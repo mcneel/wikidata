@@ -1,0 +1,36 @@
+====== "IOn" vs "On" Classes in openNURBS.NET ======
+> **Developer:** //[[developer:opennurbs:home|openNURBS]]//
+> **Summary:** //Discusses openNURBS.NET class types.//
+
+===== Question =====
+What is the difference between the **IOn3dPoint** class and the **On3dPoint** class?
+
+===== Answer =====
+The openNURBS.NET toolkit is a thin wrapper around the openNURBS C++ toolkit.
+ 
+The C++ language has a **const** keyword that .NET does not have.
+ 
+When modifying a data declaration in C++, the **const** keyword specifies that the object or variable is not modifiable. When following a member function's parameter list, the **const** keyword, again in C++, specifies that the function doesn't modify the object for which it is invoked.
+ 
+The openNURBS C++ toolkit heavily uses the **const** keyword to help developers use our functions and classes properly. Since .NET does not have this feature, we have two versions of each openNURBS.NET toolkit class:
+
+  * Classes that are specified as **const** in C++ are prefixed with "IOn" in .NET. For example, IOn3dPoint, IOnNurbsCurve, etc.
+  * Classes that are specified as non-**const** in C++ are prefixed with "On" in .NET. For example, On3dPoint, OnNurbsCurve, etc.
+ 
+For example, if you had a constant pointer to a NURBS curve in C++, your code might look like this:
+
+<code c++>
+const ON_NurbsCurve* nc = ...;
+</code>
+ 
+as were C# might look like this:
+ 
+<code c#>
+IRhinoObject obj = ...;
+</code>
+
+Note, many classes that have both "IOn" and "On" versions have **Cast** and **ConstCast** static methods to help convert between the two forms.
+
+\\
+
+{{tag>Developer openNURBS}}
