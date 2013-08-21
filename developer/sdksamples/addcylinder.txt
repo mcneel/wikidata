@@ -1,0 +1,83 @@
+====== Add a Cylinder to Rhino ======
+> **Developer:** //[[developer:cplusplusplugins|C++]], [[developer:dotnetplugins|.NET]]//
+> **Summary:** //Demonstrates how to create a cylinder using **ON_BrepCylinder** and add it to Rhino.//
+
+For more information on the **ON_BrepCylinder** function, see it's definition in opennurbs_brep.h.
+
+===== C++ =====
+<code c++>
+CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& context )
+{
+  ON_3dPoint center_point( 0.0, 0.0, 0.0 );
+  double radius = 5.0;
+  ON_3dPoint height_point( 0.0, 0.0, 10.0 );
+  ON_3dVector zaxis = height_point - center_point;
+  ON_Plane plane( center_point, zaxis );
+  ON_Circle circle( plane, radius );
+  ON_Cylinder cylinder( circle, zaxis.Length() );
+  ON_Brep* brep = ON_BrepCylinder( cylinder, TRUE, TRUE );
+  if( brep )
+  {
+    CRhinoBrepObject* cylinder_object = new CRhinoBrepObject();
+    cylinder_object->SetBrep( brep );
+    if( context.m_doc.AddObject(cylinder_object) )
+      context.m_doc.Redraw();
+    else
+      delete cylinder_object;
+  }
+
+  return CRhinoCommand::success;
+}
+</code>
+
+===== VB.NET =====
+<code vb>
+Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) As IRhinoCommand.result
+
+  Dim center_point As New On3dPoint(0, 0, 0)
+  Dim radius As Double = 5
+  Dim height_point As New On3dPoint(0, 0, 10)
+  Dim zaxis As On3dVector = height_point - center_point
+  Dim plane As New OnPlane(center_point, zaxis)
+  Dim circle As New OnCircle(plane, radius)
+  Dim cylinder As New OnCylinder(circle, zaxis.Length())
+  Dim brep As OnBrep = OnUtil.ON_BrepCylinder(cylinder, True, True)
+  If (Not (brep Is Nothing)) Then
+    Dim cylinder_object As New MRhinoBrepObject()
+    cylinder_object.SetBrep(brep)
+    If (context.m_doc.AddObject(cylinder_object)) Then
+      context.m_doc.Redraw()
+    End If
+  End If
+
+  Return IRhinoCommand.result.success
+End Function
+</code>
+
+===== C# =====
+<code c#>
+public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+{
+  On3dPoint center_point = new On3dPoint(0, 0, 0);
+  double radius = 5;
+  On3dPoint height_point = new On3dPoint(0, 0, 10);
+  On3dVector zaxis = height_point - center_point;
+  OnPlane plane = new OnPlane(center_point, zaxis);
+  OnCircle circle = new OnCircle(plane, radius);
+  OnCylinder cylinder = new OnCylinder(circle, zaxis.Length());
+
+  OnBrep brep = OnUtil.ON_BrepCylinder(cylinder, true, true);
+  if( brep != null )
+  {
+    MRhinoBrepObject cylinder_object = new MRhinoBrepObject();
+    cylinder_object.SetBrep(brep);
+    if (context.m_doc.AddObject(cylinder_object))
+      context.m_doc.Redraw();
+  }
+  return IRhinoCommand.result.success;
+}
+</code>
+
+\\
+
+{{tag>Developer cplusplus dotnet}}
