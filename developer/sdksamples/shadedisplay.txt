@@ -1,0 +1,54 @@
+====== Shading Viewports ======
+====== C++, .NET ======
+> **Summary:** //Demonstrates how to set a viewport to shaded display using the Rhino SDK.//
+
+=====Question=====
+I would like to set the active viewport to shaded display from a plug-in command. How is this accomplished?
+
+=====Answer=====
+The following example code demonstrates how to shade a viewport using the Rhino SDK.
+
+===== C++ =====
+<code c++>
+
+CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& context )
+{
+  CRhinoView* view = RhinoApp().ActiveView();
+  if( 0 == view )
+    return CRhinoCommand::failure;
+
+  ON::display_mode dm = view->ActiveViewport().DisplayMode();
+  if( dm != ON::shaded_display )
+  {
+    view->ActiveViewport().SetDisplayMode( ON::shaded_display );
+    context.m_doc.ViewModified( view );
+    view->Redraw();
+  }
+
+  return CRhinoCommand::success;
+}
+
+</code>
+===== C# =====
+<code c#>
+
+public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+{
+  MRhinoView view = RhUtil.RhinoApp().ActiveView();
+  if( view == null )
+    return IRhinoCommand.result.failure;
+
+  IOn.display_mode dm = view.ActiveViewport().DisplayMode();
+  if( dm != IOn.display_mode.shaded_display )
+  {
+    view.ActiveViewport().SetDisplayMode( IOn.display_mode.shaded_display );
+    context.m_doc.ViewModified( view );
+    view.Redraw();
+  }
+
+  return IRhinoCommand.result.success;
+}
+</code>
+
+
+{{tag>Developer cplusplus dotnet}}
