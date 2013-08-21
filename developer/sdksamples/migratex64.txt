@@ -1,0 +1,85 @@
+====== Migrate Rhino 4.0 Plug-ins to Rhino 5.0 ======
+====== C++ ======
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
+> **Summary:** //Demonstrates how to migrating Rhino 4.0 C++ plug-in projects to the Rhino 5.0 SDK.//
+
+=====Prerequisites=====
+Before trying to migrate a Rhino 4.0 C++ plug-in project to the Rhino 5.0 SDK, you should have already done the following:
+
+  - Reviewed the information on **[[developer:sdksamples:rhino5wip|Rhino 5.0 Plug-in Development.]]**
+  - Completely backed up your Rhino 4.0 plug-ins project, especially the .vcproj file.
+  - Verified that the **x64 Compilers and Tools** option was checked during the installation of Visual C++ 2005.
+  - Downloaded and installed the [[http://download.rhino3d.com/rhino/5.0/wip/|Rhino 5.0 WIP.]]
+  - Downloaded and installed the [[developer:sdksamples:rhino5wip|Rhino 5.0 WIP C++ SDK.]]
+=====1. Create a new blank solution=====
+Creating a new blank solution will ensure that your plug-in's .vcproj file is the ONLY project file in the solution.
+
+  - Launch Visual C++ 2005.
+  - Click **File->New->Project...**
+  - Under Project Types->Other Project Types->Visual Studio Solutions, select **Blank Solution.**
+  - Give the blank solution a name.
+  - Click **OK**.
+{{http://en.wiki.mcneel.com/content/upload/images/SdkMigratex647.png}}
+
+=====2. Add the plug-in project to the new solution=====
+  - Click **View->Solution Explorer** to open the Solution Explorer window.
+  - In Solution Explorer, right-click on the solution and click **Add->Existing Project...**
+  - Navigate to the folder containing your plug-in project.
+  - Select the .vcproj file and click **Open.**
+  - Save the solution.
+{{http://en.wiki.mcneel.com/content/upload/images/SdkMigratex648.png}}
+
+=====3. Open Configuration Manager=====
+  * On the main toolbar, click the platform combobox and pick **Configuration Manager**.
+{{http://en.wiki.mcneel.com/content/upload/images/SdkMigratex641.png}}
+=====4. Add a new solution platform=====
+  * In Configuration Manager, click the **Active Solution** Platform drop down and pick **New**.
+{{http://en.wiki.mcneel.com/content/upload/images/SdkMigratex642.png}}
+  * Select the **x64** platform. Make sure to copy settings from Win32.
+  * Make sure the **Create new project platforms** box is checked.
+  * Click **OK**.
+{{http://en.wiki.mcneel.com/content/upload/images/SdkMigratex643.png}}
+  * Close the Configuration Manager.
+=====4a. Add a new solution platform=====
+  * For each x64 build configuration (e.g. Debug, PseudoDebug, and Release), Modify the project's C++ Preprocesor Definitions by changing **WIN32** to **WIN64**. 
+  * **CRITICAL, when doing this, do NOT use the All Configurations option**. If you do this, you will end removing necessary processor settings. 
+  * Click **View->Properties**.
+  * Make sure to set the configuration to **Debug** and the platform to **x64**.
+  * Under Configuration **Properties->C/C++**, click **Preprocessor**.
+  * In Preprocessor Definitions, change **WIN32** to **WIN64**.
+  * Click **Apply**.
+{{http://en.wiki.mcneel.com/content/upload/images/SdkMigratex644.png}}
+  * Repeat this process for **PseudoDebug** and **Release** configurations.
+  * Click **Close**.
+
+=====5. Remove any linking instructions from the project=====
+  * In Solution Explorer, right-click on the **Library Files** folder and click **Remove**.
+{{http://en.wiki.mcneel.com/content/upload/images/SdkMigratex645.png}}
+=====6. Add linking instructions to stdafx.h=====
+  * In Solution Explorer, double-click on **stdafx.h**.
+  * Modify the path to **RhinoSdkStdafxPreamble.h** to reflect the location of the Rhino 5.0 SDK.
+  * Immediately proceeding the **RhinoSdk.h** include statement, add the following:
+<code c++>
+   #if defined(//M//X64) && defined(WIN32) && defined(WIN64)
+   #undef WIN32
+   #endif
+</code>
+  * Modify the path to **RhinoSdk.h** to reflect the location of the Rhino 5.0 SDK.
+  * Include **rhinoSdkPlugInLinkingPragmas.h** at the end of **stdafx.h**.
+{{http://en.wiki.mcneel.com/content/upload/images/SdkMigratex646.png}}
+
+=====7. Build Win32 and x64 platform configurations.=====
+  * Build Debug, PseudoDebug, and Release Win32 configurations.
+  * Build Debug, PseudoDebug, and Release x64 configurations.
+
+=====8. Close the solution.=====
+  * This is a **CRITICAL** step to insure the changes you have made to the .vcproj file are actually saved to your disk.
+=====9. Backup the solution.=====
+  * Backup your newly created solution, including .vcproj file.
+  * Commit the changes to source control.
+
+\\
+
+
+
+{{tag>Developer cplusplus}}
