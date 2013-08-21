@@ -1,0 +1,135 @@
+====== How To: Add Text to Rhino ======
+====== C++, .NET ======
+> **Summary:** //Demonstrates how to use ON_TextEntity2 to add text to Rhino.//
+
+===== C++ =====
+<code c++>
+bool AddAnnotationText(
+      CRhinoDoc& doc,       // reference to active document
+      const ON_3dPoint& pt, // location of anotation text
+      const wchar_t* text,  // the text
+      double height,        // height of text item
+      const wchar_t* font,  // font or face name
+      int style             // style 0=normal, 1=bold,
+      )                     //       2=italic, 3=bold and italic
+{
+  bool rc = false;
+
+  ON_wString wText( text );
+  if( wText.IsEmpty() )
+    return rc;
+
+  if( height <= 0 )
+    height = 1.0;
+
+  ON_wString wFont( font );
+  if( wFont.IsEmpty() )
+    wFont = L"Arial";
+
+  if( style < 0 | style > 3 )
+    style = 0;
+
+  ON_Plane plane = RhinoActiveCPlane();
+  plane.SetOrigin( pt );
+
+  ON_TextEntity2* text_entity = new ON_TextEntity2;
+  CRhinoAnnotationText* text_object = new CRhinoAnnotationText;
+  text_object->SetAnnotation( text_entity );
+  text_object->SetTextHeight( height );
+  text_object->SetString( wText );
+  text_object->SetPlane( plane );
+  int idx = doc.m_font_table.FindOrCreateFont( wFont, style & 1, style & 2 );
+  text_object->SetFontIndex( idx );
+
+  if( doc.AddObject(text_object) )
+  {
+    rc = true;
+    doc.Redraw();
+  }
+  else
+  {
+    delete text_object;
+    text_object = 0;
+  }
+  return rc;
+}
+</code>
+===== VB.NET =====
+<code vb>
+Private Function AddAnnotationText(ByVal doc As MRhinoDoc, _
+                                    ByVal pt As IOn3dPoint, _
+                                    ByVal text As String, _
+                                    ByVal height As Double, _
+                                    ByVal font As String, _
+                                    ByVal style As Integer) As Boolean
+  Dim rc As Boolean = False
+
+  If (String.IsNullOrEmpty(text)) Then Return rc
+  If (height <= 0) Then height = 1.0
+  If (String.IsNullOrEmpty(font)) Then font = "Arial"
+  If (style < 0 Or style > 3) Then style = 0
+
+  Dim plane As New OnPlane(RhUtil.RhinoActiveCPlane())
+  plane.SetOrigin(pt)
+
+  Dim text_entity As New OnTextEntity2()
+  Dim text_object As New MRhinoAnnotationText()
+  text_object.SetAnnotation(text_entity)
+  text_object.SetTextHeight(height)
+  text_object.SetString(text)
+  text_object.SetPlane(plane)
+
+  Dim bold As Boolean = False
+  If (style = 1 Or style = 3) Then bold = True
+  Dim italic As Boolean = False
+  If (style = 2 Or style = 3) Then italic = True
+  Dim idx As Integer = doc.m_font_table.FindOrCreateFont(font, bold, italic)
+  text_object.SetFontIndex(idx)
+
+  If (doc.AddObject(text_object)) Then
+    rc = True
+    doc.Redraw()
+  End If
+
+  Return rc
+End Function
+</code>
+===== C# =====
+<code c#>
+private bool AddAnnotationText(MRhinoDoc doc, IOn3dPoint pt, string text,
+                               double height, string font, int style)
+{
+  bool rc = false;
+  if (string.IsNullOrEmpty(text))
+    return rc;
+  if (height <= 0)
+    height = 1.0;
+  if (string.IsNullOrEmpty(font))
+    font = "Arial";
+  if (style < 0 | style > 3)
+    style = 0;
+
+  OnPlane plane = new OnPlane(RhUtil.RhinoActiveCPlane());
+  plane.SetOrigin(pt);
+
+  OnTextEntity2 text_entity = new OnTextEntity2();
+  MRhinoAnnotationText text_object = new MRhinoAnnotationText();
+  text_object.SetAnnotation(text_entity);
+  text_object.SetTextHeight(height);
+  text_object.SetString(text);
+  text_object.SetPlane(plane);
+  int idx = doc.m_font_table.FindOrCreateFont(ref font, (style & 1) > 0, (style & 2) > 0);
+  text_object.SetFontIndex(idx);
+
+  if (doc.AddObject(text_object))
+  {
+    rc = true;
+    doc.Redraw();
+  }
+  return rc;
+}
+
+</code>
+
+
+{{tag>Developer cplusplus dotnet}}
