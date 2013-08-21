@@ -1,0 +1,166 @@
+====== How To: Synchronize a Layer's Rendering Color ======
+====== C++, .NET ======
+> **Summary:** //Demonstrates how to synchronize the basic material color of a layer with the layer's color.//
+
+The following source code sample demonstrates how to synchronize the basic material color of a layer with the color of the layer. If the layer does not have a material assigned to it, a new material is created and assigned to the layer.
+
+===== C++ =====
+<code c++>
+CRhinoCommand::result CCommandTest::RunCommand(const CRhinoCommandContext& context)
+{
+  CRhinoLayerTable& layer_table = context.m_doc.m_layer_table;
+  CRhinoMaterialTable& material_table = context.m_doc.m_material_table;
+  int num_modified = 0;
+
+  int i, layer_count = layer_table.LayerCount();
+  for( i = 0; i < layer_count; i++ )
+  {
+    const CRhinoLayer& layer = layer_table[i];
+    if( layer.IsDeleted() | layer.IsReference() )
+      continue;
+
+    int material_index = layer.RenderMaterialIndex();
+    if( material_index < 0 )
+    {
+      // If material_index < 0, then the layer does not have a 
+      // material assigned to it. So, we will create a new material
+      // that is based on Rhino's default material, and add it
+      // to the material table.
+
+      ON_Material material( RhinoApp().AppSettings().DefaultMaterial() );
+      material_index = material_table.AddMaterial( material );
+      if( material_index >= 0 )
+      {
+        // Now that we have added the new material,
+        // assign it to the layer.
+        ON_Layer new_layer( layer );
+        new_layer.SetRenderMaterialIndex( material_index );
+        layer_table.ModifyLayer( new_layer, layer.LayerIndex() );
+      }
+    }
+
+    if( material_index < 0 )
+      continue;
+
+    const CRhinoMaterial& material = material_table[material_index];
+    if( layer.Color() == material.Diffuse() )
+      continue;
+
+    // Modify the material's basic, or diffuse, color
+    ON_Material new_material( material );
+    new_material.SetDiffuse( layer.Color() );
+    material_table.ModifyMaterial( new_material, material.MaterialIndex(), FALSE );
+
+    num_modified++;
+  }
+
+  if( num_modified > 0 )
+    context.m_doc.Regen();
+  return CRhinoCommand::success;
+}
+</code>
+===== VB.NET =====
+<code vb>
+Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
+  As RMA.Rhino.IRhinoCommand.result
+
+  Dim layer_table As MRhinoLayerTable = context.m_doc.m_layer_table
+  Dim material_table As MRhinoMaterialTable = context.m_doc.m_material_table
+
+  Dim num_modified As Integer = 0
+  Dim layer_count As Integer = layer_table.LayerCount()
+
+  For i As Integer = 0 To layer_count - 1
+    Dim layer As IRhinoLayer = layer_table(i)
+    If (layer.IsDeleted() Or layer.IsReference()) Then Continue For
+
+    Dim material_index As Integer = layer.RenderMaterialIndex()
+    If (material_index < 0) Then
+      ' If material_index < 0, then the layer does not have a 
+      ' material assigned to it. So, we will create a new material
+      ' that is based on Rhino's default material, and add it
+      ' to the material table.
+      Dim mat As New OnMaterial(RhUtil.RhinoApp().AppSettings().DefaultMaterial())
+      material_index = material_table.AddMaterial(mat)
+      If (material_index >= 0) Then
+        ' Now that we have added the new material,
+        ' assign it to the layer.
+        Dim new_layer As New OnLayer(layer)
+        new_layer.SetRenderMaterialIndex(material_index)
+        layer_table.ModifyLayer(new_layer, layer.LayerIndex())
+      End If
+    End If
+
+    If (material_index < 0) Then Continue For
+
+    Dim material As IRhinoMaterial = material_table(material_index)
+    If (layer.Color().Compare(material.m_diffuse) = 0) Then Continue For
+
+    ' Modify the material's basic, or diffuse, color
+    Dim new_material As New OnMaterial(material)
+    new_material.m_diffuse = layer.Color()
+    material_table.ModifyMaterial(new_material, material.m_material_index, False)
+    num_modified = num_modified + 1
+  Next
+
+  If (num_modified > 0) Then context.m_doc.Regen()
+  Return IRhinoCommand.result.success
+End Function
+</code>
+===== C# =====
+<code c#>
+public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+{
+  MRhinoLayerTable layer_table = context.m_doc.m_layer_table;
+  MRhinoMaterialTable material_table = context.m_doc.m_material_table;
+  int num_modified = 0;
+  int layer_count = layer_table.LayerCount();
+
+  for( int i=0; i<layer_count; i++ )
+  {
+    IRhinoLayer layer = layer_table[i];
+    if(layer.IsDeleted() | layer.IsReference())
+      continue;
+
+    int material_index = layer.RenderMaterialIndex();
+    if(material_index < 0)
+    {
+      // If material_index < 0, then the layer does not have a 
+      // material assigned to it. So, we will create a new material
+      // that is based on Rhino's default material, and add it
+      // to the material table.
+      OnMaterial mat = new OnMaterial(RhUtil.RhinoApp().AppSettings().DefaultMaterial());
+      material_index = material_table.AddMaterial(mat);
+      if(material_index >= 0)
+      {
+        // Now that we have added the new material,
+        // assign it to the layer.
+        OnLayer new_layer = new OnLayer(layer);
+        new_layer.SetRenderMaterialIndex(material_index);
+        layer_table.ModifyLayer(new_layer, layer.LayerIndex());
+      }
+    }
+
+    if(material_index < 0)
+      continue;
+
+    IRhinoMaterial material = material_table[material_index];
+    if(layer.Color().Compare(material.m_diffuse) == 0)
+      continue;
+
+    // Modify the material's basic, or diffuse, color
+    OnMaterial new_material = new OnMaterial(material);
+    new_material.m_diffuse = layer.Color();
+    material_table.ModifyMaterial(new_material, material.m_material_index, false);
+    num_modified++;
+  }
+
+  if (num_modified > 0)
+    context.m_doc.Regen();
+  return IRhinoCommand.result.success;
+}
+
+</code>
+
+
+{{tag>Developer cplusplus dotnet}}
