@@ -1,0 +1,170 @@
+====== Drawing Arrowheads in a Display Conduit ======
+> **Developer:** //[[developer:dotnetplugins|.NET]]//
+> **Summary:** //Discusses and demonstrates how to draw arrowheads in Rhino Display Conduit.//
+
+===== Question =====
+We are trying to get our heads around drawing arrowheads through conduits in the Rhino .NET SDK. We create an instance of the **MRhinoArrowhead** class and set 2-D information (point and direction) and then need to set a parent (any 
+type of **MRhinoAnnotationObject**). As **MRhinoAnnotationObject** is a virtual 
+class, the best version for our purposes seems to be the "leader" class. However (not so surprisingly), the arrowhead behaves like a leader, sitting in world space, and is not aligned or scaled to the viewport's construction as is desired. Is there any other way to draw an arrowhead that does not involve using the **MRhinoArrowhead** class?
+
+===== Answer =====
+Trying to draw arrowheads in a conduit by using an MRhinoArrowhead object might appear to be the correct approach. But this object is fairly specialized and designed to be used in conjunction with other annotation object. Thus, this might not work well for you in this case.
+
+If you'd added your lines to the document, you could set the objects' decoration. Then Rhino would draw the arrowheads for you. Here is an example:
+
+[[http://wiki.mcneel.com/developer/sdksamples/objectdecoration|Adding Arrowheads to Curves]]
+
+But, adding temporary geometry to the document just for display purposes is 
+awkward and frowned upon.
+
+With all this said, you might be better off just drawing your own 
+arrowheads. Its really not that hard. Arrowheads are drawing by calling the 
+display pipeline's DrawPolygon() member with the fill parameter set to true. 
+The trick is defining the polygon you want to draw.
+
+Below is some sample code that draws a 2-D arrowhead at the end of a line somewhat like a leader object. Perhaps this will give you some of how to implement arrowhead drawing in your project.
+
+==== C# ====
+<code c#>
+/// <summary>
+/// TestDrawArrowheadConduit conduit
+/// </summary>
+public class TestDrawArrowheadConduit : MRhinoDisplayConduit
+{
+  #region Private Data Members
+
+  const double m_default_arrow_size = 1.0;
+  bool m_bDraw;
+  OnLine m_line;
+  OnPlane m_plane;
+  On3dPointArray m_arrowhead;
+  
+  #endregion
+
+  #region Public Methods
+
+  /// <summary>
+  /// Public constructor
+  /// </summary>
+  public TestDrawArrowheadConduit(OnPlane plane, OnLine line, double scale)
+    : base(new MSupportChannels(MSupportChannels.SC_CALCBOUNDINGBOX | MSupportChannels.SC_DRAWOVERLAY), false)
+  {
+    m_bDraw = false;
+    m_plane = plane;
+    m_line = line;
+    m_arrowhead = new On3dPointArray();
+
+    double x = 0, y = 0;
+
+    m_plane.ClosestPointTo(line.from, ref x, ref y);
+    On2dPoint from = new On2dPoint(x, y);
+
+    m_plane.ClosestPointTo(line.to, ref x, ref y);
+    On2dPoint to = new On2dPoint(x, y);
+
+    On2dVector dir = new On2dVector(from - to);
+    dir.Unitize();
+
+    m_bDraw = GetArrowHead(dir, from, scale, ref m_arrowhead);
+  }
+
+  /// <summary>
+  /// Virtual MRhinoDisplayConduit.ExecConduit override
+  /// </summary>
+  public override bool ExecConduit(ref MRhinoDisplayPipeline dp, uint nChannel, ref bool bTerminate)
+  {
+    if (nChannel == MSupportChannels.SC_CALCBOUNDINGBOX)
+    {
+      m_pChannelAttrs.m_BoundingBox.Union(m_line.BoundingBox());
+    }
+    else if (nChannel == MSupportChannels.SC_DRAWOVERLAY)
+    {
+      dp.DrawLine(m_line.from, m_line.to, m_pDisplayAttrs.m_ObjectColor | 0xFF000000, m_pDisplayAttrs.m_nLineThickness);
+      if (m_bDraw)
+        dp.DrawPolygon(m_arrowhead, dp.DisplayAttrs().m_ObjectColor | 0xFF000000, true);
+    }
+    return true;
+  }
+
+  #endregion
+
+  #region Private Methods
+
+  bool GetArrowHead(On2dVector dir, On2dPoint tip, double scale, ref On3dPointArray triangle)
+  {
+    double arrow_size = m_default_arrow_size * scale;
+
+    On2dPointArray corners = new On2dPointArray();
+    corners.Reserve(3);
+    corners.SetCount(3);
+
+    On2dVector up = new On2dVector(-dir.y, dir.x);
+    corners[0].Set(tip.x, tip.y);
+    corners[1].x = tip.x + arrow_size * (0.25 * up.x - dir.x);
+    corners[1].y = tip.y + arrow_size * (0.25 * up.y - dir.y);
+    corners[2].x = corners[1].x - 0.5 * arrow_size * up.x;
+    corners[2].y = corners[1].y - 0.5 * arrow_size * up.y;
+
+    triangle.Reserve(corners.Count());
+    triangle.SetCount(corners.Count());
+
+    for (int i = 0; i < corners.Count(); i++)
+      triangle[i] = m_plane.PointAt(corners[i].x, corners[i].y);
+
+    return true;
+  }
+
+  #endregion
+}
+</code>
+
+Here is the above sample conduit used in a test command.
+
+<code c#>
+public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+{
+  OnLine line = new OnLine();
+  OnPlane plane = new OnPlane();
+
+  MRhinoGetPoint gp = new MRhinoGetPoint();
+  gp.SetCommandPrompt("Start of line");
+  gp.GetPoint();
+  if (gp.CommandResult() != IRhinoCommand.result.success)
+    return gp.CommandResult();
+
+  line.from = gp.Point();
+  plane = new OnPlane(RhUtil.RhinoActiveCPlane());
+  plane.SetOrigin(line.from);
+
+  gp.SetCommandPrompt("End of line");
+  gp.Constrain(plane);
+  gp.SetBasePoint(line.from);
+  gp.DrawLineFromPoint(line.from, true);
+  gp.GetPoint();
+  if (gp.CommandResult() != IRhinoCommand.result.success)
+    return gp.CommandResult();
+
+  line.to = plane.ClosestPointTo(gp.Point());
+  if (!line.IsValid())
+    return IRhinoCommand.result.nothing;
+
+  TestDrawArrowheadConduit conduit = new TestDrawArrowheadConduit(plane, line, 1.0);
+  conduit.Enable();
+  context.m_doc.Redraw();
+
+  MRhinoGetString gs = new MRhinoGetString();
+  gs.SetCommandPrompt("Press <Enter> to continue");
+  gs.AcceptNothing();
+  gs.GetString();
+
+  conduit.Disable();
+  context.m_doc.Redraw();
+
+  return IRhinoCommand.result.success;
+}
+</code>
+
+
+\\
+
+{{tag>Developer dotnet}}
