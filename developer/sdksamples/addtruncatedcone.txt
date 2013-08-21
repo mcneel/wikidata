@@ -1,0 +1,120 @@
+====== How To: Add a Truncated Cone to Rhino ======
+> **Summary:** //Demonstrates how to create a truncated cone ON_BrepRevSurface and add it to Rhino.//
+====== C++, .NET ======
+
+Rhino represents truncated cones as capped surfaces of revolution. For more information on the ON_BrepRevSurface, see it's definition in opennurbs_brep.h.
+
+===== C++ =====
+<code c++>
+CRhinoCommand::result CCommandTest::RunCommand(
+        const CRhinoCommandContext& context 
+        )
+{
+  ON_3dPoint bottom_pt( 0.0, 0.0, 0.0 );
+  double bottom_radius = 2;
+  ON_Circle bottom_circle( bottom_pt, bottom_radius );
+
+  ON_3dPoint top_pt( 0.0, 0.0, 10.0 );
+  double top_radius = 6;
+  ON_Circle top_circle( top_pt, top_radius );
+
+  ON_RevSurface* revsrf = new ON_RevSurface;
+  ON_LineCurve* pShapeCurve = new ON_LineCurve;
+  revsrf->m_curve = pShapeCurve;
+  pShapeCurve->m_dim = 3;
+  pShapeCurve->m_line.from = bottom_circle.PointAt(0);
+  pShapeCurve->m_line.to = top_circle.PointAt(0);
+  pShapeCurve->m_t.Set(0, pShapeCurve->m_line.from.DistanceTo(pShapeCurve->m_line.to));
+  revsrf->m_axis.from = bottom_circle.Center();
+  revsrf->m_axis.to = top_circle.Center();
+  revsrf->m_angle[0] = revsrf->m_t[0] = 0.0;
+  revsrf->m_angle[1] = revsrf->m_t[1] = 2.0*ON_PI;
+
+  ON_Brep* tcone_brep = ON_BrepRevSurface(revsrf, TRUE, TRUE );
+  if( tcone_brep )
+  {
+    CRhinoBrepObject* tcone_object = new CRhinoBrepObject();
+    tcone_object->SetBrep( tcone_brep );
+    if( context.m_doc.AddObject(tcone_object) )
+      context.m_doc.Redraw();
+    else
+      delete tcone_object;
+  }
+
+  return CRhinoCommand::success;
+}
+</code>
+===== VB.NET =====
+<code vb>
+Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
+  As IRhinoCommand.result
+
+  Dim bottom_pt As New On3dPoint(0, 0, 0)
+  Dim bottom_radius As Double = 2
+  Dim bottom_circle As New OnCircle(bottom_pt, bottom_radius)
+
+  Dim top_pt As New On3dPoint(0, 0, 10)
+  Dim top_radius As Double = 6
+  Dim top_circle As New OnCircle(top_pt, top_radius)
+
+  Dim revsrf As New OnRevSurface()
+  Dim pShapeCurve As New OnLineCurve()
+  revsrf.m_curve = pShapeCurve
+  pShapeCurve.m_dim = 3
+  pShapeCurve.m_line.from = bottom_circle.PointAt(0)
+  pShapeCurve.m_line.to = top_circle.PointAt(0)
+  pShapeCurve.m_t.Set(0, pShapeCurve.m_line.from.DistanceTo(pShapeCurve.m_line.to))
+  revsrf.m_axis.from = New On3dPoint(bottom_circle.Center())
+  revsrf.m_axis.to = New On3dPoint(top_circle.Center())
+  revsrf.m_angle(0) = 0
+  revsrf.m_t(0) = 0
+  revsrf.m_angle(1) = 2.0 * OnUtil.On_PI
+  revsrf.m_t(1) = 2.0 * OnUtil.On_PI
+
+  Dim tcone_brep As OnBrep = OnUtil.ON_BrepRevSurface(revsrf, True, True)
+  If (tcone_brep IsNot Nothing) Then
+    If (context.m_doc.AddBrepObject(tcone_brep) IsNot Nothing) Then
+      context.m_doc.Redraw()
+    End If
+  End If
+
+  Return IRhinoCommand.result.success
+End Function
+</code>
+===== C# =====
+<code c#>
+public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+{
+  On3dPoint bottom_pt = new On3dPoint(0, 0, 0);
+  double bottom_radius = 2;
+  OnCircle bottom_circle = new OnCircle(bottom_pt, bottom_radius);
+
+  On3dPoint top_pt = new On3dPoint(0, 0, 10);
+  double top_radius = 6;
+  OnCircle top_circle = new OnCircle(top_pt, top_radius);
+
+  OnRevSurface revsrf = new OnRevSurface();
+  OnLineCurve pShapeCurve = new OnLineCurve();
+  revsrf.m_curve = pShapeCurve;
+  pShapeCurve.m_dim = 3;
+  pShapeCurve.m_line.from = bottom_circle.PointAt(0);
+  pShapeCurve.m_line.to = top_circle.PointAt(0);
+  pShapeCurve.m_t.Set(0, pShapeCurve.m_line.from.DistanceTo(pShapeCurve.m_line.to));
+  revsrf.m_axis.from = new On3dPoint(bottom_circle.Center());
+  revsrf.m_axis.to = new On3dPoint(top_circle.Center());
+  revsrf.m_angle[0] = revsrf.m_t[0] = 0.0;
+  revsrf.m_angle[1] = revsrf.m_t[1] = 2.0 * OnUtil.On_PI;
+
+  OnBrep tcone_brep = OnUtil.ON_BrepRevSurface(ref revsrf, true, true);
+  if (tcone_brep != null)
+  {
+    if (context.m_doc.AddBrepObject(tcone_brep) != null)
+      context.m_doc.Redraw();
+  }
+  return IRhinoCommand.result.success;
+}
+
+</code>
+
+
+{{tag>Developer cplusplus dotnet}}
