@@ -1,0 +1,163 @@
+====== Getting Curves from a 3DM File with openNURBS.NET ======
+> **Developer:** //[[developer:opennurbs:home|openNURBS]]//
+> **Summary:** //Discusses openNURBS.NET and extracting curve data.//
+
+===== Question =====
+I am trying to write a little test program to read a .3DM file using Microsoft
+Visual C# 2008 Express Edition. It is working fine up to the point I want to extract an object from the object table in the model as shown below:
+
+<code c#>
+OnNurbsCurve nc = (OnNurbsCurve)model.m_object_table[0].m_object;
+</code>
+
+I know the object I stored is a **OnNurbsCurve**.  I can not seem to find a way to get the object back to a OnNurbsCurve so I can use it. I get the error.
+
+<code c#>
+Unable to cast object of type 'RMA.OpenNURBS.OnObject' to type 'RMA.OpenNURBS.OnNurbsCurve'.
+</code>
+
+===== Answer =====
+**OnXModel.m_object_table** is an array of **OnXModel_Object** objects. An **OnXModel_Object** object contains two components:
+
+  - An object that inherits from **OnObject** (**OnXModel_Object.m_object**). This is the geometry component.
+  - An **On3dmObjectAttributes** object (**OnXModel_Object.m_attributes**) which contains the object's attributes (e.g. color, layer, etc.)
+
+As you can see, an **OnXModel_Object** cannot be cast as an **OnNurbsCurve** object. But, you can try to cast an **OnObject** as an **OnNurbsCurve** object.
+
+===== Example =====
+The following code example demonstrates how to walk through the object table and  attempt to cast each object as some type of curve object.
+
+==== C# ====
+<code c#>
+OnXModel model = ...;
+for (int i = 0; i < model.m_object_table.Count(); i++)
+{
+  // Get a model object
+  IOnXModel_Object model_obj = model.m_object_table[i];
+  If( model_obj == null)
+    continue;
+
+  // Get the geometry of the object
+  IOnObject obj = model_obj.m_object;
+  If (obj == null)
+    continue;
+
+  // Is the geometry a curve?
+  IOnCurve crv = OnCurve.ConstCast(obj);
+  If (crv != null)
+  {
+    // OnCurve is a virtual class. So, if we want the curve's data,
+    // then we need to cast the curve object as one of the implemented
+    // curve types
+    
+    // Is the curve a line?
+    IOnLineCurve line_crv = OnLineCurve.ConstCast(crv);
+    If (line_crv != null)
+    {
+      // TODO: process line curve
+      continue;
+    }
+
+    // Is the curve a polyline?
+    IOnPolylineCurve pline_crv = OnPolylineCurve.ConstCast(crv);
+    If (pline_crv != null)
+    {
+      // TODO: process polyline curve
+      continue;
+    }
+
+    // Is the curve an arc (or circle)?
+    IOnArcCurve arc_crv = OnArcCurve.ConstCast(crv);
+    If (arc_crv != null)
+    {
+      // TODO: process arc curve
+      continue;
+    }
+
+    // Is the curve a polycurve?
+    IOnPolyCurve poly_crv = OnPolyCurve.ConstCast(crv);
+    If (plinepoly_crv_crv != null)
+    {
+      // TODO: process poly curve
+      continue;
+    }
+
+    // Is the curve a NURBS curve?
+    IOnNurbsCurve nurbs_crv = OnNurbsCurve.ConstCast(crv);
+    If (nurbs_crv != null)
+    {
+      // TODO: process NURBS curve
+      continue;
+    }
+  }
+}
+</code>
+
+==== C++ ====
+<code c++>
+ONX_Model model = ...;
+for (int i = 0; i < model.m_object_table.Count(); i++)
+{
+  // Get a model object
+  const ONX_Model_Object& model_obj = model.m_object_table[i];
+ 
+  // Get the geometry of the object
+  const ON_Object* obj = model_obj.m_object;
+  if( 0 == obj )
+    continue;
+ 
+  // Is the geometry a curve?
+  const ON_Curve* crv = ON_Curve::Cast( obj );
+  if( crv )
+  {
+    // ON_Curve is a virtual class. So, if we want the curve's data,
+    // then we need to cast the curve object as one of the implemented
+    // curve types
+ 
+    // Is the curve a line?
+    const ON_LineCurve* line_crv = ON_LineCurve::Cast( crv );
+    if( line_crv )
+    {
+      // TODO: process line curve
+      continue;
+    }
+ 
+    // Is the curve a polyline?
+    const ON_PolylineCurve* pline_crv = ON_PolylineCurve::Cast( crv );
+    if( pline_crv )
+    {
+      // TODO: process polyline curve
+      continue;
+    }
+ 
+    // Is the curve an arc (or circle)?
+    const ON_ArcCurve* arc_crv = ON_ArcCurve::Cast( crv );
+    if( arc_crv )
+    {
+      // TODO: process arc curve
+      continue;
+    }
+ 
+    // Is the curve a polycurve?
+    const ON_PolyCurve* poly_crv = ON_PolyCurve::Cast( crv );
+    if( poly_crv )
+    {
+      // TODO: process poly curve
+      continue;
+    }
+ 
+    // Is the curve a NURBS curve?
+    const ON_NurbsCurve* nurbs_crv = ON_NurbsCurve::Cast( crv );
+    if( nurbs_crv )
+    {
+      // TODO: process NURBS curve
+      continue;
+    }
+  }
+}
+</code>
+
+
+\\
+
+{{tag>Developer openNURBS}}
