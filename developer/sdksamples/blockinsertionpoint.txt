@@ -1,0 +1,38 @@
+====== Obtaining the Insertion Point of a Block ======
+
+=====Question=====
+How to get the basepoint coordinates (x,y,z) of a block instance?
+
+=====Answer=====
+See the following sample code:
+
+===== C++ =====
+<code c++>
+ON_3dPoint BlockInstanceInsertionPoint(const CRhinoInstanceObject* instance_obj)
+{
+  ON_3dPoint pt = ON_UNSET_POINT;
+  if (instance_obj != 0)
+  {
+    pt = ON_origin;
+    pt.Transform(instance_obj->InstanceXform());
+  }
+  return pt;
+}
+</code>
+
+===== C# =====
+<code c#>
+public On3dPoint BlockInstanceInsertionPoint(IRhinoInstanceObject instance_obj)
+{
+  On3dPoint pt = new On3dPoint(OnUtil.On_UNSET_POINT);
+  if (instance_obj != null)
+  {
+    pt.Set(OnUtil.On_origin);
+    pt.Transform(instance_obj.InstanceXform());
+  }
+  return pt;
+}
+</code>
+
+
+{{tag>Developer cplusplus dotnet}}
