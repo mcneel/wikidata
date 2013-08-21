@@ -1,0 +1,44 @@
+====== Create Surfaces From Corner Points ======
+====== .NET ======
+> **Summary:** //Demonstrates how to creates a surface from specified corner points.//
+
+=====Question=====
+Can anyone tell me how to run the **SrfPt** command from a C# plug-in? Specifically, I need to know the format for the string 'pt_surf' in this call:
+
+
+<code c++>
+RhUtil.RhinoApp().RunScript(pt_surf);
+
+</code>
+=====Answer=====
+Instead of scripting the **SrfPt** command, why not just use the **RhinoCreate1FaceBrepFromPoints** function, which creates a surface from corner points? Here is an example of its usage.
+
+===== C# =====
+<code c#>
+
+public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+{
+  IRhinoCommand.result rc = IRhinoCommand.result.failure;
+
+  On3dPoint[] corners = new On3dPoint[4];
+  corners[0] = new On3dPoint( 0.0,  0.0, 0.0);
+  corners[1] = new On3dPoint(10.0,  0.0, 0.0);
+  corners[2] = new On3dPoint(10.0, 10.0, 0.0);
+  corners[3] = new On3dPoint( 0.0, 10.0, 0.0);
+
+  OnBrep brep = RhUtil.RhinoCreate1FaceBrepFromPoints(corners);
+  if (brep != null)
+  {
+    if (context.m_doc.AddBrepObject(brep) != null)
+    {
+      context.m_doc.Redraw();
+      rc = IRhinoCommand.result.success;
+    }
+  }
+
+  return rc;
+}
+</code>
+
+
+{{tag>Developer dotnet}}
