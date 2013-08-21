@@ -1,0 +1,862 @@
+====== Bongo 2.0 Development ======
+  * [[#Change Log]]
+  * Note: Bongo 2.0 Betas are only available to licensed Rhino 5 users.
+
+======2013-08-05 Release Candidate 1======
+**[[http://download.rhino3d.com/Bongo/2.0/beta/download/|Download...]]**
+===== Notes:===== 
+  * Only supports Rhino 5 (32- and 64-bit)
+  * Available in different languages
+
+
+===== Bug Fixes:===== 
+  * Adjustments to the keyframe editor tweening settings and document properties page.
+  * Constraint parallel views going into endless loop of messages -problem fixed.
+  * View flipping fixed.
+  * Animation tree has an Expand all option.
+  * Better undo in the expression editor.
+  * Grayed out monitor controls have been fixed.
+  * Groups selected in document highlight in animation tree.
+
+======2013-07-30 Beta 18======
+
+===== Notes:===== 
+  * Beta 18 terminates support for Rhino 4.0.
+  * Requires Rhino 5 SR 5 in order to work.
+
+===== Features:===== 
+  * MCL update to version 6.2.0
+  * Expressions support object constraints.
+  * BongoAnimationSets command has scripting option.
+  * Updated to Rhino 5.0 licensing system.
+
+===== Bug Fixes:===== 
+  * Nested toolbar commands crash fixed.
+  * Animation mode lockup fixed.
+  * Tweening works for view location (spherical).
+  * Crash fixed in view rotation calculation.
+  * Keyframe editor flicker improved.
+  * Clipping calculation improved.
+  * Per object IK goal error displays document values now when disabled.
+  * Scale commands scale pivot.
+  * IK solver uses cached solutions.
+  * Keyframe editor tweening section edit boxes display showing -0.000 has been fixed.
+  * Fixed memoryleak when rendering an animation with "overwrite existing frames" turned off.
+  * Timeline reset function takes display range into account.
+  * BongoAnimationLimits command extended with "Enable" option.
+  * Timeline display range rounding error fixed.
+  * Plugin menu entry for Bongo Help fixed.
+  * Interaction between Keyframe Editor and Curve Editor improved.
+  * View animation indicators update when enableing/disableing views.
+  * Keyframe deletion updates the timeline.
+  * Animation manager context menu disappearing when keyframe editor visible problem fixed.
+  * Copying of animated objects fixed.
+  * BongoShowViewPath command works again.
+  * Animation color restore function works.
+  * BongoRenderAnimation command scripable version fixed.
+  * BongoAdvancedHierarchySettings command scriptable version fixed.
+  * Keyframe editor remembers position now.
+  * Camera up vector animation under constraint conditions works like Bongo 1.0 now.
+  * Editing a #......# in the expression editor and jumping to the end of the line problem fixed.
+  * Focus rect removed from timline.
+  * Animation limits visibility default value fixed.
+  * BongoRegister command and menu removed (obsolete).
+  * Duplicated strings in view properties dialog removed.
+  * Old Bongo 1.0 robot arm proxy tutorial fixed.
+  * "This view is currently animated. Do you want to disable animation for this view?" message pops up when rendering problem fixed.
+  * FPS setting taken into account when creating video out of frames.
+
+
+======2013-04-23: Public Beta 17======
+
+===== Features:=====
+  * MCL update to version 6.1.2
+  * Error tolerance can now be set per IK goal.
+  * Continues option for animation preview added to document properties.
+  * BongoAnimateEntity command.
+  * Added "All" option to the BongoDeleteKeyframe command.
+  * Bongo help (English only).
+  * "Remove animation" and "remove keyframes" has been added to context menu items in Animation Manager.
+  * Pressing F2 makes it possible to rename objects in the Animation Manager.
+  * "Expand all" context menu to items in the Animation Manager.
+  * Objects in animation manager are now sorted alphabetically.
+  * Default tweening tangent type can now be changed.
+
+
+=====Bug Fixes:=====
+  * String and UI changes made for localization and documentation.
+  * IK precalution step minimum set to 2.
+  * Timeline resetting when enabling/disabling animation limits problem fixed.
+  * Bongo commands wakes up Bongo when its set to sleep.
+  * Layers can now be selected in commands (e.g. BongoScaleKeyframe) for layer keyframe manipulation.
+  * Fixed a crash in BongoRenderFileCollection dialog when adding files.
+  * Fixed a crash when opening models with IK data. 
+  * Render animation video output default type changed to WMV.
+  * BongoScaleKeyframe renamed to BongoScaleKeyframes.
+  * Color option changes to pivot path work now.
+  * Keyframe editor tree updates in "Show only animated properties" mode and new properties are added.
+  * Only one codec compression dialog allowed at a time.
+  * BongoNamedViewsAnimation command changed to BongoNamedViewsWizard.
+  * Fixed "View is animated" popup during rendering.
+  * Camera rotation accepts minus values.
+  * Camera rotation angle wrapping fixed.
+
+
+======2013-02-08: Public Beta 16======
+
+===== Features:=====
+  * Timeline limits bar color configurable.
+  * Timeline keyframe color configurable.
+  * Colors option seperated from options dialog.
+  * Defaults button added to options dialog.
+  * Object keyframe menu allows to selection of objects.
+  * Buttons on Animation manager to switch between default and IK view.
+  * Added BongoResetPivot command.
+
+=====Bug Fixes:=====
+
+  * New animation set name now called Animation instead of Document.
+  * BongoAnimations command changed to BongoAnimationSets
+  * Fixed crash when dragging control points.
+  * Controls rearranged on render animation dialog.
+  * Fixed crash when autosave executes during loading of Bongo (MessageBox on screen).
+  * Removed duplicated file types from render animation dialog.
+  * Fixed crash when animating lights.
+  * Dragging of timeline limits bar fixed.
+  * UI application settings removed from SDK.
+  * Removed object and view copy, move, delete and add keyframe commands.
+  * Keyframes do not get deleted when crossed over by another keyframe while dragging.
+  * Rhino’s scale command does not reset the object pivot anymore.
+  * CameraToObject and TargetToObject constraint only add one keyframe when assigned.
+  * BongoScaleKeyframe command rounds non-integer numbers correctly.
+  * Copying values out of the object monitor works now.
+  * Reset option added to BongoMovePivot and BongoRotatePivot command.
+  * Animating a sphere sets the pivot to the center of the bounding box.
+  * Copy, move keyframe dialog gets focus to edit box and reacts to return press.
+  * Camera zoom (lens length) change adds keyframe in animation mode.
+
+======2012-12-19: Public Beta 15======
+=====Bug Fixes:=====
+
+  * Keyframe editor: keyframe selection highlights connected items in tree.
+  * Expression syntax errors extended.
+  * Crash fixed when timeline tick range defaults changed.
+  * Monitor edit boxes take global digits setting into account.
+  * Result box added to expression section.
+  * Implicit object angle expression calculation fixed.
+  * Fixed monitor and implicit ObjectAngle and WorldAngle jumps.
+  * Constraints removed from keyframe editor tree when target deleted from document.
+  * Properties shown in keyframe editor that have no keyframes but expressions when "Only show animated paramters" option is turned on.
+  * Version switch for Windows XP fixed.
+======2012-12-03: Public Beta 14======
+
+=====Bug Fixes:=====
+  * Delay loading of SDK added.
+  * Beta running on Rhino 5.0 eval now.
+  * Automatic beta expire date generation added.
+  * Logging of version switch improved.
+  * Version switch deleting a key/value in the alternate registry view works now.
+
+======2012-10-25: Public Beta 13======
+
+=====Bug Fixes:=====
+  * Animation manager started up empty in Rhino 5.0 -problem fixed.
+  * Keyframe editor tree note expanding state memorized and selection keeping improved.
+  * Keyframe editor has a general section now.
+  * Step tweening works with 3d parameters.
+  * Clipping bounding box calculation improved.
+  * Crash/hang fixed when objects were constraint to themselves. This could happen when using animation property match command.
+  * Morphing of curves fixed.
+  * Crash fixed when adding precalculated keyframes.
+  * MPEG fps check disabled when video creation disabled.
+  * Lock up fixed when previewing document with disabled animated entities.
+  * Disabled animated constrain targets taken into account now.
+  * RDK content flagged as surrogate (PlugIn owner of material not loaded) removed from animated object list.
+  * Keyframe dragging on timeline improved (speed).
+  * IK precalculation progress improved.
+  * Step tweening removed from 3d curve path.
+  * Fixed  text disappearance in the Video encoder when resized.
+  * Video encoder output video file name is incremented when already available.
+  * NamedView restore command adds keyframe when animation mode on.
+  * NamedView restore command deleted user data on active view fixed.
+  * BongoDeleteObjectKeyframe command deleted the whole animation, now it only remove keyframes.
+  * General object properties section changed to have a row of command buttons.
+
+======2012-09-14: Public Beta 12======
+
+=====Bug Fixes:=====
+  * Crash in object properties expressions (e.g. visibility) fixed.
+  * Messages for view user data changes improved.
+  * Crash fixed when drag-deleting keyframes in timeline.
+  * "Bad geometry" bug fixed.
+  * "Disable animated view" dialog box pops up when not needed in Rhino 4.0.
+  * Custom tweening for view constraints works now.
+  * Timeline view keyframes update when view replaced by named view with animation data.
+  * Timeline & Curve editor: context menu cursor changed to cursor.
+  * Joint limits enabling/disabling hides/shows the needed UI.
+  * TravelDistance expression fixed.
+  * Object property general section split into more sub sections.
+  * Changing constraint heading works again.
+  * Dragging constraint object in animation mode will create keyframe (Bongo 1.0 feature).
+  * LookAt and ToPivot constraint only add one keyframe when assigned.
+  * Constrain parameter disabled in keyframe editor for LookAt and ToPivot constraints.
+  * Precision property for edit boxes added.
+  * Crash fix when editing expressions.
+  * Crash fix when dragging lights.
+  * Wrong plugin version error handling improved.
+
+======2012-05-28: Public Beta 11======
+
+
+=====Bug Fixes:=====
+  * More support/fixes for localization added.
+  * Render animation dialog: resolution type and chosen viewport remembered.
+  * Protection added for autosave and closing Rhino during rendering an animation.
+  * Added help and default buttons to object properties/keyframe editor sections.
+  * Timeline edit controls - up/down icon visible when dragging spinners.
+  * Selection in curve editor stays when dragging keyframe on timeline.
+  * Keyframe selection synchronisation between timeline and keyframe editor improved.
+  * Reset button added to timeline.
+  * Show curve editor command added to timeline menu.
+  * BongoLoadEntityFromFile working again.
+  * Notification on startup added to notify user that Rhino version is loading incompatible version of Bongo.
+  * Default video type changed to mpeg.
+  * Object hierarchy setting reflect global settings.
+  * Added "not accessible" message to monitor when values cannot be extracted from matrix.
+  * Changed message box text when animated views get replaced by named views.
+  * Animation manager entity context menu calls UI version of loading and saving.
+  * Rotate and Scale command run Bongo version of commands when animation button pressed.
+  * Group improvement in animation manager.
+  * IK crash bug fix (tick 0 unsolved).
+  * Texture icon in animation manager fixed.
+  * Look Along camera constraint supports length parameter to match Bongo 1.0.
+
+=====Features:=====
+  * Render animation dialog has option for setting view capture delay.
+  * Scene updating while dragging keyframes on timeline.
+  * System added to prompt/warn user of view user data loss.
+  * Load/Save options added to context menu on animation manager.
+======2012-03-23: Public Beta 10a======
+
+=====Bug Fixes:=====
+  * Localization bug
+Bug Fixes:
+======2012-03-22: Public Beta 10======
+
+=====Bug Fixes:=====
+
+Bug Fixes:
+  * Document tolerance for IK error calculation changed to customizable values for translation, rotation and scaling.
+  * Another keyframe selection synchronization improvement.
+  * Reticle draw color cleanup added (sun was painted red).
+  * Localization problems fixed.
+  * Messages printed to show edition when Bongo loads.
+  * Crash in morphing code fixed.
+  * Scrollbar added to Bongo document options page.
+  * Bongo options page checkbox strings cut off fixed.
+  * Changed BongoKeyframeEditorCmd name to BongoKeyframeEditor.
+  * Frames radio button deactivates the others and remains 'on'.
+  * File output location: Same as 3DM file option is clickable.
+  * Keyframe parameters sorted in curve and keyframe editor.
+  * Position parameter stays selected when toggling 3dTweening option.
+  * Turned off events on tree control when hidden.
+  * Multiple items selection state remembered.
+  * Expression position parameter works again.
+  * Monitor improved.
+  * History updates when transforming objects (preview not supported).
+  * Test command BongoObjectWorldTransforms removed.
+  * Object rotation space changed to World as a default to match Bongo 1.0.
+  * Animation sets with IK settings will update correctly when switching between sets.
+  * Adding an empty/precalcualted keyframe gives correct value type for position.
+  * When Tweening setting Input/Output match is set it displays correct values.
+  * Keyframe editor position values accepted when varies.
+  * Copied objects with Bongo data works proper.
+  * Animation manager updates when entity gets renamed.
+  * Keyframe editor updates when constrain deleted.
+  * Copy/Paste via CtrlC and CtrlV works in the Keyframe Editor input boxes.
+  * Clicking off Animation Manager selects the root item.
+  * Matched the behaviour of edit box changes.
+  * Constrain keyframes deleted when last constrain removed.
+  * BongoTimelineDeleteTicks command prompt fixed.
+  * Animation sets got context menu and can be activated by mouse click.
+  * IK system updates when parent-child relations changes.
+  * BongoMatchAnimationProperties updates animation manager if needed.
+  * Extended object context menu in animation manager.
+  * Option added to show/hide decoration on hidden objects.
+  * BongoTimelineInsertTicks does not pop up unnecessary message box.
+  * World/Object space rotation fixed.
+  * Fixed undo of timeline edit boxes.
+  * "A joint and a constraint" pivot functionality fixed.
+  * Curve path display fixed for objects with rotation keyframes.
+  * Timeline: multiple keyframe drag fixed.
+  * IK UI improved.
+
+=====Features:=====
+  * Added Bongo 1.0 command BongoBonusSaveObjectCSVFile as BongoSaveObjectCSVFile.
+======2012-01-18: Public Beta 9======
+
+=====Bug Fixes:=====
+  * BongoObjectSetParent renamed to BongoSelectParent.
+  * Clipping improved (animated point objects pivot often not fully displayed).
+  * Scene updates when objects are moved in unanimated state.
+  * Timeline and keyframe editor keyframe selection synchronization fixed.
+  * Fixed crash that happened during saving.
+  * User data deletion on viewport detected.
+  * Fixed crash during opening of a file.
+  * BongoScale/BongoRotate automatically executed when running Rhino rotate/scale command.
+  * Moved overlapping controls in Render animation dialog.
+  * Codec info display updates when changing video type.
+  * Switching 3d tweening updates keyframe and curve editor UI.
+  * Look along curve normal at frame 0 fixed.
+  * When viewport in shaded mode you can now change the transform data using the arrows.
+  * Expression for Position Z based on Position X fixed (expressions can use parameters pointing back to own object).
+  * Animation manager icon background changed.
+  * Animation manager: double click on object opens keyframe editor.
+  * Animation manager: animation set menu allows to switch to other set.
+  * Animation Sets: "current state" check boxes replaced.
+  * Expression error messaging improved.
+  * Expression text wrapping works.
+  * Tab order on dialogs fixed.
+  * Joint axis controls changed for non universal types.
+  * Reset option added to BongoChangeConstraintHeading command.
+  * Disabled animated objects not transformed anymore.
+  * Timeline compact mode remembered between sessions.
+  * Keyframe editor section state remembered.
+  * Bug in constrained view target fixed.
+
+
+=====Features:=====
+  * Expression evaluator: asin, acos, atan and constant for Pi (pi) added.
+  * Added implicit expression: ObjectAngleX, ObjectAngleY and ObjectAngleZ.
+  * object transform monitor added.
+======2011-12-09: Public Beta 8======
+
+=====Features:=====
+  * Object Look Along constraint with curve normal stabilisation added.
+  * Command added to reset IK BongoObjectResetIk.
+  * IK enable/disable button added to the timeline. 
+
+=====Bug Fixes:=====
+  * Parent child connection display updates during child selection in LinkChain command.
+  * BongoMatchAnimationProperties command copies expressions and parameter weight.
+  * Joint section works for multiple selected objects now.
+  * Cancelation of the IK precalculation will reset the IK and ask the user if he wants to disable IK.
+  * Events added for Animation Set changes.  [internal]
+  * Items in the Animation Manager are all listed under Animation Set root item.
+  * Double clicking a keyframe pops up the Keyframe Editor with the right item pre-selected.
+  * Minor selection bug in animation manager fixed.
+  * Animation Set: Duplicates are made from the current selection in the list.
+  * Constrain to original position object IK option fixed.
+  * Copy/Paste an animated object updates the animation manager.
+  * Changes to constraint tweeing are taken in count now.
+  * Weighting disabled when expression usage set to "added".
+  * Expression on boolean parameter (e.g. visibility) works.
+  * Changes to constraint tweeing are taken in count now.
+
+======2011-11-23: Public Beta 7======
+
+=====Features:=====
+  * Added BongoRotatePivot command.
+  * Added BongoObjectSetParent command.
+  * WorldAngleX, WorldAngleY and WorldAngleZ implicit expressions added.
+  * IK ball joint replaced with universal joint.
+
+
+=====Bug Fixes:=====
+  * Fixed a few minor bugs in the scale and rotate command.
+  * Constrain To Original Position option should be stable now. It was jumping when IK properties got changed.
+  * Parameter names changed from Position X to PositionX.
+  * Expressions autocompletion improved.
+  * TravelDistance expression fixed.
+  * The Bongo Splashscreen freezing Rhino problem has been solved.
+  * Groups display correctly in the Animation Manager now.
+  * "Goal not reached" IK message visible again.
+  * Morphed surfaces are now visible in shaded mode.
+  * Curve Editor: constraints curves are scaled correctly.
+  * Animation dialog: Keyframe range works correctly now.
+
+
+======2011-10-24: Public Beta 6======
+
+=====Features:=====
+  * Added implicit expression: WorldX, WorldY, WorldZ, TravelDistance.
+  * Added auto completion for entities and parameters in expression editor.
+
+=====Bug Fixes:=====
+  *  Copying a keyframe takes tweening into account.
+  * Changed expression section hint.
+  * Curve editor graph matches object transform in viewport.
+  * Keyframes updates in Keyframe Editor when moved on the timeline.
+  * Added animate button to the Curve Editor.
+  * Added animate menu item.
+  * Menu updates enable state.
+  * Added resize limits to curve control.
+  * Adding rotation/scale to an object from the timeline only adds the data for the selected axis.
+  * Added check for invalid constraints.
+  * Invalid constraints are "grayed out" in the constraint manager.
+  * New icons for add, delete, duplicate and edit.
+  * Bongo Looping menu item in Animation Manager works.
+  * Fixed Bongo Animation Limit dialog box caption.
+  * "View is animated" notification improved.
+  * Expressions can use parameters pointing back to own object.
+  * Render Animation: Frames to render values in synch.
+  * Text fixed on keyframe move and copy dialog.
+  * View simple constraints enabled by default.
+  * Fixed time interpolation (sun studies).
+  * Fixed evaluation check.
+  * Fixed crash in morphing code.
+  * Fixed crash when plugin fails to load.
+  * Fixed crash when dragging keyframes on timeline.
+  * Fixed shutdown crashes.
+  * Fixed a bug in expression parsing.
+  * Animation manager as tab in Rhino 5.0 builds added.
+  * Improved object transformation in Rhino 5.0.
+  * Keyframe editor menu item works no when UI plugin is not loaded.
+  * Added "Snap In Place" option to BongoSelctChildren command and right drag in animation manager.
+  * Curve and Keyframe editor trees support context menu.
+  * Fixed crash when dialog opened on top of splash screen.
+  * Rotation order on object sticks again.
+
+======2011-08-23: Public Beta 5a======
+
+=====Features:=====
+  * Added duplication of animation sets.
+
+=====Bug Fixes:=====
+  * Boolean keyframe interpolation fixed. Effected for example the animation of layer On/Off-ness.
+  * Change button size on entity properties page.
+  * Added hard coded strings to localization file.
+  * Changed view properties page caption.
+  * Fixed the tooltips on view property buttons.
+  * Renaming of object names used in expressions will modify expression to match new name.
+  * Animation Set Dialog got a clean up.
+  * Fixed a crash bug in Animation Manager.
+  * Changed icons on constraint and named view dialog.
+  * Named View Animation dialog: active view selected now on startup, keyframes deleted when option enabled.
+  * Timeline: delete ticks does delete instead of insert.
+
+======2011-07-29: Public Beta 5======
+
+=====Features:=====
+	* Step Tweening
+	* Expressions
+
+
+=====Bug Fixes:=====
+	* Curve control and timeline synchronization improved.
+	* Curve control zoom and pan made more usable.
+	* Curve control grid drawing improved.
+	* Curve control got controls for zoom window, zoom extent and show/hide tree.
+	* Keyframe editor displays the sections correctly now.
+	* Keyframe editor border on edit boxes has been fixed for Windows 7.
+	* Crash bug fix which happend on complex parent-child setups (inherit settings).
+	* Timeline and keyframe editors keyframe synchronization improved.
+	* Rhino 4.0: Bongo UI updates when drag/drop a 3dm file onto Rhino:
+	* Minor bug fixes.
+	* IK: joint axis mixup fixed when multiple priority levels on joints;
+	* IK: Joint axis now enabled for rubberband and telescopic joints.
+	* 64-bit support for Video encoding from Render Animation command.
+	* 64-bit support for Bongo Video Texture.
+
+======2011-03-31: Public Beta 4======
+
+=====Bug Fixes:=====
+
+	* IK re-calculation improved.
+	* Removed unnecessary updating of the UI.
+	* Added menu support for groups in Animation Manager.
+	* Curve Editor handles easing now.
+	* Travel path displayed correctly in Curve Editor.
+	* Easing section on Keyframe Editor correctly disables when custom tangent selected.
+	* Bongo Morphing animates grip points changed through script.
+	* Keyframe Editor shows properties from all entity types (light, layer, object etc) again.
+	* Curve Editor left limit set to 0.
+	* Object transformation updates correctly when being dragged while animation mode is turned off.
+	* Advanced Hierarchy Settings are implemented now.
+	* Ik-calculation hangs up on model on opening fixed.
+	* 64-bit Bongo 2.0 has been updated to work with the new Rhino 5.0 WIP.
+
+======2011-02-18: Public Beta 3======
+
+=====Features:=====
+  * Render Animation dialog: added more options to specify the frames to be rendered.
+
+
+=====Bug Fixes:=====
+
+	* Memory leak when rendering an animation.
+	* Render Animation dialog: Fps value can be manually entered.
+	* Render Animation dialog: Changing the start and stop tick will change the animation limits.
+	* Timeline slider will update position while rendering an animation.
+	* Animated views from Bongo 1.0 files import correctly.
+	* Curve editor: Custom tangent supported.
+	* Named view animation dialog: Drag/drop added.
+	* Named view animation dialog: Views gets sorted.
+	* Named view animation dialog: Selection kept when changing view position.
+	* Named view animation dialog: Check box added to select/deselect all views.
+	* Localization bug in the render animation dialog.
+	* More robust morphing.
+	* Problem in the Bongo Version Switch.
+	* Animation manager: Refresh (flicker) problem fixed.
+	* Curve editor: Tree and graph resizes correctly.
+	* IK – recalculation when resizing a viewport – problem fixed.
+	* IK updates when deleting a simple constraint from a chain.
+	* Animation manager updates when changing the name of an animated group.
+	* Turning off the pivot display works.
+	* Animation Manager: Groups can be renamed.
+	* Timeline display range is saved.
+	* Keyframe Editor: Added splitter to resize tree/editor.
+	* Removed double redrawing of named view keyframes.
+	* The "disable view animation" message, when changing active view problem is solved.
+	* The pivots now remain unchanged when the Scale command is applied on animated objects.
+	* Added setting to change default animation tick length.
+	* Undo problem when changing timeline tick range.
+	* Keyframe scaling command accepts rational numbers.
+	* Scaling command direction option "left" back.
+	* Menu added to the timeline Play -button to change animation mode.
+	* Double clicking the timeline slider allows tick number changing/editing.
+	* Render Animation: File type list updates according to selected renderer.
+
+======2010-12-13: Public Beta 2======
+**[[http://download.rhino3d.com/Bongo/2.0/beta/download/|Download...]]**
+=====Features:=====
+        * Missing features added (smart object dragging).
+	* Added BongoDeleteKeyframe command.
+	* Added BongoCopyKeyframe command.
+	* Added BongoMoveKeyframe command.
+	* Added BongoScaleKeyframe command.
+	* BongoTimelineInsertTicks command added.
+	* Commands added to import and export animation data (BongoLoadEntityToFile & BongoSaveEntityToFile)
+
+=====Bug Fixes:=====
+        * Fixed a few memory leaks.
+	* Travel path on curve editor takes tweening easing into account.
+	* Removed tree-panel collapsing control from keyframe editor.
+	* Changed visual settings on curve control.
+	* Object properties page updates now when changing current selection.
+	* Options dialog control background color fixed.
+	* Proxy name fixed.
+	* Fixed localization bugs.
+	* Changed the command to add keyframes to entities.
+	* Fixed a crash on exit.
+	* Animation frame/reticle draws now also in shadow/rendered mode.
+	* Removed debug print to command line.
+	* Keyframe editor flicker fixed.
+	* Check added to verify that entered keyframe parameters are in range/valid.
+	* Added scene updates when entity properties changed (animation manager).
+	* View flips back now when user does not want to disable it while manipulating when animation mode off.
+	* Keyframe editor timeline updates when dragging/deleting keyframes on Timeline dockbar.
+	* BongoAddKeyframe command extended with tweening properties.
+	* Removed custom tangent type section from tweening sections.
+	* Animation mode disables when closing/hiding timeline.
+	* Video encoder cuts of underscore in video name generated from frame.
+	* Changed threshold check box position in tweening sections.
+	* Option added to turn off smart dragging for multiple objects.
+	* Render animation default path extended with "Animation" subfolder.
+	* Animation mode disabled when rendering.
+	* Render animation stops now when user does not agree to create output folder.
+	* Textures stay on objects when rendering an animation.
+	* Bongo decorations not displayed anymore when rendering animation.
+	* Option added to show/hide object constraint heading.
+	* Added text to named view dialog to explain drop down list.
+	* Added tick(s) deletion and insertion to timeline.
+	* Copy/Paste an animated from one document to another works now.
+	* Render file collection added.
+	* Email notification finished (prototype).
+	* Restore expanded state in tree only worked on visible items. Now works on whole tree. 
+
+======2010-10-20: Public Beta 1======
+
+=====Bug Fixes:=====
+  * Bongo performance improved.
+  * Tooltips on object properties general section fixed.
+  * Removed the "Invalid parameter" message from the simple constraint dialog.
+  * Improved stopping/pausing of animation preview.
+  * Disabled Rhino while previewing animation.
+  * Animation manager display mode always defaults back to "Normal" mode now.
+  * UI settings now always set to defaults when opening new document.
+  * IK pre-calculation progress shown on Rhinos status bar now.
+  * Timeline thumb moving when pre-calculating IK solution, has been fixed.
+  * Improved commands to make them work with toolbar.
+  * Added support for localization.
+  * Internal system changes.
+  * Changed error message when Bongo SDK is unavailable.
+  * Various crashes and memory leaks fixed.
+  * Anti-clipping improved.
+  * IK tag option added to properties command.
+  * Command added to change IK document properties.
+  * IK properties added to Bongo document UI.
+  * Timeline has a reset option on context menu now.
+  * Timeline / curve tick position thumb updates correctly when opening new model.
+  * RRP tweening settings now sticking
+  * Keyframe editor keyframe selection synchronizes correctly when opened first time.
+  * Sun (document) keyframes updates correctly on timeline.
+  * Travel ease controls works for tweening.
+  * Default values for translation axis fixed.
+  * Added "sleep" mode to Bongo in order to disable it.
+  * Added animation mode reticle.
+  * Fixed the render progress window caption.
+  * Set Keyframe editor window style "tool window".
+  * Fixed a bug where objects could not be reselected in animation manager.
+  * Timeline now updating when woken up while floating.
+  * Fixed bits and pieces in animation manager.
+  * Non-animated parent object accepts children assignments now.
+  * Advanced hierarchy controls enables correctly now for the root item.
+  * Undo for tracking stop works as expected now.   
+  * Synchronization between Timeline and Curve Editor has been improved.
+  * Improved view animation.
+  * Video texture had missing localized strings.
+======2010-08-25: Public WIP 12======
+
+=====Features:=====
+  * Morphing: first test implementation added.
+  * Bongo 2.0 toolbar. 
+  * Support for RDK properties extended. It’s now possible to animate material for example.
+  * New icons for object pivot modes and for IK nodes in the tree dialog.
+
+
+
+=====Bug Fixes:=====
+
+  * Bongo Switch: shows correctly which versions of Bongo are installed.
+  * Bongo Switch: handles toolbar switching.
+  * Animation manager updates when restoring named views with animation data.
+  * Broken menu commands works now.
+  * Bongo toolbar installed in a folder that can be accessed by Windows.
+  * View event watcher improved.
+  * IK chains used the same joints twice in certain situations, this has now been fixed.
+  * Named views added to a separate menu on the "Add Keyframe" Timeline menu.
+  * Reduced Keyframe Editor UI space.
+  * Double clicking curve point opens Keyframe Editor now.
+  * Fixed memory leaks.
+  * Improved IK solving.
+  * Speeded up the time slider in the Curve Editor.
+  * Edit box text is properly "disabled" looking on themed Windows.
+  * Color picker button and combo box resizes correctly in the Keyframe Editor.
+  * Added a scroll bar to the combo box in the Keyframe Editor.
+  * Fixed problem with animated objects getting automatically renamed when document opened, this happened in specific situations.
+  * BongoAddObjectKeyframe command takes the chosen axis into account.
+  * Curve Editor Update: has a legend, travel path for 3D parameters, double clicking a point opens editor.
+  * Tooltips on object constraint dialog show correct info.
+  * BongoConstrainObjectLookAt and BongoConstrainObjectLookAlong command ask to pick constraint heading.
+  * BongoChangeConstraintHeading has a "Use Current" option and correctly applies the axis picked from the Use Axis option.
+  * Show pivot path option in UI can be turned off.
+  * Draw pivot points on path gets disabled when pivot path is turned off.
+  * Removed None option from object joint type. Joint can be disabled when switched to simple pivot.
+  * Problem with Undo leaving duplicated objects in the document has been fixed.
+  * Checks added to see if object parent is animated.
+  * Fixed a memory leak caused by the Animation Manager.
+
+======2010-05-27: Public WIP 11======
+**[[http://download.rhino3d.com/en/Bongo/2.0/wip/download/|Download...]]**
+
+=====Features:=====
+	* Support for 64-bit Rhino 5.0 Work-in-progress releases.
+
+
+=====Bug Fixes:=====
+
+	* Group support added.
+	* Stacked document support.
+	* Auto threshold for ease in/out added on tweening section in keyframe editor.
+	* Bongo 1.0 tweening data imported to Bongo 2.0.
+	* Looping added for objects (missing feature).
+	* Dialog section state now remembered.
+	* IK text changed into symbols.
+	* Animation Manager dragging restrictions works now.
+	* Lights and objects combined on Animation Manager.
+	* Mode added to Animation Manager to show IK chains.
+	* Render animation progress % now calculates correct.
+	* Clicking on item name in constraint manager chooses the object correctly now.
+	* The pause value stays correct when rearranging items in the named view dialog.
+	* Updated RDK installs with Bongo again.
+	* Delete button on object constraints section works again.
+	* Path constraints now work as expected when maximizing views in Rhino 4.0.
+	* More space between animation manager items.
+	* Changes to the Animation preview settings have an effect now.
+	* Fixed the "forwards-backwards" animation preview behavior.
+	* Lights now add a keyframe when moving them, even though animation mode is off.
+	* Problems with moving lights when animate button is off, has been fixed.
+	* Animation data can now be removed from members of IK chains.
+
+======2010-04-21: Public WIP 10======
+
+=====Features:=====
+	* Positional weighting for views added.
+	* BongoPreCalculateIk command added for manual calculation
+
+
+=====Bug Fixes:=====
+
+	* Object constraint heading y-axis not flipping anymore.
+	* Bongo object constraint command operate on multiple objects now.
+	* Bongo positional weighting for objects added (missing feature).
+	* Possibility to switch between transforms (keyframes, constraints) added.
+	* IK pre-calculation cancellation improved.
+	* Moved object constraint managers to the properties dialog.
+	* Changed the constraint UI.
+	* IK viewport color can be customized.
+	* Fixed drawing of camera path.
+	* Unanimated views removed from animation manager.
+	* Parent-Child links can be turned off now.
+	* Reactor added when moving IK members or constraint targets.
+	* Added Bongo UI to RDK ViewDockBar.
+	* Memory leak in IK system fixed.
+	* NamedView edit box in keyframe editor now resizes.
+	* Copy command, copy-paste, insert and import commands are supported now.
+	* Objects now selected in all viewport when picked in animation manager.
+	*  Animated object name counter changes now correctly when copying objects and re-opening a model.
+	* Last timeline position now saved with the model.
+	* Crash fixed when deleting keyframes of an object that is constraint to a path.
+	* Light support improved.
+	* BongoMatchObjectProperties command has been fixed.
+	* View based pivot is now working properly.
+	* Keyframe editor position and state now saved.
+	* Tweening parameters on object properties now supported.
+	* More Bongo 1.0 data imported.
+
+
+======2010-03-10: Public WIP 9======
+
+=====Bug Fixes:=====
+
+	* IK precalculation in endless loop when multiple chains.
+	* Improved Animation Manager.
+	* Check for update menu item enabled in non release mode.
+	* Lots of improvements made to the Curve Editor.
+	* Default joint is changed to be Hinge. 
+	* Joint text now update when joint is changed to simple pivot.
+	* Joint types now include limits.
+	* Ghosted keyframes on timeline now moves/deletes as expected.
+	* Pause button is more responsive.
+	* Speed up pivot and curve path drawing.
+
+
+======2010-02-09: Public WIP 8======
+
+=====Bug Fixes:=====
+
+	* AddKeyframe context menu added to the Timeline.
+	* Improved the Bongo Undo.
+	* The Tweening section on Keyframe Editor UI does now enable/disable when adding parameter through UI.
+	* Keyframe Editor: Tree/Editor splitter not using full dialog height.
+	* Tree/Model selection/Highlight feedback added.
+	* Keyframe editor looses selection.
+	* Precalculated constraints now updates correctly.
+	* Curve Editor now supports constraints.
+	* Curve Editor updates when new keyframe added.
+	* Bongo 1.0 view constraints now imports correctly into Bongo 2.0.
+	* The Curve Editor now supports the Rhino sun.
+	* Turning Ortho (F8) on/off while adding animation now works correctly.
+	* IK text can now be turned on or off.
+
+======2010-01-12: Public WIP 7======
+
+=====Features:=====
+
+  * Bongo is now inactive until used.
+  * RPC support (RPC Plug-in test command: RpcSetAnimationFrame)
+
+=====Bug Fixes:=====
+
+  * Memory leaks.
+  * Crashes on shutdown.
+  * Lots of stability issues fixed.
+
+
+
+
+
+======2009-10-19: Public WIP 6======
+=====Features:=====
+
+  * Added BongoAddKeyframe command.
+  * Mode added to collapse timeline keyframes.
+  * Animatable named views.
+  * Animatable RDK content (Bongo video texture).
+
+=====Bug Fixes:=====
+
+  * Parallel view animation was broken.
+  * "Disable animated view" messages pops up when previewing.
+  * Animation manager: parent child links not showing up correctly.
+  * Animation manager: view constraints misplaced.
+  * Control resizing in object properties joint and constraint sections was broken.
+  * Timeline resizing was broken.
+  * Parallel view animation was broken.
+  * IK precalculation went wrong when model opened before Bongo UI.
+  * Problem with IK cache reset.
+  * Constraints show up in Animation Manager.
+  * Object jumps when adding first keyframe at position 0.
+
+======2009-09-08: Public WIP 5======
+
+=====Features:=====
+
+  * Added animatable light properties.
+
+=====Bug Fixes:=====
+
+  * Problem with saving Bongo data has now been fixed.
+  * Copying/moving keyframes ignored constraint parameters.
+  * Timeline flickers when adding keyframes.
+  * Transformation controls on timeline stay disabled in certain situations.
+  * Timeline slider lost when zooming.
+  * Bongo commands to check in/out licenses missing.
+  * Crash when entering wrong CD keys.
+  * Memory leak.
+  * Crash on shutdown.
+  * BongoPreviewAnimation command missing.
+
+======2009-08-12: Public WIP 4======
+
+=====Features:=====
+
+  * Added animatable layer properties.
+  * Keyframe selection control added on keyframe editor.
+
+=====Bug Fixes:=====
+
+  * Improved Bongo System Reporter.
+  * Bongo Version Switch now supports Rhino 5.
+
+======2009-06-15: Public WIP 3======
+=====Features:=====
+
+  * Added animatable document properties (RDK Sun)
+
+=====Bug Fixes:=====
+
+  * Crash on Rhino exit.
+  * Crash when rendering with Flamingo.
+  * Cannot remove object constraints.
+  * Error message pops up when "viewport display" chosen as renderer.
+  * BongoLinkChain only allows to pick one child.
+  * Groups do not display in animation manager.
+  * Animated view jumps (view up-vector animation broken).
+  * Crash when enabling a view for animation.
+  * Version switch sets Bongo 1.0 to "load on startup" mode.
+
+======2009-05-12: Public WIP 2======
+=====Features:=====
+
+  * Switching joint type from ball to hinge set the pivot to simple mode
+  * Video Encoder did not work correctly
+  * IK has a document option for pre-calculation.
+  * Added more animatable object properties.
+  * Added support for writing WMV and OGV video file formats
+
+=====Bug Fixes:=====
+
+  * Switching joint type from ball to hinge set the pivot to simple mode.
+  * Video Encoder did not work correctly
+  * Telescopic type did not stick and switched back to universal joint.
+  * First rendered frame was named incorrectly
+
+======2009-04-22: Public WIP 1======
+=====Features:=====
+
+  * Inverse Kinematics.
+  * Improved timeline and keyframe editor.
+  * Curve Editor
+  * Multiple animations per file.
