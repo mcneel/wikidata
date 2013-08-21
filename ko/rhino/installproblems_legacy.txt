@@ -1,0 +1,103 @@
+======Rhino 3과 Rhino 4의 설치 관련 문제 해결 안내======
+Rhino 5의 설치 관련 안내는 [[http://wiki.mcneel.com/ko/rhino/installproblems|여기를 클릭하세요.]]
+
+  * [[#Rhino 3에서 도구모음이 올바르게 고정되지 않는 문제|Rhino 3에서 도구모음이 올바르게 고정되지 않는 문제]]
+  * [[#Rhino 3에서의 OpenGL 성능과 디스플레이 문제|Rhino 3에서의 OpenGL 성능과 디스플레이 문제]]
+  * [[#Rhino 3 도움말 색인 탭이 공백으로 표시됨|Rhino 3 도움말 색인 탭이 공백으로 표시됨]]
+  * [[#Rhino 4에서 플러그인이 로드되지 않고 시작함|Rhino 4에서 플러그인이 로드되지 않고 시작함]]
+  * [[#Rhino 4 필요한 디스크 공간 확인 과정이 종료되지 않음|Rhino 4 필요한 디스크 공간 확인 과정이 종료되지 않음]]
+  
+
+=====Rhino 4에서 플러그인이 로드되지 않고 시작함=====
+**문제:**
+
+Vista 에서 도구모음이 안 보이고 플러그인이 로드되지 않음
+
+적은 수의 사용자가 관리자가 아닌 계정에서 Rhino 4.0 (SR2 이후 버전)을 Vista에서 설치했을 때 도구모음이 보이지 않고 플러그인도 로드되지 않는 현상이 있음을 알려 주셨습니다.  이와 같은 현상은 Vista Home Premium 시스템에서 주로 발생하며 모든 버전의 Vista에서도 문제가 발생하는 것이 보고되었습니다.  대부분의 사용자에게는 이러한 문제가 발생하지 않으며, Rhino 개발팀에서도 이 문제를 재연할 수 없었습니다.
+
+**해결책:**
+
+제어판 - 사용자 계정에서 사용자 계정 컨트롤(UAC)을 해제하고 일시적으로 백신 소프트웨어와 시스템 보호 소프트웨어를 해제한 후에 Rhino를 설치하면 이 문제가 해결되었다는 사용자들이 계셨습니다. 재설치한 후에 Rhino를 한 번 실행하면 백신과 시스템 보호 프로그램이 다시 실행하셔야 합니다. 원한다면 UAC도 다시 실행하실 수 있습니다.  
+
+2009년 5월 5일 작성 - John Brock
+
+=====Rhino 3에서 도구모음이 올바르게 고정되지 않는 문제=====
+
+  - Rhino 3.0 을 닫습니다.
+  - Rhino를 종료한 후, 이 유틸리티를 실행하세요: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip
+  - Rhino를 다시 시작합니다.
+  - 이 유틸리티는 레지스트리에서 다음 키를 삭제하여 Rhino에서 도구모음 고정이 안 되었던 설정을 원래대로 되돌립니다.
+  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+
+=====Rhino 3에서의 OpenGL 성능과 디스플레이 문제=====
+
+//- 그래픽 카드와 드라이버 업그레이드하신 후에 사용하세요//
+
+  - Rhino 3.0 을 닫습니다.
+  - Rhino를 종료한 후, 이 유틸리티를 실행하세요: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip
+  - Rhino를 다시 시작합니다.
+  - 이 유틸리티는 레지스트리에서 다음 키를 삭제하여 Rhino의 이전 [[rhino:opengl|OpenGL]] 디스플레이 설정을 삭제합니다. 
+  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Options\OpenGL//
+
+=====Rhino 4 필요한 디스크 공간 확인 과정이 종료되지 않음=====
+**문제:**
+
+Rhino 4.0를 설치할 때 "필요한 디스크 공간을 확인하고 있습니다. 기다려 주십시오"라는 메시지가 표시되고 사라지지 않습니다.
+
+**원인:**
+
+Windows Installer 엔진에서 Rhino를 설치할 만큼 모든 드라이브에 충분한 디스크 공간이 있는지 확인하려고 합니다. 원인이 무엇이든, 이 과정이 오래 걸리거나 절대 종료되지 않는 경우가 있습니다. 실제 이유는 Microsoft의 Windows Installer 엔진에 있습니다.
+
+**해결책:** ////
+
+명령 프롬프트에서 설치 관리자를 실행합니다:
+<code>
+msiexec /i Rhino4_Setup.msi /qr
+</code>
+
+=====Rhino 3 도움말 색인 탭이 공백으로 표시됨=====
+
+**문제:**
+
+Windows 2000 에서 사용자의 권한이 낮은 경우, Rhino 도움말의 색인 탭 또는 BonusToolsHelp 창이 
+
+공백으로 표시됩니다.
+
+**해결책:**
+
+이것은 Windows 2000의 오류와 관련있는 권한 설정 문제입니다. Program File 폴더의 권한을 변경하지 않고 문제를 해결하는 방법입니다.
+  * 관리자에게 ...Program Files\Rhino\English\Help 폴더에 있는 Rhino.GID  파일을 삭제하게 한 후, RhinoBonusTools.GID 파일도 삭제시킵니다.
+  * 관리자가 로그아웃 (아직 도움말을 실행하지 마십시오. 안 그러면 관리자용 GID 파일이 또 생성됩니다)합니다.
+  * 권한이 낮은 사용자가 로그인합니다. 색인 탭이 표시됩니다. (해당 사용자의 개인 파일 영역 어딘가에 GID 파일이 만들어집니다.)
+  * Windows XP의 경우, Microsoft가 이 오류를 수정하였으므로 이 방법을 사용하실 필요가 없습니다.
+  * 이 오류를 Windows 2000 에서 수정하실 수 있는 또 다른 방법은 ...Rhino\English\Help folder 의 "쓰기(Write)" 권한을 **사용자**에게 추가하는 것입니다.
+
+=====Rhino 4 수동 제거=====
+**//질문://** Rhino 4.0를 설치 제거하려고 하다 오류가 발생하였고, 이제는 Rhino를 지울 수 없습니다.
+
+**//답변://** [[http://wiki.mcneel.com/ko/rhino/uninstalling|수동으로 Rhino 4.0 제거하는 방법]]
+
+=====Rhino 4를 업그레이드로 설치하기=====
+
+**//질문://** //"Rhino 4.0 업그레이드를 설치하려면 제가 어떻게 해야 합니까?"//
+
+**//답변://** 다음 조건 중 하나에 해당하면 Rhino 4.0 업그레이드 설치 관리자로 설치가 됩니다. 다음 순서대로 확인됩니다:
+
+  * Rhino 3.0 이 설치되어 있습니다  
+  * Rhino 2.0 이 설치되어 있습니다 
+  * Rhino 1.1 이 설치되어 있습니다  
+  * Rhino 1.0 이 설치되어 있습니다  
+  * 설치 과정 중에 Rhino 3.0 CD 를 CD 드라이브에 삽입합니다   
+  * 설치 과정 중에 Rhino 2.0 CD 를 CD 드라이브에 삽입합니다   
+  * 설치 과정 중에 Rhino 1.1 CD 를 CD 드라이브에 삽입합니다   
+  * 설치 과정 중에 Rhino 1.0 CD 를 CD 드라이브에 삽입합니다  
+
+**[[SettingsTransfer|Rhino 4의 개인 설정을 다른 컴퓨터로 옮기려면]]**
+
+
+=====Rhino 4 설치 제거 실패=====
+**문제:**
+이것은 사용자 컴퓨터에 있는 손상된 설치 관리자 캐시가 원인일 수 있습니다.
+
+**해결책:**
+[[http://wiki.mcneel.com/ko/rhino/uninstalling|수동으로 Rhino 4.0 설치 제거]] 항목의 안내대로 실행하세요.
