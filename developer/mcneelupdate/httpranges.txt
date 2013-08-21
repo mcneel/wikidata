@@ -1,0 +1,8 @@
+====== McNeel Update: HTTP 1.1 Ranges Header ======
+The McNeel Update service downloads both version.xml files and installers using the [[http://technet.microsoft.com/en-us/library/cc732428.aspx|Microsoft Background Intelligent Transfer Service (BITS)]]. This service is used by the Windows Update system, and allows silent background downloads that cannot be blocked by firewalls.
+
+Because BITS is designed to stop downloading when network usage is high, and to resume downloads later, it must be able to get specific parts of a file from the server. This is accomplished by sending the Range header in the HTTP request. The HTTP Range header specifies to the HTTP server a range of bytes to be sent in the response.
+
+By default, dynamically rendered web pages do not support the HTTP Range header. However, it is possible to write code that supports it. For an example in PHP, see  [[http://stackoverflow.com/questions/157318|this stackoverflow]] article.
+
+{{tag>Developer McNeelUpdate}}
