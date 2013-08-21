@@ -1,0 +1,51 @@
+====== Transform Screen Coordinates to World Coordinates ======
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
+> **Summary:** //Demonstrates how to transform screen coordinates to world coordinates using Rhino SDK.//
+
+=====Question=====
+How to I get the world coordinates of a view? That is, I need to transform client-area coordinates of a specified view to world coordinates. The resulting coordinates are represented as 3-D points. How can I do this?
+
+=====Answer=====
+Every Rhino view is capable of returning the transformation from one coordinate system to another. This is accomplished by the ON_Viewport::GetXform member. The following demonstrates how to use this to convert screen coordinates to world coordinates.
+
+<code c++>
+CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& context )
+{
+  CRhinoCommand::result rc = failure;
+
+  // Get the active view
+  CRhinoView* view = RhinoApp().ActiveView();
+  if( view )
+  {
+    // Get the current cursor position
+    POINT point;
+    if( GetCursorPos(&point ) )
+    {
+      // Convert the screen coordinates to client coordinates
+      view->ScreenToClient( &point );
+
+      // Obtain the view's screen-to-world transformation
+      ON_Xform screen_to_world;
+      view->ActiveViewport().VP().GetXform( ON::screen_cs, ON::world_cs, screen_to_world );
+
+      // Create a 3-D point
+      ON_3dPoint pt( point.x, point.y, 0 );
+      // Transform it
+      pt.Transform( screen_to_world );
+
+      // Add it to the document
+      context.m_doc.AddPointObject( pt );
+      context.m_doc.Redraw();
+
+      rc = success;
+    }
+  }
+
+  return rc;
+}
+
+</code>
+
+\\
+
+{{tag>Developer cplusplus}}
