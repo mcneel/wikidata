@@ -1,0 +1,59 @@
+====== Using Blocks ======
+The basics of blocks are the same in Rhino 4 and 5. However, Rhino 5 offers additional features and commands that you will find [[http://www.rhino3d.com/new/large|here.]]
+ 
+> **Summary:** //Blocks provide a way of managing repeated objects in a file.//
+
+=====Advantages of using blocks include:=====
+
+**1.** You can change any number of copies of an object if they are block instances by making changes to the geometry that defines the block.
+
+**2.** Objects can be updated from external files.
+
+**3.** Repeated instances of a single definition do  not increase the file size much since there is only one actual definition for the block held in the file. All instances reference the data for the one original definition. Rhino does some bookkeeping and display tricks to display these at the other locations and orientations.
+
+=====How blocks work:=====
+When you make a block in Rhino from geometry in the current file (Block command), Rhino replaces the geometry you selected with a block instance. It saves the block definition (the geometry you selected to define the block) in the file. You can insert as many instances of this definition as needed with the Insert command. Existing block definitions available for inserting are on a drop down  list in the Insert dialog.
+
+If you insert another 3dm file as a block instance, a similar thing happens- the block definition is sucked into the current file and saved with it. What you see on screen is an instance of geometry. The difference of course is that the definition refers back to the external file and can be updated as well as any instances that are placed if the external file is changed. This is done via [[rhino:blockmanager|BlockManager]].
+
+(In both cases, there need not be any actual instances placed in the file for the block definition to exist in the file.This is why you sometimes have trouble deleting layers- if a block definition uses the layer you cannot delete it. This can happen when all instances of a block have been deleted. Use Purge to get rid of unused block definitions.)
+To update all block instances of a particular block in the file, you need to redefine the block definition. You can do this by Exploding a block instance, making changes and redefining the block to the same name. You will see a warning dialog to confirm the change to the definition. Or, you can change by simply redefining the block with another set of objects altogether.
+
+====An example to try====
+>  **//Make a box//** and use the **Block** command to define a block. Call it //Box1//. Put the insertion point at one corner of the box.  When this is done, the box is no longer a box- it looks like a box but if you select it and look at Properties>Details you will see that it is a block instance.
+>  
+>  **//Explode the Block.//** Check Properties again. The box is a box again and has nothing to do with the block called //Box1//. Delete the box. Now, use **Insert**. In the drop down list of the **Insert** dialog locate //Box 1//. This is the block definition that you created when you made the block.  Insert it as a block instance and then copy the instance several times.
+>  
+>  **//Redefine the Block in Rhino 4://** Select one of the instances of //Box1//, **Explode** it to return in to being a normal box. Fillet the edges of the box. Now start the **Block** command- select the filleted box and choose an insertion point. Select Box1 as the name for the new block. All of the instances of //Box1// are now filleted boxes. They may move if you picked an insertion point on the new definition  that is different from the original.
+>
+>  **//Redefine the block Rhino 5://** Here you will use BlockEdit. Edit the block by double clicking on it. A BlockEdit dialog will appear. You can add and delete objects and reset the insertion point. Also you can directly edit the geometry in the block. Closing the BlockEdit will save the changes and update all intances of the block in the model. Picking the "x" or ESC will cancel the redefine.
+
+>  **//Make a sphere.//** Start **Block** and choose an insertion point. Call the block //Box1//. The filleted boxes are now all spheres.
+\\ 
+=====External block references=====
+Block definitions that are from external files can be updated by editing and saving the external file then updating the definition in [[rhino:blockmanager|BlockManager]]. The definition looks at the absolute path, by the way, so you cannot move external files used in block definitions and have the update work, but the current definition does not care if the original source file moved- the current definition is in the current file.
+
+
+====Example to try====
+>  **Make a box**, save the file. Open a new file, and call **Insert**. Use the //File// button in the dialog to navigate to the box file. Insert it as a block instance. 
+>  
+>  **Make several copies of the block** - scale, rotate, move these to taste.
+>  
+>  **In another instance of Rhino,** open the box file and fillet the edges. Make a sphere. Save the file. 
+>  
+> **Now, go back to the file with the inserted blocks** and call the command [[rhino:blockmanager|BlockManager]]. You will see a reference to the inserted box file. Select it in the list and click //__Update__//. 
+>  
+>  **//The instances in the file should now all be filleted boxes with a sphere.//**
+>  
+>  Note that in all cases, the layers that the block definition uses are maintained in the instances- turning off any layer that some part of a block instance uses will turn off that part of the block in the Rhino window. Turning off the layer on which the instance was inserted will turn off the entire block regardless of the state of the other layers used by the block.
+
+=====Advanced Techniques=====
+
+**[[developer:scriptsamples/superexplodeblock|SuperExplodeBlock Script]]**\\ 
+(Now a part of [[labs:rhinolabstools|Rhino Labs Tools]] for V4 and integrated into V5 as a command)
+
+**[[developer:scriptsamples/countblocks|Count Blocks Script]]**
+
+
+
+
