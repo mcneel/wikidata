@@ -1,0 +1,264 @@
+====== How To: Sweeping Surfaces using RhinoSweep1 ======
+====== C++, .NET ======
+> **Version:** //Rhino 4//
+
+The following sample code demonstrates how to use the CArgsRhinoSweep1 class and the RhinoSweep1 SDK function. The definitions of these can be found in rhinoSdkSweep.h.
+
+Note, this example does not perform any curve sorting or direction matching. This is the responsibility of the the SDK developer.
+
+===== C++ =====
+<code c++>
+CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& context )
+{
+  CRhinoGetObject go;
+  go.SetCommandPrompt( L"Select rail curve" );
+  go.SetGeometryFilter( CRhinoGetObject::curve_object );
+  go.GetObjects(1,1);
+  if( go.CommandResult() != success )
+    return go.CommandResult();
+
+  const CRhinoObjRef& rail_ref = go.Object(0);
+  const CRhinoObject* rail_obj = rail_ref.Object();
+  if( !rail_obj )
+    return failure;
+  const ON_Curve* rail_crv = rail_ref.Curve();
+  if( !rail_crv )
+    return failure;
+
+  CRhinoGetObject gx;
+  gx.SetCommandPrompt( L"Select cross section curves" );
+  gx.SetGeometryFilter( CRhinoGetObject::curve_object );
+  gx.EnablePreSelect( false );
+  gx.EnableDeselectAllBeforePostSelect( false );
+  gx.GetObjects(1,0);
+  if( gx.CommandResult() != success )
+    return gx.CommandResult();
+
+  CRhinoPolyEdge edge;
+  edge.Create( rail_crv, rail_obj );
+
+  CArgsRhinoSweep1 args;
+  args.m_rail_curve = edge.Duplicate();
+  args.m_bHaveRailPickPoint = false;
+  args.m_bClosed = rail_crv->IsClosed();
+  args.m_bUsePivotPoint = false;
+
+  int i;
+  for( i = 0; i < gx.ObjectCount(); i++ )
+  {
+    const CRhinoObjRef& obj_ref = gx.Object(i);
+    const ON_Curve* crv = obj_ref.Curve();
+    if( crv )
+    {
+      ON_Curve* dup_crv = crv->DuplicateCurve();
+
+      double t = 0;
+      edge.GetClosestPoint( dup_crv->PointAtStart(), &t );
+
+      args.m_shape_curves.Append( dup_crv );
+      args.m_rail_params.Append( t );
+      args.m_shape_objrefs.Append( obj_ref );
+    }
+  }
+
+  // Start and end points
+  args.m_bUsePoints[0] = 0;
+  args.m_bUsePoints[1] = 0;
+
+  // Point objects picked for endpoints
+  args.m_bClosed = false; 
+  args.m_style = 0;
+  args.m_planar_up = ON_zaxis; // Don't need this, but set it anyway.. 
+  args.m_simplify = 0; // Simplify method for shape curves
+  args.m_rebuild_count = -1; // Sample point count for rebuilding shapes
+  args.m_refit_tolerance = context.m_doc.AbsoluteTolerance();
+  args.m_sweep_tolerance = context.m_doc.AbsoluteTolerance();
+  args.m_angle_tolerance = context.m_doc.AngleToleranceRadians();
+  args.m_miter_type = 0; // 0: don't miter
+
+  ON_SimpleArray<ON_Brep*> breps;
+  if( RhinoSweep1(args, breps) )
+  {
+    for( i = 0; i < breps.Count(); i++ )
+    {
+      context.m_doc.AddBrepObject( *breps[i] );
+      delete breps[i];
+    }
+  }
+
+  // Clean up
+  delete args.m_rail_curve;
+
+  for( i = 0; i < args.m_shape_curves.Count(); i++ )
+    delete args.m_shape_curves[i];
+
+  context.m_doc.Redraw();
+
+  return success;
+}
+
+</code>
+===== VB.NET =====
+<code vb>
+Public Overrides Function RunCommand(ByVal context As RhinoCommandContext) _
+  As IRhinoCommand.result
+  Dim go As New MRhinoGetObject()
+  go.SetCommandPrompt("Select rail curve")
+  go.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.curve_object)
+  go.GetObjects(1, 1)
+  If (go.CommandResult() <> IRhinoCommand.result.success) Then
+    Return go.CommandResult()
+  End If
+
+  Dim rail_ref As MRhinoObjRef = go.Object(0)
+  Dim rail_obj As IRhinoObject = rail_ref.Object()
+  Dim rail_crv As IOnCurve = rail_ref.Curve()
+  If (rail_obj Is Nothing Or rail_crv Is Nothing) Then
+    Return IRhinoCommand.result.failure
+  End If
+
+  Dim gx As New MRhinoGetObject()
+  gx.SetCommandPrompt("Select cross section curves")
+  gx.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.curve_object)
+  gx.EnablePreSelect(False)
+  gx.EnableDeselectAllBeforePostSelect(False)
+  gx.GetObjects(1, 0)
+  If (gx.CommandResult() <> IRhinoCommand.result.success) Then
+    Return gx.CommandResult()
+  End If
+
+  Dim edge As New MRhinoPolyEdge()
+  edge.Create(rail_crv, rail_obj)
+
+  Dim args As New MArgsRhinoSweep1()
+  args.m_rail_curve = edge.Duplicate()
+  args.m_bHaveRailPickPoint = False
+  args.m_bClosed = rail_crv.IsClosed()
+  args.m_bUsePivotPoint = False
+
+  Dim curves As New System.Collections.Generic.List(Of OnCurve)()
+
+  For i As Integer = 0 To gx.ObjectCount() - 1
+    Dim obj_ref As MRhinoObjRef = gx.Object(i)
+    Dim crv As IOnCurve = obj_ref.Curve()
+    If (crv IsNot Nothing) Then
+      Dim dup_crv As OnCurve = crv.DuplicateCurve()
+      Dim t As Double = 0
+      edge.GetClosestPoint(dup_crv.PointAtStart(), t)
+      curves.Add(dup_crv)
+      args.m_rail_params.Append(t)
+      args.m_shape_objrefs.Append(obj_ref)
+    End If
+  Next
+  args.m_shape_curves = curves.ToArray()
+
+  ' Start and end points
+  args.m_bUsePoints(0) = 0
+  args.m_bUsePoints(1) = 0
+
+  ' Point objects picked for endpoints
+  args.m_bClosed = False
+  args.m_style = 0
+  args.m_planar_up = New On3dVector(OnUtil.On_zaxis)
+  args.m_simplify = 0 'Simplify method for shape curves
+  args.m_rebuild_count = -1 'Sample point count for rebuilding shapes
+  args.m_refit_tolerance = context.m_doc.AbsoluteTolerance()
+  args.m_sweep_tolerance = context.m_doc.AbsoluteTolerance()
+  args.m_angle_tolerance = context.m_doc.AngleToleranceRadians()
+  args.m_miter_type = 0 '0: don't miter
+
+  Dim breps() As OnBrep = Nothing
+  If (RhUtil.RhinoSweep1(args, breps)) Then
+    For Each b As OnBrep In breps
+      context.m_doc.AddBrepObject(b)
+    Next
+  End If
+  context.m_doc.Redraw()
+  Return IRhinoCommand.result.success
+End Function
+
+</code>
+===== C# =====
+<code c#>
+public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+{
+  MRhinoGetObject go = new MRhinoGetObject();
+  go.SetCommandPrompt( "Select rail curve" );
+  go.SetGeometryFilter( IRhinoGetObject.GEOMETRY_TYPE_FILTER.curve_object );
+  go.GetObjects(1,1);
+  if( go.CommandResult() != IRhinoCommand.result.success )
+    return go.CommandResult();
+
+  MRhinoObjRef rail_ref = go.Object(0);
+  IRhinoObject rail_obj = rail_ref.Object();
+  IOnCurve rail_crv = rail_ref.Curve();
+  if( rail_obj == null | rail_crv == null )
+    return IRhinoCommand.result.failure;
+
+  MRhinoGetObject gx = new MRhinoGetObject();
+  gx.SetCommandPrompt( "Select cross section curves" );
+  gx.SetGeometryFilter( IRhinoGetObject.GEOMETRY_TYPE_FILTER.curve_object );
+  gx.EnablePreSelect( false );
+  gx.EnableDeselectAllBeforePostSelect( false );
+  gx.GetObjects(1,0);
+  if( gx.CommandResult() != IRhinoCommand.result.success )
+    return gx.CommandResult();
+
+  MRhinoPolyEdge edge = new MRhinoPolyEdge();
+  edge.Create( rail_crv, rail_obj );
+
+  MArgsRhinoSweep1 args = new MArgsRhinoSweep1();
+  args.m_rail_curve = edge.Duplicate();
+  args.m_bHaveRailPickPoint = false;
+  args.m_bClosed = rail_crv.IsClosed();
+  args.m_bUsePivotPoint = false;
+
+  System.Collections.Generic.List<OnCurve> curves =
+       new System.Collections.Generic.List<OnCurve>();
+  for( int i=0; i<gx.ObjectCount(); i++ )
+  {
+    MRhinoObjRef obj_ref = gx.Object(i);
+    IOnCurve crv = obj_ref.Curve();
+    if( crv != null )
+    {
+      OnCurve dup_crv = crv.DuplicateCurve();
+      double t = 0;
+      edge.GetClosestPoint( dup_crv.PointAtStart(), ref t );
+      curves.Add( dup_crv );
+      args.m_rail_params.Append( t );
+      args.m_shape_objrefs.Append( obj_ref );
+    }
+  }
+  args.m_shape_curves = curves.ToArray();
+
+  // Start and end points
+  args.set_m_bUsePoints(0, 0);
+  args.set_m_bUsePoints(1, 0);
+
+  // Point objects picked for endpoints
+  args.m_bClosed = false; 
+  args.m_style = 0;
+  // Don't need this, but set it anyway.. 
+  args.m_planar_up = new On3dVector(OnUtil.On_zaxis);
+  args.m_simplify = 0; // Simplify method for shape curves
+  args.m_rebuild_count = -1; // Sample point count for rebuilding shapes
+  args.m_refit_tolerance = context.m_doc.AbsoluteTolerance();
+  args.m_sweep_tolerance = context.m_doc.AbsoluteTolerance();
+  args.m_angle_tolerance = context.m_doc.AngleToleranceRadians();
+  args.m_miter_type = 0; // 0: don't miter
+
+  OnBrep[] breps = null;
+  if( RhUtil.RhinoSweep1( ref args, out breps ) )
+  {
+    for( int i=0; i<breps.Length; i++ )
+      context.m_doc.AddBrepObject( breps[i] );
+  }
+  context.m_doc.Redraw();
+  return IRhinoCommand.result.success;
+}
+
+</code>
+
+
+
+{{tag>Developer cplusplus dotnet}}
