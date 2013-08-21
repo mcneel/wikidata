@@ -1,0 +1,95 @@
+====== Writing Text Objects to 3DM Files ======
+> **Developer:** //[[developer:opennurbs:home|openNURBS]]//
+> **Summary:** //Writing OnTextEntity2 objects using openNURBS.NET.//
+
+===== Question =====
+I am having difficulties writing OnTextEntity2 objects to 3DM files. Any example code that you can provide would be beneficial.
+
+===== Answer =====
+See the following example.
+
+==== C# ====
+<code c#>
+static bool WriteTextExample(OnFileHandle fp, int version, OnTextLog error_log)
+{
+  // example demonstrates how to write text
+  OnXModel model = new OnXModel();
+
+  // file properties (notes, preview image, revision history, ...)
+
+  // set revision history information
+  model.m_properties.m_RevisionHistory.NewRevision();
+
+  // set application information
+  model.m_properties.m_Application.m_application_name = "OpenNURBS WriteTextExample() function";
+  model.m_properties.m_Application.m_application_URL = "http://www.opennurbs.org";
+  model.m_properties.m_Application.m_application_details = "Example program in OpenNURBS toolkit.";
+
+  // some notes
+  model.m_properties.m_Notes.m_notes = "This file was made with the OpenNURBS WriteTextExample() function.";
+  model.m_properties.m_Notes.m_bVisible = true;
+
+  // file settings (units, tolerances, views, ...)
+  model.m_settings.m_ModelUnitsAndTolerances.m_unit_system = IOn.unit_system.inches;
+  model.m_settings.m_ModelUnitsAndTolerances.m_absolute_tolerance = 0.001;
+  model.m_settings.m_ModelUnitsAndTolerances.m_angle_tolerance = OnUtil.On_PI / 180.0; // radians
+  model.m_settings.m_ModelUnitsAndTolerances.m_relative_tolerance = 0.01; // 1%
+
+  // layer table
+  {
+    OnLayer layer = new OnLayer();
+    layer.SetLayerName("Text");
+    layer.SetVisible(true);
+    layer.SetLocked(false);
+    layer.SetColor(new OnColor(0, 0, 255));
+    model.m_layer_table.Append(layer);
+  }
+
+  // font table
+  {
+    OnFont font = new OnFont();
+    font.SetFontFaceName("Arial");
+    font.HeightOfI();
+    font.SetBold(true);
+    font.SetIsItalic(false);
+    font.SetFontName("Arial Bold");
+    model.m_font_table.Append(font);
+  }
+
+  // object table
+  {
+    {
+      OnPlane plane = new OnPlane(OnPlane.World_xy);
+      plane.SetOrigin(new On3dPoint(5.0, 5.0, 0.0));
+
+      OnTextEntity2 text = new OnTextEntity2();
+      text.SetPlane(plane);
+      text.SetUserText("Hello Rhino!");
+      text.SetHeight(1.0);
+      text.SetFontIndex(0);
+
+      // write on the default layer
+      OnXModel_Object mo = new OnXModel_Object();
+      mo.m_object = text;
+      mo.m_attributes.m_layer_index = 0;
+      mo.m_attributes.m_name = "Hello Rhino!";
+      model.m_object_table.Append(mo);
+    }
+  }
+
+  // start section comments
+  string sStartSectionComment = "WriteTextExample()";
+
+  OnBinaryFile archive = new OnBinaryFile(IOn.archive_mode.write3dm, fp);
+
+  // Set uuid's, indices, etc.
+  model.Polish();
+  // writes model to archive
+  bool ok = model.Write(archive, version, sStartSectionComment, error_log);
+  return ok;
+}
+</code>
+
+\\
+
+{{tag>Developer openNURBS}}
