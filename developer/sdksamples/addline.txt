@@ -1,0 +1,125 @@
+====== How To: Add a Line Curve Object ======
+====== C++, .NET ======
+> **Summary:** //Demonstrates how to add a line curve to Rhino using the Rhino SDK.//
+
+===== C++ =====
+<code c++>
+CRhinoCommand::result CCommandTest::RunCommand(const CRhinoCommandContext& context)
+{
+  CRhinoGetPoint gp;
+  gp.SetCommandPrompt( L"Start of line" );
+  gp.GetPoint();
+  if( gp.CommandResult() != CRhinoCommand::success )
+    return gp.CommandResult();
+
+  ON_3dPoint pt_start = gp.Point();
+
+  gp.SetCommandPrompt( L"End of line" );
+  gp.SetBasePoint( pt_start );
+  gp.DrawLineFromPoint( pt_start, TRUE );
+  gp.GetPoint();
+  if( gp.CommandResult() != CRhinoCommand::success )
+    return gp.CommandResult();
+
+  ON_3dPoint pt_end = gp.Point();
+  ON_3dVector v = pt_end - pt_start;
+  if( v.IsTiny() )
+    return CRhinoCommand::nothing;
+
+  ON_Line line( pt_start, pt_end );
+
+  context.m_doc.AddCurveObject( line );
+  context.m_doc.Redraw();
+
+  return CRhinoCommand::success;
+}
+</code>
+===== VB.NET =====
+<code vb>
+Public Overrides Function RunCommand(ByVal context As RMA.Rhino.IRhinoCommandContext)_
+  As RMA.Rhino.IRhinoCommand.result
+
+  Dim gp As New MRhinoGetPoint()
+  gp.SetCommandPrompt("Start of line")
+  gp.GetPoint()
+  If (gp.CommandResult() <> IRhinoCommand.result.success) Then
+    Return gp.CommandResult()
+  End If
+  Dim pt_start As On3dPoint = gp.Point()
+
+  gp.SetCommandPrompt("End of line")
+  gp.SetBasePoint(pt_start)
+  gp.DrawLineFromPoint(pt_start, True)
+  gp.GetPoint()
+  If (gp.CommandResult() <> IRhinoCommand.result.success) Then
+    Return gp.CommandResult()
+  End If
+  Dim pt_end As On3dPoint = gp.Point()
+
+  Dim v As On3dVector = pt_end - pt_start
+  If (v.IsTiny()) Then Return IRhinoCommand.result.nothing
+
+  Dim line As New OnLine(pt_start, pt_end)
+  context.m_doc.AddCurveObject(line)
+  context.m_doc.Redraw()
+
+  Return IRhinoCommand.result.success
+End Function
+
+' NOTE: The AddCurveObject has several overloads to have different curves like
+' lines, arcs and [[rhino:nurbs|NURBs]] curves. If you are working with a curve type that is
+' not supported by AddCurveObject, you may have to convert your curve to a [[rhino:nurbs|NURBs]]
+' curve and then add the [[rhino:nurbs|NURBs]] curve to the document.
+' Here is an example with an ellipse
+Dim e As New OnEllipse(OnUtil.ON_xy_plane, 1, 2)
+Dim nc As New OnNurbsCurve()
+Dim result As Integer = e.GetNurbForm(nc)
+If( result = 2 ) Then
+  context.m_doc.AddCurveObject(nc)
+End If
+
+</code>
+===== C# =====
+<code c#>
+public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+{
+  MRhinoGetPoint gp = new MRhinoGetPoint();
+  gp.SetCommandPrompt("Start of line");
+  gp.GetPoint();
+  if( gp.CommandResult() != IRhinoCommand.result.success )
+    return gp.CommandResult();
+
+  On3dPoint pt_start = gp.Point();
+  gp.SetCommandPrompt("End of line");
+  gp.SetBasePoint(pt_start);
+  gp.DrawLineFromPoint(pt_start, true);
+  gp.GetPoint();
+  if (gp.CommandResult() != IRhinoCommand.result.success)
+    return gp.CommandResult();
+  On3dPoint pt_end = gp.Point();
+
+  On3dVector v = pt_end - pt_start;
+  if (v.IsTiny())
+    return IRhinoCommand.result.nothing;
+
+  OnLine line = new OnLine(pt_start, pt_end);
+  context.m_doc.AddCurveObject(line);
+  context.m_doc.Redraw();
+  return IRhinoCommand.result.success;
+}
+
+// NOTE: The AddCurveObject has several overloads to have different curves like
+// lines, arcs and [[rhino:nurbs|NURBs]] curves. If you are working with a curve type that is
+// not supported by AddCurveObject, you may have to convert your curve to a [[rhino:nurbs|NURBs]]
+// curve and then add the [[rhino:nurbs|NURBs]] curve to the document.
+// Here is an example with an ellipse
+OnEllipse e = new OnEllipse(OnUtil.ON_xy_plane, 1, 2);
+OnNurbsCurve nc = new OnNurbsCurve();
+int result = e.GetNurbForm(ref nc);
+if( result == 2 )
+  context.m_doc.AddCurveObject(nc);
+
+</code>
+
+
+{{tag>Developer cplusplus dotnet}}
