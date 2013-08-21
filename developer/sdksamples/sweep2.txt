@@ -1,0 +1,366 @@
+====== How To: Sweeping Surfaces using RhinoSweep2 ======
+====== C++, .NET ======
+> **Version:** //Rhino 4//
+
+The following sample code demonstrates how to use the CArgsRhinoSweep2 class and the RhinoSweep2 SDK function. The definitions of these can be found in rhinoSdkSweep.h.
+
+Note, this example does not perform any curve sorting or direction matching. This is the responsibility of the the SDK developer. The following image shows an example that will work:
+
+{{http://en.wiki.mcneel.com/content/upload/images/my_sweep2.PNG}}
+
+===== C++ =====
+<code c++>
+// Helper function to calculate rail parameters
+bool GetShapeParameterOnRail( 
+  const ON_Curve& shape, 
+  const ON_Curve& rail, 
+  double tol, 
+  double& t 
+  )
+{
+  ON_Interval rail_domain = rail.Domain();
+
+  // Test start point
+  bool rc = rail.GetClosestPoint( shape.PointAtStart(), &t, tol );
+  if( rc )
+  {
+    if( rail.IsClosed() )
+    {
+      if( fabs(t - rail_domain.Max()) < ON_SQRT_EPSILON )
+        t = rail_domain.Min();
+      if( fabs(t - rail_domain.Min()) < ON_SQRT_EPSILON )
+        t = rail_domain.Min();
+    }
+    return true;
+  }
+
+  // Test end point
+  rc = rail.GetClosestPoint( shape.PointAtEnd(), &t, tol );
+  if( rc )
+  {
+    if( rail.IsClosed() )
+    {
+      if( fabs(t - rail_domain.Max()) < ON_SQRT_EPSILON )
+        t = rail_domain.Min();
+      if( fabs(t - rail_domain.Min()) < ON_SQRT_EPSILON )
+        t = rail_domain.Min();
+    }
+    return true;
+  }
+
+  // Try intersecting...
+  ON_SimpleArray<ON_X_EVENT> x;
+  if( 1 == rail.IntersectCurve(&shape, x, tol, 0.0) && x[0].IsPointEvent() )
+  {
+    t = x[0].m_a[0];
+    if( rail.IsClosed() )
+    {
+      if( fabs(t - rail_domain.Max()) < ON_SQRT_EPSILON )
+        t = rail_domain.Min();
+    }
+    return true;
+  }
+
+  return false;
+}
+
+// RhinoSweep2 wrapper function
+bool MySweep2( 
+  const ON_Curve* Rail1, 
+  const CRhinoObject* Rail1_obj, 
+  const ON_Curve* Rail2, 
+  const CRhinoObject* Rail2_obj, 
+  ON_SimpleArray<const ON_Curve*> sCurves, 
+  ON_SimpleArray<ON_Brep*>& Sweep2_Breps 
+  )
+{
+  if( 0 == Rail1 | 0 == Rail1_obj )
+    return false;
+
+  if( 0 == Rail2 | 0 == Rail2_obj )
+    return false;
+
+  CRhinoDoc* doc = RhinoApp().ActiveDoc();
+  if( 0 == doc )
+    return false;
+
+  // Define a new class that contains sweep2 arguments
+  CArgsRhinoSweep2 args;
+
+  // Set the 2 rails
+  CRhinoPolyEdge Edge1, Edge2;
+  Edge1.Create( Rail1, Rail1_obj );
+  Edge2.Create( Rail2, Rail2_obj );
+
+  // Ok, we can at least do some rail direction matching
+  if( !RhinoDoCurveDirectionsMatch(&Edge1, &Edge2) )
+    Edge2.Reverse();
+
+  // Add rails to sweep arguments
+  args.m_rail_curves[0] = &Edge1;
+  args.m_rail_curves[1] = &Edge2;
+
+  args.m_rail_pick_points[0] = ON_UNSET_POINT;
+  args.m_rail_pick_points[1] = ON_UNSET_POINT;
+
+  // To create a closed sweep, you need to have:
+  //  1. Two closed rail curves and and a single shape curve, or
+  //  2. Set CArgsRhinoSweep2::m_bClosed = true
+  args.m_bClosed = false;
+
+  double tol = doc->AbsoluteTolerance();
+
+  // Loop through sections to set parameters
+  for( int i = 0; i < sCurves.Count(); i++ )
+  {
+    const ON_Curve* sCurve = sCurves[i];
+    if( 0 == sCurve )
+      continue;
+
+    // Add to shapes
+    args.m_shape_curves.Append( sCurve );
+
+    // Cook up some rail parameters
+    double t0 = 0.0;
+    if( !GetShapeParameterOnRail(*sCurve, Edge1, tol, t0) )
+      return false;
+    args.m_rail_params[0].Append( t0 );
+
+    double t1 = 0.0;
+    if( !GetShapeParameterOnRail(*sCurve, Edge2, tol, t1) )
+      return false;
+    args.m_rail_params[1].Append( t1 );
+  }
+
+  // Set the rest of parameters
+  args.m_simplify = 0;
+  args.m_bSimpleSweep = false;
+  args.m_bSameHeight = false;
+  args.m_rebuild_count = -1; //Sample point count for rebuilding shapes
+  args.m_refit_tolerance = tol;
+  args.m_sweep_tolerance = tol;
+  args.m_angle_tolerance = doc->AngleToleranceRadians();
+
+  // Sweep2
+  return RhinoSweep2(args, Sweep2_Breps) ? true : false;
+}
+
+// Test command that uses the above functions.
+CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& context )
+{
+  // Select first rail curve
+  CRhinoGetObject go1;
+  go1.SetCommandPrompt( L"Select first rail curve" );
+  go1.SetGeometryFilter( CRhinoGetObject::curve_object );
+  go1.EnablePreSelect( false );
+  go1.GetObjects( 1, 1 );
+  if( go1.CommandResult() != success )
+    return go1.CommandResult();
+
+  const CRhinoObject* Rail1_obj = go1.Object(0).Object();
+  const ON_Curve* Rail1 = go1.Object(0).Curve();
+  if( 0 == Rail1_obj | 0 == Rail1 )
+    return failure;
+
+  // Select second rail curve
+  CRhinoGetObject go2;
+  go2.SetCommandPrompt( L"Select second rail curve" );
+  go2.SetGeometryFilter( CRhinoGetObject::curve_object );
+  go2.EnablePreSelect( false );
+  go2.EnableDeselectAllBeforePostSelect( false );
+  go2.GetObjects( 1, 1 );
+  if( go2.CommandResult() != success )
+    return go2.CommandResult();
+
+  const CRhinoObject* Rail2_obj = go2.Object(0).Object();
+  const ON_Curve* Rail2 = go2.Object(0).Curve();
+  if( 0 == Rail2_obj | 0 == Rail2 )
+    return failure;
+
+  // Select cross section curves
+  CRhinoGetObject gx;
+  gx.SetCommandPrompt( L"Select cross section curves" );
+  gx.SetGeometryFilter( CRhinoGetObject::curve_object );
+  gx.EnablePreSelect( false );
+  gx.EnableDeselectAllBeforePostSelect( false );
+  gx.GetObjects( 1, 0 );
+  if( gx.CommandResult() != success )
+    return gx.CommandResult();
+
+  ON_SimpleArray<const ON_Curve*> sCurves;
+  int i;
+  for( i = 0; i < gx.ObjectCount(); i++ )
+  {
+    const ON_Curve* sCurve = gx.Object(i).Curve();
+    if( sCurve )
+      sCurves.Append( sCurve );
+  }
+
+  // Call MySweep2 function
+  ON_SimpleArray<ON_Brep*> Sweep2_Breps;
+  if( MySweep2(Rail1, Rail1_obj, Rail2, Rail2_obj, sCurves, Sweep2_Breps) )
+  {
+    // Add to context then delete
+    for( i = 0; i < Sweep2_Breps.Count(); i++ )
+    {
+      ON_Brep* brep = Sweep2_Breps[i];
+      if( brep )
+      {
+        context.m_doc.AddBrepObject( *brep );
+        delete Sweep2_Breps[i]; // Don't leak...
+        Sweep2_Breps[i] = 0;
+      }
+    }
+
+    context.m_doc.Redraw();
+  }
+
+  return success;
+}
+
+</code>
+===== VB.NET =====
+<code vb>
+Public Overrides Function RunCommand(ByVal context As RhinoCommandContext) _
+  'Select first rail curve
+  Dim go As New MRhinoGetObject()
+  go.SetCommandPrompt("Select first rail curve for Sweep 2")
+  go.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.curve_object)
+  go.GetObjects(1, 1)
+  If (go.CommandResult() <> IRhinoCommand.result.success) Then
+    Return go.CommandResult()
+  End If
+
+  Dim rail1_ref As MRhinoObjRef = go.Object(0)
+  Dim rail1_obj As IRhinoObject = rail1_ref.Object()
+  Dim rail1_crv As IOnCurve = rail1_ref.Curve()
+  If (rail1_obj Is Nothing Or rail1_crv Is Nothing) Then
+    Return IRhinoCommand.result.failure
+  End If
+
+  'Select second rail curve
+  Dim go1 As New MRhinoGetObject()
+  go1.EnablePreSelect(False)
+  go1.EnableDeselectAllBeforePostSelect(False)
+  go1.SetCommandPrompt("Select second rail curve for Sweep 2")
+  go1.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.curve_object)
+  go1.GetObjects(1, 1)
+  If (go1.CommandResult() <> IRhinoCommand.result.success) Then
+    Return go1.CommandResult()
+  End If
+
+  Dim rail2_ref As MRhinoObjRef = go1.Object(0)
+  Dim rail2_obj As IRhinoObject = rail2_ref.Object()
+  Dim rail2_crv As IOnCurve = rail2_ref.Curve()
+  If (rail2_obj Is Nothing Or rail2_crv Is Nothing) Then
+    Return IRhinoCommand.result.failure
+  End If
+
+  Dim gx As New MRhinoGetObject()
+  gx.SetCommandPrompt("Select cross section curves")
+  gx.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.curve_object)
+  gx.EnablePreSelect(False)
+  gx.EnableDeselectAllBeforePostSelect(False)
+  gx.GetObjects(1, 0)
+  If (gx.CommandResult() <> IRhinoCommand.result.success) Then
+    Return gx.CommandResult()
+  End If
+
+  Dim curves As New List(Of IOnCurve)
+  For i As Integer = 0 To gx.ObjectCount() - 1
+    Dim obj_ref As MRhinoObjRef = gx.Object(i)
+    Dim crv As IOnCurve = obj_ref.Curve()
+    If (crv IsNot Nothing) Then
+      curves.Add(crv)
+    End If
+  Next
+
+  Dim Sweep2_Breps As New List(Of OnBrep)
+  Sweep2(rail1_crv, rail2_crv, curves, Sweep2_Breps)
+
+  'Add to document
+  For Each b As OnBrep In Sweep2_Breps
+    context.m_doc.AddBrepObject(b)
+  Next
+
+  context.m_doc.Redraw()
+  Return IRhinoCommand.result.success
+
+End Function
+
+'Sweep2 function
+'----------------
+Sub Sweep2( ByVal Rail1 As IOnCurve, _
+            ByVal Rail2 As IOnCurve, _
+            ByVal sCurves As List(Of IOnCurve), _
+            ByRef Sweep2_Breps As List(Of OnBrep))
+  'Define a new class that contains sweep2 arguments
+  Dim args As New MArgsRhinoSweep2
+
+  'Set the 2 rails
+  Dim Edge1 As New MRhinoPolyEdge
+  Dim Edge2 As New MRhinoPolyEdge
+  Edge1.Append(Rail1.DuplicateCurve())
+  Edge2.Append(Rail2.DuplicateCurve())
+
+  'Add rails to sweep arguments
+  args.m_rail_curves(0) = Edge1
+  args.m_rail_curves(1) = Edge2
+  args.m_bClosed = False
+
+  Dim section_curves As New List(Of OnCurve)
+
+  'Loop through sections to set parameters
+  For Each Section As IOnCurve In sCurves
+    Dim sCurve As OnCurve = Section.DuplicateCurve()
+    section_curves.Add(sCurve)
+
+    Dim t0 As Double = 0
+    If Not Edge1.GetClosestPoint(sCurve.PointAtStart(), t0) Then
+      If Not Edge1.GetClosestPoint(sCurve.PointAtEnd(), t0) Then
+        Dim s As Double = 0
+        sCurve.GetNormalizedArcLengthPoint(0.5, s)
+        Edge1.GetClosestPoint(sCurve.PointAt(s), t0)
+      End If
+    End If
+    args.m_rail_params(0).Append(t0)
+
+    Dim t1 As Double = 0
+    If Not Edge2.GetClosestPoint(sCurve.PointAtStart(), t1) Then
+      If Not Edge2.GetClosestPoint(sCurve.PointAtEnd(), t1) Then
+        Dim s As Double = 0
+        sCurve.GetNormalizedArcLengthPoint(0.5, s)
+        Edge2.GetClosestPoint(sCurve.PointAt(s), t1)
+      End If
+    End If
+    args.m_rail_params(1).Append(t1)
+  Next
+
+  'Set shapes
+  args.m_shape_curves = section_curves.ToArray
+
+  'Set the rest of parameters
+  args.m_simplify = 0
+  args.m_bSimpleSweep = False
+  args.m_bSameHeight = False
+  args.m_rebuild_count = -1 'Sample point count for rebuilding shapes
+  args.m_refit_tolerance = RMA.Rhino.RhUtil.RhinoApp.ActiveDoc.AbsoluteTolerance()
+  args.m_sweep_tolerance = RMA.Rhino.RhUtil.RhinoApp.ActiveDoc.AbsoluteTolerance()
+  args.m_angle_tolerance = RMA.Rhino.RhUtil.RhinoApp.ActiveDoc.AngleToleranceRadians()
+
+  Dim sBreps() As OnBrep = Nothing
+  If (RhUtil.RhinoSweep2(args, sBreps)) Then
+    For Each b As OnBrep In sBreps
+      Sweep2_Breps.Add(b)
+    Next
+  End If
+
+  Return
+End Sub
+
+</code>
+
+
+
+
+{{tag>Developer cplusplus dotnet}}
