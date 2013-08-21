@@ -1,0 +1,188 @@
+====== Mac Rhino Frequently Asked Questions ======
+
+
+
+=== Q. What are the system requirements for running Rhino on a Macintosh? ===
+
+A. Rhino will run on any Intel Macintosh computer running OS X 10.7 or later. It will not run on OS X 10.6 or earlier versions. It will not run on OS 9.
+
+We suggest that you have at least four gigabytes of RAM in your machine, and more than that if you can afford it.
+
+=== Q. Mac Rhino has a time limit and expires after a while. What happens then? ===
+
+A. Each Work In Progress (WIP) version of Mac Rhino will expire and stop working. Before each version expires, we will publish another version of Mac Rhino that you can download and use. Mac Rhino checks for WIP updates each time it starts and will notify you if a new version is available. We will also post a notice in the Mac Rhino support forum each time a new WIP version is available.
+
+We will continue to publish new WIP versions until we release a commercial version of Mac Rhino. We do this so that we can ensure that everyone is testing the latest version of the software and not reporting problems that exist in old versions and have already been fixed in the current version.
+
+=== Q. Are the data files compatible with the Windows version? ===
+
+A. Yes, the Rhino files are identical between Windows and the Macintosh. The Macintosh version can read Rhino files created on Windows, and writes files that are compatible with Version 5 on Windows. You can also export Rhino V4 files for compatibility with Windows Rhino V4. You must have at least version 4 of Windows Rhino to read files written by Mac Rhino.
+
+=== Q. Can I use my two button / three button mouse on the Macintosh version? ===
+
+A. Yes, all Macintoshes support multiple button mice out of the box, and Macintosh Rhino can use mice with multiple buttons and a scroll wheel. You can also use a Macintosh mouse that has a single button. Holding the Control key while clicking the single mouse button is equivalent to clicking the right mouse button.
+
+=== Q. Can I use a Spaceball/SpaceNavigator/SpaceExplorer on the Macintosh version? ===
+
+A. No, not at this time. 3DConnexion provides a Macintosh driver only for the SpaceNavigator. None of the other 3DConnexion devices are supported on the Macintosh. We have not tested the SpaceNavigator with Rhino on the Macintosh.
+
+=== Q. What are the differences between the Windows and Macintosh version? ===
+
+Most of the differences are user interface differences, which you can read about [[rhino:mac:diff|here]].
+
+=== Q. Where are the tutorials? ===
+
+A. You can download the tutorial manuals by running Mac Rhino and selecting Help > Learning Rhino > Open Level 1 Training Manual in the application menu. If you do not have the training manual installed, Mac Rhino will prompt you to download and install it. After you install the manual, this same menu option will open the manual for you.
+
+There is only one tuturial download. Once you install the downloaded file, you will have the Level 1 Training Manual, Level 2 Training Manual, and tutorial models all installed on your computer. They can all be accessed from the Help > Learn Rhino menu.
+
+These tutorials were written for Windows Rhino. Since Mac Rhino is not completed, we do not yet have Mac-specific documentation for Rhino.
+
+=== Q. Why is <feature x> missing? === 
+=== Q. Why do I get "Unknown or unimplemented command"? ===
+
+A. You might review the [[http://www.rhino3d.com/nr.htm|software development process]] for Windows Rhino to see how McNeel and Associates introduces new products. We are following the same plan while developing the Macintosh version. Currently we are in [[http://www.rhino3d.com/nr.htm#phase1|phase 1: work-in-progress]]. We plan to eventually support as much of the Windows Rhino program as is practical on the Macintosh platform, but all features are not yet implemented in this WIP Macintosh version.
+
+=== Q. What works? What doesn't work? ===
+
+A. We have a [[rhino:mac:whatworks|web page]] that describes what is working, and what still needs to be implemented. We will keep this page updated as we continue work on Mac Rhino.
+
+=== Q. Does the Macintosh version work in languages other than English? ===
+
+A. Yes. We currently support all the languages supported on Windows Rhino. This is still a Work In Progress, so there are some gaps in the language localization, but most of the language translation is complete. Right now, we ship Spanish, French, German, Italian, Chinese, and Japanese with the WIP version.
+
+=== Q. How do I select the language to use? ===
+
+A. Macintosh Rhino uses the default language selection built into the Macintosh.
+
+If you want to use a language that is different from the OS X default, select Rhinoceros > Preferences in the application menu, then select the Language preference panel.
+
+=== Q. How do I install Python for writing scripts? ===
+
+A. See [[rhino:mac:python|Python Scripting in Mac Rhino]] for directions.
+
+=== Q. How do I uninstall Rhino? ===
+
+A. The following steps completely remove Mac Rhino from your computer:
+
+  * Remove the application in the Applications folder.
+  * Remove the directory **/Library/Application Support/McNeel**. This directory contains the tutorial models and manuals if you downloaded them and may not exist on your computer.
+  * Remove the directory **~/Library/Application Support/McNeel** in your home directory. This directory is optionally used by Rhino and may not exist on your computer. It might contain Toucan materials you created, Python scripts, and other Mac Rhino plug-ins.
+  * Remove the file **~/Library/Preferences/com.mcneel.rhinoceros.plist** in your home directory. This file contains all your Rhino preferences.
+
+=== Q. Do I need to uninstall Rhino before installing a newer version? ===
+
+A. No.
+
+=== Q. Can I run a command script on the Macintosh version? ===
+
+A. Yes. Select **Tools / Commands / Read From File...** in the Rhino menu to load and run a command script.
+
+=== Q. Can I run a RhinoScript program on the Macintosh version? ===
+
+A. No. RhinoScript is based on VisualBasic on Windows and VisualBasic does not run on OS X. Scripting is supported on the Mac version and we are providing a cross-platform solution. We are using Python for scripting on both the Mac and Windows version, and this will provide a way to write scripts for both versions of Rhino. See the [[http://discourse.mcneel.com/category/scripting | Rhino scripting support forum]] for Python scripting support for both Windows and OS X.
+
+=== Q. Will third party plug-ins work on Rhino for Mac? ===
+
+A. Perhaps. A Windows plug-in will not directly work on the Mac - the plug-in must be ported (recompiled) for the Macintosh platform. The decision to port a plug-in to port a plug-in will be up to each plug-in developer. Depending on how a plug-in was developed, some plug-ins may be difficult or impossible to port. See the next few questions for a discussion of the issues.
+
+=== Q. Will the Macintosh version support my C plug-in? ===
+
+A. Yes, eventually. The C plug-in mechanism has been brought over from the Windows platform. We are using C plug-ins internally in the Macintosh version to support feautures such as file importing.
+
+We are not yet ready to provide user support for C plug-ins, but we plan to do so in the future. As you can imagine, this is a big area to cover, and we want to do a good job supporting the developers using the C plug-in mechanism. We need to get more of Macintosh Rhino working before we release a Macintosh SDK.
+
+You will of course have to recompile your plug-in using the Macintosh development system. We can tell you that almost all of the Rhino SDK is identical between Windows and the Macintosh. Depending on the complexity of your plug-in, it may take only a small amount of work to create a plug-in that compiles and works both on Windows and the Macintosh. Plug-ins that have dialogs and other user interface elements will take more work, but the effort is nowhere near the work required to create a brand new plug-in just for the Macintosh.
+
+=== Q. Will the Macintosh version support my .NET plug-in? ===
+
+A. Yes, eventually. We are working with [[http://www.mono-project.com|Mono]], which is a library that lets us run .NET code on OS X.  We are working on tools that will let Rhino plug-in developers write plug-ins that will run on both OS X and Windows, but this work is not yet ready for release.
+
+=== Q. When will Mac Rhino be released? ===
+
+A. We do not know. McNeel and Associates has an unusual development cycle where we release early, incomplete versions of our software so we can get feedback. Mac Rhino is following the same development style used for [[http://www.rhino3d.com/nr.htm|Windows Rhino development]].
+
+=== Q. If I buy Rhino for Windows, will I get Rhino for Mac free? What will be the cross-upgrade policy? ===
+
+A. We have not made any decisions yet about an upgrade policy.
+
+====== Problems ======
+
+
+=== Q. I cannot install Rhino! ===
+
+A. Check that your downloaded .dmg file is valid. Files can sometimes become corrupted when downloaded.
+
+  * Start the Disk Utility program **/Applications/Utilities/Disk Utility**
+  * From the menu, select **Images > Verify...** An Open File dialog box appears.
+  * Select the .dmg file that you downloaded. It is usually in your Downloads folder and is named rhinoceros_wip_YYYYMMDD.dmg
+  * If your downloaded file is not valid, go to [[http://download.rhino3d.com/wenatchee/Default.aspx|the download page]] and request another download link.
+
+=== Q. I installed the latest version of Rhino and it still says that it is expired! ===
+
+A. You have more than one copy of Rhino installed, and it is still starting the expired version.
+
+Remove **all** copies of Rhino by double clicking any 3DM file. If the file opens in Rhino, then you still have a copy of Rhino installed somewhere. Right-click the Rhino icon in the Dock, select Options > Show in Finder from the menu to find out where it is and drag that copy to the Trash. When no more copies of Rhino exist, then double-clicking a 3DM file will open it with TextEdit instead. When this happens, all copies of Rhinoceros have been removed.
+
+Now reinstall the version that you just downloaded.
+
+
+=== Q. On 10.7, when I drag Rhino to Applications folder, after asking to replace file it says it cannot install because BGHUDAppKit is running. Any ideas? ===
+
+A. This is a bug in the 10.7 Finder.  It does not correctly check if it can overwrite an application before it starts the copy.  You might get this complaint, or you might get a complaint about Info.plist.  If you try the drag and drop a second or third time, it eventually works. 
+ 
+You can also drag your existing copy of Rhinoceros from the Applications folder to the Trash before installing a newer version.  Then the Finder won't have a problem trying to overwrite the existing version.
+ 
+The 10.8 Finder does this correctly.  Upgrading to 10.8 is another "workaround".
+
+=== Q. Help! Mac Rhino crashed! ===
+
+A. Please refer to our web page that describes [/content/crash.aspx how to handle a program crash].
+
+=== Q. The current version of Mac Rhino has a problem and I just want to download the previous version. ===
+
+A. Previous WIP versions of Mac Rhino are not available. You are participating in a Work In Progress testing program and you agreed to report problems that you find. See the post [[rhino:mac:reportingproblems|Reporting Problems with Mac Rhino]] to learn how to report your problem so we can find it and fix it.
+
+=== Q. I got a mysterious dialog that said "Program Failure" and now Mac Rhino does not work any more. ===
+
+A. When Mac Rhino encounters an unexpected situation, it displays a dialog with a generic "Program Failure" message. After this error, Mac Rhino shuts down internally and you cannot run any commands or menu choices after this point. You can save your file and you can quit Mac Rhino, but you won't be able to do much more than this. We'd like to know when this happens to you, so see [/content/programfailure.aspx this page] for a more detailed description of what you can do when this occurs.
+
+=== Q. I want to report a problem. ===
+
+A. Click on the Forums button in the toolbar at the top of this web page to go to the Forums. Check the Support forum. See if your problem is mentioned, and, if so, add your own comment to the topic. If you don't see your problem in the topics, start a new topic by using the **Write a New Post** button at the top of the forums page.
+
+If you want to include files with your post, screen shots or perhaps a .3dm file, select the Options tab at the top of the block where you enter your post. There is a File Attachment button labeled Add/Update. You can attach only one file to your post. If you want to include more than one file, create an archive (really, a zip file) by selecting all the files you wish to include, right click on one and select Create Archive from the menu. Attach the new archive with your post.
+
+=== I want right click to repeat the last command ===
+
+For those of you who want the right mouse button to repeat the last command, there is a Preference setting that will let you do so.
+
+  - Open the Preferences panel by selecting the Rhinoceros/Preferences... menu choice.
+  - Select the Mouse panel.
+  - In the Right Mouse Button section, uncheck the "Enable Context Menus" check box.
+
+This disables the context menu, and the repeat last command behavior will reappear.
+
+=== I want right click to execute the secondary command in a tool button ===
+
+Some tool palette buttons have two commands attached to the button, and the commands are listed, one below the other, in the tool tip.
+The default action to execute the alternate command is to Option-click the tool button.
+
+In Windows Rhino, the default action to execute the alternate command is to right-click the tool button. 
+Each Rhino user can now customize how the alternate command is executed.
+
+Select Rhinoceros > Preferences... then select the ToolPalette panel. You can now define a right click to execute the alternate command by right-clicking on the tool button on the line that says "Execute alternate command when:". You can even set the combination of Option-Shift-Command-Middle button click to execute the alternate command if you are perverse enough. Also, the tool bar and tool palettes handle right clicks in the same way.
+
+If you define a right click to execute the alternate command, you can no longer use a right click to customize the document toolbar (which is the default right-click behavior).  You must use the View/Customize Toolbar menu choice instead.
+
+The Mac UI standard is that a right-click (or control-click) //always// brings up a context menu.  With this ToolPalette panel, you can change this to your preference.
+====== Info ======
+
+
+=== Q. I thought developing a Macintosh version was not possible. ===
+
+A. We thought that was true. However, a developer came to us with a partially developed version running on the Macintosh. We decided to continue this development as an experiment and evaluated its progress over time. As more and more of Rhino became functional on the Macintosh, we decided to release a public Work In Progress version to evaluate our users' interest.
+
+=== Q. Why is there no Linux version? ===
+
+A. The work for porting Rhino to the Mac is almost exclusively specific to OS X and does not assist in creating a Linux version. Creating a Linux version would be an additional project that would take as much effort as the Macintosh port. We are not pursuing such a project at this time.
