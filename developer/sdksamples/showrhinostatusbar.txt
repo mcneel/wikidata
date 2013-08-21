@@ -1,0 +1,37 @@
+====== Show or Hide Rhino's Status Bar ======
+====== C++ ======
+> **Version:** //Rhino 4.0//
+
+===== Overview=====
+All of Rhino's options, or application settings, that you see when you run the Options command are maintained by a **CRhinoAppSettings** class which is stored on the Rhino application object. This class is a container class in that it holds a number of other CRhinoApp_xxx_Settings classes that help to organize all of the options.
+
+The process for modifying any Rhino option is as follows:
+
+  - Find the container class in CRhinoAppSettings that holds the option you want to modify.
+  - Make a copy of that container class.
+  - Modify the appropriate members.
+  - Replace Rhino's copy of that container class with yours by calling one of CRhinoAppSettings' Set_xxx_Settings() member functions.
+
+===== Example=====
+The following sample source code demonstrates how to show or hide Rhino's status bar using the Rhino SDK.
+
+
+<code c++>
+void ShowRhinoStatusBar( BOOL bShow )
+{
+  // Copy the CRhinoAppAppearanceSettings class 
+  CRhinoAppAppearanceSettings settings = RhinoApp().AppSettings().AppearanceSettings( true );
+  if( settings.m_show_statusbar != bShow )
+  {
+    // Modify the desired setting
+    settings.m_show_statusbar = bShow;
+    // Replace the CRhinoAppAppearanceSettings with the modified version
+    RhinoApp().AppSettings().SetAppearanceSettings( settings );
+  }
+}
+
+
+</code>
+
+
+{{tag>Developer cplusplus}}
