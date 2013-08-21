@@ -1,0 +1,29 @@
+====== Autosaving and Versions in OS X 10.7 (Lion) ======
+Apple has added a radically different method for managing your models in OS X 10.7 and this has been integrated into Mac Rhino.  Apple describes Autosaving and Versions [[http://support.apple.com/kb/HT4753|here]] and [[http://www.apple.com/macosx/whats-new/features.html#versions|here]], and another introduction can be found [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|here]].
+
+This article discusses additional details not mentioned in these articles that are important to Mac Rhino users.  Lastly, you should read [[http://wiki.mcneel.com/rhino/mac/lionsaving|everything you learned about saving files is wrong]].
+
+**Q.  What happened to the "Do you want to save?" question when I quit Rhino?**
+
+**A.**  This is no longer necessary as your model is constantly being saved to disk.  Before automatic autosaving, you actually had two versions of your model -- the one in Rhino and the one on disk.  It was your job to manually keep these two versions in sync by saving your model often.  This is why program crashes could be catastrophic.  If you forgot to manually keep these versions in sync, you could lose a lot of work.  With autosaving in Lion, there is only one version of your model.  The one you see on the display is the same as the one on disk.
+ 
+**Q. When does Mac Rhino autosave a model?**
+
+**A.** A model is saved when you close a model window, when you quit Rhino, when you switch from Rhino to another application, and "every once in a while".  Apple says the "every once in a while" saves happen about every five minutes.  Apple's autosaving code picks a moment when Rhino is idle to start one of these autosaves, and this time interval is not configurable by an application.
+
+**Q. Large Rhino models can take ten seconds or more to save a model.  If Rhino is constantly saving my model, I am going to be constantly interrupted by the autosaves.**
+
+**A.** The periodic autosaves that happen in Lion are run in the background, and they are instantly cancelled by any user action.  You will never know when a background autosave is happening because it never blocks Rhino from working.  If you start changing your model while Rhino is performing a periodic autosave, the autosave is silently abandoned and will be attempted again later.
+
+**Q.  Is this going to fill up my disk?**
+
+**A.**  Autosaving saves only what has changed since the previous version, so disk space usage is optimized.  Also, older versions far in the past are culled automatically by Autosaving.
+
+**Q. Can Mac Rhino browse previous versions of my Rhino models?**
+
+**A.** Yes, the Versions browser is part of Mac Rhino in 10.7.
+
+**Q. What can I do in the Versions browser?**
+
+The introductory articles mentioned above show what the Versions browser looks like, but does not describe all the features available to you.  In the Versions browser, the window on the left is your current model, and all the windows on the right are previous versions of your model.  All the windows on the right are actual Rhino windows and can be manipulated like any Rhino model.  You can rotate views; bring up the Layers panel to show and hide layers; you can even copy objects from a past model to paste into your current model.  You cannot //change// past versions, but you can look at past versions and copy from them.  However, [[http://tidbits.com/article/12483 |beware Lion’s Versions Bug on Network and Non-HFS+ Volumes]].
+
