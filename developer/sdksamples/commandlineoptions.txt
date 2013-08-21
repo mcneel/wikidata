@@ -1,0 +1,231 @@
+====== Adding command line options ======
+> **Summary:** //Demonstrates how to add a different type of command line options to a custom command.//
+
+=====Overview=====
+The Rhino SDK has a number of CRhinoGet derived classes that you can use to interactively get information from the user. Some of these classes include:
+
+  * CRhinoGetObject - SDK user interface tool used to get objects.
+  * CRhinoGetPoint - SDK user interface tool used to get points.
+  * CRhinoGetString - SDK user interface tool used to get strings.
+  * CRhinoGetNumber - SDK user interface tool used to get floating point values.
+  * CRhinoGetInteger - SDK user interface tool used to get integer values.
+  * CRhinoGetAngle - SDK user interface tool used to get angles.
+  * CRhinoGetDistance - SDK user interface tool used to get distances.
+  * CRhinoGetOption - SDK user interface tool used to get command line options.
+
+Each CRhinoGet derived classes can, in addition to its primary function, prompt the user for additional options. These options display on the command following the developer specified prompt, and appear as clickable hyperlinks.
+
+The following example code demonstrates how to add command line options to some user interaction. In this example, we use the CRhinoGetOption class, which is only capable of displaying command line options. But, we could have used any of the above CRhinoGet derived classes.
+
+===== C++ =====
+<code c++>
+CRhinoCommand::result CCommandTestOptions::RunCommand(const CRhinoCommandContext& context)
+{
+  CRhinoCommandOptionValue list_items[5];
+  list_items[0] = RHCMDOPTVALUE(L"Item0");
+  list_items[1] = RHCMDOPTVALUE(L"Item1");
+  list_items[2] = RHCMDOPTVALUE(L"Item2");
+  list_items[3] = RHCMDOPTVALUE(L"Item3");
+  list_items[4] = RHCMDOPTVALUE(L"Item4");
+
+  CRhinoGetOption go;
+  go.SetCommandPrompt( L"Command options" );
+  go.AcceptNothing();
+
+  for(;;)
+  {
+    go.ClearCommandOptions();
+
+    int nval_option_index = go.AddCommandOptionInteger( 
+        RHCMDOPTNAME(L"Integer"), &m_nVal, L"integer value", 1, 99 );
+    int dval_option_index = go.AddCommandOptionNumber( 
+        RHCMDOPTNAME(L"Double"), &m_dVal, L"double value", FALSE, 0.1, 99.9 );
+    int bval_option_index = go.AddCommandOptionToggle( 
+        RHCMDOPTNAME(L"Boolean"), RHCMDOPTVALUE(L"False"), RHCMDOPTVALUE(L"True"), 
+        m_bVal, &m_bVal );
+    int list_option_index = go.AddCommandOptionList( RHCMDOPTNAME(L"List"), 
+        5, list_items, m_list_index );
+    int test_option_index = go.AddCommandOption( RHCMDOPTNAME(L"Test") );
+
+    CRhinoGet::result res = go.GetOption();
+
+    if( res == CRhinoGet::nothing )
+      break;
+
+    if( res == CRhinoGet::cancel )
+      return CRhinoCommand::cancel;
+
+    if( res != CRhinoGet::option )
+      return CRhinoCommand::failure;
+
+    const CRhinoCommandOption* option = go.Option();
+    if( !option )
+      return CRhinoCommand::failure;
+
+    int option_index = option->m_option_index;
+
+    if( option_index == nval_option_index )
+      continue; // nothing to do
+
+    if( option_index == dval_option_index )
+      continue; // nothing to do
+
+    if( option_index == bval_option_index )
+      continue; // nothing to do
+
+    if( option_index == list_option_index )
+    {
+      m_list_index = option->m_list_option_current;
+      continue;
+    }
+  }
+  return CRhinoCommand::success;
+} 
+</code>
+===== VB.NET =====
+<code vb>
+Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
+  As IRhinoCommand.result
+  Dim list_items(4) As MRhinoCommandOptionValue
+  list_items(0) = New MRhinoCommandOptionValue("Item0")
+  list_items(1) = New MRhinoCommandOptionValue("Item1")
+  list_items(2) = New MRhinoCommandOptionValue("Item2")
+  list_items(3) = New MRhinoCommandOptionValue("Item3")
+  list_items(4) = New MRhinoCommandOptionValue("Item4")
+
+  Dim go As New MRhinoGetOption()
+  go.SetCommandPrompt("Command options")
+  go.AcceptNothing()
+
+  Dim m_nVal As New MRhinoGet.IntegerOption(0)
+  Dim m_dVal As New MRhinoGet.DoubleOption(0)
+  Dim m_bVal As New MRhinoGet.BooleanOption(True)
+  Dim m_list_index As Integer = 0
+
+  While (True)
+    go.ClearCommandOptions()
+
+    Dim nval_option As Integer = go.AddCommandOptionInteger(New MRhinoCommandOptionName("Integer"), _
+                                                            m_nVal, "integer value", 1, 99)
+    Dim dval_option As Integer = go.AddCommandOptionNumber(New MRhinoCommandOptionName("Double"), _
+                                                           m_dVal, "double value", False, 0.1, 99.9)
+    Dim bval_option As Integer = go.AddCommandOptionToggle(New MRhinoCommandOptionName("Boolean"), _
+                                                           New MRhinoCommandOptionValue("False"), _
+                                                           New MRhinoCommandOptionValue("True"), _
+                                                           m_bVal.Value, m_bVal)
+    Dim list_option As Integer = go.AddCommandOptionList(New MRhinoCommandOptionName("List"), _
+                                                         list_items, m_list_index)
+    Dim test_option As Integer = go.AddCommandOption(New MRhinoCommandOptionName("Test"))
+
+    Dim res As IRhinoGet.result = go.GetOption()
+    If (res = IRhinoGet.result.nothing) Then Exit While
+    If (res = IRhinoGet.result.cancel) Then Return IRhinoCommand.result.cancel
+    If (res <> IRhinoGet.result.option) Then Return IRhinoCommand.result.failure
+
+    Dim cmd_option As IRhinoCommandOption = go.Option()
+    Dim option_index As Integer = cmd_option.m_option_index
+
+    If (option_index = nval_option) Then Continue While ' nothing to do
+
+    If (option_index = dval_option) Then Continue While ' nothing to do
+
+    If (option_index = bval_option) Then Continue While ' nothing to do
+
+    If (option_index = list_option) Then
+      m_list_index = cmd_option.m_list_option_current
+      Continue While
+    End If
+  End While
+  Return IRhinoCommand.result.success
+End Function
+</code>
+===== C# =====
+<code c#>
+//Set up an array of command options that a use can select from a list
+MRhinoCommandOptionValue[] list_items = new MRhinoCommandOptionValue[5];
+list_items[0] = new MRhinoCommandOptionValue("Item0");
+list_items[1] = new MRhinoCommandOptionValue("Item1");
+list_items[2] = new MRhinoCommandOptionValue("Item2");
+list_items[3] = new MRhinoCommandOptionValue("Item3");
+list_items[4] = new MRhinoCommandOptionValue("Item4");
+
+//The MRhinoGetOption object is what is used to get command options in Rhino
+MRhinoGetOption go = new MRhinoGetOption();
+go.SetCommandPrompt("Command options");
+go.AcceptNothing();
+
+//Set up initial values for the command options
+MRhinoGet.IntegerOption m_nVal = new MRhinoGet.IntegerOption(0);
+MRhinoGet.DoubleOption m_dVal = new MRhinoGet.DoubleOption(0);
+MRhinoGet.BooleanOption m_bVal = new MRhinoGet.BooleanOption(true);
+
+//For the toggle option
+MRhinoCommandOptionValue optOff = new MRhinoCommandOptionValue("No");
+MRhinoCommandOptionValue optOn = new MRhinoCommandOptionValue("Yes");
+bool toggleVal = false;
+
+int m_list_index = 0;
+for(;;)
+{
+  //Set up the options
+  go.ClearCommandOptions();
+  int nval_option = go.AddCommandOptionInteger(new MRhinoCommandOptionName("Integer"), 
+        m_nVal, "integer value", 1, 99);
+  int dval_option = go.AddCommandOptionNumber(new MRhinoCommandOptionName("Double"), 
+        m_dVal, "double value", false, 0.1, 99.9);
+  int bval_option = go.AddCommandOptionToggle(new MRhinoCommandOptionName("Boolean"),
+                                              new MRhinoCommandOptionValue("False"),
+                                              new MRhinoCommandOptionValue("True"),
+  //Sometimes, the 2008 C# compiler seems to get confused by the Value property
+  //in the next line. In this case, you can reach it by reflection:
+  //(bool)typeof(MRhinoGet.BooleanOption).GetProperty("Value").GetValue(m_bVal, null)
+                                              m_bVal.Value, m_bVal);
+  int list_option = go.AddCommandOptionList(new MRhinoCommandOptionName("List"), 
+        list_items, m_list_index);
+  int toggle_option =   go.AddCommandOptionToggle(new MRhinoCommandOptionName("Toggle"),
+        optOff, optOn, toggleVal);
+
+  //Get the option - this displays the options on the Rhino Command Prompt
+  IRhinoGet.result res = go.GetOption();
+
+  if (res == IRhinoGet.result.nothing) break; 
+  //User hit enter key so they are excepting the current
+  //set of options.  Exit the while loop
+
+  if (res == IRhinoGet.result.cancel) return IRhinoCommand.result.cancel;
+  //This doesn't appear to work quite right
+  //pressing ESC seems to be the same as pressing enter
+
+  if (res != IRhinoGet.result.option) return IRhinoCommand.result.failure;
+  //Something bad happened so exit
+
+  //Here's where we figure out which option was selected and take action
+  IRhinoCommandOption cmd_option = go.Option();
+  int option_index = cmd_option.m_option_index;
+  if (option_index == nval_option)
+  {
+    int myInt = (int)cmd_option.m_number_option_value;
+  }
+  if (option_index == dval_option) 
+  {
+    double myDouble = cmd_option.m_number_option_value;
+  }
+  if (option_index == bval_option)
+  {
+    bool myBool = cmd_option.m_bIntegerNumberValue;
+  }
+  if ((option_index == list_option))
+  {
+    m_list_index = cmd_option.m_list_option_current;                    
+  }
+  if (option_index == toggle_option)
+  {
+    toggleVal = Convert.ToBoolean(cmd_option.m_toggle_option_value);                    
+  }
+}
+return IRhinoCommand.result.success;
+
+</code>
+
+
+{{tag>Developer cplusplus dotnet}}
