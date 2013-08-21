@@ -1,0 +1,95 @@
+====== How To: Show All Hidden Objects ======
+====== C++, .NET ======
+> **Summary:** //Demonstrates how to iterate throught the geometry table an unhide hidden objects.//
+===== C++ =====
+<code c++>
+int ShowAllHiddenObjects( CRhinoDoc& doc, bool bRedraw )
+{
+  CRhinoObjectIterator it(
+        doc,
+        CRhinoObjectIterator::undeleted_objects,
+        CRhinoObjectIterator::active_and_reference_objects
+        );
+  it.IncludeLights();
+
+  int count = 0;
+  CRhinoObject* obj = 0;
+  for( obj = it.First(); obj; obj = it.Next() )
+  {
+    // Ignore objects that are not hidden
+    if( obj->Attributes().Mode() != ON::hidden_object )
+      continue;
+    // Ignore objects on hidden or locked layers
+    if( ON::normal_layer != obj->ObjectLayer().Mode() )
+      continue;
+    if( doc.ShowObject(obj) )
+      count++;
+  }
+
+  if( count > 0 && bRedraw )
+    doc.Redraw();
+  return count;
+}
+</code>
+===== VB.NET =====
+<code vb>
+Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
+  As RMA.Rhino.IRhinoCommand.result
+
+  Dim it As New MRhinoObjectIterator( _
+          IRhinoObjectIterator.object_state.undeleted_objects, _
+          IRhinoObjectIterator.object_category.active_and_reference_objects)
+  it.IncludeLights()
+  Dim count As Integer = 0
+
+  For Each obj As MRhinoObject In it
+    ' Ignore objects that are not hidden
+    If (obj.Attributes().Mode() <> IOn.object_mode.hidden_object) Then
+      Continue For
+    End If
+    ' Ignore objects on hidden or locked layers
+    If (obj.ObjectLayer().IsVisibleAndNotLocked()) Then
+      Dim obj_ref As New MRhinoObjRef(obj)
+      If (context.m_doc.ShowObject(obj_ref)) Then
+        count = count + 1
+      End If
+    End If
+  Next
+  If (count > 0) Then context.m_doc.Redraw()
+  Return IRhinoCommand.result.success
+End Function
+</code>
+===== C# =====
+<code c#>
+public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+{
+  MRhinoObjectIterator it =
+    new MRhinoObjectIterator( 
+        IRhinoObjectIterator.object_state.undeleted_objects,
+        IRhinoObjectIterator.object_category.active_and_reference_objects);
+  it.IncludeLights();
+  int count = 0;
+
+  foreach( MRhinoObject obj in it )
+  {
+    // Ignore objects that are not hidden
+    if(obj.Attributes().Mode() != IOn.object_mode.hidden_object)
+      continue;
+    // Ignore objects on hidden or locked layers
+    if(obj.ObjectLayer().IsVisibleAndNotLocked())
+    {
+      MRhinoObjRef obj_ref = new MRhinoObjRef(obj);
+      if(context.m_doc.ShowObject(obj_ref))
+        count++;
+    }
+  }
+  if (count > 0)
+    context.m_doc.Redraw();
+  return IRhinoCommand.result.success;
+}
+
+</code>
+
+
+
+{{tag>Developer cplusplus dotnet}}
