@@ -18,14 +18,33 @@ Currently, the [[developer:opennurbs:home|openNURBS]] Toolkit will read and writ
 
 In addition, the [[developer:opennurbs:home|openNURBS]] Toolkit provides [[rhino:nurbs|NURBs]] evaluation tools and elementary geometric and 3-D view manipulation tools.
 
+=====Supported C++ compilers=====
 
+The [[developer:opennurbs:home|openNURBS]] C++ toolkit has been successfully used with the following compilers:
 
-=====Note Well=====
+  * **Microsoft Visual Studio 2010 (VC 10.0 SP1)** (Windows 7 Professional SP1)
+    * To build opennurbs and the examples with Visual Studio 2010 SP1, use the solution build_opennurbs_vs2010.sln.
+  * **gcc version 4.2.1** (Apple Build 5658)
+    * To build opennurbs and the examples with gcc use the makefile.
+  * **Apple Xcode 4.6.3** (4H1503) (OSX 10.8.2)
+    * To build opennurbs and the examples with Xcode 4.5, use the workspace build_opennurbs_xcode.workspace.
 
-  * [[developer:opennurbs:home|openNURBS]] uses UNICODE to store text information in 3DM files.  At the time of this release, support for UNICODE / ASCII conversion on UNIX platforms is spotty at best.
-  * All memory allocations and frees are done through onmalloc(), onfree(), and onrealloc().  The source code that ships with [[developer:opennurbs:home|openNURBS]] simply has onmalloc() call malloc() and onfree() call free().
-  * In the code you write include only opennurbs.h.  The opennurbs.h header file includes the necessary [[developer:opennurbs:home|openNURBS]] toolkit header files in the appropriate order.
-  * If you want to use Open GL to render [[developer:opennurbs:home|openNURBS]] geometry, then you may want to include opennurbs_gl.h after opennurbs.h and add opennurbs_gl.cpp to your [[developer:opennurbs:home|openNURBS]] Toolkit library. See example_gl.cpp for more details.
+The [[developer:opennurbs:home|openNURBS]] C++ source code is clean and fairly simple.  You
+should be able to use any good C++ compiler that has 32-bit
+integers, 32-bit or 64-bit pointers, and wchar_t support.
+
+OpenNURBS uses UTF-16 to store text information in
+3DM files and provides tools for converting UTF-16
+strings to and from UTF-8, UTF-32 and wchar_t strings. 
+The ON_wString class has wchar_t characters.
+
+All memory allocations and frees are done through onmalloc(), onfree(), and onrealloc().  The source code that ships with [[developer:opennurbs:home|openNURBS]] simply has onmalloc() call malloc() and onfree() call free().
+
+In the code you write include only opennurbs.h.  The opennurbs.h header file includes the necessary [[developer:opennurbs:home|openNURBS]] toolkit header files in the appropriate order.
+
+If you want to use Open GL to render [[developer:opennurbs:home|openNURBS]] geometry, then you may want to include opennurbs_gl.h after opennurbs.h and add opennurbs_gl.cpp to your [[developer:opennurbs:home|openNURBS]] Toolkit library. See example_gl.cpp for more details.
+
+If you are using a good quality C++ compiler and run into some toolkit code that causes problems, please let us know and we'll attempt to change the code to accommodate the compiler.
 
 =====Getting Started=====
 If your goal is to read and write 3dm files, then you may find that the class ONX_Model::Read() and ONX_Model::Write() to be an easy way to attain your goal. See example_read.cpp and example_write.cpp for more details.
@@ -80,28 +99,6 @@ where opennurbs is used.
   - **Version 3 3DM files.** The [[developer:opennurbs:home|openNURBS]] toolkit will read and write version 3 files. Rhino 3 and applications using an [[developer:opennurbs:home|openNURBS]] toolkit released on or after October 2002 create version 3 files.  (Rhino 1 and Rhino 2 will not read version 2 files.)
   - **Version 4 3DM files.** The [[developer:opennurbs:home|openNURBS]] toolkit will read and write version 4 files. Rhino 4 and applications using an [[developer:opennurbs:home|openNURBS]] toolkit released on or after September 2006 create version 4 files.  (Rhino 1, Rhino 2, and Rhino 3 will not read version 4 files.)
   - **Version 5 3DM files.** The [[developer:opennurbs:home|openNURBS]] toolkit will read and write version 5 files. Rhino 5 and applications using an [[developer:opennurbs:home|openNURBS]] toolkit released on or after September 2009 create version 5 files.  (Rhino 1, Rhino 2, Rhino 3 and Rhino 4 will not read version 5 files.)
-
-=====Supported compilers=====
-
-The [[developer:opennurbs:home|openNURBS]] C++ toolkit has been successfully used with the following compilers:
-
-  * **Microsoft Visual Studio 2010 (VC 10.0 SP1)** (Windows 7 Professional SP1)
-    * To build opennurbs and the examples with Visual Studio 2010 SP1, use the solution build_opennurbs_vs2010.sln.
-  * **gcc version 4.2.1** (Apple Build 5658)
-    * To build opennurbs and the examples with gcc use the makefile.
-  * **Apple Xcode 4.6.3** (4H1503) (OSX 10.8.2)
-    * To build opennurbs and the examples with Xcode 4.5, use the workspace build_opennurbs_xcode.workspace.
-
-The [[developer:opennurbs:home|openNURBS]] C++ source code is clean and fairly simple.  You
-should be able to use any good C++ compiler that has 32-bit
-integers, 32-bit or 64-bit pointers, and wchar_t support.
-
-OpenNURBS uses UTF-16 to store text information in
-3DM files and provides tools for converting UTF-16
-strings to and from UTF-8, UTF-32 and wchar_t strings. 
-The ON_wString class has wchar_t characters.
-
-If you are using a good quality C++ compiler and run into some toolkit code that causes problems, please let us know and we'll attempt to change the code to accommodate the compiler.
 
 =====Vertex ordering in ON_Mesh faces=====
 
