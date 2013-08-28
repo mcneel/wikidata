@@ -84,7 +84,12 @@ where opennurbs is used.
   - **Version 4 3DM files.** The [[developer:opennurbs:home|openNURBS]] toolkit will read and write version 4 files. Rhino 4 and applications using an [[developer:opennurbs:home|openNURBS]] toolkit released on or after September 2006 create version 4 files.  (Rhino 1, Rhino 2, and Rhino 3 will not read version 4 files.)
   - **Version 5 3DM files.** The [[developer:opennurbs:home|openNURBS]] toolkit will read and write version 5 files. Rhino 5 and applications using an [[developer:opennurbs:home|openNURBS]] toolkit released on or after September 2009 create version 5 files.  (Rhino 1, Rhino 2, Rhino 3 and Rhino 4 will not read version 5 files.)
 
-=====Vertex ordering in ON_Mesh faces=====
+
+=====Common Questions=====
+
+====ON_Mesh:====
+
+===Vertex ordering in ON_Mesh faces===
 
 All faces in a ON_Mesh are stored with vertices listed in counter-clockwise order. In particular, for quads the vertices are ordered as
 
@@ -100,8 +105,9 @@ The definition of
 
 in opennurbs_gl.cpp demonstrates how to go through an ON_Mesh and render all the quads as two triangles.
 
+====ON_Brep:====
 
-=====Orientation of ON_Brep faces=====
+===Orientation of ON_Brep faces===
 
 The "UV" orientation of surfaces in a Brep is arbitrary.  If the
 
@@ -111,11 +117,11 @@ member is FALSE, then the face's orientation agrees with the surface's natural D
 
 If your application cannot handle ON_BrepFaces that have a TRUE m_bRev flag, then call ON_Brep::FlipReversedSurfaces(). See the comments in ON_Brep::FlipReversedSurfaces() and ON_Brep::SwapFaceParameters() for details.
 
-=====Trimming loop order and nesting=====
+===Trimming loop order and nesting===
 
 The ON_BrepLoop::m_type member records the type of boundary (inner, outer, etc.).  A ON_BrepFace has exactly one outer loop and it is the first loop referenced in the ON_BrepFace::m_li[] array.  The inner loops all define "holes" in the ON_BrepFace.  All of the inner holes lie inside of the outer loop.  A ON_BrepFace is always path connected. In particular, inner loops are not "nested".
 
-=====Surfaces in Rhino are read as ON_Breps=====
+===Surfaces in Rhino are read as ON_Breps===
 
 Internally, Rhino stores all surfaces as some type of b-rep and the [[developer:opennurbs:home|openNURBS]] toolkit reads these objects as b-reps.  To see if an entire
 
