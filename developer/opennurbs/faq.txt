@@ -90,22 +90,25 @@ The [[developer:opennurbs:home|openNURBS]] Toolkit is works correctly on both bi
 
 =====Supported compilers=====
 
-The [[developer:opennurbs:home|openNURBS]] toolkit has been successfully used with the following compilers:
+The [[developer:opennurbs:home|openNURBS]] C++ toolkit has been successfully used with the following compilers:
 
-  * Microsoft Developer Studio 2005 (VC 8.0) (Tested on Windows XP SP2 and x64 SP2)
-  * gcc version 4.1.2 20061115 (Tested on SUSE Linux)
-  * Apple XCode (Tested on OSX Intel)
+  * **Microsoft Visual Studio 2010 (VC 10.0 SP1)** (Windows 7 Professional SP1)
+    * To build opennurbs and the examples with Visual Studio 2010 SP1, use the solution build_opennurbs_vs2010.sln.
+  * **gcc version 4.2.1** (Apple Build 5658)
+    * To build opennurbs and the examples with gcc use the makefile.
+  * **Apple Xcode 4.6.3** (4H1503) (OSX 10.8.2)
+    * To build opennurbs and the examples with Xcode 4.5, use the workspace build_opennurbs_xcode.workspace.
 
-The [[developer:opennurbs:home|openNURBS]] C++ source code is clean and fairly simple. You should be able to use any good C++ compiler that has 32-bit integers and 32-bit pointers.
+The [[developer:opennurbs:home|openNURBS]] C++ source code is clean and fairly simple.  You
+should be able to use any good C++ compiler that has 32-bit
+integers, 32-bit or 64-bit pointers, and wchar_t support.
 
-[[developer:opennurbs:home|openNURBS]] source code works with both 32 and 64 bit pointers.
-
-[[developer:opennurbs:home|openNURBS]] uses UNICODE to store text information in 3DM files. At the time of this release, support for UNICODE / ASCII conversion on UNIX platforms is spotty at best.
-
-Excellent compilers and make utilities are available from The Free Software Foundation <http://www.fsf.org>. You have the option of using these tools free of charge.
+OpenNURBS uses UTF-16 to store text information in
+3DM files and provides tools for converting UTF-16
+strings to and from UTF-8, UTF-32 and wchar_t strings. 
+The ON_wString class has wchar_t characters.
 
 If you are using a good quality C++ compiler and run into some toolkit code that causes problems, please let us know and we'll attempt to change the code to accommodate the compiler.
-
 =====Visual Studio 6 Users=====
 
 If you get a compile bug error c2676 binary != not defined for struct _GUID, then you are not using the November 2001 Platform SDK or the platform SDK is not first in your includes and libraries list.
