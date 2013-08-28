@@ -33,6 +33,8 @@ The [[developer:opennurbs:home|openNURBS]] C++ source code is clean and fairly s
 should be able to use any good C++ compiler that has 32-bit
 integers, 32-bit or 64-bit pointers, and wchar_t support.
 
+In the code you write include only opennurbs.h.  The opennurbs.h header file includes the necessary [[developer:opennurbs:home|openNURBS]] toolkit header files in the appropriate order.
+
 OpenNURBS uses UTF-16 to store text information in
 3DM files and provides tools for converting UTF-16
 strings to and from UTF-8, UTF-32 and wchar_t strings. 
@@ -40,12 +42,12 @@ The ON_wString class has wchar_t characters.
 
 All memory allocations and frees are done through onmalloc(), onfree(), and onrealloc().  The source code that ships with [[developer:opennurbs:home|openNURBS]] simply has onmalloc() call malloc() and onfree() call free().
 
-In the code you write include only opennurbs.h.  The opennurbs.h header file includes the necessary [[developer:opennurbs:home|openNURBS]] toolkit header files in the appropriate order.
 
 If you want to use Open GL to render [[developer:opennurbs:home|openNURBS]] geometry, then you may want to include opennurbs_gl.h after opennurbs.h and add opennurbs_gl.cpp to your [[developer:opennurbs:home|openNURBS]] Toolkit library. See example_gl.cpp for more details.
 
-If you are using a good quality C++ compiler and run into some toolkit code that causes problems, please let us know and we'll attempt to change the code to accommodate the compiler.
+The [[developer:opennurbs:home|openNURBS]] Toolkit is works correctly on both big and little endian CPUs.  (Generally, Intel CPUs use little endian byte order and MIPS, Motorola, and Sparc CPUs use big endian byte order.)
 
+If you are using a good quality C++ compiler and run into some toolkit code that causes problems, please let us know and we'll attempt to change the code to accommodate the compiler.
 =====Getting Started=====
 If your goal is to read and write 3dm files, then you may find that the class ONX_Model::Read() and ONX_Model::Write() to be an easy way to attain your goal. See example_read.cpp and example_write.cpp for more details.
 
