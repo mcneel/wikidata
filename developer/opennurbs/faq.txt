@@ -35,13 +35,13 @@ If your goal is to read and write 3dm files, then you may find that the class ON
 
   - Compile the openNURBS Toolkit library. In order to compile the example programs you must link with the openNURBS Toolkit library.  Compile the library as described in the first paragraph of the Instructions section.
   - Study example_read\example_read.cpp. All of the openNURBS geometry classes are derived from the ON_Geometry class.  If you need generic attribute information, there is probably a ON_Geometry member function that will answer your query.  See the Dump() function in example_read.cpp for code that demonstrates how to use the Cast() function to get at the actual class definitions.
-  - Study example_write\example_write.cpp. If you want to write points, meshes, [[rhino:nurbs|NURBs]] curves, [[rhino:nurbs|NURBs]] surfaces, or trimmed [[rhino:nurbs|NURBs]] surfaces, you should be able to cut and paste most of what you need from the functions in example_write.cpp.  If you want to write trimmed surfaces or b-reps, then please study example_brep.cpp.
+  - Study example_write\example_write.cpp. If you want to write points, meshes, NURBs curves, NURBs surfaces, or trimmed NURBs surfaces, you should be able to cut and paste most of what you need from the functions in example_write.cpp.  If you want to write trimmed surfaces or b-reps, then please study example_brep.cpp.
   - Study example_brep\example_brep.cpp. If you want to write solid models or more general b-reps, then you should first work through example_write.cpp and then work through example_brep.cpp.
   - The comments in the openNURBS Toolkit header files are intended to be the primary source of documentation.  I suggest that you use a development environment that has high quality tags capabilities and a good class browser.
   - In the code you write include only opennurbs.h.  The opennurbs.h header file includes the necessary openNURBS toolkit header files in the appropriate order.
   - Other
     * OpenNURBS uses UTF-16 to store text information in 3DM files and provides tools for converting UTF-16 strings to and from UTF-8, UTF-32 and wchar_t strings. The ON_wString class has wchar_t characters.
-    * All memory allocations and frees are done through onmalloc(), onfree(), and onrealloc().  The source code that ships with [[developer:opennurbs:home|openNURBS]] simply has onmalloc() call malloc() and onfree() call free().
+    * All memory allocations and frees are done through onmalloc(), onfree(), and onrealloc().  The source code that ships with openNURBS simply has onmalloc() call malloc() and onfree() call free().
     * If you want to use Open GL to render openNURBS geometry, then you may want to include opennurbs_gl.h after opennurbs.h and add opennurbs_gl.cpp to your openNURBS Toolkit library. See example_gl.cpp for more details.
     * The openNURBS Toolkit is works correctly on both big and little endian CPUs.  (Generally, Intel CPUs use little endian byte order and MIPS, Motorola, and Sparc CPUs use big endian byte order.)
 
