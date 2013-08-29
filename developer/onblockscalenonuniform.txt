@@ -3,7 +3,7 @@
 > **Summary:** //Discusses non-uniform scaling issues when using the openNURBS toolkit.//
 
 =====Question=====
-In Rhino, I can insert an instance of a block and give it a non-uniform scale (transformation). But, when I read the model, using the [[developer:opennurbs|openNURBS]] toolkit, and try to "explode" the block into its geometric form, the geometry is no longer non-uniformly scaled.
+In Rhino, I can insert an instance of a block and give it a non-uniform scale (transformation). But, when I read the model, using the openNURBS toolkit, and try to "explode" the block into its geometric form, the geometry is no longer non-uniformly scaled.
 
 =====Answer=====
 Not all ON_Geometry-derived classes can be can be accurately modified with "squishy" transformations like projections, shears, an non-uniform scaling. For example, if you were to apply a non-uniform scale to a circle, which is represented by an ON_ArcCurve curve, the resulting geometry is no longer a circle.
