@@ -4,33 +4,47 @@ Download from http://download.rhino3d.com/brazil/2.0/sr/download
 
 ======Brazil 2.0 for Rhino Development Status======
 
-======2012-12-07: Service Release 3 Beta 2======
+======2013-08-30: Service Release 3 ======
 
 =====Features=====
 
+  * Per object and material analytic displacement.
+  * Environment scaling added (in Brazil option, environment panel)
+  * Defaults changes - shadows, skylight, environment sky on by default and higher anti-aliasing.
+  * Support for Rhino 5 two-point perspective.
+  * Thin film iridescence added to all reflection options
+  * Display while rendering control added to detailed system settings
+  * Reversed normal setting added to occlusion texture to support depth based occlusion
+  * Paper shader added to Brazil Advanced Material - backlighting support.  Good for paper lanterns, fabrics etc.
+  * Support for Rhino ground plane in exclusion lists
+  * Brazil Advanced Cellular texture added
+  * Added Brazil Curvature Texture
+  * "Self" support added to Exclude lists where possible.
+  * Override max ray depth option added to Chrome, Glass, BAM and Porcelain
+  * RenderBlowup retains the previous frame buffer and renders over the top of the previous rendering if possible.
   * Motion blur reimplemented to work with both Bongo 2.0 and Bongo 1.0
-
-=====Bug fixes=====
-
-  * Physical sky environment did not respond to linear workflow correctly.
-  * Ground plane crash in Beta 1
-  * Shadow/Light shaders were not allowed in filter slots.
-
-======2012-11-23: Service Release 3 Beta 1======
-
-=====Features=====
-
   * Improvements to BAM transparency/opacity viewport simulation
   * Allow > 100% connection values for textures.
   * Thin translucency texture.
-  * Per object analytic displacement.
-  * Per material analytic displacement.
   * Cellular texture
   * Rhino 5.0 panel based settings UI.
   * Saved preset files are now displayed in the presets manager.
-    
-=====Bug fixes=====
 
+=====Bug Fixes=====
+
+  * GI environment blur section previews were unstable and slow.
+  * Default light was still on when light dome present.
+  * Custom render meshes that use the existing object material are correctly handled.
+  * Light and sun graphics improved and several bugs fixed.
+  * Brazil took over resolution setting while other renderers were current.
+  * Brazil render settings panel disappeared when the renderer was changed.
+  * Document settings did not reset when loading a 3dm file that had no previous Brazil data.
+  * Decals with complex block transforms rendered incorrectly.
+  * Decals did not work correctly on block inserts
+  * Porcelain specular color did not work
+  * Renderblowup command did not render the same area that has been selected in the viewport.
+  * Physical sky environment did not respond to linear workflow correctly.
+  * Shadow/Light shaders were not allowed in filter slots.
   * Workaround for bug in Rhino 4.0 and 5.0 SR0 with Mask texture returning a value in the alpha channel.
   * Linear workflow gamma correction was incorrect for environments.
 
