@@ -1,0 +1,38 @@
+======Zoo 檢查工具======
+> **產品： ** //[[zoo:zoo5|Zoo 5]]//
+> **摘要：** //Zoo for Rhino 5檢查工具相關討論。//
+
+[[zoo:zoo5diagnostics|{{:zoo:zoodiagnostics.png|Zoo檢查工具}}]]
+
+=====簡介=====
+Zoo檢查工具可於Rhino 5工作機執行，此實用工具提供下列工具：
+  - 提供了一些實用網路診斷工具，協助您解決Rhino 5工作機及[[zoo:determinezoohost|Zoo Servers]]之間的連接問題。
+  - 可讓您由Rhino工作機查看及修改Zoo Server的名稱。Zoo Server名稱被儲存在[[http://wiki.mcneel.com/zoo/findzooserver|Windows Registry]]。
+
+=====檢查工具說明=====
+Zoo檢查工具提供下列實用網路檢測功能：
+
+1.	**[[http://support.microsoft.com/kb/814155|Ping]]** - Ping (PING) 檢查工具是主要用來檢查主要的TCP/IP是否連接及名稱。
+
+//請注意 Windows防火牆預設ICMP需開啟，開啟方式為控制台 -> Windows防火牆 -> 進階設定-> 輸入規則 -> 檔案及印表機共用 (回應要求 - ICMPv4-In)。//
+
+2. **[[http://support.microsoft.com/kb/200525|DNS 查詢]]** - DNS查詢(NSLOOKUP)檢查工具顯示域名系統(DNS)基礎The DNS Lookup (NSLOOKUP)。
+
+3.  **[[http://support.microsoft.com/kb/314868|跟踪路由]]** - 跟蹤路由(TRACERT)檢查工具決定所採取的路線向目標發送Internet控制消息協議（ICMP）回顯數據包到目的地不同的IP生存期（TTL）值。需要一個數據包上的TTL遞減前至少1轉發路徑上的每個路由器，所以TTL是有效的躍點計數。當一個數據包上的TTL到達0時，路由器應該發送ICMP超時消息到Rhino用戶機。
+
+4. **檢查Zoo連接埠** - 可檢查Zoo 5是否有在伺服器或工作站回應連接埠80。
+
+//若測試失敗，請檢查Zoo伺服器 [[zoo:window7firewall|防火牆是否有開啟連接埠80]]。 //
+
+5. **Zoo 連接** - Zoo連接測試可以了解Zoo 5服務是否正在伺服器上執行。 
+
+//若此測試失敗但其他測試接成功，請確認Zoo伺服器的服務有正確被執行。您可以由控制台->系統管理工具->服務，或ZooAdmin.exe確認執行。//
+
+=====下載=====
+* 需先安裝 [[http://www.microsoft.com/en-us/download/details.aspx?id=17851|Microsoft .NET Framework 4]].
+
+{{:zoo:zoodiagnostics.zip|下載Zoo檢查工具}}
+
+\\
+
+{{tag>Zoo5}}
