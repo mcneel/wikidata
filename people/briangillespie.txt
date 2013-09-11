@@ -40,7 +40,10 @@ Sub Body
 
 
 ====== Troubleshooting Installer Issues for Rhino 5 ======
-For help with Installer Issues for Rhino 3 or Rhino 4, go [[http://wiki.mcneel.com/rhino/installproblems_legacy|here.]]
+This article is for Rhino 5. [[http://wiki.mcneel.com/rhino/installproblems_legacy|Previous Versions]]
+
+===== General Information =====
+
 
 -->Reporting Rhino 5 Installer Problems#
 The Rhino V5 installer will display a log file when the installation process fails.  This log file is very helpful to our technical support in solving any problems you may have. 
@@ -54,34 +57,6 @@ The Rhino V5 installer will display a log file when the installation process fai
 **//Question://** I tried to uninstall Rhino 5, but an error occurred and Rhino could not be removed.
 
 **//Answer://** [[rhino/5/uninstall|Manually remove Rhino 5.]]
-
-<--
-
--->Could not open key: UNKNOWN\Components (Error 1402 or 1406)#
-** //Question://** // A message "Could not open key: UNKNOWN\Components\(lots of letters and numbers). Error 1402. Verify that you have sufficient access to that key, or contact your support personnel."//
-
-**//Cause://** One or more registry keys in the HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components key has incorrect permissions.
-
-**//Solution 1://**
-On the Windows Start menu, enter "CMD" to the search box. Right-click on the "cmd.exe" and select "Run as administrator". Copy the following line and paste it into the cmd window, press Enter. Then Rhino will be able to install.
-
-<code>
-secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
-</code>
-
-**//Solution 2://**
-//WARNING: The following procedure involves editing the Windows Registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
-  - Download [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] from Microsoft TechNet, and extract the contents to your desktop.
-  - Open a Windows command shell
-  - Change directories to your desktop.
-  - In the command shell, enter: **psexec -i -d -s c:\windows\regedit.exe** This causes Windows to run the registry editor with the permissions of the System account - an account even more powerful than Administrator.
-  - Browse to HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
-  - Right-click the **UserData** folder, then click **Permissions...**
-  - In the Permissions for UserData dialog box, click **Advanced**
-  - Ensure that "Administrators" has "Full Control" Permissions in this folder, and that "Users" has "Read" Permissions. There will be other user permissions, too - but Administrators and Users are what matter most.
-  - Select the **Replace all child object permissions with inheritable permissions from this object**
-  - Click **OK** twice to apply permissions
-  - Install Rhino again.
 
 <--
 
@@ -128,6 +103,37 @@ The "Add or Remove Programs" entry in the Control Panel in Windows is reporting 
 
 -->Rhino 5 Install Never Completes#
 See this page [[rhino:debuginstaller|DebugInstaller]] for instructions on how to generate a logfile of the error and get Technical Support involved.
+
+<--
+
+
+===== Error Messages =====
+
+-->Error 1402 or 1406 (Could not open key: UNKNOWN\Components)#
+** //Question://** // A message "Could not open key: UNKNOWN\Components\(lots of letters and numbers). Error 1402. Verify that you have sufficient access to that key, or contact your support personnel."//
+
+**//Cause://** One or more registry keys in the HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components key has incorrect permissions.
+
+**//Solution 1://**
+On the Windows Start menu, enter "CMD" to the search box. Right-click on the "cmd.exe" and select "Run as administrator". Copy the following line and paste it into the cmd window, press Enter. Then Rhino will be able to install.
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//Solution 2://**
+//WARNING: The following procedure involves editing the Windows Registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
+  - Download [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] from Microsoft TechNet, and extract the contents to your desktop.
+  - Open a Windows command shell
+  - Change directories to your desktop.
+  - In the command shell, enter: **psexec -i -d -s c:\windows\regedit.exe** This causes Windows to run the registry editor with the permissions of the System account - an account even more powerful than Administrator.
+  - Browse to HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - Right-click the **UserData** folder, then click **Permissions...**
+  - In the Permissions for UserData dialog box, click **Advanced**
+  - Ensure that "Administrators" has "Full Control" Permissions in this folder, and that "Users" has "Read" Permissions. There will be other user permissions, too - but Administrators and Users are what matter most.
+  - Select the **Replace all child object permissions with inheritable permissions from this object**
+  - Click **OK** twice to apply permissions
+  - Install Rhino again.
 
 <--
 
