@@ -145,47 +145,44 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 <--
 
 -->Error 1603#
-The **Error Code 1603** is not a specific crash error, but is a general error in the installation process.  Some of the conditions that can cause 1603 are:
-  * Short file name creation is disabled on the target machine.
-  * An Install Script custom action is prototyped incorrectly.
-  * A file is locked and cannot be overwritten.
-  * The Microsoft Windows Installer Service is not installed correctly.
-  * The Windows Temp folders are full.
-  * The setup was corrupted after installation and, therefore, fails with this error during un-installation.
-If the Rhino installer crashes with a 1603 error or no error code at all you can try these steps to get more information.
+A wide variety of problems can cause 1603 errors. Please follow all of the steps below.
+====Step 1: Install .NET 4.0 Framework====
+  - Open Windows Explorer and browse to the contents of the Rhino Installer DVD
+  - Open the Installers\Prerequisites folder on the DVD.
+  - Run the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]].
+  - If the Microsoft .NET installer shows an error, take note of the error and go to Step 2.
+  - If the Microsoft .NET installer is successful, go to Step 3.
 
-**//Step 1//**
-  - Follow the steps above under Reporting Rhino V5 Installer Problems to send us the Install Log. 
-  - Close the existing installer
-  - Go to Windows Explorer and navigate to the contents of the Rhino Installer DVD
-  - Open the Installer folder on the DVD
-  - Open the Prerequisites folder.
-  - Run the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]] installer in the folder.
-  - If the dotNet installer shows an error, take note of the error and go to Step 2.
-  - If the dotNet installer is successful, go to Step 3.
-
-**//Step 2//**
+====Step 2: Perform Windows Updates====
   - Click here to run the [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows Update service]]
   - If there are any important updates to install, click on Update Now to install the updates.  This process can take a long time.
   - If there is an error when trying to run Windows update installer, see this article [[http://support.microsoft.com/kb/906602|Troubleshooting common Windows Update Issues]]
   - If you resolve the Windows update problem and finish running [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows Update service]], then return to Step 1.
 
-**//Step 3//**
-  - Go to the Rhino installer DVD with Windows Explorer
-  - Try and run the Setup.exe in the root of the DVD.
-  - The installation should now complete.
-  - If the Installer continues to crash, please attach the log file to an email to tech@mcneel.com. Or continue onto Step 4
+====Step 3: Install Rhino====
+  - Open Windows Explorer
+  - Browse to the root of the Rhino 5 DVD
+  - Double-click Setup.exe to start the Rhino 5 installation process.
+  - If the Rhino 5 installer fails, save a copy of the log file to your desktop.
+  - **continue onto Step 4**
 
-**//Step 4//**
-  - Go to the Rhino installer DVD with Windows Explorer
-  - For 64-bit systems, run the file D:\Installers\rhino5setup_en-us_x64.msi
-  - For all systems then run 
-      - D:\Installers\rhino5setup_en-us_x86.msi
-      - Run the language specific (LanguagePack) installer. For instance the English installer is D:\Installers\LanguagePack_en-us.msi
-      - D:\Installers\HelpMedia.msi
-      - Note: for 64-bit systems you will have run all 4 installers.
+====Step 4====
+  - Open Windows Explorer
+  - Browse to the **Installers** folder of the Rhino 5 DVD
+  - For 64-bit systems only: double-click **rhino5setup_en-us_x64.msi** and complete the installation
+  - For all systems: 
+      - double-click **rhino5setup_en-us_x86.msi** and complete the installation
+      - double-click **LanguagePack_en-us.msi** (and any other languages you wish to install)
+      - double-click **HelpMedia.msi**
+  - If you experience errors during installation, please email tech@mcneel.com
   - Restart Windows if prompted.
-  - The last step is to start Rhino and type ToolbarReset on the commandine.  This will complete the install.
+  - Start Rhino 5
+  - In the Rhino 5 command line, type **ToolbarReset** then press Enter.
+  - Close and restart Rhino 5.
+
+====Still not working?====
+  - That's frustrating - we're sorry!
+  - Please email any log files from Step 3 to tech@mcneel.com
 
 <--
 
