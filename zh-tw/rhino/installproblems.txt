@@ -1,5 +1,91 @@
-====== Rhino 5 安裝疑難排解======
+====== Rhino 5 安裝疑難排解 ======
 若您有Rhino 3 或 4的安裝問題，請至[[http://wiki.mcneel.com/rhino/installproblems_legacy|這裡]]
+
+===== 一般性問題 =====
+-->提報Rhino 5安裝問題#
+Rhino 5安裝程式若安裝過程中失敗的情形，Rhino會自動產生一個log檔案。這個log檔案對我們的技術支援人員解決您的問題非常有幫助。 
+  - 當有錯誤發生時，會跳出有一個連結的對話框。 
+  - 點選連結並開啟log並請存檔成一個txt文字檔。
+  - 請將此檔案email到[[tech@mcneel.com]]
+
+<--
+
+-->Rhino 5移除失敗#
+
+**問：**我試著移除Rhino 5，但有錯誤發生並且無法完整移除。
+
+**答：**
+隨著此文說明[[rhino:5:uninstall|手動移除Rhino 5.0]]
+
+
+<--
+
+-->在新電腦上安裝最新更新版本#
+**//問：//** //我買了一台新電腦並且想安裝Rhino版本**X** SR **Y**。我有購買升級版本的Rhino，我需要安裝所有的舊版及修正版嗎？ //
+
+**//答：//**  您只要安裝您最近版本的安裝光碟。在安裝時，將會檢查是否會有舊版，您只要將光碟片放入檢查，並不需要實際安裝。當您安裝後，檢查並升級到最新的修正版即可。(Rhino 5則是會要求您輸入舊版序號)\\
+
+<--
+
+-->什麼是修正版？#
+
+修正版是針對現存版本進行錯誤修正，維護性更新，並且為免費提供。這些安裝程式可經由網路下載、並可安裝在已安裝程式的電腦上安裝。修正版可由兩種方式確認版本，一是SR編號，例如：SR3 或 SR4b，另一為日期，可由下載檔案名稱上看到例如：20050729，則代表是西元2005年7月29日版本。
+<--
+
+-->如何知道我目前安裝的版本為？#
+您可由程式中的說明>關於查看您的軟體程式版次，會出現Rhino開啟的畫面，您可以由”關於”了解目前的版次。 [[rhino:rhinoceros|Rhinoceros]].
+\\
+若要查Flamingo的版次，請在指令列輸入 FlamingoAbout 指令，Bongo則輸入BongoAbout 指令。
+
+<--
+
+-->如何取得修正版？#
+
+您可以在Rhino的說明>檢查是否有新版本來快速了解是否有新的修正版。若您的電腦有網路連線，McNeel的網路伺服器將會提供您最新版的下載連結。若您使用Flamingo，請在Raytrace或Photometric下找檢查是否有新版本。若您使用Bongo，請到Bongo>找檢查是否有更新。
+\\
+在Rhino 5，請到**工具>選項>更新與統計**並設定更新頻率為"修正版" 或者是您可以嘗試改到"修正版候選版"。 當您關閉Rhino，您將會收到安裝最新修正版的提示，您可以選擇是否要立即安裝。
+
+<--
+
+-->我可以在新增移除程式這邊直接移除較舊的版本且不會有任何問題？#
+您在系統控制台的新增移除程式可以看到所有已安裝的修正版本，您可以發現每個更新版本皆使用約250MB的硬碟空間，這部分有些誤導，微軟系統回報所有已安裝的檔案被添加到現有的安裝檔案中。請**不要**任意自行移除較舊版本的Rhino 5修正版本。
+<--
+
+-->Rhino 5無法結束安裝#
+請參考此頁 [[rhino:debuginstaller|DebugInstaller]]了解如何產生一個錯誤log file並提供給技術支援人員。
+<--
+
+-->Rhino V5 64位元版本無法使用但32位元版可以#
+**問：**\\ 當我試著開啟Rhino 5 64位元版本，出現下載錯誤訊息。
+{{:zh-tw:rhino:img_31072013_095222.png?450|}}\\
+
+**//答：//** 
+  * [[http://wiki.mcneel.com/rhino/rhino5/error0xc000007b|修正Rhino 5:錯誤碼 0xc000007b]]\\
+
+<--
+
+-->當安裝程式安裝於Win7/8系統卻提示不支援WinXP？#
+有時SR0 V5的DVD安裝光碟在Windows 7 或 8 安裝時，卻出現提示Rhino無法安裝於Windows XP。\\
+這個錯誤已修正，請到下載網頁並[[http://www.rhino3d.com/download/rhino/5.0/commercial|下載Rhino V5完整安裝版本]]，請使用更新後的版本安裝Rhino V5。
+
+<--
+
+-->Rhino 5.0安裝不完整，缺少語言包#
+您是否缺少了範本檔、工具列或外掛程式？這些是語言包沒有安裝的徵狀，這可能是某些安裝過程中產生的錯誤或不完整安裝。
+
+若您在安裝過程中缺少了些語言包，您可以由Rhino 5安裝光碟中找群Installer資料匣，您將需要手動自行完成安裝。
+
+若要確認是否有安裝好語言支援給外掛及介面，您可以找尋下列路徑：
+C:\Users\<login>\AppData\Roaming\McNeel\Rhinoceros\5.0. 
+
+If these folders are missing or if you have already opened Rhino, you will have found no toolbars, templates, and Help. To fix this, do the following:
+     - Run the MSI for the language pack
+     - Open Rhino and type **ToolbarReset**. 
+     - Close Rhino and reopen. This will delete the scheme in the registry, and reopening will reset it with the missing components
+
+
+<--
+===== 錯誤訊息 =====
 
   * [[InstallingRhino| Rhino進階自動安裝 – 關於使用腳本安裝，安裝資料匣及MSI腳本等詳細資訊。]]
   * [[#提報Rhino 5安裝問題|提報Rhino 5安裝問題]]\\
