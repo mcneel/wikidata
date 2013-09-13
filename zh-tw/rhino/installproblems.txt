@@ -78,154 +78,18 @@ Rhino 5安裝程式若安裝過程中失敗的情形，Rhino會自動產生一�
 若要確認是否有安裝好語言支援給外掛及介面，您可以找尋下列路徑：
 C:\Users\<login>\AppData\Roaming\McNeel\Rhinoceros\5.0. 
 
-If these folders are missing or if you have already opened Rhino, you will have found no toolbars, templates, and Help. To fix this, do the following:
-     - Run the MSI for the language pack
-     - Open Rhino and type **ToolbarReset**. 
-     - Close Rhino and reopen. This will delete the scheme in the registry, and reopening will reset it with the missing components
+若資料匣不見貨您已經開啟Rhino，您將會發現沒有工具列、範本檔及說明檔。
+請依照下列步驟修復：
+     - 執行光碟中的繁體中文版的LuanguaPack_zh-tw.msi檔案。
+     - 開啟Rhino並輸入**ToolbarReset**。
+     - 關閉Rhino並重新開啟。這將會將遺漏的元件都重新設定。
 
 
 <--
+
 ===== 錯誤訊息 =====
 
-  * [[InstallingRhino| Rhino進階自動安裝 – 關於使用腳本安裝，安裝資料匣及MSI腳本等詳細資訊。]]
-  * [[#提報Rhino 5安裝問題|提報Rhino 5安裝問題]]\\
-  * [[#Rhino 5安裝錯誤碼1603 與相關資訊| Rhino 5安裝錯誤碼1603 與相關資訊]]\\
-  * [[#手動移除Rhino 5|手動移除Rhino 5]]\\
-  * [[#Could not open key: UNKNOWN\Components (Error 1402 或 1406)|Could not open key: UNKNOWN\Components (Error 1402 或 1406)]]
-  * [[#Rhino 5移除失敗|Rhino 5移除失敗]]
-  * [[#在新電腦上安裝最新修正版|在新電腦上安裝最新修正版]]
-  * [[#什麼是修正版？ | 什麼是修正版？]]
-  * [[#如何取得修正版？ | 如何取得修正版？]]
-  * [[#Rhino 5無法結束安裝|Rhino 5無法結束安裝]]
-  * [[#Error 1327 - Invalid Drive:|Error 1327 - Invalid Drive:]]
-  * [[#Error 1603 - XP x64|Error 1603 - XP x64]]
-  * [[#Error 1935|Error 1935]]
-  * [[#Error 2502|Error 2502]]
-  * [[#.NET Framework 4 installer error (HRESULT: 0xc8000222)|.NET Framework 4 installer error (HRESULT: 0xc8000222)]]
-  * [[#Rhino 5 安裝程式一直要求安裝.NET Framework 4| Rhino 5 安裝程式一直要求安裝.NET Framework 4]]
-  * [[#.NET Framework 4 installer error (exit code -2145124330)|.NET Framework 4 installer error (exit code -2145124330)]]
-  * [[#Missing DLL]]
-  * [[#Windows 7/8 is not a supported system?|Windows 7/8 is not a supported system?]]
-  * [[#Rhino V5 64位元版本無法使用但32位元版可以Rhino V5 64位元版本無法使用但32位元版可以]]
-=====提報Rhino 5安裝問題=====
-Rhino 5安裝程式若安裝過程中失敗的情形，Rhino會自動產生一個log檔案。這個log檔案對我們的技術支援人員解決您的問題非常有幫助。 
-  - 當有錯誤發生時，會跳出有一個連結的對話框。 
-  - 點選連結並開啟log並請存檔成一個txt文字檔。
-  - 請將此檔案email到[[tech@mcneel.com]]
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首]]
-===== Rhino 5安裝錯誤碼1603 與相關資訊=====
-**安裝錯誤碼1603** 並非特定的當機錯誤，而是在安裝過程中普遍錯誤。造成1603錯誤碼的可能情況如下：
-  * 在安裝電腦上停用建立短檔案名稱。
-  * 安裝腳本自訂操作不正確。
-  * 有檔案被鎖定並無法覆寫。
-  * Microsoft Windows Installer Service 未正確安裝。
-  * Windows Temp folders空間不足。
-  * 由於安裝檔損壞，在移除過程中發生錯誤。
-若您安裝時發生1603的錯誤，或沒有任何錯誤碼，您可以試著使用下列步驟取得更多資訊。
-
-**//步驟 1//**
-  - 依照上述方式儲存錯誤log檔案，並email給我們。 
-  - 關閉目前的安裝程式。
-  - 開啟檔案總管，並且找到Rhino安裝光碟內容。
-  - 找到並開啟名為”Installer”的資料匣。
-  - 開啟”Prerequisites “資料匣。
-  - 執行資料匣中的[[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]]安裝程式。
-  - 若dotNet安裝程式出現錯誤，請記錄錯誤訊息並看步驟2。
-  - 若dotNet安裝程式安裝成功，請看步驟3。
-
-**//步驟 2//**
-  - 請 [[http://windows.microsoft.com/en-US/windows/help/windows-update|更新微軟作業系統]]
-  - 若安裝並更新所有重要的更新。這部分可能會花很長的時間作業。
-  - 若您在更新的時候有錯誤，請看此篇關於 [[http://support.microsoft.com/kb/906602|微軟更新常見問題]]文章。
-  - 當您更新完[[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows Update service]]，請重新再做一次步驟1。
-
-**//步驟 3//**
-  - 到檔案總管找到Rhino安裝光碟。
-  - 試著執行DVD路徑下的Setup.exe。
-  - 這次安裝應可順利完成。
-  - 若安裝仍失敗，請將錯誤log檔案寄到tech@mcneel.com 。或繼續做步驟4。
-
-**//步驟4//**
-  -到檔案總管找到Rhino安裝光碟。
-  - 若電腦是64位元作業系統，請執行下列檔案D:\Installers\rhino5setup_en-us_x64.msi
-  - 然後所有作業統請執行 
-      - D:\Installers\rhino5setup_en-us_x86.msi
-      - 開啟執行特定語言檔(LanguagePack)安裝檔。英文版為D:\Installers\LanguagePack_en-us.msi。繁體中文版文D:\Installers\LanguagePack_zh-tw.msi
-      - 開啟執行D:\Installers\HelpMedia.msi
-      - 附註:64位元系統使用者請安裝以上所述的安裝檔。
-  - 重新啟動電腦。
-  - 開啟Rhino並於指令列輸入ToolbarReset 指令，完成安裝。
-
-=====手動移除Rhino 5=====
-**//問：//** 我試著移除Rhino 5，但發生錯誤無法移除。
-
-**//答：//** 請參考關於[[rhino/5/uninstall|手動移除Rhino 5]]
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首]]
-=====Could not open key: UNKNOWN\Components (Error 1402 或 1406)=====
-** //問：//** // 有訊息 "無法開啟：UNKNOWN\Components\(許多字母及數字)。錯誤碼1402。請檢查是否有足夠電腦權限。"//
-
-**//產生原因：//** 部分或某一個於以下路徑的機碼HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components 權限不足。.
-
-**//解決方式1：//**
-於微軟的開始搜尋欄輸入"CMD"，於"cmd.exe"按右鍵及選擇”以管理員權限執行"。複製並於cmd視窗貼上下列文字，按enter。Rhino將可安裝。
-
-<code>
-secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
-</code>
-
-**//解決方式2：//**
-//警告：下列方式將編輯微軟機碼，若有錯誤可能會造成電腦無法開機，若您擔心有相關問題產生，請直接聯絡McNeel技術人員服務。//
-  - 由微軟的TechNet下載 [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]]並解壓縮放在電腦桌面。
-  - 開啟命令提示字元(Windows command shell)
-  - 將路徑改到您的桌面
-  - 在指令列輸入： **psexec -i -d -s c:\windows\regedit.exe**這會導致 Windows 運行登錄編輯程式使用系統帳戶將有比帳戶管理員更強大的許可權。
-  - 瀏覽HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
-  - 在**UserData**資料匣上按右鍵，然後點選**Permissions...**
-  - 在Permissions對話框選擇 **Advanced**
-  - 確認在這個資料匣"系統管理者身分(Administrators)"有"完全控制" 權限，並且設定使用者有可讀的權限。
-  - 選擇 **Replace all child object permissions with inheritable permissions from this object**
-  - 點選兩次 **OK**以套用新的權限設定。
-  - 再次安裝Rhino。
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====Rhino 5移除失敗=====
-**問：**
-可能是由您電腦中安裝程式緩存已損壞造成的安裝失敗。
-
-**答：**
-隨著此文說明[[rhino:5:uninstall|手動移除Rhino 5.0]]
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====在新電腦上安裝最新更新版本=====
-
-**//問：//** //我買了一台新電腦並且想安裝Rhino版本**X** SR **Y**。我有購買升級版本的Rhino，我需要安裝所有的舊版及修正版嗎？ //
-
-**//答：//**  您只要安裝您最近版本的安裝光碟。在安裝時，將會檢查是否會有舊版，您只要將光碟片放入檢查，並不需要實際安裝。當您安裝後，檢查並升級到最新的修正版即可。(Rhino 5則是會要求您輸入舊版序號)\\
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====什麼是修正版？=====
-修正版是針對現存版本進行錯誤修正，維護性更新，並且為免費提供。這些安裝程式可經由網路下載、並可安裝在已安裝程式的電腦上安裝。修正版可由兩種方式確認版本，一是SR編號，例如：SR3 或 SR4b，另一為日期，可由下載檔案名稱上看到例如：20050729，則代表是西元2005年7月29日版本。
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====如何知道我目前安裝的版本？=====
-您可由程式中的說明>關於查看您的軟體程式版次，會出現Rhino開啟的畫面，您可以由”關於”了解目前的版次。 [[rhino:rhinoceros|Rhinoceros]].
-\\
-若要查Flamingo的版次，請在指令列輸入 FlamingoAbout 指令，Bongo則輸入BongoAbout 指令。
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====如何取得修正版？=====
-您可以在Rhino的說明>檢查是否有新版本來快速了解是否有新的修正版。若您的電腦有網路連線，McNeel的網路伺服器將會提供您最新版的下載連結。若您使用Flamingo，請在Raytrace或Photometric下找檢查是否有新版本。若您使用Bongo，請到Bongo>找檢查是否有更新。
-\\
-在Rhino 5，請到**工具>選項>更新與統計**並設定更新頻率為"修正版" 或者是您可以嘗試改到"修正版候選版"。 當您關閉Rhino，您將會收到安裝最新修正版的提示，您可以選擇是否要立即安裝。
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====我可以在新增移除程式這邊直接移除較舊的版本且不會有任何問題？ =====
-您在系統控制台的新增移除程式可以看到所有已安裝的修正版本，您可以發現每個更新版本皆使用約250MB的硬碟空間，這部分有些誤導，微軟系統回報所有已安裝的檔案被添加到現有的安裝檔案中。請**不要**任意自行移除較舊版本的Rhino 5修正版本。
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-===== Rhino 5無法結束安裝=====
-請參考此頁 [[rhino:debuginstaller|DebugInstaller]] 了解如何產生一個錯誤log file並提供給技術支援人員。
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====Error 1327 - Invalid Drive:=====
+-->Error 1327 - Invalid Drive:#
 **//問：//** //安裝時有一個錯誤訊息為 "Error 1327. Invalid Drive (E:, F:, etc)"的錯誤 //
 
 **//產生原因：//** //您的使用者帳戶設定有幾個虛擬槽用來指定為特定資料匣，例如”我的文件” //
@@ -239,13 +103,91 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 
 **注意：** 這個變更登錄資料的解決方式，若操作不正卻很可能會造成您電腦嚴重的問題。因此，請您務必小心執行這些步驟。此外，您可以在修改之前，先備份登錄檔。如果發生問題，您可以還原回復。關於備份及還原登錄檔的更多訊息，您可以參考下列微軟技術支援文章：
 [[http://support.microsoft.com/kb/322756|如何在 Windows XP 中備份及還原登錄]]
+
+<--
+
+-->Error 1402 or 1406 (Could not open key: UNKNOWN\Components)#
+** //問題：//** //若您看到錯誤訊息 "Could not open key: UNKNOWN\Components\(lots of letters and numbers).Error 1402. 確認您有足夠權限，請聯絡您的資訊網管人員"//
+
+**//造成原因//** 一個或多個註冊碼無法寫入 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components沒有足夠權限。
+
+**//解決方案1：//**
+在微軟的開始表，在搜尋欄輸入"CMD"。在"cmd.exe"上按右鍵然後選擇"以使用者管理員權限執行"。複製下列內容並複製至cmd，按Enter。然後Rhino將可安裝。
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//解決方案2：//**
+//WARNING: The following procedure involves editing the Windows Registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
+  - Download [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] from Microsoft TechNet, and extract the contents to your desktop.
+  - Open a Windows command shell
+  - Change directories to your desktop.
+  - In the command shell, enter: **psexec -i -d -s c:\windows\regedit.exe** This causes Windows to run the registry editor with the permissions of the System account - an account even more powerful than Administrator.
+  - Browse to HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - Right-click the **UserData** folder, then click **Permissions...**
+  - In the Permissions for UserData dialog box, click **Advanced**
+  - Ensure that "Administrators" has "Full Control" Permissions in this folder, and that "Users" has "Read" Permissions. There will be other user permissions, too - but Administrators and Users are what matter most.
+  - Select the **Replace all child object permissions with inheritable permissions from this object**
+  - Click **OK** twice to apply permissions
+  - Install Rhino again.
+
+<--
+
+-->Error 1603#
+
+A wide variety of problems can cause 1603 errors. Please follow all of the steps below.
 \\
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
+\\
+**Step 1: Install .NET 4.0 Framework**
+  - Open **Windows Explorer** and browse to the Rhino Installer DVD
+  - Open the **Installers\Prerequisites** folder.
+  - Run the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]].
+  - If the Microsoft .NET installer **shows an error**: 
+    - write down the error 
+    - **Proceed to Step 2**.
+  - 64-bit Windows XP Only:
+    - Download and install [[http://www.microsoft.com/en-us/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]]
+  - **Skip to Step 3**.
+\\
+**Step 2: Perform Windows Updates**
+  - Run the [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows Update service]]
+  - If there are any important updates to install, click on **Update Now** to install the updates.  This process can take a long time.
+  - If there is an error when trying to run Windows update installer, please read [[http://support.microsoft.com/kb/906602|Troubleshooting common Windows Update Issues]]
+  - If you resolve the Windows update problem and finish running [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows Update service]], then **return to Step 1**.
+\\
+**Step 3: Install Rhino**
+  - Open **Windows Explorer**
+  - Browse to the Rhino 5 DVD
+  - Double-click **Setup.exe** to start the Rhino 5 installation process.
+  - If the Rhino 5 installer fails, save a copy of the log file to your desktop.
+  - **Proceed to Step 4**
+\\
+**Step 4: Manual Installation**
+  - Open **Windows Explorer**
+  - Browse to the **Installers** folder of the Rhino 5 DVD
+  - For //64-bit systems only//: double-click **rhino5setup_en-us_x64.msi** and complete the installation
+  - For all systems: 
+      - double-click **rhino5setup_en-us_x86.msi** and complete the installation
+      - double-click **LanguagePack_en-us.msi** (and any other languages you wish to install)
+      - double-click **HelpMedia.msi**
+  - If you experience errors during installation:
+    - Write down any error numbers and messages you see
+    - Email the step you are on in this article and any errors to tech@mcneel.com
+  - Restart Windows if prompted.
+  - **Start Rhino 5**
+  - In the Rhino 5 command line, type **ToolbarReset** then press Enter.
+  - **Close Rhino 5**
+  - **Start Rhino 5**
+  - **Installation is complete!**
+\\
+**Still not working?**
+  - That's frustrating - we're sorry!
+  - Please email any log files from Step 3 to tech@mcneel.com
 
-=====Error 1603 - XP x64=====
-若您安裝於64位元版本的XP並且出現錯誤碼1603，請由下列網址：http://www.microsoft.com/en-us/download/details.aspx?id=8483下載並安裝 Windows Installer 4.5 Redistributable。
+<--
 
-=====Error 1935=====
+-->Error 1935#
 **//問：//** //安裝時發生錯誤訊息"Error 1935. An error occurred during the installation of assembly "Microsoft.VC80.CRT, ..."//
 
 **//產生原因//** //是微軟Microsoft C++ 2005 Redistributable Package 的錯誤//
@@ -263,11 +205,14 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 
 若您無法選取這個選項或開啟或關閉Windows功能對話框為空白，那代表您的微軟系統需要修正一些問題，請聯絡微軟技術服務提供協助。
 
-**//更多詳情：//**
-若安裝時遇到這個錯誤同時也無法安裝微軟的 [[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 Redistributable Package directly]]。因此，此錯誤跟微軟視窗系統相關。
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====Error 2502=====
+**//補充：//**
+若您在安裝Rhino時，有這個錯誤訊息，同時也無法安裝微軟的[[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 Redistributable Package directly]]，因此，這個與微軟視窗系統相關。
+
+
+<--
+
+-->Error 2502#
+
 **//問：//** Rhino 5通知有新的修正版本可以安裝，選擇安裝後有錯誤訊息"Error 2502"。
 
 **{{http://wiki.mcneel.com/_media/rhino/k01373.png?400}}**
@@ -279,18 +224,10 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
   - 選擇 "以系統管理員身份執行"。
   - 重新啟動Rhino 5，並有一個新的修正版可以安裝的提示。
   - 選擇安裝修正版更新。
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====.NET Framework 4 installer error (HRESULT: 0xc8000222)=====
-**問：**\\ 安裝時，出現一個錯誤內容為.NET Framework 4 failed to install because of error code HRESULT: 0xc8000222.
 
-**造成原因**\\ Some files corrupted in the **Software Distribution folder**.
+<--
 
-**解決方式：**
-  - 下載[[http://files.na.mcneel.com/misc/Fix_0xc8000222.zip|Fix_0xc8000222.zip]].
-  - 解壓縮**Fix_0xc8000222.bat** 檔案到任一資料匣。
-  - 在Fix_0xc8000222.bat檔案上按右鍵並選擇**以系統管理員身份執行**。\\ <color #999999>這個批次檔會執行以下動作： \\ 1) 取消</color><color black>Windows Update 服務</color><color #999999>.\\ 2) 刪除</color><color black>C:\Windows\SoftwareDistribution</color><color #999999>.\\ 3) 重新開啟</color><color black>Windows Update服務</color><color #999999> again.</color>
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-===== Rhino 5 安裝程式一直要求安裝.NET Framework 4=====
+-->Rhino 5 安裝程式一直要求安裝.NET Framework 4#
 **問：**\\ Rhino 5 安裝程式一直要求安裝.NET Framework 4並且Rhino 5安裝失敗，但.NET Framework 4 實際已安裝。
 
 **原因：**\\ 系統中的.NET Framework 4不知明原因已損壞。
@@ -302,8 +239,23 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
   - 選擇 **Cleanup Now** 按鈕。
   - 重新啟動電腦。
   - 使用Rhino 5 DVD 安裝光碟安裝Rhino 5。\\ <color #999999> Rhino 5 DVD安裝光碟將會先安裝.NET Framework 4 再安裝Rhino 5。\\ 若你想安裝</color><color black>Rhino 5 評估版本</color><color #999999>，您需要先 [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|下載]] and re-install .NET Framework 4 full version before installing Rhino 5. </color>
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-=====.NET Framework 4 installer error (exit code -2145124330)=====
+
+<--
+
+-->.NET Framework 4 installer error (HRESULT: 0xc8000222)#
+**問：**\\ 安裝時，出現一個錯誤內容為.NET Framework 4 failed to install because of error code HRESULT: 0xc8000222.
+
+**造成原因**\\ Some files corrupted in the **Software Distribution folder**.
+
+**解決方式：**
+  - 下載[[http://files.na.mcneel.com/misc/Fix_0xc8000222.zip|Fix_0xc8000222.zip]].
+  - 解壓縮**Fix_0xc8000222.bat** 檔案到任一資料匣。
+  - 在Fix_0xc8000222.bat檔案上按右鍵並選擇**以系統管理員身份執行**。\\ <color #999999>這個批次檔會執行以下動作： \\ 1) 取消</color><color black>Windows Update 服務</color><color #999999>.\\ 2) 刪除</color><color black>C:\Windows\SoftwareDistribution</color><color #999999>.\\ 3) 重新開啟</color><color black>Windows Update服務</color><color #999999>。</color>
+
+
+<--
+
+-->.NET Framework 4 installer error (exit code -2145124330)#
 **//問：//** 在安裝Rhino 5時，看到一個.Net amework 4.0 installer error 錯誤訊息
 
 **//解決方案：//** 在安裝Rhino 5之前修復 .NET Framework 。
@@ -311,16 +263,21 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
   - 執行此修復工具。
   - 持續按"Next"直到出現"Finish"並點選。
   - 在試著安裝一次Rhino 5。
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
 
-===== Missing DLL =====
+<--
+
+-->錯誤:安裝過程失敗並出現有遺漏的dll訊息#
 問：安裝過程失敗並出現有遺漏的dll訊息，如： 
 
 **//這個問題與微軟的Windows Installer package相關。 需要一個特定的DLL來完成安裝，請聯絡您的微軟相關技術支援。//**
 
 解決方式：這可能是防毒軟體正在嘗試禁用任何防毒軟體。或您的電腦遺漏某個重要的**系統更新(Windows Updates)**。 
   * // [[http://wiki.mcneel.com/windows_updates|到此了解]]如何檢查微軟系統更新//
-===== 安裝程式不支援Windows 7/8 ？=====
+
+<--
+
+-->安裝程式不支援Windows 7/8？#
+
 **問：**\\ 我目前使用Windows 7/8，但我在使用Rhino安裝光碟安裝時系統卻提示不支援？
 
 **答：**\\ 
@@ -331,13 +288,7 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
   - 按**確定**兩次結束此對話框。
   - 再次在exe安裝程式上按右鍵並選擇**以系統管理員身分執行**安裝。
 
-===== Rhino V5 64位元版本無法使用但32位元版可以=====
-**問：**\\ 當我試著開啟Rhino 5 64位元版本，出現下載錯誤訊息。
-{{:zh-tw:rhino:img_31072013_095222.png?450|}}\\
+<--
 
-**//答：//** 
-  * [[http://wiki.mcneel.com/rhino/rhino5/error0xc000007b|修正Rhino 5:錯誤碼 0xc000007b]]\\
-
-[[http://wiki.mcneel.com/rhino/installproblems|返回頁首。]]
-
+ 
 {{tag>rhino5installation}}
