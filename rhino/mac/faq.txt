@@ -207,7 +207,16 @@ Previous WIP versions of Mac Rhino are not available. You are participating in a
 
 -->I got a mysterious dialog that said "Program Failure" and now Mac Rhino does not work any more.#
 
-When Mac Rhino encounters an unexpected situation, it displays a dialog with a generic "Program Failure" message. After this error, Mac Rhino shuts down internally, and you cannot run commands or menu choices after this point. You can save your file, and you can quit Mac Rhino, but you won't be able to do more. We need to know when this happens. See [[http://mac.rhino3d.com/content/programfailure.aspx|this page]] for what you can do when this occurs.
+When Mac Rhino encounters an unexpected situation, it displays a dialog with a generic "Program Failure" message. After this error, Mac Rhino shuts down internally, and you cannot run commands or menu choices after this point. You can save your file, and you can quit Mac Rhino, but you won't be able to do more. We need to know when this happens. 
+When working with Rhino, you may see the following dialog:
+
+Rhino displays this generic dialog for several situations. Not every feature is implemented yet in Rhino, and you will get this dialog when you attempt to use an unimplemented feature. There is also program code in Rhino that we expect should only be used in the Windows version of Rhino. If something you do tries to execute this code, you will also get a "Rhino Error" dialog. Lastly, there are lots of debugging tests in this early code, and you will see this dialog when an internal test discovers a situation that should not happen.
+
+{{:rhino:mac:notimpl.png?nolink|}}
+
+When you encounter one of these dialogs, please write down the file name, line number, and version information from the dialog. Email this information, along with a description of what you were doing when you received the dialog, to us at <mactech@mcneel.com>. We will try to duplicate your problem and find a solution so that this error will not happen in the future.
+
+After receiving this dialog, Rhino restricts you to just a few commands. You'll be able to save your file and you can quit Rhino, but not much else will work.
 
 <-- 
 
