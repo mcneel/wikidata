@@ -1,0 +1,23 @@
+====== Rhino 5: 編輯工具列無法儲存 ======
+若您無法儲存任何您自訂編輯的工具列配置(當您重開Rhino又跑回預設值)，您可能有Windows檔案寫入權限的問題。  [[http://wiki.mcneel.com/rhino/toolbarproblemsv5|請至此頁觀看修正或測試此問題的建議]]  
+
+//注意： 在編輯自訂的工具列配置時，請指開啟一個Rhino程式畫面，否則您編輯的工具列可能在另一個Rhino關閉時設定將會被覆蓋。//
+====== Rhino V4 及 V5工具列消失問題======
+
+若您Rhino開啟時，您所有的工具列都不見了，請不要慌張！通常有很簡單的方式就能復原。
+
+[[toolbarsdissappearV4| Rhino V4 使用者建議及說明]]
+
+[[toolbarsdissappearV5| Rhino V5使用者建議及說明]]
+
+若您的工具列依然消失，這代表程式有其他錯誤，請聯絡McNeel 台灣區技術支援[[tech.tw@mcneel.com]]協助。
+====== Rhino V3工具列停靠問題======
+** Rhino V3工具列配置無法正確地放在欲擺放位置**
+
+請試試：
+  * 關閉 Rhino 3.0
+  * 當Rhino關閉時，請執行下列程式: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip
+  * 重啟 Rhino 3.0
+
+此程式為刪除Rhino部分機碼來讓Rhino”忘記”某些讓工具列無法正確地擺放的設定：
+//HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
