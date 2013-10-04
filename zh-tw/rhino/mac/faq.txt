@@ -45,3 +45,70 @@ Rhino麥金塔版本使用您系統預設的語言，若您要使用與系統預
   - 於**Language Preference**面板選擇您想使用的語言介面。
 
 <-- 
+-->如何移除Rhino?#
+
+要完整移除您電腦的Mac Rhino，請參考下列步驟：
+
+  - 從程式集資料匣移除程式。
+  - 刪除目錄**/Library/Application Support/McNeel**。此目錄包含了教學用模型及文件檔，若您沒有下載可能就不存在您的電腦中。
+  - 刪除目錄**~/Library/Application Support/McNeel**，這個目錄為Rhino選擇性使用，並可能不存在於您的電腦，內容可能會包含您建立的Toucan材質、Python scripts及其他Mac Rhino plug-ins。
+  - 刪除於您下列目錄的檔案 **~/Library/Preferences/com.mcneel.rhinoceros.plist** ，這些檔案為您的Rhino preferences設定資料。
+
+<-- 
+
+-->我可以撰寫巨集及外掛程式嗎？ #
+
+-->可以在麥金塔系統執行執行一個巨集指令嗎？ #
+
+可以的。請於Rhino功能表列，找**Tools > Commands > Read From File**一個載入並執行巨集指令。
+ 
+<--
+
+-->可以在麥金塔系統執行一個RhinoScript程式？ #
+
+不行。RhinoScript為以VisualBasic為基礎並且VisualBasic並無法於OS X被執行。我們同時使用Python作為Mac及Windows系統的腳本編寫工具，做為可以跨平台的腳本工具。請參考[[http://discourse.mcneel.com/category/scripting | Rhino scripting討論版]]學習更多如何使用Python於這兩個系統撰寫腳本。
+
+<--
+
+
+-->是否將有其他外掛程式可以於麥金塔版本的Rhino使用？ #
+
+也許。然後Windows版本的外掛程式將不支援Mac版本，將視各外掛商的開發者決定是否要移植到Mac版本的Rhino。
+<--
+ 
+-->麥金塔版本的Rhino可以支援我的C語言外掛程式？ #
+
+會的。然而，我們尚未準備好支援提供使用者C語言外掛開發程式，但我們計畫在未來支援。您將需要使用麥金塔開發系統重新編譯您的外掛程式，依照您外掛程式的複雜性來決定轉譯的工作量，可能只需要少量的工作就可以在兩個系統使用。
+
+<--
+
+-->麥金塔版本的Rhino可以支援我的.NET語言外掛程式？#
+
+最終會的，我們正在製作提供Rhino開發者使用的開發工具，並可於OS X及Windows使用。
+
+<-- 
+<--
+
+-->麥金塔版本的Rhino正式上市日期？#
+
+尚未有明確的日期。McNeel & Associates有一個不同一般的開發週期，我們發布早期且尚不完整的軟體，並藉此得到回饋。麥金塔版本的Rhino也使用同樣的產品研發週期風格，您可以參考 [[http://www.rhino3d.com/nr.htm|Windows Rhino 產品研發]]。
+
+<--
+ 
+-->若我購買了Windows版本的Rhino，是否能免費取得Mac版本的Rhino？是否將會有跨系統的升級版？ #
+
+我們目前尚無任何關於升級版的決策。
+
+====== 疑難排解======
+-->若我發現問題，如何回報#
+
+請參考[[:zh-tw/rhino/mac/ reportingproblems| Mac Rhino問題回報]]。
+
+<--
+
+-->安裝相關問題#
+
+-->在安裝較新版本之前，我需要移除舊版本嗎？ #
+
+不需要。 
+<--
