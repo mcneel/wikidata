@@ -1,13 +1,13 @@
-====== The Rhino Installer Engine (Beta) ======
+====== The Rhino Installer Engine ======
 =====Overview=====
-Note: This document describes features that are not yet available in Rhino. It is expected in a WIP release of Rhino 5.0 in February 2010.
-
-The Rhino Installer Engine simplifies distribution, installation, and updating of plug-ins for Rhino 4.0 and 5.0 on both 32- and 64- bit platforms. The Rhino Installer Engine is compatible with the McNeel Update System - a system that keeps Rhino 5.0 up-to-date with the latest releases. This system will keep plug-ins up-to-date as well.
-
-All plug-ins are installed per-user as part of the user's roaming profile.
+The Rhino Installer Engine simplifies distribution, installation, and updating of plug-ins for Rhino 4.0 and 5.0 on both 32- and 64- bit platforms.
 
 =====How It Works=====
-A Rhino Installer File (.RHI) is a zip file with a different extension. The RHI file can contain directory structures, and can include more than one version of a plug-in. For example:
+A Rhino Installer Package is a zip file with an .RHI extension. The RHI file can contain directory structures, and can include more than one version of a plug-in. 
+
+There are no file structure or naming rules.
+
+For example:
 
 <code>
   myPlugIn\4.0\myPlugIn.rhp
@@ -15,7 +15,7 @@ A Rhino Installer File (.RHI) is a zip file with a different extension. The RHI 
   myPlugIn\5.0\x64\myPlugIn.rhp
 </code>
 
-The Rhino Installer Engine examines each of the plug-ins and extracts the Plug-in GUID, Title, Version, and appropriate SDK version numbers. It also examines each Rhino installed on the computer.
+The Rhino Installer Engine examines each plug-in and extracts the plug-in GUID, Title, Version, and appropriate SDK version numbers. It also examines each Rhino installed on the computer.
 
 Next, each plug-in is compared to each installed version of Rhino. The newest compatible plug-in is registered with the corresponding version of Rhino.
 =====How-To Articles=====
@@ -26,7 +26,7 @@ Next, each plug-in is compared to each installed version of Rhino. The newest co
 =====Limitations=====
   * The Rhino Installer Engine will copy files from the RHI archive, and will register the plug-ins it finds. No other execution is done.
   * Currently, it is not possible to digitally sign RHI files. This means it is also not possible to verify the source of RHI files.
-  * The Rhino Installer Engine is currently **available with Rhino 5.0**. It will install plug-ins for Rhino 4.0, but there isn't a separate redistributable for the Rhino Installer Engine for Rhino 4.0 - we plan to do this once the kinks are ironed out a bit.
+  * The Rhino Installer Engine is currently **available with Rhino 5.0**. It will install plug-ins for Rhino 4.0, but there isn't a separate redistributable for the Rhino Installer Engine for Rhino 4.0.
 
 ===== Related Articles=====
 {{topic>rhinoinstallerengine mcneelupdate}}
