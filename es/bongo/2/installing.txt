@@ -1,0 +1,151 @@
+====== Resolución de problemas de instalación de Bongo ======
+> Este artículo hace referencia a Bongo 1.0 y Bongo 2.0. 
+
+===== General =====
+
+
+-->Comunicar problemas de instalación#
+Si el instalador de Bongo no funciona, póngase en contacto con el soporte técnico de McNeel y proporcione la siguiente información: 
+- Si aparece un mensaje de error, escriba exactamente el mensaje o envíe una captura de pantalla del mensaje de error. 
+- El sistema operativo de la máquina donde esté intentando instalar Bongo.
+  - La versión de Rhino 5 que tiene instalada. La información se obtiene escribiendo AcercaDe en la línea de comandos.
+
+Envíe un correo electrónico con la información solicitada a [[tech.eu@mcneel.com]]
+
+===== Mensajes de error =====
+
+-->Error 1327 - Unidad no válida:#
+**//Pregunta://** //Me aparece el "Error 1327. Unidad no válida (E:, F:, etc)" al instalar//
+
+**//Causa://**//Su cuenta de usuario tiene una configuración que indica que debe utilizarse una o más unidades no existentes para las carpetas especiales como "Mis documentos"//
+
+**//Solución://**
+  - En el menú Inicio, haga clic en Ejecutar.
+  - Escriba regedit y pulse Ejecutar
+  - Vaya a HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+- Busque los directorios listados que contienen la letra de la unidad mencionada en el error del instalador. Cámbielos para que redireccionen a una unidad y carpeta válidas.
+  - Vaya a HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+  - Busque los directorios listados que contienen la letra de la unidad mencionada en el error del instalador 
+
+**Nota:** Este método contiene pasos que le indican cómo modificar el registro. Sin embargo, pueden producirse problemas graves si modifica incorrectamente el registro. Por lo tanto, asegúrese de seguir estos pasos con mucha atención. Para una mayor protección, realice una copia de seguridad del registro antes de modificarlo. De este modo, podrá restaurar el registro si se produce algún problema. Para obtener más información sobre cómo realizar una copia de seguridad y restaurar el registro, haga clic en el siguiente número de artículo para verlo en Microsoft Knowledge Base:
+[[http://support.microsoft.com/kb/322756|Cómo hacer copia de seguridad y restaurar el registro en Windows ]]
+
+<--
+
+-->Error 1402 o 1406 (No se pudo abrir la clave: UNKNOWN\Components)#
+** //Pregunta://** // Aparece el mensaje "No se pudo abrir la clave: UNKNOWN\Components\(letras y números). Error 1402. Compruebe que dispone de los derechos de acceso necesarios para esa clave o póngase en contacto con el personal de asistencia."//
+
+**//Causa://** Una o más claves del registro de la clave HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components no tiene los permisos correctos.
+
+**//Solución 1://**
+En el menú Inicio de Windows, escriba "cmd" en el cuadro de búsqueda. Haga clic con el botón derecho "cmd.exe" y seleccione “Ejecutar como administrador". Copie la línea siguiente, péguela en la ventana de cmd y pulse Intro. Entonces Rhino se podrá instalar.
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//Solución 2://**
+//AVISO: El siguiente procedimiento implica la modificación del registro de Windows. La edición incorrecta del registro puede dañar el ordenador y evitar que arranque. Si no tiene la seguridad para realizar estos pasos, póngase en contacto con el soporte técnico de McNeel.//
+  - Descargue [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] de Microsoft TechNet y extraiga el contenido en su escritorio.
+  - Abra un shell de comandos de Windows
+  - Cambie los directorios en su escritorio.
+  - En el shell de comandos, escriba: **psexec -i -d -s c:\windows\regedit.exe** De este modo, Windows ejecutará el editor del registro con los permisos de la cuenta del sistema (una cuenta más potente que la de Administrador).
+  - Vaya a HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - Haga clic con el botón derecho en la carpeta **UserData** y seleccione **Permisos...**
+  - En Permisos del cuadro de diálogo UserData, haga clic en **Avanzados**
+- Asegúrese de que "Administradores" tiene permisos de "Control total" en esta carpeta y que "Usuarios" tiene permisos de "Lectura". También hay otros permisos de usuario, pero Administradores y Usuarios son los más importantes.
+  - Seleccione el **Reemplazar todos los permisos de objetos secundarios por permisos heredables de este objeto**
+  - Haga clic en **Aceptar** dos veces para aplicar los permisos
+  - Vuelva a instalar Rhino.
+
+<--
+
+-->Error 1603#
+Varios problemas pueden causar el error 1603. Siga todos los pasos que se describen a continuación.
+\\
+\\
+**Paso 1: Instale .NET 4.0 Framework**
+  - Abra el **Explorador de Windows** y vaya al instalador del DVD de Rhino
+  - Abra la carpeta **Installers\Prerequisites**.
+  - Ejecute el archivo [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]].
+  - Si el instalador Microsoft.NET **muestra un error**: 
+    - anote el error 
+    - **Continúe con el paso 2**.
+  - Solo para Windows XP 64 bits:
+    - Descargue e instale [[http://www.microsoft.com/en-us/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]]
+  - **Continúe con el paso 3**.
+\\
+**Paso 2: Ejecute las actualizaciones de Windows**
+  - Ejecute el [[http://windows.microsoft.com/en-US/windows/help/windows-update|servicio de Windows Update]]
+- Si hay actualizaciones importantes para instalar, haga clic en **Actualizar ahora** para instalarlas.  Este proceso puede tardar un poco.
+  - Si se produce un error al ejecutar las actualizaciones de Windows, lea el artículo [[http://support.microsoft.com/kb/906602|Solucionar problemas de Microsoft Windows Update]]
+  - Si soluciona el problema de Windows Update y termina con el [[http://windows.microsoft.com/en-US/windows/help/windows-update|servicio de Windows Update]], **vuelva al paso 1**.
+\\
+**Paso 3: Instale Rhino**
+  - Abra el **Explorador de Windows**
+  - Explore el contenido del DVD de Rhino 5
+  - Haga doble clic en **Setup.exe** para iniciar el proceso de instalación de Rhino 5.
+  - Si el instalador de Rhino 5 falla, guarde una copia del archivo de registro en el escritorio.
+  - **Continúe con el paso 4**
+\\
+**Paso 4: Instalación manual**
+  - Abra el **Explorador de Windows**
+  - Abra la carpeta **Installers** del DVD de Rhino 5
+  - Para //sistemas de 64 bits solamente//: haga doble clic en **rhino5setup_en-us_x64.msi** y complete la instalación
+  - Para todos los sistemas: 
+      - haga doble clic en **rhino5setup_en-us_x86.msi** y complete la instalación
+      - haga doble clic en **LanguagePack_en-us.msi** (y cualquier otro idioma que desee instalar)
+      - haga doble clic en **HelpMedia.msi**
+  - Si experimenta errores durante la instalación:
+    - Anote los números de error y los mensajes que vea
+   - Envíe el paso donde está de este artículo y los errores a tech.eu@mcneel.com
+  - Reinicie Windows si se solicita.
+  - **Inicie Rhino 5**
+  - En la línea de comandos de Rhino 5, escriba **RestablecerBarrasDeHerramientas** y pulse Intro.
+  - **Cierre Rhino**
+  - **Inicie Rhino 5**
+  - **Instalación completada**
+\\
+**¿Todavía no funciona?**
+  - Lo sentimos.
+  - Envíe los archivos de registro desde el paso 3 a tech.eu@mcneel.com
+
+<--
+
+-->Error 1935#
+**//Pregunta://** //Me aparece el "Error 1935. Se ha producid un error durante la instalación del ensamblaje "Microsoft.VC80.CRT, ..."//
+
+**//Causa://** //Se trata de un error de Microsoft C++ 2005 Redistributable Package//
+
+**//Solución 1://**
+  * **Desactivae el antivirus en el sistema.** Un usuario informó que desactivar AVG permitía que la instalación de Rhino funcionara.
+**//Solución 2://**
+  * **Intente instalar varias veces.** Un usuario informó que la instalación de Rhino funcionó la tercera vez que intentó instalar Rhino. No hizo nada en el sistema.
+**//Solución 3://**
+  - En Windows Vista o Windows 7, en el menú Inicio, escriba Características.
+  - Haga clic em **Activar o desactivar las características de Windows**
+  - En el cuadro de diálogo Características de Windows, seleccione la casilla **Activación HTTP de Windows Communication Foundation**:
+  - {{:rhino:rhino_1935_windows_features.png|}}
+  - Haga clic en Aceptar
+
+Si no pudo activar esta función o si aparece el cuadro de diálogo Características de Windows y está vacío, significa que la instalación de Windows está dañada y debe repararse. Póngase en contacto con el soporte técnico de Microsoft para obtener ayuda.
+
+**//Más información://**
+Las personas que experimentan este error al instalar Rhino, tampoco pueden instalar el [[http://www.microsoft.com/es-es/download/details.aspx?id=3387|Microsoft C++ 2005 Redistributable Package directamente]] de Microsoft. Por lo tanto, se trata de un problema con Windows y el Microsoft Redistributable Package, no con el instalador de Rhino.
+
+<--
+
+-->Error 2502#
+**//Pregunta://** Cuando Rhino 5 indica que hay una nueva actualización lista para instalar, elijo instalar la actualización y me aparece el "Error 2502".
+
+**{{http://wiki.mcneel.com/_media/rhino/k01373.png?400}}**
+
+**//Causa://** El instalador de la actualización no tiene suficientes permisos.
+
+**//Solución://**
+  - Haga clic con el botón derecho en el icono de acceso directo de Rhino 5.
+  - Seleccione "Ejecutar como Administrador".
+  - La pantalla de inicio de Rhino 5 indica que hay una nueva actualización lista para instalar.
+  - Elija instalar la actualización.
+
+<--
