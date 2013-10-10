@@ -1,22 +1,20 @@
-====== 고급 Flattening 기능 ======
-> **Summary:** Ship Constructor의 Expander 플러그인은 Rhino 4.0 용으로 나오지 않을 것이므로, 대체 도구를 개발하기 시작했습니다. //<color red>이것은 첫 번째 프로토타입입니다.</color>//
+====== Advanced Flattening ======
+> **요약:** Ship Constructor의 Expander 플러그인은 Rhino 4.0 용이 없으므로, 이를 대체할 기능을 개발하였습니다. //<color red>이것은 첫 번째 프로토타입니다.</color>//
 
+=====Contents=====
 
-=====내용=====
-
-  * [[#배경]]
-  * [[#개요]]
-  * 다운로드
-    * [[http://en.wiki.mcneel.com/content/upload/files/vcredist_x86.exe|Download and Install]] the latest Microsoft runtime libraries (required to run Squish). (You only need to to this once.)
-    * [[http://download.mcneel.com/download.asp?id=SquishWIP&language=|Download the latest Squish plug-in.]] - //Updated 27-February-2007//
-  * [[#Installation]]
+  * [[#Background]]
+  * [[#Overview]]
+  * Download & Install:
+    * [[#Installation|For Rhino 4.0]].
+    * For Rhino 5.0: Advanced Flattening is included in Rhino 5.0. //[[http://download.rhino3d.com/rhino/5.0/wip/download|Download Rhino 5.0 Now...]]//
   * [[#Interface]]
   * [[#Limitations]]
   * [[#Known bugs]]
   * [[#To Do]]
   * [[#Feedback]]
 
-=====배경=====
+=====Background=====
 
 Rhino 4.0 has:
 
@@ -26,13 +24,13 @@ Rhino 4.0 has:
 
 Rhino 4.0 does NOT have:
 
-  * **Unfold or unbend** - to make a flat pattern from 3-D shapes made from bending up a 2-D pattern. Mostly used to create sheet metal cases, etc. Most MCAD products do this nicely.
+  * **Unfold or unbend** - to make a flat pattern from 3-D shapes made from bending up a 2-D pattern. Mostly used to create sheet metal cases, etc. Most MCAD products do this nicely, ojezu.
   * **Flow** - to make a flat pattern for a 3-D shape made by flowing metal over a complex mold. An example is stamping a soda can from the metal disk or stamping an auto interior door panel from a flat pattern.
   * **Peel** - to split surfaces based on where they might rip and flattens the surfaces. An example is flattening a sphere. //Note: if the shape is already split, Squish may work. You can tell when and where a 3-D surface needs to be split by where it has extreme stretching or compression or the 2-D pattern overlaps.//
 
-=====Squish 개요=====
+=====Squish Overview=====
 
-The **Squish** command flattens a non-developable (curved in two directions) 3-D mesh or NURBS surface into a flat 2-D pattern.
+The **Squish** command flattens a non-developable (curved in two directions) 3-D mesh or [[rhino:nurbs|NURBs]] surface into a flat 2-D pattern.
 
 {{http://en.wiki.mcneel.com/content/upload/images/squish1.jpg}}
 {{http://en.wiki.mcneel.com/content/upload/images/squish2.jpg}}
@@ -53,7 +51,7 @@ Up to ten text dots mark the locations with the most dramatic deformation. The n
 
 The **SquishBack** command lets you place points and curves on a 2-D pattern, that was made with the Squish command, and then "unsquish" them back to the 3-D shape.
 
-For example, suppose we wanted to put a "Rhino" brand name in the black circle on this 3-D NURBS model of a shoe last.
+For example, suppose we wanted to put a "Rhino" brand name in the black circle on this 3-D [[rhino:nurbs|NURBs]] model of a shoe last.
 
 {{http://en.wiki.mcneel.com/content/upload/images/SquishBack_3dShapeBefore.jpg}}
 
@@ -69,13 +67,19 @@ Finally, use the **SquishBack** command to "unsquish" the white Rhino text onto 
 
 {{http://en.wiki.mcneel.com/content/upload/images/SquishBack_3dShapeAfter.jpg}}
 
-=====설치=====
+=====Installation=====
 
-1. Download the plug-in file **[[http://download.mcneel.com/download.asp?id=SquishWIP&language=|Squish.rhp]]** to a folder on your computer.
+==== For Rhino 4.0:====
+    - [[http://en.wiki.mcneel.com/content/upload/files/vcredist_x86.exe|Download and Install]] the latest Microsoft runtime libraries (required to run Squish). (You only need to do this once.)
+    - [[http://download.mcneel.com/download.asp?id=SquishWIP&language=|Download the latest Squish plug-in.]] - //Updated 11-January-2008//
+    - Download the plug-in file **[[http://download.mcneel.com/download.asp?id=SquishWIP&language=|Squish.rhp]]** to a folder on your computer.
+    - Download the toolbar file **[[http://en.wiki.mcneel.com/content/upload/files/Expand.zip|Expand.tb]]** to a folder on your computer. Activate the toolbar under menu "Tools/ Toolbar layout".
+    - From Windows file Explorer, drag and drop Squish.rhp files into an open Rhino 4.0 viewport, or use the 'install' button on the Tools - Options - Plug-ins page.
+    - You may also need to download and install [[http://www.microsoft.com/downloads/details.aspx?familyid=766a6af7-ec73-40ff-b072-9112bab119c2|Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package ATL Security Update]].
 
-2. Download the toolbar file **[[http://en.wiki.mcneel.com/content/upload/files/Expand.zip|Expand.tb]]** to a folder on your computer. Activate the toolbar under menu "Tools/ Toolbar layout".
+==== For Rhino 5.0: ====
+1. Download the latest [[http://download.rhino3d.com/rhino/5.0/wip/download|Rhino 5.0 WIP]].
 
-3. From Windows Explorer, drag and drop the files into Rhino 4.0 plug-in folder.
 
 =====Squish Command Options=====
 
@@ -87,10 +91,10 @@ Finally, use the **SquishBack** command to "unsquish" the white Rhino text onto 
   * Deformation=Free/StretchMostly/StretchOnly/CompressMostly/CompressOnly
     * There are five built-in deformation options to choose from depending on your bias for stretching or compressing, and the ability to specify custom deformation settings.
       * Free - No preference for compression or stretching.
-      * StretchMostly - Strong bias for expansion when the pattern is deformed into the 3-D shape.
-      * StretchOnly - Absolutely no compression when the pattern is deformed into the 3-D shape.
-      * CompressMostly - Strong bias for compression when the pattern is deformed into the 3-D shape.
-      * CompressOnly - Absolutely no expansion when the pattern is deformed into the 3-D shape.
+      * StretchMostly - Strong bias for expansion when the pattern is deformed into the 2-D shape.
+      * StretchOnly - Absolutely no compression when the pattern is deformed into the 2-D shape.
+      * CompressMostly - Strong bias for compression when the pattern is deformed into the 2-D shape.
+      * CompressOnly - Absolutely no expansion when the pattern is deformed into the 2-D shape.
       * CustomA, CustomB, CustomC - custom deformations.
       * [[#CustomSetup]] - Used to specify settings used by the CustomA, CustomB and CustomC options.
   * Material=Rigid/Floppy
@@ -147,7 +151,7 @@ If you want to preserve boundary lengths you could use the settings:
   * Button development, first attempt (Gerard Petersen) {{http://en.wiki.mcneel.com/content/upload/images/Button_24x24.jpg}}
 {{http://en.wiki.mcneel.com/content/upload/images/Button.jpg}}
 
-=====의견=====
+=====Feedback=====
 
 Please post feedback to Dale Lear on the [[http://www.rhino3d.com/newsgroup.htm|Rhino Newsgroup]] ([[http://news2.mcneel.com/scripts/dnewsweb.exe?cmd=xover&group=rhino|web version]] ). Be sure to use the word "Squish" in the subject line of your post.
 
@@ -160,7 +164,4 @@ We need to know whether or not the flattened patterns generated by the **Squish*
     * How much shear can be tolerated?
     * How important is preserving boundary length?
     * Does the material behave differently near the edge?
-
-
-
 
