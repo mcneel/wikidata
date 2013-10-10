@@ -1,12 +1,12 @@
-====== Info: Defining New Plug-in Commands ======
-====== C++, .NET ======
+====== Defining New Plug-in Commands======
+> **Developer:** //[[developer:cplusplusplugins|C++]], [[developer:dotnetplugins|.NET]]//
+> **Summary:** //Discusses Rhino commands and how define new commands using the Rhino C++ SDK.//
 
 =====Introduction=====
-Rhino plug-ins can contain any number of commands. Commands are created by deriving a new classes from //CRhinoCommand//, or //MRhinoCommand// in .NET. See **rhinoSdkCommand.h** for details on the //CRhinoCommand// class.
+Rhino plug-ins can contain any number of commands. Commands are created by deriving a new classes from **CRhinoCommand**, or **MRhinoCommand** in .NET. See **rhinoSdkCommand.h** for details on the **CRhinoCommand** class.
 
-=====Example:=====
+=====Example=====
 The following example code demonstrates a simple command class that essentially does nothing.
-
 
 <code c++>
 // Do NOT put the definition of class CCommandTest in a header
@@ -84,43 +84,38 @@ CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& cont
   //                            in a Get operation, dialog, time consuming computation, etc.
   //   CRhinoCommand::nothing:  The command did nothing but CANCEL was not pressed.
 
-  return CHippoCommand::success;
+  return CRhinoCommand::success;
 }
-
 </code>
-===== C++ =====
-<code c++>
-</code>
-        - Command classes must return a unique UUID. If you try to use a UUID that is already in use, then your command will not work. Use the GUIDGEN.EXE that comes with Visual Studio to create unique UUIDs.
-        - Command classes must return a unique command name. If you try to use a command name that is already in use, then your command will not work.
-        - Only ONE instance of a command class can be created. This is why you should put the definition of your command classes in .cpp files.
 
-=====Rhino Command Generator=====
-The Rhino Command Generator wizard is a standalone application that will generate new skeleton CRhinoCommand-derived class. The generated source code is copied to the Windows clipboard so you can easily paste it into your source files. Note, this tool can be used for both Rhino 3.0 and Rhino 4.0 development.
+=====C++=====
+  - Command classes must return a unique UUID. If you try to use a UUID that is already in use, then your command will not work. Use the GUIDGEN.EXE that comes with Visual Studio to create unique UUIDs.
+  - Command classes must return a unique command name. If you try to use a command name that is already in use, then your command will not work.
+  - Only ONE instance of a command class can be created. This is why you should put the definition of your command classes in .cpp files.
 
-To use this tool in Visual Studio 2005:
+====Rhino Command Generator====
+The Rhino Command Generator wizard is a standalone application that will generate new skeleton CRhinoCommand-derived class. The generated source code is copied to the Windows clipboard so you can easily paste it into your source files.
 
-  - Launch Visual Studio 2005.
-  - Select //Tools->External Tools...//
-  - Use the Add button to add the RhinoCommandGenerator.exe file to the list. This file can be found in C:\Program Files\Rhino 4.0 SDK\CmdWizard.
+To use this tool in Visual Studio 2010:
+  - Launch Visual Studio 2010.
+  - Select **Tools -> External Tools...**
+  - Use the Add button to add the **RhinoCommandGenerator.exe** file to the list. This file can be found in the following folder:
+
+  C:\Program Files\Rhino 5.0 x64 SDK\Wizards\Command
 
 \\
 {{http://en.wiki.mcneel.com/content/upload/images/cmdwizard.png}}
 \\
 
-----
-\\
-
 =====.NET=====
-Rules to follow when deriving new command classes.
+Rules to follow when deriving new command classes:
+  - Command classes must return a unique UUID. If you try to use a UUID that is already in use, then your command will not work. Use the GUIDGEN.EXE that comes with Visual Studio to create unique UUIDs. If you are using one of the Express Editions of Visual Studio, GUIDGEN.EXE is located in the ..\Common7\Tools directory of your Visual Studio installation. Use the Tools menu to add this executable as an external tool.
+  - Command classes must return a unique command name. If you try to use a command name that is already in use, then your command will not work.
+  - Only ONE instance of a command class can be created. You should NEVER create an instance of your command class. Rhino will use reflection to inspect your assembly and create an instance of your command class at the appropriate time. This also means that your command classes must be declared public so they can be seen through Reflection.
 
-        - Command classes must return a unique UUID. If you try to use a UUID that is already in use, then your command will not work. Use the GUIDGEN.EXE that comes with Visual Studio to create unique UUIDs. If you are using one of the Express Editions of Visual Studio, GUIDGEN.EXE is located in the ..\Common7\Tools directory of your Visual Studio installation. Use the Tools menu to add this executable as an external tool.
-        - Command classes must return a unique command name. If you try to use a command name that is already in use, then your command will not work.
-        - Only ONE instance of a command class can be created. You should NEVER create an instance of your command class. Rhino will use reflection to inspect your assembly and create an instance of your command class at the appropriate time. This also means that your command classes must be declared public so they can be seen through Reflection.
+====More Information====
+The **[[http://en.wiki.mcneel.com/content/upload/files/RhinoDotNetSDK.zip|VB.NET and C# wizards]]** contain command wizards. On the menu click "Project" and then "Add New Item". Select the "Rhino Command" item and type in a name that you would like your command to have. The wizard will add a new command class to your project and generate a new UUID for that class.
 
-=====More Information=====
-The [[http://en.wiki.mcneel.com/content/upload/files/RhinoDotNetSDK.zip|VB.NET and C# wizards]] contain command wizards. On the menu click "Project" and then "Add New Item". Select the "Rhino Command" item and type in a name that you would like your command to have. The wizard will add a new command class to your project and generate a new UUID for that class.
-
-
+\\
 
 {{tag>Developer cplusplus dotnet}}
