@@ -69,16 +69,18 @@ The //Plug-in Settings// page allows you to modify a number of settings used by 
 
 For this tutorial, just accept the default settings. Click the **Finish** button, and the wizard begins to generate your plug-in project’s folders, files, and classes. When the wizard is finished, look through the plug-in project using Visual Studio’s Solution Explorer. The following files are of interest:
 
-  * **cmdTest.cpp** - Sample "Test" Rhino command source code.
-  * **Resource.h** - //#define// constant definitions.
-  * **Test.def** – Windows module definition file.
-  * **Test.rc** – Resource script file.
-  * **Test.vcproj** – Project file that allows Visual C++ to build your plug-in.
-  * **TestApp.h** – Application class header file that contains the //CTestApp// class declaration.
-  * **TestApp.cpp** – Application class implementation file that contains the //CTestApp// member functions.
-  * **TestPlugIn.h** – Plug-in class header file that contains the //CTestPlugIn// class declaration.
-  * **TestPlugIn.cpp** - Plug-in class implementation file that contains the //CTestPlugIn// member functions.
-
+  * **Test.vcxproj** – Project file that allows Visual C++ to build your plug-in.
+  * **stdafx.h** - Main project header.
+  * **stdafx.cpp** - Used to generate precompiled header.
+  * **TestApp.h** – Application class header that contains the //CTestApp// class declaration.
+  * **TestApp.cpp** – Application class implementation that contains the //CTestApp// member functions.
+  * **TestPlugIn.h** – Plug-in class header that contains the //CTestPlugIn// class declaration.
+  * **TestPlugIn.cpp** - Plug-in class implementation that contains the //CTestPlugIn// member functions.
+  * **cmdTest.cpp** - Sample "Test" Rhino command.
+  * **Resource.h** - //#define// constant definitions for resources.
+  * **Test.rc** – Resource script.
+  * **Test.def** – Module definition.
+ 
 ====2. Compile and Link the Generated Code====
 The Rhino plug-in wizard, in addition to generating code, creates a custom project file for your plug-in. This file, **Test.vcproj**, specifies all of the file dependencies together with the compile and link option flags.
 
