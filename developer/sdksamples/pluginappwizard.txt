@@ -1,11 +1,11 @@
-====== Info: Creating Your First Plug-in ======
-====== C++ ======
-
-=====Overview=====
-This hands-on tutorial is designed to show you how to build a functioning Rhino plug-in.
+======Creating Your First Rhino 4.0 Plug-in======
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
+> **Summary:** //This hands-on tutorial is designed to show you how to build a functioning Rhino 4.0 plug-in//
 
 =====Requirements=====
-In order to complete this tutorial, you will need to have Microsoft Visual C++ 2005 installed on your system. You will also need to have downloaded and installed the [[http://download.mcneel.com/download.asp?id=rh40sdk|Rhino 4.0 SDK.]] If you are installing the SDK on Windows 7 or Vista, you will need to right click on the installer and choose "Run as administrator" as opposed to double clicking the installer for it to install correctly.
+In order to complete this tutorial, you will need to have Microsoft Visual C++ 2005 installed on your system. You will also need to have downloaded and installed the [[http://download.mcneel.com/download.asp?id=rh40sdk|Rhino 4.0 SDK]].
+
+Note, if you are installing the SDK on Windows 8, 7 or Vista, you will need to right click on the installer and choose "Run as administrator" as opposed to double clicking the installer for it to install correctly.
 
 =====What’s a Plug-In?=====
 From a user’s standpoint, a Rhino plug-in is a software module that extends the functionality of Rhino by adding new commands, features, or capabilities. From a programmer’s perspective, a Rhino plug-in is a regular Windows Dynamic Link Libraries, or DLL that links with the Rhino SDK libraries. Examples of Rhino plug-ins include Bongo, Flamingo, and [[penguin:home|Penguin]].
@@ -26,7 +26,7 @@ The Rhino SDK includes a Visual Studio Wizard. The wizard program generates the 
 Choose //New->Project…// from the Visual Studio File menu. From the New Project dialog, select the Rhino plug-in template from the list of installed templates.
 
 \\
-{{http://en.wiki.mcneel.com/content/upload/images/appwizard1.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/appwizard1.png?640}}
 \\
 
 Type the project name as show. You can enter a different name if you want, but the wizard uses the project name when it creates files and classes. If you enter a different name, your files and classes will have a name different from that of the files and classes mentioned in this tutorial.
@@ -34,7 +34,7 @@ Type the project name as show. You can enter a different name if you want, but t
 Don’t forget to choose a location to store the project. When finished, click the //OK// button.
 
 \\
-{{http://en.wiki.mcneel.com/content/upload/images/appwizard2.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/appwizard2.png?640}}
 \\
 
 Upon clicking OK, the Overview page of the Rhino Plug-In Wizard dialog will appear. This page gives you a summary of the type of project that the wizard is going to create. By default, the wizard will do the following:
@@ -46,7 +46,7 @@ Upon clicking OK, the Overview page of the Rhino Plug-In Wizard dialog will appe
 If you are satisfied with the default settings, just click the //Finish// button. If you want to change any of these settings, just click the //Next// button.
 
 \\
-{{http://en.wiki.mcneel.com/content/upload/images/appwizard3.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/appwizard3.png?640}}
 \\
 
 The Plug-in Settings page allows you to modify a number of settings used by the wizard when generating the plug-in source code.
@@ -85,8 +85,8 @@ RHINO_PLUG_IN_DEVELOPER_FAX( L"123.456.7891" );
 RHINO_PLUG_IN_DEVELOPER_EMAIL( L"support@mycompany.com" );
 RHINO_PLUG_IN_DEVELOPER_WEBSITE( L"http://www.mycompany.com" );
 RHINO_PLUG_IN_UPDATE_URL( L"http://www.mycompany.com/support" );
-
 </code>
+
 When finished, delete the following line of source code as the //#error// directive will prevent the project from building.
 
    #error Developer declarations block is incomplete!
@@ -105,11 +105,11 @@ For this tutorial, build the debug configuration.
 From within Rhino, select //Options// from the Tools menu. Navigate to the //Plug-ins// page under Rhino Options and install your plug-in. Note, being that the debug version of Rhino will only load debug plug-ins, no other plug-ins will show up in the list.
 
 \\
-{{http://en.wiki.mcneel.com/content/upload/images/appwizard4.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/appwizard4.png?640}}
 \\
 
 Once your plug-in is loaded, close the options dialog and run your **Test** command. You have finished creating your first plug-in.
 
-
+\\
 
 {{tag>Developer cplusplus}}
