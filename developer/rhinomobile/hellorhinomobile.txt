@@ -12,7 +12,13 @@
   - When you done playing around with the HelloRhino example on the iOS Simulator, click the //Stop// button in Xamarin Studio to stop the Debug session.
   - Now let's build and run the Android version.  Right-click the //HelloRhino.Droid// project and select //Set As Startup Project// from the drop-down menu.  As expected, this makes the Android project the default project for the build.  (Much like .Touch, .Droid is a Mono naming convention that avoids namespace collisions and denotes the Android target project).
   - Verify that the build is set to //Debug//.  The time, the device selection drop-down should be disabled.  This is because you don't have an Emulator setup, so let's do that now.
-  - Click the //Play/Run// button to start the //HelloRhino.Droid// debug build. 
+  - Click the //Play/Run// button to start the //HelloRhino.Droid// debug build.
+  - The Select Device window should appear.  This is the window where you tell the Android SDK which emulator or device you would like to use for testing.  None of the defaults will do, so let's create a faster emulator.
+  - Click the //Create Emulator// button.
+  - The Android Virtual Device Manager should launch.  This is part of the Android SDK and will be familiar to you if you have done any Android development before.  This is where you define your Android Virtual Devices (AVDs) that run in the Emulator.
+  - Highlight each of the existing AVD and click the Delete button.  These AVDs are much too slow for development.
+  - To create a new AVD: Click the //New// button.  The Create new Android Virtual Device (AVD) window appears.  Create a new AVD with the following parameters.  AVD Name: //Nexus7-API18-IntelHAXM//; Device: //Nexus 7//; Target: //Android 4.3 - API Level 18//; CPU/ABI: //Intel Atom (x86)//; Front Camera: //Webcam0//; VM Heap: //64// Emulation Options: //Snapshot enabled?, Use Host GPU enabled//.
+  - You should see your new AVD in the list.  Highlight it in the list and click the //Start// button.
 
 **Windows Instructions**
 
