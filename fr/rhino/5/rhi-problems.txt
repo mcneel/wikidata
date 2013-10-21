@@ -1,7 +1,7 @@
 =====Identification des problèmes d'installation de fichiers RHI=====
 
 Les fichiers **RHI** sont des packs d'installation de Rhino.\\
-Ils sont prévus pour simplifier la création et l'installation de programmes d'installation de modules pour Rhino.
+Ils sont conçus pour simplifier l'installation des modules de Rhino. 
 
 ==== Problèmes d'installation ====
 -->Windows ne peut pas ouvrir ce fichier#
@@ -16,8 +16,15 @@ Ils sont prévus pour simplifier la création et l'installation de programmes d'
 Si cette option ne fonctionne pas, veuillez suivre les instructions données ci-dessous pour **associer manuellement des fichiers RHI**.
 <--
 
--->Le fichier est ouvert par erreur dans Rhinoceros 5#
-**Cause :** D'une certaine façon, Rhino 5 a été associé par erreur avec les fichiers RHI. 
+-->Pack non compatible#
+Cette erreur peut se produire dans plusieurs cas. Les plus probables sont :
+  - **Téléchargement endommagé:** un fichier RHI endommagé qui ne peut pas être installé. Cette erreur se produit souvent lorsque le téléchargement ne s'est aps terminé correctement. Supprimez le fichier RHI, effacez les fichiers temporaires de votre navigateur et recommencez le téléchargement. 
+  - **Fichier RHI mal compilé:** si vous êtes développeur, le fichier RHI n'a peut-être pas été créé correcetment. Reportez-vous aux instructions de [[developer/rhinoinstallerengine/authoring|création de fichiers RHI]].
+\\
+<--
+
+-->Erreur d'ouverture d'un fichier Rhinoceros 5#
+**Cause :** D'une certaine façon, Rhino 5 a été associé par erreur avec les fichiers RHI.
 \\
 **Solution :** Veuillez suivre les instructions données ci-dessous pour **associer manuellement des fichiers RHI**.
 <--
@@ -27,7 +34,7 @@ Si cette option ne fonctionne pas, veuillez suivre les instructions données ci-
   - Cliquer avec le bouton de droite sur le fichier RHI, puis cliquez sur **Ouvrir avec...**
   - Dans la boîte de dialogue Ouvrir avec, sélectionnez la case **Utiliser cette application pour tous les fichiers RHI**.
   - Dans la boîte de dialogue Ouvrir avec, cliquez sur **Parcourir...**
-  - Ouvrez **C:\Program Files\Rhinoceros 5 (64-bit)\System\x64** puis sélectionnez **rhiexec.exe** (Si vous avez installé Rhino dans un autre dossier, ouvrez celui-ci)
+  - Ouvrez **C:\Program Files\Rhinoceros 5 (64 bits)\System\x64**puis sélectionnez **rhiexec.exe** (Si vous avez installé Rhino dans un autre dossier, ouvrez celui-ci)
   - Cliquez sur **Ouvrir**
   - Cliquez sur **Accepter**
 
@@ -37,9 +44,19 @@ Si cette option ne fonctionne pas, veuillez suivre les instructions données ci-
   - Cliquer avec le bouton de droite sur le fichier RHI, puis cliquez sur **Ouvrir avec...**
   - Dans la boîte de dialogue Ouvrir avec, sélectionnez la case **Utiliser cette application pour tous les fichiers RHI**.
   - Dans la boîte de dialogue Ouvrir avec, cliquez sur **Parcourir...**
-  - Ouvrez **C:\Program Files\Rhinoceros 5\System\x86** puis sélectionnez **rhiexec.exe** (Si vous avez installé Rhino dans un autre dossier, ouvrez celui-ci)
+  - Ouvrez **C:\Program Files\Rhinoceros 5\System\x86**puis sélectionnez **rhiexec.exe** (Si vous avez installé Rhino dans un autre dossier, ouvrez celui-ci)
   - Cliquez sur **Ouvrir**
   - Cliquez sur **Accepter**
 
 <--
+<--
+
+==== Déploiement des fichiers RHI ====
+--> Déploiement pour tous les utilisateurs d'un ordinateur#
+  - Vérifiez que Rhino 5.6 ou une version plus récente est déployé sur votre réseau.
+  - Lancez "C:\Program Files\Rhinoceros 5 (64-bit)\System\x64\rhiexec.exe" "C:\Full\Path\To\Installer.rhi" /admin /silent
+
+\\
+L'option /admin réalise l'installation pour tous les utilisateurs de l'ordinateur.\\
+L'option /silent réalise l'installation sans montrer d'interface utilisateur.\\
 <--
