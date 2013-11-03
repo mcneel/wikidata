@@ -1,14 +1,10 @@
 ====== Installing RHI Files for All Users ======
-The Rhino Installer Engine installs RHI packages for Rhino. These packages can contain plug-ins, training material, documentation, etc.
+Rhino 5.6 allows you to select whether you want to install for one user or for all user on the computer. In addition, the deployment of RHI files can be scripted to happen silently.
 
-The Rhino Installer Engine only installs plug-ins for individual users, not for all users on a computer. To install a plug-in for all users, please do the following:
+=====Deploying RHI Files=====
+  - Make sure Rhino 5.6 or newer has been deployed on your network.
+  - Run "C:\Program Files\Rhinoceros 5 (64-bit)\System\x64\rhiexec.exe" "C:\Full\Path\To\Installer.rhi" /admin /silent
 
-  - Rename the .RHI file to .ZIP
-  - Extract the contents of the .ZIP archive into a folder that is readable by all users on the computer. For example, "C:\Program Files\Rhino Plug-ins\[PLUGIN-NAME]"
-  - **Right-click the Rhino icon**, then click **Run as Administrator**
-  - From the **Tools** menu, click **Options**, then select the **Plug-ins** tab.
-  - Click the **Install** button
-  - Browse to the folder where you unzipped the plug-in archive, and select the plug-in RHP file.
-  - Close the Options dialog, then close Rhino 5
-
-At this point, the plug-in will be registered for all users on the system.
+\\
+The /admin option installs for all users on the computer.\\
+The /silent option will install without showing user interface.\\
