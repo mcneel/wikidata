@@ -1,8 +1,8 @@
 ====== Transforming Brep Objects ======
-====== C++, .NET ======
-> **Summary:** //Demonstrates how to transform brep, or boundary representation, objects using the Rhino SDK.//
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
+> **Summary:** //Demonstrates how to transform brep, or boundary representation, objects. //
 
-**Method 1 - The Short Way**
+===== Method 1 - The Short Way=====
 
 <code c++>
 CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& context )
@@ -27,8 +27,8 @@ CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& cont
 }
 
 </code>
-**Method 2 - The Long Way**
 
+=====Method 2 - The Long Way=====
 
 <code c++>
 CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& context )
@@ -76,132 +76,5 @@ CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& cont
 }
 
 </code>
-===== VB.NET =====
-<code vb>
-</code>
 
-<code c++>
-Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
-  As IRhinoCommand.result
-  Dim go As New MRhinoGetObject()
-  go.SetCommandPrompt("Select brep")
-  go.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.polysrf_object _
-                    Or IRhinoGetObject.GEOMETRY_TYPE_FILTER.surface_object)
-  go.GetObjects(1, 1)
-  If (go.CommandResult() <> IRhinoCommand.result.success) Then
-    Return go.CommandResult()
-  End If
-  ' Simple translation transformation
-  Dim xform As New OnXform()
-  xform.Translation(18, -18, -25)
-  Dim objref As MRhinoObjRef = go.Object(0)
-  context.m_doc.TransformObject(objref, xform)
-  context.m_doc.Redraw()
-  Return IRhinoCommand.result.success
-End Function
-</code>
-**Method 2 - The Long Way**
-
-<code c++>
-Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
-  As IRhinoCommand.result
-  Dim go As New MRhinoGetObject()
-  go.SetCommandPrompt("Select brep")
-  go.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.polysrf_object Or _
-                       IRhinoGetObject.GEOMETRY_TYPE_FILTER.surface_object)
-  go.GetObjects(1, 1)
-  If (go.CommandResult() <> IRhinoCommand.result.success) Then
-    Return go.CommandResult()
-  End If
-
-  Dim objref As MRhinoObjRef = go.Object(0)
-  Dim obj As IRhinoObject = objref.Object()
-  If (obj Is Nothing) Then Return IRhinoCommand.result.failure
-  Dim brep As IOnBrep = objref.Brep()
-  If (brep Is Nothing) Then Return IRhinoCommand.result.failure
-  Dim dupe As New OnBrep(brep)
-
-  ' Simple translation transformation
-  Dim xform As New OnXform()
-  xform.Translation(18, -18, -25)
-  If (Not dupe.Transform(xform)) Then
-    RhUtil.RhinoApp().Print("Unable to transform object." + vbCrLf)
-    Return IRhinoCommand.result.failure
-  End If
-
-  Dim attribs As IOn3dmObjectAttributes = obj.Attributes()
-  context.m_doc.AddBrepObject(dupe, attribs)
-
-  ' Delete the selected object
-  context.m_doc.DeleteObject(objref)
-  context.m_doc.Redraw()
-  Return IRhinoCommand.result.success
-End Function
-</code>
-===== C# =====
-<code c#>
-</code>
-
-<code c++>
-public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
-{
-  MRhinoGetObject go = new MRhinoGetObject();
-  go.SetCommandPrompt("Select brep");
-  go.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.polysrf_object
-                     | IRhinoGetObject.GEOMETRY_TYPE_FILTER.surface_object);
-  go.GetObjects(1, 1);
-  if(go.CommandResult() != IRhinoCommand.result.success)
-    return go.CommandResult();
-  // Simple translation transformation
-  OnXform xform = new OnXform();
-  xform.Translation(18, -18, -25);
-  MRhinoObjRef objref = go.Object(0);
-  context.m_doc.TransformObject(ref objref, xform);
-  context.m_doc.Redraw();
-  return IRhinoCommand.result.success;
-}
-</code>
-**Method 2 - The Long Way**
-
-<code c++>
-public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
-{
-  MRhinoGetObject go = new MRhinoGetObject();
-  go.SetCommandPrompt("Select brep");
-  go.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.polysrf_object
-                     | IRhinoGetObject.GEOMETRY_TYPE_FILTER.surface_object);
-  go.GetObjects(1, 1);
-  if(go.CommandResult() != IRhinoCommand.result.success)
-    return go.CommandResult();
-
-  MRhinoObjRef objref = go.Object(0);
-  IRhinoObject obj = objref.Object();
-  if(obj == null)
-    return IRhinoCommand.result.failure;
-  IOnBrep brep = objref.Brep();
-  if(brep == null)
-    return IRhinoCommand.result.failure;
-  OnBrep dupe = new OnBrep(brep);
-
-  // Simple translation transformation
-  OnXform xform = new OnXform();
-  xform.Translation(18, -18, -25);
-  if(!dupe.Transform(xform))
-  {
-    RhUtil.RhinoApp().Print("Unable to transform object.\n");
-    return IRhinoCommand.result.failure;
-  }
-
-  IOn3dmObjectAttributes attribs = obj.Attributes();
-  context.m_doc.AddBrepObject(dupe, attribs);
-
-  // Delete the selected object
-  context.m_doc.DeleteObject(objref);
-  context.m_doc.Redraw();
-  return IRhinoCommand.result.success;
-}
-
-</code>
-
-
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus}}
