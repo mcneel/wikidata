@@ -1,21 +1,24 @@
 ====== How To: Retrieve the Unit System of the Active Document ======
-====== C++, .NET ======
-> **Summary:** //Demonstrates how to determine the current unit system of the current document using the Rhino SDK.//
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
+> **Summary:** //Demonstrates how to determine the current unit system of the current document.//
 
 The unit system of the active document is stored on an ON_3dmUnitsAndTolerances class that is located on the CRhinoDoc object.
 
 If you inside of a CRhinoCommand-derived object's RunCommand() member, you can get the current units system as follows:
 
-  const CRhinoDocProperties& doc_props = context.m_doc.Properties();
-  const ON_3dmUnitsAndTolerances& units = doc_props.ModelUnitsAndTolerances();
-  ON::unit_system units_system = units.m_unit_system;
+<code c++>
+const CRhinoDocProperties& doc_props = context.m_doc.Properties();
+const ON_3dmUnitsAndTolerances& units = doc_props.ModelUnitsAndTolerances();
+ON::unit_system units_system = units.m_unit_system;
+</code>
 
 As a shortcut, you can do the following:
 
-  ON::unit_system units_system = context.m_doc.UnitSystem();
+<code c++>
+ON::unit_system units_system = context.m_doc.UnitSystem();
+</code>
 
 If you outside of a CRhinoCommand-derived object's RunCommand() member, you can get the current units system as follows:
-
 
 <code c++>
 CRhinoDoc* doc = RhinoApp().ActiveDoc();
@@ -24,29 +27,19 @@ if( doc )
   ON::unit_system units_system = doc->UnitSystem();
 }
 </code>
-=====This has changed for Rhino 4=====
+
+----
+
+=====Rhino 4 Changes=====
 With the addition of layouts in Rhino 4, there are now two unit systems associated with a document, model and page units. A new class has been added to [[developer:opennurbs:home|opennurbs]] call ON_UnitSystem which makes it easier to work with custom units. The Rhino document class now contains two functions
 
   * const ON_UnitSystem& ModelUnits() const;
   * const ON_UnitSystem& PageUnits() const;
-  C++
+  
+=====C++=====
 
 <code c++>
 ON_UnitSystem units = doc->ModelUnits();
-
 </code>
-  VB.NET
-
-<code c++>
-Dim units as IOnUnitSystem = doc.ModelUnits()
-
-</code>
-  C#
-
-<code c++>
-IOnUnitSystem units = doc.ModelUnits();
-
-</code>
-
-
-{{tag>Developer cplusplus dotnet}}
+  
+{{tag>Developer cplusplus}}
