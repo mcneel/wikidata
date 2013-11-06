@@ -1,5 +1,5 @@
 ====== How To: Dump Debug Information to a Log File ======
-====== C++, .NET ======
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Discusses the use of the ON_TextLog class for debugging plug-ins.//
 
 The [[developer:opennurbs:home|opennurbs]] SDK, which is also included with the Rhino SDK, contains a ON_TextLog class that makes it very simple to write, or dump, information to a text file. The class can be very handy when trying to debug geometric objects, for most objects have the ability to dump their contents to a log file.
@@ -35,59 +35,5 @@ CRhinoCommand::result CCommandTest::RunCommand(
   return CRhinoCommand::success;
 }
 </code>
-===== VB.NET =====
-<code vb>
-Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
-  As IRhinoCommand.result
-  Dim go As New MRhinoGetObject()
-  go.SetCommandPrompt("Select brep")
-  go.SetGeometryFilter(IRhinoGetObject.GEOMETRY_TYPE_FILTER.polysrf_object _
-                      Or IRhinoGetObject.GEOMETRY_TYPE_FILTER.surface_object)
-  go.GetObjects(1, 1)
-  If (go.CommandResult() = IRhinoCommand.result.success) Then
-    Dim brep As IOnBrep = go.Object(0).Brep()
-    If (brep IsNot Nothing) Then
-      Dim fp As OnFileHandle = OnUtil.OpenFile("c:\\brep_info.txt", "w")
-      If (fp IsNot Nothing) Then
-        Dim text_log As New OnTextLog(fp)
-        text_log.Print("Dumping Brep..." + vbCrLf)
-        brep.Dump(text_log)
-        OnUtil.CloseFile(fp)
-      End If
-    End If
-  End If
-  Return IRhinoCommand.result.success
-End Function
 
-</code>
-===== C# =====
-<code c#>
-public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
-{
-  MRhinoGetObject go = new MRhinoGetObject();
-  go.SetCommandPrompt( "Select brep" );
-  go.SetGeometryFilter( IRhinoGetObject.GEOMETRY_TYPE_FILTER .polysrf_object
-                      | IRhinoGetObject.GEOMETRY_TYPE_FILTER.surface_object);
-  go.GetObjects( 1, 1 );
-  if( go.CommandResult() == IRhinoCommand.result.success )
-  {
-    IOnBrep brep = go.Object(0).Brep();
-    if( brep != null )
-    {
-      OnFileHandle fp = OnUtil.OpenFile("c:\\brep_info.txt", "w" );
-      if( fp != null )
-      {
-        OnTextLog text_log = new OnTextLog(fp);
-        text_log.Print( "Dumping Brep...\n" );
-        brep.Dump( ref text_log );
-        OnUtil.CloseFile( fp );
-      }
-    }
-  }
-  return IRhinoCommand.result.success;
-}
-
-</code>
-
-
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus}}
