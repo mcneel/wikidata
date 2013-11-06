@@ -1,5 +1,5 @@
 ====== Creating Sublayers ======
-====== C++, .NET ======
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates how to create sublayers using the Rhino SDK.//
 
 =====Question=====
@@ -39,63 +39,5 @@ CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& cont
 }
 
 </code>
-===== C# =====
-<code c#>
 
-public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
-{
-  IRhinoCommand.result rc = IRhinoCommand.result.failure;
-  MRhinoLayerTable layer_table = context.m_doc.m_layer_table;
-
-  OnLayer layer = new OnLayer();
-  layer.m_name = "MyTestLayer";
-
-  int layer_index = layer_table.AddLayer( layer );
-  if( layer_index >= 0 | layer_index < layer_table.LayerCount() )
-  {
-    IRhinoLayer rhino_layer = layer_table[layer_index];
-
-    OnLayer sublayer = new OnLayer();
-    sublayer.m_name = "MyTestSubLayer";
-    sublayer.m_parent_layer_id = rhino_layer.m_layer_id;
-
-    layer_index = layer_table.AddLayer( sublayer );
-    if( layer_index >= 0 | layer_index < layer_table.LayerCount() )
-      rc = IRhinoCommand.result.success;
-  }
-
-  return rc;
-}
-
-</code>
-===== VB.NET =====
-<code vb>
-
-Public Overrides Function RunCommand(ByVal context As RMA.Rhino.IRhinoCommandContext) As RMA.Rhino.IRhinoCommand.result
-
-  Dim rc As IRhinoCommand.result = IRhinoCommand.result.failure
-  Dim layer_table As MRhinoLayerTable = context.m_doc.m_layer_table
-
-  Dim layer As OnLayer = New OnLayer()
-  layer.m_name = "MyTestLayer"
-
-  Dim layer_index As Integer = layer_table.AddLayer(layer)
-  If (layer_index >= 0) And (layer_index < layer_table.LayerCount()) Then
-    Dim rhino_layer As IRhinoLayer = layer_table(layer_index)
-
-    Dim sublayer As OnLayer = New OnLayer()
-    sublayer.m_name = "MyTestSubLayer"
-    sublayer.m_parent_layer_id = rhino_layer.m_layer_id
-
-    layer_index = layer_table.AddLayer(sublayer)
-    If (layer_index >= 0) And (layer_index < layer_table.LayerCount()) Then
-      rc = IRhinoCommand.result.success
-    End If
-  End If
-
-  Return rc
-End Function
-</code>
-
-
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus}}
