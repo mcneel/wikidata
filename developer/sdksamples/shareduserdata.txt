@@ -1,6 +1,6 @@
 ====== Sharing User Data Between Plug-ins ======
-====== C++ ======
-> **Summary:** //Discuss how to share object user data between plug-ins using the Rhino SDK.//
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
+> **Summary:** //Discusses how to share object user data between plug-ins using the Rhino C++ SDK.//
 
 =====Question=====
 I would like my plug-in's user data to be access from another plug-in. How can I do this?
@@ -8,7 +8,7 @@ I would like my plug-in's user data to be access from another plug-in. How can I
 =====Answer=====
 This is a question that we have been asked numerous time. Thus, the following sample:
 
-[[http://en.wiki.mcneel.com/content/upload/files/TestSharedUserData.zip|**TestSharedUserData]] - demonstrates how to share object user data between plug-ins.**
+[[http://en.wiki.mcneel.com/content/upload/files/TestSharedUserData.zip|Download: TestSharedUserData]] 
 
 In a nutshell, the best way to share user data between plug-ins is to have access to the plug-in data controlled by a shared DLL - a DLL that is used by all interested plug-ins.  The user data class definitions and declarations, along with any helper functions used to access this data, are then added to and exported from this DLL.
 
@@ -18,7 +18,7 @@ One import piece of information to keep in mind is that when you create a class 
 
 For example:
 
-
+=====C++=====
 <code c++>
 ON_UUID CPlugInUserData::PlugInId()
 {
@@ -51,7 +51,6 @@ CPlugInUserData::CPlugInUserData()
 
 </code>
 The plug-in sample mentioned above contains two plug-in projects and one DLL project. To load the sample, just download and extract into some folder, and then open **Test.sln** is Visual Studio.
-
 
 
 {{tag>Developer cplusplus}}
