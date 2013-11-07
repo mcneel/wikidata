@@ -1,5 +1,5 @@
 ======Create a NURBS Curve from Control Points======
-> **Developer:** //[[developer:cplusplusplugins|C++]], [[developer:dotnetplugins|.NET]]//
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates two ways to create clamped ON_NurbsCurve from a set of control points.//
 
 {{http://en.wiki.mcneel.com/content/upload/images/nc_example.PNG}}
@@ -30,33 +30,6 @@
     RhinoApp().ActiveDoc()->Redraw();
     return CRhinoCommand::success;
   }
-</code>
-
-==== VB.NET ====
-<code vb>
-Public Overrides Function RunCommand(ByVal context As RMA.Rhino.IRhinoCommandContext)_
-  As RMA.Rhino.IRhinoCommand.result
-
-    Dim CPoints As New List(Of On3dPoint)
-    CPoints.Add(New On3dPoint(0, 0, 0))
-    CPoints.Add(New On3dPoint(0, 2, 0))
-    CPoints.Add(New On3dPoint(2, 4, 0))
-    CPoints.Add(New On3dPoint(4, 2, 0))
-    CPoints.Add(New On3dPoint(4, 0, 0))
-
-    Dim dimension As Integer = 3
-    Dim order As Integer = 4
-
-    Dim nc As New OnNurbsCurve
-    nc.CreateClampedUniformNurbs(dimension, order, CPoints.ToArray())
-
-    If (nc.IsValid()) Then
-          context.m_doc.AddCurveObject(nc)
-          context.m_doc.Redraw()
-    End If
-    Return IRhinoCommand.result.success
-
-End Function
 </code>
 
 =====Method 2=====
@@ -104,45 +77,6 @@ End Function
   }
 </code>
 
-==== VB.NET ====
-<code vb>
-Public Overrides Function RunCommand(ByVal context As RMA.Rhino.IRhinoCommandContext)_
-  As RMA.Rhino.IRhinoCommand.result
-
-    Dim i As Integer
-    Dim CPoints As New List(Of On3dPoint)
-    CPoints.Add(New On3dPoint(0, 0, 0))
-    CPoints.Add(New On3dPoint(0, 2, 0))
-    CPoints.Add(New On3dPoint(2, 4, 0))
-    CPoints.Add(New On3dPoint(4, 2, 0))
-    CPoints.Add(New On3dPoint(4, 0, 0))
-
-    Dim dimension As Integer = 3
-    Dim bIsRational As Boolean = False
-    Dim order As Integer = 4
-    Dim cv_count As Integer = CPoints.Count()
-
-    Dim nc As New OnNurbsCurve(dimension, bIsRational, order, cv_count)
-
-    'Set CV Points
-    nc.ReserveCVCapacity(cv_count)
-    For i = 0 To cv_count - 1
-          nc.SetCV(i, CPoints(i))
-    Next
-
-    'Set Knots
-    nc.ReserveKnotCapacity(order + cv_count - 2)
-    nc.MakeClampedUniformKnotVector()
-
-    If (nc.IsValid()) Then
-          context.m_doc.AddCurveObject(nc)
-          context.m_doc.Redraw()
-    End If
-    Return IRhinoCommand.result.success
-
-End Function
-</code>
-
 \\
 
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus}}
