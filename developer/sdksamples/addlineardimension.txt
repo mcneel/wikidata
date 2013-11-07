@@ -1,6 +1,6 @@
 ====== How To: Add a Linear Dimension to Rhino ======
-====== C++, .NET ======
-> **Summary:** //Demonstrates how to add a linear dimension object to Rhino.//
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
+> **Summary:** //Demonstrates how to add a linear dimension object using the Rhino SDK.//
 
 ===== C++ =====
 <code c++>
@@ -93,110 +93,5 @@ CRhinoCommand::result CCommandTestSdk::RunCommand( const CRhinoCommandContext& c
 }
 
 </code>
-===== VB.NET =====
-<code vb>
-' Interactively add a dimension
-Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext)_
-  As RMA.Rhino.IRhinoCommand.result
-  Dim args As New MArgsRhinoDimLinear()
-  args.SetFirstPointPrompt("First dimension point")
-  args.SetSecondPointPrompt("Second dimension point")
-  args.SetDragPointPrompt("Dimension location")
-  args.SetIsInteractive(context.IsInteractive())
 
-  Dim pDim As MRhinoLinearDimension = Nothing
-  Dim rc As IRhinoCommand.result = RhUtil.RhinoGetDimLinear(args, pDim)
-  If (rc = IRhinoCommand.result.success And pDim IsNot Nothing) Then
-    context.m_doc.AddObject(pDim, False)
-    context.m_doc.Redraw()
-  End If
-  Return rc
-End Function
-
-' Non-Interactive method
-Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext)_
-  As IRhinoCommand.result
-  Dim origin As New On3dPoint(1, 1, 0)
-  Dim offset As New On3dPoint(11, 1, 0)
-  Dim pt As New On3dPoint((offset.x - origin.x) / 2.0, 3, 0)
-  Dim dim_obj As New MRhinoLinearDimension()
-
-  Dim plane As New OnPlane(OnUtil.On_xy_plane)
-  plane.SetOrigin(origin)
-  dim_obj.SetPlane(plane)
-
-  Dim u As Double = 0
-  Dim v As Double = 0
-  plane.ClosestPointTo(origin, u, v)
-  dim_obj.SetPoint(0, New On2dPoint(u, v))
-
-  plane.ClosestPointTo(offset, u, v)
-  dim_obj.SetPoint(2, New On2dPoint(u, v))
-
-  plane.ClosestPointTo(pt, u, v)
-  Dim dimlinept As New On2dPoint(u, v)
-  dim_obj.UpdateDimPoints(dimlinept)
-  dim_obj.UpdateText()
-
-  If (context.m_doc.AddObject(dim_obj) = True) Then
-    context.m_doc.Redraw()
-  End If
-  Return IRhinoCommand.result.success
-End Function
-
-</code>
-===== C# =====
-<code c#>
-// Interactively add a dimension
-public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
-{
-  MArgsRhinoDimLinear args = new MArgsRhinoDimLinear();
-  args.SetFirstPointPrompt( "First dimension point" );
-  args.SetSecondPointPrompt( "Second dimension point" );
-  args.SetDragPointPrompt( "Dimension location" );
-  args.SetIsInteractive( context.IsInteractive() );
-
-  MRhinoLinearDimension pDim = null;
-  IRhinoCommand.result rc = RhUtil.RhinoGetDimLinear(ref args, out pDim);
-  if( rc == IRhinoCommand.result.success && pDim != null )
-  {
-    context.m_doc.AddObject( pDim, false);
-    context.m_doc.Redraw();
-  } 
-  return rc;
-}
-
-// Non-Interactive method
-public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
-{
-  On3dPoint origin = new On3dPoint(1,1,0);
-  On3dPoint offset = new On3dPoint(11,1,0);
-  On3dPoint pt = new On3dPoint( (offset.x - origin.x)/2.0, 3, 0 );
-  MRhinoLinearDimension dim_obj = new MRhinoLinearDimension();
-
-  OnPlane plane = new OnPlane( OnUtil.On_xy_plane );
-  plane.SetOrigin( origin );
-  dim_obj.SetPlane( plane );
-
-  double u=0,v=0;
-  plane.ClosestPointTo( origin, ref u, ref v);
-  dim_obj.SetPoint( 0, new On2dPoint(u,v) );
-
-  plane.ClosestPointTo( offset, ref u, ref v );
-  dim_obj.SetPoint( 2, new On2dPoint(u,v) );
-
-  plane.ClosestPointTo( pt, ref u, ref v );
-  On2dPoint dimlinept = new On2dPoint(u, v);
-  dim_obj.UpdateDimPoints( ref dimlinept );
-  dim_obj.UpdateText();
-
-  if( context.m_doc.AddObject(dim_obj) )
-    context.m_doc.Redraw();
-
-  return IRhinoCommand.result.success;
-}
-
-</code>
-
-
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus}}
