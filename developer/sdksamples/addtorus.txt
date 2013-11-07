@@ -1,6 +1,6 @@
 ====== How To: Add a Torus to Rhino ======
+> **Developer:** //[[developer:cplusplusplugins|C++]]//, //[[developer:rhinocommon|RhinoCommon]]//
 > **Summary:** //Demonstrates how to create a torus using ON_BrepTorus and add it to Rhino.//
-====== C++, .NET ======
 
 For more information on the ON_BrepTorus function, see it's definition in opennurbs_brep.h.
 
@@ -28,45 +28,65 @@ CRhinoCommand::result CCommandTest::RunCommand(
   return CRhinoCommand::success;
 }
 </code>
-===== VB.NET =====
-<code vb>
-Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
-  As IRhinoCommand.result
 
-  Dim major_radius As Double = 4
-  Dim minor_radius As Double = 2
-  Dim plane As New OnPlane(OnUtil.On_origin, OnUtil.On_zaxis)
-  Dim circle As New OnCircle(plane, major_radius)
-  Dim torus As New OnTorus(circle, minor_radius)
-  Dim brep As OnBrep = OnUtil.ON_BrepTorus(torus)
-  If (Not (brep Is Nothing)) Then
-    If (context.m_doc.AddBrepObject(brep) IsNot Nothing) Then
-      context.m_doc.Redraw()
-    End If
-  End If
-  Return IRhinoCommand.result.success
-End Function
-</code>
 ===== C# =====
 <code c#>
-public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
+public static Rhino.Commands.Result AddTorus(Rhino.RhinoDoc doc)
 {
-  double major_radius = 4;
-  double minor_radius = 2;
-  OnPlane plane = new OnPlane(OnUtil.On_origin, OnUtil.On_zaxis);
-  OnCircle circle = new OnCircle(plane, major_radius);
-  OnTorus torus = new OnTorus(circle, minor_radius);
+  const double major_radius = 4.0;
+  const double minor_radius = 2.0;
 
-  OnBrep brep = OnUtil.ON_BrepTorus(torus);
-  if (brep != null)
+  Rhino.Geometry.Plane plane = Rhino.Geometry.Plane.WorldXY;
+  Rhino.Geometry.Torus torus = new Rhino.Geometry.Torus(plane, major_radius, minor_radius);
+  Rhino.Geometry.RevSurface revsrf = torus.ToRevSurface();
+  if (doc.Objects.AddSurface(revsrf) != Guid.Empty)
   {
-    if (context.m_doc.AddBrepObject(brep) != null)
-      context.m_doc.Redraw();
+    doc.Views.Redraw();
+    return Rhino.Commands.Result.Success;
   }
-  return IRhinoCommand.result.success;
+  return Rhino.Commands.Result.Failure;
 }
+</code>
+===== VB.NET =====
+<code vb>
+Public Shared Function AddTorus(ByVal doc As Rhino.RhinoDoc) As Rhino.Commands.Result
+  Const major_radius As Double = 4.0
+  Const minor_radius As Double = 2.0
 
+  Dim plane As Rhino.Geometry.Plane = Rhino.Geometry.Plane.WorldXY
+  Dim torus As New Rhino.Geometry.Torus(plane, major_radius, minor_radius)
+  Dim revsrf As Rhino.Geometry.RevSurface = torus.ToRevSurface()
+  If doc.Objects.AddSurface(revsrf) <> Guid.Empty Then
+    doc.Views.Redraw()
+    Return Rhino.Commands.Result.Success
+  End If
+  Return Rhino.Commands.Result.Failure
+End Function
+</code>
+
+===== Python =====
+<code python>
+import Rhino
+import scriptcontext
+import System.Guid
+
+def AddTorus():
+    major_radius = 4.0
+    minor_radius = 2.0
+
+    plane = Rhino.Geometry.Plane.WorldXY
+    torus = Rhino.Geometry.Torus(plane, major_radius, minor_radius)
+    revsrf = torus.ToRevSurface()
+
+    if scriptcontext.doc.Objects.AddSurface(revsrf)!=System.Guid.Empty:
+        scriptcontext.doc.Views.Redraw()
+        return Rhino.Commands.Result.Success
+    return Rhino.Commands.Result.Failure
+
+
+if __name__=="__main__":
+    AddTorus()
 </code>
 
 
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus rhinocommon}}
