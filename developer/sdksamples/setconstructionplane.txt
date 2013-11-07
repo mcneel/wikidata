@@ -1,6 +1,7 @@
 ====== How To: Set a View's Construction Plane ======
-====== C++, .NET ======
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates how to set a view's construction plane.//
+
 ===== C++ =====
 <code c++>
 CRhinoCommand::result CCommandTest::RunCommand(
@@ -49,109 +50,5 @@ CRhinoCommand::result CCommandTest::RunCommand(
   return CRhinoCommand::success;
 }
 </code>
-===== VB.NET =====
-<code vb>
-Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
-  As IRhinoCommand.result
-  Dim view As MRhinoView = RhUtil.RhinoApp.ActiveView
-  If (view Is Nothing) Then Return IRhinoCommand.result.failure
 
-  Dim go As New MRhinoGetOption()
-  go.SetCommandPrompt("Select a construction plane")
-  Dim back_option As Integer = go.AddCommandOption(New MRhinoCommandOptionName("Back"))
-  Dim bottom_option As Integer = go.AddCommandOption(New MRhinoCommandOptionName("Bottom"))
-  Dim front_option As Integer = go.AddCommandOption(New MRhinoCommandOptionName("Front"))
-  Dim left_option As Integer = go.AddCommandOption(New MRhinoCommandOptionName("Left"))
-  Dim right_option As Integer = go.AddCommandOption(New MRhinoCommandOptionName("Right"))
-  Dim top_option As Integer = go.AddCommandOption(New MRhinoCommandOptionName("Top"))
-  go.GetOption()
-  If (go.CommandResult() <> IRhinoCommand.result.success) Then Return go.CommandResult()
-
-  Dim opt As IRhinoCommandOption = go.Option()
-  If (opt Is Nothing) Then Return IRhinoCommand.result.failure
-  Dim option_index As Integer = opt.m_option_index
-  Dim cplane As New On3dmConstructionPlane(view.ActiveViewport().ConstructionPlane())
-
-  Dim pos_x As New On3dPoint(1, 0, 0)
-  Dim neg_x As New On3dPoint(-1, 0, 0)
-  Dim pos_y As New On3dPoint(0, 1, 0)
-  Dim neg_y As New On3dPoint(0, -1, 0)
-  Dim pos_z As New On3dPoint(0, 0, 1)
-
-  If (option_index = back_option) Then
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, neg_x, pos_z)
-  ElseIf (option_index = bottom_option) Then
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, neg_x, pos_y)
-  ElseIf (option_index = front_option) Then
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, pos_x, pos_z)
-  ElseIf (option_index = left_option) Then
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, neg_y, pos_z)
-  ElseIf (option_index = right_option) Then
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, pos_y, pos_z)
-  ElseIf (option_index = top_option) Then
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, pos_x, pos_y)
-  Else
-    Return IRhinoCommand.result.failure
-  End If
-
-  view.ActiveViewport().PushConstructionPlane(cplane)
-  view.Redraw()
-  Return IRhinoCommand.result.success
-End Function
-</code>
-===== C# =====
-<code c#>
-public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
-{
-  MRhinoView view = RhUtil.RhinoApp().ActiveView();
-  if( view == null )
-    return IRhinoCommand.result.failure;
-
-  MRhinoGetOption go = new MRhinoGetOption();
-  go.SetCommandPrompt( "Select a construction plane" );
-  int back_option   = go.AddCommandOption( new MRhinoCommandOptionName("Back") );
-  int bottom_option = go.AddCommandOption( new MRhinoCommandOptionName("Bottom") );
-  int front_option  = go.AddCommandOption( new MRhinoCommandOptionName("Front") );
-  int left_option   = go.AddCommandOption( new MRhinoCommandOptionName("Left") );
-  int right_option  = go.AddCommandOption( new MRhinoCommandOptionName("Right") );
-  int top_option    = go.AddCommandOption( new MRhinoCommandOptionName("Top") );
-  go.GetOption();
-  if (go.CommandResult() != IRhinoCommand.result.success)
-    return go.CommandResult();
-
-  IRhinoCommandOption opt = go.Option();
-  if (opt == null)
-    return IRhinoCommand.result.failure;
-  int option_index = opt.m_option_index;
-  On3dmConstructionPlane cplane =
-    new On3dmConstructionPlane(view.ActiveViewport().ConstructionPlane());
-  On3dPoint pos_x = new On3dPoint(1, 0, 0);
-  On3dPoint neg_x = new On3dPoint(-1, 0, 0);
-  On3dPoint pos_y = new On3dPoint(0, 1, 0);
-  On3dPoint neg_y = new On3dPoint(0, -1, 0);
-  On3dPoint pos_z = new On3dPoint(0, 0, 1);
-
-  if( option_index == back_option )
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, neg_x, pos_z);
-  else if( option_index == bottom_option )
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, neg_x, pos_y);
-  else if( option_index == front_option )
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, pos_x, pos_z);
-  else if( option_index == left_option )
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, neg_y, pos_z);
-  else if( option_index == right_option )
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, pos_y, pos_z);
-  else if( option_index == top_option )
-    cplane.m_plane.CreateFromPoints(OnUtil.On_origin, pos_x, pos_y);
-  else
-    return IRhinoCommand.result.failure;
-
-  view.ActiveViewport().PushConstructionPlane( cplane );
-  view.Redraw();
-  return IRhinoCommand.result.success;
-}
-
-</code>
-
-
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus}}
