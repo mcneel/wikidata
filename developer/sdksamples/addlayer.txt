@@ -1,6 +1,6 @@
 ====== How To: Add a New Layer ======
-====== C++, .NET ======
-> **Summary:** //Demonstrates how to add a new layer to Rhino.//
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
+> **Summary:** //Demonstrates how to add a new layer to Rhino using the C++ SDK.//
 
 Rhino maintains layers on a CRhinoLayerTable object that is located on the active CRhinoDoc object. The CRhinoLayerTable class has numerous methods for adding, querying, modifying, and deleting layers. See rhinoSdkLayer.h for more information on the CRhinoLayerTable class.
 
@@ -60,119 +60,5 @@ CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& cont
   return CRhinoCommand::success;
 }
 </code>
-===== VB.NET =====
-<code vb>
-Public Overrides Function RunCommand(ByVal context As IRhinoCommandContext) _
-  As IRhinoCommand.result
 
-  ' Get a reference to the layer table
-  Dim layer_table As MRhinoLayerTable = context.m_doc.m_layer_table
-  ' Cook up an unused layer name
-  Dim unused_name As String = 
-  layer_table.GetUnusedLayerName(unused_name)
-
-  ' Prompt the user to enter a layer name
-  Dim gs As New MRhinoGetString()
-  gs.SetCommandPrompt("Name of layer to add")
-  gs.SetDefaultString(unused_name)
-  gs.AcceptNothing(True)
-  gs.GetString()
-  If (gs.CommandResult() <> IRhinoCommand.result.success) Then
-    Return gs.CommandResult()
-  End If
-
-  ' Was a layer named entered?
-  Dim layer_name As String = gs.String()
-  layer_name = layer_name.Trim()
-  If (String.IsNullOrEmpty(layer_name)) Then
-    RhUtil.RhinoApp().Print("Layer name cannot be blank."+vbrclf)
-    Return IRhinoCommand.result.cancel
-  End If
-
-  ' Is the layer name valid?
-  If (RhUtil.RhinoIsValidName(layer_name) = 0) Then
-    RhUtil.RhinoApp().Print(layer_name + " is not a valid layer name."+vbcrlf)
-    Return IRhinoCommand.result.cancel
-  End If
-
-  ' Does a layer with the same name already exist?
-  Dim layer_index As Integer = layer_table.FindLayer(layer_name)
-  If (layer_index >= 0) Then
-    Dim msg As String = "A layer with the name "+layer_name+" already exists."+ vbcrlf
-    RhUtil.RhinoApp().Print(msg)
-    Return IRhinoCommand.result.cancel
-  End If
-
-  ' Create a new layer
-  Dim layer As New OnLayer()
-  layer.SetLayerName(layer_name)
-  ' Add the layer to the layer table
-  layer_index = layer_table.AddLayer(layer)
-  If (layer_index < 0) Then
-    RhUtil.RhinoApp().Print(String.Format("Unable to add {0} layer."+vbcrlf, layer_name))
-    Return IRhinoCommand.result.failure
-  End If
-  Return IRhinoCommand.result.success
-End Function
-</code>
-===== C# =====
-<code c#>
-public override IRhinoCommand.result RunCommand(IRhinoCommandContext context)
-{
-  // Get a reference to the layer table
-  MRhinoLayerTable layer_table = context.m_doc.m_layer_table;
-  // Cook up an unused layer name
-  string unused_name = ;
-  layer_table.GetUnusedLayerName(ref unused_name);
-
-  // Prompt the user to enter a layer name
-  MRhinoGetString gs = new MRhinoGetString();
-  gs.SetCommandPrompt("Name of layer to add");
-  gs.SetDefaultString(unused_name);
-  gs.AcceptNothing(true);
-  gs.GetString();
-  if( gs.CommandResult() != IRhinoCommand.result.success )
-    return gs.CommandResult();
-
-  // Was a layer named entered?
-  string layer_name = gs.String();
-  layer_name = layer_name.Trim();
-  if (string.IsNullOrEmpty(layer_name))
-  {
-    RhUtil.RhinoApp().Print("Layer name cannot be blank.\n");
-    return IRhinoCommand.result.cancel;
-  }
-
-  // Is the layer name valid?
-  if (RhUtil.RhinoIsValidName(layer_name) == 0)
-  {
-    RhUtil.RhinoApp().Print(layer_name + " is not a valid layer name.\n");
-    return IRhinoCommand.result.cancel;
-  }
-
-  // Does a layer with the same name already exist?
-  int layer_index = layer_table.FindLayer(layer_name);
-  if( layer_index >= 0 )
-  {
-    string msg = string.Format("A layer with the name {0} already exists.\n", layer_name);
-    RhUtil.RhinoApp().Print( msg );
-    return IRhinoCommand.result.cancel;
-  }
-
-  // Create a new layer
-  OnLayer layer = new OnLayer();
-  layer.SetLayerName(layer_name);
-  // Add the layer to the layer table
-  layer_index = layer_table.AddLayer(layer);
-  if( layer_index < 0 )
-  {
-    RhUtil.RhinoApp().Print( string.Format("Unable to add {0} layer.\n", layer_name ));
-    return IRhinoCommand.result.failure;
-  }
-  return IRhinoCommand.result.success;
-}
-
-</code>
-
-
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus}}
