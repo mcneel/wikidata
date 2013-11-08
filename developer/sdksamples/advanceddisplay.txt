@@ -1,5 +1,5 @@
 ====== Modifying Advanced Display Settings ======
-> **Developer:** //[[developer:cplusplusplugins|C++]], [[developer:dotnetplugins|.NET]]//
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates how to modify advanced display settings using the Rhino SDK.//
 
 =====Overview=====
@@ -110,89 +110,7 @@ CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& cont
 }
 
 </code>
-===== VB.NET =====
-<code vb>
-Public Overrides Function RunCommand(ByVal context As RMA.Rhino.IRhinoCommandContext) _
-  As RMA.Rhino.IRhinoCommand.result
-  'Use the display attributes manager to build a list of display modes.
-  'Note, these are copies of the originals...
-  Dim attrs_list As New MDisplayAttrsMgrList()
-  Dim attrs_count As Integer = MRhinoDisplayAttrsMgr.GetDisplayAttrsList(attrs_list)
-  If (attrs_count = 0) Then Return IRhinoCommand.result.failure
-
-  ' Construct an options picker so the user can pick which display mode they want modified
-  Dim go As New MRhinoGetOption
-  go.SetCommandPrompt("Display mode to modify mesh thickness")
-
-  Dim opt_list As New Arrayint(attrs_count)
-  opt_list.SetCount(attrs_count)
-
-  For i As Integer = 0 To attrs_count - 1
-    ' Verify the display mode had a valid CDisplayPipelineAttributes pointer
-    If (attrs_list(i).m_pAttrs Is Nothing) Then
-      opt_list(i) = 0
-      Continue For
-    End If
-
-    ' Get the display attributes English name
-    Dim english_name As String = attrs_list(i).m_pAttrs.EnglishName()
-    english_name = english_name.Replace("_", )
-    english_name = english_name.Replace(" ", )
-    english_name = english_name.Replace("-", )
-    english_name = english_name.Replace(",", )
-    english_name = english_name.Replace(".", )
-
-    ' Get the display attributes localized name
-    Dim local_name As String = attrs_list(i).m_pAttrs.LocalName()
-    local_name = local_name.Replace("_", )
-    local_name = local_name.Replace(" ", )
-    local_name = local_name.Replace("-", )
-    local_name = local_name.Replace(",", )
-    local_name = local_name.Replace(".", )
-
-    ' Add the command option
-    opt_list(i) = go.AddCommandOption(New MRhinoCommandOptionName(english_name, local_name))
-  Next
-
-  ' Get the command option
-  go.GetOption()
-  If (go.CommandResult() <> IRhinoCommand.result.success) Then Return go.CommandResult()
-
-  Dim opt As IRhinoCommandOption = go.Option()
-  If (opt Is Nothing) Then Return IRhinoCommand.result.failure
-
-  ' Figure out which command option was picked
-  Dim attrs_index As Integer = -1
-  For i As Integer = 0 To opt_list.Count() - 1
-    If (opt_list(i) = opt.m_option_index) Then
-      attrs_index = i
-      Exit For
-    End If
-  Next
-
-  ' Validate...
-  If (attrs_index < 0 Or attrs_index >= attrs_count) Then
-    Return IRhinoCommand.result.failure
-  End If
-
-  ' Get the display mode requested by the user
-  Dim desc As MDisplayAttrsMgrListDesc = attrs_list(attrs_index)
-  If (desc.m_pAttrs Is Nothing) Then Return IRhinoCommand.result.failure
-
-  ' Modify the desired display mode. In this case, we
-  ' will just set the mesh wireframe thickness to zero.
-  desc.m_pAttrs.m_nMeshWireThickness = 0
-
-  ' Use the display attributes manager to update the display mode.
-  MRhinoDisplayAttrsMgr.UpdateAttributes(desc)
-
-  ' Force the document to regenerate.
-  context.m_doc.Regen()
-  Return IRhinoCommand.result.success
-End Function
-
-</code>
 
 \\
 
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus}}
