@@ -1,5 +1,5 @@
 ====== Calculate angle between two vectors ======
-> **Developer:** //[[developer:cplusplusplugins|C++]], [[developer:dotnetplugins|.NET]]//
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates how to calculate the angle between two vectors.//
 
 The following example code demonstrates how to calculate the angle between two 3-D vectors.
@@ -37,47 +37,6 @@ double ON_3dVectorAngle( ON_3dVector v0, ON_3dVector v1, double* reflex_angle = 
 
 </code>
 
-===== C# =====
-
-<code c#>
-public static double ON_3dVectorAngle(On3dVector v0, On3dVector v1)
-{
-  // Unitize the input vectors
-  v0.Unitize();
-  v1.Unitize();
-  double dot = OnUtil.ON_DotProduct(v0, v1);
-
-  // Force the dot product of the two input vectors to 
-  // fall within the domain for inverse cosine, which 
-  // is -1 <= x <= 1. This will prevent runtime 
-  // "domain error" math exceptions.
-  dot = (dot < -1.0 ? -1.0 : (dot > 1.0 ? 1.0 : dot));
-
-  return System.Math.Acos(dot);
-}
-
-</code>
-
-===== VB.NET =====
-
-<code vb>
-Public Shared Function ON_3dVectorAngle(ByVal v0 As On3dVector, ByVal v1 As On3dVector) _
-  As Double
-  ' Unitize the input vectors
-  v0.Unitize()
-  v1.Unitize()
-  Dim dot As Double = OnUtil.ON_DotProduct(v0, v1)
-
-  ' Force the dot product of the two input vectors to 
-  ' fall within the domain for inverse cosine, which 
-  ' is -1 <= x <= 1. This will prevent runtime 
-  ' "domain error" math exceptions.
-  If (dot < -1.0) Then dot = -1.0
-  If (dot > 1.0) Then dot = 1.0
-  Return System.Math.Acos(dot)
-End Function
-</code>
-
 \\
 
-{{tag>Developer cplusplus dotnet}}
+{{tag>Developer cplusplus}}
