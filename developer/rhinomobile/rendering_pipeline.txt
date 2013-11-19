@@ -2,4 +2,60 @@
 
 > :!: **WARNING:** This wiki entry is a work-in-progress: Information may be missing or incomplete.
 
-COMING SOON
+=====Rendering at a glance=====
+
+COMING SOON...
+
+=====Rendering in detail=====
+
+COMING SOON...
+
+=====OpenGL ES and OpenTK=====
+
+COMING SOON...
+
+=====Vertex Buffer Objects (VBOs)=====
+
+**The Vertices**
+
+The vertices of our DisplayMesh are fed to the GPU as an object called a Vertex Buffer Object (VBO).  This is a diagram of how a simple, vertex only Vertex Buffer Object would look like in memory:
+{{ :developer:rhinomobile:vbos_001.png |}}
+
+<code c#>
+public struct VData {  //This is a redundant struct, but it's for example purposes only
+        public Point3f Vertex;
+}
+</code>
+
+**Adding a normal vector**
+
+<code c#>
+public struct VNData  {
+	public Point3f Vertex;
+	public Vector3f Normal;
+}
+</code>
+
+This is a diagram of how an interleaved Vertex and Color VBO would look like in memory:
+{{ :developer:rhinomobile:vbos_002.png |}}
+
+**Color too!**
+
+We define a simple struct for our VertexColor VBO in code like this:
+
+<code c#>
+public struct VCData {
+	public Point3f Vertex;
+	public Color4f Color;
+}
+</code>
+
+
+{{ :developer:rhinomobile:vbos_003.png |}}
+{{ :developer:rhinomobile:vbos_004.png |}}
+{{ :developer:rhinomobile:vbos_005.png |}}
+
+=====Frame Buffer Objects (VBOs)=====
+
+COMING SOON...
+
