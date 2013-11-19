@@ -18,14 +18,26 @@ COMING SOON...
 
 **The Vertices**
 
-The vertices of our DisplayMesh are fed to the GPU as an object called a Vertex Buffer Object (VBO).  This is a diagram of how a simple, vertex only Vertex Buffer Object would look like in memory:
-{{ :developer:rhinomobile:vbos_001.png |}}
+The vertices of our DisplayMesh are fed to the GPU (via the shader) as an object called a Vertex Buffer Object.
 
+This is how a (hypothetical) Vertex-only VBO might look in code:
 <code c#>
 public struct VData {  //This is a redundant struct, but it's for example purposes only
         public Point3f Vertex;
 }
 </code>
+
+We say hypothetical because it would be redundant to define this as a struct.  Additionally, we don't use a Vertex only VBO in our code, but it's a good place to start because it illustrates some points about VBOs and how to construct them.
+
+It's important to be aware of our memory footprint and the sizes of each type as we pack them into a VBO.  This is because.  So, here are the C# value types we are using the construct our VBOs:
+  * float  = 32 bits, 4 bytes
+  * short  = 16 bits, 2 bytes
+  * ushort = 16 bits, 2 bytes
+
+This is a diagram of how a simple, vertex only Vertex Buffer Object would look like in memory:
+{{ :developer:rhinomobile:vbos_001.png |}}
+
+Each item in a VBO is called an attribute.  Notice the attribute separator in the diagram above. This separator would device the first vertex from the second.  The vertex is made up of 3 floats (X,Y,Z) at 4 bytes each, for a total of 12 bytes.
 
 **Adding a normal vector**
 
@@ -53,9 +65,16 @@ public struct VCData {
 
 {{ :developer:rhinomobile:vbos_003.png |}}
 {{ :developer:rhinomobile:vbos_004.png |}}
+
+
+**Indexing the vertices***
+
+<code c#>
+public ushort[] IndexData { get; private set; }
+</code>
+
 {{ :developer:rhinomobile:vbos_005.png |}}
 
 =====Frame Buffer Objects (VBOs)=====
 
 COMING SOON...
-
