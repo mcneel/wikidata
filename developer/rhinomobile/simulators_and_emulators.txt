@@ -14,9 +14,9 @@ __**Rotation and Multi-touch**__*
 
 __**Accessing Emulator File System**__
 
-The best way to access the internals of an Android device or an Emulator is to use the Android Debug Bridge (ADB) which comes bundled with the Android SDK as part of the Xamarin Toolkit.  The ADB comes with a shell utility that allows you to browse the Android file system as if you were a standard Linux file system - which it is.  Running adb shell on a Mac is slightly different from running it on Windows, but here are the basics.
+The best way to access the internals of an Android device or an Emulator is to use the [[http://developer.android.com/tools/help/adb.html|Android Debug Bridge]] (ADB) which comes bundled with the Android SDK as part of the Xamarin Toolkit.  The ADB comes with a shell utility that allows you to browse the Android file system as if you were a standard Linux file system - which it is.  Running adb shell on a Mac is slightly different from running it on Windows, but here are the basics.
 
-**__Mac OS X__**
+**Mac OS X**
 
 Before launching into the adb tools, let's make sure that the Android SDK and NDK are part of our bash terminal environment.  Open your .bash_profile (in your ~ or home folder) with a trusty text editor (I recommend [[http://www.barebones.com/products/textwrangler/|TextWrangler]] or [[http://www.barebones.com/products/bbedit/|BBEdit]]).  Add the following lines to your profile if they are not already there:
 <code>
@@ -26,7 +26,11 @@ export PATH="$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$ANDROID_NDK"
 export _JAVA_OPTIONS="-Xmx1g"
 </code>
 
-Save your profile and launch a Terminal window.  You should now be able to type //adb shell//. 
+Save your profile and launch a Terminal window.  You should now be able to type //adb shell//. If you don't have an Emulator running or a device plugged in, you will get an //error: device not found// response.  That's fine, it means adb shell is setup.  Plugin a device or launch and emulator and try the //adb shell// command again.  Now you should see something like the following in your terminal:
+
+{{ :developer:rhinomobile:adb_shell.png |}}
+
+You may not use many standard posix commands to get around and mess with files.  Note there are a number of special commands for pushing and pulling file on and off the device/emulator.  See the [[http://developer.android.com/tools/help/adb.html|Android ADB documentation]] for a handy list.  Data for many apps is store in the //data/data/AppName/// folder.
 
 __**Resetting an Emulator**__
 
