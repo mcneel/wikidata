@@ -5,7 +5,7 @@ Draws an arc from center, start and end points, tangent, radius, and direction.
 
 -->Toolbars#
 
-{{:rhino:rhino:help:images:command_icons:arc_csa.png?nolink|}} **Main1** and **Arc** toolbars
+{{:rhino:help:images:command_icons:arc.png?nolink|}} **Main1** and **Arc** toolbars
 <--
 
 -->Menus#
@@ -22,109 +22,154 @@ Tangent to Curves
 <--
 
 === Arc: Center, Start, End ===
-
+{{:rhino:help:images:topic_illustrations:arc_cse.png?nolink|}}
 
 -->To draw an arc using a center, an end point, a second end point, or an angle#
-**Steps**
+
+-->Steps#
   - Pick the center of the arc's radius.
   - Pick the arc's first endpoint. This point is also the arc's start point.
   - Pick the arc's second end point or type an angle.
 
+<--
 -->Options#
-
 **Deformable**\\
-Draws a NURBS approximation of the arc.
-
+Draws a NURBS approximation of the arc.\\
 **Extension**\\
-Extends a curve with an arc by picking the arc's endpoint.
+Extends a curve with an arc by picking the arc's endpoint.\\
+-->Extension Steps#
+  - Pick the curve to extend.
+  - Pick the location where you want the arc to end.
 
 <--
-<--
-
-Steps
-Pick the curve to extend.
-Pick the arc's end point.
-Extension options
-Center
+-->Extension options#
+**Center**\\
 Extends a curve with an arc by picking the arc's center and endpoint.
+-->Center Steps#
+  - Pick the arc's center point.
+  - Pick the arc's end point.
 
-//
 
-Steps
-Pick the arc's center point.
-Pick the arc's end point.
-Notes
-The arc extension is not joined to the original curve.
-To draw an arc extension and join it in one step, use the Extend command.
-The center point is constrained to a plane perpendicular to the curve end. If the extension is drawn in a view perpendicular to the constraint plane, the input will be automatically locked parallel to the construction plane.
-In other views Rhino tries to make sure one of the ortho directions is parallel to the construction plane. Press the Shift key when making the pick to maintain the ortho direction.
-Length
-Type a positive or negative number or pick two points to specify the arc curve's length.
+<--
+<--
+
+**Length**\\
+Type a positive or negative number or pick two points to specify the extension's length.
+<--
+
+-->Notes#
+  * The arc extension is not joined to the original curve.
+  * To draw an arc extension and join it in one step, use the [[rhino:help:commands:Extend|Extend]] command.
+  * The center point is constrained to a plane perpendicular to the curve end. If the extension is drawn in a view perpendicular to the constraint plane, the input will be automatically locked parallel to the construction plane.
+  * In other views Rhino tries to make sure one of the ortho directions is parallel to the construction plane. Press the Shift key when making the pick to maintain the ortho direction.
+
+
+<--
+<--
+ 
+
+
+
+
+
+
+
+
 StartPoint
+
 Draws an arc starting from the arc's first end point.
 
-//
+ 
 
 Steps
+
 Pick the arc's start point.
+
 Pick the arc's end point.
+
 Click a location the arc passes through.
+
 StartPoint options
+
 Direction
+
 Specifies the direction of a line tangent to the arc's first end point.
 
-//
+ 
 
 Steps
+
 Pick a start point.
+
 Pick a tangent direction.
+
 Pick an end point.
+
 ThroughPoint
+
 Specifies a location the arc curve must pass through.
 
-//
+ 
 
 Steps
+
 Pick a start point.
+
 Pick a location.
+
 Pick an end point.
+
 Center
+
 Specifies a center point for the arc's radius.
 
-//
+ 
 
 Steps
+
 Pick a center point.
+
 Tangent
+
 Draws an arc tangent to two curves with an option to specify a radius.
 
-//
+ 
 
 Steps
+
 Select a tangent curve.
+
 Select the second tangent curve, or type a radius to restrict the arc to the specified radius.
+
 If a tangent point exists on the second curve that meets the radius requirement, the tangent constraint will appear at that point as you drag the arc around.
+
 Select a third tangent curve, or press Enter to draw a circle.
+
 Click to choose the arc direction from the options displayed when the mouse is dragged.
+
 Tangent options
+
 Point
+
 Releases the command from the tangent constraint. Pick a point not on the tangent curve for the arc to pass through.
 
-//
+ 
 
 FromFirstPoint
+
 Forces the arc to go through the first picked point on the curve instead of allowing the point to slide along the curve.
 
-//
+ 
 
 Radius
+
 Specifies a radius. If a tangent point exists on the second curve that meets the radius requirement, the tangent constraint will appear at that point as you drag the circle.
 
-//
+ 
 
-Tilted
+Tilted 
+
 Draws an arc whose plane is tilted from the current construction plane. In a different viewport or with elevator mode, pick the start of the tilted arc, and specify the arc's orientation.
+
 See Also
-
-
-//
+ 
