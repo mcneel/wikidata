@@ -32,6 +32,19 @@ Save your profile and launch a Terminal window.  You should now be able to type 
 
 You may use many standard linux commands to get around and mess with files.  Note there are a number of special commands for pushing and pulling file on and off the device/emulator.  See the [[http://developer.android.com/tools/help/adb.html|Android ADB documentation]] for a handy list.  Data for many apps is store in the //data/data/AppName/// folder.
 
+**Windows**
+Before launching into the adb tools, let's make sure that the Android SDK and NDK are part environment variables.  Here's how to do that:
+
+  - Navigate to the **System Controls** in the Control Panel (**Start** > **Control Panel** > **System**)
+  - Click on the **Advanced systems settings** button on the left side.
+  - You should now be the **System Properties** window.  Click on the **Environment Variables...** button in the Advanced Tab.
+  - In the **System variables** box (the lower box), scroll through the list until you see **Path** under the Variable column.
+  - Click on **Path** to highlight it, then click the **Edit...** button.
+  - We are going to add our path to adb, where Xamarin installed the android-sdk.  Make sure your curson is at the end of the last entry and then type: //;C:\Users\<you>\AppData\Local\Android\android-sdk\platform-tools\// replacing //<you>// with the name of your account.  Make sure there aren't any spaces in this path.  If the path to your android-sdk is somewhere custom, replace it with that path.
+  - Click **OK** on everything and **close the Control Panel** if it's still open.
+
+Open a **cmd.exe** prompt.  Now type //adb shell//.  Make sure you have an Emulator started or a device connected and you should see an adb shell tool similar to that shown above in the Mac instructions.  You may use many standard linux commands to get around and mess with files.  Note there are a number of special commands for pushing and pulling file on and off the device/emulator.  See the [[http://developer.android.com/tools/help/adb.html|Android ADB documentation]] for a handy list.  Data for many apps is store in the //data/data/AppName/// folder.
+
 __**Resetting an Emulator**__
 
 It is rarely necessary to reset the Android Emulators as the entire app is removed between builds.  Should you need to reset it, the best way is to delete the entire AVD itself and create a new one from scratch.  Open the Android Virtual Device Manager (In Xamarin Studio, navigate to **Tools** > **Open Android Emulator Manager...** in the Application toolbar), in the **Android Virtual Devices Tab**, select the Emulator from the list of AVDs and click the **Delete** button.
