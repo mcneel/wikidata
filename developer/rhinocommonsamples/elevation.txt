@@ -1,0 +1,283 @@
+===== Sample: Furthest Z value on Surface for Given X,Y =====
+
+===== C# =====
+<code c#>
+[System.Runtime.InteropServices.Guid("F26DAC86-F6D6-46D7-9796-8770E6B51F18")]
+public class ex_elevation : Rhino.Commands.Command
+{
+  public override string EnglishName { get { return "csFurthestZOnSrfGivenXY"; } }
+
+  protected override Rhino.Commands.Result RunCommand(RhinoDoc doc, Rhino.Commands.RunMode mode)
+  {
+    #region user input
+    // select a surface
+    var gs = new Rhino.Input.Custom.GetObject();
+    gs.SetCommandPrompt("select surface");
+    gs.GeometryFilter = Rhino.DocObjects.ObjectType.Surface;
+    gs.DisablePreSelect();
+    gs.SubObjectSelect = false;
+    gs.Get();
+    if (gs.CommandResult() != Result.Success)
+      return gs.CommandResult();
+    // get the brep
+    var brep = gs.Object(0).Brep();
+    if (brep == null)
+      return Result.Failure;
+
+    // get X and Y
+    double x = 0.0, y = 0.0;
+    var gx = new Rhino.Input.Custom.GetNumber();
+    gx.SetCommandPrompt("value of X coordinate");
+    gx.SetDefaultNumber(x);
+    gx.Get();
+    if (gs.CommandResult() != Result.Success)
+      return gs.CommandResult();
+    x = gx.Number();
+
+    var gy = new Rhino.Input.Custom.GetNumber();
+    gy.SetCommandPrompt("value of Y coordinate");
+    gy.SetDefaultNumber(y);
+    gy.Get();
+    if (gs.CommandResult() != Result.Success)
+      return gs.CommandResult();
+    y = gy.Number();
+
+    var go = new Rhino.Input.Custom.GetOption();
+    go.SetCommandPrompt("Which method to use?");
+    go.AddOption("intersection");
+    go.AddOption("projection");
+    go.Get();
+    if (go.CommandResult() != Rhino.Commands.Result.Success)
+      return go.CommandResult();
+    #endregion
+    
+    var msg = "";
+    var pointFound = false;
+    var maxZ = 0.0;
+
+    #region intersection method
+    if (go.Option().EnglishName == "intersection")
+    {
+      var bbox = brep.GetBoundingBox(true);
+      var height = bbox.Corner(true, true, false) - bbox.Corner(true, true, true);
+      var maxDistFromXY = (from corner in bbox.GetCorners() select corner.Z)
+                          // furthest Z from XY plane.  Max() doesn't work because of possible negative Z values
+                          .Aggregate((z1, z2) => Math.Abs(z1) > Math.Abs(z2) ? z1 : z2);
+      var lineCurve = new LineCurve(new Point3d(x, y, 0), new Point3d(x, y, maxDistFromXY*2));
+
+      Curve[] overlapCurves;
+      Point3d[] interPoints;
+      if (Intersection.CurveBrep(lineCurve, brep, doc.ModelAbsoluteTolerance, out overlapCurves, out interPoints))
+      {
+        if (overlapCurves.Length > 0 || interPoints.Length > 0)
+        {
+          // grab all the points resulting frem the intersection. 
+          //    1st set: points from overlapping curves, 
+          //    2nd set: points when there was no overlap
+          //    .Aggregate: furthest Z from XY plane.
+          maxZ = (from c in overlapCurves select Math.Abs(c.PointAtEnd.Z) > Math.Abs(c.PointAtStart.Z) ? c.PointAtEnd.Z : c.PointAtStart.Z)
+                 .Union
+                 (from p in interPoints select p.Z)
+                 .Aggregate((z1, z2) => Math.Abs(z1) > Math.Abs(z2) ? z1 : z2);
+
+          msg = String.Format("Maximum surface Z coordinate at X={0}, Y={1} is {2}", x, y, maxZ);
+          pointFound = true;
+        }
+        else
+        {
+          msg = String.Format("no maximum surface Z coordinate at X={0}, Y={1} found.", x, y);
+        }
+      }
+    }
+    #endregion
+    #region projection method
+    else // projection
+    {
+      var breps = new List<Brep> {brep};
+      var points = new List<Point3d> {new Point3d(x, y, 0)};
+      try
+      {
+        // grab all the points projected.  Aggregate finds furthest Z from XY plane
+        maxZ = (from p in Intersection.ProjectPointsToBreps(breps, points, new Vector3d(0, 0, 1) /*Z dir*/, doc.ModelAbsoluteTolerance) select p.Z)
+               .Aggregate((z1, z2) => Math.Abs(z1) > Math.Abs(z2) ? z1 : z2);
+
+        msg = String.Format("Maximum surface Z coordinate at X={0}, Y={1} is {2}", x, y, maxZ);
+        pointFound = true;
+      }
+      catch (InvalidOperationException ioe)
+      {
+        msg = String.Format("no maximum surface Z coordinate at X={0}, Y={1} found.", x, y);
+      }
+    }
+    #endregion
+
+    RhinoApp.WriteLine(msg);
+
+    if (pointFound)
+    {
+      doc.Objects.AddPoint(new Point3d(x, y, maxZ));
+      doc.Views.Redraw();
+    }
+    return Rhino.Commands.Result.Success;
+  }
+}
+</code>
+===== VB.NET =====
+<code vb>
+<System.Runtime.InteropServices.Guid("34BD7346-64AB-4A97-BCDC-5C9E40CAE9DF")> _
+Public Class ex_elevation
+  Inherits Rhino.Commands.Command
+  Public Overrides ReadOnly Property EnglishName() As String
+    Get
+      Return "vbFurthestZOnSrfGivenXY"
+    End Get
+  End Property
+
+  Protected Overrides Function RunCommand(doc As RhinoDoc, mode As Rhino.Commands.RunMode) As Rhino.Commands.Result
+    '#Region "user input"
+    ' select a surface
+    Dim gs = New Rhino.Input.Custom.GetObject()
+    gs.SetCommandPrompt("select surface")
+    gs.GeometryFilter = Rhino.DocObjects.ObjectType.Surface
+    gs.DisablePreSelect()
+    gs.SubObjectSelect = False
+    gs.[Get]()
+    If gs.CommandResult() <> Result.Success Then
+      Return gs.CommandResult()
+    End If
+    ' get the brep
+    Dim brep = gs.[Object](0).Brep()
+    If brep Is Nothing Then
+      Return Result.Failure
+    End If
+
+    ' get X and Y
+    Dim x As Double = 0.0, y As Double = 0.0
+    Dim gx = New Rhino.Input.Custom.GetNumber()
+    gx.SetCommandPrompt("value of X coordinate")
+    gx.SetDefaultNumber(x)
+    gx.[Get]()
+    If gs.CommandResult() <> Result.Success Then
+      Return gs.CommandResult()
+    End If
+    x = gx.Number()
+
+    Dim gy = New Rhino.Input.Custom.GetNumber()
+    gy.SetCommandPrompt("value of Y coordinate")
+    gy.SetDefaultNumber(y)
+    gy.[Get]()
+    If gs.CommandResult() <> Result.Success Then
+      Return gs.CommandResult()
+    End If
+    y = gy.Number()
+
+    Dim go = New Rhino.Input.Custom.GetOption()
+    go.SetCommandPrompt("Which method to use?")
+    go.AddOption("intersection")
+    go.AddOption("projection")
+    go.[Get]()
+    If go.CommandResult() <> Rhino.Commands.Result.Success Then
+      Return go.CommandResult()
+    End If
+    '#End Region
+
+    Dim msg = ""
+    Dim pointFound = False
+    Dim maxZ = 0.0
+
+    '#Region "intersection method"
+    If go.[Option]().EnglishName = "intersection" Then
+      Dim bbox = brep.GetBoundingBox(True)
+      Dim height = bbox.Corner(True, True, False) - bbox.Corner(True, True, True)
+      ' furthest Z from XY plane.  Max() doesn't work because of possible negative Z values
+      Dim maxDistFromXY = (From corner In bbox.GetCorners() Select corner.Z).Aggregate(Function(z1, z2) If(Math.Abs(z1) > Math.Abs(z2), z1, z2))
+      Dim lineCurve = New LineCurve(New Point3d(x, y, 0), New Point3d(x, y, maxDistFromXY * 2))
+
+      Dim overlapCurves As Curve()
+      Dim interPoints As Point3d()
+      If Intersection.CurveBrep(lineCurve, brep, doc.ModelAbsoluteTolerance, overlapCurves, interPoints) Then
+        If overlapCurves.Length > 0 OrElse interPoints.Length > 0 Then
+          maxZ = 0.0
+          For Each c As Curve In overlapCurves
+            Dim largerCrvPointZ = If(Math.Abs(c.PointAtEnd.Z) > Math.Abs(c.PointAtStart.Z), c.PointAtEnd.Z, c.PointAtStart.Z)
+            If Math.Abs(largerCrvPointZ) > Math.Abs(maxZ) Then
+              maxZ = largerCrvPointZ
+            End If
+          Next
+          For Each p As Point3d In interPoints
+            If Math.Abs(p.Z) > Math.Abs(maxZ) Then
+              maxZ = p.Z
+            End If
+          Next
+
+          msg = [String].Format("Maximum surface Z coordinate at X={0}, Y={1} is {2}", x, y, maxZ)
+          pointFound = True
+        Else
+          msg = [String].Format("no maximum surface Z coordinate at X={0}, Y={1} found.", x, y)
+        End If
+      End If
+    Else
+      '#End Region
+      '#Region "projection method"
+      ' projection
+      Dim breps = New List(Of Brep)() From { _
+       brep _
+      }
+      Dim points = New List(Of Point3d)() From { _
+       New Point3d(x, y, 0) _
+      }
+      maxZ = 0.0
+      msg = [String].Format("no maximum surface Z coordinate at X={0}, Y={1} found.", x, y)
+      For Each p As Point3d In Intersection.ProjectPointsToBreps(breps, points, New Vector3d(0, 0, 1), doc.ModelAbsoluteTolerance)
+        If Math.Abs(p.Z) > Math.Abs(maxZ) Then
+          maxZ = p.Z
+        End If
+        pointFound = True
+        msg = [String].Format("Maximum surface Z coordinate at X={0}, Y={1} is {2}", x, y, maxZ)
+      Next
+    End If
+    '#End Region
+
+    RhinoApp.WriteLine(msg)
+
+    If pointFound Then
+      doc.Objects.AddPoint(New Point3d(x, y, maxZ))
+      doc.Views.Redraw()
+    End If
+    Return Rhino.Commands.Result.Success
+  End Function
+End Class
+d Namespace
+</code>
+===== Python =====
+<code python>
+import rhinoscriptsyntax as rs
+from Rhino.Geometry import Intersect, Point3d, Vector3d
+from scriptcontext import doc
+
+def RunCommand():
+  # select a surface
+  srfid = rs.GetObject("select serface", rs.filter.surface | rs.filter.polysurface)
+  if not srfid: return
+  # get the brep
+  brep = rs.coercebrep(srfid)
+  if not brep: return
+
+  x = rs.GetReal("value of x", 0)
+  y = rs.GetReal("value of y", 0)
+
+  pts = [(abs(point.Z), point.Z) for point in Intersect.Intersection.ProjectPointsToBreps(
+           [brep], [Point3d(x, y, 0)], Vector3d(0, 0, 1), doc.ModelAbsoluteTolerance)]
+           
+  pts.sort(reverse=True)
+  
+  if pts == []:
+    print "no Z for given X, Y"
+  else:
+    rs.AddPoint(Point3d(x, y, pts[0][1]))
+
+if __name__ == "__main__":
+  RunCommand()
+</code>
+
+{{tag>Developer rhinocommon}}
