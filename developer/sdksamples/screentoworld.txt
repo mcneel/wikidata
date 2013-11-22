@@ -8,6 +8,7 @@ How to I get the world coordinates of a view? That is, I need to transform clien
 =====Answer=====
 Every Rhino view is capable of returning the transformation from one coordinate system to another. This is accomplished by the ON_Viewport::GetXform member. The following demonstrates how to use this to convert screen coordinates to world coordinates.
 
+====C++====
 <code c++>
 CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& context )
 {
@@ -43,9 +44,56 @@ CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& cont
 
   return rc;
 }
+</code>
 
+====C#====
+<code c#>
+[System.Runtime.InteropServices.DllImport("user32.dll")]
+public static extern bool GetCursorPos(out System.Drawing.Point pt);
+
+protected override Result RunCommand(RhinoDoc doc, RunMode mode)
+{
+  Result rc = Result.Failure;
+
+  // Get the active view
+  Rhino.Display.RhinoView view = doc.Views.ActiveView;
+  if (null != view)
+  {
+    // Get the current cursor position
+    System.Drawing.Point point;
+    if (GetCursorPos(out point))
+    {
+      // Convert the screen coordinates to client coordinates
+      point = view.ScreenToClient(point);
+
+      // Obtain the view's screen-to-world transformation
+      Rhino.Geometry.Transform screen_to_world = view.ActiveViewport.GetTransform(
+        Rhino.DocObjects.CoordinateSystem.Screen, 
+        Rhino.DocObjects.CoordinateSystem.World
+        );
+
+      // Create a 3-D point
+      Rhino.Geometry.Point3d pt = new Rhino.Geometry.Point3d(
+        point.X, 
+        point.Y, 
+        0.0
+        );
+
+      // Transform it
+      pt.Transform(screen_to_world);
+
+      // Add it to the document
+      doc.Objects.AddPoint(pt);
+      doc.Views.Redraw();
+
+      rc = Result.Success;
+    }
+  }
+
+  return rc;
+}
 </code>
 
 \\
 
-{{tag>Developer cplusplus}}
+{{tag>Developer cplusplus rhinocommon}}
