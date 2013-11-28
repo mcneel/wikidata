@@ -15,7 +15,12 @@ Note that the pipeline itself is not bound to the channels, it just executes its
 
 Note that the pipeline itself is not bound to the channels, it just executes its code and raises events during specific phases of drawing.  During the drawing of a single frame the events are raised in the following order:
 
-  - CalculateBoundingBox - Determine the extent of the entire scene 
+  - ObjectCulling:
+      Create a list of all the objects to draw.
+  - CalculateBoundingBox:
+      Determine the extent of the entire scene.  Override this function to increase the bounding box of scene so it includes the geometry that you plan to draw.  
+  - CalculateBoundingBoxZoomExtents:
+      If you want to participate in the Zoom Extents command with your display conduit, then you will need to override ZoomExtentsBoundingBox.  Typically you could just call your CalculateBoundingBox override, but you may also want to spend a little more time here and compute a tighter bounding box for your conduit geometry if that is needed.
   - #CalculateClippingPanes - Calculate the depth of the z-buffer based on the boundingbox 
   - #SetupFrustum - Load projection {camera; target; lens length; etc.} and calculate world-to-screen transformations 
   - #SetupLighting - Create a lighting environment to be used in Shaded modes 
@@ -29,22 +34,6 @@ Note that the pipeline itself is not bound to the channels, it just executes its
   - For Each Visible Highlighted Object
   - #PostProcessFrameBuffer (If a delegate exists that requires this) - Perform pixel operations on the framebuffer (such as contrast and brightness adjustments) 
   - DrawOverlay (if Rhino is in a feedback mode)
-  # old list
-  # - Set up the drawing buffer so we have something to draw on (SC_INITFRAMEBUFFER)
-  # - Load projection {camera; target; lens length; etc.} and calculate world-to-screen transformations (SC_SETUPFRUSTUM)
-  # - Create a list of all objects to draw (SC_OBJECTCULLING)
-  # - Determine the extent of the entire scene (SC_CALCBOUNDINGBOX)
-  # - Calculate the depth of the z-buffer based on the boundingbox (SC_CALCCLIPPINGPLANES)
-  # - Create a lighting environment to be used in Shaded modes (SC_SETUPLIGHTING)
-  # - Draw the background of the scene. This includes the viewport color, BackgroundBitmaps and grids (SC_DRAWBACKGROUND)
-  # - Draw the stuff that has to be drawn before any objects are drawn (SC_PREDRAWOBJECTS)
-  # - Prepare for the drawing of an object, i.e. set up the display attributes for it (SC_PREOBJECTDRAW)
-  # - Draw all the objects (SC_DRAWOBJECT  (this channel is called once for every object))
-  # - Recover from drawing the object (SC_POSTOBJECTDRAW)
-  # - Draw stuff on top of all the objects, like selection wireframes etc. (SC_POSTDRAWOBJECTS)
-  # - Draw the foreground, like the little axis-system in the lower left corner of viewports (SC_DRAWFOREGROUND)
-  # - Honestly, I have no idea what Overlay is for (SC_DRAWOVERLAY)
-  # - Perform pixel operations on the framebuffer (such as contrast and brightness adjustments) (SC_POSTPROCESSFRAMEBUFFER)
 
 You hook into the pipeline by extending DisplayConduit and overriding the key event handlers which have the same name as the pipeline events.
 
