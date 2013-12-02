@@ -66,6 +66,7 @@ The above function could be rewritten to just always call the delegate
     _label.Dispatcher.Invoke(setLabelTextDelegate, new String[] { msg });
   }
 </code>
+**note**: if Windows Forms is used instead of WPF then _label.Dispatcher.CheckAccess() becomes _label.InvokeRequired and _label.Dispatcher.Invoke(...) becomes _label.Invoke(...).
 
 Here is the complete example:
 <code c#>
