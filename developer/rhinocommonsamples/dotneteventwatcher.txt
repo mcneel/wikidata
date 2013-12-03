@@ -1,4 +1,4 @@
-====== Event Watchers ======
+====== UI Controls and multiple threads (Event Watchers) ======
 If you have some controls that are using an event watcher to synchronize a control's appearance with what is going on in Rhino, please read the following.
 
 An event handler that that modifies a UI property could potentially be called from a thread that is NOT your main user interface thread. This happens in the case where a long running command has started a thread to allow a user to cancel a command. A sample case where this occurs is in the contour command and the RhinoDoc.AddRhinoObject event.
