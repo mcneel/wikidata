@@ -13,6 +13,18 @@ When Rhino 5 needs a license from a Zoo 5 server, it determines the name of the 
 
 =====More Information=====
 
+====Registry Lookup - Current User====
+
+When searching in HKEY_CURRENT_USER, of the Windows Registry, for the host name or IP address of your Zoo server, both Rhino 5 32-bit and Rhino 5 64-bit will look in this location:
+
+<code>
+Hive:  HKEY_CURRENT_USER
+Key:   Software\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <host name or IP address>
+</code>
+
 ====Registry Lookup - Local Machine====
 If you are using a 32-bit version of Windows, then when searching in HKEY_LOCAL_MACHINE, of the Windows Registry, for the host name or IP address of your Zoo server, Rhino 5 32-bit will look in this location:
 
@@ -29,18 +41,6 @@ If you are using a 64-bit version of Windows, then when searching in HKEY_LOCAL_
 <code>
 Hive:  HKEY_LOCAL_MACHINE
 Key:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
-Name:  Server
-Type:  REG_SZ
-Value: <host name or IP address>
-</code>
-
-====Registry Lookup - Current User====
-
-When searching in HKEY_CURRENT_USER, of the Windows Registry, for the host name or IP address of your Zoo server, both Rhino 5 32-bit and Rhino 5 64-bit will look in this location:
-
-<code>
-Hive:  HKEY_CURRENT_USER
-Key:   Software\McNeel\Rhinoceros\5.0\License Manager
 Name:  Server
 Type:  REG_SZ
 Value: <host name or IP address>
