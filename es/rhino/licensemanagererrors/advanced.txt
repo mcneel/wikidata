@@ -1,0 +1,134 @@
+======Resolución de errores para "No se puede comunicar con el administrador de licencias" ======
+
+> **Actualizado:** //20 de septiembre de 2012//
+
+=====Problema=====
+Al ejecutar Rhino 3.0 o Rhino 4.0, aparece el siguiente mensaje de error:
+
+{{http://en.wiki.mcneel.com/content/upload/images/rhinolicensemanager.png}}
+\\
+
+=====Causa=====
+El mensaje "No se puede comunicar con el administrador de licencias" tiene lugar porque Rhino no puede comunicarse con el módulo del administrador de licencias. Este error se produce tanto en instalaciones independientes como de nodo de grupo de trabajo.
+
+El error se debe a una de las siguientes situaciones:
+
+  - Faltan archivos del administrador de licencias.
+  - Faltan entradas del registro del sistema de Windows.
+  - Faltan archivos de soporte de la biblioteca runtime.
+- Se está ejecutando un administrador de licencias errático.
+  - Problema de seguridad del registro de Windows.
+\\
+
+=====SOLUCIÓN 1 - Instalar la última service release =====
+
+Descargue la [[http://download.rhino3d.com/rhino/sr.asp|última service release]].
+
+Se ha identificado otra razón que también puede causar este error cuando se ejecuta Rhino V4 en Vista o Windows 7. Tiene que ver con un conflicto con el Control de cuentas de usuario. Haga clic con el botón derecho del ratón en el icono de Rhino V4 y seleccione Ejecutar como administrador. Si esta acción soluciona el problema, asegúrese de descargar e instalar la Service Release 7 de Rhino V4. Al instalar la SR7, el problema queda resuelto.
+
+=====SOLUCIÓN 2 - Faltan archivos del administrador de licencias=====
+En las versiones de Rhino en inglés, los módulos del administrador de licencias se encuentran en la siguiente carpeta:
+
+   C:\Program Files\Common Files\McNeel Shared\License Manager
+
+Rhino 3.0 y Rhino 4.0 utilizan diferentes módulos del administrador de licencias:
+
+  * El administrador de licencias de Rhino 3.0 tiene el nombre **McNeelLM.exe**.
+  * El administrador de licencias de Rhino 4.0 tiene el nombre **RhinoLM.exe**.
+
+Si el módulo del administrador de licencias de la versión de Rhino que utilizando no existe, deberá reinstalar Rhino desde su CD.
+
+\\
+=====SOLUCIÓN 3 - DESINSTALAR/REINSTALAR=====
+Si los archivos del administrador de licencias o las claves de registro ya no están, será necesario hacer una desinstalación limpia y reinstalar. Se deberán eliminar las claves de registro de Rhino y los archivos del administrador de licencias de Rhino y, a continuación, será necesario volver a instalar. 
+  - Asegúrese de iniciar sesión en su estación de trabajo como administrador o usuario equivalente.
+  - Asegúrese de desactivar los detectores de virus y programas antiespía.
+- Desinstale Rhino y limpie el sistema siguiendo estas [[http://wiki.mcneel.com/es/rhino/uninstalling|recomendaciones.]]
+  - Después de desinstalar, en el Explorador, vaya a **C:\Archivos de programa\Common Files\McNeel Shared\** y elimine la subcarpeta License Manage
+  - Reinicie
+  - Reinstale Rhino 4 a través del CD. Descargue e instale [[http://download.rhino3d.com/cruftfree/whatsnew.asp?lang=&p=rhino&v=4.0&t=sr&r=current&a=whatsnew|la service release actual]] si es necesario.
+
+
+=====SOLUCIÓN 4 - Faltan entradas del registro del sistema de Windows=====
+Si el módulo del administrador de licencias de la versión de Rhino que está utilizando está presente, puede ser que el módulo no se haya registrado (debe de faltar información en el registro de Windows que impide que Rhino encuentre este módulo). Para solucionar este problema:
+
+  - Asegúrese de iniciar sesión en su estación de trabajo como administrador o usuario equivalente.
+  - Asegúrese de desactivar los detectores de virus y programas antiespía.
+  - En el explorador de carpetas, abra a la carpeta mencionada anteriormente. (C:\Program Files\Common Files\McNeel Shared\License Manager)
+
+====Rhino 3.0====
+
+Si el error se produce al intentar ejecutar **Rhino 3.0**, entonces:
+
+  - **[[http://en.wiki.mcneel.com/content/upload/files/REGISTER_MCNEELLM.zip|Descargue]]** y descomprima este archivo en la misma carpeta donde se encuentra **McNeelLM.exe**.
+  - Haga doble clic en el archivo **Register_McNeelLM.bat**.
+  - Usuarios de Windows Vista: haga clic con el botón derecho en el archivo y seleccione "Ejecutar como administrador".
+
+El archivo reproducirá los resultados en la línea de comando, indicando si el proceso se ha llevado a cabo correctamente o si ha fallado. Para confirmar que este método ha solucionado el problema, ejecute Rhino 3.0.
+====Rhino 4.0 y 5.0====
+Si el error se produce al intentar ejecutar **Rhino 4.0**, entonces:
+
+  - **[[http://en.wiki.mcneel.com/content/upload/files/REGISTER_RHINOLM.zip|Descargue]]** y descomprima este archivo en la misma carpeta donde se encuentra **RhinoLM.exe**.
+  - Haga doble clic en el archivo **Register_RhinoLM.bat**.
+  - Usuarios de Windows Vista: haga clic con el botón derecho en el archivo y seleccione "Ejecutar como administrador".
+
+El archivo reproducirá los resultados en la línea de comando, indicando si el proceso se ha llevado a cabo correctamente o si ha fallado. Para confirmar que este método ha solucionado el problema, ejecute Rhino.
+
+\\
+
+=====SOLUCIÓN 5 - Faltan archivos de soporte de la biblioteca runtime=====
+Si al ejecutar el archivo anterior aparece un error, **[[http://www.microsoft.com/en-us/download/details.aspx?id=26347|descargue]]** e instale las últimas bibliotecas runtime de Microsoft y vuelva a intentarlo.
+=====SOLUCIÓN 6 - Se está ejecutando un administrador de licencias errático=====
+Reinicie la máquina.  Los pasos anteriores pueden haber funcionado, pero un administrador de licencias errático en Windows puede causar problemas. ¿Funciona Rhino después de reiniciar?
+\\
+=====SOLUCIÓN 7 - Comodo Internet Security está bloqueando COM=====
+[[http://www.comodo.com/|Comodo Internet Security]] - Hemos detectado que Comodo puede bloquear las comunicaciones COM entre procesos con Rhino y el administrador de licencias. Puede saber si está ejecutando Comodo comprobando estas [[https://help.comodo.com/topic-72-1-284-2956-Starting-Comodo-Internet-Security.html|interfaces]]. Si tiene Comodo, siga estos pasos para desactivar este bloque:
+
+  - Vaya a la [[https://help.comodo.com/topic-72-1-284-2956-Starting-Comodo-Internet-Security.html|configuración de Comodo Intenet Security]]
+  - Haga clic en [[https://help.comodo.com/topic-72-1-284-2945-Defense+-Tasks---Introduction.html|Defense+ Settings]].
+  - Haga clic en la ficha [[https://help.comodo.com/topic-72-1-284-3039-Monitoring-Settings.html|Monitor Settings]]
+  - Desactive la casilla "Protected COM Interfaces".
+  - Pulse Aceptar para salir del diálogo.
+
+Ahora Rhino 4 debería funcionar correctamente.
+
+\\
+=====SOLUCIÓN 8 - Problema de seguridad del registro de Windows Vista=====
+Si el módulo del administrador de licencias de la versión de Rhino que está utilizando está presente y el módulo esta registrado, puede que no tenga suficientes derechos para leer el registro de Windows.
+
+Ejecute **Regedit.exe**. 
+
+//Si utiliza el Editor del registro incorrectamente, puede provocar problemas graves en todo el sistema que quizás requieran reinstalar Windows para corregirlos. Robert McNeel & Associates y Microsoft no garantizan que puedan solucionarse los problemas causados por el uso del Editor del registro. Utilice esta herramienta bajo su responsabilidad. Para obtener ayuda, póngase en contacto con el [[http://www.rhino3d.com/support|Soporte de McNeel]]//
+
+Una vez abierto, busque la clave **RhinoLicenseManager.RhinoLicense** en HKEY_CLASSES_ROOT. Por ejemplo:
+
+    - Busque **HKEY_LOCAL_MACHINE\Software\Classes**
+    - Haga clic con el botón derecho en **Clases** y luego en **Permisos**
+    - En la ficha Seguridad, en **Nombres de grupos o usuarios** verá al menos cuatro entradas de permisos. A veces, el problema de "No se puede comunicar con el administrador de licencias" se produce porque no hay permisos en la clave de registro "Clases".
+
+**Si <color blue>y SOLO SI</color> faltan permisos, agréguelos:**
+    - Haga clic en el botón **Agregar**.  
+    - Escriba **Creador Propietario** y haga clic en **Aceptar**.
+    - Seleccione **Creador Propietario** y desmarque todas las casillas de verificación de columna Permitir, en Permisos de la sección Creador Propietario:
+    - {{:rhino:classes_permissions_1.png|}}
+    - Haga clic en el botón **Agregar**.  
+    - Escriba **SISTEMA** y pulse **Aceptar**.
+    - Seleccione **SISTEMA** y marque la casilla de verificación **Control total** en la columna Permitir debajo de Permiso para SISTEMA:
+    - {{:rhino:classes_permissions_2.png|}}
+    - Haga clic en el botón **Agregar**.  
+    - Escriba **Administradores** y pulse **Aceptar**.
+    - Seleccione **Administradores** y marque la casilla de verificación **Control total** en la columna Permitir debajo de Permiso para Administradores:
+    - {{:rhino:classes_permissions_3.png|}}
+    - Escriba **Usuarios** y pulse **Aceptar**.
+    - Seleccione **Usuarios** y marque la casilla de verificación **Lectura** en la columna Permitir debajo de Permiso para Usuarios:
+    - {{:rhino:classes_permissions_4.png|}}
+    - Haga clic en el botón **Avanzada**.
+    - En el cuadro de diálogo "Configuración de seguridad avanzada" de Clases, seleccione **Reemplazar los permisos de todos los objeto descendientes con permisos heredables de este objeto**.
+    - En el cuadro de diálogo "Configuración de seguridad avanzada" de Clases, seleccione **Incluir todos los permisos heredables del objeto primario de este objeto**.
+    - {{:rhino:classes_permissions_5.png|}}
+   - Haga clic en **Aceptar**. La operación puede tardar varios minutos en completarse.
+    - En **Permisos** del cuadro de diálogo Clases, haga clic en **Aceptar**
+  
+Si los pasos anteriores siguen sin funcionar, es posible que tenga que ejecutar RegEdit como cuenta del sistema usando [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]]. Descargue psexec i ejecute //psexec -i -d -s c:\windows\regedit.exe//
+  
+Ahora debería poder ejecutar Rhino y comunicarse con el administrador de licencias.
