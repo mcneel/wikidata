@@ -1,0 +1,204 @@
+====== Mac Rhino - Häufig gestellte Fragen ======
+
+--> Mac Rhino hat ein Zeitlimit. Was passiert, wenn es abläuft?#
+
+Das Ablaufen einer Version soll sicherstellen, dass alle Nutzer die jeweils letzte Version verwenden und keine Fehler berichten, die schon behoben sind. 
+
+Bevor eine WIP-Version von Rhino Mac abläuft, steht Ihnen bereits eine neue zum [[http://www.rhino3d.com/download/wenatchee/5.0/wip|Download]] bereit. Mac Rhino sucht bei jedem Start nach WIP-Aktualisierungen und meldet, wenn eine neue Version erhältlich ist. Zudem wird jedes Mal eine Nachricht im [[http://discourse.mcneel.com/category/rhino-for-mac|Rhino-Mac-Bereich]] des [[http://discourse.mcneel.com/ |Discourse-Forums]] gepostet, wenn eine neue WIP-Version verfügbar ist.
+
+<-- 
+
+-->Sind die Rhino-Mac-Dateien kompatibel mit der Windows-Version?#
+
+Ja, die Rhino-5-Dateien sind identisch. Sie können auch Rhino-4-Dateien exportieren, um so Kompatibilität mit der Windows-Version von Rhino 4 zu erhalten.
+
+<-- 
+
+-->Kann ich meine Zweitasten-/Dreitasten-Maus mit der Mac-Version verwenden?#
+
+Ja, alle Mac-Computer unterstützen standardmäßig Mehrtastenmäuse mit Scrollrad. Sie können aber auch eine Mac-Eintastenmaus verwenden. Zur Simulierung eins Rechtsklicks halten Sie einfach die Kontrolltaste gedrückt, während Sie die Maustaste drücken.
+
+<-- 
+
+-->Kann ich meinen Spaceball/SpaceNavigator/SpaceExplorer mit der Mac-Version verwenden?#
+
+Zurzeit wird nur der SpaceNavigator unterstützt.
+
+<--
+ 
+
+
+-->Was funktioniert nicht? Wieso erhalte ich die Fehlermeldung "Unbekannter oder nicht implementierter Befehl"?#
+
+Wir planen, so viele Funktionen wie praktisch möglich von der Windows-Version auf die Mac-Version zu portieren, wobei jedoch die WIP-Versionen noch nicht alle Features implementiert haben. Im [[http://www.rhino3d.com/nr.htm|Software-Entwicklungsprozess]] der Windows-Version können Sie sehen, wie wir neue Produkte einführen. Bei der Entwicklung der Mac-Version gehen wir genau gleich vor. Momentan befinden wir uns in [[http://www.rhino3d.com/nr.htm#phase1|Phase 1: Work-in-Progress]]. 
+
+Auf [[rhino:mac:whatworks|dieser Webseite]] sehen Sie, was bereits funktioniert und was noch implementiert werden muss.
+
+<-- 
+
+-->Gibt es die Mac-Version auch in anderen Sprachen als Englisch?#
+
+Ja. Momentan werden Deutsch, Spanisch, Französisch, Italienisch, Chinesisch und Japanisch unterstützt. Da es sich aber noch um eine Work-in-Progress-Version handelt, gibt es noch Lücken in der Lokalisierung. 
+
+Mac Rhino verwendet die standardmäßige Sprachauswahl, die in Ihrem Mac aktiv ist. Um eine Sprache zu verwenden, die von derjenigen des Betriebssystems abweicht, gehen Sie im Anwendungsmenü auf:
+  - **Rhinoceros** und anschließend auf **Eigenschaften**.
+  - Wählen Sie den **Spracheinstellungen** Ihre Sprache aus.
+
+<-- 
+-->Wie deinstalliere ich Mac Rhino?#
+
+Die folgenden Schritte entfernen Mac Rhino vollständig von Ihrem Computer:
+
+  - Entfernen Sie das Programm im Anwendungsordner.
+  - Entfernen Sie das Verzeichnis **/Library/Application Support/McNeel**. Dieses Verzeichnis enthält die Tutorialmodelle und Handbücher, wenn Sie sie heruntergeladen haben. Anderenfalls existiert es nicht auf Ihrem Computer.
+  - Entfernen Sie das Verzeichnis **~/Library/Application Support/McNeel** in Ihrem Home-Verzeichnis. Dieses Verzeichnis wird von Rhino optional verwendet und existiert auf Ihrem Computer eventuell ebenfalls nicht. Darin werden Toucan-Materialien, Python-Skripts und andere Mac-Rhino-Plug-ins gespeichert.
+  - Entfernen Sie die Datei **~/Library/Preferences/com.mcneel.rhinoceros.plist** in Ihrem Home-Verzeichnis. Diese Datei enthält all Ihre Rhino-Eigenschaften.
+
+<-- 
+
+-->Kann ich in der Mac-Version Skripts und Plug-ins ausführen?#
+
+-->Kann ich in der Mac-Version ein Befehls-Skript ausführen?#
+
+Ja. Um ein Befehlsskript zu laden und auszuführen, wählen Sie im Rhino-Menü **Werkzeuge > Befehle > Lesen von Datei**.
+ 
+<--
+
+-->Kann ich in der Mac-Version ein RhinoScript-Programm ausführen?#
+
+Nein. RhinoScript basiert auf VisualBasic und VisualBasic läuft nicht unter OS X. Wir verwenden Python sowohl für die Mac- als auch für die Windows-Version zum Skripting, so dass Sie auf diese Weise Skripts für beide Versionen schreiben können. Im [[http://discourse.mcneel.com/category/scripting |Rhino-Scripting-Support-Forum]] finden Sie Hilfe sowohl für Windows als auch OS X.
+
+<--
+
+
+-->Werden Plug-ins von Drittentwicklern unter Rhino für Mac funktionieren?#
+
+Vielleicht. In jedem Fall funktionieren die Windows-Plug-ins nicht auf dem Mac. Die Entscheidung, ob ein Plug-in auf den Mac portiert wird, trifft jeder Plug-in-Entwickler selbst.
+<--
+ 
+-->Wird die Mac-Version mein C-Plug-in unterstützen?#
+
+Ist geplant. Wir haben im Moment noch keinen Benutzersupport für C-Plug-ins, haben dies aber für die Zukunft geplant. Sie müssen dabei Ihr Plug-in mit dem Mac-Entwicklungssystem neu kompilieren. Je nach Komplexität Ihres Plug-ins kann so relativ einfach ein Plug-in erzeugt werden, das sowohl unter Windows als auch auf dem Mac kompiliert und ausgeführt werden kann.
+
+<--
+
+-->Wird die Mac-Version mein .NET-Plug-in unterstützen?#
+
+Ist geplant. Wir arbeiten an Werkzeugen, mit denen Entwickler Plug-ins schreiben können, die sowohl unter OS X als auch Windows laufen.
+
+<-- 
+<--
+
+-->Wann erscheint Mac Rhino offiziell auf dem Markt?#
+
+Das wissen wir noch nicht. McNeel & Associates folgt einem etwas unüblichen Entwicklungsprozess. Wir veröffentlichen unvollständige Versionen unserer Software, um Feedback zu erhalten. Mac Rhino folgt dabei demselben Entwicklungsprozess wie es auch bei der [[http://www.rhino3d.com/nr.htm|Windows-Entwicklung]] üblich ist.
+
+<--
+ 
+-->Erhalte ich beim Kauf von Rhino für Windows eine Version von Rhino für Mac kostenlos? Wie wird die Cross-Upgrade-Politik aussehen?#
+
+Wir haben noch keine Entscheidung über eine Upgrade-Politik getroffen.
+
+====== Probleme ======
+-->Wie kann ich ein Problem melden?#
+
+Mehr Infos dazu finden Sie in der Rubrik [[reportingproblems|Fehlerberichte]].
+
+<--
+
+-->Installationsprobleme#
+
+-->Muss ich Rhino deinstallieren, bevor ich eine neuere Version installiere?#
+
+Nein. 
+
+<-- 
+
+-->Ich kann Rhino nicht installieren. Was soll ich jetzt tun?#
+
+Überprüfen Sie, ob die heruntergeladene DMG-Datei gültig ist. Dateien können manchmal beim Download beschädigt werden.
+
+  - Starten Sie das Festplatten-Dienstprogramm **/Applications/Utilities/Disk Utility**
+  - Wählen Sie im Menü **Bilder > Überprüfen ...**.
+  - Wählen Sie im sich öffnenden Dialogfenster die heruntergeladene DMG-Datei aus. Sie befindet sich normalerweise im Download-Ordner und heißt rhinoceros_wip_YYYYMMDD.dmg
+  - Wenn die heruntergeladene Datei ungültig ist, fordern Sie einen neuen [[http://www.rhino3d.com/download/wenatchee/5.0/wip|Download]] der Datei an.
+
+<-- 
+
+-->Ich habe die neueste Rhino-Version installiert und erhalte die Meldung, dass sie abgelaufen ist. Was nun?#
+
+Sie haben mehr als eine Rhino-Kopie installiert und es wird immer noch die abgelaufene Version gestartet. Entfernen Sie **alle** Rhino-Kopien. 
+
+Versuchen Sie, eine 3DM-Datei zu öffnen. Wenn die Datei in Rhino geöffnet wird, ist irgendwo noch eine Kopie installiert. 
+  - Klicken Sie mit der rechten Maustaste auf das Rhino-Symbol im Dock und suchen Sie seinen Speicherort über **Optionen > Im Finder anzeigen**.
+  - Ziehen Sie diese Kopie in den Papierkorb. 
+  - Wenn keine Rhino-Kopien mehr vorhanden sind, öffnet ein Doppelklick die 3DM-Datei mit dem Text-Editor. Dies bedeutet, dass alle Rhinoceros-Kopien entfernt wurden.
+  - Installieren Sie nun erneut die heruntergeladene Version.
+
+<--
+ 
+-->Wenn ich Rhino in den Anwendungsordner ziehe, erscheint eine Meldung, dass es nicht installiert werden kann, weil das BGHUDAppKit bereits ausgeführt wird. Irgendwelche Vorschläge?#
+
+Dies ist ein Fehler im Finder 10.7. Dieser überprüft nicht ordentlich, ob eine Anwendung überschrieben werden kann, bevor die Kopie ausgeführt wird. Es kann vorkommen, dass Sie diese Meldung oder eine Fehlermeldung bezüglich Info.plist erhalten.
+
+Leider hat der Finder in diesem Moment bereits einen Teil von Rhino entfernt, dabei aber die neue Version nicht installiert.  Das bedeutet, dass Ihre aktuelle Kopie von Rhinoceros beschädigt ist und beim Ausführen abstürzt.
+
+Wenn Sie es ein zweites oder drittes Mal mit Drag&Drop versuchen, funktioniert es schließlich. Sie können auch Ihre vorhandene Kopie von Rhinoceros aus dem Anwendungsordner in den Papierkorb ziehen, bevor Sie eine neue Version installieren. Dadurch hat der Finder dann kein Problem beim Versuch, die vorhandene Version zu überschreiben.
+ 
+Der Finder 10.8 erledigt diese Aufgabe korrekt. Ein Update auf die Version 10.8 ist somit ein weiterer Workaround.
+
+<-- 
+<--
+
+-->Mac Rhino ist abgestürzt! Was mache ich jetzt?#
+
+Mehr dazu unter [[macrhinocrash|Rhino stürzt ab - was nun?]]
+
+<--
+ 
+-->In der aktuellen Version von Mac Rhino tritt ein Problem auf. Ich möchte die vorherige Version herunterladen.#
+
+Vorherige WIP-Versionen von Mac Rhino sind leider nicht mehr verfügbar. Mac Rhino ist ein Work-in-Progress-Testprogramm, bei dem wir Sie um Ihre Mithilfe in Form von Fehlermeldungen bitten. Im Eintrag [[reportingproblems|Fehlerberichte für Mac Rhino]] finden Sie weitere Informationen, wie Sie ein Problem melden können, damit wir es in der nächsten Version beheben.
+
+<-- 
+
+-->Ich habe eine Nachricht mit einem Hinweis auf einen "Programmfehler" erhalten und nun funktioniert Mac Rhino nicht mehr.#
+
+Wenn Mac Rhino auf eine unerwartete Situation trifft, wird ein Dialog mit der allgemeinen Nachricht "Programmfehler" angezeigt. Nach diesem Fehler wird Mac Rhino intern heruntergefahren und Sie können nun keine Befehle oder Menüoptionen mehr ausführen. Sie können nun nur noch Ihre Datei speichern und Mac Rhino beenden. Bitte lassen Sie es uns wissen, wenn dies auftritt. 
+Bei der Arbeit mit Rhino kann folgende Meldung angezeigt werden:
+
+Rhino zeigt diese allgemeine Nachricht in verschiedenen Situationen an. Momentan sind noch nicht alle Funktionen der Windows-Version in Mac Rhino implementiert und Sie erhalten diese Nachricht, wenn Sie versuchen, eine noch nicht implementierte Funktion zu nutzen. Zudem gibt es Teile des Codes, die nur in der Windows-Version verwendet werden sollen. Wenn irgendeine Aktion einen Teil dieses Codes aufzurufen versucht, erhalten Sie ebenfalls eine Fehlermeldung. Schließlich gibt es noch zahlreiche Debugging-Tests in diesem frühen Stadium des Codes und auch hier wird eine Fehlermeldung angezeigt, wenn ein interner Test auf eine Situation trifft, die so nicht eintreten sollte.
+
+{{:rhino:mac:notimpl.png?nolink|}}
+
+Wenn Ihnen eine dieser Fehlermeldungen angezeigt wird, schreiben Sie sich den Dateinamen, die angegebene Zeilennummer und die Versionsinformation des Dialogs auf. Senden Sie diese Informationen zusammen mit einer Beschreibung dessen, was Sie gerade taten, als die Meldung erschien, an unsere E-Mail-Adresse <mactech@mcneel.com>. Wir werden versuchen, Ihr Problem zu reproduzieren und eine Lösung zu finden, damit es in Zukunft nicht mehr auftritt.
+
+Nach Erhalt dieser Meldung wird die Funktionalität von Rhino extrem eingeschränkt. Sie können dann nur noch Ihre Arbeit speichern und das Programm beenden.
+
+<-- 
+
+
+--> Ich möchte meine letzte Aktion mit einem Rechtsklick wiederholen. #
+
+Durch Deaktivierung des Kontextmenüs können Sie diese Funktionalität erhalten.
+
+  - Klicken Sie im Menü auf **Rhinoceros** und anschließend auf **Eigenschaften**.
+  - Wählen Sie den Abschnitt **Maus**.
+  - Deaktivieren Sie im Abschnitt **Rechte Maustaste** die Option **Kontextmenüs aktivieren**.
+
+<--
+
+-->Ich möchte durch Rechtsklick den sekundären Befehl einer Werkzeugleistenschaltfläche ausführen.#
+
+Mit manchen Schaltflächen sind zwei Befehle verknüpft. Diese werden im Tooltipp angezeigt.
+Standardmäßig können Sie den alternativen Befehl ausführen, indem Sie beim Klick die Wahltaste gedrückt halten.
+
+  - Klicken Sie im Menü auf **Rhinoceros** und anschließend auf **Eigenschaften**.
+  - Gehen Sie zum Abschnitt **ToolPalette**.
+  - Definieren Sie die Einstellung für **Alternativen Befehl ausführen wenn**. Werkzeugleisten und Werkzeuge behandeln Rechtsklicks auf dieselbe Art und Weise.
+
+**Hinweis:** Wenn Sie einstellen, dass ein Rechtsklick den alternativen Befehl ausführt, können Sie die Dokumentenwerkzeugleiste nicht länger durch Rechtsklick einstellen.  Dazu müssen Sie dann das Menü "Ansicht/Werkzeugleiste anpassen" verwenden.
+
+Auf dem Mac wird durch Rechtsklick (oder Kontrollklick) standardmäßig //immer// ein Kontextmenü geöffnet.  Im Abschnitt ToolPalette können Sie dies nach Ihren Wünschen einstellen.
+
+<--
