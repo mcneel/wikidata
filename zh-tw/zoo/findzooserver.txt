@@ -24,18 +24,27 @@ Type:  REG_SZ
 Value: <host name or IP address>
 </code>
 
-====註冊表查找-目前使用者====
+====註冊表查找-Local Machine====
 
-若您查找登錄編輯程式HKEY_CURRENT_USE的Zoo server名稱或IP位置。Rhino 32及64位元版本皆會尋找這個位置：
+若您使用32位元Windows作業系統，查找登錄編輯程式HKEY_CURRENT_USE的Zoo server名稱或IP位置。Rhino 32位元程式會尋找下列位置：
 
 <code>
-Hive:  HKEY_CURRENT_USER
+Hive:  HKEY_LOCAL_MACHINE
 Key:   Software\McNeel\Rhinoceros\5.0\License Manager
 Name:  Server
 Type:  REG_SZ
 Value: <host name or IP address>
 </code>
 
+若您使用64位元Windows作業系統，查找登錄編輯程式HKEY_CURRENT_USE的Zoo server名稱或IP位置。Rhino 32及64位元程式__皆__會尋找下列位置：
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <host name or IP address>
+</code>
 ====使用DNS====
 若Rhino 5無法通過登錄編輯程式確認您的Zoo 5伺服器主機名稱，則會查詢您的DNS伺服器名稱為Zoo預設名稱，以下則是主機名稱：
 
