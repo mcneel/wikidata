@@ -9,7 +9,7 @@ public class CaptureViewToBitmapCommand : Rhino.Commands.Command
     get { return "csCaptureViewToBitmap"; }
   }
 
-  protected override Rhino.Commands.Result RunCommand(RhinoDoc doc, Rhino.Commands.RunMode mode)
+  protected override Result RunCommand(RhinoDoc doc, RunMode mode)
   {
     var file_name = "";
 
@@ -46,7 +46,7 @@ Public Class CaptureViewToBitmapCommand
     End Get
   End Property
 
-  Protected Overrides Function RunCommand(doc As RhinoDoc, mode As Rhino.Commands.RunMode) As Rhino.Commands.Result
+  Protected Overrides Function RunCommand(doc As RhinoDoc, mode As RunMode) As Result
     Dim file_name = ""
 
     Dim bitmap = doc.Views.ActiveView.CaptureToBitmap(True, True, True)
@@ -57,7 +57,8 @@ Public Class CaptureViewToBitmapCommand
     ' save bitmap to file
     Dim save_file_dialog = New Rhino.UI.SaveFileDialog()
     save_file_dialog.Filter = "*.bmp"
-    save_file_dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+    save_file_dialog.InitialDirectory =
+      Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 
     If save_file_dialog.ShowDialog() = DialogResult.OK Then
       file_name = save_file_dialog.FileName
@@ -91,7 +92,8 @@ def RunCommand():
   # save bitmap to file
   save_file_dialog = Rhino.UI.SaveFileDialog()
   save_file_dialog.Filter = "*.bmp"
-  save_file_dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+  save_file_dialog.InitialDirectory = \
+    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 
   if save_file_dialog.ShowDialog() == DialogResult.OK:
     file_name = save_file_dialog.FileName
