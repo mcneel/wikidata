@@ -1,0 +1,37 @@
+====== Rhino 5 Zoo於網路服務器上啟動失敗 ======
+> **產品：** //[[zh-tw:zoo:zoo5|Zoo 5]]//
+> **摘要：** //Zoo 5需要使用TCP埠80。 requires access to TCP Port 80. This is not possible on systems with Web Services running.//
+
+===== 問題 =====
+當我重新開啟我的伺服器時，Zoo 5服務並未被啟動。我檢查了Windows事件日誌(控制台->系統管理工具->事件檢視器)，我可以看到Zoo 5服務登入錯誤如下：
+
+<code>
+The Zoo 5.0 service on the Local Computer started and then stopped.
+Some services stop automatically if they are not in use by another
+service or program.
+</code>
+
+在 Windows 事件日誌中，檢查詳細資訊的錯誤，可看到下列報告：
+
+<code>
+Address already in use by another process.
+Run 'netstat -o -n -a' from a command line to find the conflicting
+process ID, then look in Task Manager to find the name of that process.
+</code>
+
+  - 在命令列執行**NETSTAT -ano**，記下您想要開放的PID號埠。
+  - 從工作管理員可以看到哪些程式具有 PID，你可以了解哪些程式正在使用該埠。
+
+這個錯誤的主因是正有其他應用程式已佔用埠80，一次只有一個應用程式可以使用埠80，所以Zoo無法正常使用，一般來講會常見的應用程式會影響到的埠80如下：
+
+  * [[http://www.iis.net/|Internet Information Services (IIS) for Windows® Services]]
+  * [[http://httpd.apache.org/|Apache HTTP Server]]
+  * [[http://www.java.com|Java]]
+  * [[zoo:zooskype|Skype]]
+===== 解決方式 =====
+  - 把Zoo移到另一台沒有執行其他網路服務的主機。可以是一台列印伺服器、另一個保持開啟的電腦工作站或是另外一個虛擬主機。
+  - 將其他的網路服務配置到不同埠，Apache及IIS皆可配置到不同的埠運行。
+
+\\
+
+{{tag>Zoo5}}
