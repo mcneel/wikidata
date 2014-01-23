@@ -1,0 +1,59 @@
+======Rhino 5がZooサーバーを検出する方法======
+> **製品:** //[[ja:zoo:zoo5|Zoo 5.0]]//
+> **要約:** //Rhino 5がZoo 5.0ライセンスマネージャのサーバーを検出する方法の概要//
+
+=====概要=====
+同じサブネットにあれば自動的にZoo 4.0サーバーを検出できたRhino 4.0とは異なり、Rhino 5にはZoo 5.0サーバーの名前が必要です。
+
+Rhino 5はZoo 5.0サーバーのライセンスが必要な時、次の場所を順番に検索してZoo 5.0サーバーの名前を見つけ出します。
+  - Windowsレジストリのローカルコンピューター ハイブでZooサーバーのホスト名またはIPアドレスを検索します。
+  - Windowsレジストリの現在のユーザー ハイブでZooサーバーのホスト名またはIPアドレスを検索します。
+  - ドメインネーム システム（DNS）サーバーでデフォルトのZooサーバー名 を照会します。
+ 
+
+=====詳細=====
+
+====レジストリ参照 - ローカルコンピューター====
+32ビット版Windowsをお使いでWindowsレジストリのHKEY_LOCAL_MACHINEでZooサーバーのホスト名またはIPアドレスを検索する場合、Rhino 5の32ビット版は以下の場所を検索します。
+
+<code>
+ハイブ:  HKEY_LOCAL_MACHINE
+キー:   Software\McNeel\Rhinoceros\5.0\License Manager
+名前:  Server
+種類:  REG_SZ
+値: <ホスト名またはIPアドレス>
+</code>
+
+64ビット版Windowsお使いでWindowsレジストリのHKEY_LOCAL_MACHINEでZooサーバーのホスト名またはIPアドレスを検索する場合、Rhino 5の32ビット版と64ビット版の両方が以下の場所を検索します。
+
+<code>
+ハイブ:  HKEY_LOCAL_MACHINE
+キー:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
+名前:  Server
+種類:  REG_SZ
+値: <ホスト名またはIPアドレス>
+</code>
+
+====レジストリ参照 - 現在のユーザー====
+
+WindowsレジストリのHKEY_CURRENT_USERでZooサーバーのホスト名またはIPアドレスを検索する場合、Rhino 5の32ビット版と64ビット版の両方が以下の場所を検索します。
+
+<code>
+ハイブ:  HKEY_CURRENT_USER
+キー:   Software\McNeel\Rhinoceros\5.0\License Manager
+名前:  Server
+種類:  REG_SZ
+値: <ホスト名またはIPアドレス>
+</code>
+
+====DNSを使用====
+Rhino 5がWindowsレジストリを検索してもZoo 5.0サーバーの名前を見つけ出すことができなかった場合は、DNSサーバーに以下のホスト名のデフォルトZooサーバーを照会します。
+
+<code>
+__mcneel.__zoo5
+</code>
+
+例えば会社のドメインが"mycorp.com"の場合、Zooサーバーを示す<nowiki>"__mcneel.__zoo5.mycorp.com"</nowiki>のDNSエイリアスを追加することができます。
+\\
+
+{{tag>Zoo5}}
