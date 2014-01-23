@@ -1,0 +1,64 @@
+====== Läuft Rhino auf Vista? ======
+> **Zusammenfassung:** //Ja, aber es gibt ernsthafte Probleme. Fügen Sie Ihre Erfahrungen dem Bericht hinzu.//
+
+=====Überblick=====
+
+Rhino läuft auf Windows Vista, aber die Leistung der 3D-Anzeige (OpenGL) kann schlechter sein als auf Windows XP oder 2000, mit der gleichen Hardware.[[http://www.tomshardware.com/2007/01/29/xp-vs-vista/page6.html|Unabhängige Leistungseinschätzung]] zeigt entmutigende Resultate für andere CAD-Applikationen, die [[rhino:opengl|OpenGL]] verwenden.
+
+Vista verfügt ebenfalls über neue Sicherheitseigenschaften, die einige zusätzliche Sicherheitsnachrichten während des Programmstarts aufrufen könnte.
+
+Unser Plan ist es, in einer zukünftigen 4.0 Service Release [[labs:directx|DirectX]] auf Vista zu unterstützen.
+
+Außer Microsoft verbessert den OpenGL-Support, wird Rhino 3.0 nie richtig auf Vista funktionieren, ohne spezielle Videoanzeige-Treiber, die die OpenGL-Anzeige beschleunigen.
+
+
+=====Video und beschleunigte 3D-Anzeige=====
+
+Rhino 3.0 und 4.0 verwenden [[rhino:opengl|OpenGL]] für beschleunigte 3D-Anzeige.[[rhino:opengl|OpenGL]] kann eine Grafik-Beschleunigerkarte verwenden, um die Leistung der 3D-Anzeige zu verbessern.
+
+**Nicht-beschleunigtes OpenGL**
+
+Nicht-beschleunigtes OpenGL, manchmal auch [[rhino:opengl|OpenGL]] Software Emulation oder Standard [[rhino:opengl|OpenGL]] genannt, wird auf Windows Vista unterstützt.Rhino läuft mit nicht-beschleunigtem OpenGL, aber weil es nicht beschleunigt ist, kann es recht langsam sein - vor allem mit großen Modellen.
+
+Windows Vista unterstützt kein beschleunigtes [[rhino:opengl|OpenGL]] direkt und einige Videokarten-Hersteller verfügen über keine Treiber für ihre Karten.Wir wissen nicht, ob Treiber, die beschleunigtes [[rhino:opengl|OpenGL]] unterstützen, je für diese Karten erhältlich sein werden.
+
+**Aktualisierung von XP auf Vista**
+
+Sie haben vielleicht eine OpenGL-Karte, die hervorragende 3D-Beschleunigung unter Windows XP bietet.Sollte ein Treiber nicht für Vista erhältlich sein, könnte eine Aktualisierung auf Vista die Vorteile Ihrer OpenGL-Karte reduzieren oder beseitigen. Das bedeutet, dass Rhinos 3D-Anzeige unter Vista mit der gleichen Hardware schlechter als unter XP sein könnte.
+
+**Neue Computer mit Vista**
+
+Wenn Sie einen neuen Computer mit Vista kaufen, vergewissern Sie sich zu überprüfen, ob ein OpenGL-Treiber für die ausgewählte Videokarte erhältlich ist.Sollte er nicht vorhanden sein, könnten Rhinos Anzeige sehr langsam sein.
+
+**Grafiktreiber für Vista**
+
+[[http://www.nvidia.com/content/drivers/drivers.asp|nVidia]] und [[http://ati.amd.com/support/driver.html|ATI]] veröffentlichen regelmäßig aktualisierte Treiber, um Anzeigeprobleme in Vista mit ihrer Hardware zu beheben.Werfen Sie einen Blick auf ihre Webseite und vergewissern Sie sich, dass ihre Vista-Treiber mit Ihrer Hardware funktionieren.
+
+<color blue>Rhino 4 Fehlerbehebung</color>: Die erste Rhino 4 Service Release enthält mehrere Problembehebungen der Anzeige, die erlauben, dass Rhino beschleunigte Grafiken richtig auf Vista verwendet.In der Zwischenzeit können Sie eine der folgenden zwei Optionen ausprobieren:
+
+  * Option 1: Klicken Sie mit der rechten Maustaste auf die rhino4.exe Applikationsdatei und gehen Sie auf "Compatibility". Klicken Sie auf 'Disable desktop composition'. So wird Vista zu einem XP ähnlichen Desktop gezwungen.
+  * Option 2: Verwenden Sie das [[labs:directx|DirectX Anzeige-Plug-in]] , das über Rhino Labs erhältlich ist.
+
+=====Sicherheit=====
+
+  * Die Anzahl Popup-Sicherheitswarnungen und andere Sicherheitshindernisse werden für viele Vista-Benutzer entmutigend sein.Rhino könnte einige Sicherheitswarnungen beim Programmstart anzeigen, wird aber sonst normal funktionieren.
+  * <color blue>Rhino 4 Fehlerbehebung</color>: Die Popup-Sicherheitswarnung, die Benutzer sehen, wenn Sie Rhino starten, wird durch den Mechanismus zur Aktualisierungssuche, der beim Programmstart ausgeführt wird, verursacht.Bei der anfänlichen Release von Rhino 4 ist ein versteckter Befehl namens TestDisableCheckForUpdates vorhanden, mit dem Sie die lästigen Sicherheitswarnungen ausschalten können.Wenn Sie diesen Befehl ein zweites Mal ausführen, wird dieser Mechanismus zur Aktualisierungssuche erneut aktiviert.Dieses Problem wird in der ersten Service Release von Rhino behoben sein.Wenn Sie diesen Mechanismus deaktivieren, sollten Sie den Befehl zum Suchen nach Aktualisierungen, der sich im Menü Hilfe befindet, regelmäßig ausführen.
+
+=====Speicher=====
+
+Vista verwendet mehr Speicher als XP.Während der gesamte Speicherplatz, der für einen Prozess erhältlich ist, unverändert bleibt, wird das erhältliche RAM mit Vista geringer sein.Wenn Sie also auf Windows XP Probleme mit dem Speicher bei der Verwendung von Rhino 3.0 haben, wird das in Vista schlimmer.Der maximale RAM-Speicher, den Rhino 3.0 auf Vista verwenden kann, beträgt 2GB.
+
+Rhino 4.0 wurde aber kompiliert, um 3GB RAM zu verwenden, falls erhältlich.Wenn 3GB erhältlich sind, kann Rhino diese sowohl auf Windows XP wie auch auf Windows Vista verwenden. XP verwendet weniger Speicher, also wird mehr Speicher mit XP als mit Vista erhältlich sein.
+
+Wenn Speicher für Sie sehr wichtig ist, wird XP mehr erhältlich machen für Rhino als Vista.
+
+=====Rhino 3.0=====
+
+Es gibt mehrere Probleme in Rhino 3.0 auf Vista, die nicht repariert werden.McNeel empfiehlt eine Aktualisierung auf Rhino 4.0, wenn Sie Windows Vista verwenden.
+
+> **Probleme:** ////
+  * Die OpenGL-Anzeige könnte auf Vista langsamer sein als auf XP und es könnten beträchtliche Anzeigeprobleme vorhanden sein.
+  * Mehrere Dialogfenster erscheinen beim Programmstart mit der Nachricht, dass Rhino nicht in die Registrierung schreiben kann.
+  * Vista wird nicht mit WinHelp (WinHlp32.exe) geliefert. Die Hilfedatei von Rhino 3.0 ist eine WinHelp Datei, Sie werden sie also nicht auf Vista sehen, außer Sie laden die folgende Aktualisierung von Microsoft runter. **//[[http://www.microsoft.com:80/downloads/details.aspx?familyid=6ebcfad9-d3f5-4365-8070-334cd175d4bb&displaylang=en|Download WinHelp für Vista...]]//**
+
+
