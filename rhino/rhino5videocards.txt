@@ -1,0 +1,108 @@
+====== Video Card Recommendations for Rhino 5======
+
+**Note: We do not make any specific hardware recommendations or comparisons.**\\
+Also see these pages:
+  * [[http://wiki.mcneel.com/rhino/troubleshootingdisplayproblems?s[]=video&s[]=cards|Video Card Reviews]]
+  * [[http://wiki.mcneel.com/rhino/hardwarebaseline|Hardware Guidelines for Rhinoceros 5]]
+===== General Video Requirements =====
+Rhino has a fixed set of hardware requirements, and although some hardware configurations may work or perform better/worse than others, we believe that Rhino is flexible enough to run on almost any computer system you can buy today. Some of Rhino’s latest display features may not work or underperform on low-end computers or **inferior video cards like Intel (all models)**, but that will generally not prevent you from getting your work done. Unfortunately, the 13" Apple MacBook computers including the newly announced 13" "Retina", have this problematic Intel HD graphics chip and should be avoided.\\
+
+Rhino makes liberal use of the OpenGL graphics system within Windows. Most graphics cards on the market use DirectX and are designed for “game” usage. Many have spotty support for OpenGL with varying degrees of success. The best cards for Rhino are designed for “workstation graphics” and place a high emphasis on robust OpenGL support. That said, even a good card running bad drivers is a problem. **Keep your display driver up to date!**\\
+
+<color red> **Warning:**</color> Not all drivers create a Windows System Restore Point before installing. In the event the new drivers mess up your Windows configuration, it is **good insurance** to make a **System Restore Point** before updating any critical Windows system component.
+
+  * Rhino V4 requires OpenGL version 1.1
+  * Rhino V5 requires OpenGL version 2.0 and Shader version 1.2
+
+Notes from conversations with Jeff Lasor, Rhino Display/OpenGL Programmer
+
+===== Performance Benchmarks =====
+Driver writers spend months fine tuning their code in order to get certain benchmarks to yield better results. A given benchmark doesn’t prove anything, all it proves is that that specific benchmark ran better or worse on a specific GPU.
+
+Benchmarks do not show real world usage or performance of the GPU. 
+In other words, if one game runs better at some point on a card/GPU, that doesn’t mean that ALL games will now run better on that card. 
+
+It’s more likely that the benchmarks are mentioned or available simply because they were better.
+What about all of the other benchmarks where the card failed or was significantly less?
+
+Benchmarks are marketing tools, and are used to position a specific product so that it looks better than competitive products, and are not good measure of real world usage or performance. 
+
+**To get this kind of information, you need to participate in the user forums and get real user feedback and experience.** Consider posting a question to the [[http://discourse.mcneel.com/|Rhino User Forum]].
+ 
+===== Intel Graphics Cards and Rhino 5 =====
+**These cards are not recommended and you should avoid using them with Rhino.**
+
+If you already one of these cards, AND it’s the ONLY card in the system (i.e. not a hybrid) then we should encourage you to enable accelerated hardware modes and test. Rhino 5 may have disabled this setting automatically during installation.
+
+{{:rhino:rhino_opengl_options.png?400|}}
+
+//In Rhino, go to Tools-Options-OpenGL.//
+
+If after testing, your Rhino performance is better than when it is un-check (Software Emulation mode), keep it checked.
+Many Rhino 5 features use OpenGL like shaded or rendered display mode and analysis modes.
+The performance will not be great using those new features but they may work ok, which might be more desirable than not working at all.
+
+===== nVidia Quadro cards =====
+
+These are high end engineering level video cards. They consistantly have had good drivers and strong performance. If there is a card we have recommended over the long run this is it.\\
+Please see http://wiki.mcneel.com/rhino/videocards for additional **important** details.
+
+Some users have found that that Quadros behave better with Rhino if the nVidia control panel > Global settings page is set to use  **//Workstation App- Dynamic Streaming//** 
+
+
+===== Nvidia GeForce =====
+
+The Nvidia Geforce line of GT 200, 300, GTX 400 and GTX 500 line of video cards work fine with Rhino.
+
+The GT 200's and 300/s are based on an older chipset that is quite fast.  The new NVidia FERMI based GeForce cards (ie. GeForce FX 400 and 500 series) do work, but are not showing the performance increase we would expect from the more expensive cards. In fact, in some cases they have been slower then the 200 or 300 series cards.
+
+
+===== ATI Video =====
+Recent AMD/ATI 4/5/6k series Radeon HD cards are really proving to be nice cards for V5. Avoid the older earlier versions. They were intended for DIrectX only. But we are seeing that many times the bundled drivers with the cards are quite old. We recommend going to the ATI/AMD website and updating to the most recent drivers. The FirePro v7900 and v5900 cards are really very good.
+http://wiki.mcneel.com/rhino/videocards
+
+
+//Note: Several advanced users on the Rhino newsgroup have reported bad experiences with the FirePro v7900 in the area of antialiasing, so check the newsgroup before investing in one.//
+
+
+14 Nov, 2012 - We had a report from a user of a FirePro 8800 that the driver version 8.982 had a problem with shaded surfaces far from the origin, while the older version 8.911 drivers worked correctly
+
+===== FireGL 5800/7800/8800 =====
+Yes, both of these cards are nice. The 5800 is on a bit of the low-end for
+FirePro's, but it's still a good card. I have one here, but haven't really
+put it through rigorous test. The 7800 is their mid-range FirePro, with the
+8800 being their high-end (which is what I have and use here). Since I don't
+own a 7800, I can only assume it's going to be good, but so far, nothing
+leads me to think it wouldn't work. 
+
+===== New Drivers=====
+If you are using an nVidia Quadro 3800, make sure the drivers are up to date.
+
+For updated nVidia drivers look [[http://www.nvidia.com/Download/index.aspx?lang=en-us
+|here.]]
+
+For updated ATI drivers, look [[http://support.amd.com/us/Pages/AMDSupportHub.aspx
+|here.]] 
+
+Also do not do the automatic update from the Windows Display Properties. Go directly to the manufacture's web site and download the update driver. Typically it is an EXE that you run when the download is complete. 
+
+Make it easy to find by downloading it to the Desktop. After it is installed, delete or move it to the Recycle Bin.
+
+<color red> **Warning:**</color> Not all drivers create a Windows System Restore Point before installing. In the event the new drivers mess up your Windows configuration, it is **good insurance** to make a **System Restore Point** before updating any critical Windows system component.
+===== Crossfire =====
+Running two in Crossfire should only make things better...although I'm not sure if we will see the difference in Rhino.  Crossfire only really reveals itself when things are really pushing the card, like high resolution packed graphics and games requiring high frame rates.   Rhino just doesn't work that way...most of time (like 95%) Rhino's display just sits idle, doing nothing.
+
+===== Video Memory===== 
+However, we will highly recommend getting a card with as much video memory as possible...that will help with V5. So if you have a choice between a card with 1GB or one with 2GB, go with the 2GB.
+
+===== Two Video Cards===== 
+More on two display adapters.
+http://wiki.mcneel.com/rhino/twodisplayadapters
+
+===== The Latest and Greatest =====  
+You may also want to ask the Rhino user base what type of card they are using with Rhino 5 WIP. You do that on the Newsgroup. And you can link to it from the support page:
+http://www.rhino3d.com/support.htm
+
+===== The Nitty Gritty =====  
+Here is a link to another Wiki page with details about specific video cards; both good and bad.
+http://wiki.mcneel.com/rhino/videocards
