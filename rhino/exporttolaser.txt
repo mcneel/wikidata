@@ -1,0 +1,62 @@
+====== Preparing Files for Laser and Waterjet Cutters ======
+
+> **Summary:** //Tips and techniques for using Rhino 4.0 to prepare files for laser and waterjet cutting.//
+
+The two main types of laser cutters (Windows desktop/plotter and CNC/G-Code driven) require different preparation methods.
+
+=====Windows laser cutters=====
+
+Desktop/plotter-sized laser cutters work like Windows printers. Examples:
+
+  * [[http://www.epiloglaser.com/|Epilog]]
+  * [[http://www.ulsinc.com/english/laser_systems/laser_systems.html|Universal lasers]]
+
+In Rhino 4.0 printing is improved so you can simply print to the machine like you would with a normal paper printer, no special treatment or geometry conversion is necessary.
+
+**[[rhino:epilogrhino|White Paper on using Rhino 4.0 to drive an Epilog Laser]]**
+
+If the laser cutting is being done in-house, in most cases you will not need arc fitting or other geometry conversion. You can use any normal Rhino geometry.
+
+=====CNC-type laser or waterjet cutting=====
+
+Industrial G-Code-driven laser or waterjet cutters normally require a CAM product up front, although a few may take DXF files directly. Large industrial laser cutter examples:
+
+  * [[http://www.multicam.com/eng/Products/products.html|MultiCAM]]
+  * [[http://www.mazaklaser.com/products.html|Mazak]]
+
+Laser and Waterjet cutting may require the geometry from Rhino to be converted to lines and arcs, depending on the age and sophistication of the machine/software being used. Export file formats most commonly used are DXF, [[accurender:dwg|dwg]] and AI (AI, EPS, PDF).
+
+> **Note:** For Rhino 3 there is a [[http://www2.rhino3d.com/wip_plugins/import_PDF_m.rhp|PDF import plug-in]] available. The AI, EPS, and PDF reader for Rhino imports a broad range of files that have an EPS extension. You must have Rhino V3 SR4 to use this plugin.  **Rhino 4 imports PDF files directly.**  //To export PDF files, it is necessary to print to a PDF printer program (many available).//
+
+====Arcfitting====
+
+A great many industrial laser/waterjet cutter software/controllers **only** understand lines and arcs. Thus, in order to cut parts sucessfully, it is necessary to //convert// any free-form [[rhino:nurbs|NURBs]] curves (splines) that might be in your file into arcs and lines. By //convert//, we mean here that the spline curve is //approximated// by a polyline or polycurve containing only arc and line segments.  The approximation tolerance can be controlled by using the correct settings during the conversion process.  Approximating splines by a series of tangent (or nearly tangent) arcs is generally preferable to just polylines, because they allow for a more accurate cut with a smaller file and less possibility of slowdowns along the curves, especially with older machines.  Consult your service bureau if in doubt.
+
+You can use the Rhino **Convert** command for this process, commonly called "Arc Fitting". Set options as follows: **Output**=//Arcs//, **SimplifyInput**=//No//, **AngleTolerance**=//0//, and **Tolerance** to reasonable number for your model. Run the **Convert** command on all curves in the file you want to send to the cutter.
+
+> **Note:** //Convert has been improved for Rhino 4.0.//
+
+====Geometry repair and nesting====
+Overlaps, gaps, and duplicate curves will cause problems in cutting. The **CurveBoolean** command may work to clean some of these up, but may not entirely eliminate overlapping sections, and it will not fix gaps.  For small gaps, the CloseCrv command in Rhino 4 can be a quick fix for open curves that need to be closed (to be used with caution).
+
+If you need to nest many profiles together onto standard stock sheets, check out [[http://www.rhino3d.com/resources/display.asp?listing=1278|Mosaix]] or [[http://www.tdmsolutions.com/en/|RhinoNest]] , both of which run inside Rhino.
+
+====Export Settings====
+In Rhino 4, once the geometry has been correctly prepared, use the Rhino **Export** or **SaveAs** command. Select [[rhino:autocad|AutoCAD]] [[accurender:dwg|dwg]] or DXF file format, name the file and click Save. When the schemes selection box comes up, choose the **R12 Natural** scheme and hit OK.
+
+To check, open the [[accurender:dwg|dwg]] in [[rhino:autocad|AutoCAD]] or any other product that reads [[accurender:dwg|dwg]] or DXF. There should be only arcs and lines. This is one good way to get the most consistent results.
+
+If you do not need to convert to arcs and lines (if your laser/waterjet supplier can read splines), try the **2004 Natural** scheme.
+
+If the results are not what you want, [[scottd@mcneel.com|**please send a sample**.]] or post the problem to the Rhino newsgroup.
+
+
+----
+=====Laser Cutting of Fabric=====
+
+> **Comment:** //Laser cutting would work well for [cutting patterns into a **fabric materials** that will be used as a tablecloth]. Check out this site for a better idea of what can be done: http://www.synrad.com/search_apps/materials/Plastics.htm . Its simple enough to do sample so once you find someone local take a series of sample materials. Note typically this would be done with a low power laser under 100 watts (30 would probably do it) with this sort of power range be sure there is no metallic materials in the material because it wont be able to cut the metal element. One other thing to note with the right setting you would do better with a polyester type material rather than a cotton as the laser will cut the polyester and seal the edge at the same time. [Ken Miller - 2005-11-10]//
+
+> **Comment:** //With the new V4 print modes laser cutting directly out of rhino works wonderfully. No converting to line, polyline and arcs . Snappier to.//
+
+> **Comment:** //I think 30 watts is too much. We had prototypes made of .004" PET film done on a 35W CO2 laser and the edges were a bit singed. This is okay for initial prototypes but not for presentation. Even at 10 or 15 watts on a .003" beam, the operator probably still has to be careful with the power settings of the beam and travel speed of the head. [Jensen Didulo - 2005-11-10]//
+
