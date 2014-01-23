@@ -1,0 +1,59 @@
+======Come fa Rhino 5 a trovare un server Zoo?======
+> **Prodotto:** //[[zoo:zoo5|Zoo 5]]//
+> **Sommario:** //Panoramica sul metodo usato da Rhino 5 per trovare il server del gestore delle licenze Zoo 5.//
+
+=====Informazioni generali=====
+Diversamente da Rhino 4.0, che era in grado di individuare automaticamente il server dello Zoo 4.0 se questo si trovava sulla stessa subnet, Rhino 5 ha bisogno di sapere il nome del server dello Zoo 5.
+
+Quando Rhino 5 ha bisogno di una licenza da un server dello Zoo 5, esso determina il nome del server dello Zoo 5 cercando nei seguenti percorsi, nell'ordine:
+  - Cerca, nell'hive "Local Machine" del Registro di sistema di Windows, il nome host o indirizzo IP del server dello Zoo.
+  - Cerca, nell'hive "Current User" del Registro di sistema di Windows, il nome host o indirizzo IP del server dello Zoo.
+  - Richiede al server DNS (Domain Name System) il nome del server di default dello Zoo.
+ 
+
+=====Ulteriori informazioni=====
+
+====Ricerca nel Registro di sistema - Local Machine (computer locale)====
+Se state usando una versione a 32 bit di Windows, quando Rhino 5 a 32 bit va alla ricerca del nome host o indirizzo IP del server dello Zoo nell'hive HKEY_LOCAL_MACHINE del Registro di sistema di Windows, cerca qui:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Chiave:   Software\McNeel\Rhinoceros\5.0\License Manager
+Nome:  Server
+Tipo:  REG_SZ
+Valore: <nome host o indirizzo IP>
+</code>
+
+Se state usando una versione a 64 bit di Windows, quando __sia__ Rhino 5 a 32 bit che Rhino 5 a 64 bit vanno alla ricerca del nome host o indirizzo IP del server dello Zoo nell'hive HKEY_LOCAL_MACHINE del Registro di sistema di Windows, cercano qui:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Chiave:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
+Nome:  Server
+Tipo:  REG_SZ
+Valore: <nome host o indirizzo IP>
+</code>
+
+====Ricerca nel Registro di sistema - Current User (utente corrente)====
+
+Quando sia Rhino 5 a 32 bit che Rhino 5 a 64 bit vanno alla ricerca del nome host o indirizzo IP del server dello Zoo nell'hive HKEY_CURRENT_USER del Registro di sistema di Windows, cercano qui:
+
+<code>
+Hive:  HKEY_CURRENT_USER
+Chiave:   Software\McNeel\Rhinoceros\5.0\License Manager
+Nome:  Server
+Tipo:  REG_SZ
+Valore: <nome host o indirizzo IP>
+</code>
+
+====Uso del server DNS====
+Se Rhino 5 non riesce a determinare il nome del server dello Zoo 5 effettuando la ricerca nel Registro di sistema di Windows, richiede al server DNS il nome del server di default dello Zoo, che è il seguente nome host:
+
+<code>
+__mcneel.__zoo5
+</code>
+
+Se, per esempio, il dominio della vostra azienda è "mycorp.com", potete aggiungere un alias DNS di <nowiki>"__mcneel.__zoo5.mycorp.com"</nowiki> che indica il vostro server dello Zoo.
+\\
+
+{{tag>Zoo5}}
