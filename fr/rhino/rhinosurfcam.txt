@@ -1,0 +1,50 @@
+====== Rhino et Surfcam ======
+
+> **Sommaire:** //Trucs et conseils pour utiliser Rhino avec Surfcam//
+
+======Rhino et Surfcam======
+
+Rhino et Surfcam fonctionnent très bien ensemble, il s'agit d'ailleurs peut-être de l'une des meilleures combinaisons CFAO de modeleurs surfaciques. En effet, Rhino et Surfcam sont tous deux des modeleurs à base de NURBS, ils sont donc hautement compatible et complémentaire.
+
+L'interface de création de géométrie de Surfcam est plutôt limitée et difficile à utiliser et c'est là où Rhino excelle. Rhino peut donc être utilisé comme la façade de Surfcam, en réalisant toute la création et l'édition de géométrie dans Rhino et en transférant la géométrie dans Surfcam pour la programmation des trajets d'outils. C'est comme ça que j'utilise ces deux programmes. Le seul point négatif de cette association est que l'on perd les opérations réalisées dans Surfcam sur une pièce lorsque celle-ci est modifiée dans Rhino et réimportée dans Surfcam. Ce problème est cependant très petit par rapport aux avantages apportés par la puissance et la facilité d'utilisation de Rhino lors de la création et de l'édition des objets.
+
+Surfcam n'ouvre pas les fichiers de Rhino directement mais vous disposez de plusieurs options pour que la conversion entre les deux programmes soit fluide. Mon mode opératoire normal est d'ouvrir le fichier de Rhino et son équivalent dans Surfcam ouvert simultanément pendant tout le processus afin de pouvoir passer facilement de l'un à l'autre avec Alt+Tab.
+
+//<color gray>Nouveau développement! Un module  pour passer de Rhino à Surfcam est maintenant disponible !  Il ajoute le type de fichier de Rhino dans la boîte de dialogue Ouvrir de Surfcam et vous permet ainsi d'importer directement des fichiers de Rhino. Il semble prometteur pour le moment, même s'il reste quelques petits problèmes à résoudre. Un des avantages est que les noms des calques sont importés et il se pourrait que la traduction directe de Rhino vers Surfcam sera meilleure que 2 traductions Rhino vers IGES et IGES vers Surfcam. La section ci-dessous aura donc peut-être besoin de quelques ajouts/révisions. Je reviendrai publier des informations lorsque j'aurai fait plus de tests. Le module est en téléchargement gratuit, vous pouvez également le tester par vous-même.</color>//
+
+<color red>Bon, il semblerait que le module n'est plus disponible en ligne et que la page du fabricant en anglais a aussi disparu.  Pour le moment il ne reste donc plus que l'ancienne méthode qui consiste à utiliser le format IGES pour échanger les fichiers. Si de nouvelles possibilités voient le jour je les indiquerai ici.</color>
+
+=====Transférer de la géométrie de Rhino vers Surfcam=====
+
+Vous pouvez tout d'abord définir un bouton pour exporter à partir de Rhino. J'ai défini le bouton suivant pour exporter vers IGES :
+
+  ! //Select //Pause
+  //-Export "C:\surfcam\igs\AAA.igs surfcam //Enter
+
+//<color steelblue>Remarque - Le chemin du fichier peut être différent pour vous, suivant où vous avez installé Surfcam</color>//
+
+Ce bouton permet d'exporter toute la géométrie sélectionnée (s'il n'y a pas de sélection Rhino vous demandera d'en réaliser une) vers un fichier "presse-papiers" en utilisant le style iges/surfcam. Le fichier exporté est placé dans le dossier IGS de Surfcam. La version de la commande précédée d'un tiret exportera simplement la géométrie sélectionnée en remplaçant le fichier AAA.igs à chaque fois sans demander (ce n'est qu'un fichier presse-papier de toute façon). Il est aussi possible de créer un raccourci clavier dans Rhino pour faire la même chose.
+
+Dans Surfcam, tout ce que vous devez faire est de choisir Fichier > Ouvrir, sélectionnez le type IGES, vérifiez que "append" est coché, cherchez  AAA (sûrement au début de la liste) et double cliquez dessus. Votre géométrie de Rhino sera alors fusionnée dans le fichier de Surfcam. Après la première fois, c'est encore plus facile car le fichier AAA sera déjà dans la boîte de dialogue de Surfcam.
+
+Ainsi, une fois partie : sélectionnez des objets dans Rhino, Alt+Tab pour passer dans Surfcam, Ouvrir entrée/entrée et clic dans Surfcam  //<color steelblue>Ahh, si seulement on pouvait scripter cela...</color>//
+
+J'ai défini sur le bouton de droite une macro alternative :
+
+  ! //Select //Pause
+  //-Export "C:\surfcam\igs\AAA.igs 144 //Enter
+
+Elle me permet d'exporter en passant par le type IGES 144 au lieu du type Surfcam. Le type Surfcam simplifie les choses telles que les surfaces planes mais si vous avez créé une surface de glissement plane spéciale dans Rhino pour l'utiliser dans Surfcam, les directions UV seront perdues sauf si vous exportez ces entités avec le type 144. 144 fonctionne parfois aussi mieux pour les limites bizarres qui ne sont pas conservées lors du passage de Rhino vers surfcam - même si ce phénomène est assez rare.
+
+=====Choses à regarder :=====
+
+  * Les rectangles sont exportés comme une entité en passant par le type Surfcam, si vous voulez quatre segments de ligne, décomposez-les avant de les exporter.  En général je décompose toutes les courbes avant d'exporter et j'utilise la commande **SimplifierCourbe** pour être sûr que tout bord extrait pouvant être un arc ou une ligne le soit.
+  * Si vous avez utilisé **JoinEdge** à un moment en espérant refermer des vides entre les bords, cette jonction disparaîtra dans Surfcam - même si vous exportez sous forme de solide avec ACIS ou STEP par exemple - alors attention. (Je n'ai pas Surfcam solids, je ne peux donc pas dire comment il réagit)
+  * Les couleurs des objets et les noms des calques ne sont pas transférés.  Les calques restent dans l'ordre pendant l'exportation alors attention, si vous changez l'ordre des calques dans Rhino, ils ne correspondront plus avec les calques de Surfcam. Je recommande de ne pas changer l'ordre des calques dans Rhino après avoir effectué votre exportation initiale.
+  * Vérifiez votre géométrie dans Surfcam après l'importation. Surfcam a parfois des problème avec certaines géométries que Rhino considère comme valide. Les plus courantes sont les surfaces qui sont marquées comme "degenerate" par Surfcam, le plus souvent à cause de deux lignes ou plus de points de contrôle trop proches les unes des autres. Surfcam mettra un point là où il pense que se trouve le problème, revenez dans Rhino et utilisez la commande **EnleverNœud** sur ce point pour voir si vous pouvez corriger le problème. Normalement vous devriez trouver deux lignes de nœuds ou plus les unes sur les autres à cet endroit.
+
+Je suis sûr que je trouverai d'autres trucs plus tard.
+
+<color steelblue>--Mitch</color>
+
+
