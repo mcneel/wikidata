@@ -1,0 +1,36 @@
+**Problem:** 
+
+In Rhino, the PictureFrame image does not display. It shows up white or blank without the image or texture displaying.
+
+{{:rhino:blank.png|}}
+ 
+**Solution**
+
+**1. Update video drivers.**
+
+Confirm that your Windows display drivers are the latest available from your video card manufacture.
+
+**2. Confirm that the hardware acceleration is on.**
+
+The Windows acceleration slider should be set to the right or at least most of the way to the right. 
+This is under Display Properties Settings -> Advanced -> Trouble Shooting tab.
+
+{{:rhino:slider.png|}}
+
+**3. Confrim Accelerated Hardware Modes is on in Rhino.**
+
+In Rhino Options -> Appearance -> OpenGL, from the right pane, confirm the "Use accelerate hardware moade" is checked. 
+Also confirm that the manufacturer's display driver is being used, not the Windows basic GDI.
+
+{{:rhino:options_opengl.png|}}
+
+**4. Return Render Advanaced Display Modes to Default Settings.**
+
+There is a recent trend to modify this Render display set. Changing options in the Render display mode, can leaving the PicutreFrame command not working properly. When in doubt, "restore defaults" to return the Render display mode to default values.
+
+{{:rhino:render_display.png|}}
+
+Specifically, setting "Color and Materials Usage" to "Single Color for all objects" will leave the PictureFrame previewing blank on the Rhino screen.
+
+{{:rhino:render_display_not.png|}}
+
