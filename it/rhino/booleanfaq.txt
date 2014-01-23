@@ -1,0 +1,91 @@
+> **Sommario:** //Tentativo di svelare i misteri delle operazioni Booleane. Come e perché funzionano, perché falliscono, come risolvere i problemi e far in modo che funzionino più sistematicamente, comprendendo come agiscono su oggetti aperti.//
+
+======Introduzione======
+Le operazioni Booleane possono far risparmiare un sacco di tempo nella modellazione di oggetti in Rhino. Per il principiante tuttavia spesso sembrano fallire senza ragione apparente. Spero che questa FAQ (Frequently Asked Question = Domanda posta frequentemenete) aiuti a chiarire un po’ la materia.
+
+Innanzitutto, per capire perché fallisce un’operazione Booleana è necessario sapere come funziona. Non si tratta di uno strumento magico che riesce a combinare gli oggetti,  ma più semplicemente di una procedura semiautomatica che mette insieme più comandi manuali. Le operazioni Booleane sostanzialmente sono composte da 4 passaggi: Intersezione tra due o più oggetti, Divisione alle intersezioni trovate, Eliminazione (Cancella) delle parti inutili, Unione di ciò che resta. Quello che si può fare con un’operazione Booleana, si può fare manualmente con la sequenza di queste operazioni. L’operazione Booleana velocizza il processo- quando funziona…
+
+Dunque l’aspetto primario da considerare è la necessità di conoscere alla perfezione come funzionano le operazioni che compongono il processo Booleano. Quando non vi riesce di far funzionare una Booleana, provate con i comandi Intersezione, Suddividi, Cancella, Unisci.  Provate ad annullare un’operazione Boleana riuscita e rifarla con i comandi citati, fino a quando non vi sentirete tranquilli sul fatto che, anche in caso la Booleana fallisca, sarete sempre in grado di arrivare al risultato con questi comandi.
+
+=====L'operazioe Booleana è fallita...=====
+Ok, perché falliscono le Booleane? l’intersezione è la causa principale del successo o fallimento della Booleana. Se si ottiene una corretta e completa intersezione tra gli oggetti, il resto è facile. Ma se questo non avviene, l’operazione non può che fallire. Dunque il trucco consiste nell’aiutare Rhino a trovare un’intersezione corretta e completa. Capire alcuni limiti e particolarità di Rhino e preparare una strategia di modellazione corretta serve proprio a favorire l’operazione di intersezione.
+
+L’intersezione tra due oggetti chiusi (solidi) dovrebbe produrre sempre almeno una curva di intersezione chiusa (per esempio un cappio). E’ possibile che si ottengano più curve di intersezione, se gli oggetti si toccano in più parti: nessun problema se tutte le curve risultano chiuse, ma se anche una sola è aperta, la Booleana fallisce. Questo succede perché la curva non taglia completamente l’oggetto ed il sistema, non potendo completare il taglio, arresta l’operazione dandovi un messaggio d’errore.
+
+> **Nota:** //E’ possibile compiere operazioni Booleane anche su oggetti aperti, ma è un po’ più complicato e ce ne occuperemo dopo.//
+Per il momento ipotizziamo che tutti gli oggetti siano chiusi.
+
+Allora, dopo aver preso visione di quanto sopra, se la Booleana fallisce, la prima cosa da controllare è l’intersezione tra gli oggetti.    Selezionate gli oggetti ed eseguite il comando Intersezione. Controllate le curve di intersezione sullo schermo. Sembrano corrette? ci sono su di esse interruzioni visibili o parti strane? Se si, dovete scoprire perché. Se la Booleana fallisce anche se la curva sembra corretta, attivate le Proprietà/Dettagli della curva selezionata o digitate **Cosa** sulla riga di comando.La finestra d'informazione che si apre vi dovrebbe dire tutto quello di cui avete bisogno:la curva è aperta? quella sarà la zona da controllare.Ci sono più curve? Dovete appurare perché ci sono interruzioni o sovrapposizioni sull'intersezione.
+
+=====Problemi di intersezione, soluzioni e limiti=====
+Quale può essere la causa delle discontinuità o altri problemi sull'intersezione? Ne esistono numerose. Alcune sono dovute ad errori o mancata precisione nella modellazione, alcuni altri a limiti di Rhino. Guardiamo innanzi tutto gli errori più frequenti:
+
+Se ritenete che l'intersezione debba essere chiusa, mentre non lo è, digitate **InizioCrv**, che creerà un punto all'inizio della curva. Generalmente tale punto corrisponde ad uno dei lati dell'interruzione. Zoomate su di esso e verificate se l'interruzione risulta visibile. Perchè si è creata una discontinuità in quel punto? Beh, forse credete che i vostri oggetti siano chiusi, mentre non lo sono. L'intersezione potrebbe attraversare una fessura tra 2 superfici e conseguentemente la curva sarebbe interrotta. Se avete unito forzatamente le superfici che formano gli oggetti con il comando **UnisciBordo**, può succedere, anche se gli oggetti vi vengono segnalati come chiusi. L'altra cosa da controllare sono le impostazioni di Tolleranza (Vedere l'articolo Tolleranze in questa sezione). Se esse sono troppo rigide, ciò potrebbe impedire all'algoritmo di intersezione di trovare una curva continua, anche se tutto il resto è a posto. Provate ad allentare la tolleranza fino a quando non ottenete un'intersezione completa: a quel punto l'operazione Booleana dovrebbe funzionare.
+
+Se non riuscite a produrre automaticamente un'intersezione chiusa anche dopo che avete sistemato al meglio gli oggetti, è meglio far le cose a mano. Conservate la curva di intersezione migliore ed editatela, finché non contiene più interruzioni né sovrapposizioni. Con essa potete tentare di tagliare gli oggetti individualmente, dopo aver esploso le polisuperfici. Una volta eliminate le parti indesiderate, riunite il resto.
+
+//<color blue>Limiti noti di Rhino:</color>//
+
+<color brown>Cuciture coincidenti</color> – tutti gli oggetti contengono cuciture, a volte quando le cuciture su 2 oggetti coincidono, Rhino ha problemi a trovare l'intersezione. La soluzione: spostare la cucitura o uno degli oggetti di quel pochino sufficiente a fargliela trovare (senza rendere il modello troppo impreciso), oppure farla a mano.
+
+<color brown>Facce coplanari</color> – Se 2 facce degli oggetti sono sullo stesso piano, Rhino non riesce a produrre un'intersezione: Questo capita assai spesso, tentate di evitare di costruire il modello in questo modo, se potete.  Soluzione – come prima, potete spostare un pochino uno degli oggetti, oppure, se questo non è possibile fate l'operazione a mano.
+
+<color brown>Superfici quasi tangenti</color> – come l'intersezione di 2 tubi dello stesso diametro ad una certa angolazione. L'intersezione fallisce spesso nella posizione in cui le superfici sono tangenti. Attualmente non esiste una soluzione semplice per questo problema, al di là dei suggerimenti di cui sopra.
+
+
+<color brown>Animazione: Quando le Booleane falliscono, provate ad editare le superfici.Vedere il filmato:**[[http://en.wiki.mcneel.com/content/upload/images/boolean_problem-1.swf|How to Manually Edit Surfaces with Coplanar Faces and Nearly Tagent Surfaces]]**</color>
+
+
+<color brown>Oggetti non validi</color> – Se uno degli oggetti sui quali state operando non è valido, le operazioni Booleane falliscono di frequente. Per controllare, usate il comando **SelOggettiImperfetti**. Se uno di essi viene evidenziato, dovrete sistemarlo prima di poter procedere. Si raccomanda inoltre di tenere attivato il controllo automatico, in modo che vi venga notificato immediatamente se viene creato o importato un oggetto non valido. Per farlo, digitate **VerificaOggettiNuovi**, per attivarlo, o disattivarlo se attivo.
+
+<color brown>Polisuperfici Non-Manifold</color> – Benchè Rhino non segnali questi oggetti come invalidi (dovrebbe), essi possono provocare il fallimento delle Booleane. Rhino //non dovrebbe// per niente creare questo tipo di strutture, ma qualche volta lo fa. L'unico modo di scoprirli è controllare le proprietà dell'oggetto.
+
+
+======Operazioni Booleane su oggetti aperti======
+
+Come accennato prima, si possono effettuare operazioni Booleane anche su oggetti aperti. Il principio è identico, ma in aggiunta dobbiamo tenere presenti un altro paio di condizioni, dal momento che gli oggetti sono aperti.
+
+=====Direzione della superficie=====
+
+Innanzitutto è necessario capire bene il concetto di normali e direzione della superficie. Ogni superficie ha un verso, vale a dire un "davanti" ed un " dietro".Questa proprietà in Rhino si chiama "direzione" e la si può verificare con il comando **Dir**.  Provate ad usare **Dir** su diverse superfici e vedete che succede.Le frecce direzionali puntano verso l'esterno di ciascuna superficie e mostrano anche la normale locale, vale a dire sono a 90° rispetto alla superficie a livello locale.
+
+Su ciascuna superficie, potete invertire la direzione (es.:rivoltare il verso della superficie). Per farlo, all'interno del comando **Dir**, digitate F  sulla riga di comando e premete Invio, oppure clickate sulla superficie una volta. Vedrete che le frecce si spostano sull'altro lato.
+
+Potete anche fare la stessa cosa al di fuori del comando **Dir**, digitando **Flip** sulla riga di comando ed Invio (ma in questo caso le frecce direzionali non sono visibili).
+
+{{http://en.wiki.mcneel.com/content/upload/images/Directions.gif}}
+
+> **Nota:** //Anche le curve in Rhino hanno una direzione che può essere ugualmente evidenziata con il comando **Dir**. In questo caso il comando **Flip** inverte tra loro inizio e fine della curva, invertendone la direzione.//
+
+Quando le superfici vengono unite, Rhino tenta di "uniformare" le normali della polisuperficie risultante, vale a dire cerca di fare im modo che le singole superfici adiacenti abbiano tutte lo stesso verso. In questo modo, quando avete una polisuperficie aperta, essa presenterà un "davanti" ed un "dietro" unici, anziché un'accozzaglia di direzioni diverse.
+
+> **Prova:** //Disegnate un quadrangolo. Estrudetelo a formare le pareti verticali di una scatola. Esplodete in 4 superfici separate. Usando **Dir**, invertite la direzione di 2 delle superfici. Selezionatele tutte ed unite a formare di nuovo la polisuperficie. Ora controllate con **Dir** e vedete che è successo alla direzione delle superfici.//
+
+Quando un oggetto è chiuso in Rhino, il programma orienta la direzione di tutte le superfici verso l'esterno,assumendo che l'interno, trattandosi di un oggetto chiuso (solido), non sia più d'interesse. Polisuperfici chiuse non possono avere le normali verso l'interno. Provate ad invertirle con **Flip**: se vi riesce, significa che la polisuperficie non è chiusa o siete incappati in una baco (molto infrequente) di Rhino.
+
+Prova 2: Disegnate un cubo. Esplodete in superfici separate. Usando **Dir**, invertite alcune delle superfic verso l'interno. Selezionatele tutte insieme ed usate **Join** per riunrle in una polisuperficie, verificando che succede alla direzione.
+
+=====L'influenza della direzione delle superfici sulle operazioni Booleane=====
+OK, Adesso avete compreso il significato di normali e direzione. Perché questo è così importante nelle operazioni Booleane? Quando diciamo a Rhino di fare una Booleana, il programma controlla la direzione delle normali, per determinare quale parte tenere e quale scartare. In sostanza Unione , Differenza ed Intersezione Booleana sono un'unica operazione, la differenza consiste nelle parti che vengono tenute alla fine. Così ad esempio l'Unione Booleana scarta le parti che si sovrappongono ed il resto viene unito. Con Intersezione Booleana succede esattamente l'opposto.
+
+Le Booleane con i "solidi"(polisuperfici chiuse) sono prevedibili, perché tutte le normali puntano sempre verso l'esterno. Con le polisuperfici aperte invece il risultato potrebbe sembrare casuale, dal momento che non è immediatamente apparente il davanti ed il dietro di ciascun oggetto, senza utilizzare il comando **Dir**.
+
+> **Nota:** //Se state effettuando operazioni Booleane su solidi e succede qualcosa di imprevisto, come la sparizione di una parte che dovrebbe essere mantenuta, probabilmente una o più parti non sono chiuse e la loro direzione punta verso l'interno. Usate **Dir** per verificarlo.//
+
+> **Suggerimento:** //un modo per sapere sempre in quale direzione punta la superficie è quello di settare il display per mostrare le facce posteriori in un colore diverso da quelle frontali. Usate il comando **VisualizzazioneAvanzata**  > **Colora facce posteriori**.  Naturalmente questo funziona solo in modalita Ombreggiata o O.semitrasparente, mentre non vedrete niente in Wireframe o Rendering.//
+
+Immaginiamo la più semplice operazione Booleana "aperta".  Disponete di un "solido" interamnte intersecato da una superficie singola. Potete facilmente crere questa situazione usando **PianoDiTaglio** in una direzione qualsiasi.
+
+Provate ora **DifferenzaBooleana** (BD).  Selezionate il solido come primo set ed il piano di taglio come secondo set. Uno o l'altro lato del solido verrà scartato ed il foro chiuso con il piano, ma quale dei 2?
+
+Non potete prevederlo, se non eseguendo **Dir** sul piano di taglio. Controllate la direzione della superfcie, effettuate la diffrenza Booleana. Annullate, invertite la direzione con**Dir** e riprovate. La direzione della superficie determina quale parte viene matenuta.
+
+In generale, se volete che la BD tra una (poli)superficie aperta ed un solido avvenga come se si trattasse di 2 solidi, le normali dell'oggetto aperto devono essere rivolte in direzione del solido, come appunto se anche l'oggetto aperto fosse un solido.
+
+{{http://en.wiki.mcneel.com/content/upload/images/BooleanDiff1.gif}}
+
+{{http://en.wiki.mcneel.com/content/upload/images/BooleanDiff2.gif}}
+
+
+
+
