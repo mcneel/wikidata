@@ -1,0 +1,51 @@
+======Informations sur le prototypage rapide======
+
+> **Sommaire:** //Trucs, astuces et conseils pour le prototypage rapide et la production de petites séries//
+
+===== Qu'est-ce que le prototypage rapide ?=====
+Le prototypage rapide est un terme qui couvre une grande variété de processus qui visent à créer rapidement des pièces physiques à partir de modèles informatiques 3D en utilisant des machines contrôlées par ordinateur. Virtuellement, tous les processus de prototypage rapide sont additifs, c'est-à-dire que la pièce est construite en ajoutant, en déposant ou en solidifiant de la matière.  Il s'agit de la stratégie opposée aux processus dits de soustraction tels que l'usinage, qui crée des objets en retirant la matière inutile d'un grand bloc sous la forme de copeaux.  Tous les processus de prototypage rapide actuel construisent l'objet grâce à une série de couches horizontales de différentes épaisseurs.
+
+Le mot rapide, dans prototypage rapide, est un terme relatif, puisque la plupart de ces processus sont en fait plutôt lents. Le mot Rapide se réfère plutôt au temps réduit entre la conception de la pièce et la production. En effet une grande quantité de travail manuel (et de programmation dans le cas des pièces usinées avec des machines CNC) est évitée et un concept peut passer très facilement plusieurs fois à travers les différentes étapes, ce qui donne des temps de production beaucoup plus courts.
+
+
+**[[http://fr.wikipedia.org/wiki/Prototypage_rapide|Vous trouverez une bonne définition du prototypage rapide ici ]]**
+
+===== Informations générales sur la création de pièces de prototypage rapide dans Rhino (et d'autres programmes)=====
+
+Pour presque tous les processus de prototypage rapide, tout commence avec une polysurface ou un "solide" valide et fermé.
+
+**[[rhino:faqclosedsolids|Informations sur la production de solides fermés dans Rhino]]**
+
+À partir de ce solide fermé, une représentation maillée du modèle doit être créée / exportée dans un fichier STL.
+
+**[[STLInfo|Informations sur les fichiers STL (en anglais)]]**
+
+**[[rhino:meshfaq|Informations sur le maillage d'objets dans Rhino]]**
+
+=====Informations et commentaires sur différents processus=====
+
+
+**Stéréolithographie**
+
+**[[SLSInfo|SLS (frittage sélectif par laser)]]**
+
+**[[FDMInfo|FDM (Fused Deposition Modeling - Stratasys)]]**
+
+**Polymer ink printer (Objet)**
+
+**Z-Corp**
+
+**[[rhino:solidscape|Solidscape et autres imprimantes à cire]]**
+
+**Découpe et laminage (LOM)**
+
+
+----
+
+===== Extraits d'une discussion d'un forum et commentaires :=====
+
+  * <color darkblue>JB dit : Si une jointure ou à un bord n'est pas fermé, l'objet ne pourra pas être imprimé au format STL puisque les surfaces n'ont pas d'épaisseur. La seule façon d'obtenir un solide est d'avoir une surface ou une polysurface entièrement fermée. Il pourra alors contenir de l'eau et être imprimé. C'est le volume défini par le maillage qui est imprimé et non pas les surfaces elles-mêmes.</color>
+  * <color green>Jim dit : D'ailleurs, dans la pratique, ce peut être une condition obligatoire pour une plus grande simplification, mais en théorie la seule condition nécessaire à la plupart des systèmes d'impression 3d est de pouvoir transformer l'objet en formes fermées 2d. Ces systèmes construisent les objets sous forme de couches. Ils déposent d'une façon ou d'une autre une fine couche de matière à l'intérieur de la forme fermée de chaque couche. Par exemple, une boîte orthogonale n'a besoin que de ses surfaces latérales pour être définie. Les surfaces supérieures et inférieures ne sont pas utilisées pour générer les profils 2d nécessaires à la production de la pièce. De même, souvent, il ne suffit pas d'avoir un objet fermé pour produire la pièce. D'autres contraintes doivent normalement être prises en compte. Certains systèmes ne peuvent construire un objet que si chaque couche successive peut être adaptée à l'intérieur de la couche précédente. En d'autres termes, chaque couche déposée a besoin de quelque chose en dessous pour la soutenir. Il existe des solutions pour contourner ce problème, mais il y aura toujours des limites sur la forme pour que l'objet puisse se tenir seul de façon stable et ne pas tomber pendant sa construction [2005-12-02]</color>
+  * <color darkslateblue>Jeffrey dit : En gros, il existe deux approches différentes pour soutenir les surfaces : la flottaison et celle que vous proposez. [[rhino:solidscape|SolidScape]] (impression 3D à la cire type jet d'encre) utilise un milieu de support solide qui est imprimé comme l'espace négatif dans et autour du solide. L'impression est ensuite placée dans un réservoir ultrasonique dans un milieu qui dissout la matière de support. D'autres processus utilisent des structures de support possédant un très petit point de connexion qui doit être supprimé physiquement en le cassant et en lissant le point restant par ponçage et remplissage si nécessaire. Ce type de structure de support peut ressembler à un filament ou à un autre objet délicat qui utilise un minimum de matière de support, ce qui permet de réduire le temps de construction et le coût en matière. Au fait, pour imprimer un vrai trou, vous voudrez probablement l'imprimer en deux sections qui peuvent est assemblées plus tard.  [2005-12-03]</color>
+  * <color mediumvioletred> Mitch dit :  Sur les machines FDM, le logiciel de découpe en couches crée également les supports pour les pièces flottantes.  Avec les machines les plus perfectionnés, les supports peuvent également être créés manuellement.  Un mur flottant dont l'angle avec l'horizontale est supérieur à 45° se tient tout seul et n'a pas besoin de structure de support.  Avec les matériaux ABS et ABS/PC actuels, une matière de support soluble dans l'eau est utilisée.  En ce qui concerne le besoin d'avoir des objets à 100 % fermés, le logiciel de découpe en couches essaiera de fermer les courbes ouvertes ; les versions plus avancées permettent à l'utilisateur de les modifier et de les fermer manuellement. [2006-17-02]</color>
+
