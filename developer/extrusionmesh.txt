@@ -1,0 +1,32 @@
+====== Extrusion Meshes ======
+> **Developer:** //[[developer:opennurbs:home|openNURBS]]//
+> **Summary:** //Discusses the new ON_Extrusion object and render meshes.//
+
+=====Question=====
+We have succesfully implemented a 3dm file importer using OpenNURBS. But the new OpenNURBS 5.0 API contains a new **ON_Extrusion** object, and we cannot find method that we can use to extract the saved mesh of an extrusion object. Any help would be appreciated.
+
+=====Answer=====
+The openNURBS toolkit does not provide any meshing tools. Thus, you cannot 
+create meshes from **ON_Brep**, **ON_Extrusion**, and **ON_Surface**-derived objects.
+
+An **ON_Brep** object does have the ability to store cached meshes. The Rhino 
+user has the option of saving 3dm files with or without cached meshes. Thus, 
+there is no guarantee a **ON_Brep** will have cached meshes.
+
+Note, **ON_Extrusion** and **ON_Surface** objects do not store cached meshes.
+
+A Rhino user convert a extrusion to a Brep using the **ConvertExtrusion** 
+command. Thus, the workflow for a Rhino user who wanted their models to be 
+read by your product would be to:
+
+  - Convert any extrusion objects to Breps using the **ConvertExtrustion** command.
+  - Shade at least one viewport so Brep render meshes are generated.
+  - Save to a 3dm file using the **Save** command - do not use the "save small" option.
+
+I should mention that Rhino plug-ins do not have the above limitation. From 
+a Rhino plug-in, you have access to an object's mesh. And, if an object does 
+not have a mesh, you can generate one.
+
+\\
+
+{{tag>Developer openNURBS}}
