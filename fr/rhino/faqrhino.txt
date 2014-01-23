@@ -1,0 +1,202 @@
+** [[rhino:faq|FAQ]] - Questions souvent posées **
+
+> **Sommaire:** //Questions qui reviennent souvent sur le forum de discussion de Rhino.//
+
+
+> **Suggestion:** //Écrivez vos questions sous forme de titres et les réponses sous forme de texte. Si la réponse fait plus de deux ou trois lignes, créez un lien vers une nouvelle page où le sujet sera traité plus profondément. La traduction est en cours.... alors certaines choses sont encore en anglais, excusez-nous. Si vous voulez la traduction d’un sujet en particulier, n’hésitez pas à m'écrire : [[cecile@mcneel.com|Cécile Lamborot]]//
+
+======Comment obtenir de l'aide....======
+
+Publiez vos questions techniques ici si vous ne trouvez pas les informations que vous cherchez sur le Wiki:
+
+**Forum de Rhino** [[news://news.mcneel.com/rhino.francais,|(Newsreader]] [[http://news2.mcneel.com/scripts/dnewsweb.exe?cmd=xover&group=rhino.francais|Web version]] )
+
+**[[http://www.fr.rhino3d.com/support.htm|Assistance technique de McNeel]]**
+
+======Problèmes communs de modélisation======
+**[[BooleanFAQ|Erreurs sur les opérations booléennes...]]**
+Explication générale sur le fonctionnement des opérations booléennes.  Pourquoi les opérations booléennes échouent parfois et stratégies pour avoir plus de chances qu'elles marchent.
+
+**[[MeshFAQ|Maillages : problèmes, informations, trucs et techniques ]]**
+Une des questions les plus souvent posées sur les forums :
+
+//Pourquoi mon modèle ombré n'est-il pas correct alors qu'il a été modélisé avec précision ?//  //Les bords sont "dentés"!// //Où est ma surface super lisse ?//
+
+Il s'agit probablement ni plus ni moins qu'un problème de réglage du maillage de rendu, ce qui est très facile à corriger.
+
+Cherchez ici une solution à votre problème et bien d'autres informations sur les maillages et les paramètres personnalisés, //y compris le maillage de modèles pour l'exportation//.
+
+**[[BadObjects|Que faire avec des mauvais objets ?]]**
+//J'ai un mauvais (invalide) objet, comment cela est-il arrivé et comment le réparer ?//
+
+Les "mauvais" objets dans Rhino sont des objets qui violent certaines règles NURBS ou qui présentent un problème au niveau de leur structure.
+
+En théorie, Rhino n'est pas sensé produire de mauvais objets, mais en pratique, cela est possible et arrive parfois.
+
+Des mauvais objets peuvent aussi être créés lors de l'importation de fichiers d'autres programmes.
+
+Une fois que vous savez comment les traiter, ce n'est normalement pas très long ni difficile de les réparer - voici quelques conseils.
+
+** [[FaqClosedSolids|Pourquoi mon objet n'est-il pas fermé ? Comment puis-je obtenir un modèle solide?]]**
+Comment procéder pour être sûr que vos objets sont des solides fermés pour pouvoir les exporter.
+
+Indications tirées d'un message dans le forum de Rhino en anglais, publié le 15 juillet 2005 par Jeffrey Everett.
+
+**[[WhySomeSurfacesDoNotUnroll|Pourquoi certaines surfaces ne se déroulent pas ?]]**
+Réponses à des questions récurrentes sur les surfaces déformables.
+
+======Problèmes d'importation/exportation======
+=====Pourquoi mon fichier DWG d'AutoCAD est-il vide quand je l'ouvre dans Rhino ?=====
+Avant d'ouvrir le fichier, vérifiez que les lignes sont décomposées en éléments de base. En d'autres termes, vérifiez que votre modèle ne contient pas de polylignes. Si cela ne marche pas, utilisez le format DXF au lieu de DWG.
+
+**[[BigRhinoFiles|Pourquoi les fichiers 3DM de Rhino sont-ils si grands ?]]**
+Pourquoi les fichiers 3DM sont-ils beaucoup plus grands que les fichiers originaux importés, utilisés pour les créer ?
+
+======Problèmes communs avec l'interface======
+**[[ToolbarWorkspaceProblems|Où ont disparu mes barres d'outils ?  Je ne les retrouve pas !]]**
+Que faire si votre espace de travail ne s'affiche pas lorsque vous ouvrez Rhino
+
+=====La ligne de commande a disparu (partiellement) de l'écran. Comment la récupérer ?=====
+Tapez **InviteCommande** (Entrée) **P** (Entrée) **T** (Entrée Entrée)
+
+Elle devrait être à nouveau ancrée en haut de l'écran.  Vous pouvez alors la rendre flottante si vous voulez.
+
+=====Pourquoi ma souris Logitech (curseur) ralentit dans Rhino ?=====
+Vérifiez que vous avez les pilotes (Mouseware) 9.76 ou supérieurs.  Ouvrez le logiciel de configuration de la souris.
+
+allez dans l'onglet Mouvement et DÉSACTIVEZ la case "désactiver l'accélération dans les jeux".
+
+Mouseware pense que toute application utilisant **OpenGL** (comme Rhino) est un jeux.
+
+**[[RhinoInstallProblems|J'ai un problème lors de l'installation ou  du démarrage de Rhino]]**
+Quelques problèmes lors de l'installation et les instructions pour les réparer.
+
+**[[RhinoLicenseManagerErrors|Impossible de communiquer avec le gestionnaire de licences]]**
+Conseils pour résoudre l'erreur "Impossible de communiquer avec le gestionnaire de licences".
+
+=====Pourquoi ma tablette Wacom ne fonctionne pas correctement ?=====
+Les utilisateurs de Rhino 4.0 qui disposent d'une tablette Wacom ont souvent les observations suivantes :
+
+  - Le déplacement par panoramique, zoom ou rotation dans une fenêtre annule le travail sur le bord d'une vue, contrairement à la souris.
+  - Le déplacement par panoramique, zoom ou rotation sur le bord d'une vue envoie la vue à l'infini.
+La tablette Wacom **doit être configurée en mode souris**et non en mode crayon. Cette contrainte existait également dans les versions précédentes de Rhino.
+
+La différence avec la version 4, c'est que le curseur est enroulé autour de la fenêtre active.
+
+Dans les versions précédentes, le curseur était enroulé autour de tout l'écran. Vous remarquez donc l'effet décrit ci-dessus plus rapidement dans la version 4.
+
+=====Pourquoi mon appareil de type Spaceball ne fonctionne-t-il pas correctement ?=====
+**Question** - après avoir réalisé une mise à jour de Rhino 3.0 vers 4.0, j'ai remarqué que mon Space Pilot n'effectue que des rotations. Je ne peux plus configurer mes boutons ni mes vues et le bouton "fit" ne fonctionne plus. J'ai les derniers pilotes de http://www.3dconnexion.com.
+
+**Réponse** - le nom du fichier exécutable a été modifié entre les versions 3 et 4 de Rhino. Si le pilote ne charge pas à votre configuration de Rhino, ouvrez le fichier Rhinoceros.scg qui se trouve dans le dossier en_us/profiles/default du répertoire 3DxWare et tapez **rhino4.exe** comme nom des EXECUTABLES. Redémarrez ensuite le pilote et Rhino.
+
+Le lien vers le dernier pilote répare ce problème : http://www.3dconnexion.com/support/4a1.php
+
+Nous vous recommandons de mettre à jour les pilotes toutes les 8 semaines environ afin d'obtenir toutes les corrections d'erreur et les mises à jour des versions.
+
+**[[OsnapTooltipFix|L'étiquette des accrochages est floue ou complètement illisible]]**
+
+======Problèmes d'affichage======
+
+**[[TroubleshootingDisplayProblems|Comment résoudre les problèmes d'affichage]]**
+Rhino repose principalement sur [[rhino:opengl|OpenGL]]. Toutes les cartes et les pilotes ne sont pas créés de la même façon.  Vous trouverez ici des conseils pour minimiser les problèmes et obtenir les meilleures performances d'affichage.
+
+**[[http://fr.wiki.mcneel.com/default.aspx/McNeel/NvidiaThreadedOptimization.html|Plantages occasionnels avec les cartes Nvidia]]**
+Plusieurs utilisateurs ont indiqué des plantages occasionnels après une mise à jour des pilotes Nvidia. Jeff a découvert un paramètre dans le panneau de contrôle Nvidia qui semble être la cause du problème.  Nvidia dit qu'il devrait être normalement désactivé mais ce contrôle est activé dans de nombreux cas.
+
+<color blue>Nous recommandons de désactiver le contrôle Optimisation threadée</color>.
+
+> **Actualisation:** //<color blue>On 7-Nov-08, John (<jrharvey5923@gmail.com>) a indiqué sur le forum de Rhino qu'il n'y a plus de problèmes avec l'optimisation threadée sur les derniers pilotes (ver. 180.42). Ces pilotes semblent aussi permettre plusieurs moniteurs sur les ordinateurs SLI.</color>//
+
+**[[TwoDisplayAdapters|Utiliser deux cartes d'affichage]]**
+Une discussion sur les pour et les contre de l'utilisation de deux cartes d'affichage dans votre ordinateur.
+
+
+**[[FarFromOrigin|Loin de l'origine...]]**
+À l'heure actuelle, la géométrie construite dans Rhino qui se trouve très loin de l'origine du repère général présente des problèmes d'affichage et de précision. Ceci est dû aux maillages simple précision et au très grand nombre d'unités impliquées. Une des solutions est de déplacer toute la géométrie plus près de l'origine et réaliser le modèle à cet endroit. Cependant il se peut que le modèle doive être placé loin de l'origine pour être conforme à des données de levés qui utilisent le très grand nombre d'unités. Vous pouvez l'avoir des deux façons en utilisant cette [[FarFromOrigin.|procédure]]
+
+=====L'affichage des lignes n'est pas correct dans les trois vues parallèles avec la mise à jour vers Rhino 4 : Fermer les fenêtres=====
+Si vos courbes et vos lignes ne sont pas affichées correctement dans les trois vues parallèles tout en étant correctes dans la vue perspective, commencez par afficher toutes les vues sur l'écran. Cliquez avec le bouton de droite sur le titre de chaque fenêtre parallèle et sélectionnez Fermer la vue dans le menu. Une fois que toutes les fenêtres avec un mauvais affichage sont fermées, allez dans le menu Vue, sélectionnez Disposition des fenêtres et choisissez 4 vues. Les courbes et les lignes devraient apparaître correctement.
+
+<color blue>Ce problème a été résolu dans Rhino V4 SR-3. -John Brock</color>
+
+**[[ATiRadeonCards|Problèmes avec les cartes ATi Radeon]]**
+Selon plusieurs utilisateurs, lorsque des pilotes ATi plus récents que la version 8.4 (la version actulelle est 8.10 à l'heure de ce message) sont installés sur les cartes Radeon, les fenêtres de Rhino ne fonctionnent pas correctement.  <color red>Parmi les symptômes on retrouve des retards de 1-2 secondes lors d'un déplacement en panoramique, en zoom ou en rotation.</color>  cette solution a été testée sur les cartes HD, cependant elle semble ne pas fonctionner sur les cartes [[rhino:firegl|FireGL]].
+
+Ajouté le 16/10/2008 -John Brock
+
+=====Problèmes d'affichage des info-bulles=====
+  * [[http://fr.wiki.mcneel.com/default.aspx/McNeel/OsnapTooltipFix.html|Étiquettes des accrochage floues]]
+  * [[http://fr.wiki.mcneel.com/default.aspx/McNeel/UltraMonProblem.html|Info-bulles qui ne s'affichent pas sur les systèmes avec plusieurs moniteurs]]
+  * [[http://fr.wiki.mcneel.com/default.aspx/McNeel/WacomVistaProblem.html|Info-bulles qui ne s'affichent pas dans les barres d'outils déroulantes]]
+
+======Trucs, astuces et techniques======
+**[[RhinosHiddenSecrets|Secrets cachés de Rhino]]**
+Trucs et astuces proposées par des experts, idées et solutions pour une exécution plus facile des tâches les plus courantes dans Rhino.
+
+**[[FaqTolerances|Tolérances, tolérances, tolérances...]]**
+//Que signifient tous ces chiffres ?//  //Comment les définir dans Rhino ?//
+
+**[[LoadProtect|Empêcher le chargement de modules]]**
+Résoudre des problèmes causés par des modules en utilisant la protection de chargement.
+
+**[[DotNetPlugins|Utiliser des modules dotNET avec Rhino]]**
+Instructions de configuration de base pour utiliser des modules dotNET dans Rhino 3
+
+**[[ReverseEngineering|Rétro-conception : Conversion de nuages de points ou de maillages en NURBS]]**
+Informations de base sur la rétro ingénierie avec Rhino
+
+**[[UsingBlocks|Utilisation de blocs]]**
+Informations de base pour l'utilisation de blocs dans les fichiers 3dm.  Trucs et astuces d'utilisateurs
+
+**[[http://www.eu.rhino3d.com/HiddenLinesPrinting.pdf|Imprimer un modèle avec des lignes cachées]]**
+Informations pour l'impression d'un modèle avec des lignes cachées.
+
+
+**[[RhinoTweaks|Mise au point et réglages de Rhino]]**
+Rhino est configurable à l'infini au niveau de son interface
+
+mais certains éléments particuliers demandent une modification de registre ou d'autres actions spécifiques.
+
+Voici quelques instructions pour des mises au point et des réparations typiques.
+
+**[[RhinoCommandLine|Lancer Rhino à partir de la ligne de commande]]**
+Comment exécuter à partir de la ligne de commande de Windows une série de commandes écrites dans un fichier, puis fermer Rhino.
+
+
+
+======Matériel, installation, réseau======
+**[[RhinoOnVista|Rhino fonctionne-t-il sur Vista ?]]**
+En général oui, mais il existe de nombreux problèmes que vous devez connaître. //Veuillez ajouter vos commentaires.//
+
+**[[GraphicsCards|Quelles cartes graphiques recommandez-vous pour Rhino ?]]**
+Une liste des cartes graphiques qui fonctionnent avec Rhino ainsi que leurs caractéristiques.
+
+**[[http://en.wikipedia.org/wiki/Scalable_Link_Interface|Qu'est-ce que SLI ?]]**
+Scalable Link Interface (SLI) est une marque de solution multi-GPU développée par NVIDIA pour relier plusieurs cartes vidéos ensemble afin de produire une seule sortie. //[[http://www.slizone.com/page/slizone_learn|En savoir plus...]]//
+
+
+**[[InstallationAdvice|Installer Rhino, les mises à jour, les versions révisées et les WIPs/Bêtas]]**
+Réponses à des questions récurrentes sur l'installation et/ou l'actualisation de Rhino
+
+**[[AddLanguages|Ajoutez des langues]]**
+Ajouter ou changer les langues prises en charge par Rhino.
+
+**[[RhinoV3AndWindows2000Servers|Problème avec la version 3 lors de l'enregistrement sur des serveurs de fichiers Windows 2000]]**
+Rhino indique qu'il a enregistré le fichier correctement puis vous obtenez un message d'erreur de Windows indiquant que le fichier n'a pas pu être enregistré.
+
+**[[RhinoMacSupport|Rhino sur Apple MAC]]**
+Notre logiciel n'est pas compatible directement avec la plate forme Mac. Voici des informations d'utilisateurs ayant utilisé Rhino sur les nouveaux Intel Macs et OS X.
+
+**[[RhinoV3Lock|Rhino 3 demande une clé de protection]]**
+Rhino 3 me demande une clé de protection. Pourquoi ?  Que dois-je faire ?
+
+======Plantages======
+
+**[[RhinoV4AcerComputerFileOpenSaveDialogCrash|Plantages sur les ordinateurs Acer]]**
+Je viens d'acheter un ordinateur Acer et Rhino plante constamment. Que puis-je faire ?
+
+**[[TeachingRecordBroadcastingSystem|Teaching Record Broadcasting System]]**
+Notre école utilise le Teaching Record Broadcasting System de 4edu information co., Ltd.  Rhino ne démarre même pas.  Que devons-nous faire ?
+
+
