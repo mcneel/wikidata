@@ -1,0 +1,93 @@
+======Brep Data Structure======
+> **Developer:** //C++//
+> **Version:** //Rhino 4//
+
+{{http://en.wiki.mcneel.com/content/upload/images/brep_structure.gif}}
+
+=====Example=====
+<code c++>
+
+//Given a brep and a face index
+const ON_Brep* brep;
+const int face_index = 0;
+ON_SimpleArray<int> face_ti_list; //trims indeces list
+ON_SimpleArray<int> face_ei_list; //edges indeces list
+
+//Get the BrepFace of the given index
+const ON_BrepFace* face = brep->Face(face_index);
+if( 0 == face )
+  return false;
+
+//Get the loop of the face
+for( int fli = 0; fli < face->LoopCount(); fli++ )
+{
+  const ON_BrepLoop* loop = face->Loop( fli );
+  if( 0 == loop )
+    continue;
+
+  for( int lti = 0; lti < loop->TrimCount(); lti++ )
+  {
+    //Find the trim
+    const ON_BrepTrim* trim = loop->Trim( lti );
+    if( 0 == trim )
+      continue;
+    face_ti_list.Append( trim->m_trim_index );
+
+    //Find the edge of that trim
+    //Each trim has exactly one edge attached to it
+    const ON_BrepEdge* edge = trim->Edge();
+    if( 0 == edge )
+      continue;
+    face_ei_list.Append( edge->m_edge_index );
+  }
+}
+
+</code>
+===== C++ =====
+<code c++>
+
+//Given a brep and a vertex index
+const ON_Brep* brep;
+const int vertex_index = 0;
+ON_SimpleArray<int> face_i_list; //faces indeces list
+ON_SimpleArray<int> edge_i_list; //edges indeces list
+
+//Get the vertex;
+const ON_BrepVertex* vertex = brep->Vertex( vertex_index );
+if( 0 == vertex )
+  return false;
+
+//Find surrounding edges
+for( int i = 0; i < vertex->EdgeCount(); i++ )
+{
+  int edge_index = vertex->m_ei[i];
+  const ON_BrepEdge* edge = brep->Edge( edge_index );
+  if( 0 == edge )
+    continue;
+
+  //Add to edges list
+  edge_i_list.Append( edge_index );
+
+  //Find all trims connected to the edge
+  for( int eti = 0; eti < edge->TrimCount(); eti++ )
+  {
+    const ON_BrepTrim* trim = edge->Trim( eti );
+    if( 0 == trim )
+      continue;
+
+    ON_BrepLoop* loop = trim->Loop();
+    if( 0 == loop )
+      continue;
+
+    ON_BrepFace* face = loop->Face();
+    if( 0 == face )
+      continue;
+
+    //Add to faces list
+    face_i_list.Append( face->m_face_index );
+  }
+}
+</code>
+
+
+{{tag>Developer cplusplus Brep}}
