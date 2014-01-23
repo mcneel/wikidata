@@ -1,0 +1,32 @@
+
+CageEdit is a tool that allows deformation of complex geometry using relatvely simple controls. Smoothly defornming complex objects is difficult to do using point manipulation of the objects themselves- if the objects are polysurfaces, their control points are not accesible, if they are curves or surfaces they may have more points than can easily be controlled through direct manipiulation. CageEdit imposes a more or less simple structure on the controlled objects, including polysurfaces, and allows them to be deformed smoothly and retain their integrity as polysurfaces . Controling objects can be curves, surfaces or cages.
+
+
+1. The CageEdit command allows you to create a 'controlling object' **or** pick an existing object as a controlling object after selecting the objects to be edited. The 'controlling object' can be a cage made separately with the Cage command, or it can be a curve or surface. It can also be a line or plane or a box made within the command to user set degree and point count.
+
+
+2. The Cage command creates a 3d [[rhino:nurbs|NURBs]] cage- that is all. It does not associate any objects with the cage.
+
+3. Options for cage editing:
+
+  * PreserveStructure=Yes/No
+    * Yes keeps the edited object structure-degree and point count.
+    * No refits the objects- this is a better bet if there are joined trimmed surfaces involved or if the objects are too simple in structure to accommodate much distortion.
+  * Deformation=Fast/Accurate- Fast is faster, accurate is more accurate but may be slower... =)
+  * Region to edit <Global> ( Global  Local  Other )
+    * Global is the way cage has always worked before- deformation is  throughout the 3d space.
+    * Local- you get to set a region from the controller that is deformed, then a falloff distance from the region to the rest of space.
+    * Other- you get to draw a box, cylinder or sphere as the volume  to enclose the space to be deformed. Again, you get to set a falloff distance from this volume to the rest of space as well.
+With these options it is possible for example to use a large cage object to control a small volume within the objects to be edited.
+
+4. Ancillary cagey commands:
+
+  * SelCaptives
+  * SelControls
+  * ReleaseFromCage
+  * Explode (makes a controlling object back into a regular piece of geometry)
+
+At some point ChangeDegree and InsertKnot will become available for control objects.
+
+
+
