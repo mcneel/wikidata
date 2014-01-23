@@ -1,0 +1,72 @@
+======Create a Skin using the RhinoCommon SDK======
+> **Developer:** //[[developer:rhinocommon|RhinoCommon]]//
+> **Summary:** //The Rhino Application Platform (RAP) provides the tools for .Net developers to wrap their application around Rhino 5.0 by creating custom Skin.//
+
+=====Overview=====
+Rhino 5.0 allows developers to customize most of Rhino's interface so that the application appears to be their own. We call this a custom **Skin**. With a custom Skin, you can change the application icon, splash screen, the application name etc.
+If you instead are searching for information on how to skin Rhinoceros 4.0 using the unmanaged C++ SDK, see the [[developer:sdksamples:skin|C++ SDK sample]].
+
+Creating a custom Skin for Rhino 5.0 involves creating a custom skin assembly:
+
+  * **<skin name>.rhs** This is a regular .Net .dll that implements the skin's icon, splash screen, application name, etc. In this article, we will refer this to the Skin DLL. See a full list of methods and properties on the [[http://www.rhino3d.com/5/rhinocommon/html/AllMembers_T_Rhino_Runtime_Skin.htm|Skin class documentation]] page.
+
+=====Create the Skin DLL (.rhs) =====
+  * To create the Skin DLL, launch Visual Studio 2010 and add a project to your solution.
+  * The Rhino Skin AppWizard will only need to contain one class: the Skin-derived class.
+==C#==
+<code c#>
+using Rhino.Runtime;
+
+namespace MySkin
+{
+  public class MyHippoSkin : Skin
+  {
+    protected override string ApplicationName
+    {
+      get
+      {
+        return "Hippopotamus";
+      }
+    }
+  }
+  // You can override more methods and properties here
+}
+</code>
+==Vb.Net==
+<code vb.net>
+Imports Rhino.Runtime
+
+Namespace MySkin
+    Public Class MyHippoSkin
+        Inherits Skin
+        Protected Overrides ReadOnly Property ApplicationName() As String
+            Get
+                Return "Hippopotamus"
+            End Get
+        End Property
+    End Class
+    ' You can override more methods and properties here
+End Namespace
+</code>
+
+=====Finishing Up=====
+  * Compile the Skin DLL.
+
+=====Installation=====
+> **Warning**: //modifying the registry wrongly can have negative consequences on your system's stability and even damage the system.//
+
+  * To install your custom Skin, use **REGEDIT.EXE** to add a scheme key to your registry with a path to your Skin DLL. For example:
+
+|**Item**|**Value**|
+|Subkey|HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\5.0x64\Scheme: MySkin|
+|Entry name|SkinDLLPath|
+|Type|REG_SZ|
+|Data value|C:\Src\MySkin\MySkinDLL\Release\MySkinDLL.rhs|
+
+  * You can now test your custom Skin by creating shortcut to your Rhino executable with /scheme="<scheme name from the previous step>" as command line argument. For example:
+
+<code>
+"C:\Program Files\Rhinoceros 4.0\System\Rhino4.exe" /scheme=MySkin
+</code>
+
+{{tag>Developer RhinoCommon}}
