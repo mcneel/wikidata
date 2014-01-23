@@ -1,0 +1,90 @@
+====== 5版進階顯示模式 ======
+
+> **摘要：** Rhino 5.0增加新的顯示模式，可顯示隱藏線、草圖模式及其他選項。 
+
+=====內容=====
+
+  * [[#背景]]
+  * [[#自訂顯示模式範例]]
+  * [[#列印進階顯示模式]]
+  * [[#限制]]
+=====背景=====
+
+Rhino 5 提供更多進階顯示選項，能建立更多進階、即時的顯示模式。這些新的顯示選項包括陰影、邊緣粗細及照明配置。關於了解基礎Rhino進階顯示可參考下列連結：
+  * Rhino Visual Tips的相關教學影片 5.0:[[http://v5.rhino3d.com/group/rhino-visual-tips-5/page/out-line-of-rhino-visual-tips-5-0| Chapter 9: Rhino Options: Display Modes]]
+  * 更多關於個別顯示模式特點，請參考 [[http://docs.mcneel.com/rhino/5/help/en-us/options/view/display_mode_options.htm|Advanced Display Options Topic]].
+
+以下是新的預設顯示模式的範例。共有三種模式：
+
+====工程圖模式==== 
+{{http://wiki.mcneel.com/_media/rhino/technicalboat.jpg?w=600}}
+====鋼筆模式==== 
+{{http://wiki.mcneel.com/_media/rhino/usbpen.jpg?w=600}}
+====藝術風格模式(Artistic)==== 
+{{http://wiki.mcneel.com/_media/rhino/harken_artistic.jpg?w=600}}
+
+====彩現模式(Rendered)====
+{{http://wiki.mcneel.com/_media/rhino/xlrcable.jpg?w=600}}
+
+彩現顯示模式已經升級，可增加一些材質及環境設定讓效果很好，以下是影片教學連結： {{http://vimeo.com/59268869|Materials, Environments and more!}}
+
+=====自訂顯示模式範例=====
+要使用新的顯示選項的全部功能，您可以建立自訂的顯示模式及控制：
+
+  - 即時輪廓線
+  - 銳邊
+  - 邊界
+  - 即時交線
+  - 著色及彩現顯示
+  - 陰影及相關設定
+
+下列模式可由Rhino的顯示選項的匯入指令匯入。請到工具>選項>視圖>顯示模式>匯入。請參考{{http://docs.mcneel.com/rhino/5/help/en-us/options/view/display_mode_options.htm#import|進階顯示說明主題中的匯入相關內容。}}
+
+====Patent====
+{{http://wiki.mcneel.com/_media/rhino/hull4b_patent.jpg?w=600}}
+
+下載[[http://wiki.mcneel.com/_media/rhino/patent_drawing.zip|Patent.ini]] 檔案並匯入此模式。
+
+這個模式對於陰影的設定相當靈敏，有些設定為試驗性設定，例如陰影線角度，可試試看0, 23, 45, 90度。23度一般能呈現有趣的風格特性。陰影線並非固定在23度，可由選項的顯示模式調整，請再Patent>物件>線條中做調整。
+
+並可在圖紙配置下加入文字並編輯。
+
+====Blueprint====
+{{http://wiki.mcneel.com/_media/rhino/harkin_2602_and_2616_blueprint.jpg?w=600}}
+
+Blueprint顯示模式結合了一張bitmap背景圖，白色條紋陰影及輪廓線。由下列連結下載此模式 [[http://wiki.mcneel.com/_media/rhino/blueprint.zip|Blueprint.ini]]及[[http://www.psdgraphics.com/backgrounds/blank-blueprint-paper/|Blueprint bitmap背景圖]]。此模式也可以利用下列黑板背景圖 [[http://blog.finishatweber.com/wp-content/uploads/2011/03/chalkboard_bg-1024x682.jpg|blackboard background]]。
+
+====Blackboard====
+{{http://wiki.mcneel.com/_media/rhino/lmgtblackboard.jpg?w=600}}
+
+此顯示模式與Blueprint顯示模式非常像。使用背景圖及白色陰影，但使用較大的寬度來模擬草圖模式。下載 [[http://wiki.mcneel.com/_media/rhino/blackboard.zip|Blackboard.ini]]檔案及 [[http://blog.finishatweber.com/wp-content/uploads/2011/03/chalkboard_bg-1024x682.jpg|chalkboard bitmap]]。
+
+====Simple Bright====
+{{http://wiki.mcneel.com/_media/rhino/fallingwater.jpg?w=600}}
+
+這個simple bright 顯示模式於建築及機械設計相當受到歡迎，可下載並匯入下列 [[http://wiki.mcneel.com/?ns=rhino%3A&image=rhino%3Asimple_bright.zip&do=media|Simple Bright.ini]] 檔案。
+
+====Ghosted Blueprinting====
+{{ :rhino:lmp2005.jpg?600 |}}
+
+此模式與藍圖模式類似，但物件是部分透明、曲面有些微陰影。若要執行此模式，匯入 [[http://files.na.mcneel.com/rhino/5.0/misc/Ghosted Blueprint.zip|Ghosted Blueprint.ini]]。同時有一個背景圖檔需下載； [[http://andrewl14.files.wordpress.com/2011/04/blueprint-1920x1200.png|Blueprint Grid]]
+
+=====列印進階顯示模式=====
+這些進階顯示模式目前都是以顯示視窗實際像素顯示(邊緣有2個像素寬的邊框)當您要列印這些模式，實際列印效果可能跟您螢幕顯示的非常不同，在螢幕顯示四個像素寬時，但列印則會不同於螢幕寬度不同，這些改變可用於影響陰影及剖面線，在列印是否能預覽這些效果，是我們需要改進的部分，下列是目前解決這個問題的方法。
+
+若您想要列印任一顯示模式，建立一個螢幕使用的模式及另一列印模式。例如Patent模式邊緣使用4像素於螢幕使用模式，在列印用模式則是用8像素寬。下列是一個比較表格：
+
+|                        ^Patent 模式   ^Patent 列印用顯示模式  ^
+^Shading Mode           |Parallel Lines |Parallel Lines      |
+^Shaded mode lines      |1 px           |4 px                |
+^Shaded mode separation |3 lines        |2 lines             |
+^邊緣線寬    |1 px           |2 px                |
+^輪廓線寬   |2 px           |8 px                |
+
+
+
+=====限制=====
+
+  - 這些顯示模式無法單獨套用單一物件(設定物件的顯示屬性SetObjectDisplayMode指令)，然而，若您在工程圖模式中，您可設定個別物件為其他顯示模式。換句話說，工程圖顯示模式是可結合所有其他模式(支援標準) [[rhino:opengl|OpenGL]] 管線)。您只要使用工程圖模式就可可以混合物件的顯示模式。
+  - 工程圖顯示模式對於密集的網格物件最初的計算需要耗費很長的時間，並且這是必然的。並且若物件以任何方式改變，則必須重新計算。
+{{topic>.?Rhino5}}
