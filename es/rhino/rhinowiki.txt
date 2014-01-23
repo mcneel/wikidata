@@ -1,0 +1,129 @@
+====== Wiki de Rhino ======
+
+
+
+> **Resumen:** //Usuarios de Rhino:  Este el sitio de Rhino para los usuarios. Pueden agregar o cambiar cualquier cosa que deseen. Para aprender cómo, véase: AboutTheWiki//
+
+**Páginas recientemente modificadas [[http://wiki.mcneel.com/feed.php|{{http:www.rhino3d.com/images/rss.jpg}}]]**
+
+----
+\\
+[
+   Newline,
+   namespace.Topics.Select{item | item.HasProperty("Hidden").Not}.SortBy{each| DateTime.Now.SpanBetween(each.LastModified)}.Snip(3).Collect
+   {
+     aTopic |
+     [
+       "|",
+       aTopic.HasProperty("Title").IfTrue
+       {
+         Presentations.Link(federation.LinkMaker.LinkToTopic( aTopic.Fullname ) , aTopic.GetProperty("Title"))
+       }
+       IfFalse
+       {
+         aTopic.Name
+       },
+       " |",
+       aTopic.GetProperty("Summary"),
+       "|",
+       Newline
+     ]
+   }
+]
+
+|  //[[#más...]]// |
+
+
+=====Contenido:=====
+
+  * [[RhinoHome#Info|Información, FAQ, Conocimiento]]
+  * [[RhinoHome#Resources|Recursos, Modelos, Tutoriales]]
+  * [[RhinoHome#News|Noticias, Historias de los usuarios, Biografías, etc.]]
+  * [[RhinoHomeLabs|Rhino Labs]]
+  * [[RhinoHome#Jobs|Expertos de Rhino]]
+  * [[RhinoHome#Employee|Páginas de los empleados de McNeel]]
+  * [[#Cambios y adiciones recientes]]
+
+=====Información, FAQ, Conocimiento=====
+
+  * [[rhino:faq|Preguntas Más Frecuentes]] - Encuentra las respuestas a problemas y preguntas que aparecen regularmente en el grupo de discusión.
+  * [[RhinosHiddenSecrets|Secretos ocultos de Rhino]] - Sugerencias y trucos de expertos de Rhino para facilitar las tareas comunes y ahorrar tiempo.
+  * [[rhino:whitepapers|Documentación técnica]] - Lista de documentos que describen tareas técnicas.
+  * [[rhino:installationadvice|Consejos de instalación]] - Preguntas más frecuentes sobre la instalación o la actualización de Rhino
+  * [[RhinoRendering|Renderizar con Rhino]] - Consejos para renderizar con el renderizador integrado en Rhino.
+  * [[rhino:rhinoworkflow|Uso de Rhino con otras aplicaciones]] - Sugerencias, trucos y consejos para usar Rhino con otras aplicaciones
+  * [[rhino:commandlist|Lista de comandos]] - Lista de todos los comandos de Rhino en español y en inglés.
+  * [[WishList|Lista de deseos]] - ¿Falta algo en Rhino? Consulte si está en la lista de deseos.
+  * [[rhino:installingrhino|Implementación de Rhino]] - Técnica para instalaciones silenciosas o mediante scripts, detalles de carpetas y registro, etc.
+  * [[rhino:v4pages|Rhino V4]] - Información sobre nuevas funciones.
+  * [[http://news2.mcneel.com/scripts/dnewsweb.exe?cmd=xover&group=rhino|Grupo de discusión de Rhino - Versión web]] - Envíe sus preguntas de soporte aquí si no encuentra las respuestas que necesita en el Wiki.
+  * [[http://es.rhino3d.com/4/help/rhinov4.htm|Ayuda en línea de Rhino 4.0]]
+
+=====Recursos, Modelos, Tutoriales=====
+
+  * [[rhino:rhinomodellinks|Modelos]] - Lista de enlaces a los modelos de Rhino en otras páginas web.
+  * [[ScriptsPage|Macros, Scripts y Plugins]] - Herramientas desarrolladas por los usuarios para automatixar todo tipo de tareas en Rhino, además de algunas instrucciones y tutoriales de configuración.
+  * [[ToolbarPage|Herramientas personalizadas]] - Barras de herramientas creadas por los usuarios y botones personalizados con macros y scripts para para varias aplicaciones.
+  * [[WorkspacePage|Entornos de trabajo personalizados]] - Un espacio para compartir su entorno personal de Rhino con otros.
+  * [[DraftingPage|Patrones de trama y tipos de línea]] - Conjunto de patrones de trama, tipos de línea, cotas, etc.
+  * [[rhino:imagemaps|Mapas de entorno, materiales, texturas, etc.]] - Lugar para compartir su material personalizado, mapas de entorno, etc. con los demás.
+  * [[RhinoTutorialLinks|Tutoriales]] - Lista de enlaces a tutoriales de Rhino de otras páginas web.
+  * [[BobKoll|Sitio para profesores]] - Lugar para agregar a el enlace de la galería de su escuela, tutoriales, etc.
+  * [[http://www.es.rhino3d.com|RhinoWebSite]]
+  * [[rhino:rhinoblog|Blogs de Rhino]] - Lista de blogs relacionados con Rhinoceros
+  * [[http://www.rhino3dhelp.com/|Rhino 3D Help]] - Nuevo sitio web con tutoriales de calidad, diseños, modelos y mucho más.
+
+=====Novedades, Historias de usuarios, Biografías, etc.=====
+
+  * [[RhinoNews|Novedades relacionadas con Rhino]] - Novedades relacionadas con Rhino, productos relacionados, proyectos y usuarios
+  * [[CustomerStories|Historias de clientes]] - Información sobre cómo la gente utiliza Rhino.
+  * [[StudentStories|Historias de estudiantes]] - Lea historias de estudiantes que usan Rhino.
+  * [[RhinoPhiles|Rincón de la fama]] - ¿Eres un fan de Rhino? Únete al club de Rhinófilos.
+  * [[UserMeetings|Reuniones de usuarios]] - Plataforma de reuniones de usuarios de Rhino con fechas, lugares, temas de discusión, etc.
+  * [[Contests|Concursos]] - Concursos de diseño
+  * [[RhinoHistory|La historia de Rhino]]
+
+=====Expertos de Rhino=====
+
+  * [[rhino:rhinoopportunities|Expertos en Rhino (Inglés)]] - Lista de gente con experiencia en Rhino que están disponibles para ofrecer sus servicios (Inglés)
+  * [[http://it.wiki.mcneel.com/default.aspx/McNeel/CurrVitae.html|Curriculum]] - Lugar para encontrar expertos en Rhino que pueden ayudar a su empresa (Italiano)
+
+=====Páginas de los empleados de McNeel=====
+
+namespace.TopicsWith("McNeelEmployee").Sort.Collect
+
+{
+   aTopic |
+   [
+     Tab, "*", aTopic.Name,Newline
+   ]
+}
+
+**Páginas recientemente modificadas [[http://wiki.mcneel.com/feed.php?|{{http:www.rhino3d.com/images/rss.jpg}}]]**
+
+[
+   "|**Topic**|**Date of Last Change**|**Summary**|",
+   Newline,
+   namespace.Topics.Select{item | item.HasProperty("Hidden").Not}.SortBy{each| DateTime.Now.SpanBetween(each.LastModified)}.Snip(15).Collect
+   {
+     aTopic |
+     [
+       "|",
+       aTopic.HasProperty("Title").IfTrue
+       {
+         Presentations.Link(federation.LinkMaker.LinkToTopic( aTopic.Fullname ) , aTopic.GetProperty("Title"))
+       }
+       IfFalse
+       {
+         aTopic.Name
+       },
+       " |",
+       aTopic.LastModified,
+       "|",
+       aTopic.GetProperty("Summary"),
+       "|",
+       Newline
+     ]
+   }
+]
+
