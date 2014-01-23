@@ -1,0 +1,107 @@
+====== Frequently asked questions about installing or upgrading Rhino ======
+=====System administrators:=====
+[[InstallingRhino|Deploying Rhino - Technique for silent/scripted installs, details of folders and registry, etc.]]
+=====Installing Rhino 5=====
+
+<color darkslategray>**//Question://** //Why do I have two Desktop Shortcuts for Rhino V5?//</color>\\
+**Answer:** Rhino 5 automatically installs both 32 bit and 64 bit versions, and there is one shortcut for each.  [[Why2Shortcuts|See this page for more explanations on why this is done.]]
+
+<color darkslategray>**//Question://** //Why is the V5 installer is refusing my old V3 or V2 key code?//</color>\\ 
+**Answer:**There is a bug in the SR0 installer, but it is easily worked-around.\\
+Turn on your keyboard CAPS lock when entering your old V3 or V2 key code and it will work.\\
+The problem is the installer is not allowing lower case characters, but is changing the display when you enter them. If you make sure the letters in your key code are entered in upper case, the SR0 installer will work.
+Our apologies for the inconvenience and confusion.
+
+<color darkslategray>**//Question://** //"Can I install or uninstall Rhino 5 and keep my Rhino 4 install intact?"//</color>\\ 
+**Answer:** Yes, <color darkslateblue>**//but with one important condition//**</color> - read on\\ 
+
+Rhino V5 is a completely separate installation from V4 - However, it uses the same license manager as V4.  <color darkslateblue>//Problems can arise if you decide to uninstall Rhino 5, the V4 license manager gets uninstalled in the process, and your V4 installation will stop working.//</color>  
+
+In order to prevent this from happening, if you decide to uninstall V5 , first COPY the files McNeelLM.exe and RhinoLM.exe to a safe location, then uninstall Rhino 5 and then copy them back to the original location.
+
+In Windows Vista or 7 the license manager is located at:\\ 
+C:\Program Files (x86)\Common Files\McNeel Shared\License Manager (64 bit)\\ 
+or\\ 
+C:\Program Files\Common Files\McNeel Shared\License Manager (32 bit)\\ 
+
+//*You also want to be VERY careful with plug-ins, toolbars, etc. that might be shared between V4 and V5 - either consciously or inadvertently.  This has been known to cause problems...//
+
+<color darkslategray>**//Question://** //"Can I have both the 32 bit and 64 bit versions of Rhino 5 installed on the same computer?"//</color>\\ 
+**Answer:** Yes, no problem, except for the license manager issue as above.\\
+\\ 
+ 
+=====Remove Rhino 4.0 Manually=====
+<color darkslategray>**//Question://** I tried to uninstall Rhino 4.0, but an error occurred and Rhino could not be removed.</color>\\
+**//Answer://** [[rhino/uninstalling|Manually remove Rhino 4.0.]]
+
+=====Remove Rhino 5.0 Manually=====
+<color darkslategray>**//Question://** I tried to uninstall Rhino 5.0, but an error occurred and Rhino could not be removed.</color>\\
+**//Answer://** [[rhino/5/uninstall|Manually remove Rhino 5.0.]]
+
+=====Installing upgraded versions of Rhino=====
+
+<color darkslategray>**//Question://** //"What previous version info do I need to get my Rhino 5 Upgrade to install?"//</color>\\
+**//Answer://** The Rhino 5 Upgrade installer will install if one of the following is true.\\ 
+It is checked in order:\\
+
+Rhino 4.0 is installed
+
+Rhino 3.0 is installed
+
+Rhino 2.0 is installed
+
+Rhino 4.0 key code is entered during installation
+
+Rhino 3.0 key code is entered during installation
+
+Rhino 2.0 key code is entered during installation
+
+
+=====Transferring personalized settings from one Rhino install to another=====
+[[SettingsTransfer|A page with some advice on copying/transferring customized setttings]]
+
+
+=====Installing Rhino with the latest Service Releases on a new computer=====
+
+**//Question://** //I've got a new computer and I want to install Rhino version **X** SR **Y**.  I have always purchased upgrade versions of Rhino.  Do I have to install ALL previous versions and sucessive service packs??//
+
+**//Answer://**  Simply install the last upgrade version you have on CD.  During the install, you will be asked to insert the CD of a previous version to validate that you have it, but it is not necessary to actually **INSTALL** the previous versions.  Once you have installed the last CD version, proceed to install the latest Service Release - it is not necessary to install previous ones.
+
+=====What are Service Releases?=====
+These installers are downloadable and will only install if you have a version of the product already installed.  Service Releases are identified two ways: the SR number, like SR3 or SR4b; and the date, which is coded into the name of the download file like 20050729, meaning July 29, 2005.
+
+=====How do I tell what version is installed?=====
+Once you have the software installed, you can see the date and the SR number by viewing the "about" information, which appears on the "splash screen" when you start Rhino, or can be viewed by doing Rhino > Help > About [[rhino:rhinoceros|Rhinoceros]].
+
+For Flamingo, do the FlamingoAbout command. For Bongo, do the BongoAbout command.
+
+=====How do I get Service Releases?=====
+The quick way is to use the Check for Updates service.  In Rhino, pull down the Help menu, and pick Check for Updates.  If you are connected to the internet, the McNeel web servers will offer the correct Service Release if there is one newer than your software.  For Flamingo, pull down the Raytrace or Photometric menu and pick Check for Updates.  For Bongo, pull down the Bongo menu and pick Check for Updates.
+
+=====Can I delete older versions in "Add or Remove Programs" without causing problems?=====
+The "Add or Remove Programs" entry in the Control Panel in Windows is reporting all Service Releases as an installed program, each using approx. 250MB of disk space. This is somewhat misleading. Windows reports the total as though all installed files are added on to the existing installation even though many if not all files are actually overwritten on install. Do **not** use the "Add or Remove Programs" to remove older Service Releases of Rhino 4.0.
+
+=====I get an error and the install never completes=====
+See this page [[rhino:debuginstaller|DebugInstaller]] for instructions on how to generate a logfile of the error and get Technical Support involved.
+
+===== Error 1327. Invalid Drive: =====
+**//Question://** //I get "Error 1327. Invalid Drive (E:, F:, etc)" when installing//
+
+**//Cause://** //Your user account has settings indicating that one or more non-existent drives should be used for special folders such as "My Documents"//
+
+**//Solution://**
+  - From the Start menu, click Run.
+  - Type RegEdit, then click Run
+  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  - Look for directories listed that contain the drive letter mentioned in the error from the installer. Change them to point to a valid drive and folder.
+  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+  - Look for directories listed that contain the drive letter mentioned in the error from 
+
+**Note:** This method, or task contains steps that tell you how to modify the registry. However, serious problems might occur if you modify the registry incorrectly. Therefore, make sure that you follow these steps carefully. For added protection, back up the registry before you modify it. Then, you can restore the registry if a problem occurs. For more information about how to back up and restore the registry, click the following article number to view the article in the Microsoft Knowledge Base:
+
+[[http://support.microsoft.com/kb/322756|How to back up and restore the registry in Windows ]]
+
+===== Error 0xc000007b: =====
+Problem:
+Rhino 5 64-bit cannot run because of Error 0xc000007b. 
+[[http://wiki.mcneel.com/rhino/rhino5/error0xc000007b|{{http://wiki.mcneel.com/_media/rhino/5/0xc000007b.png?450}}]]
