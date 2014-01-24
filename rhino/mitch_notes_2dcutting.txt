@@ -1,14 +1,16 @@
-====== Preparing Rhino Files for 2D automated cutting ======
+====== Preparing Rhino Files for 2-D automated cutting ======
 
-[[http://enac-oc.epfl.ch/files/content/sites/enacco/files/shared/am/Dcoupe/Export-DXF-Rhino-EN|Link to PDF by Mitch Heynick]]
+[[http://enac-oc.epfl.ch/files/content/sites/enacco/files/shared/am/Dcoupe/Export-DXF-Rhino-EN|Link to PDF]]
 
-  - All of the info on this page concerns 2D automated cutting only, like [[http://www.epiloglaser.com/|Epilog]] lasers and Zünd rotary knife cutters.  
+  - All of the info on this page concerns 2-D automated cutting only, like [[http://www.epiloglaser.com/|**Epilog**]] lasers and **Zünd** rotary knife cutters.  
   - For the lasers, we run directly out of Rhino.  The lasers have a printer-driver type interface so everything is done with just “Print”.  
   - Unfortunately for the Zünd, there is no printer driver available, so it needs to be run with some other software.  
-  - The software that we use is Type3, it’s pretty painful to use It can act as a machine control.  But it’s DXF import is glitchy with certain types of objects.   
+  - The software that we use is Type3, it’s pretty painful to use. It can act as a machine control. But it’s DXF import is glitchy with certain types of objects.   
   - We need to create an export model that works both for Rhino and Type3.  Rhino can take pretty much anything, but Type3 is a bit more particular, especially with polycurves – which is why they are set to export as Splines.  Even with that, it doesn’t like degree 2 splines much.  
   - The other reason for needing to create a special export model is that Default DXF scheme explodes polylines/polycurves, which is unwanted for either machine.  We need to make sure that curves are neither exploded nor tessellated.
-  - Lastly, this is all 2D cutting, in principle there shouldn’t be any surfaces in their files to export. But if there are accidentally, we would rather have them come in as curves and not meshes. The curves will cut, the meshes won’t do anything.
+  - Lastly, this is all 2-D cutting, in principle there shouldn’t be any surfaces in their files to export. But if there are accidentally, we would rather have them come in as curves and not meshes. The curves will cut, the meshes won’t do anything.
 
 Mitchell Heynick
 mitch.heynick@epfl.ch
+
+> **Author:** //Mitchell Heynick email: <mitch.heynick@epfl.ch>//
