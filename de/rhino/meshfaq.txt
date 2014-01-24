@@ -1,156 +1,94 @@
-====== Rhino Mesh Settings ======
-//Unraveling the mysteries of Rhino mesh settings...  Solutions to common meshing problems.//
+======Polygonnetzeinstellungen in Rhino======
+//Ein kurzer Überblick über die benutzerdefinierten Polygonnetzeinstellungen in Rhino und wie sie funktionieren//
 
-> <color slategray> Note: I've done a fairly massive edit of this page - the formatting was was all messed up by the WIKI transition, and while fixing that, I took the opportunity to reorganize the info a bit.  Hopefully I made it more readable... if there's anything that got missed or needs adding, check into the [[news://news.mcneel.com/rhino|Rhino newsgroup]] and let me know.  --Mitch 13.02.2010 </color>
+> <color slategray> Hinweis: Zur besseren Übersichtlichkeit bietet diese Seite nur einen kurzen Überblick über die benutzerdefinierten Polygonnetzeinstellungen.  Detailliertere Informationen und Erklärungen finden Sie auf [[http://wiki.mcneel.com/rhino/meshfaqdetails|dieser Seite]].  -- 16.01.2013 </color>
 
 
-> <color darkslategray>**Please feel free to contribute and share your meshing expertise and settings secrets!**</color>
+==== Zugriff auf die Polygonnetzeinstellungen ====
+Die Polygonnetzeinstellungen sind Teil der Eigenschaften der 3DM-Datei und können über **Datei > Eigenschaften > Polygonnetz** oder **Werkzeuge > Optionen > Polygonnetz** erreicht werden.  
 
-> //**[[http://www.hydraulicdesign.net/meshes.htm|See also James Carruthers' excellent explanation of display mesh problems]]**//
+Standardmäßig werden sie für das ganze Modell festgelegt, wobei Sie sie jedoch ab Rhino 4 auch objektweise über das Eigenschaftenpanel einstellen können.  
 
-=====Why am I here?=====
+Rhino bietet die zwei 2 //Standardeinstellungen//, **//Gezackt & schneller//** und **//Glatt und langsamer//** sowie die Option **//Benutzerdefiniert//**, mit der Sie eine weitergehende Kontrolle erhalten.
 
-**//Pretty much everyone//** that has ever used Rhino has run into a mysterious display problem at one point or another.  Things like:
+====Die Standardeinstellungen====
+  * **Gezackt & schneller** ist der Standard für Renderpolygonnetze und geeignet zur allgemeinen Visualisierung.
 
-  * getting a //faceted rendition// of what should be a nice, smooth curved surface
-  * a display that //slows to a crawl// with a large model
-  * mysterious //"ghost surfaces"// showing up in unexpected places
-  * invisible surfaces or whole objects
+  * **Glatt & langsamer** bietet eine bessere Auflösung, dauert dafür aber länger.\\
+  * //(In Rhino 4 funktionierte die Option "Glatt & langsamer" nicht so gut, in Rhino 5 läuft sie um Einiges besser!)//
 
-All of these can usually be traced back to some problem with the meshing of the model or your mesh settings in general...\\  
+  * **Benutzerdefiniert** erlaubt dem Anwender die maximale Flexibilität in der Anpassung der Polygonnetzeinstellungen nach den individuellen Bedürfnisse, wobei diese Option aber auch schwerer zu verstehen und einzustellen ist. 
 
-//MESH you say?//  //I didn't make any meshes, all I made was NURBS surfaces.//  
+> //**[[http://www.hydraulicdesign.net/meshes.htm|Sehen Sie sich dazu auch die ausgezeichnete Erklärung von James Carruthers zur Verwendung von Polygonnetzen zur Anzeige an.]]**//
 
-Well, you may not know it, but you created some meshes without realizing it ...  //read on//.
-
-=====Why do we need meshes anyway?=====
-Although Rhino is a [[rhino:nurbs|NURBs]] surface modeler, it uses polygon meshes created from those surfaces for visualization purposes - so what you see on the screen when the model is shaded is in reality a special, invisible polygon mesh (the "render mesh") that is attached to the actual [[rhino:nurbs|NURBs]] surface.
-
-Why? For quick shading and rendering.  But while a mesh has the advantages of shading speed and adjustability, there is a disadvantage. The render mesh is always an approximation of the surface, so there are almost always gaps between the faceted render mesh and the actual smooth surface.
-
-The same meshing engine in Rhino is used in the creation of analysis meshes for the functions like Draft Analysis and Curvature Analysis, EMap, etc., and by the **Mesh** command (Tools > Polygon Mesh > From [[rhino:nurbs|NURBs]] Object), which creates a "real" mesh object directly from a [[rhino:nurbs|NURBs]] object.
-
-Exporting from Rhino with certain polygon-based formats (such as .stl) will also create mesh objects (in the exported file).  Although you can't edit these in the original Rhino file, you do have the same group of mesh density settings to control how they are created.
-
-The functions that create real, editable meshes like **Mesh** and **Export** (.stl) are very important in many applications, as other "downstream" programs or processes often need polygon mesh objects to work with.
-
-All of the types of mesh objects can exist simultaneously in one file, they do not affect one another and each can have its own settings. Although all the meshes are created with the same engine, there are a couple of important differences between them.
-
-=====The different types of meshes=====
-
-  * **Render meshes** are created on [[rhino:nurbs|NURBS]] surfaces and polysurfaces for visualization purposes when using Shaded or Rendered Viewports.  They are not directly user accessible or editable, they stay "attached" to the [[rhino:nurbs|NURBS]] object they were created from. They can be deleted by using the **ClearAllMeshes** command, and regenerated by using the **RefreshShade** command or by changing the settings (at File > Properties > Mesh) (which forces a global regeneration of all render meshes). As of V4, you can also transform the render mesh into a real editable mesh object using the command **ExtractRenderMesh**.
-
-
-  * **Analysis meshes** are similar to the render meshes in that they are not normally editable or separable from their [[rhino:nurbs|NURBS]] object.  They simply have another set of controls and exist separately from the render meshes.  You //can// see them temporarily, however, when you use the "adjust mesh" button or the "preview" button in the settings panel on the dialog boxes for the Analysis commands.  In V5, like with render meshes above,you can transform an analysis mesh into a real mesh object with the command **ExtractAnalysisMesh**.
-
-
-  * **Meshes created by the MESH command** are visible and editable, and are separate from the [[rhino:nurbs|NURBS]] objects they were created from.  They are objects in their own right, and can be seen and edited with the various Rhino commands that apply to meshes (see Bonus > Mesh), and can be exported to in the polygon mesh formats like STL, DXF, 3DS, and OBJ.
-
-
-  * **Meshes created during SAVE and EXPORT** (such as .stl) have the same mesh settings dialogs ("Detailed Controls") as the other types.  You can also see them temporarily when you use the "preview" button in the settings panel, but they are not stored in the original file (only exported).
-
-> <color slategray>//**Willem:**  When meshing an object for export I always first create a mesh and look at it in the viewport Flat Shade mode (**FlatShade** command) before exporting it to the desired format. The Flat Shade mode "Shades the current viewport with no smoothing so the individual (render)mesh faces are visible".// </color>
-
-
-=====The Mesh Settings Dialogs=====
-<color darkslateblue>**//Why do we need mesh settings anyway?  Isn't Rhino intelligent enough to figure all this stuff out without my having to tell it what to do?//**</color>
-
-<color darkslategray>**//That's a good question//**</color> --- and subject to much debate.  We won't get into the debate here, but suffice to say that yes, if you want optimum meshing in Rhino, you //will// need to understand how these settings work and how to manipulate them.  Hence this long and windy page full of info and advice.  Don't despair...
-
-<color darkslateblue>**//OK then, why don't I just mesh everything very finely and with high resolution - won't that solve my problem and let me forget about it??//**</color>
-
-<color darkslategray>**//Actually not//**</color> --- it will probably make things worse.  Meshes are a bit like pixels in an image - the more pixels //(mesh faces)// you have, the finer the image //(model)// resolution is, but also the more data is needed to describe the image //(model)//.  At a certain point the data set can become huge, and considering that this data also needs to be dynamic //(you want to rotate your shaded model and look at it, right?)// the ability of your computer to process this data in realtime quickly reaches its limit.
-
-So meshing is a balancing act.  The idea is to use the //least// number of mesh faces you need to have adequate resolution for your job - and no more.  To do that in Rhino requires some understanding of how the meshing system works.  //That's why you're here.// :-)
-
-====The Controls====
-The controls for different mesh types are virtually identical.  The controls for the Render Mesh (display mesh) settings are part of the .3DM file's properties (**Properties > Mesh**).  They are set globally for the whole model, but as of V4 you can also override them on a per-object basis.  Rhino offers you 2 //standard// settings, **//jagged and faster//** and **//smooth and slower//**, as well as **//custom//**, which lets you access the detailed controls.  
-
-When creating a mesh from a NURBS object, or exporting to a mesh format like STL, DXF, 3DS, and OBJ you can choose to use the "simple" controls, which are just a coarse <==> fine slider: **fewer <==> more polygons**.
-
-Alternatively, there are the "detailed controls" which expose more of the settings to the user.  They are virtually are identical for all the mesh types, and are described in detail below.
-
-====The Default settings====
-  * **Jagged and Faster** is the default for render meshes --- fine for quick visualization, but not very good for anything else.
-
-  * **Smooth and Slower** //theoretically// offers better resolution at the expense of longer meshing times. In practice, even though it does take longer, frankly, it may still leave visible gaps where you don't want them, so you are advised to try the custom settings instead.
-
-  * **Custom** allows the user the maximum flexibility in tailoring the mesh settings to their needs, at the expense of being a bit complex to understand and set up. 
-
-  * The default "simple" slider settings for analysis meshes as well as Mesh and Export is an average //"somewhere in the middle"//...
-
-  * The default setting for the special STL Export dialog is generally the last used //"max dist edge to srf"// setting in the custom dialog (see further on) or the value of Absolute Tolerance in File > Properties > Units if none was set.
-
-====The Custom Settings====
-<color darkslateblue>//**If you really want to control your meshing process, here is where you need to start!**//</color>
-
-There are //seven// numerical settings and //three// check boxes.  Each one has a different method of mesh control and some of them can work together.  The interactions and combined effects of these settings are complex to understand.  Individually they are well described in the Help however, and reading this info carefully will give you a good idea of what each one does.
-
-**[[rhino:meshsettings|A copy of the Rhino Mesh Help page can also be found here.]]**
-
-==Some Quick Guidelines==
-Below is a basic start point for custom settings, experiment with them on your models.\\ //If a setting is 0 or 0.0, it is turned off (not taken into a account).//
-
-|**Density** //(new in Rhino 4)//|  <color slategray>**0.0**</color>|
-|**Maximum angle**|  <color slategray>**35**</color>|
-|**Maximum aspect ratio**|  <color slategray>**0.0**</color>|
-|**Maximum edge length**|  <color slategray>**0.0**</color>|
-|**Maximum distance edge to surface**  |  **%%**%%**|
-|**Minimum initial grid quads**|  <color slategray>**16**</color>|
-
-> <color slategray>In Rhino 4, you can experiment with Density setting.  It is scale independent.  See below for a more detailed explanation of what it does.  In Rhino 3, there is no Density setting, you can insert a //scale appropriate value// in Maximum distance edge to surface.  For millimeter-unit models try 0.10 to 0.01</color>
-
-  * Refine mesh **checked**
-  * Jagged seams **//unchecked//**
-  * Simple planes **//unchecked//**
-
-  * The //maximum distance edge to surface// method forces Rhino to create a mesh that is no further away from the surface than the specified value, which is in current file units.  It allows Rhino to put fewer polygons in lower detail areas and more polygons in higher detail areas, resulting in a more efficient mesh.
-  * The //minimum initial grid quads// setting makes sure the flatter areas have enough polygons to look smooth.
-
-> <color darkslategray>//**Pascal:** I prefer to set some largish number in "Maximum angle" rather than zero (disabled), maybe 35-45 degrees. This way 'features' that fall below the max distance number will be subdivided a little. You can get away with a little bigger max distance number in some cases if you let a large angle setting take over for the smallest objects. When there is too great a discrepancy between an object and the global mesh settings, it often pays to use the Mesh command on those objects. Set the mesh to be as loose or as fine as needed for that object, then render the mesh object only, hide or delete the %%NURBS%% surface. Very small repeated details can be meshed very very loosely for instance, without impacting the quality of the image.//</color>
-
-> <color darkslategray>//**Mitch:** I sometimes put a value of 6.0 in the "Maximum aspect ratio" setting to keep Rhino from meshing long, thin objects with long, skinny triangles, it will break them up into more shorter, smaller ones.  However, this comes at the expense of bigger file sizes and sometimes significantly longer meshing times.//</color>
-
-> <color darkslategray>//**Ricardo:** I do jewelry rapid prototyping. My default settings are 0.001 for maximum distance and 12 degrees for maximum angle. Larger angles tend to show the triangle edges on the final product. Mesh sizes range up to 30mb on very complex models. Units are milimeters//</color>
-
-> <color darkslategray>//**Olivier:** I work on tensile structures that mix large membranes and steel structures. I need the membrane to be meshed accurately, but the steel tubes   and fittings induce very heavy meshes. To deal with both big and very small curvatures, I always set a 'minimum edge length' to limit the number of polygons on small curvy details. //</color>
-
-**The main setting is the one for //max distance edge to surface//**. If you think about it for a moment, you will understand that this value is scale (size) dependent, hence the following question:
-
-<color darkslateblue>//**What is a scale-appropriate value?**//</color>
-
-First, it depends on what you're going to be using your mesh setting for.  For general display purposes your value can be a bit bigger (looser), as you're only visualizing the model on your screen, and fewer polygons mean faster meshing times and quicker display reaction when tumbling, zooming, etc.
-
-  * If you are doing computer-sized objects, 0.01mm works out pretty well. For watches and jewelry, you will probably want it smaller, maybe .002mm. For larger objects like buildings, much larger, maybe 1mm or even larger.
-
-  * If you're going to be exporting your object for later processes, or are going to be doing very detailed renderings, you may need to tighten up the settings a bit, depending on where it's going and how precise the process is.  For a stereolithography part, .01mm should still be fine for example, but for a good machined part, .001mm-.002mm is probably more appropriate.
-
-It may seem very complicated at first, but after a bit of practice, you will find a few standard settings that work for you in most situations.  These settings can even then be programmed into a macro or script to quickly launch the meshing of your objects with the desired characteristics.
-
-<color darkslategray>Details of the **//Density//** setting: \\ //The Density setting in V4 uses a formula to control how close the polygon edges are to the original surface.  The valid range is from zero (off, or ignored) to 1, maximum density. Larger values result in a mesh with a higher polygon count. Used by itself (all other settings 0) it seems to create well balanced meshes. Density is not directly related to units or scale.//\\ 
-\\ 
-//The Density number feeds Rhino something to use in its own internal calculation, per object, which in turn spits out a number that is like the "maximum distance edge to surface" setting that is, a number in current model units that tells the mesher how far to allow the mid-point of any mesh edge to stray from the original surface. The calculation is based on the size of the object among other things. This number will be smaller as the Density setting gets closer to one. The user will never actually see this final number and it is different for each object being meshed. If there is also an explicit non-zero "Maximum distance edge to surface" number set elsewhere in the dialog, then the mesher will use whichever number is smaller for its eventual max distance setting for each object.//</color>
-
-=====Known meshing problems and weaknesses=====
-
-Sometimes, you may find that even with the settings guidelines above, you are still not getting good results.  You may struggle with ghost surfaces, uneven shading, or triangular mesh facets that cut across empty space where they shouldn't be.  Some of these problems may be caused by the Rhino mesher's reaction to certain types of geometric structures.  The only way to correct them currently may be to do some reconstruction on your structures.
-
-====Things to watch out for:====
-//While these conditions don't always cause problems meshing, they have been known to do so in the past, so it's worthwhile checking if you are having difficulties.//
-
-  * <color darkslateblue>**Bad objects.**</color>  While they don't always result in mesh problems, these are easy enough to track down, so it's a good place to start.  If you find one, try hiding it. If your problem disappears, then perhaps all you need to do is fix the object (make it valid) and you'll be good to go.
-
-  * <color darkslateblue>**Long, skinny surfaces.**</color>  These are hard for the mesher currently.  The longer and thinner, the harder it is and the longer it takes.  A typical example might be long continuous small radius fillets on the edges of your model.  If it's taking forever to mesh and you think you're geometry doesn't warrant that, you might also have a tiny sliver surface somewhere that's hanging up the mesh machine.
-
-  * <color darkslateblue>**Joined tangent lines and arcs that have been extruded or revolved.**</color>  Example - extruding a rounded rectangle.  This forms a single surface with internal G1 areas, which the mesher struggles with.  Solution - **Explode** the curves before extruding, or use **Split  > Isocurves** at the G1 spots to create a structure with separate joined tangent surfaces instead of one single one.  In the case of the extruded rounded rectangle, you will have eight joined surfaces, not one.
-
-  * <color darkslateblue>**Kinked surfaces.**</color>  Usually caused by having **CreaseSplitting** (V5 or V4 add-on) set to No, or using **MergeSrf Smooth=No** on surfaces that are not at least tangent to each other.  In this case, again, it is better to have multiple joined surfaces instead of one kinked one.  Use **Surface edit tools > Divide surface along creases** or **Split  > Isocurves** at the kinked spots to split these types of surfaces up into separate parts.
-
-  * <color darkslateblue>**Triangular surfaces with holes**</color>  //This is a known Rhino bug in V4.//  The "Use simple planes" setting (outlined above) messes up with either a triangular planar surface with a hole in the middle, or a planar surface with a triangular hole in the middle.  The symptom is that the hole is not displayed in shaded mode, even though it is there.  The remedy is to uncheck "Use simple planes" in the detailed mesh dialog.  If you are using "Jagged and Faster", "Simple planes" is checked by default and can't be unchecked, so you will have to switch to a "Custom" mode.
-
-=====Diagnostics (From the Rhino Help file)=====
-**[[rhino:meshdiagnostics|The Diagnostics explanation is a bit difficult to find in the Help, for your convenience it is provided here]]**
 
 ----
 
-===Please add your experiences!===
+====Benutzerdefinierte Einstellungen====
+<color darkslateblue>//**Wenn Sie wirkliche Kontrolle über die Polygonnetzerzeugung haben möchten, sind Sie hier genau richtig!**//</color>
+
+Bei Auswahl der Option **Benutzerdefiniert** in Rhino 5 sehen Sie als Erstes einen einfachen Schieberegler zur Kontrolle der **//Dichte//**.  Je weiter er nach links bewegt wird, desto weniger Polygone und ein umso grobkörnigeres Polygonnetz.erhalten, während es zur rechten Seite hin immer feiner wird. 
+
+Durch Klick auf die Schaltfläche **Genaue Einstellungen** werden die Feineinstellungen geöffnet, mit denen Sie die maximale Kontrolle über die Polygonnetzerzeugung haben.  //In Rhino 4 sind die Feineinstellungen direkt sichtbar, während der Schieberegler zur Kontrolle der //Dichte// nicht verfügbar ist.//
+
+Es gibt insgesamt //sieben// numerische Einstellungen und //drei// Kontrollkästchen.  Sie alle beziehen sich auf unterschiedliche Methoden zur Polygonnetzkontrolle und manche von ihnen können kombiniert werden.  Das Zusammenspiel und die kombinierten Effekte dieser Einstellungen sind sehr komplex.  Ihre individuellen Funktionsweisen sind in der Hilfe allerdings sehr gut beschrieben und wenn Sie diese Info sorgfältig lesen, können Sie sich ein gutes Bild davon machen, wozu jede Einstellung dient.  
+
+[[rhino:meshsettings|Eine Kopie der Hilfeseite zum Thema Polygonnetz finden Sie hier.]]
+
+[[http://wiki.mcneel.com/rhino/meshfaqdetails|Detailliertere Infos zu Polygonnetzen finden Sie auf dieser Seite]]
+
+**Unten finden Sie einen Ausgangspunkt für benutzerdefinierte Einstellungen**, von dem ausgehend Sie mit Ihren Modellen experimentieren können. //Wenn eine Einstellung auf 0 oder 0.0 gesetzt ist, ist sie abgeschaltet (wird nicht berücksichtigt).//
+
+|**Dichte**|  <color slategray>**0.0**</color>|
+|**Maximaler Winkel**|  <color orangered>**35**</color>|
+|**Maximales Seitenverhältnis**|  <color slategray>**0.0**</color>|
+|**Maximale Kantenlänge**|  <color slategray>**0.0**</color>|
+|**Maximaler Abstand Kante zu Fläche**  |  <color orangered>**siehe unten**</color>|
+|**Minimale Quadrate des anfänglichen Gitters**|  <color orangered>**16**</color>|
+
+Polygonnetz verfeinern **aktiviert**\\
+Gezackte Nähte **//deaktiviert//**\\
+Einfache Ebenen **//deaktiviert//**\\
+
+
+  * Mit dem //maximalen Winkel// erzwingen Sie mehr Dreiecke in scharf gekurvten Bereichen. Auf diese Weise werden kleinere Details, die unter die maximale Abstandszahl fallen, ein wenig unterteilt. Damit können Sie eventuell einen etwas größeren Maximalabstand einstellen und sich die Winkeleinstellung um die kleinsten Objekte kümmern lassen.
+
+  * Mit dem //maximalen Abstand von der Kante zur Fläche// zwingen Sie Rhino zur Erstellung eines Polygonnetzes, das nicht weiter eintfernt ist von der Fläche als der angegebene Wert in aktuellen Dateieinheiten.  Dies erlaubt Rhino, in Bereichen mit geringeren Details weniger Polygone und in Bereichen mit höheren Details mehr Polygone zu verwenden, wodurch das Polygonnetz effizienter wird.
+  * Mit der Einstellung der //minimalen Quadrate des anfänglichen Gitters// stellen Sie sicher, dass die flacheren Bereiche genügend Polygone erhalten, um sanft auszusehen.
+
+
+**Die wichtigste Einstellung hier ist der //maximale Abstand der Kante zur Fläche//**. Dieser Wert ist in Dateeinheiten und ist abhängig von der Skalierung (Größe) - das heißt, Sie müssen ihn je nach Größe und Detailtiefe der Modellobjekte anpassen.
+
+Diese Einstellung wird davon abhängen, für was Sie Ihre Polygonnetzeinstellungen verwenden.  Wenn Sie Ihr Modell nur auf dem Bildschirm visualisieren möchten, können Sie hier einen etwas größeren Wert (gröberes Netz) eingeben, da weniger Polygone eine schnellere Polygonnetzerzeugung und eine bessere Performance beim Drehen, Zoomen etc. bedeuten. Wenn Sie auf der anderen Seite ein präziseres Polygonnetz für ein hochwertiges Renderbild oder zur Herstellung benötigen, sollten Sie hier einen etwas kleineren Wert (feineres Netz) eingeben.
+
+  * Für Objekte von der Größe einer Mikrowelle ist eine Einstellung von 0,01 mm (0,0005 Zoll) in der Regel ausreichend. 
+
+  * Für kleine Objekte mit vielen Details wie Uhren oder Schmuck, sollten Sie einen etwas kleineren Wert wie etwa 0,002 mm (0.00001 Zoll) nehmen. 
+
+  * Für große Objekte wie Gebäude kann ein weitaus größerer Wert von vielleicht 0,1 mm bis 1 mm (0.005 Zoll bis 0.05 Zoll) oder mehr eingegeben werden.
+
+  * Wenn Sie Ihr Objekt für die weitere Bearbeitung exportieren oder sehr detailreiche Renderbilder erstellen möchten, sollten Sie die Einstellungen je nach dem konkreten Verwendungszweck etwas straffer setzen.  Für eine Stereolithographie sind beispielsweise 0,01 mm ausreichend, während für ein gutes Werkstück eine Einstellung von 0,001 mm - 0,002 mm vermutlich angemessener ist.
+
+Auf den ersten Blick mag dies alles etwas kompliziert erscheinen, aber mit der Zeit werden Sie für sich einige Standardeinstellungen herausfinden, die für die meisten Zwecke geeignet sind.  Diese Einstellungen können auch in ein Makro oder Skript programmiert werden, um die Polygonnetzerzeugung Ihrer Objekte schnell durchführen zu können.
+
+----
+
+
+=====Andere Polygonnetzeinstellungen und mögliche Lösungen=====
+
+Unter Umständen kann es vorkommen, dass Sie auch bei Befolgen der Richtlinien oben keine idealen Ergebnisse erzielen.  Die Polygonnetzerzeugung wurde für Rhino 5 komplett neu geschrieben und erzielt in den meisten Fällen bedeutend bessere Ergebnisse als ältere Versionen - aber auch hier können noch kleinere Ungereimtheiten auftreten.  Wenn Sie bei der Polygonnetzerzeugung auf unlösbare Probleme stoßen, berichten Sie diese im[[http://discourse.mcneel.com/category/rhino-for-windows|Rhino-Support-Forum]] oder senden Sie eine E-Mail an den [[tech@mcneel.com|Technischen Support von McNeel]].
+
+Manche Probleme entstehen, wenn Modelle versteckte geometrische Fehler enthalten.  In diesem Fall müssen Sie das Modell selbst reparieren.  Die Fehler sind dabei oft in der Nähe der Stelle zu finden, an der das sichtbare Polygonnetz Fehler aufweist.
+
+====Dinge, auf die zu achten ist:====
+//Obwohl diese Bedingungen nicht notwendigerweise Probleme bei der Polygonnetzerzeugung verursachen, sollten Sie Ihr Modell doch immer auf Probleme hin untersuchen, wenn Sie sich nicht sicher sind.//
+
+  * <color darkslateblue>**Fehlerhafte Objekte.**</color> Diese führen zwar nicht immer zu Problemen, da sie aber relativ leicht auszumachen sind, sind sie ein guter Ausgangspunkt.  Wenn Sie eines finden, versuchen Sie, es zu verbergen. Wenn ihr Problem damit verschwindet, reicht es vielleicht, das fehlerhafte Objekt zu reparieren.
+
+  * <color darkslateblue>**Lange, dünner Flächen.**</color>  Diese stellten für die Polygonnetz-Engine in Rhino 4 ein großes Problem dar. In Rhino 5 wurde dies aber stark verbessert und ist nicht länger ein Problem.
+
+  * <color darkslateblue>**Extrudierte oder rotierte verbundene Tangentenlinien und Bögen.**</color>  Beispiel - Extrusion eines abgerundeten Rechtecks.  Dadurch wird eine einzelne Fläche mit G1-Bereichen erstellt, die bei der Polygonnetzerzeugung Probleme hervorrufen kann.  Lösung: **Zerlegen** Sie die Kurven vor dem Extrudieren oder nutzen Sie an den G1-Stellen **Teilen > Isokurven**, um statt einer einzelnen Fläche eine Struktur mit getrennten verbundenen Tangentenflächen zu erstellen.  Im Fall eines extrudierten abgerundeten Rechteck erhalten Sie so acht verbundene Flächen statt einer einzelnen.  In Rhino 5 können Sie den Befehl **Extrudieren** mit der Option **//AnTangentenTeilen=Ja//** verwenden, um die erhaltene Extrusion automatisch zu teilen.
+
+  * <color darkslateblue>**Flächen mit Knicken.**</color>  Dies wird normalerweise dadurch verursacht, dass **FaltenTeilung** (nativ in Rhino 5 oder als Add-on für Rhino 4) auf "Nein" gesetzt ist oder die Option **FlächenVereinigen Glätten=Nein** auf Flächen angewandt wird, die nicht wenigstens tangential zueinander sind.  Auch in diesem Fall ist es besser, mehrere verbundene Flächen statt einer einzelnen zu haben.  Verwenden Sie **Bearbeitungswerkzeuge für Flächen > Fläche entlang Falten unterteilen** oder **Teilen > Isokurven** an den geknickten Stellen, um diese Art von Flächen in mehrere Teile zu unterteilen.
+
+  * <color darkslateblue>**Dreieckige Flächen mit Öffnungen**</color>  //Dies ist ein bekannter Bug in Rhino V4.//  Das Loch ist im Gitternetzmodus sichtbar, verschwindet aber im schattierten Modus. Es war ein benutzerdefinierter Modus nötig, um diese Flächen korrekt zu rendern.  //Dies wurde allerdings in Rhino 5 behoben!//
