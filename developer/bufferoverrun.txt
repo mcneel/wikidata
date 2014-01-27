@@ -1,0 +1,55 @@
+====== Avoid Buffer Overruns in String function ======
+> **Developer:** //[[developer:cplusplusplugins|C++]]//
+> **Summary:** //Discusses how to write safe string function.//
+
+===== Overview =====
+Consider the following function:
+
+<code c++>
+int GetName( wchar_t* pInput )
+{
+  wchar_t* pBuffer = (wchar_t*)malloc(100);
+  wcscpy( pBuffer, pInput ); // might overflow!
+  wcscat( pBuffer, L".txt"); // might also overflow!
+  <...>
+}
+</code>
+
+====1. Add a size_t argument for buffer size====
+<code c++>
+int GetName( wchar_t* buffer, size_t buffer_size );
+
+// Ex:
+wchar_t buffer[100];
+int rc = GetName( buffer, _countof(buffer) );
+</code>
+
+====2. Change buffer argument to use a string object reference====
+<code c++>
+int GetName( ON_wString& str );
+
+// Ex:
+ON_wString str;
+int rc = GetName( str );
+</code>
+
+====3. Change buffer argument to a fixed size array reference====
+<code c++>
+int GetName( wchar_t(&buffer)[100] );
+
+// Ex:
+wchar_t buffer[100];
+int rc = GetName( buffer );
+</code>
+
+====4. Change buffer point argument to reference to a pointer====
+<code c++>
+// API allocates buffer, call required to free it
+int GetName( wchar_t*& pBuffer );
+
+// Ex:
+wchar_t* pBuffer = 0;
+int rc = GetName( pBuffer );
+<...>
+delete pBuffer;
+</code>
