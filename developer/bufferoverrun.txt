@@ -50,11 +50,18 @@ strBuffer.ReleaseBuffer();
 ====2. Change buffer argument to use a string object reference====
 <code c++>
 int GetName( ON_wString& str );
+int GetName( CString& str );
 
 // Ex:
 ON_wString str;
 int rc = GetName( str );
+
+// Ex:
+CString str;
+int rc = GetName( str );
 </code>
+
+
 
 ====3. Change buffer argument to a fixed size array reference====
 <code c++>
