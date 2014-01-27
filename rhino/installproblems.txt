@@ -71,6 +71,15 @@ See this page [[rhino:debuginstaller|DebugInstaller]] for instructions on how to
 <--
 
 -->Installer reports WinXP not supported when running Win7/8?#
+  * This problem may caused by Microsoft PCA (Program compatibility assistant), perhaps because an earlier attempt to install Rhino was cancelled.
+  * Solution: 
+    - Ordered List ItemRight-click on the exe installer, select Properties.
+    - Go to the Compatibility tab.
+    - The compatibility mode may be set to “Windows XP (Service Pack 2)” and can't be changed.
+    - Click the Change settings for all users button near the bottom.
+    - Clear the Run this program in compatibility mode check box.
+    - Click OK two times to close the dialogs.
+    - Right-click on the exe installer again and select Run as administrator to install.\\
   * Sometimes the installer on the SR0 V5 DVD will report that Rhino can not be installed on Windows XP when the user is actually running Windows 7 or 8. The fix is to download an updated installer. Go to the Download page and download the Rhino V5 full version. Use that file to install rhino V5.\\
   * It's also possible that the error is coming from the MIcrosoft DotNet 4 installer. Try downloading and running the DotNet 4 installer directly: http://www.microsoft.com/en-us/download/details.aspx?id=17718
 
@@ -90,7 +99,6 @@ If these folders are missing or if you have already opened Rhino, you will have 
      - Close Rhino and reopen. This will delete the scheme in the registry, and reopening will reset it with the missing components.
 
 <--
-
 ===== Error Messages =====
 
 -->Error 1327 - Invalid Drive:#
