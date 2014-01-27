@@ -1,0 +1,40 @@
+====== Enregistrement automatique et versions dans OS X 10.7 (Lion) ======
+Apple a ajouté une méthode radicalement différente de gestion des modèles dans OS X 10.7 et cette fonction a été intégrée dans Rhino pour Mac. Apple décrit l'enregistrement automatique et les versions [[http://support.apple.com/kb/HT4753?viewlocale=fr_FR|ici]] et [[http://www.apple.com/macosx/whats-new/features.html#versions|ici]], et une autre introduction se trouve [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|ici]].
+
+Cet article aborde d'autres informations, non mentionnées dans les articles précédents, qui sont importantes pour les utilisateurs de Rhino pour Mac. Enfin, vous devriez lire [[http://wiki.mcneel.com/rhino/mac/lionsaving|tout ce que vous avez appris sur l'enregistrement des fichiers est faux]].
+
+-->Qu'est-il arrivé à la question "Voulez-vous enregistrer ?" lorsque je quitte Rhino ?#
+
+Cette question n'est plus nécessaire puisque votre modèle est constamment enregistré sur le disque. Avant l'enregistrement automatique, vous aviez deux versions de votre modèle -- celle dans Rhino et celle sur le disque. C'était à vous de conserver manuellement ces deux versions synchronisées en enregistrant souvent votre modèle. Et voilà pourquoi les plantages pouvaient être catastrophiques. Si vous aviez oublié de conserver la synchronisation entre ces versions, vous pouviez perdre votre travail. Avec l'enregistrement automatique de Lion, il n'y a plus qu'une version de votre modèle, celle que vous voyez à l'écran est la même que celle sur le disque. 
+
+<--
+  
+-->Quand est-ce que Rhino pour Mac enregistre automatiquement le modèle ?#
+
+Un modèle est enregistré automatiquement lorsque vous **fermez** la fenêtre du modèle, lorsque vous **quittez** Rhino, lorsque vous **passez** à une autre application et //de temps en temps//. Apple dit que //de temps en temps// signifie que des enregistrements se produisent environ toutes les cinq minutes lorsque Rhino est inactif. Cet intervalle de temps n'est pas configurable.
+
+<--
+
+-->Si Rhino enregistre constamment mon modèle, je vais être constamment interrompu par les enregistrements automatiques ?#
+
+Les enregistrements périodiques sont exécutés en arrière-plan. Vous ne saurez jamais quand un enregistrement se produit parce qu'il n'empêche jamais Rhino de fonctionner. Si vous commencez à modifier votre modèle pendant que Rhino réalise un enregistrement automatique, l'enregistrement est abandonné et sera relancé plus tard. 
+
+<--
+
+-->Cette opération va-t-elle prendre de la place sur mon disque ?#
+
+L'enregistrement automatique enregistre uniquement ce qui a changé depuis la version précédente, l'utilisation de l'espace du disque est donc optimisée. Les anciennes versions sont automatiquement éliminées. 
+
+<--
+
+-->Rhino pour Mac peut-il parcourir les anciennes versions de mon modèle de Rhino ?#
+
+Oui, le navigateur de versions fait partie de Rhino pour Mac dans 10.7. 
+
+<--
+
+-->Que puis-je faire dans le navigateur de versions ?#
+
+La fenêtre de gauche est votre modèle actuel et toutes les fenêtres à droite sont les versions précédentes de votre modèle. Ces fenêtres sont de vraies fenêtres de Rhino et peuvent être manipulées comme tout modèle de Rhino.  Vous pouvez faire tourner les vues, ouvrir le panneau des calques pour afficher et cacher des calques, vous pouvez même copier des objets d'un modèle précédent dans votre modèle actuel. Vous ne pouvez pas //modifier// des versions précédentes. [[http://tidbits.com/article/12483 |Attention au bogue de Versions dans Lion sur le réseau et les volumes Non-HFS+ (en anglais)]].
+
+<--
