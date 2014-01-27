@@ -36,6 +36,12 @@ delete pBuffer;
 
 // Ex:
 const size_t kBufLen = 100;
+ON_wString strBuffer;
+strBuffer.ReserveArray( kBufLen );
+GetName( strBuffer.Array(), kBufLen );
+
+// Ex:
+const size_t kBufLen = 100;
 CString strBuffer;
 GetName( strBuffer.GetBuffer(kBufLen), kBufLen );
 strBuffer.ReleaseBuffer();
