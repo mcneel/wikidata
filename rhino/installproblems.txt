@@ -17,6 +17,21 @@ The Rhino V5 installer will display a log file when the installation process fai
 http://wiki.mcneel.com/zoo/converttostandalone
 
 <--
+-->The installer unzips but nothing happens#
+**//Problem://** The installer unzips but nothing happens after that.\\
+**//Cause://** This problem is caused by Microsoft PCA (Program compatibility assistant), perhaps because an earlier attempt to install Rhino was cancelled.\\
+**//Solution://** 
+  - Restart Windows
+  - Open the file Explorer and browse to the downloaded executable file, and select it.
+  - Press and hold Shift
+  - Right-click on the executable the run it.
+  - A small dialog asking for a language will come up
+  - Let up the Shift key
+  - Choose English and continue
+**//Note://** You may also get a message that you are trying install Rhino on an unsupported operating system. The fix for this problem is in the **Error Messages** section below.
+
+<--
+
 -->Problems Uninstalling Rhino 5#
 **//Question://** I tried to uninstall Rhino 5, but an error occurred and Rhino could not be removed.
 
@@ -70,20 +85,6 @@ See this page [[rhino:debuginstaller|DebugInstaller]] for instructions on how to
 
 <--
 
--->Installer reports WinXP not supported when running Win7/8?#
-  * This problem may caused by Microsoft PCA (Program compatibility assistant), perhaps because an earlier attempt to install Rhino was cancelled.
-  * Solution: 
-    - Ordered List ItemRight-click on the exe installer, select Properties.
-    - Go to the Compatibility tab.
-    - The compatibility mode may be set to “Windows XP (Service Pack 2)” and can't be changed.
-    - Click the Change settings for all users button near the bottom.
-    - Clear the Run this program in compatibility mode check box.
-    - Click OK two times to close the dialogs.
-    - Right-click on the exe installer again and select Run as administrator to install.\\
-  * Sometimes the installer on the SR0 V5 DVD will report that Rhino can not be installed on Windows XP when the user is actually running Windows 7 or 8. The fix is to download an updated installer. Go to the Download page and download the Rhino V5 full version. Use that file to install rhino V5.\\
-  * It's also possible that the error is coming from the MIcrosoft DotNet 4 installer. Try downloading and running the DotNet 4 installer directly: http://www.microsoft.com/en-us/download/details.aspx?id=17718
-
-<--
 
 -->Incomplete Rhino 5.0 Install Without the Language Pack#
 Are you missing templates, toolbars, or plugins? This is a symptom that the language pack was not installed. This can be a incomplete or "botched" install if you are installing from the CD or an error in the install script if you are installing from an MSI script.
