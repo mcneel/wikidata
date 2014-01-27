@@ -9,8 +9,8 @@ Consider the following function:
 int GetName( wchar_t* pInput )
 {
   wchar_t* pBuffer = (wchar_t*)malloc(100);
-  wcscpy( pBuffer, pInput ); // might overflow!
-  wcscat( pBuffer, L".txt"); // might also overflow!
+  wcscpy( pBuffer, pInput ); // might overrun buffer!
+  wcscat( pBuffer, L".txt"); // also might overrun buffer!
   <...>
 }
 </code>
