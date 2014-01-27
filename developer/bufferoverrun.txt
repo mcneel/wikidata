@@ -26,6 +26,19 @@ int GetName( wchar_t* buffer, size_t buffer_size );
 // Ex:
 wchar_t buffer[100];
 int rc = GetName( buffer, _countof(buffer) );
+
+// Ex:
+const size_t kBufLen = 100;
+wchar_t* pBuffer = new wchar_t[kBufLen];
+GetName( pBuffer, kBufLen );
+<...>
+delete pBuffer;
+
+// Ex:
+const size_t kBufLen = 100;
+CString strBuffer;
+GetName( strBuffer.GetBuffer(kBufLen), kBufLen );
+strBuffer.ReleaseBuffer();
 </code>
 
 ====2. Change buffer argument to use a string object reference====
