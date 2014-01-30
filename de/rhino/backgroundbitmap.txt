@@ -1,0 +1,30 @@
+====== Hintergrundbilder in Rhino ======
+
+=====Überblick=====
+Bei Verwendung von Hintergrundbildern mit dem Befehl **HintergrundBild** kann weniger manchmal mehr sein.
+
+Rhino verwendet [[rhino:opengl|OpenGL]] zur Anzeige und Zeichnung der Objekte des Ansichtsfensters. Bilddateien oder Bitmaps werden als [[rhino:opengl|OpenGL]]-Texturen behandelt. [[rhino:opengl|OpenGL]] hat bestimmte Beschränkungen und Voraussetzungen, die bei der Erzeugung von Texturen beachtet werden müssen.
+
+  - Die Bildgröße muss sowohl in der Höhe als auch in der Breite eine Zweierpotenz betragen (z.B. 512 x 512, 1024 x 512, 2048 x 4906, etc.).
+  - Dies Gesamtbildgröße darf die Beschränkungen der Grafikkarte und/oder des Treibers nicht überschreiten. Dies hängt von der jeweiligen Grafikkarte ab.
+
+Wenn diese Kriterien nicht erfüllt werden, kann das Bild nicht angezeigt werden.
+
+=====Weitere Informationen=====
+Aufgrund der oben erwähnten Beschränkungen stellt Rhino sicher, dass alle Bilder diesen Vorgaben entsprechen, weswegen in vielen Fällen die Bildgröße angepasst werden muss.
+
+In //Rhino 5// können Sie unter **Werkzeuge -> Optionen...-> Rhino-Optionen -> Ansicht -> OpenGL** die maximale Größe für eine Textur einsehen, die Ihre Grafikkarte zulässt.
+
+{{http://wiki.mcneel.com/_media/rhino/backgroundbitmap5.png}}
+
+In //Rhino 4// finden Sie die Information unter **Werkzeuge -> Optionen -> Erscheinung -> OpenGL**:
+
+{{http://en.wiki.mcneel.com/content/upload/images/backgroundbitmap.jpg}}
+=====Problembehandlung=====
+Bei Problemen mit Hintergrundbitmaps stellen Sie als Erstes sicher, dass Sie die neuesten Grafiktreiber vom Hersteller Ihrer Grafikkarte verwenden.
+
+Sie können auch versuchen, die Größe des Hintergrundbilds mit einer Bildbearbeitungssoftware selbst zu ändern, damit es die erforderlichen Kriterien erfüllt. Im Allgemeinen sind Bilder mit einer Größe von 2048 x 2048 px ausreichend und werden auch von den meisten Mittelklasse-Grafikkarten unterstützt:
+
+Denken Sie daran, dass, nur weil es möglich ist, ein Bild mit einer Auflösung von 1000000 x 1000000 zu laden, dies nicht bedeutet, dass Rhino diese Auflösung auch verwendet (aus den oben erwähnten Gründen). Es kann natürlich vorkommen, dass Ihnen eine Auflösung von 2048 x 2048 zu gering erscheint, um gewisse Details sehen zu können.  Wenn die Grenze Ihrer Grafikkarte aber bei 2048 x 2048 liegt, wird Rhino auf jeden Fall diese Auflösung verwenden.
+
+Wenn ein //Bild als weißes Rechteck angezeigt wird//, versuchen Sie, die Seitenlänge des Bilds (in Pixel) so zu ändern, dass sie ein [[http://discourse.mcneel.com/t/background-bitmap-shows-as-white-rectangle/890/10|Vielfaches von 4]] ist.
