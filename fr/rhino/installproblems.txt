@@ -1,132 +1,109 @@
-====== Résolution des erreurs pendant l'installation de Rhino 5 ======
-Si vous avez des problèmes avec l'installation de Rhino 3 ou Rhino 4, consultez [[http://wiki.mcneel.com/rhino/installproblems_legacy|here.]]
+====== Résolution de problèmes d'installation de Rhino 5 ======
+> Cet article concerne Rhino 5. Un article similaire est disponible pour [[http://wiki.mcneel.com/rhino/installproblems_legacy|Rhino 3 et 4]].
 
-  * [[InstallingRhino|Déploiement de Rhino - Informations sur les installations silencieuses/automatiques, détails des dossiers et du registre, scripts MSI, etc.]]
-  * [[#Reporting Rhino 5 Installer Problems|Indiquer des problèmes avec l'installation de Rhino 5]]\\
-  * [[#Rhino 5 Installer Error 1603 and others|Erreur 1603 et autres erreurs lors de l'installation de Rhino 5]]\\
-  * [[#Manually Uninstalling Rhino 5|Désinstaller Rhino 5 manuellement]]\\
-  * [[#Could not open key: UNKNOWN\Components (Error 1402)|Impossible d'ouvrir la clé : INCONNU\Composants (Erreur 1402)]]
-  * [[#Rhino 5 Uninstall Fails|Échec de la désinstallation de Rhino 5]]
-  * [[#Installing the Latest Service Releases on a New Computer|Installer les dernières versions révisées sur un nouvel ordinateur]]
-  * [[#What is a Service Release?|Qu'est-ce qu'un version révisée ?]]
-  * [[#How do I get a Service Release?|Comment puis-je obtenir une version révisée ?]]
-  * [[#Rhino 5 Install Never Completes|L'installation de Rhino 5 ne se termine jamais]]
-  * [[#Error 1327 - Invalid Drive:|Erreur 1327 - Lecteur invalide :]]
-  * [[#Error 1935|Erreur 1935]]
-  * [[#Error 2502|Erreur 2502]]
-  * [[#.NET Framework 4 installer error (HRESULT: 0xc8000222)|Erreur avec l'installation de .NET Framework 4 (HRESULT: 0xc8000222)]]
-  * [[#Rhino 5 installer keeps asking for .NET Framework 4|L'installation de Rhino 5 demande toujours .NET Framework 4]]
-  * [[#.NET Framework 4 installer error (exit code -2145124330)|Erreur de l'installtion de .NET Framework 4 (code de sortie-2145124330)]]
-  * [[#Windows 7/8 is not a supported system?|Windows 7/8 n'est pas pris en charge ?]]
-=====Indiquer des problèmes avec l'installation de Rhino 5=====
-Le programme d'installation de Rhino 5 affiche un fichier journal lorsque le processus d'installation échoue. Ce fichier journal est très utile à notre équipe technique pour trouver une solution à vos problèmes. 
+**Remarque -** Presque tous les problèmes indiqués sur cette page peuvent être évités en mettant Windows à jour avec les **mises à jour importantes** en utilisant **Windows Update**, avant d'installer Rhino.\\
+
+**Informer de problèmes d'installation -**
+Le programme d'installation de Rhino 5 affiche un fichier journal lorsque le processus d'installation échoue.  Ce fichier journal est très utile à notre équipe technique pour trouver une solution à vos problèmes. 
   - Le message d'erreur qui apparaît contient un lien. 
-  - Cliquez sur ce lien pour ouvrir le journal et enregistrez-le où vous pourrez le retrouver dans un fichier au format txt. 
+  - Cliquez sur ce lien pour ouvrir le journal et enregistrez-le où vous pourrez le retrouver dans un fichier au format txt.
   - Joignez le fichier txt à un message destiné à [[tech@mcneel.com]]
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Erreur 1603 et autres erreurs lors de l'installation de Rhino 5=====
-L'**Erreur portant le code 1603** n'est pas une erreur spécifique mais une erreur générale au niveau du processus d'installation.  Voici certaines conditions qui peuvent entraîner l'erreur 1603 :
-  * La création de noms de fichiers courts est désactivée sur la machine cible.
-  * Une action personnalisée de script d'installation n'est pas correctement prototypée.
-  * Un fichier est verrouillé et ne peut pas être remplacé.
-  * Le service d'installation de Microsoft Windows n'est pas installé correctement.
-  * Les dossiers Temp de Windows sont pleins.
-  * La configuration a été corrompue après l'installation et échoue alors avec cette erreur lors de la désinstallation.
-Si le programme d'installation de Rhino plante et donne l'erreur 1603 ou aucun code d'erreur, vous pouvez essayer les propositions suivantes afin d'obtenir plus d'informations. 
 
-**//Étape 1//**
-  - Suivez les étapes précédentes de la section Erreurs d'installation de Rhino 5 afin de nous envoyer le journal d'erreur. 
-  - Fermez le programme d'installation existant
-  - Ouvrez l'explorateur de Windows et accédez au contenu du DVD d'installation de Rhino
-  - Ouvrez le dossier de l'installateur sur le DVD
-  - Ouvrez le dossier Prerequisites.
-  - Lancez le programme [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]] dans ce dossier.
-  - Si l'installateur de dotNet affiche une erreur, notez cette erreur et passez à l'étape 2.
-  - Si l'installation de dotNet se déroule correctement, passez à l'étape 3.
+===== Général =====
 
-**//Étape 2//**
-  - Cliquez ici pour lancer le [[http://windows.microsoft.com/en-US/windows/help/windows-update|service de mise à jour de Windows]]
-  - Si des mises à jour importantes sont prêtes à installer, cliquez sur Mettre à jour maintenant pour les installer. Ce procédé peut être long. 
-  - Si une erreur se produit lorsque vous essayez d'utiliser l'installation de mises à jour de Windows, consultez cet article [[http://support.microsoft.com/kb/906602|Résolution des problèmes courants d'installation de Windows Update]]
-  - Si vous résolvez le problème de mise à jour de Windows et réussissez à lancer le [[http://windows.microsoft.com/en-US/windows/help/windows-update|service de mise à jour de Windows]], revenez à l'étape 1.
+-->J'ai cliqué par erreur sur l'option d'installation utilisant le Zoo#
+**//Question ://** Lorsque j'ai installé Rhino, j'ai coché l'option pour utiliser le Zoo Mais je ne sais pas de quoi il s'agit et je ne peux pas démarrer Rhino.
 
-**//Étape 3//**
-  - Accédez au DVD d'installation de Rhino avec l'explorateur de Windows
-  - Essayez de lancer le programme Setup.exe qui se trouve à la racine du DVD.
-  - L'installation devrait maintenant se dérouler correctement.
-  - Si l'installation échoue toujours, écrivez un message à tech@mcneel.com en joignant le fichier journal.  
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Désinstaller manuellement Rhino 5=====
+**//Réponse ://** Pour convertir une installation utilisant le Zoo en installation autonome :
+http://wiki.mcneel.com/zoo/converttostandalone
+
+<--
+-->Le programme d'installation est décomprimé mais rien ne se passe ensuite#
+**//Problème ://** Le programme d'installation est décomprimé mais rien ne se passe ensuite.\\
+**//Cause://** Ce problème est causé par Microsoft PCA (assistant de compatibilité de programmes), probablement parce qu'un essai précédent d'installation de Rhino a été annulé.\\
+**//Solution ://** 
+  - Redémarrez Windows
+  - Ouvrez l'explorateur de WindowsS et recherchez le fichier téléchargé puis sélectionnez-le.
+  - Maintenez enfoncée la touche Maj
+  - Cliquez avec le bouton de droite sur le fichier exe.
+  - Une petite boîte de dialogue demandant une langue s'ouvrira
+  - Relâchez la touche Maj
+  - Choisissez English et continuez
+**//Remarque ://** Vous verrez peut-être un message indiquant que vous essayez d'installer Rhino sur un système d'exploitation non pris en charge. La solution pour corriger cette erreur se trouve dans la section **Messages d'erreur** ci-dessous.
+
+<--
+
+-->Problèmes de désinstallation de Rhino 5#
 **//Question ://** J'ai essayé de désinstaller Rhino 5 mais une erreur s'est produite et Rhino n'a pas pu être désinstallé.
 
 **//Réponse ://** [[rhino/5/uninstall|Supprimer Rhino 5 manuellement.]]
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Impossible d'ouvrir la clé : INCONNU\Composants (Erreur 1402)=====
-** //Question://** // Un message "Impossible d'ouvrir la clé: INCONNU\Composants\(beaucoup de lettres et de chiffres). Erreur 1402. Vérifiez que vous disposez des droits suffisants pour cette clé ou contactez votre service d'assistance." apparaît//
 
-**//Cause://** Les autorisations ne sont pas définies correctement pour une clé de registre, ou plusieurs, sous HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<nombres>\Components. 
+<--
 
-**//Solution 1://**
-Dans le menu Démarrer de Windows, tapez cmd dans la case de recherche et appuyez sur Entrée. Copiez la ligne suivante et collez-la dans la fenêtre de commande puis appuyez sur Entrée. Rhino pourra ensuite être installé. 
-
-<code>
-secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
-</code>
-
-**//Solution 2://**
-//AVERTISSEMENT: La procédure suivante implique l'édition du registre de Windows. Une mauvaise manipulation du registre peut endommager votre ordinateur et l'empêcher de redémarrer. Si vous n'êtes pas à l'aise pour réaliser les étapes suivantes, contactez l'équipe d'assistance de McNeel.//
-  - Téléchargez [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] sur le site de Microsoft TechNet, et extrayez le contenu sur votre bureau.
-  - Ouvrez une fenêtre de commande de Windows 
-  - Choisissez le dossier de votre bureau comme répertoire de départ.
-  - Dans la fenêtre de commande, tapez : **psexec -i -d -s c:\windows\regedit.exe** De cette façon, Windows lance l'éditeur de registre avec des autorisations du compte Système - un compte encore plus puissant que le compte d'administrateur.
-  - Naviguez jusqu'à HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
-  - Cliquez avec le bouton de droite sur la clé **UserData**, puis cliquez sur **Autorisations...**
-  - Dans la boîte de dialogue Autorisations pour UserData, cliquez sur **Avancé**
-  - Vérifiez que "Administrateurs" a des autorisations de "Contrôle total" sur ce dossier et que "Utilisateurs" a des autorisations de "Lecture". D'autres autorisations seront définies, mais Administrateurs et Utilisateurs sont les plus importantes dans notre cas. 
-Cochez la case **Remplacer toutes les entrées d'autorisation des objets enfants par des entrées d'autorisation pouvant être héritées de cet objet**
-  - Cliquez deux fois sur **OK** pour appliquer les autorisations
-  - Installez Rhino à nouveau.
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Échec de la désinstallation de Rhino 5=====
-**PROBLÈME:**
-Ce problème peut être dû à un cache d'installation corrompu sur votre ordinateur. 
-
-**SOLUTION:**
-Suivez les instructions de l'article [[rhino:5:uninstall|Désinstaller manuellement Rhino 5.0]]
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Installer les dernières versions révisées sur un nouvel ordinateur=====
+-->Installer les dernières versions révisées sur un nouvel ordinateur#
 
 **//Question ://** //J'ai un nouvel ordinateur et je veux installer Rhino version **'X** SR **Y**.  J'ai toujours acheté les versions de mise à jour de Rhino.  Dois-je installer TOUTES les versions précédentes et les versions révisées ??//
 
 **//Réponse ://** Installez simplement la dernière version mise à jour que vous avez sur le CD.  Au cours de l'installation vous devrez insérer le CD d'une version précédente afin de montrer que vous l'avez mais il n'est pas nécessaire d'**INSTALLER** les versions précédentes.  Une fois que vous avez installé la dernière version sur CD, installez la dernière version révisée - vous n'avez pas besoin d'installer les précédentes.
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Qu'est-ce qu'une version révisée ?=====
-Les versions révisées sont des mises à jour gratuites corrigeant des erreurs et ajoutant parfois de petites fonctions. Ces patchs sont téléchargeables et ne pourront être installés que si une version du produit est déjà installée.  Les versions révisées peuvent être identifiées de deux façons : le numéro SR, par exemple SR3 ou SR4b ; et la date qui est codée dans le nom du fichier de téléchargement, par exemple 20121106 qui signifie le 6 novembre 2012.
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Comment puis-je savoir quelle version est installée ?=====
+
+<--
+
+-->Qu'est-ce qu'une version révisée ?#
+Les versions révisées sont des mises à jour gratuites corrigeant des erreurs et ajoutant parfois de petites fonctions. Ces patchs sont téléchargeables et ne pourront être installés que si une version du produit est déjà installée.  Les versions révisées peuvent être identifiées de deux façons : le numéro SR, par exemple SR3 ou SR4b et la date qui est codée dans le nom du fichier de téléchargement, par exemple 20050729 qui signifie le 29 juillet 2005.
+
+<--
+
+-->Comment puis-je savoir quelle version est installée ?#
 Lorsque le logiciel est installé, vous pouvez voir la date et le numéro de la SR en regardant les informations de la section À propos, qui apparaît sur "l'écran de démarrage" au lancement de Rhino ou qui peut être affiché en allant dans le menu ? > À propos de [[rhino:rhinoceros|Rhinoceros]].
 \\
 Pour Flamingo, lancez la commande FlamingoÀPropos. Pour Bongo, lancez la commande BongoÀPropos.
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Comment obtenir les versions révisées?=====
+
+<--
+
+-->Comment obtenir les versions révisées ?#
 La méthode la plus rapide est d'utiliser le service de Mises à jour.  Dans Rhino, déroulez le menu Aide et cliquez sur Mises à jour.  Si vous êtes connecté à Internet, les serveurs de McNeel vous proposeront la version révisée dont vous avez besoin s'il en existe une plus récente que celle de votre logiciel.  Dans Flamingo, déroulez le menu Lancer de rayons ou Photométrique et cliquez sur Mises à jour.  Dans Bongo, déroulez le menu Bongo et cliquez sur Mises à jour.
 \\
-Dans Rhino 5, ouvrez **Outils, Options, Mises à jour et statistiques** puis choisissez la fréquence de mise à jour "Versions revisées" ou si vous êtes courageux, essayez "Candidate à la version révisée." Lorsque vous fermez Rhino, il vous demandera de confirmer l'installation et la dernière version. Vous pouvez refuser et accepter lors d'une autre session. 
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Puis-je supprimer des versions précédentes dans "Ajouter ou retirer des programmes" sans créer de problèmes ?=====
-L'entrée "Ajouter ou retirer des programme" du Panneau de configuration dans Windows indique toutes les versions révisées comme un programme installé, chancune utilisant environ 250Mo d'espace sur le disque. Cela peut porter à confusion. Windows affiche toutes les installations même si les fichiers sont ajoutés sur l'installation existante et si la plupart sont en fait remplacés lors de l'installation. N'utilisez **pas** "Ajouter ou retirer des programmes" pour retrer des anciennes versions révisées de Rhino 4.
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====L'installation de Rhino 5 ne se termine jamais=====
+Dans Rhino 5, ouvrez **Outils, Options, Mises à jour et statistiques** puis choisissez la fréquence de mise à jour "Versions revisées" ou si vous êtes courageux, essayez "Candidate à la version révisée." Lorsque vous fermez Rhino, il vous demandera de confirmer l'installation et la dernière version. Vous pouvez refuser et accepter lors d'une autre session.
+
+<--
+
+-->Puis-je supprimer des versions précédentes dans "Ajouter ou retirer des programmes" sans créer de problèmes ?#
+L'entrée "Ajouter ou retirer des programme" du Panneau de configuration dans Windows indique toutes les versions révisées comme un programme installé, chancune utilisant environ 250Mo d'espace sur le disque. Cela peut porter à confusion. Windows affiche toutes les installations même si les fichiers sont ajoutés sur l'installation existante et si la plupart sont en fait remplacés lors de l'installation. N'utilisez **pas** "Ajouter ou retirer des programmes" pour retrer des anciennes versions révisées de Rhino 5.
+
+<--
+
+-->L'installation de Rhino 5 ne se termine jamais#
 Consultez cette page [[rhino:debuginstaller|DebugInstaller]] pour savoir comment générer un fichier journal de l'erreur et obtenir de l'aide de l'équipe d'assistance.
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Erreur 1327 - Lecteur invalide :=====
+
+<--
+
+-->Rhino V5 64 bits ne s'exécute pas mais V5 32 bits si#
+**Problème :**\\ Lorsque j'essaie de démarrer Rhino 5 64 bits, j'obtiens ce message d'erreur.
+{{http://wiki.mcneel.com/_media/rhino/5/0xc000007b.png?450}}\\
+
+**//Solution ://** 
+  * [[http://wiki.mcneel.com/rhino/rhino5/error0xc000007b|Réparer dans Rhino 5 : Erreur 0xc000007b]]\\
+
+<--
+
+
+-->Installation incomplète de Rhino 5.0 sans le pack de langue#
+Les fichiers modèles, les barres d'outils ou les modules ne sont pas installés ? Il s'agit d'un des symptômes indiquant que le pack de langue n'est pas installé. Ceci peut être dû à une installation incomplète si vous installez à partir du CD ou une erreur dans le script d'installation si vous installez à partir d'un script MSI.
+
+Si vous installez Rhino avec le script d'installation MSI ci-dessus, mais si vous oubliez la ligne concernant la langue, vous devrez lancer manuellement le pack MSI de la langue que vous souhaitez installer. Inl se trouve également sur le CD de Rhino 5 dans le dossier Installers. 
+
+Afin de vérifier si la prise en charge linguistique est installée, consultez les dossiers de localisation, des modules et de l'interface ici :
+C:\Utilisateurs\<login>\AppData\Roaming\McNeel\Rhinoceros\5.0. 
+
+Si ces dossiers n'existent pas ou si vous avez déjà ouvert Rhino, vous ne trouverez pas de barres d'outils, de fichier modèle ni d'aide. Pour réparer cette erreur :
+     - Lancez le fichier MSI du pack de langue
+     - Ouvrez Rhino et tapez **_ToolbarReset**. 
+     - Fermez Rhino et relancez-le. Cette opération supprimera le schéma du registre et le redéfinira avec les composants manquants. 
+
+<--
+===== Messages d'erreur =====
+
+-->Erreur 1327 - Lecteur invalide :#
 **//Question://** //J'obtiens l'"erreur 1327. Lecteur incorrect (E:, F:, etc)" lors de l'installation//
 
 **//Cause ://** //Votre compte utilisateur dispose de paramètres indiquant qu'un ou plusieurs lecteurs non existants doivent être utilisés pour des dossiers spéciaux tels que "Mes Documents"//
@@ -141,67 +118,178 @@ Consultez cette page [[rhino:debuginstaller|DebugInstaller]] pour savoir comment
 
 **Remarque :** Cette méthode contient des étapes qui vous expliquent comment modifier le registre. Cependant, des problèmes importants peuvent se produire si vous modifiez le registre incorrectement. Suivez donc ces instructions avec grande attention. Pour plus de sécurité, sauvegardez le registre avant de le modifier. Vous pouvez ensuite restaurer le registre en cas de problème. Pour plus d'informations sur la sauvegarde et la restauration du registre, consultez l'article suivant de la base de connaissances de Microsoft :
 [[http://support.microsoft.com/kb/322756|Procédure de sauvegarde, de modification et de restauration du Registre]]
+
+<--
+
+-->Erreur 1402 ou 1406 (Impossible d'ouvrir la clé : UNKNOWN\Components)#
+** //Question://** // Un message "Impossible d'ouvrir la clé: INCONNU\Composants\(beaucoup de lettres et de chiffres). Erreur 1402. Vérifiez que vous disposez des droits suffisants pour cette clé ou contactez votre service d'assistance." apparaît//
+
+**//Cause://** Les autorisations ne sont pas définies correctement pour une clé de registre, ou plusieurs, sous HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<nombres>\Components.
+
+**//Solution 1://**
+Dans le menu Démarrer de Windows, tapez "cmd" dans la case de recherche et appuyez sur Entrée. Cliquez avec le bouton de droite sur "Cmd.Exe" et sélectionnez "Exécuter en tant qu'administrateur". Copiez la ligne suivante et collez-la dans la fenêtre de commande puis appuyez sur Entrée. Rhino pourra ensuite être installé.
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//Solution 2 ://**
+//AVERTISSEMENT: La procédure suivante implique l'édition du registre de Windows. Une mauvaise manipulation du registre peut endommager votre ordinateur et l'empêcher de redémarrer. Si vous n'êtes pas à l'aise pour réaliser les étapes suivantes, contactez l'équipe d'assistance de McNeel.//
+  - Téléchargez [[http://technet.microsoft.com/fr-fr/sysinternals/bb897553|psexec]] sur le site de Microsoft TechNet, et extrayez le contenu sur votre bureau.
+  - Ouvrez une fenêtre de commande de Windows
+  - Choisissez le dossier de votre bureau comme répertoire de départ.
+  - Dans la fenêtre de commande, tapez : **psexec -i -d -s c:\windows\regedit.exe** De cette façon, Windows lance l'éditeur de registre avec des autorisations du compte Système - un compte encore plus puissant que le compte d'administrateur.
+  - Naviguez jusqu'à HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - Cliquez avec le bouton de droite sur la clé **UserData**, puis cliquez sur **Autorisations...**
+  - Dans la boîte de dialogue Autorisations pour UserData, cliquez sur **Avancé**
+  - Vérifiez que "Administrateurs" a des autorisations de "Contrôle total" sur ce dossier et que "Utilisateurs" a des autorisations de "Lecture". D'autres autorisations seront définies, mais Administrateurs et Utilisateurs sont les plus importantes dans notre cas.
+  - Cochez la case **Remplacer toutes les entrées d'autorisation des objets enfants par des entrées d'autorisation pouvant être héritées de cet objet**
+  - Cliquez deux fois sur **OK** pour appliquer les autorisations
+  - Installez Rhino à nouveau.
+
+<--
+
+-->Erreur 1603#
+Une grande variété de problèmes peuvent causer des erreurs 1603. Veuillez suivre toutes les étapes ci-dessous.
 \\
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Erreur 1935=====
+\\
+**Étape 1 : Installez .NET 4.0 Framework**
+  - Ouvrez l'explorateur de Windows et accédez au contenu du DVD d'installation de Rhino
+  - Ouvrez le dossier **Installers\Prerequisites**.
+  - Exécutex le fichier [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]].
+  - Si le programme d'installation de Microsoft .NET **affiche une erreur** : 
+    - recopiez l'erreur 
+    - **Passez à l'étape 2**.
+  - Windows XP 64 bits uniquement :
+    - Téléchargez et installez [[http://www.microsoft.com/fr-fr/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]]
+  - **Passez à l'étape 3**.
+\\
+**Étape 2 : Mettez à jour Windows**
+  - Exécutez le [[http://windows.microsoft.com/en-US/windows/help/windows-update|Service de mise à jour de Windows]]
+  - Si des mises à jour importantes sont prêtes à installer, cliquez sur Mettre à jour maintenant pour les installer.  Ce procédé peut être long.
+  - Si une erreur se produit lorsque vous essayez d'utiliser l'installation de mises à jour de Windows, consultez cet article [[http://support.microsoft.com/kb/906602|Résolution des problèmes courants d'installation de Windows Update]]
+  - Si vous résolvez le problème de mise à jour de Windows et réussissez à lancer le [[http://windows.microsoft.com/fr-fr/windows/help/windows-update|service de mise à jour de Windows]], **revenez à l'étape 1**.
+\\
+**Étape 3 : Installez Rhino**
+  - Ouvrez l'**explorateur de Windows**
+  - Accédez au DVD de Rhino 5
+  - Double clicquez sur **Setup.exe** pour lancer le processus d'installation de Rhino 5.
+  - Si l'installation de Rhino 5 échoue, enregistrer une copie du fichier journal sur votre bureau.
+  - **Passez à l'étape 4**
+\\
+**Étape 4 : Installation manuelle**
+  - Ouvrez l'**explorateur de Windows**
+  - Accédez au dossier **Installers** sur ke DVD de Rhino 5
+  - Pour les //systèmes 64 bits uniquement// : double cliquez sur le fichier **rhino5setup_fr-fr_x64.msi** et terminez installation
+  - Pour tous les systèmes : 
+      - double cliquez sur le fichier **rhino5setup_fr-fr_x86.msi** et terminez installation
+      - double cliquez sur **LanguagePack_en-us.msi** (et toute autre langue que vous voulez installer)
+      - double cliquez sur **HelpMedia.msi**
+  - Si vous rencontrez des erreurs pendant l'installation :
+    - Recopiez les numéros et les messages d'erreur que vous voyez
+    - Envoyez par e-mail l'étape à laquelle vous vous trouvez sur cet article ainsi que toutes les erreurs à l'adresse tech@mcneel.com
+  - Redémarrez Windows si nécessaire.
+  - **Lancez Rhino 5**
+  - Dans la ligne de commandes, tapez **RéinitialiserBarreOutils** et appuyez sur Entrée.
+  - **Fermez Rhino**
+  - **Lancez Rhino 5**
+  - **L'installation est terminée !**
+\\
+**Cela ne fonctionne toujours pas ?**
+  - C'est très frustrant, nous sommes désolés !
+  - Veuillez envoyer  tous les fichiers journaux à partir de l'étape 3 à tech@mcneel.com
+
+<--
+
+-->Erreur 1921#
+**//Question ://** Le fichier journal affiche "Erreur 1921.  (1)Le service 'McNeel Update Service 5.0' (McNeelUpdate) n'a pas pu être arrêté. Vérifiez que vous disposez des privilèges suffisants pour arrêter les services système."
+\\
+\\
+**//Solution 1://**
+  * **Redémarrez Windows et lancez à nouveau le programme d'installation.** Le service de mise à jour démarre lorsque Rhino est lancé, il ne sera donc pas en route après un redémarrage de Windows. 
+\\ 
+**//Solution 2 ://**
+  * **Arrêtez le service manuellement**
+    - Lancez services.msc. 
+    - Recherchez "McNeel Update Service 5.0"
+    - Cliquez avec le bouton de droite et sélectionnez Propriétés
+    - Dans la section Type de démarrage, sélectionnez Désactivé au lieu de Automatique
+    - Fermez l'application Services 
+    - Redémarrez Windows
+    - Installez Rhino
+    - Exécuter à nouveau services.msc
+    - Remettez l'option Type de démarrage sur Automatique
+
+<--
+
+-->Erreur 1935#
 **//Question://** //J'obtiens le message "Erreur 1935. Une erreur s'est produite lors de l'installation de l'assemblage "Microsoft.VC80.CRT, ..."//
 
 **//Cause://** //Il s'agit d'une erreur du Package redistribuable de Microsoft C++ 2005 //
 
 **//Solution 1://**
+  * **Actualisez Windows** Plusieurs utilisateurs ont signalé que la mise à jour de Windows a résolu le problème.
+**//Solution 2 ://**
   * **Désactivez le programme antivirus sur l'ordinateur.** Un utilisateur nous a informé qu'il a réussi à installer Rhino après avoir désactivé AVG.
-**//Solution 2://**
-  * **Essayez d'installer plusieurs fois.** Un utilisateur a réussi à installer Rhino au troisième essai. Il n'avait rien touché sur le système. 
-**//Solution 3://**
+**//Solution 3 ://**
+  * **Essayez d'installer plusieurs fois.** Un utilisateur a réussi à installer Rhino au troisième essai. Il n'avait rien touché sur le système.
+**//Solution 4 ://**
   - Sur Windows Vista ou Windows 7, dans le menu Démarrer, tapez Fonctionnalités.
   - Cliquez sur **Activer ou désactiver des fonctionnalités Windows**
   - Dans la boîte de dialogue, cochez la case **Activation HTTP Windows Communication Foundation**:
   - {{:rhino:rhino_1935_windows_features.png|}}
   - Cliquez sur OK
 
-Si vous ne pouvez pas activer cette fonctionnalité, ou si la boîte de dialogue des fonctionnalités de Windows apparaît vide, votre installation de Windows est corrompue et doit être réparée. Contactez l'assistance de Microsoft pour plus d'aide. 
+Si vous ne pouvez pas activer cette fonctionnalité, ou si la boîte de dialogue des fonctionnalités de Windows apparaît vide, votre installation de Windows est corrompue et doit être réparée. Contactez l'assistance de Microsoft pour plus d'aide.
 
-**//Plus d'informations://**
-Les utilisateurs qui obtiennent cette erreur lors de l'installation de Rhino ne peuvent également pas installer le [[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=fr|Package Redistribuable de Microsoft C++ 2005]] directement de Microsoft. Il s'agit donc d'un problème avec Windows et le Package Redistribuable de Microsoft, et non avec le programme d'installation de RHino. 
-\\
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Erreur 2502=====
+**//Plus d'informations ://**
+Les utilisateurs qui obtiennent cette erreur lors de l'installation de Rhino ne peuvent également pas installer le [[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=fr|Package Redistribuable de Microsoft C++ 2005]] directement de Microsoft. Il s'agit donc d'un problème avec Windows et le Package Redistribuable de Microsoft, et non avec le programme d'installation de RHino.
+
+<--
+
+-->Erreur 2502#
 **//Question://** Rhino 5 informe qu'une nouvelle mise à jour est prête à être installée, je choisis de l'installer et j'obtiens l'"erreur 2502".
 
 **{{http://wiki.mcneel.com/_media/rhino/k01373.png?400}}**
 
-**//Cause://** Le programme d'installation de la mise à jour ne dispose pas d'autorisation suffisante.
+**//Cause ://** Le programme d'installation de la mise à jour ne dispose pas d'autorisation suffisante.
 
 **//Solution ://**
   - Cliquez avec le bouton de droite sur l'icône du raccourci de Rhino 5.
-  - Sélectionnez "Exécuter en tant qu'administrateur". 
-  - L'écran de démarrage de Rhino 5 informe qu'une nouvelle mise à jour est prête à être installée. 
+  - Sélectionnez "Exécuter en tant qu'administrateur".
+  - L'écran de démarrage de Rhino 5 informe qu'une nouvelle mise à jour est prête à être installée.
   - Choisissez d'installer la mise à jour.
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Erreur d'installation de .NET Framework 4 (HRESULT: 0xc8000222)=====
-**Problème:**\\ L'installation de .NET Framework 4 échoue en donnant le code d'erreur HRESULT: 0xc8000222.
 
-**Cause:**\\ Certains fichiers du **dossier Software Distribution** sont corrompus.
+<--
 
-**SOLUTION:**
-  - Téléchargez [[http://files.na.mcneel.com/misc/Fix_0xc8000222.zip|Fix_0xc8000222.zip]].
-  - Extrayez le fichier **Fix_0xc8000222.bat** dans un dossier.
-  - Cliquez avec le bouton de droite sur le fichier et sélectionnez **Exécuter en tant qu'administrateur**.\\ <color #999999>Que fait ce fichier batch ?\\ 1) Il désactive le </color><color black>service de mise à jour de Windows</color><color #999999>.\\ 2) Il supprime le dossier </color><color black>C:\Windows\SoftwareDistribution</color><color #999999>.\\ 3) Il réactive le </color><color black>service de mise à jour de Windows</color><color #999999>.</color>
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Le programme d'installatoion de Rhino 5 demande toujours .NET Framework 4=====
-**Problème:**\\ Le programme d'installation de Rhino 5 demande toujours .NET Framework 4 et n'autorise pas l'installation de Rhino 5, mais .NET Framework 4 est déjà sur le système.
+-->.NET Framework 4 demandé : Le programme d'installation de Rhino 5 demande toujours .NET Framework 4#
+**Problème:**\\ Le programme d'installation de Rhino 5 demande toujours .NET Framework 4 et n'autorise pas l'installation de Rhino 5, mais .NET Framework 4 est déjà sur le système. 
 
 **Cause:**\\ .NET Framework 4 présente un problème sur le système.
 
-**SOLUTION:**
+**Solution :**
   - Téléchargez <color #999999>[[http://files.na.mcneel.com/misc/dotnetfx_cleanup_tool.zip|l'outil de nettoyage de .NET Framework]]</color>.
   - Lancez l'outil de nettoyage de .NET Framework.
   - Sélectionnez **.NET Framework - All versions** comme produit à nettoyer.\\ {{http://wiki.mcneel.com/_media/rhino/rhino5/k01521.png?w=405}}
   - Cliquez sur le bouton **Cleanup Now**.
   - Redémarrez votre ordinateur.
   - Installez Rhino 5 à partir de votre DVD de Rhino 5.\\ <color #999999>Le programme d'installation du DVD de Rhino 5 installera .NET Framework 4 en premier puis Rhino 5.\\ Si vous installez la </color><color black>version d'évaluation de Rhino 5</color><color #999999>, vous devrez [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|télécharger]] et réinstaller la version complète de .NET Framework 4 avant d'installer Rhino 5. </color>
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-=====Erreur d'installation de .NET Framework 4 (exit code -2145124330)=====
+
+<--
+
+-->.Erreur de .NET Framework 4 : (HRESULT: 0xc8000222)#
+**Problème:**\\ L'installation de .NET Framework 4 échoue en donnant le code d'erreur HRESULT: 0xc8000222.
+
+**Cause:**\\ Certains fichiers du **dossier Software Distribution** sont corrompus.
+
+**Solution :**
+  - Téléchargez [[http://files.na.mcneel.com/misc/Fix_0xc8000222.zip|Fix_0xc8000222.zip]].
+  - Extrayez le fichier **Fix_0xc8000222.bat** dans un dossier.
+  - Cliquez avec le bouton de droite sur le fichier et sélectionnez **Exécuter en tant qu'administrateur**.\\ <color #999999>Que fait ce fichier batch :\\1) Il désactive le </color><color black>service de mise à jour de Windows</color><color #999999>.\\ 2) Il supprime le dossier </color><color black>C:\Windows\SoftwareDistribution</color><color #999999>.\\ 3) Il réactive le </color><color black>service de mise à jour de Windows</color><color #3>.</color>
+
+<--
+
+-->.Erreur de .NET Framework 4 : (code de sortie -2145124330)#
 **//Problème://** J'obtiens une erreur de l'installateur de .NET Framework 4.0 lors de l'installation de Rhino 5.
 
 **//Solution://** Réparez .NET Framework avant d'installer Rhino 5.
@@ -209,9 +297,23 @@ Les utilisateurs qui obtiennent cette erreur lors de l'installation de Rhino ne 
   - Lancez l'outil de réparation.
   - Continuez à cliquer sur le bouton "Next" jusqu'à ce qu'il ne reste plus que le bouton "Finish".
   - Installez Rhino 5 à nouveau.
-[[http://wiki.mcneel.com/rhino/installproblems|Revenir au début.]]
-===== Windows 7/8 n'est pas pris en charge ? =====
+
+<--
+
+-->Erreur : Une DLL nécessaire à l'installation n'a pas pu être lancée.#
+Problème : L'installation échoue et un message de DLL manquante apparaît : 
+
+**//Ce programme d'installation Windows présente un problème. Une DLL nécessaire à l'installation n'a pas pu être lancée. Contactez votre personnel d'assistance ou le vendeur du logiciel//**
+
+Solution : Il se peut qu'un antivirus empêche l'installation -  essayez de désactiver les antivirus et relancez l'installation. Ou il manque des **Mises à jour importantes de Windows**. 
+  * //Pour savoir comment vérifier les mises à jour disponibles pour Windows [[http://wiki.mcneel.com/windows_updates|cliquez ici.]]//
+
+<--
+
+-->Windows 7/8 n'est pas pris en charge ?#
 **Problème:**\\ J'utilise Windows 7/8, mais le programme d'installation du DVD de Rhino 5 me dit que mon système n'est pas pris en charge.
+
+**Cause possible :**\\ Ce problème est causé par Microsoft PCA (assistant de compatibilité de programmes), probablement parce qu'un essai précédent d'installation de Rhino a été annulé.
 
 **Solution:**\\ 
   - Cliquez avec le bouton de droite sur le fichier exe d'installation et sélectionnez **Propriétés**.
@@ -220,5 +322,24 @@ Les utilisateurs qui obtiennent cette erreur lors de l'installation de Rhino ne 
   - Désactivez la case **Exécuter ce programme en mode de compatibilité pour**. 
   - Cliquez sur **OK** deux fois pour fermer les boîtes de dialogue.
   - Cliquez à nouveau avec le bouton de droite sur le fichier exe et sélectionnez **Exécuter en tant qu'administrateur** pour lancer l'installation.
+
+<--
+
+-->Erreur : Rhino ne peut pas se connecter à ZooClient.dll#
+**Problème :**\\Rhino 5 affiche un message “Rhino ne peut pas se connecter à ZooClient.dll. Rhino ne fonctionnera pas”
+
+**Solution :**\\
+http://wiki.mcneel.com/rhino/rhino5/zooclient.dll
+
+<--
+
+-->Erreur : Erreur du script - ! Une erreur est survenue sur le script de cette page.
+** Problème :**\\L'exécution du programme d'installation se trouvant sur le DVD donne cette erreur :
+{{:rhino:rhino5:installer_stript_error.png?direct&200|}}
+
+**Solution :**\\
+  - Téléchargez et lancez la dernière version du programme d'installation de Rhino 5 sur:\\http://www.rhino3d.com/download
+
+<--
 
 {{tag>rhino5installation}}
