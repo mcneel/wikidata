@@ -1,0 +1,40 @@
+====== Salvataggio automatico e Versioni in OS X 10.7 (Lion) ======
+Apple ha implementato un metodo radicalmente diverso per la gestione dei modelli in OS X 10.7; questo metodo è stato integrato in Rhino per Mac.  Apple descrive "Salvataggio automatico" e "Versioni" [[http://support.apple.com/kb/HT4753|qui]] e [[http://www.apple.com/macosx/whats-new/features.html#versions|qui]]. Troverete anche un'altra introduzione [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|qui]].
+
+In questo articolo vedremo degli aspetti importanti per gli utenti di Rhino per Mac, non menzionati negli articoli citati sopra.  Per concludere, vi consigliamo anche di leggere il seguente articolo:[[http://wiki.mcneel.com/rhino/mac/lionsaving|everything you learned about saving files is wrong]].
+
+-->Che fine ha fatto la domanda "Salvare le modifiche a...?" all'uscita da Rhino?#
+
+Non è più necessaria, dato che il modello aperto viene continuamente salvato su disco. Prima del salvataggio automatico, di fatto esistevano due versioni di un modello: quella in Rhino e quella su disco. Era compito vostro mantenere sincronizzate queste due versioni salvando il modello di frequente. I crash del programma potevano risultare disastrosi. Se vi scordavate di mantenere manualmente sincronizzate queste versioni, potevate perdere un sacco di lavoro. Con il salvataggio automatico di Lion, esiste solo una versione del modello; quella visualizzata sullo schermo è la stessa di quella su disco.
+
+<--
+ 
+-->Quando effettua il salvataggio automatico di un modello Rhino per Mac?#
+
+Un modello viene salvato quando **chiudete** una finestra di modellazione, quando **uscite** da Rhino, quando **passate** ad un'altra applicazione e //di tanto in tanto//. Apple dice che i salvataggi //di tanto in tanto// avvengono circa ogni cinque minuti quando Rhino è inattivo. Questo intervallo di tempo non è configurabile.
+
+<--
+
+-->Se Rhino continua a salvare il mio modello, verrò continuamente interrotto dai salvataggi automatici?#
+
+I salvataggi automatici periodici vengono eseguiti in background. Visto che i salvataggi automatici in background non bloccano mai il funzionamento di Rhino, non ne noterete l'esecuzione. Se modificate il modello mentre Rhino sta eseguendo un salvataggio automatico, il salvataggio automatico viene abbandonato e ritentato più tardi.
+
+<--
+
+-->E l'uso dello spazio su disco?#
+
+Il salvataggio automatico salva solo ciò che è cambiato rispetto alla versione precedente, per cui l'uso dello spazio su disco è ottimizzato. Le versioni più vecchie vengono scartate automaticamente.
+
+<--
+
+-->Rhino per Mac è in grado di sfogliare le versioni precedenti dei miei modelli di Rhino?#
+
+Sì, il browser di Versioni è parte di Rhino per Mac in 10.7.
+
+<--
+
+-->Cosa posso fare nel browser di Versioni?#
+
+Nel browser di Versioni, la finestra sulla sinistra rappresenta il modello corrente e tutte le finestre sulla destra rappresentano le versioni precedenti del modello. Queste finestre sono vere e proprie finestre di Rhino e si possono manipolare come qualsiasi altro modello di Rhino. Potete ruotare le viste, richiamare il pannello Livelli per mostrare o nascondere i livelli e persino copiare gli oggetti da un modello precedente per incollarli nel modello  corrente. Non potete però //modificare// le versioni precedenti. [[http://tidbits.com/article/12483 |beware Lion's Versions Bug on Network and Non-HFS+ Volumes]].
+
+<--
