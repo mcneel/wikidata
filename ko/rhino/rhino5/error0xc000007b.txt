@@ -1,0 +1,31 @@
+====== Rhino 5: 오류 0xc000007b ======
+**문제:**\\ Rhino 5 64비트가 **오류 0xc000007b**로 인해 실행되지 않습니다.
+{{http://wiki.mcneel.com/_media/rhino/5/0xc000007b.png?450}}
+
+**원인:**\\ Rhino 5 64 비트가 실행될 때 Windows에서 32비트 msvcr100.dll 을 호출합니다.
+
+**해결책 1:**
+  - **C:\Windows\System32** 에 있는 **msvcr100.dll** 파일을 삭제합니다.\\ <color #999999>32비트 DLLs 은 64 비트 Windows 시스템의 System32 폴더에 존재해서는 안됩니다. 32 비트 프로그램 설치 파일에서 실수로 설치했을 수도 있습니다.</color>
+  - [[http://www.microsoft.com/ko-kr/download/details.aspx?id=13523|Microsoft Visual C++ 2010 SP1 재배포 가능 패키지 (x64)]] 를 설치합니다.\\ <color #999999>64비트 msvcr100.dll 이 설치됩니다.</color>
+  - Rhino 5 64 비트를 실행합니다.
+
+**해결책 2:** 1번 해결책으로 해결되지 않았다면 다음 안내대로 실행해 보세요.
+  - http://www.dependencywalker.com에서 **Dependency Walker for x64**를 다운로드하세요. 
+  - 폴더에 zip 파일의 압축을 풉니다.
+  - **depends.exe** 파일을 실행합니다.
+  - 바탕화면에 있는 Rhino 5 64 비트의 바로 가기 아이콘을 엽니다.\\ <color #999999>C:\Program Files\Rhinoceros 5 (64-bit)\System\Rhino.exe 이 열립니다.</color>
+  - **CPU** 열의 머리글을 클릭하여 CPU 유형으로 DLL 파일을 정렬합니다.\\ {{http://wiki.mcneel.com/_media/rhino/5/k01376b.png?600}}
+  - <color red>**x86**</color> DLL 을 찾습니다.
+  - **F9** 키를 누르거나, **View** 메뉴에서 **Full Paths** 메뉴를 선택합니다. 
+  - **x86** DLL의 경로를 찾습니다.
+  - **C:\Windows\System32** 에 있는 x86 DLL을 삭제합니다.\\ <color #999999>C:\Windows\System32 에 아마도 단 한 개의 x86 DLL 파일이 있을 것입니다. C:\Windows\System32 외부에 있는 x86 DLL 파일은 삭제하지 마세요.</color>
+  - [[http://www.microsoft.com/ko-kr/download/details.aspx?id=13523|Microsoft Visual C++ 2010 SP1 재배포 가능 패키지 (x64)]] 를 설치합니다.
+  - Rhino 5 64 비트를 실행합니다.
+
+**Rhino 5 32 비트**를 실행할 때 오류 0xc000007b가 발생하는 경우에는 **Dependency Walker for x86**을 사용하여 바탕화면의 Rhino 5 32 비트의 바로 가기 아이콘을 열고 C:\Windows\SysWOW64 아래 있는 x64 DLL 파일(문제 발생의 원인)을 삭제합니다. 그 이후에, [[http://www.microsoft.com/ko-kr/download/details.aspx?id=8328|Microsoft Visual C++ 2010 SP1 재배포 가능 패키지 (x86)]]를 설치합니다..
+
+**도움이 필요하세요?**\\ Dependency Walker 에서 *.dwi 파일을 저장하여 해당 파일을 Rhino 지원 담당자에게 [[http://www.rhino3d.com/upload|업로드 기능]]을 사용하여 보내 주세요. 메모 항목에 **오류 0xc000007b**라고 적어주시기 바랍니다.
+{{tag>rhino5}}
+\\  
+\\ 
+<color white> keywords: 64 bit rhino does not start,V5 startup problems </color>
