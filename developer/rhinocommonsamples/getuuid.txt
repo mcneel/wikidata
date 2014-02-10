@@ -9,7 +9,8 @@ public class GetUuidCommand : Command
   protected override Result RunCommand(RhinoDoc doc, RunMode mode)
   {
     ObjRef obj_ref;
-    var rc = RhinoGet.GetOneObject("Select object", false, ObjectType.AnyObject, out obj_ref);
+    var rc = RhinoGet.GetOneObject(
+      "Select object", false, ObjectType.AnyObject, out obj_ref);
     if (rc != Result.Success)
       return rc;
     if (obj_ref == null)
