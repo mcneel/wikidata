@@ -1,0 +1,30 @@
+** Installing [[penguin:home|Penguin]] **
+> **Summary:** //How to script the installation of [[penguin:home|Penguin]].//
+
+=====Overview=====
+
+[[penguin:home|Penguin]] installation scripting is similar to Rhino and Flamingo.
+
+The format of the command line you would usually execute from a batch file (*.bat) is:
+
+   <path to installer .exe> <parameters>
+
+The command-line parameters are:
+
+  * **/RhinoVer=[2|3|4]**    Specifies which version of Rhino to install for. This parameter is mandatory.
+  * **/CDKey=XXXXXXXXXXXX**    Use the 12-character [[penguin:home|Penguin]] CD-Key, without dashes and without the "PE10" characters. This parameter is mandatory unless you install [[penguin:home|Penguin]] as a workgroup node.
+  * **/WorkgroupNode=[Y|N]**    N means it's to be installed as a standalone and you'll need the CDKey parameter, Y means you want [[penguin:home|Penguin]] to get its license from the Zoo. This parameter is mandatory.
+  * **/Workspace=[Y|N]**    Should the [[penguin:home|Penguin]] toolbar be activated in Rhino or not.
+  * **/InstallPath=<full path to folder>**   Skip this parameter if you want to install it in the default folder ...Program Files\Rhinoceros\Plug-ins\[[penguin:home|Penguin]]
+
+=====Examples=====
+
+   "c:\my installers\penguin_en_20050726.exe" /RhinoVer=3 /CDKey=123456789ABC WorkgroupNode=N /Workspace=Y
+
+   penguin_en_20050726.exe /RhinoVer=2 /WorkgroupNode=Y /Workspace=N /InstallPath="C:\Program Files\Renderers\Penguin"
+
+=====Notes=====
+
+Some users have had problems with [[penguin:home|Penguin]] installation scripting following this guide. Adding the **/s /autoinstall** options have solved their problems.
+
+
