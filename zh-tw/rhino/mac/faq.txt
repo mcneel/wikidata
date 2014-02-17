@@ -112,3 +112,91 @@ Rhino麥金塔版本使用您系統預設的語言，若您要使用與系統預
 
 不需要。 
 <--
+-->我無法安裝Rhino，該怎麼辦？#
+
+請檢查您下載的dmg檔案是否有效，檔案可能在下載時損壞。
+
+  - Start the Disk Utility program **/Applications/Utilities/Disk Utility**
+  - From the menu, select **Images > Verify...** An Open File dialog box appears.
+  - Select the .dmg file that you downloaded. It is usually in your Downloads folder and is named rhinoceros_wip_YYYYMMDD.dmg
+  - 若您的下載檔案無效，請到 [[http://www.rhino3d.com/download/wenatchee/5.0/wip|下載網頁]]並再次申請下載。
+
+<-- 
+
+-->我已安裝最新版本的Rhino，卻顯示已過期。該怎麼辦？#
+
+您安裝了超過一個Rhino，並且系統開啟已過期的版本，您並去移除**所有**版本的Rhino。 
+
+點擊任一3DM檔案開啟Rhino，若可以開啟，代表仍有Rhino安裝在某處。 
+  - 在Dock裡的Rhino圖示上按右鍵，選擇**選項>顯示於Finder**了解Rhino安裝位置。
+  - 將此Rhino拖曳至垃圾桶。 
+  - 當所有Rhino皆已移除，雙擊一個3DM檔案將會開啟一個文字檔而非Rhino。
+  - 重新安裝您剛下載的最新版Rhinno。
+
+<--
+ 
+-->當我拖曳Rhino到應用程式資料匣時，系統回覆因為BGHUDAppKit正在執行，所以無法安裝。這是甚麼情況？#
+
+這是10.7 Finder的一個錯誤，它無法正確判斷是否可以覆蓋之前的應用程式。
+
+不幸的是，當您看到這個訊息時，Finder其實已經部分移除現有的Rhinoceros程式，且新版尚未安裝。這代表您目前的Rhino已有問題且若您執行會當機。
+
+若您試著在拖曳到應用程式2-3次，最終是可以安裝好。或這你可以先將目前的Rhino拖曳到垃圾桶，然後在安裝最新版本。這樣Finder就不會有覆蓋現有版本的問題。
+ 
+10.8 Finder並沒有這個問題，升級到10.8版也是一個解決方式。
+
+<-- 
+<--
+
+-->Mac Rhino當機了，該怎麼辦？#
+
+請參考[[macrhinocrash|Rhino 當機 – 該怎麼辦？]]
+
+<--
+ 
+-->目前的Mac Rhino版本有問題，我想要退回前個版本。#
+
+並無法退回前個WIP Mac Rhino版本。由於您參與開發階段測試，請回報您發現的問題，請見 [[rhino:mac:reportingproblems|Mac Rhino問題回報]]學習如何回報您的問題，讓我們可以發現它並修正它。
+
+<-- 
+
+-->Rhino出現一個神祕的對話框，並顯示"Program Failure"後，Mac Rhino就完全無法使用。#
+
+當Mac Rhino遇到意想不到的情況，它會顯示一個"Program Failure(程式失敗)"的訊息，之後，Mac Rhino會關閉內部，您無法再執行任何指令，只能儲存檔案，然後結束Mac Rhino。我們需要知道甚麼時候發生這個狀況。 
+當您使用Rhino時，您可能會看到下列對話框：
+
+Rhino會在下列幾個情形下出現此對話框。不是所有功能都已完整植入Mac Rhino，當您使用到未完成的功能，您會看到此對話框。還有一種狀況是Rhino的部分程式碼只能在Windowns版本的Rhino使用。若您試圖執行這類程式碼，您也會看到"Rhino Error"的對話框。最後，有很多早期的錯誤修正測試，您也可能看到這個對話框為內部測試發現不應產生的情況。
+
+{{:rhino:mac:notimpl.png?nolink|}}
+
+當您看到其中一個類似的對話框出現，請記下檔案名稱、行號及版本資訊，email到<mactech@mcneel.com>，並告知我們您看到這個對話框之前正使用Rhino做那些動作。我們會根據您的說明，嘗試複製問題，並找到解決方案，確保未來不會發生同樣的錯誤。
+
+當您看到這類對話框之後，Rhino只限制您做少數幾個指令，您將可以儲存檔案並結束Rhino，其他大部分指令皆無法運作。
+
+<-- 
+
+
+--> 我希望可以使用按右鍵重複上一個指令。#
+
+取消右鍵功能表功能並開啟重複上個指令功能。
+
+  - 在下拉式功能表，請選**Rhinoceros** 然後點選 **Preferences**。
+  - 選擇滑鼠 **Mouse** 面板。
+  - 在滑鼠右鍵部分**Right Mouse Button** ，取消勾選**Enable Context Menus**。
+
+<--
+
+--> 我希望可以使用圖示右鍵功能#
+
+有些圖示工具同時具有兩個指令功能，您可以在指令提示看到。
+Mac Rhino預設的是您可以使用 Option+點選指令圖示執行第二個(右鍵)指令。
+
+  - 在下拉式功能表，請選**Rhinoceros** 然後點選 **Preferences**。
+  - 選擇 **ToolPalette** 面板。
+  - 在**Execute alternate command when** 設定上，一樣使用右鍵將執行方式切換為點選右鍵執行。
+
+**請注意：** 若您預設使用右鍵執行第二個指令，您將無法使用右鍵自訂工具列，您必須使用View/Customize 工具列取代。
+
+Mac 使用者介面標準為右鍵 (或 control-click) //總是// 執行文字功能表。您可使用ToolPalette面板改變這點。
+
+<--
