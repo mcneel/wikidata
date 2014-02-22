@@ -1,0 +1,114 @@
+====== Rhino 4.0 의 자동 배포를 위한 매개변수 지정 안내 ======
+> **안내:** 이 안내글은 Rhino 4.0용입니다. [[ko/rhino/installingrhino/5.0#스크립트와_ini_파일을_사용한_rhino_5_설치|Rhino 5용 안내글을 보시려면 여기를 클릭]]하세요.
+
+
+
+
+
+
+====== 자동으로 설치하기 위해 Rhino 4.0 Setup .INI 파일을 편집하는 방법======
+이 페이지의 아래 부분에는 ActiveDirectory 또는 SMS, 또는 배치 스크립트를 사용하여 Rhino 4.0을 설치할 때 사용되는 Rhino4Setup.INI 파일의 실제 내용이 담겨 있습니다. 자세한 안내는 **[[InstallingRhino|Rhino 설치 안내 페이지]]**를 참조하세요.
+
+이 파일은 **[[http://en.wiki.mcneel.com/content/upload/files/Rhino4Setup.zip|Rhino4Setup.ini]]**에서 다운로드하실 수 있으며, 갖고 계신 [[rhino:rhinoceros|Rhinoceros]] 4.0 CD 에도 있습니다.
+
+Windows의 메모장과 같은 텍스트 편집기로 이 .INI 파일을 편집하세요.
+
+대문자 부분은 Rhino 설치 관리자에서 인식하는 특별한 키워드 (MSI 속성) 입니다.  이러한 키워드를 설치 관리자 MSI에서 인식시키려면 줄의 첫머리에서 # 기호를 제거하고 콘텐츠를 = 기호의 오른쪽에 오도록 맞춥니다. 이 페이지의 아래쪽에 있는 대로 파일을 사용한다면, 설치에 영향을 주는 매개변수는 "INSTALL_EN=1" 과 "RMA_CDKEY=" 입니다. 단, "RMA_CDKEY=" 매개변수에서 사용자의 CD 키 앞에 있는 # 기호를 미리 삭제하셔야 합니다.
+
+=====매개변수=====
+AUTOINSTALL=1 - 질문과 대화상자를 표시하지 않고, 설치 관리자가 자동으로 실행되도록 지정하는 매개변수입니다.  이 매개변수가 없으면 대화상자가 표시되지만, 다른 매개변수에 의해 이미 답변이 채워져 있을 것입니다.
+
+FOLDER="C:\Program Files\[[rhino:rhinoceros|RhinoCeros]] 4.0"   -  설치할 폴더를 지정합니다. 원하는 위치로 지정할 수 있습니다.  경로에 공백이 있으면 큰 따옴표로 앞 뒤를 둘러싸야 합니다. 
+
+RMA_CDKEY=AAAA-BBBB-CCCC-DDDD-EEEE - 설치에 필요한 CD 키입니다. 이 CD 키를 사용하여 독립실행형 노드로 설치합니다. CD 키는 대시 대시(-) 없이 입력할 수 있으며, 앞에 RH40-가 있어도 되고 없어도 됩니다.
+
+INSTALL_EN=1   -  영어 지원을 설치합니다. -- 영어 도움말, 튜토리얼, 샘플 파일 등을 포함한 영어 버전 Rhino 지원 파일이 설치됩니다.
+
+=====추가적인 매개변수:=====
+WORKGROUP_NODE=1  -  매번 Rhino를 시작할 때마다 컴퓨터에서 Zoo 라이선스 관리자 (www.rhino3d.com/zoo.htm)로부터 CD 키를 받아오게 하려면, 이 매개변수로 RMA_CDKEY 입력을 대신합니다. 
+
+USERNAME="Rodney Dangerfield"
+
+COMPANYNAME="Universal Pictures"
+
+INSTALL_XX=1   -  XX 언어 지원을 설치합니다.
+
+     #############################################################
+     # Configuration file for installation of Rhino 4.0.
+     # Text following a pound sign (#) on a line are ignored when this file is read.
+     #
+     # Empty values are also ignored.
+     #
+     # For details on using this file, please visit
+     # [[rhino:installingrhino|InstallingRhino]]
+     #
+     #
+     #############################################################
+     # AUTOINSTALL = 0 # Interactive installation (default)
+     # AUTOINSTALL = 1 # Silent Installation
+     
+     #############################################################
+     #Installation directory:  (default is C:\Program Files\[[rhino:rhinoceros|RhinoCeros]] 4.0)
+     # FOLDER = C:\Program Files\[[rhino:rhinoceros|RhinoCeros]] 4.0
+     
+     #############################################################
+     # License Details:
+     # WORKGROUP_NODE=1     # Install so Rhino uses Zoo license manager
+     # WORKGROUP_NODE=0     # Install as stand-alone node. RMA_CDKEY is required.
+     # RMA_CDKEY=XXXX-XXXX-XXXX-XXXX-XXXX # Your CD-Key
+     # RMA_VALIDATION_CODE=____-____-____-____-____ # Your Validation Code, obtained from https://www.mcneel.com/validate/rhino/
+     
+     #############################################################
+     #User and company information:   (default is information from Windows)
+     # USERNAME=Joe Smith
+     # COMPANYNAME=Acme Construction, Inc.
+     
+     #############################################################
+     # Language Support:
+     # Uncomment one or more of the following lines
+     # to install language support for the language.
+     
+     #English:
+      INSTALL_EN = 1   # Install English Language support
+     # INSTALL_EN = 0  # Do NOT Install English Language support
+     
+     #French:
+     # INSTALL_FR = 1   # Install French Language support
+     # INSTALL_FR = 0  # Do NOT Install French Language support
+     
+     #Spanish:
+     # INSTALL_ES = 1   # Install Spanish Language support
+     # INSTALL_ES = 0  # Do NOT Install Spanish Language support
+     
+     #Italian:
+     # INSTALL_IT = 1   # Install Italian Language support
+     # INSTALL_IT = 0  # Do NOT Install Italian Language support
+     
+     #German:
+     # INSTALL_DE = 1   # Install German Language support
+     # INSTALL_DE = 0  # Do NOT Install German Language support
+     
+     #Czech:
+     # INSTALL_CS = 1   # Install Czech Language support
+     # INSTALL_CS = 0  # Do NOT Install Czech Language support
+     
+     #Polish:
+     # INSTALL_PL = 1   # Install Polish Language support
+     # INSTALL_PL = 0  # Do NOT Install Polish Language support
+     
+     #Simplified Chinese:
+     # INSTALL_CN = 1   # Install Simplified Chinese Language support
+     # INSTALL_CN = 0  # Do NOT Install Simplified Chinese Language support
+     
+     #Traditional Chinese:
+     # INSTALL_TW = 1   # Install Traditional Chinese Language support
+     # INSTALL_TW = 0  # Do NOT Install Traditional Chinese Language support
+     
+     #Korean
+     # INSTALL_KO = 1   # Install Korean Language support
+     # INSTALL_KO = 0  # Do NOT Install Korean Language support
+     
+     #Japanese
+     # INSTALL_JA = 1   # Install Japanese Language support
+     # INSTALL_JA = 0  # Do NOT Install Japanese Language support
+     
