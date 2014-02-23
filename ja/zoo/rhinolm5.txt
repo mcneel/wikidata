@@ -1,0 +1,49 @@
+======ライセンスマネージャー - Rhino 5 SR6のアップデート======
+> **製品:** //[[ja:zoo:zoo5|Zoo 5]]//
+> **要約:** //サービスリリース6でのRhino 5とZoo 5の変更についての説明//
+
+=====概要=====
+Rhino 5のリリースに伴い、ネットワークライセンスマネージャー、 [[http://wiki.mcneel.com/ja/zoo/home|Zoo 5]]の新しく向上したバージョンもリリースされました。
+
+Bongo、Brazil、Flamingo、Penguinはサービスリリース6（SR6）の前のZoo 5をサポートしません。
+
+**Rhino 5 SR6**と**Zoo 5 SR6**をインストールすることで、1つのZoo 5サーバー を使って以下の製品ライセンスをフローティングさせることができるようになります。
+
+  * Bongo 2.0
+  * Brazil 2.0
+  * Flamingo nXt
+  * Penguin 2.0
+  * Rhino 5
+
+メモ - 以下の製品はZoo 5 SR6で動作**しません**。
+  * Bongo 1.0
+  * Flamingo 1.0
+  * Flamingo 1.1
+  * Flamingo 2.0
+  * Penguin 1.0
+  * Penguin 1.1
+  * Rhino 4.0
+
+=====詳細=====
+Rhino 5 SR6には新しいライセンスマネージャークライアント（RhinoLM5）が含まれています。これは古いライセンスマネージャークライアント（RhinoLM）を置き換えます。
+
+サポートされているMcNeelプラグイン製品がZooサーバーからライセンスが必要な場合、RhinoLM5はシステムが[[http://wiki.mcneel.com/ja/zoo/findzooserver|Zoo 5サーバーを使用]]するよう設定されているかどうかチェックします。設定されている場合、RhinoLM5はZoo 5サーバーからのライセンス取得を試みます。Zoo 5サーバーからライセンスを取得できない場合またはZoo 5サーバーが見つからない場合、RhinoLM5はZoo 4.0サーバーからのライセンス取得を試みます。
+
+=====テクニカルサポート=====
+RhinoとMcNeelプラグイン製品はZooサーバーとの通信にライセンスマネージャークライアントを使います。
+
+Zoo 4.0サーバーへのアクセスに使っていたライセンスマネージャークライアントのファイル名は**RhinoLM.exe**で、次のフォルダにインストールされています:
+
+<code>
+%ProgramFiles(x86)%\Common Files\McNeel Shared\License Manager
+</code>
+
+Rhino 5 SR6に含まれる新しいライセンスマネージャークライアントの名前は**RhinoLM5.exe**で、同じフォルダにインストールされています。
+
+古いライセンスマネージャーに戻す必要がある場合、同じフォルダにある**RegRhinoLM4.exe**を実行することができます。
+
+新しいライセンスマネージャーを登録し直す場合は**RegRhinoLM5.exe**を実行してください。例えばRhino 5 SR5をインストールした後にFlamingo nXtをインストールした場合、Flamingo nXtのインストーラーは常に古いライセンスマネージャーを登録するため、**RegRhinoLM5.exe**を実行する必要があります。
+
+\\
+
+{{tag>Zoo5}}
