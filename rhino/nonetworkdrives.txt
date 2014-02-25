@@ -1,0 +1,11 @@
+====== Mapped Network drives don't show in Rhino V5 File Open dialog ======
+
+Several users have reported that the Rhino V5 file dialog does not display mapped network drives in Windows 8/8.1. This was generally isolated to Matrix users that were running as Administrators with UAC disabled.
+
+Under these conditions, a policy registry key called "EnableLinkedConnections” needs to be added that will enable the mapped drives to appear when running applications as an administrator.
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+“EnableLinkedConnections”=dword:00000001
+
+Thanks to Dale Fugier for figuring this out.\\
+-Added 25 February 2014
