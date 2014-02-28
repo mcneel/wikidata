@@ -1,0 +1,35 @@
+====== Nvidiaディスプレイドライバの問題と情報 ======
+
+===== Rhinoceros 5のQuadroドライバのテスト =====
+**下のドライバがRhinoとQuadroカードに「最適」のドライバとして推奨されます。**
+
+  * Windows 7で最も新しく適しているドライバとして推奨するのは、[[http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]]です。
+  * On Windows 8 and 8.1, there is no stable driver we can recommend
+  * This information is subject to change without notice, as new drivers are released regularly.
+
+-->Details#
+February 10, 2014
+\\
+{{:rhino:nvidia_error.png?400|}}
+\\
+For the past year there have been several reports coming in about crashes in the video drivers from users who have specific NVidia Quadro video cards. Trying to isolate the problem to a level where Rhino developers could come up with some kind of workaround or fix has proven to be very difficult and elusive. 
+
+The bottom line is that this problem is happening down inside the video driver, and although it *could* be caused by something Rhino is doing, the drivers should still not crash. Because of this, the possibility of fixing this in Rhino extremely difficult, or possibly impossible at this point.
+
+This situation concerns us since work can be lost due to the crash and forced shutdown of Rhino(s). Some crashes seem to occur without Rhino running … just running web browsers and viewing video crashed the system at other times. But the combination of both Rhino and browser(s) seemed to speed up the frequency of crashes.
+
+For even more details, read the full report [[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|here.]]
+<--
+===== Random crashing with Nvidia cards - Nvidia Threaded Optimization setting =====
+
+Several users are reporting random crashes with updated Nvidia drivers.  Jeff recently discovered a setting in the Nvidia Control Panel that seems to be causing this problem.  Nvidia says it should normally be turned off, but many users are finding the control turned on instead.
+
+<color coral>**We recommend turning this Threaded Optimization control OFF**</color>.\\
+
+> <color slategray>**Update:** //on 7-Nov-08, John (<jrharvey5923@gmail.com>) reported on the Rhino Newsgroup that there are no longer problems with threaded optimization in the newest drivers (ver. 180.42). Also these drivers reportedly allow multi-monitors on SLI computers.//</color>
+
+> <color slategray>**Update:** //on 18-Nov-08, John Brock (<jb@mcneel.com>) is running a [[rhino:geforce|GeForce]] 9800 GTX with driver version 7.15.11.7813 (9/17/2008) and has the random crash problem with threaded optimization set to "auto".  Set to off eliminates the problem.//</color>
+
+> <color slategray>**Update:** //on 17-July-2013 Some users have found that that Quadros behave better with Rhino if the nVidia control panel > Global setting page is set to use  'Workstation App- Dynamic Streaming" //</color>
+
+{{http://en.wiki.mcneel.com/content/upload/images/NVCP.jpg}}
