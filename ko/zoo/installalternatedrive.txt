@@ -1,20 +1,18 @@
-====== 원격으로 라이선스 모니터링하기======
-> **제품:** //[[ko:zoo:zoo5|Zoo 5]]//
-> **요약:** //Discusses how to monitor Zoo-managed licenses from a web browser.//
+======다른 드라이브에 Zoo 설치하기======
+> **제품:** //[[zoo:zoo5|Zoo 5]]//
+> **요약:** //기본적으로 설정된 드라이버 외에 다른 드라이버에 Zoo 를 설치하는 방법에 대한 안내입니다.//
 
 =====질문=====
-서버 외에 다른 장치에서 실시간으로 라이선스 사용을 모니터링할 수 있는 방법이 있습니까? 라이선스를 자율적으로 관리하기 위해 누가 현재 라이선스를 사용하고 있는지 사용자가 확인할 수 있었으면 좋겠습니다. 다른 어플리케이션의 경우, 현재 사용되는 상황을 웹페이지를 통해 확인하거나, 이를 위한 별도의 전용 뷰어 어플리케이션을 제공하기도 합니다.
+Zoo 서버를 다른 디스크 드라이브에 설치하려고 합니다. **msiexec.exe**를 통해 다른 경로로 Zoo 를 설치하려고 시도했으나 항상 "Program Files" 에 설치됩니다.
 
 =====답변=====
-Zoo 5 서비스 릴리스 8 (SR8) 또는 그 이후 버전을 사용하시면 웹 브라우저를 사용하여 편리하게 라이선스 사용 상황을 사용자가 모니터링할 수 있습니다. 다음과 같이 입력하셔서, 사용하시는 Zoo 서버에서 제공하는 **status** 페이지를 방문하시면 됩니다:
+Zoo 를 다른 위치에 설치하실 때 필요한 올바른 구문입니다.
 
-  http://<zoo_서버_호스트_이름>/status
-
-위와 같이 사용하시는 웹브라우저에 입력하세요. 예를 들어, Zoo 서버의 호스트 이름이 "zooserver.mycorp.com" 이라면 다음과 같이 입력하세요:
-
-  http://zooserver.mycorp.com/status
+  msiexec /i <msi_file> INSTALLLOCATION=<pathspec>
   
-현재 실행 중인 Zoo의 버전을 확인하려면 **Zoo Administrator** (ZooAdmin.exe)를 시작하여 **Help -> About**을 선택합니다.
+예를 들어, 이 구문은 Zoo 5 SR6 을 "D:\Progs\Zoo" 폴더에 설치합니다.
+
+  msiexec /i zoo50_5.6.30918.07015.msi INSTALLLOCATION=D:\Progs\Zoo
 
 \\
 
