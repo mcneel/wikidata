@@ -1,50 +1,72 @@
 ======Zoo – 公用授權管理員======
 [[zoo:home|{{:zoo:zoo_small.png|Zoo Home}}]]
 
-=====概要=====
-Zoo可以讓同一個工作群組中的電腦共享有限的Rhino、Flamingo、Penguin、Brazil、Bongo授權（CD-Key），當這些產品安裝成工作群組單機時，取得授權的流程如下：
-  * 工作群組單機啟動時會向Zoo請求一個授權。 
-  * Zoo會將一個未被使用的授權分配給該工作群組單機。
-  * 工作群組單機關閉時會自動將授權退還給Zoo。
+==== 概要 ====
+Zoo 可以讓同一個網路工作群組內的使用者共用 Rhino、Flamingo、Penguin、Brazil 與 Bongo 的授權 (CD-Key)，當這些產品安裝成工作群組單機時的作業方式： 
+
+  * 當工作群組單機執行時會向 Zoo 請求一個授權。 
+  * Zoo 會將一個未使用的授權分配給這個單機。 
+  * 當這個單機關閉時，使用的授權會退回 Zoo，以便給其它工作群組單機需要時可以取用。 
 
 ** Zoo為免費提供！**
 
-**[[http://download.rhino3d.com/zoo/5.0/beta/download/|Download Zoo 5.0]]**  for Rhino 5.0、Bongo 2、Flamingo NXT、Brazil 2及Penguin2 (//不支援Rhino 4.0、Flamingo 2、Penguin 1 及Bongo 1.0。//)
+**[[http://download.rhino3d.com/Zoo/5.0/release/download/|下載 Zoo 5]]**  for Rhino 5.0、Bongo 2、Flamingo NXT、Brazil 2及Penguin2  (//不支援Rhino 4.0、Flamingo 2、Penguin 1 及Bongo 1.0。//).
 
-**[[http://download.rhino3d.com/zoo/4.0/release/download/|Download Zoo 4.0]]** Rhino 4.0、Flamingo 2、Penguin 1、Brazil 及Bongo1.0使用 (//不支援Rhino 5.0 及Bongo 2.0 。//)
+**[[http://download.rhino3d.com/Zoo/4.0/release/download/|下載 Zoo 4.0]]**  Rhino 4.0、Flamingo 2、Penguin 1、Brazil 及Bongo1.0使用  (//不支援Rhino 5.0 及Bongo 2.0 。//).
 
 //備註：可同時將Zoo 4.0及Zoo 5.0安裝在同一台伺服器主機或同個網路，並不會有衝突。//
 =====特色=====
+-->不需額外的花費#
+ 不必使用特別版本的 Rhino、Flamingo、Penguin、Brazil 或 Bongo。 
+<--
+-->沒有特別的硬體需求#
+Zoo 可以在工作群組中的任何作業系統上執行。 
+<--
+-->沒有特別的軟體需求#
+Zoo可於任何Windows系統執行，包括Windows XP、Vista、Win7、Windows Server 2000、2003及2008系統。
+<--
+-->設定簡單 #
+只要將 Zoo 安裝在工作群組的任何一部電腦上，將授權 (CD-Key) 輸入至 Zoo，不必在每一部電腦分別輸入授權。 
+<--
+-->取出授權#
+Rhino 的授權可以取出至筆記型電腦，並可以切斷與工作群組的連線。在筆記型電腦重新與工作群組連線後可以再將授權回存到 Zoo。 
+<--
+-->安全性#
+當安裝Zoo的電腦當機或網路連線中斷時，作業中的工作群組單機可以繼續運作，但除非恢復與Zoo的連線，否則工作群組單機無法重新啟動。
+<--
+-->可以跨路由器#
+Zoo可以管理一個網路或以路由器連接的不同網路裡的授權。 
+<--
+-->混合環境#
+同一個網域或工作群組裡工作群組單機與獨立單機可以並存。 
+<--
+-->可作為 Windows 服務#
+Zoo 不需使用者登入桌面即可自動執行。 
+<--
 
-  * **不需額外費用** - 不需要特殊版本的Rhino、Flamingo、Penguin、Brazil或Bongo。 
-  * **不需特別的硬體** - Zoo可於同網路群組中任何一台主機運作。 
-  * **不需特別的軟體** - Zoo可於任何Windows系統執行，包括Windows XP、Vista、Win7、Windows Server 2000、2003及2008系統。
-  * **設定容易** -  只要將Zoo安裝在同一個工作群組中的任何一部電腦上，將授權（CD-Key）輸入至Zoo裡，不必在每一部電腦分別輸入授權。 
-  * **取出授權** - 筆記型電腦可以將授權（CD-Key）取出，中斷與工作群組的連線，下次重新與工作群組連線時再將授權回存至Zoo。
-  * **安全性** -當安裝Zoo的電腦當機或網路連線中斷時，作業中的工作群組單機可以繼續運作，但除非恢復與Zoo的連線，否則工作群組單機無法重新啟動。
-  * **可以跨路由器** -Zoo可以管理一個網路或以路由器連接的不同網路裡的授權。
-  * **混合環境** - 同一個網域或工作群組裡工作群組單機與獨立單機可以並存。
-  * **以服務方式執行** - 若您在Zoo執行中重新開機，無須再次啟動Zoom。 
-
-
-
-
-=====Zoo 5.0新功能=====
-Zoo 5.0是一個全新版本的Zoo。Zoo 5.0是完全重新撰寫的程式，提供全新新功能如下：
-  * **支援標準網路協定** - Zoo 5.0使用HTTP (Port 80)與用戶端溝通，可使系統管理員更易透過路由器從網路或複雜的網路設定與Zoo溝通。
-  * **防火牆設定友善** - Zoo 5.0 須讓用戶端週期性地檢查Zoo主機，但不須連回用戶端，所以無需打開用戶端電腦的防火牆ports設定。
-  * **Limited License Check Out** - 之前的Zoo版本可讓序號取出授權給筆記型電腦用戶出差使用。但並沒有限制取出授權的期限，Zoo 5.0可供管理員設定取出授權期限。
-  * **支援外掛程式** - -之前的Zoo只支援McNeel產品(如：Rhino、Flamingo、Bongo、Brazil及Penguin)。Zoo 5 能夠支援外掛程式開發者在他們的產品增加支援Zoo的功能。
+=====Zoo 5 有些什麼新功能?=====
+-->新版本#
+Zoo 5 是全新重寫的公用授權管理員，提供了數項有別於舊版本的新功能。
+<--
+-->使用標準的網際網路通訊協定#
+ Rhino 客戶端以 HTTP (Port 80) 與 Zoo 5 通訊，使跨路由器的複雜網路環境，甚至透過網際網路共用授權變的更容易。
+<--
+-->防火牆設定友善#
+ Zoo 5.0 須讓用戶端週期性地檢查Zoo主機，但不須連回用戶端，所以無需打開用戶端電腦的防火牆ports設定。
+<--
+-->授權取出期限#
+舊版的 Zoo 允許授權取出至筆電方便旅途使用，但授權取出沒有期限限制，Zoo 5 讓電腦管理員可以設定授權的取出期限。
+<--
+-->支援協力廠商外掛#
+舊版的 Zoo 只能管理 McNeel 產品的授權 (例如：Rhino、Flamingo、Bongo、Brazil 與 Penguin)，Zoo 5 讓協力廠商可以使用 Zoo 來管理他們的外掛的授權。
+<--
 
 =====系統需求=====
   * 視窗作業系統。
   * [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]]
   * TCP/IP網路連接配置。
 
-
-
-
 =====支援=====
-**[[:zh-tw/zoo/zoo5|Zoo 5.0]]** - Rhino 5.0及Bongo 2.0授權管理員。(//不支援Rhino 4.0、Flamingo、Penguin、Brazil 及 Bongo 1.0。//).
+**[[zh-tw:zoo:zoo5|Zoo 5]]** - for Rhino 5.0、Bongo 2、Flamingo NXT、Brazil 2及Penguin2  (//不支援Rhino 4.0、Flamingo 2、Penguin 1 及Bongo 1.0。//).
 
-**[[:zh-tw/zoo/zoo4|Zoo 4.0]]** - Rhino 4.0、Flamingo、Penguin、Brazil及Bongo 1.0 授權管理員。(//不支援Rhino 5.0 及 Bongo 2.0//)
+**[[zh-tw:zoo:zoo4|Zoo 4.0]]** - Rhino 4.0、Flamingo 2、Penguin 1、Brazil 及Bongo1.0使用  (//不支援Rhino 5.0 及Bongo 2.0 。//).
