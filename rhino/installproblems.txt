@@ -103,53 +103,7 @@ If these folders are missing or if you have already opened Rhino, you will have 
 <--
 ===== Error Messages =====
 
--->Error 1327 - Invalid Drive:#
-**//Question://** //I get "Error 1327. Invalid Drive (E:, F:, etc)" when installing//
-
-**//Cause://** //Your user account has settings indicating that one or more non-existent drives should be used for special folders such as "My Documents"//
-
-**//Solution://**
-  - From the Start menu, click Run.
-  - Type RegEdit, then click Run
-  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
-  - Look for directories listed that contain the drive letter mentioned in the error from the installer. Change them to point to a valid drive and folder.
-  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
-  - Look for directories listed that contain the drive letter mentioned in the error from 
-
-**Note:** This method, or task contains steps that tell you how to modify the registry. However, serious problems might occur if you modify the registry incorrectly. Therefore, make sure that you follow these steps carefully. For added protection, back up the registry before you modify it. Then, you can restore the registry if a problem occurs. For more information about how to back up and restore the registry, click the following article number to view the article in the Microsoft Knowledge Base:
-[[http://support.microsoft.com/kb/322756|How to back up and restore the registry in Windows ]]
-
-<--
-
--->Error 1402 or 1406 (Could not open key: UNKNOWN\Components)#
-** //Question://** // A message "Could not open key: UNKNOWN\Components\(lots of letters and numbers). Error 1402. Verify that you have sufficient access to that key, or contact your support personnel."//
-
-**//Cause://** One or more registry keys in the HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components key has incorrect permissions.
-
-**//Solution 1://**
-On the Windows Start menu, enter "CMD" to the search box. Right-click on the "cmd.exe" and select "Run as administrator". Copy the following line and paste it into the cmd window, press Enter. Then Rhino will be able to install.
-
-<code>
-secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
-</code>
-
-**//Solution 2://**
-//WARNING: The following procedure involves editing the Windows Registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
-  - Download [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] from Microsoft TechNet, and extract the contents to your desktop.
-  - Open a Windows command shell
-  - Change directories to your desktop.
-  - In the command shell, enter: **psexec -i -d -s c:\windows\regedit.exe** This causes Windows to run the registry editor with the permissions of the System account - an account even more powerful than Administrator.
-  - Browse to HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
-  - Right-click the **UserData** folder, then click **Permissions...**
-  - In the Permissions for UserData dialog box, click **Advanced**
-  - Ensure that "Administrators" has "Full Control" Permissions in this folder, and that "Users" has "Read" Permissions. There will be other user permissions, too - but Administrators and Users are what matter most.
-  - Select the **Replace all child object permissions with inheritable permissions from this object**
-  - Click **OK** twice to apply permissions
-  - Install Rhino again.
-
-<--
-
--->Error 1603#
+===Error 1603===
 A wide variety of problems can cause {{anchor:error:1603}} errors. Please follow all of the steps below.
 \\
 \\
@@ -198,6 +152,51 @@ A wide variety of problems can cause {{anchor:error:1603}} errors. Please follow
 **Still not working?**
   - That's frustrating - we're sorry!
   - Please email any log files from Step 3 to tech@mcneel.com
+
+
+-->Error 1327 - Invalid Drive:#
+**//Question://** //I get "Error 1327. Invalid Drive (E:, F:, etc)" when installing//
+
+**//Cause://** //Your user account has settings indicating that one or more non-existent drives should be used for special folders such as "My Documents"//
+
+**//Solution://**
+  - From the Start menu, click Run.
+  - Type RegEdit, then click Run
+  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  - Look for directories listed that contain the drive letter mentioned in the error from the installer. Change them to point to a valid drive and folder.
+  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+  - Look for directories listed that contain the drive letter mentioned in the error from 
+
+**Note:** This method, or task contains steps that tell you how to modify the registry. However, serious problems might occur if you modify the registry incorrectly. Therefore, make sure that you follow these steps carefully. For added protection, back up the registry before you modify it. Then, you can restore the registry if a problem occurs. For more information about how to back up and restore the registry, click the following article number to view the article in the Microsoft Knowledge Base:
+[[http://support.microsoft.com/kb/322756|How to back up and restore the registry in Windows ]]
+
+<--
+
+-->Error 1402 or 1406 (Could not open key: UNKNOWN\Components)#
+** //Question://** // A message "Could not open key: UNKNOWN\Components\(lots of letters and numbers). Error 1402. Verify that you have sufficient access to that key, or contact your support personnel."//
+
+**//Cause://** One or more registry keys in the HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components key has incorrect permissions.
+
+**//Solution 1://**
+On the Windows Start menu, enter "CMD" to the search box. Right-click on the "cmd.exe" and select "Run as administrator". Copy the following line and paste it into the cmd window, press Enter. Then Rhino will be able to install.
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//Solution 2://**
+//WARNING: The following procedure involves editing the Windows Registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
+  - Download [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] from Microsoft TechNet, and extract the contents to your desktop.
+  - Open a Windows command shell
+  - Change directories to your desktop.
+  - In the command shell, enter: **psexec -i -d -s c:\windows\regedit.exe** This causes Windows to run the registry editor with the permissions of the System account - an account even more powerful than Administrator.
+  - Browse to HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - Right-click the **UserData** folder, then click **Permissions...**
+  - In the Permissions for UserData dialog box, click **Advanced**
+  - Ensure that "Administrators" has "Full Control" Permissions in this folder, and that "Users" has "Read" Permissions. There will be other user permissions, too - but Administrators and Users are what matter most.
+  - Select the **Replace all child object permissions with inheritable permissions from this object**
+  - Click **OK** twice to apply permissions
+  - Install Rhino again.
 
 <--
 
