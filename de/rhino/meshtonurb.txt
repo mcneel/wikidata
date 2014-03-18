@@ -1,0 +1,68 @@
+====== Der Befehl PolygonnetzZuNURBS ======
+> **Zusammenfassung:** //In der Vergangenheit gab es viele Kontroversen und Support-Anfragen bezüglich dieses Befehls.  Dieser Artikel erklärt die Grundlagen dieser hilfreichen, aber oft missverstandenen Funktion und soll so zu einer fundierten Verwendung beitragen.//
+
+=====PolygonnetzZuNURBS: Eine kurze Beschreibung======
+  
+Um zu verstehen, was diese Funktion leistet, ist ein gewisses Verständnis der Grundlagen der 3D-Geometrie sowie der Charakteristiken von Polygonnetz- unf NURBS-Objekten nötig.  Im Folgenden finden Sie daher eine kurze Beschreibung der wichtigsten Eigenschaften der beiden Konzepte.
+
+=====Polygonnetze vs. NURBS=====
+Grundlegend für den Befehl **PolygonnetzZuNURBS** ist die Kenntnis der Unterschiede zwischen einem //Polygonnetz// und einem //NURBS//-Flächenmodell.  Obwohl beide ein 3D-Objekt als Computermodell widerspiegeln können, geschieht dies doch in sehr unterschiedlicher Weise. 
+
+Ein Polygonnetz repräsentiert dreidimensionale Flächen als Folgen diskreter Facetten, so ähnlich wie Pixel ein Bild als eine Folge farbiger Punkte repräsentieren.  Wenn die Facetten bzw. Pixel klein genug sind, erscheint das Objekt bzw. Bild "glatt".  Je näher jedoch an das Objekt herangezoomt wird, desto deutlicher wird, wie "verpixelt" es in Wahrheit ist und dass es lokal weder glatt noch stetig ist.
+
+NURBS-Flächen dagegen sind mathematische Darstellungen von Kurven und Flächen. Mit ihnen können komplexe und glatte Freiformflächen dargestellt werden, die ihre Glattheit beim Bearbeiten behalten.  Im Gegensatz zu einem Polygonnetz weisen sie keinen Mosaikeffekt oder Granularität auf. Daher verhalten sie sich auch eher wie das Gesicht einer Person als wie das verpixelte Bild desselben.
+
+So können auch NURBS einfach in Polygonnetze umgewandelt werden, wie Sie auch einfach ein digitales Bild eines Gesichts machen können.  Andererseits ist die Umwandlung eines Polygonnetzes in NURBS so ähnlich wie der Versuch, das Gesicht einer Person aus einem verpixelten Digitalbild heraus zu rekonstruieren - dies ist weitaus schwieriger und es gibt dafür auch keine schnelle, automatisierte Methode.
+
+===In diesem Artikel verwendete Polygonnetzterminologie ===
+Polygonnetze sind also Facettendarstellungen von zwei- und dreidimensionalen Flächen.  Einzelne Polygonnetzfacetten können in Rhino entweder 3 Seiten (Dreiecke) oder 4 Seiten (Vierecke) haben.   Auf dem Bildschirm werden sie im Gitternetzmodus als Drahtgittermodelle dargestellt, während im schattierten Modus jede Facette zur Visualisierung eine "Fläche" erhält. Die Eckpunkte der Facetten werden Vertices genannt.   Ein Polygonnetzobjekt besteht aus einer Folge von Facetten.
+
+**Wichtiger Hinweis:** Es wird oft die Meinung vertreten, dass Facetten stets planar sind - dies ist aber nicht der Fall.  Nur Dreiecksnetze verfügen garantiert ausschließlich über planare Facetten.  Viereckige Facetten KÖNNEN planar sein, müssen aber nicht, da 4 nicht-koplanare Punkte im Raum einen verzerrten Bereich beschreiben.
+
+===In diesem Artikel verwendete NURBS-Terminologie===
+NURBS sind ein hochkomplexes Thema, zu dem es eine Vielzahl hochwertiger Informationen gibt, das hier aber nicht detailliert diskutiert werden kann. NURBS sind mathematische Kurven.  NURBS-//Flächen// werden aus einer Folge von interpolierten NURBS-Kurven in zwei Richtungen ("u" und "v") generiert.  In dem vorliegenden Artikel werden nur die einfachsten NURBS-Kurven behandelt – die sogenannten "bilinearen" Flächen, die in beiden Richtungen aus NURBS-Kurven 1. Grades (d.h. Linien) bestehen, wie sie auch vom Befehl PolygonnetzZuNURBS erzeugt werden.  Wenn alle Kanten der NURBS-Fläche mit den Originalkurven (den "natürlichen" Kanten) übereinstimmen, aus denen die Fläche erzeugt wurde, wird die Fläche als ungetrimmt bezeichnet.  Wenn die Fläche mit einer von ihrer natürlichen Kante verschiedenen Kurve geschnitten wird, bezeichnet man diese Fläche als getrimmt.
+
+===== Was kann der Befehl PolygonnetzZuNURBS - und was nicht?=====
+
+
+===Was er nicht kann:===
+Wie oben angedeutet, kann PolygonnetzZuNURBS kein automatisches "Reverse Engineering" von Polygonnetzobjekten durchführen und sie in glatte NURBS-Objekte überführen.    Wenn ein 3D-Modell einmal als Polygonnetz vorliegt, ist es sehr schwierig, daraus wieder ein glattes NURBS-Objekt herzustellen.  Einen Artikel zum Thema Reverse Engineering, die damit verbundenen Schwierigkeiten und wie Sie es mit Rhino-Werkzeugen angehen können, finden Sie [[reverseengineering|hier]]. Es gibt daneben auch spezielle Reverse-Engineering-Software zur teilweisen Automatisierung dieses Prozesses, die meist von teuer bis sehr teuer reichen.  Außerdem sind ein paar Rhino-Plug-ins für diesen Zweck erhältlich, die aber ebenfalls nicht kostenlos sind.
+
+===Was er kann:===
+PolygonnetzZuNURBS wandelt eine (facettierte) Polygonnetzstruktur in eine (facettierte) NURBS-Struktur um.  Dabei wird eine NURBS-Fläche für jede Polygonnetz-Facette im Originalobjekt erstellt und das Resultat in einen Flächenverband verbunden (wenn das Original über mehr als eine Facette verfügte).
+
+===Funktionsweise:===
+**Polygonnetzvierecke** werden in ungetrimmte, vierseitige NURBS-Flächen 1. Grades umgewandelt.  "Ungetrimmt" bedeutet, wie gesagt, dass die "natürlichen" Kanten der Fläche dieselben sind wie die äußeren Begrenzungen und dass somit nichts "getrimmt" wurde.  Die Kanten der NURBS-Fläche sind in diesem Fall dieselben wie die Linien, die die Kanten der Polygonnetzfacetten darstellen.  Daraus folgen zwei Dinge:  Wenn die ursprüngliche Polygonnetzfacette durch 4 koplanare Punkte definiert wurde, befinden sich alle Kantenlinien in derselben Ebene und die resultierende NURBS-Fläche ist ebenfalls planar.  Wenn die 4 Vertices der Vierecksfacette nicht koplanar sind, werden auch die Kantenlinien der NURBS-Fläche nicht koplanar sein und die Fläche erscheint verzerrt.  Diese Art von Fläche kann auch als "Regelfläche" bezeichnet werden.
+
+**Polygonnetzdreiecke** sind per Definition planar.  PolygonnetzZuNURBS wandelt Polygonnetzdreiecke in planare NURBS-Flächen um.  Die getrimmte NURBS-Fläche wird wie bei den Vierecken eine Fläche 1. Grades sein, bei der eine Hälfte getrimmt ist, um ein Dreieck zu erhalten.
+
+Ausgehend davon hat also der aus dem Befehl PolygonnetzZuNURBS entstehende Flächenverband **//exakt//** dieselben Kanten wie das ursprüngliche Polygonnetzmodell und besteht aus bilinearen NURBS-Flächen (1. Grades).  Dreiecksflächen sind planar und getrimmt, während Vierecksflächen ungetrimmt und entweder planar oder nicht sind.
+
+**Wichtiger Hinweis:** PolygonnetzZuNURBS unterteilt die Vierecke nicht in Dreiecke, um planare Flächen zu erhalten.
+
+===== Darauf sollten Sie achten:====
+
+===Speicherverwendung und Dateigröße ===
+ 
+Polygonnetzobjekte können zwischen einigen wenigen bis zu mehreren Millionen Polygone haben.  Das Polygonnetzformat ist sehr kompakt für die Speicherung dieser facettierten Daten.  NURBS-Flächen hingegen sind weitaus weniger kompakt in ihrer Definition, sodass eine NURBS-Definition eines mit dem Befehl PolygonnetzZuNURBS umgewandelten Polygonnetzes locker bis zu 100 Mal so viele Daten benötigen kann wie das Polygonnetzobjekt.  Wenn Sie daher den Befehls PolygonnetzZuNURBS auf komplexe Polygonnetze mit mehreren Tausend Dreiecken anwenden, wird dadurch eine sehr große Datei erzeugt und es kann dazu kommen, dass Ihr Speicher nicht ausreicht.  Wenn Sie über einen modernen Computer mit einem guten Prozessor, genügend Speicher und einem 64-Bit-Betriebssystem nutzen, werden Sie damit weniger Probleme haben.
+ 
+===Folgeoperationen===
+
+Wenn Sie nun über ein NURBS-Objekt mit Tausenden winziger NURBS-Flächen verfügen (genau wie auch schon das Polygonnetz), was können Sie nun mit diesem Objekt anfangen?  Nicht viel! Die meisten Operationen werden vermutlich nicht funktionieren und Sie sollten sich deswegen fragen, wozu Sie es benötigen.
+
+===Geometrische Erwägungen===
+Ein grundsätzliches Verständnis der Art von Geometrie, die erzeugt wird, ist essenziell.  Wie schon oben beschrieben, sind viereckige Facetten nicht notwendigerweise planar und die viereckigen NURBS-Ergebnisse können daher verzerrt sein.  Ohne Dehnen sind sie möglicherweise nicht entwickelbar.  Wenn Sie auf einen NURBS-Flächenverband den Befehl **FlächeAbwickeln** verwenden, kann das Ergebnis verzerrt oder inkorrekt sein.  Um Planarität und korrektes Abwickeln sicherzustellen, können Sie das Polygonnetz vor Ausführung des Befehls PolygonnetzZuNURBS entweder triangulieren oder überprüfen, ob alle Seiten planar sind (dazu ist ein Skript erforderlich - ein natives Rhino-Werkzeug ist nicht vorhanden).
+
+=====Bei all diesen Einschränkungen - wozu ist dieser Befehl dann gut?=====
+
+===Konvertierung von Modellen mit weitmaschigen Polygonnetzen===
+
+PolygonnetzZuNURBS ist hilfreich, wenn Sie weitmaschige, überwiegend planare Polygonnetze in NURBS-Flächen für die weitere Bearbeitung in Rhino umwandeln möchten.  Wenn Sie beispielsweise ein Architekturmodell aus SketchUp oder einem ähnlichen, polygonnetzbasierten Programm importieren, besteht dieses aus großen planaren Polygonnetzseiten.  Mit PolygonnetzZuNURBS können Sie das Modell in NURBS-Flächen umwandeln und erhalten so zusammen mit einigen anderen Werkzeugen wie AlleSeitenVereinen ein gutes, sauberes NURBS-Modell zur weiteren Bearbeitung in Rhino.
+
+===Abwickeln von Objekten===
+Da es momentan nicht möglich ist, Polygonnetzobjekte direkt abzuwickeln, können Sie zuerst PolygonnetzZuNURBS verwenden und den daraus resultierenden Flächenverband dann abwickeln.  Achten Sie aber auch hier auf die oben erwähnten Einschränkungen zur Nützlichkeit, Dateigröße und verzerrten Geometrie.
+
+===Export in Programme, die keine Polygonnetze unterstützten===
+Achten Sie auch hier auf die Dateigröße, aber unter Umständen kann der Befehl Ihnen hier sehr hilfreich sein, obwohl Sie auch dann immer noch ein facettiertes Modell haben.
+
+//WIP msh 13.04.2011//
