@@ -41,7 +41,7 @@ CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& cont
   ON_PolylineCurve pline;
   if( RhinoConvertCurveToPolyline(*curve, 0, 0, 0, 0, 0.0, tol, 0.0, 0, pline) )
   {
-    const ON_MeshTree* mesh_tree = mesh->MeshTree();
+    const ON_MeshTree* mesh_tree = mesh->MeshTree(true);
     if( mesh_tree )
     {
       ON_SimpleArray<ON_CMX_EVENT> cmx;
