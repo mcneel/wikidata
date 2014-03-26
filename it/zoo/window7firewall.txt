@@ -1,0 +1,55 @@
+======Aprire la porta TCP 80 nel firewall di Windows 7======
+> **Prodotto:** //[[zoo:zoo5|Zoo 5]]//
+> **Sommario:** //Come aprire la porta TCP 80 nel firewall di Windows 7.//
+
+È necessario che la porta 80 sia aperta per tutte le comunicazioni in entrata ed in uscita del firewall. Non basta aprire la porta 80 solo sull'applicazione dello Zoo. Se non seguite la seguente procedura nel firewall del vostro server dello Zoo, i client di Rhino non riusciranno a comunicare con lo Zoo.
+
+===== IMPORTANTE =====
+Non è accettabile aprire il traffico in entrata ed in uscita della porta solo per il //programma// o il //servizio//.
+È necessario impostare le regole per la //**porta**// come spiegato qui sotto nel passo 6, altrimenti //**non**// funzionerà. 
+
+==== Passi====
+
+1. Aprite il **Pannello di controllo** dal menu Start.
+
+2. Selezionate **Windows Firewall**.
+
+{{:zoo:open-port-windows-7-firewall-1.png?640}}
+
+3. Nella colonna sinistra della finestra di Windows Firewall, selezionate **Impostazioni avanzate**.
+
+{{:zoo:open-port-windows-7-firewall-2.png?640}}
+
+4. Selezionate **Regole connessioni in entrata** nella colonna sinistra della finestra "Windows Firewall con protezione avanzata".
+
+{{:zoo:open-port-windows-7-firewall-3.png?640}}
+
+5. Selezionate **Nuova regola** nella colonna sulla destra.
+
+{{:zoo:open-port-windows-7-firewall-4.png?640}}
+
+6. Nella procedura guidata per la nuova regola in ingresso, selezionate **Porta** e quindi cliccate su **Avanti**. //N.b.: non create una regola **Programma**, dovete creare una regola **Porta**.//
+
+{{:zoo:open-port-windows-7-firewall-5.png?640}}
+
+7. Selezionate il protocollo **TCP** per l'applicazione della regola, selezionate **Porte locali specifiche**, digitate il numero di porta **80** e quindi cliccate su **Avanti**.
+
+{{:zoo:open-port-windows-7-firewall-6.png?640}}
+
+8. Selezionate **Consenti la connessione** e quindi cliccate su **Avanti**.
+
+{{:zoo:open-port-windows-7-firewall-7.png?640}}
+
+9. Specificate quando si applica questa regola (spuntate tutte le opzioni affinché la porta rimanga sempre aperta) e quindi cliccate su **Avanti**.
+
+{{:zoo:open-port-windows-7-firewall-8.png?640}}
+
+10. Assegnate un nome a questa regola e quindi cliccate su **Fine** per aggiungere la nuova regola.
+
+{{:zoo:open-port-windows-7-firewall-9.png?640}}
+
+La porta TCP 80 ora è aperta e pronta per l'uso.
+
+\\
+
+{{tag>Zoo5}}
