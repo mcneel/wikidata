@@ -1,0 +1,25 @@
+====== Error 1921 ======
+> **Summary:** //How to fix the installation Error 1921.//
+> **Related Installation Help:** //[[installproblems|Troubleshooting Rhino 5 Installation]]//
+
+=====Problem=====
+The log file shows "Error 1921.  (1)Service 'McNeel Update Service 5.0' (McNeelUpdate) could not be stopped. Verify that you have sufficient privileges to stop system services."
+
+=====Answer=====
+**//Solution 1://**
+  * **Reboot Windows and run the installer again.** The Update Service starts when Rhino is launched so it will not be running after a restart.
+\\ 
+**//Solution 2://**
+  * **Manually stop the service**
+    - Run services.msc. 
+    - Find "McNeel Update Service 5.0"
+    - Right-click and choose Properties
+    - Change Startup type from Automatic to Disabled
+    - Close Services
+    - Restart Windows
+    - Install Rhino
+    - Run Services.msc again
+    - Change the Startup type for "McNeel Update Service 5.0" back to Automatic
+
+
+{{tag>rhinoinstallationerror}}
