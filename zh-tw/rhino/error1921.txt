@@ -1,0 +1,25 @@
+====== Error 1921 ======
+> **摘要：** //如何修正錯誤碼1921.//
+> **相關安裝疑難排解：** //[[:zh-tw:rhino:installproblems|Rhino 5 安裝疑難排解]]//
+
+=====問題=====
+log檔案顯示為”Error 1921. (1)Service 'McNeel Update Service 5.0' (McNeelUpdate) could not be stopped. Verify that you have sufficient privileges to stop system services.” 
+
+=====答案=====
+**//解決方案1： //**
+  * **重新啟動Windows並且再次執行安裝程式。** 更新服務於Rhino開啟時啟動，所以重新開機後更新服務不會馬上啟動。
+\\ 
+**//解決方案2：//**
+  * **手動停止此服務**
+    - 執行 services.msc. 
+    - 尋找 "McNeel Update Service 5.0"
+    - 按右鍵並選擇內容
+    - 將開啟模式由自動改為取消。
+    - 關閉服務
+    - 重開機
+    - 安裝 Rhino
+    - 再次執行 Services.msc
+    - 將”McNeel Update Service 5.0”的啟動模式調整回自動。
+
+
+{{tag>rhino5installationerror_zh-tw}}
