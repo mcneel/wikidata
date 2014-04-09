@@ -1,0 +1,34 @@
+====== Error 1402 or 1406 (Could not open key: UNKNOWN\Components) ======
+> **摘要：** //如何修復安裝錯誤碼 1402 或 1406 (Could not open key: UNKNOWN\Components).//
+> **相關安裝疑難排解：** //[[:zh-tw:rhino:installproblems|Rhino 5 安裝疑難排解]]//
+
+=====問題=====
+若您看到錯誤訊息 “Could not open key: UNKNOWN\Components\(lots of letters and numbers).Error 1402.” 確認您有足夠權限，請聯絡您的資訊網管人員
+
+=====產生原因====
+一個或多個註冊碼無法寫入 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components key 沒有足夠權限。
+
+=====答案=====
+**//解決方案1： //**
+在微軟的開始表，在搜尋欄輸入”CMD”。在”cmd.exe”上按右鍵然後選擇”以使用者管理員權限執行”。複製下列內容並複製至cmd，按Enter。然後Rhino將可安裝。
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//解決方案2：//**
+//警告：下列方式將編輯微軟機碼，若有錯誤可能會造成電腦無法開機，若您擔心有相關問題產生，請直接聯絡McNeel技術人員服務。//
+  - 由微軟的TechNet下載[[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] 並解壓縮放在電腦桌面。
+  - 開啟命令提示字元(Windows command shell)
+  - 將路徑改到您的桌面
+  - 在指令列輸入：**psexec -i -d -s c:\windows\regedit.exe**這會導致 Windows 運行登錄編輯程式使用系統帳戶將有比帳戶管理員更強大的許可權。
+  - 尋找下列路徑HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - 在**UserData**資料匣上按右鍵，然後點選**Permissions...**
+  - 在Permissions對話框選擇**Advanced**
+  - 確認在這個資料匣”系統管理者身分(Administrators)“有”完全控制” 權限，並且設定使用者有可讀的權限。
+  - 選擇**Replace all child object permissions with inheritable permissions from this object**
+  - 點選兩次**OK**以套用新的權限設定。
+  - 再次安裝Rhino。
+
+
+{{tag>rhino5installationerror_zh-tw}}
