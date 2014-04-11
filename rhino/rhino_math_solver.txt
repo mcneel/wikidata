@@ -1,0 +1,44 @@
+====== Using Rhino To Solve Math Equations ======
+
+Although Rhino in a 3-D modeling application, you can also use it to solve mathematical equations. 
+But Rhino does not have commands like "solve equation" or "plot graph". 
+Therefore, you will need to use scripting.
+
+Rhino 5 contains two scripting languages:\\
+  * **Rhino.Python**
+  * **RhinoScript**
+Rhino 4 contains only **RhinoScript**. 
+
+//Because of this, we would recommend using RhinoScript.//
+
+
+For more information on **RhinoScript**, go [[http://wiki.mcneel.com/developer/rhinoscript|here.]]
+
+===== Examples =====
+To illustrate how you can use **RhinoScript** to solve mathematical problem, I have written two simple scripts that solve the first two questions of the math practice test.
+
+Note, both of these solutions can be copied and pasted into the RhinoScript editor (EditScript) for testing.
+
+==== 1. Graph the following equation: y = (x - 4)^2 = 2 ====
+' Define range of x values
+xrange = Array(-4, -2, 0, 2, 4, 6, 8, 10)
+' With each x value
+For Each x In xrange
+  ' Solve for y
+  y = (x-4)^2 + 2
+  ' Add a point at the x,y location
+  Rhino.AddPoint Array(x, y)
+Next
+
+===== 2. With the following equation: f(x) = x^2 - 5x - 14, find zeros of function using these values: 2, 7, -2, -7 =====
+' Define range of x values
+xrange = Array(2, 7, -2, -7)
+' With each x value
+For Each x In xrange
+  ' Solve for y, where y = f(x)
+  y = (x^2) - (5*x) - 14
+  ' If y is zero, print x
+  If y = 0 Then Rhino.Print x
+Next
+
+The great thing about scripting is that it can be adapted to solve nearly any problem and in any manner chosen by the script writer.
