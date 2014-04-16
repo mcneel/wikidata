@@ -1,14 +1,18 @@
-======Open TCP Port 80 in Windows 7 Firewall======
+======Open TCP Port 80 in Windows Firewall======
 > **Product:** //[[zoo:zoo5|Zoo 5]]//
-> **Summary:** //Demonstrates how to open TCP Port 80 in the Windows 7 firewall.//
+> **Summary:** //Demonstrates how to open TCP Port 80 in the Windows firewall.//
 
-Be advised, TCP Port 80 is required to be open for all communication in and out of the firewall. It is not adequate to simply open port 80 on the Zoo application. Rhino clients will not be able to communicate with the Zoo unless you do the following procedure on your Zoo server's firewall.
+===== Overview =====
+Zoo 5 communicates with Rhino 5 clients via TCP Port 80 (HTTP).
 
-===== IMPORTANT =====
-It is not acceptable to open the port's inbound and outbound traffic for just the //program// or the //service//.
-You must set the rules for just the //**port**// as directed below in Step 6, or it will //**not**// work. 
+After installing Zoo 5, you will need to ensure that TCP Port 80 is open, for //both incoming and outgoing// communications, in the firewall software running on the Zoo server system.
 
-==== Steps====
+Note, TCP Port 80 is open for outgoing communications, by default, in most firewall software. Thus, you should not have to open any ports in the firewall software running on Rhino workstations. 
+
+===== Steps=====
+The following instructions are for opening TCP Port 80 in the Window Firewall - the firewall software included with Windows. If you are using an alternate firewall, please consult their documentation.
+
+> Important: It is not adequate to open the port's inbound and outbound traffic for just the //program// or the //service//. You must set the rules for the //**Port**// as directed below in Step 6, or it will //**not**// work. 
 
 1. Open **Control Panel** from the Start menu.
 
