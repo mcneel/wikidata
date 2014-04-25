@@ -1,0 +1,33 @@
+====== Informazioni sui driver NVIDIA ======
+
+===== Test con i driver delle schede Quadro per Rhinoceros 5 =====
+**Se Rhino 5 vi va in crash a causa dei driver NVIDIA, provate il seguente driver con Rhino 5 e le schede Quadro.**
+
+  * Per Windows 7, l'ultimo driver stabile che raccomandiamo è [[http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]]
+  * Per Windows 8 e 8.1, **non possiamo raccomandare nessun driver stabile**
+  * Visto che i driver vengono rilasciati regolarmente, queste informazioni sono soggette a modifica senza preavviso.
+
+//9 aprile 2014//
+Alcuni utenti ci hanno indicato di recente che l'ultimo driver per le schede Quadro NVIDIA [[http://www.nvidia.com/download/driverResults.aspx/74061/en-us|332.76]] (3.14.14) funziona bene. Si veda la sezione **Supported Products** nel sito del fabbricante.
+Sappiateci dire se quest'opzione vi funziona. Mandate un'e-mail a [[mary@mcneel.com|Mary Fugier.]] 
+
+-->Dettagli#
+10 febbraio 2014
+\\
+{{:rhino:nvidia_error.png?400|}}
+\\
+Negli ultimi mesi abbiamo ricevuto varie segnalazioni di errori che hanno a che vedere con i driver video delle schede NVIDIA Quadro. Cercare di isolare il problema affinché gli sviluppatori di Rhino potessero giungere ad una soluzione si è rivelato molto difficile. 
+
+Il problema si verifica all'interno del driver video e, sebbene *possa* essere causato da qualche azione di Rhino, i driver non dovrebbero causare nessun arresto anomalo del sistema. Per questo motivo, la possibilità di risolvere questo problema in Rhino è estremamente difficile o quasi impossibile.
+
+Questa situazione ci preoccupa perché, in seguito alla chiusura forzata di Rhino, può andar perso del lavoro. Alcuni crash sembrano aver luogo senza eseguire Rhino… a volte, l'arresto del sistema era causato dall'uso di web browser e dalla visualizzazione di video. La combinazione "uso di Rhino-uso di web browser" sembrava comunque aumentare la frequenza con cui si verificavano i crash.
+
+Per ulteriori informazioni, leggete il rapporto completo qui: [[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|here.]]
+<--
+===== Arresti casuali con le schede NVIDIA - Impostazione di ottimizzazione di NVIDIA =====
+
+Molti utenti ci hanno segnalato degli arresti che avvengono in modo casuale con i driver aggiornati di NVIDIA.  Nel pannello di controllo di NVIDIA c'è un'opzione che sembra risolvere questi problemi.  
+
+<color coral>**Raccomandiamo di usare l'opzione "Workstation App - Dynamic Streaming"**</color>.\\
+
+{{:rhino:5:quadrowsadsoption.png?direct|}}
