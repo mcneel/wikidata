@@ -1,0 +1,33 @@
+====== Informations et problèmes de pilotes NVIDIA ======
+
+===== Test de pilote Quadro pour Rhinoceros 5 =====
+**Si Rhino 5 plante à cause du pilote NVIDIA, essayez d'utiliser le pilote suivant avec Rhino 5 et une carte Quadro.**
+
+  * Pour Windows 7, le dernier pilote stable que nous recommandons est celui-ci : [[http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]]
+  * Pour Windows 8 et 8.1, **il n'existe aucun pilote stable que nous pouvons recommander**
+  * Cette information peut changer à tout moment puisque de nouveaux pilotes sortent régulièrement.
+
+//9 avril 2014//
+D'après l'expérience de certains utilisateurs, il semblerait que le dernier pilote NVIDIA Quadro [[http://www.nvidia.fr/download/driverResults.aspx/74097/fr]] (3.14.14) donne de bons résultats. Consultez les **Produits supportés** sur leur page.
+Merci de nous dire si ce pilote fonctionne chez vous. Vous pouvez envoyer un message à [[mary@mcneel.com|Mary Fugier.]] 
+
+-->Infos#
+10 février 2014
+\\
+{{:rhino:nvidia_error.png?400|}}
+\\
+Depuis un an, nous avons reçu plusieurs rapports d'erreur sur des plantages au niveau des pilotes vidéo chez des utilisateurs possédant certaines cartes Quadro NVIDIA spécifiques. Nous avons essayé d'isoler le problème afin que les développeurs de Rhino puissent mettre en place une solution alternative ou corriger le problème mais sans succès. 
+
+Pour faire court, l'erreur se produit à l'intérieur du pilote vidéo et même s'il est possible que cette erreur soit due à une action de Rhino, les pilotes ne devraient quand même pas planter. Ainsi, la possibilité de corriger l'erreur dans Rhino est très difficile, voire impossible pour le moment. 
+
+Cette situation nous préoccupe car le plantage et la fermeture de Rhino peuvent entraîner une perte de travail. Certains plantages se produisent même sans que Rhino soit ouvert.... juste en utilisant un navigateur Internet et en regardant des vidéos. Mais la combinaison de Rhino et d'un ou plusieurs navigateurs semble accélérer la fréquence des plantages. 
+
+Pour encore plus d'informations, lisez le rapport complet (en anglais) [[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|ici.]]
+<--
+===== Plantages occasionnels avec les cartes Nvidia =====
+
+De nombreux utilisateurs ont indiqué des plantages occasionnels après une mise à jour des pilotes NVIDIA.  Un paramètre du panneau de contrôle NVIDIA semble pouvoir aider. 
+
+<color coral>**Nous vous conseillons d'utiliser le paramètre "Workstation App - Dynamic Streaming"**</color>.\\
+
+{{:rhino:5:quadrowsadsoption.png?direct|}}
