@@ -1,0 +1,49 @@
+======Aggiornamenti relativi alle gestione delle licenze con Rhino 5 SR6======
+> **Prodotto:** //[[zoo:zoo5|Zoo 5]]//
+> **Sommario:** //Esamina le modifiche relative a Rhino 5 ed allo Zoo 5 apportate dalla Service Release 6.//
+
+=====Informazioni generali=====
+Con il rilascio di Rhino 5, è stata rilasciata anche una nuova versione migliorata del gestore delle licenze di gruppo: lo [[http://wiki.mcneel.com/zoo/home|Zoo 5]].
+
+Bongo, Brazil, Flamingo e Penguin non supportano lo Zoo 5 prima della Service Release 6 (SR6).
+
+Con **Rhino 5 SR6** e lo **Zoo 5 SR6** installati, ora è possibile usare un unico server dello Zoo 5 per rendere libere le licenze dei seguenti prodotti:  
+
+  * Bongo 2.0
+  * Brazil 2.0
+  * Flamingo nXt
+  * Penguin 2.0
+  * Rhino 5
+
+I seguenti prodotti **NON** funzionano con lo Zoo 5 SR6:
+  * Bongo 1.0
+  * Flamingo 1.0
+  * Flamingo 1.1
+  * Flamingo 2.0
+  * Penguin 1.0
+  * Penguin 1.1
+  * Rhino 4.0
+
+=====Ulteriori informazioni=====
+Rhino 5 SR6 include un nuovo client per la gestione delle licenze (RhinoLM5). Esso sostituisce il precedente client (RhinoLM).
+
+Quando un plug-in McNeel supportato ha bisogno di una licenza da un server dello Zoo, RhinoLM5 verifica che il sistema sia configurato per [[http://wiki.mcneel.com/zoo/findzooserver|usare un server dello Zoo 5]]. Se configurato, RhinoLM5 cerca di ottenere una licenza dal server dello Zoo 5. Se non ottiene nessuna licenza dal server dello Zoo 5, o se non trova il server dello Zoo 5, RhinoLM5 cerca di ottenere una licenza dal server dello Zoo 4.0.
+
+=====Supporto tecnico=====
+Rhino ed i plug-in McNeel usano un client per comunicare con i server dello Zoo.
+
+Il file del client per la gestione delle licenze usato per accedere ai server dello Zoo 4.0 è denominato **RhinoLM.exe** e si installa nella seguente cartella:
+
+<code>
+%Programmi(x86)%\Common Files\McNeel Shared\License Manager
+</code>
+
+Il file del nuovo client per la gestione delle licenze, incluso in Rhino 5 SR6, si chiama **RhinoLM5.exe** ed è installato nella stessa cartella.
+
+Se si vuole ritornare al gestore delle licenze precedente, occorre eseguire **RegRhinoLM4.exe**, che si trova nella stessa cartella.
+
+Per registrare di nuovo il nuovo gestore delle licenze, occorre eseguire **RegRhinoLM5.exe**. Per esempio, se installate Rhino 5 SR5 e quindi installate Flamingo nXt, dovrete eseguire **RegRhinoLM5.exe** perché il programma di installazione di Flamingo nXt registrerà sempre il gestore delle licenze precedente.
+
+\\
+
+{{tag>Zoo5}}
