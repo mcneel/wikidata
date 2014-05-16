@@ -1,0 +1,51 @@
+====== Softimage-Dateiaustausch ======
+
+> **Hinweis:** //Diese Notizen sind schon etwas älter und stammen aus der Rhino-Hilfe. Die Informationen sollten aber eventuell überprüft und aktualisiert werden. ~mb//
+
+Es gibt drei Möglichkeiten, um [[rhino:nurbs|NURBS]]-Modelle von Rhino nach Softimage zu exportieren. Alle drei haben ihre eigenen Vor- und Nachteile.
+
+
+Softimage kann auch in Rhino erzeugte 3DS-, DXF- und OBJ--Dateiformate importieren.
+
+=====Verwendung der Datei-Utility von Softimage:=====
+  - Klicken Sie im Menü Datei auf //Auswahl exportieren// oder //Speichern unter//.
+  - Wählen Sie im Dialogfenster //Speichern unter...// die Option IGES.
+  - Geben Sie einen Dateinamen ein und klicken Sie auf //Speichern//.
+  - Wählen Sie im Dialogfenster //IGES-Export// als IGES-Typ die Option //Softimage// aus.
+  - Führen Sie iges2soft.exe mit den folgenden Befehlszeilenparametern aus:
+   iges2soft -f -L -S3 -s3 -T5 -t3 -v3 -R [RSRC_DIR] MeineIgesDatei.igs MeineDSCDatei.dsc
+   [RSRC_DIR] = Softimage Ressourcenverzeichnis (oft c\\ soft3d_3.7\\ 3d\\ bin\\ rsrc)
+iges2soft.txt enthält Informationen zu Befehlszeilenoptionen.
+
+=====Verwendung des Dateiaustausch-Tools von Polytrans:=====
+
+Polytrans von Okina kann IGES-Dateien lesen und Softimage-Dateien schreiben. Weitere Informationen finden Sie auf ihrer Website: www.okino.com.
+
+=====Verwendung des Plug-ins Phoenix Tools:=====
+
+Ratschläge eines Experten:
+
+Nutzen Sie das kostenlose IGES-Import-Plug-in Phoenix Tools für Softimage:
+
+Homepage: http://www.phoenixtools.com
+
+Download des Plug-ins: http://www.phoenixtools.com/products/GreenCD/freeplugs.html
+
+Download-Seite mit Plug-ins für Alpha, SGI und x86 (Intel), für SI-Versionen 3.7sp1 und 3.8: ftp:ftp.phoenixtools.com/pub/download/Free_Plug-ins/
+
+Die beste Art, um Objekte richtig getrimmt von Rhino nach Softimage zu exportieren:
+
+  - Exportieren Sie das Modell als Softimage-IGES.
+  - Klicken Sie im Menü //Datei// auf //Auswahl exportieren//.
+  - Wählen Sie im Dialogfenster //Speichern unter...// die Option //IGES//.
+  - Wählen Sie in den IGES-Exportoptionen //Softimage//.
+
+In einem sehr großen Modell sollten Sie ihre Objekte separat exportieren. Damit können Sie in der schematischen Ansicht alles besser aussortieren, wenn Sie die Elemente später wieder neu zusammensetzen. Indem Sie die Objekte separat exportieren wird auch der Konvertierungsprozess beim Import in Softimage weniger kompliziert, da die importierten Teile keine übergeordneten Objekte besitzen.
+
+===== Import in Softimage=====
+
+  - Importieren Sie die Datei: Tools > Import > Objects > PT_IgesImport.
+  - Wählen Sie die Datenbank, in der Sie die importierte IGES-Datei beim Umwandeln ins Softimage-Format speichern möchten. Es ist ratsam, ein eigenes Softimage-Verzeichnis speziell für den IGES-Import anzulegen.
+  - Akzeptieren Sie die Standardeinstellungen der Phoenix Tools für den IGES-Import. Das Modell wird übersetzt und erscheint dann in Softimage.
+  - Wählen Sie alle Modell aus [Leertaste+a] und drehen Sie -90 in der X-Achse: Model > Effect > Freeze > Rotation.
+  - Speichern Sie die Szene bzw. das Modell, die zum Vereinigen in die gewünschte Softimage-Szene bestimmt sind.
