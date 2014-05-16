@@ -1,0 +1,61 @@
+====== Was bedeutet NURBS? ======
+
+======Weitere Details======
+http://de.wikipedia.org/wiki/NURBS
+
+======Non-Uniform Rational B-Spline (NURBS)======
+Woher stammt das Wort "NURBS"?
+
+NURBS ist ein Akronym und steht für nicht-uniforme rationale B-Spline (non-uniform rational B-spline).  Nicht-uniforme rationale B-Splines können 3D-Geometrie darstellen.
+
+======Wieso NURBS verwenden, um 3D-Geometrie darzustellen?======
+NURBS-Geometrie verfügt über fünf wichtige Merkmale, die es zur idealen Lösung für die computergestützte Modellierung machen.
+
+  * Es gibt mehrere industrielle Standardwege, um NURBS-Geometrie auszutauschen.  Das bedeutet, dass Kunden ihre wertvolle Geometriemodelle zwischen verschiedenen Modellierungs-, Render-, Animations- und Analyseprogrammen verschieben können.  Sie können geometrische Informationen so speichern, dass sie sogar noch in 20 Jahren verwendet werden können.
+  * NURBS verfügen über eine genaue und bekannte Definition.  Die Mathematik und Computerwissenschaft der NURBS-Geometrie wird in den meisten großen Universitäten gelehrt.  Das bedeutet, dass Anbieter von Spezialsoftware, Ingenieurgruppen, Industriedesignfirmen und Animationshäuser, die benutzerdefinierte Software-Anwendungen erzeugen, geschulte Programmierer finden können, die sich in der NURBS-Geometrie auskennen.
+  * NURBS können sowohl geometrische Objekte wie Linien, Kreise, Ellipsen, Kugeln und Ringe wie auch Freiformgeometrien wie Autos und Menschenkörper genau darstellen.
+  * Die zur NURBS-Darstellung einer Geometrie nötige Information ist viel geringer als die Information, die für übliche facettierte Annäherungen benötigt wird.
+  * Die des weiteren besprochene NURBS-Bewertungsregel kann auf effektive und genaue Weise auf einem Computer durchgeführt werden.
+
+======Was ist NURBS-Geometrie?======
+Es gibt viele Antworten auf diese Frage.  Wenn Sie mathematische Formeln dazu interessieren, finden Sie sehr detaillierte Informationen im Abschnitt **Books and papers on NURBS** auf der **[[developer:opennurbs:home|opennurbs]]-Website**.
+
+Rhino verwendet NURBS zur Darstellung von Kurven und Flächen.  NURBS Kurven und Flächen verhalten sich in ähnlicher Weise und haben eine gemeinsame Terminologie.  Da Kurven am einfachsten zu beschreiben sind, behandeln wir sie im Detail.  Rhino besitzt Flächenwerkzeuge, die den unten erwähnten Kurvenwerkzeugen ähnlich sind.
+
+Eine NURBS-Kurve wird durch vier Eigenschaften definiert: !Grad, Kontrollpunkte, Knoten und Bewertungsregel!.
+
+Der **Grad** ist eine positive Ganzzahl.
+
+Diese Zahl ist normalerweise 1, 2, 3 oder 5.  In Rhino weisen Linien und Polylinien Grad 1, Kreise Grad 2 und die meisten Freiformkurven Grad 3 oder 5 auf.  In Rhino können Sie mit NURBS arbeiten, die 1 bis 32 Grad aufweisen.  Manchmal werden die Begriffe linear, quadratisch, kubisch und quintisch verwendet.  Linear bedeutet Grad 1, quadratisch Grad 2, kubisch Grad 3 und quintisch Grad 5.
+
+Sie sehen vielleicht Referenzen zur Ordnung einer NURBS-Kurve.  Die Ordnung einer NURBS-Kurve ist eine positive Ganzzahl gleich (Grad+1).  Demzufolge ist der Grad gleich der Ordnung-1.
+
+Es ist möglich, den Grad einer NURBS-Kurve zu erhöhen, aber nicht ihre Form zu verändern.  Es ist jedoch nicht möglich, den Grad einer NURBS-Kurve zu vermindern, ohne ihre Form zu ändern.  Rhino bietet ihnen Techniken, die es ihnen ermöglichen, den Grad in jeden Wert zwischen 1 und 32 zu verändern.
+
+**Kontrollpunkte** sind eine Liste von mindestens (Gradzahl+1) Punkten.
+
+Eine der einfachsten Methoden, die Geometrie einer NURBS-Kurve zu verändern, ist ihre Kontrollpunkte zu verschieben.  Mit Rhino können Sie Kontrollpunkte auf mehrere Arten verschieben.  Um große Freiformanpassungen vorzunehmen, verwenden Sie einfach die Maus, um Kontrollpunkte zu ziehen.  Rhino bietet auch andere Werkzeuge, die auf kleine und genaue Anpassungen zugeschnitten sind.
+
+Die Kontrollpunkte haben eine angegliederte Zahl, die **Wichtung** genannt wird  Bis auf ein paar Ausnahmen sind Wichtungen positive Zahlen.  Wenn die Kontrollpunkte einer Kurve alle dieselbe Wichtung (normalerweise 1) haben, wird die Kurve nicht-rational genannt, sonst wird sie rational genannt.  Das R in NURBS steht für rational und weist darauf hin, dass bei einer NURBS-Kurve die Möglichkeit besteht, rational zu sein.  In der Praxis sind die meisten NURBS-Kurven nicht-rational.  Manche NURBS-Kurven - Kreise und Ellipsen sind wichtige Beispiele dafür - sind immer rational. Rhino besitzt Werkzeuge, um die Kontrollpunktwichtung zu überprüfen und zu ändern.
+
+**Knoten** sind eine Liste von (Gradzahl+N-1) Zahlen, wobei N für die Anzahl der Kontrollpunkte steht.  Manchmal wird diese Zahlenliste auch Knotenvektor genannt.  In diesem Zusammenhang bedeutet das Wort Vektor nicht 3D-Richtung.
+
+Diese Liste von Knotenzahlen muss einige technische Bedingungen erfüllen.  Der Standardweg, um zu garantieren, dass die technischen Bedingungen erfüllt werden, ist zu erwarten, dass die Zahlen gleich bleiben oder größer werden, während Sie in der Liste abwärts gehen, und die Anzahl duplizierter Werte auf eine Zahl nicht größer als den Grad begrenzen.  Zum Beispiel eine Grad 3 Kurve mit 15 Kontrollpunkten, die Liste der Nummern 0,0,0,1,2,2,2,3,7,7,9,9,9 ist eine zufriedenstellend Liste für die Knoten. Die Liste 0,0,0,1,2,2,2,2,7,7,9,9,9 ist inakzeptabel, weil die Zwei viermal vorkommt und Vier größer als der Grad ist.
+
+Die Anzahl Male, die ein Knotenwert dupliziert wird, wird **Vielfalt des Knotens** genannt.  Im vorherigen Beispiel einer zufriedenstellenden Knotenliste verfügt der Knotenwert 0 über eine Vielfalt von drei, der Knotenwert 1 über eine Vielfalt von eins, der Knotenwert 2 eine Vielfalt von drei, der Knotenwert 7 eine Vielfalt von zwei und der Knotenwert 9 eine Vielfalt von drei.  Ein Knotenwert ist ein voller Vielfaltsknoten, wenn er so oft dupliziert wurde, wie seine Gradzahl angibt. Im Beispiel haben die Knotenwerte 0, 2 und 9 volle Vielfalt.  Ein Knotenwert, der nur einmal vorkommt, wird einfacher Knoten genannt.  In diesem Beispiel sind 1 und 3 die einfachen Knoten.
+
+Wenn eine Knotenliste mit einem vollen Vielfaltsknoten beginnt, von einfachen Knoten gefolgt wird, mit einem vollen Vielfaltsknoten endet und die Werte einen gleichmäßigen Abstand aufweisen, werden die Knoten uniform (einheitlich) genannt.  Wenn z. B. eine NURBS-Kurve vom Grad 3 mit 7 Kontrollpunkten die Knoten 0,0,0,1,2,3,4,4,4 besitzt, dann hat die Kurve uniforme Knoten.  Die Knoten 0,0,0,1,2,5,6,6,6 sind nicht uniform.  Nicht-uniforme (nicht einheitliche) Knoten heißen nicht-uniform.  Die Buchstaben NU in NURBS stehen für non-uniform (nicht-uniform) und weisen darauf hin, dass die Knoten in einer NURBS-Kurve nicht-uniform sein dürfen.
+
+Duplizierte Knotenwerte in der Mitte der Knotenliste machen eine NURBS-Kurve weniger glatt.  Im Extremfall bedeutet ein voller Vielfaltsknoten mitten in der Knotenliste, dass die NURBS-Kurve an einer Stelle in einen scharfen Knick verbogen werden kann.  Aus diesem Grund mögen manche Designer Knoten hinzuzufügen und zu entfernen und danach Kontrollpunkte anzupassen, damit die Kurven glatter oder mit mehr Knicken erscheinen.  Rhino verfügt über Werkzeuge, um Knoten zu entfernen oder hinzuzufügen.  Da die Anzahl Knoten gleich ist wie (N+Grad-1), wobei N die Anzahl Kontrollpunkte ist, werden beim Hinzufügen von Knoten auch Kontrollpunkte hinzugefügt und beim Entfernen von Knoten auch Kontrollpunkte entfernt.  Knoten können hinzugefügt werden, ohne dass die Form einer NURBS-Kurve verändert wird.  Im Allgemeinen wird beim Entfernen von Knoten die Kurvenform verändert.  Rhino bietet ein modernes Interface zur Knotenentfernung an, das den entsprechenden Knoten automatisch entfernt, wenn der Benutzer einen Kontrollpunkt löscht.
+
+Es besteht die falsche Vorstellung, dass jeder Knoten mit einem Kontrollpunkt gepaart ist.  Das gilt nur für NURBS (Polylinien) vom Grad 1.  Für NURBS mit einen höheren Grad gibt es Knotengruppen vom Grad 2 x, die Kontrollpunktgruppen vom Grad+1 entsprechen.  Nehmen Sie z. B. an, dass Sie eine NURBS vom Grad 3 mit 7 Kontrollpunkten und Knoten 0,0,0,1,2,5,8,8,8 haben.  Die ersten vier Kontrollpunkte werden mit den ersten sechs Knoten gruppiert.  Die zweiten bis fünften Kontrollpunkte werden mit den Knoten 0,0,1,2,5,8 gruppiert.  Die dritten bis sechsten Kontrollpunkte werden mit den Knoten 0,1,2,5,8,8 gruppiert. Die letzten vier Kontrollpunkte werden mit den letzten sechs Knoten gruppiert.
+
+Manche Modellierer, die ältere Algorithmen für die NURBS-Berechnung verwenden, benötigen zwei zusätzliche Knotenwerte für das Total von Knoten vom Grad+N+1.  Beim Export und Import von NURBS-Geometrie werden diese zwei überflüssigen Knoten je nach Bedarf automatisch hinzugefügt und entfernt.
+
+Die **Bewertungsregel** verwendet eine mathematische Formel, die eine Zahl nimmt und einen Punkt zuordnet.
+
+Die Formel schließt den Grad, Kontrollpunkte und Knoten ein.  Die Formel enthält B-Spline-Basisfunktionen.  Die Buchstaben BS in NURBS stehen für B-Spline. Die Zahl, mit der die Bewertungsregel beginnt, heißt Parameter.  Sie können sich die Berechnungsregel als eine schwarze Box vorstellen, die ein Parameter ist und einen schwarzen Punkt produziert.  Grad, Knoten und Kontrollpunkte bestimmen, wie das schwarze Kästchen funktioniert.
+
+Rhino besitzt Bewertungswerkzeuge.  Sie können eine NURBS-Kurve auswählen, den Parameterwert eingeben und den entsprechenden Punkt erzeugen.
+
+Die Knoten bestimmen die B-Spline-Basisfunktionen.  Die B-Spline-Basisfunktionen am Parameter bestimmen, wie der Durchschnitt der Kontrollpunkte und Wichtungen ermittelt wird, um einen Punkt zu erzeugen. Genauere Informationen der Bewertungsregel und B-Spline-Basisfunktionen sind in vielen Textbüchern und auf Webseiten erhältlich.
