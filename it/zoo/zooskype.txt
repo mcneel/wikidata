@@ -1,0 +1,33 @@
+====== Skype in conflitto con il servizio Zoo ======
+> **Prodotto:** //[[zoo:zoo5|Zoo 5]]//
+> **Sommario:** //Esamina un conflitto di porta con Skype e lo Zoo 5.//
+
+===== Problema =====
+Quando riavvio il server, il servizio dello Zoo 5 non si avvia. Se verifico il registro eventi di Windows (Pannello di controllo -> Strumenti di amministrazione -> Registro eventi), vedo che il servizio dello Zoo 5 ha registrato un errore:
+
+<code>
+The Zoo 5.0 service on the Local Computer started and then stopped.
+Some services stop automatically if they are not in use by another
+service or program.
+</code>
+
+Esaminando i dettagli di questo errore, sempre nel registro eventi di Windows, appare il seguente messaggio:
+
+<code>
+Address already in use by another process.
+Run 'netstat -o -n -a' from a command line to find the conflicting
+process ID, then look in Task Manager to find the name of that process.
+</code>
+
+Seguendo le instruzioni qui sopra, ho scoperto che il processo che causava il conflitto era Skype.
+
+===== Soluzione=====
+Avviare l'interfaccia utente di Skype e quindi selezionare **Tools -> Options** (Strumenti > Opzioni). 
+
+{{:zoo:zooskype.jpg}}
+
+Nella finestra di dialogo delle opzioni di Skype, selezionare la scheda **Connessione**. In questa scheda, deselezionare l'opzione **Usa le porte 80 e 443 come alternative per le connessioni in ingresso**.
+
+\\
+
+{{tag>Zoo5}}
