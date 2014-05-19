@@ -1,0 +1,34 @@
+======Su una licenza estratta, Rhino 5 non si avvia più======
+> **Prodotto:** //[[zoo:zoo5|Zoo 5]]//
+> **Sommario:** //Perché Rhino 5 SR0 non si avvia su una licenza estratta.//
+
+=====Sintomo=====
+Dopo aver estratto una licenza da un server dello Zoo 5, Rhino 5 non si avvia più.
+
+=====Problema=====
+Se avete estratto una licenza con l'opzione **Enable limited license check out** (estrazione licenze limitata) attivata nello Zoo, a sette giorni dalla scadenza dell'estrazione, Rhino 5 non si avvia più.
+
+=====Soluzione=====
+Questo problema è stato risolto nella Service Release 1 di Rhino 5.
+
+Per risolverlo manualmente:
+ 
+1. Eliminare il file .CHK da questa cartella:
+
+**Windows 7 o 8**
+<code>
+C:\Utenti\<nome_utente>\AppData\Roaming\McNeel\Rhinoceros\5.0\License Manager\Licenses
+</code>
+
+**Windows XP**
+<code>
+C:\Documents and Settings\<nome_utente>\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
+</code>
+ 
+2. Dall'amministratore dello Zoo, fare clic sulla licenza estratta e selezionare **Edit > Recover** (Modifica > Ricupera).
+ 
+3. Sempre dall'amministratore dello Zoo, fare clic su **Tools > Options** (Strumenti > Opzioni) e deselezionare  "Enable limited license check out" fino a quando tutti non abbiano aggiornato a  Rhino 5 SR1.
+
+\\
+
+{{tag>Zoo5}}
