@@ -1,0 +1,34 @@
+======Rhino 5 mit abgemeldeter Lizenz läuft nicht======
+> **Produkt:** //[[de:zoo:zoo5|Zoo 5]]//
+> **Zusammenfassung:** //Erklärung, warum Rhino 5 SR0 mit einer abgemeldeten Lizenz nicht startet.//
+
+=====Symptom=====
+Nach dem Abmelden einer Lizenz vom Zoo-5-Server wird Rhino 5 nicht mehr ausgeführt.
+
+=====Problem=====
+Wenn Sie eine Lizenz abmelden und die Option **Enable limited license check out** aktiviert haben, wird Rhino nicht ausgeführt, wenn die Abmeldung in weniger als 7 Tagen abläuft.
+
+=====Lösung =====
+Dieses Problem wurde im Rhino 5 Service Release 1 behoben.
+
+So können Sie den Fehler schnell beseitigen:
+ 
+1. Löschen Sied die CHK-Datei in folgendem Ordner:
+
+**Windows 7 oder 8**
+<code>
+C:\Benutzer\[BENUTZERNAME]\AppData\Roaming\McNeel\Rhinoceros\5.0\License Manager\Licenses
+</code>
+
+**Windows XP**
+<code>
+C:\Dokumente und Einstellungen\[BENUTZERNAME]\Anwendungsdaten\McNeel\Rhinoceros\5.0\License Manager\Licenses
+</code>
+ 
+2. Wählen Sie im Zoo die abgemeldete Lizenz und gehen Sie auf **Edit -> Recover**.
+ 
+3. Gehen Sie im Zoo auf **Tools -> Options** und deaktivieren Sie die Option **Enable limited license check out** solange, bis alle Lizenzen ein Update auf mindestens Service Release 1 durchgeführt haben.
+
+\\
+
+{{tag>Zoo5}}
