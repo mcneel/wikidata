@@ -1,0 +1,33 @@
+====== NVIDIA 디스플레이 드라이버 문제와 정보 ====== 
+
+===== Rhinoceros 5 에서 Quadro 드라이버 테스트 =====
+**NVIDIA 드라이버와 관련하여 Rhino 5 에서 크래시 문제가 있으시다면, Rhino 5와 콰드로 카드에서 다음 드라이버를 사용해 보시기 바랍니다.**
+
+  * Windows 7의 경우, 저희가 권장하는 안정적인 최신 드라이버는 [http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]] 입니다. 
+  * Windows 8 과 8.1은 **현재 권장할만한 안정적인 드라이버가 없습니다**
+  * 새 드라이버가 정기적으로 릴리스됨에 따라, 이 정보는 사전 공지 없이 변경될 수 있습니다.
+
+//2014년 4월 9일//
+최근 사용자 여러분께서 보내주신 의견에 따르면 최신 NVIDIA Quadro 드라이버[[http://www.nvidia.com/download/driverResults.aspx/74061/en-us|332.76]] (3.14.14) 는 일부 경우 성공적이라고 합니다. NVIDIA 홈페이지에서 **지원되는 제품** 목록을 참조하세요.
+이 드라이버가 잘 실행된다면 저희에게 알려 주시기 바랍니다. [[mary@mcneel.com|Mary Fugier에게 이메일을 보내 주세요.]] 
+
+-->자세히#
+2014년 2월 10일
+\\
+{{:rhino:nvidia_error.png?400|}}
+\\
+지난 한 해 동안 특정한 NVIDIA Quadro 비디오 카드의 비디오 드라이버에 크래시가 발생한다고 보고해주신 사용자가 여러 명 있었습니다. 문제를 파악하고 Rhino 개발자들이 해결책을 찾는 것은 매우 어렵니다. 
+
+기본적으로 이 문제는 비디오 드라이버에서 발생하는 것으로, Rhino에서의 어떤 작업이 문제를 *일으키는 것일 수도 있으나.* 드라이버에서는 크래시가 발생하면 안 됩니다. 따라서 Rhino 자체적으로 문제를 해결할 수 있는 가능성은 지극히 낮으며, 아마도 불가능할 수도 있습니다.
+
+크래시 발생으로 인해 작업 결과가 사라지거나 Rhino를 강제로 종료해야 하는 것이 저희가 걱정하는 부분입니다. 일부 크래시는 Rhino가 실행되지 않은 상태에서 발생하는 것 같습니다 ¡¦ 웹 브라우저를 실행하고 동영상을 볼 때 시스템 크래시가 발생하기도 합니다. Rhino와 웹 브라우저를 함께 사용하면 크래시가 더욱 빈번하게 발생하게 됩니다.
+
+자세한 정보는 보고서 전체 내용을  [[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|참조하시기 바랍니다.]]
+<--
+===== NVIDIA 카드에서의 불특정한 크래시 발생 - NVIDIA 스레드 최적화 설정 =====
+
+업데이트된 NVIDIA 드라이버를 사용하고 계신 많은 사용자들이 불특정한 크래시가 발생한다고 알려 주셨습니다.  NVIDIA 제어판에는 이 문제 해결에 도움이 되는 설정이 있습니다. 
+
+<color coral>**"Workstation App - Dynamic Streaming" 설정을 사용하실 것을 권장합니다**</color>.\\
+
+{{:rhino:5:quadrowsadsoption.png?direct|}}
