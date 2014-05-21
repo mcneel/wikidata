@@ -1,11 +1,15 @@
-====== Nvidiaディスプレイドライバの問題と情報 ======
+====== NVIDIAディスプレイドライバの問題と情報 ======
 
 ===== Rhinoceros 5のQuadroドライバのテスト =====
-**下のドライバがRhinoとQuadroカードに「最適」のドライバとして推奨されます。**
+**NVIDIAドライバとの関連でRhino 5がクラッシュする場合、Rhino 5とQuadroカードには以下のドライバを試すと良いでしょう。**
 
   * Windows 7で最も新しく安定しているドライバとして推奨するのは、[[http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]]です。
-  * Windows 8と8.1には、推奨できる安定したドライバはありません。
+  * Windows 8と8.1には、**推奨できる安定したドライバはありません**。
   * 新しいドライバが次々とリリースされているため、この情報は予告なしに変更されることがあります。
+
+//2014年4月9日//
+ユーザーの方から最近いただいたフィードバックから、最新のNVIDIA Quadroドライバ [[http://www.nvidia.com/download/driverResults.aspx/74061/en-us|332.76]]（3.14.14）がうまくいくこともあるようです。サポートされる製品については**[[http://www.nvidia.com/download/driverResults.aspx/74061/en-us|Supported Products]] **をご覧ください。
+それでもうまくいかない場合はどうぞお知らせください。メール [[mary@mcneel.com|Mary Fugier.]] 
 
 -->詳細#
 2014年2月10日
@@ -20,16 +24,10 @@
 
 より詳しい詳細については、[[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|こちら]]（英語）をご覧ください。
 <--
-===== Nvidiaカードを使っている場合のランダムなクラッシュ - Nvidia Threaded Optimization設定 =====
+===== NVIDIAカードを使っている場合のランダムなクラッシュ - NVIDIAスレッドした最適化の設定 =====
 
-何人かのユーザーの方から更新したNvidiaのドライバでランダムなクラッシュが起きているとのご報告がありました。弊社のJeffがこの問題を引き起こしていると考えられるNvidiaのコントロールパネルのある設定を発見しました。Nvidiaは、その設定は通常オフになっていると言いますが、それが正しいとは限りません。
+多くのユーザーの方から更新したNVIDIAのドライバでランダムなクラッシュが起きているとのご報告がありました。NVIDIAコントロールパネルにある設定の1つが問題の解決に役立つかもしれません。
 
-<color coral>**このスレッドした最適化コントロールをオフにすることを推奨します。**</color>\\
-
-> <color slategray>**更新情報:** //2008年の11月8日にJohn様（jrharvey5923@gmail.com）が、最新のドライバ（バージョン180.42）のThreaded Optimizationでは問題が起きなくなったとRhinoのニュースグループに報告されました。また、これらのドライバは伝えられるところによればSLIコンピュータでマルチモニターの使用ができます。//</color>
-
-> <color slategray>**更新情報:** //2008年11月18日に弊社のJohn Brock（jb@mcneel.com）が[[rhino:geforce|GeForce]] 9800 GTXをドライバのバージョン7.15.11.7813（2008年9月17日）で動かしていたところ、Threaded OptimazationがAutoのされている場合、ランダムなクラッシュの問題が起きることに気づきました。この設定をオフにすると、問題が解決します。//</color>
-
-> <color slategray>**更新情報:** //2013年7月17日に何人かのユーザーの方達がnVidiaのコントロールパネル > Global settingページがWorkstation App- Dynamic Streamingを使用するように設定されているとQuadrosをRhinoで使用する際の動作が向上することを発見しました。//</color>
+<color coral>**このコントロールをオフにすることを推奨します。**</color>\\
 
 {{:ja:rhino:nvidia.jpg|}}
