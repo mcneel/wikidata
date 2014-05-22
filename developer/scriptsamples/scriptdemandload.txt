@@ -50,7 +50,7 @@ Option Explicit
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Sub DemandRun(ByVal subroutine, ByVal filename)
   Dim macro
-  macro = "_-LoadScript " & filename
+  macro = "_-LoadScript " & QuoteString(filename)
   If Not Rhino.IsProcedure(subroutine) Then
     Call Rhino.Command(macro, 0)
   End If
