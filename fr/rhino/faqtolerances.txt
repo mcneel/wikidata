@@ -47,24 +47,30 @@ D'autres commandes peuvent vous permettre de définir une tolérance spécifique
 
 =====3: Tolérances angulaires et relatives dans Rhino=====
 
-Il existe deux autres paramètres de tolérance dans Rhino : angulaire et relative. La tolérance relative est utilisée pour très peu de commandes et peut généralement être oubliée //<color blue>Marc dit : Ce serait intéressant ici aussi de connaître les commandes concernées//</color><color black>. La tolérance angulaire est importante dans le sens où elle indique à Rhino à quel moment vous voulez que deux courbes ou deux surfaces soient considérées "Tangentes". La valeur par défaut, 3 degrés, est assez élevée. Les surfaces qui sont 3 degrés en dehors de la tangence présentent un pli ou une ligne visible. Je trouve que 0.1 degré (voir même plus petit) fonctionne mieux.</color>
+Il existe deux autres paramètres de tolérance dans Rhino : angulaire et relative. La tolérance relative est utilisée pour très peu de commandes et peut généralement être oubliée.
 
-////<color red>JB dit : Dans la pratique, je trouve que j'ai moins de problèmes lorsque j'envoie des modèles vers d'autres applications de modélisation telles que Unigraphics, ProEngineer, SDRC Ideas, SolidWorks, Solid Edge, Inventor, etc. si j'utilise une tolérance angulaire de 0.5 - 1º. Je n'ai pas encore trouvé de cas particulier où la modification de la tolérance absolue a fait une différence.</color>//
+ <color blue>//Marc dit : Ce serait intéressant ici aussi de connaître les commandes concernées//</color>
+
+La tolérance angulaire est importante dans le sens où elle indique à Rhino à quel moment vous voulez que deux courbes ou deux surfaces soient considérées "Tangentes". La valeur par défaut, 3 degrés, est assez élevée. Les surfaces qui sont 3 degrés en dehors de la tangence présentent un pli ou une ligne visible. Je trouve que 0.1 degré (voir même plus petit) fonctionne mieux.
+
+<color red>//JB dit : Dans la pratique, je trouve que j'ai moins de problèmes lorsque j'envoie des modèles vers d'autres applications de modélisation telles que Unigraphics, ProEngineer, SDRC Ideas, SolidWorks, Solid Edge, Inventor, etc. si j'utilise une tolérance angulaire de 0.5 - 1º. Je n'ai pas encore trouvé de cas particulier où la modification de la tolérance absolue a fait une différence.//</color>
 
 =====4: Comment les tolérances affectent votre projet et votre travail=====
 
 Il est important de noter ici que que les tolérances doivent être définies au début du processus de modélisation. Même si vous pouvez changer les tolérances pendant que vous travaillez, les objets que vous avez modélisés avant ne seront pas modifiés. Vous devriez vérifier souvent votre travail en joignant les éléments au fur et à mesure de leur création. S'ils se joignent correctement, vous êtes dans les limites de la tolérances, sinon vous devez revenir en arrière et trouver le problème afin de le corriger. Cette technique permet d'éviter d'avoir un modèle terminé avec des problèmes ou des imprécisions très difficiles à corriger à ce niveau sans tout reconstruire certaines parties, ce qui signifie une grande perte de temps.
 
-Les opérations qui impliquent la fonction d'intersection telles que les commandes Intersection, Diviser ou les opérations booléennes peuvent aussi être assez sensibles aux paramètres de tolérance. Souvent, si la tolérance absolue est trop petite, des intersections entières ne peuvent pas être trouvées, les divisions et les opérations booléennes ne fonctionnent alors pas correctement. Ce problème arrive souvent. (attention, les tolérances ne sont pas la seule raison pour laquelle ces opérations échouent, cependant) <color red>Mikko dit : La bêta de Rhino 4 plante lorsque l'on crée des congés sur un solide alors que la tolérance absolue est très petite. En général, je laisse la tolérance absolue sur 0.01 ou 0.001 et je ne la définie jamais à moins de 1.0e-5. Si vous avez besoin de tolérances plus petites, utilisez des unités plus petites. [2005-11-28]</color> D'autre part, des tolérances bien trop élevées (très petites valeurs) peuvent donner des temps de calculs trop longs.
+Les opérations qui impliquent la fonction d'intersection telles que les commandes Intersection, Diviser ou les opérations booléennes peuvent aussi être assez sensibles aux paramètres de tolérance. Souvent, si la tolérance absolue est trop petite, des intersections entières ne peuvent pas être trouvées, les divisions et les opérations booléennes ne fonctionnent alors pas correctement. Ce problème arrive souvent. (attention, les tolérances ne sont pas la seule raison pour laquelle ces opérations échouent, cependant).
+
+D'autre part, des tolérances bien trop élevées (très petites valeurs) peuvent donner des temps de calculs trop longs.
 
 =====5: Exporter vers d'autres programmes (“en aval”) :=====
 
 Si les objets doivent être exportés dans une autre application en aval (logiciel de FAO ou modeleur de solides), il est très important de prendre en compte la précision dont ont besoin ces programmes pour que les importations fonctionnent correctement. L'expérience est le seul guide ici. En cas de doute, demandez sur le forum de Rhino, vous trouverez sûrement quelqu'un qui a de l'expérience dans ce domaine et qui peut vous aider. En général, les applications de FAO semblent apprécier les objets de haute précision, si c'est donc là votre but, pêchez du côté de la précision si possible ! Tout votre processus de modélisation, du début à la fin doit être fait à ce niveau de précision si vous voulez que l'exportation se fasse correctement.
 
-//<color blue>Marc dit : Dans les programmes de FAO que j'ai regardés, le paramètre de tolérance ne peut pas être modifié par l'utilisateur. Tout doit se trouver dans leur espace de modélisation, parfois une sphère d'un kilomètre, la tolérance est dont très élevée. // //</color><color red>Si vous voulez vous amuser, modélisez quelques trucs dans un modeleur mécanique. Transférez le fichier sous le format STEP dans Rhino et utilisez la fonction d'écart de courbe (commande **ÉcartCourbe**) pour vérifier les bords. Vous serez probablement surpris par la tolérance réelle.</color>//
+<color blue>//Marc dit : Dans les programmes de FAO que j'ai regardés, le paramètre de tolérance ne peut pas être modifié par l'utilisateur. Tout doit se trouver dans leur espace de modélisation, parfois une sphère d'un kilomètre, la tolérance est dont très élevée. Si vous voulez vous amuser, modélisez quelques trucs dans un modeleur mécanique. Transférez le fichier sous le format STEP dans Rhino et utilisez la fonction d'écart de courbe (commande **ÉcartCourbe**) pour vérifier les bords. Vous serez probablement surpris par la tolérance réelle.//</color>
 
 
 
 
--- [[rhino@millwork.ch|Mitch Heynick (e-mail Mitch Heynick)]] 27.05.05
+-- [[info@swissrhino.com|Mitch Heynick (e-mail Mitch Heynick)]] 27.05.05
 
