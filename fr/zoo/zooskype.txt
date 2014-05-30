@@ -1,0 +1,33 @@
+====== Conflits entre Skype et le service Zoo ======
+> **Produit:** //[[zoo:zoo5|Zoo 5]]//
+> **Résumé:** //Explique le conflit entre Skype et Zoo 5 au niveau du port.//
+
+===== Problème =====
+Lorsque je redémarre mon serveur, le service Zoo 5 ne démarre pas. Si je consulte le Journal des événements de (Panneau de configuration -> Outils d'administration -> Journal des événements), je peux voir que le service Zoo 5 a enregistré une erreur :
+
+<code>
+Le service Zoo 5 sur l'ordinateur local a démarré puis s'est arrêté.
+Certaines services s'arrêtent automatiquement s'ils ne sont pas utilisés par un autre
+service ou programme.
+</code>
+
+En regardant les détails de l'erreur, toujours dans le journal des événements, on trouve :
+
+<code>
+Adresse en cours d'utilisation par un autre processus.
+Lancer 'netstat -o -n -a' dans une invite de commande pour déterminer
+l'ID du processus conflictuel, puis regarder dans le Gestionnaire des tâches afin de trouver le nom de ce processus.
+</code>
+
+En suivant les indications précédentes, j'ai pu déterminer que le processus conflictuel était Skype. 
+
+===== Résolution=====
+Lancez Skype puis sélectionnez **Outils > Options**. 
+
+{{:fr:zoo:skype_port.jpg}}
+
+Dans la boîte de dialogue Skype - Options, sélectionnez Avancées puis **Connexion**. Désactivez la case **Utiliser les ports 80 et 443 comme alternative pour les connexions entrantes**. 
+
+\\
+
+{{tag>Zoo5}}
