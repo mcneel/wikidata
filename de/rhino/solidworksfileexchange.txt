@@ -1,0 +1,19 @@
+** [[rhino:solidworks|SolidWorks]]-Dateiaustausch**
+
+> **Hinweis:** //Diese Notizen sind schon etwas älter und stammen aus der Rhino-Hilfe. Die Informationen sollten aber eventuell überprüft und aktualisiert werden. ~mb//
+
+=====Ratschläge eines Benutzers:=====
+
+Verwenden Sie eine absolute Toleranz von 0.0001.
+
+Modellieren Sie in Rhino nur die organischen Teile des Modells und überlassen Sie [[rhino:solidworks|SolidWorks]] Eigenschaften wie Verrundungen, Verschalung, Keile, etc. 
+
+[[rhino:solidworks|SolidWorks]] betrachtet Rhino-Tangentialitäten nicht als tangential. Glücklicherweise liefert [[rhino:solidworks|SolidWorks]] einige Hilfslösungen für Flächenverrundungen.
+
+So können Sie in [[rhino:solidworks|SolidWorks]] die ganze Kette "naher Tangentenkanten" auswählen. Daraufhin werden Stück-für-Stück-Verrundungen mit "beinahe tangentialen" Segmenten erstellt, die für menschliche Maßstäbe tangential sind. Sie können dazu in [[rhino:solidworks|SolidWorks]] mit der rechten Maustaste die Tangenten auswählen (funktioniert bei Kanten und Flächen). Das ist für die Verrundung von importierten Modellen eine große Hilfe.
+
+Von Natur aus erfordert die Verschalung manchmal, dass einige Flächen verlängert werden. Wenn Ihr Rhino-Modell aber eine Singularität oder andere Eigenheit an der Stelle aufweist, an der die Verlängerung angebracht werden soll, wird wahrscheinlich die Verschalung fehlschlagen.
+
+Kleine Falten halten den Verschaler an, wenn die Krümmung der Falte kleiner als die erforderliche Wanddicke ist.
+
+Versuchen Sie im Allgemeinen, nach Möglichkeit mit glatten, übergroßen Flächen zu modellieren. Importieren Sie während der Modellierung eine Reihe von "Mini-Modellen", um die Durchführbarkeit zu testen.
