@@ -1,0 +1,37 @@
+====== Zoo 5 ne démarre pas sur les serveurs Web ======
+> **Produit:** //[[fr:zoo:zoo5|Zoo 5]]//
+> **Résumé:** //Zoo 5 doit accéder au port TCP 80. Ceci n'est pas possible sur les systèmes exécutant des services Web.// 
+
+===== Problème =====
+Lorsque je redémarre mon serveur, le service Zoo 5 ne démarre pas. Si je consulte le Journal des événements de (Panneau de configuration -> Outils d'administration -> Journal des événements), je peux voir que le service Zoo 5 a enregistré une erreur :
+
+<code>
+Le service Zoo 5 sur l'ordinateur local a démarré puis s'est arrêté. 
+Certaines services s'arrêtent automatiquement s'ils ne sont pas utilisés par un autre
+service ou programme. 
+</code>
+
+En regardant les détails de l'erreur, toujours dans le journal des événements, on trouve :
+
+<code>
+Adresse en cours d'utilisation par un autre processus.
+Lancer 'netstat -o -n -a' dans une invite de commande pour déterminer
+l'ID du processus conflictuel, puis regarder dans le Gestionnaire des tâches afin de trouver le nom de ce processus. 
+</code>
+
+  - Lancez **NETSTAT -ano** dans l'invite de commande et notez le numéro PID du port ouvert que vous voulez libérer.
+  - Dans le Gestionnaire des tâches vous pouvez voir à quel processus correspond le PID et vous pouvez déterminer quel programme utilise ce port.
+
+Cette erreur est due à l'utilisation du port 80 par une autre application. Une seule application ne peut écouter un port à un moment donné et le Zoo ne peut donc pas se connecter au port 80. Applications les plus communes causant cette erreur :
+
+  * [[http://www.iis.net/|Internet Information Services (IIS) for Windows® Services]]
+  * [[http://httpd.apache.org/|Apache HTTP Server]]
+  * [[http://www.java.com|Java]]
+  * [[fr:zoo:zooskype|Skype]]
+===== Résolution=====
+  - Déplacez le Zoo sur un ordinateur n'exécutant pas de services Web.  Ce peut être un serveur d'impression, un autre ordinateur qui reste toujours allumé ou un serveur virtuel supplémentaire. 
+  - Configurez les services web afin qu'ils utilisent un autre port. Apache et IIS peuvent tout deux être configurés pour s'exécuter sur une autre port.
+
+\\
+
+{{tag>Zoo5}}
