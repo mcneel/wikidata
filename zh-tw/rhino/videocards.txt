@@ -1,0 +1,284 @@
+======顯示卡以及它們在Rhino下的表現的性能======
+
+=====您推薦Rhino使用那種顯示卡？=====
+
+**//我們並不做任何特定硬體的比較或推薦。//**
+
+可參考以下幾篇：
+  * [[http://wiki.mcneel.com/zh-tw/rhino/rhino5videocards|顯示卡推薦以及一般要求]]
+  * [[http://wiki.mcneel.com/zh-tw/rhino/hardwarebaseline|Rhinoceros 5的硬體規定]]
+
+**以下為顯示卡列表以及它們在Rhino環境下的效能**
+----
+當您添加清單內容，請使用所有的表項並且盡可能加入細節。這裡有一個Rhino程式碼，您可以從中得知更多關於您的視訊系統的資訊。 http://en.wiki.mcneel.com/content/upload/files/video.zip
+謝謝 -     John Brock
+
+---- (新增於 2013/3/14)
+| 品牌  | Intel |
+| 型號| Intel HD Graphics 4000 |
+| <color red>不推薦</color> by: | John Brock|
+| 註: |包括13吋 Apple MacBook、 13吋 MacBook Pro及13吋 Retina, 或任何只有Intel顯示卡 的筆記型電腦，都不適用於Windows的Rhino。這種晶片並不充分支援Windows OpenGL  你將會有很多我們沒有辦法解決的問題。很多混和電腦 (Hybird)使用針對圖形應用程式的二級高性能顯卡 (AMD或Nvidia)，也運作得很不錯。**所以也很推薦這些Hybrid型電腦。**|
+
+---- ( 1/3/2013新增 -  7/24/2013更新)
+| 品牌 | Nvidia|
+| 型號 | Quadro 600 |
+| 評論: | John Brock |
+| 註: |**請參照以下2013年7月更新:** 目前為止我對於Quadro 600的使用經驗不太好。使用他們的310.90版驅動程式常常當機。Nvidia技術支援建議安裝311.35 (目前的驅動程式)，以自訂選項並選擇全新安裝(clean install)。新的驅動程式也沒有比較好。每隔幾分鐘已經開啟的Rhino跟Chrome視窗就會變成黑幕，然後會有一個訊息跳出來說Nvidia驅動程式沒有回應但已恢復。這個驅動程式會將Rhino與Chrome鎖死。甚至Rhino不是在運作的狀態下，Chrome就會鎖死。我目前無法推薦這樣的顯示卡，而且已經把它們從系統中刪除。|
+| 更新: |最近有些用戶反映目前的Quadro驅動程式有些性能與顯示的問題。似乎是因為OpenGL 2.0與 Shader 1.2 規格不如之前健全。 有些使用者反映Rhino V4與V5間的Quadro卡功能不如以往。 Rhino V5 SR2 則包括一些改變似乎能夠改善Quadro 卡的性能。
+| **2013年7月更新** - JB: | 本月NVIDIA發出的 **主要驅動程式更新** 似乎修復了許多Quadro 卡的問題，包括Quadro 600。在這張卡的舊版驅動程式下，就算只是開Google Chrome都會導致當機或是重新啟動。 
+新驅動程式已經把在Windows 7與Windows 8裡的問題都修正了。 **我目前非常推薦這些顯示卡**|
+
+---- ( 2013/1/3新增 -  2013/5/8更新)
+| 品牌 | Nvidia|
+| 型號 | GTX |
+| 推薦人 : | Brian James |
+| 註: |我用過這個系列包括GTX 470及CTX 690。兩種都運作得不錯，而且也有很多驅動程式可供選擇，如果你的顯示卡有問題，更新驅動程式通常就可以修正錯誤。|
+
+---- (新增於 2011/12/16)
+| 品牌 | AMD|
+| 型號| FirePro v7900 與 FirePro v5900 |
+| 推薦人 : | Jeff LaSor |
+| 註 : | 我最近才完成了AMD v5900及v7900的認證，而他們公司在發表這些卡時也提到了McNeel。兩張卡都有很好的性能，尤其它們與其他卡比起來使用量很少(footprint)。
+我已經用Fire Pro v7900替換了FirePro v8800。
+是的，就是那麼好用。
+我必須說AMD現在很用心讓他們的產品能夠在真實生活中好好應用，而不是想著下一波是不是做一些與Pooduh相容的產品。
+所有最近的V5顯現功能都被測試確認，可以在v 5900跟v7900環境下作業得很好。
+如果您預算足夠，就選擇 7900。5900的性能相對較弱，但它們的功能、尺寸， 功率消耗與熱代都很不錯。AMD做得好。
+
+| 2012八月加註: | **//幾位高階使用者在Rhino newsgroup表示這張卡在抗鋸齒方面表現極差，遠不如NVIDIA，他們甚至從電腦移除那些令人傷腦筋的顯示卡而回到NVIDIA的懷抱。
+Jeff他自己曾說//"NVIDIA也許總是在AA上比AMD好。為什麼呢? 我也不知道。他們會改善嗎?不曉得。 能在我這一端解決問題嗎? 我也不清楚，但目前為止我並不這麼覺得。"// 所以如果你打算買AMD的卡，請在newsgroup上先做功課，了解情況。|
+
+---- (新增於 2011/4/11)
+| 品牌 | AMD/ATI|
+| 型號 | FirePro V5800 |
+| 推薦人: | Aya Maeda |
+| 推薦程式版本: | ATI driver 8.77.6.3 Rev.A |
+| 註| 在使用者聯絡AMD並且要求使用以上驅動程式之前，這張卡在縮放與平移時出現問題。這些卡原本是適用於Microstation的。解決方法是在OpenGL 選項中不要點選"Use region buffers when available"。|
+
+---- (新增於 2011/3/2)
+| 品牌 | Nvidia|
+| 型號| Nvidia GTX 295 |
+| 推薦人: | Rhino Support Newsgroup |
+| 註: | 較新的GTX 300, 400與500系列的替換卡似乎在OpenGL下會被停用。
+它們的OpenGL性能明顯比GTX295慢。|
+
+---- (新增於 2011/3/2)
+| 品牌 | Nvidia|
+| 型號| Nvidia Quadro 4000, 5000, 6000 |
+| 推薦人: | Rhino Support Newsgroup |
+| 註: |這些卡比較貴但性能比GTX295更優。 大部分的使用者都表示使用得很順暢，這款ODE驅動程式也少有問題發生。|
+
+
+---- (新增於 2011/3/2)
+| 品牌 | Intel |
+| 型號| Intel HD Graphics|
+| <color red>不推薦</color> by: | John Brock,<tech@mcneel.com> |
+| 註: |我手動處理了大量Rhino當掉的報告。這些卡對於OpenGL型的應用程式如Rhino來說根本就是垃圾。<color red>千萬別用這些卡!</color> 就算執行很簡單的功能比如PictureFrame都會當。要當心，很多筆電製造商都用這款，一定要避免!|
+
+---- (新增於 2011/3/2)
+| 品牌 | Intel |
+| 型號 | Intel 82865G Graphics Controller|
+| 型號| Intel 82945G Express Chipset Family|
+| 型號| Mobile Intel 4 Series Express Chipset Family|
+| <color red>不推薦</color> BY: | John Brock, <tech@mcneel.com> |
+| 註: | 這些卡很糟。它們不是為了OpenGL型，需要用到很多圖像的應用程式使用的，比如Rhino。通常在比較平價的筆電上收發email、上網用。並不支援加速圖形。|
+
+---- (新增於 2011/1/4)
+
+| 品牌 | NVIDIA|
+| 型號| Quadro 1800 and 2000 series |
+| 推薦人: | Jørgen, <holo1@holografisk.no> |
+| 註: | 如果你用到很多曲線與結構線，那這款卡是不錯選擇。|
+
+---- (新增於 2011/1/4)
+
+| 品牌 | NVIDIA|
+| 型號 | [[rhino:geforce|GeForce]] 2xx series |
+| 推薦人: | Jørgen, <holo1@holografisk.no> |
+| 註: | NVIDA Geforce 4xx及5xx系列並不比前幾代快速，所以用2xx系列就好。|
+ 
+---- (新增於 2011/1/4)
+
+| 品牌 | AMD/ATI|
+| 型號 | FirePro V8750, V8800 |
+| 推薦人 : | Jeff LaSor |
+| 註: | 我的development box 裝有FirePro v8750已經超過一年了，我都用這個發展新的V5顯示功能。|
+
+---- (新增於 2011/1/4)
+
+| 品牌 | AMD/ATI|
+| 型號| Radeon 4000 & 5000 series|
+| 推薦人 : | Jeff LaSor, <jeff@mcneel.com> |
+| 註: | Radeon 4870很好用。 |
+ 
+
+======以下輸入條目仍有效，不過都很舊了-JB======
+| 品牌 | NVIDIA|
+| 型號 |[[rhino:geforce|GeForce]] 8600M GT 256MB|
+| BIOS 版本| Apple - 70 |
+| 驅動程式版本: | 6.14.11.134| 
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊 驅動程式設定 | 無 |
+| Rhino版本| V4 SR2 |
+| 已知問題| |
+| 意見| 我在[[MACBOOK]] Pro裡用這張卡，沒有什麼問題。|
+| 提交人 | Brian James, <brian.james@mcneel.com> |
+
+----
+
+| 品牌 | NVIDIA|
+| 型號 | [[rhino:geforce|GeForce]] FX 5200 128MB|
+| BIOS 版本 | 4.34.20.22.A1 |
+| 驅動程式版本 | 6.14.10.6693 |
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊Rhino 設定 | Rhino為活動狀態時Redraw 作業視窗啟動|
+| 特殊 驅動程式設定 | 無 |
+| 使用Rhino 版本| V2, V3, V4 |
+| 已知問題 | 在 V3裡, 有時狀態列標籤(Snap, Ortho,等等)並不會顯示出來但仍在活動狀態中。曲面選取項目在著色模式使用醒目顏色會發生問題。
+| 意見| 這張卡適用所有Rhino版本，支援Rhino的特殊圖形模式。 雖然它是遊戲顯卡但其功能不錯也不貴。這就是測試V4顯示管道的那張卡。在V4研發期間我們發現關於這張顯卡的許多細節與功能。 我目前使用的這張安裝於 Dell Dimension 4600 系統 |
+| 提交人: | John Brock, <jb@mcneel.com> |
+
+----
+
+| 品牌 | NVIDIA|
+| 型號 | Quadro FX Go 700 128MB|
+| BIOS 版本 | 4.31.20.52.C2 |
+| 驅動程式版本 | 6.14.10.4424 |
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊 驅動程式設定 | 無 |
+| 使用Rhino 版本| V2, V3, V4 |
+| 已知問題 | 無 |
+| 意見 | 這張卡很不錯，是少數"圖形工作站"適用的筆電顯卡之一。"Quadro" 系列是為 [[rhino:opengl|OpenGL]] 像Rhino這樣圖形軟體設計的. 這張卡也曾在新版V4顯示管道測試中被使用。這張卡有很好的性能，目前安裝在Dell Precision M60 筆電.|
+| 提交人: | John Brock, <jb@mcneel.com> |
+
+----
+
+| 品牌 | NVIDIA|
+| 型號 | [[rhino:geforce|GeForce]]FX Go 5650 128MB|
+| BIOS 版本 | 4.31.20.52.C6|
+| 驅動程式版本 | 6.7.4.2 |
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊Rhino設定| 我用v4s TestSetAAlevel at 8 ，仍舊運作良好，並沒有變慢太多。|
+| 特殊驅動程式設定| Vertical sync 關閉, AA 設定由程式控制|
+| 使用Rhino 版本| V2, V3, V4 |
+| 已知問題 | 無 |
+| 意見 | 到目前為止都很好，目前使用在1900x1200螢幕，一切正常。|
+| 提交人: | [[rhino:pascal_golay|Pascal Golay]] <pascal@mcneel.com>|
+
+----
+
+| 品牌 | NVIDIA|
+| 型號| PNY Quadro FX 330 64 MB RAM|
+| BIOS 版本 |4.34.20.84.06 |
+| 驅動程式版本 | 6.14.10.6693 |
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊 驅動程式設定 | 無 |
+| 使用Rhino 版本| V2, V3, V4 |
+| 已知問題 | 無 |
+| 意見 | PCI-Express 卡, 被動冷卻，沒有噪音。是很棒的[[rhino:opengl|OpenGL]] CAD-graphic 卡，價格不貴性能表現也好。|
+| 提交人: | Michael Meyer AT flexiCAD com|
+
+----
+
+| 品牌 | NVIDIA|
+|型號| BFG 6800GT OC 256MB|
+| BIOS 版本 | 5.40.02.15.05|
+| 驅動程式版本 | 7.1.8.9 |
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊驅動程式設定| Vertical sync 關閉, AA 設定由程式控制|
+| 使用Rhino 版本| V2, V3, V4 |
+| 已知問題 | 無 |
+| 意見 |在推動超大模型還有在嘗試使用最大化作業視窗時，有時速度會變慢，而且作業視窗會變成全黑。
+| 提交人: | Sam Page |
+
+----
+
+| 品牌 | AMD/ATI|
+| 型號| Mobility Radeon 9700 128Mb|
+| BIOS 版本| BK-ATI VER 008.017M.109.000|
+| 驅動程式版本 | 8.162.0.0 Catalyst 5.8 - 使用標準Radeon顯示卡時及Patje's Mobility Modder (http://www.driverheaven.net/patje/)時用原始的ATI驅動程式 |
+| 作業系統 & SP 級別 | Windows XP Pro Service Pack 2 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊驅動程式設定 | 停用AA 或將AA設為由程式控制 |
+| 使用Rhino 版本| V3, V4 |
+| 已知問題 | V3: 物件消失不見以及在AA啟動的狀況下，彩現作業視窗有類似污漬出現。 |
+| 意見| 這款顯示卡常見於客戶的筆電中，而且有極好的3D顯示功能。要不是在使用AA時會有點小故障，它會是在筆電上使用Rhino一個非常經濟的選擇。|
+| 提交人: | Simon Crowder |
+
+----
+
+| 品牌 | AMD/ATI|
+| 型號| Mobility Radeon 9000 128Mb (筆電)|
+| BIOS 版本 | 008.007.010.000 |
+| 驅動程式版本 | Omega Drivers 2.6.53 (http://www.omegadrivers.net/)|
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 1 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊 驅動程式設定 | 無 |
+| 使用Rhino 版本| V2, V3, V4 |
+| 已知問題 | 很多 |
+| 意見 | 不管我裝什麼驅動程式，都有問題。只要用四個作業視窗 [[rhino:opengl|OpenGL]] (Rhino當掉), 換了驅動程式之後抗拒齒功能完全失效。 我完全不推薦這張卡。 |
+| 提交人: | Heath Satow |
+
+----
+
+| 品牌 | Nvidia|
+| 型號 | [[rhino:geforce|GeForce]] 4200 GO|
+| BIOS 版本 |4.28.20.31.10 |
+| 驅動程式版本 | 6.7.4.2 |
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊驅動程式設定 | 智能垂直同步關閉 |
+| 使用Rhino 版本| V3, V4 |
+| 已知問題 | 無 |
+| 意見 |如果記得關掉智能垂直同步，那麼這張卡很好用，雖然它已經很舊了，但狀況還不錯。 |
+|提交人: | Jakob Normand |
+
+----
+| 品牌 | ATI|
+| 型號| RADEON X800 |
+| BIOS 版本 | 113-AA61300-101 |
+| 驅動程式版本 | 6.14.10.6517 |
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊 驅動程式設定 | 無 |
+| 使用Rhino 版本| V3, V4 |
+| 已知問題 | 無 |
+| 意見 | 這張卡沒什麼問題，保持原始設定或是設為讓程式去控制就好了。我用兩個TFT螢幕，每個都是1280x1024，能夠把Rhino展開成兩個螢幕大。|
+| 提交人: | Mark Sharman, <msharman@bom.co.uk>|
+
+----
+
+| 品牌 | ATI|
+| 型號| RADEON 7000 |
+| BIOS 版本 | 未知 |
+| 驅動程式版本 | 6.14.10.6599 |
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊 驅動程式設定 | 雙顯示 |
+| 使用Rhino 版本| V3, V4 |
+| 已知問題| 子工具列位置, 浮動作業視窗 |
+| 意見 | 這張卡用在V3沒問題，但在V4問題就很多。 在2.8 GHz P4的性能上表現中等。當用兩個螢幕的時候，在第二個螢幕上的浮動視窗常在顯示時發生問題並且需要重新啟動。在ATI雙螢幕狀態時(ATI dual monitor desktop manager, Hydravision)工具列子功能表在滑鼠游標經過時並不會出現 |
+|提交人: | B. Gom |
+
+----
+
+| 品牌 | ATI|
+| 型號| RADEON X1600Pro |
+| BIOS 版本 | 009.012.006.002 |
+| 驅動程式版本 | 6.14.10.6599 |
+| 作業系統 & SP 級別| Windows XP Pro Service Pack 2 |
+| 特殊 Rhino 設定 | 無 |
+| 特殊 驅動程式設定 | 雙顯示 |
+| 使用Rhino 版本| V4 |
+| 已知問題 | 子工具列位置，物件所點工具提示有問題 |
+| 意見 | 安裝此卡的目的是要提高7000系列性能。3D顯示更加快速，但在繪製複雜場景時仍舊被主要處理器的速度所限制。作業視窗內容的顯示對這張卡來講並不是問題，但在ATI雙螢幕模式中(Hydravision)，當滑鼠游標經過子工具列功能表時還是不能顯現。
+3D顯示時抗鋸齒功能有改善(如著色或半透明模式)，而且整體性能並沒有明顯減弱，然而在框架模式作業視窗時，很多線會變得模糊。雙螢幕模式下使用圖形驅動程式時，抗鋸齒功能無法在單一螢幕上啟動(在有TestSetAALevel功能的狀況下)
+一開始物件鎖點的工具提示還正常運作，但現在已無法顯現。
+調整視窗視頻功能的滑桿似乎還算正常。|
+| 提交人: |B. Gom|
+
+----
