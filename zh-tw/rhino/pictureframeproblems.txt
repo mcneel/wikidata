@@ -1,0 +1,35 @@
+**問題** 
+
+在Rhino裡，圖框平面(PictureFrame)的影像沒有顯示。或是顯示白色或空白，沒有文字也沒有影像。
+
+{{:rhino:blank.png|}}
+ 
+**解決方法**
+
+**1.更新顯示卡的驅動程式**
+
+確認你的Windows顯示驅動程式是顯示卡廠商所提供的最新版。
+
+**2.確認硬體加速是打開的**
+
+Windows加速滑桿應該被設定在最右邊，或至少大部分設到右邊。 
+此功能在顯示-內容設定-進階-疑難解決標籤 (Display->Properties->Settings->Advanced->Trouble Shooting tab)
+
+{{:rhino:slider.png|}}
+
+**3.確認Rhino的硬體加速模式開啟中**
+
+在Rhino 5版，此功能會在選項>視圖>OpenGL (Option>Rhino Options>View>OpenGL)如果你使用的是Rhino 4版，請到選項>外觀（Appearance）>OpenGL，從右側視窗中確認 "使用硬體加速模式" 是勾選的。 
+同時也請確認使用的是供應商的顯示卡，不是 Windows的基本GDI卡。   
+
+{{:zh-tw:rhino:01.jpg|}}
+
+**4.從彩現進階顯示模式回到預設模式**
+
+最近的趨勢是修改這個彩現顯示。改變彩現顯現模式的選項，會導致圖框平面(PictureFrame)指令無法正常工作。如果有任何問題，用"還原預設值"來將彩現顯示模式設回預設模式。
+
+{{:zh-tw:rhino:02.jpg|}}
+
+特別說明，將＂Color and Materials Usage" 設定為"Single Color for all objects" 時，會讓圖框平面(PictureFrame)的預覽模式在Rhino視窗下看起來是空白的。
+
+{{:zh-tw:rhino:03.jpg|}}
