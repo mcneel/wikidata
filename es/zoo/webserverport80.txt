@@ -1,0 +1,37 @@
+====== Zoo 5 no se inicia en los servidores web ======
+> **Producto:** //[[zoo:zoo5|Zoo 5]]//
+> **Resumen:** //Zoo 5 requiere acceso al puerto 80. Esto no es posible en sistemas con servicios web en ejecución.//
+
+===== Problema =====
+Cuando reinicio el servidor, el servicio de Zoo 5 no se inicia. Cuando compruebo el registro de eventos de Windows (Panel de control -> Herramientas administrativas -> Registro de eventos), veo que el servicio Zoo 5 registra un error:
+
+<code>
+El servicio Zoo 5.0 en el equipo local se ha iniciado y luego se ha detenido.
+Algunos servicios se detienen automáticamente si no están siendo utilizados por otro
+servicio o programa.
+</code>
+
+Al examinar los detalles del error, de nuevo en el registro de eventos de Windows se informa de lo siguiente:
+
+<code>
+La dirección ya en siendo utilizada por otro proceso.
+Ejecute 'netstat -o -n -a' desde una línea de comandos para encontrar el 
+ID del proceso en conflicto y luego busque el nombre de proceso en el Administrador de tareas.
+</code>
+
+- Ejecute **NETSTAT-ano** desde la línea de comandos y escriba el número PID del puerto que abierto que quiere liberar.
+- Desde el administrador de tareas se puede ver qué proceso tiene el PID y se puede saber qué programa está utilizando ese puerto.
+
+El motivo de este error es que alguna otra aplicación ya está utilizando el puerto 80. Una aplicación solo puede tener en cuenta un puerto en un momento determinado, por lo que el Zoo no puede enlazar con el puerto 80. Más aplicaciones que causan este problema:
+
+  * [[http://www.iis.net/|Internet Information Services (IIS) for WindowsÂ® Services]]
+  * [[http://httpd.apache.org/|Apache HTTP Server]]
+  * [[http://www.java.com|Java]]
+  * [[zoo:zooskype|Skype]]
+===== Resolución =====
+ - Mueva el Zoo a una máquina que no esté ejecutando servicios web.  Puede ser un servidor de impresión, otra estación de trabajo que se haya dejado encendida o un servidor virtual adicional.
+  - Configure los servicios web para utilizar un puerto diferente. Tanto Apache como IIS pueden configurarse para ejecutarse en un puerto diferente.
+
+\\
+
+{{tag>Zoo5}}
