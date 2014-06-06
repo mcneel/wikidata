@@ -1,0 +1,34 @@
+======Rhino 5 no funciona con licencias retiradas del Zoo======
+> **Producto:** //[[zoo:zoo5|Zoo 5]]//
+> **Resumen:** //Describe por qué Rhino 5 SR0 no se inicia cuando tiene una licencia retirada del Zoo.//
+
+=====Síntoma=====
+Después de retirar una licencia de un servidor de Zoo 5, Rhino 5 no se inicia.
+
+=====Problema=====
+Si retira una licencia y tiene activada la opción **Enable limited license check out** en el Zoo, cuando la retirada de licencia se produzca a 7 días de caducar, Rhino no se iniciará.
+
+=====Resolución =====
+Este problema se ha resuelto en Rhino 5 Service Release 1.
+
+La solución inmediata es la siguiente:
+ 
+1. Elimine el archivo .CHK de esta carpeta:
+
+**Windows 7 u 8**
+<code>
+C:\Users\<user_name>\AppData\Roaming\McNeel\Rhinoceros\5.0\License Manager\Licenses
+</code>
+
+**Windows XP**
+<code>
+C:\Documents and Settings\<nombre_de_usuario>\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
+</code>
+ 
+2. En el administrador del Zoo, haga clic en la licencia retirada y seleccione **Edit > Recover**.
+ 
+3. De nuevo en el administrador del Zoo, haga clic en **Tools > Options** y desactive la casilla **Enable limited license check out** hasta que todo el mundo haya actualizado a Rhino 5 SR1.
+
+\\
+
+{{tag>Zoo5}}
