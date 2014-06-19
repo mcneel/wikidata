@@ -18,11 +18,9 @@ Creating a custom Skin for Rhino 5 involves creating a custom skin assembly:
 
 ==C#==
 <code c#>
-using Rhino.Runtime;
-
 namespace MySkin
 {
-  public class MyHippoSkin : Skin
+  public class MyHippoSkin : Rhino.Runtime.Skin
   {
     protected override string ApplicationName
     {
@@ -38,11 +36,9 @@ namespace MySkin
 
 ==VB.Net==
 <code vb>
-Imports Rhino.Runtime
-
 Namespace MySkin
     Public Class MyHippoSkin
-        Inherits Skin
+        Inherits Rhino.Runtime.Skin
         Protected Overrides ReadOnly Property ApplicationName() As String
             Get
                 Return "Hippopotamus"
