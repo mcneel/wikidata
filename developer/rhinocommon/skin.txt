@@ -15,6 +15,10 @@ Creating a custom Skin for Rhino 5 involves creating a custom skin assembly:
   - To create the Skin DLL, launch Visual Studio 2010 and add a new Class Library project to your solution.
   - In the new Class Library project, add a reference to RhinoCommon.DLL, which is found in Rhino's SYSTEM folder. Note, make sure, after adding the reference, to set the properties of the reference to **Copy Local = False**. 
   - Create a new class that inherits from **Rhino.Runtime.Skin**.
+  - Add a post build event to the project to rename the assembly from .DLL to .RHS:
+<code>
+(TargetPath)" "$(TargetDir)$(ProjectName).rhs" Erase "$(TargetPath)"
+</code>
 
 ==C#==
 <code c#>
