@@ -65,13 +65,10 @@ class DrawBlueMeshConduit : DisplayConduit
   // will incur an overhead on the heap and garbage collection.
   protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
   {
-    base.CalculateBoundingBox(e);
     // Since we are dynamically drawing geometry, we needed to override
     // CalculateBoundingBox. Otherwise, there is a good chance that our
     // dynamically drawing geometry would get clipped.
- 
-    // Union the mesh's bbox with the scene's bounding box
-    e.BoundingBox.Union(_bbox);
+    e.IncludeBoundingBox(_bbox);
   }
 
   protected override void PreDrawObjects(DrawEventArgs e)
@@ -154,13 +151,11 @@ Class DrawBlueMeshConduit
   ' in order to not degrade display speed. Don't create new objects if you don't have to as this
   ' will incur an overhead on the heap and garbage collection.
   Protected Overrides Sub CalculateBoundingBox(e As CalculateBoundingBoxEventArgs)
-    MyBase.CalculateBoundingBox(e)
     ' Since we are dynamically drawing geometry, we needed to override
     ' CalculateBoundingBox. Otherwise, there is a good chance that our
     ' dynamically drawing geometry would get clipped.
 
-    ' Union the mesh's bbox with the scene's bounding box
-    e.BoundingBox.Union(_bbox)
+    e.IncludeBoundingBox(_bbox)
   End Sub
 
   Protected Overrides Sub PreDrawObjects(e As DrawEventArgs)
@@ -221,8 +216,7 @@ class DrawBlueMeshConduit(Rhino.Display.DisplayConduit):
       self.bbox = mesh.GetBoundingBox(True)
 
   def CalculateBoundingBox(self, calculateBoundingBoxEventArgs):
-    #super.CalculateBoundingBox(calculateBoundingBoxEventArgs)
-    calculateBoundingBoxEventArgs.BoundingBox.Union(self.bbox)
+    calculateBoundingBoxEventArgs.IncludeBoundingBox(self.bbox)
 
   def PreDrawObjects(self, drawEventArgs):
     #base.PreDrawObjects(rawEventArgs)
