@@ -1,0 +1,80 @@
+====== 레이저와 워터젯 커터를 위한 파일 준비 ======
+
+> **Summary:** //Rhino 4.0을 사용하여 레이저와 워터젯 커터를 위한 파일을 준비하는 팁과 테크닉.//
+
+레이저 커터의 두 가지 주요 종류 (Windows 데스크톱/플로터, CNC/G-Code 방식)에는 다른 준비 작업이 필요합니다.
+
+=====Windows 레이저 커터=====
+
+데스크톱/플로터 크기 레이저 커터는 일반 Windows 프린터처럼 사용합니다. 예:
+
+  * [[http://www.epiloglaser.com/|Epilog]]
+  * [[http://www.ulsinc.com/english/laser_systems/laser_systems.html|Universal lasers]]
+
+Rhino 4.0에서는 프린팅 기능이 향상되어, 지오메트리를 변환하지 않고 기계로 간단하게 프린팅이 가능합니다.
+
+내부에서 커터를 사용하는 경우, Rhino 플러그인 Mosaix(네스팅용)와 Bamboo(G-코드 생성용)는 피팅(fitting)이 필요하지 않습니다. 보통의 Rhino 지오메트리를 사용할 수 있습니다.
+
+=====CNC형 레이저 또는 워터젯 커팅=====
+
+CNC/G-코드식 레이저 커터는 외부적으로는 CAM 제품이 필요한 경우가 일반적이거나, 또는 DXF 파일만이 필요합니다. 대형 산업용 레이저 커터의 예:
+
+  * [[http://www.multicam.com/eng/Products/products.html|MultiCAM]]
+  * [[http://www.mazaklaser.com/products.html|Mazak]]
+
+모든 워터넷 커팅에는 Rhino의 지오메트리가 선과 호로 변환되어야 합니다. 대부분 많이 사용되는 파일 형식은 DXF, DWG, AI (AI, EPS, PDF)입니다.
+
+**PDF 플로그인 가져오기 - 2005년 9월 30일**
+
+Rhino를 위한 최신 AI, EPS, PDF 리더는 EPS 확장자를 가진 광범위한 파일을 가져옵니다(import). 이 플러그인을 사용하려면 Rhino V3 SR4가 있어야 합니다. [[http://www2.rhino3d.com/wip_plugins/import_PDF_m.rhp|지금 Rhino PDF 플러그인을 다운로드하세요.]]
+
+대다수의 기종에서는 **오직** 선과 호만을 인식합니다. 성공의 키는 복잡한 3D 형태 또는 2D 커브를 선과 호로 변환하는 작업에 있습니다.
+
+직선으로 이루어진 폴리라인에는 호가 언제나 바람직합니다. 이것은 작은 파일과 커브를 따라 보다 적은 수의 선이 있을 때 더욱 정확한 커팅 작업이 이루어지기 때문입니다.
+
+이러한 과정에 Rhino의 **Convert** 명령을 효과적으로 사용하십시오. 옵션을 다음과 같이 설정합니다: **Output**=//Arcs//, **SimplifyInput**=//No//, **AngleTolerance**=//0//, 그리고 **Tolerance**(허용 오차)를 모델에 맞춰 지정합니다. 커터로 보내고자 하는 모든 커브에 **Convert** 명령을 실행합니다. 4.0 버전에서는 이 명령이 더욱 향상되어, 작업을 성공적으로 이룰 수 있었습니다. 단, 사용자가 원하시는 결과를 얻지 못한 경우에는 [[scottd@mcneel.com.|scottd@mcneel.com 앞으로 샘플을 보내 주십시오]]
+
+중첩(Overlap), 틈(gap), 복제(duplicate)된 커브에서는 제대로 커팅이 이루어지지 않습니다. **CurveBoolean** 명령은 이러한 상태를 정리할 때 유용하게 사용하실 수 있습니다.
+
+많은 프로파일을 함께 표준 스톡 파트(standard stock parts)로 중첩(nest)해야 하는 경우, Mosaix plug-in for Rhino를 사용하시면 됩니다: http://www.rhino-plugins.com/ 으로 가셔서 //Mosaix를 다운로드하십시오.
+
+커터 회사 또는 컨트롤러를 위해 좋은 DWG를 저장하려면, 새로운 DWG/DXF 내보내기 옵션, DWG 내보내기 **schemes**을 사용하여 과정을 단순화할 수 있습니다.
+
+Rhino의 **SaveAs** 명령을 사용하십시오. AutoCAD DWG 또는 DXF 파일 형식을 선택하시고 Save를 클릭하십시오. Edit Schemes 대화 상자에서 새로운 스키마를 만드십시오. 옵션을 다음과 같이 지정하십시오:
+
+**General**
+
+AutoCAD Version: Release 14
+
+Write Surfaces as: Curves
+
+Write Meshes as: Meshes
+
+Project to plane: Don't project
+
+**Curves**
+
+> **Lines:** //Lines//
+> **Arcs:** //Arcs//
+> **Polylines:** //Polylines//
+> **Curves:** //Polylines//
+> **Polycurves:** //Polylines//
+
+Maximum angle: On, 2.0
+
+Chord height: Off
+
+Segment Length: Off
+
+Explode Polycurves: On
+
+Split Curves at Kinks: On
+
+Simplify Lines & Arcs: Off
+
+추후 사용을 위해 스키마를 저장합니다.
+
+DWG를 AutoCAD 또는 DWG 또는 DXF 파일을 읽는 프로그램에서 엽니다. 호와 선만이 파일에 있는 것을 알 수 있습니다. 이것은 일정한 결과를 얻기에 좋은 방법입니다.
+
+
+

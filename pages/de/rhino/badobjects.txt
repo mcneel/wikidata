@@ -1,0 +1,45 @@
+====== Fehlerhafte Objekte ======
+
+======Ich habe ein fehlerhaftes Objekt. Wie ist das passiert und wie repariere ich es?======
+
+> **Zusammenfassung:** //Wie fehlerhafte Objekte gefunden und (hoffentlich) repariert werden, die in Rhino erzeugt wurden oder durch Import aus anderen Programmen//
+
+=====Was ist ein fehlerhaftes (ungültiges) Objekt?=====
+
+“Fehlerhafte” Objekte in Rhino sind jene, die entweder gewisse NURBS-Regeln nicht einhalten oder ein Strukturproblem haben.  Rhino sollte theoretisch keine fehlerhaften Objekte erzeugen, aber in der Praxis ist es möglich und geschieht regelmäßig.  Wenn Sie einmal wissen, wie diese Probleme zu beheben sind, werden sie auch schnell repariert.
+
+=====Wie weiß ich, dass ich ein fehlerhaftes Objekt habe?=====
+
+Am einfachsten finden Sie fehlerhafte Objekte mit dem Befehl **FehlerhafteObjekteAuswählen** (Analysieren > Diagnose > Fehlerhafte Objekte auswählen).  Alle Objekte, die als ungültig betrachtet werden, werden ausgewählt.  Ein Flächenverband könnte jedoch "fehlerhaft" sein, wenn es nur eine fehlerhafte Fläche enthält.  Sie können sie mit dem Befehl **FehlerhafteFlächeLösen** finden (nicht in dem Menüs). Dieser Befehl entfernt die fehlerhaften Flächen und wählt sie aus.  Es gibt einen sehr hilfreichen Befehl in Rhino namens **NeueObjekteÜberprüfen**, der die Überprüfung im Hintergrund aktiviert und alle Objekte, während der Erzeugung oder dem Import, überprüft.  Auf diese Weise wissen Sie sofort, wenn es ein Problem gibt.
+
+=====Wieso sind diese fehlerhaften Objekte schlecht und wie wurden sie erzeugt?=====
+
+Nun, es gibt viele technische Erklärungen.  Oft ist die Struktur oder die Trimmkurve fehlerhaft - es können ein oder mehrere Segmente vorhanden sein, die winzig sind und Probleme verursachen.  Andere Male kann eine Fläche fehlerhaft sein, weil zwei oder mehr Kontrollpunktreihen aufeinander liegen oder weil eine Länge Null in einer Richtung vorhanden ist (eine “zusammengefaltete Kante”).  Diese Situation ist in Rhino einfach produzierbar - erstellen Sie eine vertikale Ebene und projizieren Sie sie auf die Konstruktionsebene.  Nun weist Sie eine Länge von Null in einer Richtung auf und wird als fehlerhaft angesehen.
+
+Wieso sollte eine Trimmkurve fehlerhaft sein?  Sie haben sie wahrscheinlich nicht mit Absicht so gemacht.  Fehlerhafte Objekte erscheinen oft nach dem Befehl Verbinden (oder ein anderer Befehl, der Objekte verbindet, wie boolsche Operationen). Beim Verbinden von Objekten muss Rhino oft Kanten teilen und Trimmkurven anpassen.  In manchen Situationen können Teile dieser geteilten Kanten so winzig sein oder die Anpassung der Trimmkurve kann schief gehen und plötzlich haben Sie ein fehlerhaftes Objekt.  //(Übrigens, wenn ich “winzig” sage, meine ich kleiner als die absolute Toleranz – Objekte, die kleiner sind, haben in der Datei nichts zu suchen und verursachen nur Probleme.)//
+
+Beim Import von Geometrie aus anderen Programmen können ebenfalls fehlerhafte Objekte erzeugt werden.  Wenn Sie **NeueObjekteÜberprüfen** ausführen, während eine Datei importiert wird, erhalten Sie eine Nachricht, ob und wann ein ungültiges Objekt erzeugt wurde.  Sie müssen auf OK klicken, um jedes Objekt zu bestätigen.  Wenn viele vorhanden sind, kann es lästig sein. Sie können den Befehl ausschalten und nach dem Import neu starten.
+
+=====Die gefürchtete halbtransparente Fläche=====
+//Wieso kann ich mein fehlerhaftes Objekt nicht sehen?//
+
+Manchmal erzeugt Rhino fehlerhafte Flächen, die Sie nicht sehen können.  Sie sind buchstäblich unsichtbar!  (Sie sind unsichtbar, weil kein Rendernetz erzeugt werden konnte, um sie anzuzeigen).
+
+Diese können normalerweise mit dem Befehl **FehlerhafteObjekteAuswählen** ausgewählt werden und das beste wäre, einfach den Befehl Löschen auszuführen, um sie zu löschen - oft können sie nicht repariert werden.  Manchmal funktioniert Löschen nicht. Sollte dies geschehen, versuchen Sie es mit **Strg+X**, um sie aus der Datei auszuschneiden.
+
+Diese Art von Flächen verursachen, dass Dateien seltsam reagieren, z.B. ein **ZoomBildfüllend**, das nicht richtig funktioniert, weil die Fläche außerhalb des Raums ist und der Befehl **Zoom** dies in Betracht zieht.
+
+=====OK, Wie repariere ich fehlerhafte Flächen?=====
+
+Meine Strategie zur Handhabung fehlerhafter Flächen aufgrund von Trimmkurven lautet wie folgt - Bevor Sie beginnen, bestimmen Sie die fehlerhaften Flächen und blenden Sie den Rest aus (Sie müssen vielleicht den Befehl **FehlerhafteFlächeLösen** wie oben ausführen).
+
+**1.** Als erstes führe ich normalerweise den Befehl **KantenZurücksetzen** an allen fehlerhaften Objekten aus. Einige werden repariert. Der Befehl stellt die Kanten einer Fläche mehr oder weniger wieder her, und zwar so, wie sie vor dem Verbinden waren.  Es bedeutet aber auch, dass die Fläche nicht mehr mit den benachbarten Flächen verbunden ist oder dass das Verbinden die Fläche erneut fehlerhaft machen kann. Aber in einigen Fällen funktioniert es.  Wenn einige Flächen repariert werden (verwenden Sie **FehlerhafteObjekteAuswählen/Invertieren**), blenden Sie diese aus.   Manchmal hilft auch der Befehl **FlächeAnKanteSchrumpfen** auf fehlerhaften Flächen.
+
+**2.** Verwenden Sie den Befehl TrimmungAufheben an die erste fehlerhafte Fläche, wobei die Option "Trimmobjekte beibehalten" ausgewählt ist, dann, während die Trimmkurve noch ausgewählt ist, verwenden Sie Trimmen, um die Fläche erneut zu trimmen.  Überprüfen Sie, ob das die Fläche repariert hat.  Wenn ja, gut, blenden Sie sie aus. Wenn nicht, lassen Sie es stehen und führen Sie den selben Vorgang an allen anderen fehlerhaften Flächen eine nach der anderen erneut aus.  Blenden Sie alle aus, die erfolgreich verlaufen.
+
+**3.** Wenn fehlerhafte Objekte übrig bleiben, führen Sie **TrimmkanteAbtrenne** erneut aus. **Zerlegen** Sie die erhaltene Trimmkurve und suchen Sie Mikrosegmente irgendwo in der Kurve. Dieser Fall von fehlerhaften Trimmungen kommt am häufigsten vor. Schauen Sie, über wie viele Teilkurven die Trimmkurve verfügt. Es kann vorkommen, dass die Anzahl verdächtig ist, d.h. was wie ein Rechteck aussehen soll, enthält 5 Kurven und nicht 4. Da hat sich eine Mikrokurven eingeschlichen und bringt alles durcheinander. Oft liegt sie in der Nähe eines Eckpunkts. Versuchen Sie, eine Fensterauswahl in der Nähe der Enden Ihrer Trimmkurvensegmente auszuführen. Oder verwenden Sie den Befehl **KurzeKurveAuswählen** und definieren Sie einen kleinen Wert.  Wenn Sie einige Mikrosegmente finden, löschen Sie diese und verbinden Sie die Trimmkurven erneut zu einer geschlossenen Schlaufe. Trimmen Sie damit die Fläche erneut. Das repariert in den meisten Fällen fast alles, was durch andere Methoden nicht repariert wird.
+
+**4.** Als letztes, versuchen Sie alles anzuzeigen (**Anzeigen**) und schauen Sie, ob Sie alles verbinden können, ohne dass Objekte erneut fehlerhaft erscheinen.  Wenn alles gut verbunden wird und keine fehlerhaften Objekte erzeugt werden, ist das großartig!  Wenn nicht, liegt das im Allgemeinen daran, dass Verbinden versucht, Objekte zu verbinden, die nicht wirklich zusammenpassen.  In diesem Fall müssen Sie die Flächen analysieren, die fehlerhaft sind, und die Beziehung zu den benachbarten Flächen, um herauszufinden, was nicht zusammenpasst und wieso.  Das kann manchmal Kopfzerbrechen bereiten.
+
+> **Anmerkung:** //Die obige Methode dient der Handhabung von Flächen mit fehlerhaften Trimmkurven.  Diese Methode ist keine Hilfe für zusammengefaltete Kanten oder gestapelte Kontrollpunktreihen.  Die Handhabung dieser Kanten oder Kontrollpunkte erfolgt mit anderen Methoden, wie Knotenentfernung oder einfacher Wiederherstellung.  Flächen mit zusammengefalteten Kanten sind einfach zu identifizieren - die Anzeige sieht wie eine Kurve aus, aber in den **Eigenschaften** steht, dass es eine Fläche ist.  Im Allgemeinen können sie gelöscht werden.//
+

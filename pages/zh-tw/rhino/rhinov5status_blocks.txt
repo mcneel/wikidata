@@ -1,0 +1,65 @@
+====== Rhino 5.0 Status – 圖塊與插入(Blocks and Inserts) ======
+
+Rhino 5.0 支援參考的圖塊定義。 
+
+===== 建立一個連結的圖塊定義 =====
+
+
+執行"插入(Insert)"指令，將會打開一個插入的對話框。如下圖
+
+{{:zh-tw:rhino:blockinsert.jpg|}}
+
+
+  - 在”插入為”對話框選擇”圖塊引例”。
+  - 使用檔案瀏覽器選擇要做為圖塊引例的檔案。
+  - 點選”確定”按鈕確認。
+
+當您於”插入”對話框選”確定”按鈕之後，”插入檔案選項”對話框會跳出如下：
+ 
+{{:zh-tw:rhino:blockinsert02.jpg|}}
+
+  - 在"定義圖塊類型"選擇"連結"選項。
+  - 在"圖層形式"選擇適當的形式。更多關於”啟用”及”參考”的圖層選項，請看[[:zh-tw/rhino/rhinov5status_layernames#examplelinked_block_layer_names|圖塊引例的圖層名稱]]
+  - 點選”確定”按鈕。
+
+於”插入檔案選項”對話框選擇”確定”，您可以使用滑鼠定位圖塊的位置或是輸入插入點資料。
+
+===== 連結的巢狀圖塊 =====
+
+在大型複雜的專案中，可將模型分類存檔並將分類以圖塊形式連結至專案檔案。請下載壓縮檔案{{:rhino:superblockv5.zip|}}包含下列模型：
+
+  * V5\
+    * projectV5.3dm
+    * BuildingV5\
+      * buildingV5.3dm
+        * PartsV5\
+          * awnings-roundV5.3dm
+          * awnings-straightV5.3dm
+          * guidelinesV5.3dm
+          * level1V5.3dm
+          * level2V5.3dm
+          * roofV5.3dm
+    * SiteV5\
+      * siteV5.3dm
+
+開啟檔案名稱"...\V5\projectV5.3dm"，這個projectV5.3dm模型檔案包含兩個連結的圖塊，一個是Building另一個是Site。
+
+若您執行"BlockManager"圖塊管理員指令，您將看到"buildingV5"及"siteV5"兩個圖塊定義。另外，您也可看到有5個”參考的圖塊定義”。
+ {{:zh-tw:rhino:blockinsert03-1.jpg|}}
+
+
+勾選”顯示5個參考的圖塊定義”來查看相關的連結圖塊引例。
+
+
+{{:zh-tw:rhino:blockinsert04.jpg|}}
+
+您可以看到在buildingV5.3dm檔案裡有5的圖塊引例，包括awnings-round、 level1、 level2、 roof及guidelines。
+
+===== 編輯參考的圖塊定義=====
+
+Rhino可讓您透過使用"BlockManager"圖塊管理員來查看及修改參考圖塊定義的內容選項。  **請注意更改”參考的圖塊引例”內容選項是暫時性且不會被存檔。** 當您希望永久更改連結的圖塊設定，請您一定要在包含此圖塊引例的檔案中修改。
+
+舉例來說，您可以試著改變Building模型修改窗簷的樣式，請選” "buildingV5.3dm : awnings-roundV5"，並且點選”內容”按鈕，然後把檔案由awnings-roundV5.3dm 改成awnings-straightV5.3dm 。您可發現窗簷由圓弧造型變成較平直的造型。若您想永久改變窗簷造型，由圓弧改成平直，您必須要開啟buildingV5.3dm檔案並且修改模型中的窗簷圖塊(awnings block)。 
+
+
+返回[[:zh-tw/rhino/rhinov5status|Rhino 5.0 Status]]

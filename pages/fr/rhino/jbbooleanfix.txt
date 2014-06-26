@@ -1,0 +1,15 @@
+====== Réparation d'erreur sur les opérations booléenes par JB ======
+
+Here's what I do when someone sends in a Boolean problem. -JB McNeel Tech support
+
+First I check the Units and tolerance setting compared with the geometry in the file to make sure there isn't a major scaling problem.  Assuming the units are right, I verify the tolerance is at least 0.001" or 0.01mm or perhaps one order of magnitude higher, particularly for small parts with tiny detail.  If the settings are wrong, I make the changes; scaling geometry if needed, explode and rejoin to make sure I'm working with solids.  If not solids then I check the surface normals with the Direction command and fix any that are pointing the wrong way.
+
+Next is to run SelBadObjects and make sure there are no problems with the curves or surfaces.  If there are, rebuilding edges, detaching trim curves and retrimming almost always fix the problem.  Once in a while I'll have to delete and replace a surface but that's not often.
+
+After that I run the Intersect command between the two solids and see if I get closed curves that clearly define the trimming and joining boundaries.  If the curve it open, I inspect the surfaces and see why.  Most of the time when the intersection curves are sorted out the Boolean works.  Occasionally even with good curves the Booleans fail.  In that case I do the splitting, deleting, and joining myself to get the same result that the Boolean would have produced.
+
+That's the process.  Give it a try.  You will very likely discover the problem and fix it in the process.
+
+If any of this is confusing, read on.  The information and detail on the following pages is excellent.  -JB
+
+

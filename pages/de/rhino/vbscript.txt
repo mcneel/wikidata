@@ -1,0 +1,80 @@
+
+
+
+
+   Morphing example (morph.rvb)
+
+   Copyright (C) 2004 Stylianos Dritsas
+
+   This software is provided 'as-is', without any expressed or implied warranty.
+   In no event will the author be held liable for any damages arising from the
+   use of this software.
+
+   Permission is granted to anyone to use this software for any purpose,
+   including commercial applications, and to alter it and redistribute it
+   freely, subject to the following restrictions:
+
+   1. The origin of this software must not be misrepresented; you must not
+      claim that you wrote the original software. If you use this software
+      in a product, an acknowledgment in the product documentation would be
+      appreciated but is not required.
+   2. Altered source versions must be plainly marked as such, and must not be
+      misrepresented as being the original software.
+   3. This notice may not be removed or altered from any source distribution.
+
+   Stylianos Dritsas <dritsas@alum.mit.edu>
+
+dim u: u = 0: dim min: min = 0
+
+dim v: v = 1: dim max: max = 1
+
+sa = rhino.getobject( "sa" )
+
+sb = rhino.getobject( "sb" )
+
+dim steps: steps = 12
+
+for i = 1 to steps - 1
+
+   call surface_interpolate( sa, sb, 10, 10, i/steps )
+next
+
+function surface_interpolate( sa, sb, cols, rows, factor )
+
+   dim nu: nu = cols
+   dim nv: nv = rows
+
+   dim cpa: cpa = array( nu, nv )
+   dim cpb: cpb = array( nu, nv )
+
+   dim da: da = array( rhino.surfacedomain( sa, U ), rhino.surfacedomain( sa, V ) )
+   dim db: db = array( rhino.surfacedomain( sb, U ), rhino.surfacedomain( sb, V ) )
+
+   dim dua: dua = ( da( U )( MAX ) - da( U )( MIN ) ) / ( cpa( U ) - 1 )
+   dim dva: dva = ( da( V )( MAX ) - da( V )( MIN ) ) / ( cpa( V ) - 1 )
+   dim ua: ua = da( U )( MIN )
+   dim va: va = da( V )( MIN )
+
+   dim dub: dub = ( db( U )( MAX ) - db( U )( MIN ) ) / ( cpb( U ) - 1 )
+   dim dvb: dvb = ( db( V )( MAX ) - db( V )( MIN ) ) / ( cpb( V ) - 1 )
+   dim ub: ub = db( U )( MIN )
+   dim vb: vb = db( V )( MIN )
+
+   dim point: point = 0
+   redim points( nu * nv - 1 )
+
+   dim pu, pv
+   for pu = 0 to nu - 1
+     for pv = 0 to nv - 1
+       dim pa: pa = rhino.evaluatesurface( sa, array( pu ** dua + ua, pv ** dva + va ) )
+       dim pb: pb = rhino.evaluatesurface( sb, array( pu ** dub + ub, pv ** dvb + vb ) )
+       points( point ) = vertex_interpolate( pa, pb, factor )
+       point = point + 1
+     next
+   next
+   surface_interpolate = rhino.addsrfptgrid( cpa, points )
+end function
+
+
+
+

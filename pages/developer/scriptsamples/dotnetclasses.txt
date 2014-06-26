@@ -1,0 +1,178 @@
+======Using .Net Classes with VBScript======
+> **Developer:** //[[developer:rhinoscript|RhinoScript]]//
+> **Summary:** //Demonstrates a number of .NET classes that work with RhinoScript.//
+
+=====Overview=====
+VBScript lacks support of complex data structures unlike other programming languages. This sometimes make life a bit difficult. We need to code our own algorithms to achieve simple tasks like sorting of an array or reversing it. .NET has support for complex data structures which come with build-in functions for these simple tasks. So if we can use .NET data structure then we can save reinvention of wheel for some of these tasks. Well the good news is some of .NET libraries are exposed to COM and can be used in VBScript.
+
+=====ArrayList=====
+An **[[http://msdn.microsoft.com/en-us/library/system.collections.arraylist(v=vs.100).aspx|ArrayList]]** is an array array whose size is dynamically increased as required. Here is an example of it's usage.
+
+<code vb>
+Set objArrayList = CreateObject("System.Collections.ArrayList")
+
+objArrayList.Add 6
+objArrayList.Add 8
+objArrayList.Add 2
+objArrayList.Add 4
+objArrayList.Add 1
+objArrayList.Add 5
+objArrayList.Add 3
+objArrayList.Add 3
+objArrayList.Add 7
+
+'Convert to VBScript Array
+Rhino.Print Join(objArrayList.ToArray, ",")
+
+'Return the element at a given index
+Rhino.Print objArrayList(0)
+
+'Return the number of elements 
+Rhino.Print objArrayList.Count
+
+'Verifies an element exists or not. 
+Rhino.Print objArrayList.Contains(5)
+
+'Sort the elements
+objArrayList.Sort
+Rhino.Print Join(objArrayList.ToArray, ",")
+
+'Reverse the order of all elements
+objArrayList.Reverse
+Rhino.Print Join(objArrayList.ToArray, ",")
+
+'Remove a specific element
+objArrayList.Remove 8
+
+'Remove element by index
+objArrayList.RemoveAt 6
+
+'Remove all elements
+objArrayList.Clear  
+</code>
+
+For VBScript **Dictionary** objects we don’t need to redim while appending/removing elements; also an element can be directly searched without iterating through each of them. Both of these features are available with **ArrayList** as well but one of the most important dictionary object feature ‘Key-Value pair’ is not present in **ArrayList**.** SortedList** is alternative if you want utilize power of both **ArrayList** and **Dictionary**. 
+
+=====SortedList=====
+A **[[http://msdn.microsoft.com/en-us/library/system.collections.sortedlist.aspx|SortedList]]** a is sorted **Dictionary**. Every time we add/remove a key value pair in dictionary, it automatically gets sorted by Key. Also you can also access elements based on its index (just like arrays) which makes this even more powerful. Here is an example of it's usage.
+
+<code vb>
+Set objSortedList = CreateObject("System.Collections.SortedList")
+
+objSortedList.Add "Point", 1
+objSortedList.Add "Point Cloud", 2
+objSortedList.Add "Curve", 4
+objSortedList.Add "Surface", 8
+objSortedList.Add "Polysurface", 16
+objSortedList.Add "Mesh", 32
+
+'Return the number of elements
+Rhino.Print objSortedList.Count
+
+'Return a value by its key
+Rhino.Print objSortedList("Surface")
+
+'Access all elements by index
+For i = 0 To objSortedList.Count - 1
+  Rhino.Print CStr(objSortedList.GetByIndex(i))
+Next
+
+'Verify a key exists 
+Rhino.Print objSortedList.ContainsKey("Polysurface")
+
+'Verify a value exists
+Rhino.Print objSortedList.ContainsValue(16)
+
+'Return the index by key (zero based index)
+Rhino.Print objSortedList.IndexOfKey("Polysurface")
+
+'Return the index by value
+Rhino.Print objSortedList.IndexOfValue(16)
+
+'Remove an element by key
+objSortedList.Remove "Polysurface"
+
+'Remove an element by index
+objSortedList.RemoveAt 0
+
+'Remove all elements
+objSortedList.Clear
+</code>
+
+=====Stack=====
+A **[[http://msdn.microsoft.com/en-us/library/system.collections.stack.aspx|Stack]]** is a simple last-in-first-out (LIFO) non-generic collection of objects or data. By last-in-first-out, what we mean is if a set of objects are put into a stack, the last object that was put in, will be the first object to be taken out. For example, if you see in restaurants that have an automatic plate dispenser, a stack of plates are kept and as each person takes a plate, the next plate in the stack becomes available. Here is an example of it's usage.
+
+<code vb>
+Set objStack = CreateObject("System.Collections.Stack")
+
+'Add elements to stack
+objStack.Push "Item_1"
+objStack.Push "Item_2"
+objStack.Push "Item_3"
+objStack.Push "Item_4"
+
+'Iterate through each element
+For Each Item In objStack
+ Rhino.Print Item
+Next
+
+'Convert to VBScript array
+Rhino.Print Join(objStack.ToArray, ",")
+
+'Return the number of elements
+Rhino.Print objStack.Count
+
+'Verify an element exists
+Rhino.Print objStack.Contains("Item_2")
+
+'Pop the last element
+Rhino.Print objStack.Pop
+
+'Return the last in element without popping
+Rhino.Print objStack.Peek
+Rhino.Print objStack.Pop
+Rhino.Print objStack.Pop
+
+'Remove all elements
+objStack.Clear
+</code>
+
+=====Queue=====
+Unlike a **Stack**, a **[[http://msdn.microsoft.com/en-us/library/system.collections.queue(v=vs.100).aspx|Queue]]** represents a first-in, first-out collection of objects or data.  Here is an example of it's usage.
+
+<code vb>
+Set objQueue = CreateObject("System.Collections.Queue")
+
+'Add elements to queue
+objQueue.Enqueue "Item_1"
+objQueue.Enqueue "Item_2"
+objQueue.Enqueue "Item_3"
+objQueue.Enqueue "Item_4"
+
+'Iterate through each element
+For Each Item In objQueue
+  Rhino.Print Item
+Next
+
+'Convert to VBScript array
+Rhino.Print Join(objQueue.ToArray, ",")
+
+'Return the number of elements
+Rhino.Print objQueue.Count
+
+'Verify an element exists
+Rhino.Print objQueue.Contains("Item_2")
+
+'Return the first element
+Rhino.Print objQueue.Dequeue
+
+'Return the first element without removing it
+Rhino.Print objQueue.Peek
+Rhino.Print objQueue.Dequeue
+Rhino.Print objQueue.Dequeue
+
+'Removes all elements
+objQueue.Clear
+</code>
+
+{{tag>Developer RhinoScript}}

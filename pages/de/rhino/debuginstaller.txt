@@ -1,0 +1,34 @@
+====== Debugging von Installerfehlern ======
+
+> **Zusammenfassung:** //Anleitungen, um eine Logdatei aus einem .MSI Installer (wie Rhino 4.0, 5.0, Flamingo 2.0, Brazil 2.0) zu erzeugen//
+
+=====PROBLEM:=====
+Wenn ich versuchen, das Produkt zu installieren, erhalte ich einen Installerfehler und die Installation wird nicht vervollständigt.
+
+=====LÖSUNG:=====
+Folgen Sie den Anleitungen unten, um eine Textdatei zu erzeugen, die ein Protokoll der Aktionen beinhaltet, die während der Installation vorgenommen werden. Danach senden Sie diese Datei in einer E-Mail an den Technischen Support von McNeel unter <tech.eu@mcneel.com>
+
+=====VORGEHENSWEISE:=====
+  * Laden Sie diese Zip-Datei runter http://s3.amazonaws.com/mcneel/misc/DebugInstaller.zip
+  * Entzippen Sie die beinhaltete Datei namens "DebugInstaller.exe" auf Ihren Desktop.
+  * Suchen Sie den MSI-Installer, der Standort ist für verschiedene Produkte nicht der gleiche:
+    Rhinoceros 4.0 CD -- Der Name der Datei lautet "Rhino4_Setup.msi" und befindet sich im Rhinoceros Ordner auf der CD
+    Rhinoceros 4.0 Testversion -- Entzippen Sie den .EXE Installer (z.B. rh40eval_en_yyyymmdd.exe) und suchen Sie die Datei
+    "RHINO4_EVALUATION_EN.MSI"
+    Rhinoceros 5.0 WIP/Beta -- Der Name lautet "rh50beta_x86_en_yyyymmdd_hhmm.msi"
+    Flamingo 2.0 CD -- Der Name lautet "Flamingo2_Setup_English.msi" und befindet sich im Flamingo Ordner auf der CD
+    Flamingo 2.0 Testversion -- Entzippen Sie den .EXE Installer (z.B. fl20eval_en_yyyymmdd.exe) und suchen Sie die Datei
+    "FL20_.MSI"
+    Brazil 2.0 CD -- Der Name lautet "Setup Brazil.msi" und befindet sich im Brazil Ordner auf der CD
+    Brazil 2.0 Testversion -- Entzippen Sie den .EXE Installer (z.B. brazil_evaluation_yyyymmdd.exe) und suchen Sie die Datei
+    "BRAZIL_2.0_ENGLISH.MSI"
+
+  * Führen Sie "DebugInstaller.exe" aus, indem Sie das Symbol auf dem Desktop doppelklicken
+  * Ziehen Sie die Installerdatei .MSI in das Fenster mit dem Namen "McNeel Install Debugger"
+  * Der Installationsprozess beginnt, fahren Sie fort, bis der Fehler auftritt, und fahren Sie weiter, bis der Installer stoppt.
+  * Sie finden die neue .TXT Datei auf Ihrem Desktop mit dem gleichen Namen wie die .MSI Installerdatei aber mit der Erweiterung .TXT (z.B. Rhino4_Setup.txt) Das Symbol sieht wie ein spiralgebundener Notizblock aus. Die Dateierweiterung könnte nicht angezeigt werden.
+  * Senden Sie diese .TXT Datei in einer E-Mail an den Technischen Support von McNeel unter <tech.eu@mcneel.com>
+
+
+
+

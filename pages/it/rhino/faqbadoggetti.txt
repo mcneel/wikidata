@@ -1,0 +1,57 @@
+> **Sommario:** //Come trovare a aggiustare i "Bad Objects" creati in Rhino o importati da altri programmi.//
+
+=====Cos'è un "bad (invalid) object"?=====
+
+"Bad  object" in Rhino sono quelli che violano alcune regole per le NURBS, o hanno problemi strutturali.
+In teoria, Rhino non dovrebbe produrre bad objects, ma in pratica, è possibile e capita periodicamente. Bad objects possono presentarsi quando si importano file da altri programmi. Quando saprete come aggiustarli non vi richiederà molto tempo farlo.
+
+=====Come faccio a sapere se ce n'è uno?=====
+
+La via più semplice per scovarlo è usare il comando **SelBadObjects**. Tutti gli oggetti considerati non validi verranno automaticamente selezionati. Una polisuperficie potrebbe essere selezionata anche se contiene solo una superficie "bad" in qualche punto. Potete vedere quale è col comando **ExtractBadSrf** che estrae la superficie non valida e la seleziona. C'è un utilissimo comando chiamato **CheckNewObjects** che lavora in background e verifica tutti gli oggetti creati o importati. In questo modo saprete immediatamente se si presenta qualche problema.
+
+=====Perchè questi oggetti sono considerati non validi e come si creano?=====
+
+Ci sono diverse spiegazioni tecniche. Spesso è la struttura della curva di taglio che è "invalida", ha uno o più segmenti microscopici che causano problemi. Altre volte la superficie non è valida perchè ha una o due righe di punti di controllo uno sopra l'altro o con lunghezza 0 in una direzione (collassati). Questa situazione è semplice da produrre quando si crea un piano verticale e lo si proietta sul Cplane. Se ha lunghezza 0 in una direzione è considerato non valido.
+
+Perchè a volte la curva di taglio non è corretta? Sicuramente non è intenzionale. I Bad Objects spesso saltano fuori usando **Join** o i comandi che uniscono come le Booleane. Nel processo di unione, Rhino spesso necessita di spezzare gli spigoli e aggiustare le curve di taglio. In certe situazioni parte di questi spigoli spezzati possono essere minuscole o l'adeguamento delle curve di taglio non funziona bene e improvvisamente "Bing!!" ecco il bad object.
+
+//(Per la precisione per microscopiche si intendono minori della tolleranza assoluta, oggetti così piccoli generalmente non c'entrano niente col disegno e causano un sacco di problemi.)//
+
+Importare da altri software può produrre questi problemi. Se avete abilitato **CheckNewObjects**, quando importate un file ricevete un messaggio se e quando uno di questi oggetti viene creato. Dovete scegliere OK per conoscerli ognuno. Se ce ne sono tanti può essere una procedura noiosa, percui conviene disabilitare il comando.
+
+=====La temuta superficie nascosta=====
+//Perchè non vedo i miei bad object?//
+
+Occasionalmente Rhino produce superfici che non sono valide ma che non si possono vedere. Letteralmente invisibili.Questo succede perchè non è possibile produrre la mesh di rendering per visualizzarle. Generalmente sono riferite a superfici "fantasma"
+
+Generalmente possono però essere selezionate con **SelBadObjects**, e quasi sempre si possono cancellare col normale **delete**. Rarissime volte non basta cancellarle, allora potete provare con **Cut** (taglia) o invertendo la seleziona incollare le superifici "vere" in un nuovo file.
+
+Le superfici nascoste causano al file di "agire strano", esempio  **Zoomextens** non funziona correttamente perchè la superficie nascosta è fuori dallo spazio di lavoro.
+
+=====OK, come aggiusto le superfici non valide?=====
+
+Per cominciare dovete selezionare la superfici che necessita d'intervento e nascondere tutto il resto. (con **ExtractBadSurface**)
+
+before starting, determine which are the bad surfaces and hide everything else temporarily (you may need to run **ExtractBadSrf** as above).
+
+Metodo "automatico" semplice ma non sempre funzionante
+
+----
+**1.** Per primo utlizzate **RebuildEdges** su tutti i bad objects. Questo ne aggiusterà automaticamente molti. Questo comando rigenera gli edges all'interno di una tolleranza  riportando (più o meno) gli edges allo stato in cui erano prima del join. Tuttavia questo sgnifica che le superfici potrebbero non unirsi più con quelle vicine o che unendosi il bordo ritorni ad essere "non valido". Ma funziona in molti casi. Con **SelBadObjects/Invert** spegnete le superfici aggiustate.
+
+A volte anche **ShrinkSrf** aiuta a risolvere alcuni problemi.
+
+Metodo manuale, funziona sempre ma bisogna faticare un poco di più.
+
+----
+**1.** Utilizzate **Untrim** con l'opzione "keep trim objects" attiva (altrimenti **DetachTrim**) sulla superficie non valida. poi, con le curve di taglio ancora selezionate utilizzate **Trim** per ri-tagliare la superficie. Verifcate se questo ha aggiustato la superficie. Se si, bene, nascondetela, se no visualizzate quelle adiacenti e procedete allo stesso modo anche su di queste. nascondete tutto quello che è buono.
+
+**2.** Se nessun bad objects è stato risolto, utilizzate **DetachTrim** ancora. **Explode** le curve risultanti a cercate microsegmenti nella curva. Questo è il caso più comune di trim non validi. Guardate i pezzi di curva che il trim ha creato. A volte ce ne sono un numero "sospetto", tipo quello che dovrebbe essere un rettangolo ha 5 curve anzichè 4. Da qualche parte potrebbe esserci una micro curva che guasta tutto. A volte è vicino ad un angolo, provate con una selezione a finestra vicino alla fine del segmento di taglio. Se trovate dei microsegmenti, cancellateli e riunite la curva di taglio in un loop chiuso. Ri-tagliate la superficie con questa nuova curva. Questo generalmente risolve quello che non è stato risolto con altri metodi.
+
+**3.** Ultimo, provate a visualizzare tutto (**Show**) e osservate se riuscite a unire tutto senza avere problemi. Se tutto è giusto non dovrebbero più esserci bad objects, bene! Se è ancora no è generalmente perchè l'unione (**join**) forza l'unione di cose che non combaciano correttamente. In questo caso dovete andare ad analizzare le superfici che non si aggiustano e le relazioni con le superfici vicine per cercare cos'è che non combacia. Questi casi a volte richiedono una visione da molto, molto vicino e possono essere un piccolo rompicapo.
+
+> **Nota:** //La metodologia presentata serve per le superfici con tagli "errati". Non può servire nei casi in cui ci sono superfici "disegnate" male, tipo con spigoli collassati o file di punti impilati. Questi casi necessitano di essere risolti con altri metodi, tipo rimuovere i nodi o una ricostruzione da zero. Superfici con gli spigoli collassati sono semplici da individuare perchè sembrano curve ma in prorpietà vengono descritte come superfici. Basta cancellarle.//
+
+
+
+

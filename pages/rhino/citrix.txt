@@ -1,0 +1,49 @@
+====== Does Rhino work on CITRIX servers? ======
+
+======Caveat======
+We have no actual experience running Rhino on CITRIX, but based on our own thought experiments, we can't imagine that it would work very well. If you have experience with Rhino on CITRIX, we'd love to hear it.
+
+======Overview======
+There are at least two ways to configure Rhino on CITRIX:
+
+  - Use CITRIX to deploy Rhino to the client computer.
+  - Run Rhino on the CITRIX server and stream the UI to the client.
+
+======1. Use CITRIX to deploy Rhino======
+Rhino 4.0 uses Windows Installer for deployment, and there are scripted installation instructions available at: [[rhino:installingrhino|InstallingRhino]]#Rhino4ini
+
+It is your responsibility to assure that your organization owns enough licenses as the number of Rhinos running simultaneously. It is your responsiblity to monitor usage and deny usage to your clients if you have reached your license count.
+
+======2. Run Rhino on the CITRIX server and stream the UI======
+We recommend that you do not run Rhino on a CITRIX server. It is possible to install and run Rhino on a CITRIX server, but it is not likely that the user experience will be a positive one.
+
+Before investing in a CITRIX solution for Rhino, we recommend that you download the Rhino Evaluation and try it - be sure to have many clients actively running Rhino simultaneously before you determine whether it really works.
+
+**Graphics Performance**
+
+Rhino is graphics intensive. Unlike many text-based products (such as e-mail, word processing, and spreadsheets), for which CITRIX can send relatively small amounts of information across the network, Rhino requires full-screen graphics refresh multiple times per second. When the user rotates the model on the screen, Rhino redraws the entire screen between 5 and 30 times per second. This means that the CITRIX server needs to send a bitmap image across the wire 5-30 times per second. Running at 1280x1024, assuming lossless compression such as PNG, means sending about 100kb per frame (that's between  500k and 3MB per second per client) just to support screen redraw. If you have 30 clients each using Rhino, that means 15MB - 90MB per second going across the wire.
+
+This assumes that the server is capable of generating images that quickly. To have 30 clients each generating that kind of frame rate requires some substantial hardware acceleration - you'll likely need a dedicated GPU (graphics processor) for each client.
+
+If you can't reliably get this kind of network traffic and graphics performance (when all 30 clients are using Rhino) you'll likely get a ton of complaints.
+
+**CPU Overhead**
+
+Rhino has several features that are CPU intensive. It is not uncommon for a user to spike CPU usage to 100% for between 3 seconds and 3 minutes, depending on the complexity of the operation. Rhino doesn't do these processes with multiple threads, so one client will fully utilize only one processor at a time. If you have 30 clients trying to do this, you may find performance degredation.
+
+**RAM Availability**
+
+Your clients will likely use as much RAM as they can. When people have a lot of processor and RAM available, they tend to use it. Rhino 3.0 will only use 2GB, but Rhino 4.0 can use 3GB. I have no idea how big the models are that your clients will be making, but it's not uncommon for people to start using 500MB - 1.5GB.
+
+**Your Experience**
+
+If you have tried Rhino on CITRIX, please edit this wiki page and tell us about it.
+
+======Actual User Experiences======
+
+**Licensing Problems**
+
+It is more likely that you'll run into license problems before you reach any performance limit. RhinoLM only allows one user at once to get a licence (in either Standalone or Workgroup/Zoo mode). Once one user is running Rhino, subsequent users will just hang when trying to get a license. This bug effectively renders Rhino useless on Citrix, which is a shame as initial testing shows that performance was good.
+
+
+

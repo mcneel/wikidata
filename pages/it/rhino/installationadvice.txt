@@ -1,0 +1,102 @@
+====== Domande più frequenti sull'installazione e sull'aggiornamento di Rhino ======
+=====Amministratori di sistema:=====
+[[InstallingRhino|Installazione automatica di Rhino -  Tecniche per installazioni invisibili all'utente/controllate da script, dettagli sulle cartelle ed il registro, ecc.]]
+=====Installazione di Rhino 5=====
+
+<color darkslategray>**//Domanda://** //Perché ci sono due collegamenti a Rhino V5 sul desktop?//</color>\\
+**Risposta:** Rhino 5 installa automaticamente sia la versione a 32 bit che quella a 64 bit, con un collegamento per ciascuna di esse.  [[Rhino:Why2Shortcuts|Si veda questa pagina per ulteriori informazioni sul perché ciò succede.]]
+
+<color darkslategray>**//Domanda://** //Perché il programma di installazione di V5 rifiuta i miei codici di V3 o V2?//</color>\\ 
+**Risposta:**C'è un errore nel programma di installazione della SR0, ma si può risolvere facilmente.\\
+Quando andate ad inserire i codici di V3 o V2, attivate il tasto BLOC MAIUSC della tastiera.\\
+Il problema risiede nel fatto che il programma di installazione non consente l'inserimento dei caratteri in minuscolo, ma ne cambia la visualizzazione quando si inseriscono. Assicuratevi di inserire le lettere dei codici chiave in maiuscolo ed il programma di installazione della SR0 funzionerà.
+Ci scusiamo per il disagio.
+
+<color darkslategray>**//Domanda://** //"Posso installare o disinstallare Rhino 5 mantenendo intatta l'installazione di Rhino 4?"//</color>\\ 
+**Risposta:** Sì, <color darkslateblue>**//ma con una condizione importante//**</color> - Leggi sotto\\ 
+
+Rhino V5 ha un'installazione completamente indipendente da V4 - Tuttavia, esso usa lo stesso gestore delle licenze di V4.  <color darkslateblue>//Se decidete di disinstallare Rhino 5, si possono verificare dei problemi: il gestore delle licenze di V4 viene disinstallato e V4 smette di funzionare.//</color>  
+
+Per evitare che ciò accada, se decidete di disinstallare V5, COPIATE prima i file McNeelLM.exe e RhinoLM.exe in un percorso sicuro, quindi disinstallate Rhino 5, per poi copiare di nuovo i file nella posizione originale.
+
+In Windows Vista o 7, il gestore delle licenze si trova qui:\\ 
+C:\Program Files (x86)\Common Files\McNeel Shared\License Manager (64 bit)\\ 
+o\\ 
+qui C:\Program Files\Common Files\McNeel Shared\License Manager (32 bit)\\ 
+
+//*Fate anche MOLTA ATTENZIONE con i plug-in, le barre degli strumenti, ecc. che possono venire condivisi tra V4 e V5, consapevolmente o inavvertitamente.  È noto che ciò può causare dei problemi...//
+
+<color darkslategray>**//Domanda://** //"Nel mio computer, posso avere sia la versione di Rhino 5 a 32 bit che quella a 64 bit?"//</color>\\ 
+**Risposta:** Sì, non c'è nessun problema, tranne che per la questione del gestore delle licenze descritta qui sopra.\\
+\\ 
+ 
+=====Rimozione manuale di Rhino 4.0=====
+<color darkslategray>**//Domanda://** Ho cercato di disinstallare Rhino 4.0, ma si è verificato un errore e non sono riuscito a rimuovere Rhino.</color>\\
+**//Risposta://** [[rhino/uninstalling|Rimuovere manualmente Rhino 4.0.]]
+
+=====Rimozione manuale di Rhino 5.0=====
+<color darkslategray>**//Domanda://** Ho cercato di disinstallare Rhino 5.0, ma si è verificato un errore e non sono riuscito a rimuovere Rhino.</color>\\
+**//Risposta://** [[rhino/5/uninstall|Rimuovere manualmente Rhino 5.0.]]
+
+=====Installare versioni aggiornate di Rhino=====
+
+<color darkslategray>**//Domanda://** //"Di quali informazioni sulle versioni precedenti ho bisogno perché si installi l'aggiornamento a Rhino 5?"//</color>\\
+**//Risposta://** Il programma di installazione dell'aggiornamento a Rhino 5 si installerà se si verifica una qualsiasi delle seguenti condizioni.\\ 
+La verifica avviene nell'ordine:\\
+
+Rhino 4.0 è installato
+
+Rhino 3.0 è installato
+
+Rhino 2.0 è installato
+
+Il codice di Rhino 4.0 viene inserito durante l'installazione
+
+Il codice di Rhino 3.0 viene inserito durante l'installazione
+
+Il codice di Rhino 2.0 viene inserito durante l'installazione
+
+
+=====Trasferire le impostazioni personalizzate da un'installazione di Rhino all'altra=====
+[[Rhino:SettingsTransfer|Una pagina con alcuni suggerimenti sulla copia/sul trasferimento delle impostazioni personalizzate]]
+
+
+=====Installare Rhino con le ultime Service Release su un nuovo computer=====
+
+**//Domanda://** //Voglio installare Rhino **X** SR **Y** sul mio computer nuovo. Ho sempre acquistato versioni di aggiornamento di Rhino.  Devo installare TUTTE le versioni precedenti ed i successivi service pack?//
+
+**//Risposta://**  Basta che installiate l'ultima versione di aggiornamento che avete su un CD.  Durante l'installazione, vi verrà richiesto di inserire il CD di una versione precedente per confermare che siete in suo possesso, ma non è necessario **INSTALLARE** le versioni precedenti.  Una volta installata l'ultima versione da CD, installate l'ultima Service Release; non è necessario installare quelle precedenti.
+
+=====Cosa sono le Service Release?=====
+Sono delle installazioni scaricabili che si installano solo se si è già installata una versione del prodotto.  Le service release si identificano in due modi: il numero della SR, come per esempio SR3 o SR4b; e la data, codificata all'interno del nome del file di download, come per esempio 20050729, che significa 29 luglio 2005.
+
+=====Come faccio a sapere qual'è la versione installata?=====
+Una volta installato il software, potete visualizzare la data ed il numero della SR nella sezione "Informazioni" che appare nella schermata di avvio di Rhino, oppure andando al menu Aiuti > Informazioni su [[rhino:rhinoceros|Rhinoceros]].
+
+Per Flamingo, eseguire il comando FlamingoInfo. Per Bongo, eseguire il comando BongoInfo.
+
+=====Come ottengo le Service Release?=====
+Il modo più veloce è usare il servizio di verifica aggiornamenti.  In Rhino, dal menu Aiuti, selezionare Aggiornamenti.  Se il computer è connesso a Internet, i server Web McNeel rileveranno l'eventuale disponibilità di una Service Release più nuova rispetto al vostro software e ve ne offriranno il download.  Per Flamingo, dal menu Raytrace o Photometric, selezionare Verifica aggiornamenti.  Per Bongo, dal menu di Bongo, selezionare Aggiornamenti.
+
+=====Posso eliminare le versioni precedenti da "Installazione applicazioni" del pannello di controllo senza causare dei problemi?=====
+La voce "Installazione applicazioni" del pannello di controllo di Windows segnala tutte le Service Release come programmi installati, con un uso di 250MB di spazio su disco per ciascuno di essi. Ciò è piuttosto ingannevole. Windows riporta il totale come se tutti i file installati venissero aggiunti all'installazione esistente, ma di fatto non tutti i file vengono sovrascritti durante l'installazione. **Non** usate "Installazione applicazioni" per rimuovere le Service Release precedenti di Rhino 4.0.
+
+=====Ottengo un errore e l'installazione non si completa=====
+Si veda questa pagina [[http://wiki.mcneel.com/it/rhino/debuginstaller|DebugInstaller]] per informazioni su come generare un file di registro dell'errore e ricevere supporto tecnico.
+
+===== Errore 1327. Unità non valida: =====
+**//Domanda://** //Ottengo il messaggio "Errore 1327. Unità non valida (E:, F:, ecc)" durante l'installazione//
+
+**//Causa://** //Il vostro account utente ha delle impostazioni che indicano che una o più unità non esistenti vanno usate per cartelle speciali come per esempio "Documenti"//
+
+**//Soluzione://**
+  - Dal menu Start, fare clic su Esegui.
+  - Digitare RegEdit e quindi cliccare su Esegui
+  - Andare a HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  - Cercare tra le directory elencate quelle che contengono la lettera di unità menzionata nell'errore del programma di installazione. Modificatele in modo che facciano riferimento ad un'unità e cartella valida.
+  - Andare a HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+  - Cercare tra le directory elencate quelle che contengono la lettera di unità menzionata nell'errore del programma di installazione. 
+
+**Nota:** Questo metodo contiene dei passi che indicano come modificare il Registro di sistema. Tuttavia, se il registro viene modificato in modo erroneo, possono verificarsi dei problemi gravi. Assicuratevi quindi di seguire i vari passi attentamente. Per sicurezza, vi consigliamo di eseguire il backup del registro prima di modificarlo. In caso di eventuali problemi, potrete ripristinare il registro. Per ulteriori informazioni su come eseguire il backup e il ripristino del Registro di sistema, leggete il seguente articolo della Microsoft Knowledge Base:
+
+[[http://support.microsoft.com/kb/322756|Come eseguire il backup e il ripristino del Registro di sistema in Windows ]]

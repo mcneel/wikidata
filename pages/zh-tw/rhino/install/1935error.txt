@@ -1,0 +1,30 @@
+======Rhino 4.0 安裝問題:錯誤 1935  ======
+**作業系統**
+Windows Vista, Windows 7
+
+**錯誤情形**
+
+當您安裝Rhino並收到下列錯誤訊息
+ "Error 1935. An error occurred during the installation of assembly 'Microsoft.VC80.ATL, type="win32", version="8.0.50727.42", publicKeyToken="1fc8b3b9a1e183b", processorArchitecture="x86"'. Please refer to Help and Support for more information."
+
+**造成因素:**
+
+這會是.NET framework在您的電腦失效。
+This can be caused by the .NET framework being disabled on your computer.
+
+**解決方式:**
+
+  - Click the Windows Start button
+  - Type "features"
+  - Click "Turn Windows Features on or off" (If this box is empty, your Windows installation is corrupt, and needs to be repaired - contact Microsoft Support for assistance).
+  - Expand "Microsoft .NET Framework 3.5.1"
+  - Select the "Windows Communication Foundation HTTP Activation" and "Windows Communication Foundation Non-HTTP Activation" checkboxes
+  - Click OK
+  - Restart Windows
+  - Click the Windows Start Button
+  - Type "Windows Update" then press Enter
+  - Install all available updates
+  - Continue to check for updates until no more updates are available
+  - 安裝Rhino
+
+若以上動作無法解決錯誤1935，請聯絡Rhino Support [[http://www.rhino3d.com/support|McNeel Support]].

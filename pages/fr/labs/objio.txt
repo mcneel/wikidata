@@ -1,0 +1,83 @@
+====== Importer/Exporter des fichiers OBJ avec Rhino V4 ======
+
+> **Contenu:** //Modules de Rhino 4.0 pour importer et exporter des fichiers .obj de WaveFront.//
+
+=====Description=====
+
+Ces modules pour Rhino 4.0 mettent à jour la fonction d'importation et d'exportation de fichiers *.obj. Renommez ou déplacez les originaux puis placez les fichiers
+
+//export_OBJ.rhp// et //import_OBJ.rhp//
+
+de ce [[http://en.wiki.mcneel.com/content/upload/files/OBJ_IO.zip|dossier zip]] dans le répertoire Plug-ins du dossier d'installation de Rhino 4.0.
+
+=====Exporter (_Export)=====
+  * Le module d'exportation restaure la possibilité d'exporter les maillages de Rhino sous forme de maillages séparés dans OBJ- cette fonction ne marche pas correctement dans le module qui vient avec Rhino. //Pour exporter des objets différents dans Rhino sous forme de maillages séparés dans obj, utilisez le paramètre permettant d'exporter les noms des objets de Rhino **sous OBJ "g"** //. Vous disposez également d'options pour exporter des groupes ou des calques comme objets "o" obj.
+  * Le nombre de chiffres après la virgule écrits dans le fichier obj peut être défini - la valeur par défaut est le nombre à virgule flottante maximum mais comme cette option cause des problèmes dans certaines applications, les utilisateurs peuvent maintenant indiquer un plus petit nombre.
+  * Une option permet d'exporter les maillages obj sous forme de maillages non soudés, c'est-à-dire sans lissage des sommets. Le maillage ressemble alors à un maillage STL.
+
+===== Importer=====
+
+  * Le module actuel ajoute une boîte de dialogue au procédé d'importation OBJ.  "Don't show this dialog", lorsque cette option est cochée, la boîte de dialogue n'apparaît plus pour les importations OBJ suivantes. Elle peut être réactivée grâce à la commande OBJImportOptions. La boîte de dialogue vous permet de faire des choix pour définir par exemple commet sont lus les objets "g" et "o" OBJ. Lorsque cette boîte de dialogue est désactivée, l'importation OBJ utilisera les derniers paramètres définis.
+  * Si l'option "Attempt to preserve vertex order" est cochée, les faces et les sommets seront, dans la mesure du possible, maintenus dans le même ordre et leurs numéros seront les mêmes que dans le fichier OBJ.  Les coordonnées de texture peuvent être altérées, il vaut donc mieux laisser cette option désactivées dans la plupart des cas.
+  * "Reverse group order" définit le sens dans lequel les noms de groupe sont lus.
+  * La case "Ignore textures" ne modifiera pas les objets mais les textures seront ignorées. Sauf si vous avez besoin spécifiquement de cette option, il vaut mieux la laisser désactivée.
+
+
+----
+**[[http://en.wiki.mcneel.com/content/upload/files/OBJ_IO.zip|Télécharger les modules]]**
+
+=====Option d'importation de cibles de morphing=====
+
+Grâce au nouveau module d'importation/exportation OBJ pour Rhino 4, il est maintenant possible de créer des cibles de morphing à utiliser dans des programmes d'animation comme Poser. Le nouvel importeur OBJ possède une option pour les cibles de morphing qui permet d'ignorer toutes les normales et données de plaquage mais qui conserve le nombre de sommets. Le fichier OBJ peut ensuite être manipulé dans Rhino avec l'édition de points ou les nouvelles fonctions UDT comme la modification avec une cage. Vous trouverez ci-après un petit guide du procédé de création et de morphing par cible pour un personnage de Poser. Cette fonction ne vous servira que si vous créez une cible de morphing. Ne sélectionnez pas cette option pour les fichiers OBJ normaux mais uniquement pour ceux qui seront utilisés comme cibles de morphing.
+
+Vérifiez que les modules d'importation/exportation OBJ ont été installés.
+
+1. Exportez la partie du corps à partir de Poser. Vérifiez que l'option Morph Target est sélectionnée dans les options d'exportation OBJ. Toutes les autres options devraient être désactivées.
+
+2. Dans Rhino 4, ouvrez le menu Fichier > Importer. Choisissez OBJ dans le type de fichier et cherchez la partie que vous venez d'exporter. Lorsque le panneau des options d'importation OBJ apparaît, sélectionnez les options ci-dessous et cliquez sur Accepter pour importer le fichier.
+
+\\
+
+{{http://fr.wiki.mcneel.com/content/upload/images/Obj_import.jpg}}
+
+\\
+
+Ces options permettront de conserver le nombre de sommets dans le modèle afin qu'il puisse être réimporté correctement dans Poser.
+
+3. Maintenant que le modèle est dans Rhino, vous pouvez le modifier. Attention à ne pas déplacer le modèle, vous ne pouvez que modifier les points ou utiliser les fonctions UDT.
+
+4. Exportez maintenant le maillage modifié en utilisant les paramètres suivants.
+
+\\
+
+{{http://fr.wiki.mcneel.com/content/upload/images/Obj_export.jpg}}
+
+\\
+
+5. Dans Poser, sélectionnez maintenant la partie du corps et chargez le fichier OBJ modifié comme cible de morphing. Cela devrait fonctionner comme prévu.
+
+Le processus décrit ici fonctionne pour les cibles de morphing sur une seule partie de corps. Pour les projets dont plusieurs parties de corps doivent être déformées ensemble, le procédé est un peu plus compliqué. Il implique également l'aide d'un autre programme appelé UV Mapper. Vous pouvez télécharger UV Mapper Classic sur www.uvmapper.com.
+
+1. Exportez toutes les parties de corps à partir de Poser pour former un seul objet. Les options Morph Target et Include existing groups in polygon groups doivent être sélectionnées.
+
+2. Ouvrez le fichier OBJ exporté dans UV Mapper et allez dans File/Export UVS. Dans les options Export UVS, sélectionnez  Export Group Names and Export Material Names. Cliquez sur OK pour enregistrer le fichier UVS.
+
+3. Suivez maintenant les étapes 2 à 4 ci-dessus.
+
+4. Après l'exportation à partir de Rhino 4, le modèle est constitué d'un seul groupe. Ouvrez-le dans UV Mapper Classic et allez dans File/Import UVS. Les modèles seront regroupés et tous les noms de matériaux seront rétablis.
+
+5. La partie compliquée commence ici. Vous devez importer ce nouveau modèle dans Poser et sélectionner l'outil Groping. Cliquez sur Spawn Props et fermez l'outil Groping. Supprimez le modèle OBJ importé afin d'avoir toutes les parties du corps sous forme de modèles séparés. Exportez chacun d'eux sous forme de cible de morphing. Chargez ensuite votre personnage ainsi que les cibles de morphing pour chaque partie du corps. À la fin vous aurez un morphing qui se produit sur toutes les parties du corps.
+
+----
+11 novembre 2008
+
+  * La lecture des fichiers contenant des index de normales au sommet ou de coordonnées de texture erronés sur des faces est plus tolérante. Le fichier sera lu et le nombre d'erreurs sera indiqué dans la ligne de commandes.
+  * Une erreur de lecture des noms de fichiers de texture a été corrigée.  Des espaces dans les noms des fichiers étaient supprimés et les textures n'étaient pas correctement affichés car le chemin était faux.
+
+----
+16 janvier 2009
+
+  * Les paramètres de surface des maillages sont définis avec les coordonnées de texture initiales.
+
+----
+

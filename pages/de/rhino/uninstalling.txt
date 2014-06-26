@@ -1,0 +1,40 @@
+====== Rhino 4.0 von Hand deinstallieren ======
+====Problem:====
+Während Programmstart, Installation oder Deinstallationn von Rhino erhalten Sie eine Fehlermeldung wie folgende: 
+
+**Die Eigenschaft, die Sie verwenden möchten, befindet sich auf einer Netzwerk-Ressource, die nicht erhältlich ist.**
+
+**Klicken Sie auf OK, um es erneut zu versuchen, oder geben Sie im Kästchen einen alternativen Pfad zu einem Ordner ein, der das Installationspaket '<Dateiname>.MSI' enthält.**
+
+====Gültig für:====
+Rhino 4.0, Rhino 5.0
+
+====Ursache:====
+Der Windows Installer Speicher kann keine Datei oder Verzeichnis-Code für die Deinstallation finden. Dies ist ein allgemein bekanntes Problem, das vom Windows Installer Service verursacht wird. Die beste Lösung wäre, das Werkzeug **Windows Install Clean Up** zu verwenden, um die vorherige Installation vollständig zu entfernen. Nachdem Sie die vorheige Installation entfernt haben, können Sie Rhino erneut installieren und eine gültige Installation erhalten. 
+
+
+====Lösung:====
+Rhino und die Windows Installer Registrierung für das Produkt von Hand entfernen. 
+
+**Anmerkung:** Sie sollten das folgende Verfahren nur vornehmen, wenn die Deinstallation im Abschnitt der Programme und Eigenschaften in der Systemsteuerung nicht funktioniert. 
+
+===Bereinigung des Windows Installer Speichers:===
+  - Download von [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]]
+  - Entzippen des Inhalts von WindowsInstallerCleanupUtility.zip in einen "Windows Installer Clean Up" Ordner auf Ihrem Desktop.
+  - Ausführen von **msicuu.exe**
+  - Runterscrollen zu **(Alle Benutzer) Rhinoceros 4.0**
+  - Klicken auf **Entfernen**.
+   
+  
+===Löschen des Rhino-Installationsordners:===
+  - Durchsuchen von C:\Programmdateien\
+  - Löschen von **Rhinoceros 4.0** oder **Rhinoceros 4.0 Testversion**
+  
+===Löschen der Registry Keys:===
+  - Öffnen von **Registry Editor**.
+  - Durchsuchen von **HKEY_LOCAL_MACHINE**\Software\McNeel\Rhinoceros
+  - Löschen von **4.0** Key
+  - Durchsuchen von **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros
+  - Löschen von **4.0** Key
+  
+  

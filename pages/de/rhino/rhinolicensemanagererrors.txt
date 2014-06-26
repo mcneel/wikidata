@@ -1,0 +1,67 @@
+====== Behebung des Fehlers "Kommunikation mit dem Lizenzmanager nicht möglich" ======
+> **Zusammenfassung:** //Tipps zum Lösen des gefürchteten Fehlers "Kommunikation mit dem Lizenzmanager nicht möglich".//
+> **Version:** //Rhino 3.0, Rhino 4.0//
+
+=====Problem=====
+
+Wenn Sie entweder Rhino 3.0 oder Rhino 4.0 starten, erhalten Sie die folgende Fehlermeldung.
+
+{{http://en.wiki.mcneel.com/content/upload/images/rhinolicensemanager.png}}
+
+=====Ursache=====
+
+Die Nachricht "Kommunikation mit dem Lizenzmanager nicht möglich" wird erzeugt, weil Rhino nicht mit dem Lizenzmanagermodul kommunizieren kann. Rhino verwendet ein Lizenzmanagermodul, um Lizenzverwaltung und -kommunikation mit einem Zoo Server zu unterstützen. Dieses Lizenzmanagermodul befindet sich im folgenden Ordner:
+
+   C:\Program Files\Common Files\McNeel Shared\License Manager
+
+Rhino 3.0 und Rhino 4.0 verwenden unterschiedliche Lizenzmanagermodule:
+
+  * Der Rhino 3.0 Lizenzmanager heißt MCNEELLM.EXE.
+  * Der Rhino 4.0 Lizenzmanager heißt RHINOLM.EXE.
+
+=====Lösung 1=====
+
+Wenn das Lizenzmanagermodul für die von Ihnen verwendete Rhino-Version fehlt, müssen Sie Rhino erneut von der CD installieren.
+
+=====Lösung 2=====
+
+Wenn das Lizenzmanagermodul für die von Ihnen verwendete Rhino-Version vorhanden ist, könnte das Modul nicht registriert sein - es könnten keine Informationen im Windows-Verzeichnis vorhanden sein, die Rhino erlauben, dieses Modul zu finden. Um dieses Problem zu lösen:
+
+  - Vergewissern Sie sich, dass Sie auf Ihrem System als Administrator oder gleichwertiger Benutzer angemeldet sind.
+  - Öffnen Sie die Befehlszeile des Windows Betriebssystems.
+  - Navigieren Sie zum vorher erwähnten Ordner.
+
+Wenn der Fehler mit Rhino 3.0 geschehen ist, führen Sie folgendes in der Befehlszeile aus:
+
+   MCNEELM.EXE /REGSERVER
+Wenn der Fehler mit Rhino 4.0 geschehen ist, führen Sie folgendes in der Befehlszeile aus:
+
+   RHINOLM.EXE /REGSERVER
+
+Beachten Sie, wenn die vorherigen Befehle ausgeführt werden, wird nichts in der Befehlszeile wiedergegeben. Um zu bestätigen, dass diese Methode das Problem behoben hat, starten Sie Rhino. Wenn Sie Batch-Dateien erzeugen, um die obigen Befehle auszuführen, können Sie die Resultate in der Befehlszeile wiedergeben und so einen Erfolg oder ein Scheitern überprüfen.
+
+Es folgt ein Beispiel einer Batch-Datei, die MCNEELLM.EXE für Rhino 3.0 registriert.
+
+   rem RegisterMcNeelLM.bat
+   echo Registering McNeelLM...
+   mcneellm.exe /regserver
+   if errorlevel 1 goto ReportError
+   echo McNeelLM erfolgreich registriert.
+   goto End
+   echo Error registering McNeelLM.
+   echo Vergewissern Sie sich, dass Sie über Administratorrechte verfügen, um dieses Programm auszuführen.
+   goto End
+
+Es folgt ein Beispiel einer Batch-Datei, die RHINOLM.EXE für Rhino 4.0 registriert.
+
+   rem RegisterRhinoLM.bat
+   echo Registering RhinoLM...
+   rhinolm.exe /regserver
+   if errorlevel 1 goto ReportError
+   echo RhinoLM erfolgreich registriert.
+   goto End
+   echo Error registering RhinoLM.
+   echo Vergewissern Sie sich, dass Sie über Administratorrechte verfügen, um dieses Programm auszuführen.
+   goto End
+
+

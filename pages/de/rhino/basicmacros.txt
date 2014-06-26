@@ -1,0 +1,236 @@
+====== Ein Anfänger-Tutorial zur Erzeugung von Makros (Scripting von Rhino-Befehlen) ======
+
+=====Einführung=====
+
+Die Erstellung von Makros in Rhino ist eine gute Möglichkeit, viele Aufgaben zu automatisieren, Ihre Befehle zu personalisieren und Ihren Workflow zu verbessern.
+
+Die Verwendung des Begriffs Scripting mag hier eventuell einige Verwirrung stiften.  Generell wurde er gebraucht, um sowohl den Prozess des Schreibens von Makros (darum geht es in dieser Sektion) als auch anspruchsvollerer Skripts in [[developer:rhinoscript|RhinoScript]] und anderen Programmiersprachen zu bezeichnen.  
+
+Dabei handelt es sich jedoch um zwei verschiedene Dinge. Funktionen in Rhinoscript und anderen Programmiersprachen sind weitaus komplexer als Makros und erfordern echte Programmierkenntnisse.  Dies werden wir hier nicht behandeln.
+
+Mit dem Begriff "Makro" wird hier ausschließlich das Zusammensetzen von gewöhnlichen Rhino-Befehlen und die Optionen zur Erzeugung einer automatisierten Funktion bezeichnet.  Dies ist "Scripting" in seiner einfachsten Form, das von jedem normalen Rhino-Nutzer leicht anwendbar ist, selbst wenn keine Programmierkenntnisse vorliegen.  Alles, was Sie dafür benötigen, ist ein grundlegendes Verständnis der Rhino-Befehle und ihrer Struktur sowie etwas logisches Denken und die Bereitschaft, sich auf kleine Experimente und das Debuggen einzulassen.
+
+
+=====Verwendete Tools:=====
+
+
+Die Rhino-Hilfedatei - darin sind alle Rhino-Befehle samt Unterbefehlen aufgeführt, sodass dies Ihre wichtigste Referenz ist.
+
+Der Rhino-**MacroEditor**, mit dem Sie Ihre Makros einfach ausführen und Debuggen können.
+
+=====Sie haben bereits ein wenig Erfahrung mit Makros ...=====
+Als Rhino-Anwender nutzen Sie bereits Makros, selbst wenn Ihnen dies nicht bewusst ist.  Viele der Befehle in Rhino sind als Makros verpackt. Wenn Sie eine Schaltfläche der Werkzeugleiste klicken oder einen Befehl aus dem Menü ausführen, handelt es sich oft um ein voreingestelltes Makro.  Klicken Sie beispielsweise mit Shift und rechter Maustaste die Schaltfläche **Extrude Straight**:
+
+{{http://en.wiki.mcneel.com/content/upload/images/ExtrudeCrvButtonEditor.gif}}
+
+Dies ist ein Beispiel des einfachsten Typs von Makro, bei dem lediglich eine Reihe Optionen in einen einzigen Befehl gesteckt werden, sodass Sie nicht jeden einzelnen jedes Mal spezifizieren müssen, wenn Sie ihn verwenden.  **KurveExtrudieren** hat mehrere Schaltflächen mit vorgefertigten Optionen wie //Verjüngt//, //EntlangKurve//, //AnPunkt//, //Deckfläche=Ja// etc.  Mit der oben erwähnten Methode können Sie nun die Makros untersuchen, die hinter den verschiedenen **KurveExtrudieren**-Schaltflächen stecken.
+
+In gewisser Weise funktionieren diese, als würden Sie die einzelnen Optionen nacheinander anklicken oder in der Eingabeaufforderung eingeben.  Mehr sind Makros eigentlich auch nicht: eine Ansammlung von Anweisungen zur Wiederholung einer Abfolge von Befehlen, die Sie ansonsten einen nach dem anderen manuell eingeben müssten.
+
+Das Scripting mit Optionen eines einzelnen Befehls kann außerdem mit der Eingabe von Daten (z.B. Koordinaten oder andere numerische Daten) kombiniert werden. Es können außerdem mehrere Befehle in einer Reihe zusammengeschrieben werden, wodurch eine automatische Sequenz zur Bearbeitung oder Erstellung von Objekten erzeugt wird.
+
+> **Anmerkung:** //Wozu die _Unterstriche?  Diese teilen Rhino mit, dass ein englischer Befehl folgt (unabhängig von der Sprachversion Ihres Programms), sodass Ihr Makro "universell" ist.  Falls Sie eine englische Version von Rhino besitzen und Ihre Makros nur in dieser laufen sollen, können Sie die Unterstriche weg lassen.  Und: Wozu das Ausrufezeichen (!)?  Damit wird jeder eventuell bereits laufende Befehl aus Sicherheitsgründen beendet.//
+
+======Erste Schritte======
+
+Wenn Sie beispielsweise mehrere Würfel mit 10 cm Kantenlänge mit dem Zentrum der Unterseite auf einen gewünschten Punkt platzieren möchten, muss der entsprechende Punkt entweder durch einen Mausklick oder durch Eingabe der Koordinaten bestimmt werden.
+
+Sie könnten dafür den Standardbefehl "Quader" verwenden (Ecke zu Ecke + Höhe), wodurch jedoch standardmäßig der Einfügungspunkt auf die erste Ecke des Quaders gesetzt wird.  Für unseren Fall ist es einfacher, den Befehl "Quader -> Zentrum" zu verwenden.   Dies ist eigentlich auch nur der "Quader"-Befehl unter Verwendung der Option "Zentrum", sodass Sie ihn in Ihrem Makro aktivieren sollten.
+
+Öffnen Sie den **MakroEditor** und geben Sie ein:
+
+  ! _Box _Center 
+//(dies ist zugleich das der Schaltfläche "Quader, Zentrum" zugrunde liegende Makro)//\\ 
+Alle Einträge (Befehle und numerische Eingaben) müssen durch ein einfaches Leerzeichen getrennt sein.
+
+Nun muss der zentrale Punkt bestimmt werden.  Dazu muss Rhino mitgeteilt werden, dass es die Ausführung des Befehls vorübergehend anhält und auf eine Benutzereingabe in Form eines Klicks oder einer Tastatureingabe wartet.  Dies erreichen Sie, indem Sie den Befehl "Pause" einfügen.
+
+  ! _Box _Center _Pause
+Wenn die Daten eingegeben sind, kann die Größe des Quaders direkt als Befehl eingegeben werden.  Da die Option "Zentrum" des Befehls "Quader" eine Ecke desselben als zweiten Eingabewert erwartet, können wir die X- und Y-Koordinate eingeben:
+
+  ! _Box _Center _Pause r5,5
+(Wozu das "r"? Weil wir möchten, dass die Koordinate relativ zum zuletzt gewählten Punkt, also zur Unterseite des Würfels, ist.  Ansonsten würde die Ecke immer bei der Koordinate (5,5) landen.)
+
+Nun können wir die Höhe eingeben, die in diesem Fall relativ zum ursprünglichen Startpunkt ist.
+
+  ! _Box _Center _Pause r5,5 10
+Da es nun keiner weiteren Eingabe bedarf und keine weiteren Möglichkeiten zur Verfügung stehen, ist das Makro und auch unser Quader fertig.  Da wir die gleiche Höhe wie Breite haben wollten, wäre eine weitere Möglichkeit gewesen, anstatt der "10" des letzten Eintrags "Enter" zu verwenden.
+
+  ! _Box _Center _Pause r5,5 _Enter
+Wenn Ihr Makro nun korrekt funktioniert, [[rhino:macroscriptsetup|erstellen Sie eine neue Werkzeugleistenschaltfläche]], kopieren Sie das Makro hinein und geben Sie ihm einen aussagekräftigen Namen wie z.B. "10x10x10-Quader, Unterseite zentriert". Wenn das Makro einmal ausgeführt wurde, können Sie die ganze Sequenz des Makros durch Klick auf die rechte Maustaste wiederholen und müssen so nicht ständig die Schaltfläche von Neuem betätigen.
+
+======Ein etwas komplizierteres Beispiel======
+
+Manche Befehle rufen Dialogfenster mit zahlreichen Optionen auf.  Dies würde normalerweise die Ausführung Ihres Makros so lange stoppen, bis Sie eine der gewählten Optionen gewählt haben.  Da wir aber an einer automatisierten Ausführung interessiert sind, kann das Abarbeiten des Dialogfensters durch Einsetzen eines Bindestrichs vor den jeweiligen Befehl umgangen werden.  Sie können dann alle nötigen Optionen per Script abarbeiten lassen, sodass das Makro ohne weitere Unterbrechung fortgesetzt wird.  Manche Befehle haben mehrere Ebenen an Unteroptionen.  Um die verschiedenen Möglichkeiten zu konsultieren, geben Sie den entsprechenden Befehl mit vorangestelltem Bindestrich in der Befehlszeile ein und sehen Sie nach, was in den Optionen vorgeschlagen wird.  Klicken Sie auf die Optionen und sehen Sie nach, ob Unteroptionen verfügbar sind.
+
+=====Loft zweier offener Kurven=====
+Wenn Sie beispielsweise wiederholt zwei //offene// Kurven **loften** möchten, damit diese zusammen eine Oberfläche bilden, müssten Sie mit dem Standardbefehl **Loft** immer wieder durch denselben Dialog gehen.  Wenn Sie stattdessen **//-Loft//** verwenden, geht das Ganze viel schneller.  Werfen Sie einen Blick auf das Folgende:
+
+<code>
+_-Loft
+_Pause
+_Type=_Normal
+_Simplify=_None
+_Closed=_No
+_Enter
+</code>
+
+Zuerst wird der Befehl und anschließend die Pause aufgerufen, sodass Sie Ihre Kurven wählen können. Wenn die Pause entfernt wird, funktioniert das Makro nicht, wenn Sie vor dem Aufruf desselben die Kurven nicht ausgewählt haben.  Sie können Ihre Kurven aber auch ansonsten vorher auswählen. Die Pause wird dann automatisch ignoriert.  Der Befehl fährt anschließend mit den gewählten Optionen fort und erstellt anschließend die Oberfläche und wird beendet. Versuchen Sie es einmal mit zwei offenen Kurven, die Sie entweder vorher oder nachher auswählen.  Versuchen Sie, eine oder mehrere Optionen zu verändern und geben Sie beispielsweise ////Closed=//Yes// oder ////Simplify=//Rebuild// ein (dafür müssen Sie zudem eine Zeile hinzufügen, die für ////Rebuild=//20// oder einen anderen Wert definiert).
+
+=====Verändern zum Gebrauch mit geschlossenen Kurven=====
+Versuchen Sie es jetzt einmal mit zwei geschlossenen Kurven.  Dies wird so einfach nicht funktionieren.  Wieso? Für geschlossene Kurven erwartet Loft eine weitere Eingabe von Ihnen - die Position der Naht.  Diese müssen Sie im Makro in der richtigen Reihenfolge angeben. Sie können entweder aus mehreren automatischen Nahtoptionen (als Unteroptionen) wählen oder diese mithilfe von Benutzereingaben einstellen. In jedem Fall müssen Sie dazu das Makro modifizieren.
+
+Durch Hinzufügen einer Pause an der richtigen Stelle können Sie die Naht durch Benutzereingaben überprüfen und einstellen:
+
+<code>
+_-Loft
+_Pause
+_Pause  <--
+_Type=_Normal
+_Simplify=_None
+_Closed=_No
+_Enter
+</code>
+
+Wenn Sie statt der Pause "Enter" eingeben, verwendet Rhino für die Naht automatisch die Standardvorgabe.
+
+<code>
+_-Loft
+_Pause
+_Enter  <--
+_Type=_Normal
+_Simplify=_None
+_Closed=_No
+_Enter
+</code>
+
+Sie können außerdem in den Unteroptionen der Naht eine andere Loft-Nahtoption wählen.
+
+<code>
+_-Loft
+_Pause
+_Natural  <--
+_Enter    <--
+_Type=_Normal
+_Simplify=_None
+_Closed=_No
+_Enter
+</code>
+
+(Die Eingabe von "Enter" nach "Natural" ist notwendig, um die Nahtoptionsebene zu verlassen und zurück zu den Loftoptionen zu gelangen)
+
+//Leider funktioniert dasselbe Makro aufgrund der zusätzlich notwendigen Nahtoption nicht korrekt sowohl für offene als auch geschlossene Kurven.  Dies ist eine der Beschränkungen des Makrosystems und beruht auf der Art und Weise, wie einige Rhino-Befehle geschrieben sind.//
+
+
+======Verwendung von Makros zur schnellen Einstellung Ihrer Interface-Optionen======
+
+Makros können außerdem dazu verwendet werden, verschiedene GUI- und Dokumenteigenschaften automatisch einzustellen, ohne dabei lange durch den Optionendialog gehen zu müssen.  Folgendes Makro stellt beispielsweise das Rendernetz benutzerdefiniert ein (beachten Sie den Bindestrich vor -_DocumentProperties)
+
+<code>
+-_DocumentProperties
+_Mesh _Custom
+_MaxAngle=0 _AspectRatio=0
+_MinEdgeLength=0 _MaxEdgeLength=0
+_MaxEdgeSrf=0.01 _GridQuads=16
+_Refine=Yes _JaggedSeams=No
+_SimplePlanes=No
+_Enter
+_Enter
+</code>
+
+Wozu die zwei "Enter" am Ende?
+
+Das Makro bewegt sich in -_DocumentProperties zwei Ebenen nach unten - zuerst auf die Polygonnetzebene und anschließend auf die benutzerdefinierte Unterebene im Polygonnetz.  Mit dem ersten Enter verlassen Sie die Unterebene und gelangen wieder auf die Hauptebene und mit dem zweiten verlassen Sie den Befehl als solchen.  Manche Skripts benötigen eventuell sogar drei Enter.  Das folgende ist von Jeff LaSor und dient dem An-/Abschalten des Fadenkreuzes:
+
+Um Fadenkreuze mithilfe eines Skripts ein- und auszuschalten, muss einer Schaltfläche folgendes zugewiesen werden:
+
+<code>
+  -_Options _Appearance _Visibility
+  _Crosshairs _Enter _Enter _Enter
+</code>
+
+Beachten Sie die Referenz zu jeder einzelnen Befehlsoption.  Die Spezifizierung in einem Skript ist, als ob Sie mit der Maus darauf klicken würden.  Beachten Sie zudem die 3 "Enter".  Da Sie jede Befehlsoption (in diesem Fall) auf eine weitere Unterebene bringt, werden die Enter benötigt, um wieder hinauf und aus dem Befehl hinaus zu gelangen.  Da das Skript drei Ebenen nach unten geht, benötigt es auch drei Enter, um wieder den ganzen Weg aus dem Befehl hinaus zu finden.
+
+ODER Sie verwenden am Ende ein Ausrufezeichen ("!"), das in einem Skript so viel bedeutet wie "sofort beenden" und Sie direkt den ganzen Weg aus dem Befehl hinausführt, unabhängig davon, wie viele Unterebenen Sie hinab gegangen sind. Beachten Sie bitte, dass wenn Ihr Makro noch weitere Aufgaben durchführen soll, statt dem Ausrufezeichen die diversen "Enter" notwendig sind, da das Makro ansonsten einfach beendet wird.
+
+Das oben beschriebene Skript schaltet das Fadenkreuz einfach ein und aus. Wenn Sie allerdings ein Skript möchten, das es immer einschaltet und ein anderes, das es immer ausschaltet, sollten Sie einen Blick auf folgende Möglichkeit werfen:
+
+Immer eingeschaltet:
+
+<code>
+  -_Options _Appearance _Visibility
+  _Crosshairs=_Show !
+</code>
+
+Immer ausgeschaltet:
+
+<code>
+  -_Options _Appearance _Visibility
+  _Crosshairs_=Hide !
+</code>
+
+Hier wird das Ausrufezeichen verwendet ... Durch Verwenden des Gleichheitszeichens ("=") können alle möglichen Werte zugewiesen werden.  Für das Fadenkreuz gibt es zwei mögliche Werte: "Show" und "Hide".
+
+(Danke, Jeff)
+
+======Weitere nützliche Tools und Befehle für Makros======
+
+Es gibt einige geschickte Tricks für komplexere Makros.  Eine Möglichkeit ist die Verwendung verschiedener Auswahlfilter wie **SelLast** (LetzteAuswahl), wodurch das zuletzt erstellte/bearbeitete Objekt ausgewählt wird, **SelPrev** (VorherigeAuswahl), wodurch das vorherige Input-Objekt ausgewählt wird und **SelNone** (AuswahlAufheben), wodurch alle Auswahlen aufgehoben werden.  Es gibt zudem Möglichkeiten, Objekte zu benennen, zu gruppieren (und die Gruppe zu benennen) und dann später mit dem Objekt- bzw. Gruppennamen auf sie zuzugreifen.
+
+<code>
+Select
+SelLast
+SelPrev
+SelNone
+SetObjectName
+SetGroupName
+SelGroup
+SelName
+Group
+Ungroup
+</code>
+
+Setzung eines einzelnen Objektnamens (dies ist ein Makro für sich!):
+
+<code>
+  _Properties _Pause _Object _Name
+  [hier Name eingeben] _Enter _Enter
+</code>
+
+Entfernen eines einzelnen Objektnamens (ohne dabei das Objekt zu löschen)
+
+<code>
+  _Properties _Pause _Object _Name
+[Name] _Enter _Enter
+</code>
+
+=====Beispiele zur Verwendung der obigen Tools=====
+
+Sehen Sie sich folgendes Makro an:
+
+<code>
+_Select _Pause _Setredrawoff
+_BoundingBox _World _Enter
+_Selnone _Sellast
+_OffsetSrf _Solid _Pause
+_Delete _Sellast
+_BoundingBox _World _Enter
+_Delete _Setredrawon
+</code>
+
+Es erzeugt ein Begrenzungsrechteck mit einem Versatz rund um das Objekt, wobei der Versatz vom Benutzer einzugeben ist. Versuchen Sie, der logischen Sequenz zu folgen.  Durch das Deaktivieren und anschließende erneute Aktivieren des Bildaufbaus durch Setredrawoff/on wird das Flackern der Anzeige verhindert und der Prozess beschleunigt.  Beachten Sie dabei, dass wenn Sie den Befehl beenden, bevor Sie erneut SetRedrawOn ausführen, Rhino deaktiviert zu sein scheint, da die Anzeige nicht mehr aktualisiert wird.  Wenn dies passiert, geben Sie einfach den Befehl BildaufbauAktivieren ein, damit die Anzeige aktualisiert wird.
+
+**//Als ein letztes Beispiel//** erzeugt das folgende Makro einen auf einem 2D-Planar oder Textobjekt zentrierten und mit diesem gruppierten Punkt. Es wird davon ausgegangen, dass Sie sich in derselben Ansicht befinden, in der der Text erstellt wurde und dass das Objekt tatsächliche ein planares 2D-Objekt ist - ansonsten schlägt die Verwendung des Makros vermutlich fehl.
+
+Beachten Sie dabei die Verwendung von benannten Gruppen und verschiedenen Auswahlbefehlen.  Der Befehl **NoEcho** (EchoAus) verhindert vorübergehend, dass Informationen an die Befehlszeile gesendet werden, was in Kombination mit dem Deaktivieren des Bildaufbaus den Effekt hat, dass das Makro ohne Flackern und zu viel unnötiger Info in der Befehlschronik ausgeführt wird.  Es funktioniert natürlich aber auch ohne diese Befehle.
+
+<code>
+_Select _Pause _Noecho _Setredrawoff
+_Group _Enter _SetGroupName TexTemp
+_BoundingBox _CPlane _Enter
+_SelNone _SelLast _PlanarSrf
+_SelPrev _Delete _SelLast
+_AreaCentroid _Delete
+_Sellast _SelGroup TexTemp
+_Ungroup _Group _Setredrawon
+</code>

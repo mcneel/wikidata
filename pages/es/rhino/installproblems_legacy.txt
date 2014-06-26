@@ -1,0 +1,104 @@
+======Resolución de problemas con el instalador de Rhino 3 y Rhino 4======
+Para obtener ayuda con problemas con el instalador de Rhino 5, haga clic en [[http://wiki.mcneel.com/es/rhino/installproblems_legacy|aquí.]]
+
+  * [[#Problema en Rhino 3 con las barras de herramientas que no se acoplan correctamente|Problema en Rhino 3 con las barras de herramientas que no se acoplan correctamente]]
+  * [[#Problemas en Rhino 3 con el rendimiento OpenGL y la visualización|Problemas en Rhino 3 con el rendimiento OpenGL y la visualización]] 
+  * [[#La ficha de índice de la Ayuda de Rhino está vacía|La ficha de índice de la Ayuda de Rhino está vacía]]
+  * [[#Rhino 4 se inicia sin cargar los plug-ins|Rhino 4 se inicia sin cargar los plug-ins]]
+  * [[#La instalación de Rhino 4 se bloquea al determinar el espacio en disco|La instalación de Rhino 4 se bloquea al determinar el espacio en disco]]
+  
+
+=====Rhino 4 se inicia sin cargar los plug-ins=====
+**PROBLEMA:**
+
+Faltan las barras de herramientas y no se cargan los plug-ins en Vista
+
+Algunos usuarios han informado que la instalación de Rhino V4 (SR2 y posteriores) en Vista no instala los plug-ins y las barras de herramientas no se cargan a menos que se haya iniciado sesión como administrador. Este problema ha sido más común en sistemas Vista Home Premium, pero ha ocurrido en todas las versiones de Vista.  La mayoría de usuarios no informan de este problema y el equipo de desarrollo no ha podido reproducir el problema.
+
+**SOLUCIÓN:**
+
+Los usuarios han informado que si desactivan el Control de cuentas de usuario (Panel de control - Cuentas de usuario) y desactivan temporalmente el antivirus y cualquier otro software de protección del sistema antes de ejectutar la instalación de Rhino, el problema se soluciona.  Después de reinstalar y ejecutar Rhino, ya puede reiniciar el antivirus y las herramientas de protección del sistema.  También puede volver a activar el Control de cuentas de usuario si lo desea.
+
+Agregado el 5 mar. 2009  - John Brock
+
+=====Problema de Rhino 3 con las barras de herramientas que no se acoplan correctamente=====
+
+  - Cierre Rhino 3.0
+  - Ejecute esta herramienta: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip con Rhino cerrado.
+  - Reinicie Rhino
+  - La herramienta puede eliminar la siguiente clave del registro para que Rhino "olvide" alguna configuración que hace que las barras de herramientas no se acoplen correctamente.
+  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+
+=====Problemas en Rhino 3 con el rendimiento OpenGL y la visualización=====
+
+//- para utilizar después de actualizar las tarjetas y los controladores//
+
+  - Cierre Rhino 3.0
+  - Ejecute esta herramienta: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip con Rhino cerrado.
+  - Reinicie Rhino
+  - La herramienta puede eliminar la siguiente clave del registro para que Rhino "olvide" la configuración de visualización antigua de [[rhino:opengl|OpenGL]]  
+  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Options\OpenGL//
+
+=====La instalación de  4 se bloquea al determinar el espacio en disco=====
+**PROBLEMA:**
+
+Cuando se instala Rhino 4, aparece el mensaje "Espere mientras el instalador determina los requisitos de espacio en disco". Este cuadro de diálogo nunca desaparece.
+
+**CAUSA:**
+
+El motor de Windows Installer intenta determinar si hay espacio en disco suficiente en todas las unidades para instalar Rhino. Para alguna razón, este proceso tarda mucho o nunca finaliza. La verdadera causa reside en el motor del Windows Installer de Microsoft.
+
+**SOLUCIÓN:** ////
+
+Ejecute el instalador desde la línea de comandos:
+<code>
+msiexec /i Rhino4_Setup.msi /qr
+</code>
+
+=====La ficha de índice de la Ayuda de  está vacía=====
+
+**PROBLEMA:**
+
+La ficha Índice de la Ayuda de Rhino está vacía
+
+en usuarios sin permisos de administrador en Windows 2000.
+
+**SOLUCIÓN:**
+
+Se trata de un problema de permisos que interactúa con un error de Windows 2000. Para solucionarlo sin cambiar los permisos en las carpetas Archivos de programa:
+  * Un administrador debe eliminar el archivo Rhino.GID en la carpeta Archivos de programa\Rhino\English\Help y eliminar también el archivo RhinoBonusTools.GID
+  * El administrador debe cerrar la sesión (no ejecute la Ayuda o se volverá a crear el archivo GID para el administrador).
+  * El usuario sin privilegios debe iniciar sesión. El contenido de la ficha Índice ahora debería mostrarse (y se creará un archivo GID en los archivos personales del usuario.)
+  * Este truco no es necesario en Windows XP, ya que Microsoft solucionó el error.
+  * Otra manera de solucionarlo en Windows 2000 es agregar permisos de "Escritura" a los usuarios en la carpeta Rhino\English\Help 
+
+=====Desinstalar Rhino 4 manualmente=====
+**//Pregunta://** Intenté desinstalar Rhino 4.0, pero se produjo un error y Rhino no se pudo eliminar.
+
+**// Respuesta://** [[rhino/uninstalling|Desinstalar Rhino 4.0 manualmente.]]
+
+
+=====Instalar Rhino 4 como actualización=====
+
+**//Pregunta://** //"¿Qué necesito para poder instalar mi actualización de Rhino 4.0?"//
+
+**// Respuesta://** La actualización a Rhino 4.0 se podrá instalar si se cumple una de las siguientes condiciones. Se comprueba en el siguiente orden:
+
+  * Si Rhino 3.0 está instalado  
+  * Si rhino 2.0 está instalado 
+  * Si rhino 1.1 está instalado  
+  * Si rhino 1.0 está instalado  
+  * Si el CD de Rhino 3.0 está insertado en la unidad de CD durante la instalación   
+  * Si el CD de Rhino 2.0 está insertado en la unidad de CD durante la instalación   
+  * Si el CD de Rhino 1.1 está insertado en la unidad de CD durante la instalación   
+  * Si el CD de Rhino 1.0 está insertado en la unidad de CD durante la instalación  
+
+**[[SettingsTransfer|Transferencia de la configuración personalizada de una instalación de Rhino 4 a otra]]**
+
+
+=====Error al desinstalar Rhino 4=====
+**PROBLEMA:**
+El problema puede ser causado por un error en la caché del instalador en el equipo.
+
+**SOLUCIÓN:**
+Siga las instrucciones del artículo [[http://wiki.mcneel.com/es/rhino/uninstalling|Desinstalar Rhino 4 manualmente]]

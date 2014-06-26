@@ -1,0 +1,102 @@
+====== Questions récurrentes sur l'installation ou l'actualisation de Rhino ======
+=====Administrateurs de système :=====
+[[InstallingRhino|Déploiement de Rhino - Technique pour les installations silencieuses/automatiques, informations sur les dossiers et le registre, etc.]]
+=====Installer Rhino 5=====
+
+<color darkslategray>**//Question://** //Pourquoi ai-je deux raccourcis pour Rhino 5 ?//</color>\\
+**Réponse :** Rhino 5 installe automatiquement les deux versions 32 bits 64 bits, et crée un raccourci pour chaque version. [[rhino:Why2Shortcuts|Consultez cette page pour plus d'informations sur cette caractéristique.]]
+
+<color darkslategray>**//Question ://** //Pourquoi le programme d'installation de la version 5 refuse mon ancien code de la version 3 ou 2 ?//</color>\\ 
+**Réponse :**Il s'agit d'un bug dans le programme d'installation de la SR0, mais il est facile à résoudre.\\
+Activez le verrouillage des majuscules sur votre clavier puis tapez le code de la version 3 ou 2 et l'installation fonctionnera.\\
+En effet, le programme d'installation ne permet pas les minuscules mais il change l'affichage lorsque vous les entrer. Si vous vous assurez que les lettres de votre code sont tapées en majuscules, l'installation fonctionnera. 
+Toutes nos excuses pour le désagrément. 
+
+<color darkslategray>**//Question ://** //"Puis-je installer ou désinstaller Rhino 5 et conserver Rhino 4 ?"//</color>\\ 
+**Réponse :** Oui, <color darkslateblue>**//mais à une condition importante//**</color> - continuez la lecture\\ 
+
+L'installation de Rhino 5 est complètement séparée de la version 4 - Cependant, les deux versions utilisent le même gestionnaire de licences.  <color darkslateblue>//Si vous désinstallez Rhino 5, le gestionnaire de licence de la version 4 est également désinstallé et Rhino 4 ne fonctionnera plus.//</color>  
+
+Afin d'éviter cette situation, si vous décidez de désinstaller la version 5, COPIEZ les fichiers McNeelLM.exe et RhinoLM.exe dans un endroit sûr, désinstallez Rhino 5 et copiez ensuite ces fichiers dans leur emplacement d'origine. 
+
+Sur Windows Vista ou 7 le gestionnaire de licences se trouve ici :\\ 
+C:\Program Files (x86)\Common Files\McNeel Shared\License Manager (64 bit)\\ 
+ou\\ 
+C:\Program Files\Common Files\McNeel Shared\License Manager (32 bit)\\ 
+
+//*Il vous faudra également faire très attention avec les modules, les barres d'outils, etc. qui peuvent être partagés entre les versions 4 et 5 - que ce soit voulu ou par inadvertance.  Nous savons par expérience que des conflits peuvent se produire...//
+
+<color darkslategray>**//Question ://** //"Puis-je installer les deux versions 32 et 64 bits de Rhino 5 sur le même ordinateur ?"//</color>\\ 
+**Réponse :** Oui, aucun problème, sauf en ce qui concerne le gestionnaire de licences comme commenté ci-dessus pour Rhino 4 et 5.\\
+\\ 
+  
+=====Supprimer Rhino 4.0 manuellement=====
+<color darkslategray>**//Question ://** J'ai essayé de désinstaller Rhino 4.0 mais une erreur s'est produite et Rhino n'a pas pu être désinstallé.</color>\\
+**//Réponse ://** [[rhino/uninstalling|Supprimer Rhino 4.0 manuellement.]]
+
+=====Supprimer Rhino 5.0 manuellement=====
+<color darkslategray>**//Question ://** J'ai essayé de désinstaller Rhino 5.0 mais une erreur s'est produite et Rhino n'a pas pu être désinstallé.</color>\\
+**//Réponse ://** [[rhino/5/uninstall|Supprimer Rhino 5 manuellement.]]
+
+=====Installation de versions actualisées de Rhino=====
+
+<color darkslategray>**//Question ://** //"De quelles informations ai-je besoin pour installer ma mise à jour vers Rhino 5 ?"//</color>\\
+**//Réponse://** Le programme d'installation de Rhino 5 ne pourra fonctionner que si une des conditions suivantes se réalise.\\ 
+La vérification se fait dans cet ordre :\\
+
+Rhino 4.0 est installé
+
+Rhino 3.0 est installé
+
+Rhino 2.0 est installé
+
+Le code CD de Rhino 4.0 est entré pendant l'installation
+
+Le code CD de Rhino 3.0 est entré pendant l'installation
+
+Le code CD de Rhino 2.0 est entré pendant l'installation
+
+
+=====Transférer un configuration perso d'une installation de Rhino vers une autre=====
+[[rhino:SettingsTransfer|Page avec quelques astuces pour copier/transférer les paramètres personnalisés]]
+
+
+=====Installer Rhino avec les dernières versions révisées sur un nouvel ordinateur=====
+
+**//Question ://** //J'ai un nouvel ordinateur et je veux installer Rhino version **'X** SR **Y**.  J'ai toujours acheté les versions de mise à jour de Rhino.  Dois-je installer TOUTES les versions précédentes et les versions révisées ??//
+
+**//Réponse ://** Installez simplement la dernière version mise à jour que vous avez sur le CD.  Au cours de l'installation vous devrez insérer le CD d'une version précédente afin de montrer que vous l'avez mais il n'est pas nécessaire d'**INSTALLER** les versions précédentes.  Une fois que vous avez installé la dernière version sur CD, installez la dernière version révisée - vous n'avez pas besoin d'installer les précédentes.
+
+=====Qu'est-ce que les versions révisées?=====
+Ces patchs sont téléchargeables et ne pourront être installés que si une version du produit est déjà installée.  Les versions révisées peuvent être identifiées de deux façons : le numéro SR, par exemple SR3 ou SR4b ; et la date qui est codée dans le nom du fichier de téléchargement, par exemple 20121106 qui signifie le 6 novembre 2012.
+
+=====Comment puis-je savoir quelle version est installée ?=====
+Lorsque le logiciel est installé, vous pouvez voir la date et le numéro de la SR en regardant les informations de la section À propos, qui apparaît sur "l'écran de démarrage" au lancement de Rhino ou qui peut être affiché en allant dans le menu ? > À propos de [[rhino:rhinoceros|Rhinoceros]]. 
+
+Pour Flamingo, lancez la commande FlamingoÀPropos. Pour Bongo, lancez la commande BongoÀPropos.
+
+=====Comment obtenir les versions révisées?=====
+La méthode la plus rapide est d'utiliser le service de Mises à jour.  Dans Rhino, déroulez le menu Aide et cliquez sur Mises à jour.  Si vous êtes connecté à Internet, les serveurs de McNeel vous proposerons la version révisée dont vous avez besoin s'il en existe une plus récente que celle de votre logiciel.  Dans Flamingo, déroulez le menu Lancer de rayons ou Photométrique et cliquez sur Mises à jour.  Dans Bongo, déroulez le menu Bongo et cliquez sur Mises à jour.
+
+=====Puis-je supprimer des version précédentes dans "Ajouter ou retirer des programmes" sans créer de problèmes ?=====
+L'entrée "Ajouter ou retirer des programme" du Panneau de configuration dans Windows indique toutes les versions révisées comme un programme installée, chacune utilisant environ 250Mo d'espace sur le disque. Cela peut porter à confusion. Windows affiche toutes les installations même si les fichiers sont ajoutés sur l'installation existante et si la plupart sont en fait remplacés lors de l'installation. N'utilisez **pas** "Ajouter ou retirer des programmes" pour retirer des anciennes versions révisées de Rhino 4.
+
+=====J'obtiens une erreur et l'installation ne se termine jamais=====
+Consultez cette page [[rhino:debuginstaller|DebugInstaller]] pour savoir comment générer un fichier journal de l'erreur et obtenir de l'aide de l'équipe d'assistance.
+
+===== Erreur 1327. Lecteur incorrect : =====
+**//Question://** //J'obtiens l'"erreur 1327. Lecteur incorrect (E:, F:, etc)" lors de l'installation//
+
+**//Cause ://** //Votre compte utilisateur dispose de paramètres indiquant qu'un ou plusieurs lecteurs non existants doivent être utilisés pour des dossiers spéciaux tels que "Mes Documents"//
+
+**//Solution ://**
+  - Dans le menu Démarrage, cliquez sur Exécuter.
+  - Tapez regedit et cliquez sur Exécuter
+  - Cherchez la clé HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  - Recherchez les répertoires contenant la lettre du lecteur mentionné dans l'erreur d'installation. Changez-les pour qu'elles pointent vers un lecteur ou un dossier valide. 
+  - Cherchez la clé HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+  - Recherchez les répertoires contenant la lettre du lecteur mentionné dans l'erreur d'installation 
+
+**Remarque :** Cette méthode contient des étapes qui vous expliquent comment modifier le registre. Cependant, des problèmes importants peuvent se produire si vous modifiez le registre incorrectement. Suivez donc des instructions avec grande attention. Pour plus de sécurité, sauvegardez le registre avant de le modifier. Vous pouvez ensuite restaurer le registre en cas de problème. Pour plus d'informations sur la sauvegarde et la restauration du registre, consultez l'article suivant de la base de connaissances de Microsoft :
+
+[[http://support.microsoft.com/kb/322756|Procédure de sauvegarde, de modification et de restauration du Registre]]

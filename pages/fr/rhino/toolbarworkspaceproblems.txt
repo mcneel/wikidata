@@ -1,0 +1,45 @@
+
+======Problèmes de disparition de barres d'outils======
+
+Les barres d'outils de Rhino sont rangées dans un fichier externe portant l'extension .tb (appelé parfois fichier d'espace de travail).  Si vos barres d'outils ne se voient plus lorsque vous ouvrez Rhino, c'est souvent parce que Rhino a perdu le chemin vers le fichier de barre d'outils.  Il peut s'agir de plusieurs problèmes...  L'astuce suivante permettra de résoudre le problème dans la plupart des cas :
+
+**Premièrement**, si vous utilisez Rhino 4 et l'espace de travail par défaut (default.tb), vous pouvez essayer de lancer la commande **RéinitialiserBarreOutils**.  Normalement, les barres d'outils réapparaîtront immédiatement.
+
+Remarque :  //Si vous avez modifié votre barre d'outils default.tb, cette commande permettra de charger la barre d'outils modifiée, pas l'originale.//
+
+
+**Si vous utilisez un espace de travail personnalisé dans Rhino 4** (enregistré sous un autre nom), la commande **RéinitialiserBarreOutils** chargera le fichier default.tb et ne vous conviendra sûrement pas.  Dans Rhino 3 la commande **RéinitialiserBarreOutils** n'est pas disponible.
+
+Dans les deux cas, ou si la commande **RéinitialiserBarreOutils** ne fonctionne pas pour une raison ou pour une autre, essayez la solution suivante :
+
+Allez dans **Outils > Configuration des barres d'outils** et choisissez **Fichier > Ouvrir**.
+
+Si vous ne voyez pas le fichier correspondant à votre espace de travail (qui est default.tb si vous utilisez la configuration par défaut), regardez dans : C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\4.0  (ou 3.0).
+
+Vous //devriez// trouver le fichier default.tb ici et peut-être votre espace personnalisé si vous l'avez enregistré ici.
+
+Si votre espace de travail ne s'ouvre toujours pas, il se peut que le fichier soit abîmé. Si vous utilisez l'espace de travail par défaut non modifié (default.tb), vous trouverez un fichier default.tb.bak identique dans le même répertoire.  Fermez toutes les sessions de Rhino, supprimez le fichier abîmé, effacez l'extension .bak du fichier de rechange et ressayez.
+
+Si ça ne marche toujours pas, il existe un autre fichier de rechange nommé default_backup.tb.  Copiez-le et renommez-le default.tb.
+
+Si vous utilisez un espace de travail personnalisé et que vous avez ouvert et fermé Rhino au moins une fois depuis que vous l'utilisez, il devrait y avoir également une copie de ce fichier avec l'extension .bak. Si ce n'est pas le cas, vous devrez récupérer la copie de sauvegarde de votre espace personnalisé que vous avez fait ailleurs. Puisque BIEN SÛR vous avez fait une copie de sauvegarde, n'est-ce pas ?
+
+CONSEIL : Si vous avez modifié considérablement l'espace de travail par défaut (**default.tb**), nous vous recommandons de l'enregistrer sous un autre nom.  Les nouvelles installations ou les mises à jour de Rhino peuvent remplacer le fichier **default.tb** et faire disparaître **TOUTES** vos personnalisations en un instant.  Ouvrez **Outils > Configuration des barres d'outils**, cliquez sur **Fichier > Enregistrer sous** et changez le nom de votre espace de travail.  Effectuez toujours vos modifications sur votre espace de travail personnalisé.  Enregistrez ce fichier ainsi qu'une copie ailleurs (de préférence sur un autre ordinateur comme tous les documents importants). **Pensez au temps qu'il vous faudra pour recréer le fichier si vous le perdez.**
+
+IMPORTANT : **Une seule session de Rhino doit être ouverte lorsque vous réalisez des modifications sur une barre d'outils ou un espace de travail!**  Lorsque les modifications sont réalisées, utilisez le menu Fichier>Enregistrer de la boîte de dialogue de configuration des barres d'outils pour enregistrer vos modifications. Vous pouvez également fermer Rhino et le réouvrir.  Rhino enregistre automatiquement les modifications réalisées sur les barres d'outils lorsqu'il est fermé.  Si plusieurs sessions de Rhino sont ouvertes, les barres d'outils de la dernière session fermée seront enregistrées et pourraient annuler les modifications réalisées dans d'autres sessions.
+
+======Problèmes d'ancrage des barres d'outils======
+====Problème avec les configurations de barre d'outils de Rhino 3.0 qui ne sont pas ancrées correctement.====
+
+Fermer Rhino 3.0
+
+Exécuter cette macro : http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip alors que Rhino est fermé.
+
+Redémarrer Rhino
+
+Cet outil permet de supprimer la clé suivante dans le registre, afin que Rhino oublie certains paramètres qui empêchent le bon ancrage des barres d'outils.
+
+//HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+
+
+

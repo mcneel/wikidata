@@ -1,0 +1,16 @@
+====== RemoveMultiKnotSrf ======
+Sweep2 surfaces (includes Blend surfaces which uses Sweep2 ) usually, and offset surfaces sometimes, are built with multiple knots, RemoveMultiKnotSrf removes these stacked knots if they are not fully multiple. Sweep2 for example will put two knots on top of one another in the V direction. Offsetting the surface adds knots so it can add a third knot to the two, and make the knot 'fully multiple' at that point, introducing a kink or potential kink, or crease to the the surface. This is where the offset can split into a polysurface.
+
+The price you pay for removing the multi-knots is some loss in precision of the surface but in practice this is not a problem in most cases. Another advantage though is that if you intend to point edit the surface at all, the point count is greatly reduced (by a half-ish) by RemoveMultiKnotSrf.
+
+The 'simple' option in V4's sweep dialog makes sweeps which do not have any of these multiple knots, but this option is only available in very restricted cases, when all the curves are perfectly matched and placed correctly. The usual behavior of Sweep2 allows accurate sweeps to be made from very diverse input.
+
+--
+
+I've found that occasionally the structure of very dense sweep2 surfaces can get in the way of things- one thing to try, and it works in this case here, is to run the geek-command RemoveMultiKnotSrf on sweeps if they misbehave, than try again. It is annoying in that it untrims the surfaces and you need to retrim them, but the fillet works fine afterwards. RemoveMultiKnotSrf should be used with some caution because it changes the surface- usually microscopically but nevertheless something to be aware of. On very dense surfaces like this I think there is no loss. [Pascal - 2005-10-25]
+
+
+
+
+
+

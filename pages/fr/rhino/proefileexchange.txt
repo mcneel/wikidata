@@ -1,0 +1,33 @@
+====== Échange de fichiers Pro/E ======
+
+> **Remarque:** //Ces notes ont été créées il y a quelques temps déjà et se trouvaient dans l'aide de Rhino. Cependant, il semblerait que ces informations devraient être revues et mises à jour par des personnes familières avec le sujet, je le déplace donc ici. ~mb//
+
+=====Conseils d'un utilisateur professionnel :=====
+
+Vous trouverez ci-dessous quelques conseils d'un utilisateur de Rhino qui devraient vous aider avec les fichiers IGES et Pro/E 21.
+
+Pro/E 20 et 21 présentent des problèmes lors de l'ombrage des surfaces de forme libre.  Définissez la résolution à 10 dans Pro/E pour vous aider à voir la surface. Vérifiez la surface dans Pro/E avec la commande de maillage pour voir s'ils sont synchronisés.  Découper une surface en plusieurs moitiés ou rendre plus régulière une division en quatre parties peut aider à résoudre les problèmes d'ombrage.
+
+Utilisez Rhino pour la création et la modification de surfaces et Pro/E pour les actions spécifiques. Ne réalisez pas dans Rhino ce que vous voulez sous forme de fonction paramétrique dans le modèle. Les opérations telles que les congés et les dépouilles devraient être enregistrées pour Pro/E. Plus le nombre de limites est grand, plus les chances d'importer correctement un solide dans Pro/E sont faibles. Modélisez avec de petites tolérances dans Rhino et assurez-vous que la tolérance de la pièce de départ dans Pro/E est plus petite que celle exportée.  Assurez-vous d'avoir assez d'informations dans le fichier pour faire une traduction. Les objets dont les courbes isoparamétriques sont trop éloignées ou dont les extrémités sont bouchées ne seront pas importés sous forme de solide. Reconstruisez alors les surfaces ou augmentez leur degré pour ajouter des points de contrôle et bien joindre toutes les parties ensemble. Si vous exportez en passant par IGES, ne touchez pas aux poids des points de contrôle dans Rhino.
+
+Quand vous modélisez dans Rhino, assurez-vous que toutes les surfaces se superposent afin de pouvoir annuler la limite si IGES divise et ouvre les objets lors de l'importation. Dans certains cas, vous devrez revenir dans Rhino et annuler la limite puis réexporter vers Pro/E et faire une limite Pro/E native car les surfaces ne combleront pas les vides. Vous contournerez ainsi le problème de la tolérance si la distance de superposition est assez grande. N'utilisez donc pas la commande RétrécirSurfaceLimitée dans Rhino si elle empêche l'annulation d'une limite sans bord superposé.
+
+Des surfaces ouvertes peuvent être transformées en solide dans Pro/E si le bord ouvert est enterré dans une matière solide dans Pro/E. Un autre outil intéressant serait le remplacement des surfaces ou l'importation d'une surface simple provenant de pièces décomposées dans Rhino car chaque surface est alors une fonction et peut être remplacée avec le mode insertion dans Pro/E et traitée sous forme de fonction.
+
+Les courbes utilisées avec la commande SurfaceRéseau dans Rhino peuvent être exportées vers Pro/E et utilisées avec le module de surfaçage en utilisant Surface\Advanced\Boundary afin d'obtenir des résultats très similaires. Si les courbes sont planes, elles peuvent être utilisées et rendues paramétriques avec la fonction Use-edge, puis elles peuvent être désalignées, redimensionnées et ajustées afin que toutes les fonctions soient natives de Pro/E mais soient développées dans Rhino.
+
+N'oubliez pas que Pro/E peut utiliser une entité IGES comme objet coupant, surface et solide. Des patchworks peuvent être constitués dans Pro/E à partir de différentes entités de Rhino. Assurez-vous que toutes les surfaces passent la vérification de l'angle de dépouille pour les pièces destinées au moulage avant d'exporter et de commencer les opérations dans Pro/E.
+
+Si vous faites une boucle de Pro/E vers Rhino puis en sens inverse, vous n'obtiendrez pas ce que vous avez envoyé, Pro/E divisera et reconstruira les surfaces lors de l'importation, sauf si vous les divisez où vous voulez avant de les exporter.  La recherche des surfaces coupables est un apprentissage constant.
+
+Les fichiers d'assemblage ne sont pas acceptés.
+
+Le fichier .asm de Pro/E indique à Pro/E comment assembler les différentes pièces. Il ne contient pas d'informations sur la géométrie. Il indique les cotes décomposées et les couleurs des calques de l'assemblage. Il s'agit d'un fichier maître de l'assemblage et il est envoyé sous IGES quand vous exportez toutes les pièces. Rhino ne peut utiliser aucune des informations contenues dans ce fichier car il ne travaille pas avec les assemblages.
+
+Pour obtenir un assemblage dans Rhino, vous pouvez définir un fichier de correspondance entre les calques et les niveaux ou ne charger qu'un seul fichier IGES à la fois et placer chaque pièce importée sur un calque différent. Assurez-vous de bien envoyer les pièces IGES à partir des coordonnées par défaut ou des coordonnées de niveau supérieur dans l'assemblage afin qu'elles soient importées avec les coordonnées relatives à l'assemblage et non à la pièce.
+
+Lisez la rubrique du fichier d'aide concernant la commande DéfinirTraductionNiveauCalqueIges si vous voulez choisir cette option.
+
+
+
+

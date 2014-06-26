@@ -1,0 +1,32 @@
+====== Wie Rhino 3 automatisch installiert wird; was installiert wird und wo. ======
+> **Anmerkung:** Dieser Artikel bezieht sich nicht auf die aktuelle Rhino-Version. Es sind andere Artikel für weitere Versionen erhältlich:
+>   * [[rhino:installingrhino:5|Installation von Rhino 5]]
+>   * [[rhino:installingrhino:4|Installation von Rhino 4]]
+
+======Installation von Rhinoceros======
+  * [[#Automatic (scripted) installation for Rhino 3.0|Rhino 3.0 Skriptbare Installation]]
+  * [[#What gets changed when I install Rhino 3.0 from CD:|Rhino 3.0 Installationsdetails]]
+
+
+======Automatische (skriptbare) Installation für Rhino 3.0======
+**Lesen** Sie die Anleitungen unter http://wiki.mcneel.com/flamingo/scriptinst_v3_fla11 
+
+> Ist es möglich, .msi Dateien für die Installer zu erhalten anstatt .exe für die Bereitstellung?
+> Es wäre großartig, über unser Netzwerk Service Releases zu aktualisieren, [[penguin:penguin|Penguin]] zu installieren, etc.
+
+Wir wechseln auf .MSI Installer für Rhino 4.0 und Flamingo 2.0, aber Rhino 3.0 verwendet keinen MSI-Installer. [PASCAL GOLAY - 2005-11-10]
+
+
+======Was geändert wird, wenn ich Rhino 3.0 von der CD installiere:======
+
+Der Benutzer wählt einen Grundordner für die Rhino-Installation aus. Die Hauptdateien gehen in den Unterordner //System//, die vielen Plug-ins (*.rhp und unterstützende Dateien) gehen in Unterordner //Plug-ins// und für jede installierte Sprache wird ein Sprachordner (wie //Deutsch//) erzeugt, mit den Unterordnern //Hilfe//, //Erste Hilfe//, //Umgebungsmaps//, //Scripts//, //Beispieldateien// und //Tutorials//.
+
+Vorlage- und Werkzeugleistendateien werden installiert unter ...Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\3.0  Die Vorlagen sind für jede Sprache anders, in separaten Ordnern.
+
+Registrierungseinträge werden gemacht unter //HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\3.0//    Unter dem Schlüssel //3.0// befindet sich ein Unterschlüssel für das Datum von Rhino, wie //2004-04-21//, wo die Einträge für dieses Datum von Rhino platziert werden.
+
+Der Schlüssel für //Plug-ins// unter dem Datumsschlüssel verfügt über Unterschlüssel wie //12D31EFD-D3EE-4BCF-A856-D01320BB19F3//, welche für jedes Plug-in einzigartig sind.  Dieser Schlüssel und die Schlüssel und Werte darin veranlassen Rhino, das Plug-in zu laden, wenn Rhino startet.
+
+Der Schlüssel //<locale_ID>// (wie //1033// für Deutsch) enthält unter dem Datum die Pfade, um die deutschen Sprachressourcen wie die Hilfe zu finden.
+
+Einige Einträge werden unter //HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0// gemacht, das ist dort, wo Rhino seine Optionen speichert, meistens unter dem Unterschlüssel //Scheme: Default//   Für weitere Informationen zu Schemes lesen Sie in der Hilfedatei nach. Der Schlüssel //HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0\Global Options// verfügt über einige Einstellungen, die an alle Schemen angewendet werden können.

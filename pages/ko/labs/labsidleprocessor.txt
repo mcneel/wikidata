@@ -1,0 +1,43 @@
+====== Idle Processor 플러그인 ======
+> **Summary:** //Rhino 4.0 이 비활성 상태일 때 명령을 실행하는 플러그인//
+> **Updated:** //2008년 11월 20일//
+
+=====설명=====
+
+Idle Processor plug-in for Rhino 4.0 을 사용하여, Rhino가 사용자가 지정한 시간 동안 비활성 상태일 때, 명령이 실행되는 일정을 지정할 수 있습니다.
+
+예를 들어, Rhino에서 현재 문서가 자동 저장되도록 지정하거나, 오랜 시간이 걸리는 렌더링을 시작하게 할 수 있습니다.
+
+이 플러그인은 Rhino 4.0 SR4 또는 그 이상이 필요합니다.
+
+=====설치=====
+
+  - **IdleProcessor.rhp** 파일을 **<drive>:\Programs Files\Rhinoceros 4.0\Plug-ins** 폴더에 복사합니다.
+  - Rhino 를 시작합니다.
+  - **PluginManager** 를 실행하고 **Install** 단추를 누릅니다. **<drive>:\Programs Files\Rhinoceros 4.0\Plug-ins** 폴더를 찾아 **IdleProcessor.rhp**를 선택합니다.
+
+=====설정법=====
+
+  - **IdleProcessor**를 실행합니다.
+  - "Enable idle processing(유휴 프로세스 허용)"를 클릭합니다.
+  - "Elapsed time in seconds(경과 시간 :초)"를 지정합니다.
+  - 유휴 프로세스일 동안 "Commands to run(실행할 명령)"을 지정합니다. 도구모음 단추 명령으로 입력할 수 있는 모든 명령을 여기에 입력할 수 있습니다.
+
+{{http://en.wiki.mcneel.com/content/upload/images/LabsIdleProcessor.png}}
+
+=====제한=====
+  * 현재, Idle Processor 플러그인은 명령 비활성 상태만을 주목합니다. 즉, Idle Processor 플러그인에서 사용자가 지정한 시간 동안 사용자가 어떤 명령도 실행하지 않았음을 감지하게 되면, 유휴 프로세스 명령이 실행됩니다. 뷰의 초점 이동 (Panning), 확대/축소 (zooming), 회전 (rotating) 으로는 유휴 타이머가 재설정되지 않습니다.
+  * 유휴 프로세스 명령은 오직 한 번만 실행됩니다. 즉, 사용자가 지정한 경과 시간이 300 초 (5분) 일 경우, 사용자가 30분간 자리를 비우더라도 유휴 프로세스 명령은 한 번만 실행됩니다 (처음 5분이 경과된 후). 6 번 실행되는 것이 아닙니다. 유휴 타이머를 재설정하려면 다른 명령을 실행하시면 됩니다.
+
+\\
+
+----
+**[[http://download.rhino3d.com/download.asp?id=rhinolabsidleprocessor|플러그인 다운로드 클릭!]]**
+
+\\
+
+이 플러그인에 대한 문의 사항 및 의견이 있으시면 [[dale@mcneel.com|개발자에게 E-메일을 보내주세요.]]
+
+
+
+

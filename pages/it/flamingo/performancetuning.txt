@@ -1,0 +1,109 @@
+====== Suggerimenti per migliorare le prestazioni di Flamingo ======
+
+====SUGGERIMENTI PER MIGLIORARE LE PRESTAZIONI DI FLAMINGO====
+> **Sommario:** //Suggerimenti e tecniche per far si che Flamingo 1.1 o 2.0 velocizzino i rendering e garantiscano la qualità richiesta dall'utente.//
+
+======PROCESSORE======
+Il fattore più importante per quanto riguarda le prestazioni di Flamingo è la velocità del processore principale del computer. I processori doppi o i computer dual core (quando abilitati correttamente in Windows NT, Windows 2000, Windows XP o Vista) velocizzano i rendering di circa l'85% rispetto ai processori singoli.  I processori quad-core quadruplicano quasi le prestazioni dei processori singoli della stessa velocità.  Attualmente, Flamingo non migliora le proprie prestazioni con più di 4 processori.
+
+======ALIMENTATORE PSU======
+Assicurarsi di avere un buon alimentatore PSU, specialmente nel caso di più processori o core.  Flamingo è un'applicazione multi-threaded che porta istantaneamente tutti i processori logici disponibili al 100% di utilizzo CPU.
+
+======SCHEDE GRAFICHE======
+Le schede grafiche non aumentano la velocità di rendering di Flamingo.  Le schede grafiche/video si usano solo per mostrare lo stato di avanzamento dei calcoli di rendering, senza rallentarli.
+
+====== MEMORIA RAM======
+Renderizzare con una memoria RAM insufficiente è uno dei motivi pincipali delle prestazioni lente di Flamingo.
+
+Per verificare l'eventuale carenza di RAM, si vedano gli accessi al disco oppure si usi il Task Manager, come indicato di seguito.
+
+Si osservi la luce dell'unità disco mentre l'immagine si disegna sullo schermo. L'attività del disco dovrebbe risultare molto ridotta (a meno che non ci sia qualche altra applicazione molto attiva).
+
+Se il processo di rendering sta causando numerosi accessi al disco (swapping e paginazione), Flamingo viene rallentato ed il rendering può essere accerelato con l'aggiunta di RAM.
+
+Per una maggior precisione sulla RAM in NT, Win2000, XP o Vista, lanciare il Task Manager e, nella scheda Prestazioni, osservare la TotalPhysicalMemory (la dimensione totale della memoria fisica, la quantità di RAM). Quindi, nell'angolo in basso a sinistra, si osservi la "Memoria allocata" (lo spazio di memoria totale che Windows sta usando per tutto, compresi Rhino/Flamingo).
+
+Se, durante un rendering, il totale di memoria allocata supera di molto il totale di memoria fisica (di un 50% o del doppio), significa che Rhino e Flamingo richiedono uno spazio di memoria virtuale maggiore di quello della RAM. Windows dovrà quindi scambiare parti del programma e dei dati sul disco. Il rendering alla fine verrà completato, tuttavia l'accesso all'unità disco sarà 1000 volte più lento dell'accesso alla RAM, per cui questo swapping/paginazione rallenta notevolmente il processo di rendering.
+
+Per le versioni di Windows a 32 bit, più di 2GB di memoria RAM probabilmente non sono vantaggiosi.  Per usare più RAM, dobbiamo aspettare l'uscita di una versione di Rhino che funzioni in modo nativo su un'edizione di Windows a 64 bit.
+
+======ERRORI DI MEMORIA INSUFFICIENTE======
+Windows (32 bit) ha un limite di 2GB di spazio di memoria per processo, per cui non può assegnare più di 2GB di memoria virtuale al processo di Rhino/Flamingo.  Per questo motivo, è probabile che non valga la pena avere più di 2GB di RAM.  Se cercate di renderizzare un modello con una mesh troppo fitta (si veda la sezione "meshing" qui sotto) o troppo grande, è possibile che vi appaia un messaggio di memoria insufficiente e che Rhino si arresti in modo anomalo e si chiuda.  Se osservate l'utilizzo di memoria nel Task Manager, vedrete che la memoria allocata si avvicina ai 2GB prima dell'arresto di Rhino.
+
+Per una maggior precisione, andate alla scheda "Processi" del TaskManager e, dal menu a tendina "Visualizza", selezionate "Seleziona colonne" e quindi "Dimensione memoria virtuale".  Osservate la colonna dei processi Rhino3.exe o Rhino4.exe; in Windows a 32 bit, il limite sarà di 2GB (2.000.000K).
+
+======MEMORIA VIRTUALE======
+Dovreste allocare più di 2GB di spazio su disco alla memoria virtuale di Windows.  Per verificarlo, andate su Pannello di controllo > Sistema > Avanzate e cercate "Prestazioni" e "Memoria virtuale". Se avete molto spazio su disco, allocate 4GB (4000MB). La memoria virtuale è lo spazio su disco usato per ampliare la RAM (file di swap o file di paging) quando Windows ha bisogno di più spazio di quello esistente nella RAM (la "memoria fisica").
+
+======PREPARAZIONE DEL MODELLO IN RHINO:======
+Per risparmiare nei tempi di rendering o evitare problemi di memoria insufficiente:
+
+Eseguite il comando SelOggettiImperfetti nel modello e rimpiazzate tutti gli oggetti non validi. Gli oggetti non validi ("bad") di solito causano dei grandi ritardi nel tempo di calcolo delle mesh e generano delle mesh di rendering non valide.  Vedi [[rhino:badobjects|BadObjects]].
+
+Riducete al minimo il numero di poligoni mesh che Flamingo deve gestire usando i metodi elencati qui sotto:
+
+Nascondete o disattivate i livelli di tutti gli oggetti presenti nel modello che non contribuiscono al rendering, in particolar modo gli oggetti lontani, quelli dietro ad altre superfici o quelli che si trovano all'interno di solidi.
+
+La presenza di geometrie oltre la vista della camera può rallentare Flamingo; per esempio, i piani d'appoggio creati come superfici o poligoni che sono molto più grandi della scena che si sta renderizzando. Mantenete queste geometrie il più piccole possibili per la scena renderizzata. Per quanto riguarda i piani d'appoggio, usate il piano d'appoggio infinito automatico dell'ambiente di Flamingo, che non è una geometria e quindi non rallenta il processo di rendering.
+
+======TECNICA DI MESHING======
+Impostate Rhino > File > Proprietà > Mesh su "Scalettate e più veloce", affinché le mesh di rendering che Flamingo eredita non siano così grandi. Se ciò fa sì che alcuni oggetti arrotondati abbiano delle silhouette poligonali, regolate la mesh globalmente (vedi [[rhino:meshfaq|MeshFAQ]]) o eseguite un meshing personalizzato su quei determinati oggetti (vedi la sezione "Meshing personalizzato").
+
+Un'alternativa consigliabile è quella di usare l'opzione "Personalizzata" di Rhino > File > Proprietà > Mesh ed impostare tutti i parametri numerici sullo zero, tranne "Massima distanza bordo/superficie". Impostatelo su un valore ragionevole per le dimensioni del modello ed in funzione della vicinanza della camera di rendering agli oggetti. Per un piccolo pezzo orafo modellato in millimetri, potete usare una distanza pari 0.1 o inferiore.  Per un'imbarcazione modellata in pollici, potete usare una distanza più grande, per esempio 1.0.  Nella visualizzazione ombreggiata, verificate se gli oggetti aventi dei profili arrotondati sono sfaccettati in modo troppo grossolano e regolate di conseguenza il valore di "Massima distanza".
+
+======MESHING PERSONALIZZATO======
+Se il profilo/silhouette di un determinato oggetto arrotondato appare sfaccettato, potete usare una mesh personalizzata per quell'oggetto (gli oggetti che si trovano in prossimità della camera, per esempio, possono richiedere delle mesh più dettagliate). In Rhino 3.0, usate il comando Mesh di Rhino (Rhino > Strumenti > Mesh poligonale > Da un oggetto NURBS) per creare un oggetto mesh più denso per quel determinato oggetto NURBS, quindi nascondete l'oggetto NURBS (superficie, solido) e renderizzate di nuovo. In Rhino 4.0, selezionate l'oggetto ed eseguite Rhino > Modifica > Proprietà oggetto > Oggetto > Impostazioni delle mesh di rendering > Mesh personalizzata > Regolare.  In questo modo, Rhino ricorderà che quel determinato oggetto deve avere una mesh di rendering personalizzata.
+
+Se appaiono delle fessure tra le superfici adiacenti, unitele sulle superfici per formare una polisuperficie; la mesh di rendering verrà ricalcolata affinché riempia tutto il contorno unito.
+
+===Importante===
+Si veda anche la sezione di domande frequenti sulle mesh [[rhino:meshfaq|MeshFAQ]], ricca di informazioni utili sulle mesh.
+
+======SOLO MESH DI RENDERING======
+Usate il comando MESH per ricavare la mesh dal modello e quindi nascondete la polisuperficie NURBS. Renderizzate solo la mesh. Si tratta di una buona soluzione da usare quando si ha provato tutto il resto ed il rendering non riesce.
+
+======IMPOSTAZIONI DI FLAMINGO PER LA VELOCITÀ======
+Mantenete l'opzione Rhino > Raytracing > Proprietà > Flamingo > Antialiasing su Alto/4X o inferiore, a meno che non desideriate dedicare più tempo al rendering.  Si veda il file della guida in linea.
+
+Ci possono essere delle situazioni speciali in cui sia necessario aumentare l'antialiasing, tuttavia, di norma risulta più economico in termini di tempo aumentare la risoluzione ( Rhino > File > Proprietà > Flamingo > Risoluzione ) per ottenere la stessa chiarezza nella stampa finale.
+
+Per i rendering di prova, se state usando l'opzione ombre morbide con alcune luci, disattivatela. Mantenete il numero di luci che usano ombre morbide il più basso possibile. Impostare un numero di campioni alto per le luci con ombre morbide è molto più costoso in termini di velocità di rendering che impostare un valore di tremolio alto. Usate il numero di campioni più basso che genera un rendering accettabile.
+
+======RENDERING DI PROVA VELOCE======
+In Rhino > File > Proprietà > Flamingo > Risoluzione, selezionate "Vista" o "Personalizzata" con una risoluzione bassa (per esempio, 300×200) quando state assegnando i materiali, regolando le viste, eseguendo dei rendering di prova, ecc.
+
+Per risparmiare tempo durante i rendering di prova, usate i comandi "RenderingFinestra" o "FinestraAnteprimaRender" per renderizzare velocemente piccole porzioni dell'immagine.
+
+Usate anche il comando "AnteprimaRender" per eseguire sullo schermo un rendering di prova a massima risoluzione, il quale mostra i colori, luci ed ombre, solo un livello di riflessione, ecc. ma non esegue la passata finale dell'antialiasing, che richiede molto tempo. Anche "FinestraAnteprimaRender" e "AnteprimaRenderSuFinestra" servono per la realizzazione di prove.
+
+======TRASPARENZA E RIFLESSIONI======
+Rendere un oggetto trasparente e riflettente aumenta in modo considerevole i tempi di rendering. Potete provare a ridurre il numero di rimbalzi in Rhino > File > Proprietà > Flamingo > Rimbalzi.  I valori predefiniti sono 3; potete provare ad impostarli sullo 0 per vedere se questi effetti stanno causando dei tempi di rendering eccessivi. Se el valore dei rimbalzi è troppo basso, si vedranno delle zone scure sugli oggetti trasparenti o riflettenti.
+
+Disattivate tutto ciò che si trova all'esterno della vista e che non occorre influisca sul rendering; tutto ciò che risulta attivato in Rhino, infatti, viene preso in considerazione da Flamingo nei riflessi.  Disattivate i livelli oppure selezionate gli oggetti ed usate il comando Nascondi.
+
+======DIMENSIONI IN PIXEL DEL RENDERING======
+Quando andate a renderizzare, scegliete una risoluzione personalizzata (dimensioni in pixel) di 1024×768 o superiore in Rhino > File > Proprietà > Flamingo > Risoluzione, per salvare il risultato finale su un file immagine da stampare.
+
+Vi consigliamo di moltiplicare le dimensioni di stampa del foglio in pollici per 85, per ottenere la risoluzione orizzontale e verticale (dimensioni in pixel) dell'immagine. In molte situazioni di stampa, una densità di pixel superiore a questo valore non migliora il risultato in modo significativo, per cui si ha un inutile aumento dei tempi di elaborazione.  Dipende dal tipo di carta usata, dalle capacità della stampante e da come si vedrà l'immagine.
+
+Potete aumentare la risoluzione del rendering finale rispetto a quella consigliata solo se la stampa non vi sembra sufficientemente chiara. Duplicando la risoluzione (il numero di pixel orizzontali e verticali) si quadruplica il tempo di rendering perché viene quadruplicato il numero di pixel da calcolare.
+
+======STAMPA DEL RENDERING======
+Per controllare la stampa, aprite l'immagine renderizzata in un programma come Photoshop (Adobe) o PaintShopPro (JASC).
+
+Tenete presente che alcuni programmi per la stampa di immagini tendono a stampare le immagini in modo predefinito solo a 72 punti per pollice; potete comunque modificare la scala di stampa secondo le vostre necessità, senza cambiare la risoluzione XY (pixel) dell'immagine.
+
+La stampa con Adobe PhotoShop è complessa, visto che è bloccato sul concetto di DPI (punti per pollice).  Di solito non si "riscansiona" o cambia la risoluzione (numero di punti X ed Y) di un'immagine, ma la si vuole stampare con le dimensioni desiderate. Potete usare PhotoShop per aumentare il valore di DPI (punti per pollice) memorizzato nell'immagine: da 72 fino a 150 o persino 300, se desiderate stampe fotografiche di alta qualità.  Flamingo 1.1 imposta tutte le sue immagini su 72 punti per pollice.  Flamingo 2.0 consente di definire i punti per pollice direttamente in Rhino > File > Proprietà > Flamingo > Risoluzione > Dimesione immagine stampata.
+
+Alcuni utenti possono lamentarsi del fatto che l'impostazione DPI di un file immagine di Flamingo 1.1 sia di 72 punti per pollice. Il DPI è un semplice suggerimento sulle dimensioni di stampa di un'immagine. Sfortunatamente, usiamo il termine "risoluzione" per denominare il numero di pixel nelle direzioni X ed Y (che non dovreste cambiare una volta creata l'immagine renderizzata), mentre PaintShopPro usa il termine "risoluzione" per ciò che denominiamo DPI. L'utente non dovrebbe cambiare le dimensioni in pixel, ma piuttosto stampare l'immagine con la scala e le dimensioni desiderate (essa si stirerà per adattarsi a qualsiasi dimensione nella stampa).
+
+======DIMENSIONI IN PIXEL ED EFFICIENZA======
+Fai vari tentativi per trovare il minimo di pixel per pollice (PPI) di cui avete bisogno per ottenere delle immagini stampate in modo adeguato. Qualsiasi valore superiore rappresenta una perdita di tempo nel rendering.  Come indicato in precedenza, un'eccessiva risoluzione e l'impostazione delle opzioni della finestra Rhino > File > Proprietà > Flamingo su valori eccessivi sono la causa più comune di tempi di rendering lunghi. 
+
+======ULTERIORI AIUTI======
+Se tutto ciò non fosse d'aiuto, vi invitiamo a darci ulteriori informazioni: diteci le dimensioni del modello e come avete impostato le opzioni di File/Proprietà/Flamingo e File/Proprietà/Mesh.  Se possibile, inviateci il file .3DM eseguendo il comando FlamingoTrasporto, comprimendo in uno zip i contenuti della cartella creata dal comando e quindi allegando lo zip all'e-mail.
+
+[[tech.eu@mcneel.com|E-mail di supporto tecnico]] tech.eu@mcneel.com
+
+
+----

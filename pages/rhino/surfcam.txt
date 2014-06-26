@@ -1,0 +1,49 @@
+====== Tips and advice for using Rhino together with Surfcam ======
+
+======Rhino and Surfcam======
+
+Rhino and Surfcam work very well together, perhaps one of the best CAD/CAM combinations of surface modelers.  This is because both Rhino and Surfcam are [[rhino:nurbs|NURBs]] surface based modelers, so there is a high degree of compatibility as well as complementarity.
+
+Surfcam's geometry creation interface is painful and relatively limited, and this is where Rhino really shines.  So, Rhino can best be used as a sort of "Front end" for Surfcam, doing virtually all geometry creation and editing in Rhino, and transferring the geometry to Surfcam for toolpath programming.  This is how I use the two programs together.  The only real downside of this is that when you replace geometry that has been involved in a toolpath program in Surfcam with new geometry from Rhino, you lose the associativity on those operations.  This problem is a relatively minor one, however, compared to the advantages of having Rhino's power and ease of use to create and edit objects.
+
+Surfcam will not open Rhino files directly, but are various things you can do to make the interface between the two programs almost seamless anyway.  My normal method of operation is to have the Rhino file and it's Surfcam equivalent open simultaneously all the time I'm working on them, and just Alt+Tab back and forth between the two.
+
+//<color gray>New development! There is now a Rhino to Surfcam plug-in available!  It puts a Rhino file type in the Surfcam open box and allows you to directly import Rhino files.  It looks promising at the moment, although there are some minor issues still to resolve.  One of the advantages is that layer names are imported, and it may be that direct translation Rhino > Surfcam will be even better than 2 translations Rhino > IGES out and IGES > Surfcam in.  So the section below may need some additions/revisions.  I'll report back after more testing, the plug-in is a free download, you may also test it yourself.</color>//
+
+<color red>Well, the plug-in seems to have been taken off-line, and the manufacturer's English page has also disappeared.  So, until further notice, it's back to the original system of using IGES to exchange files.  If something new happens on this front, I'll post it here.</color>
+
+=====Transferring Geometry from Rhino to Surfcam=====
+
+First thing you can do is to set up a "one button" export inside Rhino.  I have the following on a button I've created called IGES OUT:
+
+  ! //Select //Pause
+  //-Export "C:\surfcam\igs\AAA.igs surfcam //Enter
+
+//<color steelblue>Note - Your actual file path may vary a bit, depending on where you've installed Surfcam</color>//
+
+What this does is export all geometry selected (if none is selected it will prompt for selection) via iges/surfcam flavor to a sort of "clipboard" file which resides in the "IGS" directory of Surfcam.  The dash version of the command will simply export the selected geometry, overwriting the existing AAA.igs every time without asking (it's only a clipboard file anyway).  One could also create a keyboard shortcut in Rhino to do the same thing.
+
+Inside Surfcam, all you have to do is File>Open, select IGES type, make sure "append" is checked, find AAA (pretty much guaranteed to be at the top of the list) and double click it.  Your Rhino geometry will then be merged into the Surfcam file.  After the first time, it's even easier, as Surfcam will have the AAA file already in the dialog, just hit enter to open it, enter to accept, //<color steelblue>(unfortunately you still have to click close on the report window...  when will Surfcam be as user friendly as Rhino?  -- probably never...)</color>//
+
+So, once you're rolling, it's: select stuff in Rhino, bing!, one click and it's out, Alt+Tab to SC, Open, enter/enter and click the close box (or hit alt+C)  //<color steelblue>Ahh, if you could only script that...</color>//
+
+I have on the right button an alternative macro:
+
+  ! //Select //Pause
+  //-Export "C:\surfcam\igs\AAA.igs 144 //Enter
+
+This allows me to export via IGES 144 flavor instead of Surfcam flavor.  The Surfcam flavor "simplifies" things like planar surfaces, but if you have created a special planar "flow surface" in Rhino for use in Surfcam, the UV directions will be lost unless you export these entities as 144.  144 also occasionally works better for the odd trim that gets messed up going from Rhino to Surfcam - something I've found is pretty rare, actually.
+
+=====Things to watch out for:=====
+
+  * Rectangles export as one entity via Surfcam flavor, if you want four line segments, explode them before exporting.  I generally explode all curve geometry before exporting and usually also do a **SimplifyCrv** to make sure any extracted edge geometry that might be arcs or lines actually will be.
+  * If you have used **JoinEdge** anywhere in the hopes of closing edge gaps, it will all disappear when exported to Surfcam - even if export as a solid format like ACIS or STEP - so beware. (I don't have Surfcam solids, so I can't tell you how this reacts)
+  * Object colors and layer names don't transfer.  Layers do retain their order in export, though, so be careful - if you re-order your layers in Rhino, they will no longer correspond with the appropriate Surfcam layers.  I recommend not changing the layer order in Rhino once you have done your initial export.
+  * Check your geometry in Surfcam after importing. Occasionally there is some geometry that Rhino considers valid that Surfcam doesn't like.  The most common are surfaces that get labeled "degenerate" by Surfcam, most often that is because of two or more rows of control points too close together.  Surfcam will put a point where it thinks the problem is, go back into Rhino and use **RemoveKnot** at that point to see if you can fix the problem.  Usually you will find two or more knotlines on top of each other at that point.
+
+I'm sure I'll be able to think of more tips later.
+
+<color steelblue>--Mitch</color>
+
+
+

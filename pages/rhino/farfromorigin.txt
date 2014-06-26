@@ -1,0 +1,16 @@
+
+
+In Rhino 3 or 4, geometry built in Rhino or imported into Rhino that is extremely far (millions of units) from the World origin suffers from display and precision problems due to the polygon mesh vertex locations being represented by single precision number. This affects the appearance of shading and rendering, and the appearance of polygon mesh objects.
+
+One solution to this problem is to move all of the existing geometry closer to the origin and make the model there. However since it may be that the model needs to be placed to correspond to survey data that uses the very large numbers of units, this is not always possible. You can have it both ways using the following procedure-
+
+
+  - Make a copy of the original model. You now have say, Model A and Model B
+  - In the copy, Model B, move the relevant data, such as property lines etc. to the origin and delete the rest of the model. Now build your new geometry in this model, with everything around the origin- there should be no display or precision problems. You can scale as needed to work in convenient units and orient the model to Rhino's grid for convenience as well.
+  - Insert (Insert command) Model B into Model A at the distant location as a linked and embedded block with the correct scaling and orientation (If scaling and orientation was changed in the previous step, this needs to be reversed when the data is placed back in Model A). This linked block can then be updated correctly in File A as it is modified in the working file, Model B. Model A always has the correct data in the correct location but since it is not the working model, the potential display, mesh and precision problems are not a big deal; the file can be saved as [[accurender:dwg|dwg]] or DXF as needed to return to the client- the block instance of Model B may be exploded before exporting.
+
+Model A is really just a container file, used to perform the scaling/transposing of the model. All the data in Model A can be linked to outside sources (including the data from the original model, if you will be receiving updates throughout the course of the project), so that one can update this outside data (Model B in our example, but there could be multiple linked files) and have everything update in Model A without having to go through the scale/translate process each time.
+
+Thanks to Mike La Fon for outlining this process on the Rhino newsgroup.
+
+

@@ -1,0 +1,98 @@
+====== Grasshopper 일시적 데이터 상속 ======
+
+| {{http://en.wiki.mcneel.com/content/upload/images/ExplicitHistoryBanner.png}} |  //**Grasshopper Wiki 페이지**// |
+|  [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
+
+----
+
+> **Summary:** //일시적 (volatile) 데이터의 상속에 대한 설명//
+
+\\
+
+===== 데이터 상속=====
+
+일시적 또는 [[http://kr.wiki.mcneel.com/default.aspx/McNeel/ExplicitHistoryPersistentDataRecordManagement.html|지속적]] 형식의 데이터는 모두 매개변수에 저장되어 컴포넌트에서 사용됩니다. 매개변수의 영구적인 기록에 데이터가 저장되지 않을 때, 다른 곳으로부터 상속을 받게 됩니다. 모든 매개변수는 (출력 매개변수를 제외하고) 어디서 데이터를 얻을 지를 정의하며, 대부분의 매개변수는 특별히 다르지 않습니다. 매개변수를 이중으로 정수 소스로 연결할 수 있으며, 변환도 이루어지게 됩니다. 플러그인에서 많은 변환 스키마가 정의됩니다. 그러나, 변환 과정이 정의되어 있지 않다면, 받는 쪽의 매개변수에서 변환 오류가 생성됩니다. 예를 들어, 점이 필요할 때 서페이스를 공급하면 점 매개변수에서 오류 메시지가 생성되고 (의문시되는 매개변수의 [[#메뉴]] 에서 액세스 가능) 빨간색으로 표시됩니다. 해당 매개변수가 컴포넌트에 속하는 경우, 빨간 색의 상태는 계층 구조의 위쪽으로 전파되며, 해당 컴포넌트도 자체에 오류가 없더라도 빨간 색으로 바뀝니다.
+
+\\
+
+경고와 오류에 대한 자세한 정보는 [[ExplicitHistoryPluginObjectsExplained|History Definition Objects Explained(히스토리 정의 개체 설명)]] 를 참조하세요.
+
+\\
+\\
+
+===== 연결 관리=====
+
+매개변수는 자체의 데이터 소스를 관리하므로, 이러한 설정을 통해 의문시되는 매개변수에 액세스할 수 있습니다. 세 개의 컴포넌트와 두 개의 매개변수가 있는 작은 정의가 있다고 가정해 봅시다:
+
+
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_01.png}}  |
+
+----
+\\
+
+이 단계에서는 모든 개체가 연결되어 있지 않은 상태이며, 직접 연결해야 합니다. 연결하는 순서는 중요하지 않지만, 왼쪽에서 오른쪽으로 연결해 봅시다. 매개변수의 작은 원 ("그립"이라고도 합니다) 가까이를 마우스로 끌기 시작하면 연결 와이어가 마우스에 붙게 됩니다:
+
+
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_02.png}}  |
+
+----
+\\
+
+일단 마우스 (왼쪽 단추를 누른 상태에서) 를 대상 매개변수 가까이 가져가면 와이어가 연결되어 실선이 됩니다. 마우스 왼쪽 단추를 놓기 전까지는 완전히 연결된 것이 아닙니다:
+
+
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_03.png}}  |
+
+----
+\\
+
+PtGrid 컴포넌트의 "Y" 매개변수와 Line 컴포넌트의 "A" 와 "B" 매개변수에 같은 방법으로 연결할 수 있습니다: 클릭+마우스로 끌기+마우스 놓기...
+
+
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_04.png}}  |
+
+----
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_05.png}}  |
+
+----
+\\
+
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_06.png}}  |
+
+----
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_07.png}}  |
+
+----
+\\
+
+양쪽 방향으로 연결할 수 있음을 알 수 있습니다. 단, 기본 설정에 의해 새로운 연결이 기존 연결을 지우도록 되어 있으므로 주의하시기 바랍니다. 대부분의 경우, 단일 연결의 사용이 전제되어 있으므로 여러 개의 소스를 정의하려면 특별한 과정이 필요합니다. 와이어를 마우스로 끌 때 Shift 키를 누르면, 마우스 포인터가 바뀌어 추가 연결이 가능함을 알 수 있습니다:
+
+\\
+
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_08.png}}  |
+
+----
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_09.png}}  |
+
+----
+\\
+
+"ADD" 커서가 활성 상태일 때, 소스 매개변수 상에서 마우스 단추를 놓으면 해당 매개변수가 소스 목록에 추가됩니다. 이미 소스로 정의된 매개변수를 소스 매개변수로 지정하면, 아무런 변화도 일어나지 않습니다. 동일한 소스에서 1 회를 초과하여 상속할 수 없습니다.
+
+같은 이유로, Ctrl 키를 누르면 "REM" 커서가 표시되고 대상이 되는 소스는 소스 목록에서 제거됩니다. 해당 소스가 참조되지 않았다면 아무런 변화도 일어나지 않습니다.
+
+\\
+
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_10.png}}  |
+
+----
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_Wires_11.png}}  |
+
+----
+\\
+
+매개변수 메뉴에서, 소스의 연결을 해제할 수 있습니다 (연결은 안 됩니다):
+
+
+|  {{http://en.wiki.mcneel.com/content/upload/images/ExpHis_DefaultUI_MenuDisconnect.png}}  |
+

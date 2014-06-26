@@ -1,0 +1,47 @@
+====== Ce qui suit est un message du forum de discussion en anglais écrit par Dr. Dale Lear, Scientifique, publié le 21 décembre 2007, expliquant pourquoi les fichiers de Rhino semblent être plus gros que nécessaire et pourquoi cette grande taille est une très bonne chose. ======
+
+======Pourquoi les fichiers de Rhino sont-ils si grands ?======
+
+La question de la grandeur des fichiers 3dm de Rhino revient souvent sur le forum de discussion. 
+
+Il existe une réponse simple. Nous avons conçu le format de fichier de Rhino en estimant que les informations contenues dans un fichier sont importantes et que l'espace de stockage n'est pas très cher. 
+
+
+=====CONCEPTION D'UN FICHIER DE RHINO :=====
+
+Environ la moitié des octets d'un fichier de Rhino sont consacrés à l'enregistrement d'informations permettant une récupération correcte. 
+
+Chaque élément (calque, point, courbe, matériau, ...) d'un fichier de Rhino est isolé dans une "pièce" avec son propre CRC (contrôle cyclique par redondance). 
+
+Lorsqu'un fichier de Rhino subit des dommages mineurs (mauvais octets à cause d'un disque défaillant, média amovible laissé trop près d'un champ magnétique puissant, clés USB qui tombent dans l'eau), Rhino peut toujours lire le fichier et peut même vous dire qu'il a détecté des éléments abîmés dans le fichier afin que vous sachiez que le fichier a subi des dommages. 
+
+Imaginons un fichier vraiment saccagé par un disque très défaillant. Prenez un fichier avec 50 000 objets, supprimez les premiers 20% du fichier et modifiez aléatoirement encore 5% des valeurs dans le reste du fichier. La commande "RécupérerFichier3dm" de Rhino peut chercher dans ce tas de détritus et récupérer encore la plupart de la géométrie dans ce qui reste. (Faites ce test avec vos fichiers de CAO de la marque "X" et vous n'obtiendrez rien du tout. Puis contactez le service clientèle de la marque "X" et demandez ce qu'ils peuvent faire pour récupérer les données du fichier - vous n'obtiendrez encore rien mais vous devrez sûrement payer pour l'appel.) 
+
+
+=====AMÉLIORATIONS SUR RHINO V5 :=====
+
+En général, la version 5 crée des fichier entre 5 et 20% plus petits que la version 4 mais encore plus résistants aux défaillances des moyens de stockage. De plus, le module d'importation [[accurender:dwg|dwg]] a été amélioré afin de traduire les objets dans le fichier [[accurender:dwg|dwg]] en objets de Rhino avec le meilleur rapport vitesse-taille. 
+
+
+=====COÛT DE STOCKAGE :=====
+
+Les fichiers 3dm de Rhino sont stockés sur des éléments fragiles qui peuvent tomber en panne à tout moment. Un disque de 250 Go coûte environ 70 Euros. Ce qui revient à environ 0,0003 Euros/Mo. Un fichier de 50 Mo de Rhino utilise environ 1,5 centimes d'espace de stockage. 
+
+
+Je vous laisse calculer la valeur des informations contenues dans vos fichiers 3dm et combien vous être prêt à payer pour protéger votre travail. 
+
+
+=====ENCORE PLUS POUR VOTRE ARGENT :=====
+
+Pensez à votre investissement logiciel à long terme. La valeur est dans les informations, pas dans le produit. Votre ancienne version de Rhino 1.0 d'il y a 15 ans est maintenant une disquette inutile dans une décharge. Cependant, les fichiers que vous avez créés 15 ans auparavant avec Rhino 1.0 peuvent avoir encore beaucoup de valeur. Nous donnons gratuitement le code source C++ compatible afin de pouvoir lire les fichiers de toutes les versions de Rhino et pour écrire des fichiers de Rhino en version 2, 3 et 4. 
+
+Tout le monde peut visiter la page http://www.[[developer:opennurbs|opennurbs]].org/ et obtenir ce code source. Nous apportons une assistance gratuite aux développeurs, y compris nos concurrents, qui intègrent ce code source dans leurs produits. Nous publions un nouveau toolkit [[developer:opennurbs|opennurbs]] AVANT de sortir les premières éditions des nouvelles versions de Rhino afin que tous ceux qui le souhaitent puissent lire les tout derniers fichiers de Rhino. En résumé, ceci signifie que toutes les applications écrites par des programmateurs compétents peuvent lire et écrire des fichiers 3dm de Rhino créés par toutes les versions de Rhino que nous avons publiées ou que nous commercialisons actuellement. 
+
+Comparez cette approche avec celle utilisée par les entreprises de développement qui protègent avec force leurs formats de fichier propriétaires et légalement protégés afin de retenir vos données en otage pour vous obliger à acheter leurs produits et leurs mises à jour. 
+
+Aller, assez de discours pour cette année. 
+
+
+
+
+

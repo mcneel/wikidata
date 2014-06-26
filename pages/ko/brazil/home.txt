@@ -1,0 +1,68 @@
+====== Brazil 렌더링 시스템 Wiki 홈페이지 ======
+
+
+| {{http://en.wiki.mcneel.com/content/upload/images/SplutterFishGlassLogo.png}} | {{http://en.wiki.mcneel.com/content/upload/images/RhinoGlassLogo.png}} |  //**Brazil r/s for Rhino Wiki 페이지**// |
+|  [[http://www.SplutterFish.com|//SplutterFish//]] / [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
+
+----
+
+**Brazil 렌더링 시스템 Wiki: 최근 변경된 페이지(영어) [[http://wiki.mcneel.com/feed.php|{{http:en.wiki.mcneel.com/content/upload/images/RSS.png}}]]**
+
+----
+\\
+
+namespace.TopicsWith("Brazil").SortBy{each| DateTime.Now.SpanBetween(each.LastModified)}.Snip(3).Collect
+
+{
+   aTopic |
+   [
+       "|",
+       aTopic.HasProperty("Title").IfTrue
+       {
+         Presentations.Link(federation.LinkMaker.LinkToTopic( aTopic.Fullname ) , aTopic.GetProperty("Title"))
+       }
+       IfFalse
+       {
+         aTopic.Name
+       },
+       " |",
+       aTopic.GetProperty("Summary"),
+       "|",
+       Newline
+     ]
+}
+
+\\
+
+> **Summary:** //Brazil 렌더링 시스템 관련 정보를 공유하기 위한 Wiki 페이지입니다. 공유하고자 하시는 정보가 있으시면 게재해 주세요. 내용 추가 방법은 [[:aboutwiki|Wiki 안내]] 페이지를 참조하시기 바랍니다.//
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiDownloadIcon.png}} |{W40}  [[http://download.mcneel.com/brazil/2.0/beta|Brazil r/s 2.0 베타 릴리스 다운로드]]  | {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiFeaturesIcon.png}} |{W40}  [[BrazilFeatureList|Brazil r/s 2.0 기능 안내(영어)]]  |
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiOptionsIcon.png}} |  [[BrazilOptionsExplained|Brazil r/s for Rhino 옵션 안내(안내)]]  | {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiSamplingIcon.png}} |  [[BrazilSamplingSettings|샘플링 안내(영어)]]  |
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiLightingIcon.png}} |  [[BrazilLightOptions|Lighting 안내(영어)]]  | {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiShaderIcon.png}} |  [[BrazilShaders|Shader 안내(영어)]]  |
+
+\\
+
+----
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiSplutterfishIcon.png}} |{W40}  [[http://www.splutterfish.com|Splutterfish 홈페이지(영어)]] | {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiSupportIcon.png}} |{W40}  [[http://splutterfish.com/forums/forumdisplay.php?f=33|Splutterfish - Brazil for Rhino 포럼(영어)]] |
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiGalleryIcon.png}} |  [[http://www.splutterfish.com/sf/WebContent/Gallery/|Splutterfish 사용자 갤러리(영어)]] | {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiGalleryIcon.png}} |  [[http://gallery.mcneel.com/?language=ko&g=84|McNeel 사용자 갤러리]] |
+
+\\
+
+----
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiLogIcon.png}} |  [[BrazilDevStatus|Brazil r/s for Rhino 개발 현황(영어)]]  |
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiUrlIcon.png}} |  [[BrazilKnownIssues|알려진 문제점(영어)]]  |
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiUrlIcon.png}} |  [[brazil:wishlist|희망사항]]  |
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilWikiUrlIcon.png}} |  [[UsersLounge|Brazil 렌더링 시스템 관련 의견 교환(영어)]]  |
+
+\\
+
+----
+\\
+
+

@@ -1,0 +1,66 @@
+====== Diagnose von Rhino 4.0 Startfehlern ======
+
+Sollte Rhino 4.0 auf Ihrem Computer nicht starten, verwenden Sie die Applikation Rhino Debugging Harness, um detaillierte Informationen zu generieren, die dem Rhino-Entwickler-Team helfen werden zu verstehen, was auf Ihrem Computer geschieht.
+
+=====Debug Phase 1, Sicherheitsmodus:=====
+
+**<color darkred>1.</color>** **Installieren** Sie die neuste Version von **Rhino 4.0** (Service Releases können unter www.de.rhino3d.com/download.htm runtergeladen werden)
+
+**<color darkred>2.</color>** Downloaden Sie die Applikation **[[http://s3.amazonaws.com/mcneel/rhino/4.0/misc/RhinoDebugHarness.exe|Rhino Debugging Harness]] ** und speichern Sie sie auf Ihrem Desktop.
+
+**<color darkred>3.</color>** Starten Sie **RhinoDebugHarness.exe**
+
+**<color darkred>4.</color>** **Wählen** Sie das Kontrollkästchen **Start in Safe Mode** aus.
+
+**<color darkred>5.</color>** **Löschen** Sie die Markierung unter **[[rhino:opengl|OpenGL]] Acceleration Enabled**.
+
+**<color darkred>6.</color>** Klicken Sie auf die Schaltfläche **Start Rhino**.
+
+Warten Sie einen Moment, damit Rhino versuchen kann zu starten.
+
+**Konnte Rhino richtig starten?**
+
+**Ja:** Lassen Sie die Applikation Rhino Debug Harness geöffnet und fahren Sie mit der Debug Phase 2 fort.
+
+**Nein:** Es können keine weiteren Tests vorgenommen werden, um dieses Problem zu diagnostizieren. Befolgen Sie die folgenden Schritte:
+
+  * Klicken Sie auf die Schaltfläche View Log
+  * Senden Sie eine E-Mail mit einer Kopie dieser Startup-Log-Datei an den technischen Support von McNeel unter <tech.eu@mcneel.com>.
+  * Lassen Sie den technischen Support von McNeel (<tech.eu@mcneel.com>) wissen, dass Rhino nicht im Sicherheitsmodus startet.
+
+=====Debug Phase 2, OpenGL Hardware-Beschleunigung deaktiviert:=====
+
+**<color darkred>1.</color>** **Löschen** Sie die Markierung des Kontrollkästchens **Start in Safe Mode**.
+
+**<color darkred>2.</color>** **Löschen** Sie die Markierung des Kontrollkästchens **[[rhino:opengl|OpenGL]] Acceleration Enabled**.
+
+**<color darkred>3.</color>** Klicken Sie auf die Schaltfläche **Start Rhino**.
+
+**Konnte Rhino richtig starten?**
+
+**Ja:** Lassen Sie die Applikation Rhino Debug Harness geöffnet und fahren Sie mit der Debug Phase 3 fort.
+
+**Nein:** Lassen Sie den technischen Support von McNeel wissen, dass:
+
+  * Rhino im Sicherheitsmodus startet
+  * Rhino nicht mit deaktivierter OpenGL-Beschleunigung startet.
+
+=====Debug Phase 3, OpenGL Hardware-Beschleunigung aktiviert:=====
+
+**<color darkred>1.</color>** **Löschen** Sie die Markierung des Kontrollkästchens **Start in Safe Mode**.
+
+**<color darkred>2.</color>** **Wählen** Sie das Kontrollkästchen **[[rhino:opengl|OpenGL]] Acceleration Enabled** aus.
+
+**<color darkred>3.</color>** Klicken Sie auf die Schaltfläche **Start Rhino**.
+
+**Konnte Rhino richtig starten?**
+
+**Ja:** Rhino scheint richtig zu funktionieren. Schließen Sie die Applikation Rhino Debug Harness.
+
+**Nein:** Das Problem scheint mit Ihrer [[rhino:opengl|OpenGL]] Karte oder -Treiber zusammenzuhängen. Laden Sie den neusten [[rhino:opengl|OpenGL]] Treiber oder die Videokarte vom Hersteller runter. Sollte das Problem damit nicht behoben werden, setzen Sie sich mit dem technischen Support von McNeel in Verbindung und melden Sie folgendes:
+
+  * Rhino im Sicherheitsmodus gestartet
+  * Rhino mit deaktivierter [[rhino:opengl|OpenGL]] Beschleunigung gestartet
+  * Sie haben Ihren Videotreiber aktualisiert.
+  * Rhino startet nicht mit aktivierter [[rhino:opengl|OpenGL]] Beschleunigung.
+

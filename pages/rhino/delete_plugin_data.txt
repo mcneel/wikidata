@@ -1,0 +1,34 @@
+====== Deleting Plug-In Data from Multiple Files ======
+There are times when you want to remove plug-in data from a file. This is done in Rhino by using the **-SaveAs** command.
+
+  - At command line type **-SaveAs**
+  - Command prompt: //Save file name <C:\NAME.3dm> ( Version=5  SaveSmall=No  GeometryOnly=No  SaveTextures=No  SavePlugInData=Yes  Browse ):// 
+  - Click on **SavePlugInData=Yes ** It will toggle to **SavePlugInData=No**
+  - Save file name <C:\NAME.3dm> ( Version=5  SaveSmall=No  GeometryOnly=No  SaveTextures=No  SavePlugInData=No  Browse ):
+  - Rhino echos //File successfully written as C:\SHARE\test.3dm//
+
+This works well for one file. But what if you are needing to process a entire folder and possibly subfolders of files? You need this script.
+
+===== Download =====
+  * [[http://s3.amazonaws.com/mcneel/rhinoscript/BatchRemovePlugInDataV4.zip|BatchRemovePlugInDataV4.zip]] for Rhino 4
+  * Download **BatchRemovePlugInDataV5.zip** for Rhino 5 (NOT AVAILABLE YET.) 
+  * Unzip into a folder that you will remember and not move or delete.
+
+===== How to Use=====
+  - Open Rhino 4 to a new empty file.
+  - Drag and drop **BatchRemovePlugInData.rvb** on top of the Rhino application window. {{:rhino:drag_drop_small.png|}}
+  - Type **BatchRemovePlugInData** 
+  - Select the folder to process. //Let it roll//.
+
+
+ =====BE CAREFUL =====
+  * Test thoroughly with small number of files. Make sure files still work propertly with any plug-ins like Matrix, V-Ray, RhinoGold, RhinoCAM and many others that you may be using.
+  * This utility will process all the file in a folder and its sudfolders.
+  * Arrange your directory structure so that files that you do not need processed are not in the folder or subfolder that you select.
+
+
+=====Problems?=====
+//Email max@mcneel.com.//
+
+=====Learning RhinoSrcipt=====
+See the [[http://wiki.mcneel.com/developer/home|Rhino Customization Support Page.]]

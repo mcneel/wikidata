@@ -1,0 +1,42 @@
+====== Reverse Engineering ======
+
+Rhinoceros ist keine automatische Reverse-Engineering-Software.
+
+Im Allgemeinen wird die Punktewolke oder das Polygonnetz als Referenz verwendet, um das Objekt mit NURBS-Flächen neu zu modellieren.
+
+Es können Schnittkurven aus einer Punktewolke (Befehl PunktwolkeSchnitt, Engl. _PointCloudSection) oder mit Schnitt- oder Konturkurve aus einem Polygonnetz extrahiert werden.
+
+Es sind auch einige Plug-ins für Reverse-Engineering erhältlich: http://www2.rhino3d.com/resources/default.asp?category=13
+
+Infos auch unter: http://www.flexicad.com/produkte/erweiterungen/rhinoreverse/uebersicht.htm.
+
+----
+Der Befehl Füllfläche (//Patch) ist das einzige Werkzeug, das für die Erzeugung einer Fläche aus einem Punktesatz direkt verwendet werden kann. Es kann auch der Befehl PunktwolkeSchnitt (//PointCloudSection) in Rhino verwendet werden, um das Reverse-Engineering der Kurven zuerst zu erstellen, dann diese Kurven verwenden, um NURBS-Flächen zu erzeugen.
+
+----
+Infos hier und auf den folgenden Seiten: http://www.rhino3.de/design/modeling/reengineering/
+
+Zum Navigieren auf die kleinen Pfeile unten rechts auf jeder Seite klicken.
+
+----
+Es gibt einige Möglichkeiten, dies zu tun:
+
+SMURF Plug-in für Rhino 3.0, http://www2.rhino3d.com/resources/display.asp?language=&listing=93  Smurf ist ein Rhino Plug-in, mit dem Polygonnetze interaktiv in NURBS-Füllflächen umgewandelt werden können.
+
+Das SMURF Plug-in macht ein Polygonnetz erforderlich.  Wenn also eine Punktewolke vorhanden ist, muss sie zuerst in ein Polygonnetz umgewandelt werden.
+
+> **Konverter:** ////
+  * Points2Polys ist ein KOSTENLOSER Konverter von Punktewolke zu Polygonnetz von Paraform, der auf unstrukturierten Rohdaten mittlerer Größe verwendet wird (ca. 500'000 Punkte). http://www.paraform.com/ppdl/
+  * PolygonnetzAusPunkten (_MeshFromPoints) - Teil von Rhino 3.0, der in Rhino 3.0 SR4 und neuer enthalten ist, im Bonus-Menü. Im Diskussionsforumsarchivs könnt ihr mehr Infos zu diesem Werkzeug finden.
+  * In den Diskussionsforumsarchiven und auf der Rhino Ressourcenseite findet ihr weitere neue Punktewolkenübersetzer.
+
+----
+Nehmen wir einmal an, ihr möchtet eine erstklassige Fläche auf einem komplexen Produkt, 2 Jahre professioneller Erfahrung sollten ausreichen! Aber wenn die Qualität der Fläche nicht wichtig ist oder eine einfache Form hat, könnten Programme wie SMURF hilfreich sein. Ohne das Modell gesehen zu haben oder zu wissen, wie das Projekt ist, verwenden die meisten die Punktewolkendaten als Referenz, um ein Modell von Grund auf zu erzeugen, indem gute Modelliertechniken verwendet werden. Das, kombiniert mit einer genauen Anpassung der Scan-Daten an die gewünschte Toleranz, ist sehr schwierig!
+
+----
+Reverse-Engineering ist wohl das schwierigste, was man mit Rhino tun kann, je nachdem, was das gescannte Element ist. Ich habe es gemacht und es ist kein einfacher oder angenehmer Vorgang, außer es ist ein Gelände-Map. In diesem Fall sollte es machbar sein, etwas mit Füllfläche zu erhalten. Mein Rat wäre, diese Punktewolke nicht in NURBS umzuwandeln, außer es ist unbedingt nötig (es gibt CAM-Programme, die Polygonnetzdateien importieren, sollte dies das Problem sein), und wenn es nötig ist, holt euch Hilfe von einem Rhino-Experten--es gibt keinen besonderen Trick, man muss nur Rhino sehr sehr gut kennen-- oder holt euch spezialisierte Reverse-Engineering-Software, die dies in einem vernünftigen Zeitrahmen tun.
+
+----
+Weitere Kommentare...
+
+

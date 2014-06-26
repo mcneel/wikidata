@@ -1,0 +1,40 @@
+====== Desinstalar Rhino 4.0 manualmente ======
+====Problema:====
+Durante el inicio, instalación o desinstalación de Rhino, recibe un mensaje de error como este:
+
+**La función que está intentando utilizar se encuentra en un recurso de red que no está disponible.**
+
+**Haga clic en Aceptar para volver a intentarlo o introduzca una ruta alternativa a una carpeta que contenga el paquete de instalación '<nombre de archivo>.MSI' en el siguiente diálogo.**
+
+====Se aplica a:====
+Rhino 4.0, Rhino 5.0
+
+====Causa:====
+La caché del instalador de Windows no puede encontrar un archivo o la clave de registro necesarios para la desinstalación. Se trata de un problema común causado por el servicio del instalador de Windows. La mejor solución es usar la herramienta **Windows Installer Clean Up** para eliminar por completo la instalación anterior. Después de “limpiar” la instalación anterior, podrá reinstalar Rhino y realizar una instalación válida.
+
+
+====Resolución:====
+Elimine manualmente Rhino y el registro del instalador de Windows del producto.
+
+**Nota:** sólo debería realizar los siguientes procedimientos si se produce un error al desinstalar desde Programas y características en el Panel de control.
+
+===Limpiar la caché del instalador de Windows:===
+  - Descargue [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]]
+  - Descomprima el contenido de WindowsInstallerCleanupUtility.zip a la carpeta "Windows Installer Clean Up" en el escritorio.
+  - Ejecute **msicuu.exe**
+  - Desplácese hacia abajo hasta **(Todos los usuarios) Rhinoceros 4.0**
+  - Haga clic en **Quitar**.
+   
+  
+===Eliminar la carpeta de instalación de Rhino:===
+  - Vaya a C:\Archivos de programa\
+  - Elimine **Rhinoceros 4.0** o **Evaluación de Rhinoceros 4.0**
+  
+===Eliminar claves del registro:===
+  - Abra el **Editor del registro**.
+  - Busque HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros\2.0
+  - Elimine la clave **4.0**
+  - Vaya a **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros
+  - Elimine la clave **4.0**
+  
+  

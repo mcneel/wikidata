@@ -1,0 +1,102 @@
+======Probleme bei der Installation von Rhino 3 und Rhino 4 ======
+Für Hilfe bei Problemen mit der Installation von Rhino 5 klicken Sie bitte [[http://wiki.mcneel.com/de/rhino/installproblems|hier]].
+
+  * [[#Rhino 3 - Problem mit Werkzeugleisten-Layouts, die nicht richtig konfiguriert bleiben|Rhino 3 - Problem mit Werkzeugleisten-Layouts, die nicht richtig konfiguriert bleiben]]
+  * [[#Rhino 3 - Probleme mit Performance und Darstellung von OpenGL|Rhino 3 - Probleme mit Performance und Darstellung von OpenGL]]
+  * [[#Rhino 3 - Der Verzeichnisreiter in der Hilfe ist leer|Rhino 3 - Der Verzeichnisreiter in der Hilfe ist leer]]
+  * [[#Rhino 4 startet, ohne Plug-ins zu laden|Rhino 4 startet, ohne Plug-ins zu laden]]
+  * [[#Rhino 4 - Berechnung des Festplattenbedarfs während der Installation wird nicht beendet|Rhino 4 - Berechnung des Festplattenbedarfs während der Installation wird nicht beendet]]
+  
+
+=====Rhino 4 startet, ohne Plug-ins zu laden=====
+**PROBLEM:**
+
+Unter Windows Vista fehlen Werkzeugleisten und die Plug-ins werden nicht geladen.
+
+Einige wenige Benutzer haben berichtet, dass bei Installationen von Rhino 4 (SR2 und neuer) unter Vista Werkzeugleisten und Plug-ins nur geladen werden, wenn Rhino mit Administratorberechtigung ausgeführt wird.  Dies scheint häufiger unter Vista Home Premium vorzukommen, wurde aber bei allen Varianten von Vista beobachtet.  Die meisten Benutzer haben dieses Problem nicht und auch das Entwicklerteam von Rhino konnte den Fehler nicht reproduzieren.
+
+**LÖSUNG:**
+
+Einige Benutzer haben berichtet, dass durch Deaktivierung der Benutzerkontensteuerung (Systemsteuerung -> Benutzerkonten) und vorübergehende Deaktivierung aller Antiviren- und sonstiger Systemschutzprogramme vor einer Neuinstallation von Rhino das Problem behoben wurde.  Nach der Neuinstallation von Rhino und einem geglückten Start desselben sollten Sie Ihre Antiviren- und Systemschutzprogramme wieder aktivieren.  Außerdem können Sie die Benutzerkontensteuerung wieder aktivieren, falls Sie dies wünschen.
+
+Hinzugefügt am 5. März 2009 von John Brock
+
+=====Rhino 3 - Problem mit Werkzeugleisten-Layouts, die nicht richtig konfiguriert bleiben=====
+
+  - Schließen Sie Rhino 3.0.
+  - Führen Sie [[http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip|dieses kleine Programm]] aus, während Rhino geschlossen ist.
+  - Starten Sie Rhino neu.
+  - Das kleine Programm kann den folgenden Schlüssel in der Registrierung löschen, damit Rhino einige Einstellungen "vergisst", die die Werkzeugleisten nicht richtig andocken lassen:
+  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+
+=====Rhino 3 - Probleme mit Performance und Darstellung von OpenGL=====
+
+//- Nach Aktualisierung von Karten und Treibern//
+
+  - Schließen Sie Rhino 3.0.
+  - Führen Sie [[http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip|dieses kleine Programm]] aus, während Rhino geschlossen ist.
+  - Starten Sie Rhino neu.
+  - Das kleine Programm kann den folgenden Schlüssel in der Registrierung löschen, damit Rhino einige die alten [[opengl|OpenGL]]-Anzeigeeinstellungen "vergisst":
+  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Options\OpenGL//
+
+=====Rhino 4 - Berechnung des Festplattenbedarfs während der Installation wird nicht beendet=====
+**PROBLEM:**
+
+Während der Installation von Rhino 4 öffnet sich ein Fenster mit der Nachricht: "Der Installer ermittelt die erforderliche Speicherkapazität. Bitte haben Sie etwas Geduld", das sich im Folgenden nicht mehr schließt.
+
+**URSACHE:**
+
+Der Windows Installer untersucht all Ihre Laufwerke, um zu bestimmen, ob genügend Festplattenkapazität zur Installation von Rhino 4 zur Verfügung steht. Aus irgendeinem Grund dauert dieser Vorgang sehr lange oder wird nicht abgeschlossen. Die wahre Ursache liegt im Windows-Installer-Modul verborgen.
+
+**LÖSUNG:** ////
+
+Starten Sie den Installer von der Befehlszeile aus:
+<code>
+msiexec /i Rhino4_Setup.msi /qr
+</code>
+
+=====Rhino 3 - Der Verzeichnisreiter in der Hilfe ist leer=====
+
+**PROBLEM:**
+
+Der Verzeichnisreiter im Fenster der Rhino-Hilfe oder der BonusWerkzeugeHilfe ist für Benutzer mit begrenzten Berechtigungen in Windows 2000 leer.
+
+**LÖSUNG:**
+
+Dies ist ein Problem mit der Zugriffserlaubnis, das mit einem Fehler in Windows 2000 zusammenhängt. So beheben Sie dieses Problem, ohne dabei die Zugriffsrechte der Programmordner zu ändern:
+  * Löschen Sie mit Administratorrechten die Dateien Rhino.GID im Ordner C:\Programme\Rhino\Deutsch\Hilfe und RhinoBonusTools.GID.
+  * Melden Sie sich als Administrator ab (öffnen Sie die Hilfe noch nicht, damit die GID-Datei für den Administrator nicht erneut erzeugt wird).
+  * Melden Sie sich erneut mit Ihrem vorigen Konto (begrenzte Berechtigungen) an. Der Verzeichnisreiter wird nun erzeugt (und es wird eine GID-Datei in den Eigenen Dateien angelegt.)
+  * Dieser Trick ist unter Windows XP nicht nötig, da Microsoft dieses Problem behoben hat.
+  * Eine zweite Lösungsmöglichkeit wäre, den Benutzern unter Windows 2000 Schreibzugriff auf den Ordner ...Rhino\Deutsch\Hilfe zu gewähren.
+
+=====Rhino 4 manuell entfernen=====
+**//Frage://** Ich habe versucht, Rhino 4.0 zu deinstallieren, aber es ist ein Fehler aufgetreten und Rhino konnte nicht entfernt werden.
+
+**//Antwort://** [[uninstalling|Deinstallieren Sie Rhino 4 manuell]].
+
+
+=====Rhino 4 als Upgrade installieren=====
+
+**//Frage://** //"Was muss ich tun, um mein Rhino-4-Upgrade zu installieren?"//
+
+**//Antwort://** Der Upgrade-Installer von Rhino 4 wird ausgeführt, wenn eine der folgenden Optionen zutrifft. Es wird der Reihenfolge nach überprüft:
+
+  * ob Rhino 3.0 installiert ist  
+  * ob Rhino 2.0 installiert ist 
+  * ob Rhino 1.1 installiert ist  
+  * ob Rhino 1.0 installiert ist  
+  * ob sich die Rhino-3.0-CD während der Installation im CD-Laufwerk befindet   
+  * ob sich die Rhino-2.0-CD während der Installation im CD-Laufwerk befindet   
+  * ob sich die Rhino-1.1-CD während der Installation im CD-Laufwerk befindet   
+  * ob sich die Rhino-1.0-CD während der Installation im CD-Laufwerk befindet  
+
+**[[SettingsTransfer|Übertragung von personalisierten Einstellungen von einer Rhino 4 Installation auf eine andere]]**
+
+
+=====Deinstallieren von Rhino 4 schlägt fehl=====
+**PROBLEM:**
+Dies kann von einem fehlerhaften Installer-Cache auf Ihrem Computer verursacht werden.
+
+**LÖSUNG:**
+Folgen Sie den Anweisungen des Artikels [[uninstalling|Manuelles Deinstallieren von Rhino 4]]

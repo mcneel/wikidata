@@ -1,0 +1,37 @@
+Rhinoceros non è un software specifico per Reverse Engineering.
+
+Normalmente sarà necessario usare la nuvola di punti o la mesh come riferimento per rimodellare l'oggetto con superfici Nurbs.
+
+È possibile estrarre curve di sezione da una nuvola di punti con il comando //PointCloudSection, oppure da una mesh con i comandi //Section o _Contour.
+
+Esistono anche alcuni plug-ins disponibili per Reverse Enginnering qui: http://www2.rhino3d.com/resources/default.asp?category=13
+
+Vedere anche qui: http://www.flexicad.com/produkte/erweiterungen/rhinoreverse/uebersicht.htm.
+
+Il comando _Patch è l'unico che può utilizzare direttamente come input i punti per generare una superficie (non è facile gestire il comando in modo da ottenere un risultato ottimale, specialmente quando i punti usati non sono perfettamente ordinati ed allineati, il che è abbastanza raro in una digitalizzazione). È spesso più conveniente costruire prima delle curve ottimizzate sui punti ed usare poi le stesse per generare le superfici Nurbs.
+
+Guardate qui ed alle pagine seguenti: http://www.rhino3.de/design/modeling/reengineering/
+
+Per navigare, click sui piccoli angoli di testo che si trovano all'estremità inferiore destra di ciascuna pagina.
+
+Per fare tutto questo esistono alcune possibilità:
+
+SMURF Plug-in per Rhino 3.0, http://www2.rhino3d.com/resources/display.asp?language=&listing=93 Smurf è un plug-in di Rhino che permette di convertire in modo interattivo mesh poligonali in pezze di superfici Nurbs
+
+Il Plug-in richiede come input una mesh. Di conseguenza  è necessario prima convertire la nuvola di punti in mesh.
+
+Per la conversione:
+
+  * Points2Polys è un convertitore gratuito della Paraform in grado di utilizzare input di punti non strutturato e di media dimensione (circa 500.000 punti). http://www.paraform.com/ppdl/
+  * _MeshFromPoints - comando di Rhino 3.0 incluso in Rhino 3.0 SR4  e in precedenza nel menu Bonus Tools. Cercate nell'archivio del NG di Rhino per maggiori informazioni su questo strumento.
+  * Cercate l'archivio del NG e la pagina Resources di Rhino per altri recenti convertitori di nuvole di punti.
+Supponendo che vogliate ottenere la superficie di alta qualità di un prodotto complesso, potrebbero bastare un paio d'anni di esperienza! Ma forse per qualcosa dove la qualità della superficie non è così importante o per oggetti semplici, Smurf e gli altri plug-in possono essere sufficienti. Senza vedere il modello e sapere di che si tratta, la maggior parte delle persone usa la nuvola di punti come riferimento per creare il modello con una tecnica adeguata di modellazione, combinata con la necessità di far combaciare al livello di tolleranza desiderato la superficie Nurbs con i punti della scansione, assai difficile.
+
+Il Reverse Engineering è una delle cose più difficili da fare in Rhino, in relazione alla complessità dell'oggetto da ricostruire. Ne ho fatto, trovandolo né facile né particolarmente divertente, con l'eccezione di mappe di terreno, nel qual caso è possibile ottenere qualcosa di accettabile con _Patch. Il [[rhino:mio|mio]] consiglio è di non intraprendere un processo di conversione da punti a superfici Nurbs se non è strettamente necessario (molti Cam usano Mesh, se dovete solo fabbricare l'oggetto). Se proprio dovete, chiedete l'assistenza di qualcuno con un'ottima esperienza di Rhino--non ci sono trucchi, dovete semplicemente conoscere Rhino molto molto bene-- oppure procuratevi un SW specializzato di Reverse Engineering in grado di attuare il processo in un lasso di tempo ragionevole.
+
+Aggiungete i vostri commenti...
+
+
+
+
+

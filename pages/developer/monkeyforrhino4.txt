@@ -1,0 +1,303 @@
+====== Monkey (Script Editor) for Rhino4 ======
+> **Summary:** //The Advanced [[developer:rhinoscript|RhinoScript]] editor//
+
+===== Notes =====
+This plug-in is included in the [[http://download.rhino3d.com/rhino/5.0/wip/|Rhino 5.0 WIP]]. Command name in V5 is **EditScript** 
+
+
+=====Contents=====
+
+  * [[#What is Monkey?]]
+  * [[#Download]]
+  * [[#The Script Compiler]]
+  * [[#The Script Editor]]
+    * [[#Code Editor]]
+    * [[#Statusbar]]
+    * [[#Toolbar]]
+    * [[#Menu]]
+    * [[#Method browser]]
+    * [[#Options dialog]]
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+=====What is Monkey?=====
+
+Monkey is a new script editor in Rhino4 which can be used to edit, run, debug and compile scripts. It contains all the standard programmer editor features such as Find/Replace (with regular expressions), multi-document interface, code trees and integrated helpfiles. Monkey also comes with a separate application called the //Monkey Script Compiler//. This is a standalone exe which turns **.rvb scripts into **.rhp plugins. More information on the script compiler can be found [[developer:monkeyscriptcompiler|here]] .
+
+This Wiki page focuses on the features of the Monkey plugin. Monkey is a DotNET plugin meaning you need the [[http://www.microsoft.com/downloads/details.aspx?familyid=0856eacb-4362-4b0d-8edd-aab15c5e04f5&displaylang=en|Microsoft DotNET Framework 2.0]] installed on your machine. Note that many computers already are DotNET compliant, so you only need to download and install this if Monkey doesn't run (you'll get an error message telling you when this happens).
+
+If you are a plug-in developer and have extended [[developer:rhinoscript|RhinoScript]] to use your plug-in methods, then you can access your methods from Monkey.  Click [[developer:monkeyscripting|here]] for details.
+
+[[David@McNeel.com|Contact]] the [[:people:davidrutten|author]]
+
+[[http://news2.mcneel.com/scripts/dnewsweb.exe?cmd=xover&group=rhino.plug-ins|Join or start a discussion]]
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+
+
+
+
+
+
+=====Download the latest version=====
+
+\\
+
+[[http://download.mcneel.com/download_rel.asp?rel=256|Monkey for Rhino4 RC //24//^th^ of August 2007]]
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+
+
+
+
+
+
+=====The Script Compiler=====
+
+The Script compiler is a standalone program (not a Rhino plugin), that allows you to compile any number of scripts into a single Rhino plugin. The Script Compiler has its own Wiki pages so I will not repeat myself here.
+
+\\
+
+[[developer:monkeyscriptcompiler|Info on how to use the Script Compiler]]
+
+[[developer:monkeycompilerlicensing|Info on licensing options and settings]]
+
+[[developer:monkeycompilerlicensexmlformat|Info on XML license table format (for developers)]]
+
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+
+
+
+
+
+
+=====The Script Editor=====
+
+The Monkey script editor is a Rhino plugin, not a standalone application meaning it can only be run inside of Rhino4. You can either run the _Monkey command or open the editor via the Monkey menu. After a short delay (yes, yes, we know. We're working hard to get it to load faster) the Monkey Editor will be displayed. Since the editor is likely to be displayed as a large window, we've made it non-dockable. By default, the window is linked to Rhino, meaning that if you minimize Rhino, Monkey will also disappear. It is possible to unlink Rhino and Monkey, but we'll get to that in the menu section.
+
+\\
+
+The following sections deal with all the user interface elements of the Monkey window.
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+
+
+
+
+
+
+=====The Code Editor=====
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_Editor.png}} |
+
+\\
+
+The most important item on the Monkey Editor is the Code Editor. It is here that you make your scripts. As you can see, the editor is much more than a simple text editor (a la notepad). It performs automatic syntax parsing meaning you get properly coloured keywords, collapsable code groups which encapsulate Sub() and Function() blocks, automatic indenting, autocompletion and error highlighting. These are features that we have come to expect from any developer tool nowadays, and Monkey brings them to Rhino for the first time.
+
+\\
+
+Autocompletion and parameter tips are generally grouped under the catch-phrase [[http://en.wikipedia.org/wiki/Intellisense|Intellisense]] . Since [[developer:rhinoscript|RhinoScript]] is not a strongly typed language, it is very difficult to provide a fully functional intellisense system, which is why intellisense in Monkey is limited to "[[developer:rhinoscript|RhinoScript]] methods and Script Scope procedures. We may expand this functionality later on to include vbScript specific procedures and classes as well. An example of Intellisense in action can be seen below:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/Monkey_IntellisenseAnimation.gif}} |
+
+\\
+
+Note that the autocompletion list pops up as soon as "Rhino." is typed anywhere. The list updates when you keep typing to reflect the best possible match with your current text. In this case, we want to use the Rhino.GetObject() method but we have to type at least "geto" in order to get it (Rhino.GetAngle() comes earlier in the alphabet and is the initial provided solution). Once the Rhino.GetObject() method is highlighted in the pop up list, we can simply press [Enter] and the complete method name will be inserted into the script. Once the method name is in place, we have to supply the arguments. Intellisense displays a tooltip showing us the required arguments and which one we are currently setting.
+
+\\
+\\
+
+Above the code editor you will find the document tab. Monkey is multi-document capable and you can switch between documents by clicking on the appropriate tab. You can also add existing files quickly by dragging them onto the file tab. If there are too many files in the tab to be shown on a single screen, you can scroll the bar left and right by click+dragging the ◄ ► icon. Also, if you press the right mouse button on the tab, you'll get a menu with all loaded files so you can quickly locate the correct one.
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+
+
+
+
+
+
+=====The Statusbar=====
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_StatusBar.jpg}} |
+
+\\
+
+The status bar provides feedback on the location of the caret in the currently active script. It gives both line and column coordinates, as well as procedure scope coordinate. You can jump to a specific line in your script by using the "Go to line..." dialog, but you can also scroll the line index field in the statusbar. Just click+drag up and down and the currently selected line will be scrolled.
+
+\\
+
+The status bar exposes another quick navigation tool. If you click on the procedure scope field (the last field on the statusbar) you will pop up a menu listing all defined Sub() and Function() procedures. Click on one of the names to jump to that procedure. If the caret is not inside any procedure body, the statusbar will read "Global scope".
+
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+
+
+
+
+
+
+=====The Toolbar=====
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_Toolbar.png}} |
+
+\\
+
+The toolbar exposes some standard functionality which can also be found in the menus. From left to right:
+
+\\
+
+| Button name                     | Shortcut       | Description |
+|  ● New Script                 |  Ctrl+N       |  Create a new script file with a custom header. |
+|  ● Open Script                |  Ctrl+O       |  Open an existing file. |
+|  ● Save Script                |  Ctrl+S       |  Save the currently active script. |
+|  ● Save All Scripts           |                   |  Save all changes to all loaded scripts. |
+|  ● Save Script As             |  Ctrl+Shift+S |  Save the active script under another name. |
+|  ● Run Script                 |  F5           |  Run the active script. |
+|  ● Debug Script               |  Ctrl+F5      |  Run the active script with breakpoints enabled. |
+|  ● Toggle Breakpoint          |  F9           |  Toggle breakpoint flag on the active line in the active script. |
+|  |  ○ Clear All Breakpoints      |  Ctrl+Shift+F9|  Remove all breakpoints from the active script. |
+|  |  ○ Clear Inactive Breakpoints |                   |  Remove all deactivated breakpoints from the active script. |
+|  |  ○ Clear Invalid Breakpoints  |                   |  Remove all invalid breakpoints from the active script. |
+|  |  ○ Deactivate All Breakpoints |  Shift+F9     |  Deactivate all active breakpoints. |
+|  |  ○ Reactivate All Breakpoints |  Ctrl+F9      |  Reactivate all deactivated breakpoints. |
+|  ● Find                       |  Ctrl+F       |  Search the active script for a specific string. |
+|  |  ○ Find Next                  |  F3           |  Find the next occurance of the selected text in the active script. |
+|  |  ○ Find Previous              |  Shift+F3     |  Find the previous occurance of the selected text in the active script. |
+|  |  ○ Find In Files              |  Ctrl+Shift+F |  Search all loaded scripts for a specific string. |
+|  ● Replace                    |  Ctrl+R       |  Replace one string with another in the active script. |
+|  ● Go To Line                 |  Ctrl+G       |  Display the Go To Line dialog for the active script. |
+|  ● Google Groups              |                   |  Perform a Google search for the specified keywords. |
+
+\\
+
+The toolbar can be deactivated through the View menu...
+
+\\
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+=====The Menu=====
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_MenuStrip.jpg}} |
+
+\\
+
+The menu provides access to all Monkey features. Most menus are fairly straightforwars and should be very familiar to anyone who has used text/code editors before:
+
+\\
+
+| File menu | Source menu | Tools menu |
+|    {{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_MenuFile.png}}    |    {{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_MenuSource.png}}    |    {{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_MenuTools.png}}    |
+
+\\
+
+Above you see the File, Source and Tools menu. Since the Source menu is pretty much identical to the [Breakpoint] button, it will need no further explanation. More information on using breakpoints will be available shortly on a separate Wiki page. I will highlight some menu items that are not completely standard:
+
+\\
+
+**File » Recent Files**
+
+The MRU list (**M**ost **R**ecently **U**sed) in Monkey is one of my most precious creations. Not that it is extremely advanced, it's just more advanced than other MRU menus out there. It displays a list of 15 files (fifteen by default, you can set a different number in the options) that were last saved by Monkey. The cool part is that it automatically hides files from the list that no longer exist, without shortening the list. Also, if you then restore these files, they will reappear in the menu. Not just when Monkey starts, but whenever you open the menu. I guess you have to be a fairly lost cause to appreciate that kind of thing... so be it.
+
+\\
+
+**File » Export**
+
+This feature allows you to export your script file to *.html, **.rtf and **.xml while preserving the formatting and highlighting. You can also save the text as unicode.
+
+\\
+
+**Tools » ASCII Table**
+
+This menu item will enable/disable the ASCII browser dialog. If you ever use Chr() or Asc() functions in vbScript it is a great help.
+
+\\
+
+**Tools » Constant Browser**
+
+This menu item will enable/disable the vbScript Constant browser dialog. vbScript comes with a number of predefined constants, all of which are listed in this little dialog.
+
+\\
+
+----
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_MenuView.png}} |  The View menu contains some elements that are not Windows standard.                                                                                                                                                          @@[Newline, "·", Newline]@@  **View » Link to Rhino**. With this option you can make Monkey behave more like a standalone application. By default the Monkey window is a child of the Rhino window, meaning it will minimize whenever Rhino minimizes, and it will always be on top of Rhino. If you disable the link, Monkey will get its own icon on the taskbar and it can go behind Rhino. However, if you close Rhino it will still close Monkey as well.                                                                                                                                                              @@[Newline, "·", Newline]@@  **View » Hide During Execution**. Usually when you run a script, you need the complete Rhino interface so it is annoying to have Monkey occlude the window. By default, Monkey hides itself when it starts to run a script. You can disable this by unchecking this menu item. If Monkey isn't hidden, it will instead lock its UI so you cannot make changes to a running script.                                                                                                                                                             @@[Newline, "·", Newline]@@  **View » Colours**. You can change some of the syntax highlighting colours from this submenu.                                      @@[Newline, "·", Newline]@@  **View » Clear All Markers**. If you use the Mark All button on the Find/Replace dialog, Monkey will add little widgets in the gutter area on every line that contains a match. You can clear these using this menu. |
+
+\\
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_MenuHelp.png}} |  The Help menu gives access to the following resources:                    @@[Newline, "·", Newline]@@  **Help » [[developer:rhinoscript|RhinoScript]] Help**. The [[developer:rhinoscript|RhinoScript]] helpfile which resides in Program Files\[[rhino:rhinoceros|RhinoCeros]] 4.0\Plug-ins                       @@[Newline, "·", Newline]@@  **Help » Search Rhino Help**. This menu item allows you to search the normal Rhino help file for command names.                    @@[Newline, "·", Newline]@@  **Help » Custom Help**. You can set the target of this menu to a custom helpfile or webpage. In my installation it points to a Microsoft vbScript helpfile.                                                                                                                                       @@[Newline, "·", Newline]@@  **Help » RhinoScript101**. Takes you to the [[developer:rhinoscript101|RhinoScript101]] Wiki pages. |
+
+
+
+
+{{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_MenuEdit.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_MenuSelection.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/MonkeyEditor_MenuOutlining.png}}
+
+
+
+{{tag>Developer RhinoScript_Monkey}}

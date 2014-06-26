@@ -1,0 +1,89 @@
+====== Rhino funziona con Vista? ======
+> **Sommario:** //Sì, funziona, ma con qualche serio problema. Aggiungete per favore il resoconto della vostra esperienza.//
+
+=====Panoramica=====
+
+Rhino funziona con sistema operativo Windows Vista, ma la performance della visualizzazione 3-D (OpenGL) può risultare molto inferiore a quella su Windows XP o 2000 usando lo stesso hardware. [[http://www.tomshardware.com/2007/01/29/xp-vs-vista/page6.html|Independent benchmarks]] sottolinea risultati scoraggianti per altri applicativi CAD che fanno uso di [[rhino:opengl|OpenGL]].
+
+Vista è inoltre dotata di nuove proprietà per la sicurezza che possono generare qualche ulteriore messaggio durante il caricamento dell'OS (Operating System= Sistema Operativo).
+
+Contiamo di supportare [[labs:directx|DirectX]] per Vista in una futura service release di RH4.
+
+A meno che la Microsoft non migliori il supporto per OpenGL, Rhino 3.0 potrebbe non funzionare mai bene con Vista senza drivers specifici per la scheda video che aumentino le prestazioni [[rhino:opengl|OpenGL]].
+
+
+=====Video e visualizzazione accelerata 3-D=====
+
+Sia Rhino 3.0 che il 4.0 usano [[rhino:opengl|OpenGL]] per una visualizzazione accelerata del 3-D. [[rhino:opengl|OpenGL]] può servirsi di una scheda grafica di accelerazione per migliorare la performance della visualizzazione 3-D.
+
+**[[rhino:opengl|OpenGL]] non-accelerato**
+
+[[rhino:opengl|OpenGL]] non-accelerato, a volte detto [[rhino:opengl|OpenGL]] Software Emulation o Standard OpenGL, è supportato in Windows Vista. Rhino funziona con [[rhino:opengl|OpenGL]] non-accelerated, ma, proprio perché non accelerato, può essere parecchio lento - specialmente con modelli molto grandi.
+
+Windows Vista non supporta direttamente [[rhino:opengl|OpenGL]] accelerato ed alcuni produttori di schede video non hanno ancora reso disponibili dei driver adatti. Non sappiamo neanche se diventeranno disponibili in futuro driver di accelerazione [[rhino:opengl|OpenGL]] efficienti per le schede attualmente sul mercato.
+
+**Effettuare l'upgrade da XP a Vista**
+
+Potreste essere dotati di una scheda video che fornisce un'eccelente accelerazione [[rhino:opengl|OpenGL]] in Windows XP. Se non è disponibile il driver per Vista, l'upgrade probabilmente ridurrà od eliminerà i vantaggi della vostra scheda video [[rhino:opengl|OpenGL]]. Ciò significa che la qualità della visualizzazione 3-D di Rhino potrebbe essere peggiore su Vista rispetto a XP, con lo stesso HW (hardware=parte fisica del sistema).
+
+**Nuovi computer con Vista**
+
+Se state considerando di acquistare un nuovo computer con Vista pre-caricato, assicuratevi di controllare se è disponibile un driver per [[rhino:opengl|OpenGL]] della scheda video scelta. Se non lo è, la visualizzazione in Rhino sarà probabilmente molto lenta.
+
+**Driver grafici per Vista**
+
+[[http://www.nvidia.com/content/drivers/drivers.asp|nVidia]] e [[http://ati.amd.com/support/driver.html|ATI]] stanno rilasciando driver aggiornati a cadenza regolare per sistemare i problemi di visualizzazione emersi con le loro schede grafiche. Controllate sul loro sito per essere sicuri che lo specifico driver funzioni con l'hardware scelto.
+
+<color blue>Rhino 4 Fix</color>: La prima service release di Rhino 4 conterrà alcuni rimedi che consentiranno di usare con profitto le schede grafiche di accelerazione su OS Vista. Nel frattempo, potete provare una delle due opzioni seguenti:
+
+  * Opzione 1: Fate clic destro sul file dell'applicazione rhino4.exe ed andate alla sezione "Compatibility" . Mettete il segno di spunta su 'Disable desktop composition'. Ciò forzerà Vista a lavorare come XP (spegnendo Aero Glass).
+  * Opzione 2: Usate il [[labs:directx|DirectX display plug-in]] disponibile nell'ambiente Rhino Labs
+
+=====Sicurezza=====
+
+  * Il numero di pop-up di avvisi sulla sicurezza e altri vincoli inerenti possono diventare intollerabili per molti utenti Vista. Rhino mostrerà un paio di avvertimenti di sicurezza all'avvio, ma poi funzionerà regolarmente.
+  * <color blue>Rhino 4 Fix</color>: I pop-up di avvertimento alla partenza di Rhino sono provocati dal meccanismo di controllo di nuove release, che viene attivato alla partenza (il tentativo di accedere alla rete per controllare viene visto come una minaccia di sicurezza). Nella prima release di Rhino 4, c'è un comando nascosto che si chiama TestDisableCheckForUpdates che potete usare per disabilitare il controllo degli "update" (aggiornamenti) e quindi i pop-up di sicurezza. Se lo usate una seconda volta, il controllo viene ripristinato. Questo problema verrà risolto con la prossima service release di Rhino. Se disabilitate il controllo automatico degli aggiornamenti, ricordate di usare sistematicamente il comando Check for Updates disponibile nel menu Help (Aiuti > Aggiornamenti).
+
+=====Memoria=====
+
+Vista usa piú RAM di XP. Mentre la quantità totale di memoria per singolo processo non cambia, la quantità di RAM disponibile in Vista risulta inferiore. Di conseguenza, se già avete limiti di memoria con Rhino 3.0 in Windows XP, la cosa peggiorerà con Vista. La quantità massima che Rhino 3.0 può usare in Vista è 2GB.
+
+Rhino 4.0, invece, è compilato per usarne 3GB, se disponibile. In entrambi i sistemi operativi (XP e Vista), Rhino 4.0 può usare Ram fino a 3GB, se disponibile. A parità di processi, sarà comunque disponibile sempre una quantità maggiore di memoria con XP che con Vista, perché XP usa meno memoria.
+
+Se la memoria è un fattore determinante, XP ne renderà disponibile di più di Vista.
+
+=====Rhino 3.0=====
+
+Ci sono diversi problemi in Rhino 3.0 su OS Vista che non verranno risolti. La McNeel raccomanda di effettuare l'aggiornamento a Rhino 4.0 se usate Windows Vista.
+
+I problemi sono:
+
+  * La visualizzazione [[rhino:opengl|OpenGL]] può essere più lenta su Vista che su XP, inoltre possono verificarsi diversi difetti di visualizzazione, come viewports che diventano neri o pieni di porcheria
+  * Alla partenza, sono visualizzate diverse finestre di dialogo che riportano l'impossibilità per Rhino di accedere ai registri
+  * Vista non è fornito del file di aiuto in linea WinHelp (WinHlp32.exe). L'aiuto in linea di Rhino 3.0 fa uso del file WinHelp, di conseguenza, non è accessibile in Vista se non scaricando il seguente aggiornamento dalla Microsoft. **[[http://www.microsoft.com:80/downloads/details.aspx?familyid=6ebcfad9-d3f5-4365-8070-334cd175d4bb&displaylang=en|//Download WinHelp for Vista...//]]**
+
+Consiglio sul funzionamento di Rhino 3.0 in Vista da parte di Jeff LaSor della McNeel:
+
+Potete provare a configurare Rhino 3.0 perché possa funzionare in modalità compatibile con Vista. Provate così:
+
+1) Click destro sull'icona Rhino (collegamento) sul desktop e selezionate l'opzione "Proprietà"
+
+2) Click sul pulsante "Compatibilità".
+
+3) Segno di SPUNTA sull'opzione "Esegui il programma in modalità compatibilità per:" e selezionate "Windows XP (Service Pack 2)"
+
+4) Più in basso nella finestra di dialogo segno di SPUNTA su queste 2 opzioni:
+
+   [X] Disattiva i temi visivi
+   [X] Disattiva servizi di testo avanzati per questa aplicazione
+
+Questo si spera possa darvi una mano a far girare Rhino 3.0 un po' meglio su Vista... Ma, attenzione: ciò disattiverà temporaneamente anche tutti gli "effetti" novità di Vista (finestre trasparenti, ecc.) durante il funzionamento della V3.
+
+
+=====Esperienze dirette degli utenti=====
+
+  * Aggiunto 27/2/2007 Buon giorno Pascal.  Ti avevo spedito una mail la scorsa settimana riguardo ai problemi di compatibilità delle schede video ATI con Vista.  Mi avevi consigliato di fare l'update ad un driver ATI con supporto [[rhino:opengl|OpenGL]] per Vista.  Ho pensato di fornirti un feedback per tua conoscenza e possibili domande analoghe: la performance del driver può solo essere definita mediocre.  Ho perso un sacco di tempo a provare diverse impostazioni, ma ancora non ho risolto il fatto che zoomando dentro o fuori sul viewport Top, si nota un marcato ritardo nel refresh di qualsiasi modalità più complessa del wireframe.  Inoltre durante la selezione tramite finestra sulle viste parallele si notano chimere e "rumore" fino a quando non si termina il comando.  Per finire, il problema più grosso consiste nel fatto che su qualsiasi vista parallela, mentre si traccia una curva, si forma un quadrato nero che circonda la linea attiva mentre viene tracciata, fino al momento della conferma.  Per conseguenza diventa difficile usare una traccia bitmap o altra geometria di riferimento per disegnare la linea. L'attivazione dell'accelerazione [[rhino:opengl|OpenGL]] della scheda video decisamente non compensa la scarsa qualità della visualizzazione in tempo reale.  Grazie di nuovo per l'aiuto e spero che Rhino/ATI/Windows possano risolvere questo problema.  - David Baer - Specialista della visualizzazione <color red>Ciò è dovuto principalmente a come Vista lavora con diverse tecniche di visualizzazione mischiate tra loro su una singola finestra, cosa che era possibile in passato. Adottando uno dei suggerimenti spiegati prima,  dovrebbe aiutare in questo frangente - Steve Baer</color>
+
+
+
+

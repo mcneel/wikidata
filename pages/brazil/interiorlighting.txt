@@ -1,0 +1,144 @@
+====Interior lighting Techniques====
+====Brazil r/s v2 for Rhino====
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting.jpg}}|
+\\
+Brazil r/s offers a wide variety of control for how light and shadow are calculated in any given rendering. This tutorial will cover several techniques for lighting an interior scene in Rhino and will hopefully demystify the process of choosing photon map and light parameters. To make things simple, here are three ".bzpreset" option files for you to use as you become familiar with the settings described.
+
+[[http://en.wiki.mcneel.com/content/upload/files/Brazil_Interior_Lighting_presets.zip|Brazil interior lighting presets]]
+
+You can also download this simple Rhino file to use with the presets provided.
+
+[[http://en.wiki.mcneel.com/content/upload/files/Brazil_interior_lighting_demo.zip|Brazil interior lighting scene]]
+
+\\
+The first step in any interior rendering should be to add some light. Using the scene provided, add a point light to the model with the normal Rhino light tools. Brazil can use this regular Rhino point light but in addition will also enable it with a wide range of options specific to Brazil lights. With the point light selected, position it just below the ceiling height somewhere in your scene. Then open the object properties dialog for the light by clicking the properties icon or typing the command "properties". Following the screen shots below, set your lights parameters to include Shadow, Focus and Decay. Turning on shadows will cause any objects directly illuminated by our light to cast a shadow. We won't be using "direct illumination" right away but it doesn't hurt to have the shadow option on in the meantime. The focus option gives our point light both a "hot spot" or brightest area and a "fall off" distance which controls the spread of the light. Changing these focus values is one way to alter the brightness of the scene. The decay option is used here because everything in the scene has a white material applied to it by default. Decay limits the ability of light to bounce around in the scene and thus makes the result more realistic in this case. The inverse square option should be selected as well to keep this white scene from getting too bright. Keep in mind that once non-white materials are applied the decay option will likely make this scene too dark and will need to be turned off.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_1.jpg}}|
+\\
+With the light positioned and the options indicated selected for it, render the perspective view (saved view "1" if you're using the file provided). You should get a result similar to the one shown below.
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_3.jpg}}|
+\\
+Now open the Brazil options panel by using the appropriate icon in the Brazil toolbar or by typing the command "braziloptions". At the bottom of the options panel you'll see a "load" button, use this to select and load the "Interior 1_low.bzpreset" file provided in this tutorial. Rendering the scene again with these new settings produces a result with more even and realistic lighting.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_2.jpg}}|
+\\
+Let's discuss the options that were changed from the default settings when making the bzpreset file we just used.
+
+<color orange>**Image Sampling**</color>
+
+Image sampling controls the level of detail or resolution of the rendering produced. Higher numbers for both the min and max sample amounts will result in a higher degree of detail and subsequently a longer render time. Finding a balance between these values is crucial if you want quality renderings in a reasonable amount of time.
+
+<color orange>**Direct Illumination**</color>
+
+You may have noticed that one of the differences between our two initial renderings is the bright spot on the floor when using the default options. This is due to the point light in our scene being used for direct illumination. One of the changes made for the low preset is to turn off the direct illumination option for the point light in the luma server section of the options panel. This prevents the point light from illuminating objects by shining directly on them and results in a softer and more even lighting scenario.
+
+<color orange>**Global Illumination**</color>
+
+With direct illumination turned off for the point light we will need to provide another way to illuminate the scene. This will come from turning on global illumination in the luma server. We will also be using several other options in the global illumination section. These options have been chosen to speed the rendering process while preserving a realistic look. The first of these options is the "global photon map". This provides an alternate method for light to bounce around in the scene and results in faster render times. The "regather" choice next to the photon map option is also checked to ensure a realistic and smooth creation of shadows especially in corner areas. The "render cache" option is used to provide a faster render time in conjunction with regathering. Using the render cache will also provide you with a super fast initial preview of the scene so that you can evaluate the lighting setup quickly and cancel the rendering if the results are undesirable. The retrace option for the render cache is enabled to ensure we maintain a realistic lighting effect.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_4.jpg}}|
+\\
+The next three options are in the "Render Cache" section of the options panel and are available to us only after selecting the "render cache" option in the luma server.
+
+<color orange>**Creation Shade Rate**</color>
+
+The "creation shade rate" section of the render cache allows us to set a min and max sample rate for the render cache. Entering higher values here will increase the time of the cache preview but will also add detail. However, since we're using retrace as well as the regathered photon map options these values do not have to be that high.
+
+<color orange>**Resample Filtering**</color>
+
+"Resample filtering" will smooth out splotches caused by the use of the photon map but like the creation shade rate option this one doesn't matter as much while utilizing retrace and regathered photon map. For a subtle effect, this value has been raised to one hundred from the default setting of thirty two. If we we're using the "no enhancement" version of the render cache raising this value would become more important.
+<color orange>**Detail Enhancement**</color>
+
+With retrace being the method of render cache, we have a few more parameters to control the level of detail in our final image. The default retrace sample rate is five and has not been changed for this lower resolution preset but is mentioned here as it is one setting that will be raised in making the medium and high presets provided. Raising this value in combination with values in the image sampling section discussed above will lead to higher resolution results while also causing longer render times.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_5.jpg}}|
+\\
+The last two sections we'll look at here are in the "Photon Map" section of the options panel and are available to us only after selecting the photon map option in the luma server section.
+
+<color orange>**Diffuse Depth**</color>
+
+Higher values for the diffuse depth will make the rendered image brighter. You can think of the diffuse depth as the number of times emitted photons or light particles will bounce off surfaces in the scene. Depending on the number of lights in your scene as well as the settings for those lights you may need to raise or lower this value. If you see bright splotches in corner areas it could be due to the diffuse depth being set too high in relation to the multiplier value of the lights.
+
+<color orange>**Irradiance Estimate**</color>
+
+There are two settings changed from the defaults in the irradiance estimate. The first is the "Search Type" which has been changed to elliptical instead of the default of spherical. This setting determines how Brazil looks for photons bouncing around in the scene. Elliptical is better at calculating the shadows in corner areas at the cost of a slight increase in render time. The "Precompute" option has also been enabled and in combination with our retrace and regather settings will save us a substantial amount of render time. The precompute default value of two has been left but is pointed out here as it will decrease in higher resolution settings to reduce light splotches in corners while also adding a small increase in render time.
+
+Just like some of the settings in the render cache, the number of photons specified in the irradiance estimate as well as the max search radius are not as important when using the regather option for the photon map. In fact a higher value for the number of photons would add considerable time without noticeable gain in image quality in this particular case. For this reason the default of one hundred has been left unchanged while regathering. If we were using the no enhancement option for the render cache and not using the regather option for the photon map this value would become very important for smoothing out light splotches common to photon maps.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_6.jpg}}|
+\\
+\\
+<color orange>**Direct Illumination and Shadow options**</color>
+
+By copying and pasting the one light in our scene, additional lighting conditions can be experimented with. Here's a rendering with two more copies of our light. the first light was moved back some to the right in order to reduce the brightness at the base of the stairs. The light at the top of the stairs has been lowered in intensity by changing the multiplier value in the color section of that lights properties to .2. The "Interior 2_medium.bzpreset" file was also loaded into the options panel to add more detail in the example below.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_7.jpg}}|
+\\
+Here's an example of what happens when turning on direct illumination for point lights in the luma server. We can now see hard shadows cast from our lights in addition to the global illumination we've been using so far. The scene is also brighter now due to the direct light being emitted from all three of the lights in the scene.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_8.jpg}}|
+\\
+The look of cast shadows can be changed by adjusting the settings for the individual lights. In this example the shadow type for the light above the stairs was changed to "Brazil 2 ray shadows". This exposed another section of the same name in the light properties dialog where the type of shadow cast was changed to "rectangular area" instead of the default "sharp" mode. The shadow cast from the stairs is now much softer while the shadow across the bureau from the light over our right shoulder is still sharp.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_9.jpg}}|
+\\
+Another common reason to enable direct illumination in an interior rendering is to create the effect of sunlight shining in through a window. In the example below a window was added and a directional light has been positioned outside to create the sunlight effect. Notice what appears to be light leaking through the wall along the contour of the stairs. This is a result of the directional light being used for direct illumination. The directional light is viewed as a point light by Brazil and is adhering to the same direct illumination settings as our other lights.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_10.jpg}}|
+\\
+What appears to be leaking light is actually a result of the shadow settings for the directional light outside. Changing the shadow "bias" value in the properties for this light to zero solves the issue as seen below.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_11.jpg}}|
+\\
+\\
+<color orange>**Making Lamps and Light Fixtures**</color>
+
+Adding light fixtures or lamps that illuminate in an interior rendering can be done in several ways. Let's first add a few rectangular wall fixtures to our scene. We will assign a "Brazil Br_SimpleBright shader" to these objects to make them emit light. Make sure to have the "show internal shaders" option checked in Rhino options otherwise this shader won't be seen in the content browser for the material editor.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_12.jpg}}|
+\\
+The strength of the light from this shader is controlled through the multiplier value for it in the material editor. Here's an example of two different settings for this shader applied to the light fixtures. There are no other light sources in the scene and even after raising the power of the simple bright shader the light is not spreading throughout the room. This is because the simple bright shader is not a real light and is not taking advantage of the global illumination and photon map settings we've used so far.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_13.jpg}}|
+\\
+A combination of using objects with the simple bright shader and a regular light can produce a more evenly lit result. In the example below a rectangular light was created to encompass all three of the light fixtures. The focus setting was used with the hot spot set to roughly the height of the fixtures and the falloff set to 180 degrees so that its light spreads out flat against the wall. It is important when using this technique to make sure that the light is not physically inside the objects with the simple bright shader. If it is, the emitted light will not be visible unless of course the objects include some setting for transparency.
+
+\\
+
+|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_14.jpg}}|
+\\
+\\
+<color orange>**Final Thoughts**</color>
+
+I hope this tutorial has helped you with your own interior renderings. Remember that these examples have been presented with the default white material assigned to the objects in the scene. This helps in understanding the concepts and effect of the various settings discussed. When materials and textures and assigned to your models you will likely need to adjust settings for your lights such as multiplier amounts as well as decay and focus options in order to control the brightness of your renderings. Depending on the color of objects in your scene you may also want to adjust the "energy tweaks" options for both the global illumination and photon map sections of the options panel. For instance, the rendering of this demo scene with red walls required me to lower the saturation values for both energy tweak sections in order to reduce the red tint created as photons bounced off the colored walls.
+
+
+
+

@@ -1,0 +1,45 @@
+====== Développer des surfaces ======
+> **Sommaire:** //Des petites astuces proposées par Steve Howden, utilisateur de Rhino, pour aplatir les surfaces et créer des patrons 2D. Ce message a été posté sur le forum de Rhino dans le cadre du développement de tissus mais la plupart des astuces peuvent s'appliquer au développement de surfaces courbées dans plusieurs directions.//
+
+Il existe plusieurs façons de procéder, mais tout d'abord (pour s'assurer que nous parlons la même langue) laissez moi vous rappeler qu'il existe deux types de surfaces.
+
+a/.  développable, c'est-à-dire  courbée dans une seule direction, comme par exemple les cylindres, les cônes
+
+b/ courbure double, par exemple les sphères
+
+Vous avez donc deux possibilités.
+
+  * Vous pouvez créer vos sacs en dessinant les lignes de couture et en créant une surface par sections (développable) entre elles, puis en utilisant la commande **DéroulerSurf** pour obtenir vos patrons.
+  * Ou (cette option vous donnera plus de flexibilité lors de la conception), modélisez vos formes en utilisant la méthode que vous voulez, puis projetez ou attirez les lignes de couture sur la surface et divisez ensuite la surface avec les lignes obtenues. La version 4 dispose d'un outil très pratique appelé CheminCourt (_ShortPath) permettant de créer une courbe "géodésique" sur la surface, qui peut être utile dans notre cas.
+Lorsque les surfaces sont divisées, vous pouvez les aplatir en utilisant une des méthodes disponibles pour les surfaces à double courbure (non développables). N'oubliez pas que les surfaces aplaties de cette façon SERONT une approximation, mais des coutures bien placées minimiseront les erreurs.
+
+---
+
+**Les outils disponibles sont les suivants :**
+
+=====Écraser.=====
+Cet outil est gratuit, il fait partie de la version 4. Essayez bien les deux directions de déroulement, le long de U et le long de V pour voir laquelle donne le meilleur résultat. Regardez également la boîte de dialogue qui vous indique la différence d'aire entre les surfaces originales et les surfaces développées. Si par exemple la surface obtenue est 65% plus petite que l'originale, vous pouvez en déduire que le déroulement s'est mal passé.
+
+=====Expander=====
+Module payant pour Rhino 3. C'est mon outil préféré. Il donne de très bons résultats et a l'avantage d'appliquer un dégradé de couleurs sur la surface pour montrer clairement l'étirement et la compression nécessaires pour créer la surface aplatie. Disponible ici : http://www.shipconstructor.com/productsandsolutions/companionproducts/expander.html
+
+Ils n'ont fait aucune référence à la mise à jour d'Expander pour Rhino 4 et le développement s'est arrêté, n'hésitez dont pas à leur poser la question avant de leur donner de l'argent.
+
+=====Laminadesign=====
+Programme autonome assez intéressant qui peut lire les fichiers .obj à partir de Rhino. Il ne dispose pas d'un bon outil de division des surfaces, vous devez donc le faire avant dans Rhino, puis exporter et étendre. Si vous n'aimez pas le résultat, vous devez revenir dans Rhino, rediviser, réexporter et rétendre.
+
+Disponible ici : http://laminadesign.com/
+
+=====TouchCAD=====
+Programme autonome avec une méthodologie de modélisation qui me prend la tête. Il présente cependant un GRAND avantage qui est celui d'aplatir les surfaces en temps réel, c'est-à-dire qu'il actualise les patrons 2D si le modèle 3D est modifié. Cette option est vraiment exceptionnelle pour les tissus.
+
+Disponible ici : http://www.touchcad.com/
+
+Vous ne pouvez pas importer des surfaces de Rhino dans TouchCAD. Vous devez modéliser dans TC.
+
+=====Optitex=====
+Il ne s'agit pas là d'un programme pour le développement de surfaces mais il dispose de fonctions 3d très intéressantes qui vous permettent de prendre vos patrons plats et de les coudre ensemble puis de simuler l'assemblage du produit final. Vous pouvez définir les caractéristiques du tissu et la tension de la couture et le programme vous donne un modèle TRÈS précis du produit final jusque dans les moindres détails des plis. Optitex est un programme de conception de patrons, d'assemblage, de gradation et de découpe CNC. Nous l'utilisons depuis des années et nous l'adorons. Il est vraiment très cher mais chaque centime en vaut la peine. Le CEO m'a expliqué que l'option pour aplatir les surfaces était en phase alpha et qu'elle sera disponible dans la prochaine version. On croise les doigts.
+
+Disponible ici : http://www.optitex.com
+
+

@@ -1,0 +1,28 @@
+====== Notes ======
+This plug-in is included in the [[http://download.rhino3d.com/rhino/5.0/wip/|Rhino 5.0 WIP]]. Command name is **BlockEdit** in V5.
+
+====== Block Editor ======
+> **Summary:** //In-place block editor prototyped in a plug-in.//
+> **Contact:** //[[pascal@mcneel.com|Pascal]]//
+
+**[[http://download.mcneel.com/download.asp?id=BlockEditor&language=|Download]]**
+
+Unzip the two files files from the zip archive and load (drag and drop into Rhino 4.0) both the plug-in (.rhp file) and the toolbar(.tb) file. To install the plug-in, use Rhino's **PlugInManager** command. To load the toolbar, use Rhino's **Toolbar** command.
+
+===Command: InPlaceBlockEdit===
+
+  * If the block is a single level block, the block is exploded and everything else is locked.
+  * If the block contains nested blocks, select the block to edit from a list. The selected block is exploded and everything else locked.
+  * A dialog pops up with the name of the block currently being edited and four buttons:
+
+  * **Add Objects:** Allows the user to add objects from the file to the block definition. It swaps the locked status of everything, which lets the user select previously locked objects to add to the block. Copies of the selected objects are now unlocked and available for editing. //Note: To move objects into the block rather than copying them, use the **UnlockSelected:** command to free the objects for selection.//
+  * Users can also import a file during the block edit session. Any objects not locked when the OK button is pressed will be added to the block.
+  * **OK:** Uses all currently unlocked objects to redefine the block, exits the block editor.
+  * **InsertionPoint:**  Use this while editing the block to change the location of the block insertion point.
+  * **Cancel:** Restores everything to the way it was before the edit started.
+
+=====Known Bugs/Limitations=====
+
+This tool does not work on block instances which have been scaled non-uniformly.
+
+

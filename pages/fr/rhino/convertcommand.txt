@@ -1,0 +1,10 @@
+====== Commande Convertir ======
+> **Sommaire:** //Convertir//
+
+======Convertir======
+
+Question : J'ai utilisé Convertir pour créer certains trajets d'outils. J'ai envoyé le fichier en commande numérique et il a ait planté l'autre ordinateur. En regardant de plus près j'ai remarqué qu'il y avait des vides entre certains arcs. Les vides sont très petits et je ne sais pas d'où ils venaient. Quelqu'un sait-il pourquoi ?
+
+Réponse : Le vide est seulement de 1e-9 unités, il peut s'agir d'une erreur numérique inévitable causée par la génération des arcs en utilisant la méthode début-fin-direction. Les arcs sont enregistrés au niveau interne sous forme de plan, de rayon et d'angle, il n'y a donc aucune garantie que les arcs créés avec la méthode début-fin-direction commencent et se terminent exactement au bon endroit. Plus la courbe est loin de l'origine, plus l'erreur est importante. En général il vaut mieux d'abord diviser la courbe en segments en séparant les parties les plus droites. La commande Convertir n'est pas très intelligente, ce qui signifie que les zones presque droites et les zones droites connectées à des zones plus courbées ont tendance à se tortiller. Une autre possibilité est de définir la tolérance d'angle sur 0, ce qui désactive la vérification de la tangence. [Mikko Oksanen - 2005-11-28]
+
+

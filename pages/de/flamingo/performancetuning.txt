@@ -1,0 +1,112 @@
+====== Tipps zur Flamingo-Leistung ======
+
+====TIPPS ZUR FLAMINGO-LEISTUNG====
+> **Zusammenfassung:** //Tipps und Techniken für Flamingo 1.1 oder 2.0, um das Rendering zu beschleunigen und die gewünschte Qualität zu erhalten.//
+
+======PROZESSOR======
+Die Geschwindigkeit des Hauptprozessors in Ihrem Computer stellt den Hauptfaktor für die Flamingo-Leistung dar. Verglichen mit einem Einzelprozessor beschleunigt ein Dualprozessor oder ein Computer mit zwei Kernspeichern (Dual-Core) (wenn auf Windows NT, Windows 2000, Windows XP oder Vista richtig aktiviert) das Rendering ungefähr um 85%.  Vierkern (Quadcore) Prozessoren erhöhen 4 Mal die Leistung von Einzelprozessoren der gleichen Geschwindigkeit.  Zur Zeit verbessert Flamingo nicht die Leistung mit über 4 Prozessoren.
+
+======STROMVERSORGUNGSEINHEIT======
+Vergewissern Sie sich, dass Sie über eine gute Stromversorgungseinheit verfügen, vor allem im Fall von Multiprozessoren/Mehrkern-Maschinen.  Flamingo ist eine Multi-Thread-Anwendung, die 100% der CPU-Verwendung verbraucht.
+
+======GRAFIKKARTEN======
+Grafikkarten beschleunigen das Flamingo-Rendering nicht.  Grafik-/Videokarte wird nur verwendet, um den Verlauf der Rendering-Berechnungen anzuzeigen, und verlangsamt diese nicht.
+
+======RAM-SPEICHER======
+Rendering mit unpassendem RAM-Speicher ist ein wichtiger Faktor für die Verlangsamung der Flamingo-Leistung.
+
+Um einen RAM-Engpass festzustellen, überprüfen Sie Plattenzugriff oder verwenden Sie den Task-Manager (weiter unten).
+
+Beobachten Sie das Licht Ihrer Festplatte, während das Bild langsam auf dem Bildschirm erscheint. Sie sollten wenig Festplattenaktivität sehen (außer eine andere Anwendung ist sehr aktiv).
+
+Sollte der Renderingprozess viele Festplattenzugriffe verursachen, arbeitet Flamingo langsamer. Mehr RAM würde das Rendering beschleunigen.
+
+Für weitere Infos zu RAM auf NT, Win2000, XP oder Vista führen Sie den Task-Manager aus und auf dem Leistungsreiter achten Sie auf die TotalPhysicalMemory (totaler RAM-Speicher). Danach achten Sie in der unteren linken Ecke auf Zugesicherter Speicher (gesamter von Windows verwendeter Speicher für alles, einschließlich Rhino/Flamingo).
+
+Wenn während eines Renderings ZugesicherterSpeicher/Total über PhysicalMemory/Total liegt (50% höher oder doppelt so hoch), bedeutet dies, dass Rhino und Flamingo mehr virtuellen Speicherplatz als Ihre RAM beanspruchen. Windows muss deshalb Teile des Programms und der Daten auf der Festplatte austauschen. Das Rendering wird vervollständigt, aber der Festplattenzugriff ist 1000 Mal langsamer als der RAM-Zugriff, so dass dieser Paging/Austausch den Renderprozess drastisch verlangsamt.
+
+Für 32-Bit Windows Versionen wären 2GB RAM wahrscheinlich nicht effektiv.  Um mehr RAM zu verwenden, wäre es von Vorteil auf eine Rhino-Version zu warten, die nativ in Windows 64-Bit läuft.
+
+======FEHLER UNGENÜGENDER SPEICHER======
+Auf Grund der Windows (32-Bit) Windows Einschränkung von 2GB Speicherplatz pro Prozess kann Windows dem Rhino/Flamingo Prozess nicht mehr als 2GB virtuellen Speicher zuordnen.  Mehr RAM als 2GB ist wahrscheinlich nicht effektiv.  Sollte Ihr Modell über zu kleine oder zu große Polygonnetze verfügen (siehe Polygonnetzerzeugung weiter unten) und Sie versuchen, das Polygonnetz zu rendern, werden Sie eine Nachricht über ungenügenden Speicher erhalten und Rhino wird abstürzen (schließen).  Wenn Sie die Speicherverwendung im Task-Manager verfolgen, können Sie sehen, wie sich ZugesicherterSpeicher vor dem Absturz 2GB nähert.
+
+Für mehr Genauigkeit verwenden Sie den Task-Manager > Prozesse, dann wählen Sie SpaltenAuswählen aus dem Pulldown-Menü Ansicht und danach VirtuellerSpeicher aus.  In dieser Spalte erscheint der Prozess Rhino3.exe oder Rhino4.exe, in 32-Bit Windows, der auf 2GB (2'000'000K) beschränkt ist.
+
+======VIRTUELLER SPEICHER======
+Sie sollten dem virtuellen Windows Speicher mehr als 2GB Festplattenspeicher zuordnen, unter Systemsteuerung > System > Weitere Optionen > Leistung und Virtueller Speicher. Verfügen Sie über genügend Festplattenspeicher, ordnen Sie 4GB (4000MB) zu.  Der virtuelle Speicher ist Festplattenspeicher, der verwendet wird, um die RAM zu erweitern (Austausch- oder Page-Datei), wenn Windows mehr Platz benötigt als RAM ("physischer" Speicher) vorhanden ist.
+
+======VORBEREITUNG DES MODELLS IN RHINO:======
+Renderzeit sparen oder Probleme mit ungenügendem Speicher verhindern:
+
+Führen Sie an Ihrem Modell den Befehl FehlerhafteObjekteAuswählen aus und ersetzen Sie die fehlerhaften Objekte. Fehlerhafte Objekte verzögern normalerweise den Rendernetzprozess und erzeugen fehlerhafte Rendernetze.  Werfen Sie einen Blick auf [[rhino:badobjects|FehlerhafteObjekte]]
+
+Minimieren Sie die Anzahl Polygonnetzpolygone, die Flamingo bearbeiten muss, anhand der folgenden Methoden:
+Aktivieren (einblenden) oder deaktivieren (ausblenden) Sie die Ebenen der Objekte in Ihrem Modell, die nichts in das Rendering einbringen, vor allem solche, die weiter weg sind, sich hinter Flächen oder innerhalb von Volumenkörpern befinden.
+
+Geometrie außerhalb der Kamerasicht kann Flamingo verlangsamen, zum Beispiel Grundebenen, die als Flächen oder Polygone größer als die gerenderte Szene sind. Behalten Sie diese Geometrie für die gerenderte Szene so klein wie möglich bei. Im Falle von Grundebenen verwenden Sie die die automatische unendliche Grundebene der Flamingo-Umgebung, die keine Geometrie ist und den Renderprozess nicht verlangsamen wird.
+
+======TECHNIKEN POLYGONNETZERZEUGUNG======
+Stellen Sie unter Rhino > Datei > Eigenschaften das Polygonnetz auf Gezackt & schneller ein, so dass die Rendernetze, die Flamingo erbt, nicht so groß sind. Wenn diese Option manche runde Objekte mit polygonalen Silhouetten erscheinen lässt, passen Sie die Polygonnetze global an (siehe [[rhino:meshfaq|PolygonnetzFAQ]] ) oder erzeugen Sie personalisierte Polygonnetze auf bestimmten Objekten (siehe Personalisierte Polygonnetzerzeugung weiter unten)
+
+Als Alternative empfehlen wir die Verwendung der personalisierten Einstellung unter Rhino > Datei > Eigenschaften > Polygonnetz, wobei alle numerischen Parameter auf Null gestellt werden außer "Maximaler Abstand Kante zu Fläche". Stellen Sie diese Option auf einen vernünftigen Wert für die Größe Ihres Modells ein und wie nahe sich die Rendering-Kamera an den Objekten befinden soll. Für ein kleines Schmuckobjekt in Millimeter könnte dieser Abstand 0.1 oder sogar kleiner sein.  Für ein in Zoll modelliertes Schiff sollte dieser Abstand groß sein, ungefähr 1.0.  In einem schattierten Ansichtsfenster überprüfen Sie, ob Objekte mit gerundeten Profilen zu grob facettiert sind, und passen Sie die Einstellung "Maximaler Abstand" an.
+
+======PERSONALISIERTE POLYGONNETZERZEUGUNG======
+Wenn ein bestimmtes gerundetes Objekt in Profil/Silhouette facettiert erscheint, können Sie ein personalisiertes Polygonnetz für dieses Objekt verwenden (zum Beispiel könnten die Objekte, die sich nahe an der Kamera befinden, detailliertere Polygonnetze benötigen). In Rhino 3.0 verwenden Sie den Rhino-Befehl Polygonnetz (Rhino > Werkzeuge > Polygonnetz > Von [[rhino:nurbs|NURBs]]-Objekt), um ein dichteres Polygonnetzobjekt für dieses [[rhino:nurbs|NURBs]]-Objekt zu erzeugen, und blenden Sie das [[rhino:nurbs|NURBs]]-Objekt (Fläche, Volumenkörper) aus und rendern Sie erneut. In Rhino 4.0 wählen Sie das Objekt aus und gehen Sie auf Rhino > Bearbeiten > ObjektEigenschaften > Objekt > RendernetzEinstellungen > PersonalisiertesPolygonnetz > Anpassen.  Rhino speichert, dass dieses Objekt ein personalisiertes Rendernetz haben sollte.
+
+Sollten Spalten zwischen den angrenzenden Flächen erscheinen, verbinden Sie diese mit den Flächen zu einem Flächenverband; das Rendernetz wird neu berechnet, um die verbundene Begrenzung zu füllen.
+
+===Wichtig===
+Werfen Sie einen Blick auf [[rhino:meshfaq|PolygonnetzFAQ]] für hilfreiche Info zu Polygonnetzen.
+
+======NUR RENDERNETZ======
+Verwenden Sie den Befehl Polygonnetz, um das Modell zu vermaschen und blenden Sie danach den [[rhino:nurbs|NURBs]]-Flächenverband aus. Rendern Sie nur das Netz. Dies ist eine sehr gute Lösung, wenn Sie alles versucht haben und das Rendering nicht funktioniert.
+
+======FLAMINGO-EINSTELLUNGEN FÜR GESCHWINDIGKEIT======
+Lassen Sie Rhino > Raytrace > Eigenschaften > Flamingo > Antialiasing auf Hoch/4X oder niedriger, außer Sie benötigen mehr Renderzeit.  Werfen Sie einen Blick auf die Hilfedatei.
+
+In einigen Sonderfällen ist eine Erhöhung von Antialiasing nötig, aber normalerweise ist es für die Renderzeit kostengünstiger, stattdessen die Auflösung des gerenderten Bildes zu erhöhen (Rhino > Datei > Eigenschaften > Flamingo > Auflösung), um die gleiche Deutlichkeit im endgültigen Bild zu erhalten.
+
+Wenn Sie weiche Schatten für die Lichter verwenden, deaktivieren Sie diese Einstellung für Testrenderings. Halten Sie die Anzahl Lichter mit weichen Schatten so klein wie möglich. Eine hohe Anzahl Lichter mit weichen Schatten verlangsamt das Rendering. Verwenden Sie die kleinste Anzahl Samples, die ein akzeptables Rendering erzeugen.
+
+======SCHNELLER RENDERING-TEST======
+Wählen Sie unter Rhino > Datei > Eigenschaften > Flamingo > Auflösung die Optionen "Ansichtsfenster" oder "Benutzerdefiniert" mit einer kleinen Auflösung wie zum Beispiel 300x200 aus, wenn Sie Materialien zuordnen, Ihre Ansichten anpassen, Testrenderings durchführen, etc.
+
+Um Zeit während des Testrenderings zu sparen, verwenden Sie die Befehle RenderFenster oder RendervorschauFenster, um kleine Ausschnitte Ihres Bildes schnell zu rendern.
+
+Verwenden Sie auch den Befehl Rendervorschau, um ein Testrendering in höchster Auflösung auf Ihrem Bildschirm vorzunehmen, das Farben, Licht und Schatten, nur eine Reflexionsstufe, etc. anzeigt, aber den letzten Antialiasing-Durchgang, der zeitaufwendig ist, nicht vornimmt. RendervorschauFenster und RendervorschauInFenster sind zum Testen ebenfalls hilfreich.
+
+======TRANSPARENZ UND REFLEXIONEN======
+Wenn Sie die Objekte transparent und reflektiv gestalten, erhöht dies ebenfalls die Renderzeit. Sie können mit der Anzahl Reflektionslinien unter Rhino > Datei > Eigenschaften > Flamingo > Abrall herum experimentieren.  Der Standardwert beträgt 3, er kann als Experiment auch auf 0 eingestellt werden, wenn diese Effekte die Renderzeit stark erhöhen. Wenn der Abrall zu niedrig eingestellt ist, sehen Sie schwarze Bereiche in Ihren transparenten oder reflektierenden Objekten.
+
+Deaktivieren Sie alles, was sich außerhalb Ihrer Ansicht befindet und das Ihr Rendering nicht beeinflusst. Flamingo beachtet diese Werte in Reflexionen, wenn sie in Rhino aktiviert sind.  Deaktivieren Sie die Ebenen oder wählen Sie Objekte aus und verwenden Sie den Befehl Ausblenden.
+
+======PIXELGRÖSSE DES RENDERINGS======
+Wählen Sie beim Rendern eine benutzerdefinierte Auflösung (Pixelgröße) wie 1024x768 oder höher in Rhino > Datei > Eigenschaften > Flamingo > Auflösung, um die Speicherung in eine Bilddatei vorzunehmen, wenn Sie die endgültigen Ausgabedaten drucken möchten.
+
+Wir empfehlen, dass Sie die gewünschte Druckgröße des Papiers in Zoll um 85 multiplizieren, um die horizontale und vertikale Auflösung (Pixelgröße) für Ihr Bild zu erhalten. In vielen Drucksituationen verbessert eine höhere Anzahl Pixel pro Zoll auf dem Papier das Resultat nicht groß und verursacht eine unnötige Bearbeitungszeit.  Es hängt von der verwendeten Art Papier, von den Fähigkeiten des Druckers und der Art, wie das Bild visualisiert wird, ab.
+
+Stellen Sie die Auflösung für das endgültige Rendering höher als die vorgeschlagenen 85 Pixel pro Zoll des gedruckten Papiers ein, wenn Sie finden, dass die gedruckte Ausgabe nicht genügend klar ist. Wenn die Auflösung verdoppelt wird (Anzahl Pixel horizontal und vertikal), wird die Renderingzeit vervierfacht, da die Anzahl zu berechnender Pixel vervierfacht wird.
+
+======DRUCKEN IHRES RENDERINGS======
+Um das gedruckte Bild zu überprüfen, öffnen Sie das gerenderte Bild in einem Programm wie PhotoShop (Adobe) oder PaintShopPro (JASC).
+
+Bedenken Sie, dass einige Programme zum Drucken von Bildern Ihr Bild standardmäßig nur in einer Skala von 72 dpi drucken. Sie sollten aber die Druckskala Ihren Bedürfnissen anpassen, ohne die XY-(Pixel-) Auflösung des Bildes zu ändern.
+
+Sie sollten die Auflösung Ihres Bildes nicht "erneut scannen" oder ändern (X und Y Punktanzahl), Sie sollten sie aber in der gewünschten Größe drucken.  Sie sollten also PhotoShop verwenden, um den in der Bilddatei gespeicherten DPI-Wert von 72 auf einen höheren Wert zu speichern, auf ungefähr 150 oder sogar 300 für sehr dichte Fotodruckqualität.  Flamingo 1.1 stellt all seine Bilder auf 72dpi ein.  In Flamingo 2.0 können Sie die DPI direkt unter Rhino > Datei > Eigenschaften > Flamingo > Auflösung > Größe des gedruckten Bildes einstellen
+
+Einige Benutzer könnten sich beschweren, dass die DPI-Einstellung in einer Bilddatei von Flamingo 1.1 72DPI beträgt. DPI ist bloss ein Vorschlag, in welcher Größe das Bild zu drucken ist. Unglücklicherweise verwenden wir "Auflösung" und meinen damit die Anzahl Pixel in die X- und Y-Richtungen (die Sie nicht ändern sollten, sobald Sie das gerenderte Bild erzeugt haben). PaintShopPro verwendet "Auflösung" und meint damit DPI.  Sie sollten die Pixelgröße nicht ändern, sondern das Bild in der gewünschten Skala und Größe drucken (beim Drucken wird es in eine beliebige Größe gedehnt).
+
+======PIXELGRÖßE FÜR MEHR EFFIZIENZ======
+Experimentieren Sie mit der Mindestanzahl Pixel pro Zoll auf Papier, die Sie für angemessen gedruckte Bilder benötigen. Größere Werte sind für das Rendering Zeitverschwendung.  Übermäßige Auflösung und Einstellungen unter Rhino > Datei > Eigenschaften > Flamingo sind die üblichsten Gründe für lange Renderzeiten.
+
+======WEITERE HILFE======
+Sollte dies alles nicht helfen: teilen Sie uns die Modellgröße und alle Ihre Einstellungen unter Datei/Eigenschaften/Flamingo und Datei/Eigenschaften/Polygonnetz mit.  Wenn möglich, senden Sie uns die .3DM-Datei zu, indem Sie den Befehl FlamingoTransport ausführen und den Inhalt des erhaltenen Ordners zippen und mit Ihrer E-Mail mitsenden.
+
+[[tech.eu@mcneel.com|E-Mail für technischen Support]] tech.eu@mcneel.com
+
+
+----
+
+
+
+

@@ -1,0 +1,122 @@
+
+> **Sommario:** //Informazioni sul display [[rhino:opengl|OpenGL]] da parte di Jeff LaSor (raccolti da post del NG e da altre fonti)//
+
+> **Importante:** //[[RhinoOnVista|Gli utilizzatori reali o potenziali di Vista consultino la pagina  Rhino relativa]]//
+
+----
+==Domanda:==
+Mi chiedo come verrà integrato il comando  _TestSetAALevel.
+
+Com'è adesso, è necessario ripeterlo ogni volta che si apre una sessione di Rhino o un nuovo file.
+
+==Risposta:==
+Siamo tutti d'accordo che questo dovrebbe essere incluso da qualche parte nell'UI (User Interface= interfaccia utente) e, pur sembrando logico, non sono del tutto certo che il posto giusto sia insieme alle impostazioni di visualizzazione.
+
+... Ecco perché... Impostare la modalità Anti-Alias (in realtà chiamata modalità multi-canale) consuma una quantità di
+memoria video molto maggiore di quanto si possa immaginare... di conseguenza, se inserisci il comando all'interno della modalità di visualizzazione generale, ogni vista che la utilizza consumerà più memoria video, specialmente lavorando ad alta risoluzione con viste massimizzate.
+
+Tenendolo distinto dalla modalità di visualizzazione, è possibile avere diverse impostazioni AA per ciascuna vista, ottimizzando il consumo di memoria video (ora, sicuro, sarebbe possibile mettere a punto più modalità di visualizzazione con impostazioni AA diverse, ma ciò potrebbe essere eccessivo, soprattutto quando è necessario cambiare/variare certi attributi di visualizzazione)... la situazione attuale consente di ottimizzare il livello di AA solo quando effettivamente serve... C'è gente che vuole usare livelli AA molto alti, ma poi quando massimizzano le viste, notano che l'effetto AA è degradato... quello non dipende da Rhino, ma dai drivers... e succede perché la memoria video si sta esaurendo e i drivers si adeguano come possono... se le altre viste non fossero anch'esse impostate al massimo livello AA, questo non succederebbe.
+
+La nostra prima idea era di metterlo nelle impostazioni di visualizzazione, ma dopo un po' di riflessione, non siamo sicuri che questa sia una soluzione "ottimale"... probabile che finisca comunque lì, sto solo cercando di spiegare perché non c'è adesso, e che stiamo cercando di immaginare una soluzione che vi dia il meglio in performance con questo tipo di impostazione.
+
+----
+==Problema:==
+Nell'importazione di una bitmap in Rhino allo scopo di usarla come riferimento, l'immagine viene distorta come se vi fosse applicato un filtro AA. Come risultato, un nitido disegno tecnico diventa illeggibile.
+
+Siamo già fortunati se si riesce a leggere i disegni tecnici, ma quando scansioni ad alta risoluzione in bianco e nero vengono corrotte fino alla illeggibilità, la qualità di produrre per tracciamento delle curve accurate su immagine di Rhino diventa del tutto inutilizzabile.
+
+Ho provato ad "escludere" il filtro AA quando inserisco una bitmap ed ho provato a vedere la differenza con e senza.
+
+Niente da fare.  La stessa porcheria sfuocata.  Ho cercato la soluzione, ma non la trovo nella guida in linea.  C'è qualcosa che mi sfugge, oppure questo particolare di un programma eccezionale è eccezionalmente disastrato?
+
+==Risposta:==
+Senza un esempio, posso solo fare delle ipotesi... ma fammi chiarire un paio di cosette al riguardo....
+
+Non è corretto pensare che immagini a risoluzione maggiore producano maggior dettaglio nella visualizzazione [[rhino:opengl|OpenGL]] di Rhino... Perché? Perché l'[[rhino:opengl|OpenGL]] ha due limiti:
+
+1) Le bitmaps devono avere dimensioni verticali ed orizzontali espresse come potenze di 2
+
+2) Le texture hanno dei limiti di dimensione, determinate dalla scheda video e dai drivers utilizzati
+
+Tenendo conto di questi due aspetti, ecco cosa Rhino DEVE fare se una o entrambe queste limitazioni non sono osservate:
+
+1) Rhino deve ridimensionare l'immagine (maggiorandola o riducendola) in modo che sia l'altezza che la larghezza siano potenze di 2 (2, 4, 8, 16, 32, 64, 128, 256, 512,1024, 2048, 4096, ecc...).
+
+2) Rhino deve ridurre un'immagine troppo grande ad una adatta alla dimensione supportata dalla scheda video/driver.
+
+Se questo non venisse fatto, l'immagine non si vedrebbe proprio.
+
+Ora, se qualcosa del genere succede ai tuoi disegni (specialmente l'ipotesi #2), significa che Rhino altera l'immagine e, nel processo di adattamento, ne causa la "distorsione". Non sono sicuro del perché sembra che questo sia cambiato nel corso del processo beta, ma, indipendentemente dalla soluzione adottata, ci sarà qualcuno che preferirà la modalità attuale... Non sono ancora riuscito a trovare una soluzione soddisfacente per tutti a questo problema...
+
+Ciò premesso, ti consiglio vivamente di ridimensionare le immagini manualmente, in modo che soddisfino i criteri esposti, cosicché Rhino non le tocchi affatto... e, teoricamente, dovrebbero apparire esattamente come te le aspetti. A seconda della scheda video di cui disponi, io non mi spingerei oltre 2048x2048 (la maggior parte delle schede di fascia media ed alta supportano almeno questa risoluzione). La prossima beta avrà questa informazione nella pagina delle opzioni OpenGL, in modo da poter prendere visione dei limiti della scheda video. Per il momento prova con dimensioni inferiori o uguali a 2048x2048 e vedi che succede.
+
+Tieni conto che il fatto di caricare un'immagine da 1000000 x 1000000 non significa che quella sia la risoluzione usata da Rhino (per le ragioni esposte prima)... potresti pensare che 2048x2048 sia un limite troppo basso per vedere i dettagli che ti servono, ma, ripeto, se 2048 è il limite della tua scheda video, quella è comunque la dimensione che verrà visualizzata.
+
+----
+==Schede video ATI FireGL e Rhino (da Jeff)==
+
+Ho appena scoperto alcuni guai con le schede video ATI FireGL ed i loro drivers più recenti...credo di aver risolto i problemi per quanto riguarda Rhino, ma ho anche verificato che i drivers devono avere una configurazione specifica per Rhino...
+
+Nota - Se avete una scheda video FireGL e non avete problemi di visualizzazione, NON fate niente di quanto segue (come dire: se non è rotto, non aggiustarlo). Se invece qualche guaio esiste, provate la seguente procedura:
+
+1) Andate alle impostazioni avanzate dei drivers della scheda ATI
+
+2) Andate alla pagina [[{{http://en.wiki.mcneel.com/content/upload/images/FireGLconfig.jpg}}|Configuration]] tab e:
+
+   * Selezionate "Add" e rinominate il nuovo profilo "Rhino";
+   * Togliete il segno di SPUNTA sull'opzione "Enable 8bit double buffered Overlay Panes";
+   * Mettete il segno di SPUNTA sull'opzione "Force copy swap";
+   * Cliccate OK per salvare.
+3) Andate nelle [[{{http://en.wiki.mcneel.com/content/upload/images/RhinoOGL.jpg}}|impostazioni OpenGL di Rhino]] ed assicuratevi che tutte le opzioni siano spuntate, ECCETTO "Non usare l'[[rhino:opengl|OpenGL]] per gli strumenti di feedback di disegno"... quella NON dovrebbe essere spuntata.
+
+Sfortunatamente, i profili ATI non lavorano allo stesso modo di quelli nVidia, non sono attivati automaticamente quando parte il programma, per cui dovete caricarli manualmente prima di lanciare Rhino.
+
+Dopo aver fatto questo, sembra che TUTTI i problemi legati al ridimensionamento delle finestre ed alla visualizzazione siano scomparsi, inoltre adesso posso usare l'impostazione "High"  sul comando TestSetAALevel.
+
+Per favore, provate e fatemi sapere se risolve (o peggiora le cose). E, di nuovo, NON consiglio di fare alcunché, se non avete problemi di visualizzazione.
+
+----
+==Domanda:==
+
+C'è un limite al numero di finestre che è possibile attivare in modalità OpenGL?  Mi pare circa 6?  Se ho 6 finestre render-preview aperte, una comincia di solito ad avere problemi di visualizzazione...
+
+... Vero?  Falso?   Qualcun altro ha lo stesso problema?
+==Risposta:==
+Vero e Falso... Bella risposta...
+
+Il numero di "qualsiasi" [[rhino:opengl|OpenGL]] è determinato in realtà dalla quantità di memoria video disponibile e da come quella memoria viene utilizzata. Per esempio: se state lavorando ad una risoluzione molto alta e con le viste massimizzate, ogni contesto [[rhino:opengl|OpenGL]] consuma una bella quantità di memoria. Esempio:
+
+Diciamo che il monitor è settato a 1600x1280 e, per semplicità, che il viewport è massimizzato alla stessa dimensione. Si verifica la cosa seguente:
+
+1) 1600x1280x4 = 8mb di memoria per il frame buffer
+
+2) 1600x1280x4 = 8mb di memoria per il back buffer
+
+3) 1600x1280x3or4 = 6-8 mb di memoria per il depth buffer
+
+Fin qui, siamo a 22-24mb di memoria per un solo viewport vuoto.
+
+Se state usando la modalità AA (o multi-canale), la memoria usata può essere doppia o persino tripla.
+
+Ora, se avete un certo numero di texture mappate nella vostra scena, ed anch'esse sono grandi, attingeranno pure loro dalla memoria.
+
+Moltiplicate tutto ciò per il numero di viewport che usate e potete immaginare come si faccia in fretta ad esaurire 128 o persino 256 mb di Vram.
+
+Certo, ho usato un esempio a risoluzione alta, ma avete afferrato il principio...
+
+----
+==Domanda:==
+Sia nella V3 che nella V4, le impostazioni di default della visualizzazione Wireframe sono per Windows
+
+(non accelerazione OpenGL). Per quale motivo?
+
+==Risposta:==
+Ti sorprenderebbe sapere quante scuole usano Rhino, e lo fanno su sistemi obsoleti...
+
+Se Rhino non funzionasse appena installato, loro non lo userebbero... Forzando il default Windows Wireframes praticamente garantisce che il programma lavori appena installato su quasi tutti i sistemi... Sicché, fino a quando non saremo sicuri che persino i computer più economici saranno dotati di sufficiente supporto per l'OpenGL, le cose resteranno così.
+
+Mi rendo conto che Rhino potrebbe "verificare" la tipologia di scheda video e la versione dei driver ed adeguarsi, probabilmente lo faremo nelle SR (Service Release) successive, non certo sulla prima.
+
+----
+
+

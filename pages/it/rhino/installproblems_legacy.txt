@@ -1,0 +1,104 @@
+======Risoluzione dei problemi legati ai programmi di installazione di Rhino 3 e Rhino 4 ======
+Per informazioni sui problemi legati al programma di installazione di Rhino 5, si veda [[http://wiki.mcneel.com/rhino/installproblems|qui.]]
+
+  * [[#Problema di Rhino 3 legato alle barre degli strumenti che non si ancorano correttamente|Problema di Rhino 3 legato alle barre degli strumenti che non si ancorano correttamente]]
+  * [[#Problemi di Rhino 3 legati alle prestazioni OpenGL ed alla visualizzazione|Problemi di Rhino 3 legati alle prestazioni OpenGL ed alla visualizzazione]]
+  * [[#La tabella dell'indice della guida in linea di Rhino 3 è vuota|La tabella dell'indice della guida in linea di Rhino 3 è vuota]]
+  * [[#Rhino 4 si avvia senza caricare nessun plug-in|Rhino 4 si avvia senza caricare nessun plug-in]]
+  * [[#Problema di Rhino 4 legato all'operazione di calcolo dello spazio su disco richiesto che non raggiunge il completamento|Problema di Rhino 4 legato all'operazione di calcolo dello spazio su disco richiesto che non raggiunge il completamento]]
+  
+
+=====Rhino 4 si avvia senza caricare nessun plug-in=====
+**PROBLEMA:**
+
+Barre degli strumenti mancanti e nessun plug-in caricato (su Vista)
+
+Un numero ridotto di utenti ci ha segnalato che, installando Rhino V4 (SR2 e successive) su Vista, non si caricava nessun plug-in o barra degli strumenti, a meno che non effettuassero l'accesso e l'esecuzione come amministratori.  Anche se più comune sui sistemi Vista Home Premium, il problema è stato segnalato su tutte le versioni di vista.  
+
+**SOLUZIONE:**
+
+Alcuni utenti ci hanno segnalato che il problema si risolve disattivando il controllo account utente (Pannello di controllo - Account utente) e disattivando provvisoriamente eventuali antivirus e software di protezione del sistema prima di eseguire di nuovo il programma di installazione di Rhino.  Dopo aver reinstallato ed eseguito Rhino una volta, l'antivirus e gli strumenti di protezione del sistema vanno riavviati.  Se lo si desidera, si può riattivare anche il controllo account utente.
+
+Informazioni aggiunte il 5 marzo 2009 - John Brock
+
+=====Problema di Rhino 3 legato alle barre degli strumenti che non si ancorano correttamente=====
+
+  - Chiudete Rhino 3.0
+  - Eseguite questa utility: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip mentre Rhino è chiuso.
+  - Riavviate Rhino
+  - La utility elimina la seguente chiave di registro per fare in modo che Rhino "dimentichi" alcune impostazioni che causano un ancoraggio non corretto delle barre degli strumenti.
+  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+
+=====Problemi di Rhino 3 legati alle prestazioni OpenGL ed alla visualizzazione=====
+
+//- da usare dopo aver aggiornato le schede grafiche ed i loro driver//
+
+  - Chiudete Rhino 3.0
+  - Eseguite questa utility: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip mentre Rhino è chiuso.
+  - Riavviate Rhino
+  - La utility elimina la seguente chiave di registro per fare in modo che Rhino "dimentichi" alcune impostazioni precedenti di visualizzazione [[rhino:opengl|OpenGL]].
+  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Options\OpenGL//
+
+=====Problema di Rhino 4 legato all'operazione di calcolo dello spazio su disco richiesto che non raggiunge il completamento=====
+**PROBLEMA:**
+
+Quando si installa Rhino 4.0, appare una finestra di dialogo con il seguente messaggio "Attendere. Calcolo dello spazio su disco richiesto in corso". Tale finestra non sparisce mai.
+
+**CAUSA:**
+
+Il motore di Windows Installer cerca di determinare se c'è sufficiente spazio su disco su tutte le unità per installare Rhino. Per qualche ragione, questo processo impiega molto tempo o non giunge proprio a termine. Il vero motivo è nascosto da qualche parte all'interno del motore di Windows Installer di Microsoft.
+
+**SOLUZIONE:** ////
+
+Eseguire il programma di installazione dal prompt dei comandi:
+<code>
+msiexec /i Rhino4_Setup.msi /qr
+</code>
+
+=====La tabella dell'indice della guida in linea di Rhino 3 è vuota=====
+
+**PROBLEMA:**
+
+La tabella dell'indice della finestra della guida in linea di Rhino e dei BonusTool è vuota
+
+per un accesso utente con privilegi limitati in Windows 2000.
+
+**SOLUZIONE:**
+
+Si tratta di un problema di autorizzazioni che interagisce con un bug in Windows 2000. Ecco come risolverlo senza modificare le autorizzazioni sulle cartelle dei programmi.
+  * Chiedete all'amministratore di sistema di eliminare Rhino.GID dalla cartella "...Program Files\Rhino\English\Help" e, già che ci siete, anche RhinoBonusTools.GID.
+  * Effettuate il log out come amministratore (non avviate ancora la guida in linea, altrimenti verrà di nuovo creato il file GID per l'amministratore).
+  * Accedete come utente con privilegi limitati. La tabella dell'indice ora dovrebbe apparire con i relativi contenuti ed un file GID viene creato da qualche parte dell'area file personale dell'utente.
+  * Questo trucco non è necessario in Windows XP perché Microsoft ha risolto l'errore.
+  * Un'altro modo di risolvere il problema in Windows 2000 sarebbe aggiungendo l'autorizzazione "Scrivi" per gli utenti sulla cartella "...Rhino\English\Help folder".
+
+=====Rimozione manuale di Rhino 4=====
+**//Domanda://** Ho cercato di disinstallare Rhino 4.0, ma si è verificato un errore e non sono riuscito a rimuovere Rhino.
+
+**//Risposta://** [[rhino/uninstalling|Rimuovere manualmente Rhino 4.0.]]
+
+
+=====Installazione di Rhino 4 come aggiornamento=====
+
+**//Domanda://** //"Cosa devo fare per far sì che il mio aggiornamento a Rhino 4.0 si installi?"//
+
+**//Risposta://** Il programma di installazione dell'aggiornamento a Rhino 4.0 si installerà se si verifica una qualsiasi delle seguenti condizioni. La verifica avviene nell'ordine:
+
+  * Rhino 3.0 è installato  
+  * Rhino 2.0 è installato 
+  * Rhino 1.1 è installato  
+  * Rhino 1.0 è installato  
+  * Il CD di Rhino 3.0 viene inserito nell'unità CD durante l'installazione   
+  * Il CD di Rhino 2.0 viene inserito nell'unità CD durante l'installazione   
+  * Il CD di Rhino 1.1 viene inserito nell'unità CD durante l'installazione   
+  * Il CD di Rhino 1.0 viene inserito nell'unità CD durante l'installazione  
+
+**[[SettingsTransfer|Trasferire le impostazioni personalizzate da un'installazione di Rhino 4 all'altra]]**
+
+
+=====La disinstallazione di Rhino 4 non riesce=====
+**PROBLEMA:**
+Il problema può essere causato dal danneggiamento della cache del programma di installazione.
+
+**SOLUZIONE:**
+Seguite le istruzioni dell'articolo [[rhino:uninstalling|Disinstallazione manuale di Rhino 4.0]]

@@ -1,0 +1,49 @@
+====== Cadres d'image ======
+
+**CadreImage** peut être utilisée pour créer une version plus flexible de l'image en arrière-plan de Rhino.  Les images sont liées, sous forme de plaquages de texture, à des plans dans l'espace 3D et sont affichées dans le mode rendu. C'est donc le plaquage de texture qui est visible au lieu d'un arrière-plan placé dans la fenêtre indépendamment de la géométrie.
+
+Quelques avantages de CadreImage
+
+  * Un nombre illimité d'images peut être placé dans une scène. Les images sont visibles dans toutes les fenêtres.
+  * Les images peuvent être modifiées avec les commandes d'échelle et de rotation, contrairement aux images placées avec la commande ImageArrièrePlan qui ne peuvent être alignées que sur les axes x et y du plan de construction.
+  * Les images peuvent être estompées et apparaître plus ou moins transparentes
+Un des inconvénients possibles est qu'il est impossible de garantir que l'image se trouve toujours derrière tous les objets dans l'espace - les cadres d'image sont juste des objets dans l'espace 3D.
+
+----
+
+====== Pour utiliser CadreImage comme image de référence en arrière plan :======
+
+Lancez la commande **CadreImage** (barre d'outils Surface> Barre déroulante Plans>CadreImage ou tapez CadreImage et <Entrée>.) Vous verrez apparaître la boîte de dialogue Ouvrir un fichier et Rhino vous demandera de choisir l'image que vous voulez utiliser. Lorsque l'image est sélectionnée, Rhino vous demandera de placer le plan comme dans la commande Plan 3Points avec l'option Vertical. Vous remarquerez que le plan peut avoir n'importe quelle taille mais que son rapport doit être le même que l'image. Le premier point choisi pour le plan correspond au sommet inférieur gauche de l'image, le second au sommet inférieur droit et le troisième indique l'emplacement du bord supérieur.
+
+L'image est automatiquement assignée au plan sous forme de plaquage de texture, elle est plaquée sur les coordonnées UV de la surface. Vous pouvez voir cette assignation de texture dans la section Matériau des propriétés de l'objet. Un matériau de base est assigné au plan et l'image est utilisée pour définir la texture.
+
+Puisqu'il s'agit d'un canal de matériaux, il n'est affiché dans la fenêtre que lorsque que le mode d'affichage est Rendu ou, dans Rhino 4, un autre mode d'affichage qui affiche les matériaux (Options>Apparence>Paramètres avancés. Le paramètre permettant d'afficher les matériaux de l'objet se trouve dans la section supérieure du mode sous le paramètre Ombrage>Couleur et utilisation du matériau.) Ce paramètre est défini par défaut dans le mode rendu, mais il est possible de créer de nouveaux modes qui possèdent également cette fonction. Ces modes doivent être définis dans les fenêtres ou par objet en utilisant la commande **DéfinirModeAffichageObjet**. Cette deuxième méthode peut-être plus utile puisqu'elle permet d'afficher le plan avec l'image quel que soit le mode d'affichage de la fenêtre. Le mode d'affichage par objet est défini dans la fenêtre actuelle lorsque la commande est lancée, vous devez utiliser à nouveau la commande pour voir les textures dans les autres fenêtres.
+
+<color white>.</color>
+
+{{http://en.wiki.mcneel.com/content/upload/images/PictureFrames_as_reference.png}}
+
+//Trois plans CadreImage configurés pour afficher les images de référence.//
+
+<color white>.</color>
+
+Une fois définis, les plans peuvent être ajustés comme tout autre objet de Rhino avec les commandes de transformation afin de les aligner et les faire tourner. La commande Orienter peut être utilisée pour changer l'échelle et aligner les points de l'image avec des dimensions et des emplacements connus. L'intensité de l'image peut être réglée dans la section Matériau des propriétés ; la transparence et l'intensité de l'image sont probablement les paramètres les plus utiles. Ils peuvent être réglés sur des niveaux prédéfinis en utilisant les barres d'outils Texture du matériau et Transparence du matériau.
+
+<color white>.</color>
+
+{{http://fr.wiki.mcneel.com/content/upload/images/Material_Presets.png}}
+//Barres d'outils de matériaux prédéfinis.//
+
+<color white>.</color>
+
+Il peut être utile de placer les cadres d'images sur des calques différents afin de pouvoir les sélectionner, les verrouiller où les cacher plus facilement. Il peut être également utile de définir un mode d'affichage spécial dans Rhino 4 avec des paramètres plus recherchés que dans le mode de rendu standard. Par exemple, si les faces arrière sont désactivées les images pourront être placées sur tous les côtés d'un objet sans obscurcir la vue.
+
+Vous trouverez ci-dessous une macro de commande qui peut être ajoutée à un bouton ou à un alias de commandes pour automatiser le processus d'application de l'image et des modes d'affichage sur les plans dans Rhino 4. Remplacez 90 par n'importe quel chiffre entre 0 et 100 dans l'exemple ci-dessous pour changer la transparence des plans.
+
+
+  ! CadreImage //Pause //Pause _Pause
+  SélDerniers
+  -Propriétés Matériau Objet Entrée Transparence 90
+  Entrée Objet MontrerIsoparamétriques Non Entrée Entrée
+  DéfinirModeAffichageObjet Mode=Rendu
+

@@ -1,0 +1,22 @@
+** Échange de fichiers [[rhino:solidworks|SolidWorks]] **
+
+> **Remarque:** //Ces notes ont été créées il y a quelques temps déjà et se trouvaient dans l'aide de Rhino. Cependant, il semblerait que ces informations devraient être revues et mises à jour par des personnes familières avec le sujet, je le déplace donc ici. ~mb//
+
+=====Conseils d'un utilisateur :=====
+
+Utilisez une tolérance absolue de 0.0001.
+
+Modélisez uniquement les parties organiques du modèle dans Rhino, en laissant les fonctions telles que les congés, les coques, les nervures, etc. pour [[rhino:solidworks|SolidWorks]].
+
+Normalement [[rhino:solidworks|SolidWorks]] ne considère pas que les tangences dans Rhino sont tangentes. Heureusement, [[rhino:solidworks|SolidWorks]] fournit des solutions à ce problème avec des congés de faces.
+
+Vous pouvez également sélectionner toute la chaîne de bords "presque tangents" dans [[rhino:solidworks|SolidWorks]]. La fonction de congé construira ensuite un congé dans le sens de la pièce avec des segments "presque tangents". Ce congé est tangent pour l'oeil humain. [[rhino:solidworks|SolidWorks]] aide à résoudre ces problèmes avec la fonction de sélection des tangentes qui fonctionne aussi bien sur les bords que sur les faces. Cette fonction est très utile pour créer des congés sur des modèles importés.
+
+Les surfaces doivent parfois être prolongées pour pouvoir exécuter la fonction coque sur elles, mais si votre modèle de Rhino présente une singularité ou une autre particularité au point où la surface devrait être prolongée, la fonction de coque risque fortement de ne pas fonctionner.
+
+De même, de petits plis empêcheront la réalisation d'une coque si la courbure du pli est plus petite que l'épaisseur de la paroi requise.
+
+En règle générale, essayez de modéliser avec des surfaces lisses plus grandes que leur taille normale. Importez quelques "mini modèles" au cours de la modélisation dans Rhino pour tester la viabilité du modèle dans [[rhino:solidworks|SolidWorks]]. Utilisez la fonction "Qu'est-ce qui ne va pas ?" de [[rhino:solidworks|SolidWorks]] pour détecter les zones à problème et rechercher d'autres méthodes de travail. Rien ne peut remplacer l'expérience et après avoir importé correctement plusieurs modèles dans SolidWorks, vous acquerrez plus d'intuition pour savoir quelles sont les méthodes qui fonctionnent.
+
+
+

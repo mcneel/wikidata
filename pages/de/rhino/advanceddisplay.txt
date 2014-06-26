@@ -1,0 +1,85 @@
+====== Erweiterter Anzeigemodus in der Version 5 ======
+
+> **Zusammenfassung:** Rhino 5.0 hat einen neuen erweiterten Anzeigemodus mit versteckten Linien, Skizzenmodi und anderen Optionen.
+
+=====Inhalt=====
+
+  * [[#Hintergrund]]
+  * [[#Benutzerdefinierte Beispiele]]
+  * [[#Erweiterte Modi drucken]]
+  * [[#Einschränkungen]]
+
+=====Hintergrund=====
+
+
+Ein paar einleitende Erklärungen:
+
+Rhino 5 hat zahlreiche neue erweiterte Anzeigeoptionen, die zur Erstellung erweiterter Echtzeit-Anzeigemodi konfiguriert werden können.  Zu den erweiterten Optionen zählen Schatten, Kantendicke und Beleuchtungseffekte. Eine grundlegende Einführung in die erweiterte Anzeige finden Sie hier:
+  * Video von Rhino Visual Tips 5.0:[[http://v5.rhino3d.com/video/rhino-visual-tips-5-0-chapter-9-rhino-options-display-modes| Chapter 9: Rhino Options: Display Modes]]
+Eine detaillierte Erklärung der Anzeigeeigenschaften finden Sie hier:  
+  * [[http://docs.mcneel.com/rhino/5/help/de-de/options/view/display_mode_options.htm|Optionen von Anzeigemodi]].
+
+Im Folgenden einige Beispiele der neuen Standard-Anzeigemodi. Es sind 3 neue Modi verfügbar:
+
+====Technische Zeichnung==== 
+{{http://wiki.mcneel.com/_media/rhino/technicalboat.jpg?w=600}}
+====Bleistift==== 
+{{http://wiki.mcneel.com/_media/rhino/usbpen.jpg?w=600}}
+====Künstlerisch==== 
+{{http://wiki.mcneel.com/_media/rhino/harken_artistic.jpg?w=600}}
+
+
+=====Benutzerdefinierte Beispiele=====
+Um die Möglichkeiten der neuen Anzeigemodi voll auszuschöpfen, können Sie Ihre eigenen Anzeigemodi erstellen und dabei Folgendes manuell konfigurieren:
+
+  - Echtzeit-Silhouetten
+  - Falten
+  - Begrenzungen
+  - Schnitte in Echtzeit
+  - Überblendete schattierte und gerenderte Anzeige
+  - Schattentyp
+
+Die folgenden Modi können mithilfe des Befehls "Importieren" im Bereich "Anzeigemodi" in Rhino importiert werden. Gehen Sie auf Werkzeuge -> Optionen -> Ansicht -> Anzeigemodi und wählen Sie "Importieren". Mehr hierzu finden Sie auch in {{http://docs.mcneel.com/rhino/5/help/de-de/options/view/display_mode_options.htm#import|dieser Anleitung}} unter dem Punkt "Importieren".
+
+====Patent====
+{{http://wiki.mcneel.com/_media/rhino/hull4b_patent.jpg?w=600}}
+
+Laden Sie die Datei [[http://wiki.mcneel.com/_media/rhino/patent_drawing.zip|Patent.ini]] herunter, um diesen Modus zu importieren.
+
+Dieser Modus ist besonders sensibel für Schattierungseinstellungen. Es gibt aber noch zahlreiche andere Möglichkeiten, in diesem Modus zu experimentieren.  Rotation der Schattenlinie?   Versuchen Sie es mit 0, 23, 45 oder 90 Grad.  Eine Einstellung von 23 Grad beispielsweise bietet einige interessante Charakteristika. So erscheint die Schattenlinie bei diesem Winkel beispielsweise nicht stufenweise. Wichtig ist zudem die Anpassung der Linienoptionen unter Patent -> Objekte -> Linien.
+
+Durch Verwendung des Layout-Modus können Sie den Titelblock und den Anmerkungstext einstellen.
+
+====Blueprint====
+{{http://wiki.mcneel.com/_media/rhino/harkin_2602_and_2616_blueprint.jpg?w=600}}
+
+Blueprint ist eine Kombination aus einem Bitmap-Hintergrund, einem weiß gestreiften Schatten und dicken Silhouettenlinien.  Zur Nutzung dieses Modus laden Sie sich die Datei [[http://wiki.mcneel.com/_media/rhino/blueprint.zip|Blueprint.ini]] und das [[http://www.psdgraphics.com/backgrounds/blank-blueprint-paper/|Blueprint-Hintergrundbild]] herunter.  Dieser Modus funktioniert zudem auch mit dem [[http://blog.finishatweber.com/wp-content/uploads/2011/03/chalkboard_bg-1024x682.jpg|Blackboard-Hintergrund]].
+
+====Blackboard====
+{{http://wiki.mcneel.com/_media/rhino/lmgtblackboard.jpg?w=600}}
+
+Dieser Modus ist ähnlich dem Blueprint-Modus. Er verwendet ein Hintergrundbild und einen weißen Schatten. Die Linien sind jedoch bedeutend dicker, um so einen Skizzenmodus zu simulieren. Zur Benutzung laden Sie sich die Datei [[http://wiki.mcneel.com/_media/rhino/blackboard.zip|Blackboard.ini]] und das dazugehörige [[http://blog.finishatweber.com/wp-content/uploads/2011/03/chalkboard_bg-1024x682.jpg|Hintergrundbild]] herunter.
+
+====Simple Bright====
+{{http://wiki.mcneel.com/_media/rhino/fallingwater.jpg?w=600}}
+
+Dieser einfache Modus mit hellen Farben und Schatten ist besonders bei architektonischen und mechanischen Entwürfen beliebt. Um diesen Modus zu benutzen, importieren Sie einfach die Datei [[http://wiki.mcneel.com/_media/rhino/simple_bright.zip|Simple Bright.ini]].
+
+=====Erweiterte Modi drucken=====
+Die fortgeschrittenen Anzeigemodi basieren momentan auf Bildschirmauflösungen (mit beispielsweise 2 Pixel dicken Kanten). Beim Drucken dieser Modi kann die Auflösung des Drucks stark von derjenigen auf dem Bildschirm abweichen. So kann möglicherweise eine 4 Pixel dicke Linie auf dem Bildschirm dick aussehen, im Druck jedoch erscheinen die Kanten eher dünn.  Diese Änderungen können auch bei Schatten und Schraffierungen auftreten.  Verkompliziert wird die Sache zudem dadurch, dass die Druckvorschau diese Effekte nicht korrekt darstellt.  Dies muss natürlich in Zukunft verbessert werden. Für den Moment bietet sich die folgende Übergangslösung an.
+
+Um einen dieser Anzeigemodi zu drucken, erzeugen Sie eine Kopie der Bildschirmversion und erstellen dann eine Druckversion des Anzeigemodus.  Im Anzeigemodus "Patent" beispielsweise sind die Kanten in der Bildschirmansicht 4 Pixel dick. In der Druckversion des Anzeigemodus sind die Kanten 8 Pixel dick.  In der folgenden Tabelle finden Sie einen Vergleich der Bildschirmversion mit der Druckversion:
+
+|                        ^Patent-Modus   ^Patent-Druckmodus  ^
+^Schattentyp           |Parallele Linien |Parallele Linien      |
+^Linien im schattierten Modus      |1 px           |4 px                |
+^Abstand im schattierten Modus |3 Zeilen        |2 Zeilen             |
+^Kantendicke    |1 px           |2 px                |
+^Dicke der Silhouette   |2 px           |8 px                |
+
+
+
+=====Einschränkungen=====
+
+  - Sie können diese Anzeigemodi nicht einfach einem einzelnen Objekt zuweisen (z.B. durch ObjektAnzeigemodusDefinieren). Wenn Sie allerdings im Modus "Technische Zeichnung" sind, können Sie den einzelnen Objekten einen der anderen Modi zuweisen. Der Anzeigemodus "Technische Zeichnung" ist also so etwas wie der Muttermodus aller anderen Modi (die den [[http://wiki.mcneel.com/de/rhino/opengl|OpenGL]]-Standard unterstützen). Die Anzeigemodi können also vermischt und kombiniert werden, wenn Sie dazu im Modus "Technische Zeichnung" beginnen.
+  - Die erste Berechnung der Daten des Anzeigemodus "Technische Zeichnung" kann bei dichten Polygonnetzobjekten sehr lange dauern - und wir können leider nichts dagegen tun. Und wenn die Objekte auf irgendeine Weise geändert werden, müssen die Berechnungen erneut durchgeführt werden.

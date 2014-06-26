@@ -1,0 +1,16 @@
+====== Rhino Rendering ======
+
+======Rendering with the default renderer======
+
+> **Summary:** //Rhino Rendering//
+
+=====Alpha Channels=====
+Formats supporting alpha channels: .tif, .tga, .png.
+
+The Rhino3 default renderer does not generate alpha channels [Pascal - 2005-11-09] but you can make one "manually" by saving a copy of the scene, then change all the materials to pure white & the background to pure black. Turn the ambient light all the way to pure white as well. Delete all other lights.
+
+As long as you don't change your animation or other rendering settings, this sequence should be a perfect match for your normally rendered animation. You can now use this "matte" animation as a mask in after effects or premiere or whatever compositor you are using to lay the animation in over your digital photograph. [MALaFon - 2005-11-10]
+
+The built-in renderer in V4 beta does support alpha channels. Select File->Properties->Rhino Render->Transparent background before rendering, and then save the image in TGA, PNG or TIFF format. [Mikko - 2005-11-10]
+
+

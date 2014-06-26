@@ -1,0 +1,38 @@
+====== Rhino et les applications 2D ======
+> **Sommaire:** //Utiliser Rhino avec les applications de dessin, d'illustration et d'imagerie en 2D//
+
+=====Surface topographique dans Rhino à partir d'une image en utilisant le champ de hauteur et les outils de texture en relief ainsi que GIMP et CGSD=====
+
+La fonction de Rhino avec laquelle j'ai le plus travaillé est votre commande de génération de cartes ChampHauteur.
+
+Cela m'a pris un peu de temps pour comprendre qu'il n'était pas très utile d'utiliser de simples images prises avec un appareil photo numérique.
+
+J'ai appris que la meilleure méthode était de créer une carte d'altitude réelle (j'ai utilisé le filtre shape-from-shading de GIMP) et de l'enregistrer sous forme de bitmap.
+
+Lorsque la carte d'altitude réelle de l'image est importée dans Rhino 3.0, la commande de création d'un champ de hauteur à partir d'une image est utilisée dessus afin d'obtenir une surface très détaillée et précise du terrain.
+
+Juste un peu de flou gaussien de l'image avant de l'utiliser dans rhino 3.0 aide à lisser les quelques bords grossiers.
+
+J'ai découvert récemment un meilleur créateur de cartes d'altitude que GIMP.
+
+Il s'agit de "shape from shadow", un module pour Photoshop de CGSD qui fait partie du pack Bump Texture Tools.
+
+Le pack de CGSD comprend également un inverseur d'image stéréo.
+
+Le programme GIMP crée des cartes d'altitude correctes mais le filtre "shape from shading" de GIMP a été écrit pour un satellite et nombre d'utilisateurs ne trouveront pas ça très utile.
+
+Le module CGSD pour Photoshop est d'une application beaucoup plus générale.
+
+Voir ce site : www.cgsd.com/bumptexture
+
+J'ai oublié de mentionner un autre bon programme de prétraitement, le module apportant un filtre de réduction des ombres dans Photoshop,
+
+SR Pro qui se trouve ici : www.fredmiranda.com/sr/
+
+Ce module fonctionne bien sur l'image originale avant la conversion en carte d'altitude avec le filtre de CGSD, "shape from shading".
+
+Lorsque ces deux filtres de prétraitement sont utilisés, le niveau de détails dans les cartes topographiques générées avec votre commande ChampHauteur est infiniment meilleur que si vous utilisiez uniquement l'image obtenue d'un appareil photo numérique sans aucun prétraitement.
+
+[[revans_01420@yahoo.com|--Richard 'Rick' Evans]]
+
+

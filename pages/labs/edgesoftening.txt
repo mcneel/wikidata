@@ -1,0 +1,39 @@
+====== Notes ======
+This plug-in is included in the [[http://download.rhino3d.com/rhino/5.0/wip/|Rhino 5.0 WIP]]. Command name is **ApplyEdgeSoftening** in V5.
+
+====== Edge Softening ======
+> **Summary:** //A plug-in that fakes small filleted edges in RDK compliant renderers.//
+
+Last update: 1st August 2008
+
+
+{{http://en.wiki.mcneel.com/content/upload/images/edge_softening.JPG}}
+{{http://en.wiki.mcneel.com/content/upload/images/edge_softening_ui.JPG}}
+
+Edge softening allows you to fake filleted edges on meshes for rendering.  Use the Object Properties "Edge Softening" option once the plug-in is installed to change the radius.  The plug-in requires an RDK compliant renderer to work (for example, Brazil).
+
+Use the command "ExtractSoftenedEdgeMesh" to obtain the mesh for use in other render engines or RP.
+
+The Edge Softening plugin available here requires Rhino 4.0 SR3 (or later) and the [[labs:rendererdevelopmentkit10|Rhino RDK]] to run. However, it is possible you already have the RDK installed, so only download and install the RDK if you try to install the plug-in but receive the "Dependant DLL not found" error.
+
+ [[http://en.wiki.mcneel.com/content/upload/files/EdgeSoftening.zip|Download the plugin]]
+
+
+----
+
+> **FEEDBACK:** ////
+
+Great plug-in!! Is it also possible to extract the render mesh of the soft edged polysurface???
+
+> **Answer:** //"ExtractSoftenedEdgeMesh"//
+
+
+I tried to use the plug-in with V-Ray and rhino render. It does not work. Have I missed something?
+
+> **Answer:** //I had problems also, turned out to be naked edges within the surface. Fixing them it worked. It handles boundary naked edges fine, the problem is it really disconnected edges. And on top of it it worked with Maxwell. Priceless//
+
+
+There are some problems with filetts combined with sharp edges
+
+
+

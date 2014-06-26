@@ -1,0 +1,69 @@
+====== Vista에서 Rhino가 실행됩니까? ======
+> **Summary:** //Rhino 4.0 (서비스 릴리스 1) 은 잘 실행되지만, Rhino 3.0 의 경우, 심각한 문제점이 있습니다. 여러분의 의견과 경험을 적어 주세요.//
+
+=====개요=====
+
+Rhino는 Windows Vista 에서 실행됩니다. 그러나 동일한 하드웨어상에서 3D 디스플레이 성능 (OpenGL)은 Windows XP 또는 2000 에서보다 많이 저하될 수 있습니다. [[http://www.tomshardware.com/2007/01/29/xp-vs-vista/page6.html|Independent benchmarks]] 를 보시면 Vista 상에서 OpenGL을 사용하는 CAD 프로그램의 사용 결과가 그다지 좋지 않음을 알 수 있습니다.
+
+Vista의 새로운 보안 기능으로 인하여 Rhino 를 시작할 때 몇 가지 보안 메시지가 추가로 표시될 수 있습니다.
+
+당사는 앞으로 Rhino 4.0 서비스 릴리스를 통하여 Vista에서의 [[labs:directx|DirectX]] 를 지원할 계획입니다.
+
+Microsoft 측에서 [[rhino:opengl|OpenGL]] 지원 기능을 향상시키지 않는 한, Rhino 3.0 은 [[rhino:opengl|OpenGL]] 디스플레이의 속도를 향상시키는 특별한 비디오 디스플레이 드라이버 없이는 Vista에서 제대로 실행되지 않을 것입니다.
+
+=====비디오와 가속 3D 디스플레이=====
+
+Rhino 3.0 과 4.0 모두 가속 3D 디스플레이를 위한 [[rhino:opengl|OpenGL]] 을 사용합니다. OpenGL은 3D 디스플레이 성능 향상을 위해 그래픽 가속기 카드를 사용할 수 있습니다.
+
+**비가속 OpenGL**
+
+비가속 [[rhino:opengl|OpenGL]] 은 때로는 [[rhino:opengl|OpenGL]] 소프트웨어 에뮬레이션 또는 스탠다드 [[rhino:opengl|OpenGL]] 이라고 하며 Windows Vista에서 지원됩니다. Rhino는 비가속 OpenGL에서 실행되지만, 비가속으로 인하여, 큰 모델에서 속도가 저하될 수 있습니다.
+
+Windows Vista 는 가속 OpenGL을 직접적으로 지원하지 않으며, 일부 비디오 카드 제조사에서는 이러한 카드를 위한 드라이버가 현재 없는 상태입니다. 효율적인 가속 OpenGL이 지원되는 드라이버가 언제 사용 가능한지 저희도 알지 못합니다.
+
+**XP에서 Vista로 업그레이드하기**
+
+Windows XP 상에서 뛰어난 3D 가속 성능을 가진 [[rhino:opengl|OpenGL]] 카드를 가지고 있더라도, 해당 카드의 Vista용 드라이버가 없는 경우, Vista로 업그레이드하게 되면 [[rhino:opengl|OpenGL]] 카드의 활용도 및 성능이 저하될 것입니다. 이는 동일한 하드웨어상에서, XP보다 Vista에서의 Rhino 3D 디스플레이 기능이 저하될 수 있음을 의미합니다.
+
+**Vista가 탑재된 새 컴퓨터**
+
+Vista가 기본으로 설치된 새 컴퓨터의 구입을 생각 중이시라면, 새 컴퓨터에 사용될 비디오 카드의 [[rhino:opengl|OpenGL]] 드라이버가 있는지 먼저 확인하십시오. [[rhino:opengl|OpenGL]] 드라이버가 없다면 Rhino의 디스플레이 속도가 매우 느려질 것입니다.
+
+**Vista용 그래픽 드라이버**
+
+[[http://www.nvidia.com/content/drivers/drivers.asp|nVidia]] 와 [[http://ati.amd.com/support/driver.html|ATI]] 는 자사 하드웨어 제품의 Vista에서의 문제점을 수정하기 위해 정기적으로 드라이버 업데이트를 릴리스하고 있습니다. 사용하시는 하드웨어의 Vista용 드라이버가 있는지, 두 회사의 웹사이트에서 확인하시기 바랍니다.
+
+<color blue>Rhino 4 수정</color>: Rhino 4의 첫 번째 서비스 릴리스는 Vista에서 가속 그래픽을 올바르게 사용하게 위한 몇 가지 디스플레이 오류 수정이 포함될 것입니다. 첫 번째 서비스 릴리스가 공개되지 전까지, 다음 두 가지 옵션 중 하나를 시도해 보십시오:
+
+  * 옵션 1: rhino4.exe 응용 프로그램 파일에서 오른쪽 클릭하여 "Compatibility(호환성)" 섹션으로 갑니다. 'Disable desktop composition'의 확인란을 선택합니다. 이 옵션을 선택하면 Vista를 XP와 같은 데스크탑처럼 사용하게 됩니다(에어로 글래스 기능 해제).
+  * 옵션 2: "[[labs:directx|DirectX]] display plug-in" 사용:Rhino Labs을 통해 [[labs:directx|DirectX]] 를 지원합니다.
+
+=====보안=====
+
+  * 팝업 보안 경고와 다른 보안 장애는 많은 Vista 사용자들에게는 그다지 바람직한 일이 아닙니다. Rhino에서도 프로그램 시작 시, 몇 가지 보안 경고창이 뜰 수 있으나, 그 외에는 제대로 실행됩니다.
+  * <color blue>Rhino 4 수정</color>: Rhino를 시작할 때 표시되는 팝업 보안 경고창은 시작할 때 업데이트를 확인하는 메커니즘에 의한 것입니다. Rhino 4의 첫 릴리스에는 번거로운 팝업 보안 경고창을 차단하는 TestDisableCheckForUpdates 라는 숨겨진 명령이 있습니다. 이 명령을 두 번째로 실행하면 업데이트 확인 메커니즘이 다시 활성화됩니다. 이 문제는 Rhino의 첫 번째 서비스 릴리스에서 해결될 것입니다. 자동 업데이트 확인 기능을 해제하게 되면, 도움말 메뉴 아래에 있는 "업데이트 확인" 명령을 정기적으로 실행해야 합니다.
+
+=====메모리=====
+
+Vista는 XP 보다 더 많은 메모리를 사용합니다. 프로세스에 사용할 수 있는 메모리의 전체 사용량은 변하지 않더라도, 사용 가능한 RAM 의 양은 Vista가 더 적습니다. 따라서, Windows XP 에서 Rhino 3.0을 메모리의 한계에 이르도록 사용하고 있다면, Vista에서는 더욱 사용 환경이 악화될 것입니다. Vista 에서 Rhino 3.0 이 사용할 수 있는 RAM 의 최대량은 2GB입니다.
+
+그러나 Rhino 4.0은 가능한 경우 3GB의 RAM 을 사용하도록 컴파일되어 있습니다. Windows X P와 Windows Vista 에서 모두 Rhino 는 3GB까지 사용이 가능합니다. XP가 Vista 보다 메모리를 덜 사용하므로, Rhino 는 XP 에서 더 많은 메모리를 사용할 수 있습니다.
+
+여러분께 메모리가 중요 사항이라면 Vista 보다 XP 에서 Rhino 를 여유롭게 사용하실 수 있습니다 .
+
+=====Rhino 3.0=====
+
+Vista 에서 Rhino 3.0 을 실행할 경우, 몇 가지 문제점이 있습니다. 이 문제점은 앞으로도 수정되지 않을 것입니다. 저희 McNeel 에서는 Windows Vista 사용자 여러분께 Rhino 4.0 으로 업그레이드하실 것을 권장합니다.
+
+> **문제점:** ////
+  * [[rhino:opengl|OpenGL]] 디스플레이의 속도가 Vista 에서 더욱 느려지는 점 외에도, 디스플레이상에 중대한 문제가 발생될 수 있습니다. - 뷰포트가 까맣게 보이거나 화면이 깨지는 현상 등.
+  * Rhino 를 시작할 때 레지스트리를 쓸 수 없다는 대화 상자가 여러 개 표시됩니다.
+  * Vista 는 WinHelp (WinHlp32.exe)가 탑재되어 있지 않습니다. Rhino 3.0 의 도움말 파일은 WinHelp 파일이므로, 다음의 Miscrosoft 측의 업데이트를 다운로드하시 않는 한, Vista에서 도움말을 보실 수 없습니다. **[[http://www.microsoft.com:80/downloads/details.aspx?familyid=6ebcfad9-d3f5-4365-8070-334cd175d4bb&displaylang=ko|//Vista용 WinHelp 다운로드...//]]**
+
+=====사용자 경험담=====
+
+  * 2007년 2월 27일 추가된 내용 - 안녕하세요 Pascal. ATI 디스플레이 카드/Rhino/Vista 와 관련해서 지난 주에 e-메일을 보냈었습니다. [[rhino:opengl|OpenGL]] 과 Vista 를 지원하는 ATI 드라이버로 업데이트하라고 알려 주셨는데요.. 성능을 그나마 최대한 향상시킬 수 있는 다른 정보에 대해 알려 드리려고 합니다. 설정을 조정하느라 많은 시간을 소비하였으나, top 뷰포트에서 zoom-in, zoom-out (확대/축소) 실행 시 와이어프레임 표시 외에 렌더링시 제대로 표시되지 않는 현상이 계속되었습니다.  또한 평행 뷰포트에서 창 선택시, 선택이 완료될 때까지 화면이 깨지는 현상이 발생했습니다. 마지막으로, 평행 뷰포트에서 선 도구를 사용할 때 선을 그리는 동안 활성화된 선 주변이 까맣게 보이는 현상이 가장 큰 문제점이라고 할 수 있습니다. 따라서 뷰포트에서 선을 그릴 때 다른 개체를 따라서 그리기가 어려워졌습니다. 그래픽 드라이버의 [[rhino:opengl|OpenGL]] 을 사용하면 속도가 빨라지고, 가속 옵션 또한 빨라지지만, 이것으로 실시간 디스플레이의 느린 속도를 정당화시킬 수는 없습니다. 도움을 주셔서 감사 드리며, 앞으로 Rhino/ATI/Windows 가 이 문제를 해결해 주길 바랍니다.  - David Bier - Imaging specialist <color red>이것은 우선적으로 Vista가 하나의 창에서 여러 디스플레이 테크놀로지를 혼합하는 방법에 따른 문제점입니다(예전에는 사용이 가능했습니다). 위에 언급된 수정 방법을 실행하면 문제 해결에 도움이 될 것입니다. - Steve Baer</color>
+
+
+
+

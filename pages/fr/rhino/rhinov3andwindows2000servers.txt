@@ -1,0 +1,9 @@
+====== Rhino V3 et serveurs Windows 2000 ======
+
+Il existe un problème connu lorsque Rhino 3 enregistre sur des serveurs de fichier Windows 2000. Rhino indique qu'il a enregistré le fichier correctement puis vous obtenez un message d'erreur de Windows indiquant que le fichier n'a pas pu être enregistré.
+
+En fait, les outils du système d'exploitation Windows que Rhino 3 utilise pour enregistrer les fichiers créent un fichier temporaire sur le lecteur réseau, enregistrent dans ce fichier puis renomment le fichier temporaire. Un utilisateur qui possède des droits pour écrire/créer des fichiers peut arriver jusqu'à l'écriture du fichier temporaire mais des droits de suppression sont nécessaires pour renommer le fichier temporaire. Ce fichier temporaire n'a rien à voir avec le mécanisme de sauvegarde utilisé par Rhino 3, le problème se produit pareil lorsqu'un tout nouveau fichier est créé.
+
+La solution est de donner des droits de lecture/écriture/suppression à l'utilisateur dans le dossier du lecteur réseau. N'oubliez pas que si un utilisateur crée un nouveau sous-dossier dans un dossier, les droits qu'il aura dans le sous-dossier peuvent être différents de ceux qu'il avait dans le dossier parent.
+
+

@@ -1,0 +1,90 @@
+====== FAQ zu den booleschen Operationen ======
+> **Zusammenfassung:** //Dem Geheimnis der boolschen Operationen auf der Spur.  Wie und wieso sie funktionieren, wieso sie fehlschlagen, wie Probleme gelöst werden und wie sie konsequenter und auf offenen Objekten funktionieren.//
+  Einschränkungen und Marotten verstehen.
+
+Beim Schneiden von 2 geschlossenen (“soliden”) Objekten sollte mindestens eine vollständig geschlossene Schnittkurve (d.h. eine Schlaufe) erzeugt werden. Es könnte mehr als eine Schlaufe vorhanden sein, wenn sich die Objekte an mehreren Stellen schneiden - kein Problem, wenn sie alle geschlossen sind.  Sollte einer offen sein, wird die boolesche Operation fehlschlagen.  Grund dafür ist, dass die Schnittkurve nicht vollständig durch die Objekte schneidet und Rhino den Schnitt nicht fertigstellen kann, also wird abgebrochen und Sie erhalten eine Fehlermeldung.
+
+> **Anmerkung:** //Es ist auch möglich, boolesche Operationen an offenen Objekten auszuführen, aber es ist etwas schwieriger, also nehmen wir zuerst an, dass alle Objekte geschlossen sind.  Wir werden später über offene Objekte reden.//
+
+Wenn wir also obiges in Betracht ziehen, sollte die boolesche Operation fehlschlagen, sollten Sie als erstes den Schnitt der Objekte überprüfen.  Wählen Sie die Objekte aus und führen Sie Schnitt aus. Als erstes werfen Sie einen Blick auf die Schnittkurve/n auf dem Bildschirm.  Sieht es richtig aus?  Sind sichtbare Lücken oder zusätzliche Segmente oder andere “seltsam aussehende” Dinge vorhanden?  Falls ja, müssen Sie herausfinden wieso.  Wenn der Schnitt OK ist, aber die boolesche Operation immer noch fehlschlägt, während die Schnittkurve noch ausgewählt ist, gehen Sie zu **Eigenschaften > Details** oder verwenden Sie den Befehl **Objektinfo**.  Die erhaltene Infobox sollte alle nötigen Informationen über die Kurve enthalten.  Steht in den Informationen, ob es sich um eine offene Kurve handelt?  Das sollte dann Ihr Problembereich sein.  Mehr als eine Kurve?  Sie müssen herausfinden, wieso Lücken oder Überlappungen in Ihrem Schnitt vorhanden sind.
+
+=====Schnittprobleme, Lösungen und Einschränkungen=====
+Was kann an Ihrem Schnitt Lücken oder Probleme verursachen?  Es gibt viele Möglichkeiten.  Einige werden aufgrund von Modellierungsfehlern oder -ungenauigkeiten hervorgerufen, andere wiederum entstehen aus Rhinos Einschränkungen.  Schauen wir uns erst einmal die allgemeinen Fehler an:
+
+Wenn Sie denken, dass Ihr Schnitt geschlossen sein sollte, es aber nicht ist, wählen Sie die Kurve aus und rufen Sie den Befehl **AnfangKurve** auf, der einen Punkt am Anfang der Kurve platzieren wird.  Normalerweise stimmt dies mit einer Seite der Lücke überein.  **Zoomen** Sie hinein und achten Sie darauf, ob Sie die Lücke auf dem Bildschirm sehen können.  Wieso ist die Lücke da?  Vielleicht denken Sie, dass Ihre Objekte geschlossen sind, es aber nicht wirklich sind.  Der Schnitt könnte eine Lücke zwischen Flächen durchkreuzen und das verursacht eine offene Kurve.  Wenn Sie die Verbindung Ihres Objekts anhand **KantenVerbinden** erzwungen haben, könnte das auch passieren, sogar wenn das Objekt sagt, dass es geschlossen ist.  Was Sie sonst noch überprüfen müssen, sind Ihre Modellierungstoleranzen ([[FaqTolerances|lesen Sie die FAQ über Toleranzen]]), wenn diese zu groß sind, könnte die Funktion zum Auffinden von Schnitten keinen vollständigen Schnitt finden, auch wenn alles andere funktioniert.  Versuchen Sie, Ihre Toleranzen enger zu halten, und führen Sie die boolesche Operation erneut aus.  Sobald Sie einen vollständig geschlossenen Schnitt erhalten haben, //sollte// Ihre Operation funktionieren...
+
+Wenn Sie Rhino nicht dazu kriegen können, automatisch eine geschlossene Schnittkurve zu erzeugen, sogar nachdem Sie Ihr Objekt so gut wie möglich repariert haben, sollten Sie auf “manuell” übergehen.  Erzeugen Sie die best mögliche Schnittkurve und versuchen Sie, sie zu bearbeiten, bis Sie ein geschlossenes Objekt erhalten.  Sie müssen vielleicht ein Segment hinzufügen oder ändern, Punkte bearbeiten, überlappende Segmente herausnehmen, etc.  Wenn Sie diese Kurve erhalten haben, können Sie versuchen, Ihre Objekte einzeln zu trimmen.  Sie müssen Ihre Flächenverbände zerlegen, damit sie mit der Schnittkurve getrimmt werden können.  Trimmen Sie die Teile heraus, die Sie nicht möchten, und verbinden Sie alles erneut.
+
+//<color blue>Bekannte Rhino Einschränkungen:</color>//
+
+<color brown>Übereinstimmende Nähte</color> – Alle Objekte haben Nähte, manchmal wenn sich die Nähte auf zwei Objekten am gleichen Standort befinden, wird Rhino mit dem Schnitt Probleme haben.  Lösung - entweder verschieben Sie die Naht oder verschieben Sie ein Objekt nur ein klein wenig (wenn möglich, ohne Ihr Modell ungenau zu machen).  Oder versuchen Sie, die Operation “von Hand” auszuführen.
+
+<color brown>Koplanare Seiten</color> – Wenn sich zwei Seiten eines Objekts am gleichen Standort befinden, könnte Rhino den Schnitt nicht berechnen können. Das kommt recht häufig vor, versuchen Sie zu verhindern, Ihr Modell auf diese Art zu erstellen.  Lösung - wie oben, müssen Sie vielleicht das Objekt, wenn möglich, leicht verschieben, sonst müssen Sie diese Operation “von Hand” ausführen.
+
+<color brown>Fast tangentiale Flächen</color> – Wie der Schnitt von zwei Rohre mit gleichen Durchmesser an einem Winkel.  Der Schnitt scheitert oft am Punkt, an dem die Flächen tangential sind.  Es gibt zur Zeit keine einfache Reparaturmethode für dieses Problem.
+
+
+<color brown>Animation: Wenn boolesche Operationen nicht funktionieren, versuchen Sie es mit Flächenbearbeitung.</color>
+
+**[[http://en.wiki.mcneel.com/content/upload/images/boolean_problem-1.swf|Flächen mit koplanaren Seiten und fast tangentialen Flächen von Hand bearbeiten]]**
+
+**[[http://en.wiki.mcneel.com/content/upload/files/Solids_that_Dont_boolean_2a.pdf|Flächen mit koplanaren Seiten von Hand bearbeiten II]]**
+
+Beispiel eines Volumenkörpers, der nicht mit soliden Primitiven erzeugt werden kann und bei dem Techniken zur Flächenbearbeitung erforderlich sind.
+
+  * Das Hauptproblem ist die Position der Seitenflächen, die zufällig sind und kein gemeinsames Volumen mit dem soliden Hauptteil haben. Wenn boolesche Operationen fehlschlagen, verlassen Sie sich auf die Verwendung der Flächenbearbeitungstechniken, die im angehängten Dokument schrittweise erklärt werden.
+  * Downloaden Sie das [[http://en.wiki.mcneel.com/content/upload/files/part1-r3.3dm|Modell]]
+{{http://en.wiki.mcneel.com/content/upload/images/t.JPG}}
+
+
+<color brown>Ungültige Objekte</color> – Wenn eines der Objekte, mit denen Sie versuchen zu arbeiten, ungültig ist, werden boolesche Operationen oft fehlschlagen.  Suchen Sie nach ungültigen Objekten mit dem Befehl **FehlerhafteObjekteAuswählen**.  Wenn eines hervorgehoben wird, müssen Sie es zuerst reparieren, bevor Sie weitergehen.  Es wird auch empfohlen, dass Sie die automatische Objektüberprüfung aktivieren. Wenn ungültige Objekte während Ihrer Arbeit erzeugt (oder importiert) werden, wird Rhino das sofort mitteilen.  Geben Sie einfach **NeueObjekteÜberprüfen** ein.  So wird umgeschaltet, um es wieder auszuschalten, führen Sie den Befehl erneut aus.
+
+<color brown>Nicht-mannigfaltige Flächenverbände</color> – Obwohl Rhino diese Objekte im Moment nicht als fehlerhaft markiert (sollte es aber), könnten sie zu Fehlern führen.  Rhino sollte diese Art von Strukturen //gar nicht// erzeugen, aber manchmal werden sie erzeugt. Sie können nur durch Überprüfung der Eigenschaften des Objekts gefunden werden.
+
+
+======Boolesche Operationen an offenen Objekten======
+
+Wie vorher schon gesagt können boolesche Operationen auch an offenen Objekten angewendet werden.  Das Prinzip ist das gleiche. Da die Objekte aber nicht geschlossen sind, müssen wir einige zusätzliche Dinge tun und verstehen.  **//Version 4 liefert ein Werkzeug, der den folgenden Vorgang vereinfacht, lesen Sie den folgenden Befehl nach//** [[rhino:boolscheoperationvon2objekten|BoolscheOperationVon2Objekten]]
+
+=====Flächenrichtung=====
+
+Als erstes wäre es notwendig, das Konzept von Flächennormalen und -richtungen zu verstehen.  Jedes Flächenobjekt hat eine "Frontseite" und eine "Rückseite". Dies wird in Rhino "Richtung" genannt und kann mit dem Befehl **Richtung** angezeigt werden.  Versuchen Sie **Richtung** an verschiedenen Flächen anzuwenden und achten Sie darauf, was passiert.  Die Richtungspfeile sind nach "außen" gerichtet. Sie weisen auch die lokale "Normalen"richtung auf, d.h. sie befinden sich in einem Winkel von 90° zur Fläche.
+
+Sie können für jede Fläche die Richtung der Normalen umkehren.  Sie können das tun, indem Sie während der Ausführung des Befehls **Richtung** den Buchstaben "M" eingeben oder einfach einmal auf die Fläche klicken.  Die Richtungspfeile ändern die Richtung.  Sie können das auch außerhalb des Befehls Richtung tun, indem Sie den Befehl Umkehren verwenden (Sie werden aber keine Pfeile sehen).
+
+{{http://en.wiki.mcneel.com/content/upload/images/Directions.gif}}
+
+> **Anmerkung:** //Kurven in Rhino verfügen ebenfalls über eine Richtung, die anhand des Befehls **Richtung** angezeigt werden kann.  In diesem Fall tauscht der Befehl **Umkehren** die Start- und Endpunkte und kehrt die Kurvenrichtung um.//
+
+Wenn Flächen verbunden werden, versucht Rhino die Flächennormalen des Objekts zu "vereinheitlichen", d.h. Rhino versucht, dass alle angrenzenden Flächen die gleiche Ausrichtung vorn/hinten haben.  Wenn Sie also einen offenen Satz von verbundenen Flächen haben (einen offenen Flächenverband), werden die Seiten hinten/vorne eine einheitliche Richtung aufweisen.
+
+> **Experiment:** //Erstellen Sie ein Quadrat.  Extrudieren Sie es zu einer 4-seitigen offenen Box. Zerlegen Sie die Box in separate Flächen.  Anhand des Befehls **Richtung** kehren Sie zwei Richtungen der Flächen nach innen.  Wählen Sie nun mit einem Fenster alle aus und **verbinden** Sie sie, um sie erneut zu einem 4-seitigen Flächenverband zu vereinen, verwenden Sie den Befehl **Richtung** erneut, um zu sehen, was mit den Flächenrichtungen passiert ist.//
+
+Wenn ein Objekt in Rhino geschlossen ist, kehrt das Programm alle Flächen automatisch nach außen um.  Es nimmt an, dass das Innere nicht mehr wichtig ist, weil das Objekt geschlossen ist (Volumenkörper).  Die Normalen von geschlossenen Flächenverbänden können nicht nach innen gerichtet sein (versuchen Sie es mit dem Befehl **Richtung**).  Wenn Sie es schaffen, die Normalen eines geschlossenen Flächenverbands nach innen zu kehren, ist der Flächenverband entweder nicht richtig geschlossen oder Sie haben einen (sehr seltsamen) Fehler gefunden.
+
+> **Experiment2:** //Erstellen Sie einen Quader.  Zerlegen Sie die Box in separate Flächen.  Anhand des Befehls **Richtung** kehren Sie einige Richtungen der Flächen nach innen.  Wählen Sie nun mit einem Fenster alle aus und **verbinden** Sie sie erneut zu einem Flächenverband, und sehen Sie, was mit den Flächenrichtungen passiert.//
+
+=====Wie die Flächenrichtung die booleschen Operationen beeinflussen=====
+
+OK, jetzt wissen Sie etwas über Flächennormalen und -richtung.  Wieso ist das überhaupt für boolesche Operationen wichtig?  Wenn Rhino aufgefordert wird, eine boolesche Operation auszuführen, werden die Flächennormalen beachtet, um zu bestimmen, welche Teile behalten und welche Teile entfernt werden.  Im Grunde handelt es sich bei boolesche Vereinigung, Differenz und Schnitt um die gleiche Operation, es werden einfach unterschiedliche Teile der Objekte am Ende beibehalten.  Mit der booleschen Vereinigung z.B. werden die Teile, die einander überlappen, entfernt und der Rest zusammen verbunden.  Mit Schnitt passiert genau das Gegenteil.
+
+Boolesche Operationen mit "Volumenkörpern" (geschlossenen Flächenverbänden) sind vorhersehbar, weil alle Flächennormalen immer nach außen gerichtet sind. Mit offenen Flächenverbänden jedoch können die Resultate unvorhersehbar sein, da wir nicht sofort wissen, welches die Front- oder Hinterseite eines Objekts ist, ohne den Befehl **Richtung** zu verwenden.
+
+> **Anmerkung:** //Wenn Sie boolesche Operationen an geschlossenen Flächenverbänden anwenden und diese nicht so, wie Sie sollten, reagieren (d.h. die falschen Teile werden entfernt), sind wahrscheinlich ein oder mehrere Ihrer Objekte nicht richtig geschlossen und die Normalen sind nach innen gerichtet.  Verwenden Sie zur Ansicht den Befehl **Richtung**.//
+
+> **Tipp:** //Um zu wissen, in welche Richtung die Flächennormalen zeigen, können Sie Ihre Anzeige so konfigurieren, dass die Hinterseiten in einer anderen Farbe als die Frontseiten angezeigt werden. Verwenden Sie den Befehl **FortgeschritteneAnzeige**  > **Hinterseiten in Farbe**, um dies zu konfigurieren.  Das funktioniert natürlich nur, wenn Sie in den Ansichtsfenstermodi //Schattiert// oder //Halbtransparent// arbeiten, in //Gitternetz// oder //Gerendert// werden Sie das nicht sehen.//
+
+Stellen wir uns die einfachste "offene" boolesche Operation vor.  Sie haben einen "soliden" geschlossenen Flächenverband, der von einer einzigen Fläche vollständig geschnitten wird.  Sie können das auf ganz einfache Weise erzeugen, indem Sie ein beliebiges solides Objekt erstellen, dann den Befehl **Schnittebene** verwenden und eine Linie durch Ihr Objekt in eine beliebige Richtung zeichnen.
+
+Versuchen Sie nun den Befehl **BoolscheDifferenz** (BD).  Wählen Sie den Volumenkörper als ersten Satz und die Schnittebene als zweiten Satz aus.  Eine Seite oder die andere des Volumenkörpers wird "weggeschnitten" und die Öffnung mit der Ebene gefüllt.  Aber welche Seite???
+
+Sie können das nicht wissen, außer Sie rufen den Befehl **Richtung** an der Fläche auf.  Schauen Sie sich die Richtung der Flächennormalen an.  Dann machen Sie die Differenz.  Machen Sie es rückgängig, kehren Sie die Richtung der Fläche mit dem Befehl **Richtung** um, dann versuchen Sie erneut die Differenz.  Die Richtung der Flächennormalen der Ebene bestimmt, welches Teil übrig bleibt.
+
+Wenn Sie eine boolesche Differenz zwischen einem offenen Flächenverband und einem Volumenkörper erhalten möchten, als wären es zwei Volumenkörper, sollten die Flächennormalen des offenen Objekts "gegen" das solide Objekte zeigen - als wäre es auch ein Volumenkörper.
+
+{{http://en.wiki.mcneel.com/content/upload/images/BooleanDiff1.gif}}
+
+{{http://en.wiki.mcneel.com/content/upload/images/BooleanDiff2.gif}}
+
+
+

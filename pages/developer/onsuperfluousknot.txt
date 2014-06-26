@@ -1,0 +1,34 @@
+======Superfluous Knots======
+> **Developer:** //[[developer:opennurbs:home|openNURBS]]//
+> **Summary:** //Discusses superfluous knots and the openNURBS toolkit.//
+
+=====Question=====
+How is the representation of knot vector in [[developer:opennurbs|openNURBS]] different from that in OpenGL's [[rhino:nurbs|NURBs]] renderer? In openNURBS, the formula is:
+
+   m = n + p - 2
+   
+where m is the number of knots in the knot vector; n is the number of control points; p is the order of the curve.
+
+While in OpenGL, the formula is:
+
+   m = n + p
+   
+So, in OpenGL, there are two additional knots required to draw a [[rhino:nurbs|NURBs]] curve.
+
+Could you explain how the two knot values are calculated? And, why [[developer:opennurbs|openNURBS]] adopted a representation different from most [[rhino:nurbs|NURBs]] books?
+=====Answer=====
+The knots are superfluous because they are not used in [[rhino:nurbs|NURBs]] evaluation and they make it appear the first and last spans are different from interior spans.
+
+If you grab a pencil and paper and work through the details you will understand why dragging around and setting these two knot values is a waste of time and adds needless complications to [[rhino:nurbs|NURBs]] evaluation, [[rhino:nurbs|NURBs]] degree changing, [[rhino:nurbs|NURBs]] knot insertion/deletion, [[rhino:nurbs|NURBs]] span conversion to/from bezier, [[rhino:nurbs|NURBs]] periodic closure, [[rhino:nurbs|NURBs]] curve fitting, etc., algorithms. If you look at the [[developer:opennurbs|opennurbs]] evaluation source code, you will see no knot juggling; it's just a simple computationally efficient calculation.
+
+One reason some mathematical texts on NURBS, like Carl DeBoor's b-splines, have the extra knots is that it makes proving the theorems easier because it means that the recursive b-spline basis function definition deBoor uses is well defined for degree zero b-splines. DeBoor's use of the recursive definition of the basis functions is elegant and having the extra knot values along helps make them elegant.
+
+There is no good reason for modern computer code or text books focused solely on computer aided applications of [[rhino:nurbs|NURBs]] to drag this kind of theoretical baggage along. Having modern code drag these knot values around is akin to having Excel store prime factors of integer cell entries and requiring Excel add-in developers to compute the factorization.  Prime factorization is fundamental to understanding how integers work and it is interesting to people that it interests, but it is not required if all you are trying to do is add/subtract/multiply integers in spreadsheet cells.
+
+Why the creators of the [[rhino:opengl|OpenGL]] specification, IGES [[rhino:nurbs|NURBs]] specification, and STEP [[rhino:nurbs|NURBs]] specification decided to store two useless values in their knot vectors is a mystery to me.
+
+Rhino and [[developer:opennurbs|openNURBS]] are not the only applications and  toolkits that don't carry around the extra knots.  The older versions of Alias and ACIS that I am familiar with not have the extra knots.  I do not know they are doing in the latest versions.
+
+\\
+
+{{tag>Developer openNURBS}}

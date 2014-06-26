@@ -1,0 +1,13 @@
+====== Decimals are ignored by Rhino ======
+**Problem:**\\ On some European Windows systems, once the **Open** or **Save** dialog is opened, the numbers behind the decimal point are ignored by Rhino. For example, when you enter a scale factor of **5.12** for the Scale command, the object is scaled only by a factor of **5.0**. This problem also happens to the number boxes in dialogs.
+
+**Cause:**\\ It's never been figured out what is really going on, but it appears to be related to the **Open** and **Save** dialogs using the Windows Vista/7 style.
+
+**Solution:**
+  - Go to **Tools > Options > General**.
+  - Add **TestToggleFileDialog** under **Run these commands every time Rhino starts** and **Never repeat these commands**.
+  - Click **OK** to close the Options dialog.
+
+**Note:**\\ The TestToggleFileDialog command disables the Vista/Windows 7 style for the Open and Save dialogs in the current Rhino session. The dialogs will apply the old XP style until the TestToggleFileDialog command is run again. As far as we know, this problem won't happen with the Open and Save dialogs using the old XP style.
+
+{{tag>rhino5}}

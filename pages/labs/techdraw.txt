@@ -1,0 +1,160 @@
+====== Technical Drawing Display Mode ======
+
+> **Summary:** This plug-in adds a new Technical display modes to Rhino 4.0 with hidden lines and other options.  //<color red>This is a prototype.</color>// Rhino 5.0 has more advanced version of these modes.  Go to [[rhino:advanceddisplay|Rhino 5.0 Advanced Display]] for detailed information.
+=====Contents=====
+
+  * [[#Background]]
+  * [[#Overview]]
+  * [[http://download.mcneel.com/download.asp?id=TechDraw&language=|Download]] - //Updated 7-feb-2007//
+  * [[#Installation]]
+  * [[#Interface]]
+  * [[#Limitations]]
+  * [[#Known bugs]]
+  * [[#To Do]]
+  * [[#Feedback]]
+
+{{http://en.wiki.mcneel.com/content/upload/images/TechDraw1.png}}
+
+=====Background=====
+
+
+A little explanation is in order....
+
+Because of the way this type of thing needs to be done (ie. Multi-pass algorithm), this plugin has to implement it's own "Pipeline"...However, it is derived from Rhino's standard [[rhino:opengl|OpenGL]] pipeline, which means anything you can do in Rhino's [[rhino:opengl|OpenGL]] display can be done using this pipeline, with the addition of a "Technical Display" capability.
+
+The term "Technical Display" is used because that's how Scott referred to it...And what it means is that all surface and mesh objects will be displayed using:
+
+  - Real-time silhouettes
+  - Creases
+  - Borders
+  - 
+  - Real-time intersections
+  - Blended Shaded and Rendered Display
+
+{{http://en.wiki.mcneel.com/content/upload/images/techhidden.jpg}} {{http://en.wiki.mcneel.com/content/upload/images/techhidden2.jpg}}
+
+...and will occlude all objects that lie behind them. This can be considered a "hidden line" style of drawing...but keep in mind that this plugin does not draw isocurves or mesh wireframes (ie. A [[rhino:nurbs|NURBs]] sphere will look just like a Mesh sphere), only the 3 things mentioned above.
+
+Having said that, there are 7 "toggle" mode commands:
+
+  - **TechToggleHiddenLines**
+  - **TechToggleEdges**
+  - **TechToggleSilhouettes**
+  - **TechToggleCreases**
+  - **TechToggleIntersections**
+  - **TechToggleLighting**
+  - **TechToggleSeams**
+
+...all of which should be self-explanatory...except maybe the **TechToggleHiddenLines**...
+
+The **TechToggleHiddenLines**, when ON, will display certain object types as "dashed", single-pixel thick lines when they lie behind surface and mesh objects...as well as the three elements above: silhouettes, borders, and creases.
+
+How it works:
+
+Once installed, the plugin creates a display mode called "Technical", which will now be available as a standard display mode, and selected and set the same way any display mode is.
+
+When you select "Technical" as a display mode, 2 things happen:
+
+  * 1. The plugin begins creating "Technical Drawing Data" for all surfaces and meshes "visible" (and if there aren't any render meshes, it will create those too).
+  * 1. The view mode is set to use the new pipeline, and all objects will display accordingly.
+
+If you cancel out of #1, then ALL viewports that are currently set to "Technical" are set to "Wireframe".
+
+=====Overview=====
+
+
+=====Installation=====
+
+
+  - copy the file "TechnicalDrawing.rhp" to the folder Plug-ins in the [[rhino:rhinoceros|RhinoCeros]] 4.0 folder (or any other folder you like)
+  - in Rhino go to Options->Rhino Options->Plug-ins | click the Install button and browse to the file "TechnicalDrawing.rhp" | click Open
+
+=====Interface=====
+
+  * **TechToggleHiddenLines**
+  * **TechToggleEdges**
+  * **TechToggleSilhouettes**
+  * **TechToggleCreases**
+  * **TechToggleIntersections**
+  * **TechToggleLighting**
+  * **TechToggleSeams**
+
+=====Creating Blended shaded and rendered modes=====
+
+You can create more than one configuration of Technical. You create new display configurations by going into Option->Appearance->AdvancedSettings->[Mode]->Other Settings:Pipeline, there you will see a dropdown that enumerates all available pipelines (For that mode), "Technical" is the name of the pipeline that this plugin implements.
+
+You can copy that pipline and give it a new name.  By toggling the Shading Settings on and selecting shaded color or rendered materials will blend these modes with Technical.
+
+Final note: Things look a LOT better when you have AA enabled.
+
+
+
+=====Limitations=====
+
+  - You can not assign the "Technical" display mode to individual objects (i.e. SetObjectDisplayMode), however, once in a Technical display mode, you can assign all other modes to individual objects...in other words, Technical mode is a superset of all other modes (that support the standard [[rhino:opengl|OpenGL]] pipeline). Thus, you can still mix and match object display modes, you just have to start in the Technical mode.
+  - 2D text disappears behind all surfaces and meshes without any kind of hidden lines, regardless of the whether TechToggleHiddenLines is ON... I can easily have text always show in front, but that's not how it works in shaded modes, so I did not do that.
+  - Dimensions suffer the same thing as in #2, but could also be shown in front.
+  - Initial calculations of the technical display data can take a long time for dense mesh objects...and there's nothing I can do about that...and if the object changes in any way, the calculations have to be redone.
+  - Hidden lines for curve objects show up as dotted lines instead of dashed lines, because the SDK doesn't provide a way to override that (my fault), without having to re-implement the entire curve drawing inside the plugin's engine (which I could do if this is a big issue).
+  - Currently does not work in Layout/detail views...will be fixed in SR1.
+
+=====Known bugs=====
+
+  - Lines are created where there should be none, and the other way around. (Olivier Suire)
+
+=====To Do=====
+
+  - When "Technical" is available in detail views, make sure it is possible to snap to object silhouette edges. (Olivier Suire)
+
+=====Feedback=====
+
+  - Appart from the above remarks, I am really happy with this new display mode. No more explaining to the client what are these funny curves on my surfaces : " Oh ! these are isoparms. They represent all the points having the same parameter in the [[rhino:nurbs|NURBs]] equation"
+-"Duhh ?"
+At last, I can do realistic screen shots of my models. Thanks ! (Olivier Suire)
+
+It's realy good help for representing drawing. I like it! I'm waiting for use it in the detailed view to make technical print.(Riccardo Gatti)
+
+---
+<Dimstogios@gmail.com>
+Nice plugin, thanks. Some wishes: It would be nice to choose single pixel width for edge thikness and the intersection of objects to be shown. Finally one that I do not know if it matches here, relevant to linewidths, which is the ability to choose in which side of a line the linewidth to be applied.
+
+---
+nice plugin! my wish: could the cuted edge when using a cliping plane also be displayed? thanks
+
+---
+This is a great tool. I would like to see a linetype scale option added in the future. Thanks, Dan B.
+
+---
+It would be great to be able to export the Tech view directly to Illustrator, is there any way to do this? G_Reg
+
+---
+I like it a lot. It would be great to be able to render the view. It also would be nice to change line thickness equivalent to the distance to the camera! mk
+
+---
+Great Plug-in! Absolutely love it!- Since the 'To Do' list has adding shading and technical modes as priority #1, is there a way to use 'stippling' or 'parallel line shading' based on the Z-buffer or similar? this would add the capability to do U.S. Patent Office drawings and perhaps also add a 'Da Vinci' style to Rhino Page layouts! I could use this capability immediately!! Rick L.
+
+---
+
+A truly fabulous tool to use - a pure joy.  the only thing it seems to lack is more control of LW thickness for output.  The printer diag. checkbox for LW control doesn't seem to change anything, and the image output creates linework much thinner than what is seen on screen - some post work is needed after a -viewcapturetofile/clipboard is attained.  - Update. This problem only applies to mesh objects.
+
+---
+
+Very nice. One wish though is to make it work with clipping planes so a section at a clipping plane looks like a standard technical drawing section, that would be even more awesome!!! Nick.
+
+---
+
+The plug-in should use the existing Linetype scale setting for displaying hidden lines. Also, overlapping hidden lines should be culled.
+
+---
+Rhino has for years had a [[rhino:make2d|Make2D]] function, which early on couldn't even do a cylinder unioned with a cube right, as in the lines did not go hidden in the right places. Rhino customer support (around version 1-2) didn't understand my complaint, and said it was my problem if it didn't "work as I personally wanted it to." I've tried Rhino 4's [[rhino:make2d|Make2D]] and it sort of worked, but it's merely a one-time (slow) creation of curves-as-lines on the construction plane, and although it's not as misbehaved as in older versions, it still leaves hidden lines in the same layer as visible ones when you tell it not to, nor does it have an option to merely leave **out** hidden lines. This plug-in, which works without having to even re-start Rhino, is really cool and really fast in real-time rotations. Wow. There's one bug though: within Display Options under Technical is the usual option to set line widths, and this works from 2 pixels on up, but if set to 1 pixel, it is stays in 2 pixel mode (whereas [[rhino:make2d|Make2D]] always uses 1 pixel lines). Boo.
+
+You wrote: "Final note: Things look a LOT better when you have AA enabled." I have no idea what "AA" is.
+
+[[penguin:penguin|Penguin]] V.1 SR3 within Rhino 4 also has a Technical mode that does perfectly nice solid renderings that hides hidden lines, but again uses 2 pixel thickness, and has no option for showing dotted hidden lines. By using the Overide Rhino settings for colors using Penguin's Cartoon Black and White style you can get a cartoon version with black lines, but the lines are not sharp. Ah...if I use the menu command Render Properties to set a render size to, say, 3000 X 3000 pixels, I get a VERY fine line black and white hidden-lines-hidden picture. But upon saving it as a TIFF image file, in Photoshop its edges are clipped so it didn't save the whole image, and the lines are at times jaggy or grayish, so this isn't a great solution unless I tweak it more. Within Photoshop I can convert to grayscale mode, use Levels to make the grayish lines really black, then convert to Bitmap (black and white) mode to get real lines. Etc. Too much work!
+
+---
+Anyone know how to export a drawing like this in a vector format?
+
+---
+Very good! If I had found it before, I would have not bought Penguin. It is an excelent tool when printing drawings and manuals without using up all the printer's ink (specailly on inkjet printers). TIP: The output, as on other rendering styles, can be refined using the mesh setup. The better the quality, the worst the speed and computing load... There is no free lunch :-). Often wrong lines disappear after simplifying surfaces and joints between them.
+

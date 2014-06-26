@@ -1,0 +1,140 @@
+====== Rhino to Google Earth ======
+> **Summary:** //Export and SaveAs from Rhino 4.0 to .KML and .KMZ formats//
+
+=====Contents=====
+
+  * [[#Background]]
+  * [[#Overview]]
+  * [[#Instructions]]
+  * [[#Examples]]
+  * [[#Tutorials]]
+  * [[#Discussion]]
+
+=====Background=====
+
+In Rhino V4, we've added tools to the Rhino core that allow you to anchor your model to a specific location on the earth.  The goal it to make sure the Rhino core has everything that's needed to support GIS, mapping, architectural,..., applications.
+
+We constantly endeavor to make Rhino the most precise modeler available.  When Rhino maps model space (3D Cartesian coordinates) to earth latitude, longitude and elevation, it takes into account the fact the earth is not round ( http://en.wikipedia.org/wiki/Earth_radius ).
+
+=====Overview=====
+
+To test and demonstrate these new Rhino 4.0 capabilities, we added a simple Google Earth export plug-in.  The idea is to export any Rhino model to a .KML or .KMZ file that can then be posted on a web site, or e-mailed to someone so they can view the model in Google Earth.
+
+[[http://earth.google.com/download-earth.html|{{http://www.google.com/earth/images/download_earth.gif}}]]
+
+We may also provide a way to import .KML and .KMZ files into Rhino. (Keep in mind that most KML/KMZ files don't have any 3-D geometry.)
+
+The Google Earth 3-D file format is .KML (uncompressed) or .KMZ (compressed). The .KMZ file format is simply a .KML file zipped up with the extension changed from .ZIP to .KMZ
+
+For more details on the .KML file format and other useful links, see:
+
+  * [[http://earth.google.com/kml/kml_intro.html|Google Earth KML Documentation]]
+  * [[http://www.keyhole.com/kml/kml_tut.html|KML Tutorials]]
+  * [[http://www.geocode.com/modules.php?name=TestDrive_Eagle|Geocode]]
+  * [[http://www.localsearchmaps.com/|Geocode API site]]
+  * [[http://emad.fano.us/blog/?p=277|Geocode API instructions]]
+  * [[http://ogle.eyebeamresearch.org/|Ogle]] - Capture [[rhino:opengl|OpenGL]] to OBJ.
+
+=====Instructions=====
+
+**Export, Save, etc.**
+
+Select KML from the "Save as type" drop down. Select a file name and location. This will create a .KML file that can be converted to a .KMZ file by zipping and renaming form .ZIP to .KMZ.
+
+**Publishing KML or KMZ files on your web site**
+
+KML and KMZ files can be published like an other web compatible file type (html, jpg, gif, etc.) but your web server needs to be aware of KML and KMZ files. For details, see:[[http://www.keyhole.com/kml/kml_tut.html#kml_server|http://www.keyhole.com/kml/kml_tut.html#kml_server]]
+
+**Tips for making Google Earth Models.**
+
+  * Use the [[#EarthAnchorPoint]] command to set the earth anchor point.
+  * Work in a building sized unit, like meters. (You can work in any unit system you want, but don't expect to be able to see a centimeter sized earring in Google Earth.)
+  * Set Perspective view lens to 21mm.  This closely matches the camera angle used by Google Earth.
+  * When you save the Google Earth file, make sure your in a Perspective viewport looking at the object from above ground level.
+  * Premesh complicated polysurfaces and keep the meshes fairly small.
+  * The diffuse material color is what shows up in Google.
+  * You can open, edit, and save KMZ and KML files with Google Earth to add additional features beyond 3-D geometry
+
+**EarthAnchorPoint Command**
+
+The new V4 command, "EarthAnchorPoint", sets up the anchor point.  (This command is for supplying information that any GIS or mapping application will require; it is not specific to Google Earth.)
+
+The command asks you to supply three sets of information.
+
+  * Earth anchor point location
+    * latitude
+    * longitude
+    * elevation above ground level
+  * Model orientation
+    * A point in the model that corresponds to the earth anchor point.
+    * A direction in the model that corresponds to earth north.
+    * A direction in the model that corresponds to earth east.
+  * Identification (optional)
+    * Name of the anchor point.
+    * Description of the anchor point.
+    * URL for the anchor point.
+    * URL tag for the anchor point.
+
+For example, the earth anchor point for the Seattle headquarters of McNeel and Associates might contain this information:
+
+  * Earth anchor point location
+    * latitude: 47° 39' 08.54"N (input: 47.653395° [[http://www.cosports.com/tools/gps_coords.htm|convert here]] )
+    * longitude: 122° 20' 37.30"W (-122.34384°)
+    * elevation: 0 (the building is on the ground)
+Given that a minute of longitude is roughly 6,000 feet, then a second would be about 100', and a hundredth of second, about a foot.
+
+----
+  * <color blue>Method for precise model positioning in the Rhino 'Earth Location Point' Command</color>
+    * <color blue>Create in Google Earth a placemark at the exact location for your model</color>
+    * <color blue>Change in Google Earth the setting Lat/Lon from 'degrees, minutes, seconds' to </color><color green>'degrees' </color><color black>(under 'tools/ options/ view)</color>
+    * <color blue>Read the coordinates of this placemark(right mouseclick on placemark/ properties/ view)</color>
+    * <color blue>Type the Latitude and Longitude degrees in Rhino in the Earth Location Point Command</color>
+    * <color blue>If you have coordinates in 'degrees, minutes, seconds' you can convert the Longitude and Latitude also with this [[http://www.cosports.com/tools/gps_coords.htm|converter]] to </color><color green> 'degrees'</color>
+
+----
+
+  * Model orientation
+    * basepoint = (0,0,0) model origin is the south west corner of the building..
+    * north = (0,1,0) yaxis points north.
+    * east = (1,0,0) yaxis points east.
+  * Identification (optional)
+    * Name: McNeel HQ
+    * Description:
+    * URL: http://www.rhino3d.com
+    * URL tag" Rhino
+
+=====Examples=====
+
+Here are a few examples:
+
+[[http://www.en.na.mcneel.com/ge/Rhino.kmz|{{http://en.wiki.mcneel.com/content/upload/images/earth.png}} This is a first example of an object placed in Google Earth, written as a prototype test of a quick and dirty export to kml.]]
+
+[[http://en.wiki.mcneel.com/content/upload/files/McNeel.kmz|{{http://en.wiki.mcneel.com/content/upload/images/earth.png}} HQ office building]]
+
+=====Tutorials=====
+
+**[[FlevoDam|Flevodam from Rhino to Google Earth]]**
+=====Discussion=====
+
+
+> **Note:** //We need to know from our users if it is worthwhile to tune up the plug-in. Rhino might be an easy way to export many different file formats and complex shapes to Google Earth for presentation. But... the Google Earth file format is every simple so the model will not look great.//
+
+Is this useful to anyone? If so, why?
+
+
+----
+Not yet for my type of business, but when I see Manhattan New York at Google Earth, I think there's a potential, even when it is quick and dirty because that's also the quality of the buildings to be seen at Google Earth.
+
+Gerard Petersen
+
+----
+Yes -- We do a lot of work for State DOT's and this would be especially useful in the civil-structural arena where everyone wants to get a sense of scale for the project.
+
+Reverse the idea and you have something just as interesting... Any way to export 3D building data from Google Earth into Rhino?
+----
+It would help if picture files which have been mapped to surfaces could be exported as well. Our current workaround is to export the building geometry to [[labs:sketchup|SketchUp]] via an SKP file, texture the model there using pictures of the building, then place it in GE.
+
+----
+Yes this is extremely useful.  I need to import kml files into rhino for large site models.
+
+

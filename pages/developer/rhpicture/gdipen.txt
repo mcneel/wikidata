@@ -1,0 +1,153 @@
+====== RhPicture Plugin GDI Pen object ======
+
+> **Summary:** //A description of the GDI Pen object as exposed through the [[developer:rhinoscriptimageextension|RhPicture]] plugin//
+
+\\
+
+=====GDI+ Pen objects=====
+
+GDI+ Pen objects are used to draw lines and they can simulate a wide range of behaviours, some of which are also available through the [[developer:rhinoscriptimageextension|RhPicture]] Plugin. Properties which are available in RhPicture Pen objects:
+
+\\
+
+  * Colour
+  * Width
+  * Cap style
+  * Join style
+  * Dash Pattern
+  * Dash Cap style
+  * Compound Pens
+
+\\
+
+Properties not availble in RhPicture Pen objects:
+
+\\
+
+  * Custom Caps
+  * Brush Fills
+  * Alignment
+  * Dash Pattern Offset
+  * Custom Miter Limit
+  * Local Transform  Matrix
+  * Dash Patterns in conjunction with Compound Pens
+
+\\
+
+Most of these properties are self-evident and need little elaboration. However, the lack of predefined enumerations in VBScript requires us to specify these as integers, which is not self-documenting. Note that you do not need Pen objects to draw lines in the [[developer:rhinoscriptimageextension|RhPicture]] plugin. Every method that takes a Pen object is overloaded and can be called with a colour and optional width parameter. This should be sufficient in most cases and makes for much simpler code:
+
+  Dim RhPicture : Set RhPicture = Rhin.GetPluginObject("RhPicture")
+  Call RhPicture.CreateImage(50, 50, vbWhite)
+  Call RhPicture.DrawLine(Array(10,30), Array(40,10), vbBlack, 5)
+
+If you want to draw lines with dash patterns or special caps, you'll have to use an RhPicture Pen object. You can obtain a Pen object by calling one of the Pen creation methods on "RhPicture":
+
+  Dim RhPicture : Set RhPicture = Rhin.GetPluginObject("RhPicture")
+  Call RhPicture.CreateImage(50, 50, vbWhite)
+
+  Dim PenObj : Set PenObj = RhPicture.CreateDashedPen(vbBlack, 5, , , , Array(1.0, 2.0))
+  Call RhPicture.DrawLine(Array(10,30), Array(40,10), PenObj)
+
+Note that you can store any number of Pen objects in your script and you can reuse them as often as you like. Pen objects are not bound to the RhPicture instance that created them and you can use them on any RhPicture object. There are two Pen creation methods available, the first one of which is overloaded:
+
+  RhPicture.CreatePen(Color As GDIColor) As GDIPen
+  RhPicture.CreatePen(Color As GDIColor, Width As Double) As GDIPen
+  RhPicture.CreatePen(Color As GDIColor, Width As Double, Cap As Integer) As GDIPen
+  RhPicture.CreatePen(Color As GDIColor, Width As Double, Cap As Integer, Join As Integer) As GDIPen
+  RhPicture.CreatePen(Color As GDIColor, Width As Double, Cap As Integer, Join As Integer, Compound() As Double) As GDIPen
+
+  RhPicture.CreateDashedPen(Color As GDIColor, Optional Width As Double = 1.0, _
+                            Optional Cap As Integer, Optional DashCap As Integer, _
+                            Optional Join As Integer, Optional Pattern() As Double) As GDIPen
+
+
+| Parameter | Type | Description |
+| Color     | GDIColor | A GDIColor instance. |
+| Width     | Double       | The width of the pen in pixel units. (Pen width is subject to Transform distortion). |
+| Cap       | Integer      | The start and end cap enumeration. See table below for valid numbers. |
+|DashCap| Integer      | The cap enumeration for dashes. See table below for valid numbers. |
+| Join      | Integer      | The join enumeration. See table below for valid numbers. |
+| Compound  | Double()     | An array of double values that define the compound sections of a pen. See below for further details. |
+| Pattern   | Double()     | An array of double values that define the dash pattern for this pen. See below for further details. |
+
+\\
+\\
+
+=====Enumerations explained:=====
+
+\\
+
+| Cap Enumeration flags for PEN constuctors |
+| Flat | Round | Square | Triangle | Arrow Anchor | Round Anchor | Square Anchor| Diamond Anchor |
+| {{http://en.wiki.mcneel.com/content/upload/images/LineCap_0.png}} | {{http://en.wiki.mcneel.com/content/upload/images/LineCap_1.png}} | {{http://en.wiki.mcneel.com/content/upload/images/LineCap_2.png}} | {{http://en.wiki.mcneel.com/content/upload/images/LineCap_3.png}} | {{http://en.wiki.mcneel.com/content/upload/images/LineCap_4.png}} | {{http://en.wiki.mcneel.com/content/upload/images/LineCap_5.png}} | {{http://en.wiki.mcneel.com/content/upload/images/LineCap_6.png}} | {{http://en.wiki.mcneel.com/content/upload/images/LineCap_7.png}} |
+| Cap = 0 | Cap = 1 | Cap = 2 | Cap = 3 | Cap = 4 | Cap = 5 | Cap = 6 | Cap = 7 |
+
+\\
+
+| Dash Cap Enumeration flags for PEN constuctors |
+| Flat | Round | Square |
+| {{http://en.wiki.mcneel.com/content/upload/images/DashCap_0.png}} | {{http://en.wiki.mcneel.com/content/upload/images/DashCap_1.png}} | {{http://en.wiki.mcneel.com/content/upload/images/DashCap_2.png}} |
+| DashCap = 0 | DashCap = 1 | DashCap = 2 |
+
+\\
+
+| Line Join Enumeration flags for PEN constuctors |
+| Bevel | Round | Miter |
+| {{http://en.wiki.mcneel.com/content/upload/images/LineJoin_0.png}} | {{http://en.wiki.mcneel.com/content/upload/images/LineJoin_1.png}} | {{http://en.wiki.mcneel.com/content/upload/images/LineJoin_2.png}} |
+| Join = 0 | Join = 1 | Join = 2 |
+
+\\
+
+=====Dash patterns explained:=====
+
+In GDI+ (and in fact almost everywhere else as well), dash patterns are defined as a series of gaps and dashes, whose length is relative to the width of the pen. The illustration below shows the Dash coordinate system of a Pen object. The width of this Pen object is 5 pixels and the perpendicular lines are the unit-divisors, each spaced 5 units apart along the spline of the Pen object:
+
+{{http://en.wiki.mcneel.com/content/upload/images/RhPicture_PenCoordinateSystem.png}}
+
+\\
+\\
+
+If we define a simple dash pattern consisting of a single Dash-Gap combo using the code below, we'll get a pen object that draws dashes that are as long as the pen is wide:
+
+  Dim RhPicture : Set RhPicture = Rhino.CreateObject("RhPicture")
+  RhPicture.CreateDashedPen(vbBlack, 5.0, , , , Array(1.0, 1.0))
+
+{{http://en.wiki.mcneel.com/content/upload/images/RhPicture_DashPen_11.png}}
+
+\\
+\\
+
+There is no limit to the number of Dash-Gap combos we can define, but we must always supply an array of positive numbers containing an even number of elements:
+
+  Dim RhPicture : Set RhPicture = Rhino.CreateObject("RhPicture")
+  RhPicture.CreateDashedPen(vbBlack, 5.0, , , , Array(1.0, 1.0, 2.0, 2.0))
+
+{{http://en.wiki.mcneel.com/content/upload/images/RhPicture_DashPen_1122.png}}
+
+\\
+
+| A number of diffent dash patterns. |
+| {{http://en.wiki.mcneel.com/content/upload/images/DashPattern_1_1.png}} | {{http://en.wiki.mcneel.com/content/upload/images/DashPattern_1_2.png}} | {{http://en.wiki.mcneel.com/content/upload/images/DashPattern_2_1.png}} | {{http://en.wiki.mcneel.com/content/upload/images/DashPattern_1_02.png}} | {{http://en.wiki.mcneel.com/content/upload/images/DashPattern_02_02.png}} | {{http://en.wiki.mcneel.com/content/upload/images/DashPattern_02_02_1_02.png}} |
+| (1.0, 1.0) | (1.0, 2.0) | (2.0, 1.0) | (1.0, 0.2) | (0.2, 0.2) | (0.2, 0.2, 1.0, 0.2) |
+
+\\
+
+=====Compound pens explained:=====
+
+Compounds can be best explained as perpendicular Dash patterns. Instead of drawing a succession of dashes along the line, a compound Pen object draws a number of parallel strands. Compounds are defined in much the same way as Dash patterns:
+
+  Dim RhPicture : Set RhPicture = Rhino.CreateObject("RhPicture")
+  RhPicture.CreatePen(vbBlack, 5.0, , , Array(0.0, 0.25, 0.75, 1.0))
+
+Compound arrays are arrays of increasing doubles not smaller than zero and no larger than one. The code above yields the compound pen below:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/RhPicture_CompoundPenCoordinates.png}}
+
+\\
+
+| A number of different compound definitions. |
+| {{http://en.wiki.mcneel.com/content/upload/images/CompoundPen_0_1.png}} | {{http://en.wiki.mcneel.com/content/upload/images/CompoundPen_0_025_075_1.png}} | {{http://en.wiki.mcneel.com/content/upload/images/CompoundPen_0_045_055_1.png}} | {{http://en.wiki.mcneel.com/content/upload/images/CompoundPen_0_02_04_06_08_1.png}} |
+| (0.0, 1.0) | (0.0, 0.25, 0.75, 1.0) | (0.0, 0.45, 0.55, 1.0) | (0.0, 0.2, 0.4, 0.6, 0.8, 1.0) |
+

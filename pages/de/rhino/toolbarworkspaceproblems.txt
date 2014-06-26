@@ -1,0 +1,35 @@
+====== Probleme Werkzeugleistenarbeitsraum ======
+======Problem wegen Verschwinden von Werkzeugleisten======
+
+**Die Werkzeugleisten in Rhino** werden in einer externen Datei mit einer .tb Erweiterung gespeichert (manchmal auch Arbeitsraumdatei genannt).  Wenn Ihre Werkzeugleisten nicht mehr vorhanden sind, wenn Sie Rhino öffnen, könnte Rhino den Pfad zur Werkzeugleistendatei "verloren" haben. Es könnte verschiedene Ursachen haben...  Die folgenden Informationen könnten das Problem in beinahe allen Fällen beheben:
+
+Gehen Sie in das Menü **Werkzeuge > Werkzeugleistenkonfiguration** und wählen Sie **Datei > Öffnen**.
+
+Wenn Sie Ihre Werkzeugleistendatei im Dialogfenster Öffnen nicht sehen (sie heißt default.tb, wenn Sie die standardmäßige Werkzeugleistenkonfiguration verwenden), navigieren Sie zum Ordner: C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\4.0  (oder 3.0)
+
+default.tb //sollte// sich dort befinden sowie Ihr persönlicher Arbeitsraum, wenn Sie ihn ursprünglich dort gespeichert haben.
+
+Sollte sich Ihr Arbeitsraum immer noch nicht öffnen, könnte er defekt sein.  Wenn Sie den ungeänderten Standard-Arbeitsraum verwenden (default.tb), werden Sie eine standardmäßige Datei namens default.tb.bak im gleichen Verzeichnis finden.  Schließen Sie alle Rhino-Instanzen, entfernen Sie die defekte Datei und den .bak Teil der Erweiterung und probieren Sie erneut.
+
+Sollte es immer noch NICHT funktionieren, gibt es eine weitere Notfall-Backup-Datei namens default_backup.tb.  Machen Sie eine Kopie dieser Datei und versuchen Sie, sie auf default.tb umzubenennen.
+
+Wenn  Sie einen personalisierten Arbeitsraum verwenden und Sie Rhino mindestens einmal bei der Verwendung dieses Arbeitsraums geöffnet und geschlossen haben, sollte auch eine .bak Datei dieses Arbeitsraums vorhanden sein.  Wenn nicht, müssen Sie Ihre Backup-Kopie des personalisierten Arbeitsraums, den Sie woanders gespeichert haben, finden. Sie HABEN doch eine Backup-Kopie gemacht, oder?
+
+> **RATSCHLAG:** //Wenn Sie den Standard-Arbeitsraum (**default.tb**) auf eine bedeutende Weise geändert haben, wird empfohlen, dass Sie ihn unter einem neuen Namen speichern. Neue Installationen oder Aktualisierungen von Rhino können die Datei **default.tb** überschreiben und dabei die **GESAMTE** Personalisierung sofort löschen.  Gehen Sie in das Menü **Werkzeuge > Werkzeugleistenkonfiguration**, dann auf **Datei > Speichern unter** und geben Sie Ihrem geänderten Arbeitsraum einen erkennbaren Namen. Nehmen Sie all Ihre Änderungen an Ihrem personalisierten Arbeitsraum vor.  Speichern Sie diese Datei auch irgendwo anders als Backup-Datei (vorzugsweise auf einem anderen Computer wie alle wichtigen Dokumente). **Denken Sie darüber nach, wie viel Zeit es Sie kosten würde, diese Datei neu zu erzeugen, sollten Sie sie verlieren.**//
+
+> **WICHTIG:** //**Vergewissern Sie sich, dass nur eine Rhino-Instanz geöffnet ist, wenn Sie Änderungen an Werkzeugleiste/Arbeitsraum vornehmen!**  Wenn Sie die Werkzeugleisteninstallationen vorgenommen haben, vergewissern Sie sich, dass Sie Datei>Speichern aus dem Dialogfenster der Werkzeugleistenkonfiguration verwenden, um Ihre Änderungen zu speichern!  Oder schließen Sie Rhino und öffnen Sie das Programm erneut. Rhino speichert Werkzeugleistenänderungen automatisch beim Beenden.  Wenn Sie mehrere Rhino-Instanzen geöffnet haben, wird das zuletzt geschlossene das vorherige überschreiben und Sie verlieren die gemachten Änderungen.//
+
+======Andockprobleme bei Werkzeugleisten======
+====Rhino 3.0 Problem mit Werkzeugleisten-Layouts, die nicht richtig konfiguriert bleiben====
+
+Schließen Sie Rhino 3.0
+
+Führen Sie dieses kleine Programm aus: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip, während Rhino geschlossen ist.
+
+Starten Sie Rhino neu
+
+Das kleine Programm kann den folgenden Key in der Registrierung löschen, damit Rhino einige Einstellungen "vergisst", die die Werkzeugleisten nicht richtig andocken lassen.
+
+//HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+
+

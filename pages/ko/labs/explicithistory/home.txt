@@ -1,0 +1,84 @@
+====== Grasshopper 메인 페이지 ======
+
+| {{http://en.wiki.mcneel.com/content/upload/images/ExplicitHistoryBanner.png}} |  //**Grasshopper Wiki 페이지**// |
+|  [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
+
+----
+
+> **Summary:** //Grasshopper 플러그인 메인 페이지//
+
+\\
+
+[[http://download.rhino3d.com/download_rel.asp?rel=400|Grasshopper (0.5) 다운로드]]
+
+이 버전을 사용하려면 Rhinoceros 4.0 SR4 가 필요합니다.
+
+\\
+
+====== 설치 안내:======
+
+\\
+
+<color green> **이 플러그인은 네트워크상에서 로드되지 않습니다. 로컬 디스크에 두고 사용하시기 바랍니다.!</color>**
+
+\\
+
+  - 압축된 파일을 다운로드한 후, 원하는 위치에서 압축을 풉니다. 압축을 빈 폴더에 풀어두면 더욱 좋습니다.
+  - 폴더의 구조를 원래 상태로 유지하도록 주의하시기 바랍니다. 그러나 위치가 중요한 것은 아닙니다.
+  - Rhino 를 시작합니다
+  - Grasshopper.rhp 파일을 마우스로 끌어 Rhino 창에서 놓습니다 (Drag & Drop).
+이제 _Grasshopper 명령을 사용하실 수 있습니다.
+
+\\
+
+----
+\\
+
+====== Grasshopper 페이지:======
+
+\\
+
+  - [[http://kr.wiki.mcneel.com/default.aspx/McNeel/ExplicitHistoryPluginInterfaceExplained.html|Grasshopper 인터페이스에 대한 설명]]
+  - [[ExplicitHistoryPluginObjectsExplained|Grasshopper 개체에 대한 설명 (영문)]]
+  - [[http://kr.wiki.mcneel.com/default.aspx/McNeel/ExplicitHistoryPersistentDataRecordManagement.html|Grasshopper 지속적 데이터 관리]]
+  - [[labs:explicithistory:volatiledatainheritance|Grasshopper 일시적 데이터 관리]]
+  - [[http://kr.wiki.mcneel.com/default.aspx/McNeel/ExplicitHistoryDataStreamMatchingAlgorithms.html|Grasshopper 데이터 매칭에 대한 설명]]
+  - [[http://kr.wiki.mcneel.com/default.aspx/McNeel/ExplicitHistoryExamples.html|Grasshopper 튜토리얼]]
+  - [[GrassHopperWorkshop|Grasshopper 워크샵 개요 (영문)]]
+  - [[http://kr.wiki.mcneel.com/default.aspx/McNeel/GrassHopperGallery.html|Grasshopper 갤러리]]
+
+\\
+
+----
+\\
+
+
+| {{http://en.wiki.mcneel.com/content/upload/images/GH_SquareBanner.jpg}} |
+
+====== 왜 Grasshopper 를 사용해야 하나?======
+
+Rhino4 에는 기본적인 히스토리 기능이 탑재되어 있으며, 이 기능은 특정한 모델링 단계를 자동적으로 업데이트할 수 있게 하는 과정과 관련된 비(非)주입식 레이어입니다. 현재 Rhino4 히스토리의 구현은 암시적 (implicit) 입니다. 즉, 사용자가 모델링하는 대로 기록될 뿐입니다. 모델링하는 동안 따로 생각해야할 사항이 없으며, 이것이 바로 우리가 Rhino 에서 바라는 것 (기능은 더 많으면서 추가적인 제한은 없는..)이라고 할 수 있겠습니다. 그러나 암시적 히스토리에서는 명시적으로 정의된 히스토리에서는 가능한 기능들을 실행할 수 없습니다.
+
+\\
+
+우선, 히스토리 트리가 숨겨져 있어 사용자가 볼 수 없습니다. 다른 히스토리 단계에서의 동작 (behaviour) 을 조정할 수 없습니다. 예를 들어, 히스토리를 기반으로 하는 Loft 의 경우, 속성을 설정할 수 있는 기회는 단 한 번뿐입니다. 일단 서페이스가 생기면, Loft 설정을 변경하는 한 가지 방법은 서페이스를 다시 만드는 것입니다. 이렇게 되면 모든 그에 딸린 순차적인 히스토리 기록이 모두 깨지게 되므로, 그로 인한 잠재적인 손실도 클 수 있습니다. 또한 히스토리 Loft 에 커브를 추가하거나 이를 다른 커브로 대체할 수 없습니다.
+
+\\
+
+grasshopper 는 이러한 이슈에 대응합니다. 단, 더 이상 히스토리를 투명하게 기록하는 것은 불가능하며, 사용자가 히스토리 트리를 세밀하게 구축해야 합니다. 기존 명령은 필요한 옵션과 설정이 노출되지 않기 때문에 이러한 기존 명령은 사용할 수 없습니다. 따라서 대부분의 사람들에게는 Grasshopper 플러그인이 그다지 큰 이득이 없다고 할 수 있습니다.
+
+\\
+
+그러나, 다음과 같은 장점이 있습니다:
+
+  - 노출된 트리를 다른 모델 작업시에도 일부 또는 전체를 다시 사용할 수 있습니다.
+  - 노출된 트리의 구성요소를 대체 또는 조정할 수 있습니다.
+  - 작업이 어느 특정 모델의 지오메트리로 한정되지 않습니다. 수학적인 측면만을 다루는 트리를 만들 수 있습니다.
+  - 수학적, 논리적 관계를 구성할 수 있습니다.
+  - 데이터를 검색하고 저장하는 데 외부 (Rhino 로) 소스를 사용할 수 있습니다.
+
+\\
+
+위에 언급된 모든 기능이 첫 릴리스에 포함된 것은 아닙니다. 플러그인 기능을 확장하는 데에는 앞으로도 많은 시간이 소요될 것입니다.
+
+

@@ -1,0 +1,17 @@
+======Tweening======
+
+Tweening between key frame points is done by Hermite interpolation. It has a good set of per key frame adjustments: curve tangent settings and easing control. Position tweening has separate controls for curve path and travel. Curve path controls the shape of the animation path and travel controls the speed along the that path.
+
+Tangents are used to control how key frame points are interpolated. Each key frame has controls for incoming and outgoing tangents. Incoming tangent settings change the way the path arrives to a key frame point; outgoing tangent settings define how it leaves the point. Linear interpolation uses direction from the previous key frame point as the incoming tangent and direction to the next key frame point as the outgoing tangent. Cardinal and Kochanek–Bartels splines mix these directions according to their parameters to generate incoming and outgoing tangents.
+
+Settings for tangents are tension, continuity and bias. Tension changes the roundness of the path. Continuity controls the sharpness and direction of the corner at a key frame point. Bias weights the tangent direction between incoming and outgoing directions. Each parameter can be adjusted separately for both incoming and outgoing tangents of each key frame.
+
+Easing allows interpolant to slow down before key frame point and nicely settle down to it. Automatic easing becomes active where two sequential key frames have the same value. As a result it completely stops the motion between those key frames. Alternatively easing can be set up manually.
+
+
+----
+
+Return to [[bongo:2|Bongo 2.0 Wiki]]
+
+----
+

@@ -1,0 +1,36 @@
+====== Problemas con las barras de herramientas ======
+
+======Problemas con las barras de herramientas que desaparecen======
+
+Las **barras de herramientas en Rhino** se guardan en un archivo externo con extensión .tb (denominado también espacio de trabajo). Si las barras de herramientas ya no están cuando abre Rhino, normalmente se debe a que Rhino ha "perdido" la ruta al al archivo de las barras de herramientas.  Este hecho puede ser debido a diferentes problemas...  El siguiente siempre se puede solucionar:
+
+Vaya a **Herramientas > Configurar barra de herramientas** y seleccione **Archivo > Abrir**.
+
+Si no ve su archivo de las barras de herramientas el cuadro de diálogo (será default.tb si está utilizando la configuración de barras de herramientas predeterminada), navegue hasta: C:\Documents and Settings\All Users\Datos de programa\McNeel\Rhinoceros\4.0  (o 3.0)
+
+El archivo "default.tb" debería estar ahí, además de los otros espacios de trabajo personalizados que haya guardado.
+
+Si al intentar abrir el espacio de trabajo no se abre, es posible que el archivo esté dañado. Si está utilizando el espacio de trabajo predeterminado (default.tb), encontrará un archivo default.tb.bak en el mismo directorio. Cierre todas las instancias de Rhino, elimine el archivo dañado, elimine la parte .bak de la extensión del nombre del archivo y vuelva a intentarlo.
+
+Si sigue sin funcionar, hay otra copia de seguridad de emergencia llamada default_backup.tb. Haga una copia de ese archivo y póngale el nombre default.tb.
+
+Si está utilizando un espacio de trabajo personalizado y ha abierto y cerrado Rhino al menos una vez mientras lo estaba usando, es posible que también haya un archivo .bak de ese espacio de trabajo.  Si no, tendrá que recuperar la copia de seguridad del espacio de trabajo personalizado que guardó en otra parte.  Hizo una copia de seguridad, ¿no?
+
+> **CONSEJO:** //Si ha modificado el espacio de trabajo predeterminado (**default.tb**) de manera significativa, es muy recomendable guardarlo con un nuevo nombre. Las nuevas instalaciones o actualizaciones de Rhino pueden sobrescribir el archivo **default.tb**, eliminando toda la personalización que haya hecho. Vaya a **Herramientas > Configurar barra de herramientas**, **Archivo > Guardar como** y cambie el nombre de su espacio de trabajo modificado.  Haga siempre todas las modificaciones en su espacio de trabajo personalizado.  Guarde este archivo en otra parte y guarde también una copia de seguridad (preferiblemente en otro ordenador, al igual que todos los documentos importantes). **Piense en lo que puede tardar en volver a crearlo si lo pierde.**//
+
+> **IMPORTANTE:** //**Asegúrese de tener abierta una sola instancia de Rhino cuando haga als modificaciones de la barra de herramientas o espacio de trabajo.** Cuando termine de realizar los cambios, asegúrese de ejecutar Archivo > Guardar desde el diálogo de configuración de barra de herramientas para guardar los cambios.  O bien, salga de Rhino y vuelva a abrirlo. Rhino guarda automáticamente los cambios de las barras de herramientas al salir. Si tiene abiertas varias instancias de Rhino, la última en cerrarse sobrescribirá la anterior, de manera que puede perder los cambios.//
+
+======Problemas de acoplamiento de las barras de herramientas======
+====Problema de Rhino 3.0 con las barras de herramientas que no se acoplan correctamente====
+
+Cierre Rhino 3.0
+
+Ejecute esta herramienta: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip con Rhino cerrado.
+
+Reinicie Rhino
+
+La herramienta puede eliminar la siguiente clave del registro para que Rhino "olvide" alguna configuración que hace que las barras de herramientas no se acoplen correctamente.
+
+//HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+
+

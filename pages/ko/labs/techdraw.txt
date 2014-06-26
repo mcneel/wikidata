@@ -1,0 +1,112 @@
+====== 기술 도면 표시 모드 ======
+> **Summary:** 이 플러그인은 은선과 다른 옵션이 있는 새로운 기술 도면 표시 모드를 Rhino 4.0 에 추가합니다. //<color red>이 플러그인은 아직 프로토타입 단계입니다.</color>//
+=====내용=====
+
+  * [[#Background]]
+  * [[#Overview]]
+  * [[http://download.mcneel.com/download.asp?id=TechDraw&language=|Download]] - //Updated 7-feb-2007//
+  * [[#Installation]]
+  * [[#Interface]]
+  * [[#Limitations]]
+  * [[#Known bugs]]
+  * [[#To Do]]
+  * [[#Feedback]]
+
+=====Background=====
+
+
+A little explanation is in order...
+
+Because of the way this type of thing needs to be done (ie. Multi-pass algorithm), this plugin has to implement it's own "Pipeline"...However, it is derived from Rhino's standard [[rhino:opengl|OpenGL]] pipeline, which means anything you can do in Rhino's [[rhino:opengl|OpenGL]] display can be done using this pipeline, with the addition of a "Technical Display" capability.
+
+The term "Technical Display" is used because that's how Scott referred to it...And what it means is that all surface and mesh objects will be displayed using:
+
+  - Real-time silhouettes
+  - Creases
+  - Borders
+
+...and will occlude all objects that lie behind them. This can be considered a "hidden line" style of drawing...but keep in mind that this plugin does not draw isocurves or mesh wireframes (ie. A NURBS sphere will look just like a Mesh sphere), only the 3 things mentioned above.
+
+Having said that, there are 4 "toggle" mode commands:
+
+  - **TechToggleHiddenLines**
+  - **TechToggleEdges**
+  - **TechToggleSilhouettes**
+  - **TechToggleCreases**
+
+...all of which should be self-explanatory...except maybe the **TechToggleHiddenLines**...
+
+The **TechToggleHiddenLines**, when ON, will display certain object types as "dashed", single-pixel thick lines when they lie behind surface and mesh objects...as well as the three elements above: silhouettes, borders, and creases.
+
+How it works:
+
+Once installed, the plugin creates a display mode called "Technical", which will now be available as a standard display mode, and selected and set the same way any display mode is.
+
+When you select "Technical" as a display mode, 2 things happen:
+
+  - The plugin begins creating "Technical Drawing Data" for all surfaces and meshes "visible" (and if there aren't any render meshes, it will create those too).
+  - The view mode is set to use the new pipeline, and all objects will display accordingly.
+
+If you cancel out of #1, then ALL viewports that are currently set to "Technical" are set to "Wireframe".
+
+You can assign this new pipeline to any of your other custom modes, but you can not change the "Technical" mode's pipeline to something else...V4 provides a way to lock out pipelines, and this plugin does that...That way, "Technical" will always be, well, "Technical"....You assign pipelines by going into Option->Appearance->AdvancedSettings->[Mode]->Other Settings:Pipeline, there you will see a dropdown that enumerates all available pipelines (For that mode), "Technical2D" is the name of the pipeline that this plugin implements. Note: You can not change the pipeline for any of Rhino's standard modes, only new, custom modes can take on different pipes...Most people will probably never have to or want to do this, and the "Technical" mode that comes with this plugin will probably suffice...
+
+
+Final note: Things look a LOT better when you have AA enabled.
+
+=====Overview=====
+
+
+=====Installation=====
+
+
+  1: copy the file "TechnicalDrawing.rhp" to the folder Plug-ins in the Rhinoceros 4.0 folder (or any other folder you like)
+  2: in Rhino go to Options->Rhino Options->Plug-ins | click the Install button and browse to the file "TechnicalDrawing.rhp" | click Open
+
+(willem says: feel free to edit/layout this installation guide)
+
+=====Interface=====
+
+  * **TechToggleHiddenLines**
+  * **TechToggleEdges**
+  * **TechToggleSilhouettes**
+  * **TechToggleCreases**
+  * **TechToggleSeams**
+
+=====Limitations=====
+
+  - You can not assign the "Technical" display mode to individual objects (i.e. SetObjectDisplayMode), however, once in a Technical display mode, you can assign all other modes to individual objects...in other words, Technical mode is a superset of all other modes (that support the standard [[rhino:opengl|OpenGL]] pipeline). Thus, you can still mix and match object display modes, you just have to start in the Technical mode.
+  - 2D text disappears behind all surfaces and meshes without any kind of hidden lines, regardless of the whether TechToggleHiddenLines is ON... I can easily have text always show in front, but that's not how it works in shaded modes, so I did not do that.
+  - Dimensions suffer the same thing as in #2, but could also be shown in front.
+  - Initial calculations of the technical display data can take a long time for dense mesh objects...and there's nothing I can do about that...and if the object changes in any way, the calculations have to be redone.
+  - Hidden lines for curve objects show up as dotted lines instead of dashed lines, because the SDK doesn't provide a way to override that (my fault), without having to re-implement the entire curve drawing inside the plugin's engine (which I could do if this is a big issue).
+  - Currently does not work in Layout/detail views...will be fixed in SR1.
+
+=====Known bugs=====
+
+  - Lines are created where there should be none, and the other way around. (Olivier Suire)
+
+=====To Do=====
+
+  - Make it possible to blend Technical with Shaded display modes, just like in all the mechanical cads. (Olivier Suire)
+  - When "Technical" is available in detail views, make sure it is possible to snap to object silhouette edges. (Olivier Suire)
+
+=====Feedback=====
+
+  - Appart from the above remarks, I am really happy with this new display mode. No more explaining to the client what are these funny curves on my surfaces : " Oh ! these are isoparms. They represent all the points having the same parameter in the nurbs equation"
+-"Duhh ?"
+At last, I can do realistic screen shots of my models. Thanks ! (Olivier Suire)
+
+It's realy good help for representing drawing. I like it! I'm waiting for use it in the detailed view to make technical print.(Riccardo Gatti)
+
+---
+<Dimstogios@gmail.com>
+Nice plugin, thanks. Some wishes: It would be nice to choose single pixel width for edge thikness and the intersection of objects to be shown. Finally one that I do not know if it matches here, relevant to linewidths, which is the ability to choose in which side of a line the linewidth to be applied.
+
+---
+nice plugin! my wish: could the cuted edge when using a cliping plane also be displayed? thanks
+
+
+
+
+

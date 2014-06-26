@@ -1,0 +1,13 @@
+下载这个插件之前确认你的系统有安装最新的Microsoft runtime libraries,不然Squish不能正常运行
+[[http://en.wiki.mcneel.com/content/upload/files/vcredist_x86.exe|下载Microsoft runtime libraries]]
+
+**背景**
+对于展开的动作目前Rhino4提供以下几个命令
+  - UnRollSrf - 展开单曲面(曲面的UV方向有一个方向的阶数是1)为平面
+  - Smash - 这是一个特别版本的UnRollSrf,可以展开双曲面(UV方向的阶数都大于1)
+  - Squish - 新加入的双曲面和Polygon的展开工具.
+ 
+ 遇到曲面展开时这个三个命令的优先顺序我们推荐是 UnRollSrf>Squish>Smash 目前Rhino4.0的展开命令还不能做到
+  - Unfold or unbend(完全无限制的展开) - 由3D的形状展开一个平面或者反之,大多数用在板金方面,很多MCAD软件都可以做的很好
+  - Flow(随形变化) - 从平面变形为3D造型由一块板金完整的包履一个复杂的模型,例如把一块铝片冲压成 汽水罐的罐体或是拉环.
+  - Peel(切口) - 在曲面有可能裂开的地方做切口然后展开这个曲面,例如展开一个椭圆球,注意如果曲面  有切口的地方,Squish是可以展开他的,你可以指定3D曲面什么地方需要分切口.

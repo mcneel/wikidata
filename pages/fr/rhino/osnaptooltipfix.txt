@@ -1,0 +1,43 @@
+====== Comment régler le problème de l'étiquette d'accrochage (dans la plupart des cas) ======
+
+**<color red>Symptôme -</color>**  lorsque les accrochages aux objets sont activés et que vous passez sur un point d'accrochage avec la souris, l'affichage devrait indiquer le nom de l'accrochage actif (avec un mot tel que Fin ou Cen dans une petite case blanche près du curseur).  Sur certains systèmes, cette info-bulle est déformée ou illisible. Souvent, les utilisateurs voient un carré avec des pixels flous à l'intérieur.
+
+**<color darkgreen>Correction -</color>**  Cliquez avec le bouton de droite sur le bureau, choisissez Propriétés, ouvrez l'onglet Paramètres, cliquez sur le bouton Avancé et dans l'onglet Dépannage, déplacez le glisseur d'accélération matérielle d'un ou deux crans vers la gauche.  Le problème devrait disparaître.
+
+Ce problème est dû à la carte graphique, aux pilotes et aux paramètres [[rhino:opengl|OpenGL]].  Il ne se produit normalement que lorsque l'accélération matérielle OpenGL est utilisée il est beaucoup plus fréquent avec les cartes et les pilotes ATI. En déplaçant le glisseur vers la gauche d'un ou deux crans, l'accélération du curseur de la souris est désactivée mais pas le reste de l'accélération matérielle. Cette action semble résoudre le problème dans la plupart des cas.
+
+> **Remarque :** //Dans certains cas, la méthode ci-dessus ne fonctionne pas ou n'est pas réalisable, consultez la fin de la page pour voir une autre solution possible (Rhino 4 uniquement)//
+
+<color Blanc>-</color>
+
+<color Blanc>-</color>
+
+{{http://en.wiki.mcneel.com/content/upload/images/VideoAccel1.jpg}}
+<color Blanc>-</color>
+
+<color Blanc>-</color>
+
+{{http://en.wiki.mcneel.com/content/upload/images/VideoAccel2.jpg}}
+
+//En déplaçant le glisseur vers la gauche d'un ou deux crans//
+
+//l'accélération du curseur de la souris est désactivée,//
+
+//mais pas le reste de l'accélération matérielle.//
+
+----
+
+====Que faire si la solution précédente n'est pas réalisable ne fonctionne pas====
+
+Dans certains cas, vous ne pouvez pas modifier le glisseur mentionné ci-dessus (il apparaît en gris), comme par exemple si vous êtes un utilisateur de niveau inférieur sur un réseau et que vous ne disposez pas de privilèges suffisants pour modifier les paramètres d'affichage.
+
+Si c'est le cas, vous pouvez essayer la solution suivante :
+
+Ouvrez la page **Options de Rhino > Aides à la modélisation**.  Dans la section Texte de l'étiquette, cochez **"Aucun"**
+
+Avant de quitter les options, accédez à la section Info-bulles du curseur (sous catégorie de la section aide à la modélisation) et cochez la case **"Activer les info-bulles du curseur"**
+
+Ensuite, cochez l'option **"Accrochages"**, puis cliquez sur Accepter pour fermer la boîte de dialogue.
+
+L'affichage des accrochages devrait maintenant fonctionner correctement.  Les infos bulles du curseur utilisent une méthode d'affichage différente et ne sont pas concernés par les mêmes problèmes [[rhino:opengl|OpenGL]] que ceux mentionnés dans la première section.  Si votre problème persiste, publiez un message sur le forum de discussion de Rhino ou envoyez un mail à l'assistance technique.
+

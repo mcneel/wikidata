@@ -1,0 +1,301 @@
+====== Render plugin information for Rhino4 ======
+
+> **Summary:** //Render engine database//
+
+=====Rendering=====
+
+Rendering is the process of creating two dimensional images from three dimensional models. This is a very broad definition, but the field is such an extensive one that it would be hard to narrow it down. Rendering typically comes in several flavours that might blend together at the edges, some render plugins only implement a single type, others aspire to be paradigm-independent.
+
+\\
+
+There is a lot of information available on all the render plugins, usually through sites maintained by the companies that develop them, but also through user-controlled domains. This page does not aim to make a comparison, it simply lists the available products and provides links for those who want to know more.
+
+\\
+
+| [[#Back to top]]|
+
+----
+\\
+=====The list=====
+The following is a list of render-plugins that will be soon or already are available for Rhino4.
+
+\\
+
+|Name|Developer|Price|Special features|
+| | | | |
+|[[#Rhino Viewport]] | [[http://www.Rhino3d.com|McNeel]]    |  Included |Real time display|
+|[[#Rhino Renderer]] | [[http://www.Rhino3d.com|McNeel]]    |  Included |Extreme ease of use|
+|[[#Flamingo 1.1]]           | [[http://www.Flamingo3d.com|McNeel]] |  $495     |Ease of use, plant generator|
+|[[#Flamingo 2.0]]           | [[http://www.Flamingo3d.com|McNeel]] |  Beta     |Ease of use, plant generator, HDRI support|
+|[[#Toucan]]                   | [[http://www.Rhino3d.com|McNeel]]    |   Alpha   |Ambient occlusion, caustics, dof|
+|[[#VRay]]                       | [[http://www.chaosgroup.com|Chaos group]] + [[http://www.asgvis.com|ASGvis]] |      $799 |Flexible and fast photorealism|
+|[[#Brazil]]                   | [[http://www.splutterfish.com|Splutterfish]] + [[http://www.rhino3d.com|McNeel]] |      Beta |Very flexible (non)photorealism|
+|[[#Maxwell]]                 | [[http://www.maxwellrender.com|Next Limit]] |      $895 |Photometric simulation (uber-realism), [[http://www.maxwellrender.com/videos.html#multilight|Multilight]]|
+|Indigo Render                                                   | [[http://www.indigorenderer.com/joomla|Nicholas Chapman]]         |      Free |Photometric simulation|
+|Fry Render                                                   | [[http://fryrender.com|fryrender]]| 395€:Beta |Photometric simulation|
+|[[#Penguin]]                 | [[http://www.Penguin3d.com|McNeel]] |       $195|Non-photorealistic (cartoon & sketch), vector output, very fast. Real time NPR in Penguin 2.0|
+|[[#RhinoMan]]               | [[http://www.rhinoman.com|Brian Perry]] |       Free|RenderMan user interface, must be used with a RenderMan compatible renderer below|
+| Render engines that run through [[#RhinoMan]]|
+|Air            | [[http://www.sitexgraphics.com|SitexGraphics]] |      $495 |High-end engine, very complete feature list |
+|3Delight       | [[http://www.3delight.com|The 3Delight Team]]        |      Free |Complete feature list, new release available recently |
+|Aqsis          | [[http://www.aqsis.org|Open source]]                 |      Free |Opensource and still in development, no raytracing support |
+|Photorealistic Renderman |[[https://renderman.pixar.com|Pixar]] |      $3500| High-end, used in motion picture industry |
+|Render Dot C   | [[http://www.dotcsw.com|Dot C Software]]                |      $595 | High-end, used motion picture industry, no raytracing support|
+|Pixie          | [[http://sourceforge.net/projects/pixie|Open source]] |      Free | opensource and still in development, somewhat unstable, but has raytracing|
+
+\\
+
+ RhinoMan is a frontend for //all// [[https://renderman.pixar.com|RenderMan]] compliant render engines... 
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====Rhino Viewport (Real time display)=====
+
+Rhino is a 3D modeler and it thus has to display its geometry on the screen. According to the definition at the top of this page that qualifies the viewports as a render-platform. The rendering in this case is a real-time process. The viewport pipeline in Rhino supports standard 3D working modes such as wireframe, shaded and analytical modes.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/RhViewportPipeline.jpg}}
+
+\\
+
+The real-time renderer is under continuous development and proposed features for Rhino4 include [[http://en.wikipedia.org/wiki/Shader|vertex and pixel shaders]] , real time shadows and [[http://en.wikipedia.org/wiki/Bump_mapping|bump mapping]] .
+
+\\
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====Rhino Renderer=====
+
+Every version of Rhino ships with a native render engine which is available to all users. Rhino 3.0 was shipped with a stripped down version of Flamingo 1.1 and Rhino 4.0 has an all new Toucan-based engine. It supports all aspects of the native Rhino material (textures, emapping, bump, highlights etc.) and it is capable of high anti-aliasing and shadows.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/RhNativeEngine.jpg}}
+
+\\
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====Toucan=====
+
+"Toucan" is the code-name for an in-house render engine which has been in development at McNeel since the beginning of the Rhino 4.0 project.  It is currently incomplete and no decision has been made about when or how it will be released to the public.  The full Toucan plug-in will many more features typically found in high-end render engines such as caustics, depth-of-field, refraction, reflection, dispersion, occlusion and more. Although Toucan is still under development, a test page with images made with an early internal alpha version is available [[http://www.reconstructivism.net/toucanalphatesting.htm|here]] .
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/ToucanBalls.jpg}}
+
+\\
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====Flamingo=====
+
+[[http://www.flamingo3d.com|Flamingo]] (and [[http://www.accurender.com|ACCURENDER]] for [[http://en.wikipedia.org/wiki/AutoCAD|AutoCAD]] ) is an older engine developed by McNeel¹ which has been around for a long time and thus has acuired for itself a large user base. Flamingo adds many features to the native renderer such as decals (a specific type of texture mapping), more advanced materials, large material libraries and also a plant generator.
+
+[[accurender:accurender|AccuRender]] is mostly used by [[http://gallery.mcneel.com/?language=en&g=40|architects]] , but Flamingo (perhaps due to lack of competition) supports a much wider range of users including [[http://gallery.mcneel.com/?language=en&g=38|jewelers]] , [[http://gallery.mcneel.com/?language=en&g=41|marine design]] and [[http://gallery.mcneel.com/?language=en&g=37|car design]] .
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/flamingo_swissair.jpg}}
+
+[[http://www.flamingo3d.com/features.htm|Comprehensive flamingo feature list]]
+
+\\
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====VRay=====
+
+... infos under construction.
+
+\\
+
+Full integrated modern render engine. Plugin is hard tested and improved for daily use. Released since summer 2006. Demo available.
+
+More infos at [[http://www.asgvis.com/|ASGvis HOMEPAGE]] , [[http://www.asgvis.com/phpBB2/index.php|ASGvis forum]] and [[http://www.asgvis.com/VfRtw/bin/view/VfR/UserTutorials|User tutorials]] . General infos about Vray at http://www.chaosgroup.com .
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/Vray_simulacrum.de.jpg}}
+
+\\
+
+Features of Vray:
+
+  * Full global illumination support based on various methods
+  * Material editor with unlimited layers
+  * HDRI environments, textured emitter, HDRI render output, tone mapping
+  * Rhino lights supported
+  * different camera modes (spherical, 360° panorama, cylindrical, box, fish eye)
+  * ready for animation per Bongo or Rhino script
+  * enhanced Depth of Field with camera effects like Bokeh
+  * transparency mapping (good for Billboard and low poly trees), Decals
+  * SSS
+  * Caustic
+  * anisotropic reflections (brush metal effect)
+  * ... physical sky and physical camera in work
+
+\\
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====Brazil=====
+
+[[BrazilHome|Brazil]] is one of the worlds best render platforms and it is used extensively in high-end professional environments. The product itself is developed by [[http://www.splutterfish.com|Splutterfish]] and originally Brazil was strictly a 3D Studio Max product. With the release of Brazil 2.0 a Rhino implementation will be available as well. The feature list of Brazil is impressive, and so is the user-base. Many professional companies use Brazil both to render [[http://www.splutterfish.com/sf/gallery_index.php|stills and animations, photorealistic content and conceptual graphics]] . The frontend for Brazil in Rhino is developed by McNeel to ensure seamless integration. Brazil for Rhino is currently still in WIP (work-in-progress) phase, but all Rhino users can [[BrazilHome|download]] a free beta copy.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/TruckDofSmall.jpg}}
+
+\\
+
+Among the features of Brazil that you will not find in many other engines for Rhino are:
+
+  * Full global illumination support
+  * Physical simulation of light and materials
+  * Non-photorealistic shaders for toon and schematic effects
+  * Over and undersampling
+  * Intuitive material hierarchies
+  * In fact, many more can be found [[http://www.splutterfish.com/sf/sf_gen_page.php3?printer=1&page=feature_gal|here]]
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/BrazilToonExample.jpg}}
+
+\\
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====Maxwell=====
+Maxwell Render™ is a new render engine based on the physics of real light. Its algorithms and equations reproduce the behavior of light in a completely accurate way.
+
+All of the elements in Maxwell, such as light sets, physical materials and cameras, are entirely based on physically accurate models. So, Maxwell support emitter materials, but not native Rhino lights. For example, if a spot light is needed, then a model of a spot with emitter and reflector must be created. The natural vignetting of the physical camera (like a pinhole camera) can not be enabled. Lens distortion effects are not supported.
+
+Maxwell Render™ can fully capture all light interactions between all elements in a scene no matter how complex they are.
+
+All parameters in Maxwell use real-world units. You don’t need to learn strange concepts, set a long list of uncertain parameters or “launch photons” anymore. With Maxwell, just pick a 100-watt incandescent lamp or a marble material from the material gallery, and that’s all. Render times are dependent from the amount of indirect light. So interior renderings need much more time (several hours) than exterior or studio setups.
+
+[[http://www.maxwellrender.com/videos.html#multilight|Multilight]] feature : For the first time in the industry, it is possible to have unlimited variations of lighting from just one render.
+
+It's recommended to use the plugin as exporter to the Maxwell Studio application and to setup materials and camera there. The direct use of the plugin is very limited (beta version like).
+
+\\
+
+(example rendered per 3DSMax - fog effect per postwork)
+{{http://www.maxwellrender.com/img/whats_01.jpg}}
+
+\\
+
+(rhino/techgems/maxwell/hdr lightning)
+{{http://www.modellistica.com.br/maxwell/diamond_coop_small.jpg}}
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====RhinoMan=====
+RhinoMan is a Rhino rendering plug-in that provides a graphical user interface for several RenderMan compliant rendering applications. You can render directly from Rhino without exporting to another application. "RenderMan" is a modeler-renderer communication standard developed by Pixar which renderer developers can use. Pixar sells its own RenderMan compliant rendering application called "Photorealistic Renderman" ("PrMan" for short) and is the application used to generate all of Pixars' animated films. PrMan is also used heavily in the movie industry by many different special effects houses.  http://www.rhinoman.com
+
+\\
+
+{{http://www.rhinoman.com/images/bigscrews.jpg}}
+**Rendering by Clement Greiner. Features depth of field and [[rhino:displacement|Displacement]] mapped threads (the screw threads were not modeled)**
+
+\\
+
+There are several RenderMan compliant rendering applications developed by different vendors, some are free and some are not and all have different capabilities.
+
+\\
+
+Highlighted features available in RhinoMan:
+
+  * Full global illumination support including: Monte Carlo Irradiance, ambient occlusion, and raytraced caustics (when used with AIR, PrMan, 3Delight)
+  * Programmable shading language
+  * Background rendering (work while rendering finishes in background)
+  * Multiprocessor rendering support
+  * True displacement, bump mapping, and volumetric rendering
+  * Toon and hidden-line rendering support
+  * Depth of Field
+  * Renders NURBS surfaces, curves, points, meshes, or Rhino render meshes.
+
+\\
+
+The Rhino3 version has been available for a couple years and the Rhino4 version will be available soon.
+
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====Penguin=====
+
+[[http://www.penguin3d.com/|Penguin]] brings freehand sketching, watercolor painting and cartoon-like rendering to Rhino and AutoCAD.
+
+Penguin is a conceptual, sketch and cartoon, non-photometric scan line renderer for creating stylized images of your models.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/Penguin_samples.jpg}}
+
+\\
+
+You can download Penguin last version and evaluation versions [[http://www.penguin3d.com/download.htm|here]] . If you already own a copy of Penguin, you can download Penguin 2 beta [[http://download.mcneel.com/?id=PE20BETA|here]]
+
+\\
+
+| [[#Back to top]]|
+
+----
+
+[[#^1^]]  Flamingo and [[accurender:accurender|AccuRender]] core libraries were (and still are) written by Roy Hirshkowitz. 
+
+
+
+

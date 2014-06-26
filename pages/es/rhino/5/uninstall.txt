@@ -1,0 +1,61 @@
+====== Desinstalar Rhino 5 manualmente ======
+====Problema:====
+Durante la desinstalación de Rhino, aparece el mensaje de error "No se puede desinstalar - La función no está disponible (ruta)"
+
+====Se aplica a:====
+Rhino 5.0
+
+====Causa:====
+La caché del instalador de Windows no puede encontrar el archivo necesario para la desinstalación.
+====Resolución:====
+Elimine manualmente Rhino y el registro del instalador de Windows del producto.
+
+===Probar la desinstalación de programas estándar==
+  - Vaya al menú Inicio de Windows
+  - Seleccione Panel de control
+  - Seleccione Agregar/Quitar programas
+  - Busque las entradas de Rhinoceros 5.0 y seleccione Desinstalar.
+
+
+**Nota:** sólo debería realizar los siguientes procedimientos si se produce un error al desinstalar desde Programas y características en el Panel de control.
+
+  
+===Detener el servicio McNeelUpdate:===
+  - En el menú **Inicio**, haga clic en **Panel de control** y luego en **Herramientas**
+  - En Herramientas administrativas, haga doble clic en **Servicios**
+  - En el cuadro de diálogo Servicios, desplácese hasta **McNeel Update (32-bit)** (en equipos de 64 bits, puede aparecer McNeel Update (64-bit) o ambas opciones, según la versión de Rhino 5.0 que tenga instalada).
+  - Haga clic con el botón derecho en **McNeel Update (32-bit)** y luego en **Detener**
+  - En Windows 64 bits, detenga también el servicio **McNeel Update (64-bit)**
+  
+===Eliminar la carpeta de instalación de Rhino:===
+  - Vaya a la carpeta C:\Archivos de programa\ y elimine el directorio Rhinoceros 5.0
+  - Vaya a la carpeta C:\Archivos de programa (x86)\ y elimine el directorio Rhinoceros 5.0
+  - Elimine también la carpeta **Rhinoceros 5.0 WIP** si se encuentra en alguno de los directorios anteriores.
+  - Es posible que no pueda eliminar el archivo "RhinoShExt.dll". No pasa nada, deje la carpeta del sistema con ese archivo y elimine los demás.
+  
+===Eliminar claves del registro:===
+  - Abra el **Editor del registro:**
+    - //En Windows XP:// En el **menú Inicio**, haga clic en **Ejecutar**, escriba **RegEdit** y pulse **Intro**.
+    - //En Windows Vista y Windows 7:// En el menú **Inicio**, escriba **RegEdit** y pulse **Intro**.
+  - Busque **HKEY_LOCAL_MACHINE**\Software\McNeel\Rhinoceros
+  - Elimine la clave **5.0**
+  - Vaya a **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros
+  - Elimine la clave **5.0**
+
+
+===Ejecutar el parche de desinstalación de Microsoft===
+  - Visite http://support.microsoft.com/mats/program_install_and_uninstall
+  - Haga clic en Ejecutar ahora
+
+
+===NO RECOMENDADO: Limpiar la caché del instalador de Windows:===
+<color rojo>**ADVERTENCIA:**</color> El siguiente procedimiento puede dañar el registro y podría aparecer el error 1402 la próxima vez que instale el programa. <color rojo>**Siga estos pasos únicamente**</color> si el procedimiento anterior no permitió desinstalar Rhino.
+
+
+  - Descargue [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]]
+  - Descomprima el contenido de WindowsInstallerCleanupUtility.zip a la carpeta "Windows Installer Clean Up" en el escritorio.
+  - Ejecute **msicuu.exe**
+  - Desplácese hacia abajo hasta **(Todos los usuarios) Rhinoceros 5.0 WIP** (o Todos los usuarios Rhino 5.0 WIP x64) en sistemas de 64 bits.
+  - Haga clic en **Quitar**.
+
+Si ha seguido estos pasos y aparece el mensaje de error 1402, [[http://wiki.mcneel.com/rhino/installproblems#could_not_open_keyunknown_components_error_1402|estas instrucciones pueden ayudarle a resolverlo]].

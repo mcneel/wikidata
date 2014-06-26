@@ -1,0 +1,39 @@
+
+
+    . Sommario Il comando _FilletSrf è agisce su un massimo di 3 superfici che si incontrano in uno spigolo. Ecco qui una procedura che funziona se le superfici da raccordare sono 4.
+Four surfaces
+
+Download Rhino 3DM file
+
+
+
+   Original polysurface with 4 planar surfaces meeting at a single point.
+
+
+   Run FilletSrf (with Extend = no and Trim = no) on all pairs of adjacent surfaces. Also, compare the pairs of surfaces on opposite sides. Run FilletSrf on the pair that are closest together.
+
+
+   Using the Split command with the Isocurve option, split all of the adjacent surface fillets where their edges intersect. Split the opposite side fillet surface at both edge intersections. Split all surface in the curved isocurve direction.
+
+
+   Delete the excess portions of the surfaces split away in the previous step.
+
+
+   Draw two spheres in the corners. Use a Center Osnap and the same radius as the fillets.
+
+
+   Trim away the excess portions of the spheres that are not needed for filling the spherical holes. Use sub-object picking (CRV) to select the edges of the surfaces that define the holes as cutting objects in the Trim command.
+
+
+   Extend the adjacent side fillet surfaces so the extend past the base ofthe polysurface.
+
+
+   Trim off all the extra surface portions that overlap the other surfaces.
+
+
+   Join all the surfaces together to make a closed, solid, polysurface.
+
+
+rename · changes · history · subscriptions · lost and found · references · file upload
+
+

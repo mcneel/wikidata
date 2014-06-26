@@ -1,0 +1,52 @@
+====== La seconda sfida di Mitch sui raccordi fillet ======
+
+> **Sommario:** //Ecco un altro esempio proposto da Mitch Heynick. Lo ammetto, mi aveva messo in difficoltà, ma Pascal ha trovato il bandolo della matassa. Scrive Mitch: Raccordate tramite fillet tutti gli spigoli, eccetto quelli del fondo con un raggio costante pari a 5. --Mitch//
+
+> **Update:** //6/6/2007: Aggiunta una soluzione alternativa (vedere a fondo pagina) --Tan W.H//
+
+======Seconda sfida di Mitch======
+//[[http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/MitchChallenge2.zip|Download Rhino 3DM file]]//
+
+----
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_01.jpg}} | Polisuperficie originaria. Usate _MergeAllFaces (UnisciTutteFacce) per riunire tutte le superfici coplanari. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_02a.jpg}} |{{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_02b.jpg}} | _FilletEdge (RaccordaBordi) lascia un buco. Non c'è un metodo semplice per riempirlo bene, specialmente con un raccordo. L'aspetto più difficile è che i raccordi orizzontali lungo la sommità da entrambi i lati del buco non sono allineati tra di loro. Per compensare questo gradino, sarebbe necessaria una superficie che congiunga la faccia inclinata con la grande faccia verticale. AnnullaOperazione.|
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_03a.jpg}} |{{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_03b.jpg}} | Create temporaneamente un nuovo oggetto che contenga la superficie superiore, quella frontale inclinata e una superficie verticale di taglio coplanare a quella originale che forma l'angolo dell'oggetto originario, in corrispondenza del foro. Esse sono contrassegnate rispettivamente con a, b, c. Un modo semplice per creare questa polisuperficie è quello di estrudere gli spigoli corrispondenti (in rosso).|
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_04a.jpg}} |{{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_04b.jpg}} | Raccordate gli spigoli dell'oggetto temporaneo; vi servono solo quelli che convergono sull'angolo incriminato. Le superfici importanti sono la piccola porzione di superficie sferica ed il raccordo che corre all'interno sulla sommità della figura originaria. Estraete queste superfici e cancellate tutto il resto dell'oggetto temporaneo. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_05.jpg}}  | Riapplicate il comando FilletEdge (RaccordaBordi). Estraete e ripristinate (AnnullaTaglio) le superfici dei raccordi che convergono sullo spigolo incriminato, inclusi quelli dell'oggetto temporaneo di cui sopra. Alcuni saranno molto lunghi. (Nota: li ho troncati un po' sul disegno per migliorare la visibilità). Estraete e ripristinate (AnnullaTaglio) la grande superficie frontale verticale (Nera). |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_06a.jpg}} | Ora usate il comando di raccordo delle superfici(RaccordaSuperficie, estendi=no) per creare le connessioni necessarie. |@@[Tab,"** a - Raccordo inclinato e faccia anteriore", Newline, Tab, "** b - Raccordo inclinato e raccordo orizzontale superiore", Newline, Tab, "** c - Raccordo orizzontale superiore e la piccola porzione di sfera del raccordo temporaneo", Newline, Tab, "** d - Raccordo orizzontale superiore e raccordo temporaneo lungo (rosso)"]@@|
+
+\\
+
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_07a.jpg}} | {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Mitch2/Mitch2_07b.jpg}} | Tutti questi raccordi sono sovrapposti ed è necessario troncarli tra di loro e con i raccordi originali e la superficie frontale: il tutto va poi riunito. Alla fine si utilizza solo una piccola parte del raccordo temporaneo lungo e della superficie sferica temporanea. Ho ritenuto più semplice eliminare le superfici piane inferiori e usare il comando Chiudi dopo aver unito tutto il resto.  -PG. |
+
+-- Bel lavoro John e Pascal!
+
+----
+
+======Soluzione alternativa======
+//[[http://en.wiki.mcneel.com/content/upload/files/MitchChallenge2-TWH.zip|Download Rhino 3DM file]]//
+
+
+| {{http://en.wiki.mcneel.com/content/upload/images/MitchChallenge2-TWH.jpg}} | Soluzione alternativa. Istruzioni disponibili nel file 3DM. -Tan W.H. |
+
+
+
+

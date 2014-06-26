@@ -1,0 +1,96 @@
+====== How To: Simplify polylines ======
+====== .NET ======
+> **Summary:** //An implementation of the Douglas~Peucker polyline reduction algorithm//
+
+=====Introduction=====
+The Douglas~Peucker algorithm simplifies a polyline by removing vertices that do not contribute (sufficiently) to the overall shape. It is a recursive process which finds the most important vertices for every given reduction:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/DouglasPeucker_01.jpg}}
+
+\\
+
+First, the most basic reduction is assumed. A single segment connecting the beginning and end of the original polyline. This is when the recursion starts, the most significant vertex (the most distant) for this segment is found and, when the distance from this vertex to the segment exceeds the reduction tolerance, the segment is split into two sub-segments, each inheriting a subset of the original vertex list:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/DouglasPeucker_02.jpg}}
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/DouglasPeucker_03.jpg}}
+
+\\
+
+Each segment continues to subdivide until none of the vertices in the local list are further away than the tolerance value:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/DouglasPeucker_04.jpg}}
+
+\\
+
+=====Main Function=====
+
+<code c++>
+Public Shared Function DP_Reduction(ByVal P As OnPolyline, ByVal tolerance As Double) As OnPolyline
+    Dim N As Int32 = P.Count() - 1
+    If N < 5 Then Return P 
+
+    Dim vertex_tag(N) As Boolean 
+    vertex_tag(0) = True
+    vertex_tag(N) = True
+    For i As Int32 = 1 To P.Count() - 2
+        vertex_tag(i) = False
+    Next
+
+    DP_Recursion(P, vertex_tag, tolerance, 0, N)
+
+    Dim nPath As New OnPolyline
+    nPath.SetCapacity(N + 1)
+
+    For i As Int32 = 0 To vertex_tag.GetUpperBound(0)
+        If vertex_tag(i) Then nPath.Append(P(i))
+    Next
+
+    Return nPath
+End Function
+
+</code>
+\\
+
+=====Recursive component=====
+
+<code c++>
+Private Shared Sub DP_Recursion(ByVal P As OnPolyline, ByVal vertex_tag As Boolean(), _
+                                ByVal tolerance As Double, ByVal A As Int32, ByVal B As Int32)
+    If (B <= A + 1) Then Return
+
+    Dim dp_segment As New OnLine(P(A), P(B))
+    Dim max_dist As Double = 0.0
+    Dim local_dist As Double
+    Dim max_index As Int32 = A
+
+    For i As Int32 = A + 1 To B - 1
+        local_dist = dp_segment.DistanceTo(P(i))
+        If local_dist > max_dist Then
+            max_dist = local_dist
+            max_index = i
+        End If
+    Next
+
+    If max_dist > tolerance Then
+        vertex_tag(max_index) = True
+
+        DP_Recursion(P, vertex_tag, tolerance, A, max_index)
+        DP_Recursion(P, vertex_tag, tolerance, max_index, B)
+    End If
+End Function
+
+</code>
+[[David@McNeel.com|Contact]] the [[people:davidrutten|author]]
+
+
+
+{{tag>Developer dotnet}}

@@ -1,0 +1,73 @@
+> **Sommario:** //10 o più suggerimenti per usare Rhino, che vi avrebbero fatto risparmiare un sacco di tempo, se solo aveste saputo che esistono da anni!//
+
+=====1. Il Blocco di direzione del tasto Tab=====
+
+Dopo aver effettuato una prima selezione all'interno di un comando ---come Linea o Scala, se premete il tasto TAB prima della seconda selezione, questo obbliga la direzione lungo l'asse che passa tra il primo punto selezionato e la posizione del cursore al momento in cui avete premuto il tasto TAB . Potete muovervi liberamente lungo questo asse obbligato per effettuare la seconda selezione alla distanza desiderata. Funziona con tutti i comandi che richiedono l'input di 2 punti per la direzione.
+
+Particolarmente utile in combinazione con lo Snap agli oggetti <del>-</del> (Osnap).
+
+**2.[[CameraManipulation|Vista dinamica da tastiera (inglese)]]**
+
+----
+Usare il tasto Dx del mouse in combinazione con il tasto 'CTRL' e 'SHIFT'per spostarvi all'inteno della vista e Zoomare rispettivamente.Il pulsante Dx del mouse da solo ruota la vista. Se disponete di un 'mouse con rotellina', potete usare quella per lo Zoom dinamico.
+
+=====3. Il comando DragMode=====
+
+L'opzione UVN di questo comando con Ortho attivo, permette di trascinare i punti di controllo delle superfici in direzione normale alla superficie stessa, anzichè lungo gli assi X e Y del piano di costruzione. Non dimenticate di riportare **DragMode** al suo default CPlane, se volete tornare al comportamento normale (faccina indica UVN).
+
+=====4. Filtri di selezione=====
+
+Potete selezionare gli oggetti da usare dalla riga di comando in molti casi- uno dei più utili è ** 'crv' ** per usare solo curve. Esempio: se desiderate troncare con lo spigolo anziché con l'intera superficie, iniziate il comando **Tronca**, poi al prompt per l'oggetto che tronca, digitate ** 'crv' ** ed Invio. Verrà utilizzato lo spigolo della superficie come oggetto che tronca. Non vi è dunque necessità di duplicare lo spigolo stesso e creare una curva per troncare.
+
+=====5. Renderizzazione rapida=====
+
+Nel renderizzatore di base di Rhino e in Flamingo il comando **AnteprimaRender** effettua una renderizzazione veloce ed approssimata, molto utile per verificare illuminazione, colori e composizione, senza dover aspettare per una renderizzazione completa. Usare**AnteprimaRenderSuFinestra** per effettuare la prova su una porzione della vista è ancora più veloce.
+
+=====6. Troncare (e estendere)=====
+
+Durante l'operazione su curve, usate **RaccordaCurve** con opzione raggio a zero per troncare e riunire gli spigoli in una sola operazione. Poiché **RaccordaCurve** ripete le ultime impostazioni e di solito viene usato più frequentemente degli smussi, sarebbe opportuno usare **Smussa** per questo trucchetto, ponendo entrambe le distanze a zero, in modo da tenere il comando **RaccordaCurve** con le impostazioni usate di solito. La V4 ha il comando **Connect** specifico per questo.
+
+=====7.  Aprire files in Rhino trascinandoli=====
+
+Trascinando un file apribile da Rhino sulla riga di comando o sulla finestra di un'istanza di Rhino, si apre un box di dialogo con le  scelte **Apri**, **Inserisci**, **Importa**, o **Allega**;fate la scelta appropriata e premete OK. Non c'è gara quanto a velocità con il sistema classico di ricerca del file!  I files possono essere di //qualsiasi// tipo  Rhino sia in grado di leggere, .3DM, IGES, STEP, ecc...  Potete persino trascinare più files contemporaneamente!
+
+<color red>(NDT:salvo poi ritrovarsi con il sistema bloccato per esaurimento della memoria o dover aspettare diversi minuti per veder apparire qualcosa, poichè si è in modalità render)</color>
+
+=====8.  Linee a lunghezza definita=====
+
+Digitando un valore numerico dopo aver selezionato il punto iniziale durante il comando **Linea** determina la lunghezza del tratto, indipendentemente dalla posizione del punto finale (la posizione del mouse quando clickate la fine).  Funziona anche sui tratti di una **Polilinea**.
+
+=====9.  Schemi=====
+
+Potete salvare e ripristinare impostazioni di lavoro di Rhino usando uno **schema**. In sostanza, gli schemi sono chiavi di registro Windows (cartelle di registro) che contengono:
+
+  * Defaults dei comandi;
+  * Posizioni delle finestre di dialogo;
+  * Tutte le impostazioni nelle finestre Opzioni di Rhino, quali aliases, impostazioni dei colori e dell'aspetto, impostazioni del mouse, impostazioni di render, tasti di abbreviazione;
+  * La lista degli ultimi files usati;
+  * La posizione delle Toolbar.
+
+Per salvare uno schema, create un tasto abbreviazione con indirizzo "C:\Program Files\Rhino3.exe" /scheme="NomeSchema". Applicate tutte le vostre impostazioni e preferenze ed esse verranno salvate nella chiave di Registro
+
+HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: NomeSchema.
+
+Se avete dimestichezza, potete editare direttamente in **Regedit** le variazioni che desiderate.E' possibile crere tanti schemi quanti servono, il che aiuta quando più utenti Rhino usano la stessa macchina.
+
+//<color darkslateblue>Mitch dice: Questa è una grande risorsa! Io uso 4 schemi diversi, per lingue, interfacce e configurazioni differenti, ecc. Sfortunatamente lo schema non è direttamente salvabile mentre si lavora, ma deve essere creato apposta su un file vuoto di Rhino e salvato come Default, oppure si devono copiare le chiavi di registro. Sarebbe **veramente** utile poterlo fare al volo</color>//
+
+[[rhino:faqschemi|Ulteriori informazioni su come si lavora con gli schemi]]
+
+=====10.  Metodi di selezione=====
+
+Una particolarità del tutto evidente che molti (me compreso) non hanno colto in passato è che:
+
+  * se selezionate trascinando da destra verso **sinistra** creando una //finestra passante// (linee tratteggiate), tutto quello che toccate viene selezionato, anche se solo parzialmente incluso.
+  * Se invece trascinate da sinistra verso **destra** creando una //finestra di contenimento// (linee continue),dovete includere per intero l'oggetto che volete selezionare.
+Sapendo come usare questa particolarità, potete risparmiare frustranti tentativi di selezionare quel dannato oggetto in mezzo a molti altri. Assicuratevi solo di aver scelto "Combo" come metodo di selezione in Opzioni di Rhino --> Mouse.
+
+Ecco qui un'utilissima **soffiata**:
+
+  * //tenendo premuto il tasto Alt, mentre si seleziona, si evita di trascinare gli oggetti//.
+
+
+

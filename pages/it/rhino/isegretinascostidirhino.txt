@@ -1,0 +1,158 @@
+> **Sommario:** //Dozzine di suggerimenti e scorciatoie, da parte di esperti Rhinofili, che semplificano azioni frequenti e fanno risparmiare ore di tempo! (questa rubrica combina le precedenti "I 10 trucchi da conoscere..." e "Quick Tips")//
+
+=====1. Il blocco della direzione con il tasto Tab=====
+
+Una volta effettuata la prima selezione all'interno di un comando come **Linea** o **Scala**, se premete il tasto **TAB** prima della seconda selezione, la direzione viene costretta lungo un solo asse, quello tra il primo punto selezionato e la posizione del puntatore del mouse al momento dell'uso di **TAB**. Una volta bloccata la direzione, potete selezionare qualsiasi punto lungo di essa come secondo input. Funziona per tutti i comandi che prevedono l'immissione di 2 punti per la definizione della direzione. Particolarmente vantaggioso in combinazione con gli Osnap agli oggetti e la modalità Ortogonale.
+
+**2. [[CameraManipulation|Manipolazione dinamica del punto di vista]]**
+
+----
+Trascinare con il pulsante DESTRO del mouse in abbinamento con **Ctrl** e **Shift** per zoomare e spostare. Trascinando con il solo tasto destro premuto ruota o sposta la vista. Se il vostro mouse dispone di una rotellina centrale, potete usare quella per lo zoom dinamico.
+
+Il comando **_Camera** (tasto scelta rapida **F6**) fornisce l’opzione di Mostrare o Nascondere il cono dell’ottica. Potete facilmente modificarne le caratteristiche semplicemente spostando i suoi punti di controllo. Utile se vi serve un punto di vista ed una direzione specifici.
+
+=====3. Il comando _DragMode=====
+
+Con l’opzione UVN costringe lo spostamento dei punti di controllo lungo le isocurve U e V della superficie, anziché lungo le X e Y del Cplane (piano di costruzione). Non dimenticate di resettare l’opzione Cplane del comando **_DragMode** per il comportamento normale (lungo X e Y di Cplane).
+
+=====4. Filtri di selezione=====
+
+Potete restringere la selezione da tastiera (sulla riga di comando): funziona in molte occasioni, la più utile è **crv**, per selezionare le sole curve. Esempio: se volete trimmare con una curva di bordo anziché con l’intera superficie, iniziate il comando //Trim, poi al prompt per selezionare l’oggetto che taglia digitate **crv** e Invio. Cliccando sul bordo della superficie, verrà selezionata la curva di bordo. Non vi è alcuna necessità di fare **//DupEdge** per avere a disposizione la curva di bordo con cui trimmare.
+
+=====5. Anteprima di render=====
+
+Nel renderizzatore base di Rhino o in Flamingo il comando //**RenderPreview** produce un’anteprima veloce ed approssimativa, che è molto utile per valutare illuminazione, colore e composizione, senza dover aspettare per una renderizzazione completa. Utilizzate **//RenderPreviewWindow** per fare l’anteprima solo su una porzione del viewport, è ancora più rapido.
+
+=====6. Trimmare=====
+
+Se dovete trimmare (troncare) linee, usate //**Fillet** con raggio zero per trimmare ed unire a spigolo vivo. Dal momento che le impostazione vengono mantenute e normalmente **//Fillet** viene usato più spesso di //**Chamfer**, può essere opportuno usare quest’ultimo, ponendo entrambe le distanze a zero e tenere **//Fillet** con le impostazioni che vi servono, anziché porre il raggio a zero ogni volta che vi serve uno spigolo vivo. La V4 ha il comando **Connetti** specifico per questo scopo.
+
+=====7.  Trascinare file all’interno di Rhino=====
+
+Trascinando un file compatibile con Rhino sul bottone minimizzato di un’istanza di Rhino o su un sua viewport, viene aperta una finestra di dialogo con le pzioni **Apri**, **Inserisci**, **Importa**, o **Allega**;sceglietene una e OK. Più veloce che navigare con il browser! I file possono essere di ogni tipo che Rhino è in grado di aprire, .3DM, IGES, STEP, ecc... Potete trascinare contemporaneamente più file. //<color red>Dalla versione di Windows XP SP 2, non è più possibile trascinare i file sul bottone del programma minimizzato. Anziché rilasciare il pulsante del mouse quando avete raggiunto la posizione del bottone, continuate a tenerlo premuto, per aprire la finestra attiva del programma, dove potrete caricare il vostro file.</color>//
+
+> **Novità:** //In Rhino 4.0, è possibile trascinare files RhinoScript (*.rvb) su un’istanza di Rhino, per caricare lo script. Sono disponibili nuovi metodi di scripting per aggiungere lo script automaticamente a quelli che vengono caricati all’avvio ed anche per dotarli automaticamente di alias che li attivano. Consultare l’help su RhinoScript per maggiori informazioni.//
+
+=====8.  Limitazione lunghezza di una linea=====
+
+Digitare un numero sulla riga di comando, dopo aver selezionato il punto di partenza con il comando **Linea**, fissa la lunghezza della linea al valore digitato, qualunque sia la posizione scelta per il punto finale. Funziona anche per i segmenti del comando **Polilinea** ed in altri casi.
+
+=====9.  Schemi=====
+
+È possibile salvare e richiamare le impostazioni di lavoro usando uno **schema**. Sostanzialmente gli schemi sono Chiavi di registro di Windows (cartelle di registro) che contengono:
+
+  * Impostazioni di default dei comandi;
+  * Posizioni delle finestre di dialogo;
+  * Tutte le impostazioni nelle pagine Opzioni di Rhino, quali alias, impostazioni dei colori di   interfaccia, impostazioni del mouse, del render, impostazioni tasti di scelta rapida;
+  * Lista dei file usati di recente;
+  * Schema delle barre degli strumenti.
+  * //**Lo stato di caricamento o non caricamento di un plug-in non può essere controllato   tramite gli schemi**//
+
+Per salvare uno schema, è necessario creare un collegamento sul desktop alla destinazione “C:\Program Files\Rhino 3.exe”\schema=”NOMESCHEMA”. Aprire un’istanza di Rhino con questo collegamento e settare tutte le caratteristiche ed opzioni di Rhino secondo le vostre preferenze: esse verranno salvate nella chiave di registro
+
+HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: NOMESCHEMA.
+
+Se avete dimestichezza con regedit, potete apportare variazioni allo schema direttamente nella chiave di registro Windows. È consentita la creazione di un numero arbitrario di schemi e relativi collegamenti, il che è di aiuto se più utenti Rhino condividono lo stesso computer.
+
+<color darkslateblue> //Osserva Mitch: È una funzione utilissima! Io uso 4 schemi diversi per lingua ed impostazioni, ecc. Purtroppo non è ancora possibile configurarla all’interno di Rhino, vale a dire, salvare direttamente uno schema attuale, al posto di crearne uno nuovo vuoto e settare tutte le impostazioni o tentare di copiare ed editare la chiave di registro.</color>//
+
+//<color #0081D2>Precisa Armido: La posizione dove vengono salvati gli schemi e le chiavi di registro è sempre nella partizione del sistema operativo corrente, nel caso sulla macchina ce ne fossero diversi.</color>//
+
+[[rhino:faqschemi|Ulteriori informazioni su come lavorare con gli schemi di Rhino]]
+
+=====10.  Metodi di selezione=====
+
+Un’ovvietà che molti hanno trascurato in passato (me compreso) è il fatto che se trascinate per selezionare con una **finestra di selezione** (linea tratteggiata) **da Destra verso Sinistra**, tutto quello che toccate anche parzialmente verrà incluso nella selezione. Se viceversa selezionate da **Sinistra verso Destra**, creando una **finestra di selezione**(con riga continua), solo gli oggetti interamente inclusi nella finestra verranno selezionati. Sapendo quale delle due forme di selezione usare in quale occasione vi farà risparmiare tempo prezioso. Assicuratevi solo che il metodo di selezione nelle Opzioni/Mouse di Rhino sia settato su “Combo”. Ecco qui un utile **suggerimento**: //tenendo premuto il tasto Alt mentre si seleziona, evitate di spostare gli oggetti.//
+
+Commento
+
+È possibile anche specificare quale tipo di finestra di selezione usare, ignorando l’impostazione Combo, digitando “C” o “W” prima di selezionare, “C” quando vi serve ad esempio di trascinare da destra verso sinistra e volete selezionare un oggetto specifico tra tanti.
+
+=====11.  Snap agli oggetti=====
+
+Cliccando con il tasto destro sulle caselle degli Osnap rende attivo quello specifico e disattiva tutti gli altri. Tenendo premuto il tasto Alt sospende temporaneamente gli Osnap senza disattivarli.
+
+=====12.  Tasti direzione=====
+
+Usare i Tasti Direzione per alterare a passi successivi il punto di vista in qualsiasi viewport è una funzione utile e complementare rispetto al movimento dinamico usato in vista prospettica con il tasto Dx premuto.
+
+I tasti direzione possono essere usati anche per muovere incrementalmente oggetti e punti di controllo di una distanza predeterminata. Premendo contemporaneamente anche il tasto Alt da solo e con **Ctrl** o **Shift** consente tre diverse distanze impostabili in Opzioni/Aiuto alla modellazione. Potete anche scegliere di usare il solo tasto direzione, sempre in abbinamento con Ctrl o Shift (in questo caso si perde la funzione di manipolazione del punto di vista descritta prima). I tasti direzione muovono gli oggetti in direzione ortogonale rispetto al Cplane o al World, a seconda della specifica impostazione (Opzioni/Aiuto alla modellazione). In aggiunta, i tasti PagSu e PagGiù servono a muovere incrementalmente in Z.
+
+=====13.  I tasti Home (freccia diagonale) e Fine=====
+
+Usando i tasti Home e Fine per ripercorrere i passi di alterazione delle viste è un comodo modo di **spostarsi avanti ed indietro nella storia dei punti di vista**.
+
+=====14.  Smussare gli spigoli di un solido=====
+
+Costruire l’oggetto senza smussi e unire tutte le superfici in una polisuperficie chiusa. Controllare che lo sia in Rhino/Edit/Proprietà dell’oggetto/Oggetto/Dettagli (pulsante). Potete anche controllare che non vi siano spigoli aperti con il comando _ShowEdges con l’opzione NakedEdges attiva. Potete far pratica con una semplice parallelepipedo.
+
+Costruite prima lo smusso a raggio maggiore con il comando //FilletEdge, selezionando tutti gli spigoli adiacenti che volete smussare con quel raggio in un’unica operazione. Riempite eventuali buchi lasciati dall’operazione di smusso (usare //EdgeSrf, _Patch, ecc.). Riportatevi nella condizione di polisuperficie chiusa.
+
+Costruite gli smussi di raggio più piccolo, selezionando tutti gli spigoli adiacenti che vi servono smussati, compresi alcuni derivanti dalle operazioni di smusso precedenti. Controllate di nuovo di avere una polisuperficie chiusa.
+
+Potete anche smussare tutti gli spigoli di un solido allo stesso raggio in una sola operazione, selezionando l’oggetto con una finestra di selezione.
+
+=====15.  Le barre degli strumenti possono essere mostrate/nascoste con una macro come questa:=====
+
+//-Toolbar Toolbar "Default" Toggle "Main1" Enter _Enter//
+
+Default è il workspace ovvero il nome della 'Collezione' – tra virgolette se ci sono spazi nel nome; Main1 è il nome della singola barra, pure tra virgolette se ci sono spazi – io ce le metto comunque, così non ci penso più… Al posto di Toggle potete anche inserire Show o Hide, se volete essere più espliciti. (Toggle alternativamente nasconde o mostra)
+
+<color sienna>Scrive Mitch: se avete un solo workspace aperto alla volta, potete usare Enter al posto del nome del workspace -</color>
+
+//-Toolbar Toolbar Enter Toggle Toolbarname Enter Enter//
+
+Per interi workspaces usate Close o Open :
+
+//-Toolbar Collection Open "BonusTools" Enter Enter//
+
+> **Novità:** //In RhinoV4, potete cliccare Dx su una posizione vuota nell’area riservata alle barre degli strumenti, per mostrarne l’intera lista disponibile: scegliete quelle da mostrare. La funzione LockToolbar si trova in fondo alla lista.//
+
+=====16.  Usare il comando _Dot per allegare etichette visibili agli oggetti=====
+
+Usate le etichette prenumerate da 0 a 9 oppure il comando //**Dot** ed immettete il testo che vi serve. Si trovano nella barra dei comandi **//Annotate**. I dot hanno il vantaggio di rimanere sempre paralleli al piano di vista e di adattare la propria dimensione, indipendentemente da come si ruota o si ingrandisce. Svantaggi- non è possibile modificare la dimensione o lo stile del testo, perché interni a Rhino (non esportabili). Suggerimento: per frasi di testo con spazi, includere tutto tra virgolette
+
+> **Novità:** //In Rhino V4, doppio clic su un dot per editarne il testo. Potete usare questa funzione per aggiungere testo con spazi- create un dot con un qualsiasi testo, doppio clic per editarlo e modificate il testo nella finestra di edit, senza bisogno di aggiungere virgolette. Alla V4 è anche stato aggiunto il comando _SelDot, per selezionarli.//
+
+=====17.  Usare il comando _CheckNewObjects per rilevare errori durante la creazione degli oggetti=====
+
+Questo comando è uno strumento per scoprire bug che possono creare geometria invalida. È disattivato di default.
+
+Per attivarlo, digitare **_CheckNewObjects** sulla riga di comando.
+
+Questa funzione rende possibile scoprire e sistemare la causa che origina geometria invalida nel modello.
+
+Se vi sentite a vostro agio nell’aiutarci a rendere Rhino privo di bug (o trovare oggetti invalidi per vostro conto), vi preghiamo di attivare questa funzione.
+
+Osserva Armido: scoprire se l’operazione in corso sta creando geometria invalida, consente di porvi rimedio all’istante, evitando spiacevoli sorprese in fase avanzata di modellazione.
+
+Come funziona _CheckNewObjects:
+
+Ogni volta che un oggetto viene creato o importato da un file, Rhino attiva il comando //Check. Se //Check determina che l’oggetto è invalido, Rhino mostra una finestra di avvertimento in tal senso. Questo messaggio appare per ogni oggetto invalido creato/importato.
+
+//Check è un processo che richiede tempo. Può rendere l’importazione di file ed il lavoro con solidi complessi in una certa misura più lento. Se vi rendete conto che vi rallenta troppo, potete disattivarlo, digitando //CheckNewObjects sulla riga di comando.
+
+[[BadObjects|Ulteriori informazioni su come evitare/sistemare Bad Objects]]
+
+=====18.  Usare _PictureFrames come immagini di sfondo:=====
+
+Il comando //[[rhino:pictureframes|PictureFrames]] può essere usato come una alternativa più valida e flessibile al posto di //BackgroungBitmap. Le immagini possono essere allegate come mappatura ai piani nello spazio 3D e renderizzate, mostrando quindi il disegno, anziché piazzate sullo sfondo del viewport, estranee alla geometria contenuta e poco modificabili con i normali strumenti.
+
+Alcuni vantaggi dell’uso di _[[rhino:pictureframes|PictureFrames]] -
+
+  * Si possono piazzare un numero arbitrario di immagini nella scena ed esse sono visibili in   tutti i viewport.
+  * Le immagini possono essere ruotate e scalate secondo la necessità, a differenza delle   Background Bitmap che sono allineabili solo con gli assi X e Y del piano di costruzione   (Cplane).
+  * Le immagini possono essere attenuate o rese più o meno trasparenti.
+
+Un possibile difetto è la mancanza di garanzia che l’immagine sia sempre dietro a tutto nello spazio - I PictureFrame sono oggetti reali nello spazio 3d.
+
+[[rhino:pictureframes|Maggiori informazioni su come usare //_PictureFrames// come immagini di riferimento]]
+
+=====19.  Come ottenere la miglior visualizzazione delle BB:=====
+
+[[rhino:backgroundbitmap|Alcuni consigli su come fare in modo che le //BackgroundBitmap// siano visibili con nitidezza]]
+
+----
+
+
+

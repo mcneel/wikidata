@@ -1,0 +1,52 @@
+> **Sommario:** //Alcuni suggerimenti dall’utente di Rhino Steve Howden per la spianatura di superfici ed il ricavo di sagome 2D. Il contesto specifico di questo post sul NG riguardava la spianatura per l’uso di tessuti, ma buona parte dei principi è applicabile in generale alla spianatura di superfici a doppia curvatura in Rhino.//
+
+Ci sono numerosi modi di farlo (spianatura), ma innanzi tutto, (per essere sicuri di parlare la stessa lingua), permettetemi di puntualizzare che esistono 2 tipi di superfici;
+
+a/ spianabili, per es. nessuna curvatura in una direzione, quali cilindri, coni, ecc.
+
+b/ a doppia curvatura, quali le sfere
+
+Di conseguenza, avete due possibilità.
+
+  * Potete progettare i sacchetti creando le linee di cucitura e costruire una superficie di Loft con l’opzione developable. Usando poi ** _Unrollsrf** è possibile ricavare le sagome 2D
+  * Oppure (e questo vi darà molta più flessibilità di modellazione) progettare i modelli usando qualsiasi metodo e successivamente proiettarvi sopra o disegnare delle curve dove desiderate le cuciture e usarle per dividere la superficie in pezzi. Nota: nella V4 è disponibile uno strumento molto utile,  _Shortpath, che produce una curva “geodesica” sulla superficie che può essere ottimale per questo scopo.
+Una volta ottenuti i pezzi di superficie, potete spianarli usando uno dei metodi disponibili per le superfici a doppia curvatura.
+
+> **Nota:** //qualsiasi superficie spianata in questo modo sarà comunque approssimata, ma la scelta oculata delle cuciture minimizza le differenze.//
+
+**Gli strumenti attualmente disponibili sono:**
+
+**Smash**
+
+Fa parte della V4 ed è quindi gratuito. Attenzione a provare entrambe le direzioni di spianatura e verificare quale produce i migliori risultati. Osservare inoltre le indicazioni nel dialogo durante l’uso, che riportano la percentuale di variazione dell’area prodotta dalla spianatura. Se vedete che il risultato è più piccolo del 65%, significa che qualcosa è andato storto.
+
+**Expander**
+
+Non è un plug-in gratuito per la V3. Attualmente il [[rhino:mio|mio]] favorito. Produce ottimi risultati ed ha il grande vantaggio di fornire una mappa visiva in falsi colori, che mostra immediatamente dove e di che entità si verifica la deformazione. Disponibile qui:
+
+http://www.shipconstructor.com/productsandsolutions/companionproducts/expander.html
+
+> **Nota:** //non hanno fatto alcun accenno alla possibilità di renderlo disponibile per la V4 e lo sviluppo si è pressoché fermato. Rompete dunque le scatole sull’argomento, prima di pagare.//
+**Laminadesign**
+
+Programma autonomo di buona qualità, in grado di leggere formato .obj da Rhino. Ha il difetto di non avere alcuna possibilità di spezzare le superfici, obbligando a fare questo lavoro in Rhino, prima dell’esportazione. Se poi il risultato non è soddisfacente, bisogna fare tutto daccapo.
+
+Disponibile qui: http://laminadesign.com/
+
+**TouchCAD**
+
+Programma autonomo con una metodologia di modellazione che mi fa perdere la testa. Ha il grande vantaggio di fare la spianatura in tempo reale, nel senso che ogni modifica sul modello 3D aggiorna immediatamente le sagome 2D, qualità utilissima per ottimizzare il consumo di materiale. Disponibile qui: http://www.touchcad.com/
+
+> **Nota:** //non è possibile importare le superfici di Rhino in TouchCAD. È necessario modellare in TC.//
+**Optitex**
+
+Non è uno strumento di spianatura in senso stretto, ma possiede alcune caratteristiche che consentono di prendere i pezzi spianati e cucirli insieme per simulare il risultato. Potete definire in dettaglio le caratteristiche del tessuto, la tensione delle cuciture, ottenendo un modello MOLTO accurato, fino alle piccole pieghe di tensione in corrispondenza della cucitura. È anche un programma completo per il disegno 2D delle sagome, per l’annidamento, la scalatura e l’esecuzione del taglio CN. Lo usiamo da tempo immemorabile e ci piace molto. Caro come il fuoco, ma vale fino all’ultimo centesimo.
+
+Ieri l’Amministratore delegato mi ha detto che la spianatura è in fase Alfa e sarà disponibile dalla prossima versione. Incrociamo le dita.
+
+Disponibile qui: http://www.optitex.com
+
+
+
+
+

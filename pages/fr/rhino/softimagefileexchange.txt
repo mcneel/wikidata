@@ -1,0 +1,54 @@
+====== Échange de fichiers Softimage ======
+
+> **Remarque:** //Ces notes ont été créées il y a quelques temps déjà et se trouvaient dans l'aide de Rhino. Cependant, il semblerait que ces informations devraient être revues et mises à jour par des personnes familières avec le sujet, je le déplace donc ici. ~mb//
+
+Trois options sont possibles pour obtenir des modèles NURBS de Rhino dans Softimage. Toutes trois présentent des avantages et des inconvénients.
+
+
+Softimage peut aussi importer les formats 3DS, DXF et OBJ créés dans Rhino.
+
+=====Utiliser l'utilitaire de Softimage :=====
+  - Dans le menu Fichier, cliquez sur Exporter les objets sélectionnés ou sur Enregistrer sous.
+  - Dans la boîte de dialogue Enregistrer, dans la case Type de fichier, sélectionnez IGES.
+  - Donnez un nom au fichier et cliquez sur Enregistrer.
+  - Dans la boîte de dialogue Options d'exportation IGES, dans la case Type IGES, sélectionnez Softimage.
+  - Lancez iges2soft.exe avec les options suivantes :
+   iges2soft -f -L -S3 -s3 -T5 -t3 -v3 -R [RSRC_DIR] MyIgesFile.igs MyDSCFile.dsc
+   [RSRC_DIR] = Dossier de ressources de Softimage (souvent c\soft3d_3.7\3d\bin\rsrc)
+iges2soft.txt contient les informations concernant les options de la ligne de commande.
+
+=====Utiliser l'utilitaire d'échange de fichiers Polytrans :=====
+
+Polytrans d'Okino peut lire les fichiers IGES et écrire les fichiers Softimage. Visitez leur site Internet pour plus d'informations : www.okino.com.
+
+=====Utiliser le module Phoenix Tools :=====
+
+Conseil d'un utilisateur professionnel de Rhino :
+
+Téléchargez le module externe d'importation IGES Phoenix Tools pour Softimage ici :
+
+Page principale :  http://www.phoenixtools.com
+
+Page de téléchargement du module : http://www.phoenixtools.com/products/GreenCD/freeplugs.html
+
+Page de téléchargement avec des modules externes pour Alpha, SGI et x86 (Intel), pour SI versions 3.7sp1 et 3.8 : ftp:ftp.phoenixtools.com/pub/download/Free_Plug-ins/
+
+La meilleure façon d'obtenir des objets correctement limités de Rhino dans Softimage est la suivante :
+
+  - Exportez le modèle sous IGES, variante Softimage.
+  - Dans le menu Fichier, cliquez sur Exporter les objets sélectionnés.
+  - Dans la boîte de dialogue Enregistrer, dans la case Type de fichier, sélectionnez IGES.
+  - Dans la boîte de dialogue Options d'exportation IGES, sélectionnez Softimage.
+
+Si votre modèle est très grand, il vaut mieux exporter les objets séparément. Les choses sont alors plus faciles à trier dans une vue schématique lors de l'assemblage des éléments de la scène par la suite.  Le processus de conversion est aussi moins compliqué lors de l'importation dans Softimage car chaque section importée sera intégrée sous un parent nul.
+
+=====Ouvrez Softimage=====
+
+  - Importez le fichier :  Tools > Import > Objects > PT_IgesImport.
+  - Sélectionnez la base de données où vous voulez que le fichier IGES importé soit enregistré après avoir été converti au format Softimage. (C'est une bonne idée de créer un nouveau répertoire Softimage réservé aux importations IGES.)
+  - Acceptez les paramètres par défaut de Phoenix Tools Iges Import. Le modèle sera traduit et il apparaîtra ensuite dans Softimage.
+  - Sélectionnez tous les modèles [barre d'espace+a] et faites-les tourner de -90 sur l'axe des x :  Model > Effect > Freeze > Rotation.
+  - Enregistrez la scène pour la fusionner ensuite dans une autre scène de Softimage.
+
+
+

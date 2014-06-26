@@ -1,0 +1,67 @@
+====== Diagnosing Rhino 4.0 Startup Errors ======
+
+If Rhino 4.0 fails to start on your computer, use the Rhino Debugging Harness to generate detailed information that will help the Rhino Development Team understand what is happening on your computer.
+
+=====Debug Phase 1, Safe Mode:=====
+
+**<color darkred>1.</color>** **Install** the latest build of **Rhino 4.0** (Service Releases are downloadable from www.rhino3d.com/download.htm)
+
+**<color darkred>2.</color>** Download the **[[http://s3.amazonaws.com/mcneel/rhino/4.0/misc/RhinoDebugHarness.exe|Rhino Debugging Harness]] ** and save it to your desktop.
+
+**<color darkred>3.</color>** Start **RhinoDebugHarness.exe**
+
+**<color darkred>4.</color>** **Select** the **Start in Safe Mode** checkbox.
+
+**<color darkred>5.</color>** **Clear** the **[[rhino:opengl|OpenGL]] Acceleration Enabled** checkbox.
+
+**<color darkred>6.</color>** Click the **Start Rhino** Button.
+
+Let Rhino try to start for a few moments.
+
+**Did Rhino start properly?**
+
+**Yes:** Keep Rhino Debug Harness running, and proceed to Debug Phase 2.
+
+**No:** No further testing will help diagnose this problem. Please do the following:
+
+  * Click the View Log button
+  * E-mail a copy of this startup log to McNeel Tech Support at <tech@mcneel.com>.
+  * Please let McNeel Tech Support (<tech@mcneel.com>) know that Rhino does not start in Safe Mode.
+
+=====Debug Phase 2, OpenGL Hardware Acceleration Disabled:=====
+
+**<color darkred>1.</color>** **Clear** the **Start in Safe Mode** checkbox.
+
+**<color darkred>2.</color>** **Clear** the **[[rhino:opengl|OpenGL]] Acceleration Enabled** checkbox.
+
+**<color darkred>3.</color>** Click the **Start Rhino** Button.
+
+**Did Rhino start properly?**
+
+**Yes:** Keep Rhino Debug Harness running, and proceed to Debug Phase 3.
+
+**No:** Please let McNeel Tech Support know that:
+
+  * Rhino starts in Safe Mode
+  * Rhino does not start with [[rhino:opengl|OpenGL]] Acceleration Disabled.
+
+=====Debug Phase 3, OpenGL Hardware Acceleration Enabled:=====
+
+**<color darkred>1.</color>** **Clear** the **Start in Safe Mode** checkbox.
+
+**<color darkred>2.</color>** **Select** the **[[rhino:opengl|OpenGL]] Acceleration Enabled** checkbox.
+
+**<color darkred>3.</color>** Click the **Start Rhino** Button.
+
+**Did Rhino start properly?**
+
+**Yes:** Rhino seems to be functioning properly. Close the Rhino Debug Harness.
+
+**No:** The problem is likely related to your [[rhino:opengl|OpenGL]] card or driver. Please download the latest [[rhino:opengl|OpenGL]] driver from your computer or video card manufacturer. If this does not solve the problem, please contat McNeel Tech support and let them know that:
+
+  * Rhino started in Safe Mode
+  * Rhino started with [[rhino:opengl|OpenGL]] Acceleration Disable
+  * You updated your video driver.
+  * Rhino does not start [[rhino:opengl|OpenGL]] Acceleration Enabled.
+
+

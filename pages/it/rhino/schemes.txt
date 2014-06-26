@@ -1,0 +1,40 @@
+====== Come duplicare gli schemi modificando il registry======
+> **Nota:** //<color red>Fate attenzione nel modificare il registry!</color>//
+
+        * Dal tasto di Windows "Start", scegliete **esegui, digitate **Regedit** quindi OK.
+        * Scorrete fino a HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0
+        * Quin vedete indicati tutti i vostri schemi. Cliccate col tasto destro sullo schema che volete duplicare e scegliete **Export**.
+  * Salvate il file in un posto che poi ritroverete... tipo il desktop.  Il file ha estensione **.reg**. Il nome del file non è importante, quindi uno che sia chiarisca il contenuto.
+  * Tasto destro sul file .reg, scegliete **Apri con...** e selezionate **Notepad**.
+  * Dentro al file ci sono diversi punti in cui è copiato il nome dello schema originale, tipo: **Scheme: MyCurrentScheme**
+  * Utilizzate la funzione "Sostituisci" di Notepad, rimpiazzate la frase **Scheme: MyCurrentScheme** con **Scheme: MyNewScheme**
+  * Assicuratevi di rimpiazzare "TUTTE" le diciture!
+  * Quando avrete fatto, salvate il file .reg e chiudete Notepad.
+  * Tasto destro sul .reg e scegliete "Unisci".  Quando cliccate OK i dati saranno uniti (o sovrascritti) nel registry nella posizione corretta.
+  * Quello che dovete fare è creare un collegamento sul desktop al tuo nuovo schema di Rhino. La via più facile per farlo è copiare un collegamento già esistente, cliccare col destro del mouse, scegliere proprietà e modificare la destinazione con <color darkslateblue>"..Rhino3.exe **/Scheme=MyNewScheme"**</color>
+  * E' una buona idea rinominare il collegamento con un nome che ricordi che è legato al nuovo schema.
+  * Il nuovo schema dovrebbe partire con tutte le impostazioni dello schema dal quale lo si è copiato.
+  * Lanciate Rhino e modificate tutti i parametri che volete per questo schema (assicuratevi che sia aperto una sola istanza di Rhino), queste modifiche saranno salvate nel nuovo schema automaticamente.
+
+====== Come duplicare uno schema senza modifiche al registro (più o meno).======
+**Questo metodo funziona con Rhino SR 4 o i Bonus Tools installati**
+
+  * Aprite Rhino partendo con lo schema che volete copiare. (controllate che sia l'unico aperto)
+  * Andate su **//Bonus > Tools > Export Options//**
+  * cliccate "Select All"
+  * In alto cliccate "..." (sfoglia) e cercate una posizione facile da ritrovare, date un nome e OK.
+  * Questo file avrà estensione .ini.
+  * Chiudete Rhino, Create un nuovo collegamento sul desktop copiando quello originale di Rhino.
+  * Tasto destro sulla copia del collegamento, scegliete proprietà e modificate la destinazione in: <color darkslateblue>"...Rhino3.exe **Scheme=MyNewScheme</color>"**
+  * E' una buona idea quella di rinominare il collegamento in modo da ricordarsi che è legato al nuovo schema.
+  * Partite da questo collegamento.  Dentro a Rhino scegliete **//Bonus > Tools > Import Options//**
+  * Aprite il vostro nuovo file .ini , assicurandovi di avere tutte le opzioni selezionate, quindi OK per concludere.
+  * A questo punto dovrete riaprire le vostre toolbar/workspace aper concludere la procedura.
+  * Per questo andate su Tools > Toolbar layout, Close per chiudere il workspace corrente, riaprite il vostro workspace/toolbar usuale.
+  * Modificate le opzioni e i parametri che volete in questa istanza di Rhino, questi cambiamenti verranno salvati nel nuovo schema automaticamente.
+
+> **IMPORTANTE:** //Se schemi differenti condividono lo stesso file di workspace (.tb) le modifiche fatte in uno schema saranno riportate negli altri che usano le stesse toolbar. Il file di layout delle toolbar (.tb) è indipendente dallo schema - lo schema riporta solo quali .tb aprire, non la sua struttura. Se avete più istanze di Rhino attive, l'ultima a chiudersi sovrascriverà il file .tb, modificando le toolbar. E' raccomandabile quindi di avere solo un'istanza aperta per volta. Se molti utenti usano workspace personalizzati è meglio avere nomi di workspace separati e corrispondenti ciascuno al suo schema.//
+
+
+
+

@@ -1,0 +1,51 @@
+====== Come trasferire tutte le impostazioni personalizzate da un'installazione di Rhino all'altra ======
+
+=====Dove vengono memorizzate le mie impostazioni?=====
+
+**La maggior parte delle impostazioni di Rhino** non viene memorizzata in file esterni, ma nel Registro di sistema.  Visto che non esiste un unico file che contenga tutte le opzioni e personalizzazioni, per trasferire tutte le vostre impostazioni personalizzate dovrete seguire alcuni passi.  Esistono alcune scorciatoie:
+
+Il modo più semplice di trasferire il grosso delle impostazioni è usare il comando di Rhino **EsportaOpzioni (_OptionsExport)** (V5), che crea un unico file contenente //LA MAGGIOR PARTE// delle impostazioni personalizzate dell'utente. Importando questo file in un'altra installazione tramite il comando **ImportaOpzioni (_OptionsImport)** (V5), tutte le impostazioni verranno trasferite nella nuova installazione.  Potete scegliere quali impostazioni desiderate importare, non è necessario che le importiate tutte.  
+
+In V4, questi due comandi si chiamavano //_ExportOptions// ed //_ImportOptions//; per evitare confusioni con altre opzioni di importazione/esportazione file, sono stati ridenominati in V5. Nella versione italiana rimangono uguali. In V4, le //modalità di visualizzazione// non vengono incluse nel comando EsportaOpzioni, occorre esportarle separatamente. Per farlo, andare su Opzioni > Aspetto > Impostazioni avanzate.  In V5, esse sono incluse ma si possono importare solo tutte in una volta.  Se invece desiderate trasferire singolarmente solo alcune modalità di visualizzazione, usate i pulsanti Esporta/Importa che troverete in Opzioni > Vista > Modalità di visualizzazione.
+
+Il //file dell'area di lavoro// (.tb per V4, .rui per V5) contiene tutte le informazioni sulle barre degli strumenti e si può copiare anch'esso da un'installazione all'altra.  Purtroppo, questo file non contiene le informazioni relative alle posizioni sullo schermo delle varie barre degli strumenti, ma solo le barre stesse ed informazioni che indicano se sono aperte o meno.  Il file .rui contiene anche informazioni sui menu, i quali sono personalizzabili in V5.
+
+Altri elementi che possono essere stati modificati sono i file modello, le modalità di visualizzazione, i plug-in installati, ecc.
+
+====Dove trovo i file delle barre strumenti?====
+
+**In V5**, il file delle barre degli strumenti si trova qui:\\
+<color darkslateblue>C:\Users\(nome utente)\AppData\Roaming\McNeel\Rhinoceros\5.0\UI</color>\\
+Nella maggior parte delle installazioni di Windows, si tratta di una cartella nascosta ed il modo più facile di accedere ad essa è digitando %appdata% nella casella di ricerca.
+
+**In V4**, con Vista, Win 7 o 8, il file delle barre degli strumenti si trova qui:\\
+<color darkslateblue>C:\ProgramData\McNeel\Rhinoceros\4.0</color>\\
+Anche questa è una cartella nascosta; per accedere ad essa, digitate %programdata% nella casella di ricerca come sopra.
+
+In XP, dovrebbe trovarsi qui:\\
+<color darkslateblue>C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\4.0 o 5.0</color>
+
+
+=====Sembra complicato... come faccio ad assicurarmi di aver trasferito tutto?=====
+
+Una procedura di trasferimento generica potrebbe essere come questa:
+
+====Nell'installazione precedente:====
+
+**_OptionsExport** (V5) o **_ExportOptions** (V4) - **EsportaOpzioni** crea un file .ini
+
+  * Realizzate una copia del vostro file dell'area di lavoro (.tb/.rui) se l'avete personalizzato 
+  * Realizzate una copia di ogni file modello personalizzato da voi creato 
+  * Realizzate una copia di ogni altro file esterno usato: plug-in non standard, mappe ambiente, script, ecc.
+  * V4 - Esportate tutte le modalità di visualizzazione personalizzate (se ne avete creata qualcuna) - si crea un file .ini per ogni modalità di visualizzazione
+
+====Nella nuova installazione:====
+
+**_OptionsImport** (V5) o **_ImportOptions** (V4) - **ImportaOpzioni** - ed importate il file .ini creato sopra
+
+  * Copiate i file dell'area di lavoro, i file modello, le mappe ambiente, gli script ed i file dei plug-in nei percorsi appropriati
+  * Andate su Strumenti > Layout delle barre degli strumenti e caricate la vostra area di lavoro personalizzata
+  * Trascinate e rilasciate i vostri plug-in aggiuntivi nella finestra di Rhino per installarli (alcuni richiedono un programma di installazione esterno; usatelo se necessario)
+  * Impostate Rhino in modo che si apra con il vostro modello template personalizzato.
+  * Nella sezione File delle Opzioni, impostate i percorsi degli script, dei file modello, ecc. se essi non sono quelli standard.
+  * V4 - Andate su Opzioni > Aspetto > Impostazioni avanzate ed importate tutte le modalità di visualizzazione personalizzate create, una alla volta

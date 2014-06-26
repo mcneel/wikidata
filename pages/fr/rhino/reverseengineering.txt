@@ -1,0 +1,49 @@
+====== Rétroconception ======
+> **Sommaire:** //Quelques informations regroupées sur la rétroconception dans Rhino.//
+
+Rhinoceros n'est pas un logiciel automatique de rétroconception.
+
+En principe, les nuages de points ou les maillages sont utilisés comme référence pour modéliser l'objet avec des surfaces NURBS.
+
+Vous pouvez extraire des courbes de section d'un nuage de points (commande SectionNuagePoints) ou d'un maillage avec la commande Section.
+
+Des modules sont également disponibles pour la rétroconception, visitez http://www2.rhino3d.com/resources/default.asp?category=13&language=fr
+
+Consultez aussi http://www.flexicad.com/produkte/erweiterungen/rhinoreverse/uebersicht.htm. (en anglais)
+
+----
+La commande Patch est le seul outil que vous pouvez utiliser directement pour créer une surface à partir d'un groupe de points. Mais vous pouvez également utiliser SectionNuagePoints pour créer des courbes tout d'abord et utiliser ensuite ces courbes pour construire des surfaces nurbs.
+
+----
+Il existe un site en anglais très intéressant sur le travail avec des nuages de points : http://www.rhino3.de/design/modeling/reengineering/PointCloud.shtml
+
+----
+Pour créer une surface directement à partir d'un nuage de points vous avez plusieurs possibilités :
+
+SMURF pour Rhino 3.0, http://www2.rhino3d.com/resources/display.asp?language=&listing=93 Smurf est un module de Rhino qui permet la conversion interactive de maillages en patchs de surfaces NURBS.
+
+
+
+
+Le module SMURF travaille avec les maillages. Par conséquent, si vous avez un nuage de points, vous devrez le convertir en maillage en premier lieu.
+
+Convertisseurs :
+
+  * [[rhino:points2polys|Points2Polys]] est un convertisseur de nuages de points en maillage GRATUIT de Paraform. Il est conçu pour être utilisé sur des données de points brutes non structurées de taille moyenne (environ 500.000 points). http://www.paraform.com/ppdl/
+  * MeshFromPoints - fait partie des outils extra de Rhino 3.0 inclus dans Rhino 3.0 SR4. Recherchez dans les archives du forum de Rhino pour plus d'informations sur ce sujet.
+  * Regardez dans les archives du forum et dans la page de ressources de Rhino pour d'autres traducteurs de nuages de points récents.
+
+----
+Admettons que vous voulez une surface de haute qualité sur un produit complexe, 2 ans d'expérience devraient faire l'affaire ! Mais si la qualité de la surface n'importe pas ou si vous travaillez sur une forme très simple, SMURF et les autres modules de ce type peuvent vous aider. Sans voir le modèle ou connaître votre projet, la plupart des gens utilisent les données du nuage de points comme référence pour créer un modèle de zéro en utilisant de bonnes techniques de modélisation, tout en adaptant exactement les données scannées à la tolérance recherchées, vraiment très dur !
+
+----
+La rétroconception est une des tâches les plus difficiles à réaliser dans Rhino suivant l'élément scanné. Je l'ai fait et ce n'est pas un procédé facile ou particulièrement amusant, sauf s'il s'agit d’une carte topographique dans quel cas ce devrait être possible d'obtenir quelque chose avec Patch. Mon conseil est de ne pas entreprendre cette tâche de conversion entre le nuage de points et les objets NURBS à moins que ce ne soit absolument nécessaire. Il existe des programmes de FAO qui peuvent travailler avec des fichiers de maillage si le problème se situe ici. Et si vous avez vraiment besoin d'utiliser des NURBS, faites vous aider par quelqu'un ayant beaucoup d'expérience avec Rhino - il n'y a pas de secret, vous devez juste connaître Rhino sur le bout des doigts - ou achetez un logiciel spécialisé dans la rétroconception si vous devez le faire en un temps raisonnable.
+
+----
+Ajoutez vos commentaires...
+
+
+
+
+
+

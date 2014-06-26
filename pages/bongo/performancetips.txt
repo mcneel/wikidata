@@ -1,0 +1,52 @@
+====== Bongo Performance Tips ======
+The render is Treefrog in the discussion below, however concepts will apply to any render you choose for your Bongo animation.
+
+=====System Level=====
+Use Windows to manage the size of the swap file: Windows Start > Control Panel >System > Advanced tab > Performance frame > Setting button. Set the initial size to twice RMA and the Max to 4 times ram. You can also run the Windows "suggested" settings. This is based on the amount of ram you have an hard disk space. Modifying the swap size rarely make a difference.
+
+The speed of the main processor in your computer is the main factor in Rhino/TreeFrog performance. A dual-processor computer (when correctly enabled in Windows NT, Windows 2000, or Windows XP) will speed up rendering, probably by 85%, compared to a single processor.
+
+Graphics cards don't speed up Rhino/TreeFrog rendering.
+
+Rendering with inadequate RAM memory is a major reason for slow Rhino/TreeFrog performance. To recognize a shortage in RAM, watch disk accesses, or use TaskManager, as below: Watch your disk drive light while the image is painting on the screen  -- you should see almost no disk activity. If the rendering process is causing significant amount of disk accesses (paging, swapping) Rhino/TreeFrog will be slowed down. Add more RAM when you can. RAM is cheap and time is money. We are seeing that most average production 3d modeling machines have 1-2gb of RAM.
+
+=====Check for Bad Surfaces=====
+Explore polysurface and check for bad objects with the SelBadObject command. If a bad surface is found, delete and re-create it. If no bad objects are found, undo Explode.
+
+=====Mesh and Render Separately=====
+Use the MESH command to mesh the model and then hide the [[rhino:nurbs|NURBs]] polysurface. Render the mesh only. This is really good solution. It can take a hour or more... just to mesh.
+
+Use Less Dense Mesh Settings: Choose less dense mesh setting at first that will allow the mesh to finish. Then drag the slider to the right a little more each render - until it will not mesh or takes longer than you want to wait.
+
+Set File/Properties/RenderMesh to Jagged&Faster, so that the render meshes that Rhino/TreeFrog inherits are not so large.
+
+If specific rounded objects appear faceted in profile/silhouette, use Rhino's Mesh command to create a denser mesh object for that [[rhino:nurbs|NURBs]] object, and turn off the [[rhino:nurbs|NURBs]] object. render again.
+
+=====Antialiasing=====
+Leave Raytrace/Properties/Rhino/TreeFrog/AntiAliasing at "Normal and Slow" unless you demonstrate that you need to
+
+devote more rendering time to this.  See the Help file.
+
+There may be some special situations where increasing AntiAliasing is required, but usually it is more economical of rendering time to increase resolution instead, to get the same clarity in the final print.
+
+=====Limit Reflection=====
+Many transparent and reflective objects increase the rendering time. You can experiment with reducing the number of Bounces on DocumentProperties/Rhino/TreeFrog.  The defaults are 3, they can even be set to 0 as an experiment to see if those effects are causing excessive rendering time.
+
+=====Control Visibility=====
+Turn off anything outside your view that you don't need to affect your rendering, Rhino will take them into account even if they not in the Render Window. Hide or turn off the layers of any objects in your model that don't contribute to the rendering, particularly things that are far away, behind other surfaces, or inside solids.
+
+=====Render Resolution=====
+In Options > DocumentProperties/Rhino Render/Resolution choose "Viewport", or "Custom" with a small resolution like 300x200 when you are assigning materials, adjusting your views, doing test renderings, etc.
+
+To save time during test rendering, use the Rhino/TreeFrogRenderWindow command to render small portions of your image quickly.
+
+Choose a higher resolution such as 800x600 in Properties/Rhino/TreeFrog/Resolution when rendering your final animation.
+
+=====As implied above, excessive resolution and excessive settings on the Raytrace/Quality tab are the most common reasons for long animation times.=====
+
+Return to [[bongo:faq|Bongo FAQ]]
+
+
+
+
+

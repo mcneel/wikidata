@@ -1,0 +1,370 @@
+====== Rhino 5.0 Status - Lightweight Extrusion Objects for developers ======
+
+Plugins written using C++ SDK, .NET SDK or Rhino common might fail to select the new lightweight extrusion objects depending on the programming style.  This is why it is very important for plugin developers (of Rhino 5.0) to test their product with lightweight extrusions and fix any bugs or crashes.
+
+===== Overview =====
+
+In general, the CRhinoObjRef (object reference) that you get from CRhinoGetObject (selecting a polysurface, faces or edges) is a special object reference especially when you select lightweight extrusion object.  The reference holds a pointer to the extrusion object and also a proxy brep of that object.  Consider the following sample to select a face:
+
+    CRhinoGetObject go;
+    go.SetGeometryFilter( ON:surface_object );
+    go.GetObject(1,1);
+    CRhinoObjRef original_objref = go.Object(0);
+
+Now suppose you picked a box face where the box was actually a lightweight extrusion. Object reference "original_objref" is a special one.  It gives valid object, brep and brepface as in the following:
+
+    const CRhinoObject* original_obj = original_objref.Object();
+    const ON_Brep original_brep = original_objref.Brep();
+    const ON_BrepFace* original_face = original_objref.Face();
+    int face_component_index = original_objref.m_component_index
+
+<color blue>**Note** that "original_obj" is not a "CRhinoBrepObject" and cannot be casted as one.</color>  In this case, it is actually a "CRhinoExtrusionObject".  This one special object reference from the getter "original_objref" has a proxy ON_Brep and therefore the brep and brep_face are both valid as long as the original_objref DOES NOT GO OUT OF SCOPE.  A case that result is deleting the proxy brep and the pointer will be invalid causing crashes and other failures.
+<color blue>**To be safe,** you need to always keep the getter in scope or keep a copy of the object reference.</color>
+
+**Help:** Please post questions to [[news://news.mcneel.com/rhino.plug-ins
+|Rhino developer newsgroup]].  Please don't hesitate to ask. 
+
+Following are examples where the code will fail when selecting extrusion objects and suggested solutions. If there are other cases that are failing and you need help with, 
+
+===== Casting CRhinoObject as CRhinoBrepObject =====
+
+Consider the following example to select a polysurface:
+
+    CRhinoGetObject go;
+    go.SetGeometryFilter( CRhinoGetObject::polysrf_object );
+    go.SetCommandPrompt( L"Select a polysurface" );
+    go.GetObjects(1,1);
+    if( go.CommandResult() != CRhinoCommand::success )
+      return go.CommandResult();
+    const CRhinoObject* obj = go.Object(0).Object();
+    if( 0 == obj )
+      return CRhinoCommand::failure;
+
+<color red>**Problem:** casting will be a problem if you select extrusion object. The following line with cause error:</color>
+
+    const CRhinoBrepObject* brep_obj = CRhinoBrepObject ::Cast(obj);
+    //
+    //Note: if you have selected an extrusion object, the pointer will be null
+    //
+    if( 0 == brep_obj )
+      return CRhinoCommand::failure;
+    const ON_Brep* org_brep = brep_obj->Brep();
+
+<color blue>**Solution:** to make your code work with extrusion objects, get your brep directly from the object reference:</color>
+
+    const ON_Brep* input_brep = go.Object(0).Brep();
+
+
+===== The original getter goes out of scope =====
+
+If you pass a pointer to an extrusion object from a function or block of code and throw away the object reference, then you will not be able to get to the "brep", brep_face" or "brep_edge" anymore. The following functions illustrate different cases when the code will not work or crash:
+
+MyGetEdge1() Function:
+  CRhinoCommand::result MyGetEdge1( const CRhinoObject*& selected_object, int& edge_index)
+  {
+    CRhinoGetObject go;
+    go.SetGeometryFilter( CRhinoGetObject::curve_object );
+    go.SetGeometryAttributeFilter( CRhinoGetObject::edge_curve );
+    go.GetObjects(1,1);
+    if( go.CommandResult() != CRhinoCommand::success )
+      return go.CommandResult();
+    const ON_Brep* brep = go.Object(0).Brep();
+    if( 0 == brep )
+      return CRhinoCommand::failure;
+    const ON_BrepEdge* edge = go.Object(0).Edge();
+    if( 0 == edge)
+      return CRhinoCommand::failure;
+    //
+    //At this point we have verified that our geometry is valid
+    //
+    selected_object = go.Object(0).Object();
+    edge_index = edge->m_edge_index;
+    return CRhinoCommand::success;
+  }
+
+MyGetEdge2() function:
+  CRhinoCommand::result MyGetEdge2( const ON_Brep*& selected_brep, int& edge_index )
+  {
+    CRhinoGetObject go;
+    go.SetGeometryFilter( CRhinoGetObject::curve_object );
+    go.SetGeometryAttributeFilter( CRhinoGetObject::edge_curve );
+    go.GetObjects(1,1);
+    if( go.CommandResult() != CRhinoCommand::success )
+      return go.CommandResult();
+    const ON_Brep* brep = go.Object(0).Brep();
+    if( 0 == brep )
+      return CRhinoCommand::failure;
+    const ON_BrepEdge* edge = go.Object(0).Edge();
+    if( 0 == edge)
+      return CRhinoCommand::failure;
+    //
+    //At this point we have verified that our geometry is valid
+    //
+    selected_brep = brep;
+    edge_index = edge->m_edge_index;
+    return CRhinoCommand::success;
+  }
+
+MyGetEdge3() function:
+  CRhinoCommand::result MyGetEdge3( const ON_BrepEdge*& selected_edge )
+  {
+    CRhinoGetObject go;
+    go.SetGeometryFilter( CRhinoGetObject::curve_object );
+    go.SetGeometryAttributeFilter( CRhinoGetObject::edge_curve );
+    go.GetObjects(1,1);
+    if( go.CommandResult() != CRhinoCommand::success )
+      return go.CommandResult();
+    const ON_Brep* brep = go.Object(0).Brep();
+    if( 0 == brep )
+      return CRhinoCommand::failure;
+    const ON_BrepEdge* edge = go.Object(0).Edge();
+    if( 0 == edge)
+      return CRhinoCommand::failure;
+    //
+    //At this point we have verified that our geometry is valid
+    //
+    selected_edge = edge;
+    return CRhinoCommand::success;
+  }
+
+MyGetEdgeGUID() function:
+  CRhinoCommand::result MyGetEdgeGUID( ON_UUID& guid, ON_COMPONENT_INDEX& component_index)
+  {
+    CRhinoGetObject go;
+    go.SetGeometryFilter( CRhinoGetObject::curve_object );
+    go.SetGeometryAttributeFilter( CRhinoGetObject::edge_curve );
+    go.GetObjects(1,1);
+    if( go.CommandResult() != CRhinoCommand::success )
+      return go.CommandResult();
+    const ON_Brep* brep = go.Object(0).Brep();
+    if( 0 == brep )
+      return CRhinoCommand::failure;
+    const ON_BrepEdge* edge = go.Object(0).Edge();
+    if( 0 == edge)
+      return CRhinoCommand::failure;
+    //
+    //At this point we have verified that our geometry is valid
+    //
+    guid = go.Object(0).ObjectUuid();
+    component_index = edge->ComponentIndex();
+    return CRhinoCommand::success;
+    }
+
+MyMainCommand() - the main caller function illustrating where things might go wrong:
+  CRhinoCommand::result MyMainCommand()
+  {
+    //initialize some variables
+    const CRhinoBrepObject* brep_obj = 0;
+    const CRhinoObject* obj = 0;
+    const ON_Brep* brep = 0;
+    const ON_BrepEdge* edge = 0;
+    int edge_index = -1;
+    CRhinoCommand::result rc = CRhinoCommand::failure;
+
+<color red>**Problem case # 1:** when call a selection function that returns a pointer to input object and edge index:</color>
+    rc = MyGetEdge1(obj, edge_index);
+    if( rc != CRhinoCommand::success )
+      return rc;
+    CRhinoObjRef new_ref = CRhinoObjRef(obj);
+    //
+    //brep will be a null or invalid pointer. Fail at the next linet
+    //
+    brep = new_ref.Brep();
+    if( 0 == brep || !brep->IsValid())
+      return CRhinoCommand::failure;
+    //
+    //
+    //If you cast object as follows, you will still fail because brep_obj will be null
+    //
+    brep_obj = CRhinoBrepObject::Cast(obj);
+    if( 0 == brep_obj )
+      return CRhinoCommand::failure;
+
+
+<color red>**Problem case # 2** when call a selection function that returns a pointer to input brep and edge index:</color>
+    rc = MyGetEdge2(brep, edge_index);
+    if( rc != CRhinoCommand::success )
+      return rc;
+    if( 0 == brep )
+      return CRhinoCommand::failure;
+    //
+    //Next line will crash or return null or invalid pointer. brep is now pointing to invalid memory 
+    // because it was destroyed once the getter went out of scope when exiting MyGetFace2 function
+    //
+    edge = brep->Edge(edge_index);
+    if( 0 == edge || !edge->IsValid())
+      return CRhinoCommand::failure;
+
+
+<color red>**Problem case # 3:** - when call a selection function that returns a pointer to input edge:</color>
+    rc = MyGetEdge3( edge );
+    if( rc != CRhinoCommand::success )
+      return rc;
+    if( 0 == edge)
+    return CRhinoCommand::failure;
+    //
+    //Next line will crash or return null or invalid pointer. edge is now pointing to invalid memory 
+    //because it was dietroyed once the getter went out of scope
+    //
+    brep = edge->Brep();
+    if( 0 == brep || !brep->IsValid())
+      return CRhinoCommand::failure;
+
+
+<color red>**Problem case # 4** - when the getter is inside a block or a loop:</color>
+    {
+      CRhinoGetObject go; //the getter will be destoyed once exiting the block
+      go.SetGeometryFilter( CRhinoGetObject::curve_object );
+      go.SetGeometryAttributeFilter( CRhinoGetObject::edge_curve );
+      go.GetObjects(1,1);
+      if( go.CommandResult() != CRhinoCommand::success )
+        return go.CommandResult();
+      brep = go.Object(0).Brep();
+      if( 0 == brep )
+        return CRhinoCommand::failure;
+      edge = go.Object(0).Edge();
+      if( 0 == edge)
+        return CRhinoCommand::failure;
+    }
+    //Using the edge pointer will give invalid index or crash
+    edge_index = edge->m_edge_index;
+
+
+<color red>**Problem case # 5** - Using Object GUID and ComponentIndex to reference objects and sub-objects:</color>
+    ON_UUID uuid = ON_nil_uuid;
+    ON_COMPONENT_INDEX component_index;
+    rc = MyGetEdgeGUID(uuid, component_index);
+      if( rc != CRhinoCommand::success )
+    return rc;
+    //
+    //The following reference will not have proxy brep information
+    //
+    CRhinoObjRef ref = CRhinoObjRef(uuid);
+    //
+    //brep will be invalid (null pointer)
+    //
+    brep = ref.Brep();
+    if( 0 == brep)
+      return CRhinoCommand::failure;
+    edge = brep->Edge(component_index);
+    if( 0 == edge)
+      return CRhinoCommand::failure;
+    return CRhinoCommand::success;
+  }
+
+
+<color blue>**Solution:** you need to either instantiate and pass the getter by refrence from the main function; or, you can also return a copy of the object reference, as follows:</color>
+
+  CRhinoCommand::result MyGetFace_work( CRhinoObjRef& obj_ref)
+  {
+    CRhinoGetObject go;
+    go.SetGeometryFilter( CRhinoGetObject::curve_object );
+    go.SetGeometryAttributeFilter( CRhinoGetObject::edge_curve );
+    go.GetObjects(1,1);
+    if( go.CommandResult() != CRhinoCommand::success )
+      return go.CommandResult();
+    const ON_Brep* brep = go.Object(0).Brep();
+    if( 0 == brep )
+      return CRhinoCommand::failure;
+    const ON_BrepEdge* edge = go.Object(0).Edge();
+    if( 0 == edge)
+      return CRhinoCommand::failure;
+    //
+    //At this point we have verified that our geometry is valid
+    //Save a copy of the object reference and return success
+    //
+    obj_ref = go.Object(0);
+    return CRhinoCommand::success;
+  }
+
+  CRhinoCommand::result MyMainCaller()
+  {
+    CRhinoObjRef obj_ref;
+    CRhinoCommand::result rc = MyGetFace_work(obj_ref);
+    if( rc != CRhinoCommand::success )
+      return rc;
+    //
+    //Both the following pointers will be valid and good to use 
+    //whether input in brep object or extrusion object
+    //
+    const ON_Brep* brep = obj_ref.Brep();
+    const ON_BrepEdge* edge = obj_ref.Edge();
+    return CRhinoCommand::success;
+  }
+
+
+===== Extending CRhinoGetObject =====
+
+You need to pay special attention when extending CRhinogetObject.  Here is an example of what might go wrong and how to fix it:
+
+
+Special class to use for picking the Face
+  class CMyGetFace : public CRhinoGetObject
+  {
+  public:
+    CMyGetFace(){};
+    ~CMyGetFace(){};
+    //
+    // virtual CRhinoGetObject override
+    //
+    bool CustomGeometryFilter(
+                 const CRhinoObject* object,
+                 const ON_Geometry* geometry,
+                 ON_COMPONENT_INDEX component_index
+                 ) const;
+    //
+    //virtual CRhinoGetObject override
+    //
+    bool PassesGeometryAttributeFilter(
+                 const CRhinoObject* object,
+                 const ON_Geometry* geometry,
+                 ON_COMPONENT_INDEX component_index
+                 ) const;
+  };
+
+  bool CMyGetFace::CustomGeometryFilter(
+                 const CRhinoObject* object,
+                 const ON_Geometry* geometry,
+                 ON_COMPONENT_INDEX component_index
+                 ) const
+  {
+
+<color red>**Problem:** the following will fail with extrusion objects because the passed object is of type CRhinoExtrusionObject:</color>
+    const CRhinoBrepObject* brep_object = CRhinoBrepObject::Cast(object);
+    if ( 0 == brep_object )
+      return false;
+    const ON_Brep* brep = brep_object->Brep();
+    if ( 0 == brep )
+      return false;
+    const ON_BrepFace* Face = brep->Face(component_index.m_index);
+    if ( 0 == Face )
+      return false;
+
+<color blue>**Solution:** the following will work with extrusion objects. Just remember to cast the geometry rather than the object:</color>
+
+    //first, make sure that the component index belongs to a brep
+    //
+    if( !component_index.IsBrepComponentIndex() )
+      return false;
+    //
+    //Cast geometry as ON_BrepFace
+    //
+    const ON_BrepFace* face = ON_BrepFace::Cast(geometry);
+    if ( 0 == face )
+      return false;
+    return true;
+  }
+
+  bool CMyGetFace::PassesGeometryAttributeFilter(
+                 const CRhinoObject* object,
+                 const ON_Geometry* geometry,
+                 ON_COMPONENT_INDEX component_index
+                 ) const
+  {
+    bool rc = CRhinoGetObject::PassesGeometryAttributeFilter(object,geometry,component_index);
+    if (rc)
+    {
+      rc = CustomGeometryFilter(object,geometry,component_index);
+    }
+    return rc;
+  }

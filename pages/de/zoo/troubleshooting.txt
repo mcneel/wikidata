@@ -1,0 +1,29 @@
+====== Fehlersuche und -behebung für den Zoo ======
+> **Zusammenfassung:** //Tipps zum Lösen von Problemen, die mit dem Zoo, dem Mehrplatz-Lizenzmanager, zu tun haben.//
+
+=====Verwandte Themen=====
+[[http://download.mcneel.com/download_rel.asp?rel=236|Zoo Download]]
+
+[[http://www.de.rhino3d.com/zoo.htm|Zoo Überblick, Eigenschaften und FAQ]]
+
+[[zoo:installation|Zoo Installation und Konfiguration]]
+
+=====Überblick=====
+Der Zoo verwendet eine einfache, Protokoll-unabhängige Messaging-Technologie namens Mailslots, um mit Rhino zu kommunizieren. Microsoft Netzwerke verwenden Mailslots-Nachrichten in verschiedenen Bereichen, einschließlich Domänen-Logon-Service. Mailslot Messaging funktioniert auf allen modernen Microsoft Betriebssystemen (z.B. Windows 95 bis Windows XP).
+
+=====Fehlersuche und -behebung=====
+Bei der Konfiguration des Zoos gibt es eigentlich nichts zu tun. So lange alle Maschinen zur gleichen Arbeitsgruppe oder Domäne gehören und auf dem gleichen Subnetz installiert sind, sollte der Zoo Lizenzen auf Anfrage hin zuweisen können. Einige Dinge, die beim Arbeiten mit dem Zoo bedacht werden müssen.
+
+  - Vergewissert euch, dass die neuste Version des Zoos installiert ist.
+  - Vergewissert euch, dass die neuste Version von Rhino installiert ist. Dieser Punkt ist sehr wichtig, denn mit der neusten Service Release lässt der Zoo bereits verwendete Lizenzen nicht mehr los.
+  - Der Zoo funktioniert **nicht** mit Schullizenzen von Rhino 2.0 oder 3.0 oder auf asiatischen Betriebssystemen.
+  - Wenn der Computer mit Rhino oder dem Zoo eine Firewall verwendet, vergewissert euch, dass UDP-Port 138 geöffnet ist. Dies ist eines der Ports, die Windows für NetBEUI über TCP/IP-Kommunikation verwendet, und ist wahrscheinlich bereits offen, falls das Browsen in den Windows Ordnern und andere Windows Netzwerkdienste funktionieren.
+  - Alle Systeme müssen der gleichen Windows Arbeitsgruppe oder Domäne angehören.
+  - Alle Rhino Arbeitsstationen und das System, auf dem der Zoo läuft, müssen auf dem gleichen Netzwerk-Subnetz installiert sein. Denn sowohl Rhino wie auch der Zoo senden Nachrichten. Gesendete Mailslot-Nachrichten gehen nicht durch Netzwerk-Router und einige Switches. Drahtlose Router leiten ebenfalls keine gesendeten Nachrichten weiter.
+  - Der Zoo ist **keine** Dienstleistung - er ist eine normale Windows Applikation. Das bedeutet, dass ihr euch in den Computer einloggen und den Zoo starten müsst, wenn ihr den Server neu startet. Wir arbeiten derzeit nicht an einer Service-Anwendung des Zoos.***
+  - Vergewissert euch, dass der in den Zoo-Server eingeloggte Anwender genügend Rechte hat, damit der Zoo läuft. Ansonsten wird der Zoo eine Nachricht "TCP/IP konnte nicht erzeugt werden" beim Programmstart anzeigen.
+  - Der Zoo kann eine Protokolldatei (Zoo.log) von Gesprächen mit Rhino Kunden speichern. Die Protokolldatei kann bei der Diagnose einiger Kommunikationsprobleme hilfreich sein. Wenn Sie keine Protokolldatei im gleichen Ordner wie Zoo.exe sehen, können Sie Logging aktivieren, indem Sie Werkzeuge->Optionen in der Zoo-Applikation auswählen. Überprüfen Sie die Protokolldatei, anhand von Notepad, um zu sehen, ob die Rhino-Nachrichten in den Zoo gelangen und dass der Zoo diese Nachrichten beantwortet.
+
+*** Anmerkung, Wir haben einige Tests mit einem erschwinglichen Produkt durchgeführt [[http://www.firedaemon.com,|FireDaemon]] mit dem Windows Applikationen als Dienstleistungen funktionieren können. Bei den wenigen Tests, die wir durchgeführt haben, scheint es mit dem Zoo zu funktionieren. Es lohnt sich, einen Blick darauf zu werfen.
+
+

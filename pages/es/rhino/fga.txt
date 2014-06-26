@@ -1,0 +1,52 @@
+====== Respuestas más frecuentes -- Rhino ======
+
+Lista de **Respuestas más frecuentes**. Aquí puede encontrar respuestas útiles.
+----
+==¿Cómo envío un informe de error?==
+* ¿Puede reproducir el error de nuevo? Si es así, los desarrolladores utilizarán los detalles específicos necesarios para repetir el error. Un problema repetible es la única manera de encontrar una solución al problema.
+  * Cuando Rhino se bloquea, si hay memoria suficiente disponible, se inicia el sistema de comunicación de errores. Introduzca su dirección de correo electrónico y describa lo que estaba intentando hacer cuando Rhino se bloqueó. Puede ser útil listar los comandos que estaba utilizado antes de producirse el error.
+* Si es posible, marque la casilla para enviar el archivo 3DM con el informe de error.
+* Si incluye su dirección de correo electrónico y una descripción, **una persona analizará el informe**. Si no incluye su dirección de correo electrónico y una descripción, se utilizará un proceso automatizado para analizar el informe de error.
+
+----
+
+==Modo seguro==
+  * Hay un acceso directo en el grupo del programa Rhinoceros. El modo seguro es una herramienta de solución de problemas que bloquea el OpenGL y evita que se carguen los plug-ins. En la V5 también evita la carga de barras de herramientas y el RDK. Normalmente la respuesta para cargarlas es Sí. El modo seguro es una herramienta de solución de problemas, no sirve como modo de trabajo.
+
+----
+==Desactivar los plug-ins de la V5==
+  -Vaya a Herramientas - Opciones - Plug-ins y desactive la casilla de verificación en la columna Activado de todos los plug-ins que no venían con Rhino.
+  -Reinicie Rhino normalmente y verifique si el problema ha desaparecido. Vuelva a activar uno de los plug-ins, reinicie Rhino y compruebe si puede reproducir el error. Si es que no, el plug-in activado no era el problema. Vuelva a repetir el ciclo del proceso de identificación hasta que encuentre el plug-in que causa el error.
+
+----
+
+==Rhino V5 no se inicia==
+* Este problema podría ser causado por controladores inadecuados o un plug-in erróneo. Para solucionar el problema: Inicie Rhino en modo seguro (hay un acceso directo en el grupo del programa Rhinoceros) y en Herramientas - Opciones - Vista - OpenGL, desactive la casilla "Usar modos de hardware acelerado". Cierre Rhino y vuelva a iniciarlo normalmente. Si Rhino se inicia sin bloquearse, el problema era probablemente el controlador de pantalla. Deberá actualizarlo. Si Rhino se bloquea después de descargar e instalar la actualización del controlador, el problema probablemente será un plug-in.
+
+* En ese caso, reinicie en modo seguro y vuelva a activar la opción "Usar modos de hardware acelerado". Vaya a Herramientas - Opciones - Plug-ins y desactive la casilla de verificación en la columna Activado de todos los plug-ins instalados que no venían con Rhino y active la casilla "Solicitar cargar plug-ins desactivados" en la parte inferior. Luego reinicie Rhino normalmente (no en modo seguro) y cuando se le solicite cargarlos, responda "No a todo". Si Rhino se inicia, el problema es uno de plug-ins con protección de carga. Reinicie Rhino normalmente de nuevo y esta vez responda Sí al cargar el primer plug-in y No al resto. Si Rhino se bloquea al cargar el primero, ese plug-in es el problema. Si no se bloquea, no lo es.  Vuelva a la página de plug-ins y actívelo. Vuelva a reiniciar y repetir ese proceso hasta que encuentre el plug-in que causa el bloqueo.
+
+----
+
+==Puedo instalar Rhino en dos equipos?==
+  * Sí. El contrato de licencia permite instalar Rhino en todos los equipos que usted controle directamente, siempre que Rhino se ejecute en solo equipo a la vez. No se puede "prestar" Rhino a un amigo. 
+
+----
+
+==Cuando intento abrir un archivo, me aparece un mensaje de error sobre algo que no se puede leer==
+  * El sistema funciona del siguiente modo, hay dos partes:
+    - Autoguardar - Si tiene activada la opción Autoguardar en Rhino, los archivos temporales se escriben en la carpeta especificada en Opciones y se activa una alerta de que Rhino se está ejecutando. Cuando Rhino se cierra normalmente, el archivo de autoguardado se elimina y Rhino desactiva la alerta. Si Rhino se bloquea, la alerta no se elimina y el archivo de autoguardado permanece ahí cuando Rhino se inicia de nuevo. En ese caso, se le advierte de que Rhino no se ha cerrado correctamente y que tiene la oportunidad de guardar el trabajo del archivo de autoguardado. Si dice que no, el archivo se pierde.
+    - Copias de seguridad: Desde la V4 SR7, se ha agregado la función de copia de seguridad  automática. Si la función no se ha desactivado, cuando se abre un archivo existente, los cambios de esta nueva sesión de edición se guardan en una nueva copia del archivo, y al archivo existente abierto se le agrega ".bak" al nombre y el archivo se deja en la misma carpeta.
+  * Ahora la V5 crea archivos *.3dmbak y tiene una lista de tipos de archivo para abrirlos.
+* Para la V4, utilice el Explorador de archivos en una vista de lista o detallada, mostrando las extensiones de archivo de los tipos de archivo conocidos, y cambie el nombre del archivo de [nombre de archivo].3dm.bak a [nuevo nombre de archivo].3dm. Entonces podrá abrirlo como cualquier otro archivo 3dm de Rhino.
+
+----
+
+==Marqué la opción para utilizar el Zoo cuando instalalé Rhino y no utilizo el Zoo==
+  * En Windows Vista o Windows 7, elimine todos los archivos de: C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses. 
+  * En Windows XP, elimine todos los archivos de: C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  - Reinicie Rhino.
+  - Introduzca la clave cuando se le solicite.
+
+Nota: En algunos sistemas, en lugar de la carpeta "\All Users\", la ruta puede ser su nombre de inicio de sesión del "\Dominio\".
+
+----

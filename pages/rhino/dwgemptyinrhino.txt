@@ -1,0 +1,46 @@
+** Why does not my [[rhino:autocad|AutoCAD]] [[accurender:dwg|dwg]] not open in Rhino? **
+
+======Problem:======
+When opening a [[accurender:dwg|dwg]] or DXF file in Rhino, no objects are imported into Rhino 3 or Rhino 4.
+
+======Why:======
+There are generally two reasons for this:
+
+  * Proxy objects in the [[accurender:dwg|dwg]].
+  * Drawing geometry was created in the layout space area.
+
+=====Proxy Objects=====
+
+Proxy objects are placeholders for custom objects that are created by ObjectARX® applications, such as AutoCAD® Mechanical, Autodesk® Architectural Desktop, and Autodesk® Land Desktop.
+
+By default, proxy object messages are displayed when opening a [[accurender:dwg|dwg]] in plain [[rhino:autocad|AutoCAD]] if the application that created the custom objects is not currently running. For example, if a drawing created in Autodesk Mechanical Desktop is opened in plain AutoCAD®, objects that were created as Autodesk Mechanical Desktop objects are displayed as proxy objects.
+
+Here you can perform operations such as moving and copying proxy objects; however, special editing operations unique to the ObjectARX application are not available. For example, you cannot perform parametric modifications to Autodesk Mechanical Desktop objects in any application other than in Autodesk Mechanical Desktop.
+
+This rule applies whenever an ObjectARX application that created the custom objects is not currently running when a drawing is opened. The ObjectARX application may be installed on the workstation, but it may not be running. This is why the Proxy Object warning dialogue box appears when you open an ADT file in regular [[rhino:autocad|AutoCAD]]. The objects must be represented by an approximation of what they really are. Looking at an approximation is one thing but attempting to work with it is another and this is where the real problems begin.
+
+====Solution:====
+Since Rhino does not have the ability to run the ARX application that created these custom objects, these proxy objects are ignored and "object ignored" warning appear on Rhino command line.
+
+Since [[rhino:autocad|AutoCAD]] saves its 3D geometry in mesh format, there is one option for getting these meshes into Rhino.
+
+  * 1. Open the [[accurender:dwg|dwg]] in the Desktop application that created it (you can try plain [[rhino:autocad|AutoCAD]] if that is all you have).
+  * 2. EXPLODE the custom object (Wall, Roof, Door, Window for example) into meshes.
+  * 3. Save this to a different name.
+  * 4. Import this file in Rhino.
+
+=====Layout Space Geometry=====
+
+Layout geometry will not be imported into Rhino 3 or Rhino 4.
+
+If you open a [[accurender:dwg|dwg]] in Rhino and it appears empty the objects may be in the Layout Space.
+
+====Solution:====
+  * 1. Open the drawing in [[rhino:autocad|AutoCAD]]
+  * 2. Move the objects to Model Space.  You can do this with the ExpressTool CHSPACE command. This command will push the objects into model space and scale them appropriately. The CHSPACE command became native [[rhino:autocad|AutoCAD]] at Release 2007.
+
+We are hoping to import Layouts in a future Rhino version. Proxy object will always have to be exploded.
+
+
+**[[FrequentlyAskedQuestions|Back to FAQ]]**
+

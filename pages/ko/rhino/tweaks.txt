@@ -1,0 +1,85 @@
+====== Rhino 인터페이스의 사용자 지정 방법 ======
+
+> **Summary:** //레지스트리 편집 또는 외부 스크립팅을 통해 Rhino 의 인터페이스를 향상시키는 팁 소개//
+
+======Rhino 인터페이스 바꾸기======
+=====절대 좌표축 아이콘의 색상 바꾸기=====
+
+Note - 이것은 화면 왼쪽 아래 모서리에 있는 짙은 회색의 작은 3 축 표시입니다.
+
+====Rhino 3.0 의 경우:====
+
+**//먼저 Rhino 의 모든 인스턴스를 닫은 후, Regedit 을 실행해야 합니다//**
+
+다음의 레지스트리 키를 편집합니다:
+
+//HKEY_CURRENT_USER\//
+
+//Software\McNeel\Rhinoceros\3.0\Scheme:Default\Options\AppearanceSettings//
+
+마지막 3 개의 키가 아이콘 색상입니다. RGB 값을 입력하세요
+
+(예: 녹색 0,255,0 또는 노랑 255,255,0)
+====Rhino 4.0 의 경우:====
+
+Rhino 인터페이스에서 이와 같은 설정을 모두 바로 지정할 수 있습니다. 아이콘 색상은 각각의 디스플레이 모드에서 개별적으로 조정 가능합니다. (전체적인 설정 방법은 없습니다).
+
+**옵션 > 화면 표시 > 고급 설정**의 각 표시 모드 (와이어프레임, 음영, 등) 에서 트리를 펼쳐 그리드 섹션으로 갑니다. "절대좌표축 설정"에 세 가지 옵션이 있습니다. "응용 프로그램 설정 사용"을 사용하면 표준 회색이 사용됩니다. 아니면 구성평면 X,Y,Z 축과 같은 색으로 지정하거나, 사용자가 원하는 색으로 지정할 수 있습니다. 사용자가 지정하고자 하는 모든 표시 모드에 설정해야 합니다.
+
+기본 "응용 프로그램 설정"을 어두운 회색으로 변경하려면, Rhino 3.0 에서와 같은 방식으로 레지스트리를 편집합니다. - //Software\McNeel\Rhinoceros\**4.0**\Scheme:Default\Options\AppearanceSettings// 키만 편집하시면 됩니다.
+
+
+=====두 번째와 세 번째 마우스 단추를 다시 할당하는 방법=====
+
+====이렇게 변경하면 마우스 가운데 단추가 마우스 오른쪽 단추와 서로 바뀌게 됩니다. 3D Studio Max 마우스 레이아웃에 익숙한 사용자를 위한 방법입니다.====
+
+//이와 같이 변경하기 전에 모든 Rhino 창을 닫아야 합니다.//
+
+
+다음의 레지스트리 키를 편집합니다:
+
+//HKEY_CURRENT_USER\//
+
+//Software\McNeel\Rhinoceros\3.0(or 4.0)\Scheme:Default\Options\MouseSettings//
+
+====이 레지스트리 키에는 다음의 8 개의 엔트리가 있습니다:====
+
+middle_mouse_dblclk_remap       3
+
+middle_mouse_down_remap         3
+
+middle_mouse_move_remap         3
+
+middle_mouse_up_remap           3
+
+right_mouse_dblclk_remap        2
+
+right_mouse_down_remap          2
+
+right_mouse_move_remap          2
+
+right_mouse_up_remap            2
+
+====각 엔트리를 편집합니다. 3을 2로, 2를 3으로 각각 편집합니다. 결과는 다음과 같습니다 :====
+
+middle_mouse_dblclk_remap       2
+
+middle_mouse_down_remap         2
+
+middle_mouse_move_remap         2
+
+middle_mouse_up_remap           2
+
+right_mouse_dblclk_remap        3
+
+right_mouse_down_remap          3
+
+right_mouse_move_remap          3
+
+right_mouse_up_remap            3
+
+**//이제 수정이 완료되었습니다!//**
+
+
+
+

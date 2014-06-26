@@ -1,0 +1,46 @@
+====== Filleting four surfaces ======
+> **Summary:** //FilletSrf is limited to handling exactly three surfaces that meet at a point.  Here's a technique that will work if you have four surfaces to fillet.//
+
+======Four surfaces======
+//[[http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/4_srf.zip|Download Rhino 3DM file]]//
+
+----
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/start.jpg}} | Original polysurface with 4 planar surfaces meeting at a single point. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/step_1.jpg}} | Run FilletSrf (with Extend = no and Trim = no) on all pairs of adjacent surfaces.  Also, compare the pairs of surfaces on opposite sides.  Run FilletSrf on the pair that are closest together. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/step_2.jpg}} | Using the Split command with the Isocurve option, split all of the adjacent surface fillets where their edges intersect.  Split the opposite side fillet surface at both edge intersections.  Split all surface in the curved isocurve direction. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/step_3.jpg}} | Delete the excess portions of the surfaces split away in the previous step. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/step_4.jpg}} | Draw two spheres in the corners.  Use a Center Osnap and the same radius as the fillets. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/step_5.jpg}} | Trim away the excess portions of the spheres that are not needed for filling the spherical holes.  Use sub-object picking (CRV) to select the edges of the surfaces that define the holes as cutting objects in the Trim command. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/step_6.jpg}} | Extend the adjacent side fillet surfaces so the extend past the base ofthe polysurface. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/step_7.jpg}} | Trim off all the extra surface portions that overlap the other surfaces. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/4_srf/step_8.jpg}} | Join all the surfaces together to make a closed, solid, polysurface. |
+
+\\
+
+

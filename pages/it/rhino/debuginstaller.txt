@@ -1,0 +1,33 @@
+====== Debug degli errori di un programma di installazione ======
+
+> **Sommario:** //Istruzioni per generare un file di log a partire da un programma di installazione .MSI (per esempio di Rhino 4.0, 5.0, Flamingo 2.0, Brazil 2.0)//
+
+=====PROBLEMA:=====
+Quando vado ad installare il prodotto, mi appare un messaggio di errore del programma di installazione e l'installazione non viene completata.
+
+=====SOLUZIONE:=====
+Seguire il seguente procedimento per generare un file di testo che rappresenta un log delle azioni che erano in corso durante l'installazione e quindi inviare via mail il file di testo al Supporto tecnico di McNeel: <tech.eu@mcneel.com>
+
+=====PROCEDIMENTO:=====
+  * Scaricare il seguente file zip: http://s3.amazonaws.com/mcneel/misc/DebugInstaller.zip
+  * Decomprimere il file denominato "DebugInstaller.exe" sul desktop.
+  * Cercare il programma di installazione MSI, la cui ubicazione è diversa a seconda dei prodotti:
+    Rhinoceros 4.0 CD -- Il nome del programma è "Rhino4_Setup.msi" e si trova nella cartella di Rhinoceros del CD
+    Rhinoceros 4.0 valutazione -- Decomprimere il programma di installazione .EXE (es: rh40eval_en_yyyymmdd.exe) e cercare il file "RHINO4_EVALUATION_EN.MSI"
+    Rhinoceros 5.0 WIP/Beta -- Il nome del programma è "rh50beta_x86_en_yyyymmdd_hhmm.msi"
+    Flamingo 2.0 CD -- Il nome del programma è "Flamingo2_Setup_English.msi" e si trova nella cartella di Flamingo del CD
+    Flamingo 2.0 valutazione -- Decomprimere il programma di installazione .EXE (es: fl20eval_en_yyyymmdd.exe) e cercare il file "FL20_.MSI"
+    Brazil 2.0 CD -- Il nome del programma è "Setup Brazil.msi" e si trova nella cartella di Brazil del CD
+    Brazil 2.0 valutazione -- Decomprimere il programma di installazione .EXE (es: brazil_evaluation_yyyymmdd.exe) e cercare il file "BRAZIL_2.0_ENGLISH.MSI"
+
+  * Eseguire "DebugInstaller.exe" facendoci doppio clic sopra sul desktop
+  * Trascinare il file del programma di installazione MSI sulla finestra avente come titolo "McNeel Install Debugger"
+  * Inizierà il processo di installazione, procedere fino al rilevamento dell'errore e proseguire fino al completamento del programma di installazione.
+  * Sul desktop troverete il nuovo file .TXT, con lo stesso nome del file di installazione .MSI, ma con estensione .TXT (esempio: Rhino4_Setup.txt) L'icona ha l'aspetto di un blocco ad anelli; è possibile che non si visualizzi l'estensione del file.
+  * Inviare il file .TXT via mail al Supporto tecnico di McNeel: <tech.eu@mcneel.com>
+
+
+
+
+
+

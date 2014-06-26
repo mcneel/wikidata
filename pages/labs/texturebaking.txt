@@ -1,0 +1,34 @@
+====== Texture Baking ======
+> **Summary:** //A plug-in in that enables the display of procedural textures, world-coordinate based (non UV) textures and decals in the viewport, and allows for baking textures into a UV bitmap that can be used in non-RDK compliant renderers.//
+
+Last update: 2nd January 2009
+
+
+{{http://en.wiki.mcneel.com/content/upload/images/tb_without.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/tb_with.png}}
+
+Those of you using the RDK to generate textures based on either the procedural set, or with projections based in World Coordinate space (ie - non UV textures like Marble, Granite or Wood) will have noticed that the viewport display of those texture is - ahem - sub-optimal.  The two images above show the difference between a marble texture with and without the TextureBaking plug-in loaded.
+
+This plug-in also enables display of RDK decals (it doesn't work for Flamingo decals) - even with partial transparency.
+
+{{http://en.wiki.mcneel.com/content/upload/images/tb_decal.png}}
+
+The plug-in adds a panel to the Options dialog that allows you to turn the effect on and off, and also to choose the level of refinement of the effect.  Higher resolution values will take longer to calculate.  Note that this plug-in is really, really WIP and is active as part of the display, so if you start to get crashes, please disable this before doing anything else.
+
+{{http://en.wiki.mcneel.com/content/upload/images/tb_options.PNG}}
+
+Use the "BakeTexture" command to create a texture bitmap that can be used to represent the current RDK texturing (including procedurals and decals) for the selected object's UV.  You can use this command to "export" decals to non-RDK complient renderers - like the Rhino renderer.  Note that this works like a very, very basic UV unwrapper - so you can modify the image after it is saved to paint new features on an object.
+
+{{http://en.wiki.mcneel.com/content/upload/images/tb_baked_decal.png}}
+
+The Texture Baking plugin available here requires Rhino 4.0 SR4 (or later) and the [[labs:rendererdevelopmentkit10|Rhino RDK]] to run. However, it is possible you already have the RDK installed, so only download and install the RDK if you try to install the plug-in but receive the "Dependant DLL not found" error.
+
+ [[http://en.wiki.mcneel.com/content/upload/files/TextureBaking.zip|Download the plugin]]
+
+Stop Press:  Special bonus feature
+
+The GenerateNormalMap command can be used to create a normal map from existing geometry.
+
+
+
+

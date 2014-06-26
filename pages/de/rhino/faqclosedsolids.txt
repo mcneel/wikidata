@@ -1,0 +1,85 @@
+====== Wie erhalte ich das Modell eines Volumenkörpers? ======
+
+
+
+======Was ist ein Volumenkörper in Rhino?======
+=====Wie bekomme ich eine gute, "wasserdichte" .stl-Datei von meinen Rhino-Objekten?=====
+
+Zur Erzeugung einer .stl-Datei gibt es zahlreiche gute Hilfestellungen. Das Wichtigste ist aber ganz einfach:
+
+Das Rhino-Objekt muss ein **GESCHLOSSENER VOLUMENKÖRPER** sein, damit daraus eine gültige .stl-Datei erzeugt werden kann.
+
+//<color darkslateblue>Mitch ergänzt: Der offizielle Term für einen geschlossenen Volumenkörper in Rhino ist ein **geschlossener Flächenverband**</color>//
+
+Eine prägnante Definition wäre, dass ein Volumenkörper **KEINE OFFENEN KANTEN** hat. Eine andere Art, es zu verstehen, wäre, ihn sich als eine Art Ballon vorzustellen. Wenn sich darin auch nur ein winzig kleines Loch befindet, verliert er Luft, da er nicht luft-/wasserdicht und somit auch nicht volumetrisch ist. Ein Volumenkörper besteht aus seinen äußeren Flächen, wenn diese komplett verbunden sind.
+
+//<color green>JB ergänzt: Mit dem Befehl **KantenAnzeigen** und der Einstellung "offene Kanten" finden Sie die nicht verbundenen Kanten.</color>//
+
+Die Terminologie "Volumenkörper" scheint oft zu verwirren und es gibt zahlreiche Debatten darüber, insbesondere in Verbindung mit der Erzeugung "wasserdichter" Volumenkörper zum Rapid Prototyping.  Es stößt teilweise auf Unverständnis, dass man bei Abschneiden einer Scheibe eines "Volumenkörpers" in Rhino keine Oberflächenebene oder "Salamischeibe", sondern nur die äußere Begrenzungskurve erhält.  Dies ist aber normal.  Beim Rapid Prototyping werden diese Scheiben automatisch gefüllt.  Prinzipiell wird beim Rapid Prototyping auch nicht das Rhino-[[rhino:nurbs|NURBS]]-Objekt abgeschnitten, sondern ein Polygonnetz in Form des Objekts mithilfe einer STL-Datei.  Und Polygonnetze sind nicht solider als Rhino-[[rhino:nurbs|NURBS]]-Objekte.  Wenn sie angeschnitten werden, erhält man immer noch nur die Begrenzungskurven...
+
+**[[en:rhino:soliddiscussion|Weiterführende Diskussionen zum Konzept der Volumenkörper (aus dem Forum zusammengetragen) finden Sie hier]]**
+
+=====Toleranzen spielen eine Rolle bei der Erstellung geschlossener Volumenkörper=====
+Ein Grundverständnis **[[rhino:faqtolerances|ABSOLUTER TOLERANZ]]** ist nötig zur Erzeugung von gültigen Volumenkörpern. Ein guter Ausgangspunkt ist die Änderung der absoluten Toleranz vom Standardwert von 0,01 auf 0,0001 oder 0,001. Ich beginne all meine Projekte in Schmuckgröße mit einer Toleranz von 0,0001, sodass ich später Raum zur Lockerung derselben habe.
+
+//<color green>JB ergänzt: Eine weitere "Regel" ist, die Toleranz eine Größenordnung kleiner als die Genauigkeit Ihres Herstellungsprozesses oder eine Größenordnung kleiner als das kleinste Ihrer Details einzustellen.  Für Juweliere wie Jeffrey, die mit sehr feinen Details auf relativ kleinen Teilen arbeiten, sollten 0,001 mm oder 0,0001 Zoll genug sein.</color>//
+
+//<color darkslateblue>Mitch ergänzt: Wenn Sie mit einer kleineren Toleranz als nötig anfangen, können Sie diese am Ende etwas erweitern, um das Verbinden schwieriger Stellen zu vereinfachen. [[rhino:faqtolerances|Lesen Sie auch unsere Wiki-Seite zum Thema Toleranzen durch.]] </color>//
+
+=====Organisation von Objekten=====
+Der Gebrauch des Befehls **OBJEKTFANG** ist äußerst hilfreich, wenn nicht elementar zur Verbindung der Kanten.
+
+=====Infos zu Ihrem Objekt=====
+Die **ANALYSE** eines Rhino-Objekts ist ein bedeutender Teil des Prozesses. Der schnellste Weg, um herauszufinden, ob ein Objekt ein Volumenkörper (<color darkslateblue>geschlossener Flächenverband</color>) oder nicht ist, führt über die Rubrik "Details" unter dem Menüpunkt "Eigenschaften", die ich an der rechten Seite des Bildschirms neben dem Ebenenpanel angedockt habe.
+
+//<color green>JB ergänzt: Wenn Sie die Eigenschaften normalerweise nicht geöffnet haben, können Sie auch den Befehl "Objektinfo" verwenden</color>.//
+
+=====Hilfe bei Problemen mit Volumenkörpern=====
+Veröffentlichen Sie die Objekte, mit denen Sie Probleme haben, im Rhino-Diskussionsforum. Suchen Sie generell nach den offenen Kanten und zoomen Sie soweit hinein wie möglich, um zu sehen, wo die Verbindung lückenhaft ist. Erfahrung und Übung helfen immer weiter.  Versuchen Sie stets, von Beginn an auf die Volumenkörper zu achten und nicht erst am Ende.
+
+Wenn Sie einen **GÜLTIGEN VOLUMENKÖRPER** haben, exportieren Sie ihn als STL-Datei. Wenn Sie als Maximalabstand für Kante zu Oberfläche 0,01 mm einstellen, wird die STL-Datei für alle gängige Maschinen geeignet sein. Sie können die STL-Datei testen, indem Sie sie wieder in Rhino einlesen und den Befehl KantenAnzeigen mit der Option "Offene Kanten" ausführen.  Das Erzeugen eines gültigen Volumenkörpers zum Exportieren ist eine schwierige Aufgabe, die Sie beständig üben müssen. Allerdings ist das Erstellen von STL-Dateien auch kein Hexenwerk. Sie sind lediglich ein Polygonnetz aus Dreiecken.
+
+//<color darkslateblue>Mitch ergänzt:  Während der STL-Export theoretisch funktioniert, hat Rhino in der Praxis manchmal Probleme mit der Polygonnetzerzeugung aus Objekten.  Eine gute Methode, das Ergebnis Ihrer exportierten STL-Datei zu überprüfen, ist, diese erneut in einem neuen Fenster von Rhino zu öffnen und das Perspektivische Ansichtsfenster auf **FlachSchattieren** einzustellen (es gibt dafür eine Schaltfläche in der Werkzeugleiste, Sie können den Befehl von Hand eintippen oder die Ansicht einfach aus dem Kontextmenü auswählen, das sich bei einem Rechtsklick auf die Fensterleiste des Anzeigefensters öffnet).  Wenn das Modell mit **FlachSchattieren** in Ordnung aussieht - keine offensichtlichen Löcher oder Anomalien - ist es vermutlich in Ordnung.  [[meshfaq|Sehen Sie sich dazu auch unsere Wiki-Seite zum Thema Polygonnetzerzeugung an]].</color>//
+
+Zögern Sie nicht, auch weiterhin Fragen zu stellen und arbeiten Sie sich durch die bereits gegebenen Antworten.  Das Verständnis zur Modellierung mit Rhino und ein gründliches Verständnis der [[nurbs|NURBS]] sind der Schlüssel. Leider braucht es etwas Arbeit (und vielleicht mehr als nur ein bisschen), ein routinierter CAD-Modellierer zu werden.  Dies ist nicht herablassend gemeint. Ich bin Schritt für Schritt durch alle Phasen (Studium, Praxis, Studium, Praxis etc.) gegangen und habe es am Ende verstanden.
+
+Wenn Ihnen hier irgendetwas unklar ist, teilen Sie es im Diskussionsforum mit!
+
+Jeffrey Everett
+
+<color darkslateblue>(Etwas angepasst von John Brock, Mitch Heynick und Gordon Adams - ich hoffe, es stört dich nicht, Jeffrey!)</color>
+
+
+----
+
+=====Weitere Tipps, um gültige Volumenkörper zu erhalten=====
+
+===Verbinden Sie während des Modellierens===
+Sie können während des Modellierens Teile verbinden und Ihre Arbeit überprüfen.  Nutzen Sie den Befehl **KantenAnzeigen** -> Offene Kanten.  Wenn Ihnen eine angezeigt wird, können Sie direkt zurückgehen, das Problem beheben und herausfinden, warum es aufgetreten ist.  Es ist um Einiges einfacher, die Dinge eines nach dem anderen zu reparieren, während Sie noch modellieren, als dies am Ende zu tun. Manche späten Korrekturen können Sie am Ende viele Stunden kosten, während es mittendrin nur wenige Minuten gewesen wären.
+
+===Mögliche Ursachen für offene Kanten:===
+
+Achten Sie darauf, wie Sie die Oberflächen trimmen.  Rhino trimmt Flächen mit Kurven entsprechend der aktiven Konstruktionsebene und diese Kurven müssen nicht notwendigerweise auf der Fläche liegen.  Auf diese Weise ist es dann auch möglich, dass die Trimmkante nicht genau dort ist, wo Sie sie vermuten würden und dies ist möglicherweise in der orthographischen Ansicht nicht sichtbar.  Am Besten trimmen Sie die Flächen zusammen mit den anderen Flächen, mit denen Sie sie verbinden.  Wenn dies nicht möglich ist und Sie mit Kurven trimmen müssen, sollten Sie sicherstellen, dass die Flächen anschließend verbunden sind.
+
+Flächen neuaufbauen - dadurch können die Kanten so weit verändert werden, dass sie zu weit entfernt sind, um verbunden werden zu können. Seien Sie damit also sehr vorsichtig.
+
+Das Verbinden selbst kann ebenfalls offene Kanten verursachen.  Paradoxerweise produziert Rhino in bestimmten Bereichen mit komplexen Verbindungen mehrerer Flächen (normalerweise durch Auswahl mehrerer Flächen und Ausführen des Befehls **Verbinden**) gelegentlich offene Kanten, wo keine sein sollten.  In diesem Fall sollten Sie die Verbindung rückgängig machen und versuchen, die Flächen eine nach der anderen zu verbinden anstatt alle auf einmal.  In hartnäckigen Fällen müssen eventuell eine oder mehrere der zu verbindenden Flächen leicht angepasst werden.
+
+===Die Behelfslösung KantenVerbinden===
+
+Dieser Befehl erlaubt Ihnen, die Verbindung von Kanten zu erzwingen, die normalerweise zu weit entfernt wären, um normal verbunden werden zu können. Dieser Befehl sollte sparsam und mit Bedacht eingesetzt werden.  Dadurch wird Ihr Modell weder genauer, noch korrigiert es Ihre Geometrie - der Befehl erlaubt es Rhino lediglich, die absoluten Toleranzen an diesem Punkt zu überschreiben und irgendwo zwischen den beiden realen Kanten eine "Durchschnittskante" zu erzeugen.  Auf diese Weise kann die Polygonnetzerzeugung die Lücke überbrücken und ein "wasserdichtes" Polygonnetzobjekt erzeugen, mit dem Ihr STL-Servicebüro zufriedener sein mag.  Wenn das Objekt allerdings als Fläche oder Volumenkörper für die weitere Verarbeitung exportiert wird, kann alles auseinanderfallen. In diesen Fällen ist der Befehl **KantenVerbinden** daher besser zu vermeiden.
+
+===Der Befehl KantenNeuerstellen===
+Dieser Befehl setzt die Kanten einer Fläche (mehr oder weniger) auf den Zustand zurück, den sie vor der Verbindung hatten.  Dies kann wichtig sein, da so Kanten wiederhergestellt werden können, deren Ausrichtung durch **KantenVerbinden** erzwungenermaßen verschoben wurde.
+
+===Die gefürchtete eine offene Kante===
+Wenn Sie auf dieses Phänomen stoßen, haben Sie ein Problem.  Normalerweise treten offene Kanten paarweise auf.  Sie können paarweise offene Kanten oftmals mit **KantenVerbinden** vereinigen, wodurch die Naht geschlossen wird, obwohl die Verbindungen außerhalb der Toleranz liegen.  Wenn Sie allerdings nur eine offene Kante haben, kann diese mit nichts vereinigt werden.  In diesem Fall steht Ihnen etwas Arbeit bevor. Sie müssen öfters die Kanten rund um den Problembereich trennen, den Befehl **KantenZurücksetzen** auf alle anwenden und nachsehen, wo etwas falsch ausgerichtet ist.  Sie werden öfters tief hineinzoomen müssen, um herauszufinden, was schief gelaufen ist.
+
+===Stellen Sie sicher, dass es GÜLTIG ist!===
+Stellen Sie sicher, dass Sie eine GÜLTIGES Objekt haben.  Wenn Sie hineingehen und anfangen, die Kanten zu bearbeiten, ist es möglich, dass das Objekt dadurch ungültig wird (obwohl es geschlossen ist).  Dies kann Probleme bei der Polygonnetzerzeugung verursachen und erneutes Modellieren der Linie nach sich ziehen.  Ich empfehle daher, die Auswahl **NeueObjekteÜberprüfen** zu aktivieren und aktiviert zu lassen.  Auf diese Weise erfahren Sie es sofort, wenn Sie beim Bearbeiten ein ungültiges Objekt erzeugen.
+
+<color darkslateblue>--Mitch</color>
+
+===Bearbeiten Sie das Polygonnetz anstatt die Flächenkanten===
+Es ist oftmals möglich und vor allem schneller, mithilfe der Polygonnetzreparatur ein bestehendes Polygonnetzobjekt zu schließen, als hartnäckige offene Kanten im Flächenobjekt zu entfernen. Wenn Ihr Ziel Rapid-Prototyping über eine STL- oder SLC-Datei ist, versuchen Sie, mithilfe der Befehle **PolygonnetzkantenAnpassen** und **PolygonnetzÖffnungenFüllen** ein Polygonnetzobjekt zu erzeugen (Sehen Sie hierzu außerdem die Informationsseite [[rhino:meshfaq|FAQ Polygonnetz]]) und schließen Sie die Naht mit einigen der anderen Werkzeuge für die Polygonnetzreparatur, bevor Sie es als STL exportieren. Konsultieren Sie außerdem die Hilfe zu diesen Befehlen, um mehr über ihre Funktionsweise zu erfahren. **KantenAnzeigen** zeigt Ihnen ebenso wie bei Flächen, ob das Polygonnetz geschlossen ist.
+

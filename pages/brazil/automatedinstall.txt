@@ -1,0 +1,92 @@
+====== Brazil 2.0 for Rhino Automated Installation ======
+
+> **Summary:** //Three ways to install Brazil 2.0 for Rhino without user intervention.//
+
+=====Requirements:=====
+To deploy Brazil 2.0 for Rhino using any of the methods below use the appropriate .MSI file from the CD, or for Beta and Eval installers.
+
+
+=====Overview=====
+These instructions are useful for System Administrators who want to deploy Brazil 2.0 for Rhino using silent installation with a batch file, silent installation with an INI file, or throughout an organization via Active Directory or SMS.
+
+General documentation of ActiveDirectory/SMS application deployment is beyond the scope of this article, so most deployment-specific instructions have been omitted.
+
+=====Uninstalling Previous Installations of Brazil 2.0 for Rhino=====
+Newer versions of Brazil automatically uninstall an older version.
+
+> **NOTE:** //If you need to install an older version of Brazil 2.0 for Rhino over a newer version, you should uninstall the newer Brazil first, using Windows manual uninstall (ControlPanel>AddRemovePrograms) or do an automated uninstall by running the uninstall command for the currently installed Brazil, which is in the UninstallString value of the registry key HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Brazil\Version 2.0//
+
+======Method 1: Brazil 2.0 for Rhino MSI Scripted Installation======
+
+If you are installing off the standard Brazil 2.0 for Rhino CD, you can execute a line (or execute a batch file with extension .bat) with content like this (all on one line separated by spaces):
+
+     msiexec.exe
+       /i"D:\Brazil\Setup Brazil.msi" /qn
+       INSTALLDIR="C:\Program Files\Brazil 2.0 for Rhino"
+       RMA_CDKEY=BR20-1234-5678-ABCD-EFGH-IJKL
+
+If you would like to install off a server and have copied the Brazil installer MSI onto a network server the commands may look like this
+
+     msiexec.exe
+       /i"J:\download\Setup Brazil.msi" /qb
+       INSTALLDIR="C:\Program Files\Renderers\Brazil"
+       RMA_CDKEY=BR20-AAAA-BBBB-CCCC-DDDD-EEEE
+
+/qn - Tells the installer not to show any dialogs.  An alternate is /qb which will show only a self-closing progress dialog.  Or you can test it without the /q switch to observe how the parameters appear in the installer dialogs
+INSTALLDIR="C:\Program Files\Renderers\Brazil"   <del>-</del>  Specify the folder to install into.  Must be surrounded by quotes if the path contains spaces.
+
+RMA_CDKEY=BR20-AAAA-BBBB-CCCC-DDDD-EEEE <del>-</del> provides the CD-Key for the installation. Use this to install as a standalone node. The CD-Key can also be entered with no dashes.
+
+=====Optional Parameters:=====
+WORKGROUP_NODE=1  <del>-</del>  Alternative to the RMA_CDKEY entry, when you want the station to get its Brazil CDKey from the Zoo license manager (www.rhino3d.com/zoo.htm) each time it starts.
+
+USERNAME="Rodney Dangerfield"  <del>-</del> These two items fill in the user information that displays later in BrazilAbout dialog
+
+COMPANYNAME="Universal Pictures"
+
+> **Example:** ////
+
+To install Brazil as a workgroup node (gets CD-Key from the Zoo) from the installer file D:\Installer\Setup Brazil.msi to the folder C:\Program Files\Brazil2 use this  (all on one line separated by spaces):
+
+     msiexec.exe
+       /i"D:\Installer\Setup Brazil.msi" /qn
+       INSTALLDIR="C:\Program Files\Brazil2"
+       WORKGROUP_NODE=1
+       USERNAME="Rodney Dangerfield"
+       COMPANYNAME="Universal Pictures"
+
+> **NOTE:** //If an earlier version of Brazil 2.0 for Rhino might be already installed on the computer, it should be uninstalled first.  If the new install replaces an old, it will adopt it will use the settings (INSTALLDIR, etc) of the old install.  You can uninstall the old verision using the command that is stored in the registry value UninstallString in the key HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Brazil\Version 2.0//
+
+======Method 2: Brazil 2.0 for Rhino MSI Installation with INI File======
+
+Edit the file **[[http://en.wiki.mcneel.com/content/upload/files/Brazil2Setup.zip|Brazil2Setup.ini]]** or use the copy in the Brazil folder on the Brazil 2.0 for Rhino CD.  Uncomment the parameters (see Method 1 above) you want to set for the installation process. Note: All characters on a line in the INI file following a # sign are ignored by the installer, even if the # character appears in the middle of a line.  After the equals sign in your lines, don't use quotes around the strings (as you must in Method 1)
+
+Rename the INI file and/or the MSI file so they have the same filename (before the file extension), and put them in the same folder.
+
+Launch the MSI file (using the same "msiexec.exe /i" /qn syntax as in Method 1) and it will automatically find the INI file, read the parameters from the INI file (see Method 1 above) from it, and run the installer silently.
+
+
+
+======Method 3: Brazil 2.0 for Rhino MSI Deployment with Active Directory or SMS======
+
+=====Deployment Preparation=====
+  - Perform an administrative install of the MSI to your network share. For this example, we'll assume the location **S:\Brazil 2.0 for Rhino**
+  - Prepare the INI file as in Method 2.
+
+=====Deployment Configuration=====
+  - Open **Active Directory Users & Computers**
+  - Right-click the Group or Organizational Unit that contains the users or computers that will receive Brazil 2.0 for Rhino, then click Properties.
+  - In the Group Policy tab, add a new Group Policy Object named **Install Brazil 2.0 for Rhino**
+  - Select the **Install Brazil 2.0 for Rhino** Group Policy Object, then click **Edit...**
+  - Determine whether you will be installing per-computer or per-user (read up on Group Policy to determine which works best for your organization).
+  - Under User Configuration or Computer Configuration (depending on how you chose in the last step), expand **Software Settings**, then right click **Software installation**, then click **New -> Package**.
+  - Select the .MSI file to install.
+  - In the Deploy Software dialog box, select **Assigned**, then click OK.
+  - Right-click Brazil 2.0 for Rhino in the right pane, then click **Properties**.
+  - Select the **Install this application at logon checkbox.** (Or customize the deployment options to fit the needs of your organization).
+
+(end)
+
+
+
+

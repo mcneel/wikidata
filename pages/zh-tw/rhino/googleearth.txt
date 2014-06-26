@@ -1,0 +1,129 @@
+====== Rhino to Google Earth ======
+> **摘要:** //從Rhino 4.0 匯出或是另存新檔成.KML和.KMZ的格式//
+
+=====內容：=====
+
+  * [[#背景]]
+  * [[#概要]]
+  * [[#操作指南]]
+  * [[#範例]]
+  * [[#教學]]
+  * [[#討論]]
+
+=====背景=====
+
+Rhino V4裡，我們在Rhino核心裡增加了一些工具可允許讓你的模型在地球的具體位置上定位。目的要確保Rhino core需要支援GIS，mapping，建築等等應用。
+
+我們不斷的努力使Rhino提供最精確的建模。當Rhino繪圖模型空間(3D卡式座標)對比地球的緯度、經度和高度，會考慮到一個事實是地球不是圓的( http://en.wikipedia.org/wiki/Earth_radius ).
+
+=====概要=====
+
+去測試和證明這些新的Rhino功能，我們增加了一個簡單的Google Earth匯出之外掛程式。這個主意是匯出任何Rhino的模型為.KML或.KMZ file可以放在網站上，或E-mail給其他人那他們可以在Google Earth上觀看模型。
+
+[[http://earth.google.com/download-earth.html|{{http://www.google.com/earth/images/download_earth.gif}}]]
+
+我們也提供一個方法去匯入.KML和.KMZ file到Rhino。(記得，有很多的KML/KMZ file沒有任何3D幾何。)
+
+Google Earth 3D檔案格式是.KML(未壓縮)或.KMZ(壓縮過)。.KMZ file是簡單的；.KML file之壓縮與擴充更換.ZIP為.KMZ，想了解更多的.KML file格式和其他有幫助的連結，如下：
+
+  * [[http://earth.google.com/kml/kml_intro.html|Google Earth KML 文件]]
+  * [[http://www.keyhole.com/kml/kml_tut.html|KML 教學]]
+  * [[http://www.geocode.com/modules.php?name=TestDrive_Eagle|Geocode]]
+  * [[http://www.localsearchmaps.com/|Geocode API 網址]]
+  * [[http://emad.fano.us/blog/?p=277|Geocode API 教學]]
+  * [[http://ogle.eyebeamresearch.org/|Ogle]] - 從 [[rhino:opengl|OpenGL]]到OBJ.
+  *
+=====操作指南=====
+
+**匯出檔案，存檔等等**
+
+從另存新檔中之存檔類型中選擇KML(圖1)。選擇一個檔案名稱和儲存位置。這將會創造一個.KML file且藉由壓縮和重新命名(.ZIP到.KMZ)可轉換成一個.KMZ file。
+
+{{:zh-tw:rhino:save_as_kml_format.png|}}
+**發佈KML或是KMZ 檔案格式在你的網站上**
+
+KML和KMZ 檔案格式可以發表像其他網站相容的類型(html,jpg,gif等等)，但是你的網站伺服器需能認識KML和KMZ 檔案格式。詳細如下：[[http://www.keyhole.com/kml/kml_tut.html#kml_server|http://www.keyhole.com/kml/kml_tut.html#kml_server]]
+
+**繪製Google Earth模型的要點**
+
+  * 利用[[#EarthAnchorPoint]]指定模型在地球上的地位錨點
+  * 在建模的尺寸單位裡作業，像公尺(你可以在你任何想要的單位系統裡作業，但不要指望能夠在Google Earth裡看到一公分大小的耳環。)
+  * 設定Perspective view鏡頭為21mm。由Google Earth使用這種緊密匹配的攝影角度。
+  * 當你儲存Google Earth file時，確保你的物件在Perspective視窗裡看起來是在地平面以上。
+  * 以 Mesh 指令將曲面轉換為網格時模型的資料量會變大，請盡量減少網格面的數量。
+  * Google Earth 可以顯示物件的顏色。
+  * 您可以使用 Google Earth 開啟、編輯、儲存 KMZ 與 KML 檔，以加入其它非 3D 幾何圖形的資訊。
+
+**EarthAnchorPoint 指令**
+
+Rhino 4的新增指令, "EarthAnchorPoint",設定錨點。  (這個指令是提供給所有地理資訊系統(GIS)及地圖應用程式(mapping aplication)相關地理位置資訊使用；並非特定給Google Earth使用)
+
+此指令需提供三個設定的資訊。
+
+  * 地球上的位置
+    * 緯度(latitude)
+    * 經度(longitude)
+    * 高度(elevation above ground level)
+  * 模型的方位
+    * 指定模型與地球上的位置的錨點。
+    * 指定模型朝北的方向。
+    * 指定模型朝東的方向。
+  * 識別資訊 (可選填)
+    * 名稱。
+    * 描述。
+    * URL。
+    * URL標籤。
+
+舉例,以下資訊包含McNeel and Associates的西雅圖總部之定位點：
+
+  * 定位點在地球上的位置
+    * 緯度: 47° 39' 08.54"N (輸入: 47.653395° [[http://www.cosports.com/tools/gps_coords.htm|轉換]] )
+    * 精度: 122° 20' 37.30"W (-122.34384°)
+    * 高度: 0 (建構模型在地平面上)
+
+在海平面，經度一分大約為 6,000 英呎，一秒大約為 100 英呎，百分之一秒大約為 1 英呎。
+**轉換器使用教學：**
+1.選GPS Lat/Long Conversion
+{{:zh-tw:rhino:convert.png|}}
+2.輸入’度分秒’點選convert轉換成’度’(經/緯度一樣的方法)
+{{:zh-tw:rhino:convert-input_parameter.png|}}
+[[http://zh.wikipedia.org/zh-tw/%E7%BB%8F%E7%BA%AC%E5%BA%A6|更多關於經緯度說明]]
+=====範例=====
+
+下列為一些範例
+
+[[http://www.en.na.mcneel.com/ge/Rhino.kmz|{{http://en.wiki.mcneel.com/content/upload/images/earth.png}} This is a first example of an object placed in Google Earth, written as a prototype test of a quick and dirty export to kml.]]
+
+[[http://en.wiki.mcneel.com/content/upload/files/McNeel.kmz|{{http://en.wiki.mcneel.com/content/upload/images/earth.png}} HQ office building]]
+=====教學=====
+
+**[[FlevoDam|Flevodam from Rhino to Google Earth]]**
+
+=====討論=====
+
+
+> **附註：** //我們需要從我們的使用者了解假如這個外掛程式是值得去調整的。Rhino也許是一個簡單的方法去匯出不同的檔案格式和複雜的圖形到Google Earth上呈現。但是…Google Earth file格式非常簡單所以模型看起來不會那麼棒。//
+
+這個對任何人有幫助嗎？假如如此，為什麼？
+
+
+----
+在我工作的行業目前並無幫助，但當我看見Manhattan New York在Google Earth上，我想這個有潛力，即便Google Earth他的建築物品質快速但色彩黯淡。
+
+Gerard Petersen
+
+----
+Yes -- We do a lot of work for State DOT's and this would be especially useful in the civil-structural arena where everyone wants to get a sense of scale for the project.
+
+Reverse the idea and you have something just as interesting... Any way to export 3D building data from Google Earth into Rhino? <color blue> If you are looking for an adventure, try **[[http://ogle.eyebeamresearch.org/|Ogle.]]** </color>
+
+----
+It would help if picture files which have been mapped to surfaces could be exported as well. Our current workaround is to export the building geometry to [[labs:sketchup|SketchUp]] via an SKP file, texture the model there using pictures of the building, then place it in GE.
+
+----
+Yes this is extremely useful.  I need to import kml files into rhino for large site models.
+
+
+
+
+

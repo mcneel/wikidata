@@ -1,0 +1,58 @@
+====== Rhino 4.0 수동으로 설치 제거 ======
+====문제:====
+Rhino를 시작, 설치, 설치 제거하는 동안 다음과 같은 오류 메시지가 표시됩니다:
+
+**사용하려는 기능이 현재 연결되어 있지 않은 네트워크 리소스에 있습니다.**
+
+**확인을 클릭하여 다시 시도하거나, 아래 칸에 '<filename>.MSI' 설치 패키지가 포함된 폴더로의 다른 경로를 입력합니다.**
+====적용되는 버전:====
+Rhino 4.0, Rhino 5
+
+====원인:====
+Windows Installer 캐시에서 설치 제거에 필요한 파일 또는 레지스트리 키를 찾지 못합니다. 이것은 Windows Installer Service로 인해 흔히 발생하는 문제입니다. 가장 좋은 해결책은 **Windows Install Clean Up** 을 사용하여 이전 설치를 완전히 제거하는 것입니다. 이전 설치를 완전히 **제거**한 후에는 Rhino를 다시 올바르게 설치하실 수 있습니다. 
+
+
+====해결책:====
+Rhino와 Windows Installer 등록을 수동으로 제거합니다.
+
+===표준 프로그램 설치 제거 사용===
+  - Windows 시작 메뉴로 갑니다.
+  - 제어판을 선택합니다.
+  - 프로그램 추가/제어 (XP), 프로그램 및 기능(Windows 7)를 선택합니다.
+  - Rhinoceros 4.0을 찾아 설치 제거합니다.
+
+
+**안내:** 제어판의 프로그램 및 기능에서 프로그램을 제거하는 방법이 실패했을 경우에만 다음 방법을 사용하셔야 합니다 .
+
+  
+===Rhino 설치 폴더 삭제:===
+  - C:\Program Files\ 를 찾습니다.
+  - **Rhinoceros 4.0** 또는 **Rhinoceros 4.0 Evaluation** 를 삭제합니다.
+  
+===레지스트리 키 삭제:===
+  - **레지스트리 편집기**를 엽니다.
+  - **HKEY_LOCAL_MACHINE**\Software\McNeel\Rhinoceros 를 찾습니다.
+  - **4.0** 키를 삭제합니다.
+  - **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros 를 찾습니다.
+  - **4.0** 키를 삭제합니다.
+
+
+===Microsoft의 Fix it 실행===
+  - http://support.microsoft.com/mats/windows_file_and_folder_diag/ko 를 방문합니다.
+  - **지금 실행**을 클릭합니다.
+
+
+===Windows Installer 캐시 정리:===
+<color red>**경고:**</color> 다음 절차는 레지스트리 손상과, 다음에 소프트웨어를 설치할 때 1402 오류의 원인이 될 수 있습니다. 위에 안내해 드린 방법으로도 Rhino를 <color red>**설치할 수 없는 경우에만, 다음 방법대로 실행하시기 바랍니다**</color>.
+
+
+  - [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]] 를 다운로드합니다.
+  - WindowsInstallerCleanupUtility.zip 파일을 바탕 화면의 "Windows Installer Clean Up" 폴더에 압축 해제합니다.
+  - **msicuu.exe**를 실행합니다.
+  - **(All Users) Rhinoceros 5.0 WIP** (또는 All Users Rhino 5.0 WIP x64) 으로 스크롤다운합니다.
+  - **Remove**를 클릭합니다.
+
+이 과정대로 실행한 후 1402 오류가 발생하면, [[http://wiki.mcneel.com/rhino/installproblems#could_not_open_keyunknown_components_error_1402|여기를 클릭하셔서 1402 오류로 인한 문제 해결을 참조하시기 바랍니다]].
+
+  
+  

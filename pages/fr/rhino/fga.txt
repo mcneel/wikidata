@@ -1,0 +1,52 @@
+====== Réponses souvent données -- Rhino ======
+
+Voici une liste des **Réponses souvent données** Vous pourriez y trouver 2 ou 3 trucs utiles. 
+----
+==Comment envoyer un rapport d'erreur ?==
+  * Pouvez vous reproduire l'erreur ? Si oui, les développeurs auront besoin de toutes les informations nécessaires à la reproduction de l'erreur. Un problème qui peut être reproduit est la seule bonne façon de détecter les problèmes d'un logiciel et de les résoudre.
+  * Lorsque Rhino plante, si la mémoire disponible est suffisante, le système de rapports d'erreurs est lancé. Merci d'indiquer votre adresse e-mail et de décrire ce que vous essayiez de faire lorsque Rhino a planté. Une petite liste des commandes que vous utilisiez juste avant le plantage peut être utile.
+  * Si possible, merci de cocher la case pour envoyer votre fichier 3dm avec le rapport.
+  * Si vous indiquez votre adresse e-mail et une description, **votre rapport sera analysé par un humain**. Si vous n'indiquez pas votre adresse e-mail ainsi qu'une description, nous utiliserons un processus automatique pour analyser le rapport d'erreur.
+
+----
+
+==Mode sans échec==
+  * Un raccourci est disponible dans le groupe de programmes de Rhinoceros. Le mode sans échec est un outil de résolution de problèmes qui bloquent le chargement d'OpenGL et des modules. Dans la version 5, il bloque également le chargement des barres d'outils et du RDK. Je réponds normalement Oui au chargement de ces derniers. Le mode sans échec est un outil de détection des problèmes, il ne s'agit pas d'un mode de travail.
+
+----
+==Désactiver les modules dans Rhino 5==
+  -Ouvrez le menu Outils - Options - Modules, et désactivez la case de la colonne Activer pour tous les modules qui ne sont pas livrés avec Rhino.
+  -Redémarrez Rhino normalement et vérifiez que le problème est résolu. Réactivez un des modules, redémarrez Rhino et regardez si vous pouvez répéter l'erreur. Si vous ne pouvez pas, le module que vous avez activé n'est pas la source du problème. Activez les autres modules un à un jusqu'à ce que vous trouviez celui qui pose problème
+
+----
+
+==Rhino 5 ne démarre pas==
+  * Ce problème peut venir des pilotes d'affichage ou d'un mauvais module. Suivez les étapes ci-dessous afin de déterminer la source du problème. Lancez Rhino en mode sans échec (vous trouverez un raccourci dans le groupe de programmes de Rhinoceros) et dans le menu Outils - Options - Vue - OpenGL, désactivez l'option Utiliser les modes d'accélération matérielle. Fermez Rhino et redémarrez normalement. S'il démarre sans planter, le problème venait probablement du pilote d'affichage. Cherchez une mise à jour et installez-la. Si Rhino plante toujours après avoir téléchargé et installé une mise à jour de votre pilote d'affichage, le problème vient probablement d'un module.
+
+  * Dans ce cas, redémarrer en mode sans échec et réactivez l'option d'accélération matérielle. Ouvrez maintenant le menu Outils - Options - Modules et désactivez les cases de la colonne Activé pour tous les modules que vous avez installé et qui n'étaient pas livrés avec Rhino puis cochez l'option "Demander le chargement des modules désactivés" en bas. Redémarrez ensuite Rhino normalement (pas en mode sans échec) et lorsque Rhino vous demande de charger les modules répondez non à tous. Si Rhino démarre correctement, le problème vient d'un des modules dont le chargement a été désactivé. Redémarrer Rhino normalement, mais cette fois, répondez Oui au chargement du premier module et Non aux autres. Si Rhino plante lors du chargement du premier module, vous avez découvert la source du problème. S'il ne plante pas, ce module fonctionne correctement.  Rouvrez la page des options des modules et activez le module qui ne pose pas problème. Redémarrer et répétez le processus jusqu'à ce que vous trouviez le module qui cause le plantage.
+
+----
+
+==Puis-je installer Rhino sur mes deux ordinateurs ?==
+  * Oui. Votre contrat de licence vous permet d'installer Rhino sur tous les ordinateurs que vous contrôlez directement, du moment que vous ne démarrez Rhino que sur un seul ordinateur à la fois. Vous ne pouvez pas prêter Rhino à un ami. 
+
+----
+
+== Lorsque j'essaye d'ouvrir un fichier, j'obtiens un message d'erreur sur quelque chose qui n'est pas lisible==
+  * Voici comment fonctionne le système, il y a deux parties : 
+    - Enregistrement automatique - Si vous avez activé l'enregistrement automatique dans Rhino, des fichiers temporaires sont écrits dans le dossier indiqué dans les options est une marque indiquant que Rhino est ouvert leur est appliquée. Lorsque Rhino est fermé normalement, les fichiers d'enregistrement automatiques sont supprimés et Rhino supprime la marque. – Si Rhino plante, la marque n'est pas supprimée et le fichier d'enregistrement automatique existe toujours lorsque Rhino démarre la prochaine fois. Dans ce cas, vous êtes avertis que Rhino ne s'est pas fermé correctement et vous avez la possibilité d'enregistrer votre travail à partir du fichier d'enregistrement automatique. Si vous dites non, vous perdez le fichier. 
+    - Sauvegardes - À partir de la version 4 SR7, nous avons ajouté une fonction de sauvegarde automatique. Si la fonction n'a pas été désactivée, alors, lorsque vous ouvrez un fichier existant, les modifications réalisées dans cette nouvelle session d'édition sont enregistrées dans une nouvelle copie du fichier, le fichier existant que vous avez ouvert présente une extension ".bak" derrière son nom et le fichier est laissé dans le même dossier.
+  * La version 5 crée maintenant des fichiers *.3dmbak et un type de fichier leur est attribué à fin de pouvoir les ouvrir. 
+  *Pour la version 4, utilisez votre explorateur de fichiers avec un affichage sous forme de Liste ou de Détails, avec les options des dossiers de Windows définies de telle sorte que les extensions des fichiers soient visibles pour les types de fichiers connus, et renommez le fichier de [filename].3dm.bak vers [newfilename].3dm. Vous pouvez maintenant l'ouvrir comme tout autre fichier de Rhino.
+
+----
+
+== J'ai coché l'option d'utiliser le Zoo lorsque j'ai installé Rhino mais je n'utilise pas le Zoo==
+  * Sur Windows Vista ou Windows 7, supprimez tous les fichiers se trouvant dans le dossier : C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses. 
+  * Sur Windows XP, supprimez tous les fichiers du dossier : C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  - Redémarrez Rhino.
+  - Entrez votre clé lorsque Rhino vous la demande.
+
+Note : Sur certains systèmes, le dossier "\All Users\" peut être remplacé par votre nom de connexion au "\Domaine\". 
+
+----

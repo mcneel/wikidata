@@ -1,0 +1,23 @@
+====== Image en arrière-plan ======
+Détails du développeur de Rhino Jeff LaSor
+
+----
+Il est faux de penser que des images de plus haute résolution donneront plus de détails dans les modes [[rhino:opengl|OpenGL]] de Rhino... Pourquoi ? Car [[rhino:opengl|OpenGL]] a 2 limites :
+
+     1) Les bitmaps doivent être une puissance de 2 sur la largeur et sur la hauteur
+     2) Les textures ont des limites quant à leur taille, en fonction votre carte graphique et du pilote.
+
+Voici ce que Rhino DOIT faire si au moins une de ces conditions n'est pas remplie :
+
+  * 1) Rhino doit augmenter ou diminuer la taille de l'image pour que la largeur et la hauteur soient toutes deux des puissances de 2 (2, 4, 8, 16, 32, 64, 128, 256, 512,
+1024, 2048, 4096, etc...).
+
+  * 2) Rhino doit diminuer la taille de l'image  jusqu'à une puissance de 2 si la résolution actuelle de l'image est supérieure à celle acceptée par la carte ou le pilote.
+
+Si ce procédé n'est pas réalisé, l'image ne sera pas affichée.
+
+Ceci dit, je vous recommande vivement d'essayer de changer la taille de vos images à la main afin de répondre aux critères indiqués ci-dessus, de cette façon, Rhino ne les touchera pas du tout et, théoriquement, elles devraient être affichées comme vous le souhaitez. En fonction de votre carte graphique, je ne dépasserai pas 2048x2048..., la plupart des cartes moyenne et haute gamme supportent au moins cette taille. La prochaine version bêta de Rhino4 disposera de ces informations dans la section [[rhino:opengl|OpenGL]] des options, ce qui vous permettra de voir les limites de votre carte, mais pour le moment essayez des tailles inférieures ou égales à 2048 et voyez si le résultat est meilleur.
+
+Et n'oubliez pas, si vous chargez une image 1000000 x 1000000, la résolution utilisée par Rhino n'est pas forcément celle-ci (comme expliqué ci-dessus). Même si vous pensez que 2048 est trop petit pour obtenir les détails que vous voulez, si votre carte est limitée à 2048, il s'agit alors de la taille utilisée de toute façon.
+
+

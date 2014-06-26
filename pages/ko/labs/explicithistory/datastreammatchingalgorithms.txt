@@ -1,0 +1,102 @@
+====== Grasshopper 데이터 스트림 매칭 ======
+
+| {{http://en.wiki.mcneel.com/content/upload/images/ExplicitHistoryBanner.png}} |  //**Grasshopper 플러그인 Wiki 페이지**// |
+|  [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
+
+----
+
+> **Summary:** //데이터 스트림 매칭 알고리즘에 대한 설명//
+
+\\
+
+===== 데이터 매칭=====
+
+데이터 매칭은 명확한 해결책이 없는 문제입니다. 이 문제는 다른 크기의 입력(input)에 구성요소가 액세스할 때 발생합니다. 점 사이에 선 세그먼트를 만드는 구성요소를 생각해 보십시오. 점 좌표를 지원하는 두 개의 입력 매개변수가 있게 됩니다(A 스트림과 B 스트림). 구성요소가 입력/출력 매개변수 너머를 볼 수 없으므로, 이 매개변수가 어디에서 데이터를 수집하는지는 상관이 없습니다.:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/StreamComparisonProblem.png}}
+
+\\
+\\
+
+여러분이 보시는 것처럼, 여러 점 사이에 선을 그리는 방법은 다양합니다. Grasshopper 플러그인은 현재 이러한 매칭 알고리즘을 지원하지만, 더욱 많은 방법을 사용하실 수 있습니다. 가장 간단한 방법은 스트림 중 하나가 없어질 때까지 입력 개체를 일대일로 연결하는 방법입니다. 이것을 "최단 리스트 Shortest List" 알고리즘이라고 합니다:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/StreamComparisonShortestList.png}}
+
+\\
+\\
+
+"최장 리스트 Longest List" 알고리즘은 모든 스트림이 없어질 때까지 입력 개체를 연결합니다.  이것은 구성요소에 기본적으로 설정된 동작입니다:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/StreamComparisonLongestList.png}}
+
+\\
+\\
+
+마지막으로, "교차 참조 Cross Reference" 방식은 모든 가능한 방법을 동원하여 연결합니다:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/StreamComparisonCrossReference.png}}
+
+\\
+\\
+
+이 방식은 출력된 결과의 수가 엄청날 수 있으므로, 잠재적으로 위험합니다. 더 많은 매개변수가 포함될수록 문제는 더욱 복잡해지며,함될수록 문제는 더욱 복잡하게 얽힐 수 있으며, 휘발성 데이터 상속의 수가 늘어나게 되더라도 로직은 그대로 남게 됩니다.
+
+다음과 같은 데이터가 포함된 원격 매개변수에서 x, y, z 값을 상속하는 점 구성요소가 있다고 생각해 봅시다.
+
+\\
+
+X coordinate: {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0}
+
+Y coordinate: {0.0, 1.0, 2.0, 3.0, 4.0}
+
+Z coordinate: {0.0, 1.0}
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/DataCombinationSetup.jpg}}
+
+\\
+\\
+
+이러한 데이터를 "최단 리스트 Shortest List" 식에 병합하면, "Z coordinate" 에 오직 두 개의 값만 존재하므로 두 개을 점을 얻게 됩니다. 이것은 최단 리스트이므로, 솔루션의 범위를 정의합니다.:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/ShortestListViewport.jpg}} |
+
+\\
+\\
+
+"최장 리스트 Longest List" 알고리즘은 Y 와 Z 스트림에 있을 수 있는 가장 높은 값을 재활용하여, 열 개의 점을 만들어냅니다.:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/LongestListViewport.jpg}} |
+
+\\
+\\
+
+"교차 참조 Cross Reference" 는 X 의 모든 값을 Y 와 Z 의 모든 값과 연결하므로, 결과적으로 10×5×2 = 100 개의 점이 생깁니다:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/CrossReferenceViewport.jpg}} |
+
+\\
+\\
+
+모든 구성요소가 이러한 세 가지 규칙 중 하나를 따르게 설정할 수 있습니다. (설정은 메뉴에 있습니다).
+
+\\
+
+이러한 규칙에 한 가지 큰 예외 사항이 있습니다. 일부 구성요소는 하나 이상의 입력 필드에 데이터 리스트가 있으리라고 기대합니다. 예를 들어, 폴리라인 구성요소는 입력된 점의 배열을 통해 폴리라인 커브를 만듭니다. 입력 매개변수에 점이 많을수록, 더 많은 수의 폴리라인이 생성되는 것이 아니라, 폴리라인의 길이가 길어지게 됩니다. 두 개 이상의 값 생성이 예측되는 입력 매개변수를 리스트 매개변수( List Parameters )라고 하며, 이들은 데이터 매칭 과정 중에 무시됩니다.
+
+

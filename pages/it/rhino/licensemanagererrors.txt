@@ -1,0 +1,38 @@
+====== Risoluzione degli errori "Impossibile comunicare con il license manager" ======
+**1) Avete rimosso la beta di Rhino 5.0?**
+
+Scaricare ed installate il file [[http://www.microsoft.com/en-us/download/details.aspx?id=26347|Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package MFC Security Update]]. Dopo l'installazione, Rhino 4.0 dovrebbe riuscire a comunicare correttamente con il license manager.
+
+//**2) Usate Rhino 5 ed avete appena disinstallato Rhino 4?**//
+
+  * Flamingo nXt, Bongo 1.0/2.0 e Rhino 4 usano un file comune chiamato RhinoLM.
+  * Quando Rhino 4 viene disinstallato, il file RhinoLM viene rimosso e Flamingo nXt e Bongo 1.0/2.0 non riescono più ad avviarsi in Rhino 5, né nella versione a 32 bit né in quella a 64 bit.
+
+//Per reinstallare il file senza reinstallare Rhino 4//, scaricate, decomprimete ed eseguite il file **rhinolm_20110309_x86.exe** che troverete in questo zip [[http://s3.amazonaws.com/mcneel/flamingo/nxt/rhinolm_20110309.zip|rhinolm_20110309.zip]]
+
+  * Occorrono diritti per poter modificare il registro di sistema per eseguire rhinolm_20110309_x86.exe. Se vi viene denegato l'accesso, rivolgetevi all'amministratore del computer per accedere con privilegi elevati ed eseguite  **rhinolm_20110309_x86.exe**. Utenti di Windows Vista: cliccate con il tasto destro sul file e selezionate "Esegui come amministratore". 
+
+
+**3) Usate Windows Vista o Windows 7?**
+
+Assicuratevi di usare la SR9 di Rhino 4.0:
+  - Avviare Rhino 4.0
+  - Dal menu Aiuti, cliccare su Aggiornamenti
+
+**4) Reinstallate Rhino 4**
+
+Purtroppo, c'è qualcosa che non va con la vostra installazione di Rhino 4. Per riparare l'installazione, seguite questi passi:
+  - Disinstallare Rhino 4 - può essere necessario rimuovere varie voci "Rhinoceros 4.0 SRx".
+  - Eliminare la cartella "License Manager" da 
+    * C:\Programmi\File comuni\McNeel Shared\ (per i sistemi a 32 bit)
+    * C:\Programmi (x86)\File comuni\McNeel Shared\ (per i sistemi a 64 bit)
+  - Installare Rhino 4 di nuovo
+  - Avviare Rhino 4
+  - Dal menu Aiuti, cliccare su Aggiornamenti
+  - Se necessario, scaricare ed installare l'ultima service release.
+
+**5) Ancora niente?**
+
+Se nessuna di queste soluzioni funziona, visitate la pagina [[rhino:licensemanagererrors:advanced|Risoluzione avanzata degli errori relativi al license manager]].
+
+> **Ultimo aggiornamento:** //28 luglio 2012// Brian Gillespie, McNeel Seattle

@@ -1,0 +1,40 @@
+====== Guardado automático y versiones en OS X 10.7 (Lion) ======
+Apple ha introducido un método totalmente diferente para gestionar los modelos en OS X 10.7 y este método también se ha integrado en Rhino para Mac.  Apple describe las funciones de Guardado automático y Versiones [[http://support.apple.com/kb/HT4753|aquí]] y [[http://www.apple.com/macosx/whats-new/features.html#versions|aquí]], y también puede encontrar otra introducción [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|aquí]].
+
+Este artículo describe detalles adicionales que no se mencionan en estos artículos y que son importantes para los usuarios de Rhino para Mac.  Finalmente, es recomendable leer [[http://wiki.mcneel.com/rhino/mac/lionsaving|todo lo que ha aprendido sobre el guardado de archivos es erróneo]].
+
+-->¿Qué ha pasado con la pregunta "Desea guardar los cambios?" al salir de Rhino?#
+
+Esta pregunta ya no es necesaria porque su modelo se guarda constantemente en el disco. Antes del guardado automático, tenía dos versiones del modelo: la de Rhino y la del disco. El usuario debía mantener sincronizadas esas dos versiones manualmente guardando el modelo a menudo. Por este motivo, los bloqueos del programa eran problemáticos. Si se olvidada de sincronizar los cambios manualmente, podía perder mucho trabajo. Con el guardado automático en Lion, solo hay una versión del modelo; la que se ve en pantalla es a misma que la del disco.
+
+<--
+ 
+-->¿Rhino para Mac cuándo guarda automáticamente un modelo?#
+
+Un modelo se  guarda cuando **cierra** una ventana del modelo, cuando **sale** de Rhino, cuando **cambia** a otra aplicación y //cada cierto tiempo//. Apple indica que //cada cierto tiempo// significa cada cinco minutos cuando Rhino está inactivo. Este intervalo de tiempo no se puede configurar.
+
+<--
+
+-->Rhino está guardando mi modelo constantemente, ¿el guardado automático interrumpirá mi trabajo cada vez?#
+
+El guardado automático periódico se realiza en segundo plano. Nunca sabrá cuándo se está realizando un guardado automático en segundo plano porque esto no impide trabajar con Rhino. Si empieza a modificar su modelo mientras Rhino está realizando un guardado automático, el guardado automático se cancela silenciosamente y se vuelve a intentar más tarde.
+
+<--
+
+-->¿Esta función ocupará mucho espacio en mi disco?#
+
+El guardado automático solo guarda lo que se ha modificado desde la última versión, de modo que se optimiza el uso del disco duro. Las versiones anteriores se descartan automáticamente.
+
+<--
+
+-->¿Rhino para Mac puede buscar versiones anteriores de mis modelos de Rhino?#
+
+Sí, el navegador de versiones forma parte de Rhino para Mac en la versión 10.7.
+
+<--
+
+-->¿Qué puedo hacer en el navegador de versiones?#
+
+En el navegador de versiones, la ventana de la izquierda es el modelo actual, y las ventanas de la derecha son las versiones anteriores del modelo. Estas ventanas son ventanas de Rhino y pueden manipularse como cualquier otro modelo de Rhino. Puede rotar las vistas, abrir el panel de Capas para mostrar y ocultar capas e incluso copiar objetos de un modelo anterior al modelo actual. No es posible //modificar// las versiones anteriores. [[http://tidbits.com/article/12483 |Error de versiones de Lion en redes y volúmenes no HFS+]].
+
+<--

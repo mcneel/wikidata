@@ -1,0 +1,106 @@
+
+> **Zusammenfassung:** //Gelegentliche Probleme bei Installationen und Reparaturanleitungen//
+
+=====Problem mit Werkzeugleisten-Layouts, die nicht richtig konfiguriert bleiben=====
+
+Schließen Sie Rhino
+
+Löschen Sie folgenden Eintrag in der Registrierung
+
+//HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+
+Starten Sie Rhino neu
+
+=====Probleme mit OpenGL Leistung und Anzeige=====
+//- Nach Aktualisierung von Karten und Treiber//
+
+
+----
+Schließen Sie Rhino
+
+Löschen Sie folgenden Eintrag in der Registrierung
+
+//HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Options\OpenGL//
+
+Starten Sie Rhino neu
+
+> **Anmerkung:** //**Beide Probleme** können in V3 gelöst werden, indem folgendes Hilfsprogramm ausgeführt wird: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip, während Rhino geschlossen ist.//
+
+=====Probleme mit Rhino nach der Installation von Rhino 3.0 SR4 oder 4.0 Beta=====
+Dies könnte auch mit Installation/Starten von Windows XP SP2 zusammenhängen
+
+----
+Symptome - Rhino lässt sich nicht starten, nachdem eines der oben genannten Programme installiert wurde.
+
+> **Lösung:** ////
+
+Kopieren Sie die Dateien //msvcp71.dll// und //msvcr71.dll//
+
+aus
+
+//C:\Program Files\Rhinoceros 4.0\System//
+
+nach
+
+//C:\Program Files\Common Files\McNeel Shared\License Manager//
+
+Danach sollten Rhino 3.0 und 4.0 richtig funktionieren.
+
+Bitte schreiben Sie das Diskussionsforum an, wenn dies das Problem nicht lösen sollte.
+
+
+=====Rhino 4.0 Beta wird weder installiert noch deinstalliert=====
+
+
+> **PROBLEM:** ////
+Wenn ich versuche, Rhino 4.0 zu installieren, erhalte ich eine Windows Installer Meldung, die besagt, dass ich das Produkt zuerst anhand der Option zum Hinzufügen/Entfernen von Programmen deinstallieren muss, und ich kann nicht mit der Installation fortfahren.
+
+Wenn ich dies aber versuche, funktioniert es nicht.
+
+> **LÖSUNG:** ////
+Diese Lösung annulliert die Sicherung des Windows Installers, verwenden Sie also diese Lösung nur, wenn Sie das Produkt sofort erneut installieren.
+
+Verwenden Sie REGEDIT.EXE, um diesen Registrierungsschlüssel zu entfernen (Vorsicht!):
+
+HKEY_CLASSES_ROOT\Installer\Products\DFFBC2C5B3CF9AA499B3ECB2D82AB578
+
+
+=====Der Verzeichnisreiter in der Hilfe von Rhino 3.0 ist leer=====
+
+
+> **PROBLEM:** ////
+Der Verzeichnisreiter im Fenster der Rhino Hilfe oder der BonusWerkzeugeHilfe ist
+
+für Benutzer mit niedrigen Rechten in Windows 2000 leer.
+
+> **LÖSUNG:** ////
+Das ist ein Problem der Zugriffserlaubnis, der mit einem Fehler in Windows 2000 interagiert.
+
+Es folgt eine Anleitung zur Behebung dieses Problems, ohne dass die Zugriffsrechte der Programmordner geändert werden.
+
+Lassen Sie einen Administrator die Datei Rhino.GID im Ordner ...Program Files\Rhino\English\Help löschen, und wenn Sie schon dabei sind, löschen Sie auch RhinoBonusTools.GID.
+
+Dann sollte sich der Administrator abmelden (öffnen Sie die Hilfe noch nicht oder es wird die GID Datei für den Administrator erneut erzeugt).
+
+Dann sollte sich der Anwender mit niedriger Privilegstufe anmelden. Der Verzeichnisreiter wird nun festgelegt (und es wird eine GID Datei irgendwo im persönlichen Bereich erzeugt.)
+
+Dieser Trick ist für Windows XP nicht nötig, da Microsoft dieses Problem behoben hat.
+
+Eine weitere Lösung für Windows 2000 wäre,
+
+die Option zum "Schreiben" für Anwender im Ordner ...Rhino\English\Help hinzuzufügen.
+
+
+=====Rhino 3.0 kann nicht installiert werden, da Windows denkt es wird schon ausgeführt, obwohl es noch nicht installiert ist.=====
+
+
+=====Rhino 4.0  Beta kann nicht installiert werden da ich die (leider noch nicht vorhandene) geforderte Rhino4-CD nicht in das Laufwerk einlegen kann.=====
+
+
+> **PROBLEM:** ////
+Die Autorisierung der v3-CD gelingt, da vorhanden; Das Problem tritt bei der deutschen & englischen Version auf; vorherige v4-Version ist bei mir englisch.
+
+Gibt es diesbezüglich einen aktualisierten Installer, wie bereits bei vorherigen beschädigten Installationsroutinen?
+
+~~ Ulrich Maasmeier
+

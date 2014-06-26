@@ -1,0 +1,24 @@
+====== This information is taken from an internal email message written to clarify the use of two display adapters in a single computer.  -JB ======
+
+=====Using two video display adapters:=====
+Rhino does not support multiple (different) video cards, and relies on the OS to manage them (it has to, since different drivers are most likely involved)... That being said, Rhino will initialize itself based on what ever the primary video source is, and in this case, my guess is that will be what ever monitor Rhino is started up on. However, since this user is using two completely different video cards, it means that two completely different drivers are being used...This means that what ever Rhino initialized itself to probably will not work or be compatible with the "other" video card/driver (unless everything is being done in software (ie. Microsoft Software Emulation) read below...)
+
+=====Misleading information?=====
+I realize this can be misleading since Windows seems to be able to manage between the two, however what you won't see is an application running that spans both monitors...you would have a single application running on two completely different video cards (which is an impossible thing to do). For example: Suppose the second video card was an ATI card, you couldn't possibly have half of the Perspective view rendered by nVidia and the other half rendered by ATI...get the picture? The only way this can work is if/when the OS manages between to two, and the only way it can do that is by enforcing a 100% pure software solution (ie. no hardware accelerated support). Which means that the user has most likely configured his system so that he can extend the Windows desktop across the multiple monitors...at which point, Windows probably disables ALL hardware accelerated capabilities.
+
+=====To span or not to span:=====
+My guess is that the user can still have both cards in his system, but I think he needs to configure his "Primary" display to use the FX3500 and then only run (or start) Rhino on that monitor/card...Moving and/or launching Rhino on the other monitor will most likely have undetermined results. The user also probably has to configure the system so that you're not allowed to "span" or "extend" across the monitors...doing so will most likely disable all hardware acceleration capabilities.
+
+=====nVidia SLI and ATI CrossFire=====
+I'd also like to point out that this is not, and has nothing to do with nVidia's SLI capabilities... SLI (and ATI's Crossfire) technology is where multiple video cards can be used together simultaneously and in parallel to generate the final result in a cooperative fashion...However, the video cards MUST be exactly the same cards, they MUST support SLI, they MUST be physically connected together using the SLI bridge adpater, and they MUST be running on a motherboard that supports SLI/Crossfire. Given all of that, the drivers will allow you to enable SLI support, and Rhino will work just fine across multiple video cards...This user's situation does not meet any of these requirements, and as I said, is something completely different.
+
+=====More isn't always better:=====
+The reason his old ATI card worked better, is because it was standalone, and operating in full accelerated mode...The user must be made aware that "more" video cards does not equate to "faster" or "more" capabilities. This (IMO) sounds more like a lack of understanding of how hardware works.
+
+=====Making the most of your hardware:=====
+Thus, this isn't bug, or if it is, I'm really not sure how one would even go about "fixing" it. I believe the solution is to configure the system to use both video cards, but in a standalone fashion, and not allow "Extending the desktop"...That way Windows will allow hardware acceleration to be enabled...However, moving windows (viewports) across the different monitors is still not something I would recommend...at most, he could place toolbars on one monitor, but all modelling and "viewing" must take place on a single monitor (most likely the Primary monitor).
+
+Thanks,
+
+  * Jeff
+

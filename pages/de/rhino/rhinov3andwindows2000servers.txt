@@ -1,0 +1,9 @@
+====== Rhino V3 und Windows 2000 Server ======
+
+Es gibt ein bekanntes "Problem" in der Version 3 beim Speichern auf Windows 2000 Dateiservern.  Das Symptom ist, dass Rhino mitteilt, dass die Datei erfolgreich gespeichert wurde und Sie dann eine Windows Fehlermeldung erhalten, in der steht, dass die Datei nicht gespeichert werden konnte.
+
+Das grundlegende Problem ist, dass die Windows OS Werkzeuge, die Rhino V3 verwendet, um Dateien zu speichern, eine temporäre Datei auf dem Netzlaufwerk erzeugt, in diese Datei speichert und dann die temporäre Datei umbenennt.  Ein Benutzer mit Schreibrechten kann eine temporäre Datei schreiben, aber es werden Löschrechte benötigt, um die temporäre Datei umzubenennen.  Diese temporäre Datei, hat nichts mit dem Backup-Mechanismus zu tun, den Rhino V3 verwendet; dies geschieht sogar, wenn eine ganz neue Datei erzeugt wird.
+
+Die Lösung für den Benutzer besteht darin, Schreib-/Löschrechte für den Ordner auf dem Netzlaufwerk zu haben.  Bitte beachten Sie, wenn ein Benutzer einen neuen Unterordner in einem Ordner erzeugt, könnten die Rechte für diesen Unterordner von den Rechten des Hauptordners abweichen.
+
+

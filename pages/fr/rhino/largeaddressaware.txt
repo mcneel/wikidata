@@ -1,0 +1,81 @@
+====== Plus de mémoire pour Rhino 4 - de 2 Go à 3 Go ======
+
+> **Sommaire:** //Le nouveau Rhino 4 peut "Gérer les longues adresses". Grâce à une petite modification du fichier **C:\\BOOT.INI** ou dans le **magasin BCD**, vous pouvez augmenter la mémoire disponible pour Rhino (3 Go au lieu de 2 Go).//
+
+> **Avertissement:** //<color darkred>**De nombreux documents d'assistance technique de Microsoft avertissent que les modifications décrites ici sont très souvent malvenues. Procédez avec beaucoup de précaution et soyez prêts à rétablir la configuration d'origine en cas de problème. Utilisez ces informations à vos propres risques.</color>**//
+
+> **Actualisation:** //<color blue>4 Nov 07 - Un utilisateur de Rhino avec deux écrans sur une carte ATI [[rhino:firegl|FireGL]] 5200 w/256, a indiqué qu'il avait des problèmes d'affichage brouillé. Après avoir essayé d'autres solutions, il a découvert qu'en revenant de 3 Go à 2 Go le problème ne se produisait plus. - JB</color>//
+
+Actualisation_2: 4 Déc 07 - Après avoir défini la mémoire sur /3GB sur mon système WinXP Pro, j'ai commencé à avoir des problèmes pour quitter correctement MSIE7. J'ai continué ainsi pendant plusieurs mois et finalement j'ai annulé l'option /3GB dans le fichier Boot.ini. Mes problèmes avec MSIE7 ont disparu. - JB
+
+======Informations======
+Ajoutez le paramètre /3GB dans votre fichier **C:\Boot.ini** à la fin de cette ligne et redémarrez :
+
+**Dans Windows 2000 Pro**
+
+multi(0)disk(0)rdisk(0)partition(2)\WINNT="Windows XP Professional" <color red>**/3GB**</color>
+
+**Dans Windows XP Pro**
+
+multi(0)disk(0)rdisk(0)partition(2)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn <color red>**/3GB**</color>
+
+> **Remarque:** //Attention, par défaut, l'explorateur de fichiers de Windows n'affiche pas les "Fichiers cachés du système" tels que C:\BOOT.INI. Vous devrez configurer les options de dossier pour trouver le fichier, puis modifier ses propriétés pour supprimer l'attribut "lecture seule" avant d'ajouter le commutateur "/3GB" aux options de démarrage. Après le changement, réactivez l'option de lecture seule du fichier C:\BOOT.INI puis redémarrez le système afin que la modification soit prise en compte.//
+
+**Dans Windows Vista**
+
+C:\Boot.ini a été remplacé par le magasin Boot Configuration Data
+
+BCDEDIT /export "C:\BCD Backup" - crée une copie de sauvegarde de vos paramètres d'origine
+
+BCDEDIT /set increaseuserva <color red>3072</color> - Modifie le paramètre de mémoire
+
+> **Remarque:** //Dans Windows Vista l'utilitaire BCDEDIT est utilisé pour exporter puis modifier le magasin BCD.//
+BCDEDIT est une fonction de la ligne de commande et elle doit être utilisée dans une fenêtre CMD.
+
+======Informations======
+
+Les systèmes d'exploitation utilisant la technologie Microsoft® Windows NT® ont toujours fourni des applications avec un espace d'adressage virtuel plat de 32 bits qui décrit les 4 gigaoctets (Go) de mémoire virtuelle.
+
+L'espace d'adressage est normalement divisé pour que 2 Go soient directement accessibles par les applications et que les 2 autres Go soient accessibles uniquement par logiciel d'exploitation Windows.
+
+En réponse aux demandes des clients, Microsoft Windows XP Professionnel fournit des applications avec un espace d'adressage virtuel plat de 3 Go ce qui laisse uniquement 1 Go au noyau et aux composants d'exploitation.
+
+L'espace d'adressage virtuel des processus et des applications est toujours limité à 2 Go sauf si le commutateur /3GB est utilisé dans le fichier Boot.ini.
+
+Le commutateur /3GB alloue 3 Go d'espace d'adressage virtuel à une application qui utilise IMAGE_FILE_LARGE_ADDRESS_AWARE dans l'en-tête du processus. Ce commutateur permet aux applications d'adresser 1 Go d'espace d'adressage virtuel en plus des 2 Go.
+
+
+======Si vous rencontrez des problèmes de pilote vidéo en utilisant le commutateur /3GB (WinNT/WinXP) :======
+
+Si après avoir ajouté le paramètre /3GB dans boot.ini, vous découvrez en redémarrant que votre pilote vidéo ne fonctionne pas correctement (problème VgaSave), l'ajout du paramètre **/USERVA** peut résoudre le problème. Par exemple :
+
+<color red>**/3GB /USERVA=2800**</color>
+
+Pour plus d'informations sur ce paramètre consultez cette rubrique en anglais : http://support.microsoft.com/?scid=kb;fr;319043&x=13&y=12
+
+De plus, lorsque vous modifiez boot.ini, il est recommandé d'inclure vos modifications sous forme de copie du système d'exploitation. De cette façon, si le résultat ne marche pas vous pouvez tout simplement choisir votre configuration originale au démarrage. Voici un exemple du fichiers boot.ini sur Windows XP Pro qui peut être utile pour tester les commutateurs /3GB et /USERVA :
+
+
+[boot loader]
+timeout=30
+
+default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
+
+[operating systems]
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn
+
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional with /3GB" /fastdetect /NoExecute=OptIn /3GB /USERVA=2800
+
+======Si vous rencontrez des problèmes en utilisant "increaseuserva" sur Vista :======
+
+Après avoir modifié le paramètre de mémoire en utilisant BCEDIT, vous pouvez restaurer votre configurations d'origine si vous avez réalisé une copie.
+
+BCDEDIT /import "C:\BCD Backup" - Importe les paramètres d'origine si vous avez réalisé une copie
+
+Pour plus d'informations sur BCDEDIT consultez ces rubriques en anglais :
+
+http://technet.microsoft.com/fr-fr/library/cc721886(en-us).aspx
+
+http://msdn.microsoft.com/fr-fr/library/aa906217(en-us).aspx
+
+

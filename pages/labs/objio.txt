@@ -1,0 +1,82 @@
+====== OBJ File Import/Export for V4 ======
+
+> **Summary:** //Rhino 4.0 Plug-ins to import and export WaveFront *.obj files//
+
+=====Description=====
+
+These plug-ins for Rhino 4.0 update the *obj import and export. First rename or move the originals then then place the
+
+//export_OBJ.rhp// and  //import_OBJ.rhp//
+
+files from this [[http://en.wiki.mcneel.com/content/upload/files/OBJ_IO.zip|zip archive]] in your Rhino 4.0 installation plug-ins directory.
+
+=====Export=====
+  * The export plug-in restores the ability to export separate Rhino meshes as separate meshes in OBJ- this does not work correctly in the shipping plug-in. //To export separate objects in Rhino as separate meshes in obj, use the setting for Export Rhino Object Names **as OBJ "g"** //. In addition there are options to export groups or layers as obj "o" objects.
+  * There is a control for the number of significant digits written to the obj file- the default is the maximum floating point number of digits but as this apparently causes problems for some target applications, users can now speciify a lower number of significant digits.
+  * Currently there is an option to export obj meshes as unwelded meshes- that is, with no 'smoothing' of vertices. This is more like an STL mesh.
+
+===== Import=====
+
+  * The current plug-in adds a dialog to the OBJ import process.  "Don't show this dialog", when checked, disables the dialog for subsequent OBJ imports.It can be turned on again using the OBJImportOptions command. The dialog lets you make some choices as to how OBJ "g" and "o" objects are read. When the dialog is off OBJ import will use the last settings set when the dialog was shown.
+  * "Reverse group order" switches which way the group names are read.
+  * "Ignore textures" checkbox will not make/change the object on import, it will simply ignore the textures. Unless you specifically need this you'll probably be happier with it unchecked.
+
+
+----
+**[[http://en.wiki.mcneel.com/content/upload/files/OBJ_IO.zip|Download Plug-ins]]**
+
+=====Morph Target Import Option=====
+
+With the new OBJ Import/Export Plug-ins for Rhino 4 it is now possible to create Morph Targets to be used in animation programs such as Poser. The new OBJ Importer includes an Option for Morph Targets which ignores all Normals and Mapping data but keeps the Vertex Count identical. The OBJ can now be manipulated inside Rhino using Point Editing or the new UDT functions such as Cage Edit. The following is a simple step by step guide on the process of creating and Morph Target for  a Poser figure. This feature is only required if you are making a Morph Target. Do not select this option for normal OBJ files, only those that will be used as Morph Targets.
+
+Make sure the OBJ Import/Export Plug-ins have been installed.
+
+1. Export the desired body-part from Poser. Make sure to select Morph Target option in the OBJ export options. All other options should be unchecked.
+
+2. In Rhino 4, go to File/Import. Change the file type to OBJ and browse for your exported body part. When the OBJ Import Options panel comes up, select the options shown here and press OK to Import the OBJ.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/OBJ_IMPORT.jpg}}
+
+\\
+
+This options will allow the model's vertex count to remain the same so it works later back in Poser.
+
+3. Now that the model is in Rhino you can do your desired editing. Be carefully not to move the model, only modify the points or UDT functions without moving or translating the model.
+
+4. Now export the edited mesh using the following settings.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/OBJ_EXPORT.jpg}}
+
+\\
+
+5. Back in Poser you can now select the Body Part and load the edited OBJ as a Morph Target and it should work as expected.
+
+The above process works for Morph Targets for a single Body Part. For Projects where multiple body-parts need to be morphed together the process is a little bit more complex. It also involves the help of another program called UV Mapper. You can download UV Mapper Classic from www.uvmapper.com.
+
+1. Export from Poser all the Body-parts as 1 OBJ. Make sure Morph Target and Include existing groups in polygon groups options are selected.
+
+2. Open the exported OBJ in UV Mapper and go to  File/Export UVS. In the Export UVS options select Export Group Names and Export Material Names. Click OK to save the UVS File.
+
+3. Now follow steps 2 - 4 above.
+
+4. After exporting from Rhino 4 the model is one single group. Open it in UV Mapper Classic and go to File/Import UVS. This will regroup the models and reassign all your material names.
+
+5. Now is the complicated part. You need to import this new model into Poser and Select the Groping Tool. Click on Spawn Props and close the Groping tool. Delete the original imported OBJ and you now have all the body-parts as separate models. Export each as Morph Targets. Now load your Figure and load the Morph Targets for each Body-part. In the end you will have a morph which spans across the multiple Body Parts.
+
+----
+November 11th 2008
+
+  * Made reading of files that have bogus vertex normal or texture coordinate indices on faces more lenient.  Will read in the file and give an error count on the command line.
+  * Fixed bug in reading texture filenames.  Spaces in the filenames were being removed so textures didn't display right because the path was wrong.
+
+----
+January 16th 2009
+
+  * Set surface parameters of meshes to initial texture coordinates.
+
+----
+

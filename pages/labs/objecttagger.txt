@@ -1,0 +1,60 @@
+====== ObjectTagger ======
+> **Summary:** //Object User Tag plugin for Rhino4 and 5//
+
+\\
+
+=====Purpose=====
+
+This plugin allows you to attach, detach, search and view custom tags. It is a very early beta version with a lot of missing functionality and quite probably some serious bugs. Do not use this on important files!
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/OT_Toolbars.png}}
+
+\\
+
+=====Available commands:=====
+
+The plugin adds a new page to the Object Properties dockbar, and it exposes several commands:
+
+
+| Command name | Explanation |
+| otAttach | Attach a new tag to a number of objects (or replace existing tags with an identical name) |
+| otDetach | Detach all tags that match the given search filters from the selected objects |
+| otClearAllTags | Detach all tags from all selected objects |
+| otSelName | Select all objects that contain tags who pass the given name search filter |
+| otSelValue | Select all objects that contain tags who pass the given value search filter |
+| otSelect | A combination of otSelName and otSelValue |
+| otShowTags | Display tags on selected objects directly in the Rhino viewports |
+| otExamine | Display the tags on a collection of objects in a treeview |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/OT_Conduit.png}} | {{http://en.wiki.mcneel.com/content/upload/images/OT_ObjPropPage.png}} |
+| The otShowTags command will draw tags directly into the viewports | The Object Properties dockbar is extended to show tag properties of the selected objects |
+
+\\
+
+[[http://download.mcneel.com/s3/mcneel/plug-in/beta/en/ObjectTagger.zip|Download the plugin here]]
+
+To install, unzip the rhp and the tb file into a secure location and drag both files into a running Rhino4 or 5 instance.
+
+\\
+
+Features missing in this version:
+
+* Tag groups are not maintained during tag edit operations.
+* An export command which collects tag data and writes out an xml file.
+* An import command which collects tag data from an xml file and applies it to objects.
+* A viewer which shows all tags in the document.
+* A set of [[developer:rhinoscript|RhinoScript]] methods which exposes the functionality of this plugin to [[developer:rhinoscript|RhinoScript]].
+* Some minor commands for merging/copying etc. tags around.
+* A tag preset window where users can add oft used tags for easy access.
+
+\\
+
+[[David@McNeel.com|Contact]] the [[people:davidrutten|author]]
+
+
+
+

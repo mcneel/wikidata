@@ -1,0 +1,114 @@
+====== Consejos de rendimiento de Flamingo ======
+
+====CONSEJOS DE RENDIMIENTO DE FLAMINGO====
+> **Resumen:** //Sugerencias y técnicas para que Flamingo 1.1 o 2.0 acelere la velocidad de renderizado y obtenga la calidad que necesita.//
+
+
+
+======PROCESADOR======
+La velocidad del procesador principal de su ordenador es el principal factor del rendimiento de Flamingo. Un ordenador con procesador dual o de doble núcleo (cuando está habilitado correctamente en Windows NT, Windows 2000, Windows XP o Vista) aumentará la velocidad de renderizado, probablemente un 85% en comparación con un procesador simple. Los procesadores con cuatro núcleos aumentarán 4 veces el rendimiento de procesadores simples de la misma velocidad. Actualmente, Flamingo no mejorar el rendimiento con más de 4 procesadores.
+
+======UNIDAD DE ALIMENTACIÓN======
+Asegúrese de tener una buena fuente de alimentación, especialmente en el caso de múltiples procesadores/núcleos. Flamingo es una aplicación multiproceso que consume el 100% de uso de la CPU.
+
+======TARJETAS GRÁFICAS======
+Las tarjetas gráficas no aumentan la velocidad de renderizado de Flamingo.  La tarjeta gráfica/vídeo sólo se utiliza para mostrar el progreso de los cálculos de renderizado y no los ralentiza.
+
+======MEMORIA RAM======
+Renderizar con una memoria RAM inadecuada es el motivo principal del rendimiento lento de Flamingo.
+
+Para ver si se dispone de poca RAM, consulte los accesos al disco o utilice el Administrador de tareas, como se indica a continuación.
+
+Observe la luz de su unidad de disco mientras la imagen se dibuja en la pantalla. Debería verse muy poca actividad en el disco (a menos que haya otra aplicación muy operativa).
+
+Si el proceso de renderizado está causando una cantidad importante de accesos al disco, Flamingo irá más lento y más RAM acelerá la velocidad de renderizado.
+
+Para tener más precisión sobre la RAM en NT, Win2000, XP o Vista, ejecute el Admistrador de tareas y en la ficha Rendimiento, observe el Total de la Memoría física (su cantidad de RAM). Luego observe en la esquina inferior izquierda la Carga de transacciones (significa el espacio de memoria total que está usando actualmente Windows para todo, incluyendo Rhino/Flamingo).
+
+Si durante un renderizado el total de la Carga de transacciones supera el total de Memoria física (un 50% superior) significa que Rhino y Flamingo requieren más memoria virtual que la de su RAM. De manera que Windows tiene que intercambiar partes de su programa y datos al disco. El renderizado se completará finalmente, pero el acceso a la unidad de disco será 1000x más lento que el acceso a la RAM, de modo que este paginado/intercambio ralentiza drásticamente el proceso de renderizado.
+
+Para las verisones de Windows de 32 bits, más de 2 GB de memoria RAM probablemente no es rentable. Para utilizar más RAM, es mejor esperar a una versión de Rhino que funcione nativametne en una edición de Windows de 64 bits.
+
+======ERRORES DE MEMORIA INSUFICIENTE======
+Debido al límite de Windows (32 bits) de 2GB de espacio de memoria por proceso, Windows no puede asignar más de 2GB de memoria virtual al proceso de Rhino/Flamingo. Así que más de 2GB de RAM probablemente no valga la pena.  Y si su modelo tiene un mallado muy fino (vea el mallado más abajo) o es demasiado grande, e intenta renderizarlo, es posible que aparezca un mensaje de error de memoria agotada y que Rhino se cierre.  Si observa el uso de memoria en el Administrador de tareas, puede ver que la carga es de casi 2GB antes de bloqueo del sistema.
+
+Para más precisión, use el AdministradorDeTareas > Procesos y escoja SeleccionarColumnas del menú desplegable Ver y seleccione TamañoDeMemoriaVirtual". Observe la columna del proceso Rhino3.exe o Rhino4.exe, en Windows de 32 bits que estará limitado a 2GB (2.000.000K).
+
+======MEMORIA VIRTUAL======
+Debería asignar más de 2GB de espacio en disco a la memoria virtual de Windows.  Para comprobarlo, vaya a Panel de control > Sistema > Opciones avanzadas y busque el Rendimiento y la Memoria virtual. Si tiene mucho espaco en el disco, asigne 4GB (4000MB).  La memoria virtual es el espacio en el disco usado para ampliar la RAM cuando Windows necesita más espacio que el que tiene en la RAM ("memoria física").
+
+======PREPARACIÓN DEL MODELO EN RHINO======
+Para ahorrar tiempo de renderizado o evitar problemas de memoria:
+
+Ejecute SelObjetosDeficientes en su modelo y reemplace los objetos erróneos. Los objetos erróneos normalmente causan grandes retrasos en el proceso de mallado del renderizado y crean mallas de renderizado erróneas.  Véase [[rhino:badobjects|ObjetosErróneos]]
+
+Minimice el número de polígonos de malla que Flamingo debe procesar de la siguiente manera:
+
+Oculte o desactive las capas de cualquier objeto del modelo que no contribuyan al renderizado, particularmente los objetos que están lejos, detrás de otras superficies o dentro de sólidos.
+
+Tener geometría fuera de la vista de la cámara puede ralentizar Flamingo, por ejemplo, planos de suelo creados como superficies o polígonos más grandes que la escena que se va a renderizar. Esa geometría debería ser lo más pequeña posible para la escena renderizada. En el caso de planos de suelo, utilice el plano de suelo infinito del Entorno de Flamingo que no es geometría y no ralentiza el proceso de renderizado.
+
+======TÉCNICA DE MALLADO======
+Vaya a Archivo > Propiedades > Malla de renderizado y seleccione Dentada y más rápida para que las mallas de renderizado que hereda Flamingo no sean tan grandes. Si esto hace que algunos objetos redondos tengan siluetas poligonales, ajuste las mallas globalmente o realice un mallado personalizado en objetos específicos (ver sección Mallado personalizado)
+
+Una alternativa recomendada es usar la opción Personalizada en Rhino > Archivo > Propiedades > Malla y configurar todos los parámetros numéricos a cero, except el de "Distancia máxima de borde a superficie". Defínalo a un valor razonable para el tamaño de su modelo y la proximidad de la cámara de renderizado de los objetos. Para un elemento pequeño de joyería en milímetros, esta distancia podría ser de 0.1 o inferior.  Para un barco modelado en pulgadas, este distancia podría ser grande, como 1.0.  En una vista sombreada, compruebe si los objetos con perfiles redondeados tienen facetas demasiado toscas y ajuste el valor de "Distancia máxima".
+
+======MALLADO PERSONALIZADO======
+Si un objeto rendondo específico aparece faceteado en perfil/silueta, puede usar una malla personalizada para ese objeto (por ejemplo, los objetos que están cerca de la cámara pueden necesitar mallas más detalladas). En Rhino 3.0, utilice el comando Malla de Rhino (Rhino > Herramientas > Malla poligonal > Desde objeto NURBS) para crear un objeto de malla más denso para ese objeto NURBS, oculte el objeto NURBS (superficie, sólido) y vuelva a renderizar. En Rhino 4.0, seleccione el objeto, ejecute Rhino > Edición > Propiedades de objeto > Objeto > Configuración de malla de renderizado > Malla personalizada > AjustarRhino recordará que ese objeto debe tener una malla de renderizado personalizada.
+
+Si aparecen aberturas entre las superficies adyacentes, únalas en las superficies convirtiéndolas en una polisuperficie; la malla de renderizado se recalculará para rellenar todo el contorno unido.
+
+===Importante===
+Consulte también las preguntas más frecuentes sobre mallas ( [[rhino:meshfaq|MeshFAQ]] ) para obtener información sobre el mallado.
+
+======SÓLO MALLA DE RENDERIZADO======
+Utilice el comando Malla para mallar el modelo y luego oculte la polisuperficie NURBS. Renderizce sólo la malla. Se trata de una buena solución cuando se ha intentado todo y el renderizado da error.
+
+======CONFIGURACIÓN DE FLAMINGO PARA LA VELOCIDAD======
+La opción Rhino > Trazado de rayos > Propiedades > Flamingo > Antialias debe estar en Alto/4X o inferior, a no ser que necesite dedicar más tiempo de renderizado. Consulte el archivo de Ayuda.
+
+Es posible que haya algunas situaciones especiales en sea necesario aumentar el Antialias, pero normalmente requiere menos tiempo de renderizado aumentar la resolución ( Rhino > Archivo > Propiedades > Flamingo > Resolución ) para obtener la misma claridad en la impresión final.
+
+Si está utilizando sombras suaves o luces, desactive estas opciones en los renderizados de prueba. Ponga el menor número posible de luces con sombras suaves. Si mantiene un número alto de muestras en las luces con sombras suaves, el renderizado será más lento que si la configuración de variación es alta. Utilice el número mínimo de muestras que cree un renderizado aceptable.
+
+======RENDERIZADO DE PRUEBA RÁPIDO======
+En Rhino > Archivo > Propiedades > Flamingo > Resolución, seleccione "Vista" o "Personalizada" con una resolución pequeña de 300x200 cuando asigne materiales, ajuste vistas, haga renderizados de prueba, etc.
+
+Para ahorrar tiempo en el renderizado de prueba, utilice el comando RenderizarPorVentana o "PrevisualizarRenderizadoPorVentana" para renderizar pequeñas partes de la imagen rápidamente.
+
+Utilice también el comando PrevisualizarRenderizado para hacer un renderizado de prueba de resolución máxima en su pantalla que muestre los colores, las luces y las sombras, sólo un nivel de reflexión, etc. pero que no haga el paso de Antialias final, que tarda mucho tiempo. PrevisualizarRenderizadoPorVentana y PrevisualizarRenderizadoEnVentana también sirven para hacer pruebas.
+
+======TRANSPARENCIA Y REFLEJOS======
+Hacer los objetos transparentes y reflectantes aumenta el tiempo de renderizado. Puede tratar de reducir el número de rebotes en Rhino > Archivo > Propiedades > Flamingo > Rebotes. Los valores predeterminados son 3, pueden establecerse a 0 como experimento para ver si esos efectos aumentan el tiempo de renderizado. Si el valor de rebotes es demasiado bajo, se verán áreas negras en los objetos transparentes o reflectantes.
+
+Desactive lo que esté fuera de la vista que no necesite que repercuta en el renderizado, ya que Flamingo los tiene en cuenta en los reflejos si están activados en Rhino.  Desactive las capas o seleccione los objetos y utilice el comando Ocultar.
+
+======TAMAÑO DE PÍXELES DE RENDERIZADO======
+Escoja una resolución Personalizada (tamaño de píxeles) como 1024x768 o superior en Rhino >Archivo > Propiedades > Flamingo > Resolución cuando renderice para guardar un archivo de imagen con el fin de imprimir el resultado final.
+
+Es recomendable multiplicar el tamaño de impresión del papel en pulgadas por 85 para obtener la resolución horizontal y vertical (tamaño de píxeles) de su imagen. En muchas situaciones de impresión, las resoluciones superiores a ese nivel no mejoran significativamente el resultado y por eso aumenta el tiempo de procesamiento. Depende de tipo de papel usado, las prestaciones de la impresora y cómo se verá la imagen.
+
+Aumente la resolución del renderizado final sólo si ve que la impresión no se ve suficientemente clara. Doblar la resolución (número de píxeles horizontales y verticales) cuadruplica el tiempo de renderizado porque cuadruplica el número de píxeles a calcular.
+
+======IMPRESIÓN DE SU RENDERIZADO======
+Para controlar la impresión, abra la imagen renderizada en un programa como Photoshop (Adobe) o PaintShopPro (JASC).
+
+Tenga en cuenta que algunos programas de impresión de imágenes imprimien por defecto sólo a escala de 72 ppp, pero se puede modificar la escala de impresión según sus necesidades, sin cambiar la resolución XY (píxel) de la imagen.
+
+Adobe PhotoShop es complicado para imprimir, ya que está bloqueado en el concepto de PPP.  Nunca se suele "reescanear" o cambiar la resolución (número de puntos X e Y), pero se suele imprimir en un tamaño deseado. Puede que quiera usar PhotoShop para cambiar el valor de PPP guardado en el archivo de imagen de 72 a una cifra superior, a 150 o incluso 300 si desea una impresión fotográfica de alta calidad. Flamingo 1.1 define todas las imágenes en 72ppp. Flamingo 2.0 puntoermite definir los PPP directamente en Rhino > Archivo > Propiedades > Flamingo > Resolución > Tamaño de imagen impresa
+
+Algunos usuarios se quejan de que la configuración de PPP de un archivo de imagen de Flamingo 1.1 es de 72ppp. Los PPP sin una simple sugerencia sobre el tamaño de impresión de la imagen. Desafortunadamente, usamos "resolución" para denominar el número de píxeles en las direcciones X e Y (que no deben cambiar una vez creada la imagen renderizada) y PaintShopPro utiliza "resolución" para lo que nosotros denominamos PPP.  Las instrucciones para el usuario deben ser de no cambiar el tamaño de píxeles, sino imprimir la imagen en la escala y el tamaño deseados (se estirará a cualquier tamaño en la impresión).
+
+======TAMAÑO DE PÍXELES PARA MAYOR EFICACIA======
+Experimente para hallar el mínimo de píxeles por pulgada de papel que necesita para obtener imágenes bien impresas. Cualquier valor superior es tiempo perdido de renderizado.  Como se ha indicado antes, la excesiva resolución y la configuración excesiva en Rhino > Archivo > Propiedades > Flamingo son las causas más frecuentes de renderizados lentos.
+
+======MÁS AYUDA======
+Si todo esto no ayuda, necesitaremos trabajar más en ello: díganos el tamaño del modelo y la configuración de Archivo/Propiedades/Flamingo y Archivo/Propiedades/Malla.  Si es posible, envíenos el archivo 3DM ejecutando el comando FlamingoTransporte y comprimiendo el contenido de la carpeta que crea el comando y adjuntándolo al e-mail.
+
+[[tech.eu@mcneel.com|E-mail de soporte técnico]] tech.eu@mcneel.com
+
+
+----
+
+
+

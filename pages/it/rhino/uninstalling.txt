@@ -1,0 +1,41 @@
+====== Disinstallazione manuale di Rhino 4.0 ======
+====Problema:====
+Durante l'avvio, l'installazione o la disinstallazione di Rhino, viene visualizzato un messaggio come quello seguente:
+
+**La caratteristica desiderata si trova in una risorsa di rete non disponibile.**
+
+**Fare clic su OK per riprovare oppure specificare nella casella in basso il percorso di una cartella contenente il pacchetto di installazione '<filename>.MSI'.**
+
+====Si riferisce a:====
+Rhino 4.0, Rhino 5.0
+
+====Causa:====
+La cache di Windows Installer non riesce a trovare il file o la chiave del registro richiesti per la disinstallazione. Si tratta di un problema comune, causato dal servizio Windows Installer. La migliore soluzione è usare **Windows Install Clean Up** per eliminare completamente l'installazione precedente. Dopo aver “ripulito” l'installazione precedente, potrete installare di nuovo Rhino ed ottenere un'installazione valida.
+
+
+====Soluzione:====
+Rimuovere manualmente Rhino e la registrazione dell'installazione di Windows del prodotto.
+
+**Nota:** si seguano i seguenti procedimenti solo se si verifica un errore quando si disinstalla dalla sezione "Programmi e funzionalità
+" del Pannello di controllo.
+
+===Ripulire la cache di Windows Installer:===
+  - Scaricare [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]]
+  - Decomprimere il contenuto di WindowsInstallerCleanupUtility.zip nella cartella "Windows Installer Clean Up" sul desktop.
+  - Eseguire **msicuu.exe**
+  - Scorrere verso il basso fino a **(Tutti gli utenti) Rhinoceros 4.0**
+  - Cliccare su **Rimuovi**.
+   
+  
+===Eliminare la cartella di installazione di Rhino:===
+  - Andare a C:\Programmi\
+  - Eliminare **Rhinoceros 4.0** o **Valutazione di Rhinoceros 4.0**
+  
+===Eliminare le chiavi del registro di sistema:===
+  - Aprire l'**Editor del Registro di sistema**.
+  - Andare su **HKEY_LOCAL_MACHINE**\Software\McNeel\Rhinoceros
+  - Eliminare la chiave **4.0**
+  - Andare su **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros
+  - Eliminare la chiave **4.0**
+  
+  

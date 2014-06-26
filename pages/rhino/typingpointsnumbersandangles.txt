@@ -1,0 +1,98 @@
+
+
+There are lots of ways to enter points, numbers, and angles in Rhino.
+
+The only hard and fast rule is that **NO SPACES** are permitted in a number, angle, or point.
+
+=====Entering Numbers=====
+
+
+Basic numbers
+
+    123         whole numbers
+   +123.456     decimal numbers
+    0.456
+    .456
+   -1.23456e10  scientific notation
+   - 23456E10
+    5/16        fractions
+    1-3/4       (=1.75)
+
+You can specify units when typing lengths and point coordinates.  Rhino will automatically convert the number you type into the model's units.  For example, if your model units are meters and you type 27cm, Rhino automatically converts your number to 0.27.
+
+   - 235millimeters
+   -1.234cm
+   +16'5"       (16 feet 5 inches)
+    1'2-3/4"    (1 foot 2.75 inches)
+
+=====Entering angles=====
+
+
+> **Note:** //Usually angles are preceeded with a < symbol.//
+
+You can specify angles by typing a number.  If no units are specified, then degrees are assumed.
+
+   45              (45 degrees)
+
+There are six ways to specify degrees.  You can type the "°" symbol, but it is easier to just type a "d".  The reason multiple formats are accepted is to make life easier for people who cut and paste text from other programs.
+
+   45d
+   39deg
+   22.875degs
+   12.345e2degree
+   180degrees
+   47.653395°
+  * There are 360 degrees in a circle
+
+You can also use degrees-minutes-seconds format.
+
+   128d37'22"     (128° 37 minutes 22 seconds = 128.622777...°)
+   99d37'45.234"
+   32.543'
+   32'30.1234"
+
+Radians and grads are also supported.
+
+{{http://en.wiki.mcneel.com/content/upload/images/Radian.png}}
+
+   3.1415926535897932384626433832795r  (pi radians)
+  - 
+  - 234rad
+  - 234rads
+  - 234radian
+  - 234radians
+
+   4g
+   4grad
+   4grads
+  * There are 400 grads in a circle
+
+=====Entering points=====
+
+
+   3,4,5               x,y,z
+
+   2,-11               = (2,-11,0)
+                       When you omit the z coordinate, it is automatically set to 0.
+
+   17<45               polar  (radius<rotation angle)
+   17<45,8             polar  (radius<rotation angle,z)
+
+   5<30<45             spherical (radius<rotation angle<elevation angle)
+
+   11<N30d22'54.43"W   surveyor  (distance<N/SangleE/W)
+
+If you put a "w" in front of a point, then the point is in "world" coordinates.  Otherwise it uses the construction coordinates of the active viewport.
+
+   w9,3,4              world x,y,z
+   w78<32              world polar
+
+Whenever there is a "previous point" known, as in the Polyline command, you can specify relative points.
+
+   r3,4
+   R3,4
+
+
+
+
+

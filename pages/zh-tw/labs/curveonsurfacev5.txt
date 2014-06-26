@@ -1,0 +1,25 @@
+====== Curve on Surface外掛for Rhino 5 ======
+> **摘要:** // **CurveOnSurface**這個外掛工具可以在Rhino 5中使用，主要功能是依照曲面上的參考點順序生成曲面上的內插點曲線。而且產生出來的曲線還可以利用這些參考點進行編輯。//
+
+> //如果您使用的是Rhino 4.0，請參考
+ [[http://wiki.mcneel.com/labs/curveonsurface|legacy Rhino 4.0 Labs tools]] 網頁。//
+
+=====下載=====
+    *下載 {{:labs:interpcurveonsurface.zip|InterpCurveOnSurface.zip}}
+    *下載完成請將檔案解壓縮至您指定的資料夾中。 
+    *資料夾中會有Win32及X64兩個子資料夾，各自都有一個**InterCurveOnSurface.rhp**外掛工具檔案。 
+    *若您是32位元Rhino使用者請至Win32資料夾。若是64位元Rhino 5使用者請用X64資料夾中的InterpCurveOnSurface.rhp檔案。
+    * 將**InterpCurveOnSurface.rhp**檔案拖曳至Rhino 5作業視窗中放開即可完成此外掛的安裝。
+
+**CurveOnSurface**外掛工具可以在Rhino 5 32位元及64位元作業環境下運作。它提供了兩個指令。CurveOnSurface指令可以取代原本Rhino 5中的**InterpCrvOnSrf(曲面上的內插點曲線) **指令。**CurveOnSurfacePtOn**指令可以開啟此外掛所生成曲線的控制點且可編輯。
+
+與**InterpCrvOnSrf(曲面上的內插點曲線) **指令不同的地方是，CurveOnSurface指令在建立曲線時是獨立於曲面參數之外。曲線的走向將趨於直線般的直接路徑，而不會受到曲面結構線走向的影響。事實上，若以只有兩個定義點的曲線來看的話，所產生的曲線應該是最短的可能路徑，作出近似於ShortPath(測地線)指令般的曲線效果。
+
+**CurveOnSurfacePtOn**指令可以開啟這條曲線的定義內插點。這些點可以單獨編輯也可以大範圍選取進行編輯。這些點在編輯時都會被限制在曲面範圍內。也可以搭配推移功能進行微調作業。使用**PointsOff** (關閉點)指令或是按ESC鍵即可將這些點關閉。
+
+建議或需要協助請至[[tech@mcneel.com|Technical Support]]。
+
+返回[[:zh-tw/labs/home|Rhino5 Labs]]
+
+----
+{{tag>Labs}}

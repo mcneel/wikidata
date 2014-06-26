@@ -1,0 +1,34 @@
+====== Helpful stuff about using lightdomes ======
+
+**In the following where I mention 'direct light' I don't mean Rhino lighting types - its a generic statement - any rhino light could be used but normally I'd use a point light.**
+
+When using lightdomes its important to remember why you are using them... the idea is to simulate ambient light so the first thing you should do is make sure Flamingo's inbuild ambient lighting is turned off or set to 'black' so that it doesn't affect the rendered image.
+
+The image above is lit with a single point light with soft shadows.
+
+In an outdoor scene (speaking architecturally) you will most likely have ambient lighting and some direct lighting - for example the sun.    When setting up your scene start with the lightdome.  Do a quick trial render - the image shouldn't be too bright - basically the colour of things in this render will pretty much be the colour of the areas that have shadows cast by the direct lighting.  Typically I would expect an intensity of about 15-20 but this will depend on other factors including colour so you may need to experiment.
+
+Once you are happy with this introduce your point light.  the location of this is down to you but two things you will need to look at are the intensity and the colour.  The default I think (I'll need to check) is a white light with an intensity of about 40.
+
+Render up the image again and see the effect.  Likelyhood is the image will be quite burnt out where it is hit by light from both the lightdome and the direct light. Adjust the intensity of the direct light to about 20 (it should be more intense than the setting for the lightdome itself).  Render again and see the effect.
+
+If you are still getting burnout at this point you need to adjust the colour of the directlight.  Reduce the colour to a shade of grey (if I remember I will post more info about this) - don't go too dark, and render again.  By playing with this you should quite quickly be able to get the balance right.  Remember you don't need to render the whole scene just a window that covers both direct and indirect areas of lighting.
+
+The image above is lit with a single direct source (pointlight) along with a lightdome to fill in the ambient lighting.
+
+When working with direct lighting and lightdomes the effect of artifacts can be greatly reduced.  remember that it is possible to have your direct light set to soft shadows and the lightdome not.  It doesn't alway solve the problem but it well worth trying first.
+
+Again apologies for the image quality I will work on getting something that looks better as soon as I can!!
+
+**Source Radius :**
+
+My understanding of this is quite simply the 'size' of the light source - so for example if you were simulating a tiny halogen torch bulb the source radius would be very small - in the case of a light dome you want the size to be much bigger so that each light overlaps its neighbour.  Note : you don't actually see a physical representation of the source radius within the rhino viewports.
+
+[[rhino:softgilightingusinglightdomes|Want to know more?]]
+
+----
+
+**Keith Wilkinson**
+[[http://www.ultra3d.com]]
+
+

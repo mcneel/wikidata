@@ -1,0 +1,70 @@
+
+
+> **Sommario:** //Una breve spiegazione delle macchine a controllo numerico (CN) e come lavorano//
+Principi fondamentali di CN
+
+Per poter utilizzare con profitto i dati creati in Rhino per operazioni di lavorazione o taglio a controllo numerico, è necessario comprendere il processo CN e come lavora. Si spera che questo piccolo stuzzichino possa darvi una mano ad iniziare a farlo.
+
+Innanzitutto, un paio di definizioni:
+
+CNC-Computer Numeric Control - Sta a significare l'uso di un computer per controllare e monitorare i movimenti di una macchina. La macchina può essere una fresa, un tornio, una macchina a lama alternativa, una saldatrice, una mola, una macchina di taglio a Laser o ad acqua, una macchina di stampaggio a freddo di lamiera, un robot e molti altri tipi di macchina, dove sia necessario conoscere e controllare con precisione la posizione di alcuni organi in movimento. Il computer è generalmente un controllo integrato a bordo e dedicato, specialmente su macchine industriali, ma può anche essere un normale PC, per macchine amatoriali o nel caso di ricondizionamento-revisione di macchine usate. Il controllo CNC aziona una serie di motori e guide, per il movimento controllato e coordinato degli assi della macchina, allo scopo di portare l'utensile o il pezzo nella posizione e nel momento previsti.
+
+Le macchine industriali sono in genere dotate anche di un sofisticato sistema di retroazione, che controlla e corregge costantemente (decine/centinaia di volte al secondo) che la posizione  e la velocità di spostamento dell'utensile sia quella prevista, andando a leggere migliaia di passi avanti il programma di lavorazione.
+
+CNC Desktop - Esistono molte piccole macchine CNC per uso hobbistico, in genere meno rigide, precise e costose delle corrispondenti macchine industriali, ma in grado di lavorare con successo materiali morbidi, come plastiche, schiume e cere. Alcune di queste macchine possono essere usate quasi con la semplicità di una stampante, altre hanno un proprio controllo dedicato e addirittura un SW CAM specifico. Alcune altre possono addirittura riconoscere ed eseguire codice G standard. Esistono poi piccole macchine industriali per lavori di precisione, che hanno dotazioni SW e costi molto più elevati delle macchine amatoriali.
+
+CAM - Lavorazione a Controllo Computerizzato - sta ad indicare l'utilizzo di SW per calcolare percorsi e codice CN per una macchina CNC, a partire da dati CAD 2-3D. Quando i due Sw coesistono, li si indica come CAD/CAM.
+
+Notate che il CAM "non" aziona direttamente una specifica macchina CNC, ma crea un codice generico da eseguire. Inoltre il CAM non è una semplice operazione automatica, che importa i dati CAD ed esporta il corrispondente codice CN. L'uso del CAM richiede conoscenza ed esperienza su strategie di lavorazione per ottenere i migliori risultati, utensili, materiali, scelta della sequenza delle singole lavorazioni, ecc. Esistono CAM di tutti i tipi, da quelli per principianti, che introducono l'utente alla lavorazione di oggetti semplici, fino a quelli più sofisticati, che sono molto complessi e per i quali è necessario prevedere un consistente investimento di tempo e danaro, prima di diventare produttivi. Ne parleremo ancora in seguito.
+
+Codice CN - Uno speciale e relativamente semplice linguaggio macchina che il CNC è in grado di comprendere ed eseguire. Questi linguaggi in origine servivano a programmare le lavorazioni direttamente a bordo macchina, con una tastiera alfanumerica, senza l'uso di Sw CAM. Si tratta di una sequenza di comandi semplici, che la macchina esegue nell'ordine,  e di alcune altre istruzioni standard, quali il numero di giri (RPM) del mandrino e le velocità di spostamento nelle varie situazioni (lavoro, risalita, discesa, rapido, ecc.). Il linguaggio più comune è il Codice G o Codice ISO, un semplice linguaggio sviluppato per le prime macchine CNC negli anni settanta.
+
+Postprocessor - Mentre il Codice G è di fatto un linguaggio "standard", i costruttori di macchine sono liberi di personalizzarlo, per incorporarvi funzioni supplementari e specifiche di ogni macchina: per questo motivo il Codice G creato per una macchina può non essere adatto ad un'altra. Alcuni costruttori hanno addirittura sviluppato propri linguaggi di programmazione, come Heidenhain, Mazak/Mazatrol, ecc. Di conseguenza, per tradurre i percorsi utensile calcolati dal SW CAM in un linguaggio specifico per la singola macchina, è necessario un ulteriore SW "ponte", chiamato Postprocessor, che, una volta correttamente configurato, si incarica di tradurre il codice generico in un linguaggio specifico per la macchina per la quale è stato compilato. Questo permette (in teoria) a qualsiasi CAM di calcolare percorsi per qualsiasi macchina. I Postprocessor possono essere inclusi od esclusi nel costo del SW CAM.
+
+Macchine CNC - generalità
+
+Le macchina CNC possono avere un numero qualsiasi di assi in movimento, che può essere lineare o rotatorio. Molte macchine ne hanno di entrambi i tipi. Le macchine di taglio Laser o ad acqua hanno in genere solo 2 assi lineari, X e Y. Le frese hanno almeno 3 assi, X,Y e Z e possono avere assi rotativi addizionali. Una macchina a 5 assi è dotata di 3 assi lineari e 2 assi rotativi, per consentire all'utensile di lavorare su un emisfero di almeno 180°. Esistono anche Laser a 5 assi, usati per taglio di finitura, scultura e decorazione. Un braccio robotico può avere più di 5 assi.
+
+Alcuni limiti delle macchina CNC
+
+In relazione alla loro età e grado di sofisticazione, le macchine CNC hanno dei limiti a quanto il loro sistema di controllo dei movimenti è in grado di fare. La maggior parte dei controlli CNC è in grado solo di interpretare movimenti lineari diritti e segmenti di arco. In molte macchine, gli archi sono limitati ai soli piani principali XYZ. I movimenti di rotazione possono essere considerati come movimenti lineari (con i gradi al posto delle distanze). Per ottenere un movimento lineare inclinato o un movimento ad arco, è necessario "interpolare" (muovere in modo coordinato e sincronizzato) i movimenti di almeno 2 assi. E' anche possibile interpolare movimenti lineari e movimenti rotatori. Nel caso delle macchine a 5 assi, tutti i movimenti sui 5 assi devono essere perfettamente coordinati e sincronizzati, cosa non facile.
+
+La velocità a cui il controllo può ricevere e processare i dati in arrivo, trasmetterli al sottosistema di movimento e controllarne la corretta esecuzione è l'aspetto cruciale dell'intero processo.
+
+Macchine datate saranno ovviamente meno performanti di macchine più recenti, come del resto avviene per i PC, nell'esecuzione di task sempre più complessi.
+
+I vostri dati 3D e spline devono per prima cosa essere interpretati.
+
+Il primo problema è quello di aggiustare i dati CAD in modo che, dopo il passaggio di generazione CAM dei percorsi, il risultato sia una sequenza di movimenti quanto più possibile morbida (senza brusche variazioni) e fluida (senza intoppi). Dal momento che la maggior parte dei controlli CNC sono in grado di interpretare solo linee ed archi, tutta la geometria di diversa natura deve essere approssimata a queste 2 entità. Entità tipiche da approssimare sono le "Splines", per esempio le curve Nurbs che non sono archi o linee e le superfici 3D.
+
+Le Splines possono essere spezzettate in una serie di segmenti lineari, di archi tangenti o dalla loro combinazione. Potete immaginare la prima opzione come una serie di corde d'arco sulla Spline, che la toccano alle estremità ed hanno una certa deviazione al centro. Un altro modo di immaginare la stessa cosa è convertire la Spline in una polilinea: meno segmenti usate, più grande l'approssimazione e più "spigoloso" il risultato. Suddividendo con un numero maggiore di segmenti, vi darà un risultato meno approssimato, aumentando tuttavia la complessità del calcolo ed il lavoro del controllo. Una serie di archi "potrebbe" essere un'interpretazione più fedele, entro la tolleranza data, della Spline originale, con un numero inferiore di segmenti più lunghi.
+
+Le superfici possono essere immaginate come lo stesso tipo di approssimazione, solo ripetuto molte volte nella direzione "trasversale", con uno spazio tra un percorso ed il successivo (di solito detto passo). In genere le superfici sono approssimate usando solo segmenti lineari, ma a volte possono servire anche archi o entrambi.
+
+La dimensione ed il numero dei segmenti saranno determinati dal grado di precisione e dal metodo di lavorazione scelti ed influiranno direttamente sull'esecuzione. Troppi segmenti molto corti "strozzeranno" il controllo di macchine datate, mentre un numero insufficiente di segmenti darà un risultato sfaccettato. Il CAM è dove di solito si decidono queste approssimazioni, che dipendono, oltre che dalle possibilità della macchina, anche dalla destinazione del pezzo finale e dal materiale scelto. Alcuni CAM invece non sono in grado di leggere geometrie spline o alcuni tipi di superfici, per cui è necessario effettuare queste approssimazioni direttamente nel CAD (Rhino).
+
+Il passaggio dal CAD al CAM (attraverso un formato neutro come STL, DXF, ecc.) può a volte provocare dei problemi, in relazione alla qualità di import/esport dei programmi usati.
+
+Convenzioni comuni del linguaggio CNC
+
+Il vostro progetto può rientrare in una delle seguenti categorie:
+
+2D se tutta la lavorazione giace sullo stesso piano. In questo caso l'utensile non ha alcuna possibilità di movimento indicizzato (controllato) lungo l'asse Z, ma al limite solo due possibili posizioni (su e giù).Gli assi X e Y possono interpolare (muoversi insieme in modo coordinato) per tracciare linee inclinate o archi di cerchio.
+
+2,5D se tutta la lavorazione avviene su piani paralleli al piano principale, a livelli Z diversi. In questo caso l'asse Z può variare la sua quota, ma non interpolare con gli assi X e Y. Un'eccezione è costituita dalla lavorazione ad elica, dove X E Y interpolano a formare un cerchio, mantre Z si muove a velocità costante, descrivendo quindi come risultato una spirale (ad esempio nel ricavo di filetti).
+
+Una sottospecie della categoria precedente è rappresentata da controlli che possono interpolare su una coppia di assi alla volta, ma non contemporaneamente su tutti e tre. Ovviamente in questo modo di operare ci sono  molti più limiti di quanti ne avremmo con una piena interpolazione dei tre assi.
+
+3D se la lavorazione richiede un movimento simultaneo e coordinato degli assi X,Y e Z, come richiesto dalla lavorazione di molte superfici free-form.
+
+4 assi se la lavorazione include, oltre al movimento interpolato su 3 assi, un movimento di rotazione (sull'utensile o sul pezzo). Se il 4° asse è interpolato con gli altri tre, si parla di 4assi vero, altrimenti, se il 4° asse può solo ruotare mentre gli altri assi sono fermi, si parla di 4 assi indexato.
+
+5 assi se la lavorazione avviene con il movimento dei tre assi principali e con la rotazione sia della testa porta-utensile che del pezzo. Anche qui un 5 assi vero è quello in grado di interpolare simultaneamnete i 5 movimenti, mentre esistono macchine a 4,5 assi (quelle che interpolano 3 assi+ una rotazione e sono in grado di riposizionare con una quinta rotazione), oppure macchine a 3+2 assi (quelle che lavorano a tre assi interpolati, ma sono in grado di riposizionare per rotazione sia il pezzo che la testa porta-utensile).
+
+Diventa abbastanza complicato, no?
+
+Continua... --MSH 22.12.05 tradotto ArC 24.12.05
+
+
+
+

@@ -1,0 +1,534 @@
+====== Rhino 4.0 용 플러그인 ArchCut ======
+
+> **Summary:** //Rhino 4.0 용 단면/패널 작업 플러그인. //[[http://download.mcneel.com/download_rel.asp?rel=244|2007년 3월 7일자 ArchCut 다운로드]]////
+//**Critical:**//ArchCut 플러그인을 로드하기 전에 //[[http://en.wiki.mcneel.com/content/upload/files/vcredist_x86.exe|Microsoft의 runtime libraries를 다운로드]]// //하여 설치하시기 바랍니다.//
+
+
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/panel.PNG}}
+\\
+
+=====다운로드=====
+ **[[http://download.mcneel.com/download_rel.asp?rel=244|ArchCut_Plug-in of 7-March-2007]]** //(works with the released Rhino4 and current [[http://www.rhino3d.com/4/beta.htm|Rhino4 BETA]])// 
+
+ //ArchCut Commands [[http://en.wiki.mcneel.com/content/upload/files/ArchCut_Tools_Feb14_2007.zip|Toolbar]]// 
+ //3DM Sectioning [[http://en.wiki.mcneel.com/content/upload/files/ArchCut_Example.3dm|Example]]// 
+ //Sectioning Report [[http://en.wiki.mcneel.com/content/upload/files/ArchCut_report.zip|Example]]// 
+ //Sections File Format [[http://en.wiki.mcneel.com/content/upload/files/ArchCut_LoadFormat.zip|Example]]// (to load section names and distances) 
+ //Create Sections [[http://en.wiki.mcneel.com/content/upload/files/ArchCut_Create1.zip|(short clip)]]// 
+ //Create, View & Update Sections [[http://en.wiki.mcneel.com/content/upload/files/ArchCut_Create_View_Update.zip|(short clip)]]// 
+ //Scripting Help Document// //[[http://en.wiki.mcneel.com/content/upload/files/ArchCutScripting_Feb6_2007.zip|(word file .doc)]]// //[[http://en.wiki.mcneel.com/content/upload/files/ArchCutScripting_Feb6_2007.pdf|(PDF file)]]// //[[http://en.wiki.mcneel.com/content/upload/files/ArchCutHelp_March7_2007.zip| (.CHM and .DEC files)]]// 
+\\
+
+----
+=====Contents=====
+====Sectioning Commands====
+Tools to import sections (names/locations), create sections, update, 2D layout and generate area report.  Sections data is saved to document and are updatable when model changes.
+
+  * [[#ArchCut_Create]]
+  * [[#ArchCut_CreateArray]]
+  * [[#ArchCut_Update]]
+  * [[#ArchCut_Report]]
+  * [[#ArchCut_Layout]]
+  * [[#ArchCut_NestLayout]]
+  * [[#ArchCut_View]]
+  * [[#ArchCut_ClearView]]
+  * [[#ArchCut_MoveSections]]
+  * [[#How to Export]]
+  * [[#How to Display Sections]]
+  * [[#How to Delete and Rename Sections]]
+  * [[#Sectioning Wish List]]
+====Paneling Commands====
+Paneling tools support a variety of paneling algorithms ranging from directional paneling to completely random paneling.
+
+  * [[#ArchCut_Divide]]
+  * [[#ArchCut_Paneling_Dir]]
+  * [[#ArchCut_PanelingUV_Num]]
+  * [[#ArchCut_PanelingUV_Dis]]
+  * [[#ArchCut_SubPaneling]]
+  * [[#ArchCut_RandomPaneling]]
+  * [[#ArchCut_PanelingUpdate]]
+  * [[#Paneling Wish List]]
+
+====Scripting====
+ArchCut supports scripting mainly to allow custom pattern definition and also to make plug-in methods available for Rhino scripting developers
+
+  * [[#Custom Patterns for Paneling]]
+
+====Links====
+  * [[rajaa@mcneel.com|Contact the developer]] for comments and feedback
+  * [[http://www.en.na.mcneel.com/support.htm|McNeel Technical Support]]
+  * [[labs:rhinohomelabs|McNeel tools for Rhino4]]
+\\
+
+| [[#Back to top]]|
+
+----
+====ArchCut_Create command:====
+\\
+
+> **Flow:** ////
+  * **Select objects to section. Press Enter to select all visible** ( //Dir=CPlaneX  Replace=Yes  AutoNaming=Yes  LoadFromFile=No// ):
+  * **Place section. Press Enter when done** ( Flip=No ):
+\\
+
+> **Options:** ////
+  * **Dir**: ( //CPlaneX , CPlaneY, Pick// ) - Set section line direction
+  * **Replace**: If a section (layer) with same name exists, then delete the content of the old one and replace with the new.
+  * **Name=SEC**: Naming format is "SEC_01", "SEC_02", etc.
+  * **LoadFromFile**: If (Yes), user gets section names and their distance from a 0.0 base point, from a .txt, .dat or .csv file (comma separated). (//[[http://en.wiki.mcneel.com/content/upload/files/ArchCut_LoadFormat.zip|Sample File Format]]// )
+  * **Flip**: Flips the direction of the section (makes difference is "Layout" view)
+  * **DetectSolids**: an option to detect solids (if cutting through a solid, a surface is generated alongside intersection curve)
+\\
+
+> **Notes:** ////
+  * The plugin maintains "Sections Table" (ST):
+    * ST is saved to the document.  That is sections data is carried from one session to the other.
+    * ST keeps track of each section: layer, section plane, sectioned objects (or all visible)
+  * Each section plane is represented as hidden clipping plane object in the section layer, user can make visible and edit.
+  * Section curves are given the name of the layer from which the sectioned object comes from and name of sectioned object (**LayerName_ObjectName**).  This helps sorting curves by objects when reporting.
+  * Section curves and surfaces take the properties of objects they come from.
+  * Section curves take the attributes of object they section if set to **ByObject**, However if **ByLayer** then take the attributes of that layer.
+  * Can not section through meshes
+  * Supports sectioning through blocks
+
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/ArchCut_create.PNG}}
+
+\\
+\\
+
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_CreateArray command:====
+Create array of sections.  User defines spacing and number of sections
+
+\\
+
+> **Options:** ////
+  * **Dir**: ( //CPlaneX , CPlaneY, Pick// ) - Set section line direction
+  * **Replace**: If a section (layer) with same name exists, then delete the content of the old one and replace with the new.
+  * **Name**: Enter sections name.  Default name is "SEC".  Names take the format "SEC_01, SEC_02, etc".
+  * **NumOfSections**: Number of sections
+  * **Spacing**: distance between sections
+  * **DetectSolids**: an option to detect solids (if cutting through a solid, a surface is generated alongside intersection
+  * **Flip**: Flips the direction of the section
+  * **Reverse**: Reverse direction vector
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_Update command:====
+Updates all sections.
+
+\\
+
+> **Notes:** ////
+  * The command uses section plane and the list of sectioned objects (or all visible) to create new section curves and replace old content.
+  * User can edit the following and will be updated using the command:
+    * Sectioned objects (the model)
+    * Section layer name through layer table
+    * Section plane - hidden in section layer. user can make it visible and move.
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+====ArchCut_Report command:====
+\\
+  * Creates a .csv file that lists sections, SUM area of closed curves, SUM perimeter and SUM of surfaces area sorted by sections and names (//[[http://en.wiki.mcneel.com/content/upload/files/ArchCut_report.zip|Sample Report]]// )
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_Layout command:====
+\\
+
+> **Flow:** ////
+  * **(Dialog)** ask to select sections.
+  * **Placement point. Press Enter to project in-place** ( Grip=Center  ApplyToAll=No ): Grip
+  * **Grip** <Center> ( Center  Min  Max ): Min
+\\
+
+> **Options:** ////
+  * **Grip** <Center> ( Center  Min  Max ): Base point relative to section bounding box.
+  * **ApplyToAll**: if (Yes), Grip and placement point are applied to all sections without prompting the user for a placement point for each section.
+\\
+
+> **Notes:** ////
+  * Creates new layer for each layout. Layer name looks like: "SectionName"_Layout.
+  * It maps sections to world_xy_plane.
+  * Calling **ArchCut_Layout** deletes old layouts and place new ones.
+  * Projecting in place ensure layouts to properly overlap.
+
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/ArchCut_layout.PNG}}
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_NestLayout command:====
+\\
+
+> **Flow:** ////
+  * **(Dialog)** ask to select sections.
+\\
+
+> **Notes:** ////
+  * Creates layouts and put in current layer with name tags.
+  * All layouts are placed in the +,+ quarter along the world x-axis (next to one another).
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_View command:====
+\\
+
+> **Flow:** ////
+  * Select sections and assign them to viewports.
+\\
+
+> **Notes:** ////
+  * In the following example, section is added to the perspective view
+  * For hidden-lines view try the new Rhino4 [[labs:techdraw|TechnicalDrawing Plugin]]
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/ArchCut_view.PNG}}
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_ClearView command:====
+\\
+
+> **Flow:** ////
+  * Select viewport to delete selected sections from that viewport.
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_MoveSections command:====
+\\
+
+> **Flow:** ////
+  * Move sections and update sections curves.
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+===How to Export:===
+\\
+
+> **Macro:** //SelLayer //Export
+  * You can select one or all layers and export to any supported file format.
+  * To export sections or their layouts, use the above macro (copy and paste to command line)
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====How to Display Sections:====
+\\
+
+> **Macro:** //PrintDisplay State=On //Enter
+  * Section curves are assigned a print width = 0.5 (default=0.13) to appear thick.
+  * To be able to view the thicker section curves, use the above macro (also available in the toolbar).
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====How to Delete and Rename Sections:====
+\\
+  * **Delete**: Delete layer of the section.
+  * **Rename**: Change layer name.
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====Sectioning Wish List: ... You welcome to add to this list====
+\\
+  * Make2D for Layout... If you need it for viewing, try the new Rhino4 [[labs:techdraw|TechnicalDrawing]] Plug-in
+  * Option for dynamic update of sections
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_Divide command:====
+\\
+
+> **Flow:** ////
+  * Select curves to divide by number or distance.  If dividing by distance, there is option to round up or down.
+\\
+
+> **Options:** ////
+  * **Method**: ( //ByNumber, ByDistance// ).  If ByDistance, user can round up or down to cover all curve length.
+  * **SpanNum**: Number of spans
+  * **SpanDistance**: Length of each span.  If it doesn't divide evenly, then **Rounding** option can be used.
+\\
+
+> **Notes:** ////
+  * For each curve, user is notified of the final number of spans and length of each span in the output window.
+  * User is prompted to enter dividing points name.  Dividing points are ordered using the format "Name_Row(0,1,...)_Col(0,1,...)"
+  * Has History support
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_Paneling_Dir command:====
+\\
+
+> **Flow:** ////
+  * Select object to create a base grid panels.
+\\
+
+> **Options:** ////
+  * **DirectionOfCuts**: ( //CPlaneX, CPlaneY, Pick// ) - User defines paneling direction relative to CPlane.
+  * **DistanceBetweenCuts**: Distance separating cuts (section plates)
+  * **SplitMethod**: Either "ByNumber" or "ByDistance".  If **SplitMethod=ByNumber**, then user can define "NumOfPanels_PerCut".  If **SplitMethod=ByDistance**, then user define "PanelLength" and "RoundingMethod".
+  * **PanelShape**: Either //Straight// or //Pull//. Straight creates linear panels while in Pull, panels follow surface shape.
+  * **Pattern**: Paneling pattern. For prototype purposes, eight patterns are available
+  * **CalcEdges**: Calculate,serialize and output paneling edges.
+  * **CalcFaces**: Calculate, serialize and output paneling faces.
+  * **CalcMesh**: Calculate the mesh that makes paneling faces.
+
+\\
+
+> **Notes:** ////
+  * User can panel polysurfaces. Difference in UV direction among faces does not affect result.
+  * If you like to change the corner where paneling starts, you can use **Dir** command to swap UV.
+  * Paneling point grid, paneling edges and paneling faces are grouped and added to document in new layer.
+  * All paneling points, edges and faces are tagged (named).
+  * Works with trimmed surfaces.
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/paneling_dir.PNG}}
+\\
+
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/patterns1.GIF}}
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_PanelingUV_Num command:====
+\\
+
+> **Flow:** ////
+  * Select object to create a variety of structural panels.  The command is sensitive to UV.
+\\
+
+> **Options:** ////
+  * **U_Num**: Number of panels in **U** direction.
+  * **V_Num**: Number of panels in **V** direction.
+  * **PanelShape**: Either //Straight// or //Pull//. Straight creates linear panels while in Pull, panels follow surface shape.
+  * **Pattern**: Paneling pattern. For prototype purposes, eight patterns are available
+  * **CalcEdges**: Calculate,serialize and output paneling edges.
+  * **CalcFaces**: Calculate, serialize and output paneling faces.
+  * **CalcMesh**: Calculate the mash that makes paneling faces.
+\\
+
+> **Notes:** ////
+  * Paneling point grid, paneling edges and paneling faces are grouped and added to document in new layer.
+  * All paneling points, edges and faces are tagged (named).
+  * Works with trimmed surfaces.
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/paneling_trim_num1.PNG}}
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_PanelingUV_Dis command:====
+\\
+
+> **Flow:** ////
+  * Select object to create a variety of structural panels.  The command is sensitive to surface UV directions.
+\\
+
+> **Options:** ////
+  * **U_Dis**: Length of panels in **U** direction.
+  * **V_Dis**: Length of panels in **V** direction.
+  * **Round**: User can choose round the length of each panel to fit surface.
+  * **RoundingMethod**: Up or down.
+  * **PanelShape**: Either //Straight// or //Pull//. Straight creates linear panels while in Pull, panels follow surface shape.
+  * **Pattern**: Paneling pattern. For prototype purposes, eight patterns are available
+  * **CalcEdges**: Calculate,serialize and output paneling edges.
+  * **CalcFaces**: Calculate, serialize and output paneling faces.
+  * **CalcMesh**: Calculate the mash that makes paneling faces.
+\\
+
+> **Notes:** ////
+  * Exact distances are achieved only when iso-curves are parallel in U & V directions
+  * Paneling point grid, paneling edges and paneling faces are grouped and added to document in new layer.
+  * All paneling points, edges and faces are tagged (named).
+  * Works with trimmed surfaces.
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/paneling_trim_dis.PNG}}
+\\
+
+| [[#Back to top]]|
+
+----
+  * Following is a comparison among different directional paneling commands:
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/directional_paneling.PNG}}
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_SubPaneling command;====
+\\
+
+> **Flow:** ////
+  * Select base surface, any number of closed polylines with end points on surface.
+\\
+
+> **Options:** ////
+  * **Degree**: Number of subdividing steps.
+  * **Method**: All/SubsOnly/MainOnly. Different methods of sub-paneling as in the image.
+  * **PanelShape**: Straight or Pull
+\\
+
+> **Notes:** ////
+  * Has History support
+
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/subpaneling2.PNG}}
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+
+====ArchCut_RandomPaneling command:====
+\\
+
+> **Flow:** ////
+  * Select base surface, any number of points on surface or have the command generate points for you.
+\\
+
+> **Options:** ////
+  * **GenerateRandomly**: random generation of points.
+  * **PointCount**: number of points.  Aprrears only when //GenerateRandomly=Yes//
+  * **PanelShape**: Straight or Pull
+\\
+
+> **Notes:** ////
+  * Random paneling algorithm finds best solution for smallest triangles starting from a central location of the grid point set.
+  * Random paneling doesn't take into account shorter distances across the seam (in closed surfaces)
+  * Surface is reparameterized to minimize distortion.
+  * Has History support
+
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/rand1.PNG}}
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+====ArchCut_PanelingUpdate command:====
+Updates all paneling.
+
+\\
+
+> **Notes:** ////
+  * If the base paneling surface get edited, user can call this command to update paneling.
+  * Paneling data is saved to document
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+====Custom Patterns for Paneling:====
+\\
+Use ArchCut script functions to define custom patterns for paneling and access many ArcCut methods using [[developer:rhinoscript|RhinoScript]].
+
+**Download Scripting Documentation**:
+
+  * //[[http://en.wiki.mcneel.com/content/upload/files/ArchCutScripting_Feb6_2007.zip|Scripting Help - word file]]//
+  * //[[http://en.wiki.mcneel.com/content/upload/files/ArchCutScripting_Feb6_2007.pdf|Scripting Help - PDF file]]//
+  * //[[http://en.wiki.mcneel.com/content/upload/files/ArchCutHelp_March7_2007.zip|Scripting Help - CHM and .DEC files]]// - If you like to view ArchCut methods and access its help from within [[developer:monkeyforrhino4|Monkey RhinoScript Editor]] , then please save .chm and .dec files in the ../Monkey/Resources folder.
+\\
+{{http://en.wiki.mcneel.com/content/upload/images/Custom.PNG}}
+
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+====Paneling Wish List: ... You're welcome to add to this list====
+\\
+  * Create custom patterns interactively
+\\
+\\
+
+| [[#Back to top]]|
+
+----
+[[rajaa@mcneel.com|E-mail the developer your questions & feedback]]
+
+Last updated: **January 10, 2007**
+
+
+
+
+

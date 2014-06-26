@@ -1,0 +1,54 @@
+====== Problemi con le barre degli strumenti ======
+
+======Problemi con le barre degli strumenti che spariscono======
+
+Le **barre degli strumenti di Rhino** vengono archiviate in un file esterno avente estensione .tb (a volte denominato anche file di area di lavoro). Se le barre degli strumenti, all’apertura di Rhino, non appaiono più, di solito ciò si deve al fatto che Rhino ha "perso" il percorso che porta al file delle barre degli strumenti.  Le cause possono essere molte. Di solito, il problema si risolve in questo modo:
+
+Andate al menu **Strumenti > Layout delle barre degli strumenti** e selezionate **File > Apri**.
+
+Se non trovate il file delle barre degli strumenti nella finestra di dialogo “Apri collezione barre degli strumenti” (“default.tb” se si sta usando il layout delle barre degli strumenti predefinito), passate alla cartella: C:\Documents and Settings\Tutti gli utenti\Dati applicazioni\McNeel\Rhinoceros\4.0 (o 3.0)
+
+Il file "default.tb" dovrebbe essere lì, assieme alle eventuali aree di lavoro personalizzate salvate lì.
+
+Se, dopo questa operazione, lo spazio di lavoro continua a non aprirsi, è possibile che il file sia danneggiato. Se state usando lo spazio di lavoro predeterminato e non modificato (default.tb), troverete un file default.tb.bak nella stessa directory. Chiudete tutte le istanze di Rhino, eliminate il file danneggiato, eliminate il .bak dell’estensione del file e provate di nuovo.
+
+Se il problema persiste, esiste un altro file di backup di emergenza denominato “default_backup.tb”. Realizzatene una copia ed assegnategli il nome “default.tb”.
+
+Se state usando un’area di lavoro personalizzata ed avete aperto e chiuso Rhino almeno una volta mentre lo stavate usando, ci dovrebbe essere un file .bak anche di tale area. Altrimenti, dovrete recuperare la copia backup dell’area di lavoro personalizzata che avete archiviato altrove. AVETE FATTO una copia di backup, vero?
+
+> **CONSIGLIO:** //Se avete modificato l’area di lavoro predeterminata (**default.tb**) in modo significativo, vi raccomandiamo di salvarla con un nuovo nome. Le nuove installazioni o aggiornamenti di Rhino potrebbero sovrascrivere il file **default.tb**, eliminando **TUTTE** le personalizzazioni fatte in un istante. Andate a ** Strumenti > Layout delle barre degli strumenti**, **File > Salva con nome** ed assegnate alla vostra area di lavoro modificata un nome riconoscibile.  Fate sempre le modifiche nell’area di lavoro personalizzata.  Salvate questo file anche in un’altra ubicazione come copia di backup (predefibilmente in un altro computer, così come tutti gli altri documenti importanti). **Pensate a quanto tempo ci vorrebbe per crearlo di nuovo se andasse perso.**//
+
+> **IMPORTANTE:** //**Assicuratevi che, mentre fate le modifiche alle barre/aree di lavoro, sia aperta una sola istanza di Rhino!** Una volta realizzate le modifiche, assicuratevi di salvarle andando a File > Salva, nella finestra di dialogo del layout delle barre degli strumenti. Oppure, uscite da Rhino e riapritelo. Rhino salva automaticamente le modifiche apportate alle barre all’uscita. Se avete più di un’istanza di Rhino aperta, l’ultima ad essere chiusa sovrascriverà quella precedente, per cui le modifiche possono andare perse.//
+
+======Problemi relativi all’ancoraggio delle barre degli strumenti======
+====Problema con le barre degli strumenti di Rhino 3.0 che non si ancorano correttamente====
+
+Chiudete Rhino 3.0.
+
+Eseguite questa utility: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip dopo aver chiuso Rhino.
+
+Riavviate Rhino.
+
+Questa utility è in grado di eliminare la seguente chiave del registro affinché Rhino "dimentichi" le impostazioni che causano l’errato ancoraggio delle barre degli strumenti.
+
+//HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+
+
+----
+====Problema con le barre degli strumenti di Rhino 4.0 che non si ancorano correttamente====
+
+Per essere sicuri di bloccare tutte le barre degli strumenti, procedere come segue:
+
+  * Aprire una sola sessione di Rhino
+  * Togliere la modalità "Ingrandisci" della finestra (la seconda icona in alto a destra della finestra, quella tra minimizza e chiudi finestra, deve essere con il simbolo di un quadratino singolo)
+  * Chiudere tutte le applicazioni attive (va bene anche minimizzarle, l'importante è che non siano visibili a schermo) e tenere solo Rhino visibile
+  * Cliccare con il pulsante Destro sulla barra di windows in un punto in cui non ci siano icone e selezionare "Affianca le finestre orizzontalmente/verticalmente"
+  * Rhino a questo punto andrà ad occupare tutto lo schermo (senza però essere in modalità Ingrandita).
+  * Posizionare tutte le barre degli strumenti e le finestre che di solito teniamo aperte; bloccare le barre degli strumenti con l'apposita opzione (menu Strumenti > Blocca barre degli strumenti)
+  * Chiudere Rhino e riaprirlo dopo qualche secondo (cerchiamo di lasciare il tempo al computer di chiudere tutti i processi attivi e di salvare le impostazioni...)
+
+
+
+
+
+

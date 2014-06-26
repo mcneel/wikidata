@@ -1,0 +1,82 @@
+====== RhinoCAM ======
+> **Sommaire:** //Trucs, astuces, conseils et expériences d'utilisateurs travaillant avec le module RhinoCAM//
+
+**[[http://www.mecsoft.com/cgi/teemz/teemz.cgi?board_master&forumSupport|Pour toute question concernant RhinoCAM et RhinoCAM Pro, veuillez accéder directement au forum d'assistance de MecSoft]]**
+
+**[[http://www.rhinocam.com/index.htm|Page principale de RhinoCAM de MecSoft]]**
+
+**[[http://www.mecsoft.com/Mec/Training/projects.htm|Didacticiels de RhinoCAM]]**
+
+Nous disposons de 14 didacticiels pour RhinoCAM qui peuvent être téléchargés.
+
+**[[http://www.mecsoft.com/Mec/Training/projects.htm|Téléchargez les didacticiels ici]]**
+
+Chaque projet est adapté pour montrer à l'utilisateur différentes méthodes d'usinage et les situations dans lesquelles ces méthodes seront utilisées.
+
+Chaque téléchargement comprend le fichier du didacticiel, les fichiers modèles avec les méthodes d'usinage ainsi que les fichiers de code G.
+
+Tous les projets ont été usinés sur une fraiseuse 3 axes Techno-Isel et testés. Les fichiers de code G sont compris dans le téléchargement. Vous pouvez lancer ces fichiers de code G si vous possédez une machine Techno-Isel. Faites attention cependant à bien reproduire la configuration décrite dans le didacticiel.
+
+Bon usinage et n'hésitez pas à nous envoyer vos commentaires et suggestions ou tout autre projet que vous aimeriez que nous ajoutions en écrivant à <support@mecsoft.com>.
+
+
+----
+
+**[[http://support.microsoft.com/default.aspx?scidkb;en-us;310519&sdtech|Variables d'environnement]]**
+
+Ces paramètres permettent de définir certaines options dans VisualMill et RhinoCAM qui ne sont pas directement accessibles à travers les options internes de ces programmes.
+
+Les variables d'environnement sont des paramètres enregistrés dans WINDOWS et elles sont crées et utilisées de la façon suivante :
+
+Cliquez avec le bouton de droite su **Poste de travail**, sélectionnez **Propriétés**, l'onglet **Avancé**, puis cliquez sur **Variables d'environnement**.  Elles peuvent être ajoutées avec le bouton **Nouveau**.  Ces variables peuvent être placées dans la section **Utilisateur** pour avoir différentes possibilités suivant les utilisateurs ou dans la section **Système** pour appliquer les paramètres à tous les utilisateurs.
+
+[[http://support.microsoft.com/default.aspx?scid=kb;en-us;310519&sd=tech|Pour plus d'informations sur l'utilisation des variables d'environnement, regardez ici]]
+
+**Vous trouverez ci-dessous les Variables d'environnement qui peuvent être utilisées avec RhinoCAM et ce qu'elles font :**
+
+"VMILL_HFINISH_LEVELFIRST" - 1/0 - Permet un usinage sur le niveau en finition horizontale
+"VMILL_ZTRANS_FFACTOR" - [0.1-1.0] – Change l'échelle des avances pour les mouvements en plongée sur Z entre les niveaux Z dans les cycles 2 axes ½.
+"VMILL_SORT_PROFILES" – [1/0] – Si sur 1, trie les profils en fonction de la distance minimale entre eux.
+"VMILL_DORETRACT_TABLEROTATE" – [1/0] - Si sur 1, effectue un retrait dans la position de changement d'outil avant de faire pivoter la table.
+"VMILL_BEEP_TYPE" - [0/1/2] 0 – Bip en forme d'onde, 1 – bip de l'ordinateur, 2 – pas de bip.
+"VMILL_LICENSE_HOST" – [IP Address] – Définir l'adresse IP de la machine possédant la clé de protection réseau pour les licences en réseau.
+"VMILL_DISPLAYTOOLTIP" - [1/0] - Si sur 1, affiche un point sur la pointe de l'outil pendant la simulation.
+"VMILL_TOOLPATH_THICKNESS" – [0.1-10.0] – Valeur d'épaisseur [[rhino:opengl|OpenGL]] pour l'affichage des trajets d'outils à l'aide de lignes épaisses.
+
+----
+=====Utilisation de l'onglet outil défini par l'utilisation pour créer des outils personnels=====
+
+//Question// - Comment utiliser l'onglet outil défini par l'utilisateur dans la section de définition des outils ? Est-il possible de générer des outils de contournage personnalisés en utilisant cette fonction dans RhinoCAM à partir de dessins d'outils ?
+
+//Réponse// - Les outils définis par l'utilisateur peuvent être créés et utilisés dans RhinoCAM uniquement pour les cycles de contournage 2axes 1/2.  Pour créer un outils défini par l'utilisateur, suivez ces étapes :
+
+
+1. Dessinez le profil de l'outil dans le plan XY (uniquement jusqu'à l'axe longitudinal, c'est-à-dire la moitié du profil)
+
+2. Le point de départ doit être sur 0,0
+
+3. Enregistrez le fichier sous .mrg (en utilisant la fonction d'exportation d'une région dans le menu fichier). Vérifiez qu'il s'agisse bien de la seule région dans le fichier avant d'exporter. Ce fichier sera le fichier de profil de l'outil.
+
+4. Dans le menu Créer/Sélectionner outil - sélectionnez l'outil Fraise Utilisateur
+
+5. Choisissez un nom pour l'outil et entrez les informations pertinentes et les commentaires. Le paramètre du diamètre de l'outil devrait être le double du rayon du profil. Vous pouvez également entrer un diamètre outil différent si vous avez besoin d'un outil d'une autre taille. Le système calcule le diamètre de l'outil en doublant la valeur de la coordonnée X la plus grande dans le profil de l'outil. Le profil sera ensuite mis à l'échelle (diamètre entré/diamètre calculé). Exemple : si le diamètre entré est le même que le diamètre calculé, le facteur d'échelle est alors égal à 1.
+
+6. Indiquez le chemin vers le fichier de profil de l'outil défini par l'utilisateur.
+
+7. Ajoutez-le au catalogue.
+
+Utilisez l'outil dans des cycles de contournage 2 axes 1/2.
+
+
+----
+=====Pour capturer la fenêtre active avec une image dans RhinoCAM :=====
+CapturerÉcranVersFichier et CapturerÉcranVersPressePapiers fonctionnent bien dans RhinoCAM pour capturer la fenêtre active contenant l'image d'une simulation de RhinoCAM. CapturerVueDansFichier et CapturerVueDansPressePapiers ne fonctionnement pas correctement.
+
+
+----
+=====Comment afficher un "Guide d'outils" dans VisualMill :=====
+Ouvrez le registre de Windows, ouvrez le dossier HKEY_CURRENT_USER, cherchez "Software" et ouvrez-le. Ouvrez ensuite le dossier "Mecsoft Corporation". Ouvrez le dossier "settings". Double-cliquez sur "DisplayToolAtCursor" reg_dword et remplacez la valeur 0 par 1.
+
+Quelque soit l'outil chargé il sera maintenant affiché lorsque vous créez une frontière ou une géométrie.
+
+

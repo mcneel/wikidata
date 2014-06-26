@@ -1,0 +1,28 @@
+====== Débogage des erreurs d'installation ======
+
+> **Sommaire:** //Instructions pour générer un fichier journal à partir d'une application d'installation .MSI (comme Rhino 4.0, 5.0, Flamingo 2.0, Brazil 2.0)//
+
+=====PROBLÈME:=====
+Lorsque j'essaie d'installer le produit, je reçois un message d'erreur d'installation et l'installation ne se termine pas.
+
+=====SOLUTION:=====
+Suivez la procédure suivante pour générer un fichier de texte qui est un journal des actions qui se produisent pendant l'installation puis envoyez ce fichier à l'équipe d'assistance technique de McNeel <tech.fr@mcneel.com>
+
+=====PROCEDURE:=====
+  * Téléchargez ce fichier http://s3.amazonaws.com/mcneel/misc/DebugInstaller.zip
+  * Décomprimez le fichier "DebugInstaller.exe" sur votre bureau.
+  * Trouvez le fichier d'installation MSI, le chemin est différent suivant le produit :
+    CD de Rhinoceros 4.0 -- Le fichier s'appelle "Rhino4_Setup.msi" et se trouve dans le dossier Rhinoceros du CD
+    Version d'évaluation de Rhinoceros 4.0 -- Décomprimez le fichier .EXE (par exemple rh40eval_fr_aaaammjj.exe) et trouvez le fichier "RHINO4_EVALUATION_FR.MSI"
+    Rhinoceros 5.0 WIP/Beta -- Fichier nommé "rh50beta_x86_en_aaaammjj_hhmm.msi"
+    CD de Flamingo 2.0 -- Le fichier s'appelle "Flamingo2_Setup_English.msi" et se trouve dans le dossier Flamingo du CD
+    Version d'évaluation de Flamingo 2.0 -- Décomprimez le fichier .EXE (par exemple fl20eval_fr_aaaammjj.exe) et trouvez le fichier "FL20_.MSI"
+    CD de Brazil 2.0 -- Le fichier s'appelle "Setup Brazil.msi" et se trouve dans le dossier Brazil du CD
+    Version d'évaluation de Brazil 2.0 -- Décomprimez le fichier .EXE (par exemple brazil_evaluation_aaaammjj.exe) et trouvez le fichier "BRAZIL_2.0_ENGLISH.MSI"
+
+  * Lancez "DebugInstaller.exe" en double cliquant
+  * Faites glisser le fichier d'isntallation .MSI dans la fenêtre intitulée "McNeel Install Debugger"
+  * Le processus d'installation commencera. Continuez jusqu'à ce que l'erreur se produise et que l'installation s'arrÊte.
+  * Sur votre bureau, trouvez le nouveau fichier .TXT portant le même nom que le fichier d'installation .MSI mais avec l'extension .TXT (exemple : Rhino4_Setup.txt) L'icône ressemble à un cahier à spirales ; l'extension n'est peut-être pas affichée.
+  * Envoeyz ce fichier .TXT à l'équipe d'assistance technique de McNeel <tech.fr@mcneel.com>
+

@@ -1,0 +1,65 @@
+====== Sample: Circle Packing Plugin (VB.NET) ======
+> **Summary:** //A basic 2D circle packing plugin for Rhino4//
+
+This plugin was made during the London 2007 DotNET workshop. It is a very simple circle packing algorithm which iteratively attempts to find a solution.
+
+The command exposes a number of options, but there are no advanced features yet. The essential source code (VB.NET) is available from this wiki page as well.
+
+This example plugin showcases some Rhino SDK basics such as [[developer:opennurbs:home|opennurbs]] class inheritance and using Getters. It also provides a simple example of using display conduits to draw feedback geometry.
+
+\\
+
+[[http://en.wiki.mcneel.com/content/upload/files/CirclePackingPlugin.zip|Download the plugin (Rhino4)]]
+
+\\
+
+[[http://en.wiki.mcneel.com/content/upload/files/CirclePackingCommand.zip|Download the CirclePacking command source (VB.NET)]]
+
+[[http://en.wiki.mcneel.com/content/upload/files/CirclePackingClasses.zip|Download the circle packing classes (VB.NET)]] :
+
+  * The PackCircle class contains the mathematics for circle bumping.
+  * The PackCircles class manages a list of multiple circles.
+  * The PackConduit class takes care of the feedback display.
+\\
+\\
+
+----
+\\
+\\
+
+The algorithm works as follows. Every circle in the array is compared with all circles that have a higher index. When two circles overlap (when the distance between A and B is less than the sum of both radii) then the A circle is moved away from B (V is the translation vector), until they are touching:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/CirclePackingAlgorithm.png}}
+
+\\
+
+Before the collision test is performed, the entire array containing all circles is sorted from the center outwards. After every collision pass, the circles move towards the basepoint to reduce the amount of wasted space. The magnitude of this motion decreases exponentially as the algorithm progresses. This plugin comes with 4 different packing algorithms, the details of which differ slightly from the default behaviour (Fast packing) described above.
+
+\\
+\\
+
+----
+\\
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/FastPack.png}} | {{http://en.wiki.mcneel.com/content/upload/images/DoublePack.png}} |
+|    Packing as described above. Note that small circles tend to end up near the center of the pack. This solution took 140 iterations. Packing efficiency is 74%    |    Double packing algorithm. Here, in the event of a collision both circles are moved. Note the different distribution of circle sizes as compared to Fast packing. This solution took 470 iterations, which is significantly slower than Fast packing. Packing efficiency = 78%    |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/RandomPack.png}} | {{http://en.wiki.mcneel.com/content/upload/images/SimplePack.png}} |
+|    Random packing uses randomized rather than sorted collision detection. This solution took 430 iterations. Packing efficiency = 74%    |    Simple packing omits the contraction pass, resulting in large gaps. This algorithm is the fastest one available, however it performs very badly. This solution took 25 iterations. Packing efficiency = 68%    |
+
+
+Circle packing efficiency expressed as the ratio of total circle area divided by the convex hull area. This results in an underestimate of efficiency which decreases as the number of circles increases.
+
+\\
+
+----
+[[David@McNeel.com|Contact]] the [[people:davidrutten|author]]
+
+
+
+{{tag>Developer dotnet}}

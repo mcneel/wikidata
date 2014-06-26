@@ -1,0 +1,130 @@
+** Google 3-D Warehouse and [[rhino:sketchup|SketchUp]] utilities **
+
+> **Summary:** //We have been adding support for Google SketchUp and Google Earth files within Rhino. Browse and Load models directly from [[http://sketchup.google.com/3dwarehouse/|Google 3d Warehouse]]. Import SketchUp files directly in Rhino 4.0.  Anchor Rhino files in Google Earth.//
+
+We have been adding support for Google SketchUp and Google Earth files within Rhino 4.0.
+
+====How-to====
+
+  * [[#Importing SketchUp Files]] - Rhino 4.0 can Open and Import files directly. Here are a few tips on how this can be done.
+  * [[#Exporting SketchUp Files]] 
+  * [[#Using 3d Warehouse]] - Insert models from the 3D Warehouse directly into Rhino 4.0.
+  * [[#Placing Rhino models in Google Earth]] - Anchor and export Rhino models to the KZL format
+
+| [[#Back to commands]]|
+
+----
+\\
+
+===== Notes =====
+This plug-in is included in the [[http://download.rhino3d.com/rhino/5.0/wip/|Rhino 5.0 WIP]].
+
+
+=====Importing SketchUp Files=====
+
+\\
+
+V4 [[rhino:sr8|SR8]] includes an import plugin to open SketchUp Version 7 files.
+
+\\
+
+Rhino 4 comes with the reader for SketchUp (.skp) file format. You will find it in the Open, Import, Insert and Worksession Manager Dialogs. By default, SketchUp models are imported as a Mesh.  You can change the way the SketchUp files are imported by using the SketchUpImportOptions command before you open the SketchUp file.
+
+In the SketchUpImportOptions the facetype option controls how the SketchUp objects will show up in Rhino.  The Mesh is default. TrimmedPlane will import the SketchUp objects as Trimmed [[rhino:nurbs|NURBs]] surfaces.  You can choose to join all the surfaces together or not.
+
+If you choose to import as a Mesh into Rhino, the SketchUp textures will also come into Rhino. To see the texture you must be in Rendered Viewport mode.  Right-click on the Viewport names and select rendered to see the textures.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/sketchup.jpg}}
+
+\\
+
+When you open a SketchUp file, the textures, which are contained in the SketchUp file are expanded as seperate JPG files into the same directory as the SketchUp file.  These are the texture files that Rhino uses for displaying its model.
+
+> **Note:** //Remember in Rhino 4 we can Trim and Boolean with mesh objects directly//
+
+\\
+
+If you choose to import the SketchUp model as a series of Trimmed planes, the textures will not preview correctly on the Rhino objects.  But, the objects will be made of [[rhino:nurbs|NURBs]] surfaces.
+
+\\
+
+| [[#Back to commands]]|
+
+----
+
+\\
+
+=====Exporting SketchUp Files=====
+\\
+
+The SketchUp plugin that used to exist on the labs page has become outdated.  Please use the one included in the Rhino V5 win32 WIP product.  You can download it [[http://download.rhino3d.com/en/Rhino/5.0/wip/|here]].
+
+Contact - [[tim@mcneel.com|Tim Hemmelman]] if you have any questions
+
+\\
+
+\\
+
+| [[#Back to commands]]|
+
+----
+
+\\
+
+=====Using 3d Warehouse=====
+\\
+
+With the [[http://sketchup.google.com/3dwarehouse/|Google 3d Warehouse]] you can search, share or download 3D models.
+
+\\
+
+[[http://sketchup.google.com/3dwarehouse/|{{http://en.wiki.mcneel.com/content/upload/images/3dgoogle.jpg}}]]
+
+\\
+
+[[http://download.mcneel.com/download.asp?id=3DWarehousePlugin&language=|Download latest build]] of the [[http://sketchup.google.com/3dwarehouse/|Google 3d Warehouse]] plugin which runs on Rhino 4.0.
+
+ build# 12/11/06 
+
+\\
+
+The download includes a plugin installer. After you download the installer file follow these steps to install:
+
+  - Download: **[[http://en.wiki.mcneel.com/content/upload/files/SketchUpGetModel.zip|SketchUpGetModel.zip]]**
+  - Unzip the entire contents to Rhino's Plug-ins folder (e.g. C:\Program Files\Rhinoceros 4.0\Plug-ins)
+  - Double-click on the **RegisterSketchUpGetModel.bat** file that you just extracted.
+  - In Rhino 4.0, click the **Tools->Options** menu item.
+  - From the Plug-ins page, click **Install**.
+  - Browse to Rhino's Plug-ins folder (e.g. C:\Program Files\Rhinoceros 4.0\Plug-ins)
+  - Select the **SketchUpGetModel.rhp** file and click **Ok**.
+
+\\
+
+Instructions to use:
+
+  - In Rhino, run the **SketchUpGetModel** command.
+  - Select a model in **Google 3d Warehouse**.: [[http://sketchup.google.com/3dwarehouse/]]
+  - Click **Download Model** to load this model directly into Rhino.
+  - Note, the model will be saved in a directory under My Documents\My 3D Warehouse
+\\
+
+Contact - [[dale@McNeel.com|Dale Fugier]] with questions about this plug-in
+
+
+| [[#Back to commands]]|
+
+----
+
+\\
+
+=====Placing Rhino models in Google Earth=====
+\\
+
+In Rhino V4, we've added tools to the Rhino core that allow you to anchor your model to a specific location on the earth. The goal it to make sure the Rhino core has everything that's needed to support GIS, mapping, architectural,..., applications.
+
+We constantly endeavor to make Rhino the most precise modeler available. When Rhino maps model space (3D Cartesian coordinates) to earth latitude, longitude and elevation, it takes into account the fact the earth is not round ( http://en.wikipedia.org/wiki/Earth_radius ).
+
+
+For details on placing Rhino files in Google Earth, go to this page - [[rhino:googleearth|Rhino to Google Earth]]

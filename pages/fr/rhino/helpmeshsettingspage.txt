@@ -1,0 +1,99 @@
+====== Page de l'aide sur les paramètres de maillage ======
+
+> **Sommaire:** //Cette page est une copie du fichier d'aide de Rhino qui contient d'excellentes informations sur les paramètres du maillage//
+
+===Comment sont créés les maillages===
+
+Le maillage est créé en trois étapes basées sur les critères suivants : quadrilatères de départ (estimation permettant de répondre plus ou moins au critère), raffinement (décomposition pour répondre au critère) et réglage des frontières limites.
+
+Le maillage des surfaces se fait en deux étapes. En premier lieu, un maillage quadrilatère normal est créé, ensuite le maillage est raffiné en divisant certains quadrilatères en 4 quadrilatères plus petits. Les paramètres Rapport image maximal, Longueur maximale des bords et Division initiale minimale de la grille contrôlent la génération du maillage initial. Les paramètres Densité (Rhino 4 uniquement), Angle maximal, Longueur maximale des bords, Longueur minimale des bords et Distance maximale entre bord et surface déterminent les quadrilatères qui seront divisés.
+
+===Densité===
+
+Ce paramètre est nouveau dans Rhino 4. Utilise une formule pour contrôler la distance entre les bords du polygone et la surface originale.  Les valeurs sont comprises entre 0.5 et 1. Les valeurs plus élevées donnent un maillage avec un plus grand nombre de polygones. Un paramètre très utile.
+
+
+===Angle maximal===
+
+De petites valeurs entraînent des maillages plus lents, plus précis et un plus grand nombre de polygones.  L'angle maximal est la différence maximum permise entre la normale de surface en tout point et le sommet de maillage.
+
+Techniquement : L'angle maximum entre les normales de la surface au niveau des sommets adjacents est inférieur ou égal à l'angle maximal. Deux sommets sont adjacents s'ils se trouvent aux extrémités d'un même bord de facette.
+
+Ce que cela signifie pour vous : Lorsque vous maillez des surfaces composées de régions plates et de régions ondulées et que vous voulez moins de triangles sur les régions plates que sur les régions ondulées, utilisez l'angle maximal et tapez 0 dans la case Longueur maximale des bords.
+
+> **Essai:** //Créez un modèle avec une sphère, un tore et un cylindre. Changez l'échelle de vos objets pour créer une petite, une moyenne et une grande version. Faites varier l'angle maximal et regardez les résultats.//
+
+===Rapport image maximal===
+
+Les surfaces sont quadrillées avec un maillage régulier et celui-ci est ensuite amélioré. Le maillage initial est construit de sorte que le rapport image maximal des quadrilatères soit inférieur ou égal à la valeur du Rapport image maximal.
+
+De petites valeurs entraînent des maillages plus lents et un plus grand nombre de polygones avec plus de polygones équilatéraux.  Il s'agit plus ou moins du rapport image maximal des quadrilatères de la grille de maillage de départ.  Si la valeur donnée à l'option Rapport image maximal est égale à zéro, l'option est désactivée. Zéro signifie qu'il n'y a pas de limite. La valeur par défaut est égale à 6 et l'intervalle proposé va de 1 à 100.  Indépendant de l'échelle.
+
+===Longueur minimale des bords===
+
+La valeur est toujours indiquée dans le système d'unité actuel.
+
+Des valeurs élevées entraînent un maillage plus rapide et moins précis et un plus petit nombre de polygones.  Si la valeur donnée à l'option Longueur min des bords est égale à zéro, l'option est désactivée.  Zéro limite la taille des bords des polygones.  La valeur par défaut est 0.01 et l'intervalle dépend de la taille du modèle.  Cette valeur dépend de l'échelle.
+
+===Longueur maximale des bords===
+
+La longueur maximale d'un bord sera inférieure ou égale à l'option Longueur maximale des bords.
+
+De petites valeurs entraînent des maillages plus lents et un plus grand nombre de polygones avec plus de polygones de même taille.  Si la valeur donnée à l'option Longueur max des bords est égale à zéro, l'option est désactivée. Zéro est la valeur par défaut.  Lorsque la case Raffiner est cochée, les polygones sont décomposés jusqu'à ce que leurs bords soient plus courts que cette valeur.  Il s'agit aussi plus ou moins de la longueur maximale des bords des quadrilatères de la grille de maillage de départ. Cette option dépend de l'échelle et elle peut être utile pour s'assurer que les polygones sont environ de la même taille.
+
+===Distance maximale entre bord et surface===
+
+La distance maximale entre le centre d'un bord et la surface sera inférieure ou égale à l'option Distance maximale entre bord et surface.
+
+De petites valeurs entraînent des maillages plus lents, plus précis et un plus grand nombre de polygones. Si la valeur donnée à l'option Distance max entre bord et surface est égale à zéro, l'option est désactivée.  La valeur par défaut est égale à 0 et l'intervalle dépend de la taille du modèle. Lorsque l'option Affiner est cochée, les polygones sont décomposés jusqu'à ce que la distance entre le milieu d'un bord de chaque polygone et la surface NURBS soit inférieure à cette valeur. Il s'agit aussi de la distance maximale entre les milieux des bords des polygones et la surface NURBS sur la grille de maillage de départ. Cette option dépend de l'échelle et elle peut être utilisée comme tolérance générale du maillage.
+
+===Division initiale minimale de la grille===
+
+Nombre minimum de quadrilatères sur le maillage de départ.
+
+Des valeurs élevées entraînent un maillage plus lent et plus précis et un plus grand nombre de polygones avec des polygones distribués plus régulièrement.  Si la valeur donnée à l'option Division initiale minimale de la grille est égale à zéro, valeur par défaut, l'option est désactivée. Cette option force la géométrie simple à être maillée avec un plus grand nombre de polygones. Zéro signifie qu'il n'y a pas de minimum.  La valeur par défaut est égale à zéro.  Indépendant de l'échelle. Il s'agit aussi du nombre de quadrilatères par surface sur la grille de maillage de départ.  Dans la pratique, Rhino utilisera au moins autant de polygones que cette valeur pour chaque surface.  Cette option ne dépend pas de l'échelle et elle permet d’assurer que le nombre de polygones utilisés lors du maillage soit suffisant pour les surfaces très détaillées.
+
+===Raffiner===
+
+Si cette option n'est pas cochée, le maillage quadrangle initial est laissé.
+
+Le maillage est décomposé jusqu'à ce que l'angle entre les normales de la surface le long d'un bord du maillage soit plus petit que cette valeur.  La valeur par défaut est égale à 20 degrés et l'intervalle proposé va de 5 à 90 degrés. Si la valeur donnée à l'option Angle maximal est égale à zéro, l'option est désactivée.  Indépendant de l'échelle.
+
+Si le raffinement est réglé à zéro, le maillage est plus rapide et moins précis et le nombre de polygones est plus petit.  Si vous désactivez cette case, les surfaces individuelles non limitées et les zones de surfaces éloignées des bords de limite et des bords joints sont maillées avec des quadrilatères de taille régulière. Lorsque cette option est activée, après le maillage initial, Rhino utilise un procédé récursif pour raffiner le maillage jusqu'à ce qu'il réponde aux critères définis par les options Angle maximal, Longueur minimale des bords, Longueur maximale des bords et Distance maximale entre bord et surface.
+
+===Jointures dentées===
+
+Si cette option est cochée, les maillages de chaque surface dans une polysurface ne se rencontrent pas nécessairement pour former un maillage hermétique. Sinon, des maillages hermétiques sont créés.
+
+Entraîne un maillage beaucoup plus rapide, un plus petit nombre de polygones et des fissures entre les surfaces jointes dans l'image rendue.  Par défaut, l'option Jointures dentées n'est pas sélectionnée.  Cette option signifie que toutes les surfaces sont maillées indépendamment les unes des autres et que les maillages des bords de surface joints ne coïncident pas exactement.
+
+===Plans simples===
+
+Si l'option Plans simples est cochée, tous les paramètres précédents, à l'exception de Jointures dentées, seront ignorés pour les surfaces planes et celles-ci seront maillées avec aussi peu de polygones que possible.
+
+Le maillage est plus lent et le nombre de polygones utilisé sur les surfaces planes est minimal. Le maillage peut être plus lent, surtout pour les surfaces limitées complexes. Par défaut, l'option Plans simples n'est pas sélectionnée.  Dans le cas de surfaces planes, les bords sont maillés et ensuite, la zone limitée par les bords est remplie avec des triangles.
+
+===Souder===
+
+Les sommets du maillage créés à partir de jointures entre des surfaces tangentes d'une polysurfaces et coïncidents sont soudés ensemble.
+
+En général, ce qui importe est l'application finale et non le format de fichier. Dans la plupart des cas, Souder ne devrait pas être coché, en particulier si vous exportez vers une application qui tient compte des coordonnées de texture ou des normales au sommet précises. Si vous exportez vers une application qui ne sait pas traiter les sommets coïncidents, cochez Souder. Pour les formats simples tels que STL (qui n'a pas de normales au sommet et aucune coordonnée de texture) la soudure ne fait rien.
+
+===Comprimer les textures===
+
+Les coordonnés de texture comprimées sont créées lorsque les polysurfaces sont maillées. Une texture comprimée est une partition du carré de l'unité en sous-rectangles disjoints de telle sorte qu'une image bitmap puisse être utilisée pour appliquer des textures indépendantes sur chaque face de la polysurface.
+
+L'option Comprimer les textures comprimera les textures de maillage de tous les maillages, y compris les maillages de rendu, sur les objets sélectionnés. Si plusieurs objets sont sélectionnés, la compression "étale" la texture sur tous les objets.
+
+===Aperçu===
+
+Permet d'obtenir un aperçu du maillage créé à partir des options définies.
+
+===Options simples===
+
+La boîte de dialogue Options de maillage ou Options d'exportation de maillage STL apparaît en fonction de l'action. Ces options simples permettent aussi de contrôler la création du maillage.
+
+> **Remarque:** //Les maillages créés avec la commande Maillage sont visibles et peuvent être modifiés et séparés des objets NURBS à partir desquels ils ont été créés. Les maillages créés par l'option Affichage rendu et Affichage ombré sur les surfaces et les polysurfaces NURBS sont visibles mais ne peuvent pas être modifiés ni séparés de l'objet NURBS, ils peuvent uniquement être effacés avec la commande **ActualiserOmbrage**. Les maillages de rendu sont contrôlés par un groupe différent de paramètres qui se trouvent dans la boîte de dialogue Propriétés du document, section Rendu.//
+
+
+

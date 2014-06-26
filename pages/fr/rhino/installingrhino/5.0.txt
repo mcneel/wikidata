@@ -1,0 +1,95 @@
+
+====== Automatisation de l'installation de Rhino 5.0 ======
+=====Installation de Rhinoceros=====
+  * [[#Déploiement MSI avec Active Directory ou SMS]]
+  * [[#Déploiement du patch de la version révisée de Rhino 5 via Active Directory ou SMS| Déploiement du patch de la version révisée de Rhino 5]]
+  * [[#Installation de Rhino 5 avec un script (fichier batch)|Installation automatique de Rhino 5]]
+  * [[#Installation de Rhino 5 avec un script et un fichier INI|Installation automatique de Rhino 5 avec un fichier INI]]
+  * [[rhino:debuginstaller|Rhino 5 - Diagnostic des erreurs pendant l'installation]]
+  * [[#Installation de Rhino 5 - Définir un serveur Zoo]]
+
+======Rhino 5.0 - Déploiement MSI avec Active Directory ou SMS======
+=====Présentation=====
+Ces instructions sont destinées principalement aux administrateurs de systèmes qui veulent déployer Rhino 5.0 dans une organisation utilisant Active Directory ou SMS.
+
+Ces techniques fonctionneront aussi pour l'installation automatisée en exécutant le MSI à partir d'un dossier contenant un fichier Setup.ini personnalisé. De cette façon, Active Directory, SMS ou tout autre outil de déploiement ne sont pas nécessaires.
+
+=====Conditions=====
+**Microsoft .NET 4.0 Full Framework** doit être installé sur le système avant l'installation de Rhino 5. Le programme d'installation est inclus sur le DVD et se trouve dans le dossier Installers\Prerequisites.  
+
+=====Préparation du déploiement=====
+   - Modifiez le fichier**Setup.ini** et placez-le dans le même dossier que le fichier MSI que vous installez. **Remarque :** Tous les caractères situés après le signe # sont ignorés par le programme d'installation même si le caractère # se trouve au milieu d'une ligne.
+
+=====Configuration du déploiement=====
+  -Ouvrez **Utilisateurs et ordinateurs Active Directory**
+  - Cliquer avec le bouton de droit sur le groupe ou l'unité d'organisation qui contient les utilisateurs ou les ordinateurs qui recevront Rhino 5, puis cliquez sur Propriétés. 
+  - Dans l'onglet Stratégie de groupe, ajoutez un nouvel Objet de stratégie de groupe intitulé **Installer Rhino 5**
+  - Sélectionnez l'objet de stratégie de groupe **Installer Rhino 5**, puis cliquez sur **Éditer...**
+  - Déterminez si vous effectuerez l'installation par ordinateur ou par utilisateur (lisez la stratégie de groupe pour déterminer l'installation qui fonctionnera le mieux dans votre cas).
+  - Sous Configuration de l'utilisateur ou Configuration de l'ordinateur (suivant le choix de l'étape précédente), ouvrez **Paramètres du logiciel**, puis cliquez avec le bouton de droite sur **Installation du logiciel**, et enfin cliquez sur **Nouveau -> Pack**.
+  - Sélectionnez **S:\Rhino 5.0\rh50.msi**pour procéder à l'installation.
+  - Dans la boîte de dialogue Déploiement du logiciel, sélectionnez **Assigné**, puis cliquez sur OK.
+  - Cliquez avec le bouton de droite sur Rhino 5 dans le panneau de droite, puis cliquez sur **Propriétés**.
+  - Sélectionnez l'option **Installer cette application lors de la connexion.** (Ou personnaliser les options de déploiement selon vos besoins).
+  - Répétez les étapes 6 à 10 pour déployer **HelpMedia.msi** et **LanguagePack_en-us.msi** (plus tout autre pack de langue dont vous auriez besoin).
+
+======Installation de Rhino 5 avec un script (fichier batch)======
+Pour installer Rhino 5 32 bits en anglais en tant que licence autonome en utilisant le code CD "AAAABBBBCCCCDDDDEEEE", exécutez :
+
+<code>
+
+msiexec.exe /i"D:\Installers\setup_x86_en-us.msi" INSTALLDIR="C:\Progs\Rhino4" RMA_CDKEY=AAAABBBBCCCCDDDDEEEE INSTALL_EN=1
+
+</code>
+
+Pour installer Rhino 5 64 bits en anglais, français et allemand, en tant que licence autonome, en utilisant le code CD "AAAABBBBCCCCDDDDEEEE", exécutez :
+
+<code>
+
+msiexec.exe /i"D:\Installers\setup_x86_en-us.msi" INSTALLDIR="C:\Progs\Rhino4" RMA_CDKEY=AAAABBBBCCCCDDDDEEEE INSTALL_EN=1 INSTALL_DE=1 INSTALL_FR=1
+
+</code>
+          
+**Installation silencieuse :** Pour installer sans aucune interface utilisateur, plusieurs options sont disponibles. Consultez la documentation sur les [http://technet.microsoft.com/fr-fr/library/cc759262(v=ws.10).aspx|Options de la ligne de commande de Msiexec]] sur le site de Microsoft pour plus d'informations sur l'opérateur /q.
+
+Pour plus d'informations sur ces paramètres et pour voir tous ceux qui sont possibles, consultez **[[rhino:automatedinstalls|Editing Rhino4Setup.ini]]** 
+
+======Installation de Rhino 5 avec un script et un fichier INI======
+- Modifiez le fichier **Setup.ini** qui se trouve dans le dossier Installers de votre DVD d'installation. Supprimez la marque de commentaires (#) des paramètres que vous voulez définir pendant le processus d'installation. 
+
+**Remarque :** Tous les caractères situés après le signe # dans une ligne sont ignorés par le programme d'installation même si le caractère # se trouve au milieu d'une ligne. Pour plus d'informations sur la configuration, consultez [[rhino:installingrhio:5.0:setupini|Modifier Setup.ini]]
+
+ - Exécutez le fichier MSI et il trouvera automatiquement le fichier INI du même dossier. Il lira les paramètres du fichier INI et lancera l'installation de façon silencieuse. 
+
+**Exemple de fichier batch :**\\
+**Remarque :** Ce fichier installera les versions 32 et 64 bits de Rhino 5 avec l'interface et l'aide en anglais en supposant que vous avez copié le dossier Installers à partir du DVD de Rhino 5 dans C:\Temp\Installers, que vous avez modifié le fichier **setup.ini** comme nécessaire et créé un fichier batch avec les informations suivantes :
+<code>
+
+msiexec /i C:\Temp\Installers\rhino5setup_en-us_x64.msi /qb
+msiexec /i C:\Temp\Installers\rhino5setup_en-us_x86.msi /qb
+msiexec /i C:\Temp\Installers\LanguagePack_en-us.msi /qb
+msiexec /i C:\Temp\Installers\HelpMedia.msi /qb
+
+</code>
+            
+======Installation de Rhino 5 - Définir un serveur Zoo======
+Pour définir un serveur Zoo pendant l'installation, ajoutez cette ligne à votre fichier setup.ini :
+
+<code>
+ZOO_SERVER=host.domain.com # Nom de domaine entier ou adresse IP
+</code>
+
+OU 
+
+Passez la propriété ZOO_SERVER dans la ligne de commandes :
+<code>
+ZOO_SERVER=host.domain.com
+</code>
+
+OU
+
+[[zoo:findzooserver#using_dns|Définir une entrée DNS]]
+
+\\
+
+{{tag>Zoo5}}

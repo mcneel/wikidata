@@ -1,0 +1,67 @@
+====== Diagnóstico de errores de inicio de Rhino 4.0 ======
+
+Si Rhino 4.0 falla al iniciarse en su ordenador, use la aplicación **Rhino Debugging Harness** para generar información detallada que ayudará al equipo de desarrollo a averiguar cuál es el problema.
+
+=====Fase de depuración 1 - Modo seguro:=====
+
+**<color darkred>1.</color>** **Instale** la última versión de **Rhino 4.0** (las Service Release se pueden descargar desde www.es.rhino3d.com/download.htm).
+
+**<color darkred>2.</color>** Descargue la aplicación **[[http://s3.amazonaws.com/mcneel/rhino/4.0/misc/RhinoDebugHarness.exe|Rhino Debugging Harness]] ** y guárdela en su escritorio.
+
+**<color darkred>3.</color>** Ejecute **RhinoDebugHarness.exe**
+
+**<color darkred>4.</color>** **Seleccione** la casilla de verificación **Start in Safe Mode**.
+
+**<color darkred>5.</color>** **Deseleccione** la casilla de verificación **OpenGL Acceleration Enabled**.
+
+**<color darkred>6.</color>** Haga clic en el botón **Start Rhino**.
+
+Deje que Rhino intente iniciarse durante un momento.
+
+**¿Se inició Rhino correctamente?**
+
+**Sí:** Siga con la aplicación Rhino Debug Harness abierta y continúe con el la fase de depuración 2.
+
+**No:** No se pueden hacer más comprobaciones para diagnosticar el problema. Realice lo siguiente:
+
+  * Haga clic en el botón View Log
+  * Envíe por e-mail una copia de este registro de inicio a la dirección <tech.eu@mcneel.com> del soporte técnico de McNeel.
+  * Indique al soporte técnico de McNeel (<tech.eu@mcneel.com>) que Rhino no se inicia en modo seguro.
+
+=====Fase de depuración 2 - Aceleración de hardware OpenGL desactivada:=====
+
+**<color darkred>1.</color>** **Deseleccione** la casilla de verificación **Start in Safe Mode**.
+
+**<color darkred>2.</color>** **Deseleccione** la casilla de verificación **OpenGL Acceleration Enabled**.
+
+**<color darkred>3.</color>** Haga clic en el botón **Start Rhino**.
+
+**¿Se inició Rhino correctamente?**
+
+**Sí:** Siga con la aplicación Rhino Debug Harness abierta y continúe con el la fase de depuración 3.
+
+**No:** Escriba al soporte técnico de McNeel indicando que:
+
+  * Rhino se inicia en modo seguro
+  * Rhino no se inicia con la aceleración de OpenGL desactivada.
+
+=====Fase de depuración 3 - Aceleración de hardware OpenGL activada:=====
+
+**<color darkred>1.</color>** **Deseleccione** la casilla de verificación **Start in Safe Mode**.
+
+**<color darkred>2.</color>** **Seleccione** la casilla de verificación **OpenGL Acceleration Enabled**.
+
+**<color darkred>3.</color>** Haga clic en el botón **Start Rhino**.
+
+**¿Se inició Rhino correctamente?**
+
+**Sí:** Parece que Rhino funciona correctamente. Cierre la aplicación Rhino Debug Harness.
+
+**No:** Es posible que el problema esté relacionado con la tarjeta o el controlador de OpenGL. Descargue el último controlador de OpenGL del fabricante de su equipo o tarjeta de vídeo. Si el problema no se soluciona, póngase en contacto con el soporte técnico de McNeel indicando que:
+
+  * Rhino se inicia en modo seguro.
+  * Rhino se inicia con la aceleración de OpenGL desactivada.
+  * Ha actualizado el controlador de vídeo.
+  * Rhino no se inicia con la aceleración de OpenGL activada.
+
+

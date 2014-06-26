@@ -1,0 +1,31 @@
+====== Cartes Vidéo ATI Radeon ======
+> **Sommaire:** //Informations sur les cartes vidéos ATi Radeon et leurs problèmes dans Rhino.//
+
+=====Les pilotes ATi postérieurs à la version 8.4 installés sur les systèmes avec des cartes modèle Radeon entraînent des retards d'affichage dans les fenêtres de Rhino.=====
+====Par exemple, un retard de 1 à 2 secondes se fait ressentir lors des opérations suivantes :====
+  * <color red>Panoramique</color>
+  * <color red>Zoom</color>
+  * <color red>Rotation</color>
+
+Nous avons contacté ATi au sujet de ce problème. ATi déclare que les cartes de la ligne [[rhino:firegl|FireGL]] sont conçues pour les applications de CAO telles que Rhino. Les cartes Radeon sont conçues pour les jeux et il est donc inutile de rapporter des problèmes du domaine de la CAO avec des cartes pour le jeu.
+
+Jeff LaSor, le développeur de l'affichage de Rhino, a écrit un module pour régler ce problème. Le module remplace le moteur d'affichage de Rhino par un autre qui gère les problèmes liés aux cartes HD de ATi.
+
+Téléchargez ce module : http://en.wiki.mcneel.com/content/upload/files/RhinoDisplayEngine_OGLx.zip
+
+Décomprimez le fichier et faites-le glisser dans une fenêtre de Rhino ou utilisez la commande GestionnaireModules pour le charger. Pour plus de précautions, fermez et redémarrez Rhino.
+
+Cette astuce a été testée sur les cartes HD ; elle ne semble pas nécessaire sur les cartes [[rhino:firegl|FireGL]]. Elle n'aura pas d'effet sur les autres cartes graphiques.
+
+Il se peut que vous rencontriez des problèmes que nous n'avons pas prévu. Indiquez-nous tous les problèmes rencontrés pendant l'utilisation de ce module sur le [[news://news.rhino3d.com/rhino.francais|forum]] de Rhino ou par mail [[tech.fr@mcneel.com|tech.fr@mcneel.com.]]
+
+> **Infos:** //Les derniers pilotes d'ATI se bloquent sur un appel de base d'[[rhino:opengl|OpenGL]] que Rhino utilise pour capturer les contenus du mémoire d'image utilisés dans les mécanismes de double-tampon et triple-tampon de Rhino. Ainsi, lorsque vous réalisiez une rotation ou une panoramique dans une vue, tout fonctionnait correctement mais lorsque vous arrêtiez, un retard se produisait (environ deux secondes par fenêtre). De même, les opérations qui avaient simplement besoin de rafraîchir l'affichage (par exemple la sélection d'objets) présentaient de grands retard. Ce module corrige le problème en réécrivant le mécanisme de capture de la mémoire d'image. -Jeff//
+
+> **Remarque:** //La seule façon de désactiver ce module est de supprimer le fichier .rhp de votre système.//
+
+====Étiquettes d'accrochages floues ?:====
+http://fr.wiki.mcneel.com/default.aspx/McNeel/OsnapTooltipFix.html
+
+Page ajoutée le 16-Oct-2008 par John Brock
+
+

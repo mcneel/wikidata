@@ -1,0 +1,37 @@
+====== 手動移除 Rhino 4.0 ======
+
+===問題：===
+移除 Rhino 時，發生找不到某個檔案而無法移除。
+
+===適用於：===
+Rhino 4.0、Rhino 5.0
+
+===原因===
+Windows Installer 找不到它的記錄中移除作業需要的檔案。
+
+===解決方法：===
+手動移除 Rhino 與 Windows Installer 對 Rhino 的安裝記錄。
+
+**注意：**只有從 Windows 控制台的新增/移除對話框無法移除 Rhino 時才使用以下的方法。
+
+==清除 Windows Installer 的安裝記錄：==
+  - 下載 [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup 工用程式]]
+  - 將下載的 **WindowsInstallerCleanupUtility.zip** 解壓縮到一個資料夾
+  - 雙擊 **msicuu.exe**
+  - 選取 **(All Users) Rhinoceros 4.0**
+  - 按 **Remove**
+   
+  
+==刪除 Rhino 的安裝資料夾：==
+  - 瀏覽至 C:\Program Files\
+  - 刪除 **Rhinoceros 4.0** 或 **Rhinoceros 4.0 Evaluation**
+  
+==刪除登錄檔機碼：==
+  - 開啟**登錄檔編輯程式** (開始 > 執行，輸入 Regedit)
+  - 瀏覽至 **HKEY_LOCAL_MACHINE**\Software\McNeel\Rhinoceros
+  - 刪除 **4.0** 機碼
+  - 瀏覽至 **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros
+  - 刪除 **4.0** 機碼
+  
+===注意：===
+* 此方法適用於32位元的windows作業程式，使用64位元的用戶請洽原廠工程師 [[mailto:kelvin@mcneel.com|Kelvin]]。

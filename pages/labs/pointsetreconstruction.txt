@@ -1,0 +1,334 @@
+====== Pointset reconstruction ======
+> **Summary:** //Pointset reconstruction tools for Rhino4//
+=====Contents=====
+
+  * [[#What is PointSet Reconstruction?]]
+  * [[#Available commands]]
+
+\\
+
+[[http://en.wiki.mcneel.com/content/upload/files/PointSetReconstructionTools.zip|Download the latest build]] of the PointSetReconstruction plugin for Rhino4.
+
+\\
+
+The download includes the plugin, a toolbar which maps to all commands and an example 3dv file for the _Import3DVoronoiSolution command.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/PSetToolbar.png}}
+
+\\
+
+**Service Notice:**
+//This is an old plug-in that has a bunch of known, but unsolved bugs. The algorithms in this plug-in are slowly being integrated with [[http://www.Grasshopper3d.com|Grasshopper]]. If you experience problems with this plug-in, you may want to consider switching to Grasshopper instead as it's being actively developed.//
+
+\\
+
+[[David@McNeel.com|Contact]] the [[rhino:davidrutten|author]]
+
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====What is PointSet Reconstruction?=====
+
+PSR is the process of creating 'higher level' geometry from ordinary points. There are many algorithms which can be grouped under this header and this plugin implements some of them. The most famous examples are Delaunay meshes and Voronoi diagrams:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/DelaunayExample.jpg}}    {{http://en.wiki.mcneel.com/content/upload/images/VoronoiExample.jpg}}
+
+\\
+
+The first image resembles a delaunay triangulation through a set of unorganized points. The second image represents a Voronoi subdivision of 2D space based on another pointcloud.
+
+
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+=====Commands=====
+
+There are several available commands in this plugin, hopefully an ever growing list. Most of them share a common interface:
+
+\\
+
+1. Select input geometry
+
+2. Change options
+
+3. Insert solution
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/ContourProcess.gif}} |  You can select any amount of Points, Pointclouds, Curves or Meshes as input geometry. If you select curves you will be prompted for a division value which will be used to sample the curves. Curves are also always sampled at their kinks. After you have selected the input curves, the command will either complete if it has no options or it will draw a preview of the result while providing you with clickable command line options. Some options will cause the solution to become invalid in which case it will have to be recomputed. This is potentially a very expensive operation but you can always abort these processes by pressing the escape key.  |
+
+\\
+\\
+
+The available commands are:
+
+\\
+
+  * [[#Delaunay]]                                                                [[http://en.wikipedia.org/wiki/Delaunay_Triangulation|(wikipedia)]]
+  * [[#Voronoi]]                                                                  [[http://en.wikipedia.org/wiki/Voronoi|(wikipedia)]]
+  * [[#3DVoronoi]]                                                              [[http://en.wikipedia.org/wiki/Voronoi|(wikipedia)]]
+  * [[#PixelGrid]]
+  * [[#OcTree]]                                                                    [[http://en.wikipedia.org/wiki/Octree|(wikipedia)]]
+  * [[#QuadTree]]                                                                [[http://en.wikipedia.org/wiki/Quadtree|(wikipedia)]]
+  * [[#Network]]                                                                  [[http://en.wikipedia.org/wiki/Graph_theory|(wikipedia)]]
+  * [[#ConvexHull]]                                                            [[http://en.wikipedia.org/wiki/Convex_hull|(wikipedia)]] ^▪^
+  * [[#SpanningCircle]]                                                    [[http://en.wikipedia.org/wiki/Bounding_circle|(wikipedia)]] ^▪^
+
+\\
+
+^▪^  //Does not expose any options// 
+
+| [[#Back to top]]|
+
+----
+
+\\
+\\
+
+======Delaunay======
+
+Delaunay triangulation is a 2.5Dimensional process of fitting triangles through unorganized points so that there are no gaps left in a mesh. It is well suited for recreating surfaces that are implied by a collection of points. The output is always a mesh (not a [[rhino:nurbs|NURBs]] surface) and it cannot deal with z-based overlap of points. The mesh can be coloured using several different shader algorithms (see below). These colours will persist after the mesh is inserted.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/DelaunayShaders.png}}
+
+\\
+
+  * **Terrain** » //Apply standard colours which are associated with terrain. You have to specify the water-level and whether or not the terrain is lit from a certain direction as opposed to ambient lighting.//
+  * **Slope** » //The steepest areas are coloured green and the flattest areas become yellow. The gradient is scaled to encompass the entire slope domain of the mesh.//
+  * **Deviation** » //This shader can e used to assess the accuracy of Guides. You have to specify a deviation value (20% by default) and all vertices that exceed this distance are coloured yellow-red. The deviation is measured as a percentage of the maximum deviation.//
+  * **UVW & XYZ** » //These shaders simply map the red, green and blue components of a vertex to its relative position within the UVW or XYZ boundingbox of the entire pointset.//
+  * **Texture** » //This shader can be used to check the distribution of (u,v) texture coordinates of the output mesh. A well balanced grid indicates a proper guide choice. This texture is not 'baked' into the resulting mesh, i.e. it will be lost once the geometry is inserted.//
+  * **Occupancy** » //The occupancy shader colours mesh vertices based on the number of converging edges. When there are large areas of red-purple vertices the current guide is heavily deforming the projection.//
+
+\\
+
+If the points are organised (I.e. if they are on a grid or on a circle) the solution might fail, in which case you have to increase the sampling noise. Another caveat are overlapping points. If the surface which is implied by a pointset distribution exists in more than one place on any given vertical ray the delaunay algorithm will produce garbage:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/SphericalPointSet.png}}   {{http://en.wiki.mcneel.com/content/upload/images/SphericalPointSet_NoGuide.png}}
+
+the above imags shows the default triangulation of a nearly closed sphere of points. Since delaunay trianglation is a 2D process it will connect the points at the bottom of the sphere with the points at the top of the sphere. For these kinds of poorly aligned pointsets it is sometimes possible to use a projection guide. A guide will resample the points using more advanced projection algorithms such as aligned planes, spheres, [[rhino:nurbs|NURBs]] surfaces oy hyperbolic singularities. If we use a hyperbolic guide on this pointset the surface can be resolved:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/SphericalPointSet_HyperbolicGuide.png}}
+
+\\
+
+Guides can be selected from the commandline options when the command is running. Some guides depend on existing geometry other are purely virtual.
+
+
+| [[#Back to commands]]|
+
+----
+
+\\
+\\
+
+======Voronoi======
+
+Voronoi subdivision is the partitioning of space into discrete cells where every cell contains all possible coordinates that are closer to the local point than any other point in the set. It usually results in a very natural division of space similar to stacked soapbubbles. Voronoi diagrams too suffer from organised input so they might need noise to overcome faulty solutions.
+
+\\
+
+Voronoi diagrams support guides and the solution will be projected back onto the guide shape:
+
+
+| {{http://en.wiki.mcneel.com/content/upload/images/VoronoiNullGuide.png}} | {{http://en.wiki.mcneel.com/content/upload/images/VoronoiSurfaceGuide.png}} |
+|    A voronoi diagram with a null guide    |    The same voronoi diagram with a surface guide    |
+
+\\
+
+There are shaders available for voronoi, but the colours do not persist. The output is a group of closed polylines each one indicating the outline of a voronoi cell. The available shaders are:
+
+  * Random » Assign random colours to every cell.
+  * Area » Assign a colour gradient based on the area of the cells.
+  * Circumference » Assign a colour gradient based on the circumference of the cells.
+  * Asymmetry » Assign a colour gradient based on the closeness of a cell site to the cell boundary divided by the diagonal of the cell boundingbox. this shader can be used to indicate unevenly distributed areas in a voronoi solution. A completely relaxed voronoi solution tends to have hexagonal cells with the points located in the middle.
+
+
+| [[#Back to commands]]|
+
+----
+
+\\
+\\
+
+======3DVoronoi======
+
+Three-dimensional voronoi partitioning is similar to 2D-voronoi diagrams. This command is an early release and thus extra caution is advised. Save your model before using this command. Due to the large memory footprint of this command, several memory conserving options have been added:
+
+  * Geometry can now be inserted as meshes or polyline boundaries, instead of just Polysurfaces.
+  * Solution canbe saved to a file, which results in a zero-memory footprint for the duration of the calculation
+
+When you choose to save the solution to a file, the command will create a **.3dv file in a specified location. This file will be filled with the data while the command is still running. If the command is aborted, or <del>heaven forbid</del> crashes, the partial solution can still be inserted. The _Import3DVoronoiSolution command can be used to load **.3dv files. It also exposes several options, all of which I hope are straightforward.
+
+Note that inserting many Polysurfaces is potentially a very memory intensive operation and your system simply might not be up to the task. To conserve as many bytes as possible the undo-buffer will be disabled while importing a 3D voronoi solution.
+
+{{http://en.wiki.mcneel.com/content/upload/images/3DVoronoiSequence.gif}}
+
+
+| [[#Back to commands]]|
+
+----
+
+\\
+\\
+
+======PixelGrid======
+
+PixelGrids are tables consisting of rows and columns, the cells of which are assigned a value depending on how many points they contain. Cells with no points are omitted which means there is potentially a jagged border:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/PixelGrid1.png}}
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/PixelGrid2.png}}
+
+\\
+
+PixelGrids can be used to reduce a complex point collection in a linear fashion.
+
+
+| [[#Back to commands]]|
+
+----
+
+\\
+\\
+
+======OcTree======
+
+OcTree subdivision is the partitioning of space into discrete blocks where every box contains a number of points from the original pointcloud and all boxes together contain all points. Boxes are subdivided if they contain more than N points, or if they exceed a certain volume value or some other threshold:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/OctreeExample.jpg}}
+
+\\
+
+There are several options available to control the method of subdivision:
+
+  * Sample Threshold » Whenever a box contains more than the sample threshold number of points it will subdivide into 8 smaller boxes. The default is 1, but higher numbers will reduce the computation time.
+  * Volume threshold » Whenever a box is larger than a certain amount of cubic units, it will subdivide into 8 smaller boxes. The default is not to use volume subdivision at all.
+
+Depending on which threshold values are active there are two additional options:
+
+  * PreventSampleUnderrun » When this is active it will prevent boxes that are larger than 'Volume Threshold' from subdividing if they have fewer than 'Sample Threshold' points.
+  * PreventVolumeUnderrun » When this is active it will prevent boxes that contain more than 'Sample Threshold' points from subdividing if they are smaller than 'Volume threshold'.
+
+\\
+\\
+
+OcTrees support Guides and the resulting boxes will be projected back onto the guide shape in order to reflect the internal subdivision scheme:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/OcTreeSurfaceGuide.png}}
+
+
+| [[#Back to commands]]|
+
+----
+
+\\
+\\
+
+======QuadTree======
+
+QuadTree subdivision is the partitioning of space into discrete rectangles where every rectangle contains a number of points from the original pointcloud and all boxes together contain all points. Rectangles are subdivided if they contain more than N points, or if they exceed a certain area value or some other threshold:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/QuadTreeExample.png}}
+
+\\
+
+There are several options available to control the method of subdivision:
+
+  * Sample Threshold » Whenever a rectangle contains more than the sample threshold number of points it will subdivide into 4 smaller rectangles. The default is 1, but higher numbers will reduce the computation time.
+  * Area threshold » Whenever a rectangle is larger than a certain amount of square units, it will subdivide into 4 smaller rectangles. The default is not to use area subdivision at all.
+
+Depending on which threshold values are active there are two additional options:
+
+  * PreventSampleUnderrun » When this is active it will prevent rectangles that are larger than 'Area Threshold' from subdividing if they have fewer than 'Sample Threshold' points.
+  * PreventAreaUnderrun » When this is active it will prevent rectangles that contain more than 'Sample Threshold' points from subdividing if they are smaller than 'Area threshold'.
+
+\\
+\\
+
+Octrees and [[rhino:quadtrees|QuadTrees]] use the same shader routines:
+
+  * Random » Assign random colors to boxes.
+  * Volume » Assign colours based on a volume gradient (this one is meaningless for [[rhino:quadtrees|QuadTrees]] since all tree branches have zero-volume).
+  * Area » Assign colours based on an area gradient.
+  * Recursion » Assign colours based on subdivision depth.
+
+\\
+
+[[rhino:quadtrees|QuadTrees]] support Guides and the resulting rectangles will be projected back onto the guide shape in order to reflect the internal subdivision scheme:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/QuadTreeSurfaceGuide.png}}
+
+| [[#Back to commands]]|
+
+----
+
+\\
+\\
+
+======Network======
+
+Connectivity networks are about point neighbours. They can be used to map to the nearest neighbours in a large cloud. At this point, networks are still 2D entities. Connections between points can be limited to a certain amount per point, or to a certain length of the connection or both.
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/ConnectivityNetwork.png}}
+
+\\
+
+| [[#Back to commands]]|
+
+----
+
+\\
+\\
+
+======Spanning Circles and Convex Hulls======
+
+Spanning circles and convex hulls are a way to encapsulate points. These commands do not offer any options at present. The results can be seen in the image below:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/WrappingAlgorithms.png}}
+
+\\
+
+Convex hulls are minimum area convex polygons that contain all points in a set. A minimum area spanning circle is the smallest possible circle that contains all points. The Convex hull algorithm is guaranteed to be correct, spanning circle is not. The circle is sometimes slightly larger than the optimal solution.
+
+
+| [[#Back to commands]]|
+
+----

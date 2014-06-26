@@ -1,0 +1,51 @@
+====== Module DirectX 9 des laboratoires de Rhino ======
+> **Sommaire:** //Ce module donne la possibilité aux fenêtres de Rhino d'utiliser DirectX (plus particulièrement la version 9 de DirectX) au lieu d'[[rhino:opengl|OpenGL]]. Le but est de fournir une alternative aux utilisateurs de Rhino 4.0 qui rencontrent des problèmes OpenGL//
+
+=====Informations=====
+
+La prise en charge de DirectX a été prévue pour les utilisateurs qui ont de **sérieux** problèmes d'affichage lorsqu'ils travaillent sous [[rhino:opengl|OpenGL]].
+
+**Si vous n'avez //PAS// de problèmes avec OpenGL, nous vous recommandons de continuer à utiliser [[rhino:opengl|OpenGL]] pour l'affichage de Rhino.**
+
+Il existe deux technologies, **OpenGL** et **DirectX**, utilisées pour accéder à la carte graphique de l'ordinateur et pour réaliser un dessin rapide 3D dans une fenêtre (également appelé dessin avec accélération matérielle).
+
+Rhino 4.0 utilise **OpenGL** par défaut. Cette technique fonctionne très bien sur la plupart des systèmes, mais certaines combinaisons carte graphique/pilote ne fonctionnent pas ou pas très bien avec [[rhino:opengl|OpenGL]].
+
+DirectX est une technologie similaire à [[rhino:opengl|OpenGL]] dans le sens où elle permet à un programme d'utiliser des graphiques par accélération matérielle.
+
+Rhino ne laissera **PAS** tomber la compatibilité avec [[rhino:opengl|OpenGL]].
+
+=====Téléchargements=====
+
+Par la suite, tous ces fichiers seront rassemblés en un seul et unique programme d'installation mais pour le moment vous devrez installer 3 composants pour que le module DirectX fonctionne sur votre ordinateur.
+
+====Une fois :====
+  * [[http://en.wiki.mcneel.com/content/upload/files/vcredist_x86.exe|Téléchargez et installez]] les dernières bibliothèques d'exécution de Microsoft.
+  * [[http://www.microsoft.com/downloads/details.aspx?FamilyID=4b1f5d0c-5e44-4864-93cd-464ef59da050&DisplayLang=en|Téléchargez et installez]] les bibliothèques d'exécution Microsoft de DirectX pour utilisateur final, de février 2007.
+    * Même si votre ordinateur vous dit qu'il dispose de DirectX9c il est préférable de télécharger et installer ce logiciel.
+====À chaque nouvelle version bêta :====
+  * [[http://download.mcneel.com/download.asp?id=directx9|Téléchargez et installez]] le module d'affichage DirectX 9.0.
+    * Enregistrez le fichier DirectX9Display.rhp dans un répertoire accessible de votre ordinateur (si possible dans le répertoire de modules de Rhino)
+    * Lancez Rhino et exécutez la commande PlugInManager. Cliquez sur le bouton Installer et sélectionnez le fichier de module DirectX9Display.rhp.
+
+=====Systèmes d'exploitation=====
+
+**Windows 2000/XP** - Le module devrait fonctionner avec la SR0 de Rhino 4.0
+
+**Windows Vista** - Le module devrait fonctionner avec la SR0 de Rhino 4.0
+
+=====Utiliser le module=====
+
+Lorsque le module sera installé, vous aurez besoin d'avoir des modes d'affichage utilisant DirectX.
+
+  * Ouvrez les Paramètres avancés dans la section Apparence des options de Rhino et créez une copie de l'un des modes d'affichage. Par exemple ; sélectionnez Ombré, copiez-le et renommez la copie, par exemple Ombré DX9. Pour faire des tests, j'ai utilisé des copies des modes Filaire, Ombré et Rendu.
+  * Accédez aux paramètres du mode d'affichage copié et sélectionnez Autres paramètres. Choisissez DirectX 9 comme canal d'affichage.
+Si vous définissez une de vos fenêtres avec le nouveau mode d'affichage, votre géométrie devrait être affichée avec DirectX (pour la première version de ce module, les mots DirectX 9 apparaîtront en bas à gauche de la fenêtre.)
+
+===== Commandes=====
+
+**DirectX9Options** - Options pour l'affichage des fenêtres DirectX. Les options sont
+
+  * TransformLighting - définit le lieu où sont effectués certains calculs (dans le logiciel ou sur la carte graphique). La modification de ce paramètre devrait jouer sur la performance.
+  * AntiAliasCurves - Les lignes et les courbes peuvent être dessinées avec un effet d'anticrénelage. L'inconvénient de l'anticrénelage est la vitesse d'affichage. Cette option vous permet de ne jamais utiliser l'anticrénelage, de toujours l'utiliser ou de ne l'utiliser que lorsque la fenêtre est fixe.
+

@@ -1,0 +1,58 @@
+====== Comment trouver et réparer des mauvais objets créés par Rhino ou suite à l'importation d'un fichier ======
+======J'ai un mauvais objet, comment cela est-il arrivé et comment le réparer?======
+
+=====Qu'est-ce qu'un mauvais objet (invalide) ?=====
+
+Les "mauvais" objets dans Rhino sont des objets qui violent certaines règles [[rhino:nurbs|NURBs]] ou qui présentent un problème au niveau de leur structure.  En théorie, Rhino n'est pas sensé produire de mauvais objets, mais en pratique, cela est possible et arrive parfois.  Une fois que vous savez comment les traiter, ce n'est normalement pas très long ni difficile de les réparer.  Le plus souvent, les mauvais objets sont des surfaces mais il arrive parfois qu'un modèle contienne également de mauvaises courbes.
+
+=====Comment puis-je savoir si mon modèle possède de mauvais objets ?=====
+
+La façon la plus simple pour trouver les mauvais objets est d'utiliser la commande **SélMauvaisObjets** (Analyse > [[rhino:diagnostics|Diagnostique]] > Sélectionner les mauvais objets).  Tous les objets considérés invalides seront sélectionnés.  Cependant, une polysurface peut être "invalide" car elle contient une mauvaise surface.  Vous pouvez savoir laquelle en utilisant la commande ·**ExtraireMauvaiseSurf** (qui n'est pas répertoriée dans le menu), afin d'extraire les mauvaises surfaces et les sélectionner.  Rhino dispose d'une commande très utile appelée **VérifierNouveauxObjets** qui active la vérification en arrière-plan et vérifie tous les objets lors de leur création ou importation.  De cette façon vous êtes immédiatement averti en cas de problème.
+
+=====Pourquoi ces objets sont-ils considérés invalides et comment ont-ils été créés ?=====
+
+En fait il y a beaucoup d'explications techniques possibles.  Pour les surfaces, c'est souvent la structure de la courbe de limite qui est mauvaise - elle peut avoir un ou plusieurs segments microscopiques, ce qui peut entraîner des problèmes.  Une surface peut être mauvaise parfois si elle a plusieurs lignes de points de contrôle les unes sur les autres ou si sa longueur est égale à 0 dans une direction.  Cette situation est facile à produire dans Rhino 3 - il suffit de créer une ligne ou un plan vertical et de le projeter sur le plan de construction à partir de la vue de dessus.  L'objet a maintenant une longueur égale à zéro dans une direction et sera considéré invalide.  Dans Rhino 4, ce type d'opération a été désactivé dans certains cas  afin de ne pas créer de mauvais objets ; la commande échouera et vous obtiendrez un message d'erreur.  Cependant, il est toujours possible de produire de mauvais objets dans Rhino 4. 
+
+Pourquoi une courbe limite de surface peut elle être mauvaise ?  Vous ne l'avez probablement pas fait exprès.  Les mauvais objets apparaissent souvent après l'utilisation de Joindre (ou d'une autre commande intégrant cette fonction telle que les opérations booléennes). Lors de la jointure des objets, Rhino doit souvent diviser des objets et ajuster les courbes de limite.  Dans certains cas des parties de ces bords divisés peuvent être microscopiques ou l'ajustement de la courbe limite peut mal se faire et tout d'un coup vous avez un mauvais objet.  //(Au fait, quand je dis “microscopique” je veux dire plus petit que votre tolérance absolue – les objets plus petits que cette valeur ont normalement rien à faire dans votre fichier et poseront des problèmes.)//
+
+=====Mauvais objets à l'importation/exportation=====
+
+L'importation d'une géométrie à partir d'autres programmes peut aussi produire des mauvais objets.  Si la commande **VérifierNouveauxObjets** est activée, lors de l'importation d'un fichier vous aurez un message au cas où un objet invalide est créé.  Vous devez cliquer sur Accepter pour accepter chaque objet.  S'il y a trop de mauvais objets cette commande peut être une gêne, vous pouvez désactiver la commande et la relancer après l'importation.
+
+Il est important de comprendre que les objets importés n'étaient sûrement pas considérés "mauvais" dans le programme où ils ont été créés.  Chaque programme possède ses propres méthodes de création et de vérification de la géométrie qui seront sûrement différentes de celles de Rhino.  De plus, l'échange de données entre les programmes utilisant des formats différents oblige à effectuer au moins une traduction voire même deux (en passant par un format neutre tel que IGES). Des problèmes de traduction peuvent entraîner la création de mauvais objets suivant la qualité des fonctions d'importation/exportation. Rhino produira également des objets qu'il ne considère pas comme "mauvais" mais qui sont marqués en tant que tels par d'autres programmes.
+
+=====Surfaces fantômes=====
+//Pourquoi ne puis-je pas voir mon mauvais objet ?//
+
+Parfois, Rhino produit des surfaces invalides mais vous ne pouvez pas les voir.  En d'autres termes, elles sont invisibles !  (Elles sont invisibles car aucun maillage de rendu n'a pu être produit pour les afficher). Elles sont appelées parfois surfaces fantômes.  Les surfaces fantômes peuvent donner des comportements bizarres. Par exemple un **Zoom Étendu** qui ne fonctionne pas correctement car la surface invisible est en dehors de l'espace mais la commande **Zoom** la prend en compte.
+
+Elles peuvent en principe être sélectionnées avec la commande **SélMauvaisObjets** et la meilleure solution est encore de les supprimer - souvent elles ne peuvent pas être réparées.  La commande Supprimer ne fonctionne pas toujours, essayez alors **Ctrl+X** pour les éliminer du fichier.  Si vous ne pouvez pas les sélectionner d'une autre façon, vous pouvez également essayer cette solution :  Faites un zoom étendu, sélectionnez tout avec une fenêtre et utilisez la commande Cacher. Essayez ensuite la combinaison Ctrl+A. Normalement cette option sélectionne tout ce qui se trouve dans le fichier, même les objets qui ne peuvent pas être sélectionnés d'une autre façon.  Si vous voyez dans la ligne de commande qu'un objet est sélectionné, utilisez la commande Infos pour vérifier qu'il s'agit bien de votre mauvais objet (vous verrez indiqué "invalide"), supprimez-le et affichez tout à nouveau. 
+
+
+===== Mauvais maillages=====
+Si un maillage est indiqué comme mauvais, utilisez la commande **VérifierMaillage** pour voir un rapport plus détaillé de ce qui ne va pas, cette commande vous en dira beaucoup sur ce qui peut être réparé. Regardez dans le menu Maillage sous Outils de modification et Outils de réparation pour trouver des commandes dont vous avez besoin. Certaines commandes utiles :
+
+**ExtraireFacesMaillageDupliquées**
+
+**ExtraireBordsMaillageNonManifold**
+
+**ÉliminerFacesMaillageDégénérées**
+
+**UnifierNormalesMaillage** 
+
+=====Comment puis-je réparer les mauvaises  courbes et surfaces?=====
+
+Les mauvaises polycourbes sont le plus souvent réparées en les décomposant et en les rejoignant. Sinon, recherchez des segments microscopiques dans la courbe et éliminez-les. Si le problème n'est toujours pas résolu, il se peut qu'il y ait une réelle erreur au niveau de la structure [[rhino:nurbs|NURBs]] de la courbe et des recherches plus avancées seront alors nécessaires.
+
+Ma stratégie pour traiter les mauvaises surfaces dues à un problème au niveau des courbes limites est la suivante. Avant de commencer, repérez les mauvaises surfaces et cachez tout le reste temporairement (vous devrez peut-être lancer la commande *ExtraireMauvaiseSurf* comme indiqué ci-dessus).
+
+**1.** Je commence en principe par utiliser la commande *ReconstruireBords* sur tous les mauvais objets. Elle peut en réparer certains. Elle restaure plus ou moins les bords d'une surface dans leur position avant la jonction.  Mais cela signifie aussi que la surface ne joint peut-être plus ses voisines et qu'une nouvelle jointure peut entraîner à nouveau la création d'une mauvaise surface. Mais elle fonctionne dans certains cas.  Si certaines surfaces sont réparées (utilisez **SélMauvaisObjets/ Inverser**), cachez-les.   La commande **RétrécirSurfSurBord** peut aider aussi parfois.
+
+**2.** Utilisez la commande AnnulerLimite avec l'option "garder les objets de limite" (commande **DetachTrim** dans les versions précédentes) sur la première mauvaise surface et utilisez ensuite la commande Limiter pour relimiter la surface avec les courbes de limite sélectionnées.  Vérifiez si la surface est réparée.  Si c'est le cas, cachez-la, sinon laissez-la et lancez la même procédure sur toutes les autres mauvaises surfaces une par une.  Cachez toutes les surfaces réparées.
+
+**3.** S'il reste de mauvais objets, lancez à nouveau la procédure précédente. **Décomposez** la courbe limite obtenue et recherchez des micro segments dans cette courbe. C'est le cas le plus fréquent de mauvaise limite. Regardez combien de courbes forment la courbe limite. Il se peut que le nombre obtenu ne soit pas logique, par exemple une polyligne qui ressemble à un rectangle comprend 5 courbes au lieu de 4. Une micro courbe s'est glissée dans cette polyligne et entraîne des problèmes par la suite. Cherchez près des sommets, essayez de sélectionner avec une fenêtre près des extrémités des segments de la courbe limite. Ou, utilisez la commande **SélCourbesCourtes** et choisissez une valeur plus petite.  Si vous trouvez des microsegments, supprimez-les et joignez à nouveau les courbes limites pour former une boucle. Relimitez la surface avec cette courbe. Cette méthode permet de réparer presque tout ce qui ne l'est pas avec d'autres.
+
+**4.** Enfin, essayez d'afficher tout (**Montrer**) et regardez si vous pouvez joindre tout sans recréer des mauvais objets.  Si tout est joint correctement et si aucun mauvais objet n'apparaît, c'est tout bon !  Sinon, c'est probablement la commande Joindre qui essaie de forcer la connexion de choses qui ne s'adaptent pas correctement.  Dans ce cas vous devrez analyser les surfaces qui deviennent de mauvaises surfaces et la relation avec leurs voisines afin d'essayer de trouver ce qui est mal adapté et pourquoi.  Ceci peut parfois représenter un vrai petit casse-tête...
+
+> **Remarque :** //La méthodologie précédente est prévue pour les surfaces avec de mauvaises courbes de limite.  Elle ne sera pas utile sur les surfaces avec des bords réduits ou des lignes de points de contrôle superposées.  Ces surfaces devront être traitées avec d'autres méthodes telles que la suppression de noeuds ou la reconstruction totale.  Les surfaces avec des bords réduits sont faciles à identifier - l'affichage ressemble à celui d'une courbe mais les **Propriétés** indiquent qu'il s'agit d'une surface.  Normalement il suffit de les supprimer.//
+

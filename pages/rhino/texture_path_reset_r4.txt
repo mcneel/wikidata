@@ -1,0 +1,17 @@
+===== Problem: Moved Textures Not Found=====
+  * In Rhino, moving textures from one drive to another causes them to be not found by the built-in Rhino render. 
+  * Adding the drive letter to the search path does not reset them, because it does not seach in the subfolders.
+
+===== Solution: =====
+This plugin will let you pick a new folder. It will search that entire folder (recursively, all the sub-folders) for the textures, and do that for every missing texture. It will search for color texture, bump, transparency, and bump files. When you save the file, all the new paths will be changed to found location. 
+=== Works in Rhino 4 Only ===
+
+To use the attached plugin do the following:
+
+  - Download and unzip the attached **[[http://s3.amazonaws.com/mcneel/plug-in/RemapTextures.zip|RemapTextures.zip]]** into the //C:\Program Files (x86)\Rhinoceros 4.0\Plug-ins// folder or //C:\Program Files\Rhinoceros 4.0\Plug-ins//.
+  - Drag and Drop RemapTextures.rhp from File Explorer on to the open Rhino application
+  - Open file whose textures can not be found
+  - Type **RemapTextures**, navigate to new drive and folder.
+  - It will report to the Text Screen (F2) which textures were remapped and what textures were not found.
+
+Email comments to [[max@mcneel.com|Max Fugier]].

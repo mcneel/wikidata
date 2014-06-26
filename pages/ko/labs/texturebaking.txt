@@ -1,0 +1,31 @@
+====== 텍스처 베이킹 ======
+> **Summary:** //절차적 텍스처, 절대 좌표 기준 (비 UV 방식) 텍스처, 데칼을 뷰포트에 표시하는 플러그인으로, 비 RDK 방식의 렌더러에서 사용할 수 있는 단일 UV 매핑 이미지로 텍스처를 만듭니다.//
+
+> **Updated:** //2009년 1월 2일//
+
+{{http://en.wiki.mcneel.com/content/upload/images/tb_without.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/tb_with.png}}
+
+절차적 설정 또는 절대 좌표 기반의 투영(예: 대리석, 화강암, 목재와 같은 비 UV 방식의 텍스처)을 바탕으로 하는 텍스처를 생성하는 데 RDK 를 사용하는 분들께서는 이러한 텍스처의 뷰포트 표시가 준최적화 상태임을 알 수 있을 것입니다. 위에 있는 두 개의 이미지는 TextureBaking 플러그인을 로드한 상태에서 생성한 대리석 텍스처와 그렇지 않은 텍스처의 차이를 나타냅니다.
+
+이 플러그인은 또한 RDK 데칼 (Flamingo 데칼에서는 실행되지 않습니다) 도 표시합니다. 일부 투명한 경우에도 표시가 가능합니다.
+
+{{http://en.wiki.mcneel.com/content/upload/images/tb_decal.png}}
+
+이 플러그인을 설치하면 Options 대화상자에 패널이 추가되며, 이 패널에서 효과를 설정/해제하고, 효과의 구체적인 설정을 지정할 수 있습니다. 해상도가 높으면 처리 시간이 더 길어지게 됩니다. 이 플러그인은 현재 개발 중이며, 디스플레이의 일부로 활성화된 상태이므로 사용 중에 크래시가 발생하는 경우, 제일 먼저 이 플러그인을 사용 안 함으로 설정하시기 바랍니다.
+
+{{http://en.wiki.mcneel.com/content/upload/images/tb_options.PNG}}
+
+"BakeTexture" 명령을 사용하여, 선택한 개체의 UV 에 현재 RDK 텍스처 (절차적 텍스처 및 데칼 포함) 를 나타내는 데 사용 가능한 텍스처 비트맵을 만듭니다. 이 명령을 사용하여 데칼을 Rhino renderer 와 같은 비 RDK 방식 렌더러로 내보낼 수 있습니다 (export). 단, 매우 기본적인 UV 언래퍼에서만 실행 가능하므로, 이미지를 저장한 후 개체에 적용하여 수정할 수 있습니다.
+
+{{http://en.wiki.mcneel.com/content/upload/images/tb_baked_decal.png}}
+
+Texture Baking 플러그인을 실행하려면 Rhino 4.0 SR4 (또는 그 이상) 과 [[rhino:rendererdevelopmentkit10|Rhino RDK]] 이 필요합니다. 그러나, RDK 가 이미 설치되어 있을 가능성도 있으므로, 우선 이 플러그인을 다운로드한 후 설치할 때, "Dependant DLL not found" 오류가 표시되는 경우에만 RDK를 다운로드하여 설치하시기 바랍니다.
+
+ [[http://en.wiki.mcneel.com/content/upload/files/TextureBaking.zip|플러그인 다운로드]]
+
+Stop Press:  특별 보너스 기능
+
+기존 지오메트리로 맵을 만들 때 GenerateNormalMap 명령을 사용하실 수 있습니다.
+
+

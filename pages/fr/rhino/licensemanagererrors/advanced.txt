@@ -1,0 +1,134 @@
+======Résolution avancée des erreurs "Impossible de communiquer avec le serveur de licences" ======
+
+> **Actualisation:** //20 septembre 2012//
+
+=====Problème=====
+Lorsque vous lancez Rhino 3.0 ou Rhino 4.0, vous recevez le message d'erreur suivant:
+
+{{http://en.wiki.mcneel.com/content/upload/images/rhinolicensemanager.png}}
+\\
+
+=====Cause=====
+Le message "Impossible de communiquer avec le serveur de licences" apparaît lorsque Rhino ne peut pas communiquer avec son module de gestion de licence. Cette erreur peut se produire aussi bien dans les installations autonomes que dans les noeuds de groupes de travail.
+
+Elle découle d'une des situations suivantes :
+
+  - Les fichiers de gestionnaires de licence ne sont pas installés.
+  - Les entrées du registre du système de Windows ne sont pas définies.
+  - Les fichiers de prise en charge de la bibliothèque d'exécution ne sont pas installés.
+  - Un gestionnaire de licences errant est en cours d'exécution. 
+  - Il existe un problème de sécurité au niveau du registre de Windows.
+\\
+
+=====SOLUTION 1 - Installer la dernière version révisée.=====
+
+Pour obtenir la [[http://download.rhino3d.com/rhino/sr.asp|version révisée actuelle]] .
+
+Une nouvelle raison a été déterminée qui peut également causer cette erreur lorsque Rhino 4 est lancé sous Vista ou Windows 7. Il s'agit d'un conflit avec le contrôle des comptes d'utilisateurs. Cliquez avec le bouton de droite sur l'icône de Rhino 4 et sélectionnez Exécuter en tant qu'administrateur. Si cette solution résout le problème, téléchargez et installez Rhino 4 Service Release 7. L'installation de la SR7 devrait résoudre le problème.
+
+=====SOLUTION 2 - Les fichiers de gestionnaires de licence ne sont pas installés=====
+Dans les versions de Rhino en français, le module de gestion des licences se trouve dans le dossier de suivant :
+
+   C:\Programmes\Fichiers communs\McNeel Shared\License Manager
+
+Rhino 3.0 et Rhino 4.0 utilisent différents modules de gestion de licence :
+
+  * Le gestionnaire de licences de Rhino 3.0 s'appelle **McNeelLM.exe**.
+  * Le gestionnaire de licences de Rhino 4.0 s'appelle **RhinoLM.exe**.
+
+Si le module de gestion des licences pour votre version de Rhino n'existe pas sur votre ordinateur, vous devrez réinstaller Rhino à partir du CD.
+
+\\
+=====SOLUTION 3 - DÉSINSTALLER/RÉINSTALLER =====
+Si les fichiers du gestionnaire de licence ou les clés du registre ne sont plus à leur place, la meilleure solution est de désinstaller tout et réinstaller. Cette opération comprendra la suppression des clés de registre, la suppression des fichiers du gestionnaire de licences puis la réinstallation. 
+  - Vérifier que vous avez ouvert une session en tant qu'administrateur ou comme utilisateur ayant des droits d'administrateur.
+  - Vérifier que les détecteurs de virus et de logiciels espions sont désactivés.
+  - Désinstaller Rhino et nettoyer le système en suivant ces [[http://wiki.mcneel.com/rhino/uninstalling|recommendations.]]
+  - Après la désinstallation, utiliser l'explorateur de Windows pour accéder au dossier **C:\Programmes\Common Files\McNeel Shared\** et supprimer le sous-dossier "License Manage"
+  - Redémarrer
+  - Réinstaller Rhino 4 en utilisant le CD du produit. Télécharger et installer [[http://download.rhino3d.com/cruftfree/whatsnew.asp?lang=&p=rhino&v=4.0&t=sr&r=current&a=whatsnew|la dernière version révisée]] si nécessaire.
+
+
+=====SOLUTION 4 - Les entrées du registre du système de Windows ne sont pas définies=====
+Si le module de gestion des licences pour votre version de Rhino est présent, il se peut qu'¡l ne soit pas enregistré - les informations qui permettent à Rhino de localiser ce module ne sont peut-être pas dans le registre de Windows. Pour régler ce problème :
+
+  - Vérifier que vous avez ouvert une session en tant qu'administrateur ou comme utilisateur ayant des droits d'administrateur.
+  - Vérifier que les détecteurs de virus et de logiciels espions sont désactivés.
+  - En utilisant l'explorateur de Windows, accéder au dossier mentionné ci-dessus. (C:\Program Files\Common Files\McNeel Shared\License Manager)
+
+====Rhino 3.0====
+
+Si l'erreur se produit lorsque vous essayez de lancer **Rhino 3.0** :
+
+  - **[[http://en.wiki.mcneel.com/content/upload/files/REGISTER_MCNEELLM.zip|Télécharger]]** et décomprimer ce fichier batch dans le même dossier que **McNeelLM.exe**.
+  - Double cliquer sur le fichier batch **Register_McNeelLM.bat**.
+  - Utilisateurs de Windows Vista : cliquer avec le bouton de droite sur le fichier et sélectionnez "Exécuter en tant qu'administrateur".
+
+Le fichier batch affichera les résultats dans la ligne de commandes et vous pourrez voir s'il a été exécuté avec succès ou non. Afin de voir si cette méthode a résolu le problème, essayez d'ouvrir Rhino 3.0.
+====Rhino 4.0 et 5.0====
+Si l'erreur se produit lorsque vous essayez de lancer **Rhino 4.0** :
+
+  - **[[http://en.wiki.mcneel.com/content/upload/files/REGISTER_RHINOLM.zip|Télécharger]]** et décomprimer ce fichier batch dans le même dossier que **RhinoLM.exe**.
+  - Double cliquer sur le fichier batch **Register_RhinoLM.bat**.
+  - Utilisateurs de Windows Vista : cliquer avec le bouton de droite sur le fichier et sélectionner "Exécuter en tant qu'administrateur".
+
+Le fichier batch affichera les résultats dans la ligne de commandes et vous pourrez voir s'il a été exécuté avec succès ou non. Afin de voir si cette méthode a résolu le problème, essayez d'ouvrir Rhino.
+
+\\
+
+=====SOLUTION 5 - Les fichiers de prise en charge de la bibliothèque d'exécution ne sont pas installés=====
+Si le fichier batch précédent renvoie une erreur, **[http://www.microsoft.com/en-us/download/details.aspx?id=26347|téléchargez]]** et installez les dernières bibliothèques d'exécution de Microsoft et réessayez.
+=====SOLUTION 6 - Un gestionnaire de licences errant est en cours d'exécution==========
+Veuillez redémarrer la machine. Les étapes précédentes peuvent avoir été réalisées avec succès mais un gestionnaire de licences errant exécuté sur Windows peut entraîner des problèmes. Rhino fonctionne-t-il après le redémarrage ?
+\\
+=====SOLUTION 7 - Comodo Internet Security bloque COM=====
+[[http://www.comodo.com/|Comodo Internet Security]] - Nous avons découvert que Comodo peut bloquer les communications interprocédés COM entre Rhino et le gestionnaire de licences. Vous pouvez vérifier si Comodo est exécuté en vérifiant ces [[https://help.comodo.com/topic-72-1-284-2956-Starting-Comodo-Internet-Security.html|interfaces]]. Si vous avez Comodo, veuillez suivre ces instructions pour annuler le blocage :
+
+  - Ouvrir [[https://help.comodo.com/topic-72-1-284-2956-Starting-Comodo-Internet-Security.html|les paramètres de sécurité Intenet de Comodo]]
+  - Cliquer sur les [[https://help.comodo.com/topic-72-1-284-2945-Defense+-Tasks---Introduction.html|Paramètres Defense+]].
+  - Cliquer sur [[https://help.comodo.com/topic-72-1-284-3039-Monitoring-Settings.html|l'onglet Monitor Settings]]
+  - Désactiver la case "Protected COM Interfaces".
+  - Cliquer sur OK pour quitter la boîte de dialogue.
+
+Rhino 4 devrait maintenant fonctionner correctement.
+
+\\
+=====SOLUTION 8 - Il existe un problème de sécurité au niveau du registre de Windows Vista=====
+Si le module du gestionnaire de licences pour la version de Rhino que vous utilisez est présent et qu'il est dans le registre, vous n'avez peut-être pas assez de droits pour lire le registre de Windows.
+
+Lancer **Regedit.exe**. 
+
+//Une mauvaise utlisation de l'éditeur de registre peut entraîner de graves problèmes, au niveau du système, qui peuvent demander la réinstallation de Windows. Robert McNeel & Associates et Microsoft ne peuvent pas garantir la résolution de problèmes dus à l'utilisation de l'éditeur de registre. Utilisez cet outil à vos propres risques. Pour obtenir de l'aide, veuillez contacter [[http://www.rhino3d.com/support|l'assistance de McNeel]]//
+
+Lorsque l'éditeur de registre est ouvert, chercher la clé **RhinoLicenseManager.RhinoLicense** dans HKEY_CLASSES_ROOT. Par exemple :
+
+    - Ouvrir **HKEY_LOCAL_MACHINE\Software\Classes**
+    - Cliquer avec le bouton de droite sur la clé **Classes**, puis cliquer sur **Autorisations**
+    - Dans l'onglet Sécurité, sous **Noms de groupes ou d'utilisateurs** vous devriez voir au moins quatre entrées. L'erreur "Impossible de communiquer avec le gestionnaire de licences" est parfois due à un manque d'autorisation dans les classes de la clé de registre. 
+
+**Si <color blue>et SEULEMENT SI</color> des autorisations manquent, les ajouter :**
+    - Cliquer sur le bouton **Ajouter**.  
+    - Taper **Créateur propriétaire** puis cliquer sur **OK**.
+    - Sélectionner **Créateur propriétaire**, puis désactiver les cases dans la colonne Autoriser sous Autorisations pour Créateur propriétaire :
+    - {{:rhino:classes_permissions_1.png|}}
+    - Cliquer sur le bouton **Ajouter**.  
+    - Taper **SYSTÈME** puis cliquer sur **OK**.
+    - Sélectionner **SYSTÈME**, puis sélectionner la case **Contrôle total** dans la colonne Autoriser sous Autorisations pour SYSTÈME :
+    - {{:rhino:classes_permissions_2.png|}}
+    - Cliquer sur le bouton **Ajouter**.  
+    - Taper **Administrateurs** puis cliquer sur **OK**.
+    - Sélectionner **Administrateurs**, puis sélectionner la case **Contrôle total** dans la colonne Autoriser sous Autorisations pour Administrateurs :
+    - {{:rhino:classes_permissions_3.png|}}
+    - Taper **Utilisateurs** puis cliquer sur **OK**.
+    - Sélectionner **Utilisateurs**, puis sélectionner la case **Lecture** dans la colonne Autoriser sous Autorisations pour Utilisateurs :
+    - {{:rhino:classes_permissions_4.png|}}
+    - Cliquer sur le bouton **Avancé**.
+    - Dans la boîte de dialogue **Paramètres de sécurité avancés pour Classes**, cocher la case **Remplacer toutes les entrées d'autorisation des objets enfants par des entrées d'autorisation pouvant être héritées de cet objet.**
+    - Dans la boîte de dialogue **Paramètres de sécurité avancés pour Classes**, cocher la case **Inclure les autorisations pouvant être héritées du parent de cet objet.**. 
+    - {{:rhino:classes_permissions_5.png|}}
+    - Cliquer sur **OK** - cette opération peut prendre plusieurs minutes.
+    - Dans la boîte de dialogue **Autorisations pour Classes**, cliquer sur **OK**
+    
+Si les étapes précédentes ne fonctionnent pas, vous devrez peut-être lancer l'éditeur de registre avec le compte Système en utilisant  [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]]. Télécharger psexec, puis lancer //psexec -i -d -s c:\windows\regedit.exe//
+    
+Vous devriez maintenant pouvoir lancer Rhino et communiquer avec le gestionnaire de licences. 

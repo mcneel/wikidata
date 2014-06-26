@@ -1,0 +1,10 @@
+====== Rhino V3 and Windows 2000 Servers ======
+
+There is a known "issue" with V3 saving to Windows 2000 file servers.  The symptom is that Rhino says it saved the file successfully, and then you get a Windows error message saying the file could not be saved.
+
+The basic issue is that the Windows OS tools Rhino V3 uses to save files, creates a temporary file on the network drive, saves to that file, and then renames the temporary file.  A user with create/read rights can get to the point where the temporary file is written, but delete rights are required to get the temporary file renamed.  This temporary file that has nothing to do with the backup mechanism Rhino V3 uses; this happens even when a brand new file is being created.
+
+The fix is for the user to have read/write/delete rights in the folder on the network drive.  Please note that if a user creates a new subfolder in a folder, the rights the user gets in the subfolder may be different from the rights they had in the parent folder.
+
+
+

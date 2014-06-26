@@ -1,0 +1,108 @@
+** [[FaqSolidiChiusi|Perchè il mio oggetto non è chiuso? Come faccio a fare un solido?]]**
+
+----
+Come fare per creare oggetti sicuramente chiusi e esportarli correttamente.
+
+Basato su un a post dal "Rhino newsgroup " di Jeffrey Everett, July 15, 2005.
+
+
+> **Sommario:** //Come faccio un modello chiuso correttamente?//
+
+======Cos'è un solido in Rhino?======
+=====Come creo un buon file .stl dal mio disegno in Rhino?=====
+
+Ci sono molti buoni consigli per la generazioni di buoni STL.
+
+Il più importante è semplicemente questo:
+
+Gli oggetti di Rhino devono essere "CLOSED SOLID" per generare un STL valido.
+
+//<color darkslateblue>Mitch : il termine corretto per "closed solid" in Rhino è  **closed polysurface</color>**//
+
+Un solido ha **NO NAKED EDGES**, questa definizione è un poco sbrigativa.
+
+Un altro modo di vedere un solido è d'immaginare un pallone. Se c'è anche un minuscolo buchetto, il pallone si sgonfierà. Un solido è un volume. Un solido è le sue superfici esterne completamente unite.
+
+//<color green>JB : utilizza il comando **ShowEdges** con l'opzione **naked edges** per vedere gli spigoli non uniti</color>//
+
+=====Le tolleranze giocano un ruolo importante nel creare volumi chiusi=====
+
+La comprensione del **[[rhino:faqtolerances|LaTolleranza]]** è necessaria per generare un solido chiuso e valido. Una buona regola è cambiare la tolleranza assoluta da 0.01 di default a **0.001** fino anche a 0.0001. Per i miei progetti di gioielleria parto sempre da 0.0001, tanto avrò sempre la possibilità di allargarla se necessario.
+
+<color red> //Riccardo : è più semplice allargare la tolleranza partendo con un valore ristretto (es: da 0.001 a 0.01) che viceversa restringere la tolleranza su un disegno creato con valori maggiori.</color>//
+
+//<color green>JB : altra regola è avere la **tolleranza 1 ordine di grandezza più piccolo della precisione** che si può raggiungere nel processo di produzione, o **1 ordine di grandezza più piccolo del più piccolo dettaglio da modellare**. Per la gioielleria, come Jeffrey, che lavoro su particolari veramente minuti, 0.001 mm funziona bene.</color>//
+
+//<color darkslateblue>Mitch : Se parti con tolleranze più strette del necessario, puoi allargarle un pochino alla fine per facilitarel'unione dei punti difficili. **[[rhino:faqtolerances|Ma leggi bene la pagina sulle tolleranze]]** </color>//
+
+
+=====Mantieni le cose allineate correttamente=====
+L'uso di **SNAPS** e **OBJECT SNAPS** è estremamente utile, essenziale per far coincidere e quindi unire gli spigoli.
+
+=====Info sul tuo oggetto=====
+**ANALIZZARE** un oggetto è una parte importante del processo di disegno. La via più veloce che ho trovato per verificare che sia un solido (<color darkslateblue>closed polysurface</color>) o no, è di cliccare su **details** nel pannello **Properties**, che lascio sempre aperta sulla destra del [[MIO]] schermo, insieme al pannello dei livelli.
+
+//<color green>JB : Oppure puoi usare **What** se non hai il pannello proprietà abitualmente aperto</color>//
+
+=====Solidi consigli=====
+Posta l'oggetto con problemi sul Newsgroup di Rhino. Ci puoi riuscire se continui a provarci. Controlla i "naked edges" e zooma vicino. Vedrai cosa non è unito. Esperienza e pratica portano a capire meglio. E' una cosa semplice dopotutto. Bisogna tenere un occhio sulla realizzazione dei solidi fin dall'inizio, e non come ultimo pensiero.
+
+Quando hai un **solido** valido basterà esportarlo come STL. Se usi come **Maximum Distance** e **Edge to Surface** 0.01 il file sarà corretto per ogni macchina attualmente utilizzata. Ottenere un filevalido è quindi semplice quanto esportarlo. Il vero trucco è creare un solido valido. Questa è la via su cui devi lavorare. Non ci sono misteri nella creazione dei file stl. Questi sono fatti solo di mesh triangolari.
+
+<color darkslateblue>Mitch :  Sebbene il principio sia vero, nella pratica non sempre è così. A volte Rhino ha problemi nel "meshare" gli oggetti. Un buon modo per verificare il risultato del tuo .stl è di aprirlo in una nuova finestra di Rhino e guardarlo in prospettiva con l'ombreggiatura impostata su **FlatShade** (dal menù della finestra). Se il modello sembra OK molto probabilmente lo sarà.</color>
+
+<color red> //Riccardo : per creare file più leggeri e dettagliati vedi anche **[[rhino:meshfaq|Parametri delle mesh]]**.</color>//
+
+Interagisci col NG e cerca di capire dalle risposte. Capire come modellare in Rhino è la chiave, ma anche una generale comprensione delle NURBS.
+
+Jeffrey Everett
+
+<color darkslateblue>(Adapted some by John Brock and Mitch Heynick - hope you don't mind, Jeffrey!)</color>
+
+======Altri consigli per ottenere solidi chiusi======
+=====Unisci e verifica prima di procedere=====
+Unisci (Join ) le parti che formano il solido e verifica il tuo lavoro attreverso il tuo modello.
+
+Usa **ShowEdges>Naked Edges**.
+
+Se trovi degli spigoli "nudi" devi tornare indietro e capire perchè è successo e correggere il problema.
+
+E' più semplice correggere "in corsa" piuttosto che risolvere le cose a fine modellazione, alcune piccole correzioni potrebbero costarti ore di lavoro quando sei alla fine ma solo pochi minuti se fatte subito.
+
+=====Comprendi cosa genera "naked edges":=====
+Guarda coem tagli le superfici. Rhino taglia le superfici "normalmente" al **CPlane**, con la curva che non necessariamente giace sulla superficie. Il bordo di taglio potrebbe non essere esatamente  dove pensi che sia e potrebbe non vedersi in una vista ortogonale. Il modo migliore per tagliare le superfici con altre superfici è di unirle se possibile. D'altro canto a volte questo non funziona, e sei costretto a tagliare con le curve, ma controlla subito che le superfici si uniscano.
+
+Rebuilding delle superfici - può causare un cambiamento abbastanza grande per poter riunire, utilizzare con cautela.
+
+L'azione d'unione stessa può causare "naked edges".  Paradossale ma vero, in certe aree dove ci sono tante superfici complesse da unire (di solito quando si usa la selezione preventiva al comando "join"), Rhino può occasionalmente produrre "naled edges" dove non dovrebbero essercene. In questo caso, bisogna annullare l'operazione e andare a vedere cosa succede se si porva ad unire le superfici una alla volta. In stranissimo casi , una o più superfici da unire vanno "aggiustate" un pochio.
+
+=====Supporto a JoinEdge=====
+Questo comando permette di "forzare" gli spigoli insieme anche se sono troppo distanti per essere uniti normalmente.
+
+Un comando da usarsi con moderazione, discrezione e molta consapevolezza.
+
+Non crea un modello più preciso, non corregge le geometrie, semplicemente permette di by-passare la tolleranza assoluta in quel punto e creare uno "spigolo intermedio" fra i due spigoli reali. Facendo questo il comando di "meshing" può scavalcare il gap e creare una mesh "chiusa", e il vostro prototipista più contento.
+
+Se state esportando i solidi o le superfici verso un sw d'ingegnerizzazione, **joinedge** è meglio non usarlo proprio!
+
+
+=====RebuildEdges=====
+Questo comando "resetta" lo spigolo della superficie (all'incirca) a come era prima di essere unito. Questo è utile quando un bordo è forzato fuori allineamento da **joinedge** per riportarlo allo stato iniziale.
+
+In realtà la funzione di questo comando è più complessa e funziona rigenerando, all'interno della tolleranza impostata, la curva d'intersezione fra le superfici che hanno creato lo spigolo.
+
+=====Il temuto "one naked edge"=====
+Se vi trovate in questa condizione... **avete un problema**. Generalmente gli spigoli vanno a coppie. Spesso si uniscono paia di spigoli con **Joinedge** (anche se sono evidentemente fuori tolleranza, la cucitura viene chiusa). Ma se avete un solo bordo questo non protrà essere accoppiato con nulla. In questo caso avete un po di lavoro da fare. Spesso è necessario esplodere tutti i pezzi intorno al problema, fare  **RebuildEdges**  su tutti, verificare dove sono i disallineamenti e correggerli. Spesso bisogna zoomare veramente vicino per capire esattamente cosa succede.
+
+Armido dice: a volte il naked edge singolo è prodotto da un cappio che si richiude nel punto d'origine. In questo caso, usare SplitEdge nel punto sommitale ed unire la coppia così formatasi con JoinEdge può risolvere il problema. Ricordate che JoinEdge forza l'unione degli spigoli, in modo che la polisuperficie risulti chiusa, ma solo formalmente: la sostanza non cambia, nel senso che se esplodete e riunite vi ritrovate nella condizione iniziale (con naked edges), a meno di non allentare la tolleranza. Può inoltre essere più veloce esportare una mesh con buchi da spigoli aperti e chiuderla poi con FillHoles.
+
+=====Assicuratevi che i vostri %mattoni% siano "VALID"!=====
+Assicuratevi di creare oggetti VALIDI. Quando procedete a modificare un bordo spesso questo causa oggetti "invalidi" anche se perfettamente chiusi. Questo causa problemi con la "meshatura" molto evidenti.
+
+Il suggerimento è di abilitare **CheckNewObjects** in Rhino e lasciarlo ON. In questo modo se create un oggetto "invalido" lo saprete immediatamente.
+
+<color darkslateblue>--Mitch</color>
+
+<color darkslateblue>(tradotto e adattato da Riccardo Gatti)</color>
+
+

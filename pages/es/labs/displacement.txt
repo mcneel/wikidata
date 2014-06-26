@@ -1,0 +1,104 @@
+====== Desplazamiento ======
+
+> **Resumen:** //Plug-in de desplazamiento real y de tiempo de renderizado//
+
+\\
+
+El [[http://en.wikipedia.org/wiki/Displacement_mapping|mapeado de desplazamiento]] equivale al [[http://en.wikipedia.org/wiki/Bump_mapping|mapeado de relieve]] pero geométricamente. Permite deformar mallas (ya sean objetos de malla o mallas de renderizado NURBS) basadas en los datos de escala de grises de una textura.
+
+\\
+
+El plug-in de desplazamiento disponible aquí requiere el [[RendererDevelopmentKit10|RDK]] para funcionar. Sin embargo, si ya tiene el RDK instalado, sólo tiene que descargar e instalar el RDK si no puede cargar este plug-in.
+
+\\
+
+ [[http://en.wiki.mcneel.com/content/upload/files/Displacement_20070625.zip|Descargar el plug-in]] 
+
+\\
+
+----
+\\
+
+El plug-in funciona de la siguiente manera:
+
+\\
+
+1. Empieza con un objeto sin datos de desplazamiento. Todas las propiedades de desplazamiento se agrupan en la ficha **Displacement** del cuadro de diálogo **Object properties**:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_01.png}}
+
+\\
+\\
+
+2. Tiene que activar el desplazamiento por objeto. Esto significa que puede deshabilitar rápidamente el desplazamiento sin perder la configuración. Cuando se ha habilitado el desplazamiento **y** elegido una textura (en este caso se ha usado un mapa algorítmico que viene con el RDK), aparece una previsualización del desplazamiento en la vista:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_02.png}}
+
+\\
+\\
+
+3. Se puede mejorar el efecto seleccionando un valor más elevado en **Amount**. Este valor indica el número de unidades que se desplazará un píxel blanco. Los píxeles negros no se desplazan y los píxeles grises se interpolan:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_03.png}}
+
+\\
+\\
+
+4. El desplazamiento está ligado a las propiedades del mapeado de textura de un objeto. Puesto que he designado una polisuperficie para empezar, cada cara tiene su propio dominio de textura, que da como resultado un desplazamiento muy protuberante. Cuando configuro el mapeado de textura para que sea esférico (el predeterminado es por superficie), no hay más saltos UV en las superficies adyacentes y el resultado es más suave. Sigue habiendo un salto UV en la costura de la esfera:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_04.png}}
+
+\\
+\\
+
+----
+
+\\
+\\
+
+Si necesita más control sobre el comportamiento del desplazamiento, puede activar la sección **Advanced controls**. Los controles avanzados ofrecen una interfaz para para configuración del algoritmo de desplazamiento, como desfases, subdivisión e iteraciones.
+
+Por ejemplo, con la configuración avanzada activada se pueden especificar diferentes valores para los desfases de píxeles blancos y negros:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_01.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_02.png}}
+
+\\
+\\
+
+La opción **Ignore creases** soldará completamente una malla antes del desplazamiento, lo que significa que los bordes de polisuperficies que contienen saltos UV se verán menos.
+
+\\
+\\
+
+De manera predeterminada, las mallas se subdividen antes del desplazamiento para asegurar un nivel más alto de detalle donde sea necesario. Puede deshabilitar la subdivisión deseleccionando la casilla, con lo que la malla desplazada resultante es idéntica en tamaño a la malla original.
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_03.png}}
+
+\\
+\\
+
+Observe lo que pasa cuando se habilita la subdivisión:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_04.png}}
+
+Cada triángulo de la malla se mide para ver si supera o no el umbral acordado (cuanto inferior sea el umbral, más agresiva será la subdivisión) y, si lo supera, se reemplazará por tres triángulos más pequeños. Este proceso se repite el número de veces indicado en **Max steps**. Tenga en cuenta que designar valores bajos en **Contrast** o valores altos en **Max steps** puede alargar los tiempos de cálculo.
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_05.png}}
+
+\\
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_06.png}}
+(Primer plano de la malla desplazada, que muestra el esquema de subdivisión)
+
+\\
+
+----
+
+\\
+\\
+
+Las mallas de desplazamiento se pueden extraer con el comando _ExtractDisplacedMeshes.
+
+

@@ -1,0 +1,36 @@
+====== Scripted install for Rhino V3 and Flamingo 1.1======
+
+**Rhino 3.0 and Flamingo 1.1 installers accept the following command-line options:**
+  *  **/autoinstall** - Tells the installer to run automatically without asking any questions.
+  * **/key=[cd-key]** - [cd-key] is the CD-Key for the installation. Use this to install as a standalone node. The CD-Key can be one of two formats: XXXXYYYYZZZZ or XXXX-YYYY-ZZZZ 
+  * **/workgroup_node** - Install Rhino as a workgroup node. This option takes precedence over the /key option.
+
+===The Rhino installer accepts three additional options:===
+  *  **/path=[installpath]** - [installpath] is the fully qualified destination path for the installation. Must be surrounded by quotes if the path contians spaces. (Rhino installer only - Flamingo always installs in the Plug-ins folder under the Rhino install folder)
+  * **/language_start=[languagename]** - [languagename] is the English name of the language that Rhino will start in when first launched. The names that are recognized are English, Polish, German, Spanish, French, Italian, Czech, Chinese-Simplified, Chinese-Traditional, Korean, and Japanese. If this parameter is missing, the starting language will be English.
+  * **/languages=[languagname,languagename,...]** - Include one or more language names (in English) from the above list,  separated by commas. The support files for running in those languages will be installed. The language specified in /language_start should be included. If this parameter is missing, only English will be installed.Example: /languages="English,Chinese-Traditional"
+
+===Remarks:===
+**For Rhino to install automatically, you must:**
+  * use the /autoinstall option
+  * provide a /path=
+  * use one of the following options:
+    * /workgroup_node
+    * /key=
+
+**For Flamingo to install automatically, you must:**
+  * use the /autoinstall option
+  * use one of the following options:
+    * /workgroup_node
+    * /key=
+
+===Examples:===
+  * To install Rhino in "D:\Software\Rhinoceros 3.0" as a workgroup node, run the installer this way:
+<code>
+  Setup_Rhinoceros.exe /autoinstall /workgroup_node /path="D:\Software\Rhinoceros 3.0"
+</code>
+
+  * To install Flamingo as a standalone node using CD-Key FL11-1234-5678-ABCD
+<code>
+  "Install Flamingo 1.1.exe" /autoinstall /key=12345678ABCD
+  </code>

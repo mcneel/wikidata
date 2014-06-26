@@ -1,0 +1,81 @@
+====== Rhino 4 메모리 확대 - 2GB 에서 3GB 로 ======
+
+> **Summary:** //최신 Rhino 4 에서는 많은 어드레스를 사용할 수 있습니다. **C:\BOOT.INI** 파일을 조금 변경하면 Rhino 에서 사용할 수 있는 메모리가 2 GB 에서 3 GB 로 증가합니다.//
+
+> **Warning:** //**<color darkred>많은 Microsoft 사의 기술 지원 문서에서는 다음에 설명된 변경 방법을 가급적 사용하지 않는 편이 좋다는 경고하고 있습니다. 변경하게 되더라도 매우 주의하시기 바라며, 문제 발생에 대비하여 원래대로 되돌릴 수 있도록 해두시기 바랍니다. 다음 내용은 사용자 여러분 본인의 책임 하에 사용하시기 바랍니다.</color>**//
+
+> **Update:** //07-11-4 - 최근, ATI fireGL 5200 w/256 에서 듀얼 스크린을 사용하는 Rhino 사용자가 디스플레이 문제 발생에 대해 알려 왔습니다. 여러 가지 해결책을 시도해본 끝에 3GB 에서 다시 2GB 설정으로 되돌린 후, 문제를 해결할 수 있었다고 합니다. - JB//
+
+======안내======
+**C:\Boot.ini**파일에서 다음 행의 마지막에 /3GB 매개변수를 추가하고 다시 컴퓨터를 시작하십시오.
+
+**Windows 2000 Pro**
+
+multi(0)disk(0)rdisk(0)partition(2)\WINNT="Windows XP Professional" <color red>**/3GB**</color>
+
+**Windows XP Pro**
+
+multi(0)disk(0)rdisk(0)partition(2)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn <color red>**/3GB**</color>
+
+
+> **Note:** //Windows 의 파일 익스플로러에서는 기본적으로 C:\BOOT.INI 와 같은 숨겨진 시스템 파일이 표시되지 않도록 설정되어 있습니다. 폴더 옵션을 변경하여 파일이 표시되도록 변경하신 후, 파일 속성의 읽기 전용 옵션을 해제하여 시작 옵션에 /3GB 스위치를 추가하십시오. 변경이 완료되면 C:\BOOT.INI 를 읽기 전용 파일로 다시 설정하고 시스템을 다시 시작하여 변경된 사항이 반영되도록 하십시오.//
+
+**Windows Vista**
+
+C:\Boot.ini 가 BCD (Boot Configuration Data Store)로 대체되었습니다.
+
+BCDEDIT /export "C:\BCD Backup" - 원래 설정의 백업을 만듭니다
+
+BCDEDIT /set increaseuserva <color red>3072</color> - 메모리 설정을 변경합니다
+
+> **Note:** //Windows Vista 에서는 BCDEDIT 유틸리티가 내보내기에 먼저 사용된 후 BCD store 가 수정됩니다.//
+BCDEDIT 는 명령행 유틸리티이며 CMD 창에서 실행됩니다.
+
+======배경======
+
+Microsoft® Windows NT® 테크놀로지에 기반을 둔 운영체제는 일반적으로 4 기가바이트（GB）의 가상 메모리를 나타내는 플랫 32 비트의 가상 어드레스를 응용프로그램으로 제공하고 있습니다.
+
+보통의 경우, 어드레스 공간을 2GB 로 응용 프로그램이 직접 액세스할 수 있으며, 그 외 2GB 에는 Windows 이그제큐티브 소프트웨어만이 액세스할 수 있도록 나눠져 있습니다.
+
+사용자 여러분께서 요구하시는 대로, Microsoft Windows XP Professional 은 3GB 의 플랫 가상 어드레스 공간을 응용 프로그램으로 제공하며, 커넬과 이그제큐티브 컴포넌트가 1GB 만을 사용하도록 되어 있습니다.
+
+/3GB 스위치가 Boot.ini 파일에서 사용되지 않는 한, 프로세스와 응용 프로그램의 가상 어드레스 공간을 2GB 로 제한됩니다.
+
+/3GB 스위치는 프로세스 헤더로 IMAGE_FILE_LARGE_ADDRESS_AWARE 를 사용하는 응용 프로그램에 3GB 의 가상 어드레이스 공간을 할당합니다. 이 스위치는 응용 프로그램이 2GB 를 넘어 1GB 의 추가 가상 어드레스 공간을 취급하게 합니다.
+
+======/3GB 스위치를 사용할 때의 비디오 드라이버 문제 (WinNT/WinXP):======
+
+/3GB 스위치를 boot.ini 에 추가하여 컴퓨터를 다시 시작할 때 비디오 드라이버가 올바르게 작동하지 않는 경우 ( VgaSave 폴백드라이버가 사용됨), **/USERVA** 스위치를 다음과 같이 추가하여 문제를 해결할 수 있습니다.
+<color red>**/3GB /USERVA=2800**</color>
+
+이 스위치에 대한 자세한 내용은 다음 사이트를 참조하시기 바랍니다:  http://support.microsoft.com/default.aspx?scid=kb;en-us;319043
+
+boot.ini 를 편집할 때, 변경한 내용을 별도의 파일로 만들고 원래 파일을 보관해 두면 편리합니다. 변경한 파일이 올바르게 실행되지 않을 경우, 다음 부팅 시 원래 설정을 선택할 수 있습니다. 다음에 소개하는 내용은 /3GB 및 /USERVA 스위치를 테스트할 때 도움이 되는 Windows XP Pro boot.ini 의 예입니다:
+
+[boot loader]
+timeout=30
+
+default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
+
+[operating systems]
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn
+
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional with /3GB" /fastdetect /NoExecute=OptIn /3GB /USERVA=2800
+
+
+======Vista 에서 "increaseuserva" 사용시 문제가 발생하는 경우:======
+
+BCDEDIT 를 사용하여 메모리 설정을 변경한 후, 백업을 사용하여 원래 설정으로 되돌릴 수 있습니다.
+
+BCDEDIT /import "C:\BCD Backup"
+
+BCDEDIT 에 관한 추가 정보는 다음 링크를 참조하시기 바랍니다:
+
+http://technet2.microsoft.com/WindowsVista/en/library/85cd5efe-c349-427c-b035-c2719d4af7781033.mspx?mfr=true
+
+http://msdn2.microsoft.com/en-us/library/aa906217.aspx
+
+
+
+
+

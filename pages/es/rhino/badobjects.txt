@@ -1,0 +1,45 @@
+====== Objetos erróneos ======
+
+======Tengo un objeto erróneo, ¿por qué pasó y cómo puedo arreglarlo?======
+
+> **Resumen:** //Cómo encontrar y reparar objetos erróneos creados por Rhino o al importar de otros programas//
+
+=====¿Qué es un erróneo (no válido)?=====
+
+Los objetos "erróneos" en Rhino son los que no cumplen con determinadas reglas NURBS o bien tienen algún problema estructural.  En teoría, Rhino no debería producir objetos erróneos, pero a la práctica es posible que esto suceda de vez en cuando.  Una vez sepa qué hacer, no le costará mucho repararlos.
+
+=====¿Cómo sé si tengo alguno?=====
+
+El modo más fácil de encontrar objetos erróneos es utilizar el comando **SelObjetosErróneos** (Análisis > Diagnóstico > Seleccionar objetos erróneos). Todos los objetos considerados no válidos se seleccionarán.  Sin embargo, es posible que una polisuperficie sea considerada "erróneo" porque contiene una superficie errónea.  Puede saber cuál es utilizando el comando **ExtraerSupErrónea** (no en los menús), que extraerá las superficies erróneas y las seleccionará.  Hay un comando muy útil en Rhino llamado "ComprobarNuevosObjetos", que comprueba todos los objetos cuando se crean o importan.  De este modo se puede saber inmediatamente si hay un problema.
+
+=====¿Por qué estos objetos se consideran erróneos y cómo se crean?=====
+
+Hay muchas explicaciones técnicas. A veces es la estructura de la curva de corte lo que está mal, ya que puede tener uno o más segmentos que son microscópicos y esto puede causar problemas. En otras ocasiones, una superficie puede ser errónea porque tiene dos o más filas de puntos de control una sobre la otra, o bien tienen longitud cero en una dirección (un “borde contraído”). Esta situación es fácil que se produzca en Rhino (haga un plano vertical y proyéctelo en el PlanoC). Ahora tiene longitud cero en una dirección y se considerará errónea.
+
+¿Por qué una curva de corte puede ser errónea? Probablemente no lo haya hecho a propósito.  Los objetos erróneos aparecen a menudo después de usar el comando Unir (o algún otro comando que también une objetos, como las booleanas). En el proceso de unir objetos, Rhino necesita muchas veces partir bordes y ajustar curvas de corte. En determinadas situaciones, partes de estos bordes de partición pueden acabar siendo microscópicos  o el ajuste de la curva de corte sale mal y de golpe se crea un objeto erróneo.  (Por cierto, cuando digo "microscópicos" quiero decir más pequeños que la tolerancia absoluta.)"
+
+Importar geometría de otros programas también puede generar objetos erróneos. Si ejecuta el comando **ComprobarNuevosObjetos** mientras se importa un archivo, obtendrá un mensaje cuando se cree un objeto no válido.  Es necesario hacer clic en Aceptar para reconocer cada uno. Si hay muchos, puede ser molesto. Puede desactivar el comando y volver a activarlo después de la importación.
+
+=====La temida superficie fantasma=====
+//¿Por qué no puedo ver el objeto erróneo?//
+
+A veces, Rhino produce superficies erróneos, pero no se pueden ver. Literalmente son invisibles.  (son invisibles porque no se pudo crear una malla de renderizado para verlas). Normalmente se les conoce como superficies fantasma.
+
+Se pueden seleccionar con **SelObjetosErróneos** y lo mejor es borrarlos, ya que normalmente no se pueden arreglar.  A veces, borrar no funciona. Si esto sucede, intente hacer **Ctrl+X** para cortarlos del archivo.
+
+Las superficies fantasma pueden hacer que los archivos no funcionen bien.
+
+=====¿Cómo puedo arreglar las superficies erróneas?=====
+
+Mi estrategia para manejar las superficies erróneas causadas por las curvas de corte es la siguientes - antes de empezar, determine cuáles son las superficies erróneas y oculte todo lo demás temporalmente (es posible que tenga que ejectutar el comando **ExtraerSupErrónea**).
+
+**1.** Primero suelo ejecutar el comando **ReconstruirBordes** en todos los objetos erróneos. Esto arregla algunos. Más o menos restaura los bordes de una superficie al estado en que estaban antes de unir. Sin embargo, también significa que es posible que la superficie ya no se una a las superficies adyacentes o que la unión produzca otra vez una superficie errónea. Pero funciona bien en algunos casos. Si algunas superficies se arreglan (use **SelObjetosErróneos/InvertirSel**), ocúltelas. A veces, ejecutar **ReducirSupEnBorde** en superficies erróneas también funciona.
+
+**2.** Utilice el comando DeshacerRecorte con la opción "Mantener objetos de corte" seleccionada en la primera superficie errónea y, a continuación, mientras la curva de corte siga seleccionada, utilice el comando Recortar para volver a recortar la superficie. Compruebe si la superficie se ha arreglado.  Si se ha reparado, ocúltela, si no, déjela y ejecute el mismo procedimiento en todas las demás superficies erróneas a la vez.  Oculte todas las que se arreglen.
+
+**3.** Si quedan objetos erróneos, vuelva a utilizar el comando DeshacerRecorte con la opción "Mantener objetos de corte" seleccionada. **Descomponga** la curva de corte resultante y busque microsegmentos en la curva. Éste es el caso más común de recortes erróneos. Observe cuántas curvas componente tiene la curva de corte. Es posible que a veces aparezca un número sospechoso, por ejemplo, lo que parece que debería ser un rectángulo dice 5 curvas, no 4. En algún lugar hay una microcurva que sobra. A veces está cerca de una esquina, intente seleccionar por ventana cerca de los extremos de los segmentos de la curva de corte. O bien, utilice el comando **SelCrvCorta** y defina un valor pequeño. Si encuentra microsegmentos, elimínelos y vuelva a unir las curvas de corte. Vuelva a recortar la superficie. Normalmente esto soluciona todo lo que no se ha solucionado con los otros métodos.
+
+**4.** Finalmente, intente desocultar (**Mostrar**) y ver si puede unirlo todo sin que vuelvan a aparecer objetos erróneos.  Si todo se une bien y no hay no objetos erróneos, será magnífico.  Si no, es normalmente porque Unir obliga a unir cosas que no se ajustan correctamente.  En ese caso tendrá que analizar las superficies que son erróneas y la relación con las superficies adyacentes para intentar encontrar qué es lo que va mal y por qué.  A veces es necesario mirar el modelo con mucho detalle.
+
+> **Nota:** //La metodología descrita es para manejar superficies con curvas de corte erróneas. No funcionará en superficies con bordes contraídos o filas apiladas de puntos de control.  Para esas superficies hay que usar otros métodos, como la eliminación de nodos o una simple reconstrucción.  Las superficies con bordes contraídos son fáciles de detectar, ya que parece como una curva, pero en *Propiedades" dice que es una superficie.  En general, simplemente puede eliminarlas.//
+

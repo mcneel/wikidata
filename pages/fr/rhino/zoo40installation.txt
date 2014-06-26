@@ -1,0 +1,79 @@
+====== Installation et configuration du Zoo ======
+> **Produit:** //Zoo//
+> **Sommaire:** //Conseils pour l'installation du gestionnaire de licences de groupe travail, Zoo 4.0//
+> **Actualisation:** //28 août 2008//
+
+======Voir aussi======
+[[http://www.fr.rhino3d.com/zoo.htm|Présentation, fonctions et téléchargement du Zoo]]
+
+[[rhino:zooproducts|Compatibilité des produits avec le Zoo]]
+
+[[rhino:zootroubleshooting|Résolution de problèmes avec le Zoo]]
+
+======Présentation======
+Le Zoo vous permet de partager vos licences (codes CD) de Rhino, Flamingo, Penguin et Bongo entre plusieurs utilisateurs sur le même réseau. Zoo 4.0 est conçu pour fonctionner avec les codes CD de Rhino 4.0 ainsi qu'avec les codes CD des versions précédentes de Rhino, Flamingo, Bongo et Penguin.
+
+=====Zoo 4.0 travaille avec deux topologies de réseau différentes :=====
+**1. Petit réseau :**
+
+Le Zoo et tous les ordinateurs clients avec Rhino sont sur le même sous-réseau, LAN virtuel et derrière le même pare-feu. Le Zoo travaille avec tous les ordinateurs client sans aucune configuration supplémentaire du réseau.
+
+{{http://en.wiki.mcneel.com/content/upload/images/ZooConfigBroadcast.png}}
+
+**2. Réseau routé :**
+
+Le Zoo se trouve de l'autre côté d'un routeur par rapport aux ordinateurs clients avec Rhino et ces derniers peuvent se trouver sur différents segments du réseau, derrière d'autres routeurs et sur différents réseaux locaux virtuels. Pour que Rhino puisse trouver le Zoo, vous devez configurer le réseau ou l'ordinateur client. Voir la section [[#Configurer le Zoo pour qu'il fonctionne sur les réseaux routés]] ci-dessous pour plus d'informations.
+
+{{http://en.wiki.mcneel.com/content/upload/images/ZooConfigDns.png}}
+
+=====Zoo 4.0 peut fonctionner avec des installations précédentes du Zoo 1.0 :=====
+**1. Mode principal :** Zoo 4.0 est le seul Zoo fonctionnant sur votre réseau. Il gère les requêtes pour tous les types de codes CD, y compris les codes CD de Rhino 4.0.
+
+**2. Mode secondaire :** Zoo 4.0 fonctionne avec une version précédente de Zoo sur votre réseau. En mode secondaire, Zoo 4.0 ne gère que les requêtes pour des codes CD de Rhino 4.0. Ce mode est utile pour tester le Zoo sans interrompre une configuration qui fonctionne correctement. Voir la section [[#Configurer le mode secondaire]] ci-dessous pour plus de détails.
+
+
+======Installation======
+
+  * Si vous réalisez l'installation sur un système qui utilise déjà une version précédente du Zoo, vous devrez arrêter le Zoo avant d'installer la version 4.0.
+  * Si le programme d'installation du Zoo 4.0 détecte qu'une version précédente du Zoo est installée sur le système, il s'installera par défaut dans le même dossier que la version précédente. Si vous prévoyez d'utiliser Zoo 4.0 en mode secondaire, ne l'installez pas dans le même dossier que la version précédente.
+  * Si vous installez Zoo 4.0 dans le même dossier qu'une version précédente, les fichiers Zoo.exe et Zoo.key de cette version précédente seront sauvegardés sous un autre nom. Zoo 4.0, lors de son premier démarrage, importera automatiquement les anciennes licences.
+
+======Configuration======
+  * **Configuration du mode principal (défaut)**
+    - Lancez Zoo 4.0
+    - Ajoutez vos codes CD dans le Zoo 4.0, y compris les codes de Rhino 3.0, Penguin, Bongo ou Flamingo que vous voulez utiliser.
+    - Ajoutez Zoo 4.0 dans votre liste de programmes à lancer au démarrage.
+    - Supprimez Zoo 1.0 de votre liste de programmes à lancer au démarrage.
+  * **Configuration du mode secondaire :**
+    - Arrêtez Zoo 1.0 ou 1.1.
+    - Lancez Zoo 4.0.
+    - Sélectionnez Tools->Options et activez (cochez) l'option "Disable support for legacy licenses".
+    - Arrêtez et redémarrez Zoo 4.0.
+    - Ajoutez vos codes CD dans le Zoo 4.0. Remarque, vous pouvez également ajouter des codes CD de versions précédentes de Rhino. Cependant, Zoo 4.0 ne distribuera pas ces licences tant que l'option activée avant restera activée.
+    - Lancez Zoo 1.0 ou 1.1.
+    - Ajoutez Zoo 4.0 dans votre liste de programmes à lancer au démarrage.
+
+======Configurer le Zoo pour qu'il fonctionne sur les réseaux routés======
+Par défaut, Rhino recherche le Zoo en envoyant un message sur votre réseau. Cette méthode fonctionne très bien à l'intérieur d'un réseau local virtuel ou d'un sous-réseau, tant que tous les ordinateurs se trouvent du même côté du routeur. En revanche, si vous possédez plusieurs réseaux locaux virtuels, vous devrez changer la configuration pour que cette méthode fonctionne.
+
+**Options de configuration des réseaux routés**
+
+Choisissez une seule option parmi les configurations suivantes :
+
+    - **DNS :** Définissez un enregistrement txt DNS sur vos serveurs DNS. De cette façon, Rhino peut trouver le Zoo sans configuration supplémentaire sur le client.
+    - **Clés de registre :** Créez une clé de registre sur chaque machine client. Si vous n'avez pas de DNS, ou si vous ne pouvez pas changer le DNS, cette option est pour vous.
+
+**Pour définir un DNS :**
+
+    - Déterminez le nom du domaine auquel chaque client appartient. Cliquez avec le bouton de droite sur Poste de travail, puis sélectionnez Propriétés. Le nom de domaine est indiqué dans la section Nom de l'ordinateur de la boîte de dialogue Propriétés du système.
+    - Sur le serveur DNS principal de votre domaine, créez un nouvel enregistrement TXT en utilisant le format **Zoo4=<nomhôte>** où <nomhôte> est le nom de l'hôte NETBIOS. Par exemple, si le nom de l'hôte complet est "ZooServer.bcn.es.entreprise.com" et si le domaine est "bcn.es.entreprise.com", le nom de l'hôte NETBIOS est alors **ZooServer**.
+    - Testez la configuration DNS à partir de l'ordinateur client en utilisant l'outil **ZooDnsResolver** qui fait partie des **[[http://en.wiki.mcneel.com/content/upload/files/ZooBonusTools.zip|Outils extra pour le Zoo.]]**
+
+**Pour définir des clés de registre sur chaque ordinateur : **
+
+    - Sur chaque ordinateur utilisant Rhino 4.0, créez la clé de registre suivante si elle n'existe pas : **HKEY_LOCAL_MACHINE\Software\McNeel\RhinoLM**
+    - Dans la clé **RhinoLM**, créez une nouvelle **valeur de chaîne** nommée **zoo4**.
+    - Utilisez le nom de l'hôte NETBIOS pour le serveur Zoo comme donnée de la valeur **zoo4**.  Par exemple, si le nom de l'hôte complet est "ZooServer.bcn.es.entreprise.com" et si le domaine est "bcn.es.entreprise.com", le nom de l'hôte NETBIOS est alors **ZooServer**.
+    - Pour plus d'aide sur la création de cette clé de registre, utilisez l'outil **SetZooServer** qui fait partie des **[[http://en.wiki.mcneel.com/content/upload/files/ZooBonusTools.zip|Outils extra pour le Zoo.]]**
+
+

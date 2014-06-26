@@ -1,0 +1,67 @@
+====== Diagnostique des erreurs de démarrage de Rhino 4.0 ======
+
+Si Rhino 4.0 ne démarre pas sur votre ordinateur, utilisez l'application Rhino Debugging Harness pour générer un fichier d'informations détaillées qui aidera l'équipe de développements de Rhino à comprendre ce qui se passe sur votre ordinateur.
+
+=====Phase de débogage 1, mode sans échec :=====
+
+**<color darkred>1.</color>** **Installez** la dernière version de **Rhino 4.0** (pour télécharger les versions révisées, visitez www.fr.rhino3d.com/download.htm)
+
+**<color darkred>2.</color>** Téléchargez l'application **[[http://s3.amazonaws.com/mcneel/rhino/4.0/misc/RhinoDebugHarness.exe|Rhino Debugging Harness]] ** et enregistrez-la sur votre bureau.
+
+**<color darkred>3.</color>** Lancez **RhinoDebugHarness.exe**
+
+**<color darkred>4.</color>** **Sélectionnez** la case **Start in Safe Mode**.
+
+**<color darkred>5.</color>** **Désactivez** la case **[[rhino:opengl|OpenGL]] Acceleration Enabled**.
+
+**<color darkred>6.</color>** Cliquez sur le bouton **Start Rhino**.
+
+Laissez passer quelques minutes pour que Rhino essaie de démarrer.
+
+**Rhino a-t-il démarré correctement ?**
+
+**Oui :** Laissez l'application Rhino Debug Harness ouverte et passez à la 2e phase du débogage.
+
+**Non :** Aucun test supplémentaire ne permettra de diagnostiquer le problème. Veuillez suivre les instructions suivantes :
+
+  * Cliquez sur le bouton View Log
+  * Envoyez une copie de ce journal de démarrage au service d'assistance de McNeel à l'adresse suivante <tech.fr@mcneel.com>.
+  * Indiquez dans votre message que Rhino ne se lance pas en mode sans échec.
+
+=====Phase de débogage 2, désactiver l'accélération matérielle OpenGL :=====
+
+**<color darkred>1.</color>** **Désactivez** la case **Start in Safe Mode**.
+
+**<color darkred>2.</color>** **Désactivez** la case **[[rhino:opengl|OpenGL]] Acceleration Enabled**.
+
+**<color darkred>3.</color>** Cliquez sur le bouton **Start Rhino**.
+
+**Rhino a-t-il démarré correctement ?**
+
+**Oui :** Laissez l'application Rhino Debug Harness ouverte et passez à la 3e phase du débogage.
+
+**Non :** Indiquez au service d'assistance technique de McNeel que :
+
+  * Rhino démarre en mode sans échec
+  * Rhino ne démarre pas si l'accélération [[rhino:opengl|OpenGL]] est désactivée.
+
+=====Phase de débogage 3, activer l'accélération matérielle OpenGL :=====
+
+**<color darkred>1.</color>** **Désactivez** la case **Start in Safe Mode**.
+
+**<color darkred>2.</color>** **Sélectionnez** la case **[[rhino:opengl|OpenGL]] Acceleration Enabled**.
+
+**<color darkred>3.</color>** Cliquez sur le bouton **Start Rhino**.
+
+**Rhino a-t-il démarré correctement ?**
+
+**Oui :** Rhino semble fonctionner correctement. Fermez l'application Rhino Debug Harness.
+
+**Non :** Le problème vient probablement de votre carte ou de votre pilote [[rhino:opengl|OpenGL]]. Veuillez télécharger les derniers pilotes [[rhino:opengl|OpenGL]] sur le site du fabricant de votre carte vidéo ou de votre ordinateur. Si l'installation des derniers pilotes ne résout pas le problème, veuillez contacter l'équipe d'assistance technique de McNeel et leur indiquer que :
+
+  * Rhino démarre en mode sans échec
+  * Rhino démarre si l'accélération [[rhino:opengl|OpenGL]] est désactivée
+  * Vous avez mis à jour les pilotes de la carte graphique.
+  * Rhino ne démarre pas si l'accélération [[rhino:opengl|OpenGL]] est activée.
+
+

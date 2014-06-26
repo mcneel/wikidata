@@ -1,0 +1,62 @@
+====== Grasshopper 지속적 데이터 관리 ======
+
+| {{http://en.wiki.mcneel.com/content/upload/images/ExplicitHistoryBanner.png}} |  //**Grasshopper Wiki 페이지**// |
+|  [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
+
+----
+
+> **Summary:** //지속적 (Persistent) 데이터 기록을 설정하고 변경하는 방법 안내//
+
+\\
+
+===== 데이터의 유형=====
+
+매개변수는 정보를 저장하는 데에만 사용되지만, 대부분의 매개변수에는 두 개의 다른 정보 ( [[labs:explicithistory:volatiledatainheritance|일시적]] 데이터와 지속적 데이터) 를 저장할 수 있습니다. 일시적 데이터는 새로운 솔루션이 시작할 때마다 하나 또는 두 개의 소스 매개변수에서 상속되고 소멸됩니다 (즉, 다시 수집됩니다). 지속적 데이터는 사용자가 특별히 설정한 데이터입니다. 매개변수가 소스 개체에 연결되면 지속적 데이터는 무시되지만 소멸되지는 않습니다.
+
+\\
+
+//(여기서 예외는 영구적인 기록을 저장하지도, 소스를 정의하지도 않는 출력 매개변수입니다. 출력 매개변수는 해당 매개변수가 속한 컴포넌트에서 완전히 제어합니다.)//
+
+\\
+
+지속적 데이터는 메뉴를 통해 액세스할 수 있으며, 매개변수의 종류에 따라 다른 관리자가 있습니다. 예를 들어, 벡터 매개변수는 메뉴를 통해 단일 벡터와 여러 개의 벡터로 설정할 수 있습니다.
+
+\\
+
+그러나, 몇 단계 뒤로 가서 기본적인 벡터 매개변수가 어떻게 실행되는지 살펴봅시다. 일단 Vector 패널에서 캔버스로 마우스를 사용하여 끌어 놓으면 다음과 같이 보입니다:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/ExpHis_DefaultUI_DefaultVectorParameter.png}}
+
+\\
+
+주황색의 매개변수는 경고가 생성되었음을 나타냅니다. 이 경고는 심각한 것이 아니며, 다만 매개변수가 비어 있음 (지속적 기록이 없고, 일시적 데이터를 수집하지 못하였음) 을 뜻합니다. 히스토리 솔루션의 결과에는 영향을 주지 않습니다. 매개변수의 상황에 맞는 메뉴에는 지속적 데이터를 설정하는 두 가지 방법 - Single 단일, Multiple 다중 - 이 들어있습니다:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/ExpHis_DefaultUI_SetPersistentVectors.png}}
+
+\\
+
+이러한 메뉴 항목을 클릭하면 Grasshopper 창이 사라지고 Rhino 뷰포트 중 하나에서 벡터를 지정하라는 메시지가 표시됩니다:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/ExpHis_DefaultUI_SetPersistentVectorsViewport.png}}
+
+\\
+
+사용자가 원하는 모든 벡터를 정의하고 Enter 키를 누르면 Parameters Persistent Data Record (매개변수 지속적 데이터 기록)의 일부가 됩니다. 이것은 즉, 매개변수가 더 이상 비어있지 않음을 뜻하며 주황색에서 검정색으로 색이 바뀝니다:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/ExpHis_DefaultUI_PersistentVectorParameter.png}}
+
+\\
+
+이 단계에 이르면, 이 매개변수를 사용하여 동일한 벡터로 원하는 만큼의 많은 개체를 심어놓을 수 있습니다.
+
+
+
+

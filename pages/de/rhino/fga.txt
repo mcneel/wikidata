@@ -1,0 +1,52 @@
+====== Antworten zu häufig gestellten Fragen -- Rhino ======
+
+Sie finden hier eine Liste mit **Antworten zu häufig gestellten Fragen**. Diese Informationen könnten nützlich für Sie sein. 
+----
+==Wie sende ich einen Absturzbericht ein?==
+  * Können Sie den Absturzfehler wiederholen? Wenn ja, senden Sie den Entwicklern die Details zum Wiederholen des Absturzes. Ein wiederholbares Problem stellt die einzige Möglichkeit dar, Probleme in der Software zu finden und reparieren.
+  * Wenn Rhino abstürzt und genügend Speicher erhältlich ist, startet das Absturzmeldesystem. Geben Sie bitte Ihre E-Mail-Adresse ein und beschreiben Sie, welche Operationen Sie ausführten, als Rhino abstürzte. Eine kurze Liste mit den Befehlen, die Sie kurz vor dem Absturz ausführten, wäre hilfreich. 
+  * Wenn möglich, markieren Sie das Kästchen, um Ihre 3dm-Datei mit dem Bericht zu senden. 
+  * Wenn Sie Ihre E-Mail-Adresse und eine Beschreibung miteinbeziehen, **wird Ihr Bericht von einem unserer Entwickler analysiert**. Wenn Sie weder E-Mail-Adresse noch Beschreibung miteinbeziehen, werden wir einen automatisierten Prozess anwenden, um den Absturzbericht zu analysieren.
+
+----
+
+==Sicherheitsmodus==
+  * Es ist ein Kürzel in der Rhinoceros-Programmgruppe erhältlich. Der Sicherheitsmodus stellt ein Werkzeug für die Fehlersuche und -behebung dar, das OpenGL und Plug-ins blockiert, damit diese nicht geladen werden. In Version 5 werden auch Werkzeugleisten und das RDK blockiert und nicht geladen. Normalerweise antworte ich mit Ja auf die Frage zu Laden. Der Sicherheitsmodus ist ein Werkzeug zur Fehlerbehebung und dient nicht als Arbeitsmodus.
+
+----
+==Deaktivierung der Rhino 5 Plug-ins==
+  -Gehen Sie auf Werkzeuge - Optionen - Plug-ins und entfernen Sie die Markierung in der Spalte Aktivieren für alle Plug-ins, die nicht mit Rhino versendet wurden. 
+  -Starten Sie Rhino erneut auf normalem Weg und überprüfen Sie, dass das Absturzproblem behoben wurde. Aktivieren Sie erneut eines der Plug-ins, starten Sie Rhino neu und beobachten Sie, ob Sie den Absturz wiederholen können. Wenn nicht, gab es kein Problem mit diesem Plug-in. Wiederholen Sie diesen Prozess, bis Sie das Plug-in gefunden haben, das Probleme verursacht.  
+
+----
+
+==Rhino 5 startet nicht==
+  * Bei diesem Problem könnte es sich um fehlerhafte Anzeigetreiber oder ein fehlerhaftes Plug-in handeln. Hier sind einige Anleitungen, um dieses Problem zu finden und lösen. Starten Sie Rhino im Sicherheitsmodus (verwenden Sie dazu den Shortcut in der Rhinoceros Programmgruppe) und unter Werkzeuge - Optionen - Ansicht - OpenGL ENTFERNEN Sie die Markierung für die oberste Option zur Verwendung von beschleunigter Hardware. Schließen Sie Rhino und starten Sie erneut auf normalem Weg. Wenn Rhino ohne Absturzfehler geöffnet werden kann, lag das Problem sehr wahrscheinlich beim Anzeigetreiber. Laden Sie dafür eine Aktualisierung runter und installieren Sie diese. Wenn Rhino nach Download und Installation eines aktualisierten Anzeigetreibers immer noch abstürzt, liegt das Problem sehr wahrscheinlich an einem Plug-in. 
+
+  * Starten Sie Rhino in diesem Fall erneut im Sicherheitsmodus und fügen Sie die Markierung für beschleunigte Hardware-Grafik wieder hinzu. Danach gehen Sie auf Werkzeuge - Optionen - Plug-ins und entfernen Sie die Markierungen des Kästchens Aktiviert für alle Plug-ins, die Sie installiert haben und nicht mit Rhino versendet wurden, und markieren Sie das Kästchen "Danach fragen, deaktivierte Plug-ins zu laden".  Dann starten Sie Rhino erneut auf normalem Weg (nicht im Sicherheitsmodus) und antworten Sie mit Nein, wenn Sie gefragt werden, diese zu laden. Wenn Rhino startet, liegt das Problem bei einem der ladegeschützten Plug-ins. Starten Sie Rhino erneut im normalen Modus und antworten Sie dieses Mal mit Ja auf die Frage, ob das erste Plug-in geladen werden soll, und mit Nein für die restlichen Plug-ins. Wenn Rhino jetzt beim Laden des ersten Plug-ins abstürzt, liegt das Problem bei diesem Plug-in. Wenn Rhino nicht abstürzt, liegt es nicht an diesem Plug-in.  Gehen Sie auf die Plug-ins-Seite und aktivieren Sie dieses Plug-in. Starten Sie erneut und wiederholen Sie diesen Prozess, bis Sie das Plug-in findet, das Probleme bereitet. 
+
+----
+
+==Kann ich Rhino auf zwei Computern installieren?==
+  * Ja. Ihr Lizenzvertrag erlaubt die Installation von Rhino auf allen Computern, die Sie besitzen, sofern Sie Rhino nur auf einem Computer ausführen. Sie können Ihr Rhino keinem Freund "leihen". 
+
+----
+
+==Wenn ich versuche, eine Datei zu öffnen, erhalten ich eine Fehlermeldung, dass etwas unleserlich ist==
+  * So funktioniert das System. Es gibt zwei Teile:
+    - Automatische Speicherung - Wenn Sie die automatische Speicherung in Rhino aktiviert haben, werden temporäre Dateien in den unter den Optionen definierten Ordner gespeichert und eine Markierung zeigt an, dass Rhino läuft. Wenn Rhino auf normalem Weg geschlossen wird, wird diese automatisch gespeicherte Datei gelöscht und Rhino löscht auch diese Markierung. Wenn Rhino abstürzt, wird diese Markierung nicht gelöscht und die automatisch gespeicherte Datei ist immer noch vorhanden, wenn Rhino das nächste Mal startet. In diesem Fall werden Sie gewarnt, dass Rhino nicht richtig geschlossen wurde und Sie haben eine Chance, Ihre Arbeit aus der automatisch gespeicherten Datei zu bergen. Wenn Sie mit Nein antworten, verlieren Sie diese Datei. 
+    - Sicherung - Ab Version 4 SR7 haben wir eine Eigenschaft zur automatischen Sicherung hinzugefügt. Wenn diese Eigenschaft nicht deaktiviert wurde und Sie eine vorhandene Datei öffnen, werden die Änderungen in dieser neuen Bearbeitungssitzung in eine neue Kopie dieser Datei gespeichert und die vorhandene Datei wird mit einem ".bak" hinter dem Namen im gleichen Ordner gespeichert. 
+  * Version 5 erzeugt nun *.3dmbak Dateien und verfügt über eine Dateitypenliste, um diese zu öffnen.
+  * Für Version 4 verwenden Sie Ihren Dateienexplorer in einer Listen- oder detaillierten Ansicht, wobei die Ordneroptionen so eingestellt sind, dass die Dateierweiterungen für bekannte Dateitypen angezeigt werden, und benennen Sie die Datei von [Dateiname].3dm.bak auf [Neuerdateiname].3dm um. Danach können Sie die Datei wie iene beliebige Rhino 3dm Datei öffnen.
+
+----
+
+==Ich habe die Option markiert, um den Zoo zu verwenden, wenn ich Rhino installiert habe, aber ich verwende den Zoo nicht==
+  * Auf Windows Vista oder Windows 7 löschen Sie alle Dateien im Ordner: C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses. 
+  * Auf Windows XP löschen Sie alle Dateien im Ordner: C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  - Starten Sie Rhino neu.
+  - Wenn gefragt, geben Sie den CD-Code ein.
+
+Anmerkung: Auf einigen Systemen könnte der Pfad, anstatt der Ordner "\Alle Anwender\" Ihr "\Domain\" Login-Name sein. 
+
+----

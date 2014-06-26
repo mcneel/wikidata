@@ -1,0 +1,34 @@
+======Rhino 5 with checked out license won't run======
+> **Product:** //[[zoo:zoo5|Zoo 5]]//
+> **Summary:** //Discusses why Rhino 5 SR0 will not start when it has a checked out license.//
+
+=====Symptom=====
+After checking out a license from a Zoo 5 server, Rhino 5 will no longer start.
+
+=====Problem=====
+If you check out a license and you have **Enable limited license check out** enabled on the Zoo, then when the check out is within 7 days of expiring, Rhino 5 won’t start.
+
+=====Resolution=====
+This issue has been resolved in Rhino 5 Service Release 1.
+
+The immediate fix is to the following:
+ 
+1. Delete the .CHK file from this folder:
+
+**Windows 7 or 8**
+<code>
+C:\Users\<user_name>\AppData\Roaming\McNeel\Rhinoceros\5.0\License Manager\Licenses
+</code>
+
+**Windows XP**
+<code>
+C:\Documents and Settings\<user_name>\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
+</code>
+ 
+2. From the Zoo Administrator, click on the checked out license and pick **Edit → Recover**.
+ 
+3. Again from Zoo Administrator, click **Tools → Options** and uncheck “Enable limited license check out” until everyone has updated to Rhino 5 SR1.
+
+\\
+
+{{tag>Zoo5}}

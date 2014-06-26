@@ -1,0 +1,88 @@
+====== Solides fermés ======
+
+> **Sommaire:** //Comment puis-je rendre un modèle solide ?//
+
+======Qu'est-ce qu'un solide dans Rhino ?======
+=====Comment obtenir un bon fichier .stl "étanche" à partir de mes objets de Rhino ?=====
+
+Il y a eu pas mal de bons conseils pour la production de fichiers stl. Le plus important est simplement celui-ci :
+
+L'objet Rhino doit être un **SOLIDE FERMÉ** avant qu'un fichier stl valide ne soit généré.
+
+//<color darkslateblue>Mitch dit : La terminologie officielle pour un solide fermé dans Rhino est une **polysurface fermée**</color>//
+
+Un solide n’a **AUCUN BORD LIBRE**, pour une définition concise. Une autre façon de comprendre un solide est de le considérer comme un ballon. S'il présente un trou, même de la taille de la pointe d'une aiguille, il se dégonflera, il n'est donc pas étanche, n'a pas de volume. Un solide est un volume. Un solide est représenté par ses surfaces extérieures, lorsqu'elles sont entièrement jointes.
+
+//<color green>JB dit : Utilisez la commande **MontrerBords** avec l'affichage des "bords libres" pour trouver les bords non joints</color>//
+
+La terminologie des "solides" semble confuse pour beaucoup de personnes et il y a souvent des discussions à ce sujet, en particulier en relation avec l’obtention de solides "étanches" pour le prototypage rapide. Certaines personnes se demandent pourquoi on obtient juste la courbe extérieure lorsque l’on tranche un "solide" dans Rhino alors qu’elles pensaient obtenir des surfaces planes comme des tranches de "saucisson". C’EST NORMAL. Les logiciels/machines de prototypage remplissent ces tranches à votre place. N’oubliez pas aussi que ce n’est pas l’objet NURBS de Rhino qui est tranché, mais un MAILLAGE de la forme de votre objet, à travers un fichier STL. Et vous savez quoi ? Les maillages ne sont pas plus "solides" que les objets Nurbs de Rhino... Quand vous les tranchez, vous obtenez toujours uniquement les courbes frontières...
+
+**[[rhino:soliddiscussion|Pour plus d'informations sur le concept des solides (élaboré à partir des messages du forum) regardez ici]]**
+
+=====Les tolérances jouent un rôle dans la création de volumes fermés=====
+Une bonne compréhension de la **[[fr:rhino:faqtolerances|TOLÉRANCE ABSOLUE]]** est nécessaire pour générer des solides valides. Une bonne règle à suivre est de changer la tolérance absolue par défaut et de lui assigner une valeur de 0.0001 ou 0.001. Je démarre tous mes projets de bijouterie à 0.0001, j'ai alors de la marge pour assouplir la tolérance si nécessaire.
+
+//<color green>JB dit : Une autre "règle" utile, choisissez une tolérance un rang plus petite que la précision que vous pouvez obtenir avec votre processus de fabrication ou un rang plus petite que le plus petit détail de votre modèle. Pour les bijoutiers comme Jeffrey qui travaillent avec des détails très fins sur des pièces assez petites, 0.001 millimètre ou 0.0001 pouce devrait donner de bons résultats</color>//
+
+//<color darkslateblue>Mitch dit : Si vous commencez avec une tolérance plus petite que nécessaire, vous pourrez l'assouplir un peu à la fin pour aider à la jonction de points difficiles. [[fr:rhino:faqtolerances|Lisez bien la page wiki sur les tolérances.]] </color>//
+
+=====Maintenir l'alignement=====
+L'utilisation du **MAGNÉTISME** et des **ACCROCHAGES AUX OBJETS** est extrêmement utile voire même essentielle pour que les bords se joignent.
+
+=====Informations sur votre objet=====
+L**'ANALYSE** d'un objet de Rhino est une partie importante du processus. La façon la plus rapide pour moi de vérifier si un objet est un solide (<color darkslateblue>polysurface fermée</color>) ou non, est de cliquer sur le bouton Infos dans les Propriétés. Je laisse ensuite la fenêtre ouverte et ancrée à droite de l'écran juste au-dessus de la boîte de dialogue des calques.
+
+//<color green>JB dit : Vous pouvez aussi utiliser la commande Infos si vous n'avez pas l'habitude d'avoir la fenêtre Propriétés ouverte</color>//
+
+=====Cherchez conseil=====
+Postez les objets qui posent problème lors de la jonction sur le forum de Rhino. Vous y arriverez si vous continuez à essayer. Recherchez les bords libres et zoomez dessus. Vous verrez ce qui n'est pas joint. L'expérience et la pratique apportent compréhension. C'est un truc de base. Modélisez en gardant toujours à l'esprit que vous voulez produire des solides, ne le gardez pas pour la fin.
+
+Lorsque vous avez un **SOLIDE VALIDE**, exportez-le vers un fichier STL. Si vous utilisez la valeur par défaut (0.01) pour la distance maximale entre le bord et la surface, le fichier STL sera parfait quelle que soit la machine. Vous pouvez tester votre fichier STL en le relisant dans Rhino et en lançant la commande **MontrerBords** avec l'option Bords libres. La création d'un solide valide à exporter est la partie difficile. C'est sur ce point que vous devez travailler. Il n'y a pas de mystères ici pour produire des fichiers stl. Il s'agit tout simplement d'un maillage composé de triangles.
+
+//<color darkslateblue>'Mitch dit : Même si en théorie l'exportation STL fonctionne, en pratique Rhino a parfois des problèmes à mailler les objets. Afin de vérifier les résultats de votre exportation .stl, ouvrez le fichier STL que vous venez de créer dans une nouvelle instance de Rhino et regardez-le dans la fenêtre en perspective avec le mode **OmbragePlat** (utilisez le bouton de barre d'outil, tapez directement la commande ou utilisez le menu contextuel du titre de la fenêtre). Si le modèle semble OK avec l'ombrage plat - pas de trous ou d'anomalies visibles - vous pouvez probablement considérer votre fichier correct. [[fr:rhino:meshfaq|Voir aussi la page Wiki sur le maillage]].</color>//
+
+Continuez à poser des questions et travaillez sur les réponses obtenues ! La clé est de comprendre comment modéliser avec Rhino et de bien comprendre les NURBS en général. Je suis désolé mais cela représente un peu de travail, peut-être même plus qu'un peu pour devenir un modeleur expert en CAO. Il ne faut pas prendre ceci comme de la condescendance. Je suis passé par ces étapes moi-même (étude, mise en pratique, étude, mise en pratique, etc) et j'ai finalement réussi à joindre le tout.
+
+Si vous ne comprenez pas une des informations données ici, postez votre question dans le forum !
+
+Jeffrey Everett
+
+<color darkslateblue>(Adapté un peu par John Brock, Mitch Heynick et Gordon Adams - en espérant que cela ne vous gêne pas Jeffrey !)</color>
+
+
+----
+
+=====Autres trucs pour obtenir des solides valides=====
+
+===Joindre au fur et à mesure===
+Joignez les différentes parties et vérifiez votre travail au cours de la modélisation. Utilisez la commande **MontrerBords** avec l'option Bords libres. Si vous en détectez, vous devez revenir en arrière, trouver pourquoi ils sont là et corriger le problème. C'est bien plus facile de corriger les problèmes au fur et à mesure plutôt que d'essayer de réparer les choses une fois la modélisation terminée. Des corrections tardives peuvent prendre des heures alors que le problème aurait pu être réglé en quelques minutes s'il avait été détecté avant.
+
+===Choses qui peuvent entraîner des bords libres :===
+
+Soyez vigilants lorsque vous limitez des surfaces. Rhino limitera des surfaces avec des courbes en fonction du PlanC actif et ces courbes n'ont pas forcément besoin de reposer sur la surface. Le bord de limite peut alors ne pas se trouver exactement où vous pensez et vous ne le verrez peut-être pas dans une vue orthographique. Il vaut mieux limiter les surfaces avec les autres surfaces qui seront jointes ensuite si possible. D'autre part, il se peut que cette option ne soit pas possible dans certains cas et si vous devez absolument limiter avec des courbes, vérifiez que les surfaces se joignent après.
+
+La reconstruction de surfaces peut entraîner la modification des bords de sorte qu'ils soient trop éloignés pour être joints, vous devez donc faire attention lors de cette opération.
+
+L'action de joindre elle-même peut entraîner la création de bords libres. Paradoxal mais vrai, dans certaines zones avec des jointures complexes entre plusieurs surfaces (réalisées normalement en sélectionnant plusieurs surfaces avec une fenêtre et en lançant la commande **Joindre**), Rhino peut produire des bords libres alors qu'il ne devrait pas. Dans ce cas, vous devez annuler votre jonction et voir ce qui se passe si vous essayez de joindre les surfaces une à une. Dans des cas très rebelles, certaines surfaces devront peut-être être légèrement ajustées.
+
+===JoindreBord, la solution de secours===
+
+Cette commande vous permet de "forcer" des bords à se rejoindre alors qu'ils sont trop éloignés pour être joints normalement. Une commande à utiliser avec modération et prudence. Elle ne rend pas votre modèle plus précis, elle ne corrige pas votre géométrie, elle permet simplement à Rhino d'ignorer les tolérances absolues en ce point et de créer un bord "moyen" quelque part entre les deux bords réels. Ainsi, les commandes de maillage peuvent créer un pont sur le vide pour obtenir un objet maillé "étanche" et votre bureau de service stl sera peut-être plus content. En revanche, si le modèle doit être exporté en tant que surface ou solide pour être traité en FAO par exemple, il sera peut-être entièrement décomposé, il vaut alors mieux éviter d'utiliser **JoindreBord** dans ces cas.
+
+===La commande ReconstruireBords===
+Cette commande ramènera les bords des surfaces comme ils étaient (plus ou moins) à l'origine avant la jonction. Cette opération peut être importante car si des bords ont été déplacés par **JoindreBord** ou une autre commande similaire, ils peuvent être restaurés.
+
+===Le bord libre tant redouté===
+Si vous en avez un, vous avez un problème. Normalement les bords libres vont par paires. Vous pouvez souvent joindre les paires avec **JoindreBord** (même si les jonctions sont alors en dehors de la tolérance, la jointure sera fermée). Mais si vous n'avez qu'un seul bord libre, il n'y a rien à joindre. Dans ce cas vous avez du pain sur la planche. Vous aurez souvent besoin d'annuler la jonction de tous les bords autour de la zone à problème, d'utiliser la commande **ReconstruireBords** sur tous les bords et de chercher les bords non alignés afin de les corriger. Vous devrez souvent zoomer très près pour déceler les problèmes.
+
+===Vérifier la VALIDITÉ !===
+Assurez-vous que votre objet est VALIDE. Quand vous commencez à modifier les bords, vous pouvez souvent rendre un objet invalide (même s'il est fermé). Ceci peut alors poser des problèmes au niveau du maillage et donner plus de travail de modélisation. Ma suggestion est d'activer **VérifierNouveauxObjets** dans Rhino. Ainsi, si vous créez un objet invalide en le modifiant, vous le saurez immédiatement.
+
+<color darkslateblue>--Mitch</color>
+
+===Travailler avec le maillage au lieu des bords de surface-===
+Il est souvent possible et plus rapide de fermer un maillage en utilisant les outils de réparation des maillages du menu Maillage(V4) ou Extra (V3) que de supprimer les bords libres sur une surface. Si le but de l'opération est le prototypage rapide en passant par un fichier STL ou SLC, essayez de créer un objet maillé (commande Maillage, voir aussi [[fr:rhino:meshfaq|MeshFAQ]]) dans Rhino et d'utiliser **AdapterBordMaillage**, **RemplirTrouMaillage** et d'autres outils de réparation des maillages pour fermer correctement le maillage avant de l'exporter vers STL. Consultez l'aide sur ces commandes pour savoir ce qu'elles font et comment les utiliser. **MontrerBords** vous dira si le maillage est fermé, tout comme pour les surfaces.
+
+
+
+

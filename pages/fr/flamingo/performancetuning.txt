@@ -1,0 +1,109 @@
+====== Astuces pour la performance de Flamingo ======
+
+====ASTUCES POUR LA PERFORMANCE DE FLAMINGO====
+> **Sommaire:** //Astuces et techniques pour accélérer les rendus et obtenir la qualité voulue dans Flamingo 1.1 ou 2.0.//
+
+======PROCESSEUR======
+La vitesse du processeur principal de votre ordinateur est le facteur principal de la performance de Flamingo. Un ordinateur avec double processeur (lorsqu'il est correctement activé dans Windows NT, Windows 2000, Windows XP ou Windows Vista) donne des vitesses de rendu améliorées de 85% environ par rapport à un processeur simple.  Les processeurs à quatre coeurs apporteront presque 4 fois plus de performance qu'un processeur simple de la même vitesse.  À l'heure actuelle, Flamingo n'augmente pas ses performances avec plus de 4 processeurs.
+
+======UNITÉ D'ALIMENTATION======
+Vérifiez que vous avez une bonne unité d'alimentation, en particulier dans le cas de processeurs/coeurs multiples.  Flamingo est l'une des applications multi-tâches les plus complètes disponible actuellement, il poussera instantanément tous les processeurs logiques disponibles à utiliser l'unité centrale à 100%.
+
+======CARTES GRAPHIQUES======
+Les cartes graphiques n'accélèrent pas le rendu dans Flamingo.  La carte graphique/vidéo n'est utilisée que pour afficher l'avancée des calculs du rendu et elle ne les ralentit pas.
+
+======MÉMOIRE RAM======
+Le rendu avec une mémoire RAM inadaptée est une des raisons princiaples de la lenteur de Flamingo.
+
+Pour reconnaître un manque mémoire RAM, regardez les accès au disque ou utilisez le gestionnaire de tâches comme indiqué ci-dessous.
+
+Reagrdez la lumière de votre disque dur pendant que l'image est dessinée à l'écran. Vous ne devriez voir que très peu d'activité sur le disque (à moins qu'une autre application utilise cette ressource).
+
+Si le rendu entraîne une activité improtante du disque, Flamingo sera plus lent et une mémoire RAM plus importante accélérera le rendu.
+
+Pour plus de renseignements sur la RAM sur NT, Win2000, XP ou Vista, lancez le gestionnaire des tâches et dans l'onglet Performances, notez la mémoire physique totale (votre quantité de RAM). Regardez ensuite en bas à gauche dans Charge dédiée (il s'agit de la mémoire totale utilisée actuellement par Windows pour tout, y compris Rhino/Flamingo).
+
+Si pendant un rendu la charge dédiée totale est bien au-dessus de la mémoire physique totale (par exemple 50% plus élevée ou le double), cela signifie que Rhino et Flamingo demandent plus d'espace de mémoire virtuelle que votre RAM. Windows doit alors échanger de parties de votre programmes et des données sur le disque. Le rendu se terminera mais l'accès au dique est en principe 1000 fois plus lent que l'accès à la RAM, ce qui veut dire que cet échange ralentit considérablement le processus du rendu.
+
+Pour les versions de Windows à 32 bits, plus de 2GO de mémoire RAM n'est probablement pas un bon investissement.  Pour utiliser plus de RAM, nous devons attendre une version de Rhino qui fonctionnera en natif sur les éditions x64 de Windows.
+
+======ERREURS DE MÉMOIRE INSUFFISANTE======
+Windows (32-bits) étant limité à 2Go de mémoire par processus, il ne peut pas allouer plus que 2Go de mémoire virtuelle au processus Rhino/Flamingo.  Une mémoire RAM supérieure à 2Go n'est donc probablement pas intéressante.  Et si votre modèle est maillé trop finement (voir le maillage ci-dessous) ou est tout simplement trop gros et que vous essayez de le rendre, vous obtiendrez en fin de compte un message de mémoire insuffisante et Rhino se fermera (plantera).  Si vous regardez l'utilisation de la mémoire dans le gestionnaire des tâches vous pourrez voir que la charge dédiée approche les 2Go avant la fermeture de Rhino.
+
+Pour plus d'informations à ce sujet, utilisez le Gestionnaire de tâches > Processus, puis ouvrez le menu Affichage, cliquez sur Sélectionner les colonnes puis cochez Mémoire  - Taille d'allocation.  Regardez cette colonne pour le processus Rhino3.exe ou Rhino4.exe, dans Windows 32-bit  cette valeur sera limitée à 2Go (2 000 000K).
+
+======MÉMOIRE VIRTUELLE======
+Vous devriez allouer plus de 2Go d'espace disque à la mémoire virtuelle de Windows.  Pour vérifier cette valeur, ouvrez le Panneau de configuration > Système > Avancé > Paramètres de la performance > Avancé > Mémoire virtuelle. Si vous avez beaucoup d'espace libre sur le disque, allouez 4Go (4 000 Mo).  La mémoire virtuelle est l'espace du disque utilisé pour étendre la RAM (fichier d'échange) lorsque Windows a besoin de plus d'espace que celui qui est disponible en RAM ("Mémoire physique").
+
+======PRÉPARER LE MODÈLE DANS RHINO :======
+Pour réduire le temps de rendu ou éviter les problèmes d'insuffisance de mémoire :
+
+Lancez la commande SélMauvaisObjets dans tout votre modèle et remplacez tous les mauvais objets. Les mauvais objets augmentent considérablement le temps de maillage du rendu et entraîne de mauvais maillages de rendu.  Voir [[rhino:badobjects|Mauvais objets]]
+
+Minimiser le nombre de polygones de maillage que Flamingo doit traiter en utilisant les méthodes suivantes :
+
+Cachez ou désactivez les calques des objets qui ne participent pas au rendu, en particulier les choses qui sont loin, derrière d'autres surfaces ou à l'intérieur de solides.
+
+La géométrie en dehors du champ de vision de la caméra peut ralentir Flamingo, les plans au sol créés avec des surfaces ou des polygones par exemple, qui sont bien plus grands que la scène rendue. Réduisez autant que possible cette géométrie pour la scène de rendu. Dans le cas de plans au sol, utilisez le plan au sol infini automatique de l'environnement de Flamingo, ce n'est pas une géométrie et il ne ralentit pas le rendu.
+
+======TECHNIQUE DE MAILLAGE======
+Définissez l'option Rhino > Fichier > Propriétés/Maillage sur Denté et plus rapide afin que les maillages de rendu traités par Flamingo soient moins importants. Si des objets arrondis présentent une silhouette polygonale, ajustez les maillages de façon globale (voir [[rhino:meshfaq|Questions sur les maillages]]) ou demander un maillage personnalisé sur des objets spécifiques (voir Maillage personnalisé ci-dessous).
+
+Une alternative que nous recommandons est d'utiliser le paramètre Personnalisé dans Rhino > Fichier > Propriétés > Maillage et de définir tous les paramètres numériques sur zéro sauf pour la "Distance maximale entre bord et surface". Donnez une valeur raisonnable à la taille de votre modèle et à la distance entre votre caméra de rendu et les objets. Pour un petit objet de bijouterie en millimètres, cette distance pourrait être de 0.1 voire même plus petite.  Pour un bateau modélisé en pouces, cette distance pourrait être grande, 1 par exemple.  Dans une fenêtre ombrée, vérifiez si les objets aux profils arrondis ne sont pas maillés de façon trop grossière et ajustez le paramètre "Distance maximale".
+
+======MAILLAGE PERSONNALISÉ======
+Si les facettes sont visibles sur un objet arrondi particulier, vous pouvez utiliser un maillage personnalisé pour cet objet (par exemple, les objets proches de la caméra peuvent avoir besoin de maillages plus détaillés). Dans Rhino 3.0, utilisez la commande Maillage de Rhino (Rhino > Outils > Maillage polygonal> À partir d’un objet [[rhino:nurbs|NURBs]] ) pour créer un maillage plus dense pour cet objet [[rhino:nurbs|NURBs]] puis cachez l'objet [[rhino:nurbs|NURBs]] (surface, solide) et relancez le rendu. Dans Rhino 4.0, lancez Rhino > Édition > Propriétés de l'objet > Objet > Paramètres du maillage de rendu > Maillage personnalisé > Ajuster.  Rhino se rappellera que cet objet doit avoir un maillage de rendu personnalisé.
+
+Si des fissures apparaissent entre les surfaces adjacentes, joignez-les pour former une polysurface ; le maillage de rendu sera recalculé pour remplir la jointure.
+
+===Important===
+Consultez également la page des [[rhino:meshfaq|Questions sur les maillages]] pour obtenir plein de bonnes informations sur le maillage.
+
+======MAILLAGE DE RENDU UNIQUEMENT======
+Utilisez la commande MAILLAGE pour mailler le modèle puis CACHEZ la polysurface [[rhino:nurbs|NURBs]]. Calculez le rendu du maillage uniquement. C'est une très bonne solution quand vous avez tout essayé et que le rendu échoue.
+
+======PARAMÈTRES DE FLAMINGO POUR LA VITESSE======
+Laissez le paramètre Rhino > Lancer de Rayons > Propriétés > Flamingo > Anticrénelage sur Élevé/4X ou sur une option plus faible, sauf si vous êtes sûr de vouloir consacrer plus de temps de rendu à cette tâche.  Consultez le fichier d'Aide.
+
+Certaines situations particulières demanderont l'augmentation de l'anticrénelage, mais il est normalement plus économique en temps de rendu d'augmenter la résolution (Rhino > Fichier > Propriétés > Flamingo > Résolution) de l'image rendu afin d'obtenir la même clareté à l'impression.
+
+Si vous utlisez des ombres floues sur une lumière, désactivez ce paramètres pour les rendus de test. Résuisez au minimum les lumières utilisant les ombres floues. Un nombre élevé d'échantillons sur les lumières avec des ombres floues est beaucoup plus gourmand en termes de temps de rendu qu'un nombre de scintillement élevé. Utilisez le nombre minimum d'échantillons pour obtenir un rendu acceptable.
+
+======RENDU DE TEST RAPIDE======
+Dans Rhino > Fichier > Propriétés > Flamingo > Résolution, choisissez "Fenêtre", ou "Personnalisée" avec une faible résolution, par exemple 300x200, quand vous assignez des matériaux, ajustez vos vues, faites des rendus de test, etc.
+
+Vous gagner du temps pendant les rendus de test, utilisez la commande RectangleRendu ou RectangleAperçuRendu pour rendre rapidement de petites portions de votre image.
+
+Utilisez également la commande AperçuRendu pour lancer un rendu pleine résolution de votre écran avec les couleurs, les lumiperes et les ombres, un seul niveau de réflexions, etc. mais sans l'anticrénelage final qui prend du temps. RectangleAperçuRendu et AperçuRenduDansRectangle sont également utiles pour les tests.
+
+======TRANSPARENCE ET RÉFLEXIONS======
+Les objets transparents et réfléchissants sont très gourmands en temps de rendu. Vous pouvez essayer de réduire le nombre de rebonds dans Fichier > Propriétés > Flamingo > Rebonds.  La valeur par défaut est de 3 mais vous pouvez essayer 0 pour voir si ces effets entraînent des temps de rendu trop importants. Si les rebonds sont trop faibles, vous verrez des zones noires dans vos objets transparents ou réfléchissants.
+
+Désactivez tout ce qui se trouve en dehors de votre vue et qui n'a pas d'effet sur votre rendu, Flamingo tient compte de tous les objets lors des réflexions s'ils ne sont pas désactivés dans Rhino.  Désactivez les calques ou sélectionnez les objets et utilisez la commande Cacher.
+
+======TAILLE DES PIXELS DU RENDU======
+Choisissez une résolution personnalisée (taille des pixels), 1024x768 ou plus élevée dans Fichier > Propriétés > Flamingo > Résolution lorsque vous voulez imprimer le fichier image du rendu.
+
+Nous recommandons de multiplier la taille d'impression, en pouces, que vous voulez sur le papier par 85 afin d'obtenir la résolution horizontale et verticale (taille des pixels) de votre image. Dans beaucoup de situations d'impression, un nombre de pixels par pouce sur le papier n'améliore pas considérablement le résultat mais entraîne des temps de traitement plus élevés.  Cela dépend du type de papier utilisé, des capacités de l'imprimante et de la façon dont sera regardée l'image.
+
+Augmentez la résolution de rendu finale au-dessus de la valeur obtenue par le calcul précédent uniquement si vous trouvez que votre image imprimée n'est pas assez nette. Lorsque la résolution est multipliée par deux (nombre de pixels horizontalement et verticalement), le temps de rendu est multiplié par quatre car le nombre de pixels à calculer est multiplié par quatre.
+
+======IMPRIMER VOTRE RENDU======
+Pour contrôler l'impression, ouvrez votre image rendue dans un programme du type PhotoShop (Adobe) or PaintShopPro (JASC).
+
+Certains programmes d'impression d'images utilisent par défaut une échelle d'impression de 72 dpi mais vous pouvez modifier cette valeur sans changer la résolution XY (pixel) de l'image.
+
+Adobe PhotoShop est un peu compliqué quand il s'agit d'imprimer, il est lié au concept des PPP.  Vous ne voulez jamais "rescannériser" ou changer la résolution (nombres de points sur X et Y) de votre image, mais vous voulez l'imprimer à la taille que vous voulez.  Vous pouvez donc utiliser PhotoShop pour changer la valeur de 72 PPP, enregistrée dans le fichier image, pour une valeur plus élevée, jusqu'à 150, voire même 300 pour une impression de qualité photo très dense.  Flamingo 1.1 définit toutes ses images en 72 ppp.  Dans Flamingo 2.0, vous pouvez définir la valeur de PPP directement dans Rhino > Fichier > Propriétés > Flamingo > Résolution > Taille de l'image imprimée
+
+Certains utilisateurs se plaindront du fait que le paramètre de PPP dans un fichier image produit par Flamingo 1.1 est de 72 PPP. PPP est une suggestion de la taille d'impression de l'image. Malheureusement, nous utilisons le terme "résolution" pour indiquer le nombre de pixels dans les directions x et y (valeur que vous ne devriez pas changer lorsque vous avez créé l'image rendue) et PaintShopPro utilise "résolution" pour ce que nous appelons PPP.  L'utilisateur ne devrait pas changer la taille en pixels mais plutôt imprimer l'image avec l'échelle et à la taille voulue.
+
+======TAILLE EN PIXELS POUR PLUS D'EFFICACITÉ======
+Faites des essais pour trouver la taille maximale en pixels par pource de papier dont vous avez besoin pour obtenir les images imprimées telles que vous le souhaitez. Toutes les valeurs supérieures seront une perte de temps de rendu.  Une résolution trop élevée et des paramètres excessifs dans la boîte de dialogue Fichier > Propriétés > Flamingo sont les raisons les plus fréquentes de temps de rendu trop importants.
+
+======AIDE SUPPLÉMENTAIRE======
+Si toutes ces informations ne vous permettent pas de réduire vos temps de rendu, nous pouvons essayer de vous aider : indiquez-nous la taille du modèle et tous vos paramètres dans Fichier/Propriétés/Flamingo et Fichier/Propriétés/Maillage.  Envoyez-nous si possible le fichier .3DM en question, utilisez pour cela la commande FlamingoTransport, zippez tout le dossier créé par la commande et joignez le zip à votre message.
+
+[[tech@mcneel.com|Mail de l'assistance technique]] tech.fr@mcneel.com
+
+
+----

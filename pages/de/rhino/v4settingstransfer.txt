@@ -1,0 +1,59 @@
+====== Übertragung der V4-Einstellungen ======
+
+> **Zusammenfassung:** //Wie Sie alle Ihre personalisierten Einstellungen von einer Installation zu einer anderen übertragen//
+
+=====Wo werden meine Einstellungen gespeichert?=====
+
+**Die meisten Rhino Einstellungen** werden nicht in externen Dateien gespeichert sondern in der Registrierung.  Da keine einzige Datei vorhanden ist, die alle Optionen und Personalisierungen enthält, müssen Sie alle personalisierten Einstellungen übertragen.  Es gibt da einige Tastenkürzel:
+
+Die einfachste Art, Ihre Einstellungen zu übertragen, wäre den Rhino Befehl **OptionenExportieren** zu verwenden, der eine einzelne Datei mit den //MEISTEN// Benutzerpersonalisierungen erzeugt. Beim Import dieser Datei in eine andere Installation über den Befehl **OptionenImportieren** werden die meisten allgemeinen Einstellungen übertragen.
+
+//Anzeigemodi werden nicht in die Exportoptionen// einbezogen, Sie müssen sie separat exportieren!  Hierfür verwenden Sie Optionen > Erscheinung > Weitere Einstellungen.
+
+//Die Datei für den Arbeitsraum// (.tb) enthält alle Werkzeugleistenpersonalisierungen, man kann sie auch zwischen Installationen kopieren.
+
+Was vielleicht auch noch geändert wurde sind Ihre Vorlagedateien, Anzeigemodi, installierten Plug-ins, etc.
+
+=====Ähm, das klingt kompliziert, wie übertrage ich das alles?=====
+
+Ein allgemeines Übertragungsverfahren könnte wie folgt aussehen:
+
+====In einer alten Installation:====
+
+**OptionenExportieren** - erzeugt eine .ini-Datei
+
+Machen Sie eine Kopie Ihrer Arbeitsumgebungsdatei (.tb), wenn Sie sie personalisiert haben.
+
+Machen Sie Kopien von allen personalisierten Vorlagedateien, die Sie erzeugt haben.
+
+Exportieren Sie alle personalisierten Anzeigemodi - erzeugt eine .ini-Datei pro Anzeigemodus.
+
+Machen Sie Kopien von verwendeten externen Dateien, wie:
+
+Nicht-standardmäßigen Plug-ins
+
+E-Maps
+
+Scripts
+
+etc.
+
+====In der neuen Installation:====
+
+**OptionenImportieren** und importieren Sie die mit **OptionenExportieren** erzeugte .ini-Datei.
+
+Kopieren Sie Arbeitsraum, Vorlage, E-Maps, Scripts, Plug-in-Dateien an angemessenen Standorte.
+
+Werkzeuge>Werkzeugleistenkonfiguration und laden Sie Ihren personalisierten Arbeitsraum.
+
+Gehen Sie zu Optionen > Erscheinung > Weitere Einstellungen und importieren Sie alle personalisierten Anzeigemodi einzeln.
+
+Drag und Drop Ihrer zusätzlichen Plug-ins in das Rhino-Fenster, um sie zu installieren (einige benötigen einen externen Installer, verwenden Sie diesen falls nötig).
+
+Definieren Sie Rhino, damit das Programm mit Ihrer personalisierten Vorlage geöffnet wird.
+
+In den Rhino-Optionen, unter Dateien, definieren Sie Dateipfade für Scripts, Vorlagen, etc, wenn diese nicht standardmäßig sind.
+
+
+
+

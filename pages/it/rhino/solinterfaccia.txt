@@ -1,0 +1,106 @@
+======Sistemare i problemi di installazione======
+
+> **Sommario:** //Trucchi e piccole modifiche per migliorare l'interfaccia di Rhino e sistemare alcuni problemi attraverso la modifica del registro o con script esterni//
+
+=====Problemi con il corretto posizionamento e la stabilità delle barre di comando=====
+
+Chiudere Rhino
+
+Cancellare con REGEDIT.EXE la seguente chiave di registro
+
+**HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager**
+
+Riavviare Rhino.
+
+
+=====Problemi con il funzionamento di OpenGL e visualizzazione=====
+da utilizzare dopo aver installato nuove schede grafiche e drivers
+
+----
+Chiudere Rhino
+
+Cancellare con REGEDIT.EXE la seguente chiave di registro
+
+**HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Options\OpenGL**
+
+Riavviare Rhino
+
+> **Nota:** //entrambi questi problemi possone essere risolti nella V3 utilizzando questa utility: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip mentre Rhino non  è in funzione.//
+
+=====Problemi di funzionamento di Rhino dopo l'installazione della V3 SR4 o della V4 WIP=====
+Questo riguarda anche l'installazione/funzionamento di Windows XP SP2
+
+----
+
+> **Sintomi:** ////
+Rhino non funziona dopo l'installazione di uno dei precedenti
+
+Soluzione da provare:
+
+Copiare i files **msvcp71.dll** e **msvcr71.dll** da
+
+C:\Program Files\Rhinoceros 4.0 WIP\System
+
+a
+**C:\Program Files\Common Files\McNeel Shared\License Manager**
+
+Dopo di che, Rhino 3.0 e 4 WIP dovrebbero funzionare regolarmente.
+
+Siete pregati di segnalare sul NG di Rhino se questa soluzione non risolve il problema.
+
+=====La Rhino 4 WIP non si installa o disinstalla=====
+
+
+> **PROBLEMA:** ////
+Quando provo ad installare Rhino 4 WIP, si apre una finestra di messaggio dell'Installer, che dice che il prodotto deve essere prima disinstallato, utilizzando la utility Aggiungi/Rimuovi Programmi del Pannello di controllo,l'installazione viene arrestata.
+
+Quando provo però, neanche quello funziona.
+
+> **SOLUZIONE:** ////
+Questa soluzione aggira le sicurezze dell'Installer di Windows,da utilizzarsi solo se reinstallate immediatamente il programma.
+
+Usare REGEDIT.EXE per cancellare questa chiave di registro (<color red>attenzione!):</color>
+
+**HKEY_CLASSES_ROOT\Installer\Products\DFFBC2C5B3CF9AA499B3ECB2D82AB578**
+
+=====La finestra dell'indice di aiuto in linea di Rhino 3.0  vuota=====
+
+
+> **PROBLEMA:** ////
+La finestra dell'indice di aiuto in linea di Rhino o dei Bonus Tools  vuota, per utenti con privilegi limitati in Windows 2000.
+
+> **SOLUZIONE:** ////
+Questo  un baco di Windows 2000 che interferisce con l'attribuzione delle autorizzazioni.
+
+Ecco come risolvere, senza cambiare le impostazioni di autorizzazione nelle cartelle dei files dei Programmi.
+
+Fate cancellare da un utente con diritti di Amministratore il file
+
+**Rhino.GID** in **Program Files\Rhino\English\Help folder**,
+
+già che ci siete, cancellate anche **RhinoBonusTools.GID**
+
+A questo punto fate disconnettere l'Amministratore (non attivate l'Aiuto in linea, altrimenti si ricrea il file .Gid per l'Amministratore).
+
+Fate connettere l'utente con privilegi limitati. Ora l'indice dell'Aiuto in linea dovrebbe completarsi (viene creato un file.Gid da qualche parte nella cartella di sistema dell'utente).
+
+Questo trucco non  necessario con Windows XP, Microsoft ha corretto il baco.
+
+Un altro modo per risolvere in Windows 2000  quello di conferire il privilegio di "scrittura" per gli Utenti sulla cartella Rhino\English\Help.
+
+=====Modifica dell'interfaccia di Rhino=====
+
+Cambiare il colore delle icone degli assi
+
+Nota - si tratta della piccola icona in basso a sinistra della finestra, normalmente grigio scuro.
+
+Assicurarsi che tutte le sessioni di Rhino siano chiuse, attivare Regedit(Start/esegui...)
+
+Editare la seguente chiave di registro:
+
+**HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme:Default\Options\AppearanceSettings**
+
+Le ultime 3 impostazioni sono i colori dell'icona. Digitare una combinazione RGB
+
+(ad esempio 0,255,0 per il verde o 255,255,0 per il giallo)
+

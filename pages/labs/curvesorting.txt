@@ -1,0 +1,45 @@
+====== Curve sorter ======
+> **Summary:** //Curve sorter plugin for Rhino4//
+
+\\
+
+[[http://en.wiki.mcneel.com/content/upload/files/SortCurves.zip|Download the plugin]]
+
+\\
+\\
+
+=====Curve sorting=====
+
+When plotting or cutting curves, often a significant amount of time is spend moving the cutter from curve to curve. This plugin will reorder the curves in the Rhino document so that cutter/printing plugins will iterate through them more efficiently.
+
+\\
+
+Note that any changes made to an object in Rhino will bump it to the back of the object list, so the sorting only remains valid while the file remains unchanged.
+
+\\
+
+The sorting algorithm implemented in this plugin does not guarantee the shortest path. In fact, the solution is almost certainly not the best one. It does have a number of options which can improve the sorting efficiency. When you run the _SortCurves command, you'll be asked to pick the curves to be sorted. Since sorting might take a long time, you can limit the operation to only required curves. You'll also have to specify where the sorting routine starts (with another screen pick on the curve where you want the sort to start). If you pick a closed starting curve, you can override the start point on the curve as well. At this point the initial sorting solution is computed and you'll see a preview in the viewport:
+
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/SortCurvesViewport.png}}
+
+\\
+
+At this point you can change the sorting algorithm options:
+
+  * AdjustDirection. If enabled, open curves will be flipped if that results in a better sorting.
+  * AdjustLoops. If enabled, closed curve seams will be adjusted if that results in a better sorting. This will change curve topology, but not shape.
+
+\\
+
+You can also add the sorting feedback as a group of actual objects.
+
+
+----
+
+\\
+
+[[David@McNeel.com|Contact]] the [[rhino:davidrutten|author]]
+
+

@@ -1,0 +1,196 @@
+====== A Brief Overview of Components ======
+
+| {{http://en.wiki.mcneel.com/content/upload/images/ExplicitHistoryBanner.png}} |  //**Explicit History Plugin Wiki Pages**// |
+|  [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
+
+----
+
+> **Summary:** //Explicit History Components Overview//
+
+\\
+
+=====Contents=====
+
+  * [[#Introduction]]
+  * [[#Parameters]]
+  * [[#Components]]
+    * [[#Logic]]
+    * [[#Scalar]]
+    * [[#Vector]]
+    * [[#Curve]]
+    * [[#Surface]]
+    * [[#Transform]]
+
+----
+
+\\
+\\
+
+===== Introduction=====
+
+The Explicit History plugin comes with a large (and growing) list of available components and parameters. In addition, it's possible for users to make their own components as plugins to this plugin. Knowing your components in Explicit History is as important as knowing your commands in Rhino. This Wiki page gives a brief overview of the components and parameters that ship with the plugin (i.e. the ones that are made by Robert McNeel & Associates). This is not an in-depth discussion though, a complete reference is not yet available.
+
+\\
+\\
+
+----
+\\
+\\
+
+===== Parameters=====
+
+The parameters define the possible data-types that can be used to tranfer data between components. There is a limited set of these available and they can be compared to variable types. All parameters support //local// data, meaning that the data originated from within the Explicit History plugin. Some parameters (such as Curve and Surface) also support referenced data, meaning it points to existing Rhino objects. Once a piece of geometry is referenced, any changes to that object will result in a recomputation of the History Solution.
+
+\\
+
+| Icon | Data | Description |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_GenericParameter.png}} | Generic | Any data type, including types that have no matching parameter defined |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_GeometryParameter.png}} | Geometry | Any geometric data type, both referenced objects and local objects. |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_BooleanParameter.png}} | Boolean | Boolean values (True / False) |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_IntegerParameter.png}} | Integer| Integer (whole) numbers |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_DoubleParameter.png}} | Double | Floating point (decimal) numbers |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_StringParameter.png}} | String | Text |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_PointParameter.png}} | Point | Any 3D point, either as an {xyz} coordinate or as a point object reference. |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorParameter.png}} | Vector | Any 3D vector |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_PlaneParameter.png}} | Plane | Any 3D plane |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_LineParameter.png}} | Line | Simple line segment, does not support referenced line curves |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_CircleParameter.png}} | Circle | Simple circle curve, does not support referenced circular curves |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_CurveParameter.png}} | Curve | Any Rhino curve, either referenced or local |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_SurfaceParameter.png}} | Surface | Any Rhino (trimmed) surface, either referenced or local |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_BRepParameter.png}} | B-Rep | Any Rhino (poly)surface, either referenced or local |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_BoxParameter.png}} | Box | Any 3D box primitive, either as a referenced boundingbox or local |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_IntervalParameter.png}} | Interval | A numeric interval between two values |
+|{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_2DIntervalParameter.png}} | 2D Interval | Two numeric intervals (for u-v space) |
+
+\\
+\\
+
+----
+\\
+\\
+
+===== Components=====
+
+The parameters and components are all grouped in categories. The following is a per-category listing of available components:
+
+===== Logic Category=====
+
+Boolean components such as AND, NOT and OR gates:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_AND.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_OR.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_NOT.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_NOR.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_NAND.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_XOR.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_XNOR.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_TernaryAND.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_TernaryOr.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_TernaryMajorityVote.png}}
+
+\\
+
+Array components that allow retrievals and modifications of lists of data inside parameters. Typical operations include shifting, indexing and culling:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ArrayIndex.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ArrayShift.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_BooleanSplit.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_CullArrayNth.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_CullArrayPattern.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ListLength.png}}
+
+\\
+
+Interval components that allow for creation and analysis of 1D and 2D intervals:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_DecomponseInterval.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Decomponse2DInterval.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_DivideInterval.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Divide2DInterval.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_MakeInterval.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Make2DInterval.png}}
+
+\\
+\\
+\\
+
+----
+
+===== Scalar Category=====
+
+Mathematical components that wrap many useful functions such as Addition, Multiplication, Sine and Logarithm:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Summation.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Subtraction.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Multiplication.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Division.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Factorial.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_MachtsVerheffen.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_TweeMacht.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Emacht.png}}
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Sin.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Cos.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Tan.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ASin.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ACos.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ATan.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Min.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Max.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Ln.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Log.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_LogN.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Pi.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_GoldenRatioPhi.png}}
+
+\\
+
+Mathematical components that generate arrays of numbers such as Range and Random:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Range.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_RandomEngine.png}}
+
+\\
+
+Mathematical components that allow for custom defined (scriptable) functions:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Expression.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Function_x.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Function_xy.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Function_xyz.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Function_abcd.png}}
+
+\\
+\\
+\\
+
+----
+
+===== Vector Category=====
+
+The vector category is mostly concerned with Point and Vector math, but also with basic operations in 3D space. This is an extensive category that features many important components.
+
+\\
+
+Point and Vector mathematics components:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_UnitVectorX.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_UnitVectorY.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_UnitVectorZ.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Vector2Pt.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_PointFromXYZ.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorFromXYZ.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_PointComponents.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorComponents.png}}  {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Distance.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorAddition.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorDotProduct.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorCrossProduct.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorAmplitude.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorLength.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorMultiply.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorReverse.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_VectorUnitize.png}}
+
+\\
+
+Plane components:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_PlaneXY.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_PlaneZ.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_PlaneComponents.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_WorldXYPlane.png}}
+
+\\
+
+Complex Point, Vector and Plane components:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_DivideCurve.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_CurveFrames.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_CurveFramesPerpendicular.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_CurveFramesHorizontal.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_DivideSurface.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_SurfaceFrames.png}}
+
+\\
+\\
+\\
+
+----
+
+===== Curve Category=====
+
+Components for creating curves:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_LineAB.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_LineSDL.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_Polyline.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_Circle.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_Circle3Pt.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_CircleCNR.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_Arc.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_Arc3Pt.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_ArcSED.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_Polyarc.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_BezierCurve.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_NurbsCurve.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_InterpCrv.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_SubCurve.png}}
+
+\\
+
+Components for analyzing curves:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_CurveEnds.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_CurveDomain.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_CurveClosed.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_CurveLength.png}} {{http://en.wiki.mcneel.com/content/upload/images/Custom_24x24_CurveEvaluate.png}}
+
+\\
+\\
+\\
+
+----
+
+===== Surface Category=====
+
+Components for creating (poly)surfaces:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_SphereCR.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Sphere4Pt.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_SrfCorners.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ConeAR.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Cylinder.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Box2Pt.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_BoundingBox.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_BoxCWHD.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_PlaneBox.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_BoxInterval.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ExtrudeStraight.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ExtrudeToPoint.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Loft.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Revolve.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_SumSurface.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_SubSurface.png}}
+
+\\
+
+Components for analyzing surfaces:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_SurfaceDomain.png}}
+
+\\
+\\
+\\
+
+----
+
+===== Transform Category=====
+
+Components for transforming any kind of geometry:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Move.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Scale.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_ScaleNU.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Rotate.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_RotateAxis.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Mirror.png}} {{http://en.wiki.mcneel.com/content/upload/images/Default_24x24_Orient.png}}
+

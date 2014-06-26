@@ -1,0 +1,183 @@
+====== Cómo instalar Rhino 4 o 3 automáticamente; detalles sobre qué se instala y dónde. ======
+> **Nota:** Este artículo no es para la versión actual de Rhino. Otras versiones de este artículo disponibles en:
+>   * [[rhino:installingrhino:5.0|Instalación de Rhino 5]]
+>   * [[rhino:installingrhino:3|Instalación de Rhino 3]]
+
+
+======Instalación de Rhinoceros======
+  * [[rhino:installingrhino:5.0|Implementación del MSI de Rhino 5.0 MSI]]
+  * [[#Rhino 4.0 MSI Implementación con Active Directory o SMS]]
+  * [[#Implementación del parche de Rhino 4.0 Service Release a través de Active Directory o SMS|Implementación del parche de Rhino 4.0]]
+  * [[#Instalación de Rhino 4.0 con script (archivo por lotes)|Instalación de Rhino 4.0 mediante scripts]]
+  * [[#Instalción de Rhino 4.0 con script y archivo INI|Instalación de Rhino 4.0 mediante scripts con archivo INI]]
+  * [[#Implementación de licencias Lab de Rhino 4.0 con SysPrep]]
+  * [[#Personalización avanzada para Rhino 4.0|Configuración avanzada de Rhino 4.0]]
+  * [[rhino:debuginstaller|Error durante la instalación de Rhino 4.0]]
+
+  * [[rhino:uninstalling|Desinstalación manual de Rhino]]
+
+  * [[#Instalación automática (con scripts) de Rhino 3.0| Instalación de Rhino 3.0 con scripts]]
+  * [[#Qué cambia cuando instalo Rhino 3.0 desde el CD:|Detalles de la instalación de Rhino 3.0]]
+
+======Implementación MSI de Rhino 4.0 con Active Directory o SMS======
+=====Introducción=====
+Estas instrucciones son más útiles para los administradores de sistemas que quieren implementar Rhino 4.0 a través de una organización utilizando mediante Active Directory o SMS.
+
+Estas técnicas también funcionarán en la instalación automatizada ejecutando el MSI desde una carpeta que contenga un ""Rhino4Setup.ini"" personalizado. Véase [[#Rhino 4.0 Scripted Install with INI File]] Esto no requiere Active Directory, SMS ni otras herramientas de implementación.
+
+La documentación de la implementación de la aplicación no se trata en este artículo, de manera que se han omitido las instrucciones más específicas de implementación.
+
+=====Requisitos:=====
+Debe tener un instalador completo de Rhino 4.0 Service Release 1 (""SR1"", 3-Jul-2007) o versiones posteriores para realizar una implementación con Active Directory or SMS. Las versiones anteriores de Rhino 4.0 tenían errores en el instalador que no permitían instalar componentes de la aplicación importantes durante la implementación.
+
+Póngase en contacto con **brian** **@** **mcneel** **.** **com** para obtener un CD actual si el suyo no tiene SR1, SR2, etc. en la cara del CD.
+
+
+=====Desinstalación de instalaciones anteriores de Rhino 4.0=====
+**Nota:** Si intenta implementar el MSI con Rhino 4.0 ya instalado en el sistema de destino, se producirá un error. Se incluyen las instalaciones anteriores de las versiones de evaluación y beta. Antes de la implementación, debe desinstalar primero cualquier versión anterior existente; estas líneas de comando desinstalarán las versiones de Rhino 4.0 (de la SR0 a la SR9) en segundo plano:
+
+     msiexec /x{5C2CBFFD-FC3B-4AA9-993B-CE2B8DA25B87} /qn
+     msiexec /x{D6F64D4F-B539-448E-A5D7-B57EE89193B8} /qn
+     msiexec /x{761EC7CE-E646-4A8C-95DA-A24C6CDACF3F} /qn
+     msiexec /x{D7960C39-E3FD-4B46-8E97-A1E9D128F913} /qn
+     msiexec /x{D57F1897-D0F5-4E5F-99BA-80815B43283A} /qn
+     msiexec /x{5BC8DBE1-75C0-45A8-AEE8-34B301AA02A4} /qn
+     msiexec /x{6B9DD988-5ECB-4623-BBFF-8A8F2DA3ED16} /qn
+     msiexec /x{5B9E1A73-6A74-4DAF-AF1C-DDEBD79C942E} /qn
+     msiexec /x{CCBC3666-5199-4702-B052-2C58FCA6EFF9} /qn
+     msiexec /x{D686199B-882E-4550-92C4-BD99A8C295D0} /qn
+     msiexec /x{ECC0CADD-0491-4FB0-AAB8-5DC6C371890E} /qn
+     msiexec /x{95E1E426-EE9E-4F68-8F02-58A5A09B38F3} /qn
+     msiexec /x{E3355E5C-965C-4f67-8A8C-E9A0FA9FD80F} /qn
+
+=====Preparación de la implementación=====
+1. Realice una instalación administrativa en su ubicación compartida de red. Para este ejemplo, supondremos que la ubicación es //S:\Rhino 4.0 SR1//  Por ejemplo, si su CD de la SR1 de Rhino 4.0 está en la unidad D:\, puede realizar una instalación administrativa desde la línea de comando: **msiexec.exe /a D:\rhinoceros\rhino4_setup.msi**
+
+2. Edite el archivo  **[[http://en.wiki.mcneel.com/content/upload/files/Rhino4Setup.zip|Rhino4Setup.ini]]**, colóquelo en la misma carpeta de instalación administrativa y póngale el mismo nombre que el archivo .msi. **Nota:** Todos los caracteres detrás del signo # serán ignorados por el instalador, aunque el carácter # aparezca en medio de una línea. Para obtener más información de configuración, consulte **[[rhino:editrhino4setupini|Edición del archivo Rhino4Setup.ini]]**
+
+3. Descargue **[[http://s3.amazonaws.com:80/mcneel/rhino/4.0/misc/MS-VC80.msi|MS-VC80.msi]]** y guarde *MS-VC80.msi* en la carpeta de instalación administrativa.
+
+=====Configuración de implementación=====
+  - Abra **Usuarios y equipos de Active Directory**
+  - Haga clic con el botón derecho en la unidad de grupo o de organización que contenga los usuarios o equipos que recibirán Rhino 4.0 y, a continuación, haga clic en Propiedades.
+  - En la ficha Group Policy, agregue un nuevo Group Policy Object que se llame **Instalar Rhino 4.0**
+  - Seleccione el Group Policy Object **Instalar Rhino 4.0** y haga clic en **Edit...**
+  - Determine si instalará por equipo o por usuario (infórmese en Group Policy para determinar qué opción es mejor para su organización).
+  - En User Configuration o Computer Configuration (según la opción elegida en el último paso), expanda **Software Settings**, haga clic con el botón derecho en **Software installation** y luego haga clic en **New -> Package**.
+  - Seleccione **S:\Rhino 4.0 SR1\MS-VC80.msi** para instalar. <color red>Debe instalarse antes de Rhino 4.0 SR1 o versiones posteriores</color>
+  - Seleccione **S:\Rhino 4.0 SR1\Rhino4_Setup.msi** para instalar.
+  - En el cuadro de diálogo Deploy Software, seleccione **Assigned** y haga clic en Aceptar.
+  - Haga clic con el botón derecho en Rhino 4.0 SR1 en el panel derecho y haga clic en **Propiedades**.
+  - Seleccione la casilla **Instalar esta aplicación al iniciar sesión.** (O personalice las opciones de implementación para ajustarse a las necesidades de su organización).
+
+======Implementación del parche de Rhino 4.0 Service Release vía Active Directory o SMS======
+**<color red>Nota:</color>** Debe tener instalado Rhino 4.0 SR1 o anterior en los equipos de destino para usar esta técnica. También debe tener un instalador de parche *""rh40sr**.exe** disponible.
+  - Abra el instalador del parche (p. ej. rh40sr_en_20071017.exe) con WinZip.
+  - Extraiga **Rhino4_Patch.msi** y guárdelo.
+  - Siga las instrucciones de implementación de MSI descritas anteriormente. **NO desinstale** instalaciones anteriores de Rhino 4.0 o la instalación resultante de Rhino no funcionará correctamente.
+
+
+======Instalación de Rhino 4.0 con script (archivo por lotes)======
+Las líneas siguientes pueden ejecutarse manualmente o como parte de un archivo por lotes (.bat)
+
+1. Asegúrese que Rhino 4.0 no está instalado en el equipo de destino o ejecute estas líneas antes de la instalación:
+
+     msiexec /x{5C2CBFFD-FC3B-4AA9-993B-CE2B8DA25B87} /qn
+     msiexec /x{D6F64D4F-B539-448E-A5D7-B57EE89193B8} /qn
+2. Descargue **[[http://s3.amazonaws.com:80/mcneel/rhino/4.0/misc/MS-VC80.msi|MS-VC80.msi]]** e instálelo en el destino con
+
+     msiexec /i"s:\RhinoInstallScripts\ms-vc80.msi /qn
+3. Ejecute una línea con contenido como este (suponiendo que instala desde el CD de Rhino 4.0 en la unidad D):
+
+     msiexec.exe /i"d:\Rhinoceros\Rhino4_Setup.msi" AUTOINSTALL=1 FOLDER="C:\Progs\Rhino4" RMA_CDKEY=AAAABBBBCCCCDDDDEEEE INSTALL_EN=1
+
+Para obtener una explicación de estos parámetros y otros posibles, consulte **[[rhino:automatedinstalls|Edición del archivo Rhino4Setup.ini]]**
+
+======Instalación de Rhino 4.0 con script y archivo INI======
+Debe tener un instalador completo de Rhino 4.0 Service Release 1 (""SR3"", 2007-Jul-2007) o versiones posteriores para usar este método INI.  El instalador que tiene es un archivo .EXE, descomprímalo para obtener el archivo .MSI.  Si su instalador está en el CD, copie todos archivos de la carpeta  [[rhino:rhinoceros|Rhinoceros]] del CD de Rhino 4.0 en un carpeta del disco duro o de un disco de red compartida.
+
+1. Edite el archivo **[[http://en.wiki.mcneel.com/content/upload/files/Rhino4Setup.zip|Rhino4Setup.ini]]** para definir los parámetros del proceso de instalación. Cambie el nombre del archivo para que tenga el mismo nombre de archivo (antes de la extensión de archivo) que el archivo MSI y póngalo en la misma carpeta.
+
+**Nota:** Todos los caracteres detrás del signo # en una línea serán ignorados por el instalador, aunque el carácter # aparezca en medio de una línea. Para obtener más información de configuración, consulte [[rhino/editrhino4setupini|Edición del archivo Rhino4Setup.ini]]
+
+2. Asegúrese que Rhino 4.0 no está instalado en el equipo de destino o ejecute estas líneas antes de la instalación:
+
+     msiexec /x{5C2CBFFD-FC3B-4AA9-993B-CE2B8DA25B87} /qn
+     msiexec /x{D6F64D4F-B539-448E-A5D7-B57EE89193B8} /qn
+     msiexec /x{761EC7CE-E646-4A8C-95DA-A24C6CDACF3F} /qn
+     msiexec /x{D7960C39-E3FD-4B46-8E97-A1E9D128F913} /qn
+     msiexec /x{D57F1897-D0F5-4E5F-99BA-80815B43283A} /qn
+3. Descargue **[[http://s3.amazonaws.com:80/mcneel/rhino/4.0/misc/MS-VC80.msi|MS-VC80.msi]]** e instálelo en el destino con
+
+     msiexec /i "C:\RhinoInstallScripts\ms-vc80.msi" /qn
+4. Ejecute el archivo MSI y encontrará automáticamente el archivo INI en la misma carpeta, lea los parámetros y ejecute el instalador silenciosamente.
+
+> **Ejemplo:**
+      msiexec.exe /i "C:\RhinoInstaller\Rhino4_SR1_20070808.msi"
+
+
+
+======Personalización avanzada de Rhino 4.0======
+Varias opciones pueden configurarse desde HKEY_LOCAL_MACHINE en el registro. Estas opciones deben configurarse fuera del MSI:
+
+> **Nota:** //Todos las claves del registro son específicas de la versión y el idioma del Rhino instalado. Para la versión 3-Jan-2007, la <BUILD_DATE> sería 2007-01-03. Para instalaciones en inglés, el <LANG_ID> es 1033.//
+
+Todas las opciones de configuración están en la clave siguiente:
+
+HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros\4.0\<BUILD_DATE>\<LANG_ID>\
+
+**Ubicación de archivos de plantilla:**
+
+Cambie el valor del registro "Default Template Folder" para que tenga la ruta completa a la carpeta donde los usuarios seleccionarán los archivos de plantilla.
+
+**Plantilla predeterminada**
+
+Añada un valor de cadena con el nombre "Default Template File" y la ruta completa al archivo de plantilla predeterminado.
+
+Las otras opciones también están disponibles. Vea la clave de registro que mencionada anteriormente para otras opciones configurables.
+======Implementación de licencias Lab de Rhino 4.0 con SysPrep======
+Si utiliza Sysprep de Microsoft, Norton Ghost o alguna otra herramienta para crear una imagen de una máquina y luego implementar la imagen en varios equipos, es probable que los usuarios vean un cuadro de diálogo de licencia la primera vez que inicien Rhino.
+
+El motivo es que el archivo Rhino.key está cifrado en el disco duro y utiliza una combinación de información específica del sistema como clave de cifrado.
+
+Para que no aparezca este diálogo de licencia, debe guardar una versión en texto plano del archivo Rhino.key (//** Nota:**: sólo funciona junto con el Zoo, Rhino no reconocerá licencias independientes guardadas en texto plano//).
+
+**Para guardar una licencia Lab del archivo Rhino.key en texto plano:**
+  - Ejecutar el Bloc de notas como administrador.
+  - Abra C:\Program Files\Rhinoceros 4.0\System\Rhino.key
+  - Pegue el siguiente código en la clave:<code>:4:VR=4&NT=1</code>
+  - Guarde el archivo Rhino.key **como ANSI** (Rhino no lee correctamente archivos UTF-8 o Unicode de los archivos Rhino.key)
+
+**Nota:**
+* Asegúrese de que el archivo Rhino.key no se haya guardado como Rhino.key.txt
+  * Asegçurese de que el archivo se ha guadado como ANSI, no UTF-8
+  * Pruebe la instalación ejecutándola una vez antes de la implementación en todas las máquinas.
+
+
+======Instalación automática (con scripts) de Rhino 3.0======
+**Consulte** las instrucciones en http://www.es.rhino3d.com/script.htm
+
+Vea también la página wiki [[developer:automaterhino3installerfromcustominstaller|AutomateRhino3InstallerFromCustomInstaller]]
+
+> **Nota:** ////
+
+> ¿Es posible obtener archivos .msi para los instaladores en lugar de .exe para la implementación con Group Policy?
+> Estaría bien poder actualizar las Service Release, instalar [[penguin:penguin|Penguin]], etc. en nuestra red.
+
+Estamos pasando a instaladores .MSI para Rhino 4.0 y Flamingo 2.0, pero Rhino 3.0 no los utiliza. [PASCAL GOLAY - 2005-11-10]
+
+
+
+======Qué cambia cuando instalo Rhino 3.0 desde el CD:======
+
+El usuario elige una carpeta base para la instalación de Rhino. Los archivos de programa principales van a la subcarpeta ''Sistema'', los diferentes plug-ins (*.rhp y archivos de soporte) van a la subcarpeta ''Plug-ins'' y para cada idioma instalado se crea una carpeta de idioma ("Español'', por ejemplo), con las subcarpetas ''Ayuda'', ''Mapas de entorno'', ''Modelos de ejemplo'' y ''Tutoriales".
+
+Los archivos de plantilla y las barra de herramientas se instalan en Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\3.0  Las plantillas son diferentes para cada idioma, en carpetas separadas.
+
+Las entradas del registro se crean en ''HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\3.0''    En la clave de registro ''3.0'' hay una subclave para la fecha Rhino, como ''2004-04-21'' donde se colocan las entradas de esa fecha de Rhino.
+
+La clave ''Plug-ins'' debajo de la clave de fecha tiene subclaves como ''12D31EFD-D3EE-4BCF-A856-D01320BB19F3'', que es única para cada plug-in.  Esta clave y las claves y los valores que contiene hacen que Rhino cargue el plug-in cuando se ejecute Rhino.
+
+La clave ''<locale_ID>'' (''1033'' para inglés, "1034" para español) debajo de la fecha contiene rutas para encontrar los recursos del idioma, por ejemplo, la Ayuda.
+
+Algunas entradas se crean en ''HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0'' y aquí es donde Rhino guarda las Opciones, la mayoría en la subclave ''Scheme: Default''   Si desea más información sobre los Esquemas, consulte el archivo de Ayuda. La clave ''HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0\Global Options'' tiene algunas opciones que se aplican a todos los esquemas.

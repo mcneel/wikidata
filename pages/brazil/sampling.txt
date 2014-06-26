@@ -1,0 +1,162 @@
+======Brazil Rendering System Sampling======
+
+|{{http://en.wiki.mcneel.com/content/upload/images/SplutterFishGlassLogo.png}} {{http://en.wiki.mcneel.com/content/upload/images/RhinoGlassLogo.png}}|//**Brazil r/s for Rhino Wiki pages**// \\ [[http://www.SplutterFish.com|SplutterFish]] / [[http://www.mcneel.com|Robert McNeel & Associates]]|
+
+> **Summary:** //This page discusses the topic of Sampling in the Brazil render engine, sampling in general and guidelines for proper setups.//
+
+\\
+\\
+
+  * [[#What is Sampling?]]
+  * [[#Sampling controls in Brazil]]
+  * [[#Adaptive filters]]
+    * [[#Object Edge]]
+    * [[#Surface Normal]]
+    * [[#Z-Depth]]
+    * [[#Contrast]]
+
+=====What is Sampling?=====
+
+Real life (for "real life" look 50 cm to the right) is continuous. So is a 3D scene. Even a finite surface suspended in space and lit by a spotlight has an infinite number of different colours. In actuality, atoms terminate this regress, but Rhino is not aware of atoms so we cannot count on them in this case. When we're rendering an image, we do not have infinite accuracy since we cannot represent details smaller than one pixel (though it is possible to //suggest// details smaller than one pixel, but that is a story for another day). From this flows the obvious solution to measure the colour at the center of every pixel in the rendering, and then assume that this colour is a fair average of the entire pixel. This is called "sampling"; to create an approximation of a continuous data source by taking measurements at specific intervals:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/Brazil_QMCSampling_A.png}} |
+
+\\
+
+The pink rings represent the 2D projection of our continuous 3D model, and the dots represent the samples. As you will notice the samples are not aligned perfectly in a grid. This is done to avoid unwanted aliasing artifacts of (near) vertical and horizontal lines, which occur quite frequently in CG. Brazil's initial sample distribution is in fact far cleverer than this (these images images show a [[http://en.wikipedia.org/wiki/Stratified_Sampling|jittered-stratified]] grid, whereas Brazil uses a [[http://en.wikipedia.org/wiki/Low-discrepancy_sequence|low-discrepancy]] [[http://en.wikipedia.org/wiki/Quasi-Monte_Carlo_method|Best-Candidate]] sampling, these are just the names of algorithms involved, you do not have to remember them) Let's for the moment assume that every sample is at least //near// the pixel center. Every sample which intersects the rings is made black, others are red. If we now have to reconstruct an image based on these samples, we can hardly do better than:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/Brazil_QMCSampling_B.png}} |
+
+\\
+
+which isn't a very good approximation; large areas of white have been filled with black and large areas of pink are still visible. One solution would be to shorten the interval of our samples and measuring 4 points where we used to measure only one. This solution is a good one, but unfortunately the number of samples increases with the square of the accuracy gain, meaning that it will take longer and longer (really much, much longer) to compute the whole image as we increase the accuracy. Making a single measurement is a very expensive operation so we want to take as few samples as possible. The solution (//a// solution) is to use an **adaptive sampling algorithm**, which only introduces additional samples when an increase in accuracy is expected to pay off. If Sample A for example intersects our pink rings, but its neighbour B does not, we can safely assume that the rings ends somewhere between A and B. We can then sample a few more times in between to increase our local accuracy:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/Brazil_QMCSampling_C.png}} |    {{http://en.wiki.mcneel.com/content/upload/images/Brazil_QMCSampling_D.png}}    |
+
+\\
+
+This already results in a far more accurate approximation of the continuous input, without a doubling of the number of samples. However, the thin lower part of the leftmost ring is still ignored because it happened to fall in between two samples during the coarse pass and thus we had no idea there was something in between. This is a common problem with renderers such as Brazil which use adaptive sampling, and the only way to solve it is to increase the accuracy of the initial pass.
+
+\\
+\\
+
+=====Sampling controls in Brazil=====
+
+Brazil offers several settings to control the sampling behaviour. First of all, you can set the minimum and maximum sampling accuracy of a rendering. These numbers are integers and they indicate the exponent of the number of samples per pixel:
+
+\\
+
+| Sampling settings |
+| Sample value       | Value meaning          | Samples per pixel | Result |
+|    -3    |    2^-3^    | One sample every 8 pixels | Extreme low quality, very blurry |
+|    -2    |    2^-2^    | One sample every 4 pixels | Very low quality, useful for judging lighting conditions across a rendering |
+|    -1    |    2^-1^    | One sample every 2 pixels | Low quality, useful for judging local lighting conditions, good for previews |
+|    0    |    2^0^    | One sample every pixel    | This effectively removes any anti-aliasing artifacts from the image |
+|    1    |    2^1^    | Two samples every pixel   | Lowest anti-aliasing value, lines will still be fairly jagged |
+|    2    |    2^2^    | Four samples every pixel  | Pretty good anti-aliasing, especially on low-contract thresholds |
+|    3    |    2^3^    | Eight samples every pixel | Very good anti-aliasing, only use higher settings to counter sampling artifacts |
+
+\\
+\\
+
+Let's take a closer look at how minimum and maximum resolution cooperate to give high-quality images in a reasonable amount of time. The following images are all renderings from the exact same scene, it's a simple plane with a procedural texture on it, meaning the lines are infinitely accurate (they will never become pixelated). The maximum sampling resolution for each image is +3 (8 samples per pixel); our eyes cannot distinguish an even higher quality, though you can make Brazil sample 256 points per pixel.
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Min3Plus3.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Min2Plus3.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Min1Plus3.jpg}} |
+|    {-3, +3}    |    {-2, +3}    |    {-1, +3}    |
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_0Plus3.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Plus1Plus3.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Plus2Plus3.jpg}} |
+|    {0, +3}    |    {+1, +3}    |    {+2, +3}    |
+
+\\
+
+Even thought the potential quality of the rendering is very high, there are major sampling artifacts when we begin with a low quality sampling resolution. As the first image shows, Brazil is trashing about like a headless chicken when it is not allowed to perform an accurate enough initial sampling pass. The result is very anti-aliased (because of the +3 maximum sampling) but the super-pixel elements are all messed up. When we start to increase the minimum quality, the [[http://en.wikipedia.org/wiki/Moire|moire patterns]] start to disappear and the image becomes more and more accurate. At {+1, +3} we finally have a completely accurate representation of our texture. {+1, +3} is a relatively high sampling resolution, though you should expect to use similar domains for any production quality rendering. Since the black stripes become very thin in the top half of the rendering (they become thinner than a single pixel), we need multiple samples per pixel for the minimum sampling resolution in order for Brazil to detect them as continuous entities...
+
+\\
+
+----
+======Adaptive Filters======
+
+Since you can specify two different sampling resolutions in Brazil, you also have to specify when you want to use the more accurate one. By default, Brazil will sample the whole image at the lowest sampling resolution, then refining (adaptive sampling) the sample grid whenever two neighbouring samples meet the specified threshold settings. Let us assume we have a simple scene with two objects, a groundplane and a single lightsource plus skylight. If we set the minimum sampling resolution to -2 (one sample every 4 pixels) and the maximum to 2 (four samples per pixel) we can expect the following results without adaptive sampling:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_NoAdaptive.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilAdaptiveSamplingHighQuality.jpg}} |
+| The entire image is sampled at -2 resolution | The entire image is sampled at +2 resolution |
+
+\\
+
+Now, Brazil has four different settings that allow you to set up adaptive thresholds. I typically use all four of them, but then I'm rarely under an extreme deadline so I can afford to spend a few minutes extra on a rendering. These are:
+
+\\
+
+  - [[#Object Edge]]
+  - [[#Normal]]
+  - [[#Z-Depth]]
+  - [[#Contrast]]
+
+\\
+
+======Object Edge adaptation======
+
+When sample A intersects our groundplane, and the neighbouring sample B intersects the blue glass, we know that somewhere in between there must be a transition from groundplane to glass. We can use such a threshold to trigger a refinement event:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ObjectEdgeShow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ObjectEdge.jpg}} |
+| All the pixels (red) where the Object Edge refinement was performed. | The resulting image. As you can see, the edges are smooth, but all the sharp lines on the interior of the glasses are still chunky and rough. |
+
+\\
+\\
+
+======Surface Normal adaptation======
+
+Instead of checking for different objects, the Normal adaption compares the surface normal vectors of samples A and B. If these differ sufficiently then a refinement event is triggered:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_NormalAdaptiveshow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Normal.jpg}} |
+| All the pixels (red) where the Normal refinement was performed. | The resulting image. This refinement algorithm found the near edge of the green glass, but it was unable to pick up on the far edge. Since the top edge of a glass is fairly level the normal vectors all point upwards. The groundplane also has vertical normals and there was thus insufficient difference. It is already clear that Object Edge and Normal refinement complement each other very nicely. |
+
+\\
+
+======Z-Depth adaptation======
+
+Yet another geometric property that can be evaluated is the difference in distance between |Camera, A| and |Camera, B|. When sample A is very close and B is very far, it's probably safe to assume there's a lot happening in between:
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ZDepthShow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ZDepth.jpg}} |
+| All the pixels (red) where Z-Depth refinement was performed. | The resulting image. The image on the left already shows the weaknesses of this approach. Near tangent surfaces are easily tagged (such as the upper half of the groundplane) even though this is a completely pointless refinement in this case. |
+
+\\
+
+======Contrast adaptation======
+
+This is the only non-geometric filter available. It relies on the results of the first (coarse) sampling pass and then refines based on relative contrast between adjacent samples. This is probably the most useful filter available in the Brazil sampling engine
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ContrastShow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Contrast.jpg}} |
+| All the pixels (red) where Contrast refinement was performed. | The resulting image. Contrast refinement found almost all sharp edges in the rendering, with the exception of the transition between the blue glass and the shadow. |
+
+\\
+\\
+
+Grand Finale...
+
+\\
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_AllShow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_All.jpg}} |
+| If we combine all four filters we get an overlay of refinement grids. The Z-Depth refinement does not contribute greatly in this case and could have been left out. | None of the filters found sufficient difference on the interior of the shadow field. Contrast tagged a few pixels, but not enough to sample the entire gradient at a higher resolution. As a result the resultion of the interior of the shadow is -2 which is coarse enough to see the noise of the skylight. We either have to fine-tune the contrast filter to be more sensitive (picking a contrast threshold colour closer to black) or increase the resolution of the minimum sample density. |
+
+
+
+

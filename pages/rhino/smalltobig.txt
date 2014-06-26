@@ -1,0 +1,42 @@
+====== Existing small radius ======
+> **Summary:** //When working with multiple fillet radii, we start with the largest values first and progress in order, to the smallest fadius, to avoid running a fillet off the edge of a surface it is following. This tutorial shows a technique to use when an existing smaller fillet is complicating things.//
+
+======Small to big======
+//[[http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Small_to_Big/Sm2Big.zip|Download Rhino 3DM file]]//
+
+----
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Small_to_Big/SmallToBigStart.png}} | The existing fillet is 3mm.  We will add a 4mm filet around the top edge. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Small_to_Big/SmallToBig01.png}} | Run FilletEdge with 4mm.  It will do what it can and fail. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Small_to_Big/SmallToBig02.png}} | Extract the two 4mm surfaces, and the 3mm surface. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Small_to_Big/SmallToBig03.png}} | Split the red surface by isocurve where it intersects the edge of the 4mm filet surface. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Small_to_Big/SmallToBig04.png}} | Delete the top piece of the 3mm surface. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Small_to_Big/SmallToBig05.png}} | Untrim the fillet surfaces. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Small_to_Big/SmallToBig06.png}} | Use FilletSrf to make the curved transition surface. |
+
+\\
+
+| {{http://en.wiki.mcneel.com/content/upload/files/How_to_tutorials/Fillets/Small_to_Big/SmallToBigEnd.png}} | Join all the surfaces to the polysurface, and cap to replace the missing top surface. |
+
+\\
+
+

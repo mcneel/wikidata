@@ -1,0 +1,15 @@
+====== Reparatur boolescher Probleme von JB ======
+
+Ich tue folgendes, wenn ich ein boolesches Problem von jemand erhalte. -JB McNeel Technischer Support
+
+Als erstes überprüfe ich die Einstellungen der Einheiten und Toleranz verglichen mit der Geometrie in der Datei und vergewissere mich, dass kein größeres Skalierungsproblem vorhanden ist.  Angenommen die Einheiten sind richtig, überprüfe ich, dass die Toleranz mindestens 0.001" oder 0.01mm beträgt oder vielleicht etwas größer, vor allem für kleine Teile mit winzigen Details.  Wenn die Einstellungen falsch sind, nehme ich die Änderungen vor; Ich skaliere die Geometrie, falls nötig, zerlege und verbinde erneut, um mich zu vergewissern, dass ich mit Volumenkörpern arbeite.  Wenn keine Volumenkörper, überprüfe ich die Flächennormalen mit dem Befehl Richtung und repariere alle Normalen, die in die falsche Richtung zeigen.
+
+Als nächstes rufen Sie den Befehl FehlerhafteObjekteAuswählen auf und vergewissern Sie sich, dass keine Probleme mit den Kurven oder Flächen vorhanden sind.  Wenn Probleme vorhanden sind, werden diese durch Neuaufbauen der Kanten, Abtrennen von Trimmkurven und erneutem Trimmen fast immer behoben.  Ab und zu muss ich eine Fläche löschen und ersetzen, aber das kommt nicht allzu oft vor.
+
+Danach führe ich den Befehl Schnitt zwischen den zwei Volumenkörpern aus und schaue, ob ich geschlossene Kurven erhalte, die die Trimmungs- und Verbindungsgrenzen klar definieren.  Wenn die Kurve offen ist, überprüfe ich die Flächen nach dem Grund.  Wenn die Schnittkurven aussortiert sind, funktionieren die booleschen Operationen die meiste Zeit.  Manchmal können sie aber auch mit guten Kurven fehlschlagen.  In diesem Fall nehme ich die Teilung, Löschung und Verbindung selber vor, um das Resultat zu erhalten, das die boolesche Operation erzeugt hätte.
+
+Das ist der Vorgang.  Probieren Sie es.    Sie werden sehr wahrscheinlich das Problem im Vorgang finden und reparieren.
+
+Sollten diese Informationen verwirrend sein, lesen Sie weiter.  Die Informationen und Details auf den folgenden Seite ist ausgezeichnet.  -JB
+
+

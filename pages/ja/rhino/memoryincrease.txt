@@ -1,0 +1,53 @@
+====== Rhino 4により多くのメモリを割り当てる - 2GBから3GB ======
+
+> **Summary:** //最新のRhino 4は、大きなアドレスを使用することができます。**C:\BOOT.INI**ファイルに小さな変更を加えることで、Rhinoに使用可能なメモリを2GBから3GBにすることができます。//
+
+> **Warning:** //<color darkred>**数多くのMicrosoftのテクニカルサポートのドキュメントは、下に説明されている変更は避けた方がよいと警告しています。変更を加える場合は慎重に、また問題が発生した場合を考えて元に戻せるようにしておいてください。ここに記載されている情報は、ご自身の責任においてご利用ください。</color>**//
+
+======詳細======
+**C:\Boot.ini**ファイルにある下の行の最後に/3GBパラメータを付けて、再起動してください。
+
+**Windows 2000 Proの場合**
+
+multi(0)disk(0)rdisk(0)partition(2)\WINNT="Windows XP Professional" <color red>**/3GB**</color>
+
+**Windows XP Proの場合**
+
+multi(0)disk(0)rdisk(0)partition(2)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn <color red>**/3GB**</color>
+
+
+> **Note:** //Windowsのファイルエクスプローラは、デフォルトでC:\BOOT.INIのような隠しシステムファイルを表示しないようになっています。フォルダオプションを変更して、ファイルが表示されるようにしてください。その後、ファイルのプロパティを変更して読み取り専用でないように設定し、それから起動オプションに「/3GB」スイッチを追加してください。変更が済んだら、C:\BOOT.INIを読み取り専用ファイルに戻し、システムを再起動して、変更が反映されるようにします。//
+
+======バックグラウンド======
+
+Microsoft® Windows NT®テクノロジに基づいたオペレーティングシステムは常に、4ギガバイト（GB）の仮想メモリを表わすフラットな32ビットの仮想アドレススペースをアプリケーションに提供していました。
+
+通常、アドレススペースは、2GBにアプリケーションが直接アクセスでき、その他の2GB にはWindowsエグゼクティブソフトウェアのみがアクセスできるように分けられます。
+
+お客様のご要望に応えて、Microsoft Windows XP Professionalは3GBのフラットな仮想アドレススペースをアプリケーションに提供し、カーネルとエグゼクティブコンポーネントが1GBのみを使用するようになりました。
+
+/3GBスイッチがBoot.iniファイルで使用されない限り、プロセスとアプリケーションの仮想アドレススペースは依然として2GBに制限されます。
+
+/3GBスイッチは、プロセスヘッダーでIMAGE_FILE_LARGE_ADDRESS_AWAREを使用するアプリケーションに3GBの仮想アドレススペースを割り当てます。このスイッチは、アプリケーションが2GB を超えて1GBの追加の仮想アドレススペースを扱えるようにします。
+
+======/3GBスイッチを使用している際のビデオドライバの問題:======
+
+/3GBスイッチをboot.iniに付け加えてから再起動した際にビデオドライバが正しく動作しない場合（VgaSaveフォールバックドライバが使用されている）、**/USERVA**スイッチを次のように更に追加すると問題が解決することがあります。
+<color red>**/3GB /USERVA=2800**</color>
+
+このスイッチについての詳細は、このサイトをご覧ください: http://support.microsoft.com/default.aspx?scid=kb;jp;319043
+
+boot.iniを編集する場合、OSで変更後のものを元のものと一緒に書くといいでしょう。そうすれば、変更したものがうまくいかなかった場合、起動時に元の設定を選択することができます。下に挙げるのは、/3GB および /USERVAスイッチをテストする際に役に立つWindows XP Pro boot.iniの例です:
+
+
+[boot loader]
+timeout=30
+
+default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
+
+[operating systems]
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn
+
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional with /3GB" /fastdetect /NoExecute=OptIn /3GB /USERVA=2800
+
+

@@ -1,0 +1,52 @@
+====== Risposte frequenti -- Rhino ======      
+
+Di seguito, un elenco di **Risposte frequenti** che possono risultarvi utili. 
+----
+==Come faccio a mandare una segnalazione di arresto anomalo?==
+  * Siete in grado di riprodurre il crash? In tal caso, agli sviluppatori interesserebbe ricevere le informazioni specifiche necessarie per riprodurre il crash. Un problema ripetibile è l'unico modo efficace per rilevare e risolvere i problemi relativi a un software.
+  * Quando Rhino va in crash, se c'è abbastanza memoria disponibile, si avvia il sistema di segnalazione di crash. Inserite il vostro indirizzo di posta elettronica e descrivete l'operazione che stavate cercando di eseguire quando Rhino è andato in crash. Un breve elenco dei comandi che stavate usando prima che si verificasse il crash può risultare utile.
+  * Se possibile, spuntate la casella per l'invio del file 3dm con la segnalazione.
+  * Se fornite il vostro indirizzo di posta elettronica ed una descrizione, **la vostra segnalazione verrà analizzata da un umano**. Se non fornite il vostro indirizzo di posta elettronica ed una descrizione, verrà usato un processo automatico per analizzare la segnalazione di arresto anomalo.
+
+----
+
+==Modalità sicura==
+  * Esiste un collegamento nel gruppo di programmi di Rhinoceros. La modalità sicura è uno strumento di risoluzione dei problemi che blocca l'OpenGL ed il caricamento dei plug-in. In V5, blocca anche il caricamento delle barre degli strumenti e dell'RDK. Di norma, si risponde affermativamente alla richiesta di caricamento. La modalità sicura è uno strumento di risoluzione dei problemi e non è stata ideata come modalità di lavoro.
+
+----
+==Disattivare i plug-in di V5==
+  -Andate su Strumenti > Opzioni > Plug-in e, nella colonna Attivato, togliete il segno di spunta a tutti i plug-in non forniti con Rhino.
+  -Riavviate Rhino in modo normale e verificate che il problema di arresto anomalo non sia più presente. Riattivate uno dei plug-in, riavviate Rhino e verificate se si ripete il crash. In caso negativo, il plug-in che avete attivato non era la causa del problema. Ripetete la procedura di identificazione fino a trovare il plug-in che causa il problema.
+
+----
+
+==Rhino V5 non si avvia==
+  * Questo problema può essere dovuto ai driver della scheda video o a un plug-in. Ecco cosa fare per restringerne le cause.Avviate Rhino in modalità sicura (trovate il collegamento nel gruppo di programmi di Rhinoceros) e, nella scheda Strumenti > Opzioni > Vista > OpenGL, TOGLIETE IL SEGNO DI SPUNTA dall'opzione "Usa modalità di accelerazione grafica hardware". Chiudete Rhino ed avviatelo in modo normale. Se l'avvio avviene senza crash, il problema è stato probabilmente causato dal driver della scheda video. Vi consigliamo di aggiornarlo. Se Rhino continua ad andare in crash dopo aver scaricato ed installato l'aggiornamento del driver, è molto probabile che il problema sia dovuto ad un plug-in.
+
+  * In tal caso, riavviate in modalità sicura e RIMETTETE IL SEGNO DI SPUNTA nella casella di accelerazione grafica hardware. Quindi, andate su Strumenti > Opzioni > Plug-in e, nella colonna Attivato, togliete il segno di spunta a tutti i plug-in installati non forniti con Rhino e spuntate la casella "Richiedi caricamento..." nella parte inferiore. Riavviate Rhino in modo normale (non in modalità sicura) e, alla richiesta di caricamento dei plug-in, rispondete NO a tutto. Se Rhino si avvia, il problema deriva da uno dei plug-in protetti da caricamento. Riavviate Rhino di nuovo in modo normale e, questa volta, rispondete SÌ al caricamento del primo plug-in e NO al resto. Se, caricando il primo plug-in, Rhino va in crash, allora significa che il problema è stato causato da quel plug-in. Se non va in crash, non si tratta di quel plug-in.  Ritornate sulla scheda dei plug-in ed attivatelo. Riavviate di nuovo e ripetete la procedura fino a trovare il plug-in che causa il problema.
+
+----
+
+==Posso installare Rhino sui miei due computer?==
+  * Sì. Il contratto di licenza vi consente di installare Rhino su tutti i computer in vostro possesso, a condizione che eseguiate Rhino su un solo computer per volta. Non potete "prestare" la vostra licenza di Rhino ad un amico. 
+
+----
+
+==Quando cerco di aprire un file, ottengo un messaggio di errore che avverte di un elemento illeggibile==
+  * Ecco come funziona il sistema. Ci sono due parti:
+    - Autosalvataggio - Se avete attivato l'Autosalvataggio in Rhino (Opzioni di Rhino > File > Autosalvataggio), vengono scritti dei file temporanei nella cartella specificata e viene impostato un contrassegno che indica che Rhino è in esecuzione. Quando Rhino si chiude normalmente, il file di autosalvataggio viene eliminato e Rhino cancella il contrassegno. Se Rhino va in crash, il contrassegno non è stato cancellato ed il file di autosalvataggio continua ad essere presente al successivo avvio di Rhino. In tal caso, verrete avvisati della chiusura non corretta di Rhino e vi verrà data un'unica opportunità di salvare il vostro lavoro recuperando il file di autosalvataggio. Rispondendo di no, perderete il file.
+    - Backup - A partire da V4 SR7, abbiamo aggiunto una funzione di backup automatico. Se la funzione non è stata disattivata (Opzioni di Rhino > File > Salva > Creare backup file...), quando si apre un file esistente, le modifiche effettuate nella nuova sessione di editing vengono salvate in una nuova copia del file, al nome del file esistente aperto viene concatenato ".bak" ed il file viene lasciato nella stessa cartella.
+  * V5 ora genera file *.3dmbak che si possono aprire dall'elenco dei tipi di file.
+  * Per V4, usate Esplora file nella visualizzazione elenco o dettagli, con le Opzioni delle cartelle di Windows impostate in modo da visualizzare le estensioni dei file per i tipi di file conosciuti e rinominate il file da [nomefile].3dm.bak a [nuovonomefile].3dm. Quindi, potete aprirlo come qualsiasi altro file .3dm di Rhino.
+
+----
+
+==Quando ho installato Rhino, ho spuntato l'opzione per usare lo Zoo, ma non uso lo Zoo==
+  * Su Windows Vista o Windows 7, eliminare tutti i file che si trovano in: C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses. 
+  * Su Windows XP, eliminare tutti i file che si trovano in: C:\Documents and Settings\Tutti gli utenti\Dati applicazioni\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  - Riavviate Rhino.
+  - Inserite il vostro codice quando richiesto.
+
+Nota: Su alcuni sistemi, anziché la cartella "\Tutti gli utenti\", il percorso potrebbe essere il nome di accesso al "\Dominio\".
+
+----

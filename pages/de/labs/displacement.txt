@@ -1,0 +1,104 @@
+====== Verschiebung ======
+
+> **Zusammenfassung:** //Verschiebungs-Plug-in in Echt- und Renderzeit//
+
+\\
+
+[[http://de.wikipedia.org/wiki/Displacement_Mapping|Verschiebungs-Mapping]] ist der geometrische Vetter des [[http://de.wikipedia.org/wiki/Bumpmapping|Relief-Mapping]] . Erlaubt, Polygonnetze zu verformen (egal ob Polygonnetzobjekte oder NURBS-Render-Polygonnetze), gestützt auf Grauskaladaten einer Textur.
+
+\\
+
+Das hier erhältlich Verschiebungs-Plug-in erfordert, dass das [[RendererDevelopmentKit10|RDK]] läuft. Es ist aber auch möglich, dass Sie das RDK bereits installiert haben, also downloaden und installieren Sie einfach das RDK, wenn Sie dieses Plug-in nicht laden können.
+
+\\
+
+ [[http://en.wiki.mcneel.com/content/upload/files/Displacement_20070625.zip|Download des Plug-ins]] 
+
+\\
+
+----
+\\
+
+Und so funktioniert dieses Plug-in:
+
+\\
+
+1. Sie beginnen mit einem Objekt ohne Verschiebungsdaten. Alle Verschiebungseigenschaften werden unter dem Reiter Displacement im Dialog Object properties gruppiert.
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_01.png}}
+
+\\
+\\
+
+2. Sie müssen die Verschiebung nach Objekt aktivieren. Das bedeutet, Sie können die Verschiebung auch schnell deaktivieren, ohne Ihre Einstellungen zu verlieren. Wenn Sie Verschiebung aktivieren **und** eine Textur wählen (in diesem Fall habe ich eine standardmäßige prozedurale Textur verwendet, die mit dem RDK kommt), sehen Sie eine Vorschau der Verschiebung im Ansichtsfenster:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_02.png}}
+
+\\
+\\
+
+3. Sie können den Effekt steigern, indem Sie einen höheren Wert **Amount** wählen. Dieser Wert weist auf die Einheitenzahl hin, um die ein weißer Pixel verschoben wird. Schwarze Pixel werden gar nicht verschoben und graue Pixel werden interpoliert:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_03.png}}
+
+\\
+\\
+
+4. Verschiebung ist an die Textur-Mapping-Eigenschaften eines Objekts gebunden. Da ich für den Start einen Flächenverband gewählt habe, verfügt jede Seite über eigene Texturdomäne, was zu einer sehr unebenen Verschiebung führt. Wenn ich das Textur-Mapping auf kugelförmig überschreibe (der Standard ist nach Fläche), gibt es keine plötzlichen UV-Sprünge über angrenzende Flächen und das Resultat erscheint glatter. Es kommt jedoch ein UV-Sprung über die Kugelnaht vor:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_04.png}}
+
+\\
+\\
+
+----
+
+\\
+\\
+
+Wenn Sie mehr Kontrolle über das Verschiebungsverhalten benötigen, können Sie den Abschnitt **Advanced controls** aktivieren. Die weiteren Steuerungen bieten ein Interface für die Kerneinstellungen des Verschiebungsalgorithmus wie Versätze, Unterteilungen und Wiederholungen.
+
+Wenn Sie z.B. die weiteren Einstellungen aktiviert haben, können Sie verschiedene Werte für schwarze und weiße Pixelversätze bestimmen:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_01.png}}
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_02.png}}
+
+\\
+\\
+
+Die Option **Ignore creases** verschweißt ein Polygonnetz vor der Verschiebung vollständig, das bedeutet, dass die Kanten von Flächenverbänden, die UV-Sprünge enthalten, weniger sichtbar sein werden.
+
+\\
+\\
+
+Polygonnetze werden standardmäßig vor der Verschiebung unterteilt, um einen höheren Detailgrad, wo möglich, zu garantieren. Sie können die Unterteilung deaktivieren, indem Sie die Markierung im Kästchen entfernen, was bedeutet, dass das erhaltene verschobene Polygonnetz in Größe dem Originalpolygonnetz identisch ist:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_03.png}}
+
+\\
+\\
+
+Beobachten Sie, was geschieht, wenn wir die Unterteilung aktivieren:
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_04.png}}
+
+Jedes Dreieck im Polygonnetz wird gemessen, um zu sehen, ob es den bestimmten Grenzbereich überschreitet (je niedriger der Grenzbereich, desto aggressiver die Unterteilung), und bei Überschreiten, wird er durch drei kleinere Dreiecke ersetzt. Dieser Vorgang wird so viele Male, wie in der Option **Max steps** definiert, wiederholt. Beachten Sie, dass niedrige Werte für **Contrast** oder hohe Werte für **Max steps** lange Berechnungszeiten benötigen könnten.
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_05.png}}
+
+\\
+\\
+
+{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_06.png}}
+(Eine Nahaufnahme des verschobenen Polygonnetzes, zeigt das Unterteilungsschema an)
+
+\\
+
+----
+
+\\
+\\
+
+Verschiebungspolygonnetze können mit dem Befehl _ExtractDisplacedMeshes extrahiert werden.
+
+
