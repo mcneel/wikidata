@@ -1,6 +1,16 @@
 =====Video Troubleshooting: Microsoft GDI Generic=====
 
-If you see GDI Generic listed in Rhino's OpenGL options page, this may be caused by several different scenarios. Essentially, you can think of this meaning that no graphics card is found... which is not good. 
+Having GDI Generic listed in Rhino's OpenGL options page indicates that your graphics card was not found or is not being used by Rhino. Please try the following to enable your graphics card:
 
-  * Accelerated hardware may have been disabled due to a crash in the graphics card driver causing Rhino to close. **Try this**, Enable **accelerated hardware** if it is off to see the actual graphics card in your computer.
-  * You may be running Windows on a Mac using a Bootcamp partition. If the OSX version you are using has outdated Bootcamp drivers, the graphics card driver it has installed for Windows to access the graphics card on your Mac isn't working. **Try this**, Update your OSX version from Apple, this should also update your Bootcamp drivers which are part of OSX. You may need to set up a new Bootcamp partition to fix the display issue in Rhino. Mac hardware, the OSX and Windows versions you are using are all variables and this fix may not work for all combinations.   
+**Enable Hardware Acceleration in Rhino**
+  - From the **Tools** menu in Rhino, click **Options**
+  - Expand the **View** tab
+  - In the **OpenGL** tab, select the **Use accelerated hardware modes** checkbox.
+
+**Update your Bootcamp drivers**
+  - If you are running Windows on an Apple computer, your OS X Bootcamp Drivers may be out of date.
+  - Restart your computer
+  - Hold the **option** key while your computer starts
+  - Select the Mac partition, and **boot Mac OS X**
+  - From the **Apple** menu, click **Updates**.
+  - Install all OS X updates
