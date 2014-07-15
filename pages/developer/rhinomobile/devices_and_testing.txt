@@ -30,3 +30,17 @@ For more information, see the [[https://developer.amazon.com/sdk/fire/connect-ad
 ===== iOS Devices =====
 
 iOS devices must be registered with Apple before you can use them for development or testing.  This process is known as Device Provisioning.  Follow [[http://developer.xamarin.com/guides/ios/getting_started/installation/device_provisioning/|these directions from Xamarin]] to get your iOS device ready to go.
+
+Once you have your device provisioned and connected via USB, you can run and debug your app from Xamarin Studio or Visual Studio (via the Mac Build host).
+
+Devices are the best place to test your app.  The four areas where devices differ most from the simulator are:
+  - Networking and connectivity
+  - Location services
+  - Memory
+  - OpenGL ES
+
+The last two are the most critical to RhinoMobile apps.  Large meshes in .3dm files can consume lots of memory; the simulator will try to invoke OutOfMemory warnings, but there will not be as consistent (or realistic) as running and debugging on the device.  Finally, OpenGL ES calls will be interpreted differently on the simulator than on the device...it is possible that code working on the simulator will not work on all devices.
+
+
+
+ 
