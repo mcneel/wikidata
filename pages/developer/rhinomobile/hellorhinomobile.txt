@@ -38,8 +38,15 @@ This page presumes you have gone through the [[developer:rhinomobile:getting_sta
 
 ----
 
-**Windows 8 Step-by-Step Instructions**
+**Windows 8.1 Step-by-Step Instructions**
 
 > :!: **WARNING:** This section is a work-in-progress: Information may be missing or incomplete.
 
-COMING SOON...
+  - **Launch Visual Studio** and open the **HelloRhinoMobile** solution.  (These instructions presume you are using Visual Studio 2013 Professional).
+  - **Right-click** the **HelloRhino.Droid** project and select **Set As StartUp Project** {{ :developer:rhinomobile:android-logo_small.png|}}from the drop-down menu.  This makes **HelloRhino.Droid** the active project for the build.  (HelloRhino.Droid is the Android target project.  The //.Droid// suffix is a naming convention from Mono that avoids namespace collisions with the main Android libraries). [image here]
+  - Open the **Android Emulator Manager**: Navigate to **Tools** > **Open Android Emulator Manager**. A window called the **Android Virtual Device (AVD) Manager** should appear.  This is part of the Android SDK and will be familiar to you if you have done any Android development before. This is where you define your Android Virtual Devices (AVDs) that run in the Emulator.  [image here]
+  - **Highlight each of the existing AVD** and click the **Delete** button. These AVDs are much too slow for development.
+  - To create a new AVD: Click the **Create** button.  The Create new Android Virtual Device (AVD) window appears.  Create a new AVD with the following parameters.  **AVD Name**: //Nexus7-API17//; **Device**: //Nexus 7 (7.02", 1200 x 1920:xhdpi)//; **Target**: //Android 4.3 - API Level 18//; **CPU/ABI**: //Intel Atom (x86)//; **Skin**: //Skin with dynamic hardware controls//; **Front Camera**: //Webcam0//; **VM Heap**: //64// **Emulation Options**: //Use Host GPU enabled//. [image here]
+  - You should see your new AVD in the list.  You have just created your first AVD.  More information on creating Emulators can be found in the [[http://developer.android.com/tools/devices/index.html|Android documentation]].  You can create as many as you need.  Tips on using the Emulator can be found in the [[developer:rhinomobile:simulators_and_emulators|Simulators & Emulators page]].
+  - Back in the **Android Virtual Device (AVD) Manager** window, highlight the AVD and click the **Start** button.  If all went well, after a brief startup period (take our word for it, it's much quicker than the standard emulators) you should see Android boot.  It may take extra time to launch the first time and it is highly recommended that you leave this window open during your development session.  Once Android boots, you are ready to go...you just need to unlock the device by sliding the lock to the right.
+  - 
