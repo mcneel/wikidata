@@ -1,0 +1,273 @@
+====== A list of graphics cards and how well they work with Rhino. ======
+
+=====What Graphics Cards do you recommend for use with Rhino?=====
+
+**//We do not make any specific hardware recommendations or comparisons.//**
+
+Also see these pages:
+  * [[http://wiki.mcneel.com/rhino/rhino5videocards|Video Card Recommendations and General Requirements]]
+  * [[http://wiki.mcneel.com/rhino/hardwarebaseline|Hardware Guidelines for Rhinoceros 5]]
+
+**The following is a list of graphics cards details for how they work with Rhino.**
+----
+As you add your listing, please use all of the table entries and add as much detail as you can.  Here is a link to a Rhino script that will give you more information about your video system than you probably want to know:  http://en.wiki.mcneel.com/content/upload/files/video.zip
+Thanks.  John Brock
+
+---- (Added 3/14/2013)
+| Brand | Intel |
+| Model | Intel HD Graphics 4000 |
+| <color red>NOT RECOMMENDED</color> by: | John Brock|
+| Notes: | Computers including 13" Apple MacBook, 13" MacBook Pro, and 13" Retina, and any brand laptop that only has the embedded Intel graphics chip, should be avoided for Rhino for Windows. This chip does not support Windows OpenGL adequately. You will be plagued with problems we can not fix. Many 'Hybrid' laptops also have a secondary 'high performance' graphics chip (by AMD or Nvidia), intended for graphics intensive applications, do work very well. **These hybrid computers are recommended.**|
+
+---- (Added 1/3/2013 - Updated 7/24/2013)
+| Brand | Nvidia |
+| Model | Quadro 600 |
+| Comments by: | John Brock |
+| Notes: |**See July 2013 Update note below:** So far, my experience with the Quadro 600 has been pretty bad. I ran into crashing problems using their driver version 310.90. Nvidia tech support suggested installing 311.35 (current drivers), installed using the Custom option and selecting a "clean" install. The current driver is no better. Every few minutes, Rhino and any Chrome browser windows I had open would turn black, and a message about the Nvidia driver had stopped responding and had recovered. It locks up Rhino and Chrome. Rhino didn't even have to be running and Chrome still locked up. I can not currently recommend these cards. I have removed it from my system.|
+| More Notes: | Recently, a number of users have been reporting performance and display problems with the current Quadro drivers. It seems that support for the OpenGL 2.0 and Shader 1.2 specifications are not as robust as they once were. Some users are reporting performance degradation with Quadro cards between Rhino V4 and V5. Rhino V5 SR2 includes a change that seems to improve performance for these Quadro cards.|
+| **July 2013 update** - JB: | This month, NVIDIA issued a **major driver update** that seems to have fixed many of the problems reported with Quadro cards, including the Quadro 600. The old drivers for this card would continually crash and restart even with very simple things like just running the Google Chrome Browser. The new driver update issued this month seems to have fixed these problems for both Windows 7 and Windows 8. **I have no reservations in recommending these cards now.**|
+
+---- (Added 1/3/2013 - updated 5/8/13)
+| Brand | Nvidia |
+| Model | GTX |
+| Recommended by: | Brian James |
+| Notes: | I've used a couple cards from this series including the GTX 470 and GTX 690. Both have worked great and there are many drivers available on Nvidia's site if your particular hardware combination is causing display issues. Updating the drivers is often the fix. |
+
+---- (Added 12/16/2011)
+| Brand | AMD |
+| Model | FirePro v7900 and FirePro v5900 |
+| Recommended by: | Jeff LaSor |
+| Notes: | It turns out that I just recently completed a certification process for AMD using both the v5900 and v7900, and McNeel was even mentioned in their launch of these cards. Both very nice cards and both work incredibly well, especially given their very small footprints compared to other cards. Long story short, I've replaced my FirePro v8800 in my development box with the FirePro v7900. Yes, it's that good. All I can say is that AMD is now doing a great job getting their cards working for real life situations and programs rather than trying to figure out what the next marketing hype can be made about something that rhymes with Pooduh. All of the latest V5 display features have been tested and confirmed as working for the v5900 and v7900. If you can afford the 7900 then get it. The 5900 performance is not as good, but again, it's amazing how good it really is given its overall size, power consumption and heat generation. Two thumbs up for AMD! |
+
+|Addition August 2012: | **//Several advanced users on the Rhino newsgroup have reported bad experiences with this card in the area of antialiasing//** - which is far inferior to Nvidia cards - to the point of removing the cards from their machines and going back to an Nvidia card.  Jeff himself has stated //"Nvidia has been, is, and probably always will be better at AA than AMD... Why? I have no idea. Will it change? I have no idea? Can I fix it on my end? I have no idea, but so far I don't think so."//   So, if you are planning to buy one of these cards, make sure to check the newsgroup and do your research first. |
+
+---- (Added 4/11/2011)
+| Brand | AMD/ATI |
+| Model | FirePro V5800 |
+| Recommended by: | Aya Maeda |
+| Driver version: | ATI driver 8.77.6.3 Rev.A |
+| Notes: | This card had strange display problems when Zooming and Panning until the user called AMD and they recommended the above listed drivers. These cards were originally recommended for Microstation. Do not use the "Use region buffers when available" in OpenGL options. |
+
+---- (Added 3/2/2011)
+| Brand | Nvidia |
+| Model | Nvidia GTX 295 |
+| Recommended by: | Rhino Support Newsgroup |
+| Notes: | The newer GTX 300, 400, and 500 series replacements seems to be intentionally disabled for OpenGL performance. Their OpenGL performance is measurably slower than the GTX 295. |
+
+---- (Added 3/2/2011)
+| Brand | Nvidia |
+| Model | Nvidia Quadro 4000, 5000, 6000 |
+| Recommended by: | Rhino Support Newsgroup |
+| Notes: | These are expensive cards but deliver better performance than the GTX 295. Most users report good performance and minimal issues using the ODE drivers. |
+
+
+---- (Added 3/2/2011)
+| Brand | Intel|
+| Model | Intel HD Graphics|
+| <color red>NOT RECOMMENDED</color> BY: | John Brock, <tech@mcneel.com> |
+| Note: | I manually process a lot of Rhino crash reports. These cards are total junk for OpenGL based applications like Rhino. <color red>AVOID THEM!</color> Lots of crashes even with relatively simple commands like PictureFrame. Be aware that many laptop makers are using these. AVOID THEM! |
+
+---- (Added 3/2/2011)
+| Brand | Intel|
+| Model | Intel 82865G Graphics Controller|
+| Model | Intel 82945G Express Chipset Family|
+| Model | Mobile Intel 4 Series Express Chipset Family|
+| <color red>NOT RECOMMENDED</color> BY: | John Brock, <tech@mcneel.com> |
+| Note: | These are more bad cards. These cards are not intended for OpenGL based, graphics intensive applications like Rhino. They are commonly found on inexpensive laptops intended for email, Internet browsing, and are good for very little else. That said, they will work, but they do not support accelerated graphics. |
+
+---- (Added 1/4/2011)
+
+| Brand | NVIDIA |
+| Model | Quadro 1800 and 2000 series |
+| Recommended by: | Jørgen, <holo1@holografisk.no> |
+| Note: | If you work a lot with curves or isocurves visible. These are great with Rhino. |
+
+---- (Added 1/4/2011)
+
+| Brand | NVIDIA |
+| Model | [[rhino:geforce|GeForce]] 2xx series |
+| Recommended by: | Jørgen, <holo1@holografisk.no> |
+| Note: | The nVida Geforce 4xx and 5xx series are apparently no faster than the previous generations. So go for the 2xx series instead. |
+ 
+---- (Added 1/4/2011)
+
+| Brand | AMD/ATI |
+| Model | FirePro V8750, V8800 |
+| Recommended by: | Jeff LaSor, <jeff@mcneel.com> |
+| Note: | My development box has the FirePro v8750 in it (for over a year now), and it's what I've been using to development most of the newer V5 display features. |
+
+---- (Added 1/4/2011)
+
+| Brand | AMD/ATI |
+| Model | Radeon 4000 & 5000 series |
+| Recommended by: | Jeff LaSor, <jeff@mcneel.com> |
+| Note: | I've also have the Radeon 4870 and it works really well too. |
+ 
+
+======The following entries are still valid but are getting pretty old. -JB======
+| Brand | NVIDIA |
+| Model | [[rhino:geforce|GeForce]] 8600M GT 256MB |
+| BIOS version | Apple - 70 |
+| Driver version | 6.14.11.134 |
+| Operating system & SP level | Windows XP Pro Service Pack 2 |
+| Special Rhino settings | None |
+| Special driver settings | None |
+| Rhino versions used with | V4 SR2 |
+| Known problems | |
+| Comments | I've been using this card in a [[MACBOOK]] Pro and have no complaints.|
+| Submitted by: | Brian James, <brian.james@mcneel.com> |
+
+----
+
+| Brand | NVIDIA |
+| Model | [[rhino:geforce|GeForce]] FX 5200 128MB |
+| BIOS version | 4.34.20.22.A1 |
+| Driver version | 6.14.10.6693 |
+| Operating system & SP level | Windows XP Pro Service Pack 2 |
+| Special Rhino settings | Redraw viewport when Rhino becomes active enabled |
+| Special driver settings | None |
+| Rhino versions used with | V2, V3, V4 |
+| Known problems | In V3, sometimes the Status Bar labels (Snap, Ortho, etc.) do not show but still are active. Also surface selection in shaded mode has highlight problems.|
+| Comments | This card works fine on all versions of Rhino.   It supports Rhino's special graphics modes.  Even though it is a "game" card its performance is good and it is not very expensive.  This was one of the cards that was used for testing the new V4 display pipeline.  We found lots of little details during the V4 development with this card.  Mine is running in a Dell Dimension 4600 system. |
+| Submitted by: | John Brock, <jb@mcneel.com> |
+
+----
+
+| Brand | NVIDIA |
+| Model | Quadro FX Go 700 128MB|
+| BIOS version | 4.31.20.52.C2|
+| Driver version | 6.14.10.4424 |
+| Operating system & SP level | Windows XP Pro Service Pack 2 |
+| Special Rhino settings | None |
+| Special driver settings | None |
+| Rhino versions used with | V2, V3, V4 |
+| Known problems | None |
+| Comments | This card works very well and is one of the few "workstation graphics" cards available on laptop computers.  The "Quadro" line of cards is designed for [[rhino:opengl|OpenGL]] graphics applications like Rhino. This was one of the cards that was used for testing the new V4 display pipeline.  This card has always been a solid performer for me.  It is running in a Dell Precision M60 laptop.|
+| Submitted by: | John Brock, <jb@mcneel.com> |
+
+----
+
+| Brand | NVIDIA |
+| Model | [[rhino:geforce|GeForce]] FX Go 5650 128MB|
+| BIOS version | 4.31.20.52.C6|
+| Driver version | 6.7.4.2 |
+| Operating system & SP level | Windows XP Pro Service Pack 2 |
+| Special Rhino settings | I use v4s TestSetAAlevel at 8 and it looks pretty good and does not slow down too much. |
+| Special driver settings | Vertical sync turned off, AA set to be controlled by applications |
+| Rhino versions used with | V2, V3, V4 |
+| Known problems | None |
+| Comments | So far so good- it drives a 1900 by 1200 screen and seems to work well.|
+| Submitted by: | [[rhino:pascal_golay|Pascal Golay]] <pascal@mcneel.com>|
+
+----
+
+| Brand | NVIDIA |
+| Model | PNY Quadro FX 330 64 MB RAM|
+| BIOS version | 4.34.20.84.06|
+| Driver version | 6.14.10.6693 |
+| Operating system & SP level | Windows XP Pro Service Pack 2 |
+| Special Rhino settings | None |
+| Special driver settings | None |
+| Rhino versions used with | V2, V3, V4 |
+| Known problems | None |
+| Comments | PCI-Express card, passive cooling (no noise), in my opinion a great [[rhino:opengl|OpenGL]] CAD-graphic card with a very good price/performance relation.|
+| Submitted by: | Michael Meyer AT flexiCAD com|
+
+----
+
+| Brand | NVIDIA |
+| Model | BFG 6800GT OC 256MB|
+| BIOS version | 5.40.02.15.05|
+| Driver version | 7.1.8.9 |
+| Operating system & SP level | Windows XP Pro Service Pack 2 |
+| Special Rhino settings | None |
+| Special driver settings | Vertical sync turned off, AA set to be conctrilled by applications |
+| Rhino versions used with | V2, V3, V4 |
+| Known problems | None |
+| Comments | I am seeing some odd slowdowns and viewport blackouts after pushing unreasonably large models all day relating to maximized viewports only |
+| Submitted by: | Sam Page |
+
+----
+
+| Brand | ATI |
+| Model | Mobility Radeon 9700 128Mb|
+| BIOS version | BK-ATI VER 008.017M.109.000|
+| Driver version | 8.162.0.0 Catalyst 5.8 - using the original ATI drivers for the standard Radeon graphic cards and Patje's Mobility Modder (http://www.driverheaven.net/patje/) |
+| Operating system & SP level | Windows XP Pro Service Pack 2 |
+| Special Rhino settings | None |
+| Special driver settings | Disable AA or set AA to application controlled |
+| Rhino versions used with | V3, V4 |
+| Known problems | In V3: disappearing Objects and Screen-Smudge in rendered viewports when AA is enabled |
+| Comments | This graphics card is often found in consumer notebooks and has very good general 3D performance. If it weren't for the glitches when using AA it would be an excellent budget solution for using Rhino on a latop |
+| Submitted by: | Simon Crowder |
+
+----
+
+| Brand | ATI |
+| Model | Mobility Radeon 9000 128MB (laptop) |
+| BIOS version | 008.007.010.000 |
+| Driver version | Omega Drivers 2.6.53 (http://www.omegadrivers.net/)|
+| Operating system & SP level | Windows XP Pro Service Pack 1 |
+|Special Rhino settings | None |
+| Special driver settings | None |
+| Rhino versions used with | V2, V3, V4 |
+| Known problems | Lots |
+| Comments | No matter what drivers I try, I run into problems. Had problems any time four viewports used [[rhino:opengl|OpenGL]] (crashed Rhino), then changed drivers and now I cannot get any anti-aliasing. I cannot recommend this card at all. |
+|Submitted by: |Heath Satow |
+
+----
+
+| Brand | Nvidia |
+| Model | [[rhino:geforce|GeForce]] 4200 GO |
+| BIOS version | 4.28.20.31.10 |
+| Driver version | 6.7.4.2 |
+| Operating system & SP level | Windows XP Pro Service Pack 2 |
+|Special Rhino settings | None |
+| Special driver settings | Vertical Sync turned off |
+| Rhino versions used with | V3, V4 |
+| Known problems | None |
+| Comments | If you make sure to turn iff vertical sync, no problems at all. It's an old card by now, but still works |
+|Submitted by: |Jakob Normand |
+
+----
+| Brand | ATI |
+| Model | RADEON X800 |
+| BIOS version | 113-AA61300-101|
+| Driver version | 6.14.10.6517|
+| Operating system & SP level | Windows XP Pro Service Pack 2|
+|Special Rhino settings | None |
+| Special driver settings | None|
+| Rhino versions used with | V3, V4 |
+| Known problems | None |
+| Comments | This card works fine,  All the settings are defaults or let Application decide. I use 2 TFT Monitors each runing at 1280 x 1024 and can stretch Rhino across both with no problems or artefacts|
+|Submitted by: |Mark Sharman, <msharman@bom.co.uk>|
+
+----
+
+| Brand | ATI |
+| Model | RADEON 7000 |
+| BIOS version | unknown |
+| Driver version | 6.14.10.6599|
+| Operating system & SP level | Windows XP Pro Service Pack 2|
+|Special Rhino settings | None |
+| Special driver settings | Dual display |
+| Rhino versions used with | V3, V4 |
+| Known problems | Toolbar child positioning, floating viewports |
+| Comments | This card worked fine with V3, but was very buggy with V4. Performance was mediocre on a 2.8 GHz P4. With 2 monitors and the 2nd monitor housing a floating perspective viewport, there was often corruption of the display requiring a re-start. Child menus for the toolbar buttons also do not appear at the cursor location when using the ATI dual monitor desktop manager (Hydravision).|
+|Submitted by: |B. Gom|
+
+----
+
+| Brand | ATI |
+| Model | RADEON X1600Pro|
+| BIOS version | 009.012.006.002 |
+| Driver version | 6.14.10.6599|
+| Operating system & SP level | Windows XP Pro Service Pack 2|
+|Special Rhino settings | None |
+| Special driver settings | Dual display |
+| Rhino versions used with | V4 |
+| Known problems | Toolbar child positioning, object snap tooltip corrupted|
+| Comments | This card was installed to improve the performance over the 7000 series card. 3D display is much faster, but ultimately limited by the main processor speed when drawing complex scenes. Corruption of the viewport contents seems to no longer be a problem with this card, although child menus for the toolbar buttons also do not appear at the cursor location when using the ATI dual monitor desktop manager (Hydravision). Enabling full antialiasing on the card improves the 3D display (shaded, ghosted, etc) while not significantly reducing the performace, however, in wireframe viewports the lines suffer a lot of blurring. Antialiasing can not be enabled on only one monitor in a dual monitor display using the graphics driver (TestSetAALevel does work, however). Tooltips for the object snap display worked initially, but now are corrupted and unreadable. The official workaround of adjusting the windows video performance slider one step to the left seems to work.|
+|Submitted by: |B. Gom|
+
+----
