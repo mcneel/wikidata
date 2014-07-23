@@ -52,7 +52,7 @@ Mesh objects can contain from a few to hundreds to thousands to millions of poly
 If you now have a NURBS object produced by MeshToNurb that is composed of many thousands of tiny NURBS surfaces (just like the mesh was) what can you do with it?  Not much – most normal operations will probably fail...  so you do need to ask yourself why you need it.
 
 ===Geometric considerations===
-An understanding of the type of geometry that is being produced is essential.  As stated above, quad mesh facets are not guaranteed to be planar, and the quad NURBS results from MeshToNurb may be warped.  They may not developable without stretching.  If you are using **UnrollSrf** on the NURBS polysurface, the results may be distorted or incorrect.  To insure planarity and correct unrolling, either triangulate the mesh before running MeshToNurb or check the mesh to see if all faces are planar (a script will be necessary to do this, there is no native Rhino tool currently available).
+An understanding of the type of geometry that is being produced is essential.  As stated above, quad mesh facets are not guaranteed to be planar, and the quad NURBS results from MeshToNurb may be warped.  They may not be developable without stretching.  If you are using **UnrollSrf** on the NURBS polysurface, the results may be distorted or incorrect.  To ensure planarity and correct unrolling, either triangulate the mesh before running MeshToNurb or check the mesh to see if all faces are planar (a script will be necessary to do this, there is no native Rhino tool currently available).
 
 =====With all its limitations… what is this command useful for then?=====
 
