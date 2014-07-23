@@ -1,0 +1,29 @@
+===== Rhino Display Troubleshooting =====
+
+==== Artifacts/messy display ====
+
+
+First, it may be that simply ** [[rhino:5:video:troubleshooting:intel|updating video drivers]]** will help.
+
+
+**Flickering:** If objects appear to be flickering and unsteady as you move the view, or have grossly inaccurate render meshes, check to see if the objects are very far from the origin.
+
+{{:rhino:5:video:troubleshooting:farfromorigin.png?200|}}
+
+
+A good way to determine this is to run the **EvaluatePt** command and snap to a point on an object in the scene - if the command line reports that world coordinates are very large for this point - more than a million, then it may help to move the objects closer to the world origin. To do this, select all of the objects to move, start **Move**, and snap to some location on one of the objects as the point to move 'from'. Then, type in W0,0,0 (for World origin) as the point to move 'to'. You may need to **RefreshShade** on the objects to force new, more accurate render meshes to be generated.
+
+If moving the objects is not an option, see **[[rhino:farfromorigin|far from the origin]]** for another approach to solving this.
+
+===Wireframe incorrect in shaded views:===
+
+{{:rhino:5:video:troubleshooting:testzbiasfactor1.png?200|}}   {{:rhino:5:video:troubleshooting:testzbiasfactor12png.png?200|}}
+ 
+
+
+
+
+
+
+ Surface wires (isocurves and edges) are adjusted so that they show in front of the surfaces in shaded views- they are slightly biased towards the camera. If surface wires show through other shaded surfaces that are in front of them, you can adjust the bias using the testSetZBiasFactor command. Generally one or two applications of the 'Less' command line option will tune up the display.
+
