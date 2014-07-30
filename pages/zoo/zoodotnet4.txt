@@ -1,22 +1,27 @@
 ====== Zoo requires Microsoft .NET Framework 4 ======
-> **Product:** //[[zoo:zoo5|Zoo 5]]//
-> **Summary:** //Discusses running Zoo 5 on Windows XP.//
+> **Product:** //[[zoo:home|Zoo 5]]//
+> **Summary:** //Discusses Zoo 5 and the Microsoft .NET Framework 4.//
 
-===== Issue =====
-I am trying to get the Zoo running on Windows XP. As soon as we start the Zoo on that machine, the Zoo freezes up, and nothing happens. Isn't Windows XP supported for Zoo 5?
+=====Overview=====
+Zoo 5 requires the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]]. You can ensure that Microsoft .NET Framework 4 installed on your system using [[http://windows.microsoft.com/en-us/windows/windows-update|Windows Update]].
 
-===== Resolution =====
-Zoo 5 is supported on **Microsoft Windows XP Service Pack 3**. 
+=====Issue=====
+I installed Zoo 5 on a Windows Server 2008 R2 system. But the Zoo server service will not start. I see the following message in the Windows Event Log:
 
-Zoo 5 requires **Microsoft .NET Framework 4**.
+<code>
+Service cannot be started. System.IO.FileNotFoundException: Could not load 
+file or assembly 'System.ServiceModel.Web, Version=4.0.0.0, 
+Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its 
+dependencies. The system cannot find the file specified.
+File name: 'System.ServiceModel.Web, Version=4.0.0.0, Culture=neutral, 
+PublicKeyToken=31bf3856ad364e35'
+at ZooService.ZooService.OnStart(String[] args)
+at System.ServiceProcess.ServiceBase.ServiceQueuedMainCallback(Object 
+state)
+</code>
 
-The Zoo installer does not include this framework, as it would add about ~50 MB to the download.
-
-**Downloads**
-  * [[http://support.microsoft.com/kb/322389|Microsoft Windows XP Service Pack 3]]
-  * [[http://www.microsoft.com/en-us/download/details.aspx?id=17851|Microsoft .NET Framework 4 (Web Installer)]]
-  * [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4 (Standalone Installer)]]
- 
+=====Resolution=====
+Zoo 5 requires the full [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]]. Installing just the .NET Framework 4 Client Profile is not sufficient enough to run Zoo 5.
 
 \\
 
