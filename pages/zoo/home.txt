@@ -1,74 +1,26 @@
 ======Zoo - License Manager======
+> **Note:** If you have Rhino 4.0, you need **[[http://www.rhino3d.com/download/zoo/4.0/release|Zoo 4.0]]**.
 
-=====Overview=====
-The Zoo lets you share Rhino, Flamingo, Penguin, Brazil, and Bongo licenses (CD-Keys) among users on the same network workgroup. When these products are installed as the workgroup nodes instead of stand-alone, it works like this: 
+The Zoo is a network, or floating, license manager. The Zoo lets you share licenses among users on your network. The Zoo is useful if you have more users than you do licenses.
 
-  * When a workgroup node starts, it requests a license from the Zoo. 
-  * An unused license is assigned to the node. 
-  * When a node shuts down, the license is returned to the Zoo's license pool. 
+===== Getting Started =====
+===Setting up Zoo 5===
+  - **[[http://download.rhino3d.com/Zoo/5.0/release/download/|Download]]** and install the Zoo on a Windows-based server or workstation.
+  - Make sure **[[http://wiki.mcneel.com/zoo/window7firewall|TCP Port 80]]** is open in your system's firewall software.
+  - Run **ZooAdmin** and **[[rhino5validate|add your Rhino CD-Keys]]**.
+===Setting up Rhino 5===
+  - If Rhino is already installed, then run Rhino and click **Tools -> Options -> Licenses**. Select your Rhino license and click **Convert**. Close and restart Rhino. During restart, select **Network Node** and then specify the **[[http://wiki.mcneel.com/zoo/determinezoohost|name]]** of your Zoo server.
+  - When installing Rhino, select **Network Node** and then specify the **[[http://wiki.mcneel.com/zoo/determinezoohost|name]]** of your Zoo server.
 
-** The Zoo is free!**
 
-**[[http://www.rhino3d.com/download/zoo/5.0/latest|Download Zoo 5]]**  for Rhino 5 and Bongo 2.0 (//Brazil 2.0, Flamingo nXt and Penguin 2.0 support requires [[::zoo::rhinolm5|Rhino 5 SR6 or greater]]//).
+=====More Information & Support=====
+[[:zoo:rhino5overview|Features Overview]]\\
+[[http://wiki.mcneel.com/_media/zoo/zoo5.pdf|Extended Overview]] ([[https://vimeo.com/89968285|watch the video]])\\
+[[:zoo:rhino5requirements|System Requirements]]\\
+[[:zoo:products|Complete List of Compatible Products]]\\
+[[http://docs.mcneel.com/zoo/5/en/index.html|User Guide]]\\
+[[http://discourse.mcneel.com/category/zoo|Support Forum]]\\
+[[:zoo:zoo5diagnostics|Zoo Diagnostic Utility]]\\
 
-**[[http://www.rhino3d.com/download/zoo/4.0/commercial|Download Zoo 4.0]]** for Rhino 4, Flamingo, Penguin, Brazil, and Bongo 1.0 (//Rhino 5 and Bongo 2.0 not supported//).
-
-//Note: it is possible to have both Zoo 4.0 and Zoo 5 running on the same network, and even installed on the same server, without conflict.//
-
-**A video overview of the Zoo Licence Server**
-{{vimeo>89968285?640x360}}
-=====Features=====
--->No extra costs#
-Special versions of Rhino, Flamingo, Penguin, Brazil, or Bongo are not needed. 
-<--
--->No special hardware needed#
-The Zoo will run on any system in the same network workgroup. 
-<--
--->No special software needed#
-The Zoo will run on any Windows system that supports Microsoft .Net Framework 4, including Windows XP and newer.
-<--
--->Simple setup#
-Install the Zoo on any system in the workgroup and type the license keys into the Zoo instead of the individual systems. 
-<--
--->Check out#
-License keys can be checked out so laptop users can disconnect from the network. The key can be checked in again when the laptop is reconnected to the network. 
-<--
--->Robust#
-Workgroup nodes will keep working even if the network connection or server is down.
-<--
--->Routable#
-The Zoo works on both single-segments networks, or networks where systems are separated by routers. 
-<--
--->Mixed environment#
-A mixture of Workgroup Nodes and Standalone Nodes on the same Windows Domain or Workgroup is supported. 
-<--
--->Runs as a service#
-If you reboot the system with the Zoo, the Zoo will automatically start up. 
-<--
-
-=====What's New in Zoo 5?=====
--->New Version!#
-Zoo 5 is a brand new version of the Zoo. Completely rewritten, Zoo 5 provides a number of new features not found in prior Zoo versions
-<--
--->Standard Internet Protocol Support#
-Clients communicate with Zoo 5 using HTTP (Port 80) protocol. This makes it much easier for system administrators to route Zoo requests on complex networks or even over the Internet.
-<--
--->Firewall Friendly#
-Zoo 5 requires the client to periodically check with the server, but never initiates connections back to the client. Administrators no longer need to open firewall ports on client machines.
-<--
--->Limited License Check Out#
-Prior Zoo version allows for license check out to support laptop users or for business travel. But there was no limit to the check out duration. Zoo 5 allows the administrator to specify the license check out duration.
-<--
--->Third-Party Plug-in Support#
-Prior Zoo version only maintained licenses for McNeel product (e.g. Rhino. Flamingo, Bongo, Brazil, and Penguin). Zoo 5 allows 3rd party plug-in developers to add support for their products to the Zoo.
-<--
-
-=====System Requirements=====
-  * A Windows-based system.
-  * [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]] (Full Framework, not just Client Profile)
-  * A network connection configured for TCP/IP.
-
-=====Support=====
-**[[zoo:zoo5|Zoo 5]]** - The license manager for Rhino 5 and Bongo 2.0 (//Brazil 2.0, Flamingo nXt and Penguin 2.0 support requires [[::zoo::rhinolm5|Rhino 5 SR6 or greater]]//).
-
-**[[zoo:zoo4|Zoo 4.0]]** - The license manager for Rhino 4, Flamingo, Penguin, Brazil, and Bongo 1.0 (//Rhino 5 and Bongo 2.0 not supported//).
+===== Knowledgebase =====
+{{topic>.?zoo5&nouser&nodate}}
