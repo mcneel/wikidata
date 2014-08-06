@@ -1,0 +1,45 @@
+======NETSH를 사용하여 Windows 방화벽에서 TCP 80 포트 열기======
+> **제품:** //[[ko:zoo:home|Zoo]]//
+> **요약:** //NETSH를 사용하여 Zoo에 필요한 TCP 80 포트를 여는 방법 안내입니다.//
+
+=====개요=====
+Zoo 5는 Rhino 5 클라이언트와 TCP 80번 포트 (HTTP)를 통해 연결이 됩니다.
+
+Zoo 5를 설치한 후, Zoo 서버 시스템에 실행되는 방화벽 소프트웨어에서 //들어오고 나가는 커뮤니케이션 모두// TCP 80번 포트가 열려 있는지 확인합니다.
+
+안내: 대부분의 방화벽 소프트웨어에서 TCP 80번 포트는 기본적으로 나가는 커뮤니케이션에 열려 있습니다. 따라서 Rhino 워크스테이션에서 실행되는 방화벽 소프트웨어에서는 따로 포트를 열 필요가 없습니다. 
+
+=====추가 정보=====
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]** 는 Windows 명령행 명령줄 스크립팅 유틸리티입니다. 이 유틸리티를 사용하여 로컬/원격으로 현재 실행 중인 컴퓨터의 네트워크 설정을 표시/수정할 수 있습니다.
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]**에는 특정한 컴퓨터에 대해 배치 모드로 명령 그룹을 실행할 수 있는 스크립팅 기능도 있습니다. 
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]**는 필요한 TCP/IP 포트를 자동으로 여는 데 제어판의 방화벽 애플릿 대신 사용이 가능합니다.
+
+Window 방화벽에서 **[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]**를 사용하여 이러한 포트를 열 수 있습니다. Windows XP를 사용하는지,  또는 Windows Server 2008, Windows Vista 이상을 사용하는지에 따라 구문이 다릅니다.
+
+====Windows XP====
+**중요** 관리자 그룹의 일원이면, 명령 프롬프트에 명령을 실행합니다. 관리자 권한으로 명령 프롬프트를 시작하려면 시작 메뉴 또는 아이콘으로 명령 프롬프트 세션을 시작합니다.
+
+<code>
+rem Open TCP Port 80
+netsh firewall add portopening TCP 80 "Zoo TCP Port 80"
+</code>
+
+====Windows Server 2008, Windows Vista 이상====
+
+**중요** 관리자 그룹의 일원이고, 사용하는 컴퓨터에 사용자 계정 컨트롤(UAC)이 설정되어 있다면 관리자 권한으로 명령 프롬프트에 명령을 실행합니다. 관리자 권한으로 명령 프롬프트를 시작하려면 시작 메뉴 또는 아이콘으로 명령 프롬프트 세션을 시작하고, 오른쪽 클릭하여 **관리자 권한으로 실행**을 클릭합니다.
+
+<code>
+rem Open TCP Port 80 inbound and outbound
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=in action=allow protocol=TCP localport=80
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=out action=allow protocol=TCP localport=80
+</code>
+
+=====참고 자료=====
+[[http://support.microsoft.com/kb/947709|How to use the "netsh advfirewall firewall" context instead of the "netsh firewall" context to control Windows Firewall behavior in Windows Server 2008 and in Windows Vista]]
+
+\\
+
+{{tag>Zoo5_ko}}

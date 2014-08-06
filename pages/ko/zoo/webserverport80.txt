@@ -1,6 +1,6 @@
-====== Zoo 5가 웹 서버에서 시작하지 않습니다 ======
-> **제품:** //[[ko:zoo:zoo5|Zoo 5]]//
-> **요약:** //Zoo 5 는 TCP 포트 80 으로 액세스해야 합니다. 웹 서비스가 실행되는 시스템에서는 이것이 불가능합니다.//
+====== Zoo가 웹 서버에서 시작하지 않습니다 ======
+> **제품:** //[[ko:zoo:home|Zoo]]//
+> **요약:** //Zoo 는 TCP 80 포트로 액세스해야 합니다. 웹 서비스가 실행되는 시스템에서는 이것이 불가능합니다.//
 
 ===== 문제 =====
 서버를 다시 시작하면 Zoo 5 서비스가 시작하지 않습니다. Windows 이벤트 로그 (제어판 > 관리 도구 -> 이벤트 뷰어)를 확인하니 Zoo 5 서비스에 오류가 로그되어 있었습니다:
@@ -26,9 +26,9 @@ process ID, then look in Task Manager to find the name of that process.
   - 명령줄(command line)에 **NETSTAT -ano**를 실행하고 열어두고자 하는 포트의 PID 번호를 적어둡니다.
   - 작업 관리자에서 어떤 프로세스가 해당 PID를 갖고 있는지 볼 수 있으며, 어느 프로그램이 해당 포트를 사용하고 있는지 확인할 수 있습니다.
 
-이 오류의 이유는 일부 다른 응용 프로그램이 이미 80 포트를 사용하고 있기 때문입니다. 한 번에 하나의 응용 프로그램만이 한 포트를 사용할 수 있으므로, Zoo가 80 포트와 연결되지 않게 됩니다.  이 문제를 일으키는 일반적인 응용 프로그램은 다음과 같습니다:
+이 오류의 이유는 일부 다른 응용 프로그램이 이미 TCP 80 포트를 사용하고 있기 때문입니다. 한 번에 하나의 응용 프로그램만이 한 포트를 사용할 수 있으므로, Zoo가 80 포트와 연결되지 않게 됩니다.  이 문제를 일으키는 일반적인 응용 프로그램은 다음과 같습니다:
 
-  * [[http://www.iis.net/|Internet Information Services (IIS) for Windows® Services]]
+  * [[http://www.iis.net/|Internet Information Services (IIS) for Windows® ​Services]]
   * [[http://httpd.apache.org/|Apache HTTP 서버]]
   * [[http://www.java.com|Java]]
   * [[ko:zoo:zooskype|Skype]]

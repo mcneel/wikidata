@@ -1,22 +1,27 @@
-====== Zoo에 Microsoft .NET Framework 4가 필요함 ======
-> **제품:** //[[ko:zoo:zoo5|Zoo 5.0]]//
-> **요약:** //Windows XP에서 Zoo 5.0 실행//
+====== Zoo에는 Microsoft .NET Framework 4가 필요합니다 ======
+> **제품:** //[[ko:zoo:home|Zoo]]//
+> **요약:** //Zoo 5와 Microsoft .NET Framework 4에 대한 정보입니다.//
 
-===== 문제 =====
-Windows XP에서 Zoo를 실행하려고 합니다. 컴퓨터에서 Zoo를 시작하면 곧바로 Zoo가 멈추고 아무것도 되지 않습니다. Zoo 5.0에서 Windows XP를 지원하지 않습니까?
+=====개요=====
+Zoo 5를 사용하려면 [[http://www.microsoft.com/ko-kr/download/details.aspx?id=17718|Microsoft .NET Framework 4]]가 필요합니다. [[http://windows.microsoft.com/en-us/windows/windows-update|Windows 업데이트]]를 사용하여 Microsoft .NET Framework 4를 확실하게 설치하실 수 있습니다. 
 
-===== 해결책 =====
-Zoo 5.0는 **Microsoft Windows XP Service Pack 3**에서 지원됩니다. 
+=====문제=====
+Windows Server 2008 R2 시스템에 Zoo 5 를 설치했으나, Zoo 서버 서비스가 시작하지 않습니다. Windows 이벤트 로그의 메시지는 다음과 같습니다:
 
-Zoo 5.0에 **Microsoft .NET Framework 4**가 필요합니다.
+<code>
+서비스를 시작할 수 없습니다. System.IO.FileNotFoundException: 파일이나 어셈블리 
+'System.ServiceModel.Web, Version=4.0.0.0, 
+Culture=neutral, PublicKeyToken=31bf3856ad364e35' 또는 여기에 종속되어 있는 파일이나 
+어셈블리 중 하나를 로드할 수 없습니다. 지정한 파일을 찾을 수 없습니다.
+파일 이름: 'System.ServiceModel.Web, Version=4.0.0.0, Culture=neutral, 
+PublicKeyToken=31bf3856ad364e35'
+위치 ZooService.ZooService.OnStart(String[] args)
+위치 System.ServiceProcess.ServiceBase.ServiceQueuedMainCallback(Object 
+state)
+</code>
 
-Zoo 설치 관리자에 해당 framework가 포함되어 있지 않습니다. (포함시키면 다운로드에 ~50MB가 더해지기 때문입니다.)
-
-**다운로드**
-  * [[http://support.microsoft.com/kb/322389|Microsoft Windows XP Service Pack 3]]
-  * [[http://www.microsoft.com/en-us/download/details.aspx?id=17851|Microsoft .NET Framework 4 (웹 설치 관리자)]]
-  * [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4 (독립실행형 설치 관리자)]]
- 
+=====해결책=====
+Zoo 5를 사용하려면 완전한 [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]]가 필요합니다. .NET Framework 4 Client Profile만 설치하는 것만으로는 Zoo 5 를 실행하는 데 충분하지 않습니다.
 
 \\
 
