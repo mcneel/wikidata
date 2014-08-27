@@ -1,0 +1,135 @@
+====== FAQ sobre mallas ======
+
+======Opciones de malla de Rhino======
+
+> **Resumen:** //Revelación de los misterios de las opciones de malla de Rhino. Solución a problemas comunes de mallado.//
+
+> **Importante:** //**[[http://www.hydraulicdesign.net/meshes.htm|Véase también la excelente explicación de James Carruthers sobre los problemas de visualización de mallas]]**//
+
+> **Nota:** //¡No dude en contrinuir y compartir su experiencia sobre mallado y secretos de configuración! Si tiene una configuración de malla de exportación específica de un programa, se puede crear una página para ello.//
+
+===¿Por qué necesito las mallas?===
+Aunque Rhino es un modelador de superficies NURBS, utiliza mallas poligonales creadas a partir de esas superficies para fines de visualización, de modo que lo que se ve en la pantalla cuando se sombrea el modelo es en realidad una malla poligonal invisible (la "malla de renderizado") de la superficie NURBS.
+
+¿Por qué? Para que el sombreado y el renderizado sean más rápidos.  Pero mientras que una malla tiene las ventajas de velocidad de sombreado y ajustabilidad, hay un inconveniente. La malla de renderizado siempre es una aproximación de la superficie, de manera que siempre hay vacíos entre la malla de renderizado con facetas y la superficie suave real.
+
+El mismo motor de mallado en Rhino se usa en la creación de mallas de análisis para funciones como Análisis de desmoldeo y Análisis de curvatura, MapaE, etc. y lo usa el comando **Malla** (Herramientas > Malla poligonal > Desde objeto NURBS), que crea un objeto de malla "real" directamente a partir de un objeto NURBS.
+
+La exportación desde Rhino con determinados polígono basados en polígonos (como .stl) también crearán objetos de malla (en el archivo exportado). Aunque no se pueden editar en el archivo original de Rhino, tiene el mismo grupo de opciones de densidad de malla para controlar cómo se crearon.
+
+Las funciones que crean mallas reales editables como los comandos Malla y Exportar (.stl) son muy importantes en muchas aplicaciones.
+
+Todos los tipos de objetos de malla pueden existir simultáneamente en un archivo, no repercuten uno en otro y cada uno puede tener su propia configuración. Aunque todas las mallas se crean con el mismo motor, hay algunas diferencias importantes entre ellas.
+
+===Los diferentes tipos de mallas===
+
+  * Las mallas de renderizado creadas en las superficies y polisuperficies NURBS para fines de visualización (utilizando la vista en modo sombreado o renderizado) no son editables ni accesibles para los usuarios y no se pueden separar del objeto NURBS desde el que se crearon. Se pueden eliminar con el comando BorrarTodasLasMallas y regenerar con el comando "ActualizarSombreado" o cambiando la configuración (en Archivo > Propiedades > Malla) (que obliga a hacer una regeneración global de todas las mallas de renderizado).
+  * Las mallas de análisis son similares a las mallas de renderizado en el hecho que no son editables y que no se pueden separar de su objeto NURBS. Simplemente tienen otro grupo de controles y están separadas de las mallas de renderizado.  Sin embargo, puede "verlas" temporalmente cuando utilice el botón "Ajustar malla" o el botón "previsualizar" en el panel de configuración de los cuadros de diálogo de los comandos de análisis.
+  * Las mallas creadas con el comando Malla se pueden ver y editar, y están separadas de los objetos NURBS desde los que fueron creadas.  Son objetos y se pueden ver y editar con los diferentes comandos de Rhino que se aplican a las mallas (véase Bonus > Malla) y se pueden exportar en los formatos de malla poligonal como STL, DXF, 3DS y OBJ.
+  * Las mallas creadas durante **Guardar y exportar** (como  .STL tienen la misma configuración de malla ("Opciones detalladas") que los otros tipos. También puede verlas temporalmente cuando utilice el botón "previsualizar" en el panel de configuración, pero no se guardan en el archivo original (sólo exportados).
+
+**//<color slateblue>Willem: Al mallar un objeto para exportar, siempre creo primero una malla y lo veo en la vista en modo Sombreado plano (comando **SombreadoPlano**) antes de exportarlo al formato deseado. El modo de Sombreado plano sombrea la vista actual sin suavizado, de manera que las caras de las mallas de renderizado individuales están visibles".</color>//**
+
+
+===Los diálogos de la Configuración de malla===
+Los controles de los diferentes tipos de malla son virtualmente idénticos. Los controles de la Configuración de malla de renderizado son parte de las propiedades del archivo 3DM, son globales para todo el modelo. Al exportar a un formato de malla como STL, DXF, 3DS y OBJ, alternativamente puede usar controles simples, como un control deslizante. Los controles detalladas son idénticos para todos y se describen más abajo.
+
+La configuración de la malla de renderizado se encuentra en **Archivo > Propiedades > Malla**. Rhino ofrece dos configuraciones "estándar", **"dentada y más rápida"** y **"suave y más lenta**", además de la configuración "**personalizada"**, que permite acceder a las opciones detalladas. Las opciones "simples" aparecen cuando se ejecuta el comando y simplemente se trata de un control deslizante: **menos <-> más** polígonos.  Las "opciones detalladas" de los demás son iguales.
+
+===Valores predeterminados===
+La opción predeterminada para las mallas de renderizado es **"Dentada y más rápida"**, que está bien para la visualización, pero no para mucho más.
+
+La opción **"suave y más lento"** ofrece teóricamente una mejor resolución con mayor tiempo de mallado, pero a la práctica, aunque tarda más, suele dejar agujero visibles, de manera que es mejor probar la configuración **"personalizada"**.
+
+La configuración predeterminada de las "opciones simples" para las mallas de análisis y de exportación están "más o menos en medio"...
+
+El valor predeterminado del diálogo de exportación STL especial es el valor de la tolerancia absoluta de Archivo > Propiedades > Unidades.
+
+===Configuración personalizada===
+Si quiere controlar su proceso de mallado, debe empezar por aquí."
+
+Hay siete configuraciones numéricas y tres casillas de verificación. Cada uno tiene un método diferente de control de mallas y algunos pueden interactuar. Las interacciones y los efectos combinados de esas configuraciones son difíciles de comprender. Individualmente están bien descritas en la Ayuda y leer esa información atentamente puede ayudarle a comprender mejor qué es lo que hace cada una.
+
+===Algunas instrucciones rápidas===
+A continuación se muestran algunas configuraciones que han funcionado, con las que puede experimentar.
+
+Personalmente, utilizo las siguientes opciones detalladas de malla:
+
+
+|**Densidad (nuevo en Rhino 4)**|****|
+|**Ángulo máximo**|**<color red>0.0</color>**|
+|**Relación de aspecto máxima**|**<color slateblue>0.0**|</color>
+|**Longitud máxima de borde**|**0.0**|
+|**Distancia máxima de borde a superficie**|****|
+|**Mínimo de cuadrados de rejilla iniciales**|**16**|
+
+**//** - En Rhino 4, experimente con la opción de Densidad. Es independiente de la escala.  En Rhino 3, no hay opción de Densidad, puede insertar el valor de escala apropiado en Distancia máxima de borde a superficie. Para modelos de unidades en milímetros, pruebe 0.10 a 0.01//**
+
+Refinar malla seleccionado"
+
+Costuras dentadas **//no seleccionado//**
+
+Planos simples **//no seleccionado//**
+
+  * La "Densidad utiliza una fórmula para controlar la distancia de los bordes poligonales a la superficie original. Valores entre 0 y 1. Los valores más altos producen una malla con un número más alto de polígonos. Utilizado por sí solo crea mallas equilibradas.
+  * El método de "distancia máxima de borde a superficie obliga a Rhino a crear una malla Permite a Rhino poner menos polígonos en áreas de menos detalle y más polígonos en áreas de mayor detalle, dando como resultado una malla más eficaz.
+  * La configuración de "cuadrados de rejilla iniciales asegura que las áreas más planas tengan suficientes polígonos para que se vea suave.
+
+**//¿Cuál es un valor apropiadado para la escala?//**
+
+Primero, depende de para qué usará la configuración de malla.  Para fines de visualización generales, el valor puede ser mayor, ya que sólo está visualizando el modelo en la pantalla y menos polígonos significa tiempos de mallado más rápidos y una reacción de visualización más rápida al hacer zoom, etc.
+
+Si hace objetos del tamaño del ordenador, 0.01mm funciona bastante bien. Para relojes y joyería, probablemente le irá bien .002mm. Para objetos más grandes como los edificios, mucho más grandes, quizás 1mm.
+
+Si va a exportar su objeto para procesos posteriores o si va a hacer renderizados muy detallados, es posible que tenga que ajustar la configuración, según para qué sea y cuán preciso es el proceso. Para una pieza de estereolitografía, .01mm puede funcionar bien, pero para una parte bien mecanizada, puede que .001mm-.002mm sea más apropiado.
+
+Puede parecer complicado al principio, pero después de un poco de práctica, encontrará algunas opciones estándar que funcionan en la mayor parte de situaciones.  Esta configuración también puede programarse en una macro o un script para ejecutar rápidamente el mallado de los objetos con las características deseadas.
+
+===Problemas de mallado conocidos===
+
+En ocasiones, puede pasar que incluso con las instrucciones de configuración anteriores, no se obtienen buenos resultados. You may struggle with ghost surfaces, uneven shading, or triangular mesh facets that cut across empty space where they shouldn't be.  Some of these problems may be caused by the Rhino mesher's reaction to certain types of geometric structures.  The only way to correct them currently may be to do some reconstruction on your structures.
+
+===Diagnóstico (extraído de la Ayuda de Rhino)===
+
+A veces un modelo puede resultar dañado. Éstas áreas dañadas pueden causar problemas.
+
+Es posible construir malos diseños con las herramientas de Rhino. Por ejemplo, si recorta un superficie con una curva que se autointerseca, Rhino le permitirá hacerlo, pero el resultado será un modelo mal definido que causá problemas más adelante.
+
+Otro problema es tener un borde de corte pequeño que luego se une con una curva de corte más grande en una superficie adyacente. Si Rhino coincide con los bodes grandes, a veces la pequeña arista de corte se puede comprimir más hasta que sea realmente un punto. El borde comprimido ya no tendrá una orientación significativa y causará problemas.
+
+Hay técnicas de modelado que puede usar para aumentar la fuerza de sus modelos.
+
+Dibujar pequeñas líneas para conectar partes de una curva de corte en lugar de mover los dos puntos finales de las curvas puede confundir la unión de otros bordes y suele causar problemas.
+
+A veces, los bordes microscópicos se pueden generar de otras maneras, como las operaciones booleanas, donde los objetos están un poco separados unos de otros.
+
+Las aristas de corte que son muy pequeñas o curvadas son la principal causa de problemas en los modelos.
+
+Rhino tiene herramientas que puede usar para examinar estos defectos en su modelo.
+
+La primera herramienta es el comando **Comprobar**. Si su modelo no pasa el la comprobación, aparecerá una lista de problemas específicos. La lista le puede indicar que necesita mejorar el modelo.
+
+Sin embargo, si un modelo pasa la comprobación, no significa automáticamente que esté estructurado adecuadamente. Algunas partes defectuosas del modelo, como tener superficies que se doblan o intersecan sobre si mismas, son muy difíciles de detectar automáticamente detectar y el comando Comprobar no comprueba este tipo de errores.  Pero puede comprobar la estructura general del objeto.
+
+La solución alternativa es volver a usar los comandos **Descomponer**, **DeshacerRecorte**, **Recortar** y **Unir**. Si hay muchos bordes minúsculos, tendrá que usar el comando **DividirBorde** para dividir todos los bordes y que tengan una estructura compatible y, después, usar el comando **UnirBorde** para acoplar los pares manualmente.
+
+Cuando hay elementos largos y minúsculos adyacentes unos a otros, el comando **Unir** se puede confundir. En este caso, el  comando **UnirBorde** puede ser una alternativa.
+
+Estas herramientas se encuentran en el menú **Análisis**, **Herramientas para bordes**. Puede que también tenga que usar algunas de estas herramientas para reparar modelos con discontinuidades.
+
+Evitar errores de modelado
+
+  * En general, intente evitar crear bordes muy pequeños en los modelos.
+  * No utilice curvas donde haya una línea minúscula en el medio de la curva que una las dos partes.
+  * Intente asegurarse de que las partes adyacentes se acoplan bien con una simple igualación de bordes.
+
+**Puede … **
+
+===Mostrar la estructura de datos de un objeto===
+===Revisar objetos===
+===Seleccionar objetos deficientes===
+
+===Más información próximamente, no duden en añadir sus comentarios.===
+
+
+

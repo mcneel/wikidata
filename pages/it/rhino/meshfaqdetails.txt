@@ -1,0 +1,123 @@
+
+**Gestione dei parametri MESH in Rhino**
+
+----
+
+======Impostazioni delle Mesh per Rhino======
+> **Sommario:** //Scoprire i misteri delle impostazioni per le mesh in Rhino. Soluzione ai più comuni problemi di meshatura.//
+
+> **Importante:** //[[http://www.hydraulicdesign.net/meshes.htm|Vedere anche l’ottimo lavoro di James Carruthers con la spiegazione dei problemi di visualizzazione delle mesh.]]//
+
+> **Nota:** //Siete pregati di di contribuire con la vostra esperienza e piccoli trucchi. Se avete qualche set di impostazioni specifiche per l’esportazione verso altri programmi downstream (a valle della modellazione, quali CAM, FEA, ecc.), potremmo creare una pagina apposita per questo...//
+
+======A che servono innanzitutto le mesh?======
+Anche se Rhino è un modellatore di superfici NURBS "NonUniformRationalBSplynes", utilizza mesh poligonali create da queste superfici allo scopo di visualizzarle: quello che in effetti vedete sullo schermo in modalità ombreggiata è una mesh particolare che si riferisce alla sua superficie Nurbs.
+
+L’uso della mesh ha molti vantaggi (segnatamente velocità e controllo accurato) ed alcuni svantaggi (in particolare l’approssimazione con cui la mesh rappresenta la superficie).
+
+Rhino ha un unico motore di generazione delle mesh per tutte le funzioni in cui esse sono richieste: visualizzazione, analisi, esportazione dei formati specifici (STL, DXF, ecc.) ed esecuzione del comando Mesh, che crea un oggetto mesh reale ed editabile dalla superficie Nurbs cui è applicato.
+
+Anche l’esportazione in formati basati sulle mesh crea nel file esportato una mesh reale, che, sebbene non editabile nel file di origine in Rhino, ha le stesse impostazioni degli altri tipi di mesh elencati.
+
+Le funzioni che creano mesh reali ed editabili quali Mesh ed Export (.Stl) sono importanti in molte applicazioni e programmi a valle della modellazione, quali il CAM (Computer Aided Machining=Lavorazione a controllo numerico) e FEA (Finite Elements Analysis= Analisi agli elemneti finiti).
+
+Tutti i tipi di mesh citati possono coesistere nello stesso file, non interferiscono l’uno con l’altro e possono avere ognuno le proprie impostazioni. Benché creati con lo stesso motore di calcolo, ci sono tuttavia alcune differenze importanti da segnalare.
+
+I diversi tipi di Mesh
+
+Le mesh di rendering create sulle superfici e polisuperfici Nurbs per la visualizzazione (i vari tipi di visualizzazione ombreggiata) non sono accessibili/editabili dall’utente, né possono essere disgiunte dalla geometria Nurbs da cui derivano. Possono essere cancellate con il comando "AzzeraTutteLeMesh" e rigenerate con il comando "RidisegnaOmbreggiatura"  oppure cambiandone le impostazioni (in Strumenti/Opzioni : questo induce una rigenerazione complessiva di tutte le mesh di rendering che può richiedere un tempo notevole!!).
+
+Le mesh di analisi sono simili a quelle di visualizzazione, non essendo separabili dalle geometrie che rappresentano, ma posseggono un set di impostazioni specifico, che viene impostato in una finestra di dialogo accessibile con il comando di analisi e possono essere visualizzate temporaneamente premendo i pulsanti "RegolaMesh" e Anteprima.
+
+Le mesh create dal comando Mesh, a differenza dei tipi descritti sopra, sono sia visibili che editabili e sono oggetti distinti dalle geometrie Nurbs da cui derivano, con cui perdono ogni legame al momento della generazione (la modifica della Nurbs non comporta la corrispondente modifica della mesh). Come entità reali esse possono essere modificate in Rhino con tutti i comandi specifici delle mesh e con alcuni comandi di uso generale, nonché salvate nei formati specifici di altri programmi, ecc.
+
+Le mesh create durante l’esportazione (per esempio nel formato .Stl) hanno le stesse opzioni di impostazione delle altre, ma possono essere visualizzate temporaneamente premendo il pulsante Anteprima. Esse non vengono memorizzate nel file originale, ma solo in quello esportato.
+
+
+=====Finestre di dialogo di Impostazione=====
+
+I controlli per tutti i tipi di mesh sono virtualmente identici, con l’unica eccezione riguardante le impostazioni delle mesh di visualizzazione, che fanno parte delle proprietà specifiche del file (Strumenti/Opzioni/Mesh) e si applicano a tutte le geometrie Nurbs in esso contenute. La finestra di dialogo per le impostazioni dettagliate è identica per tutti i tipi e verrà descritta più avanti.
+
+Come accennato, le impostazioni delle mesh di visualizzazione sono accessibili in Strumenti/Opzioni/Proprietà del Documento/Mesh. Esistono 2 set standard (Scalettate e più veloce e Smussate e più lento) ed un terzo set chiamato Personalizzata.
+
+Un'ulteriore finestra di dialogo semplificata appare nel momento in cui si avvia il comando di meshatura per un oggetto specifico: si tratta di uno slider con indicazione meno<-> più poligoni. La finestra di dialogo “personalizzata” ed i “controlli dettagliati” dei comandi di meshatura (analisi, esportazione, generazione dell’oggetto mesh) sono identici.
+
+Impostazioni di Default
+
+L’impostazione di default per le mesh di visualizzazione  “Scalettate e più veloce”, che è adatta per una visualizzazione rapida, ma grossolana.
+
+L’opzione “Smussate e più lento” teoricamente ottiene una riproduzione più accurata a spese di un tempo di calcolo maggiore, ma non è certo la soluzione ottimale. Il nostro consiglio è di utilizzare l’opzione “Personalizzata”. La finestra di dialogo semplificata con lo slider è una via di mezzo.
+
+Impostazioni personalizzate
+
+Se volete veramente controllare la qualità della meshatura, cominciate da qui!
+
+Nella finestra di dialogo Personalizzata ci sono 6 impostazioni principali e 3 caselle di spunta addizionali. Ogni impostazione controlla la generazione della mesh con un parametro diverso ed alcune possono agire in sinergia. E’ difficile descrivere in modo esauriente le interazioni e l’effetto combinato di tutte queste impostazioni, ben descritte individualmente nell’Aiuto in linea, che vi consigliamo di leggere attentamente, per avere un’idea di cosa ognuna di esse fa.
+
+A  questo link  si trova una copia dell’aiuto in linea per le mesh di Rhino.
+
+Alcune sintetiche indicazioni
+
+Lo scopo del paragrafo successivo è di fornire alcune impostazioni che si sono dimostrate efficaci e che possono costituire un buon punto di partenza per ulteriori sperimentazioni personalizzate.
+
+======Le impostazioni che preferisco personalmente sono:======
+
+**Angolo massimo  0.0**
+
+**Rapporto di aspetto massimo  6.0**
+
+**Lunghezza del bordo minima  0.0  **
+
+**Massima distanza bordo/superficie  **  **
+
+**Suddivisione iniziale poligoni nella griglia  16  **
+
+inserire qui un valore appropriato alla scala degli oggetti
+
+**Rifinisci mesh spuntato**
+
+**Giunzioni scalettate libero**
+
+**Semplifica piani libero**
+
+  Il metodo della massima distanza bordo/superficie consente la creazione forzata di una mesh in cui i bordi di ciascun tassello non possono distare più del valore impostato, riferito all’unità di misura in uso, dalla superficie Nurbs d’origine. Questo consente la creazione di un numeno minore di tasselli in zone uniformi, mentre al contrario zone riccamente dettagliate vengono meshate con un numero maggiore di tasselli, con il risultato di un buon compromesso tra accuratezza e tempi di calcolo.
+Il valore Rapporto di aspetto massimo viene utilizzato per evitare che vengano creati tasselli triangolari lunghi e stretti alla base, spezzandoli in più parti a spese di un tempo di calcolo e dimensioni sul file leggermente superiori.
+
+Il valore Suddivisione iniziale poligoni nella griglia assicura che le zone più piatte siano rese con un numero sufficiente di poligoni da farle apparire non spigolose.
+
+//Pascal: personalmente preferisco utilizzare per il valore Angolo massimo 35-45°, anziché 00 (disattivato), in modo da suddividere ulteriormente particolari tanto piccoli da cadere al di sotto del valore di Massima distanza, il quale così può essere aumentato un pochino, senza eccessiva perdita di dettaglio.//
+
+Il valore di gran lunga più importante e quello della Massima distanza bordo/superficie. Se ci si riflette un attimo, si comprende che questo valore dipende dalla scala (dimensione), e dunque nasce un’altra domanda:
+
+Qual’è un valore adeguato per la scala in uso?
+
+Innanzitutto esso dipende dall’uso che della mesh si vuole fare. Per scopi di visualizzazione durante la modellazione, il valore può essere settato abbastanza alto, in quanto un numero inferiore di poligoni significa tempi di calcolo inferiori e dunque una migliore dinamica di refresh sullo schermo.
+
+Per oggetti delle dimensioni di un computer 0.01 mm è un buon valore, per orologi /gioielli 0.002 mm o inferiore, per oggetti delle dimensioni di un edificio (occhio all’unità di misura), il valore di 1 mm o più può essere adeguato.
+
+Se invece state esportando le geometrie verso altre applicazioni oppure volete realizzare delle rese realistiche molto dettagliate, potrebbe essere richiesto un valore inferiore, in funzione dell’accuratezza del processo a valle. Nel caso di un pezzo in stereolitografia può essere sufficiente un valore di 0.01 mm, mentre per un pezzo da lavorare accuratamente a controllo bisogna scendere anche a 0.001 mm, in funzione della bontà del CAM. In ogni caso ci si deve aspettare una differenza (cumulativa) tra le dimensioni della geometria Nurbs originaria e quelle del pezzo reale ottenuto con metodo additivo o sottrattivo (in genere il pezzo reale risulta più grande). Con un po’ di esperienza si può tenere conto anche di questa.
+
+Potrebbe sembrare molto complicato, ma scoprirete presto che alcuni set di impostazione standard funzionano nella maggior parte delle vostre applicazioni ed esse possono anche essere programmate con delle macro o scripts e richiamate alla bisogna.
+
+Comuni problemi e difetti della meshatura
+
+Qualche volta scoprirete che non vi riesce di ottenere risultati soddisfacienti anche con le indicazioni di cui sopra: la mesh può presentare superfici fantasma, visualizzazione irregolare o presenza di tasselli triangolari in zone vuote. Alcuni di questi fenomeni sono causati dall’interpretazione errata da parte dell’algoritmo di meshatura di particolari geometrie. In alcuni casi l’unico rimedio è quello di rivedere la modellazione di quei particolari.
+
+Cose da tener d’occhio:
+
+benchè queste condizioni non sempre causino il tipo di problemi accennati, ne sono spesso concausa ed è quindi opportuno controllarle come prima cosa, se avete dei problemi.
+
+Oggetti imperfetti. Non sempre la presenza di un oggetto imperfetto provoca un difetto di meshatura, ma poiché è  facile individuarli, partire da qui è un buon inizio. Digitando Sel sulla riga di comando, appare una lista di opzioni tra cui anche "OggettiImperfetti". Se ne trovate uno, nascondetelo e controllate se il problema della mesh scompare. In questo caso potete limitarvi a riparare l’oggetto in questione o ricostruirlo. Se volete essere avvertiti quando un oggetto di questo tipo viene creato, digitate "VerificaOggettiNuovi" sulla riga di comando e premete Invio.
+
+Superfici lunghe e strette. Sono difficili da meshare, più sono lunghe e strette più sono difficili. Un esempio è lo smusso di piccolo raggio su un modello. Se il tempo impiegato per la meshatura vi sembra eccessivamente lungo, la causa potrebbe essere una piccola superficie a scheggia, che blocca “l’ingranaggio di meshatura”.
+
+Superfici estruse da Curve unite in tangenza. Es.: estrudendo un rettangolo a spigoli arrotondati si ottiene una superficie singola con aree interne G1, difficili da meshare (rossa). Per evitare il problema è sufficiente esplodere la curva prima di estruderla per ricavare la superficie, in modo da ottenere 8 superfici singole che possono essere unite e sulle quali la meshatura avviene senza problemi (verde).
+
+Polisuperfici irregolari alle giunte. Di solito il problema è causato dal comando "CombinaSrf" su superfici che non sono in tangenza oppure in seguito alla modifica dei punti di controllo di alcune superfici in prossimità dei bordi. Anche in questo caso per la meshatura  meglio avere una polisuperficie anziché una superficie singola con difetti sulle giunte.
+
+> **Armido:** //per quanto mi riguarda, ho avuto bisogno molto raramente di combinare più superfici per ottenerne una unica. In genere è molto più importante concentrarsi sulla qualità delle curve da cui si generano le superfici singole ed usare quando possibile i bordi delle superfici già presenti come generatrici di nuove superfici, per avere la certezza che la polisuperficie finale non presenti problemi.//
+Seguiranno ulteriori informazioni, aggiungete del vostro!
+
+Bisogna comunque valutare che unire le superfici offre il vantaggio di ricostruirle con un adeguato numero di punti.
+
+
