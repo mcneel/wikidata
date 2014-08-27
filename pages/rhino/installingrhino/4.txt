@@ -28,8 +28,8 @@ These techniques will also work for automated installation by running the MSI fr
 Documentation of application deployment is beyond the scope of this article, so most deployment-specific instructions have been omitted.
 
 =====Requirements:=====
-Please deploy [[http://www.rhino3d.com/download/rhino/4.0/release|Rhino 4.0 Service Release 9]]. Releases older than SR1 do not deploy properly using Active Directory or SMS.
-
+  -Please download [[http://www.rhino3d.com/download/rhino/4.0/release|Rhino 4.0 Service Release 9]]. Releases older than SR1 do not deploy properly using Active Directory or SMS.
+  -Extract the downloaded file into folders by [[http://wiki.mcneel.com/rhino/rhino4/manual_extract_from_file|uncompressing the EXE into folders.]]
 
 =====Uninstalling Previous Installations of Rhino 4.0=====
 **Note:** If you try to deploy the MSI with Rhino 4.0 already installed on the target system, it will fail. This includes previous installations of Evaluation and Beta releases. You must first uninstall any existing release prior to deployment, these command lines will uninstall Rhino 4.0 versions (SR0 through SR9) silently:
@@ -49,7 +49,7 @@ Please deploy [[http://www.rhino3d.com/download/rhino/4.0/release|Rhino 4.0 Serv
      msiexec /x{E3355E5C-965C-4f67-8A8C-E9A0FA9FD80F} /qn
 
 =====Deployment Preparation=====
-1. Perform an administrative install to your network share location. For this example, we'll assume the location **S:\Rhino 4.0 SR1**  For example, if your Rhino 4.0 SR1 CD is in the D:\ drive, you can perform an administrative install from the command line: **msiexec.exe /a D:\rhinoceros\rhino4_setup.msi**
+1. Perform an administrative install to your network share location. For this example, we'll assume the location **E:\Rhino 4.0 SR1**  For example, if you uncompressed Rhino 4.0 SR1 download in the E:\ drive, you can perform an administrative install from the command line: **msiexec.exe /a E:\rhinoceros\rhino4_setup.msi**
 
 2. Edit the **[[http://en.wiki.mcneel.com/content/upload/files/Rhino4Setup.zip|Rhino4Setup.ini]]** file and place it in the same administrative install folder and change its name to match the name of the .msi file. **Note:** All characters following a # sign are ignored by the installer, even if the # character appears in the middle of a line. For more configuration details, see **[[rhino:editrhino4setupini|Editing Rhino4Setup.ini]]**
 
@@ -62,8 +62,8 @@ Please deploy [[http://www.rhino3d.com/download/rhino/4.0/release|Rhino 4.0 Serv
   - Select the **Instal Rhino 4.0** Group Policy Object, then click **Edit...**
   - Determine whether you will be installing per-computer or per-user (read up on Group Policy to determine which works best for your organization).
   - Under User Configuration or Computer Configuration (depending on how you chose in the last step), expand **Software Settings**, then right click **Software installation**, then click **New -> Package**.
-  - Select **S:\Rhino 4.0 SR1\MS-VC80.msi** to install. <color red>This must be installed before Rhino 4.0 SR1 or above.</color>
-  - Select **S:\Rhino 4.0 SR1\Rhino4_Setup.msi** to install.
+  - Select **E:\Rhino 4.0 SR1\MS-VC80.msi** to install. <color red>This must be installed before Rhino 4.0 SR1 or above.</color>
+  - Select **E:\Rhino 4.0 SR1\Rhino4_Setup.msi** to install.
   - In the Deploy Software dialog box, select **Assigned**, then click OK.
   - Right-click Rhino 4.0 SR1 in the right pane, then click **Properties**.
   - Select the **Install this application at logon checkbox.** (Or customize the deployment options to fit the needs of your organization).
@@ -84,7 +84,7 @@ The lines below can be executed manually, or more conveniently, as part of a bat
      msiexec /x{D6F64D4F-B539-448E-A5D7-B57EE89193B8} /qn
 2. Download **[[http://s3.amazonaws.com:80/mcneel/rhino/4.0/misc/MS-VC80.msi|MS-VC80.msi]]** and install it on the target with
 
-     msiexec /i"s:\RhinoInstallScripts\ms-vc80.msi /qn
+     msiexec /i"E:\RhinoInstallScripts\ms-vc80.msi /qn
 3. Execute a line with content like this (this assumes you are installing from the Rhino 4.0 CD on your D drive):
 
      msiexec.exe /i"d:\Rhinoceros\Rhino4_Setup.msi" AUTOINSTALL=1 FOLDER="C:\Progs\Rhino4" RMA_CDKEY=AAAABBBBCCCCDDDDEEEE INSTALL_EN=1
