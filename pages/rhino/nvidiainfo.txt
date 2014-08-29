@@ -1,24 +1,31 @@
-====== NVIDIA Display Driver Issues and Info ======
-==Updated August 27, 2014 - JB==
+====== NVIDIA Display Driver Issues ======
+> **Note:** Nvidia actively fixes issues and updates their drivers. Please follow the instructions below to get the latest update. This can have a significant impact on the stability of Rhino.
 
-===== Quadro  Driver Testing for Rhinoceros 5 =====
-**If you are experiencing crashes in Rhino 5 that are related to the NVIDIA driver, please try the following driver for use with Rhino 5 and Quadro cards.**
 
-  * Download and install driver version [[http://www.nvidia.com/download/driverResults.aspx/77637/en-us|340.66]] using the following procedure:
-=====Installation Instructions=====
+=====Installation Instructions:=====
+  - Download and install driver version [[http://www.nvidia.com/download/driverResults.aspx/77637/en-us|340.66]] or later.
   - Start the driver installation
   - At the point where you can choose installation type, select “Custom (Advanced)”
   - On the next install screen CHECK the option that says “Perform a clean install”
   - Continue with the install
   - Reboot (even though the installer might not suggest it).
 
-===== Random crashing with NVIDIA cards - NVIDIA Threaded Optimization setting =====
+=====Additional steps problems continue:=====
+
+--> Random crashing with NVIDIA cards - NVIDIA Threaded Optimization setting#
 
 Many users are reporting random crashes with NVIDIA drivers.  There is a setting in the NVIDIA Control Panel that seems to help these problems.  
 
 <color coral>**We recommend using the "Workstation App - Dynamic Streaming" setting**</color>.\\
 
 {{:rhino:5:quadrowsadsoption.png?550|}}
+<--
+--> Power adjustments
+Switching your Nvidia card to High Performance can also help stability.
+  - Open your NVIDIA Control Panel and select “Manage 3D settings”
+  - Then, select the “Power Management mode” and change the option from “Adaptive” to “Prefer maximum performance”
+  - Save your changes, and your are done! ﻿
+<--
 
-=====On Going Discussion on Nvidia=====
+=====Latest Discussion on Nvidia Cards=====
 The most recent and ongoing discussion about Rhino and Nvidia cards here: http://discourse.mcneel.com/t/quadro-drivers-updated-good-news/11197/4
