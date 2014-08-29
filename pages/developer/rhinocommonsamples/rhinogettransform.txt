@@ -24,6 +24,17 @@ public class GetTranslation : GetTransform
 
 public class RhinoGetTransformCommand : TransformCommand
 {
+  public RhinoGetTransformCommand()
+  {
+    // simple example of handling the BeforeTransformObjects event
+    RhinoDoc.BeforeTransformObjects += RhinoDocOnBeforeTransformObjects;
+  }
+
+  private void RhinoDocOnBeforeTransformObjects(object sender, RhinoTransformObjectsEventArgs ea)
+  {
+    RhinoApp.WriteLine("Transform Objects Count: {0}", ea.ObjectCount);
+  }
+
   public override string EnglishName { get { return "csGetTranslation"; } }
 
   protected override Result RunCommand(RhinoDoc doc, RunMode mode)
@@ -78,6 +89,15 @@ End Class
 
 Public Class RhinoGetTransformCommand
   Inherits TransformCommand
+  Public Sub New()
+    ' simple example of handling the BeforeTransformObjects event
+    AddHandler RhinoDoc.BeforeTransformObjects, AddressOf RhinoDocOnBeforeTransformObjects
+  End Sub
+
+  Private Sub RhinoDocOnBeforeTransformObjects(sender As Object, ea As RhinoTransformObjectsEventArgs)
+    RhinoApp.WriteLine("Transform Objects Count: {0}", ea.ObjectCount)
+  End Sub
+
   Public Overrides ReadOnly Property EnglishName() As String
     Get
       Return "vbGetTranslation"
