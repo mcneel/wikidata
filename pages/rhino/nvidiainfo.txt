@@ -1,16 +1,24 @@
-====== NVIDIA Quadro Display Driver Issues ======
-> **Note:** Nvidia actively fixes issues and updates their drivers. Please follow the instructions below to get the latest update. This can have a significant impact on the stability of Rhino.
+====== NVIDIA Quadro Issues ======
+> **Note:** NVIDIA actively fixes issues and updates their drivers.  Please follow the instructions below to get the latest update. This can have a significant impact on the stability of Rhino.
 
-=====Determine Current Installed Driver=====
+These instructions are for computers that have NVIDIA Quadro graphics hardware.  The instructions below will help you determine if your computer has NVIDIA Quadro graphics hardware and if the driver should be updated.  (The //driver// is software that the graphics hardware uses.)
+
+=====Determine Computer Graphics Hardware and Driver=====
   - Start <color red>**Rhino**</color>.
   - On the **Tools** menu, click **Options**.
   - Expand the **View** tab (located near the bottom of the list on the left), and then click **OpenGL**.
-  - At the right under **Video Hardware & Driver Information**, note the **driver version**. <color grey>x.xx.xxx</color><color red>x.xxxx</color>
-  - The last 5 digits signify the driver version. For instance, if it reads 8.17.0011.9713, your version number is 197.13.
-  - If those numbers are less then 340.66, then continue with **Installation Instructions** below to update the driver.
+  - In the **Implementation Settings** section, make sure **Use accelerated hardware modes** is checked.
+  - Look in the **Video Hardware & Driver Information** section.
+  - If the first line does not say NVIDIA Corporation, then the computer does not have NVIDIA Graphics hardware. Follow our links in the **[[rhino:5:video:troubleshooting:failure|Video Troubleshooting Section]]**to continue.
+  - If the next line does not have the word Quadro in it, then the computer does not have NVIDIA Quadro Graphics hardware. **Stop**, these instructions will not apply.
+  - Look for the **Driver Version:** line.  It will have a long number that looks like <color grey>x.xx.xxxx.xxxx</color>  The last five digits of this number are the Quadro driver version. For instance, if the long Driver Version number is 8.17.0011.9713, then the Quadro driver version is 197.13.
+  - If the Quadro driver version is equal to or larger than 340.66, then **stop**.  <color grey>(The driver is up to date.)</color>
 
-=====Installation Instructions:=====
-  - Download Nvidia Quadro driver [[http://www.nvidia.com/download/driverResults.aspx/77637/en-us|340.66]] or later.
+===== Instructions to update the NVIDIA Quadro driver =====
+
+If your computer has NVIDIA Quadro graphics hardware and the driver version is less than 340.66, then update the driver.
+
+  - Download NVIDIA Quadro driver version [[http://www.nvidia.com/download/driverResults.aspx/77637/en-us|340.66]] or later.
   - Start the driver installation
   - At the point where you can choose installation type, select “Custom (Advanced)”
   - On the next install screen CHECK the option that says “Perform a clean install”
@@ -28,12 +36,12 @@ Many users are reporting random crashes with NVIDIA drivers.  There is a setting
 {{:rhino:5:quadrowsadsoption.png?550|}}
 <--
 --> Power Adjustments#
-Switching your Nvidia card to High Performance can also help stability.
+Switching your NVIDIA card to High Performance can also help stability.
   - Open your NVIDIA Control Panel and select “Manage 3D settings”
   - Then, select the “Power Management mode” and change the option from “Adaptive” to “Prefer maximum performance”
   - Save your changes, and your are done! ﻿
 {{:rhino:nvidia_max_performance.png?nolink}}
 <--
 
-=====Latest Discussion on Nvidia Cards=====
-The most recent and ongoing discussion about Rhino and Nvidia cards here: http://discourse.mcneel.com/t/quadro-drivers-updated-good-news/11197/4
+=====Latest Discussion on NVIDIA Cards=====
+The most recent and ongoing discussion about Rhino and NVIDIA cards here: http://discourse.mcneel.com/t/quadro-drivers-updated-good-news/11197/4
