@@ -1,0 +1,40 @@
+===== Rhino顯示疑難排解 =====
+
+==== 物件凌亂閃爍的顯示 ====
+
+
+
+首先，先試試**[[zh-tw:rhino:5:video:troubleshooting:intel|更新顯示卡驅動程式]]**.
+
+
+====狀況:搖晃閃爍====
+{{:rhino:5:video:troubleshooting:farfromorigin.png?200|凌亂的物件顯示}}  {{:rhino:5:video:troubleshooting:farfromorigin2.png?200|正常的物件顯示}}
+
+如果一個物體在改變視野角度時看起來閃爍搖晃，或是有很大部分錯誤的彩現網格，可能是此物件離世界座標的原點太遠了。
+
+**如何判定一個物體是否離原點太遠**
+  - 執行**EvaluatePt**指令。(回報曲面上指定點的 UV 座標。)
+  - **物件鎖點Snap**利用鎖點功能鎖定一個點或是一個物件。 
+如果指令功能報告指出世界座標數值非常大(比如說大於一百萬)，把物件向世界座標原點靠近便可以改善問題。 
+
+**移動物件更靠近原點**
+
+  - **Select**選擇移動所有物件。
+  -  啟動**Move**移動指令。
+  - 在**移動的起點**的時候，鎖定在某物件上。  
+  - 在**移動的終點**時，填入座標**W0,0,0** (世界座標原點)。 
+  -  可能需要執行**RefreshShade**更新著色網格指令，可強制物件形成一個新的，更正確的彩現網格。 
+
+如果無法移動物件，可以嘗試以另外的方法來移動：//[[zh-tw:rhino:farfromorigin|離原點很遠的物件]]//
+
+==== 疑難問題:著色模式下的框架顯示有問題====
+
+{{:rhino:5:video:troubleshooting:testzbiasfactor1.png?200|著色表面出現框架線條}}   {{:rhino:5:video:troubleshooting:testzbiasfactor12png.png?200|正常顯示的框架}}
+ 	 
+
+曲面框架(isocurves and edges 結構線與邊緣)顯示朝攝影機的部分產生偏差，所以才出現在著色模式中有該在後面的結構線卻顯示在物件的前面，請利用**testZBiasFactor**指令改善偏差。通常只要在指令列選項中執行一至兩個**較少Less**命令，就可以改善顯示的問題。
+
+
+\\ 
+
+>**註**: 此wiki頁面為Rhino顯示疑難排解精靈的一部分。 [[http://wiki.mcneel.com/zh-tw/rhino/5/video/troubleshooting |回到開始頁面]]
