@@ -9,11 +9,10 @@ These instructions are for computers that have NVIDIA graphics hardware. The ins
   - Expand the **View** tab (located near the bottom of the list on the left), and then click **OpenGL**.
   - In the **Implementation Settings** section, make sure **Use accelerated hardware modes** is checked.
   - Look in the **Video Hardware & Driver Information** section.
-  - If the first line does not say NVIDIA Corporation, then the computer does not have NVIDIA Graphics hardware. Follow our links in the **[[rhino:5:video:troubleshooting:failure|Video Troubleshooting Section]]** for additional steps.
-  - If the hardware description contains the word "GeForce", then go to the Determine Video NVIDIA Driver section below.
-  - If the hardware description contains the word "Quadro", then go to the Determine Video NVIDIA Driver section and then to the Additional Quadro Performance Improvements section.
-  - If the model is neither GeForce nor Quadro, these instructions do not apply to your computer.
-
+  - If the first line says "NVIDIA Corporation" and the hardware description mentions "GeForce", then you have NVIDIA GeForce graphics hardware.  Continue on to determine the driver version.
+  - If the first line says "NVIDIA Corporation" and the hardware description mentions "Quadro", then you have NVIDIA Quadro hardware. Continue on to determine the driver version.
+  - If the first line does not say "NVIDIA Corporation" or the hardware description mentions neither "GeForce" nor "Quadro", then these instructions to not apply to your computer.  Please read **[[rhino:5:video:troubleshooting:failure|Video Troubleshooting Section]]** for additional things you can do.
+ 
 =====Determine NVIDIA Driver Version=====
   - Start <color red>**Rhino**</color>.
   - On the **Tools** menu, click **Options**.
@@ -22,10 +21,13 @@ These instructions are for computers that have NVIDIA graphics hardware. The ins
  
 If the NVIDIA driver version is equal to or larger than 340.66, then **stop**.  <color grey>(The driver is up to date.)</color>
 
-If the computer has NVIDIA graphics driver version is less than 340.66, then update the driver with these steps:
+If the computer has NVIDIA graphics driver version is less than 340.66, then update the driver by following the instructions in either the GeForce or the Quadro section.
 
 
 =====Instructions to update the NVIDIA GeForce driver=====
+
+These instructions explain how to update the **GeForce** driver.  If you have Quadro hardware, go to the next section.
+
   - Download NVIDIA GeForce driver version <<TODO NEED GeForce Driver Link Here>> or later.
   - Start the driver installation
   - At the point where you can choose installation type, select “Custom (Advanced)”
@@ -36,6 +38,10 @@ If the computer has NVIDIA graphics driver version is less than 340.66, then upd
 
 
 =====Instructions to update the NVIDIA Quadro driver=====
+
+These instructions explain how to update the **Quadro** driver.  If you have GeForce hardware, go to the previous section.
+
+
   - Download NVIDIA Quadro driver version [[http://www.nvidia.com/download/driverResults.aspx/77637/en-us|340.66]] or later.
   - Start the driver installation
   - At the point where you can choose installation type, select “Custom (Advanced)”
