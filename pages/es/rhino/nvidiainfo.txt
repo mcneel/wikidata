@@ -1,33 +1,62 @@
-====== Información sobre los controladores NVIDIA ======
+====== Problemas con las tarjetas de video NVIDIA Quadro ======
+> **Nota:** NVIDIA soluciona activamente los problemas y actualiza sus controladores.  Siga las instrucciones que se indican a continuación para obtener la última actualización. Este paso puede tener efectos importantes sobre la estabilidad de Rhino.
 
-===== Pruebas con controladores Quadro para Rhinoceros 5 =====
-**Si experimenta bloqueos en Rhino 5 que están relacionados con el controlador de NVIDIA, prueba el siguiente controlador con Rhino 5 y las tarjetas Quadro.**
+Estas instrucciones son para equipos que tienen tarjetas gráficas  NVIDIA Quadro. 
 
-  * Para Windows 7, el último controlador estable que recomendamos es [[http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]]
-  * Para Windows 8 y 8.1, **no podemos recomendar ningún controlador estable**
-  * Esta información está sujeta a cambios sin previo aviso, ya que se publican nuevos controladores regularmente.
+**Para completar estas instrucciones debe saber:**
+  - El fabricante de la tarjeta.  Esta página es para tarjetas Nvidia Corporation 
+  - El  modelo de la tarjeta de vídeo.  Esta página es solo para modelos Quadro
+  - El sistema operativo del equipo. [[http://windows.microsoft.com/es-es/windows/which-operating-system|¿Qué sistema operativo?]]
 
-//9 de abril, 2014//
-Los comentarios recientes de algunos usuarios indican que el último controlador Quadro de NVIDIA [[http://www.nvidia.com/download/driverResults.aspx/74061/en-us|332.76]] (3.14.14) les ha funcionado. Consulte **Productos compatibles** en su página.
-Infórmenos si esta opción le funciona. Email [[mary@mcneel.com|Mary Fugier.]] 
+Si no está seguro de estos datos, visite nuestra sección de **[[rhino:5:video:troubleshooting:failure|Resolución de problemas con tarjetas de vídeo]]** para consultar más instrucciones.
 
--->Detalles#
-10 de febrero, 2014
-\\
-{{:rhino:nvidia_error.png?400|}}
-\\
-Durante el último año hemos recibido varios informes sobre errores con los controladores de vídeo de usuarios que tienen tarjetas de video NVIDIA Quadro. Tratar de aislar el problema para que los desarrolladores de Rhino pudieran llegar a algún tipo de solución ha demostrado ser muy difícil. 
+> Antes de actualizar los controladores de vídeo, recomendamos crear un punto de restauración en el equipo por si necesita restaurar los cambios.[[http://windows.microsoft.com/es-es/windows/system-restore-faq#1TC=windows-7|Instrucciones para restaurar el sistema]]
+ 
+=====Determinar la versión del controlador NVIDIA Quadro=====
+  - Inicie <color red>**Rhino**</color>.
+  - En el menú **Herramientas**, haga clic en **Opciones**.
+  - Expanda la ficha **Vista** (situada cerca de la parte inferior de la lista a la izquierda) y haga clic en **OpenGL**.
+  - Busque la línea **Versión del controlador:**.  Tendrá un número largo con este formato: <color grey>x.xx.xxxx.xxxx</color>. Los últimos cinco dígitos de este número son la versión del controlador NVIDIA. Por ejemplo, si el número del controlador es 8.17.0011.9713, la versión del controlador NVIDIA es 197.13.
+ 
+Si la versión del controlador NVIDIA es es igual o superior a 340.66, **no haga nada**.  <color grey>(el controlador se ha actualizado en agosto de 2014.)</color>
 
-La conclusión es que este problema está causado por el controlador de vídeo y, aunque la causa *podría* ser alguna acción de Rhino, los controladores no deberían mostrar ningún error. Por este motivo, la posibilidad de la solucionar este problema en Rhino es extremadamente difícil o casi imposible en este punto.
+Si el equipo tiene una versión del controlador de la tarjeta NVIDIA inferior a 340,66, entonces actualice el controlador siguiendo las instrucciones que se indican a continuación.
 
-Esta situación nos preocupa ya que se puede perder trabajo debido al cierre forzoso de Rhino. Algunos bloqueos parecen ocurrir sin ejecutar Rhino... a veces, ejecutar navegadores web y visualizar vídeos hacía bloquear el sistema. Pero la combinación de Rhino y de los navegadores parecía acelerar la frecuencia de los bloqueos.
 
-Para obtener más información, puede consultar el informe completo [[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|aquí.]]
+=====Instrucciones para actualizar el controlador NVIDIA Quadro=====
+
+  - Vaya a la [[http://www.nvidia.com/Download/index.aspx?lang=en-us|página de descarga de controladores NVIDIA]].
+  - Introduzca la información del sistema:
+      - Tipo de producto:Quadro
+      - Modelo de producto: ¿Su adaptador está en un equipo fijo o en un portátil?
+      - Producto: Introduzca el adaptador Quadro específico indicado en Rhino.
+      - Sistema operativo: Introduzca su sistema operativo
+  - Pulse Buscar
+  - Descargue la versión del controlador NVIDIA Quadro <color grey>(se recomienda sobre todo el controlador 340.66 desde agosto de 2014.)</color>
+  - Ejecute la instalación del controlador
+  - Cuando le puntoermita seleccionar el tipo de instalación, seleccione Personalizada (Avanzada)
+  - En la siguiente pantalla de instalación, marque la opción "Perform a clean install"
+  - Continúe con la instalación
+  - - Reinicie (aunque el instalador no lo sugiera).
+  - Lea la siguiente sección Mejoras adicionales en el rendimiento de las tarjetas Quadro.
+
+=====Mejoras adicionales en el rendimiento de las tarjetas Quadro=====
+
+--> Opción "NVIDIA Threaded Optimization"#
+
+Muchos usuarios han informado de errores aleatorios con controladores de NVIDIA.  Hay una opción en el panel de control de NVIDIA que permite solucionar estos problemas.\\ 
+
+>Nota:**Recomendamos utilizar la opción "Workstation App - Advanced Streaming**.
+
+{{:rhino:5:quadrowsadsoption.png?550|}}
 <--
-===== Bloqueos aleatorios con tarjetas NVIDIA - Ajuste de optimización de NVIDIA =====
+--> Ajustes de energía#
+Si se ajusta la tarjeta NVIDIA a "Hight Performance", también se ayuda a mejorar la estabilidad.
+  - Abra el panel de control de NVIDIA y seleccione "Manage 3D settings".
+  - Seleccione el modo "Power Management" y cambie la opción de "Adaptive" a "Prefer maximum Performance".
+  - Guarde los cambios y ya habrá terminado.
+{{:rhino:nvidia_max_performance.png?nolink}}
+<--
 
-Muchos usuarios han informado de errores aleatorios con controladores actualizados de NVIDIA.  Hay una opción en el panel de control de NVIDIA que permite solucionar estos problemas.  
-
-<color coral>**Recomendamos utilizar la opción "Workstation App - Dynamic Streaming"**</color>.\\
-
-{{:rhino:5:quadrowsadsoption.png?direct|}}
+=====Últimos comentarios sobre tarjetas NVIDIA=====
+Puede consultar los últimos comentarios sobre Rhino y las tarjetas NVIDIA aquí: http://discourse.mcneel.com/t/quadro-drivers-updated-good-news/11197/4
