@@ -1,33 +1,62 @@
-====== Informazioni sui driver NVIDIA ======
+====== Problemi con le schede video NVIDIA Quadro ======
+> **Nota:** Nvidia risolve attivamente i problemi legati ai suoi driver, fornendo i relativi aggiornamenti agli utenti.  Seguite le istruzioni qui sotto per ottenere l'ultimo aggiornamento. L'impatto sulla stabilità di Rhino può essere notevole.
 
-===== Test con i driver delle schede Quadro per Rhinoceros 5 =====
-**Se Rhino 5 vi va in crash a causa dei driver NVIDIA, provate il seguente driver con Rhino 5 e le schede Quadro.**
+Queste istruzioni valgono per i computer con schede video NVIDIA Quadro. 
 
-  * Per Windows 7, l'ultimo driver stabile che raccomandiamo è [[http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]]
-  * Per Windows 8 e 8.1, **non possiamo raccomandare nessun driver stabile**
-  * Visto che i driver vengono rilasciati regolarmente, queste informazioni sono soggette a modifica senza preavviso.
+**Per completare queste istruzioni, è necessario che sappiate:**
+  - Chi è il fabbricante della scheda.  Questa pagina è per le schede prodotte da Nvidia Corporation
+  - Il modello della scheda video.  Questa pagina è solo per i modelli Quadro
+  - Il sistema operativo del computer. [[http://windows.microsoft.com/en-us/windows/which-operating-system|Quale sistema operativo state usando?]]
 
-//9 aprile 2014//
-Alcuni utenti ci hanno indicato di recente che l'ultimo driver per le schede Quadro NVIDIA [[http://www.nvidia.com/download/driverResults.aspx/74061/en-us|332.76]] (3.14.14) funziona bene. Si veda la sezione **Supported Products** nel sito del fabbricante.
-Sappiateci dire se quest'opzione vi funziona. Mandate un'e-mail a [[mary@mcneel.com|Mary Fugier.]] 
+Se avete dei dubbi su questi punti, visitate la seguente pagina **[[rhino:5:video:troubleshooting:failure|Risoluzione dei problemi legati alle schede video]]** per ulteriori informazioni.
 
--->Dettagli#
-10 febbraio 2014
-\\
-{{:rhino:nvidia_error.png?400|}}
-\\
-Negli ultimi mesi abbiamo ricevuto varie segnalazioni di errori che hanno a che vedere con i driver video delle schede NVIDIA Quadro. Cercare di isolare il problema affinché gli sviluppatori di Rhino potessero giungere ad una soluzione si è rivelato molto difficile. 
+> Prima di aggiornare i vostri driver video, vi raccomandiamo di creare un punto di ripristino del sistema nel computer nel caso in cui sia necessario ripristinare le modifiche.  [[http://windows.microsoft.com/en-us/windows/system-restore-faq#1TC=windows-7|Istruzioni sul ripristino della configurazione di sistema]]
+ 
+=====Determinare la versione del driver della scheda Quadro NVIDIA=====
+  - Avviate <color red>**Rhino**</color>.
+  - Dal menu **Strumenti**, cliccate su **Opzioni**.
+  - Espandete la scheda **Vista** (parte inferiore dell'elenco, sulla sinistra), e quindi fate clic su **OpenGL**.
+  - Cercate la riga **Versione  driver:**.  Vedrete un numero lungo, con un formato simile a <color grey>x.xx.xxxx.xxxx</color> Le ultime cinque cifre del numero indicano la versione del driver NVIDIA. Per esempio, se il numero è 8.17.0011.9713, la versione del driver NVIDIA sarà 197.13.
+ 
+Se la versione del driver NVIDIA è uguale o maggiore di 340.66, **fermatevi**.  <color grey>(Il driver è aggiornato ad agosto 2014.)</color>
 
-Il problema si verifica all'interno del driver video e, sebbene *possa* essere causato da qualche azione di Rhino, i driver non dovrebbero causare nessun arresto anomalo del sistema. Per questo motivo, la possibilità di risolvere questo problema in Rhino è estremamente difficile o quasi impossibile.
+Se la versione del driver della scheda NVIDIA è minore di 340.66, aggiornate il driver seguendo le istruzioni qui sotto.
 
-Questa situazione ci preoccupa perché, in seguito alla chiusura forzata di Rhino, può andar perso del lavoro. Alcuni crash sembrano aver luogo senza eseguire Rhino… a volte, l'arresto del sistema era causato dall'uso di web browser e dalla visualizzazione di video. La combinazione "uso di Rhino-uso di web browser" sembrava comunque aumentare la frequenza con cui si verificavano i crash.
 
-Per ulteriori informazioni, leggete il rapporto completo: [[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|qui.]]
+=====Istruzioni per aggiornare i driver delle schede Quadro NVIDIA=====
+
+  - Andate alla [[http://www.nvidia.com/Download/index.aspx?lang=en-us|pagina di download dei driver NVIDIA]].
+  - Inserite le informazioni di sistema:
+      - Product type: Quadro
+      - Product Series: La scheda è installata su un desktop o un laptop?
+      - Product: Inserite la scheda Quadro indicata da Rhino.
+      - Operating System: Indicate il vostro sistema operativo
+  - Premete "Search"
+  - Scaricate la versione del driver della scheda Quadro NVIDIAD <color grey>(Il driver 340.66 è vivamente raccomandato a partire da agosto 2014.)</color>
+  - Avviate l'installazione del driver
+  - Quando vi viene richiesto di indicare il tipo di installazione, selezionate "Custom (Advanced)"
+  - Nella successiva schermata di installazione, SPUNTATE l'opzione "Perform a clean install"  
+  - Proseguite con l'installazione
+  - Riavviate il sistema (anche se il programma di installazione non lo specifica).
+  - Leggete la sezione "Ulteriori miglioramenti delle prestazioni Quadro" qui sotto.
+
+=====Ulteriori miglioramenti delle prestazioni Quadro=====
+
+--> Impostazione "Threaded Optimization" (Ottimizzazione in thread) di NVIDIA#
+
+Molti utenti ci hanno segnalato degli arresti che avvengono in modo casuale con i driver di NVIDIA.  Nel pannello di controllo di NVIDIA c'è un'opzione che sembra risolvere questi problemi.\\ 
+
+>Nota:**Raccomandiamo di usare l'opzione "Workstation App - Advanced Streaming"**.
+
+{{:rhino:5:quadrowsadsoption.png?550|}}
 <--
-===== Arresti casuali con le schede NVIDIA - Impostazione di ottimizzazione di NVIDIA =====
+--> Regolazioni energia#
+Impostare la scheda NVIDIA su prestazioni alte può aiutare a migliorare la stabilità.
+  - Aprite il pannello di controllo della vostra scheda NVIDIA e selezionate "Manage 3D settings".   
+  - Quindi, selezionate "Power Management mode" ed impostate l'opzione da "Adaptive" a "Prefer maximum performance"   
+  - Salvate le modifiche e voilà! ï»¿
+{{:rhino:nvidia_max_performance.png?nolink}}
+<--
 
-Molti utenti ci hanno segnalato degli arresti che avvengono in modo casuale con i driver aggiornati di NVIDIA.  Nel pannello di controllo di NVIDIA c'è un'opzione che sembra risolvere questi problemi.  
-
-<color coral>**Raccomandiamo di usare l'opzione "Workstation App - Dynamic Streaming"**</color>.\\
-
-{{:rhino:5:quadrowsadsoption.png?direct|}}
+=====Ultima discussione sulle schede NVIDIA=====
+Date un'occhiata alla discussione più recente ed attualmente attiva su Rhino e le schede NVIDIA: http://discourse.mcneel.com/t/quadro-drivers-updated-good-news/11197/4
