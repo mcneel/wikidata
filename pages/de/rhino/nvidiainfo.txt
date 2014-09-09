@@ -1,22 +1,52 @@
-====== Probleme mit NVIDIA-Anzeigetreibern ======
-> **Hinweis:** Nvidia behebt regelmäßig Fehler und bringt Treiber-Updates heraus. Bitte folgen Sie den Anweisungen unten, um zum neuesten Update zu gelangen. Dies kann einen entscheidenden Einfluss auf die Stabilität von Rhino haben.
+====== Probleme mit NVIDIA-Quadro-Grafikkarten ======
+> **Hinweis:** NVIDIA behebt regelmäßig Fehler und bringt Treiber-Updates heraus.  Bitte folgen Sie den Anweisungen unten, um zum neuesten Update zu gelangen. Dies kann einen entscheidenden Einfluss auf die Stabilität von Rhino haben.
+
+Diese Anleitungen sind für Computer mit NVIDIA-Quadro-Grafikkarten. 
+
+**Sie benötigen dazu die folgenden Informationen:**
+  - Den Hersteller der Karte.  Diese Seite beschäftigt sich mit Grafikkarten von NVIDIA.
+  - Das Modell der Grafikkarte.  Es werden hier nur Probleme mit dem Modell Quadro besprochen.
+  - Das Betriebssystem des Computers. [[http://windows.microsoft.com/de-de/windows/which-operating-system|Welches Betriebssystem wird auf meinem PC ausgeführt?]]
+
+Wenn Sie sich bezüglich eines dieser Punkte unsicher sind, sehen Sie sich auch den Abschnitt zur **[[rhino:5:video:troubleshooting:failure|Fehlerbehandlung mit Grafikkarten]]** an, um zusätzliche Infos zu erhalten.
+
+> Bevor Sie Ihren Grafikkartentreiber aktualisieren, empfehlen wir Ihnen, einen Systemwiederherstellungspunkt zu erstellen, falls Sie Ihre Änderungen anschließend wieder rückgängig machen möchten.  [[http://windows.microsoft.com/de-de/windows/system-restore-faq#1TC=windows-7|So funktioniert die Systemwiederherstellung]]
+ 
+=====Bestimmung der Treiberversion Ihrer NVIDIA Quadro=====
+  - Starten Sie <color red>**Rhino**</color>.
+  - Klicken Sie im Menü **Werkzeuge** auf **Optionen**.
+  - Erweitern Sie den Reiter **Ansicht** (im linken Bereich unter "Rhino-Optionen") und klicken Sie auf **OpenGL**.
+  - Suchen Sie die Zeile **Treiberversion:**.  Dort finden Sie eine lange Nummer im Format <color grey>x.xx.xxxx.xxxx</color>, wobei die letzten fünf Ziffern die Treiberversion Ihrer NVIDIA-Karte angeben. Wenn also die ganze Nummer beispielsweise 8.17.0011.9713 ist, dann hat Ihr NVIDIA-Treiber die Versionsnummer 197.13.
+ 
+Wen die Versionsnummer Ihres NVIDIA-Treibers 340.66 oder größer ist, **fahren Sie nicht fort**.  <color grey>(Der Treiber ist mindestens auf dem Stand von August 2014.)</color>
+
+Wenn die Treiberversion Ihrer NVIDIA-Grafikkarte niedriger ist als 340.66, sollten Sie den Treiber wie unten beschrieben aktualisieren.
 
 
-=====Installationsanweisung:=====
-  - Laden Sie sich den Nvidia-Quadro-Treiber [[http://www.nvidia.com/download/driverResults.aspx/77637/de-de|340.66]] oder neuer herunter.
+=====Anleitung zum Update des NVIDIA-Quadro-Treibers=====
+
+  - Gehen Sie auf die [[http://www.nvidia.de/Download/index.aspx?lang=de|Download-Seite von NVIDIA]].
+  - Geben Sie folgende Systeminformationen ein:
+      - Produkttyp: Quadro
+      - Produktserie: Achten Sie auf die Unterscheidung von Desktop und Notebook.
+      - Produktfamilie: Geben Sie hier das genaue Modell Ihrer Quadro-Karte an (wie in Rhino angezeigt).
+      - Betriebssystem: Geben Sie Ihr Betriebssystem an.
+  - Klicken Sie auf "Suchen"
+  - Laden Sie den NVIDIA-Quadro-Treiber herunter <color grey>(Die Version 340.66 ist vom August 2014 und wird empfohlen.)</color>
   - Führen Sie die Treiberinstallation aus
   - Wählen Sie als Installationstyp "Benutzerdefiniert (Fortgeschritten)"
   - Aktivieren Sie im nächsten Fenster die Option zur Durchführung einer sauberen Installation
   - Fahren Sie mit der Installation fort
   - Starten Sie den PC neu (selbst wenn das Installationsprogramm dies nicht ausdrücklich empfiehlt).
+  - Lesen Sie den folgenden Abschnitt für zusätzliche Quadro-Performance-Verbesserungen.
 
-=====Zusätzliche Schritte zur Fehlerbehebung:=====
+=====Zusätzliche Quadro-Performance-Verbesserungen=====
 
---> Willkürliche Abstürze mit NVIDIA-Karten - Einstellungsoption zur Optimierung#
+--> NVIDIA-Threaded-Optimierung#
 
 Viele Anwender berichten von willkürlichen Abstürzen mit NVIDIA-Treibern.  Es gibt eine Einstellungsmöglichkeit, die bei diesen Problemen zu helfen scheint.\\ 
 
->Hinweis:**Wir empfehlen die Einstellung "Workstation App - Dynamic Streaming"**.
+>Hinweis:**Wir empfehlen die Einstellung "Workstation App - Advanced Streaming"**.
 
 {{:rhino:5:quadrowsadsoption.png?550|}}
 <--
@@ -25,7 +55,7 @@ Zur Steigerung der Stabilität kann es auch hilfreich sein, die NVIDIA-Karte auf
   - Öffnen Sie die NVIDIA-Systemsteuerung und wählen Sie "3D-Einstellungen verwalten"
   - Wählen Sie die Option "Energieverwaltungsmodus" und ändern Sie die Einstellung von "Adaptiv" auf "Maximale Leistung bevorzugen"
   - Speichern Sie Ihre Änderungen
-{{:rhino:nvcpl3.png?direct&550|}}
+{{:rhino:nvidia_max_performance.png?nolink}}
 <--
 
 =====Aktuelle Diskussionen zu Nvidia-Karten=====

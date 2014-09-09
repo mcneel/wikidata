@@ -1,75 +1,32 @@
 ======Zoo - Lizenzmanager======
-[[zoo:home|{{ :zoo:zoo_small.png|Zoo Home}}]]
+[[http://wiki.mcneel.com/zoo/home|{{:zoo:zoo.png?128|Zoo - Lizenzmanager}}]]
 
-=====Überblick=====
-Mit dem Zoo können Rhino, Flamingo, Penguin, Brazil und Bongo Lizenzen (CD-Codes) in der gleichen Netzwerk-Arbeitsgruppe gemeinsam genutzt werden. Wenn diese Produkte als Mehrplatzsysteme anstatt als Einzelplatzsysteme installiert werden, funktioniert es folgendermaßen: 
+> **Hinweis:** Rhino-4-Anwender benötigen den **[[:zoo:zoo4|Zoo 4.0]]**.
 
-  * Wenn ein Mehrplatzsystem startet, wird eine Lizenz vom Zoo angefordert. 
-  * Eine Lizenz, die nicht verwendet wird, wird diesem System zugewiesen. 
-  * Wenn eine Sitzung beendet wird, wird die Lizenz erneut in den Speicher verfügbarer Lizenzen des Zoos zurückgeschickt. 
+Mit dem Zoo können Sie Ihre Lizenzen bequem an einem Ort verwalten und automatisch an Rhino-Benutzer in Ihrem Netzwerk verteilen lassen. 
 
-** Der Zoo ist kostenlos!**
+===== Ist der Zoo das Richtige für mich? =====
+Wenn Folgendes auf Sie zutrifft:
+  * Sie haben mehr Anwender als Lizenzen von Rhino.
+  * Sie möchten mehrere Lizenzen von einem Ort aus verwalten.
 
-**[[http://www.rhino3d.com/download/zoo/5.0/latest|Download Zoo 5]]**  für Rhino 5 und Bongo 2.0 (//Brazil 2.0, Flamingo nXt und Penguin 2.0 benötigen [[::zoo::rhinolm5|Rhino 5 SR6 oder neuer]]//).
 
-**[[http://www.rhino3d.com/download/zoo/4.0/commercial|Download Zoo 4.0]]** für Rhino 4, Flamingo, Penguin, Brazil und Bongo 1.0 (//Rhino 5 und Bongo 2.0 werden nicht unterstützt//).
+===== Erste Schritte =====
+===Zoo 5 einrichten===
+  - **[[http://download.rhino3d.com/Zoo/5.0/release/download/|Laden Sie den Zoo herunter]]** und installieren Sie ihn auf einem Windows-Computer.
+  - Stellen Sie sicher, dass der **[[http://wiki.mcneel.com/zoo/window7firewall|TCP-Port 80]]** in Ihrer Firewall geöffnet ist.
+  - Führen Sie **ZooAdmin** aus und **[[rhino5validate|fügen Sie Ihre Rhino-CD-Schlüssel hinzu]]**.
+===Rhino 5 einrichten===
+  - Wenn Rhino bereits installiert ist, führen Sie es aus und gehen Sie auf **Werkzeuge -> Optionen -> Lizenzen**. Wählen Sie Ihre Rhino-Lizenz und klicken Sie auf **Umwandeln**. Schließen Sie Rhino und starten Sie es neu. Wählen Sie während des Startvorgangs **Netzwerkknoten** und geben Sie den **[[http://wiki.mcneel.com/zoo/determinezoohost|Namen]]** Ihres Zoo-Servers ein.
+  - Wenn Sie Rhino neu installieren, wählen Sie während des Startvorgangs **Netzwerkknoten** und geben Sie den **[[http://wiki.mcneel.com/zoo/determinezoohost|Namen]]** Ihres Zoo-Servers ein.
 
-//Hinweis: Es ist möglich, Zoo 4.0 und Zoo 5 auf dem gleichen Netzwerk und sogar auf dem gleichen Server problemlos zu installieren.//
 
-**Ein Video-Überblick über den Zoo-Lizenzserver**
-{{vimeo>89968285?640x360}}
-=====Features=====
--->Keine zusätzlichen Kosten#
-Es werden keine Sonderversionen von Rhino, Flamingo, Penguin, Brazil oder Bongo benötigt. 
-<--
--->Keine spezielle Hardware#
-Der Zoo kann auf einem beliebigen Rechner der Arbeitsgruppe laufen. 
-<--
--->Keine spezielle Software#
-Der Zoo benötigt lediglich ein beliebiges Windows-System: Windows XP, Vista oder 7/8 bzw. Windows Server 2000, 2003 oder 2008.
-<--
--->Einfache Einrichtung#
-Sie installieren den Zoo auf einem beliebigen Rechner des Netzwerks und geben die Lizenzcodes in den Zoo anstatt in die einzelnen Systeme ein. 
-<--
--->Abmelden#
-Rhino-Lizenzcodes können abgemeldet werden, d.h. Laptop-Benutzer können das Netzwerk verlassen. Der Code kann wieder angemeldet werden, wenn der Laptop an das Netzwerk angeschlossen wird. 
-<--
--->Robust#
-Mehrplatzsysteme funktionieren weiter, auch wenn die Netzwerkverbindung oder der Server unterbrochen werden.
-<--
--->Routbar#
-Der Zoo funktioniert auf Einzelknoten-Netzwerken oder auf Netzwerken, bei denen Systeme durch Router getrennt sind. 
-<--
--->Mischumgebung#
-Eine Mischung aus Mehrplatz- und Einzelplatzsystemen in derselben Windows-Domäne oder -Arbeitsgruppe wird ebenfalls unterstützt. 
-<--
--->Als Dienst ausführen#
-Wenn Sie den Computer mit dem Zoo neu starten, wird dieser wieder automatisch gestartet. 
-<--
-
-=====Neu in Zoo 5=====
--->Neue Version!#
-Zoo 5 ist eine neue Version des Zoo. Das Programm wurde vollständig überarbeitet und bietet eine Anzahl von neuen Eigenschaften an, die nicht in vorherigen Zoo-Versionen vorhanden waren
-<--
--->Unterstützung des Standard-Internet-Protokolls#
-Clients kommunizieren mit dem Zoo 5 über HTTP (Port 80). Für Systemverwalter ist es daher einfacher, Zoo-Anforderungen in komplexen Netzwerken oder über das Internet weiterzuleiten.
-<--
--->Firewallfreundlich#
-Zoo 5 erfordert eine regelmäßige Kommunikation des Client mit dem Server, initialisiert aber nie Verbindungen zurück zum Client. Verwalter müssen keine Firewallports auf Client-Computern mehr öffnen.
-<--
--->Eingeschränkte Lizenz-Abmeldung#
-Ältere Zoo-Version erlaubten die Lizenzabmeldung von Laptop-Anwendern oder für Geschäftsreisen. Es gab aber keine Einschränkung für die Dauer der Abmeldung. Zoo 5 erlaubt dem Administrator nun, die Dauer der Lizenzabmeldung zu definieren.
-<--
--->Unterstützung für Plug-ins von Drittentwicklern#
-Ältere Zoo-Versionen konnten nur Lizenzen von McNeel-Produkten verwalten (d.h. Rhino, Flamingo, Bongo, Brazil und Penguin). Für Zoo 5 können Drittentwickler von Plug-ins nun ebenfalls Unterstützung für ihre Produkte hinzufügen.
-<--
-
-=====Systemanforderungen=====
-  * Windows-System.
-  * [[http://www.microsoft.com/de-de/download/details.aspx?id=17718|Microsoft .NET Framework 4]] (Komplettes Framework, nicht nur das Client-Profil)
-  * Eine Netzwerkverbindung konfiguriert für TCP/IP.
-
-=====Support=====
-**[[de:zoo:zoo5|Zoo 5]]** - Der Lizenzmanager für Rhino 5 und Bongo 2.0 (//Brazil 2.0, Flamingo nXt und Penguin 2.0 benötigen [[::zoo::rhinolm5|Rhino 5 SR6 oder neuer]]//).
-
-**[[zoo:zoo4|Zoo 4.0]]** - Lizenzmanager für Rhino 4, Flamingo, Penguin, Brazil und Bongo 1.0 (//Rhino 5 und Bongo 2.0 werden nicht unterstützt//).
+=====Weitere Informationen und Support=====
+[[:de:zoo:rhino5overview|Überblick über die Funktionen]] ([[http://docs.mcneel.com/zoo/5/de/Zoo5.pdf|PDF]]) ([[https://vimeo.com/89968285|Video]])\\
+[[:de:zoo:rhino5requirements|Systemvoraussetzungen]]\\
+[[:de:zoo:products|Kompatible Produkte]]\\
+[[http://docs.mcneel.com/zoo/5/en/index.html|Benutzerhandbuch]]\\
+[[http://discourse.mcneel.com/category/zoo|Support-Forum]]\\
+[[:zoo:zoo5diagnostics|Diagnosetool]]\\
+===== Weitere Informationen =====
+{{topic>.?zoo5&nouser&nodate}}
