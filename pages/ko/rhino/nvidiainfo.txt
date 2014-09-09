@@ -1,33 +1,62 @@
-====== NVIDIA 디스플레이 드라이버 문제와 정보 ======
+====== NVIDIA Quadro 비디오 카드 관련 안내 ======
+> **안내:** NVIDIA에서는 능동적으로 문제를 해결하고 드라이버를 업데이트합니다. 최신 업데이트를 설치하시려면 아래의 안내대로 실행하시기 바랍니다. Rhino를 안정적으로 사용하시는 중요한 역할을 하는 부분입니다.
 
-===== Rhinoceros 5 에서 콰드로 드라이버 테스트 =====
-**NVIDIA 드라이버와 관련하여 Rhino 5 에서 크래시 문제가 있으시다면, Rhino 5와 콰드로 카드에서 다음 드라이버를 사용해 보시기 바랍니다.**
+NVIDIA Quadro 그래픽 하드웨어가 탑재된 컴퓨터를 위한 안내입니다. 
 
-  * Windows 7의 경우, 저희가 권장하는 안정적인 최신 드라이버는 [[http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]] 입니다.
-  * Windows 8 과 8.1은 **현재 권장할만한 안정적인 드라이버가 없습니다**
-  * 새 드라이버가 정기적으로 릴리스됨에 따라, 이 정보는 사전 공지 없이 변경될 수 있습니다.
+**이 안내대로 모두 실행하시려면 다음 정보가 필요합니다:**
+  - 카드 제조사. 이 페이지는 Nvidia 에서 제조한 비디오 카드를 위한 안내입니다.
+  - 비디오 카드 모델.  이 안내는 Quadro 모델에만 해당합니다.
+  - 컴퓨터의 운영체제. [[http://windows.microsoft.com/ko-kr/windows/which-operating-system|운영 체제 확인하기 클릭]]
 
-//2014년 4월 9일//
-최근 들어 일부 사용자들께서 [[http://www.nvidia.com/Download/index.aspx?lang=en-us|NVIDIA Quadro 드라이버]]가 성공적이라고 알려주셨습니다. NVIDIA 웹사이트에서 **Supported Products**의 목록을 확인하세요.
-이 드라이버가 잘 실행되는지 저희에게 알려 주시기 바랍니다. 드라이버 날짜, 버전, 그래픽 카드 모델, Windows OS 정보도 적어 [[mary@mcneel.com|Mary Fugier]] 앞으로 이메일을 보내 주세요. 
+위의 정보를 잘 모르시는 분들께서는 더욱 자세하게 안내되어 있는 **[[ko:rhino:5:video:troubleshooting:failure|비디오 문제 해결 안내]]**를 참조하세요.
 
--->자세히#
-2014년 2월 10일
-\\
-{{:rhino:nvidia_error.png?400|}}
-\\
-지난 한 해 동안 특정한 NVIDIA Quadro 비디오 카드의 비디오 드라이버에 크래시가 발생한다고 보고해주신 사용자가 여러 명 있었습니다. 문제를 파악하고 Rhino 개발자들이 해결책을 찾는 것은 매우 어렵니다. 
+> 비디오 드라이버로 업데이트하시기 전에 시스템 복원 지점을 생성해두실 것을 권장합니다.   [[http://windows.microsoft.com/ko-kr/windows/system-restore-faq#1TC=windows-7|시스템 복원 지점을 만드는 방법 안내]]
+ 
+=====NVIDIA Quadro 드라이버 버전 확인하기=====
+  - <color red>**Rhino**</color>를 시작합니다.
+  - **도구** 메뉴에서 **옵션**을 클릭합니다.
+  - **뷰** 탭 (왼쪽 창의 중간에 위치)을 펼치고 **OpenGL**을 클릭합니다.
+  - **드라이버 버전:** 항목을 찾습니다. <color grey>x.xx.xxxx.xxxx</color>처럼 길게 나열된 번호가 표시됩니다. 마지막 다섯 자리는 NVIDIA 드라이버 버전입니다. 예를 들어, 드라이버 버전의 전체 번호가 8.17.0011.9713라면, NVIDIA 드라이버 버전은 197.13입니다.
+ 
+NVIDIA 드라이버 버전이 340.66 이상이면 **멈추세요**.  <color grey>(2014년 8월 기준 최신 드라이버입니다.)</color>
 
-기본적으로 이 문제는 비디오 드라이버에서 발생하는 것으로, Rhino에서의 어떤 작업이 문제를 *일으키는 것일 수도 있으나.* 드라이버에서는 크래시가 발생하면 안 됩니다. 따라서 Rhino 자체적으로 문제를 해결할 수 있는 가능성은 지극히 낮으며, 아마도 불가능할 수도 있습니다.
+컴퓨터의 NVIDIA 그래픽 드라이버 버전이 340.66 보다 낮은 숫자라면 다음 안내에 따라 드라이버를 업데이트하세요.
 
-크래시 발생으로 인해 작업 결과가 사라지거나 Rhino를 강제로 종료해야 하는 것이 저희가 걱정하는 부분입니다. 일부 크래시는 Rhino가 실행되지 않은 상태에서 발생하는 것 같습니다 ¡¦ 웹 브라우저를 실행하고 동영상을 볼 때 시스템 크래시가 발생하기도 합니다. Rhino와 웹 브라우저를 함께 사용하면 크래시가 더욱 빈번하게 발생하게 됩니다.
 
-자세한 정보는 보고서 전체 내용을  [[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|참조하시기 바랍니다.]]
+=====NVIDIA Quadro 드라이버를 업데이트하는 방법=====
+
+  - [[http://www.nvidia.co.kr/Download/Find.aspx?lang=kr|NVIDIA 드라이버 다운로드 페이지]].
+  - 시스템 정보 입력:
+      - 제품 유형: Quadro
+      - 제품 모델: 어답터가 데스크톱 아니면, 노트북 컴퓨터에 있습니까?
+      - 제품: Rhino에서 확인한 특정한 Quadro 어답터를 입력합니다.
+      - 운영 체제: 사용하시는 운영 체제를 입력합니다.
+  - 검색을 누릅니다.
+  - NVIDIA Quadro 드라이버 버전 <color grey>(2014년 8월 기준 권장 드라이버 버전: 340.66)</color> 을 다운로드합니다.
+  - 드라이버 설치를 시작합니다.
+  - 설치 유형을 선택해야 하는 창에서 "사용자 지정 (고급) Custom (Advanced)"을 선택하세요.
+  - 다음 설치 화면에서 "클린 설치 수행 Perform a clean install" 옵션을 선택합니다.
+  - 설치를 진행합니다.
+  - 컴퓨터를 다시 부팅합니다 (설치 과정 끝에 컴퓨터를 새로 시작하라는 안내가 없어도 컴퓨터를 다시 부팅하세요).
+  - 아래의 Quadro 성능 향상 항목을 참조하세요.
+
+=====Quadro 성능 향상=====
+
+--> NVIDIA 스레드 최적화 설정#
+
+NVIDIA 드라이버를 사용하고 계신 많은 사용자들이 불특정한 크래시가 발생한다고 알려 주셨습니다.  NVIDIA 제어판에는 이 문제 해결에 도움이 되는 설정이 있습니다.\\ 
+
+>안내:** "Workstation App - Dynamic Streaming" 설정 사용을 권장합니다. Advanced Streaming 옵션을 사용하면 속도는 빨라지지만 안정성이 다소 떨어질 수 있습니다.
+
+{{:rhino:5:quadrowsadsoption.png?550|}}
 <--
-===== NVIDIA 카드에서의 불특정한 크래시 발생 - NVIDIA 스레드 최적화 설정 =====
+--> 전원 조정#
+NVIDIA 카드를 고성능으로 설정하면 보다 안정적으로 사용하실 수 있습니다.
+  - NVIDIA 제어판을 열고 “Manage 3D settings”을 선택합니다.
+  - “Power Management mode”를 선택하고 옵션을 “Adaptive”에서 “Prefer maximum performance”로 변경합니다.
+  - 변경 내역을 저장하면 끝입니다!
+{{:rhino:nvidia_max_performance.png?nolink}}
+<--
 
-업데이트된 NVIDIA 드라이버를 사용하고 계신 많은 사용자들이 불특정한 크래시가 발생한다고 알려 주셨습니다.  NVIDIA 제어판에는 이 문제 해결에 도움이 되는 설정이 있습니다.  
-
-<color coral>**"Workstation App - Dynamic Streaming" 설정을 사용하실 것을 권장합니다**</color>.\\
-
-{{:rhino:5:quadrowsadsoption.png?direct|}}
+=====NVIDIA 카드 관련 최근 토론=====
+Rhino와 NVIDIA 카드에 대해 현재 진행 중인 최신 토론글: http://discourse.mcneel.com/t/quadro-drivers-updated-good-news/11197/4
