@@ -1,22 +1,27 @@
-====== Zoo 5 需安裝 Microsoft .NET Framework 4 ======
-> **產品：** //[[zh-tw:zoo:zoo5|Zoo 5]]]//
-> **摘要：** //Zoo 5於Windows XP上執行相關問題。//
+====== Zoo需要Microsoft .NET Framework 4 ======
+>**產品：//[[zh-tw:zoo:home|Zoo 5]]//
+> **摘要:** //討論Zoo 5 與Microsoft .NET Framework 4//
 
-===== 問題 =====
-我試著在Windows XP系統上安裝Zoo，當我安裝後啟動Zoo，卻無法使用。Windows XP是否不支援Zoo 5？
+==== 概要 ====
+Zoo 5 需要[[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]].。你可以藉由[[http://windows.microsoft.com/en-us/windows/windows-update|Windows Update]]確認Microsoft .NET Framework 4 安裝在電腦系統中。
 
-=====解決方式 =====
-Zoo 5 支援**Windows XP Service Pack 3**。 
+=====問題=====
+我在2008 R2系統的Windows伺服器安裝了Zoo 5，但Zoo的伺服器無法啟動，我在Windows 事件日誌裡看到以下訊息：
 
-Zoo 5 需安裝**Microsoft .NET Framework 4**.
+<code>
+Service cannot be started. System.IO.FileNotFoundException: Could not load 
+file or assembly 'System.ServiceModel.Web, Version=4.0.0.0, 
+Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its 
+dependencies. The system cannot find the file specified.
+File name: 'System.ServiceModel.Web, Version=4.0.0.0, Culture=neutral, 
+PublicKeyToken=31bf3856ad364e35'
+at ZooService.ZooService.OnStart(String[] args)
+at System.ServiceProcess.ServiceBase.ServiceQueuedMainCallback(Object 
+state)
+</code>
 
-請您先下載並安裝下列.NET Framework 4，檔案尺寸約為~50 MB。
-
-**下載**
-  * [[http://support.microsoft.com/kb/322389|Microsoft Windows XP Service Pack 3]]
-  * [[http://www.microsoft.com/en-us/download/details.aspx?id=17851|Microsoft .NET Framework 4 (網路安裝)]]
-  * [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4 (完整安裝程式)]]
- 
+=====解決方法=====
+Zoo 5需要完整的[[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]]。單是安裝.NET Framework 4 Client Profile無法讓Zoo 5運作。
 
 \\
 
