@@ -1,0 +1,31 @@
+==== Rhino pour Mac et écrans Retina ====
+
+En juin 2012, Apple annonçait le MacBook Pro avec écran Retina, des écrans à la résolution beaucoup plus élevée que celle des portables Apple précédents. Les développeurs de logiciel doivent s'adapter à cette nouvelle technologie d'affichage. 
+
+Pendant longtemps, tous les écrans Apple avait une [[http://fr.wikipedia.org/wiki/R%C3%A9solution_spatiale_des_images_matricielles | densité en pixels ]] d'environ 100 pixels par pouce (PPI).  Lors de la conception des boîtes de dialogue, les développeurs avaient l'habitude de définir le contour en indiquant la hauteur et la largeur des champs de texte et des boutons en pixels tout comme leur position à l'écran. Les nouveaux écrans Retina ont une résolution de 220 PPP et les anciennes ne fonctionnent donc plus. 
+
+Même Apple a dû travailler dur pour que le passage se fasse correctement. Dans OS X, Apple a commencé à utiliser le concept de points, au lieu de pixels, pour mesurer les dimensions de l'écran. Pour les affichages non Retina plus anciens, Apple a décidé que les pixels et les points auraient la même taille pour que toutes les conventions précédentes sur les dispositions des écrans continuent à fonctionner. Sur les nouveaux écrans Retina en revanche, Apple a décidé que 1 point équivalait à 2 pixels, il y a donc deux fois plus de pixels que de points dans chaque direction. Lorsqu'un développeur crée un bouton de 18 x 90 (points), il fait toujours 18 x 90 pixels sur un écran non Retina mais il est dessiné en utilisant 36 x 180 pixels sur un écran Retina. L'écran Retina ayant une densité double en pixels, le bouton a la même taille apparente sur les deux écrans, soit juste un peu moins d'un pouce de large. 
+
+Apple a mis à jour toutes les méthodes de dessin de contrôles et de texte pour que les boutons et le texte dessinés sur un écran Retina utilisent deux fois plus de pixels et que toutes les applications continuent à fonctionner comme avant le changement. Cependant, les programmes graphiques tels que Rhino devaient être modifiés pour profiter des nouveaux écrans Retina, 
+
+Comme indiqué auparavant, OS X utilisent généralement des points pour ses dessins. Mais lorsque Rhino dessine votre modèle dans une vue, il doit connaître la taille de la vue en pixels et non en points. Rhino demande alors à OS X de déterminer cette valeur et utilise les valeurs correspondantes en pixels lors du dessin. Si vous comparez votre modèle sur un écran non Retina (comme sur un MacBook Air de 2012) et sur un écran Retina, vous verrez que la version sur le Retina est plus claire. Rhino dessine 4 fois plus de pixels sur un écran Retina. 
+
+=== Résolution d'écran définie sur Maximale (Retina) ===
+
+Les écrans Retina 15" des ordinateurs MacBook Pro de 2012 font 2880 par 1800 pixels. Dans Préférences Système > Affichages, Apple vous permet d'utiliser une résolution à l'échelle, ce qui normalement est une mauvaise idée sur Rhino pour Mac. Par exemple, n'utilisez pas le paramètre d'échelle suivant. Lisez le commentaire "L’utilisation d’une résolution à l’échelle peut affecter les performances"  Il correspond bien à Rhino pour Mac. 
+
+{{:rhino:mac:display_resolution_preference.png |}}
+
+
+Ce panneau vous permet de modifier la taille de votre affichage en //points// au lieu de pixels. Vous ne pouvez bien sûr pas changer le nombre de pixels physiques de votre écran. La présentation d'Apple sur ce tableau de bord peut porter à confusion si vous pensez que la résolution est indiquée ne pixels, mais n'oubliez pas que la résolution de l'écran présentée dans les Préférences Système est effectivement en points. 
+
+Pour mesurer la différence au niveau de ces paramètres, nous avons configuré Rhino pour qu'il indique les tailles réelles des fenêtres. Nous avons lancé Rhino et nous avons choisi d'afficher une seule fenêtre de travail et le dessin de Rhino en plein écran. Voici les données rapportées par Rhino quand on utilise les trois derniers paramètres des Préférences Système :
+
+^ Résolution ^ Apparence ^ fenêtre en points ^ fenêtre en pixels ^ nombre de pixels ^
+|Maximale (Retina)  |  1440 X 900  |  1438 X 801  |  2876 X 1602  |  4,607,352  |
+| |  1680 x 1050  |  1678 X 951  |  3356 X 1902  |  6,383,112  |
+|Plus d’espace |  1920 x 1200  |  1918 x 1101  |  3836 x 2202  |  8,446,872  |
+
+Attention, le nombre de pixels physiques sur un écran Retina ne peut pas changer. Pour le paramètre Maximale (Retina), le nombre de pixels dans la fenêtre correspond exactement au nombre de pixels physiques sur l'écran, le contenu de la fenêtre est donc dessiné directement à l'écran. Dans les deux autres cas, OS X crée une image hors écran dans la mémoire GPU. Cette image est plus grande que l'écran et Rhino dessine sur cette image. OS X redimensionne ensuite l'image à la taille de l'écran et dessine la version redimensionnée sur l'écran. Dans l'option Plus d’espace (1920 x 1200), Rhino doit dessiner deux fois plus de pixels que dans l'option Maximale (Retina), et tout ce travail supplémentaire ne sert ensuite à rien.
+
+Étant donné que Rhino fait déjà attention à la taille physique de votre écran, il est donc plus judicieux de conserver la résolution sur **Optimisé pour l’écran** ou, si l'option **À l’échelle** est choisie, **Maximale (Retina)**. 
