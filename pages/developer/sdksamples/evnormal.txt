@@ -1,7 +1,7 @@
 ====== Determining the Normal Direction of a Brep Face ======
 > **Developer:** //[[developer:cplusplusplugins|C++]], [[developer:dotnetplugins|.NET]]//
 > **Summary:** //Demonstrates how to determine the normal direction of a Brep face.//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:evnormal|here]]//
+> **Note:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:evnormal|here]]//
 =====Overview=====
 To determine the normal direction of a surface, you can use one of the following functions:
 
@@ -12,7 +12,7 @@ ON_Surface::EvNormal()
 
 To determine the normal direction of a face which is part of a Brep, you can also use the above functions, as an **ON_BrepFace** object is derived from **ON_Surface**. But, you will also need to take into account the orientation of the Brep face. If the orientation of the Brep face is opposite of the underlying, natural surface orientation, then you will need to reverse the direction of the calculated normal vector.
 
-It should also be noted that most surface in Rhino are really Breps with a single face.
+It should also be noted that most surfaces in Rhino are really Breps with a single face.
 
 The following sample code demonstrates how to interactively determine the normal direction of a selected surface or Brep face.
 
