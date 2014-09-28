@@ -1,33 +1,63 @@
-====== NVIDIAディスプレイドライバの問題と情報 ======
+====== NVIDIA Quadro ビデオの問題======
+> **メモ:** NVIDIAは積極的に問題を修正し、ドライバを更新しています。以下の手順に従って最新のものに更新してください。これはRhinoの安定性に大きく影響する可能性があります。
 
-===== Rhinoceros 5のQuadroドライバのテスト =====
-**NVIDIAドライバとの関連でRhino 5がクラッシュする場合、Rhino 5とQuadroカードには以下のドライバを試すと良いでしょう。**
+こちらはNVIDIA Quadroグラフィックハードウェアが入っているコンピューター向けの手順です。
 
-  * Windows 7で最も新しく安定しているドライバとして推奨するのは、[[http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]]です。
-  * Windows 8と8.1には、**推奨できる安定したドライバはありません**。
-  * 新しいドライバが次々とリリースされているため、この情報は予告なしに変更されることがあります。
+**この手順を完了するために必要な情報**
+  - カードのメーカー。このページはNvidia Corporation カード向けです。
+  - ビデオカードのモデル。このページはQuadroモデルのみが対象です。
+  - コンピューターのオペレーティングシステム [[http://windows.microsoft.com/ja-jp/windows/which-operating-system|オペレーティングシステムは?]]
 
-//2014年4月9日//
-ユーザーの方から最近いただいたフィードバックから、最新のNVIDIA Quadroドライバ [[http://www.nvidia.com/download/driverResults.aspx/74061/en-us|332.76]]（3.14.14）がうまくいくこともあるようです。サポートされる製品については**[[http://www.nvidia.com/download/driverResults.aspx/74061/en-us|Supported Products]] **をご覧ください。
-それでもうまくいかない場合はどうぞお知らせください。メール [[mary@mcneel.com|Mary Fugier.]] 
+分からない場合は**[[jp:rhino:5:video:troubleshooting:failure|ビデオに関するトラブルシューティングのセクション]]**をご覧ください。
 
--->詳細#
-2014年2月10日
-\\
-{{:rhino:nvidia_error.png?400|}}
-\\
-この一年間、特定のNVidia Quadroビデオカードをお使いのユーザーの方達よりビデオドライバのクラッシュについてのいくつかのご報告がありました。Rhinoの開発チームがこの問題を回避するまたは修正できる方法を探し出そうとしましたが、非常に困難です。 
+> 変更前の状態に戻すことができるよう、ビデオドライバを更新する前にシステムの復元ポイントを作成しておくことをお勧めします。  [[http://windows.microsoft.com/ja-jp/windows/system-restore-faq#1TC=windows-7|システムの復元ポイントについて]]
+ 
+=====NVIDIA Quadroのドライバのバージョンを特定する=====
+  - <color red>**Rhino**</color>を起動します。
+  - **ツール**メニューの**オプション**をクリックします。
+  - **ビュー**タブ（左側のリストにあるRhinoオプションの中央にあります）を見つけ、展開して**OpenGL**をクリックします。
 
-この問題は、ビデオドライバの中で起こっているのです。Rhinoの中で行っている何かがクラッシュの引き金になっているとしても、ドライバはクラッシュするべきではないのです。そのため、Rhino側でこの問題を修正するのは非常に難しく、今の時点では不可能だと言えます。
+  - <color grey>x.xx.xxxx.xxxx</color>のような長い数字が表示された**ドライバのバージョン**の行を探します。最後の5桁がNVIDIAのドライババージョンです。例えばドライバのバージョンが8.17.0011.9713という数字だった場合、NVIDIAのドライババージョンは197.13です。
+ 
+NVIDIAのドライババージョンが340.66以上だった場合は**終了**です。<color grey>（ドライバは2014年8月時点で更新されています）</color>
 
-この問題は、クラッシュのために作業が失われることと、Rhinoが終了されるために、私共も非常に心配しています。クラッシュによっては、Rhinoを実行していなくても、ウェブブラウザを実行して動画を見ていたりするだけでシステムがクラッシュする場合もありました。しかし、Rhinoとブラウザの組み合わせでクラッシュが起きる頻度が増すようです。
+コンピューターのNVIDIAグラフィックドライバのバージョンが340.66未満の場合は、以下の手順に従ってドライバを更新してください。
 
-より詳しい詳細については、[[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|こちら]]（英語）をご覧ください。
-<--
-===== NVIDIAカードを使っている場合のランダムなクラッシュ - NVIDIAスレッドした最適化の設定 =====
 
-多くのユーザーの方から更新したNVIDIAのドライバでランダムなクラッシュが起きているとのご報告がありました。NVIDIAコントロールパネルにある設定の1つが問題の解決に役立つかもしれません。
+=====NVIDIA Quadroのドライバを更新する手順=====
 
-<color coral>**「Workstation App - Dynamic Streaming」の設定を使用することを推奨します**</color>。\\
+  - [[http://www.nvidia.co.jp/Download/index.aspx?lang=jp|NVIDIAドライバダウンロードのページ]]にアクセスします。
+  - システムの情報を入力します:
+      - 製品のタイプ: Quadro
+      - 製品モデル: アダプターはデスクトップ、ノート型どちらでお使いですか？
+      - 製品: Rhinoで表示されたQuadroアダプターを指定します。
+      - オペレーティングシステム: オペレーティングシステムを入力します。
+  - 検索を押します。
+  - NVIDIA Quadroドライバのバージョンをダウンロードします。<color grey>（2014年8月時点で340.66を強くお勧めします）</color>
+  - ドライバのインストールを開始します。
+  - インストールの種類を選択する時点で“Custom (Advanced)”を選びます。
+  - インストールの次の画面で“Perform a clean install”のオプションにチェックを入れます。
+  - インストールを続けます。
+  - （インストーラーの指示がない場合でも）再起動します。
+  - 以下のセクションでQuadroのパフォーマンスをさらに向上させる方法をご覧ください。
+
+=====Quadroのパフォーマンスをさらに向上=====
+
+--> NVIDIA スレッドした最適化の設定#
+
+多くのユーザーがNVIDIAドライバのランダムクラッシュを報告していますが、NVIDIA コントロールパネルの設定が問題解決に役立ちそうです。\\ 
+
+>メモ:** "Workstation App - Dynamic Streaming"の設定を使うことをお勧めします**。Advanced Streamingオプションは少し速くなるようですが、安定性は劣るようです。
 
 {{:ja:rhino:dynamicstream.jpg|}}
+<--
+--> パワーの調整#
+NVIDIAカードを高パフォーマンスに切り替えることも安定性に役立つ可能性があります。
+  - NVIDIA コントロールパネルを開き、“3D設定の管理”を選択します。
+  - “Power Management mode”を選択し、オプションを“Adaptive”から“Prefer maximum performance”に変更します。
+  - 変更を保存して終了です。
+{{:ja:rhino:nvidia_max_performancej.png|}}
+<--
+
+=====NVIDIAカードに関する最新のディスカッション=====
+RhinoとNVIDIAカードに関する継続中の最新ディスカッション（英語）はこちら: http://discourse.mcneel.com/t/quadro-drivers-updated-good-news/11197/4
