@@ -10,13 +10,13 @@ The Zoo lets you share Rhino, Flamingo, Penguin, and Bongo licenses (CD-Keys) am
 
 The Zoo and all Rhino client computers are inside the same network subnet, virtual LAN and behind the same firewall. The Zoo works with all Rhino client computers without any additional network configuration.
 
-{{http://en.wiki.mcneel.com/content/upload/images/ZooConfigBroadcast.png}}
+{{:legacy:en:ZooConfigBroadcast.png}}
 
 **2. Routed Network**
 
 The Zoo is on the other side of a router from Rhino client computers, and Rhino client computers can be in different network segments, behind different routers, and on different virtual LANs. In order for Rhino to find the Zoo, additional network or client computer configuration is required. See [[#Configuring Zoo to work on Routed Networks]] below for more details.
 
-{{http://en.wiki.mcneel.com/content/upload/images/ZooConfigDns.png}}
+{{:legacy:en:ZooConfigDns.png}}
 =====Installation=====
 
   * If you are installing on a system that is already running a prior version of the Zoo, you will need to stop the Zoo before installing Zoo 4.0.
@@ -43,14 +43,14 @@ Select only one of the following configuration options:
 
     - Determine the name of the domain to which each client belongs. Right-click My Computer, then click Properties. The Domain name is listed in the Computer Name tab of the System Properties dialog box.
     - On the primary DNS server for your domain, create a new TXT record with the format **Zoo4=<hostname>** where <hostname> is the [[rhino:netbios|NetBIOS]] host name. For example if the Fully Qualified host name is "ZooServer.bcn.es.mycorp.com", and the domain is "bcn.es.mycorp.com", then the [[rhino:netbios|NetBIOS]] host name is **ZooServer**.
-    - Test the DNS configuration from the client using **ZooDnsResolver** tool included in the **[[http://en.wiki.mcneel.com/content/upload/files/ZooBonusTools.zip|Zoo Bonus Tools.]]**
+    - Test the DNS configuration from the client using **ZooDnsResolver** tool included in the **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zoo Bonus Tools.]]**
 
 **To set up Registry Keys on each computer:**
 
     - On each computer that runs Rhino 4.0, create the following registry key if it does not already exist: **HKEY_LOCAL_MACHINE\Software\McNeel\RhinoLM**
     - In the **RhinoLM** key, create a new **String Value** named **zoo4**.
     - Set the data for the **zoo4** value to the NetBIOS host name for the Zoo server.  For example if the Fully Qualified host name is "ZooServer.bcn.es.mycorp.com", and the domain is "bcn.es.mycorp.com", then the [[rhino:netbios|NetBIOS]] host name is **ZooServer**.
-    - For assistance in creating this Registry Key, use the "SetZooServer" tool included in the **[[http://en.wiki.mcneel.com/content/upload/files/ZooBonusTools.zip|Zoo Bonus Tools.]]**
+    - For assistance in creating this Registry Key, use the "SetZooServer" tool included in the **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zoo Bonus Tools.]]**
 
 <code>
 Note to users of x64-based versions of Windows

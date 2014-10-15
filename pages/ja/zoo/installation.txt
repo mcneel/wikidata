@@ -64,14 +64,14 @@ ZooとRhinoのクライアントコンピュータがルーターの反対側に
 
     - それぞれのクライアントが属するドメイン名を決定します。マイコンピュータを右クリックし、プロパティをクリックします。ドメイン名の一覧は、システムのプロパティダイアログボックスのコンピュータ名に表示されます。
     - ドメインのプライマリDNSサーバーに、**Zoo4=<ホスト名>**の形式で新しいTXTレコードを作製します。（<ホスト名>は[[ja:rhino:netbios|NetBIOS]]ホスト名です。例えば、完全修飾ホスト名が「ZooServer.bcn.es.mycorp.com」でドメインが「bcn.es.mycorp.com」である場合、[[ja:rhino:netbios|NetBIOS]]ホスト名は**ZooServer**です。
-    - Test the クライアントから**[[http://en.wiki.mcneel.com/content/upload/files/ZooBonusTools.zip|Zooボーナスツール]]**に含まれる**ZooDnsResolver**を使ってクライアントからDNS設定をテストします。
+    - Test the クライアントから**[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zooボーナスツール]]**に含まれる**ZooDnsResolver**を使ってクライアントからDNS設定をテストします。
 
 **それぞれのコンピュータにレジストリキーを設定するには**
 
     - まだ存在しない場合、Rhino 4.0を実行するそれぞれのコンピュータに次のレジストリキーを作成します: **HKEY_LOCAL_MACHINE\Software\McNeel\RhinoLM**
     - **RhinoLM**キーに**zoo4**という名前の新規**文字列値**を作成します。
     - **zoo4**値のデータをZooサーバーの[[ja:rhino:netbios|NetBIOS]]ホスト名に設定します。例えば、完全修飾ホスト名が「ZooServer.bcn.es.mycorp.com」でドメインが「bcn.es.mycorp.com」である場合、[[ja:rhino:netbios|NetBIOS]]ホスト名は**ZooServer**です。
-    - **[[http://en.wiki.mcneel.com/content/upload/files/ZooBonusTools.zip|Zooボーナスツール]]**に含まれる「SetZooServer」ツールは、このレジストリキーの作成を補助します。 
+    - **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zooボーナスツール]]**に含まれる「SetZooServer」ツールは、このレジストリキーの作成を補助します。 
 
 =====その他の詳細=====
   * ZooはWANで稼動するように設計されていませんでした。しかし、ネットワーク設定に手を加え、稼動するようにされている方が出てきました。弊社でははそれらの設定のテストや認定はしていません。

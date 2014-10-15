@@ -1,6 +1,6 @@
 ======Brazil Rendering System Sampling======
 
-|{{http://en.wiki.mcneel.com/content/upload/images/SplutterFishGlassLogo.png}} {{http://en.wiki.mcneel.com/content/upload/images/RhinoGlassLogo.png}}|//**Brazil r/s for Rhino Wiki pages**// \\ [[http://www.SplutterFish.com|SplutterFish]] / [[http://www.mcneel.com|Robert McNeel & Associates]]|
+|{{:legacy:en:SplutterFishGlassLogo.png}} {{:legacy:en:RhinoGlassLogo.png}}|//**Brazil r/s for Rhino Wiki pages**// \\ [[http://www.SplutterFish.com|SplutterFish]] / [[http://www.mcneel.com|Robert McNeel & Associates]]|
 
 > **Summary:** //This page discusses the topic of Sampling in the Brazil render engine, sampling in general and guidelines for proper setups.//
 
@@ -21,7 +21,7 @@ Real life (for "real life" look 50 cm to the right) is continuous. So is a 3D sc
 
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/Brazil_QMCSampling_A.png}} |
+| {{:legacy:en:Brazil_QMCSampling_A.png}} |
 
 \\
 
@@ -29,7 +29,7 @@ The pink rings represent the 2D projection of our continuous 3D model, and the d
 
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/Brazil_QMCSampling_B.png}} |
+| {{:legacy:en:Brazil_QMCSampling_B.png}} |
 
 \\
 
@@ -37,7 +37,7 @@ which isn't a very good approximation; large areas of white have been filled wit
 
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/Brazil_QMCSampling_C.png}} |    {{http://en.wiki.mcneel.com/content/upload/images/Brazil_QMCSampling_D.png}}    |
+| {{:legacy:en:Brazil_QMCSampling_C.png}} |    {{:legacy:en:Brazil_QMCSampling_D.png}}    |
 
 \\
 
@@ -69,9 +69,9 @@ Let's take a closer look at how minimum and maximum resolution cooperate to give
 
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Min3Plus3.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Min2Plus3.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Min1Plus3.jpg}} |
+| {{:legacy:en:BrazilSampling_Min3Plus3.jpg}} | {{:legacy:en:BrazilSampling_Min2Plus3.jpg}} | {{:legacy:en:BrazilSampling_Min1Plus3.jpg}} |
 |    {-3, +3}    |    {-2, +3}    |    {-1, +3}    |
-| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_0Plus3.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Plus1Plus3.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Plus2Plus3.jpg}} |
+| {{:legacy:en:BrazilSampling_0Plus3.jpg}} | {{:legacy:en:BrazilSampling_Plus1Plus3.jpg}} | {{:legacy:en:BrazilSampling_Plus2Plus3.jpg}} |
 |    {0, +3}    |    {+1, +3}    |    {+2, +3}    |
 
 \\
@@ -87,7 +87,7 @@ Since you can specify two different sampling resolutions in Brazil, you also hav
 
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_NoAdaptive.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilAdaptiveSamplingHighQuality.jpg}} |
+| {{:legacy:en:BrazilSampling_NoAdaptive.jpg}} | {{:legacy:en:BrazilAdaptiveSamplingHighQuality.jpg}} |
 | The entire image is sampled at -2 resolution | The entire image is sampled at +2 resolution |
 
 \\
@@ -109,7 +109,7 @@ When sample A intersects our groundplane, and the neighbouring sample B intersec
 
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ObjectEdgeShow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ObjectEdge.jpg}} |
+| {{:legacy:en:BrazilSampling_ObjectEdgeShow.jpg}} | {{:legacy:en:BrazilSampling_ObjectEdge.jpg}} |
 | All the pixels (red) where the Object Edge refinement was performed. | The resulting image. As you can see, the edges are smooth, but all the sharp lines on the interior of the glasses are still chunky and rough. |
 
 \\
@@ -121,7 +121,7 @@ Instead of checking for different objects, the Normal adaption compares the surf
 
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_NormalAdaptiveshow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Normal.jpg}} |
+| {{:legacy:en:BrazilSampling_NormalAdaptiveshow.jpg}} | {{:legacy:en:BrazilSampling_Normal.jpg}} |
 | All the pixels (red) where the Normal refinement was performed. | The resulting image. This refinement algorithm found the near edge of the green glass, but it was unable to pick up on the far edge. Since the top edge of a glass is fairly level the normal vectors all point upwards. The groundplane also has vertical normals and there was thus insufficient difference. It is already clear that Object Edge and Normal refinement complement each other very nicely. |
 
 \\
@@ -132,7 +132,7 @@ Yet another geometric property that can be evaluated is the difference in distan
 
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ZDepthShow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ZDepth.jpg}} |
+| {{:legacy:en:BrazilSampling_ZDepthShow.jpg}} | {{:legacy:en:BrazilSampling_ZDepth.jpg}} |
 | All the pixels (red) where Z-Depth refinement was performed. | The resulting image. The image on the left already shows the weaknesses of this approach. Near tangent surfaces are easily tagged (such as the upper half of the groundplane) even though this is a completely pointless refinement in this case. |
 
 \\
@@ -143,7 +143,7 @@ This is the only non-geometric filter available. It relies on the results of the
 
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_ContrastShow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_Contrast.jpg}} |
+| {{:legacy:en:BrazilSampling_ContrastShow.jpg}} | {{:legacy:en:BrazilSampling_Contrast.jpg}} |
 | All the pixels (red) where Contrast refinement was performed. | The resulting image. Contrast refinement found almost all sharp edges in the rendering, with the exception of the transition between the blue glass and the shadow. |
 
 \\
@@ -154,7 +154,7 @@ Grand Finale...
 \\
 \\
 
-| {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_AllShow.jpg}} | {{http://en.wiki.mcneel.com/content/upload/images/BrazilSampling_All.jpg}} |
+| {{:legacy:en:BrazilSampling_AllShow.jpg}} | {{:legacy:en:BrazilSampling_All.jpg}} |
 | If we combine all four filters we get an overlay of refinement grids. The Z-Depth refinement does not contribute greatly in this case and could have been left out. | None of the filters found sufficient difference on the interior of the shadow field. Contrast tagged a few pixels, but not enough to sample the entire gradient at a higher resolution. As a result the resultion of the interior of the shadow is -2 which is coarse enough to see the noise of the skylight. We either have to fine-tune the contrast filter to be more sensitive (picking a contrast threshold colour closer to black) or increase the resolution of the minimum sample density. |
 
 

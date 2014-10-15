@@ -18,13 +18,13 @@ Le Zoo vous permet de partager vos licences (codes CD) de Rhino, Flamingo, Pengu
 
 Le Zoo et tous les ordinateurs clients avec Rhino sont sur le même sous-réseau, LAN virtuel et derrière le même pare-feu. Le Zoo travaille avec tous les ordinateurs client sans aucune configuration supplémentaire du réseau.
 
-{{http://en.wiki.mcneel.com/content/upload/images/ZooConfigBroadcast.png}}
+{{:legacy:en:ZooConfigBroadcast.png}}
 
 **2. Réseau routé :**
 
 Le Zoo se trouve de l'autre côté d'un routeur par rapport aux ordinateurs clients avec Rhino et ces derniers peuvent se trouver sur différents segments du réseau, derrière d'autres routeurs et sur différents réseaux locaux virtuels. Pour que Rhino puisse trouver le Zoo, vous devez configurer le réseau ou l'ordinateur client. Voir la section [[#Configurer le Zoo pour qu'il fonctionne sur les réseaux routés]] ci-dessous pour plus d'informations.
 
-{{http://en.wiki.mcneel.com/content/upload/images/ZooConfigDns.png}}
+{{:legacy:en:ZooConfigDns.png}}
 
 =====Zoo 4.0 peut fonctionner avec des installations précédentes du Zoo 1.0 :=====
 **1. Mode principal :** Zoo 4.0 est le seul Zoo fonctionnant sur votre réseau. Il gère les requêtes pour tous les types de codes CD, y compris les codes CD de Rhino 4.0.
@@ -67,13 +67,13 @@ Choisissez une seule option parmi les configurations suivantes :
 
     - Déterminez le nom du domaine auquel chaque client appartient. Cliquez avec le bouton de droite sur Poste de travail, puis sélectionnez Propriétés. Le nom de domaine est indiqué dans la section Nom de l'ordinateur de la boîte de dialogue Propriétés du système.
     - Sur le serveur DNS principal de votre domaine, créez un nouvel enregistrement TXT en utilisant le format **Zoo4=<nomhôte>** où <nomhôte> est le nom de l'hôte NETBIOS. Par exemple, si le nom de l'hôte complet est "ZooServer.bcn.es.entreprise.com" et si le domaine est "bcn.es.entreprise.com", le nom de l'hôte NETBIOS est alors **ZooServer**.
-    - Testez la configuration DNS à partir de l'ordinateur client en utilisant l'outil **ZooDnsResolver** qui fait partie des **[[http://en.wiki.mcneel.com/content/upload/files/ZooBonusTools.zip|Outils extra pour le Zoo.]]**
+    - Testez la configuration DNS à partir de l'ordinateur client en utilisant l'outil **ZooDnsResolver** qui fait partie des **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Outils extra pour le Zoo.]]**
 
 **Pour définir des clés de registre sur chaque ordinateur : **
 
     - Sur chaque ordinateur utilisant Rhino 4.0, créez la clé de registre suivante si elle n'existe pas : **HKEY_LOCAL_MACHINE\Software\McNeel\RhinoLM**
     - Dans la clé **RhinoLM**, créez une nouvelle **valeur de chaîne** nommée **zoo4**.
     - Utilisez le nom de l'hôte NETBIOS pour le serveur Zoo comme donnée de la valeur **zoo4**.  Par exemple, si le nom de l'hôte complet est "ZooServer.bcn.es.entreprise.com" et si le domaine est "bcn.es.entreprise.com", le nom de l'hôte NETBIOS est alors **ZooServer**.
-    - Pour plus d'aide sur la création de cette clé de registre, utilisez l'outil **SetZooServer** qui fait partie des **[[http://en.wiki.mcneel.com/content/upload/files/ZooBonusTools.zip|Outils extra pour le Zoo.]]**
+    - Pour plus d'aide sur la création de cette clé de registre, utilisez l'outil **SetZooServer** qui fait partie des **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Outils extra pour le Zoo.]]**
 
 

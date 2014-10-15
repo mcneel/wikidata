@@ -2,32 +2,32 @@
 ====Brazil r/s v2 for Rhino====
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting.jpg}}|
 \\
 Brazil r/s offers a wide variety of control for how light and shadow are calculated in any given rendering. This tutorial will cover several techniques for lighting an interior scene in Rhino and will hopefully demystify the process of choosing photon map and light parameters. To make things simple, here are three ".bzpreset" option files for you to use as you become familiar with the settings described.
 
-[[http://en.wiki.mcneel.com/content/upload/files/Brazil_Interior_Lighting_presets.zip|Brazil interior lighting presets]]
+[[http://wiki.mcneel.com/_media/legacy/en/Brazil_Interior_Lighting_presets.zip|Brazil interior lighting presets]]
 
 You can also download this simple Rhino file to use with the presets provided.
 
-[[http://en.wiki.mcneel.com/content/upload/files/Brazil_interior_lighting_demo.zip|Brazil interior lighting scene]]
+[[http://wiki.mcneel.com/_media/legacy/en/Brazil_interior_lighting_demo.zip|Brazil interior lighting scene]]
 
 \\
 The first step in any interior rendering should be to add some light. Using the scene provided, add a point light to the model with the normal Rhino light tools. Brazil can use this regular Rhino point light but in addition will also enable it with a wide range of options specific to Brazil lights. With the point light selected, position it just below the ceiling height somewhere in your scene. Then open the object properties dialog for the light by clicking the properties icon or typing the command "properties". Following the screen shots below, set your lights parameters to include Shadow, Focus and Decay. Turning on shadows will cause any objects directly illuminated by our light to cast a shadow. We won't be using "direct illumination" right away but it doesn't hurt to have the shadow option on in the meantime. The focus option gives our point light both a "hot spot" or brightest area and a "fall off" distance which controls the spread of the light. Changing these focus values is one way to alter the brightness of the scene. The decay option is used here because everything in the scene has a white material applied to it by default. Decay limits the ability of light to bounce around in the scene and thus makes the result more realistic in this case. The inverse square option should be selected as well to keep this white scene from getting too bright. Keep in mind that once non-white materials are applied the decay option will likely make this scene too dark and will need to be turned off.
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_1.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_1.jpg}}|
 \\
 With the light positioned and the options indicated selected for it, render the perspective view (saved view "1" if you're using the file provided). You should get a result similar to the one shown below.
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_3.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_3.jpg}}|
 \\
 Now open the Brazil options panel by using the appropriate icon in the Brazil toolbar or by typing the command "braziloptions". At the bottom of the options panel you'll see a "load" button, use this to select and load the "Interior 1_low.bzpreset" file provided in this tutorial. Rendering the scene again with these new settings produces a result with more even and realistic lighting.
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_2.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_2.jpg}}|
 \\
 Let's discuss the options that were changed from the default settings when making the bzpreset file we just used.
 
@@ -45,7 +45,7 @@ With direct illumination turned off for the point light we will need to provide 
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_4.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_4.jpg}}|
 \\
 The next three options are in the "Render Cache" section of the options panel and are available to us only after selecting the "render cache" option in the luma server.
 
@@ -62,7 +62,7 @@ With retrace being the method of render cache, we have a few more parameters to 
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_5.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_5.jpg}}|
 \\
 The last two sections we'll look at here are in the "Photon Map" section of the options panel and are available to us only after selecting the photon map option in the luma server section.
 
@@ -78,7 +78,7 @@ Just like some of the settings in the render cache, the number of photons specif
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_6.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_6.jpg}}|
 \\
 \\
 <color orange>**Direct Illumination and Shadow options**</color>
@@ -87,31 +87,31 @@ By copying and pasting the one light in our scene, additional lighting condition
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_7.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_7.jpg}}|
 \\
 Here's an example of what happens when turning on direct illumination for point lights in the luma server. We can now see hard shadows cast from our lights in addition to the global illumination we've been using so far. The scene is also brighter now due to the direct light being emitted from all three of the lights in the scene.
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_8.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_8.jpg}}|
 \\
 The look of cast shadows can be changed by adjusting the settings for the individual lights. In this example the shadow type for the light above the stairs was changed to "Brazil 2 ray shadows". This exposed another section of the same name in the light properties dialog where the type of shadow cast was changed to "rectangular area" instead of the default "sharp" mode. The shadow cast from the stairs is now much softer while the shadow across the bureau from the light over our right shoulder is still sharp.
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_9.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_9.jpg}}|
 \\
 Another common reason to enable direct illumination in an interior rendering is to create the effect of sunlight shining in through a window. In the example below a window was added and a directional light has been positioned outside to create the sunlight effect. Notice what appears to be light leaking through the wall along the contour of the stairs. This is a result of the directional light being used for direct illumination. The directional light is viewed as a point light by Brazil and is adhering to the same direct illumination settings as our other lights.
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_10.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_10.jpg}}|
 \\
 What appears to be leaking light is actually a result of the shadow settings for the directional light outside. Changing the shadow "bias" value in the properties for this light to zero solves the issue as seen below.
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_11.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_11.jpg}}|
 \\
 \\
 <color orange>**Making Lamps and Light Fixtures**</color>
@@ -120,19 +120,19 @@ Adding light fixtures or lamps that illuminate in an interior rendering can be d
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_12.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_12.jpg}}|
 \\
 The strength of the light from this shader is controlled through the multiplier value for it in the material editor. Here's an example of two different settings for this shader applied to the light fixtures. There are no other light sources in the scene and even after raising the power of the simple bright shader the light is not spreading throughout the room. This is because the simple bright shader is not a real light and is not taking advantage of the global illumination and photon map settings we've used so far.
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_13.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_13.jpg}}|
 \\
 A combination of using objects with the simple bright shader and a regular light can produce a more evenly lit result. In the example below a rectangular light was created to encompass all three of the light fixtures. The focus setting was used with the hot spot set to roughly the height of the fixtures and the falloff set to 180 degrees so that its light spreads out flat against the wall. It is important when using this technique to make sure that the light is not physically inside the objects with the simple bright shader. If it is, the emitted light will not be visible unless of course the objects include some setting for transparency.
 
 \\
 
-|{{http://en.wiki.mcneel.com/content/upload/images/Brazil_Int_Lighting_14.jpg}}|
+|{{:legacy:en:Brazil_Int_Lighting_14.jpg}}|
 \\
 \\
 <color orange>**Final Thoughts**</color>

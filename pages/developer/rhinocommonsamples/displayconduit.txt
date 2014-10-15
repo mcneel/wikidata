@@ -5,11 +5,11 @@ Rhino5 allows you to define your own display conduits, which provide access to m
 
 The DisplayPipeline in Rhino5 is a big and complicated class and we do not recommend you try and derive your own pipeline, instead, we've exposed something called a "conduit" for easy access. The pipeline itself is structured like this (except in reality there are many more channels):
 
-{{http://en.wiki.mcneel.com/content/upload/images/PipeLineImageA.jpg}}
+{{:legacy:en:PipeLineImageA.jpg}}
 
 At one end is the Rhino model, a collection of 3D geometry and data. At the other end is the image we want to display on the screen, a collection of 2D pixels. In order to get from model to image, the pipeline has to process a lot of information. These steps have been put into things we call Channels. Whenever you implement a new conduit, you have to implement at least one of these channels, like so:
 
-{{http://en.wiki.mcneel.com/content/upload/images/PipeLineImageB.jpg}}
+{{:legacy:en:PipeLineImageB.jpg}}
 
 Note that the pipeline itself is not bound to the channels, it just executes its code and every once and again it calls the conduits who perceive this as a new channel execution. This means that you cannot disable certain portions of the pipeline (or portions of other conduits) from within your conduit. The pipeline has to go through these motions to generate an image:
 
@@ -98,9 +98,9 @@ Let's take a look at a more complex drawing routine:
 </code>
 This piece of code draws a coloured, c-plane axis system ON TOP of all objects. Because I disable DepthWriting and Testing prior to drawing my points and arrows, my objects are not obscured by the existing geometry (which was drawn in a channel previous to PostDrawObjects:
 
-{{http://en.wiki.mcneel.com/content/upload/images/ConduitCplaneAxis.jpg}}
+{{:legacy:en:ConduitCplaneAxis.jpg}}
 
 Another thing to realize is that there can be many other active conduits present as well and there's no way of telling which one is going to be called first. Do not write code that might screw up other peoples conduits.
 
-{{http://en.wiki.mcneel.com/content/upload/images/PipeLineImageC.jpg}}
+{{:legacy:en:PipeLineImageC.jpg}}
 {{tag>Developer rhinocommon}}

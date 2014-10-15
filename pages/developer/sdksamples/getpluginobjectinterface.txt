@@ -13,7 +13,7 @@ With the Rhino 4.0 SDK, it is now possible to write plug-ins that extend the [[d
   - Override the CRhinoPlugIn::GetPlugInObjectInterface() to give plug-ins, such as RhinoScript, access to this object.
 
 =====Example=====
-In the following example, we will create a new plug-in named TestScript that support [[developer:rhinoscript|RhinoScript]] scripting. If you are familar with creating C++ projects that support COM automation and you just want to review the sample plug-in source code, then you can **[[http://en.wiki.mcneel.com/content/upload/files/TestScript.zip|download it here.]]**
+In the following example, we will create a new plug-in named TestScript that support [[developer:rhinoscript|RhinoScript]] scripting. If you are familar with creating C++ projects that support COM automation and you just want to review the sample plug-in source code, then you can **[[http://wiki.mcneel.com/_media/legacy/en/TestScript.zip|download it here.]]**
 
 Also, the purpose of this example is not to teach COM Automation or to explain how the .IDL file work or what Variants are. There is plenty of information in MSDN and on the Internet that explain these areas.
 
@@ -21,20 +21,20 @@ Also, the purpose of this example is not to teach COM Automation or to explain h
 
 Launch Visual C++ 2005 and create a new Rhino Plug-in project named TestScript. On the Plug-in Settings page of the Rhino Plug-in Appwizard dialog box, make sure to check the Automation check box. One the Appwizard has completed creating the skeleton project, build the project.
 
-{{http://en.wiki.mcneel.com/content/upload/images/testscript1.jpg}}
+{{:legacy:en:testscript1.jpg}}
 
 **Step 2: Create a COM object that supports IDispatch**
 
 Create a new MFC class by running the MFC Class Wizard. Name the class CTestScriptObject. This class should be derived from CCmdTarget. Also, under Automation, select the Automation radio button. Note, this COM object will not be creatable by type ID because Rhino plug-ins (DLLs) are dependent on Rhino.
 
-{{http://en.wiki.mcneel.com/content/upload/images/testscript2.jpg}}
+{{:legacy:en:testscript2.jpg}}
 
 **Step 3: Add methods to your object**
 
 An object is not useful unless you expose methods or properties. In this example, we will create a new method that allows the scripter to add point objects to Rhino. Within Class View, select your new object's interface and add a new method using the Add Method Wizard. Give the new method the name of AddPoint. It should have a single VARIANT* argument and return a VARIANT.
 
-{{http://en.wiki.mcneel.com/content/upload/images/testscript3.jpg}}
-{{http://en.wiki.mcneel.com/content/upload/images/testscript4.jpg}}
+{{:legacy:en:testscript3.jpg}}
+{{:legacy:en:testscript4.jpg}}
 
 **Step 3: Implement your methods**
 
@@ -132,7 +132,7 @@ Once you have implemented your methods, you can begin to test them. Launch Rhino
 
 The following code demonstrates how to get our plug-ins scriptable object and run the AddPoint method.
 
-{{http://en.wiki.mcneel.com/content/upload/images/testscript5.jpg}}
+{{:legacy:en:testscript5.jpg}}
 
 \\
 

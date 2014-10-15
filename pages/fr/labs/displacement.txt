@@ -8,7 +8,7 @@ Il vous permet de déformer des maillages (objets maillés ou maillages de rendu
 
 Pour utiliser le module de déplacement disponible ici, le [[RendererDevelopmentKit10|RDK]] doit être lancé sur votre ordinateur. Cependant, il se peut que le RDK soit déjà installé, ne téléchargez et installez le RDK que si vous ne pouvez pas charger ce module.
 
- [[http://en.wiki.mcneel.com/content/upload/files/displacement.zip|Télécharger le module]] 
+ [[http://wiki.mcneel.com/_media/legacy/en/displacement.zip|Télécharger le module]] 
 
 \\
 
@@ -21,28 +21,28 @@ Voici comment fonctionne le module :
 
 1. Vous commencez avec un objet sans données de déplacement. Toutes les propriétés de déplacement sont groupées dans l'onglet Déplacement dans la boîte de dialogue Propriétés de l'objet :
 
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_01.png}}
+{{:legacy:en:Displacement_01.png}}
 
 \\
 \\
 
 2. Vous devez activer le déplacement sur chaque objet. Ce qui signifie que vous pouvez également désactiver rapidement le déplacement sans perdre vos paramètres. Une fois que vous avez activé le déplacement **et** choisi une texture (dans ce cas j'ai utilisé une texture algorithmique standard qui vient avec le RDK), vous verrez un aperçu du déplacement dans la fenêtre :
 
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_02.png}}
+{{:legacy:en:Displacement_02.png}}
 
 \\
 \\
 
 3. Vous pouvez augmenter l'effet en choisissant une valeur plus élevée pour **Amount**. Cette valeur indique le nombre d'unités sur lesquelles un pixel blanc sera déplacé. Les pixels noirs ne sont pas déplacés du tout et les pixels gris sont interpolés :
 
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_03.png}}
+{{:legacy:en:Displacement_03.png}}
 
 \\
 \\
 
 4. Le déplacement est lié aux propriétés de plaquage de texture d'un objet. Étant donné que j'ai choisi de démarrer avec une polysurface, chaque face possède son propre domaine de texture, ce qui donne un déplacement très bosselé. Lorsque je choisis un plaquage de texture sphérique (le plaquage par défaut est plan) il n'y a plus de saut UV brusque au niveau des surfaces adjacentes et le résultat est plus lisse. Cependant il reste un saut UV sur la jointure de la sphère :
 
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_04.png}}
+{{:legacy:en:Displacement_04.png}}
 
 \\
 \\
@@ -56,8 +56,8 @@ Si vous voulez mieux contrôler le déplacement, vous pouvez activer la section 
 
 Par exemple, lorsque les paramètres avancés sont activés vous pouvez indiquer différentes valeurs pour les décalages des pixels blancs et noirs :
 
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_01.png}}
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_02.png}}
+{{:legacy:en:Displacement_Ad_01.png}}
+{{:legacy:en:Displacement_Ad_02.png}}
 
 \\
 \\
@@ -69,23 +69,23 @@ L'option **Ignore creases** soudera entièrement un maillage avant de le déplac
 
 Par défaut, les maillages sont divisés avant le déplacement afin d'assurer un niveau élevé de détail là où c'est nécessaire. Vous pouvez éviter cette division en désactivant la case, le maillage déplacé a alors exactement la même taille que le maillage original :
 
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_03.png}}
+{{:legacy:en:Displacement_Ad_03.png}}
 
 \\
 \\
 
 Observez ce qui se passe lorsque la division est activée :
 
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_04.png}}
+{{:legacy:en:Displacement_Ad_04.png}}
 
 Chaque triangle du maillage est mesuré pour voir s'il dépasse ou non le seuil défini (plus le seuil est bas plus la division est agressive) et si c'est le cas, il sera remplacé par trois triangles plus petits. Ce processus est répété autant de fois que le définit l'option **Max steps**. N'oubliez pas que si vous choisissez des valeurs faibles pour **Contrast** ou des valeurs élevées pour **Max steps**, les temps de calcul risquent d'être longs.
 
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_05.png}}
+{{:legacy:en:Displacement_Ad_05.png}}
 
 \\
 \\
 
-{{http://en.wiki.mcneel.com/content/upload/images/Displacement_Ad_06.png}}
+{{:legacy:en:Displacement_Ad_06.png}}
 (Zoom sur le maillage déplacé, montrant le schéma de division)
 
 \\
