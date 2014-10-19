@@ -1,0 +1,11 @@
+======網路磁碟機無法在Rhino V5的開啟檔案對話框中顯示 ======
+
+有幾位使用者反映在Windows 8/8.1系統下，Rhino V5檔案對話框中無法顯示網路磁碟機。通常是以矩陣使用者為管理員並且將使用者帳戶控制(UAC)改為不要通知時的狀況下才會發生。
+
+在這樣的條件下，必須加入"EnableLinkedConnections"的授權，才能啟用映射網路磁碟機以管理員的身分運作應用程式。請到登錄編輯程式，找到下列路徑，新增二進位值如下
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+“EnableLinkedConnections”=dword:00000001
+
+謝謝Dale Fugier找出這個解決辦法。
+2014/2/25新增
