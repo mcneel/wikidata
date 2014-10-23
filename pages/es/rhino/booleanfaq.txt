@@ -1,7 +1,8 @@
-====== An attempt to unlock the mysteries of Boolean Operations.  How and why they work, why they fail, how to fix problems and make them work more consistently, understanding how they work on open objects. ======
+====== Booleans FAQ ======
+> **Summary:** //An attempt to unlock the mysteries of Boolean Operations.  How and why they work, why they fail, how to fix problems and make them work more consistently, understanding how they work on open objects.//
 
 ======Introduction======
-Boolean operations can be great time saving procedures for constructing objects in Rhino.  But, for the beginner, they seem to often mysteriously fail, and it is difficult to understand why.  Hopefully this FAQ explanation will help clarify things a bit.  If you don't want to wade through all the following info, you can also try John Brock's short [[JBBooleanFix|How I fix Boolean Problems]]
+Boolean operations can be great time saving procedures for constructing objects in Rhino.  But, for the beginner, they seem to often mysteriously fail, and it is difficult to understand why.  Hopefully this FAQ explanation will help clarify things a bit.  If you don't want to wade through all the following info, you can also try John Brock's short [[rhino:jbbooleanfix|How I fix Boolean Problems]]
 
 **//To understand why Booleans fail, first you must understand how they work.//**  They are not some sort of magic tool for putting objects together.  They are simply semi-automatic operations that combine several “manual” commands into one process.  The Boolean operations basically do 4 things:  **Intersect** two or more objects, **Split** them at the intersection(s) found, **Delete** (discard) the parts not wanted, and **Join** everything back together.  Everything you can do with Boolean operations you can also do by “manually” successively using the above four commands.  Using a Boolean operation only speeds things up by making it one procedure – when it works...
 
@@ -31,8 +32,13 @@ If you can’t get Rhino to automatically produce a closed intersection curve ev
 
 <color brown>Nearly tangent surfaces</color> – like the intersection of two equal diameter pipes at an angle.  The intersection often fails at the point where the surfaces are tangent.  There is no easy fix currently for this problem.
 
+<color brown>Invalid objects</color> – If one of the objects you're trying to work with is invalid, Boolean operations will often fail.  Check for invalid objects by using the command **SelBadObjects**.  If one highlights, you will need to fix it first before proceeding.  It is also recommended that you turn on automatic object checking, if invalid objects are created in the course of your work (or imported), Rhino will tell you immediately.  To do this, simply type **CheckNewObjects**.  This is a toggle, running the command again turns it off.
 
-<color brown>Animation: When Booleans do not work, try surfaces editing.</color>
+<color brown>Non-Manifold Polysurfaces</color> – Although Rhino doesn't currently flag these objects as bad, they can cause failure.  Rhino //shouldn't// create these types of structures, but under certain conditions it does, especially with V4.  The only way to find them currently is to check the properties of the object.
+
+===== "Manual" construction and editing is sometimes needed=====
+
+<color brown>Animated illustrations showing manual surface construction and editing when Boolean operations fail.</color>
 
 **[[http://wiki.mcneel.com/_media/legacy/en/boolean_problem-1.swf|How to Manually Edit Surfaces with Coplanar Faces and Nearly Tagent Surfaces]]**
 
@@ -44,15 +50,10 @@ This is an example of a solid that can not be constructed with solid primitives 
   * Download the [[http://wiki.mcneel.com/_media/legacy/en/part1-r3.3dm|model]]
 {{:legacy:en:t.JPG}}
 
-
-<color brown>Invalid objects</color> – If one of the objects you're trying to work with is invalid, Boolean operations will often fail.  Check for invalid objects by using the command **SelBadObjects**.  If one highlights, you will need to fix it first before proceeding.  It is also recommended that you turn on automatic object checking, if invalid objects are created in the course of your work (or imported), Rhino will tell you immediately.  To do this, simply type **CheckNewObjects**.  This is a toggle, running the command again turns it off.
-
-<color brown>Non-Manifold Polysurfaces</color> – Although Rhino doesn't currently flag these objects as bad (it should), they can cause failure.  Rhino //shouldn't// create these types of structures at all, but occasionally it does.  The only way to find them is to check the properties of the object.
-
-
+----
 ======Boolean operations on open objects======
 
-As mentioned above, Boolean operations can also be performed on open objects.  The principle is the same, but since the objects are not closed, we have a couple of extra things to do and understand.  **//Version 4 provides a tool that makes the following procedure much easier, see the command//** Boolean2Objects
+As mentioned above, Boolean operations can also be performed on open objects.  The principle is the same, but since the objects are not closed, we have a couple of extra things to do and understand.  Rhino V4 provides a tool that makes the following procedure much easier if you have only two objects, see the command: [[rhino:boolean2objects|Boolean2Objects]]
 
 =====Surface Direction=====
 
@@ -80,7 +81,7 @@ Booleans with "solids" (closed polysurfaces) are predictable, because all surfac
 
 > **Note:** //If you are doing Boolean operations on closed polysurfaces and they don't react the way you think they should (i.e. the wrong parts disappear), probably one or more of your objects aren't really closed and have the normals pointing inward.  Use **Dir** to see.//
 
-> **Tip:** //One way to always be able to know which way surfaces are facing is to set up your display to show backfaces in a different color from front faces  Use the command **AdvancedDisplay**  > **Color Backfaces** to set this up.  Of course, this only works if you are working in //Shaded// or //Ghosted// Viewport mode, in //Wireframe// or //Rendered// you will not see this.//
+> **Tip:** //One way to always be able to know which way surfaces are facing is to set up your display to show backfaces in a different color from front faces.   In **V3**, use the command **AdvancedDisplay**  > **Color Backfaces** to set this up.  In **V4**, it's **Options>Appearance>Advanced Settings>Shaded>Backface Settings**, set "single color for all backfaces", and choose a color.  Note, this only works if you are working in //Shaded// Viewport mode, in //Wireframe//, //Ghosted// or //Rendered// you will not see this.//
 
 Let's imagine the simplest "open" Boolean operation.  You have one "solid" closed polysurface that is fully intersected by a single surface.  You can easily create this by making any kind of solid object, then using the **CutPlane** command and drawing a cut line through your object in any direction you desire.
 
@@ -94,5 +95,4 @@ In general, if you want to BD between an open (poly)surface and a solid to work 
 
 {{:legacy:en:BooleanDiff2.gif}}
 
-
-
+In V4, [[rhino:boolean2objects|Boolean2Objects]] allows you to cycle through all the possibilities of the different Boolean operations and see the result on-screen, you can then chose the result you want.  This only works currently with just two objects.
