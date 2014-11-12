@@ -1,0 +1,33 @@
+====== Skype与Zoo服务相冲 ======
+> **产品：** //[[zh-tw:zoo:home|Zoo 5]]//
+> **摘要：** //Skype与Zoo 5使用埠80相冲问题。//
+
+===== 问题 =====
+当我重新开启我的服务器时，Zoo 5服务并未被启动。我检查了Windows事件日志(控制台→系统管理工具→事件检视器)，我可以看到Zoo 5服务登入错误如下：
+
+<code>
+The Zoo 5.0 service on the Local Computer started and then stopped.
+Some services stop automatically if they are not in use by another
+service or program.
+</code>
+
+在 Windows 事件日志中，检查详细信息的错误，可看到下列报告：
+
+<code>
+Address already in use by another process.
+Run 'netstat -o -n -a' from a command line to find the conflicting
+process ID, then look in Task Manager to find the name of that process.
+</code>
+
+依照以上的提示，我能确认造成相冲的应用程序为Skype。
+
+===== 解决方式 =====
+于Skype使用界面开启**功能->设定选项**。 
+
+{{:zoo:zooskype.jpg}}
+
+于Skype选项对话框，选择**进阶>连线**页面。将**以80和443 port为替代连入连线**这个选项取消勾选。
+
+\\
+
+{{tag>Zoo5}}

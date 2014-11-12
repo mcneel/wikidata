@@ -1,52 +1,26 @@
-======Zoo – 公用许可证管理员======
-[[zoo:home|{{:zoo:zoo_small.png|Zoo Home}}]]
+======Zoo - 授权管理======
+[[http://wiki.mcneel.com/zoo/home|{{:zoo:zoo.png?128|Zoo - License Manager}}]]
+> **注:** 如果你安装的是Rhino 4.0则需要使用**[[http://www.rhino3d.com/download/zoo/4.0/release|Zoo 4.0]]**。
 
-=====概要=====
-Zoo可以让同一个工作组中的计算机共享有限的Rhino、Flamingo、Penguin、Brazil、Bongo授权（CD-Key），当这些产品安装成工作组单机时，取得授权的流程如下：
-  * 工作组单机启动时会向Zoo请求一个授权。 
-  * Zoo会将一个未被使用的授权分配给该工作组单机。
-  * 工作组单机关闭时会自动将授权退还给Zoo。
+Zoo是一个网络或是浮动的授权管理。你可以你的网络之内与其他使用者分享授权。  
 
-** Zoo为免费提供！**
-
-**[[http://download.rhino3d.com/zoo/5.0/beta/download/|Download Zoo 5.0]]**  for Rhino 5.0 (//不支援Rhino 4.0、Flamingo、Penguin、Brazil及Bongo。//)
-
-**[[http://download.rhino3d.com/zoo/4.0/release/download/|Download Zoo 4.0]]** Rhino 4.0、Flamingo、Penguin、Brazil及Bongo使用 (//不支持Rhino 5.0 。//)
-
-//备注：可同时将Zoo 4.0及Zoo 5.0安装在同一台服务器主机或同个网络，并不会有冲突。//
-=====特色=====
-
-  * **不需额外费用** - 不需要特殊版本的Rhino、Flamingo、Penguin、Brazil或Bongo。 
-  * **不需特别的硬件** - Zoo可于同网络群组中任何一台主机运作。 
-  * **不需特别的软件** - Zoo可于任何Windows系统执行，包括Windows XP、Vista、Win7、Windows Server 2000、2003及2008系统。
-  * **设定容易** -  只要将Zoo安装在同一个工作组中的任何一部计算机上，将授权（CD-Key）输入至Zoo里，不必在每一部计算机分别输入授权。 
-  * **取出授权** - 笔记本电脑可以将授权（CD-Key）取出，中断与工作组的联机，下次重新与工作组联机时再将授权回存至Zoo。
-  * **安全性** -当安装Zoo的计算机当机或网络联机中断时，作业中的工作组单机可以继续运作，但除非恢复与Zoo的联机，否则工作组单机无法重新启动。
-  * **可以跨路由器** -Zoo可以管理一个网络或以路由器连接的不同网络里的授权。
-  * **混合环境** - 同一个网域或工作组里工作组单机与独立单机可以并存。
-  * **以服务方式执行** - 若您在Zoo执行中重新启动，无须再次启动Zoom。 
+===== 开始 =====
+=== 设定 Zoo 5===
+  - **[[http://download.rhino3d.com/Zoo/5.0/release/download/|下载]]** Zoo并安装在Windows系统的服务器或是工作站。
+  - 确认系统内防火墙的**[[http://wiki.mcneel.com/zh-tw/zoo/window7firewall|TCP Port 80]]** 是开启的。
+  - 执行 **ZooAdmin** 并 **[[rhino5validate|加入 Rhino CD-Keys]]**.
+===设定 Rhino 5===
+  - 如果Rhino已经安装，那么开始执行并点选**工具 -> 选项 -> 授权**. 选择你的Rhino授权再点选 **转换**. 关闭再重新启动Rhino. 在启动期间选择 **Network Node** 并注明Zoo服务器的 **[[http://wiki.mcneel.com/zoo/determinezoohost|名称]]** 。
+  - 安装Rhino的时候，选择**Network Node**并且注明Zoo服务器的**[[http://wiki.mcneel.com/zoo/determinezoohost|名称]]**。
 
 
+=====更多详情与技术支持=====
+[[zh-tw:zoo:rhino5overview|Features Overview]] ([[http://wiki.mcneel.com/_media/zoo/zoo5.pdf|PDF]]) ([[https://vimeo.com/89968285|视频]])\\
+[[zh-tw:zoo:rhino5requirements|系统需求]]\\
+[[zh-tw:zoo:products|兼容产品]]\\
+[[http://docs.mcneel.com/zoo/5/en/index.html|用户指南]]\\
+[[http://chinese.discourse.mcneel.com/category/zoo|技术支持论坛]]\\
+[[zh-tw:zoo:zoo5diagnostics|诊断工具]]\\
 
-
-=====Zoo 5.0新功能=====
-Zoo 5.0是一个全新版本的Zoo。Zoo 5.0是完全重新撰写的程序，提供全新新功能如下：
-  * **支持标准网络协议** - Zoo 5.0使用HTTP (Port 80)与客户端沟通，可使系统管理员更易透过路由器从网络或复杂的网络设定与Zoo沟通。
-  * **防火墙设定友善** - Zoo 5.0 须让客户端周期性地检查Zoo主机，但不须连回客户端，所以无需打开客户端计算机的防火墙ports设定。
-  * **Limited License Check Out** - 之前的Zoo版本可让序号取出授权给笔记本电脑用户出差使用。但并没有限制取出授权的期限，Zoo 5.0可供管理员设定取出授权期限。
-  * **支持插件** - -之前的Zoo只支持McNeel产品(如：Rhino、Flamingo、Bongo、Brazil及Penguin)。Zoo 5 能够支持插件开发者在他们的产品增加支持Zoo的功能。
-
-=====系统需求=====
-  *窗口操作系统:
-    * Windows XP、Windows Vista、Windows 7、或 Windows 8。
-    * Windows Server 2003、Windows Server 2008、或Windows Server 2008 R2。
-  * [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]]
-  * TCP/IP网络连接配置。
-
-
-
-
-=====支援=====
-**[[:zh-tw/zoo/zoo5|Zoo 5.0]]** - Rhino 5.0许可证管理员。(//不支援Rhino 4.0、Flamingo、Penguin、Brazil及Bongo。//).
-
-**[[:zh-tw/zoo/zoo4|Zoo 4.0]]** - Rhino 4.0、Flamingo、Penguin、Brazil及Bongo许可证管理员。(//不支援Rhino 5.0//)
+===== 知识库 =====
+{{topic>.?zoo5&nouser&nodate}}

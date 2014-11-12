@@ -1,0 +1,37 @@
+======Zoo5 于网络服务器上启动失败 ======
+> **产品：** //[[zh-tw:zoo:home|Zoo 5]]//
+> **摘要：** //Zoo 5需要使用TCP埠80。 requires access to TCP Port 80. This is not possible on systems with Web Services running.//
+
+===== 问题 =====
+当我重新开启我的服务器时，Zoo 5服务并未被启动。我检查了Windows事件日志(控制台->系统管理工具->事件检视器)，我可以看到Zoo 5服务登入错误如下：
+
+<code>
+The Zoo 5.0 service on the Local Computer started and then stopped.
+Some services stop automatically if they are not in use by another
+service or program.
+</code>
+
+在 Windows 事件日志中，检查详细信息的错误，可看到下列报告：
+
+<code>
+Address already in use by another process.
+Run 'netstat -o -n -a' from a command line to find the conflicting
+process ID, then look in Task Manager to find the name of that process.
+</code>
+
+  - 在命令列执行**NETSTAT -ano**，记下您想要开放的PID号埠。
+  - 从工作管理员可以看到哪些程序具有 PID，你可以了解哪些程序正在使用该埠。
+
+这个错误的主因是正有其他应用程序已占用埠80，一次只有一个应用程序可以使用埠80，所以Zoo无法正常使用，一般来讲会常见的应用程序会影响到的埠80如下：
+
+  * [[http://www.iis.net/|Internet Information Services (IIS) for Windows® Services]]
+  * [[http://httpd.apache.org/|Apache HTTP Server]]
+  * [[http://www.java.com|Java]]
+  * [[zoo:zooskype|Skype]]
+===== 解决方式 =====
+  - 把Zoo移到另一台没有执行其他网络服务的主机。可以是一台打印服务器、另一个保持开启的计算机工作站或是另外一个虚拟主机。
+  - 将其他的网络服务配置到不同埠，Apache及IIS皆可配置到不同的埠运行。
+
+\\
+
+{{tag>Zoo5}}

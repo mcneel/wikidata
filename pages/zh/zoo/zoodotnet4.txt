@@ -1,0 +1,28 @@
+====== Zoo需要Microsoft .NET Framework 4 ======
+> **产品：**//[[zh-tw:zoo:home|Zoo 5]]//
+> **摘要:** //讨论Zoo 5 与Microsoft .NET Framework 4//
+
+==== 概要 ====
+Zoo 5 需要[[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]].。你可以藉由[[http://windows.microsoft.com/en-us/windows/windows-update|Windows Update]]确认Microsoft .NET Framework 4 安装在计算机系统中。
+
+=====问题=====
+我在2008 R2系统的Windows服务器安装了Zoo 5，但Zoo的服务器无法启动，我在Windows 事件日志里看到以下讯息：
+
+<code>
+Service cannot be started. System.IO.FileNotFoundException: Could not load 
+file or assembly 'System.ServiceModel.Web, Version=4.0.0.0, 
+Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its 
+dependencies. The system cannot find the file specified.
+File name: 'System.ServiceModel.Web, Version=4.0.0.0, Culture=neutral, 
+PublicKeyToken=31bf3856ad364e35'
+at ZooService.ZooService.OnStart(String[] args)
+at System.ServiceProcess.ServiceBase.ServiceQueuedMainCallback(Object 
+state)
+</code>
+
+=====解决方法=====
+Zoo 5需要完整的[[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]]。单是安装.NET Framework 4 Client Profile无法让Zoo 5运作。
+
+\\
+
+{{tag>Zoo5}}
