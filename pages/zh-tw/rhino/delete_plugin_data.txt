@@ -1,0 +1,34 @@
+======從多個檔案刪除外掛程式資料======
+有時候您會想要將檔案中的外掛資料刪除。在Rhino裡我們可以利用另存新檔**-SaveAs**指令
+
+  - 在指令欄輸入**-SaveAs**
+  -指令提示:儲存檔名<C:\NAME.3dm>(Version=5 SaveSmall=No GeometryOnly=No SaveTextures=No SavePlugInData=Yes Browse):// 
+  -點擊**SavePlugInData=Yes** 將切換至**SavePlugInData=No**
+  -儲存檔名<C:\NAME.3dm>(Version=5 SaveSmall=No GeometryOnly=No SaveTextures=No SavePlugInData=No Browse):
+  - Rhino 回傳//成功將檔案寫為 C:\SHARE\test.3dm
+
+這個方法對於單一檔案有效，但如果您需要處理一整個資料夾(或資料夾包括子資料夾) 您需要這個腳本
+
+=====下載=====
+  * [[http://s3.amazonaws.com/mcneel/rhinoscript/BatchRemovePlugInDataV4.zip|BatchRemovePlugInDataV4.zip]]  Rhino 4版本
+  *下載**BatchRemovePlugInDataV5.zip** Rhino5版 (未上市) 
+  *解壓縮到一個您不會忘記也不會刪除的資料夾
+
+=====如何使用=====
+  - 開啟Rhino 4並開啟一個新檔
+  - 將**BatchRemovePlugInData.rvb**拖曳至Rhino視窗{{:rhino:drag_drop_small.png|}}
+  - 鍵入**BatchRemovePlugInData** 
+  - 選取須處理的資料夾，//開始動作//
+
+
+ =====請注意=====
+  *用少量檔案進行全面測試，確認檔案與其他外掛如Matrix、V-Ray、Rhino Gold、RhinoCAM以及其他您會使用的檔案都能正常運作。
+  *此程式會處理一個資料夾裡的所有檔案以及之下的子資料夾
+  *請整理您的目錄結構，所以不需要處理的檔案不需要放在您選擇的資料夾/子資料夾裡。
+
+
+====== 問題 ======
+//Email給 max@mcneel.com//
+
+=====學習Rhino腳本=====
+請至[[http://wiki.mcneel.com/developer/home|Rhino開發者頁面]]
