@@ -1,0 +1,64 @@
+
+======調整Rhino的介面======
+//經由外部腳本或編輯登錄來加強Rhino介面的提示與調整//
+
+=====改變世界軸圖示的顏色=====
+>註：視圖左下角有一個小的三軸指示器，通常是暗灰色的。
+
+====Rhino 3.0版====
+**//確認所有Rhino的工作都已經關閉，然後執行Regedit//**
+
+編輯以下登錄檔機碼
+//HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme:Default\Options\AppearanceSettings//
+
+最後三碼是圖示的顏色，請輸入RGB值。
+(例：綠色 0,255,0或黃色255,255,0 )
+
+====Rhino 4.0與5.0版====
+
+這些設定大部分可以直接從Rhino介面更改。圖示顏色可以在不同顯示模式個別調整。(沒有全域設定)
+
+每種顯示模式(框架、著色等等)在**選項>外觀>進階設定**下，展開選單至格線。在"世界座標設定"之下可以找到三個選項 - "使用應用程式設定"將使用標準灰色，或者可以設定與工作平面X、Y、Z軸顏色相同。或者是自訂新的顏色主題。 針對每個自訂顯示模式都需要這樣做。
+
+如果想要更改預設"應用程式設定"的深灰色，請參考以下步驟編輯Rhino 3.0版本以上的登錄檔 - Software\McNeel\Rhinoceros\4.0\Scheme:Default\Options\AppearanceSettings 
+
+----
+\\ 
+
+=====重新配置第二以及第三個滑鼠按鍵=====
+
+<color darklsategray>可以將滑鼠中鍵及右鍵調換，適合習慣用中間按鈕操作視圖的使用者。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ><color red>**//重要訊息:在Rhino V5中，這不再是必要，選項(Options)之下就可以找到Mouse In Rhino V5, Mouse//**</color>
+
+
+//確定在編輯前已經關閉所有Rhino案例//
+
+編輯以下登錄檔機碼
+//HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0(or 4.0)\Scheme:Default\Options\MouseSettings//
+
+====在此登錄碼中，可以找到以下八項：
+
+middle_mouse_dblclk_remap       3\\ 
+middle_mouse_down_remap         3\\ 
+middle_mouse_move_remap         3\\ 
+middle_mouse_up_remap           3\\ 
+right_mouse_dblclk_remap        2\\ 
+right_mouse_down_remap          2\\ 
+right_mouse_move_remap          2\\ 
+right_mouse_up_remap            2\\ 
+
+====只要單純編輯以下的登錄，分別將"3"換為"2"，或"2"換成"3"即可。.\\ 
+結果如下：====
+
+middle_mouse_dblclk_remap       2\\ 
+middle_mouse_down_remap         2\\ 
+middle_mouse_move_remap         2\\ 
+middle_mouse_up_remap           2\\ 
+right_mouse_dblclk_remap        3\\ 
+right_mouse_down_remap          3\\ 
+right_mouse_move_remap          3\\ 
+right_mouse_up_remap            3\\ 
+
+**//完成!//**
+
+
+
