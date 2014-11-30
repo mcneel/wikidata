@@ -1,34 +1,62 @@
-====== NVIDIA 顯示卡問題及資訊 ======
+====== NVIDIA Quadro 顯示卡問題======
+> **註：** NVIDIA 積極修復顯示卡問題，並更新驅動程式。請參照以下說明來獲得最新更新，這對Rhino的穩定性有極大的影響。
 
-===== Quadro 驅動程式測試與Rhinoceros 5 =====
-**若您有使用Rhino 5因NVIDIA驅動程式問題造成當機的經驗，請試著使用下列驅動程式使用Rhino 5及Quadro顯卡。**
+以下指令適用於裝有NVIDIA Quadro顯示卡的電腦 
 
-  * 給Windows 7使用者，我們建議使用的最近穩定的驅動程式為[[http://www.nvidia.com/content/DriverDownload-March2009/confirmation.php?url=/Windows/Quadro_Certified/320.92/320.92-quadro-tesla-grid-desktop-win8-win7-winvista-64bit-international-whql.exe&lang=us&type=Quadro|320.92]]
-  * 給Windows 8 and 8.1使用者，**目前並沒有可推薦的穩定驅動程式。**
-  * 此信息如有變更，恕不另行通知，如新的驅動程序會定期發布。
+** 要完成以下指示，你必須知道：**
+  - 顯示卡製造商。本篇針對的是Nvidia的顯示卡
+  - 顯示卡型號，本篇針對的是Quadro顯示卡
+  - 電腦作業系統[[http://windows.microsoft.com/zh-tw/windows/which-operating-system|哪一種作業系統?]]
 
-//2014年4月19日//
-近期使用者回覆表示最近的NVIDIA Quadro驅動程式[[http://www.nvidia.com/download/driverResults.aspx/74061/en-us|332.76]] (3.14.14)部分可用。
-請讓我們知道是否能有效解決您的問題。請您隨著email郵件附上您的顯示卡型號、驅動程式版本日期及Windows OS版本。Email:[[mary@mcneel.com|Mary Fugier.]] 
+如果您不能確認以上資訊，請至**[[rhino:5:video:troubleshooting:failure|Rhino顯示疑難排解]]** 參閱更多說明。
 
--->詳情#
-2014年2月10日
-\\
-{{:rhino:nvidia_error.png?400|}}
-\\
-過去的一年多來有多次回報關於使用特定NVIDIA Quadro驅動程式造成Rhino當機。我們嘗試分析這個問題，Rhino開發人員發現用某種解決辦法完整修復這個問題被證明是非常困難並難以捉摸。 
+> 在更新顯示卡驅動程式之前，我們建議您設立一個系統還原時間點，如果有需要還可以回復設定。[[http://windows.microsoft.com/zh-tw/windows/system-restore-faq#1TC=windows-7|設定系統還原點]]
+ 
+=====判別NVIDIA Quadro驅動程式版本=====
+  -開啟<color red>Rhino</color>。
+  -從**工具**功能表選擇**選項**
+  -展開**視圖**(在列表左邊的下方)，然後點擊底下**OpenGL**。
+  -找到**驅動程式**，會有一長串數字看起來像<color grey>x.xx.xxxx.xxxx</color>此串數字最後五碼就是NVIDIA驅動程式的版本，比如說：驅動程式版本為8.17.0011.9713，那麼NVIDIA的驅動程式版本為197.13
+ 
+如果NVIDIA驅動程式版本大於或等於340,66，請停止<color grey> ( 驅動程式為2014年8月最新版本)</color>
 
-此問題是顯示卡驅動程式內部的問題，雖然這也*可能*部分由Rhino所造成，但驅動程式不應因此當機。因此，由Rhino端解決這個問題極其困難。
+如果NVIDIA的驅動程式版本小於340.66，請依照以下步驟更新驅動程式。
 
-您的工作可能因為當機而造成資料損失及Rhino被強制關閉。某些當機狀況似乎在沒有使用Rhino的情形下...只要使用網頁瀏覽器及觀看影片的時候也會造成顯卡當機。但同時使用Rhino及網頁瀏覽器似乎會加速當機的機率。
 
-若您了解更多細節，請看[[http://s3.amazonaws.com/mcneel/rhino/5.0/WIKI-techsupport/Quadro Testing for Rhino5_JL.pdf|詳細報告]]
+=====更新NVIDIA  Quadro驅動程式指示 =====
+
+  - 請至 [[http://www.nvidia.com/Download/index.aspx?lang=en-us|NVIDIA 驅動程式下載頁]]。
+  - 輸入系統資訊：
+      - 產品型態：Quadro
+      - 產品型號：請問轉換器在桌機或是筆電?
+      - 產品：請在Rhino輸入您的Quadro轉換器的型號
+      -作業系統 ：請輸入您的作業系統
+  - 開始搜尋
+  -下載NVIDIA Quadro驅動程式 <color grey>(建議安裝2014年8月的最新更新版本)</color>
+  - 開始安裝驅動程式
+  - 接著可以點選"自訂(高級)安裝"
+  -在接下來的安裝螢幕上，選取"執行全新安裝"
+  -繼續進行安裝
+  -重新開機 (即使安裝程式可能並沒有建議這麼做)
+  請閱讀以下Quiadro附加的功能改進
+
+===== 更多Quadro性能的改善=====
+
+--> NVIDIA執行優化設定 #
+
+許多使用者反映NVIDIA驅動程式隨機當機。 NVIDIA控制台裡有一個設定可以改善此問題。 
+
+>註：我們建議使用"工作站應用程式 - 動態串流"設定。 進階串流選項的速度可能比較快，但穩定性較差。
+
+{{:rhino:5:quadrowsadsoption.png?550|}}
 <--
-===== NVIDIA 顯卡隨機當機 - NVIDIA 優化設定 =====
+-->功率調整 #
+將NVIDIA顯示卡切換至高性能也可以提高穩定性
+  -開啟NVIDIA控制台，選擇"管理3D設定"
+  - 選取"電源管理模式"，將"自我調整"改成"偏好最大效能"
+  -儲存更改，大功告成!
+{{:rhino:nvidia_max_performance.png?nolink}}
+<--
 
-許多用戶回報更新NVIDIA驅動程式後有隨機當機情形，請至 NVIDIA 控制面板改變一下設定可改善這些問題。  
-
-<color coral>**Quadro系列我們建議使用"Workstation App - Dynamic Streaming"設定，請見下圖。Geforce系列則可將控制台>新增移除程式下將NVIDIA GeForce Experience程式移除**</color>.\\
-
-{{ :zh-tw:rhino:workstation_app_dynamic_streaming.png?400 |}}
-
+===== NVIDIA顯示卡最新討論=====
+關於Rhino與NVIDIA顯示卡的最新討論在此：http://discourse.mcneel.com/t/quadro-drivers-updated-good-news/11197/4
