@@ -1,48 +1,34 @@
-======Zoo - ライセンスマネージャー======
-[[zoo:home|{{:zoo:zoo_small.png|Zoo Home}}]]
+======Zoo 5 - ライセンスマネージャー======
+[[http://wiki.mcneel.com/zoo/home|{{:zoo:zoo.png?128|Zoo - License Manager}}]]
 
-=====概要=====
-Zooは同じネットワークでRhino、Flamingo、Penguin、Bongo、Brazilのライセンス（CD-Key）を共有できるようにするものです。これらの製品がスタンドアロンの代わりにワークグループノードとしてインストールされている場合、次のように動作します：
+Zooはお持ちのライセンスを1ヶ所に保管し、同じネットワークのユーザーとRhinoを共有できるようにします。
 
-  * ワークグループノードを開始すると、（アプリケーションは）Zooからのライセンスを要求します。 
-  * 使用されていないライセンスがそのノードに割り当てられます。
-  * ノードがシャットダウンされると、キーはZooのライセンスプールに返却されます。
+===== Zooが適している方 =====
+以下に該当する方のみご利用いただけます:
+  * 所有するRhinoのライセンス数より利用人数の方が多い
+  * 複数のライセンスを一元管理したい
+1人で複数のコンピューターをお使いの場合、Zooは**[[http://files.na.mcneel.com/rhino/5.0/docs/rh50_eula.pdf|必要ありません]]**。
 
-** Zooは無償です。**
-
-**[[http://download.rhino3d.com/Zoo/5.0/release/download/|Zoo 5.0のダウンロード]]**  - Rhino 5 用（//Rhino 4、Flamingo、Penguin、Brazil、Bongoはサポートされていません。//）
-
-**[[http://download.rhino3d.com/zoo/4.0/release/download/|Zoo 4.0のダウンロード]]** - Rhino 4、Flamingo、Penguin、Brazil、Bongo用（//Rhino 5はサポートされていません。//）
-
-//メモ: Zoo 4.0とZoo 5.0を同じネットワークで動作させることは可能で、競合なしに両方を同じサーバーにインストールすることもできます。//
-===== 機能 =====
-  * **余分なコストが不要** - 特別なバージョンのRhino、Flamingo、Penguin、Bongo、Brazilは必要ありません。
-  * **特別なハードウェアは必要ありません** - Zooは、同じネットワークワークグループの中のどのシステム上でも動きます。
-  * **特別なソフトウェアは必要ありません** - ZooはWindows XP、Vista、7、Windows Server 2000、2003、2008を含む、どのWindowsシステムでも動作します。
-  * **シンプルなセットアップ** - ワークグループのいずれかのシステムにZooをインストールし、個々のシステムの代わりにライセンスキーを入力します。
-  * **チェックアウト** - ライセンスキーはチェックアウトが可能で、ノートパソコンのユーザーはネットワークから接続を切断することができます。ノートパソコンをネットワークに再接続する際は、再びキーをチェックインすることができます。
-  * **安定性** - ネットワーク接続やサーバーがダウンしても、ワークグループ・ノードはそのまま機能し続けます。
-  * **ルータブル** - Zooはシングルセグメントのネットワークでも、システムがルーターで分けられたネットワークでも動作します。
-  * **混在環境** - 同じWindowsドメインやワークグループでの、ワークグループノードとスタンドアロンノードの混在をサポートしています。
-  * **サービスとして動作** - Zooのあるシステムを再起動すると、Zooは自動的に起動します。
-
-** Zoo 5.0の新機能**
-
-Zoo 5.0はZooの全く新しいバージョンです。完全に書き換えられたZoo 5.0は、以前のバージョンにはなかった次を含む新しい機能を提供します。
-  * **標準インターネット・プロトコルのサポート** - クライアントはHTTP（ポート80）を使ってZoo 5.0と通信しますので、システム管理者は複雑なネットワークでのZooの要求をルーティングしやすくなり、インターネットでも可能になります。
-  * **ファイアウォールフレンドリー** - Zoo 5.0はクライアントに定期的にサーバーをチェックするよう要求しますが、クライアントに対して接続を開始することはありません。管理者がクライアントのコンピューターでファイアウォールのポートを開く必要はなくなりました。
-  * **ライセンスの制限付きチェックアウト** - Zooの過去のバージョンではノートパソコンのユーザーや出張のために、ライセンスのチェックアウトができましたが、チェックアウトの期間に制限はありませんでした。Zoo 5.0では管理者がライセンスをチェックアウトする期間を指定できるようになりました。
-  * **サードパーティプラグインのサポート** - Zooの過去のバージョンは（Rhino、Flamingo、Bongo、Brazil、Penguinなど）McNeel製品のライセンスのみを管理していましたが、Zoo 5.0はサードパーティのプラグイン開発者がZooへの製品サポートを追加できるようになりました。
+> **メモ:** このZooはRhino 5用です。Rhino 4.0をお持ちの方は、以前の**[[:ja:zoo:zoo4|Zoo 4.0]]**が必要です。
 
 
-=====動作環境=====
-  * Windowsベースのシステム:
-    * Windows XP、Windows Vista、Windows 7、またはWindows 8
-    * Windows Server 2003、Windows Server 2008、またはWindows Server 2008 R2
-  * [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]]
-  * TCP/IPが設定がされたネットワーク接続
+===== 利用するには =====
+===Zoo 5の設定===
+  - WindowsコンピューターにZooを**[[http://download.rhino3d.com/Zoo/5.0/release/download/|ダウンロード]]**、インストールします。
+  - ファイアウォールで**[[http://wiki.mcneel.com/ja/zoo/window7firewall|TCPポート80]]**が開かれていることを確認します。
+  - **ZooAdmin**を実行し、**[[ja:zoo:rhino5validate|お持ちのRhino CD-Keyを追加します]]**。
+===Rhino 5の設定===
+  - 既にRhinoがインストールされている場合はRhinoを実行し、**ツール -> オプション -> ライセンス**をクリックします。 Rhinoのライセンスを選択し、**変換**をクリックします。Rhinoを終了、再起動し、起動時に**ネットワークノード**を選択してZooサーバーの**[[http://wiki.mcneel.com/ja/zoo/determinezoohost|名前]]**を指定します。
+  - Rhinoをインストールする場合は**ネットワークノード**を選択し、Zooサーバーの**[[http://wiki.mcneel.com/ja/zoo/determinezoohost|名前]]**を指定します。
 
-=====サポート=====
-**[[zoo:zoo5|Zoo 5.0]]** - Rhino 5用ライセンスマネージャ（//Rhino 4、Flamingo、Penguin、Brazil、Bongoはサポートされていません//）
 
-**[[zoo:zoo4|Zoo 4.0]]** - Rhino 4、Flamingo、Penguin、Brazil、Bongo用ライセンスマネージャ（//Rhino 5はサポートされていません//）
+=====詳細およびサポート=====
+[[ja:zoo:rhino5overview|機能について]] （[[http://wiki.mcneel.com/_media/zoo/zoo5.pdf|PDF (英語) ]]） （[[https://vimeo.com/89968285|ビデオ (英語) ]]）\\
+[[ja:zoo:rhino5requirements|システム要件]]\\
+[[ja:zoo:products|互換性のある製品]]\\
+[[http://docs.mcneel.com/zoo/5/en/index.html|ユーザーガイド（英語・オンライン）]]\\
+[[http://discourse.mcneel.com/category/zoo|サポートフォーラム（英語）]]\\
+[[ja:zoo:zoo5diagnostics|診断ユーティリティ]]\\
+
+===== その他の情報 =====
+{{topic>.?zoo5&nouser&nodate}}
