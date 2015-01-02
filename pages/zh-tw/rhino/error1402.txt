@@ -20,14 +20,14 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 //警告：下列方式將編輯微軟機碼，若有錯誤可能會造成電腦無法開機，若您擔心有相關問題產生，請直接聯絡McNeel技術人員服務。//
   - 由微軟的TechNet下載[[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] 並解壓縮放在電腦桌面。
   - 開啟命令提示字元(Windows command shell)
-  - 將路徑改到您的桌面
+  - 輸入 CD %HOMEPATH%\Desktop，按 Enter，將路徑切換到您的桌面。
   - 在指令列輸入：**psexec -i -d -s c:\windows\regedit.exe**這會導致 Windows 運行登錄編輯程式使用系統帳戶將有比帳戶管理員更強大的許可權。
   - 尋找下列路徑HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
-  - 在**UserData**資料匣上按右鍵，然後點選**Permissions...**
-  - 在Permissions對話框選擇**Advanced**
-  - 確認在這個資料匣”系統管理者身分(Administrators)“有”完全控制” 權限，並且設定使用者有可讀的權限。
-  - 選擇**Replace all child object permissions with inheritable permissions from this object**
-  - 點選兩次**OK**以套用新的權限設定。
+  - 在**UserData**資料匣上按右鍵，然後點選**使用權限...**
+  - 在**權限**對話框選擇**進階**
+  - 確認在這個資料匣**Administrators**有**完全控制**權限，並且設定**Users**有**讀取**權限。
+  - 選擇**以可從此物件繼承的權限項目取代所有子物件的權限項目**
+  - 點選兩次**確定**以套用新的權限設定。
   - 再次安裝Rhino。
 
 
