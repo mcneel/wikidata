@@ -18,8 +18,8 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 
 **//解決方案2：//**
 //警告：下列方式將編輯微軟機碼，若有錯誤可能會造成電腦無法開機，若您擔心有相關問題產生，請直接聯絡McNeel技術人員服務。//
-  - 由微軟的TechNet下載[[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] 並解壓縮放在電腦桌面。
-  - 開啟命令提示字元(Windows command shell)
+  - 由微軟的TechNet下載 [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] 並解壓縮放在電腦桌面。(PsExec.exe 必需直接放在桌面上)。
+  - 在微軟的開始表，在搜尋欄輸入”CMD”。在”cmd.exe”上按右鍵然後選擇”以使用者管理員權限執行”。
   - 輸入 CD %HOMEPATH%\Desktop，按 Enter，將路徑切換到您的桌面。
   - 在指令列輸入：**psexec -i -d -s c:\windows\regedit.exe**這會導致 Windows 運行登錄編輯程式使用系統帳戶將有比帳戶管理員更強大的許可權。
   - 尋找下列路徑HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
