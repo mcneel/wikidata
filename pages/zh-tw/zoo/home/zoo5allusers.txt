@@ -1,0 +1,36 @@
+======為所有使用者設立Zoo 5======
+>**產品：**//[[zh-tw:zoo:home|Zoo 5]]//
+>**摘要：**//在用戶端電腦為所有使用者設立Zoo 5。//
+
+=====問題=====
+我在一個Rhino用戶端電腦上有數位使用者，所以必須替每個使用者都設置Zoo伺服器與IP/名稱。難道不能一次就為所有使用者完成設置嗎?
+\\
+\\
+======原因======
+當您在Rhino 5上點擊兩次並設定Zoo，Zoo的伺服器資訊將被加入windows系統登錄檔之下的HKEY_CURRENT_USER。**此功能只針對當前使用者**。
+\\
+\\
+===== 解決方式：=====
+在Rhino 5捷徑圖示上按滑鼠右鍵，選擇**以系統管理員身分執行**並設定Zoo伺服器。Zoo伺服器資訊將被加入Windows系統登錄檔之下的HKEY_LOCAL_MACHINE。 **此功能適用於所有使用者**。
+\\
+\\
+===== 備註 =====
+  * 使用者未來可以像往常一樣以雙點擊的方式執行Rhino。
+  * Rhino 5網路節點首先在HKEY_CURRENT_USER找到Zoo伺服器資訊。當發現這裡是空的，Rhino將會在HKEY_LOCAL_MACHINE下尋找。
+  * 如果Zoo伺服器已經正確設置在HKEY_CURRENT_USER之下，那麼設在HKEY_LOCAL_MACHINE下的Zoo伺服器會永遠被忽略，即便HKEY_CURRENT_USER之下的Zoo伺服器不會被執行。
+\\
+**完整路徑在Windows系統登錄檔內：**
+\\
+HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\5.0\License Manager
+\\
+\\
+====64位元Windows====
+\\
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
+\\
+\\
+====32位元Windows====
+\\
+HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\5.0\License Manager
+
+{{tag>Zoo5}}
