@@ -1,0 +1,58 @@
+====== Flamingo NXT 安裝疑難排解 ======
+
+> **摘要：**本頁針對Flamingo NXT的安裝設立，討論常見問題以及解答。 
+只要認為是對大家有幫助的問題(或回答，如果有的話)，請提出加入，本頁為Wiki頁面。
+請參照[[http://wiki.mcneel.com/zh-tw/aboutwiki|關於維基]]閱讀或加入更多內容。
+
+
+=====安裝Flamingo for Rhino 5.0=====
+**//問題：//**以DVD執行安裝程式，得到錯誤訊息指出使用者必須已經安裝Rhino 4 sr9或Rhino 5。但電腦上的確已經安裝Rhino 5了。
+
+{{ :flamingo:nxt:nxtnoinstall.jpg?nolink&380 |}}
+
+**//答://** 這與Rhino 5問世前，早期的安裝DVD有關。要解決此問題，請： 
+
+下載一個新的DVD安裝程式：[[http://www.flamingo3d.com/tw/download/nxt/release|Flamingo新版DVD安裝程式]]
+
+<color darkgrey>**註** 此下載檔案非常大，需要較長時間完成下載。</color>
+
+到[[http://nxt.flamingo3d.com/forum/topics/installing-nxt-with-rhino-5-0?id=6036421%3ATopic%3A91742&page=2#comments|這裡]]觀看論壇討論
+
+===另一選擇====
+如果您沒有時間下載最新的Flamingo DVD安裝程式，可以參考另一個方法，就是安裝Rhino 4 sr9 Eval，但安裝後不要使用，也不建議移除。
+請到[[http://s3.amazonaws.com/files.na.mcneel.com/rhino/4.0/2011-03-09/eval/rh40eval_en_20110309.exe|這裡]]下載 Rhino 4 English sr9 25 save eval (03-09-2011) 
+
+=====Flamingo安裝程式 - 1603錯誤訊息=====
+**//問題：//**您嘗試安裝Flamingo NXT，結果收到1603錯誤訊息，並且安裝失敗。
+
+**//解答：//**下載並安裝[[http://www..rhino3d.com/download/rhino/5.0/evaluation#|Rhino 5 32 bit eval]]
+ 
+**//為什麼?//** 
+這種情形發生在沒有安裝32位元Rhino4 或Rhino 5 的電腦上。安裝失敗是因為Flamingo NXT正在尋找這兩個版本的元件。解決這個問題的方法就是安裝32位元Rhino 5。 
+
+=====Flamingo 已經安裝好了，但不能運作=====
+**//問題：//**在Rhino 5運作Flamingo NXT，結果收到錯誤訊息： 
+
+"Flamingo初始化錯誤 - 無法與授權管理員溝通"
+
+**//解答：//** 很有可能是Flamingo的授權管理員已經被Rhino 4的移除程式移除掉。請挑選以下兩種程式其中一種，安裝後即可解決此問題。
+
+[[http://s3.amazonaws.com/files.na.mcneel.com/flamingo/nxt/2011-03-09/release/rhinolm_20110309_x86.exe|32位元 Windows 版 Flamingo授權管理員]]
+
+[[http://s3.amazonaws.com/files.na.mcneel.com/flamingo/nxt/2011-03-09/release/rhinolm_20110309_x64.exe|64位元 Windows 版 Flamingo授權管理員]]
+
+=====Rhino外掛錯誤 Flamingo無法載入=====
+**//問題：//**啟動Rhino時收到此錯誤訊息：
+
+"Rhino外掛程式 FlamingonXtNet64.rhp — — 由 ArNxtToolkitDotNet64.dll 導入程序無法載入"。  
+
+**//解答：//**通常這是Flamingo未正確安裝的更新程式。請用以下方式卸載：
+
+  - 從控制台卸載Flamingo更新程式
+  - 突顯Flamingo NXT，看一下左上角，找出左邊一個"查看已安裝更新"的選項。
+  - 選取，從清單中突顯Flamingo NXT  3.1.2012.10.18.
+  - 按右鍵並選取"卸載" (可以卸載整個Flamingo程式，但之後需要從CD重新安裝)
+  - 開啟Rhino，Flamingo應該會開始載入，請告訴我您電腦上的Flamingo是哪個版本。
+  - 關閉Rhino，接著安裝9-11-2012，接下來您應該就會了。
+
+=====如果您的問題仍未獲得解答，請email至：tech@mcneel.com=====
