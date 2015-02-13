@@ -1,0 +1,33 @@
+====== Rhino因為NET 4的錯誤而不能運作======
+如Rhino所要求的安裝.NET Framework 4之後，電腦仍然不相信已經安裝，並且拒絕運作。 
+
+====安裝後發生這些情況====
+  * Microsoft .NET Framework 4 (Full)
+  * Microsoft .NET Framework 4 Client Profile
+兩者皆顯示.NET Framework 4已成功安裝，並且出現在控制台已安裝程式清單中。
+
+====您有可能已經嘗試了====
+重新開機以及重新安裝，但Rhino仍舊無法運作。
+
+
+===== 解決方式：=====
+  - 以具有完全管理員許可權的管理員身分登入。 個人可能會有某些管理員許可權，但在此並不相同。
+  - 請進行清理程序，詳情在此[[http://blogs.msdn.com/b/astebner/archive/2008/08/28/8904493.aspx|.NET Framework Cleanup Tool User's Guide]].
+  - 清理程序之後，安裝[[http://www.microsoft.com/download/zh-tw/details.aspx?id=17851|Microsoft .NET Framework 4]]。
+Microsoft .NET Framework 4 安裝程式下載並安裝在目標電腦及作業平台上，安裝時需要連接網路。 針對此版本，使用者必須要有.NET Framework 4 來運作並展開應用程式。
+
+====測試====
+將以下語法複製至Internet Explorer，它將會回報.NET的版本
+
+<code html>
+<html>
+<body>
+<button onclick="alert(navigator.userAgent);">User Agent</button>
+</body>
+</html>
+</code>
+
+或是參閱：
+
+[[http://support.microsoft.com/kb/318785/zh-twen-us|如何判別電腦上已經安裝了哪一個版本的Microsoft .NET Framework。]].
+
