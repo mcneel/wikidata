@@ -1,0 +1,106 @@
+====== 以Rhino進行船殼建模、造船工程 ======
+
+
+>**摘要：**//Rhino裡的船殼建模方式以及造船工程工具//
+\\
+[[http://rhinocentre.blogspot.com/search/label/15%20Marine%20Design|本文將被特定文章詳細取代至Rhino Report部落格中]]
+
+\\
+----
+作者:[[gerard@scheepsbouwkunst.nl|Gerard Petersen]]
+
+  * 任職於[[http://www.scheepsbouwkunst.nl|ScheepsbouwKunst]]公司， 使用Rhino及相關外掛程式以發展新的造船概念的造船工程師。
+  *[[http://www.rhinocentre.nl|RhinoCentre.nl]]創辦人，提供軟體、服務以及培訓。
+  * 發展//know how//、//know who//來支援公司利用Rhino在更少的時間內設計出更具生產性的產品。 
+
+----
+\\
+{{:legacy:en:pict_04_2.jpg}}
+
+
+=====內容=====
+
+
+  * [[http://rhinocentre.blogspot.com/2009/11/rhino-rapid-hull-modeling-methodology.html|快速船體建模方法]] - 更新
+  * [[http://orca3d.com|Orca3d naval architecture tools]] - Updated
+  * [[http://rhinocentre.blogspot.com/2009/11/model-ship-hulls-with-control-point.html|控制點直接操作]] - 更新
+  * [[http://rhinocentre.blogspot.com/2009/12/grasshopper-parametric-ship-hull.html|Grasshopper 參數船殼建模]] - 最新
+  * [[http://rhinocentre.blogspot.com/2009/11/modeling-developable-hull-shapes-in.html|Modeling Developable Hull Shapes|可展船殼建模]] - 最新
+  * [[http://rhinocentre.blogspot.com/2010/10/ship-hull-design-with-t-splines-for.html|T-splines船殼、遊艇以及上部結構的設計]] - 最新
+  * [[#更多建模工具]]
+  * [[#更多造船工程工具]]
+  * [[#結論]]
+
+----
+\\
+[[rhino:rhinoceros|RhinoCeros]] 已經被大量用在海洋產業。但不是每個人都了解Rhino對於海洋產業設計的能力，因為很多使用者只是利用Rhino來做上部結構或是匯入幾何及其他Cad工具來達到視覺化的目的。
+
+有了這項工具，您可以直接在Rhino設計，也能知道在生產過程中執行了多少進度。
+
+本文提供了在船殼建模以及[[rhino:architecture|造船工程]]上的知識和經驗的概述。船殼建模只是[[rhino:architecture|造船工程]]過程中的一個部分，因此特定[[rhino:architecture|造船工程]]的觀點也在本文進行具體的評價。 
+
+=====更多建模工具=====
+
+造船設計師需要特定工具來提高船殼設計的進度與過程。請閱讀更多有關此主題或是點連結下載外掛程式。
+
+下載外掛非常簡單只要注意以下兩個關鍵：
+  - 經由Rhino的文件內容(Document Properties)下的外掛程式功能表下載並安裝.rhp外掛檔案。
+  - 啟動.tb外掛工具列就可以方便的使用指令。請在此啟動：Tools/toolbarlayout/file/open
+  * **[[labs:archcut|ArchCut]]** 自動衍生船殼部分、吃水線以及船尾。也可以在2D室內設計時改變船殼形狀細節之後，再回來做更新。
+  * **[[labs:advancedflattening|Expand]]** 可以做到船殼單面/雙面的曲面擴展。<del>--</del>
+  * 用"Clipping plane"(遮蔽平面)指令來以各種您需要的位置與角度來檢視，並將您的設計理念跟其他人分享。想要知道如何操作，請至功能表下的help/commandhelp，鍵入"ClippingPlane"。
+\\
+擴展外掛程式範例
+
+{{:legacy:en:Expand-ani.gif}}
+\\
+
+| [[#回到上方]]|
+
+=====更多造船工程工具=====
+
+其他廠商研發之[[rhino:architecture|造船工程]]工具:
+
+  * **[[http://www.orca3d.com/|Orca3d]]** 提供海洋工程設計師很多特定的功能，比如穩定性的分析、流體靜力學、滑行阻力估算以及linesplans等等。
+{{:legacy:en:stability2.jpg}}
+  * **[[http://www.rhino3d-design.com/rhinonest.htm|Rhino Nest]]** 是一個強大的套嵌工具。請下載評估版並自行測試。
+{{:legacy:en:nest.jpg}}
+
+
+| [[#回到上方]]|
+* [[#結論]]
+
+船殼建模之結論：
+
+1. 由線條組成的曲面以及直接衍生的曲面，兩者有基本上的不同。
+
+2. 快速船殼建模對初學者、船殼創新設計概念以及自寫腳本的參數建模來講，是一個很好用的工具。
+
+3.  [[http://www.orca3d.com|Orca3d]] 提供給專業人士簡單又好用的工具箱(toolbox)。
+
+4. 直接控點操作能與Orca3d媲美，但比較需要人力密集而缺乏額外的自動化功能。額外工具再結合Rhino可以提供更好的功能。
+
+5. T-splines提供其他方法更多額外的功能性，但需要再檢視。
+
+\\
+一般 [[rhino:architecture|海洋工程]] 之結論:
+
+1. [[rhino:rhinoceros|RhinoCeros]] 可以用各種船隻設計的概念上，唯一的限制在於設計師本身的能力。
+
+2. 詳細的設計不僅可以發揮在船殼上，也可以用在上部結構、室內，還可以針對技術安裝來設計或是建模。
+
+3. 可以嵌套及外殼擴張。
+
+\\
+
+----
+如果有任何問題、指教或是經驗分享，請聯絡：
+
+[[gerard@rhinocentre.nl|Gerard Petersen]]
+
+
+
+| [[#回到上方]]|
+
+
+----

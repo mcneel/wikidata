@@ -1,0 +1,45 @@
+======使用NETSH在Windows防火牆開啟TCP Port 80======
+>**產品：**//[[zoo:home|Zoo 5]]//
+>**摘要：**//使用NETSH開啟Zoo需要的TCP Port 80//
+
+==== 概要 ====
+Zoo 5利用TCP Port 80(HTTP)與Rhino 5使用者通信。
+
+安裝Zoo 5之後，您必須確認TCP Port 80是開啟的，才能在有防火牆程式運作的Zoo伺服器系統內做傳入或傳出。
+
+註：在大部分的防火牆程式裡，在開啟的TCP Port 80之下可以傳出通信。因此使用者不應該在有防火牆程式運作的Rhino工作站中開啟任何端口(port)。 
+
+=====更多詳情=====
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]**是一個Windows命令行腳本工具，它讓使用者可以在本機及遠距顯示或修改正在運作的電腦網絡配置。
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]**同時也提供一種腳本功能，讓使用者可以在指定電腦上，用成批方式運作一組指令。
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]**可替代控制台裡的防火牆程式，來自動開啟需要的TCP/IP 端口。
+
+可以使用[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]來打開Windows防火牆的ports。依照Windows XP、Windows Server 2008、Windows Vista或其他不同的高階系統來使用不同的語法。
+
+====Windows XP====
+**重要**如果你是管理員群組的成員，在命令提示視窗下執行命令。要開啟命令提示視窗，找出圖示或是在開始功能表內啟動命令提示視窗。
+
+<code>
+rem Open TCP Port 80
+netsh firewall add portopening TCP 80 "Zoo TCP Port 80"
+</code>
+
+==== Windows 伺服器2008、Windows Vista或更高階系統====
+
+**重要**如果你是管理員群組的成員，而"使用者帳戶控制"在電腦上是開啟的，請用"提升權限"在命令提示視窗下執行指令。並從開始功能表內找出開啟命令提示視窗的圖示，按右鍵，點選**以系統管理員身分執行**。
+
+<code>
+rem Open TCP Port 80 inbound and outbound
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=in action=allow protocol=TCP localport=80
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=out action=allow protocol=TCP localport=80
+</code>
+
+======參考資料=====
+[[http://support.microsoft.com/kb/947709|如何使用 "netsh advfirewall firewall" 而非"netsh firewall" 來控制在Windows Server 2008及Windows Vista裡的Windows防火牆行為。]]
+
+\\
+
+{{tag>Zoo5}}
