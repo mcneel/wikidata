@@ -1,0 +1,171 @@
+
+
+======進階展開工具======
+>**摘要：** 既然船舶建造程式ShipConstructor的展開外掛尚未能提供給Rhino 4.0使用，我們已經開始研發替代方案。// <color red> 這是第一代原型。 </color>//
+
+=====內容=====
+
+  *[[#背景]]
+  * [[#概述]]
+  * 下載與安裝:
+    * [[#安裝|Rhino 4.0版]].
+    * Rhino 5.0: Rhino 5.0已經包含進階展開工具 //[[http://www.rhino3d.com/download/rhino/5/latest?PageSpeed=noscript|現在就下載Rhino 5.0 ....]]//
+  * [[#介面]]
+  * [[#限制]]
+  * [[#已知的錯誤]]
+  * [[#要做的事情]]
+  * [[#意見回饋]]
+
+=====背景=====
+
+Rhino 4.0具有：
+
+  * **UnRollSrf** - 攤平可展開的曲面。從3D可展開平面(往同一方向彎曲)做圖案。//<color red> 永遠先用這個指令，如果失敗再試試曲面展開指令 (Squish) </color>//
+  * **Smash** - **UnRollSrf** 的特別版，不會檢查曲面是否可以展開。現在有**Squish**了，所以就不建議使用此指令。
+  * **Squish** //<color red>new</color>// - 從不可展開的3D曲面或多邊形網格(往兩個方向彎曲)製作平面圖案。 一般情況下，先試試看**UnRollSrf**。
+
+Rhino 4.0並不具有：
+
+  * **Unfold or unbend** - 從折彎的2D圖案製成的3D形狀製作平面圖案。主要用來製作金屬片盒子之類的東西。大部分MCAD的產品都可以做得到。
+  * **Flow** - 沿著曲線流動，利用流動金屬流經複雜的模具上，製作出3D形狀的平面圖案。例如從金屬片沖壓出汽水罐，或是從一個平面圖案沖壓出汽車門板內飾。
+  * **Peel** - 剝下，將曲面從可能撕裂或是產開的地方分開。 例如：展開一個球體。**註:**如果形狀已經剝開，那麼可以用Squish。 當一個3D曲面被極度延伸或是收縮，或是與2D圖案重疊時，就需要被分開。
+
+=====Squish指令概述=====
+
+**Squish**指令將(往兩個方向彎曲的)不可展開3D網格或[[rhino:nurbs|NURBs]]曲面壓扁成為2D圖案。
+
+{{http://en.wiki.mcneel.com/content/upload/images/squish1.jpg}}
+{{http://en.wiki.mcneel.com/content/upload/images/squish2.jpg}}
+{{http://en.wiki.mcneel.com/content/upload/images/squish3.jpg}}
+
+**Squish**指令標記出收縮的地方(紅色點雲)，並且延展(綠色點雲)以及顯示相關的收縮或延展的統計資訊。
+
+  區域：不變
+  收縮：平均=0.04% 最大 = 0.11% (在44%的表面)
+  延展：平均=0.07% 最大 = 0.28% (在35%的表面)
+
+這裡的//收縮//指的是材料將被收縮，2D圖案會被擠壓成為3D形狀。
+//延展//指的是材料將會被延展，2D圖案將被延展成為3D形狀。 括號裡的百分比是將被收縮或延展的圖案比例。
+
+在最劇烈變形的地方將會標記最多10個文字標記，這些記號的數量就是長度延展的百分比。 從以上的圖案可以看出，綠色文字標記顯示的"0.3"表示這些記號附近的區域，在3D形成過程中大概會被延展0.3% (3/1000)。
+
+{{http://en.wiki.mcneel.com/content/upload/images/Expand-ani.gif}}
+=====SquishBack指令概述=====
+
+ **SquishBack** 指令允許您用Squish在2D圖案上放置點跟曲面，然後可以用"unsquish"將他們回復為3D狀態。
+
+假設我們想要將Rhino品牌名稱放進這個3D[[rhino:nurbs|NURBs]]鞋子模型的黑色圈圈裡。
+
+{{http://en.wiki.mcneel.com/content/upload/images/SquishBack_3dShapeBefore.jpg}}
+
+首先用**Squish**指令產生一個2D圖案。
+
+{{http://en.wiki.mcneel.com/content/upload/images/SquishBack_2dShapeBefore.jpg}}
+
+接著用**TextObject**指令將白色"Rhino"曲線放進2D圖案。
+
+{{http://en.wiki.mcneel.com/content/upload/images/SquishBack_2dShapeAfter.jpg}}
+
+最後用**SquishBack**指令將白色Rhino文字"unsquish" - 也就是回復到3D狀態。
+
+{{http://en.wiki.mcneel.com/content/upload/images/SquishBack_2dShapeAfter.jpg}}
+
+=====安裝=====
+
+====Rhino 4.0版====
+    - [[http://en.wiki.mcneel.com/content/upload/files/vcredist_x86.exe|下載並安裝]] 最新版Microsoft runtime libraries  (安裝後才能操作Squish)。(此安裝只須執行一次)
+    - [[http://download.mcneel.com/download.asp?id=SquishWIP&language=|安裝最新版 Squish外掛]] - //更新時間2008年1月11日//
+    - 將外掛程式下載後 **[[http://download.mcneel.com/download.asp?id=SquishWIP&language=|Squish.rhp]]** 存放到電腦的資料夾裡。
+    - 下載工具列檔 **[[http://en.wiki.mcneel.com/content/upload/files/Expand.zip|Expand.tb]]** 至電腦資料夾，啟動功能表底下的"工具/工具列圖紙配置 ("Tools/ Toolbar layout")
+    - 開啟Windows file Explorer，將Squish.rhp檔案拖曳至此，並且開啟Rhino 4.0視圖。或是利用工具 (Tools) - 選項 (Options) - 外掛 (Plug-ins)頁面裡的安裝(install)按鈕。
+    - 您可能需要下載並安裝[[http://www.microsoft.com/downloads/details.aspx?familyid=766a6af7-ec73-40ff-b072-9112bab119c2|Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package ATL Security Update]].
+
+====Rhino 5.0版====
+1.下載並安裝最新版的[[http://www.rhino3d.com/download/rhino/5/latest?PageSpeed=noscript|Rhino 5.0]].
+
+
+=====Squish 指令選項=====
+
+  * SplitSeams=Yes/No
+    * Use SplitSeams=Yes，單一曲面的網格。
+    * Use SplitSeams=No，多邊形曲面的網格。
+  * StiffBoundary=No/Yes
+    * 如果 StiffBoundary=Yes, Squish 會盡量避免扭曲邊界的長度。
+  * Deformation=Free/StretchMostly/StretchOnly/CompressMostly/CompressOnly
+    *根據使用者的偏差，有五種選項來延展、收縮還有自訂變形的設置。
+      * Free - 沒有收縮或延展的特別偏好。
+      ** StretchMostly - 以強大的偏差演算支援圖案變形為2D形狀時的擴張。
+      ** StretchOnly - 當圖案變形為2D的時候完全無收縮。
+      ** CompressMostly - 以強大的偏差演算支援圖案變形為2D形狀時的收縮。
+      ** CompressOnly - 當圖案變形為2D時，絕對不會擴張。
+      *CustomA, CustomB, CustomC - 自訂變形。
+      * [[#CustomSetup]] - 使用在CustomA,、CustomB 和 CustomC的選項的設置。
+  * 材料=剛性/軟性
+    * 如果您利用剛性材料製作某樣東西，想要降低從3D曲面到2D圖案的壓力，請用**Rigid**。
+    *如果您利用軟性材料製作某樣東西，想要盡量限制幾何變形，請用**Floppy**。
+    *如果您利用沒有伸縮性而且已經變形的剛性材料，請告訴我們哪種設定能夠發揮最好的效果。
+    * 我們知道更多關於使用者的需求，就能夠提供更多的支援。
+  *Decorate=Yes/No
+    *紅點雲跟綠點雲以及文字標記都是裝飾。要關掉請輸入Decorate=No。
+  * Outside=Up/Down
+    *如果Outside=Up，3D曲面的//outside//在2D圖案的上面。
+    *如果Outside=Down，3D曲面的//outside//在2D圖案的下面。
+
+=====CustomSetup來定義自訂變形=====
+
+自訂選項讓您可以自訂變形參數，有四種參數可以設置。
+
+  *BndStretch
+  *BndCompress
+  *InteriorStretch
+  *InteriorCompress
+這些參數的預設值為1，也可以被設定為任何正數。越大的數字，與四個參數相等相較起來，可以減少某些變形。比如想要限制內部擴張，可以試試以下動作：
+
+   BndStretch=1
+   BndCompress=1
+   InteriorStretch=1
+   InteriorCompress=100
+
+如果您想盡量維持邊界的長度可以像這樣設定：
+
+   BndStretch=10
+   BndCompress=10
+   InteriorStretch=1
+   InteriorCompress=1
+
+=====限制=====
+
+  *不能夠展開或是剝下 (unroll、unfold或是peel )。
+  *不太適合用在延展的曲面，請用UnRollSrf指令。
+  *極度變形的情形下，比如從鋁片直接沖壓出鋁製飲料罐，用Squish指令比不用還糟糕。
+  * 不會檢查2D的重疊結果。
+
+=====已知的錯誤=====
+
+
+=====待辦事項=====
+
+  *<del> 允許選擇3D曲面的其他曲線和點，並且與曲面一同展開。</del>
+  * 標註線與曲面。
+  * 多重曲面/實體支援。
+  * 同時"Squish"多個曲面，並且盡量以最佳的方式來圖紙配置最後的圖案。(Olivier Suire)
+  * 對於盤子的擴張/收縮提供更好的詮釋。希望能有一個"熱度表"，利用顏色表現出相對變化。我認為應該在盤子上相對應擴張/收縮的地方印上輪廓環 (contour rings)，就像地形圖那樣。 如此一來操作Eckhold刨床的人就可以知道從哪個地方或是哪個方向下手。 //--Paul Fuchs//
+  *好看的對話介面。
+  *按鈕
+{{http://en.wiki.mcneel.com/content/upload/images/Button_24x24.jpg}}
+{{http://en.wiki.mcneel.com/content/upload/images/Button.jpg}}
+
+=====意見回饋=====
+
+請在[[http://discourse.mcneel.com/|Rhino使用者論壇]]將回饋刊出給Dale Lear ，務必在發言主旨處確實寫上"Squish"。
+
+我們需要知道**Squish**指令展開的圖案，在您的製造應用程式中是否有用? 如果您曾經成功的利用一個3D模型以及2D圖案做出某個物件，我們希望可以將其與"Squish"做出來成果做比較。即便您無法與我們分享您的模型，也請讓我們知道有哪些重要的程序或過程。
+
+    * 您用哪一種材料?
+    * 保存面積有多重要?
+    * 可以容許多少收縮?
+    * 可以容許多少擴張?
+    * 可以容許多少傾斜(shear)?
+    * 保存面積有長度有多重要?
+    * 在邊緣附近的材料有任何異常嗎?
+
