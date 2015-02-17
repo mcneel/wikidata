@@ -1,10 +1,16 @@
 ====== Mac Rhino 常見問題 ======
 
+--> 買得到MacRhino嗎?#
+
+買不到。MacRhino仍在研發中，目前並未販賣。請至[[http://www.rhino3d.com/download/wenatchee/5.0/wip|下載 Mac版 Rhino]] 。在研發期間請盡情使用這個版本，我們歡迎你的意見與反饋。
+
+<--
+
 --> Mac Rhino 有期限，若過期了該怎麼做？#
 
 設定期限是為了讓大家都能測試最新的版本，並且避免使用者使用舊版遇到太多問題。 
 
-在每個Mac Rhino WIP版本過期之前，都會有新版釋出，請到 [[http://www.rhino3d.com/download/wenatchee/5.0/wip|下載網頁]]。每當Mac Rhino開啟時都會自動確認是否有新WIP版更新並會自動提您您。同時也會將更新訊息公布在[[http://discourse.mcneel.com/ |討論版]]的 [[http://discourse.mcneel.com/category/rhino-for-mac|Rhino for Mac區塊 ]]。
+在每個Mac Rhino WIP版本過期之前，都會有新版釋出，請到[[http://www.rhino3d.com/download/wenatchee/5.0/wip|下載網頁]]。每當Mac Rhino開啟時都會自動確認是否有新WIP版更新並會自動提您您。同時也會將更新訊息公布在[[http://discourse.mcneel.com/ |討論版]]的[[http://discourse.mcneel.com/category/rhino-for-mac|Rhino for Mac區塊 ]]。
 
 <-- 
 
@@ -32,7 +38,7 @@
 
 我們計畫盡可能讓Windows版本的Rhino功能全部移植到麥金塔版本，但目前尚為完全移植完成。請參見Windows Rhino版本的[[http://www.rhino3d.com/nr.htm|軟體開發流程]]看我們如何進行新版產品開發。我們依照相同的規劃來進行麥金塔版本的開發。目前我們在[[http://www.rhino3d.com/nr.htm#phase1|第一階段: WIP (研發中)]]。
 
-此[[rhino:mac:whatworks|網頁連結]]說明目前已可用的功能及待完成的功能清單。
+此[[zh-tw:rhino:mac:whatworks|網頁連結]]說明目前已可用的功能及待完成的功能清單。
 
 <-- 
 
@@ -56,38 +62,6 @@ Rhino麥金塔版本使用您系統預設的語言，若您要使用與系統預
 
 <-- 
 
--->我可以撰寫巨集及外掛程式嗎？ #
-
--->可以在麥金塔系統執行執行一個巨集指令嗎？ #
-
-可以的。請於Rhino功能表列，找**Tools > Commands > Read From File**一個載入並執行巨集指令。
- 
-<--
-
--->可以在麥金塔系統執行一個RhinoScript程式？ #
-
-不行。RhinoScript為以VisualBasic為基礎並且VisualBasic並無法於OS X被執行。我們同時使用Python作為Mac及Windows系統的腳本編寫工具，做為可以跨平台的腳本工具。請參考[[http://discourse.mcneel.com/category/scripting | Rhino scripting討論版]]學習更多如何使用Python於這兩個系統撰寫腳本。
-
-<--
-
-
--->是否將有其他外掛程式可以於麥金塔版本的Rhino使用？ #
-
-也許。然後Windows版本的外掛程式將不支援Mac版本，將視各外掛商的開發者決定是否要移植到Mac版本的Rhino。
-<--
- 
--->麥金塔版本的Rhino可以支援我的C語言外掛程式？ #
-
-會的。然而，我們尚未準備好支援提供使用者C語言外掛開發程式，但我們計畫在未來支援。您將需要使用麥金塔開發系統重新編譯您的外掛程式，依照您外掛程式的複雜性來決定轉譯的工作量，可能只需要少量的工作就可以在兩個系統使用。
-
-<--
-
--->麥金塔版本的Rhino可以支援我的.NET語言外掛程式？#
-
-最終會的，我們正在製作提供Rhino開發者使用的開發工具，並可於OS X及Windows使用。
-
-<-- 
-<--
 
 -->麥金塔版本的Rhino正式上市日期？#
 
@@ -99,14 +73,59 @@ Rhino麥金塔版本使用您系統預設的語言，若您要使用與系統預
 
 我們目前尚無任何關於升級版的決策。
 
-====== 疑難排解======
--->若我發現問題，如何回報#
+<--
 
-請參考[[:zh-tw/rhino/mac/ reportingproblems| Mac Rhino問題回報]]。
+-->Mac版與Windows版的Rhino有何不同?
+  *MacRhino能做到幾乎所有Windows版Rhino的建模。
+  *它將有內建的彩現器、物件的尺寸標註、文字以及簡易出圖。
+
+__不像Windows Rhino，MacRhino將不會有__
+  *可擴展、加外掛或是附加功能。
+  *所以無法加入RhinoCAM、RhinoGold、Matrix或Grasshopper等附加功能。
+  *沒有圖紙配置
+
+MacRhino的第一版並非大家都適用，尤其是很依賴外掛的使用者。  
+但對其他使用者而言，Rhino幾乎能滿足所有的需求。
+<--
+
+==== 腳本與外掛 ====
+-->我可以在Mac版本執行指令腳本嗎?
+
+可以的。要加載並執行命令腳本，請在Rhino功能表，選擇**Tools>Commands>Read from File**。
+ 
+<--
+
+-->我可以在Mac版本執行RhinoScript的程式嗎?
+
+不能。RhinoScript的基本是VisualBasic，而VisualBasic無法在OS X的環境下執行。我們在Mac及Windows版本中使用的是Python，這才能夠同時幫Mac與Windows版寫腳本。請參閱[[http://discourse.mcneel.com/category/scripting|Rhino腳本支援論壇(英文)]]Windows和OS X的Python支援或[[http://chinese.discourse.mcneel.com/c/rhinoscript-rhinopython|Rhino腳本支援論壇(英文)]]。
 
 <--
 
--->安裝相關問題#
+
+-->可以在MacRhino上使用第三方的外掛嗎?
+
+也許。然而Windows外掛無法在Mac上使用。某個外掛能不能夠在Mac版使用，取決於當初外掛的設計者。
+<--
+ 
+-->Mac版本支援C外掛嗎?#
+
+最終是可以的。但是我們尚未準備好對C外掛用戶的支援，但未來我們打算這麼做。使用者必須重新編輯Mac開發系統上的外掛。取決於使用者外掛的複雜性，有可能花少量的時間就可以編輯出支援Mac與Windows的外掛。
+
+<--
+
+-->Mac版本支援.NET外掛嗎?#
+
+最終是可以的。Rhino外掛工程師正致力寫出能夠在Mac與Windows都能使用的外掛。
+<--
+ 
+====== 疑難排解======
+-->若我發現問題，如何回報#
+
+請參考[[:zh-tw/rhino/mac/reportingproblems|Mac Rhino問題回報]]。
+
+<--
+
+====安裝相關問題====
 
 -->在安裝較新版本之前，我需要移除舊版本嗎？ #
 
@@ -119,7 +138,7 @@ Rhino麥金塔版本使用您系統預設的語言，若您要使用與系統預
   - Start the Disk Utility program **/Applications/Utilities/Disk Utility**
   - From the menu, select **Images > Verify...** An Open File dialog box appears.
   - Select the .dmg file that you downloaded. It is usually in your Downloads folder and is named rhinoceros_wip_YYYYMMDD.dmg
-  - 若您的下載檔案無效，請到 [[http://www.rhino3d.com/download/wenatchee/5.0/wip|下載網頁]]並再次申請下載。
+  - 若您的下載檔案無效，請到[[http://www.rhino3d.com/download/wenatchee/5.0/wip|下載網頁]]並再次申請下載。
 
 <-- 
 
@@ -146,7 +165,7 @@ Rhino麥金塔版本使用您系統預設的語言，若您要使用與系統預
 10.8 Finder並沒有這個問題，升級到10.8版也是一個解決方式。
 
 <-- 
-<--
+====其他問題====
 
 -->Mac Rhino當機了，該怎麼辦？#
 
@@ -156,7 +175,7 @@ Rhino麥金塔版本使用您系統預設的語言，若您要使用與系統預
  
 -->目前的Mac Rhino版本有問題，我想要退回前個版本。#
 
-並無法退回前個WIP Mac Rhino版本。由於您參與開發階段測試，請回報您發現的問題，請見 [[zh-tw:rhino:mac:reportingproblems|Mac Rhino問題回報]]學習如何回報您的問題，讓我們可以發現它並修正它。
+並無法退回前個WIP Mac Rhino版本。由於您參與開發階段測試，請回報您發現的問題，請見[[zh-tw:rhino:mac:reportingproblems|Mac Rhino問題回報]]學習如何回報您的問題，讓我們可以發現它並修正它。
 
 <-- 
 
@@ -180,9 +199,9 @@ Rhino會在下列幾個情形下出現此對話框。不是所有功能都已完
 
 取消右鍵功能表功能並開啟重複上個指令功能。
 
-  - 在下拉式功能表，請選**Rhinoceros** 然後點選 **Preferences**。
-  - 選擇滑鼠 **Mouse** 面板。
-  - 在滑鼠右鍵部分**Right Mouse Button** ，取消勾選**Enable Context Menus**。
+  - 在下拉式功能表，請選**Rhinoceros**然後點選**Preferences**。
+  - 選擇滑鼠**Mouse**面板。
+  - 在滑鼠右鍵部分**Right Mouse Button**，取消勾選**Enable Context Menus**。
 
 <--
 
@@ -191,12 +210,12 @@ Rhino會在下列幾個情形下出現此對話框。不是所有功能都已完
 有些圖示工具同時具有兩個指令功能，您可以在指令提示看到。
 Mac Rhino預設的是您可以使用 Option+點選指令圖示執行第二個(右鍵)指令。
 
-  - 在下拉式功能表，請選**Rhinoceros** 然後點選 **Preferences**。
-  - 選擇 **ToolPalette** 面板。
-  - 在**Execute alternate command when** 設定上，一樣使用右鍵將執行方式切換為點選右鍵執行。
+  - 在下拉式功能表，請選**Rhinoceros**然後點選**Preferences**。
+  - 選擇**ToolPalette**面板。
+  - 在**Execute alternate command when**設定上，一樣使用右鍵將執行方式切換為點選右鍵執行。
 
 **請注意：** 若您預設使用右鍵執行第二個指令，您將無法使用右鍵自訂工具列，您必須使用View/Customize 工具列取代。
 
-Mac 使用者介面標準為右鍵 (或 control-click) //總是// 執行文字功能表。您可使用ToolPalette面板改變這點。
+Mac使用者介面標準為右鍵(或 control-click)//總是// 執行文字功能表。您可使用ToolPalette面板改變這點。
 
 <--
