@@ -1,5 +1,5 @@
 ====== Using Blocks ======
-The basics of blocks are the same in Rhino 4 and 5. However, Rhino 5 offers additional features and commands that you will find [[http://www.rhino3d.com/new/large|here.]]
+The basics of blocks are the same in Rhino 4 and 5. However, Rhino 5 offers additional features and commands that you will find [[http://www.rhino3d.com/new/large|here]].
  
 > **Summary:** //Blocks provide a way of managing repeated objects in a file.//
 
@@ -12,7 +12,7 @@ The basics of blocks are the same in Rhino 4 and 5. However, Rhino 5 offers addi
 =====How blocks work:=====
 When you make a block in Rhino from geometry in the current file with the [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/block.htm|Block]] command, Rhino replaces the geometry you selected with a block //instance//. It saves the block definition (the geometry you selected to define the block) in the file. You can insert as many instances of this definition as needed with the [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/insert.htm|Insert]] command. Existing block definitions available for inserting are on a drop down-list in the [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/insert.htm|Insert]] dialog box.
 
-If you insert another 3dm file as a block instance, a similar thing happens - the block definition is sucked into the current file and saved with it. What you see on screen is an //instance// of geometry. The difference, of course, is that the definition refers back to the external file and can be updated as well as any instances that are placed if the external file is changed. This is done via [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/blockmanager.htm|BlockManager]].
+If you insert another 3dm file as a block instance, a similar thing happens. The block definition is sucked into the current file and saved with it. What you see on screen is an //instance// of geometry. The difference, of course, is that the definition refers back to the external file and can be updated as well as any instances that are placed if the external file is changed. This is done via [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/blockmanager.htm|BlockManager]].
 
 In both cases, there need not be any actual instances placed in the file for the block definition to exist in the file. This is why you sometimes have trouble deleting layers. If a block definition uses the layer, you cannot delete it. This can happen when all instances of a block have been deleted. Use the [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/purge.htm|Purge]] command to get rid of unused block definitions.
 
@@ -25,7 +25,7 @@ To update all block instances of a particular block in the file, you need to red
 
 ====An example to try====
   - **//Make a box//** and use the [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/block.htm|Block]] command to define a block. 
-  - Call it **Box1**. Put the insertion point at one corner of the box.  \\ When this is done, the box is no longer a box. It looks like a box, but if you select it and look at [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/properties.htm|Properties]] > Details, you will see that it is a block instance. 
+  - Call it **Box1**. \\ Put the insertion point at one corner of the box.  \\ When this is done, the box is no longer a box. It looks like a box, but if you select it and look at [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/properties.htm|Properties]] > Details, you will see that it is a block instance. 
   - [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/explode.htm|Explode]] the block. 
   - Check [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/properties.htm|Properties]] again. \\ The box is a box again and has nothing to do with the block called **Box1**. 
   - Delete the box. 
@@ -35,7 +35,7 @@ To update all block instances of a particular block in the file, you need to red
 
 **//Redefine the Block in Rhino 4://** 
   - Select one of the instances of **Box1**.
-  -  [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/explode.htm|Explode]] it to return in to being a normal box. 
+  - [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/explode.htm|Explode]] it to return in to being a normal box. 
   - [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/fillet.htm|Fillet]] the edges of the box. 
   - Now start the [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/block.htm|Block]] command.
   - Select the filleted box and choose an insertion point. 
