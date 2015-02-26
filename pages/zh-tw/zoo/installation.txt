@@ -42,14 +42,14 @@ Zoo是在Rhino用戶電腦端路由器的另外一邊，Rhino用戶端電腦可�
 **設置DNS：**
 
     -確認每個用戶端的網域名稱。在"我的電腦"按右鍵，選擇內容 (Properties)。網域名稱在系統內容對話框的電腦名稱內。
-    -在您的網路主要DNS伺服器上，建立一個新的TXT檔格式如**Zoo4=<hostname>** ，<hostname>就是[[rhino:netbios|NetBIOS]] 的主機名稱。舉例來說，如果一個完全限定的主機名稱是"ZooServer.bcn.es.mycorp.com"，而網域是"bcn.es.mycorp.com"，那麼[[rhino:netbios|NetBIOS]]主機名稱為**ZooServer**。
+    -在您的網路主要DNS伺服器上，建立一個新的TXT檔格式如**Zoo4=<hostname>** ，<hostname>就是[[zh-tw:rhino:netbios|NetBIOS]] 的主機名稱。舉例來說，如果一個完全限定的主機名稱是"ZooServer.bcn.es.mycorp.com"，而網域是"bcn.es.mycorp.com"，那麼[[zh-tw:rhino:netbios|NetBIOS]]主機名稱為**ZooServer**。
     -在用戶端利用**[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zoo Bonus Tools]]**的**ZooDnsResolver**工具，來測試DNS的配置。
 
 **若要在每台電腦上設置登錄碼：**
 
     - 在每個裝有Rhino 4.0的電腦上建立以下登錄碼，如果電腦裡還沒有的話：**HKEY_LOCAL_MACHINE\Software\McNeel\RhinoLM**
     -在**RhinoLM**下建立新的**String Value**命名為**zoo4**。
-    -將zoo4的資料設置為Netbios主機名稱。假如完全限定的主機名稱是"ZooServer.bcn.es.mycorp.com"，網域的名稱是"ben.es.mycorp.com",那麼[[rhino:netbios|NetBIOS]]的主機名稱是**ZooServer**。
+    -將zoo4的資料設置為Netbios主機名稱。假如完全限定的主機名稱是"ZooServer.bcn.es.mycorp.com"，網域的名稱是"ben.es.mycorp.com",那麼[[zh-tw:rhino:netbios|NetBIOS]]的主機名稱是**ZooServer**。
     -利用**[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zoo Bonus Tools]]**的**SetZooServer"工具，建立登錄碼。
 
 <code>
@@ -73,7 +73,7 @@ HKEY_LOCAL_MACHINE\Software\WOW6432node\McNeel\RhinoLM
   *Zoo不是為了在WAN上使用而設計，有些人能夠調整網路位置的設定並讓zoo可以運作。然而我們尚未對那樣的配置進行測試或是認證。
     * 以下是基本需求：
       *請確認所有電腦都在同項windows網域底下。
-      *<color red>不推薦：</color>在所有防火牆，打開UDP的137及138埠，還有TCP的139埠。 <color red>請注意，這是一個很大的安全性漏洞。</color>，我們並不推薦對網際網路開啟這些埠。想了解更多詳情，請在網路上搜尋"[[rhino:netbios|NetBIOS]] 安全性漏洞"
+      *<color red>不推薦：</color>在所有防火牆，打開UDP的137及138埠，還有TCP的139埠。 <color red>請注意，這是一個很大的安全性漏洞。</color>，我們並不推薦對網際網路開啟這些埠。想了解更多詳情，請在網路上搜尋"[[zh-tw:rhino:netbios|NetBIOS]] 安全性漏洞"
   *我們建議將VPN分配到每台電腦唯一的ip位置。
   *Zoo可能無法與網路位置轉譯 (NAT)相容，我們尚未做詳盡的測試來證明其是否有效。
   *確認只有一個zoo在網域上運作。大部分的問題都是因為有另外一個測試的Zoo(有時是在試圖執行Rhino的同一台電腦上)，才引起問題 (mailshot collisions)
