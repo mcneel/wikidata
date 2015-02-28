@@ -1,0 +1,28 @@
+======"CD Key addition request denied by the server"錯誤======
+>**產品：**[[zh-tw:zoo:zoo4|Zoo 4.0]]
+>**摘要：**"CD Key addition request denied by the server"錯誤
+
+=====問題=====
+我們有一位從zoo伺服器獲得授權的使用者。 他能夠登出授權並在裝置外工作，然而等到他嘗試重新登入授權，卻得到以下錯誤訊息：
+
+//CCD Key addition request denied by the server. Contact your system administrator.//
+
+{{:zoo:zoo_checkin_failed.jpg|}}
+
+以前不曾碰上這樣的問題，我參考了疑難排除，但找不到解決方法。
+
+=====答案=====
+出現此錯誤可能是幾個原因： 
+
+  - Zoo伺服器的授權登出未啟用，如果並沒有啟用，那就無法登入授權。
+  - 授權登出有可能在Zoo控制台手動勾選，因此Zoo並不知道授權被登出。
+  - 系統只有一個獨立授權。當你執行CheckInLicense，Zoo會嘗試將CD Key加入授權區，但因為授權已經存在所以執行失敗。
+
+查看Zoo控制台看看出問題的工作站是否登出授權，如果沒有的話，您需要刪除Rhino 授權CD Key，Rhino系統資料夾裡的**RHINO.KEY**，接著重新啟動Rhino。
+
+如果Zoo的授權仍是登出，那麼參考[[zh-tw:zoo:troubleshooting|Zoo疑難排除]]技巧查看工作站的哪些東西已經被改變了。
+
+
+\\
+
+{{tag>Zoo4}}
