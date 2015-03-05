@@ -1,0 +1,131 @@
+====== 自動化安裝Rhino 5.0 ======
+=====安裝Rhinoceros=====
+  * [[#網域服務或SMS的MSI佈署]]
+  * [[#Rhino 5.0腳本安裝(批次檔)|Rhino 5.0腳本化安裝]]
+  * [[#Rhino 5.0腳本安裝 (INI檔)|INI檔執行Rhino 5.0腳本化安裝]]
+  * [[zh-tw:rhino:debuginstaller|Rhino 5.0 安裝過程中診斷錯誤]]
+  * [[#Rhino 5.0 安裝 - 指定一個Zoo的伺服器]]
+  * [[zh-tw:rhino:installrhi|為所有使用這安裝RHI檔]]
+
+======Rhino 5.0網域服務或SMS的MSI佈署======
+==== 概要 ====
+這些操作說明提供給想要利用網域服務(Active Directory)或SMS佈署Rhino 5.0的系統管理員。
+
+這些技術也適合於從含有自訂Setup.ini檔的資料夾中執行MSI的自動安裝，不需要網域服務(Active Directory)、SMS或其他佈署工具。
+
+=====系統必備元件=====
+Rhino 5.0需要[[http://www.microsoft.com/zh-tw/download/details.aspx?id=17718|Microsoft DotNet Full Framework]] 在目標系統上完成安裝。安裝程式在DVD的 Installers\Prerequisites 資料夾裡。 如果使用者從下載檔案安裝，請按照以下說明下載5.0[[http://wiki.mcneel.com/zh-tw/rhino/rhino5/manual_extract_from_file|Rhino 5.0 EXE並解壓縮到另一個資料夾]]。
+
+=====佈署準備=====
+   - 編輯**Setup.ini**檔，並放置在您正安裝的MSI檔。 **註**#符號之後的所有字元都將被安裝程式忽略，就算#出現在一行的中間也一樣。
+
+=====佈署配置=====
+  - 打開**Active Directory Users & Computers**
+  - 於那些將會收到Rhino 5.0的使用者或電腦上的群組或組織單位名稱上，按右鍵，選擇Properties。
+  - 於群組原則選項卡 (Group Policy tab)加入新的群組原則物件**Install Rhino 5.0**
+  - 選擇**Install Rhino 5.0** 群組原則物件，再按**Edit...**
+  -確定您將會在每台電腦或是為每個使用者安裝 (詳讀群組原則來決定哪個方法最適合)
+  - 在使用者配置或電腦配置(取決您上一步的決定)，展開**Sofrware Settings**，並在**Software installation**按右鍵，接著按**New -> Package**。
+  - 選擇**S:\Rhino 5.0\rh50.msi**進行安裝。
+  - 在佈署軟體對話框中，選擇**Assigned**，然後按OK。
+  - 在右邊窗格中的Rhino 5.0按右鍵，選擇**Properties**。
+  - 選擇 **Install this application at logon checkbox.** (或適合貴單位的自訂佈署選項)
+  - 重複6-10來佈署**HelpMedia.msi**以及**LanguagePack_en-us.msi** (加上其餘需要的語言)
+
+======Rhino 5.0腳本安裝 (批次檔)======
+要安裝使用CD-key獨立授權英語支援Rhino 5.0 32位元版，"AAAABBBBCCCCDDDDEEEE"，執行：
+
+<code>
+msiexec.exe /i"D:\Installers\setup_x86_en-us.msi" INSTALLDIR="C:\Program Files (x86)\Rhinoceros 5" RMA_CDKEY=AAAABBBBCCCCDDDDEEEE INSTALL_EN=1
+ 
+</code>
+ 
+要安裝使用CD-key獨立授權英語、法語及德語支援Rhino 5.0 64位元版，"RH50GBG8L8G689AA29898UE8"，執行：
+ 
+<code>
+msiexec.exe /i"D:\Installers\setup_x64_en-us.msi" INSTALLDIR="C:\Program Files\Rhinoceros 5 (64-bit)" RMA_CDKEY=AAAABBBBCCCCDDDDEEEE INSTALL_EN=1 INSTALL_DE=1 INSTALL_FR=1
+ 
+</code>
+     
+**靜默安裝：**要安裝無須任何使用者介面，msiexec支援幾種選項。 參見：用/q指令打開微軟[[http://technet.microsoft.com/zh-tw/library/cc759262(v=ws.10).aspx|Msiexec 命令列選項檔]] 詳情。
+
+**註：** 32位元及64位元版本Rhino 應該安裝在單獨的目錄中。
+這些參數與其他可能的解釋，參見**[[rhino:automatedinstalls|編輯 Rhino4Setup.ini]]**
+
+======Rhino 5.0腳本安裝 (INI檔)======
+-編輯DVD安裝資料夾裡的**Setup.ini**。如果從下載檔案執行安裝，請按照以下說明[[http://wiki.mcneel.com/zh-tw/rhino/rhino5/manual_extract_from_file|並將下載的Rhino 5 EXE解壓縮至資料夾]] 。將您想要設置至安裝過程的參數裡的#符號都刪除。
+
+**註：**#符號之後的所有字元都將被安裝程式忽略，就算#出現在一行的中間也一樣。 更多關於配置的詳情，參見**[[zh-tw:rhino:installingrhio:5.0:setupini|編輯Setup.ini]]**。
+
+- 安裝32位元及64位元的Rhino，您必須重新配置setup.ini檔至不同路徑，將它們安裝在同一資料夾將會造成問題。
+- 啟動MSI檔，它會自動找到同資料夾裡的INI檔，讀取其參數並執行靜默安裝。
+
+**示例批次檔：**\\
+**註：**這將安裝32位元及64位元的Rhino 5.0英語版及說明檔，假設您從Rhino 5.0 DVD裡複製安裝資料夾至C:\Temp\Installers，如果需要請編輯**setup.ini**，並按照以下詳情做批次檔：
+<code>
+
+msiexec /i C:\Temp\Installers\rhino5setup_en-us_x64.msi /qb
+msiexec /i C:\Temp\Installers\rhino5setup_en-us_x86.msi /qb
+msiexec /i C:\Temp\Installers\LanguagePack_en-us.msi /qb
+msiexec /i C:\Temp\Installers\HelpMedia.msi /qb
+
+</code>
+
+======沒有語言包的Rhino 5 不完整安裝 ======
+您缺少範本、工具列或是外掛程式? 這是因為沒有從CD裡安裝好，或者是MSI腳本裡有錯誤。
+
+如果您用以上MSI腳本安裝Rhino，卻忘記了語言包的指令行，您需要在系統上執行MSI。就在Rhino 5 CD的安裝程式資料夾中。
+
+要確認語言支援已經安裝，請在以下位置尋找當地語化、外掛及UI資料夾：
+C:\Users\<login>\AppData\Roaming\McNeel\Rhinoceros\5.0 
+
+如果找不到這些資料夾，或是已經開啟Rhino，您會發現沒有工具列、範本與說明檔。 要修復此問題請依照以下指示：
+     -執行MSI的語言包。
+     - 打開Rhino並鍵入**ToolbarReset**。 
+     - 關閉並重新啟動Rhino，這將會該計畫從註冊表中刪除，重新開啟將可以重置缺少的元件。
+
+如果沒有成功，接著：
+  - 開啟控制台。
+  - 到程式和功能
+  - 找到Rhino語言包的入口，如：**Rhinoceros 5 Language Pack Installer (fr-FR)**
+  - 按右鍵並選取**change**
+  -重新啟動Rhino。
+
+======定位MSI語言包======
+  - 找到Rhino CD。如果您是從下載檔案安裝，請按照以下說明[[http://wiki.mcneel.com/zh-tw/rhino/rhino5/manual_extract_from_file|並將下載的Rhino 5 EXE解壓縮至資料夾]]。
+  - 瀏覽至安裝資料夾
+  - 執行LanguagePack_XX-XX.msi
+ 
+安裝語言包之後：
+  -開啟Rhino 5。
+  - 鍵入**ToolbarReset**
+  - 關閉再開啟Rhino。
+現在應該已經載入範本
+如果沒有成功，接著：
+  - 開啟控制台。
+  - 到程式和功能
+  - 找到Rhino語言包的入口，如：**Rhinoceros 5 Language Pack Installer (fr-FR)**
+  - 按右鍵並選擇**change**
+  -重新啟動Rhino。
+
+======Rhino 5.0 安裝 - 指定一個Zoo的伺服器======
+若要在安裝過程中指定一個Zoo伺服器，將此行添加到您的 setup.ini 檔案：
+
+<code>
+ZOO_SERVER=host.domain.com # 完全符合的網域名稱或 IP 位址。
+</code>
+
+或是 
+
+在命令列中傳遞 ZOO_SERVER 屬性：
+<code>
+ZOO_SERVER=host.domain.com
+</code>
+
+或是
+
+[[zh-tw:zoo:findzooserver#使用DNS|設定DNS條目]]
+
+\\
+
+{{tag>Zoo5}}
