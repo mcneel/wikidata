@@ -1,0 +1,116 @@
+======如何為自動部署的Rhino 4.0提供參數======
+>**註：**本文只針對Rhino 4.0。[[zh-tw:rhino:installingrhino:5.0#rhino_50_install_with_script_and_ini_file|關於Rhino 5版的方法在此]].
+
+
+
+
+
+
+======如何為自動安裝編輯Rhino 4.0 設定.INI檔======
+在此頁底部顯示從ActiveDirectory、SMS或經由批次檔安裝Rhino 4.0時所用的Rhino4Setup.INI檔文本。請參閱**[[InstallingRhino.|安裝 Rhino]]**
+
+從Rhino 4.0 CD內的[[zh-tw:rhino:rhinoceros|RhinoCeros]]資料夾，將可以得到此ini檔的最新副本[[http://wiki.mcneel.com/_media/legacy/en/Rhino4Setup.zip|Rhino4Setup.ini]]。
+
+用文字編輯器如NotePad來編輯此.INI檔。
+
+大寫部分(MSI 屬性)是Rhino安裝程式能夠辨識的特殊關鍵字 。將其中一個送到MSI安裝程式，刪除開頭的#符號，並且將內容適當的放置在=(符號)的右邊。 如果您將使用本頁底部的檔案，會影響此安裝的唯一參數會是"INSTALL_EN=1" 及 "RMA_CDKEY=" 。(請注意，您需要將"RMA_CDKEY="序號前的#刪除)
+
+=====參數=====
+AUTOINSTALL=1 - 告訴安裝程式無需任何問題或對話，就進行自動安裝。 不然對話框會跳出，並填進其他參數。
+
+資料夾="C:\Program Files\[[rhino:rhinoceros|RhinoCeros]] 4.0"   -  指定要安裝的資料夾，可以在任何位置。 如果路徑包含空格則必須用引號"括住。
+
+RMA_CDKEY=AAAA-BBBB-CCCC-DDDD-EEEE - 提供安裝程式的CD-Key。
+用於安裝作為獨立節點。 沒有虛線也可以輸入CD-Key，開頭是否包含RH-40都可以。
+
+INSTALL_EN=1   -  安裝英語語言支援--支援Rhino在英語環境中操作，包括英語說明、教程及範例等等。
+
+=====可選參數==
+WORKGROUP_NODE=1  -  RMA_CDKEY的替代輸入，當您希望每次開啟，工作站都從Zoo授權管理員 (www.rhino3d.com/zoo.htm) 取得Rhino CD-Key的時候。
+
+USERNAME="Rodney Dangerfield"
+
+COMPANYNAME="Universal Pictures"
+
+INSTALL_XX=1   -  Install support for language XX
+
+    
+     #############################################################
+     # Configuration file for installation of Rhino 4.0.
+     # Text following a pound sign (#) on a line are ignored when this file is read.
+     #
+     # Empty values are also ignored.
+     #
+     # For details on using this file, please visit
+     # [[rhino:installingrhino|InstallingRhino]]
+     #
+     #
+     #############################################################
+     # AUTOINSTALL = 0 # Interactive installation (default)
+     # AUTOINSTALL = 1 # Silent Installation
+     
+     #############################################################
+     #Installation directory:  (default is C:\Program Files\[[rhino:rhinoceros|RhinoCeros]] 4.0)
+     # FOLDER = C:\Program Files\[[rhino:rhinoceros|RhinoCeros]] 4.0
+     
+     #############################################################
+     # License Details:
+     # WORKGROUP_NODE=1     # Install so Rhino uses Zoo license manager
+     # WORKGROUP_NODE=0     # Install as stand-alone node. RMA_CDKEY is required.
+     # RMA_CDKEY=XXXX-XXXX-XXXX-XXXX-XXXX # Your CD-Key
+     # RMA_VALIDATION_CODE=____-____-____-____-____ # Your Validation Code, obtained from https://www.mcneel.com/validate/rhino/
+     
+     #############################################################
+     #User and company information:   (default is information from Windows)
+     # USERNAME=Joe Smith
+     # COMPANYNAME=Acme Construction, Inc.
+     
+     #############################################################
+     # Language Support:
+     # Uncomment one or more of the following lines
+     # to install language support for the language.
+     
+     #English:
+      INSTALL_EN = 1   # Install English Language support
+     # INSTALL_EN = 0  # Do NOT Install English Language support
+     
+     #French:
+     # INSTALL_FR = 1   # Install French Language support
+     # INSTALL_FR = 0  # Do NOT Install French Language support
+     
+     #Spanish:
+     # INSTALL_ES = 1   # Install Spanish Language support
+     # INSTALL_ES = 0  # Do NOT Install Spanish Language support
+     
+     #Italian:
+     # INSTALL_IT = 1   # Install Italian Language support
+     # INSTALL_IT = 0  # Do NOT Install Italian Language support
+     
+     #German:
+     # INSTALL_DE = 1   # Install German Language support
+     # INSTALL_DE = 0  # Do NOT Install German Language support
+     
+     #Czech:
+     # INSTALL_CS = 1   # Install Czech Language support
+     # INSTALL_CS = 0  # Do NOT Install Czech Language support
+     
+     #Polish:
+     # INSTALL_PL = 1   # Install Polish Language support
+     # INSTALL_PL = 0  # Do NOT Install Polish Language support
+     
+     #Simplified Chinese:
+     # INSTALL_CN = 1   # Install Simplified Chinese Language support
+     # INSTALL_CN = 0  # Do NOT Install Simplified Chinese Language support
+     
+     #Traditional Chinese:
+     # INSTALL_TW = 1   # Install Traditional Chinese Language support
+     # INSTALL_TW = 0  # Do NOT Install Traditional Chinese Language support
+     
+     #Korean
+     # INSTALL_KO = 1   # Install Korean Language support
+     # INSTALL_KO = 0  # Do NOT Install Korean Language support
+     
+     #Japanese
+     # INSTALL_JA = 1   # Install Japanese Language support
+     # INSTALL_JA = 0  # Do NOT Install Japanese Language support
+     

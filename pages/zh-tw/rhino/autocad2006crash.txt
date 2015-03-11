@@ -1,0 +1,23 @@
+======瀏覽DWG檔案的時候當機======
+
+Rhino 4.0 及32位元Rhino 5在嘗試在.dwg檔案中執行開啟、插入、匯入、儲存檔案、另存新檔或是匯出等指令時當機。
+
+======原因======
+
+您的電腦安裝的是
+  * 64位元Windows Vista或64位元Windows 7。 
+  * AutoCAD2005、2006或2007 (2008年以前的AutoCAD版本無法偵測作業系統的模式而安裝為32位元應用程式。)
+
+AutoCAD2005、2006、2007安裝一個名為**AcSignlcon.dll**的外殼擴展程式。此程式從Rhino打開檔案的對話框中載入，常常因為在搜尋**.dwg**檔的時候導致Rhino當機。
+
+===== 解決方式：=====
+
+停用AcSignlcon.dll 外殼擴展程式：
+
+  - 下載 {{:rhino:disableacsignicon.zip|DisableAcSignIcon.zip}}
+  - 將壓縮檔解開成DisableAcSignIcon.reg
+  - 雙點擊DisableAcSignlcon.reg，並按照提示操作，允許此.reg檔修改您電腦上的設置。
+
+=====其他參考：=====
+
+[[rhino:acercomputerfileopensavedialogcrash|有關其他shell擴展程式導致檔案開啟對話知詳情，請按此。]]
