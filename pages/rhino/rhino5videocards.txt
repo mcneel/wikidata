@@ -1,28 +1,94 @@
 ====== Video Card Recommendations for Rhino 5======
+> Updated 13 March 2015
+> **Experiencing Display Problems?** Use the [[rhino:5:video:troubleshooting| Video Troubleshooter]].
 
-**Note: We do not make any specific hardware recommendations or comparisons.**\\
-Also see these pages:
-  * [[http://wiki.mcneel.com/rhino/hardwarebaseline|Hardware Guidelines for Rhinoceros 5]]
+
+McNeel **does not endorse** specific hardware, nor do we make comparisons.
+Our users often discuss video cards and drivers:
   * [[http://discourse.mcneel.com/t/holomark-2-released/8040|System Configuration Benchmarks]]
+  * [[http://discourse.mcneel.com/c/rhino-for-windows/hardware-recommendations|Hardware Recommendations by Users]]
 
-> Note: If you are experiencing video trouble with your current computer try the [[rhino:5:video:troubleshooting| Video Troubleshooter]] to fix the problem.
+Other hardware articles:
 
-===== General Video Requirements =====
-> Note: updated 13 March 2015
+  * [[http://wiki.mcneel.com/rhino/hardwarebaseline|Rhino System Requirements]]
+  * [[http://wiki.mcneel.com/rhino/videocards|The good and bad of specific video cards]]
 
-Rhino has a fixed set of hardware requirements, and although some hardware configurations may work or perform better/worse than others, we believe that Rhino is flexible enough to run on almost any computer system you can buy today. Some of Rhino’s latest display features will not work or underperform on low-end computers or **inferior video cards like Intel pre-HD3000 models**, but that will generally not prevent you from getting your work done. \\
-As of Rhino V5 SR11, Intel HD3000 and newer chips should work. They will not have any accelerated performance, but the V5 display features should work. This includes 13" Apple MacBooks and Microsoft Surface Pro tablets with the newer Intel graphics chips.\\
+-----
+===== General OpenGL Requirements =====
 
-Rhino makes liberal use of the **OpenGL graphics** system within Windows. Most graphics cards on the market use DirectX and are designed for “game” usage. Many have spotty support for OpenGL with varying degrees of success. The best cards for Rhino are designed for “workstation graphics” and place a high emphasis on robust OpenGL support. That said, even a good card running bad drivers is a problem. **Keep your display driver up to date!**\\
-
-<color red> **Warning:**</color> Not all drivers create a Windows System Restore Point before installing. In the event the new drivers mess up your Windows configuration, it is **good insurance** to make a **System Restore Point** before updating any critical Windows system component.
+Rhino uses **OpenGL** to display your model in the viewports. The best OpenGL cards for Rhino are designed for “workstation graphics”. We recommend cards with as much video memory as possible. OpenGL card manufacturers regularly publish new drivers. These new drivers always fix known problems, and sometimes introduce new ones. We recommend you **keep your display driver up to date.**
 
   * Rhino V4 requires OpenGL version 1.1
   * Rhino V5 requires OpenGL version 2.0 and Shader version 1.2
 
-Notes from conversations with Jeff Lasor, Rhino Display/OpenGL Programmer
+If you have two video cards, please read about [[http://wiki.mcneel.com/rhino/twodisplayadapters|using Rhino with two video cards]].
 
-===== Performance Benchmarks =====
+
+-----
+===== Updating Video Drivers =====
+<color red> **Warning:**</color> We recommend you create a system restore point before updating your drivers.
+
+  * [[http://wiki.mcneel.com/rhino/nvidiainfo|nVIDIA Quadro]] (make sure you have driver version 340.66 or newer)
+  * [[[[http://www.nvidia.com/Download/index.aspx?lang=en-us|Other nVIDIA cards]]
+  * [[http://support.amd.com/us/Pages/AMDSupportHub.aspx|AMD and ATI cards]] 
+
+Do not rely on automatic updates from Windows. Download directly from the manufacture's web site.
+
+-----
+===== Manufacturer Information =====
+==== Intel Graphics Cards ====
+Rhino 5 SR11 runs well on **Intel HD3000 and newer** chipsets. Common hardware that includes these newer chipsets are 13" Apple MacBooks and Microsoft Surface Pro tablets.
+
+==== Pre-HD3000 Intel Graphics Cards ====
+Pre-HD3000 Intel graphics chips are **not recommended**
+
+Rhino runs using software emulation on these cards, and may not work properly if you enable hardware acceleration.
+
+To run Rhino with hardware acceleration:
+
+   - In Rhino, Select the Tools menu, then click Options.
+   - In the Options dialog box, select the OpenGL tab.
+
+{{:rhino:rhino_opengl_options.png?400|}}
+
+If after testing, your Rhino performance is better than when it is un-check (Software Emulation mode), keep it checked.
+Many Rhino 5 features use OpenGL like shaded or rendered display mode and analysis modes.
+The performance will not be great using those new features but they may work ok, which might be more desirable than not working at all.
+
+==== nVIDIA Quadro cards ====
+
+These are high-end cards for CAD.\\
+Be sure you are running driver version **340.66** or newer.\\
+[[http://wiki.mcneel.com/rhino/nvidiainfo|More information]]
+
+
+
+==== Nvidia GeForce ====
+
+The Nvidia GeForce line of GT and GTX line of video cards work well with Rhino.
+
+The GT 200's and 300/s seem quite fast.  nVIDIA FERMI-based GeForce cards (ie. GeForce FX 400 and 500 series) do work, but are not showing the performance increase we would expect from the more expensive cards. In fact, in some cases they have been slower then the 200 or 300 series cards.
+
+
+==== ATI/AMD ====
+**We discourage use of AMD Radeon cards**\\
+AMD Radeon HD cards are currently problematic for Rhino 5. They were intended for DirectX graphics only. Video drivers from AMD for the Radeon cards after version 14.4 (December 2013) cause strange artifacts in shaded display modes when Anti-aliasing is enabled.\\
+\\
+If you have a Radeon, use the older drivers or turn off antialiasing.\\
+\\
+The FirePro v7900 and v5900 cards are really very good, but their anti-aliasing is not as good as Nvidia.
+
+
+==== FireGL 5800/7800/8800 ====
+Both of these cards are nice. The 5800 is on a bit of the low-end for
+FirePros, but it's still a good card. The 7800 is their mid-range FirePro, with the
+8800 being their high-end. 
+
+==== Crossfire ====
+Running two in Crossfire should only make things better...although I'm not sure if we will see the difference in Rhino.  Crossfire only really reveals itself when things are really pushing the card, like high resolution packed graphics and games requiring high frame rates.   Rhino just doesn't work that way...most of time (like 95%) Rhino's display just sits idle, doing nothing.
+
+-----
+===== About Performance Benchmarks =====
 Driver writers spend months fine tuning their code in order to get certain benchmarks to yield better results. A given benchmark doesn’t prove anything, all it proves is that that specific benchmark ran better or worse on a specific GPU.
 
 Benchmarks do not show real world usage or performance of the GPU. 
@@ -34,80 +100,3 @@ What about all of the other benchmarks where the card failed or was significantl
 Benchmarks are marketing tools, and are used to position a specific product so that it looks better than competitive products, and are not good measure of real world usage or performance. 
 
 **To get this kind of information, you need to participate in the user forums and get real user feedback and experience.** Consider posting a question to the [[http://discourse.mcneel.com/|Rhino User Forum]].
- 
-===== Pre-HD3000 Intel Graphics Cards and Rhino 5 =====
-**These cards are not recommended and you should avoid using them with Rhino.**
-
-If you already one of these cards, AND it’s the ONLY card in the system (i.e. not a hybrid) then we should encourage you to enable accelerated hardware modes and test. Rhino 5 may have disabled this setting automatically during installation.
-
-{{:rhino:rhino_opengl_options.png?400|}}
-
-//In Rhino, go to Tools-Options-OpenGL.//
-
-If after testing, your Rhino performance is better than when it is un-check (Software Emulation mode), keep it checked.
-Many Rhino 5 features use OpenGL like shaded or rendered display mode and analysis modes.
-The performance will not be great using those new features but they may work ok, which might be more desirable than not working at all.
-
-===== nVidia Quadro cards =====
-
-These are high end engineering level video cards. They recently fixed their drivers and good performance. \\
-Be sure you are running driver version **340.66** or newer.\\
-More information can be found here:
-http://wiki.mcneel.com/rhino/nvidiainfo
-
-
-===== Nvidia GeForce =====
-
-**The Nvidia GeForce line of GT and GTX line of video cards work well with Rhino**.
-
-The GT 200's and 300/s are based on an older chipset that is quite fast.  The new NVidia FERMI based GeForce cards (ie. GeForce FX 400 and 500 series) do work, but are not showing the performance increase we would expect from the more expensive cards. In fact, in some cases they have been slower then the 200 or 300 series cards. It seems clear Nvidia is intentionally slowing down OpenGL graphics on GeForce cards when they detect some specific OpenGL calls they (Nvidia) associate with CAD applications. Nvidia wants CAD users to run a Quadro.
-
-
-===== ATI Video =====
-AMD Radeon HD cards are currently problematic for V5. They were intended for DirectX graphics only. Video drivers from AMD for the Radeon cards after version 14.4 (December 2013) screw up Rhino shaded display modes when Antiailiasing is turned on. If you have a Radeon, use the older drivers or turn off antialiasing. So far, AMD does not seem interested in fixing the problem they introduced after 14.4.\\
-**We no longer recommend AMD Radeon cards**\\
-If you're shopping for a new system, avoid the AMD Radeon cards. The FirePro v7900 and v5900 cards are really very good, but their antiailiasing is not as good as Nvidia.
-http://wiki.mcneel.com/rhino/videocards
-
-
-===== FireGL 5800/7800/8800 =====
-Yes, both of these cards are nice. The 5800 is on a bit of the low-end for
-FirePros, but it's still a good card. I have one here, but haven't really
-put it through rigorous test. The 7800 is their mid-range FirePro, with the
-8800 being their high-end (which is what I have and use here). Since I don't
-own a 7800, I can only assume it's going to be good, but so far, nothing
-leads me to think it wouldn't work. 
-
-===== New Drivers=====
-Note: For **Nvidia Quadro users**, please see this support page: http://wiki.mcneel.com/rhino/nvidiainfo
-
-If you are using an nVidia Quadro, make sure the drivers are version 340.66 or higher.
-
-For updated nVidia drivers look [[http://www.nvidia.com/Download/index.aspx?lang=en-us
-|here.]]
-
-
-For updated AMD/ATI drivers, look [[http://support.amd.com/us/Pages/AMDSupportHub.aspx
-|here.]] 
-
-Also do not rely on automatic updates from the Windows Display Properties. Go directly to the manufacture's web site and download the update driver. Typically it is an EXE that you run when the download is complete. 
-
-Make it easy to find by downloading it to the Desktop. After it is installed, delete or move it to the Recycle Bin.
-
-<color red> **Warning:**</color> Not all drivers create a Windows System Restore Point before installing. In the event the new drivers mess up your Windows configuration, it is **good insurance** to make a **System Restore Point** before updating any critical Windows system component.
-===== Crossfire =====
-Running two in Crossfire should only make things better...although I'm not sure if we will see the difference in Rhino.  Crossfire only really reveals itself when things are really pushing the card, like high resolution packed graphics and games requiring high frame rates.   Rhino just doesn't work that way...most of time (like 95%) Rhino's display just sits idle, doing nothing.
-
-===== Video Memory===== 
-However, we will highly recommend getting a card with as much video memory as possible...that will help with V5. So if you have a choice between a card with 1GB or one with 2GB, go with the 2GB.
-===== Two Video Cards===== 
-More on two display adapters.
-http://wiki.mcneel.com/rhino/twodisplayadapters
-
-===== The Latest and Greatest =====  
-You may also want to ask the Rhino user base what type of card they are using with Rhino 5 WIP. You do that on the Discourse Discussion Forum, linked to the Support page:
-http://discourse.mcneel.com/c/rhino-for-windows/hardware-recommendations
-
-===== The Nitty Gritty =====  
-Here is a link to another Wiki page with details about specific video cards; both good and bad.
-http://wiki.mcneel.com/rhino/videocards
