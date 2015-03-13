@@ -8,8 +8,10 @@ Also see these pages:
 > Note: If you are experiencing video trouble with your current computer try the [[rhino:5:video:troubleshooting| Video Troubleshooter]] to fix the problem.
 
 ===== General Video Requirements =====
-Rhino has a fixed set of hardware requirements, and although some hardware configurations may work or perform better/worse than others, we believe that Rhino is flexible enough to run on almost any computer system you can buy today. Some of Rhino’s latest display features will not work or underperform on low-end computers or **inferior video cards like Intel (all models)**, but that will generally not prevent you from getting your work done. Unfortunately, the **13" Apple MacBook** computers including the **13" Retina**, have this problematic Intel HD graphics chip and should be avoided.\\
-The warning also includes **Microsoft's Surface and Surface Pro tablet/laptop** computer as they only include the Intel embedded graphics chip.\\
+> Note: updated 13 March 2015
+
+Rhino has a fixed set of hardware requirements, and although some hardware configurations may work or perform better/worse than others, we believe that Rhino is flexible enough to run on almost any computer system you can buy today. Some of Rhino’s latest display features will not work or underperform on low-end computers or **inferior video cards like Intel pre-HD3000 models**, but that will generally not prevent you from getting your work done. \\
+As of Rhino V5 SR11, Intel HD3000 and newer chips should work. They will not have any accelerated performance, but the V5 display features should work. This includes 13" Apple MacBooks and Microsoft Surface Pro tablets with the newer Intel graphics chips.\\
 
 Rhino makes liberal use of the **OpenGL graphics** system within Windows. Most graphics cards on the market use DirectX and are designed for “game” usage. Many have spotty support for OpenGL with varying degrees of success. The best cards for Rhino are designed for “workstation graphics” and place a high emphasis on robust OpenGL support. That said, even a good card running bad drivers is a problem. **Keep your display driver up to date!**\\
 
@@ -33,7 +35,7 @@ Benchmarks are marketing tools, and are used to position a specific product so t
 
 **To get this kind of information, you need to participate in the user forums and get real user feedback and experience.** Consider posting a question to the [[http://discourse.mcneel.com/|Rhino User Forum]].
  
-===== Intel Graphics Cards and Rhino 5 =====
+===== Pre-HD3000 Intel Graphics Cards and Rhino 5 =====
 **These cards are not recommended and you should avoid using them with Rhino.**
 
 If you already one of these cards, AND it’s the ONLY card in the system (i.e. not a hybrid) then we should encourage you to enable accelerated hardware modes and test. Rhino 5 may have disabled this setting automatically during installation.
@@ -48,22 +50,21 @@ The performance will not be great using those new features but they may work ok,
 
 ===== nVidia Quadro cards =====
 
-These are high end engineering level video cards. They recently fixed their drivers and strong performance. **We recommend these Quadro cards**.\\
+These are high end engineering level video cards. They recently fixed their drivers and good performance. \\
 Be sure you are running driver version **340.66** or newer.\\
 More information can be found here:
 http://wiki.mcneel.com/rhino/nvidiainfo
 
 
-
 ===== Nvidia GeForce =====
 
-**The Nvidia GeForce line of GT and GTX line of video cards work fine with Rhino**.
+**The Nvidia GeForce line of GT and GTX line of video cards work well with Rhino**.
 
 The GT 200's and 300/s are based on an older chipset that is quite fast.  The new NVidia FERMI based GeForce cards (ie. GeForce FX 400 and 500 series) do work, but are not showing the performance increase we would expect from the more expensive cards. In fact, in some cases they have been slower then the 200 or 300 series cards. It seems clear Nvidia is intentionally slowing down OpenGL graphics on GeForce cards when they detect some specific OpenGL calls they (Nvidia) associate with CAD applications. Nvidia wants CAD users to run a Quadro.
 
 
 ===== ATI Video =====
-AMD Radeon HD cards are currently problematic for V5. They were intended for DirectX graphics only. Video drivers from AMD for the Radeon cards after version 14.4 (December 2013) screw up Rhino shaded display modes when Antiailiasing is turned on. If you have a Radeon, use the older drivers. So far, AMD does not seem interested in fixing the problem they introduced after 14.4.\\
+AMD Radeon HD cards are currently problematic for V5. They were intended for DirectX graphics only. Video drivers from AMD for the Radeon cards after version 14.4 (December 2013) screw up Rhino shaded display modes when Antiailiasing is turned on. If you have a Radeon, use the older drivers or turn off antialiasing. So far, AMD does not seem interested in fixing the problem they introduced after 14.4.\\
 **We no longer recommend AMD Radeon cards**\\
 If you're shopping for a new system, avoid the AMD Radeon cards. The FirePro v7900 and v5900 cards are really very good, but their antiailiasing is not as good as Nvidia.
 http://wiki.mcneel.com/rhino/videocards
