@@ -1,0 +1,22 @@
+====== Error 1327 - Invalid Drive: ======
+> **摘要：** //如何修正 Error 1327 - Invalid Drive.//
+> **相关安装疑难排解：** //[[:zh:rhino:installproblems|Rhino 5 安装疑难排解]]//
+
+=====问题=====
+安装时有一个错误讯息为 “Error 1327. Invalid Drive (E:, F:, etc)“的错误
+
+=====产生原因====
+您的使用者账户设有一个或多个不存在的盘符下用于特定的文件夹，例如"我的文件夹"。
+
+=====答案=====
+  - 微软的开始键
+  - 输入 RegEdit 输入enter
+  - 寻找下列路径HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  - 由安装档案寻找错误提示错误的资料槽，变更至有效的盘符或者文件夹即可。
+  - 寻找下列路径HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+  - 由安装档案寻找错误提示错误的盘符，变更至有效的盘符或者文件夹即可。 
+
+**注意：**  这个变更登录资料的解决方式，若操作不正却很可能会造成您计算机严重的问题。因此，请您务必小心执行这些步骤。此外，您可以在修改之前，先备份登录档。如果发生问题，您可以还原回复。关于备份及还原登录档的更多讯息，您可以参考下列微软技术支持文章：
+[[http://support.microsoft.com/kb/322756|如何在 Windows XP 中备份及还原登录 ]]
+
+{{tag>rhino5installationerror_zh}}

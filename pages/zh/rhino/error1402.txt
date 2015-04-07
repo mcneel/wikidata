@@ -1,0 +1,34 @@
+====== Error 1402 or 1406 (Could not open key: UNKNOWN\Components) ======
+> **摘要：** //如何修复安装错误码 1402 或 1406 (Could not open key: UNKNOWN\Components).//
+> **相关安装疑难排解：** //[[:zh:rhino:installproblems|Rhino 5 安装疑难排解]]//
+
+=====问题=====
+若您看到错误讯息 “Could not open key: UNKNOWN\Components\(lots of letters and numbers).Error 1402.” 确认您有足够权限，请联络您的信息网管人员
+
+=====产生原因====
+一个或多个注册码无法写入 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components key 没有足够权限。
+
+=====答案=====
+**//解决方案1： //**
+在微软的开始表，在搜寻栏输入”CMD”。在”cmd.exe”上按右键然后选择”以使用者管理员权限执行”。复制下列内容并复制至cmd，按Enter。然后Rhino将可安装。
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//解决方案2：//**
+//警告：下列方式将编辑微软机码，若有错误可能会造成计算机无法开机，若您担心有相关问题产生，请直接联络McNeel技术人员服务。//
+  - 由微软的TechNet下载 [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] 并解压缩放在计算机桌面。(PsExec.exe 必需直接放在桌面上)。
+  - 在微软的开始表，在搜寻栏输入”CMD”。在”cmd.exe”上按右键然后选择”以使用者管理员权限执行”。
+  - 输入 CD %HOMEPATH%\Desktop，按 Enter，将路径切换到您的桌面。
+  - 在指令列输入：**psexec -i -d -s c:\windows\regedit.exe**这会导致 Windows 运行登录编辑程序使用系统账户将有比账户管理员更强大的权限。
+  - 寻找下列路径HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - 在**UserData**资料匣上按右键，然后点选**使用权限...**
+  - 在**权限**对话框选择**进阶**
+  - 确认在这个资料匣**Administrators**有**完全控制**权限，并且设定**Users**有**读取**权限。
+  - 选择**以可从此物件继承的权限项目取代所有子物件的权限项目**
+  - 点选两次**确定**以套用新的权限设定。
+  - 再次安装Rhino。
+
+
+{{tag>rhino5installationerror_zh}}
