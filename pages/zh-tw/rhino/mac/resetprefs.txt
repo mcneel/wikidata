@@ -1,7 +1,29 @@
-====== 重設Rhino Preferences ======
-下列是將您的Rhino preferences所有變更移除並重新設回預設值的方式。
+====== Rhino 偏好設定 ======
+以下是一些管理Rhino for Mac偏好設定的方式。
 
-  - **關閉** Rhino。
-  - 於應用程式下 > 工具程式資料匣中開啟終端機應用程式。 \\ 出現一個含有指令輸入列的視窗。
+==== 將您的Rhino偏好設定儲存備份 ====
+  - **離開** Rhino。
+  - 請到Finder，按住**Option**鍵並在功能表下的前往選擇 **資源庫**。
+  - 開啓**Preferences** 檔案夾。
+  - 尋找**com.mcneel.rhinoceros.plist**檔案。在檔案上按右鍵點選**製作替身**，這個複製檔案名稱為 **com.mcneel.rhinoceros.plist 替身**。
+
+==== 重設Rhino偏好設定 ====
+下列方式可移除所有你之前設定的Rhino偏好設定並重設回預設值。
+
+  - **離開** Rhino。
+  - 於應用程式下 > 工具程式資料匣中開啟終端機應用程式。\\ 出現一個含有指令輸入列的視窗。
   - 輸入 **defaults delete com.mcneel.rhinoceros** 並按Return。
+  - 離開終端機程式。
+
+==== 匯入備份的Rhino偏好設定 ====
+下列流程說明如何將備份好的Rhino偏好設定匯入取代目前的設定值。
+
+  - **離開** Rhino。
+  - 請到Finder，按住**Option**鍵並在功能表下的前往選擇 **資源庫**。
+  - 開啓**Preferences** 檔案夾。
+  - 尋找**com.mcneel.rhinoceros.plist**檔案。拖曳到垃圾桶。
+  - 重新命名您之前存好的偏好設定檔案為**com.mcneel.rhinoceros.plist**。
+    - 備註: 若您之前有將儲存好的檔案放在其他的檔案夾，需要先檔案拖曳回**資源庫**檔案夾。
+  - 於應用程式下 > 工具程式資料匣中開啟終端機應用程式。\\ 出現一個含有指令輸入列的視窗。
+  - 輸入**defaults read com.mcneel.rhinoceros**並按Return。終端機視窗將會出現很多輸出內容。
   - 離開終端機程式。
