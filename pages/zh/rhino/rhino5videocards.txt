@@ -1,0 +1,103 @@
+======Rhino 5 显示卡推荐======
+> 2015年3月13日更新
+>**遇到显示问题吗?** 请至[[zh:rhino:5:video:troubleshooting|显示疑难排除]]
+
+
+McNeel**不保证或推荐**特定硬件，也不做产品比较。
+我们的使用者经常讨论显示卡及驱动程序：
+  * [[http://discourse.mcneel.com/t/holomark-2-released/8040|系统配置基准]]
+  * [[http://discourse.mcneel.com/c/rhino-for-windows/hardware-recommendations|使用者推荐的硬件]]
+
+其他关于硬件的文章：
+
+  * [[http://wiki.mcneel.com/zh/rhino/hardwarebaseline|Rhino系统要求]]
+  * [[http://wiki.mcneel.com/zh/rhino/videocards|特定显示卡的优缺点]]
+
+-----
+===== 一般OpenGL的要求 =====
+
+Rhino利用**OpenGL**在作业视窗中显示您的模型。最好的Rhino OpenGL卡是专门为"工作站图形"设计的。 我们推荐尽可能多的显示卡记忆。 OpenGL显示卡厂商定期发布新的驱动程序。它们总是可以修正已知的问题，但是有时候也会产生新的问题，我们建议您**保持最新显示卡驱动程序**。
+
+  * Rhino V4需要OpenGL 1.1版
+  * Rhino V5需要OpenGL 2.0版以及Shader 1.2版。
+
+如果您有两张显示卡， 请阅读[[http://wiki.mcneel.com/zh/rhino/twodisplayadapters|使用两张显示卡的Rhino]]。
+
+
+-----
+=====更新显示卡驱动程序=====
+<color red> **警告:**</color> 我们建议您在更新驱动程序之前，先建立一个系统还原点。
+
+  * [[http://wiki.mcneel.com/zh/rhino/nvidiainfo|nVIDIA Quadro]] (确认您使用的是 340.66版或更新版本。)
+  * [[http://www.nvidia.com/Download/index.aspx?lang=zh|其他 nVIDIA 显示卡]]
+  * [[http://support.amd.com/us/Pages/AMDSupportHub.aspx|AMD 与 ATI 显示卡]] 
+
+不要依靠Windows的自动更新，请直接到厂商网站下载。
+
+-----
+=====厂商详情=====
+==== Intel 显示卡 ====
+Rhino 5 SR11 在 **Intel HD3000或更新**的芯片组上运作。常见包括这些较新芯片组的硬件为13吋Apple MacBooks以及Microsoft Furface Pro平板计算机。这些都不是高效能显示卡。
+
+
+==== Pre-HD3000 Intel 显示卡 ====
+**不建议使用**Pre-HD3000 Intel 显示芯片
+
+Rhino利用软件在这些显示卡上执行模拟，如果启用硬件加入可能无法正常工作。
+
+启用硬件加速下执行Rhino：
+
+   - 在Rhino环境下，选择工具功能表，然后选择选项(Option)。
+   - 在选项(Option)对话框，选择OpenGL。
+{{:zh_tw:rhino:opengl_option.jpg?400|}}
+
+
+如果测试之后，Rhino性能比还没勾选时更加(软件模拟模式 Software Emulation mode)，那么保持勾选。
+许多Rhino 5功能利用到OpenGL，比如上色或彩现显示模式，或是分析模式。
+利用这些新功能的时候，性能有可能不是特别强大但仍能正常运作，这比完全无法使用更好。
+
+==== nVIDIA Quadro 显示卡 ====
+
+这些是计算机辅助设计(CAD)的高端显示卡\\
+请确认您使用的是 **340.66**版或更新版本。\\
+[[http://wiki.mcneel.com/rhino/nvidiainfo|更多详情]]
+
+
+
+==== Nvidia GeForce ====
+
+Nvidia GeForce GT系列及GTX系列对于Rhino来说是运作良好的显示卡。
+
+GT 200及300似乎运作得很快。nVIDIA FERMI为基础的GeForce显示卡(如GeForce FX 400及500系列)也能运作，但并不因为它们价格较高而表现更高的性能。 事实上有时候他们比200或300系列的卡更慢。
+
+
+==== ATI/AMD ====
+**我们完全不推荐AMD Radeon 显示卡**\\
+对Rhino 5来说AMD Radeon HD显示卡是很大的问题。这些卡是针对DirectX图像所设计的。 14.4版(2013年12月)之后的驱动程序会在反锯齿功能启用时，在上色模式里显示出奇怪的物件形状。\\
+\\
+如果您使用的是Radeon，请安装旧版的驱动程序或是关闭反锯齿功能。
+\\
+FirePro v7900与v5900显示卡都非常的棒，但它们的反锯齿功能不如Nvidia。
+
+
+==== FireGL 5800/7800/8800 ====
+这些卡都很好， 5800就象是低端一点的FirePros，
+但仍旧是一张很好的显示卡。 
+7800大概是FirePro的中端卡，而8800则是最高级的。 
+
+==== Crossfire ====
+有两张Crossfire卡同时运作，性能应该是很棒的，但我不确定是否能在Rhino环境看到差异。 只有在高度使用的情况下才看得到Crossfire的高性能，比如高解析图形或者是需要极高画面播放格数的游戏。Rhino并不是那样运作的软件，95%的时间Rhino的显示处于闲置状态。
+
+-----
+=====关于性能基准=====
+驱动程序编写人员花上数个月的时间做微调，为的是达到某个基准(Benchmarks)并得到更好的效果。一个给定的基准并不能证明任何事情，只代表某个基准运作起来比特定的GPU更差或更好。
+
+基准(Benchmarks)也不能显现真实使用情况或是GPU的性能。 
+换句话说，如果某个游戏在某张显示卡/GPU上性能表现较好，那并不代表所有的游戏都会因为那张卡而展现更高的性能。 
+
+只是有可能达到了各项基准，或者是卡本身是比较好。
+那么其他达不到基准的卡呢? 
+
+基准是营销工具，用来定位特定产品，让它看起来比其他竞争产品还要强。这不是在现实世界中用来衡量或评估性能的标准。 
+
+**需要获得这类信息，您可以加入使用者论坛，并从真实使用者的反馈或经验中得到答案。** 欲张贴问题请至[[http://chinese.discourse.mcneel.com/|Rhino中文论坛]]。
