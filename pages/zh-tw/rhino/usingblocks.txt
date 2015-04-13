@@ -1,58 +1,83 @@
 ====== 使用圖塊 ======
-Rhino4與Rhino5的圖塊基本功能是一樣的，不過您還是可以在[[http://www.rhino3d.com/new/large|這裡]]找到Rhino5新增的圖塊功能與指令。
+Rhino 4與5的圖塊基本上是一樣的。但Rhino 5提供額外功能跟指令，可以在[[http://www.rhino3d.com/new/large|這裡]]找到。
  
-**簡介：** //圖塊可以用來管理檔案中重複出現的物件。//
+> **摘要:** //圖塊提供一個檔案中管理重複物件的方法。//
 
-=====使用圖塊的優點：=====
+=====使用圖塊的優點包括:=====
 
-**1.** 不論圖塊引例包含了多少複本都可以透過直接改變原本定義的幾何物件來變更這些圖塊引例及複本。
+  * 如果是更改定義圖塊幾何的圖塊引例，您可以更改任何數量的物件複本。
+  * 物件可以從外部檔進行更新。
+  *  重複單一定義引例並不會將檔案大小增加太多，因為只有一個實際定義保存在檔案裡。 所有引例都引用一個原始定義。 Rhino有一些簿記即顯示的技巧，在其他位置和方向做顯示。
 
-**2.** 可以透過外部檔案更新物件。
+=====圖塊如何運作:=====
+當您在Rhino從目前檔案中從幾何以[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/block.htm|Block]] 指令建立圖塊，Rhino會將以選的幾何換至為圖塊//引例//。 它將會在檔案中儲存圖塊定義 (您選取用來定義圖塊的幾何)。您可以用[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/insert.htm|Insert]]指令來插入任意數量的引例。
+已存在的圖塊定義可以從下拉清單中的[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/insert.htm|Insert]]來插入對話。
 
-**3.** 單一定義圖塊引例不論有多少複本都不會增加太多檔案容量，因為只有一個定義圖塊實際存在檔案中。所有的圖塊引例都是引用原始定義圖塊產生的。Rhino是透過標記與顯示技術來顯示出這些圖塊引例的定位方向。
+如果您插入另一個3dm檔案為圖塊引例，類似的事情將發生。 圖塊定義會被當前檔案儲存。 您在螢幕上看到的是幾何的//引例//。 不同在於如果定義追溯至外部檔，是可以被更新，就像外部檔有改變時，引例也跟著改變。 這可以通過[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/blockmanager.htm|BlockManager]]做到。
 
-=====圖塊如何運作：=====
-當您使用檔案中的幾何物件製作圖塊時(建立圖塊定義指令)，Rhino會以一個圖塊引例置換掉被選取的幾何物件。圖塊定義(被選取的幾何物件)將被儲存在檔案中。您可以使用插入指令依需求插入多個圖塊引例。在插入指令對話框的下拉式選單中可以選擇要插入的現有圖塊引例。
+在這兩種情況下，要讓圖塊定義存在檔案中並不需要放置任何實際的引例到檔案裡。這就是為什麼有時候刪除圖層會發生問題。 如果某圖塊定義用到了圖層，您沒有辦法刪除它。 當一個圖塊的所有引例被刪除時，就會出現這個狀況。請用 [[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/purge.htm|Purge]]指令來刪除所有未使用的圖塊定義。
 
-若您將其他3dm檔案插入為圖塊引例的話，會發生類似的情形─圖塊定義將被吸進目前的檔案並且一併被儲存起來。而您會在螢幕上看到由該幾何物件所定義的圖塊引例。當然，不同的是這個圖塊引例的定義是連結至外部檔案並且會隨著外部檔案的改變產生連動。這些設定可以透過[[rhino:blockmanager|圖塊管理員]]完成。
-
-(在這兩種情況下，檔案中的圖塊定義可以不必存有實際的圖塊引例。這也是為什麼有時會因為圖層中仍有圖塊定義而造成圖層無法刪除的問題。清除未使用的資訊指令可以將未使用的圖塊定義清除。)
-要更新特定圖塊定義的所有圖塊引例時，必須要重新定義這個圖塊。您可以先炸開圖塊並對幾何物件進行變更，再重新定義這個幾何物件為相同的圖塊名稱。重新定義時會彈出警告確認訊息。或者，您也可以直接將圖塊定義指定給別組幾何物件。
-
-====練習範例====
->  **//建立方塊//**並使用**建立圖塊定義**指令定義圖塊。將圖塊命名為//Box1//。將圖塊基準點設定在方塊物件的一角。設定完成後，這個方塊就不再是一般的方塊，當您點選這個看起來像方塊的物件後，在內容面板>物件>詳細資料中可以看到它現在是一個圖塊引例。
->  
->  **//炸開圖塊。//**再確認一次物件內容。這個方塊現在變回普通的方塊物件而且與圖塊//Box1//毫無關係。刪除這個方塊物件。接著請執行**插入**指令。在**插入**對話框中的下拉式選單內指定//Box1//。這個圖塊定義是剛才建立圖塊時產生的。以圖塊引例的方式將它插入後請再多複製幾個出來。
->  
->  **//在Rhino4中重新定義圖塊：//**選取//Box1//圖塊定義中的其中一個圖塊引例，**炸開**它讓它變成普通方塊物件。對這個方塊倒圓角。接著再執行**建立圖塊定義**指令並且選取圓角方塊及指定圖塊基準點。將圖塊定義名稱指定為Box1。所有屬於//Box1//圖塊定義的圖塊引例都會變成圓角方塊。指定新圖塊定義的圖塊基準點時若位置與原始位置不一樣的話，所有的圖塊引例將會產生位移。
->
->  **//在Rhino5中重新定義圖塊：//**您可以使用原地編輯圖塊指令。執行指令後請點選要編輯的圖塊。點選圖塊後會彈出圖塊編輯對話框。您可以新增或移除圖塊中的物件並且變更圖塊基準點。在這個狀態下也可以直接編輯圖塊內物件的幾何造型。編輯完按下確定後會關閉對話框，自動儲存並更新所有圖塊引例。若點擊"x"或按ESC鍵的話則會取消重新定義。
-
->  **//建立一個球體。//**執行**建立圖塊定義**後選取球體並且指定圖塊基準點。將圖塊名稱指定為//Box1//。所有的圓角方塊都會變成球體。
-\\ 
-=====外部連結圖塊=====
-圖塊定義若是以外部連結方式存在的話可以直接更改外部連結檔案再透過[[rhino:blockmanager|圖塊管理員]]更新圖塊定義。若圖塊定義來自外部連結檔案的話，請避免在變更外部連結檔案的資料夾絕對路徑後又對圖塊定義進行更新連動，但是外部連結檔案若是置入並連結至目前檔案中的圖塊定義，目前的檔案中會存有外部連結檔案的複本，所以當外部連結檔案的資料夾路徑被移動後，只要不進行更新連動的話，目前檔案中的複本是不會受到影響的。
+要針對檔案中某一圖塊更新所有圖塊引例，您需要重新定義圖塊。 
+[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/explode.htm|炸開]]圖塊引例。
+  - 對物件進行更改。
+  - 利用[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/block.htm|Block]] 指令重新阻止使用相同名稱的物件。 \\ 您將看到一個警告對話方塊，以確認對定義的更改。 
+  -  或是您可以利用不同一組物件來重新定義圖塊。
 
 
-====練習範例====
->  **建立方塊**，儲存檔案。另開新檔並執行**插入**指令，點擊//按這裡插入外部檔案//圖示並指定至剛才儲存的方塊檔案。點選插入為圖塊引例選項。
->  
->  **建立數個圖塊引例複本**，使用縮放、旋轉及移動。
->  
->  **編輯外部連結檔案** ，開啟先前儲存的方塊檔案並且對方塊倒圓角。再建立一顆球體。接著儲存檔案。 
->  
-> **回到有圖塊定義的檔案中**，執行[[rhino:blockmanager|圖塊管理員]]指令。您會在圖塊管理員對話框中看到剛才插入方塊檔案時建立的圖塊定義。點選這個圖塊定義並且點擊對話框右側的//__更新__//按鈕。
->  
->  **//檔案中所有的圖塊引例複本都將被更新為圓角方塊及球體。//**
->  
->  **關於圖層：**在所有的情況下，圖塊引例中包含的物件可能屬於不同圖層，當這些不同圖層的物件被定義在同一個圖塊中時，仍然會受到原屬圖層開關影響而讓該圖塊引例部份顯示或隱藏。但是，如果該圖塊引例所在的圖層被關閉的話，不論圖塊引例內物件的原屬圖層是什麼狀態都會全部被隱藏。
+==== 範例嘗試 ====
+  - **//做一個立方體//**並利用 [[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/block.htm|Block]] 指令來定義圖塊。 
+  - 將它命名為**Box1**。 \\ 將插入點放在框中的一角。 \\ 之後，這已經不是一個立方體，看起來像是，但如果將其選取並查看[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/properties.htm|屬性(Properties)]] > 詳情，您就會看到圖塊引例。 
+  - [[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/explode.htm|炸開]]圖塊。 
+  - 再次檢查[[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/properties.htm|屬性(Properties)]]。 \\ 已經變回立方體，而不是那個命名為**Box1**的圖塊。 
+  - 刪除立方體。 
+  - 現在請利用 [[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/insert.htm|Insert]] 指令。 
+  -  在下拉清單裡的[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/insert.htm|插入(Insert)]] 對話找到 **Box 1**. \\ 這就是當初建立圖塊時做的圖塊定義。  
+  - 將其作為圖塊引例並[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/insert.htm|插入(Insert)]] ，然後複製引例。 
 
-=====進階技巧=====
+**//在Rhino 4中重新定義圖塊://** 
+  - 選擇**Box1**其中一個引例。
+  - 將其[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/explode.htm|炸開]]還原為一個普通的立方體。 
+  - [[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/explode.htm|修剪(Fillet)]]立方體的邊緣。 
+  - 現在請利用 [[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/block.htm|Block]]指令。
+  - 選取修剪過的立方體並選擇一個插入點。 
+  - 選擇**Box1**為新圖塊的名字。 \\ Box1的所有引例現在都成為修剪過的立方體。\\ 它們有可能移動了如果您在新定義上選擇的插入點跟原始的不一樣。
 
-**[[developer:scriptsamples/superexplodeblock|SuperExplodeBlock Script]]**\\ 
-(在Rhino4時這個部份屬於[[http://wiki.mcneel.com/zh-tw/labs/home|Rhino Labs Tools]]但在Rhino5已經是內建指令。
+**//在Rhino 5中重新定義圖塊://** \\ 
+在Rhino 5 您可以使用[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/blockedit.htm|BlockEdit]]指令。 
+  - 在圖塊引例上雙點擊以啟動BoxEdit。 
+  - [[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/blockedit.htm|BlockEdit]]對話框將會出現。 
+  - 添加和刪除物件，並重設插入點。 
+  - 您現在可以在圖塊中直接做幾何編輯。 
+  - 關閉 [[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/blockedit.htm|BlockEdit]] 以儲存此模型中圖塊引例的所有更改及更新。 
+  - 選取"x"或ESC來取消重新定義。
 
-**[[developer:scriptsamples/countblocks|Count Blocks Script]]**
+  - **//建立球體。//** 
+  - 建立**[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/block.htm|圖塊]]** 並選取一個插入點。 
+  - 將立方體命名為**Box1**. \\ 修剪過的立方體現在都是球體了。
+ 
+=====外部圖塊引用=====
+外部檔案的圖塊定義可以經由編輯及儲存外部檔來更新，接著在[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/blockmanager.htm|BlockManager]] 更新定義。 定義用的是絕對路徑，所以您無法移動圖塊定義中使用的外部檔案並且更新。 但目前定義並不在意原始檔案是否移動了，目前定義就是在目前的檔案裡。
 
 
+==== 範例嘗試 ====
+  - **做一個立方體**，然後儲存檔案。 
+  - 開一個新檔，命名為**[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/insert.htm|Insert]]**。 \\ 利用 **檔案(File)** 來找到立方體的檔案。 
+  - 將其作為一個圖塊引例的插入。 
+  - 將此圖塊做幾個副本 - 嘗試一下縮放、旋轉。
+  - 在Rhino的另一個引例中，開啟立方體的檔案並修改邊緣。 
+  - 建立球體。 
+  - 儲存檔案。 
+  - 回到有插入圖塊的檔案，並啟動[[http://docs.mcneel.com/rhino/5/help/zh-tw/index.htm#commands/blockmanager.htm|BlockManager]] 指令。 \\ 您會看到有插入立方體檔案的引用。 
+  - 在清單中選取並按一下**更新**。這個檔案裡的引例現在應該都是修剪過的立方體與一個球體
+  
+** 有關圖層的註解：** 
+  * 在所有情況下，圖塊定義中物件的圖層在引例中。 
+  * 關閉任何部分圖塊引例使用的圖層，將會關閉Rhino視窗中那個部分的圖塊引例。 
+  * 關閉插入引例的圖層將會導致關閉整個圖塊，不管其他圖層是不是仍被這個圖塊使用中。
 
+======進階技巧======
+
+**[[developer:scriptsamples/superexplodeblock|SuperExplodeBlock 腳本]]**\\ 
+(現在已經是 V4[[zh-tw:labs:rhinolabstools|Rhino Labs 工具]]，並且是V5中的指令)
+
+**[[developer:scriptsamples/countblocks|計算圖塊腳本]]**
