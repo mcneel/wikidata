@@ -21,7 +21,6 @@ In terms of configuring the Zoo, there really is nothing to do. As long as all m
 
 ===== Networking Notes =====
   * All systems must belong to the same **Windows Domain or Workgroup**.
-  * **Update 6/3/2011** I just talked with a user with a new problem.  The Zoo server and the Rhino client were using slightly different subnet masks. One was 255.255.255.0 and the other 255.255.248.0. The Rhino client was not able to get a license until both systems were using the same 255.255.255.0 subnet mask.
   * Make sure the network connection that you are using has the **Client for Microsoft Networks** installed and enabled. Otherwise, you will get //Failed to write to client mailslot// errors written to the Zoo log file.
   * If you using TCP/IP, make sure to **Enable [[rhino:netbios|NetBIOS]] over TCP/IP** in the advanced TCP/IP options. Otherwise, you will get //Failed to write to client mailslot// errors written to the Zoo log file.
   * If the computer running either Rhino or the Zoo is using a firewall, be sure that the following ports are open:
