@@ -26,27 +26,14 @@ chown -R www-data:www-data /var/www/dokuwiki/
 #configure lightttpd for php
 lighttpd-enable-mod fastcgi-php
 
-# TODO:
-# Edit /etc/lighttpd/lighttpd.conf
-# enable mod-rewrite
-# change document root to
-# server.document-root        = "/var/www/dokuwiki"
-# at end of file add
-# url.rewrite-once = (
-#        "^(/|index.php)?$" => "/doku.php",
-#        "^/lib/(.*)/?$" => "/lib/$1",
-#        "^/_media/(.*)?\?(.*)$" => "/lib/exe/fetch.php?media=$1&$2",
-#        "^/_media/(.*)$" => "/lib/exe/fetch.php?media=$1",
-#        "^/_detail/(.*)?\?(.*)$" => "/lib/exe/detail.php?media=$1&$2",
-#        "^/_detail/(.*)?$" => "/lib/exe/detail.php?media=$1",
-#        "^/_export/([^/]+)/(.*)$" => "/doku.php?do=export_$1&id=$2",
-#        "^/(?!doku.php|feed.php|robots.txt|sitemap.xml.gz)(.*)\?(.*)/?$" => "/doku.php?id=$1&$2",
-#        "^/(?!doku.php|feed.php|robots.txt|sitemap.xml.gz|lib|_media|_detail|_export)(.*)/?$" => "/doku.php?id=$1",
-#)
-
-/etc/init.d/lighttpd force-reload
-
-#go to URL/dokuwiki/install.php to start setting up the wiki
-
 git clone https://github.com/mcneel/wikidata.git /var/dokuwiki/wikidata
 chown -R www-data:www-data /var/www/dokuwiki/wikidata
+
+# copy configuration files to appropriate locations
+cp /var/www/dokuwiki/wikidata/conf/lighttpd/lighttpd.conf /etc/lighttpd.conf
+
+cp /var/www/dokuwiki/wikidata/conf/dokuwiki/conf/* /var/www/dokuwiki/conf/
+cp /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/plugins/* /var/www/dokuwiki/lib/plugins/
+cp /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/tpl/* /var/www/dokuwiki/lib/tpl/
+#restart lightttpd
+/etc/init.d/lighttpd force-reload
