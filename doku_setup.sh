@@ -27,10 +27,10 @@ sudo chown -R www-data:www-data /var/www/dokuwiki/
 sudo lighttpd-enable-mod fastcgi-php
 
 sudo git clone https://github.com/mcneel/wikidata.git /var/www/dokuwiki/wikidata
-sudo chown -R www-data:www-data /var/www/dokuwiki/wikidata
+sudo chown -R www-data:www-data /var/www/dokuwiki
 
 # copy configuration files to appropriate locations
-sudo cp /var/www/dokuwiki/wikidata/conf/lighttpd/lighttpd.conf /etc/lighttpd.conf
+sudo cp /var/www/dokuwiki/wikidata/conf/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf
 
 sudo cp /var/www/dokuwiki/wikidata/conf/dokuwiki/conf/* /var/www/dokuwiki/conf/
 sudo cp -R /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/plugins/* /var/www/dokuwiki/lib/plugins/

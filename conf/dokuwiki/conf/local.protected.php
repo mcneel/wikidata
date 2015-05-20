@@ -21,6 +21,7 @@ $conf['securecookie'] = 0;
 $conf['jpg_quality'] = 85;
 $conf['sitemap'] = 7;
 $conf['rss_type'] = 'rss2';
+$conf['basedir'] = '/';
 $conf['userewrite'] = '1';
 $conf['useslash'] = 1;
 $conf['canonical'] = 1;
