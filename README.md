@@ -10,8 +10,9 @@ The McNeel wiki automatically synchronizes with the text files in this git repos
   - Ubuntu Server 14.04 LTS (HVM), SSD Volume Type - 64 bit
   - t2.small
   - auto-assign public IP = Enable
+  - check 'protect against accidental termination"
   - 8 Gb storage
-  - use Public Http Server security group
+  - use PublicHttpServer security group
   - use discoursekey as ssh key
 - ssh into the new instance
 - Update and install required modules
@@ -38,7 +39,7 @@ sudo mkdir /var/www/.ssh
 sudo chown -R www-data:www-data /var/www/.ssh/
 sudo -u www-data ssh-keygen -t rsa -b 4096 -C "steve@mcneel.com"
 ```
-- Follow the prompts to create/save a ssh key
+- Follow the prompts to create/save a ssh key. Accept defaults
 - ssh-add the new key
 ```bash
 sudo bash
