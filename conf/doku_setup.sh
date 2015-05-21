@@ -27,6 +27,8 @@ sudo lighttpd-enable-mod fastcgi-php
 sudo mkdir /var/www/.ssh
 sudo chown -R www-data:www-data /var/www/.ssh/
 sudo -u www-data ssh-keygen -t rsa -b 4096 -C "steve@mcneel.com"
+
+
 sudo bash
 eval "$(ssh-agent -s)"
 ssh-add /var/www/.ssh/id_rsa
