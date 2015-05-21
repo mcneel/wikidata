@@ -83,4 +83,6 @@ sudo chown -R www-data:www-data /var/www/dokuwiki
 sudo /etc/init.d/lighttpd force-reload
 ```
 - Point your browser to the public IP address for this server. If everything works :beer:
-- If you're happy with the results, change the Elastic IP associated with the Wiki to point at the server instance you just launched.
+- If you're happy with the results, change the Elastic IP associated with the Wiki to point at the server instance you just launched. The elastic IP exists in the VPC->Elastic IP control panel.
+- 
+
