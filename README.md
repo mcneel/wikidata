@@ -73,6 +73,17 @@ sudo cp -R /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/tpl/* /var/www/dokuwiki/
 sudo touch /var/www/dokuwiki/conf/users.auth.php
 sudo nano /var/www/dokuwiki/conf/users.auth.php
 ```
+
+- Create an SLL folder and add the McNeel wildcard SSL certificate to it:
+```bash
+sudo mkdir /etc/lighttpd/ssl
+sudo touch /etc/lighttpd/ssl/star.mcneel.com.pem
+sudo chmod 400 /etc/lighttpd/ssl/star.mcneel.com.pem
+sudo nano /etc/lighttpd/ssl/star.mcneel.com.pem
+
+```
+- Paste the contents of both the public and private SSL keys into star.mcneel.com.pem
+
 - Make sure everything in the dokuwiki directory has the proper ownership
 ```bash
 sudo chown -R www-data:www-data /var/www/dokuwiki
@@ -83,6 +94,7 @@ sudo chown -R www-data:www-data /var/www/dokuwiki
 sudo /etc/init.d/lighttpd force-reload
 ```
 - Point your browser to the public IP address for this server. If everything works :beer:
+
 - If you're happy with the results, change the Elastic IP associated with the Wiki to point at the server instance you just launched. The elastic IP exists in the VPC->Elastic IP control panel.
-- 
+
 
