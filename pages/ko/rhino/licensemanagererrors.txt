@@ -1,17 +1,27 @@
 ====== "라이선스 관리자와 통신할 수 없습니다 (Unable to communicate with license manager)" 오류 해결 방법 ======
 **1) Rhino 5.0 베타를 제거하셨나요?**
 
-[[http://www.microsoft.com/ko-kr/download/details.aspx?id=26347|Microsoft Visual C++ 2005 Service Pack 1 재배포 가능 패키지 MFC 보안 업데이트]] 를 다운로드하여 설치하세요. 설치하신 후에는 Rhino 4.0이 라이선스 관리자와 올바르게 통신할 수 있습니다. 
+[[http://www.microsoft.com/ko-kr/download/details.aspx?id=26347|Microsoft Visual C++ 2005 Service Pack 1 재배포 가능 패키지 MFC 보안 업데이트]]를 다운로드하여 설치하세요. 설치하신 후에는 Rhino 4.0이 라이선스 관리자와 올바르게 통신할 수 있습니다.
 
-**2) Windows Vista 또는 Windows 7를 사용하세요?**
+//**2) Rhino 5를 실행하고 계시고, Rhino 4를 설치 제거하셨나요?**//
+
+  * Flamingo nXt, Bongo 1.0/2.0, Rhino 4는 RhinoLM이라는 파일을 공통으로 사용합니다.
+  * Rhino 4를 설치 제거하면, RhinoLM 이 삭제되고, Flamingo nXt, Bongo 1.0/2.0가 32비트용 및 64비트용 Rhino 5에서 모두 실행되지 않게 됩니다. 
+
+//Rhino 4를 다시 설치하지 않고 McNeelLM을 다시 설치하려면//, **rhinolm_20110309_x86.exe**을 다운로드하고 압축 해제하여 실행하세요.  [[http://s3.amazonaws.com/mcneel/flamingo/nxt/rhinolm_20110309.zip|rhinolm_20110309.zip 파일 다운로드 클릭.]]
+
+  * rhinolm_20110309_x86.exe 를 실행하여 레지스트리를 수정하려면 반드시 관리자 권한이 있어야 합니다. 액세스가 거부되는 경우, 해당 컴퓨터의 관지라를 찾아 관리자 권한 계정에 로그인하여 **rhinolm_20110309_x86.exe**를 실행합니다**. Windows Vista 사용자: 이 파일을 오른쪽 클릭하고 “관리자로 실행(Run as administrator)” 을 선택합니다”. 
+
+
+**3) Windows Vista 또는 Windows 7를 사용하세요?**
 
 반드시 Rhino 4.0 SR9 버전을 사용하세요:
   - Rhino 4.0 시작
   - 도움말 메뉴에서 업데이트 확인을 클릭합니다.
 
-**3) Rhino 4 다시 설치**
+**4) Rhino 4 다시 설치**
 
-안타깝게도 Rhino 4 설치에 문제가 발생한 것 같습니다. 다음 순서대로 실행하셔서 설치를 복구하시기 바랍니다:
+안타깝게도 귀하의 Rhino 4 설치에 문제가 있습니다. 설치를 복구하려면 다음 순서대로 실행하세요:
   - Rhino 4 설치 제거 - 여러 개의 "Rhinoceros 4.0 SRx" 항목을 제거해야 할 수도 있습니다.
   - 다음 위치에 있는 "License Manager" 폴더를 삭제하세요. 
     * C:\Program Files\Common Files\McNeel Shared\ (32 비트 시스템)
@@ -23,6 +33,6 @@
 
 **4) 아직도 실행이 안 되나요?**
 
-위에 적힌 모든 방법으로도 실행이 되지 않는다면 [[http://wiki.mcneel.com/ko/rhino/licensemanagererrors/advanced|라이선스 관리자 오류 - 문제 해결 - 고급 ]] 페이지를 참조하세요.
+위에 적힌 모든 방법으로도 실행이 되지 않는다면 [[rhino:licensemanagererrors:advanced|라이선스 관리자 오류 - 문제 해결 - 고급 ]] 페이지를 참조하세요.
 
 > **업데이트:** //2012년 7월 28일// Brian Gillespie(McNeel Seattle) 작성
