@@ -1,7 +1,8 @@
-======라이선스 관리자와 통신할 수 없습니다 오류 해결 - 고급======
+======Rhino 3, 4 - 라이선스 관리자와 통신할 수 없습니다 (Unable to communicate with license manager)======
 
-> **업데이트:** //2012년 9월 20일//
+> **업데이트일:** //2012년 9월 20일//
 
+[[http://wiki.mcneel.com/ko/rhino/licensemanagererrors|라이선스 관리자 문제 해결]]도 참조하세요.
 =====문제=====
 Rhino 3.0 또는 Rhino 4.0 을 실행할 때 다음과 같은 메시지가 표시됩니다:
 
@@ -9,11 +10,11 @@ Rhino 3.0 또는 Rhino 4.0 을 실행할 때 다음과 같은 메시지가 표�
 \\
 
 =====원인=====
-"라이선스 관리자와 통신할 수 없습니다" 메시지는 Rhino 에서 다음과 같은 라이선스 모듈과 통신할 수 없을 때 표시됩니다. 이 오류는 독립실행형 (Standalone) 노트와 작업그룹 (Workgroup) 노드 설치 모두에서 발생할 수 있습니다.
+“라이선스 관리자와 통신할 수 없습니다” 메시지는 Rhino 에서 다음과 같은 라이선스 모듈과 통신할 수 없을 때 표시됩니다. 이 오류는 독립실행형 (Standalone) 노트와 작업그룹 (Workgroup) 노드 설치 모두에서 발생할 수 있습니다.
 
 다음과 같은 경우 발생이 가능합니다:
 
-  - 라이선스 관리자 파일이 없는 경우.
+  - 라이센스 관리자 파일이 없는 경우.
   - Windows System 레지스트리 엔트리가 없는 경우.
   - runtime library 지원 파일이 없는 경우.
   - 잘못된 라이선스 관리자를 실행하는 경우.
@@ -22,34 +23,35 @@ Rhino 3.0 또는 Rhino 4.0 을 실행할 때 다음과 같은 메시지가 표�
 
 =====해결 방안 1 - 가장 최신 버전의 서비스 릴리스를 설치=====
 
-[[http://www.rhino3d.com/download|최신 서비스 릴리스 다운로드 클릭]]
+[[http://www.rhino3d.com/download/rhino/4.0/sr|Rhino 4 최신 서비스 릴리스 다운로드 클릭]] .
 
-Rhino 4를 Vista 또는 Windows 7에서 실행할 때 이 문제를 발생시키는 새로운 원인이 알려졌습니다. User Account Control 에서의 충돌과 연관이 있습니다. Rhino 4 아이콘을 마우스 오른쪽 단추로 클릭하고 **관리자로 실행(Run as Administrator)**을 선택합니다. 이것으로 문제가 해결됩니다. 그리고 반드시 Rhino 4 서비스 릴리스 7 (SR7)을 다운로드하셔서 설치하십시오. SR7을 설치하시면 이 문제가 해결됩니다.
+Rhino 4를 Vista 또는 Windows 7에서 실행할 때 이 문제를 발생시키는 새로운 원인이 알려졌습니다. 사용자 계정 컨트롤(User Account Control)에서의 충돌과 연관이 있습니다. Rhino 4 아이콘을 마우스 오른쪽 단추로 클릭하고 관리자로 실행(Run as Administrator)을 선택합니다. 이것으로 문제가 해결되는 경우, 반드시 Rhino 4 최신 서비스 릴리스 (SR9) 를 다운로드하시기 바랍니다. Rhino 4 최신 서비스 릴리스(SR9)를 설치하시면 문제가 해결될 것입니다.
 
 =====해결 방안 2 - 라이선스 관리자 파일이 없는 경우=====
-Rhino 의 라이선스 관리자 모듈은 다음 폴더에 있습니다 (한글 Window 에서 C: 가 시스템 드라이브인 경우):
+Rhino 의 라이선스 관리자 모듈은 다음 폴더에 있습니다 (한국어 Windows 에서 C: 가 시스템 드라이브인 경우):
 
    C:\Program Files\Common Files\McNeel Shared\License Manager
 
-Rhino 3.0 과 Rhino 4.0 은 다른 라이선스 관리 모듈을 사용합니다:
+Rhino 3.0 과 Rhino 4.0 은 다른 라이센스 관리 모듈을 사용합니다:
 
-  * Rhino 3.0 라이선스 관리자 이름 - **McNeelLM.exe**
-  * Rhino 4.0 라이선스 관리자 이름 - **RhinoLM.exe**
+  * Rhino 3.0 라이선스 관리자 이름 - **McNeelLM.exe**.
+  * Rhino 4.0 라이센스 관리자 이름 - **RhinoLM.exe**
 
-현재 사용하는 Rhino 버전의 라이선스 관리자 모듈이 해당 디렉터리에 없다면, 갖고 계신 Rhino CD 를 사용하여 재설치하셔야 합니다.
+현재 사용하는 Rhino 버전의 라이센스 관리자 모듈이 해당 디렉터리에 없다면, 갖고 계신 Rhino CD 를 사용하여 재설치하셔야 합니다.
 
+Rhino 4와 Rhino 5 모두에서 공통인 플러그인에서 RhinoLM을 사용합니다. Flamingo 2, Flamingo nXt, Bongo 1.0/2.0는 Rhino 4와 Rhino 5에서 모두 사용됩니다.
 \\
 =====해결 방안 3 - 설치 제거/ 다시 설치=====
 라이선스 관리자 파일이 손실되었거나 레지스트리 키가 없다면 Rhino를 완전히 제거(clean uninstall)하고 다시 설치하셔야 합니다. Rhino의 레지스트리 키, Rhino 라이선스 관리자 파일을 모두 삭제하고 Rhino를 다시 설치하세요.
   - 사용하는 워크스테이션에 Administrator 또는 그와 동등한 권한을 가진 사용자로 로그인되어 있는지 확인하십시오.
   - 바이러스 백신 프로그램과 안티 스파이웨어 프로그램을 사용 안 함으로 설정하십시오.
-  - Rhino를 완전히 제거하려면 [[http://wiki.mcneel.com/rhino/uninstalling|여기를 참조하세요.]]
+  - Rhino를 완전히 제거하려면 [[http://wiki.mcneel.com/ko/rhino/uninstalling|여기를 참조하세요.]]
   - 설치 제거가 끝나면 탐색기를 사용하여 **C:\Program Files\Common Files\McNeel Shared\** 디렉터리에서 하위 폴더인 License Manage 를 삭제합니다.
   - 재부팅
-  - 제품 CD를 사용하여 Rhino 4 를 다시 설치합니다. 필요한 경우에 [[http://download.rhino3d.com/cruftfree/whatsnew.asp?lang=&p=rhino&v=4.0&t=sr&r=current&a=whatsnew|최신 서비스 릴리스]]를 다운로드하여 설치하세요.
+  - 제품 CD를 사용하여 Rhino 4 를 다시 설치합니다. 필요한 경우에 [[http://www.rhino3d.com/download/rhino/4.0/sr|최신 서비스 릴리스]]를 다운로드하여 설치하세요.
 
 
-=====해결 방안 4 - Windows 시스템 레지스트리 엔트리가 없는 경우=====
+=====해결 방안 4 - Windows System 레지스트리 엔트리가 없는 경우=====
 현재 사용하는 Rhino 버전의 라이선스 관리자 모듈이 있다면, 해당 모듈이 등록되지 않았을 수도 있습니다 - Rhino 가 이 모듈을 찾을 수 있게 하는 정보가 Windows 레지스트리에 존재하지 않을 수도 있습니다. 이 문제를 해결하려면:
 
   - 사용하는 워크스테이션에 Administrator 또는 그와 동등한 권한을 가진 사용자로 로그인되어 있는지 확인하십시오.
@@ -60,29 +62,37 @@ Rhino 3.0 과 Rhino 4.0 은 다른 라이선스 관리 모듈을 사용합니다
 
 **Rhino 3.0**을 실행하려고 할 때 이와 같은 오류가 발생한다면:
 
-  - **[[http://wiki.mcneel.com/_media/legacy/en/REGISTER_MCNEELLM.zip|여기를 클릭하여 배치 파일을 다운로드]]**하고  **McNeelLM.exe** 파일과 같은 폴더에, 배치 파일의 압축을 풉니다.
+  - **[[http://wiki.mcneel.com/_media/legacy/en/REGISTER_MCNEELLM.zip|배치 파일을 다운로드]]**하여 **McNeelLM.exe**와 같은 폴더에 압축 해제합니다.
   - **Register_McNeelLM.bat** 배치 파일을 두 번 클릭합니다.
-  - Windows Vista 사용자: 이 파일을 오른쪽 클릭하고 "관리자로 실행(Run as administrator)" 을 선택합니다.
+  - Windows Vista 사용자: 이 파일을 오른쪽 클릭하고 “관리자로 실행(Run as administrator)” 을 선택합니다.
 
 배치 파일은 명령행에 결과를 표시하므로 성공/실패 여부를 확인할 수 있습니다. 이 방법으로 문제가 해결되었는지 확인하려면 Rhino 3.0 을 실행해 보세요.
 ====Rhino 4.0 와 Rhino 5====
-**Rhino 4.0** 을 실행하려고 할 때 이와 같은 오류가 발생한다면:
+Rhino 4.0 또는 Rhino 5에서 Flamingo 또는 Bongo를 실행하고자 할 때 이와 같은 오류가 발생한다면:
 
-  - **[[http://wiki.mcneel.com/_media/legacy/en/REGISTER_RHINOLM.zip|여기를 클릭하여 배치 파일을 다운로드]]**하고  **RhinoLM.exe** 파일과 같은 폴더에, 배치 파일의 압축을 풉니다.
+  - **[[http://wiki.mcneel.com/_media/legacy/en/REGISTER_RHINOLM.zip|이 패치 파일을 다운로드]]**하여 **RhinoLM.exe**와 같은 폴더에 압축 해제합니다.
   - **Register_RhinoLM.bat** 배치 파일을 두 번 클릭합니다.
-  - Windows Vista 사용자: 이 파일을 오른쪽 클릭하고 "관리자로 실행(Run as administrator)" 을 선택합니다.
+  - Windows Vista 사용자: 이 파일을 오른쪽 클릭하고 “관리자로 실행(Run as administrator)” 을 선택합니다.
 
 배치 파일은 명령행에 결과를 표시하므로 성공/실패 여부를 확인할 수 있습니다. 이 방법으로 문제가 해결되었는지 확인하려면 Rhino를 실행해 보세요.
+
+또는
+
+Rhino 4를 다시 설치하지 않고 McNeelLM을 다시 설치하려면 **rhinolm_20110309_x86.exe** 파일을 다운로드하고 압축 해제하여 실행하세요.  [[http://s3.amazonaws.com/mcneel/flamingo/nxt/rhinolm_20110309.zip|rhinolm_20110309.zip 파일 다운로드 클릭.]]
+
+rhinolm_20110309_x86.exe 를 실행하여 레지스트리를 수정하려면 반드시 관리자 권한이 있어야 합니다.
+액세스가 거부되는 경우, 해당 컴퓨터의 관지라를 찾아 관리자 권한 계정에 로그인하여 **rhinolm_20110309_x86.exe**를 실행합니다. 
+Windows Vista 사용자: 이 파일을 오른쪽 클릭하고 “관리자로 실행(Run as administrator)” 을 선택합니다¡±.
 
 \\
 
 =====해결 방안 5 - runtime library 지원 파일이 없는 경우=====
 상기 배치 파일을 실행했을 때 오류가 반환되면 최신 Microsoft runtime 라이브러리를 **[[http://www.microsoft.com/ko-kr/download/details.aspx?id=26347|다운로드]]** 하고 다시 시도해 보세요.
 =====해결 방안 6 - 잘못된 라이선스 관리자가 실행 중일 때=====
-컴퓨터를 다시 시작하세요. 위에 안내한 과정이 모두 성공적이었으나 Windows에서 잘못된 라이선스 관리자가 실행 중이라면 문제가 지속될 수 있습니다. 컴퓨터를 다시 시작한 후 Rhino가 실행됩니까?
+컴퓨터를 다시 시작합니다.  위에 안내한 과정이 모두 성공적이었으나 Windows에서 잘못된 라이선스 관리자가 실행 중이라면 문제가 지속될 수 있습니다. 컴퓨터를 다시 시작한 후 Rhino가 실행됩니까?
 \\
 =====해결 방안 7 - Comodo Internet Security 에서 COM을 막고 있는 경우=====
-[[http://www.comodo.com/|Comodo Internet Security]] - Comodo에서 Rhino와 라이선스 관리자 사이의 프로세스 간 통신을 실행하는 COM을 차단할 수 있다고 합니다. Comodo를 실행하신다면 [[https://help.comodo.com/topic-72-1-284-2956-Starting-Comodo-Internet-Security.html|인터페이스]]로 확인해 보세요. Comodo를 사용하신다면 차단을 해제하기 위해 다음 과정을 실행해 보시기 바랍니다:
+[[http://www.comodo.com/|Comodo Internet Security]] - Comodo에서 Rhino와 라이선스 관리자 사이의 프로세스 간 통신을 실행하는 COM을 차단할 수 있다고 합니다. Comodo를 실행하신다면 [[https://help.comodo.com/topic-72-1-284-2956-Starting-Comodo-Internet-Security.html|인터페이스]]에서 확인해 보세요. Comodo를 사용하신다면 차단을 해제하기 위해 다음 과정을 실행해 보시기 바랍니다:
 
   - [[https://help.comodo.com/topic-72-1-284-2956-Starting-Comodo-Internet-Security.html|Comodo Intenet Security 설정]]을 클릭하세요.
   - [[https://help.comodo.com/topic-72-1-284-2945-Defense+-Tasks---Introduction.html|Defense+ 설정]]을 클릭하세요.
@@ -98,16 +108,16 @@ Rhino 4 가 이제 올바르게 실행됩니다.
 
 **Regedit.exe**를 실행합니다. 
 
-//레지스트리 편집기를 잘못 사용하면 시스템 전체에 걸친 심각한 오류의 원인이 될 수 있으며, 이를 수정하려면 Windows를 다시 설치해야할 수도 있습니다. Robert McNeel & Associates와 Microsoft는 레지스트리 편집기를 사용하여 발생한 어떠한 문제도 해결을 보장할 수 없습니다. 여러분의 책임 하에 이 도구를 사용하세요. 도움이 필요하시면 [[http://www.rhino3d.com/support|McNeel 지원팀]]에 문의하세요.//
+//레지스트리 편집기를 잘못 사용하면 시스템 전체에 걸친 심각한 오류의 원인이 될 수 있으며, 이를 수정하려면 Windows를 다시 설치해야할 수도 있습니다.  Robert McNeel & Associates와 Microsoft는 레지스트리 편집기를 사용하여 발생한 어떠한 문제도 해결을 보장할 수 없습니다. 여러분의 책임 하에 이 도구를 사용하세요. 도움이 필요하시면 [[http://www.rhino3d.com/support|McNeel 지원]]에 문의하세요.//
 
 창이 열리면 HKEY_CLASSES_ROOT 에서 **RhinoLicenseManager.RhinoLicense** 키를 찾습니다. 예:
 
     - **HKEY_LOCAL_MACHINE\Software\Classes** 로 갑니다.
     - **Classes** 키를 오른쪽 클릭하고 **Permissions**을 클릭합니다.
-    - 보안 탭에서 **Group or User Names** 아래 적어도 4개의 권한이 보여야 합니다. 경우에 따라 "라이선스 관리자와 통신할 수 없습니다" 문제는 Class 레지스트리 키 상에 권한이 없기 때문에 발생하기도 합니다.
+    - 보안 탭에서 **Group or User Names** 아래 적어도 4개의 권한이 보여야 합니다. 경우에 따라 “라이선스 관리자와 통신할 수 없습니다” 문제는 Class 레지스트리 키 상에 권한이 없기 때문에 발생하기도 합니다.
 
 **만약 <color blue>그리고 단지 </color>권한이 없는 것이라면 권한을 추가하세요:**
-    - **추가** 단추를 클릭합니다. 
+    - **추가** 단추를 클릭합니다.  
     - **Creator Owner**를 입력하고 **확인**을 클릭합니다.
     - **Creator Owner**를 선택하고 Creater Owner 섹션의 권한 아래 허용 컬럼에 있는 확인란을 모두 해제합니다:
     - {{:rhino:classes_permissions_1.png|}}
