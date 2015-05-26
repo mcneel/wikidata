@@ -1,11 +1,11 @@
-======어떻게 Rhino 5가 Zoo 서버를 찾습니까?======
+======어떻게 Rhino 가 Zoo 서버를 찾습니까?======
 > **제품:** //[[ko:zoo:home|Zoo]]//
-> **요약:** //Rhino 5가 Zoo 5 라이선스 관리자 서버를 찾는 방법에 대한 개요입니다.//
+> **요약:** //Rhino 가 Zoo 라이선스 관리자 서버를 찾는 방법에 대한 개요입니다.//
 
 =====개요=====
-동일한 서브넷에 있으면 Zoo 4.0을 자동으로 찾을 수 있는 Rhino 4.0 과는 달리, Rhino 5는 Zoo 5 서버의 이름을 알아야 합니다.
+동일한 서브넷에 있으면 Zoo 4.0을 자동으로 찾을 수 있는 Rhino 4.0 과는 달리, Rhino 는 Zoo 서버의 이름을 알아야 합니다.
 
-Rhino 5가 Zoo 5 서버에서 라이선스를 필요로 할 때, 다음 위치를 순서대로 찾아 Zoo 5 서버의 이름을 확인합니다:
+Rhino 가 Zoo 서버에서 라이선스를 필요로 할 때, 다음 위치를 순서대로 찾아 Zoo 서버의 이름을 확인합니다:
   - Windows 레지스트리의 Current User 하이브에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾습니다.
   - Windows 레지스트리의 Local Machine 하이브에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾습니다.
   - 기본 Zoo 서버 이름을 Domain Name System (DNS)에 문의합니다.
@@ -15,7 +15,7 @@ Rhino 5가 Zoo 5 서버에서 라이선스를 필요로 할 때, 다음 위치�
 
 ====레지스트리 조회 - Current User====
 
-Windows 레지스트리 HKEY_CURRENT_USER 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때, Rhino 5 32 비트와 Rhino 5 64 비트 모두 다음 위치를 찾습니다:
+Windows 레지스트리 HKEY_CURRENT_USER 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때, Rhino  32 비트와 Rhino  64 비트 모두 다음 위치를 찾습니다:
 
 <code>
 Hive:  HKEY_CURRENT_USER
@@ -26,7 +26,7 @@ Value: <host name or IP address>
 </code>
 
 ====레지스트리 조회 - Local Machine====
-Windows 32 비트 버전을 사용 중이라면, Windows 레지스트리 HKEY_LOCAL_MACHINE 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때  Rhino 5 32 비트가 다음 위치를 찾습니다:
+Windows 32 비트 버전을 사용 중이라면, Windows 레지스트리 HKEY_LOCAL_MACHINE 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때  Rhino  32 비트가 다음 위치를 찾습니다:
 
 <code>
 Hive:  HKEY_LOCAL_MACHINE
@@ -36,7 +36,7 @@ Type:  REG_SZ
 Value: <host name or IP address>
 </code>
 
-Windows 64 비트 버전을 사용 중이라면, Windows 레지스트리 HKEY_LOCAL_MACHINE 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때  Rhino 5 32 비트와 Rhino 5 64 비트 __모두__ 다음 위치를 찾습니다:
+Windows 64 비트 버전을 사용 중이라면, Windows 레지스트리 HKEY_LOCAL_MACHINE 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때  Rhino  32 비트와 Rhino  64 비트 __모두__ 다음 위치를 찾습니다:
 
 <code>
 Hive:  HKEY_LOCAL_MACHINE
@@ -47,7 +47,7 @@ Value: <host name or IP address>
 </code>
 
 ====DNS 사용하기====
-Windows 레지스트리 조회를 통해 Rhino 5가 Zoo 5 서버의 이름을 확인하는 데 실패하면 다음의 호스트 이름으로 기본 Zoo 서버를 DNS 서버에 문의합니다:
+Windows 레지스트리 조회를 통해 Rhino 가 Zoo 서버의 이름을 확인하는 데 실패하면 다음의 호스트 이름으로 기본 Zoo 서버를 DNS 서버에 문의합니다:
 
 <code>
 __mcneel.__zoo5
