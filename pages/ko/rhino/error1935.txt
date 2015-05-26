@@ -1,0 +1,31 @@
+====== 오류 1935 ======
+> **요약:** //설치 중 발생하는 1935 오류를 해결하는 방법입니다.//
+> **설치와 관련된 도움말:** //[[http://wiki.mcneel.com/ko/rhino/installproblems|Rhino 5 설치 문제 해결 안내]]//
+
+=====문제=====
+"오류 1935. 어셈블리 구성 요소 Microsoft.VC80.CRT, ... 을(를) 설치하는 동안 오류가 발생했습니다." 라는 오류가 표시됩니다.
+
+=====원인====
+이것은 Microsoft C++ 2005 Redistributable Package의 오류입니다.
+
+=====답변=====
+**//해결책 1://**
+  * **Windows 업데이트** 일부 사용자가 Windows 업데이트를 설치하여 이 문제를 해결했습니다.
+**//해결책 2://**
+  * **시스템에서 백신 프로그램을 사용 안 함으로 설정합니다.** 한 사용자가 AVG를 사용 안 함으로 설정하니 Rhino를 설치할 수 있었다고 알려 주셨습니다.
+**//해결책 3://**
+  * **여러 번 설치 시도.** 한 사용자가 Rhino 설치를 세 번째 시도했을 때 성공했다고 알려주셨습니다. 그 사용자의 경우, 시스템 설정은 전혀 변경하지 않았습니다.
+**//해결책 4://**
+  - Windows Vista 또는 Windows 7의 시작 메뉴에 **기능**을 입력합니다.
+  - **Windows 기능 사용 / 사용 안 함** 을 클릭합니다.
+  - Windows 기능 대화상자에서 **Windows 커뮤니케이션 파운데이션 HTTP 활성** 항목을 선택합니다:
+  - {{:rhino:rhino_1935_windows_features.png|}}
+  - 확인을 클릭합니다.
+
+이 기능을 활성화할 수 없거나, Windows 기능 대화상자가 공백인 상태로 표시되면 귀하의 Windows 설치가 손상되어 복구되어야 함을 뜻합니다. 도움이 필요하시면 Microsoft 지원에 문의하시기 바랍니다.
+
+**//자세히://**
+Rhino를 설치하는 중에 이 오류가 발생하는 사용자들의 경우, Microsoft의 [[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 Redistributable Package directly]] 도 설치하시 못 하십니다. 따라서, 이 사항은 Windows와 Microsoft Redistributable Package 관련 문제이며, Rhino의 설치 파일의 문제가 아닙니다. 
+
+
+{{tag>rhinoinstallationerror}}
