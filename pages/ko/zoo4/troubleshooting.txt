@@ -1,0 +1,81 @@
+====== Zoo 문제 해결 ======
+> **제품:** //[[:ko:zoo4:home|Zoo 4.0]]//
+> **Summary:** //Zoo 작업그룹 라이센스 관리자와 관련된 문제를 해결하는 팁을 소개합니다.//
+
+===== 개요=====
+Zoo 는 Rhino 와 통신하기 위해, 프로토콜과는 무관한 단순한 메세지 기술인 **메일 슬롯**을 사용합니다. Microsoft 네트워크는, 도메인 로그온 서비스를 비롯한 다양한 영역에서 메일 슬롯을 사용합니다. 메일 슬롯 메시지는 모든 Microsoft 운영 체제에서 실행됩니다. 메일 슬롯 메시지는 작업그룹 네트워크와 도메인 네트워크 모두에서 실행됩니다.
+
+모든 컴퓨터가 모두 같은 Windows 도메인 또는 작업그룹에 속해 있고 동일한 서브넷에 설치되어 있다면, Zoo 가 요청을 받아 라이센스를 배급하게 되므로, Zoo 의 설정값을 별도로 지정할 필요가 없습니다. 단, Zoo 를 사용할 때 기억해 두어야 할 사항이 몇 가지 있습니다.
+
+  * Zoo 의 최신 버전을 사용하고 있는지 확인하십시오.
+  * Zoo 콘솔 응용프로그램을 실행할 때는 관리자 (Administrator) 또는 관리자 그룹 (Administrators group) 의 멤버로 로그인 되어 있어야 합니다.
+  * Rhino 와 그 밖에 Zoo 가 지원되는 플러그인인 Brazil, Bongo, Flamingo, [[penguin:home|Penguin]] 이 최신 릴리스 버전인지 확인하십시오.
+
+===== 프로그램에 대한 안내 =====
+  * Zoo 는 Windows 2000, Windows XP, Windows Vista, Windows 7, 그리고 Windows Server 2000, 2003, 2008 시스템에서 실행됩니다.
+  * Zoo를 사용하시려면 시스템에 [[http://www.microsoft.com/downloads/details.aspx?familyid=200b2fd9-ae1a-4a14-984d-389c36f85647&displaylang=en|Microsoft C++ 2005 SP1 Redistributable Package (x86)]] 가 설치되어 있어야 합니다.
+  * Rhino 2.0 또는 3.0 교육용 및 교육 실습실용 라이센스 (CD 키) 로는 Zoo 를 사용하실 수 없습니다.
+  * 아시아 언어 버전의 Windows 에 설치된 Rhino 2.0 또는 3.0 에서는 Zoo 를 사용하실 수 없습니다.
+  * 모든 제품이 라우트된 네트워크상에서 라이센스를 배급받을 수 있는 것은 아닙니다.  [[ko:zoo:products|Zoo 제품 호환성]] 페이지에서 지원되는 제품에 대해 참조하시기 바랍니다.
+  * Zoo 콘솔 응용프로그램을 실행할 때는 관리자 (Administrator) 또는 관리자 그룹 (Administrators group) 의 멤버로 로그인 되어 있어야 합니다.
+
+===== 네트워킹 관련 안내 =====
+  * 모든 시스템은 동일한 **Windows 도메인 또는 작업그룹에 속해 있어야 합니다**.
+  * 사용하고 있는 네트워크 연결에 **Microsoft Networks용 클라이언트** 가 설치되어 사용 중이어야 합니다. 그렇지 않으면 //Failed to write to client mailslot (클라이언트 메일 슬롯에 쓸 수 없습니다)// 라는 오류가 Zoo 로그 파일에 작성됩니다.
+  * TCP/IP 를 사용한다면, TCP/IP 옵션의 고급 설정에서 **TCP/IP에서 [[rhino:netbios|NetBIOS]] 사용** 설정을 사용해야 합니다. 그렇지 않으면, //Failed to write to client mailslot (클라이언트 메일 슬롯에 쓸 수 없습니다)// 라는 오류가 Zoo 로그 파일에 작성됩니다.
+  * Rhino 또는 Zoo 가 실행되는 컴퓨터에서 방화벽을 사용한다면 다음 포트를 열어 두시기 바랍니다:
+    * **UDP 포트 137 와 138**
+    * **TCP 포트 139**
+  * 이 포트는 Windows 에서 [[rhino:netbios|NetBIOS]] 통신에 사용되는 포트입니다. 기본 제공된 **Windows 방화벽**을 사용한다면, **파일과 프린터 공유** 항목을 허용하도록 설정해야 합니다.
+\\
+{{:legacy:en:zoo_windows_firewall.png}}
+  * Rhino 시스템의 DNS 또는 레지스트리 키 부분을 설정하지 않았다면, 모든 Rhino 워크스테이션과 Zoo 가 실행되는 시스템이 모두 동일한 네트워크 서브넷에 설치되어야 합니다. 이는 Rhino 와 Zoo 가 모두 메시지를 보내기 때문입니다. 메일 슬롯 메시지는 네트워크 라우터와 일부 스위치의 범위를 넘어서는 보낼 수 없습니다. 무선 라우터 또한 메시지를 전송할 수 없습니다.
+
+
+
+==== Zoo와 클라이언트 간에 이름 확인 작업이 이루어지는지 확인 ====
+**nbtstat**는 [[rhino:netbios|NetBIOS]] 이름 확인 문제를 돕기 위한 명령입니다. 네트워크가 제대로 작동 중일 때는 TCP/IP 상에서 [[rhino:netbios|NetBIOS]] 가 [[rhino:netbios|NetBIOS]] 이름을 IP 주소에 확인합니다. 로컬 캐시 조회, WINS 서버 쿼리, 브로드캐스트, LMHOSTS 조회, 호스트 조회, DNS 서버 쿼리와 같은 몇 가지 옵션을 통하여 [[rhino:netbios|NetBIOS]] 이름이 확인됩니다.
+
+**nbtstat** 를 사용하여 이름 확인을 테스트하려면:
+
+  - Zoo 서버에서 Command Prompt 를 엽니다.
+  - **nbtstat -a <클라이언트컴퓨터이름>** 을 입력합니다.
+  - 네트워크 어답터 중 하나는 클라이언트 이름을 확인해야 합니다.
+  - 클라이언트 컴퓨터에서 Command Prompt 를 엽니다.
+  - **nbtstat -a <Zoo서버이름>** 을 입력합니다.
+  - 네트워크 어답터 중 하나는 Zoo 컴퓨터 이름을 확인해야 합니다.
+
+**nbtstat** 가 Zoo 또는 클라이언트에 대한 정보를 반환하지 못한다면, 해당 네트워크 설정 상태에서는 Zoo 가 실행되지 않습니다. 이러한 경우, 사용자의 네트워크에서 적절한  [[rhino:netbios|NetBIOS]] 이름을 확인하는 데 저희 McNeel 지원팀에서 도움을 드릴 수 있는 범위를 벗어나며, 또한 여기에서 간략하게 설명드리기도 어렵습니다.
+
+==== Zoo 와 클라이언트 간에 연결 확인 ====
+**net view** 명령은 지정된 컴퓨터에서 공유되는 도메인, 컴퓨터, 리소스의 목록을 표시합니다. 매개변수 없이 **net view** 명령이 사용되면, 현재 도메인에 속한 컴퓨터들의 목록을 표시합니다.
+
+**net view** 명령을 사용하여 연결을 테스트하려면:
+
+  - Zoo 서버에서 Command Prompt 를 엽니다.
+  - **net view \\<클라이언트컴퓨터이름>** 을 입력합니다.
+  - 클라이언트 컴퓨터에서 Command Prompt 를 엽니다.
+  - **net view \\<Zoo서버이름>** 을 입력합니다.
+
+**net view** 명령은 임시 연결을 성립시켜 설정된 파일과 인쇄 공유를 목록으로 표시합니다.
+
+  * 지정된 컴퓨터에서 파일 또는 인쇄 공유가 설정되어 있지 않다면, **net view** 명령을 실행했을 때 "There are no entries in the list" 메시지가 표시됩니다.
+  * 만약 **net view** 명령이 실패하고 //System error 53 has occurred// 메시지가 표시되면 지정된 컴퓨터 이름이 정확한지 , 해당 컴퓨터가 작동 중인지, 이 컴퓨터와 해당 컴퓨터 사이의 모든 게이트웨이 (라우터) 가 작동 중인지 확인하시기 바랍니다.
+  * 만약 **net view** 명령이 실패하고 //System error 5 has occurred. Access is denied.// 메시지가 표시되면, 원격 컴퓨터의 공유를 볼 수 있는 권한이 있는 계정으로 로그인되어 있는지 확인하시기 바랍니다.
+
+이러한 연결 문제를 해결하려면 다음 단계를 실행하십시오:
+
+  * **net view** 명령과 해당 컴퓨터의 IP 주소를 다음과 같이 사용합니다: **net view \\<IP주소>**.
+  *만약 **net view** 명령이 성공하면, 지정된 컴퓨터 이름이 잘못된 IP 주소에 확인된 것입니다.
+  *만약 **net view** 명령이 실패하고 //System error 53 has occurred// 메시지가 표시되면, 원격 컴퓨터 (remote computer) 에서 Microsoft Networks 서비스의 파일과 프린터 공유 (File and Printer Sharing) 가 실행되고 있지 않을 수도 있습니다.
+
+===== Zoo 안내 =====
+  * Zoo 에서는 Rhino 클라이언트와의 대화를 적은 로그 파일 (**ZOO.LOG**) 을 보관합니다. 이 로그 파일은 일부 통신 관련 문제를 진단하는 데 도움이 됩니다. ZOO.EXE 파일과 같은 폴더에 로그 파일이 없다면, Zoo 의 **Tools->Options** 에서 로그 파일이 저장되도록 지정할 수 있습니다. NOTEPAD.EXE 에서 로그 파일을 열어, Rhino 메시지가 Zoo 로 전달된 후 Zoo 가 제대로 대응하는지 확인하십시오.
+
+===== Zoo 보너스 툴 =====
+라우트된 네트워크에서 Zoo 를 사용하고 Rhino 가 Zoo 를 찾지 못 한다면, Zoo 의 조회 (레지스트리 키 또는 DNS) 기능이 올바르게 설정되지 않았을 수도 있습니다. 이러한 문제를 해결하는 데 Zoo Bonus Tools 가 도움이 될 수도 있습니다. Zoo Bonus Tools 에는 다음 유틸리티가 포함되어 있습니다:
+
+  - **SetZooServer.exe** - 레지스트리 키를 조회할 때 워크스테이션의 구성을 도와줍니다.
+  - **ZooDnsResolver.exe** - DNS 조회 기능의 테스트를 도와줍니다.
+
+**{{:zoo:zoobonustools_20010621.zip|Zoo Bonus Tools}}**
