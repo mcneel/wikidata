@@ -6,6 +6,7 @@
 $conf['title'] = 'McNeel Wiki';
 $conf['start'] = 'homepage';
 $conf['template'] = 'mcneel-public';
+$conf['disableactions'] = 'backlink,register';
 $conf['license'] = '';
 $conf['savedir'] = './wikidata';
 $conf['breadcrumbs'] = 0;
@@ -16,7 +17,6 @@ $conf['useacl'] = 1;
 $conf['defaultgroup'] = 'unapproved_user';
 $conf['superuser'] = 'brian,steve,bob';
 $conf['manager'] = '@mcneel';
-$conf['disableactions'] = 'backlink';
 $conf['securecookie'] = 0;
 $conf['jpg_quality'] = 85;
 $conf['sitemap'] = 7;
