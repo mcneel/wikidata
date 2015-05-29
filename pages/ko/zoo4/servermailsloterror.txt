@@ -1,0 +1,30 @@
+======"Server mailslot not created" 오류======
+> **제품:** //[[:ko:zoo4:home|Zoo 4.0]]//
+> **요약:** //"Server mailslot not created..." 오류 해결 방법.//
+
+=====질문=====
+Zoo 서버에 로그인하고 Zoo를 실행하려고 하면 다음 오류가 표시됩니다:
+
+//FATAL ERROR: Server mailslot not created.//
+
+=====답변=====
+Windows 서비스 버전 Zoo(2008년 공개)가 아닌 구식 독립실행형 Zoo를 사용할 경우 이 메시지가 표시됩니다. 
+
+구식 독립실행형 버전을 사용하시면 시스템에 로그인하고 Zoo 프로그램을 시작해야 합니다. Windows 서비스 버전 Zoo는 시스템이 시작하면 다른 Windows 시스템과 마찬가지로 Zoo가 시작합니다. 
+
+시스템의 다른 로그온 프로세스 하에서 Zoo 프로그램이 실행 중인 경우, 다시 Zoo를 실행하려고 시도하면 Zoo의 메일 슬롯이 이미 다른 프로세스에 열려 있으므로, //FATAL ERROR: Server mailslot not created// 오류가 표시됩니다. 
+ 
+구식 독립실행형 버전을 사용하는지 확인하려면 Program Files의 Zoo 4.0 폴더를 찾아 보세요. 목록이 다음과 같이 보이면:
+
+{{:zoo:old_zoo_files.jpg|}}
+
+구식 독립실행형 버전을 사용하고 계십니다. 목록이 다음과 같이 보이면:
+
+{{:zoo:new_zoo_files.jpg|}}
+
+Windows 서비스 버전을 사용하고 계십니다. 또한 제어판의 서비스 애플릿에 **Zoo License Manager** 서비스가 목록 아래에 보일 것입니다. 
+
+
+\\
+
+{{tag>Zoo4_ko}}
