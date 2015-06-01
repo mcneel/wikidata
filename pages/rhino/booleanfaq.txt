@@ -1,12 +1,17 @@
-====== Booleans frequently asked questions ======
+====== Boolean frequently asked questions ======
 > **Summary:** //An attempt to unlock the mysteries of Boolean Operations.  How and why they work, why they fail, how to fix problems and make them work more consistently, understanding how they work on open objects.//
 
 ======Introduction======
-Boolean operations can be great time saving procedures for constructing objects in Rhino.  But, for the beginner, they seem to often mysteriously fail, and it is difficult to understand why.  Hopefully this FAQ explanation will help clarify things a bit.  If you don't want to wade through all the following info, you can also try John Brock's short [[rhino:jbbooleanfix|How I fix Boolean Problems]]
+Boolean operations can be great time saving procedures for constructing objects in Rhino.  But, for the beginner, they seem to often mysteriously fail, and it is difficult to understand why.  Hopefully this FAQ explanation will help clarify things a bit.  If you don't want to wade through all the following info, you can also try John Brock's short [[rhino:jbbooleanfix|How I fix Boolean problems]].
 
-**//To understand why Booleans fail, first you must understand how they work.//**  They are not some sort of magic tool for putting objects together.  They are simply semi-automatic operations that combine several “manual” commands into one process.  The Boolean operations basically do 4 things:  **Intersect** two or more objects, **Split** them at the intersection(s) found, **Delete** (discard) the parts not wanted, and **Join** everything back together.  Everything you can do with Boolean operations you can also do by “manually” successively using the above four commands.  Using a Boolean operation only speeds things up by making it one procedure – when it works...
+**//To understand why Booleans fail, first you must understand how they work.//**  They are not some sort of magic tool for putting objects together.  They are simply semi-automatic operations that combine several “manual” commands into one process.  The Boolean operations basically do four things:  
+  * **Intersect** two or more objects 
+  * **Split** them at the intersection(s) found 
+  * **Delete** (discard) the parts not wanted 
+  * **Join** everything back together 
+Everything you can do with Boolean operations you can also do by “manually” successively using the above four commands.  Using a Boolean operation only speeds things up by making it one procedure – when it works...
 
-So, the first thing to keep in mind here is that a **//solid//** understanding of how the “component” operations of Booleans work is necessary.  When all else fails, you can get the job done with these commands – **Intersect**, **Split**, **Join** and **Delete**.  Try undoing a successful Boolean operation and re-doing it manually using those commands.  Get comfortable with the fact that this procedure will always get you where you want to go even if your Boolean attempts fail.
+So, the first thing to keep in mind here is that a **//solid//** understanding of how the “component” operations of Booleans work is necessary.  When all else fails, you can get the job done with these commands – **Intersect**, **Split**,  **Delete**, and **Join**.  Try undoing a successful Boolean operation and re-doing it manually using those commands.  Get comfortable with the fact that this procedure will always get you where you want to go even if your Boolean attempts fail.
 
 =====Boolean operation failed...=====
 OK, why do Booleans fail?  First and foremost, it is the intersection operation that will determine the success or failure of a Boolean operation.  If a correct intersection can be found, the rest is easy. However if Rhino has problems finding the intersection, the Boolean operation is guaranteed to fail.  So the whole key is to help Rhino find a good and complete intersection.  You can do this by setting up your model and file correctly, and also by understanding some of Rhino’s quirks and limitations.
