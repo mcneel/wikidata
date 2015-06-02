@@ -1,0 +1,113 @@
+{{:rhino:simple_bright.zip|}}====== Advanced Version 5 Display Modes ======
+
+> **Summary:** Rhino 5.0 adds a new display modes with hidden lines, sketch modes and other options.
+
+=====Contents=====
+
+  * [[#Background]]
+  * [[#Additional Custom Examples]]
+  * [[#Printing Advanced Modes]]
+  * [[#Limitations]]
+
+=====Background=====
+
+
+A little explanation is in order....
+
+Rhino 5 now has many more advanced display options that can be configured to create more advanced, realtime display modes.  These additional display options include , shadows, edge thickness by type and lighting control. For a basic understanding of advanced display in Rhino, go to
+  * [[https://vimeo.com/84982383|A Video Introduction to Display Modes in Rhino 5]]
+  * A video by Rhino Visual Tips 5.0:[[http://v5.rhino3d.com/group/rhino-visual-tips-5/page/out-line-of-rhino-visual-tips-5-0| Chapter 9: Rhino Options: Display Modes]]
+  * For detail on each display property, go to [[http://docs.mcneel.com/rhino/5/help/en-us/options/view/display_mode_options.htm|Advanced Display Options Topic]].
+
+Here examples of the new default display modes. There are 3 new modes available:
+
+====Technical==== 
+{{http://wiki.mcneel.com/_media/rhino/technicalboat.jpg?w=600}}
+
+<color white>
+space
+space
+space
+</color>
+
+
+====Pen==== 
+{{http://wiki.mcneel.com/_media/rhino/usbpen.jpg?w=600}}
+
+<color white>
+space
+space
+space
+</color>
+====Artistic==== 
+{{http://wiki.mcneel.com/_media/rhino/harken_artistic.jpg?w=600}}
+
+<color white>
+space
+space
+space
+</color>
+====Rendered====
+{{http://wiki.mcneel.com/_media/rhino/xlrcable.jpg?w=600}}
+
+The Rendered display mode has been upgraded.  By adding a few materials and turning on an environment, this is possible. A video tutorial is available here: {{http://vimeo.com/59268869|Materials, Environments and more!}}
+
+
+=====Additional Custom Examples=====
+To use the full power of these new display options, you can create your own Display modes and control:
+
+  - Real-time silhouettes
+  - Creases
+  - Borders
+  - Real-time intersections
+  - Blended Shaded and Rendered Display
+  - Shadow types
+
+The modes below can be imported into Rhino through the Rhino Display Options import command. Go to Tools pulldown > Options >View>Display Mode and Import. See the {{http://docs.mcneel.com/rhino/5/help/en-us/options/view/display_mode_options.htm#import|Advanced Display help topic under the import heading.}}
+
+====Patent====
+{{http://wiki.mcneel.com/_media/rhino/hull4b_patent.jpg?w=600}}
+Download the [[http://wiki.mcneel.com/_media/rhino/patent_drawing.zip|Patent.ini]] file to add this mode.
+
+This mode is quite sensitive to shadow settings. Some of the options to experiment with in this mode.  Shadow line angle?   Try 0, 23, 45, 90 degrees.  23 has some interesting characteristics. The shadow line does not stair-step at 23 degrees. Adjusting the lines widths option under Patent > Objects > Lines is quite important.
+
+By using the Layout mode you can setup the title block and leader text.
+
+====Blueprint====
+{{http://wiki.mcneel.com/_media/rhino/harkin_2602_and_2616_blueprint.jpg?w=600}}
+
+Blueprint is a combination of a bitmap background, white striped shadows and thick silhouette lines.  To use this mode, download the [[http://wiki.mcneel.com/_media/rhino/blueprint.zip|Blueprint.ini]] and the [[http://www.psdgraphics.com/backgrounds/blank-blueprint-paper/|Blueprint background bitmap]]. Set the display mode to use this image as the background. This mode also can work with the http://crisazi.deviantart.com/art/Blackboard-150161848|blackboard background]].
+
+====Blackboard====
+{{http://wiki.mcneel.com/_media/rhino/lmgtblackboard.jpg?w=600}}
+
+This mode is similar to the blueprint mode. It used an image in the background and white shadows, but uses much larger over-sized widths to simulate more of a sketch mode. Download [[http://wiki.mcneel.com/_media/rhino/blackboard.zip|Blackboard.ini]] file for the settings and the [[http://crisazi.deviantart.com/art/Blackboard-150161848|chalkboard bitmap]].
+
+====Simple Bright====
+{{http://wiki.mcneel.com/_media/rhino/fallingwater.jpg?w=600}}
+
+A simple bright colored shaded mode popular in both Architecture and Mechanical design. To run this mode import the [[http://wiki.mcneel.com/_media/rhino/simple_bright.zip|Simple Bright.ini]] file.
+
+====Ghosted Blueprinting====
+{{ :rhino:lmp2005.jpg?600 |}}
+
+This mode is similar to the blueprint mode although the objects are partially transparent and surfaces lightly shaded and modeled. To run this mode, import [[http://files.na.mcneel.com/rhino/5.0/misc/Ghosted Blueprint.zip|Ghosted Blueprint.ini]].  There is also a bitmap background to download: [[http://andrewl14.files.wordpress.com/2011/04/blueprint-1920x1200.png|Blueprint Grid]]
+
+=====Printing Advanced Modes=====
+The advanced display modes are currently based on display screen resolutions (edges 2 pixels wide for example). When printing these modes, the resolution of the print to the printer can be very different from display. It is possible that a 4 pixel thick line will look thick on the display, but when printed the edges do not look thick.  This change may apply to shadows and hatching.  To complicate the issue even more, the print preview does not preview these effects correctly.  This is something that needs to be improved. Below is a workaround to this problem.
+
+If you would like to print one of these modes, create a copy of the on-screen mode and create a print version of the mode.  For instance the Patent mode uses edges of 4 for screen display. In the Printer version of the display mode the edges are 8 pixels.  Below is a table which compares a screen version of the mode vs a printable version of the mode:
+
+|                        ^Patent Mode   ^Patent Print mode  ^
+^Shading Mode           |Parallel Lines |Parallel Lines      |
+^Shaded mode lines      |1 px           |4 px                |
+^Shaded mode separation |3 lines        |2 lines             |
+^Edge Line Thickness    |1 px           |2 px                |
+^Silhouette Thickness   |2 px           |8 px                |
+
+
+
+=====Limitations=====
+
+  - You can not assign any of these display modes to individual objects (i.e. SetObjectDisplayMode), however, once in a Technical display mode, you can assign all other modes to individual objects...in other words, Technical mode is a superset of all other modes (that support the standard [[rhino:opengl|OpenGL]] pipeline). Thus, you can still mix and match object display modes, you just have to start in the Technical mode.
+  - Initial calculations of the technical display data can take a long time for dense mesh objects...and there's nothing we can do about that...and if the object changes in any way, the calculations have to be redone.
