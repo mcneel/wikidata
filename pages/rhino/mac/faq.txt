@@ -1,6 +1,27 @@
-====== Rhino for Mac FAQ ======
+====== Frequently Asked Questions -- Rhino for Mac======
 
 These are some of the most Frequently Asked Questions (and answers!) about Rhino for Mac.  If your question is not answered here, please visit our [[http://discourse.mcneel.com/c/rhino-for-mac|Rhino for Mac forum]] and see if it has already been answered there.
+
+====Scripts and Plug-ins====
+  * [[rhino/mac/script/macro|Can I run a command script in Rhino for Mac?]]
+  * [[rhino/mac/script/rhinoscript|Can I run a RhinoScript program in Rhino for Mac?]]
+  * [[rhino/mac/plugin/third/party|Will third-party plug-ins work on Rhino for Mac?]]
+  * [[rhino/mac/plugin/dotnet/support|Will Rhino for Mac support my .NET plug-in?]]
+  * [[rhino/mac/plugin/c/support|Will the Rhino for Mac version support my C/C++ plug-in?]]
+
+====Troubleshooting====
+  * [[reportingproblems|How do I report a problem or bug?]]
+  * [[macrhinocrash|Rhino for Mac Crashed - Now What?]]
+  * [[rhino/mac/uninstall/install|Do I need to uninstall Rhino before installing a newer version?]]
+  * [[rhino/mac/disk/image/could/not/be/opened/rhinoinstall|OS X says "The following disk images couldn't be opened. What do I do now?]]
+  * [[rhino/mac/expired|Why does Rhino say that it is expired?]]
+  * [[rhino/mac/uninstall|How to Uninstall Rhino for Mac]]
+
+==== Other/miscellaneous ====
+  * [[rhino:mac:install:previous:version:nopreviousdownload|Can I download a previous version of Rhino for Mac?]]
+  * [[rhino/mac/no/rightclick/repeat/command/norightclickrepeat|Why can't I right-click to repeat the last command?]]
+  * [[rhino/mac/plugin/panelingtools|Can I use Paneling Tools?]]
+
 
 ==== General ====
 
@@ -90,117 +111,4 @@ Only the SpaceNavigator is supported at this time.
 
 No, not currently.
 
-<--
-\\
-==== Scripts and Plug-ins ====
--->Can I run a command script in Rhino for Mac?#
-
-Yes. To load and run a command script, on the top menu, select **Tools > Commands > Read From File**.
- 
-<--
-
--->Can I run a RhinoScript program in Rhino for Mac?#
-
-No. RhinoScript is based on VisualBasic and VisualBasic does not run on OS X. We are using Python for scripting on both the Mac and Windows version, and provides a way to write scripts for both versions of Rhino. See the [[http://discourse.mcneel.com/category/scripting | Rhino scripting support forum]] for Python scripting support for both Windows and Mac.
-
-<--
-
-
--->Will third-party plug-ins work on Rhino for Mac?#
-
-Perhaps. However, Windows plug-ins will not work on the Mac. The decision to port a plug-in to Rhino for Mac will be up to each plug-in developer.
-<--
-
--->Will Rhino for Mac support my .NET plug-in?#
-
-Eventually. We are working on tools that will let Rhino plug-in developers write plug-ins that will run on both OS X and Windows.
-
-<--
-
--->Will the Rhino for Mac version support my C/C++ plug-in?#
-
-Eventually. However, we are not yet ready to provide user support for C plug-ins, but we plan to do so in the future. You will have to recompile your plug-in using the Xcode development system. Depending on the complexity of your plug-in, it may take only a small amount of work to create a plug-in that compiles and works both on Windows and the Mac.
-
-<--
-
-
-\\
-==== Troubleshooting ====
--->How do I report a problem or bug?#
-
-See [[reportingproblems|Reporting problems]].
-
-<--
-
--->Rhino for Mac crashed! Now what do I do?#
-
-See [[macrhinocrash|Rhino Crashed - Now What?]]
-
-<--
-
-
--->Do I need to uninstall Rhino before installing a newer version?#
-No. 
-<-- 
-
--->OS X says "The following disk images couldn't be opened." What do I do now?#
-
-You probably have a corrupted downloaded .dmg file.  Check that your downloaded .dmg file is valid. Files can sometimes become corrupted when downloaded.
-
-  - Start the Disk Utility program **/Applications/Utilities/Disk Utility**
-  - From the menu, select **Images > Verify...** An Open File dialog box appears.
-  - Select the .dmg file that you downloaded. It is usually in your Downloads folder and is named something like: Rhinoceros_5A123.dmg
-  - If your downloaded file is not valid, go to [[http://www.rhino3d.com/download/rhino-for-mac/5/evaluation|download]] and request another download link.
-  - If this happens again, you have an unreliable internet connection and should try downloading the file using a different internet connection.  The download file is over 100 Mb.
-
-<-- 
-
--->I installed the latest version of Rhino, and it still says that it is expired. Now what?#
-
-You have more than one copy of Rhino installed, and it is still starting the expired version. You must remove **all** copies of Rhino. 
-
-Double click any 3DM file. If the file opens in Rhino, then you still have a copy of Rhino installed somewhere. 
-  - Right-click the Rhino icon in the Dock, select **Options > Show in Finder** from the menu to find out where it is.
-  - Drag that copy to the Trash. 
-  - When no more copies of Rhino exist, double-clicking a 3DM file will open it with TextEdit instead. When this happens, all copies of Rhino have been removed.
-  - Reinstall the version that you just downloaded.
-
-<--
-
-
--->How do I uninstall Rhino for Mac?#
-
-The following steps completely remove Rhino for Mac from your computer:
-
-  - Remove the application in the Applications folder.
-  - Remove the directory **/Library/Application Support/McNeel**. This directory contains the tutorial models and manuals if you downloaded them and may not exist on your computer.  This folder also contains your license file.
-  - Remove the directory **~/Library/Application Support/McNeel** in your home directory. This directory is optionally used by Rhino and may not exist on your computer. It might contain materials you created, Python scripts, and other resources.
-  - Remove the file **~/Library/Preferences/com.mcneel.rhinoceros.plist** in your home directory. This file contains all your Rhino preferences.
-
-<--
-
-\\
-==== Other/miscellaneous ====
- 
--->The current version of Rhino for Mac has a problem. Can I download the previous version?#
-
-No, previous versions of Rhino for Mac are not currently available.
-
-<-- 
-
-
---> I want right click to repeat the last command!  Why can't I do this? #
-
-You can, by disabling the Context menu, which allows the repeat behavior.
-
-  - On the menu, click **Rhinoceros** and then click **Preferences**.
-  - Select the **Mouse** panel.
-  - In the **Right Mouse Button** section, clear the **Enable Context Menus** check box.
-
-<--
-
-
---> Can I use Paneling Tools? #
-
-Yes.  PanelingTools plug-in is NOT part of the released Rhino 5 for Mac, but it is available as part of the **[[http://www.rhino3d.com/go/download/rhino-for-mac/wip/latest|Rhino for Mac WIP]]**. If you own a Rhino for Mac license, then you need to download and install the Rhino for Mac WIP to access Paneling Tools.  Please note that the Rhino for Mac WIP is a Work-In-Progress, which means it includes the latest features and development, but it also means that there may be instability and bugs.  New WIPs are released frequently as we add features and fix bugs.  In the WIP, there is no Paneling Tools menu and all of the commands are available through the command line only.  Type "pt" to see all the Paneling Tools commands in the AutoComplete list.
 <--
