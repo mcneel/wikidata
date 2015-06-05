@@ -1,0 +1,34 @@
+====== Autosaving and Versions in OS X ======
+Apple has added a radically different method for managing your models in OS X, and this has been integrated into Rhino for Mac.  Apple describes Autosaving and Versions [[http://support.apple.com/kb/HT4753|here]] and [[http://www.apple.com/macosx/whats-new/features.html#versions|here]], and another introduction can be found [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|here]].
+
+This article discusses additional details not mentioned in these articles that are important to Rhino for Mac users.  Lastly, you should read [[http://wiki.mcneel.com/rhino/mac/lionsaving|Everything you learned about saving files is wrong]].
+ 
+-->When does Rhino for Mac autosave a model?#
+
+A model is saved when you **close** a model window, when you **quit** Rhino, when you **switch** to another application, and //every once in a while//. Apple says the //every once in a while// saves happen about every five minutes when Rhino is idle. This time interval is not configurable.
+
+<--
+
+-->If Rhino is constantly saving my model, I am going to be constantly interrupted by the autosaves?#
+
+The periodic autosaves are run in the background. You will never know when a background autosave is happening because it never blocks Rhino from working. If you start changing your model while Rhino is performing an autosave, the autosave is silently abandoned and will be attempted again later.
+
+<--
+
+-->Is this going to fill up my disk?#
+
+Autosave does save frequently, but archives only a few versions of your model.  Autosave archives a model about once an hour for a day, then once a day for a week, and then once a week for some number of weeks.
+
+<--
+
+-->Can Rhino for Mac browse previous versions of my Rhino models?#
+
+Yes, the Versions browser is part of Rhino for Mac.
+
+<--
+
+-->What can I do in the Versions browser?#
+
+In the Versions browser, the window on the left is your current model, and all the windows on the right are previous versions of your model. These windows are actual Rhino windows and can be manipulated like any Rhino model. You can rotate views, bring up the Layers panel to show and hide layers, you can even copy objects from a past model to paste into your current model. You cannot //change// past versions.
+
+<--
