@@ -1,0 +1,29 @@
+====== Rhino for Mac - Preferences ======
+Here are a few procedures for manipulating your collection of preferences for Rhino for Mac.
+
+==== Save a copy of your current Rhino for Mac Preferences ====
+  - **Quit** Rhino completely.
+  - In the **Finder**, hold down the **Option** key, and select **Library** in the **Go** menu.
+  - Open the **Preferences** folder.
+  - Find the **com.mcneel.rhinoceros.plist** file.  Select **Duplicate** in the right-click context menu to make a copy.  The copy will be named **com.mcneel.rhinoceros copy.plist**.
+
+==== Reset Rhino Preferences ====
+Follow this procedure to remove all of your changed Rhino preferences and reset all of them to the original values.
+
+  - **Quit** Rhino.
+  - Start the **Terminal** application found in your **Applications** > **Utilities** folder. \\ A window with a command prompt appears.
+  - Type **defaults delete com.mcneel.rhinoceros** and press Return.
+  - Quit the Terminal application.
+
+==== Restore saved Rhino Preferences ====
+Follow this procedure to replace all of your current Rhino preferences with a previously saved copy.
+
+  - **Quit** Rhino.
+  - In the Finder, hold down the **Option** key, and select **Library** in the Go menu.
+  - Open the **Preferences** folder.
+  - Find the **com.mcneel.rhinoceros.plist** file.  Drag it to the Trash.
+  - Rename your previously saved preferences file to **com.mcneel.rhinoceros.plist**.
+    - Note: If you moved your saved plist file to a different folder, you need to drag it back into the **preferences** folder.
+  - Start the Terminal application found in your Applications > Utilities folder. \\ A window with a command prompt appears.
+  - Type **defaults read com.mcneel.rhinoceros** and press Return.  A lot of output will appear in the Terminal window.
+  - Quit the Terminal application.
