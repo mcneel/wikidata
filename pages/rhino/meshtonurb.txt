@@ -1,58 +1,58 @@
 ====== The MeshToNurb Command ======
-> **Summary:** //Much controversy and many support calls have arisen over the years concerning this command.  This article will attempt to explain some of the workings of this useful but often misunderstood function and hopefully promote a more informed usage.//
+> **Summary:** //Much controversy and many support calls have arisen over the years concerning this command.  This article will attempt to explain some of the workings of this useful but often misunderstood function and hopefully promote a more informed use.//
 
-=====MeshToNurb : What it is, what it isn’t======
+=====MeshToNurb: What it is, what it isn’t======
   
-In order to fully understand what this operation does, one must be familiar with some of the basics of basic 3D constructive geometry as well as characteristics of both mesh and NURBS objects.  For the sake of completeness, a short description of the characteristics of Meshes and NURBS is included below.
+To fully understand what this operation does, one must be familiar with some of the basics of basic 3D constructive geometry as well as characteristics of both mesh and NURBS objects.  For the sake of completeness, a short description of the characteristics of Meshes and NURBS is below.
 
 =====Meshes vs. NURBS=====
 To understand what **MeshToNurb** does, one must also understand the fundamental differences between a //Mesh// model and a //NURBS// surface model.  Although both can represent a 3D object as a computer model, they do it in completely different ways. 
 
-A mesh represents 3D surfaces as a series of discreet facets, much as pixels represent an image with a series of colored points.  If the facets/pixels are small enough, the object/image appears "smooth".  If we zoom in enough, however, we can still see the "pixelization" or granularity and the fact that the object is not locally smooth and continuous.
+A mesh represents 3D surfaces as a series of discreet facets, much as pixels represent an image with a series of colored points.  If the facets or pixels are small enough, the image appears "smooth".  Yet, if we zoom in enough, we can still see the "pixelization" or granularity and the fact that the object is not locally smooth and continuous.
 
-NURBS surfaces are mathematical representations of curves and surfaces.  They are capable of representing complex free form surfaces that are inherently smooth, and they retain their smooth shape when editing.  There is no pixelization or granularity as with a mesh. Thus they behave more like a real person’s face rather than a pixelized image of that same face.
+NURBS surfaces are mathematical representations of curves and surfaces.  They are capable of representing complex free form surfaces that are inherently smooth, and they keep their smooth shape when editing.  There is no pixelization or granularity as with a mesh. Thus they behave more like a real person’s face rather than a pixelized image of that same face.
 
-It is important to note here that NURBS can be easily converted to Meshes at any time, in the same way that you can easily take a digital image of a person’s face with a camera.  On the other hand, going from Meshes to NURBS is like trying to reconstruct a person’s face from a pixelized digital image - it is a much more difficult task, and there are no quick automatic methods.
+It is important to note here that NURBS can be easily converted to Meshes at any time, in the same way that you can easily take a digital image of a person’s face with a camera.  So, going from Meshes to NURBS is like trying to reconstruct a person’s face from a pixelized digital image - it is a much more difficult task, and there are no quick automatic methods.
  
 
 ===Mesh terminology used in this article===
-To repeat, meshes are facetted representations of 2D and 3D surfaces.  Individual mesh facets in Rhino can have either 3 sides (triangles) or 4 sides (quads).   They are represented on your computer screen as a series of connected lines in wireframe mode; in shaded modes each facet is given a "surface" for visualization purposes. The points at the corners of the facets are called vertices.   A series of facets are joined together to make a mesh object.
+To repeat, meshes are faceted representations of 2D and 3D surfaces.  Individual mesh facets in Rhino can have either 3 sides (triangles) or 4 sides (quads).   They are represented on your computer screen as a series of connected lines in wireframe mode; in shaded modes each facet is given a "surface" for visualization purposes. The points at the corners of the facets are called vertices.   A series of facets join together to make a mesh object.
 
-**Important note:**  although mesh facets are often believed to be always planar, this is in fact an incorrect assumption.  Only triangle meshes can be guaranteed to have all planar facets.  Quad facets MAY be planar, but they are not guaranteed to be so, as 4 non-coplanar points in space will describe a warped area.
+**Important note:**  Although mesh facets are often believed to be always planar, this is an incorrect assumption.  Only triangle meshes are guaranteed to have all planar facets.  Quad facets **may** be planar, but they are not guaranteed to be so, as 4 non-coplanar points in space will describe a warped area.
 
 ===NURBS terminology used in this article===
-There is a huge amount of information available on NURBS, it is a very complex subject, and will not be discussed in detail in this article. NURBS are curves based on mathematics.  NURBS //surfaces// are generated by a series of NURBS curves in two directions (called "U" and "V") that are interpolated to create a surface.  We are going to specifically consider only the simplest case of NURBS surfaces here – the so called "bilinear" surfaces defined by degree 1 NURBS curves (i.e. lines) in both directions, as those are what are produced by MeshToNurb.  When all the edges of the NURBS surface correspond with the original curves that generated the surface (the "natural" edges), the surface is called untrimmed.  If the surface has been cut with a curve that is other than its natural edge, it is called trimmed.
+There is a huge amount of information available on NURBS. It is a very complex subject and will not be discussed in detail in this article. NURBS are curves based on mathematics.  NURBS //surfaces// are generated by a series of NURBS curves in two directions (called "U" and "V") interpolated to create a surface.  We are going to specifically consider only the simplest case of NURBS surfaces here – the so called "bilinear" surfaces defined by degree 1 NURBS curves (i.e. lines) in both directions, as those are what are produced by MeshToNurb.  When all the edges of the NURBS surface correspond with the original curves that generated the surface (the "natural" edges), the surface is called untrimmed.  If the surface has been cut with a curve that is other than its natural edge, it is called trimmed.
 
 =====OK, so much for all the technogeekspeak...=====
 The **MeshToNurb** command - **//what does it do, really?//**
 
 ===What it doesn’t do:===
-As stated above, MeshToNurb does not automatically "reverse-engineer" mesh objects and make them into smooth surfaced NURBS objects.  Sorry, no one click miracles here.  Once a 3D model is in mesh form, it's hard to re-create a smooth NURBS object from it.  There is much info available on the subject of reverse engineering and its difficulties; [[rhino:reverseengineering|here is one article on how to attempt this with Rhino tools]]. There are also a number of specialized reverse engineering software packages to partially automate this process, they range from moderately expensive to very expensive.  There are even a couple of plug-ins available to add this capacity to Rhino (but they are not free).
+As stated above, MeshToNurb does not automatically "reverse-engineer" mesh objects and make them into smooth surfaced NURBS objects.  Sorry, no one-click miracles here.  Once a 3D model is in mesh form, it's hard to recreate a smooth NURBS object from it.  There is much info available on the subject of reverse engineering and its difficulties; [[rhino:reverseengineering|here is one article on how to attempt this with Rhino tools]]. There are also several specialized reverse engineering software packages to partially automate this process. They range from moderately expensive to very expensive.  There are even a couple of plug-ins available to add this capacity to Rhino (but they are not free).
 
 ===What it does:===
 MeshToNurb will convert a (faceted) mesh structure to a (faceted) NURBS structure.  It does so by creating one NURBS surface for EVERY mesh face in the original object and joining the result into a polysurface (assuming the original mesh has more than one face).
 
 ===How it is done:===
-**Mesh Quads** are converted to 4 sided untrimmed degree1 NURBS surfaces.  Again, "untrimmed" means the "natural" edges of the surface are the same as the outer boundaries and nothing has been "trimmed" off.  Thus, the defining edges of the NURBS surface in this case are the same as the lines representing the Mesh face's edges.  This implies two things:  If the original mesh quad face was defined by 4 coplanar points, all the edge lines are in the same plane, and the resulting NURBS surface will be planar.  If the quad face’s 4 mesh vertices are not co-planar, the edge lines of the NURBS surface will not be co-planar and the surface will be warped.  This type of surface can also be called a "ruled surface".
+**Mesh Quads** are converted to 4-sided untrimmed degree1 NURBS surfaces.  Again, "untrimmed" means the "natural" edges of the surface are the same as the outer boundaries and nothing has been "trimmed" off.  Thus, the defining edges of the NURBS surface in this case are the same as the lines representing the Mesh face's edges.  This implies two things:  If the original mesh quad face was defined by 4 coplanar points, all the edge lines are in the same plane, and the resulting NURBS surface will be planar.  If the quad face’s 4 mesh vertices are not co-planar, the edge lines of the NURBS surface will not be co-planar and the surface will be warped.  This type of surface can also be called a "ruled surface".
 
-**Mesh Triangles** Triangles are by definition planar.  MeshToNurb will convert mesh triangles into trimmed planar NURBS surfaces.  The trimmed NURBS surface will be a degree 1 x 1 surface as with the quads, just with one half trimmed off to form a triangle.
+**Mesh Triangles.** Triangles are by definition planar.  MeshToNurb will convert mesh triangles into trimmed planar NURBS surfaces.  The trimmed NURBS surface will be a degree 1 x 1 surface as with the quads, just with one half trimmed off to form a triangle.
 
 Based on the above, the resulting polysurface from MeshToNurb will have **//exactly//** the same edges as the original mesh model and be composed entirely of degree 1 x 1 (bilinear) NURBS surfaces.  Triangle surfaces will be planar and trimmed, quad surfaces will be untrimmed and either planar or not.
 
-**Important note:** MeshToNurb will not subdivide the quad areas into triangles in order to create planar surfaces.
+**Important note:** MeshToNurb will not subdivide the quad areas into triangles to create planar surfaces.
 
-=====Things to watch out for:=====
+=====Things to watch for:=====
 
 ===Memory use and file size===
  
-Mesh objects can contain from a few to hundreds to thousands to millions of polygons.  The mesh format is very compact for storing this facetted data.  NURBS surfaces are much less compact in their definition, a NURBS representation of a mesh object produced by MeshToNurb may easily take up 100 times as much data as the mesh does.  Executing MeshToNurb on complex meshes composed of many thousands of triangles may run your computer out of memory and will produce very large file sizes.  If you have a recent machine with a good processor, enough memory and a 64 bit operating system, this presents less of a problem.
+Mesh objects can contain from a few to hundreds to thousands to millions of polygons.  The mesh format is very compact for storing this facetted data.  NURBS surfaces are much less compact in their definition. A NURBS representation of a mesh object produced by MeshToNurb may easily take up 100 times as much data as the mesh does.  Executing MeshToNurb on complex meshes composed of many thousands of triangles may run your computer out of memory and will produce very large file sizes.  If you have a recent machine with a good processor, enough memory, and a 64-bit operating system, this presents less of a problem.
  
 ===Downstream operations===
 
-If you now have a NURBS object produced by MeshToNurb that is composed of many thousands of tiny NURBS surfaces (just like the mesh was) what can you do with it?  Not much – most normal operations will probably fail...  so you do need to ask yourself why you need it.
+If you now have a NURBS object produced by MeshToNurb composed of many thousands of tiny NURBS surfaces (just like the mesh was) what can you do with it?  Not much – most normal operations will probably fail...  so you do need to ask yourself why you need it.
 
 ===Geometric considerations===
-An understanding of the type of geometry that is being produced is essential.  As stated above, quad mesh facets are not guaranteed to be planar, and the quad NURBS results from MeshToNurb may be warped.  They may not be developable without stretching.  If you are using **UnrollSrf** on the NURBS polysurface, the results may be distorted or incorrect.  To ensure planarity and correct unrolling, either triangulate the mesh before running MeshToNurb or check the mesh to see if all faces are planar (a script will be necessary to do this, there is no native Rhino tool currently available).
+An understanding of the type of geometry produced is essential.  As stated above, quad mesh facets are not guaranteed to be planar, and the quad NURBS results from MeshToNurb may be warped.  They may not be developable without stretching.  If you are using **UnrollSrf** on the NURBS polysurface, the results may be distorted or incorrect.  To ensure planarity and correct unrolling, either triangulate the mesh before running MeshToNurb or check the mesh to see if all faces are planar (a script will be necessary to do this, there is no native Rhino tool currently available).
 
 =====With all its limitations… what is this command useful for then?=====
 
@@ -61,9 +61,9 @@ An understanding of the type of geometry that is being produced is essential.  A
 MeshToNurb is useful for converting low-polygon count meshes that are mostly planar into NURBS surfaces for further work in Rhino.  For example you may import an architectural model from Sketchup or some similar program that is mesh-based, the model is composed of largish planar mesh faces.  MeshToNurb works well to convert the model to NURBS surfaces, and along with a few other tools such as MergeAllFaces, you can quickly get a good clean NURBS model in Rhino and continue modeling.
 
 ===Unrolling objects===
-Since you cannot currently unroll mesh objects, you can use MeshToNurb and then unroll the resulting polysurface.  Beware the above-mentioned caveats as to usefulness, file size and warped geometry.
+Since you cannot currently unroll mesh objects, you can use MeshToNurb and then unroll the resulting polysurface.  Beware the above-mentioned caveats on usefulness, file size, and warped geometry.
 
 ===Exporting to programs which do not support meshes===
-Again, beware of file sizes, but occasionally this can get you out of a jam, although you will still have a facetted model.
+Again, beware of file sizes, but occasionally this can get you out of a jam, although you will still have a faceted model.
 
 //WIP msh 13.04.2011//
