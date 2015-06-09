@@ -1,34 +1,34 @@
-====== Autosaving and Versions in OS X ======
-Apple has added a radically different method for managing your models in OS X, and this has been integrated into Rhino for Mac.  Apple describes Autosaving and Versions [[http://support.apple.com/kb/HT4753|here]] and [[http://www.apple.com/macosx/whats-new/features.html#versions|here]], and another introduction can be found [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|here]].
+====== OS X에서의 자동 저장과 버전 ======
+OS X에서 모델을 관리하는 새로운 방식이 도입되었으며, Mac용 Rhinoi에서 이 부분이 반영되었습니다. Apple에서 설명하는 자동 저장 및 버전은 [[https://support.apple.com/ko-kr/HT4753|여기]]와 [[http://www.apple.com/macosx/whats-new/features.html#versions|여기]]를 참조하시고, 이와 관련한 [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|다른 글]]도 참조하세요.
 
-This article discusses additional details not mentioned in these articles that are important to Rhino for Mac users.  Lastly, you should read [[http://wiki.mcneel.com/rhino/mac/lionsaving|Everything you learned about saving files is wrong]].
+위의 글에 언급되지 않았으나 Mac용 Rhino에서는 중요한 사항을 이곳에서 알려 드립니다.[[http://wiki.mcneel.com/ko/rhino/mac/lionsaving|이제까지 파일 저장에 대해 배운 건 전부 틀렸습니다]] 항목도 반드시 읽어보시기 바랍니다.
  
--->When does Rhino for Mac autosave a model?#
+-->Mac용 Rhino는 모델을 자동저장합니까l?#
 
-A model is saved when you **close** a model window, when you **quit** Rhino, when you **switch** to another application, and //every once in a while//. Apple says the //every once in a while// saves happen about every five minutes when Rhino is idle. This time interval is not configurable.
-
-<--
-
--->If Rhino is constantly saving my model, I am going to be constantly interrupted by the autosaves?#
-
-The periodic autosaves are run in the background. You will never know when a background autosave is happening because it never blocks Rhino from working. If you start changing your model while Rhino is performing an autosave, the autosave is silently abandoned and will be attempted again later.
+모델 창을 **닫을 때**, Rhino를 **끝낼 때**, 다른 응용 프로그램으로 **바꿀 때**, 그리고 //종종// 모델이 저장됩니다. Apple에서 말하는 //종종// 저장이란, Rhino가 유휴인 상태에서 5분에 한 번씩 저장되는 것을 말합니다. 시간 간격을 변경할 수 없습니다.
 
 <--
 
--->Is this going to fill up my disk?#
+-->Rhino에서 끊임없이 내 모델을 저장한다면 자동저장이 끊임없이 내 작업을 방해하게 되나요?#
 
-Autosave does save frequently, but archives only a few versions of your model.  Autosave archives a model about once an hour for a day, then once a day for a week, and then once a week for some number of weeks.
-
-<--
-
--->Can Rhino for Mac browse previous versions of my Rhino models?#
-
-Yes, the Versions browser is part of Rhino for Mac.
+주기적 자동저장은 배경으로 실행됩니다. Rhino 작업을 방해하지 않으므로 언제 자동저장이 배경에서 실행되는지를 사용자는 전혀 모르게 됩니다. Rhino에서 자동저장이 실행 중일 때 사용자가 모델을 변경하기 시작한다면 자동저장은 조용히 무시되고 나중에 다시 자동저장이 시도됩니다.
 
 <--
 
--->What can I do in the Versions browser?#
+-->내 디스크 공간이 금방 꽉 차게 되나요?#
 
-In the Versions browser, the window on the left is your current model, and all the windows on the right are previous versions of your model. These windows are actual Rhino windows and can be manipulated like any Rhino model. You can rotate views, bring up the Layers panel to show and hide layers, you can even copy objects from a past model to paste into your current model. You cannot //change// past versions.
+자동저장이 빈번하게 저장하기는 하지만, 모델의 몇몇 버전만을 보관합니다. 자동저장은 하루 동안 한 시간에 한 번씩만 모델을 보관하고, 몇 주가 지나면 일주일에 한 번씩만 보관합니다. 
+
+<--
+
+-->Mac용 Rhino에서 Rhino 모델의 이전 버전을 탐색할 수 있나요?#
+
+예. Mac용 Rhino에는 버전 브라우저가 있습니다.
+
+<--
+
+-->버전 브라우저에서는 어떤 일을 할 수 있나요?#
+
+버전 브라우저의 왼쪽 창은 현재 모델이고, 오른쪽의 모든 창은 해당 모델의 이전 버전들입니다. 이 창은 실제 Rhino 창이고, Rhino 모델처럼 조작할 수 있습니다. 뷰를 회전하고, 레이어 패널을 표시하거나 레이어를 숨기고, 예전 모델에서 개체를 현재 모델로 복사/붙이기할 수 있습니다. 과거의 버전은 //변경할 수 없습니다/. 
 
 <--
