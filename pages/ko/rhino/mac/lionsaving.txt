@@ -1,89 +1,89 @@
-====== Everything you learned about saving files is wrong====== 
+====== 이제까지 파일 저장에 대해 배운 건 전부 틀렸습니다====== 
 
-Apple has turned file saving on its head in OS X.  //You cannot save a file any more//.  You need to be aware of this, or you may constantly cause yourself problems, not only in Rhino, but in other applications, too.
+Apple이 OS X에서의 파일 저장 기능을 활성화했습니다.  //사용자가 더 이상 파일을 저장할 수 없습니다//.  이 점을 알고 계셔야 합니다. 그렇지 않으면 Rhino를 비롯해 다른 응용 프로그램에서도 끊임없이 문제가 발생할 수 있습니다.
 
-This information is not specific to Rhino for Mac, but applies to all applications that implement OS X's Auto Save and Versions.  What you learn here applies everywhere in OS X that uses Autosave and Versions.
+이 정보는 Mac용 Rhino에만 국한된 것이 아니라, OS X의 자동 저장 및 버전을 구현한 모든 응용 프로그램에 해당됩니다. 여기서 얻은 지식은 자동 저장 및 버전을 사용하는 OS X의 모든 곳에 적용됩니다. 
 
-The following paragraph has been in each recent Rhino for Mac release note, but not everyone has read the article.  You should do that now, and also read all the other articles that are referenced in the following URL.
+다음 글은 Mac용 Rhino 릴리스 안내에 적혀 있으나, 아직 읽지 못 하신 분도 계시리라 생각됩니다. 반드시 지금 읽으시고, 다음 URL에 참조된 글도 꼭 읽어보시기 바랍니다.
 
 >
-> Additional information about Versions and Auto Save specific to Rhino can be found [[rhino:mac:autosaving|here]] (http://wiki.mcneel.com/rhino/mac/autosaving/).
+> Rhino와 관련된 자동 저장 및 버전에 대한 추가 정보는 [[ko:rhino:mac:autosaving|여기를 참조]] (http://wiki.mcneel.com/ko/rhino/mac/autosaving/)하세요.
 >
 >
 
-Everything below is also stated in the referenced articles.  It is merely stated much more bluntly here so you will realize how things have changed.
+다음의 글은 참조된 항목에도 적혀 있습니다. 이 글에서는 어떻게 변경되었는지에 대해 요점 위주로 소개합니다.
 
-**Auto Save does not mean autosaving**
+**자동 저장은 자동저장을 뜻하지 않습니다**
 
-On OS X prior to Lion and on Windows computers, the term autosaving means "writing a single backup copy of your file somewhere else that you or the program can find later".  The term autosaving has meant the above for a long time.  You still were responsible for saving your file on a regular basis, but Rhino and other programs would create a backup file just in case you forgot to save your file.
+OS X Lion에 앞서 출시된 버전과 Windows 컴퓨터에서는 자동저장이란 "나중에 사용자 또는 해당 프로그램에서 찾을 수 있는, 어느 한 파일의 백업 복사본 1개를 작성"하는 것을 뜻합니다. 오랫동안 자동저장이라는 용어의 의미는 이와 같았습니다. 정기적으로 파일을 저장하는 책임은 사용자에게 있으나, Rhino와 다른 프로그램에서 사용자가 잊었을 경우 백업 파일을 만들게 됩니다. 
 
-In OS X, Apple unfortunately uses almost the same term, //Auto Save//, to describe something entirely different.  In OS X, Auto Save means "saving your file automatically".  As in, overwriting your file automatically.  As in, there is no secret backup somewhere else --- your original file is getting overwritten.  All the time.
+OS X에서 Apple은 거의 비슷한 용어인 //자동 저장//를 사용합니다. 이 용어는 완전히 다른 뜻을 의미합니다. OS X에서 자동 저장은 "자동으로 사용자의 파일을 저장"함을 말합니다. 자동으로 사용자의 파일을 덮어씁니다. 다른 어느 곳에도 숨겨놓은 백업 파일은 없습니다. 사용자의 오리지널 파일을 계속 그리고 항상 덮어씁니다.
 
-**How often is a file saved? **   //All the time.//
+**얼마나 자주 저장됩니까? **   //항상 저장됩니다.//
 
-This is how Apple describes it:
-> Auto Save in OS X saves during pauses in your work and, if you work continuously, it will save after 5 minutes.
+다음은 Apple의 설명입니다:
+> OS X Lion의 자동 저장은 작업이 일시 정지되었을 때, 작업을 진행 중일 때는 5분 후에 작업을 저장합니다.
 
-Try the following experiment:
+다음 테스트 과정을 실행해 보세요:
 
-  * Copy one of your Rhino models to the Desktop and place it where it will not be covered by a Rhino window.  
-  * Select the copied Rhino file and select File > Get Info in the Finder menu.  A file info window will appear.
-  * Note the Modified time of the file.
-  * Select the Rhino file on the Desktop again and press Command-O to open the model in Rhino.
-  * Adjust your Rhino window and your file icon on the Desktop so you can still see both, and note the preview image of the Desktop file icon.
-  * In Rhino, select some object in the Perspective view.
-  * Type Option-left arrow then Option-right arrow.  This will nudge the selected object a little bit, then put it back where it was.  This will mark the model as modified, but it is no different than it was before.
-  * Rotate the Perspective view a little, so you will be able to tell when the preview image has changed.
-  * Now, do nothing.
+  * Rhino 모델 중 하나를 데스크탑에 복사하고 Rhino 창에 가리지 않은 위치에 둡니다.  
+  * 복사한 Rhino 파일을 선택하고 Finder 메뉴에서 파일 > 정보 가져오기를 선택합니다. 파일 정보 창이 표시됩니다.
+  * 파일의 수정된 시간을 확인합니다. 
+  * 데스크탑의 Rhino 파일을 다시 선택하고 Command-O를 눌러 Rhino에서 해당 모델을 엽니다.
+  * 둘 다 보이도록 Rhino 창과 데스크탑의 파일 아이콘을 조정하고, 데스크탑 파일 아이콘의 미리보기 이미지를 확인합니다.
+  * Rhino의 Perspective 뷰에서 개체 몇 개를 선택합니다. 
+  * Option-왼쪽 화살표를 누르고, Option-오른쪽 화살표를 누릅니다. 선택된 개체가 미세 이동하고 다시 원래 위치로 되돌아옵니다. 모델이 수정은 되었으나 그 전과 달라진 것은 없습니다.
+  * Perspective 뷰를 조금 회전하여 미리보기 이미지가 바뀐 것을 알 수 있게 합니다.
+  * 이 단계에서 아무것도 하지 않습니다.
 
-Within 10 - 20 seconds, the preview image of your file icon on the Desktop will change to match the Perspective view of your model.  Select the Rhino file on the Desktop and select File > Get Info in the Finder menu. You will see that the file modification date has changed.  Your file has been updated on disk.
+10~20 초 안에 해당 파일의 데스크탑 미리보기 이미지가 모델의 Perspective 뷰와 일치하게 변경됩니다. 데스크탑에서 Rhino 파일을 선택하고, Finder 메뉴에서 파일 > 정보 가져오기를 선택합니다. 파일의 수정 데이터가 변경되었음을 알 수 있습니다. 해당 파일이 디스크에서 업데이트되었습니다. 
 
-The same thing happens when you switch from Rhino to another application.  OS X Auto Save will save your file immediately when you switch to another application.  In the experiment above, instead of doing nothing for 10-20 seconds, switch to the Finder instead.  Your file is immediately updated.
+Rhino에서 다른 응용 프로그램으로 바꿔도 동일한 일이 발생합니다. OS X 자동 저장은 다른 응용 프로그램으로 바꾼 직후 사용자의 파일을 저장합니다. 위의 테스트에서 10초에서 20초간 아무 작업도 안 하는 대신, Finder 메뉴로 바꿔보세요. 사용자의 파일이 곧바로 업데이트됩니다.
 
-Lastly, your model is saved when you close the model window or quit Rhino.  You will never see a "Do you want to save your changes?" dialog.
+마지막으로, 모델 창을 닫거나, Rhino를 끝내면 사용자의 모델이 저장됩니다. "변경 내역을 저장하시겠습니까?" 메시지가 표시되지 않습니다.
  
-There are safeguards that are custom to each application to ensure that Auto Save does not happen while you are modifying the model.  Each copy written to disk is an accurate and consistent copy of your model at the time it is written.  For example, Rhino will never perform an Auto Save when you are in the middle of a command.  Rhino also creates a snapshot of your model in memory and then writes the snapshot to disk.  The writing to disk is done on a background thread, so even if your model is stored on a slow network drive, the Auto Save will not block you from working while waiting for your model to be written to a slow disk.
+각 응용 프로그램마다 모델을 수정하는 동안 자동 저장이 실행되지 않도록 하는 보호 장치가 있습니다. 디스크에 작성된 복사본은 모델이 작성되었을 때의 정확하고 일정한 복사본입니다. 예를 들어, 사용자가 명령을 실행하는 도중이라면 Rhino는 절대로 자동 저장을 실행하지 않습니다. Rhino는 사용자 모델의 스냅샷을 메모리에 만든 후, 디스크에 스냅샷을 작성합니다. 디스크에 작성하는 작업은 배경 스레드로 실행되므로, 느린 네트워크 드라이브에 모델이 저장되어 있더라도 해당 모델이 느린 디스크에 작성되는 동안 자동 저장이 이 작업을 방해하지 않습니다.
 
-**You can no longer save a file**
+**사용자는 더 이상 파일을 저장할 수 없습니다**
 
-Or, perhaps more accurately, you cannot decide when your model will be saved on disk.  The system is doing it for you instead, and does so all the time.  You cannot save a file, because it has already been saved for you.
+아니면, 더 정확하게는 언제 모델이 디스크에 저장되는지를 사용자가 결정할 수 없습니다. 시스템에서 대신 해 드리고, 언제나 그러합니다. 이미 저장되어 있으므로, 사용자가 저장할 수 없습니다.
 
-Apple's goal is two-fold.  One, what you see on the screen is what is stored on the disk.  You no longer have two versions of your model, the last saved version on disk and the currently modified version in the Rhino application.  Now, they are one and the same.  Two, you are much less likely to lose work because of a crashed program or a crashed operating system.
+Apple의 목표는 two-fold.  첫째, 화면에 보이는 것이 디스크에 저장된 그대로입니다. 더 이상, 디스크에 마지막 저장된 버전과 Rhino 응용 프로그램에서 현재 수정된 버전과 같은 두 개의 버전은 없습니다. 이제 두 개는 동일합니다. 둘째, 프로그램이나 운영체제에서 크래시가 발생하더라도 하던 작업을 잃는 일은 없게 될 것입니다.
 
-**Command-S does not mean Save A File**
+**Command-S 는 파일 저장이 아닙니다**
 
-If you are used to typing Command-S all the time to save your model, this is now a //bad habit//, because Command-S no longer saves a file.  It does something entirely different, and it is probably not what you want.
+모델을 저장할 때마다 항상 Command-S 를 눌렀다면, 이제 이건 //나쁜 습관//이 되어 버렸습니다. Command-S로는 파일이 저장되지 않습니다. 전혀 다른, 아마도 사용자가 원하지 않는 작업이 실행됩니다.
 
-Open one of your models and look in Rhino's File menu.  The Save menu choice is no longer there.  Instead, Command-S is associated with the new menu choice **Save A Version**.  When you Save a Version, you are creating the equivalent of a Time Machine backup of your file.  This is a backup copy of your model that you can retrieve any time in the future.  Also, even if you never explicitly Save A Version, the system automatically creates versions for you, approximately one an hour.  These are also backup copies that you can retrieve in the future.  
+모델 중 하나를 열고 Rhino의 파일 메뉴를 봅니다. 저장 메뉴는 없습니다. Command-S는 새로운 **버전 저장**으로 연결되어 있습니다. 버전을 저장하면 해당 파일의 Time Machine 백업이 만들어집니다. 미래에 언제나 사용자가 찾을 수 있는 모델의 백업 복사본입니다. 또한 별도로 버전 저장을 실행하지 않더라도 시스템이 자동으로 버전을 만들어줍니다. 대략 한 시간에 하나를 만듭니다. 이 파일들도 나중에 사용자가 찾을 수 있는 백업 복사본입니다.  
 
-Each separate version that you save is retained by the system.  Creating a new version does not overwrite previous versions but instead adds to your collection of versions.
+사용자가 저장하는 각각의 버전은 시스템에서 유지합니다. 새 버전을 만들면 이전 버전을 덮어쓰지 않고, 버전 모음에 하나가 추가됩니다.
 
-Every time you type Command-S, you add another Version to your file.  Pressing Command-S a lot means you create a //lot// of Versions of your file, and you probably do not need or want all those distinct backups in the future.  You should instead stop typing Command-S all the time if you just want to save your model.  This is no longer necessary.  The system is already saving your model for you.
+Command-S를 누를 때마다 파일의 새 버전이 추가됩니다. Command-S를 많이 누르면 해당 파일의 버전이 //무척 많아지게 됩니다//. 아마도 나중에 그렇게 많은 각각의 버전이 필요하지 않을 것입니다. 모델을 저장하기 위해 항상 Command-S 누르던 습관을 중지하세요. 시스템에서 저장해 드립니다.
 
-The system also provides a Time Machine-like interface to look at these saved versions.  Navigate to the **File** > **Revert To** menu.  Choose **Browse all versions** and OS X will present you with a browser to view all the past saved versions.  This is explained in detail in other articles that are referenced at the beginning of this article.  The point here is that Command-S does not save your file to disk; it is instead doing much more work by creating a backup, a duplicate and browsable version of your file.
+시스템에는 저장된 버전을 살펴볼 수 있는 Time Machine 같은 인터페이스가 있습니다.  **파일** > **다음으로 복귀** 메뉴를 선택합니다.  **모든 버전 탐색**으로 가면 이제까지 저장된 모든 버전을 보여주는 브라우저가 표시됩니다. 이 항목의 처음에 참조된 글에 자세히 설명되어 있습니다. 여기서 중요한 점은 Command-S로 파일이 디스크에 저장되지 않는다는 것입니다. 그 대신, 해당 파일의 백업을 만들고 복제하고 탐색 가능한 버전으로 만드는, 훨씬 많은 작업을 실행합니다.
 
-**New Models**
+**새 모델**
 
-If you are working on a new model and have never saved it, then typing Command-S brings up the standard File Save dialog (just as it did before) and you pick where you wish to store your model.  But after this initial save, the system will decide when to save your model.
+새 모델을 작업하는 중이고, 한 번도 저장한 적이 없다면 Command-S를 눌렀을 때 일반적인 파일 저장 대화상자 (예전처럼)가 열리고, 모델을 저장하려는 위치를 사용자가 지정합니다. 처음 저장된 후에는 시스템에서 모델을 저장하는 시점을 결정합니다.
 
-**IncrementalSave is gone**
+**IncrementalSave이 없어졌습니다**
 
-If you are used to using Rhino's Incremental Save, Versions provides a built-in replacement that also has a much better user interface.  In fact, Incremental Save interferes with OS X Lion's Versions because it is constantly changing the file name of the model, so Incremental Save is no longer available as a command in OS X.
+Rhino의 증분 저장(IncrementalSave)의 사용에 익숙하시다면, 더 향상된 사용자 인터페이스로 기본 탑재되어 있는 버전을 사용하세요. 실제로, 증분 저장은 모델의 파일 이름을 계속 변경하기 때문에 OS X Lion의 버전 기능에서 장애 요소가 됩니다. 따라서 OS X에서는 더 이상 증분 저장(IncrementalSave) 명령을 사용하실 수 없습니다.
 
-**OS X Mountain Lion (10.8) changes**
+**OS X Mountain Lion (10.8) 변경 사항**
 
-Apple made some additional changes to Auto Save in OS X Mountain Lion (10.8).
+Apple이 OS X Mountain Lion (10.8)에서 자동 저장 관련 몇 가지를 변경하였습니다.
 
-In 10.8, Apple changed the File > Save A Version menu title back to File > Save.  However, the behavior is still as described above.  File > Save on OS X 10.8 archives a version of your model along with writing the model to disk.
+10.8에서 Apple은 파일 > 버전 저장 메뉴 제목을 파일 > 저장으로 변경하였습니다. 하지만, 동작은 위에 설명한 내용과 동일합니다. OS X 10.8 의 파일 > 저장은 디스크에 모델을 작성하는 것에 따라 해당 모델의 버전을 보관합니다.
 
-Starting with OS X Lion, any standard OS X application has a File > Duplicate menu choice, and this opens another document with a copy of the contents of the current document.  To save a copy of your model, you needed to duplicate it first, then same the duplicated model with a new name.  Starting with 10.8, when you hold down the **Option** key, the **File** > **Duplicate** menu choice menu choice changes to **File** > **Save As...** and you can save a copy of your current document directly to disk with a new name in a single step.
+OS X Lion부터 표준 OS X 응용 프로그램에는 파일 > 복제 메뉴가 있습니다. 이 메뉴는 현재 문서 컨텐츠의 또다른 복사본 문서를 엽니다. 모델의 복사본을 저장하려면 먼저 복제하고, 복제한 모델을 새 이름으로 저장합니다. 10.8 부터 **Option** 키를 잠시 누르면 **파일** > **복제** 메뉴가 **파일** > **별도 저장...**으로 바뀌고 한 번의 단계만으로 현재 모델의 복사본을 즉시 디스크에 새 이름으로 저장할 수 있습니다. 
 
-Auto Save constantly saves to disk any changes you make to a model.  If you wanted to experiment with a model and then close the model without saving any of the changes, Auto Save in 10.7 made that difficult.  If you just closed the model, all the current changes would be automatically saved to disk by Auto Save.  You had to explicitly revert your model back to a previous version to undo your changes.
+사용자가 모델을 변경할 때마다 자동 저장이 디스크에 계속해서 저장합니다. 모델을 시험삼아 수정하고, 변경 내역을 저장하지 않고 끝내는 작업은, 10.7에서 자동 저장으로 인해 어려운 일이 되었습니다. 모델을 그냥 닫으면 모든 변경 내역을 자동 저장이 디스크에 자동저장합니다. 사용자가 직접 실행 취소하여, 모델이 변경되기 전의 상태로 되돌려야 합니다.
 
-In 10.8, there is a new setting in **System Preferences** > **General** for changing that behavior.  There is a checkbox titled "Ask to keep changes when closing documents".  We suggest that you check this checkbox.  Now when you make changes to a model and do not explicitly save your changes before closing the model, the system will ask if you want to save your changes.  The "Don't Save" button lets you discard any changes that you made to the model since your last save.  Note that this is a system-wide setting and will change the behavior of all programs, not just Rhino.
+10.8에서는 **시스템 환경설정** > **일반**에서 동작을 변경할 수 있습니다. "도큐멘트를 닫을 때 변경사항을 유지하도록 요청" 확인란이 있습니다. 이 확인란을 선택하실 것을 제안합니다. 모델을 변경할 때 모델을 닫기 전에 별도로 저장하지 않으면, 변경사항을 저장할 것인지 묻는 메시지가 표시됩니다. "저장 안 함" 단추를 클릭하면 마지막 저장한 이후의 변경 내역이 무시됩니다. 이 설정은 시스템 전체에 적용되므로 Rhino를 비롯해 다른 모든 응용 프로그램에도 동일하게 실행됩니다.
 
-**Going forward**
+**앞으로의 방향**
 
-As you work on a model, there will be natural break points or phases in your work and these would be good places to use Save A Version to take a snapshot of your work so far.  Remember that the system will also be making regular snapshots of your model about once an hour, so you will have a number of recovery points if you ever need to go back and retrieve previous work.
+모델에서 작업하면서 이제까지 작업한 내용의 스냅샷을 찍기 위해 Save A Version을 사용해야 하는 자연스러운 시점이 있을 것입니다. 시스템에서도 한 시간에 한 번씩 정기적으로 스냅샷을 찍는다는 점을 기억하세요. 이전 단계의 작업으로 되돌아가야 한다면 여러 개의 복원 지점이 있을 것입니다.   
 
-Apple has fundamentally changed how we are used to working with our documents.  There no longer is a distinction between what we see on the screen and what is stored on the disk.  They are always kept in sync.  It is going to take some new habits and retraining ourselves to adapt to the new paradigm.  It is also going to be a rocky transition as some applications are converted to Auto Save and Versions, while others are still using the previous File > Save paradigm.  It will require us to remember how to work with each program until all programs have made the transition to Auto Save and Versions.
+Apple은 근본적으로 문서 작업 방식을 바꿨습니다. 화면에 보이는 것과 디스크에 저장된 것에는 더 이상 차이가 없습니다. 두 가지는 항상 동기화된 상태로 유지됩니다. 이러한 새로운 방식에 맞춰 우리 자신도 새로운 습관에 익숙해져야 합니다. 일부 응용 프로그램은 자동 저장과 버전으로 변환되지만, 다른 응용 프로그램들은 여전히 기존의 파일 > 저장 방식을 사용하므로 혼동이 있을 수 있습니다. 모든 프로그램이 자동 저장 및 버전 방식으로 바꾸기 전까지 각각의 프로그램의 저장 방식을 기억해야 할 필요가 있습니다.
