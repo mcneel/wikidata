@@ -1,105 +1,105 @@
-====== Introduction to Layouts in Rhino 5 ======
+====== Rhino 5의 레이아웃 소개 ======
 
-=====What is a Layout?=====
+=====레이아웃이란?=====
 
-The Layout is used to arrange, annotate and plot the model. Layouts are designed to do the following:
+레이아웃은 모델을 배치하고 주석을 달고, 출력하는 데 사용됩니다. 레이아웃의 용도:
 {{ :rhino:anno_layout_tutorial1.png?300|}}
 
-      * Arrange views of the model, called details, at different scales and orientations.
-      * Add annotations like title blocks and general notes to the layout
-      * Assign scales to the details and plot the layout 1=1
-      * Create text, dimensions in the details or on the layout
-      * Use Annotation Scaling for text, dimensions and hatch
-      * Control layer visibility and color per detail
-      * Plot one, some or all the layouts to a plotter, printer or PDF.
+      * 모델의 뷰(디테일)을 다른 배율과 방향으로 배치합니다.
+      * 제목 블록과 일반적인 노트를 레이아웃에 주석으로 추가합니다.
+      * 디테일의 배율을 지정하고 레이아웃을 1=1로 출력합니다.
+      * 디테일 또는 레이아웃에 텍스트, 치수를 만듭니다.
+      * 텍스트, 치수, 해치에 주석 배율을 사용합니다.
+      * 레이어 표시 여부와 디테일에 적용되는 색을 제어합니다.
+      * 레이아웃 하나, 일부, 또는 전체를 플로터, 프린터, PDF로 출력합니다.
 
-===== Background =====
+===== 배경 =====
 
-Before Layouts in Rhino 3, arranging multiple views of the model on a title block was done outside of Rhino with other CAD software. Rhino 4 added the Layout space, and Rhino 5 improves it in the following ways:
+Rhino 3의 레이아웃 전에는 제목 블록에 모델의 여러 뷰를 배치하는 작업은 Rhino가 아닌 다른 CAD 소프트웨어에서 해야 했습니다. Rhino 4 에서 레이아웃 공간이 추가되었으며, Rhino 5의 관련 기능은 다음과 같이 향상되었습니다:
 
-**New commands:**
-  * Draw Order controls the order the Detail Views are drawn in a Layout. 
-  * DisableClippingPlane - Turns off selected clipping planes in the active viewport. Also available in Properties -> Clipping Plane pane.
-  * ImportLayout - Imports layout pages from another Rhino file.
-  * Multipage Layout Print - Any or all of the layouts can be printed at once.
-  * ShowLayersInDetail - Shows layers in detail views.
-  * HideLayersInDetail - Hides the selected layers in detail views.
-  * ShowSelectedInDetail - Works just like the ShowSelected command except it only works on objects that were previously hidden with the HideInDetail command.
-**Enhancements:**
-  * HideInDetail - New options have been added to include/exclude the active and inactive details.
-  * Text and Dimension style scaling - Text and dimension can be now scaled differently in layout viewports and model viewports. This makes it easier to have text and dimension appear at the same height in different viewports when they are at different scales in a layout.
-  * Hybrid printing - Both raster and vector printing is used when possible to make higher quality prints.
+**새 명령:**
+  * 표시 순서는 레이아웃에 그려지는 디테일 뷰의 순서를 제어합니다. 
+  * DisableClippingPlane - 활성 뷰포트에서 선택된 클리핑 평면을 끕니다. 속성 -> 클리핑 평면 창에서도 사용할 수 있습니다.
+  * ImportLayout - 다른 Rhino 파일에서 레이아웃 페이지를 가져옵니다.
+  * 여러 페이지 레이아웃 인쇄 - 일부 또는 모든 레이아웃을 한 번에 인쇄할 수 있습니다.
+  * ShowLayersInDetail - 디테일 뷰에서 레이어를 표시합니다.
+  * HideLayersInDetail - 디테일 뷰에서 선택된 레이어를 숨깁니다.
+  * ShowSelectedInDetail - ShowSelected 명령처럼 실행됩니다. 단, HideInDetail 명령으로 이전에 숨겨진 개체에만 실행되는 점이 다릅니다.
+**향상된 기능:**
+  * HideInDetail - 활성 디테일과 비활성 디테일을 포함/제외시키는 옵션이 추가되었습니다.
+  * 텍스트와 치수 스타일 크기 조정 - 텍스트와 치수의 크기를 레이아웃 뷰포트와 모델 뷰포트에서 서로 다르게 조정할 수 있습니다. 레이아웃에서 텍스트와 치수가 서로 다른 크기인 경우, 다른 뷰포트에서 텍스트와 치수를 같은 높이로 보이게 쉽게 설정할 수 있습니다.
+  * 하이브리드 인쇄 - 인쇄 품질을 높이기 위해 가능하면 래스터 인쇄와 벡터 인쇄를 모두 사용합니다.
 
-===== Support Files =====
-Here are the files required for both the PDF tutorials and the video tutorial below.[[http://s3.amazonaws.com/mcneel/rhino/5.0/training_docs/Layouts 5/RH5-TM-LAYOUTS-EN-20140408-ALL.zip|Models, Additional Files and PDF for Layout Tutorial (ZIP)]] 6.8MB 
+===== 학습 자료 =====
+다음 PDF 튜토리얼과 동영상 튜토리얼을 보시려면 필요한 파일입니다.[[http://s3.amazonaws.com/mcneel/rhino/5.0/training_docs/Layouts 5/RH5-TM-LAYOUTS-EN-20140408-ALL.zip|Models, Additional레이아웃 튜토리얼에 필요한 파일과 PDF (ZIP)]] 6.8MB 
 
 
-====== Layout Tutorial for Rhino 5 (PDF)======
+====== Rhino 5를 위한 레이아웃 튜토리얼 (PDF)======
 
-This tutorial steps you through the setup of a model to plot from a Sheet Layout viewport. You can download these files and work along with the tutorial.
+이 튜토리얼에서는 용지 레이아웃 뷰포트에서 모델을 설정하고 출력하는 과정을 소개합니다. 파일을 다운로드하여 튜토리얼을 스스로 따라하며 학습하실 수 있습니다.
 
-In this tutorial, we will:
-  - Use the Layout feature to create a plot sheet with details and title block. 
-  - Set the scale to the details and add text and dimensions that are sized correctly to the detail. Use layer visibility per detail and set layer color per detail.
-  - Annotate the plot sheet with title block, notes and other objects that are not directly related to the model. 
-  - Assign print width, print color to objects, and enable the Print Preview mode. 
-  - Plot the layout 1:1 or full size to a PDF. 
+튜토리얼 내용:
+  - 레이아웃 기능을 사용하여 디테일과 제목 블록이 있는 플롯 용지를 만듭니다. 
+  - 디테일의 배율을 설정하고 해당 디테일의 크기에 맞게 텍스트, 치수를 추가합니다. 디테일마다 레이어 표시 상태와 레이어 색을 설정합니다.
+  - 플롯 용지에 제목 블록, 노트, 해당 모델과 직접 관련이 없는 개체에 대해 주석을 추가합니다. 
+  - 인쇄 너비, 개체의 인쇄색를 지정하고 인쇄 미리보기 모드를 사용합니다. 
+  - 레이아웃 1:1 또는 전체 크기의 PDF로 출력합니다. 
 
-[[http://s3.amazonaws.com/mcneel/rhino/5.0/training_docs/Layouts 5/RH5-TM-LAYOUTS-EN-20140408.pdf|Layout Tutorial PDF Only]] 6.0MB.
+[[http://s3.amazonaws.com/mcneel/rhino/5.0/training_docs/Layouts 5/RH5-TM-LAYOUTS-EN-20140408.pdf|레이아웃 튜토리얼 PDF 파일]] 6.0MB.
 
 {{ :rhino:layout_final.jpg?nolink&400|}}
-Contents
-  * Using Layout in Rhinoceros 5
-  * Introduction to Layout
-  * Setting Up the Model
-  * Adding the Page Layout and Inserting a Title Block
-  * Setting up Annotation Scaling
-  * Adding Text to the Page Layout
-  * Setting Detail Edge Plot Width
-  * Adding Dimensions to the Detail
-  * Configuring Print Width and Print Color
-  * Adding a Logo to the Title Block
-  * Printing the Layout
-  * Monochrome Plot
-  * Print Color Plot
-  * Display Color Plot
+내용
+  * Rhinoceros 5의 레이아웃 사용
+  * 레이아웃 소개
+  * 모델 준비 설정
+  * 페이지 레이아웃을 추가하고, 제목 블록 삽입
+  * 주석 배율 설정
+  * 텍스트를 페이지 레이아웃에 추가
+  * 디테일 가장자리 플롯 너비 설정
+  * 디테일에 치수 추가
+  * 인쇄 너비와 인쇄색 설정
+  * 제목 블록에 로고 추가
+  * 레이아웃 인쇄
+  * 흑백 출력
+  * 컬러 출력
+  * 표시색 출력
 
-====== Video Tutorials======
+====== 동영상 튜토리얼======
 
-=====Full Video=====
-|**Introduction to Layouts - Full Video**||
-|{{vimeo>90471956?320x180}}| [[mary@mcneel.com|Mary Fugier]] shows you how to use Layouts in Rhino 5. Learn how to arrange views of both 2-D and 3-D models on the title block at different scales and prepare the layout for printing. Also see how to add annotations to the layout, like text, dimensions and plot to a PDF. To watch full screen, click here: [[https://vimeo.com/90471956|Introduction to Layouts]] |
+=====전체 동영상=====
+|**레이아웃 개요 - 전체 동영상**||
+|{{vimeo>90471956?320x180}}| [[mary@mcneel.com|Mary Fugier]] 가 Rhino 5에서 레이아웃을 사용하는 방법을 보여 드립니다. 다른 배율로 제목 블록에서 2D 및 3D 모델의 뷰를 조정하고 인쇄용으로 레이아웃을 준비하는 방법을 소개합니다. 또한 레이아웃에 텍스트, 치수 등의 주석을 추가하는 방법과 PDF로 출력하는 과정도 보실 수 있습니다. 전체 화면으로 보시려면 다음 링크를 클릭하세요: [[https://vimeo.com/90471956|레이아웃 소개]] |
 
-=====Course Segments=====
-Watch these segments instead of the full video or watch the [[http://vimeo.com/channels/715875|Vimeo Channel on Layouts.]]
+=====주제별 짧은 동영상=====
+동영상 전체가 아닌 짧은 동영상을 보시려면 다음 링크를 클릭하시고  [[http://vimeo.com/channels/715875|레이아웃 관련 Vimeo 채널]] 링크를 참조하세요.
 
-  - [[http://vimeo.com/channels/715875/90913061|Basic Layout Intro]] - (11:00)
-  - [[http://vimeo.com/channels/715875/90913063|Getting Rhino Setup for Accessing Layout Commands]] - (7:06)
-  - [[http://vimeo.com/channels/715875/90913065|Adding a Practice Layout]] - (7:53)
-  - [[http://vimeo.com/channels/715875/90913067|Configuring A Layout for the 3-D Imperial Unit Model]] - (1:42)
-  - [[http://vimeo.com/channels/715875/90913068|Setting up the Perspective Detail]] - (2:17)
-  - [[http://vimeo.com/channels/715875/90913913|Inserting a Title Block]] - (2:44)
-  - [[http://vimeo.com/channels/715875/90913914|Arranging and Sizing Details]] - (1:16)
-  - [[http://vimeo.com/channels/715875/90913916|Assigning Scale to Details]] - (4:41)
-  - [[http://vimeo.com/channels/715875/90913917|Aligning Details]] - (3:22)
-  - [[http://vimeo.com/channels/715875/90913919|Adding Text Labels]] - (4:13)
-  - [[http://vimeo.com/channels/715875/90914825|Annotation Scale]] - (5:59)
-  - [[http://vimeo.com/channels/715875/90914826|Adding Text Fields to Title Blocks]] - (1:58)
-  - [[http://vimeo.com/channels/715875/90914828|Copy Viewport to Details Command]] - (2:28)
-  - [[http://vimeo.com/channels/715875/90914829|Print Layout to PDF]] - (1:22)
-  - [[http://vimeo.com/channels/715875/90914831|Configuring A Layout for a 2-D Architectural Imperial Plan]] - (4:00)
-  - [[http://vimeo.com/channels/715875/90915588|Adding Title Blocks and Labels]] - (1:23)
-  - [[http://vimeo.com/channels/715875/90915750|Annotating The Plan with Text and Dimensions]] - (6:49)
-  - [[http://vimeo.com/channels/715875/90915751|Layer Setting Per Detail]] - (1:56)
-  - [[http://vimeo.com/channels/715875/90915753|PictureFrame and TestChangeSpace]] - (1:21)
-  - [[http://vimeo.com/channels/715875/90915755|Print 2-D Plan to PDF]] - (1:40)
-  - [[http://vimeo.com/channels/715875/90915756|Configuring A Layout for a 3-D Metric Model - the Frigate]] - (13:24)
-  - [[http://vimeo.com/channels/715875/90917074|Configuring A Layout for a 3D Ring Metric Model]] - (3:22)
-  - [[http://vimeo.com/channels/715875/90917075|Rhino Users Work with Layouts]] - (7:06)
+  - [[http://vimeo.com/channels/715875/90913061|기본 레이아웃 개요]] - (11:00)
+  - [[http://vimeo.com/channels/715875/90913063|레이아웃 명령을 사용하기 위해 Rhino에서 준비 설정하기]] - (7:06)
+  - [[http://vimeo.com/channels/715875/90913065|연습용 레이아웃 추가하기]] - (7:53)
+  - [[http://vimeo.com/channels/715875/90913067|3D 파운드법 단위 모델의 레이아웃 설정]] - (1:42)
+  - [[http://vimeo.com/channels/715875/90913068|투시 디테일 설정]] - (2:17)
+  - [[http://vimeo.com/channels/715875/90913913|제목 블록 삽입]] - (2:44)
+  - [[http://vimeo.com/channels/715875/90913914|디테일 배치와 크기 조정]] - (1:16)
+  - [[http://vimeo.com/channels/715875/90913916|디테일에 크기 적용]] - (4:41)
+  - [[http://vimeo.com/channels/715875/90913917|정렬에 대해 자세히]] - (3:22)
+  - [[http://vimeo.com/channels/715875/90913919|텍스트 레이블 추가하기]] - (4:13)
+  - [[http://vimeo.com/channels/715875/90914825|주석 크기 조정]] - (5:59)
+  - [[http://vimeo.com/channels/715875/90914826|제목 블록에 텍스트 필드 추가하기]] - (1:58)
+  - [[http://vimeo.com/channels/715875/90914828|디테일에 뷰포트 복사하는 명령]] - (2:28)
+  - [[http://vimeo.com/channels/715875/90914829|레이아웃을 PDF로 출력]] - (1:22)
+  - [[http://vimeo.com/channels/715875/90914831|2D 건축용 파운드법 도면의 레이아웃 구성]] - (4:00)
+  - [[http://vimeo.com/channels/715875/90915588|제목 블록과 레이블 추가하기]] - (1:23)
+  - [[http://vimeo.com/channels/715875/90915750|텍스트와 치수로 도면에 주석 달기]] - (6:49)
+  - [[http://vimeo.com/channels/715875/90915751|디테일 기준 레이아웃 설정]] - (1:56)
+  - [[http://vimeo.com/channels/715875/90915753|PictureFrame과 TestChangeSpace]] - (1:21)
+  - [[http://vimeo.com/channels/715875/90915755|2D 평면도를 PDF로 인쇄]] - (1:40)
+  - [[http://vimeo.com/channels/715875/90915756|3D 미터법 모델의 레이아웃 설정 - the Frigate]] - (13:24)
+  - [[http://vimeo.com/channels/715875/90917074|3D 반지 미터법 모델의 설정]] - (3:22)
+  - [[http://vimeo.com/channels/715875/90917075|Rhino 사용자들의 레이아웃 관련 작업 소개]] - (7:06)
 
-Other layout links:
-[[http://wiki.mcneel.com/rhino/align_details5|Aligning Details on a Layout]]
+기타 레이아웃 관련:
+[[http://wiki.mcneel.com/rhino/align_details5|디테일을 레이아웃에서 정렬하기]]
 
 
-> **Author:** //Mary Ann Fugier email: <mary@mcneel.com>//
-April 4, 2014
+> **작성자:** //Mary Ann Fugier 이메일: <mary@mcneel.com>//
+2014년 4월 4일
