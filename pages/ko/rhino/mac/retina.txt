@@ -1,31 +1,31 @@
-===== Retina displays and Rhino for Mac =====
+===== Retina 디스플레이와 Mac용 Rhino =====
 
-In June 2012, Apple announced MacBook Pro computers with Retina displays - displays with a much higher resolution than had been previously available on an Apple laptop.  This required additional work by software developers to adapt to this new display technology.
+2012년 6월, Apple에서 그 전에 출시되었던 Apple 노트북 컴퓨터보다 훨씬 고해상도로 디스플레이되는 Retina 디스플레이를 장착한 MacBook Pro 컴퓨터를 발표했습니다. 소프트웨어 개발자들은 이 새로운 디스플레이 테크놀로지를 적용해야 하는 추가 작업을 해야 했습니다.
 
-For a long time, all Apple displays had a [[http://en.wikipedia.org/wiki/Pixel_densities | pixel density]] of approximately 100 pixels per inch (PPI).  When designing dialogs, software developers were used to laying out a dialog by specifying the height and width of text fields and buttons in pixels, and also specifying their location on the screen in pixels.  The new Retina displays had 220 PPI, so the old conventions no longer worked.
+오랫동안, 모든 Apple 디스플레이에는 [[http://ko.wikipedia.org/wiki/%ED%99%94%EC%86%8C_%EB%B0%80%EB%8F%84 | 화소 밀도]]는 1인치당 약 100 픽셀 (PPI) 정도였습니다. 대화상자를 디자인할 때 소프드웨어 개발자들은 텍스트 필드와 단추의 높이와 너비를 지정하고 화면상의 위치를 픽셀 단위로 지정하여 대화상자 레이아웃을 설정했습니다. 새로운 Retina 디스플레이는 220 PPI이므로 이전 방식이 맞지 않았습니다.
 
-Apple itself did a lot of work to make the transition seamless.  Inside OS X, Apple started using the concept of points, rather than pixels, as its way of measuring screen dimensions.  For older non-Retina displays, Apple decided that pixels and points would be the same size, and so all the previous conventions about screen layout still worked.  On the new Retina displays, however, Apple said that 1 point equalled 2 pixels, so there are twice as many pixels as points in each direction.  So when a developer creates a dialog button as 18 x 90 (points), it is still 18 x 90 pixels on a non-Retina display, but drawn using 36 x 180 pixels on a Retina display.  Because the Retina display has double the pixel density, the button on both the non-Retina display and the Retina display have the same apparent physical size, which is slightly less than 1 inch wide.
+Apple도 자체적으로 순조롭게 이 변화가 진행되도록 많은 작업을 했습니다. OS X 내부적으로는 화면 치수를 측정하는 데에 픽셀이 아닌, 포인트 개념을 사용하기 시작했습니다. 이전의 Retina가 아닌 디스플레이의 경우, 픽셀과 포인트가 동일한 크기라고 Apple에서 결정하였으므로 모든 이전 방식의 화면 레이아웃을 여전히 사용할 수 있었습니다. 새 Retina 디스플레이에서는 1 포인트가 2 픽셀이라고 Apple이 정의하였으므로, 각 방향마다 픽셀 수가 2배 많아졌습니다. 개발자가 대화상자 단추를 18 x 90 (포인트)로 만들면 Retina 디스플레이가 아닌 이전 방식에서는 18 x 90 픽셀이지만, Retina 디스플레이에서 표시할 때는 36 x 180 픽셀이 사용됩니다. Retina 디스플레이의 화소 밀도는 2배이므로 비(非)Retina 디스플레이와 Retina 디스플레이에서 단추의 물리적 크기는 너비가 약 1인치에 못 미치는 정도로 동일합니다. 
 
-Apple updated all the controls and text drawing so that buttons and text drawn on a Retina display would draw using twice as many pixels and all applications would continue to work as before without change.  But graphics programs like Rhino needed to be changed to take advantage of the new Retina displays.
+Apple은 Retina 디스플레이에서는 두 배 많은 픽셀로 표시되도록 단추와 텍스트 표시 제어를 업데이트하였으며, 모든 응용 프로그램에서 별도의 변경 없이 사용이 가능합니다. 그러나 Rhino와 같은 그래픽 프로그램에서 Retina 디스플레이를 활용하려면 변경이 필요합니다.
 
-As mentioned before, OS X now generally works by using points for its drawing.  But when Rhino is drawing your model in a view, it needs to know the size of a view in pixels, not in points.  So Rhino queries OS X to determine this, and uses the appropriate pixel values when drawing.  If you visually compare your model on a non-Retina display (like a 2012 MacBook Air) with the same Rhino model on a Retina display, you will see that the Retina version is much crisper and clearer.  Rhino is drawing 4 times as many pixels when drawing to a Retina display.
+앞서 말씀 드린 바와 같이, OS X에서 포인트를 사용해 표시하는 것은 일반적으로 문제가 없습니다. 그러나, Rhino에서 모델을 뷰에 표시할 때 뷰의 크기를 Rhino가 픽셀 단위로 알아야 합니다. Rhino가 이 정보를 파악하기 위해 OS X에게 쿼리를 보내고, 그에 적합한 픽셀로 표시합니다. 같은 Rhino 모델을 비Retina 디스플레이(2012 MacBook Air)와 Retina 디스플레이에서 비교해 보면 Retina 버전에서 훨씬 선명하고 깨끗하게 보이는 것을 알 수 있습니다. Rhino는 Retina 디스플레이에 표시할 때 4배 많은 픽셀을 사용합니다.
 
-=== Screen resolution should be set to Best (Retina) ===
+=== 화면 해상도는 최고 (Retina)으로 설정해야 합니다 ===
 
-The displays on the 2012 15" Retina MacBook Pro computers are 2880 pixels wide by 1800 pixels high.  In System Preferences > Displays, Apple gives you the option of using a scaled resolution, and changing this is generally a bad idea for Rhino for Mac.  For example, do not use the scaling setting below.  See the comment "Using a scaled resolution may effect performance"?  That is very true in Rhino for Mac.
+2012 15" Retina MacBook Pro 컴퓨터의 디스플레이는 2880 픽셀 너비 X 1800 픽셀 높이입니다. 시스템 환경설정 > 디스플레이에서 해상도를 변경할 수 있으나, Mac용 Rhino에서는 바람직하지 않습니다. 예를 들어, 다음 해상도를 사용하지 마십시오. "해상도 조절이 성능에 영향을 미칩니까?" 항목을 참조하세요. Mac용 Rhino에 해당되는 글입니다. 
 
 {{:rhino:mac:display_resolution_preference.png |}}
 
 
-This panel is letting you change the dimension of your display in //points//, not in pixels.  Obviously you cannot change the number of physical pixels in your display.  Apple's presentation on this control panel can be confusing if you think that the screen resolution display is in pixels, but the screen resolution presented in System Preferences is actually in points.
+이 패널에서 디스플레이 치수를 픽셀이 아닌 //포인트//로 변경할 수 있습니다. 사용하는 디스플레이의 실제 픽셀 개수를 변경할 수는 없습니다. 화면 해상도를 픽셀 단위로 생각한다면 Apple의 제어 패널이 다소 혼란스러울 수 있습니다. 시스템 환경설정의 화면 해상도는 포인트 기준입니다. 
 
-To measure the difference these settings make, we instrumented Rhino to report the actual viewport sizes.  We started Rhino and made the Rhino drawing window full screen and a single viewport.  Here's what Rhino reports when you use the last three System Preferences settings:
+이 설정의 차이를 측정할 수 있도록, Rhino에서 실제 뷰포트 크기를 보고하는 기능이 있습니다. Rhino를 시작하고, Rhino 그리기 창을 하나의 뷰포트로 설정하고 전체 화면으로 지정합니다. 시스템 환경설정의 마지막 3개 설정을 사용할 때 Rhino가 보고하는 내용은 다음과 같습니다:
 
-^ Resolution ^ Looks like ^ viewport in points ^ viewport in pixels ^ pixel count ^
-|Best (Retina)  |  1440 X 900  |  1438 X 801  |  2876 X 1602  |  4,607,352  |
+^ 해상도 ^ 실제로 보임 ^ 뷰포트(포인트) ^ 뷰포트(픽셀) ^ 픽셀 개수 ^
+|최고 (Retina)  |  1440 X 900  |  1438 X 801  |  2876 X 1602  |  4,607,352  |
 | |  1680 x 1050  |  1678 X 951  |  3356 X 1902  |  6,383,112  |
-|More Space  |  1920 x 1200  |  1918 x 1101  |  3836 x 2202  |  8,446,872  |
+|더 많은 공간  |  1920 x 1200  |  1918 x 1101  |  3836 x 2202  |  8,446,872  |
 
-Now remember, the number of physical pixels in the Retina display cannot change.  For the Best (Retina) setting, the number of pixels in the viewport corresponds exactly to the number of physical pixels in the display, so the viewport contents are drawn directly to the display.  In the two other cases, OS X creates an off-screen bitmap in the GPU's memory that is larger than the physical display, and Rhino draws into that bitmap.  OS X then scales the contents of that bitmap down to the size of the physical display and draws the scaled down version to the physical display.  In the More Space (1920 x 1200) option, Rhino has to draw twice as many pixels as in the Best (Retina) option, and then all that extra work is essentially thrown away when OS X takes an extra step to scale down the Rhino output so it can fit on the physical screen.
+기억하세요. Retina 디스플레이의 실제 픽셀 개수는 변경할 수 없습니다. 최고(Retina) 설정은 뷰포트의 픽셀 개수와 디스플레이의 실제 픽셀 개수가 정확하게 일치하므로, 뷰포트 컨텐츠가 디스플레이에 곧바로 표시됩니다. 다른 두 개의 경우는 OS X에서 실제 디스플레이보다 더 큰 오프스크린 비트맵을 GPU의 메모리에 만들고, Rhino가 해당 비트맵을 그립니다. OS X에서 실제 디스플레이의 크기에 맞춰 해당 비트맵의 컨텐츠 크기를 줄여 표시합니다. 더 많은 공간 (1920 x 1200) 옵션의 경우, 최고 (Retina) 옵션 만큼 Rhino가 두 배로 표시해야 하며, OS X가 실제 화면에 맞도록 Rhino 출력의 크기를 줄이는 추가 과정을 처리할 때 모든 여분의 작업이 기본적으로 무시됩니다. 
 
-Since Rhino already pays attention to the physical size of your display, it always makes sense to keep your display resolution set to **Best for display** or, if the **Scaled** selection is picked, **Best (Retina)**.
+Rhino에서 이미 디스플레이의 실제 크기를 확인하므로 디스플레이 해상도를 항상 **디스플레이에 최적화**로 설정하거나, **해상도 조절**을 선택하려면 **최고 (Retina)**를 선택하시는 것이 바람직합니다.
