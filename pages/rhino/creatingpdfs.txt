@@ -1,32 +1,27 @@
 ====== Creating PDFs in Rhino ======
-> **Summary:** //Rhino 4 now has more advanced PDF support.  This explains how to create and control PDF output. <color red>Requires Rhino 4</color>//
+> **Summary:** //Rhino 4 now has more advanced PDF support.  This explains how to create and control PDF output. <color red>Requires Rhino 4.</color>//
 
-=====Contents:=====
-
-  * [[#Overview]]
-  * Available PDF writers
-  * [[#Using]]
 
 =====Overview=====
 
-There are two separate PDF formats. The traditional format is a 2D PDF format. Adobe has also introduced a 3d Format for PDF.
+There are two separate PDF formats. The traditional format is a 2D PDF format. Adobe has also introduced a 3D Format for PDF.
 
 \\
 
-| 2D PDF is a normal page layout format.  It is created by using a PDF writer that capture the print output of Rhino to create a PDF file.  By using Rhino 4, you can control page layout, lineweight, linetypes, hatches in the PDF file. Rhino does not support Layer creation in 2d PDFs.|    | 3D PDF is a newer format released by Adobe. It allows the PDF model to spin around and change how 3D objects are displayed.  We can send 3d models, materials and some texture information to a 3D PDF. See Details below on 3D PDF.|
+| 2D PDF is a normal page layout format.  It is created by using a PDF writer that captures the print output of Rhino to create a PDF file.  By using Rhino 4, you can control page layout, lineweight, linetypes, hatches in the PDF file. Rhino does not support Layer creation in 2D PDFs.|    | 3D PDF is a newer format released by Adobe. It allows the PDF model to spin around and change how 3D objects are displayed.  We can send 3D models, materials, and some texture information to a 3D PDF. See details below on 3D PDF.|
 |{{:legacy:en:BOTTLE_2D.jpg}}|   |{{:legacy:en:hydropdf.jpg}}|
 
 
-=====Available 2d Drawing PDF writers=====
+=====Available 2D drawing PDF writers=====
 
-Creating 2d PDF drawings requires a PDF printer driver.  Some drivers cost money, some are free. A list of drivers available:
+Creating 2D PDF drawings requires a PDF printer driver.  Some drivers cost money. Some are free. A list of drivers available:
 
   * [[http://www.adobe.com/products/acrobat/|Adobe Acrobat Professional]]
   * [[http://www.cutepdf.com/|CutePDF]]
   * [[http://www.pdf995.com/|PDF995]]
   * [[http://www.primopdf.com/|PrimoPDF]]
 
-When printing a 2d PDF you need to determine which style you would like to print. You can shoose between vector style PDF file and a Raster type PDF file.  Vector PDFs have the advantage in printing to larger paper sizes and getting sharp linework at any size.  Raster PDFs will handle images and shaded modes coming from Rhino, but limit the sharpness of the print based on a preset resolution of the PDF. See details below on 2D PDF.
+When printing a 2D PDF you need to determine which style you would like to print. You can choose between a vector style PDF file and a raster type PDF file.  Vector PDFs have the advantage in printing to larger paper sizes and getting sharp linework at any size.  Raster PDFs will handle images and shaded modes coming from Rhino, but limit the sharpness of the print based on a preset resolution of the PDF. See details below on 2D PDF.
 
 \\
 
@@ -39,21 +34,21 @@ Once you have installed one of the above drivers, the steps to create a PDF file
 
   - Open the drawing you want to convert in Rhino.
   - Go to the Print command in Rhino.
-  - In the Select the PDF printer destination you would like to use.
+  - Select the PDF printer destination you would like to use.
   - Select the Page size you would like to use.
-  - Do Not click on Print to file.  It will create the wrong file type.
+  - Do not click on Print to file.  It will create the wrong file type.
   - Select which Printer Output mode you would like to use, Vector or Raster.  If vector is greyed out, it means you are trying to print something that cannot be printed vector, for instance a shaded view.
 
 > **Note:** //Most of the PDF converters allow you to set resolution (DPI) of a file. This setting affects both raster and vector printing.  In raster printing it controls the overall resolution of the result.  In a vector file it controls the accuracy of the file in printing.//
 
-=====Available 3D PDF Writers=====
+=====Available 3D PDF writers=====
 
 
-> **Note:** //Acrobat Professional does not currently support 3D PDF.  You must have Acrobat 3D to support 3D models. Acrobat 3D does contain Acrobat 2D Drivers also.//
+> **Note:** //Acrobat Professional does not currently support 3D PDF.  You must have Acrobat DC to support 3D models. Acrobat DC does contain Acrobat DC Drivers also.//
   * [[http://www.adobe.com/products/acrobat3d/|Adobe Acrobat 3D]]
 
-Currently Acrobat 3D only supports the Rhino 3 file format. If you try and read a Rhino 4 file, Acrobat will report back that no displayable geometry exists in the file.  You can save your Rhino 4 file back to Rhino 3 before reading them into Acrobat.
+Currently Acrobat DC only supports the Rhino 3 file format. If you try and read a Rhino 4 file, Acrobat will report back that no displayable geometry exists in the file.  You can save your Rhino 4 file back to Rhino 3 before reading them into Acrobat.
 
-> **Update:** //Depending on your version of Acrobat 3D it may be possible to use the "Print Screen" function of Windows to bring models from Rhino4 to Acrobat 3D directly. Texture assignments will stay intact after transfer.//
+> **Update:** //Depending on your version of Acrobat DC it may be possible to use the "Print Screen" function of Windows to bring models from Rhino 4 to Acrobat DC directly. Texture assignments will stay intact after transfer.//
 
 
