@@ -1,202 +1,39 @@
-====== Mac Rhino 常见问题 ======
-
---> Mac Rhino 有期限，若过期了该怎么做？#
-
-设置期限是为了让大家都能测试最新的版本，并且避免用户使用旧版遇到太多问题。 
-
-在每个Mac Rhino WIP版本过期之前，都会有新版释出，请到 [[http://www.rhino3d.com/download/wenatchee/5.0/wip|下载网页]]。每当Mac Rhino打开时都会自动确认是否有新WIP版更新并会自动提您您。同时也会将更新消息公布在[[http://discourse.mcneel.com/ |讨论版]]的 [[http://discourse.mcneel.com/category/rhino-for-mac|Rhino for Mac块 ]]。
-
-<-- 
-
--->文件数据可以与Windows版本的Rhino通用吗？ #
-
-可以的，Rhino 5文件可共享，您也可以另存为Rhino 4的文件与Windowns版的Rhino 4使用。
-
-<-- 
-
--->Mac版本Rhino可以使用有左右键或多键的鼠标吗？ #
-
-可以的，所有的 Mac支持多键及有滚轮的鼠标，您也可以使用单键的Mac鼠标，使用单键鼠标时若要使用右键功能时，可以在点左键时同时按住Control键。
-
-<-- 
-
--->在Mac版本Rhino，可以使用Spaceball/SpaceNavigator/SpaceExplorer？#
-
-当前只支持SpaceNavigator。
-
-<--
- 
-
-
--->为何有"Unknown or unimplemented command(未知或尚未完成的指令)"消息？有那些还不能使用？ #
-
-我们计划尽可能让Windows版本的Rhino功能全部移植到Mac版本，但当前尚为完全移植完成。请参见Windows Rhino版本的[[http://www.rhino3d.com/nr.htm|软件开发流程]]看我们如何进行新版产品开发。我们依照相同的规划来进行Mac版本的开发。当前我们在[[http://www.rhino3d.com/nr.htm#phase1|第一阶段: WIP (研发中)]]。
-
-此[[rhino:mac:whatworks|网页连结]]说明当前已可用的功能及待完成的功能清单。
-
-<-- 
-
--->Mac版本的Rhino是否支持英文以外的语言？ #
-
-有的。我们当前支持西班牙语、法语、德语、意大利文、中文、韩文及日文。由于当前尚在开发阶段。所以仍有部分尚未完成。 
-
-Rhino Mac版本使用您系统缺省的语言，若您要使用与系统缺省语言不一样的语言设置，请到工具列。
-  - 选择**Rhinoceros**并选择**Preferences**。
-  - 于**Language Preference**面板选择您想使用的语言界面。
-
-<-- 
--->如何删除Rhino?#
-
-要完整删除您计算机的Mac Rhino，请参考下列步骤：
-
-  - 从应用程序夹中删除程序。
-  - 删除目录**/Library/Application Support/McNeel**。此目录包含了教学用模型及文件档，若您没有下载可能就不存在您的计算机中。
-  - 删除目录**~/Library/Application Support/McNeel**，这个目录为Rhino选择性使用，并可能不存在于您的计算机，内容可能会包含您创建的Toucan纹理、Python scripts及其它Mac Rhino plug-ins。
-  - 删除于您下列目录的文件 **~/Library/Preferences/com.mcneel.rhinoceros.plist** ，这些文件为您的Rhino preferences设置数据。
-
-<-- 
-
--->我可以撰写Macro及插件程序吗？ #
-
--->可以在Mac系统执行执行一个Macro指令吗？ #
-
-可以的。请于Rhino菜单列，找**Tools > Commands > Read From File**一个装入并执行Macro指令。
- 
-<--
-
--->可以在Mac系统执行一个RhinoScript程序？ #
-
-不行。RhinoScript为以VisualBasic为基础并且VisualBasic并不能于OS X被执行。我们同时使用Python作为Mac及Windows系统的脚本编写工具，做为可以跨平台的脚本工具。请参考[[http://discourse.mcneel.com/category/scripting | Rhino scripting讨论版]]学习更多如何使用Python于这两个系统撰写脚本。
-
-<--
-
-
--->是否将有其它插件程序可以于Mac版本的Rhino使用？ #
-
-也许。然后Windows版本的插件程序将不支持Mac版本，将视各插件厂商的开发者决定是否要移植到Mac版本的Rhino。
-<--
- 
--->Mac版本的Rhino可以支持我的C语言外挂程序？ #
-
-会的。然而，我们尚未准备好支持提供用户C语言插件开发程序，但我们计划在未来支持。您将需要使用Mac开发系统重新编译您的插件程序，依照您插件程序的复杂性来决定转译的工作量，可能只需要少量的工作就可以在两个系统使用。
-
-<--
-
--->Mac版本的Rhino可以支持我的.NET语言外挂程序？#
-
-最终会的，我们正在制作提供Rhino开发者使用的开发工具，并可于OS X及Windows使用。
-
-<-- 
-<--
-
--->Mac版本的Rhino正式上市日期？#
-
-尚未有明确的日期。McNeel & Associates有一个不同一般的开发周期，我们发布早期且尚不完整的软件，并藉此得到反馈。Mac版本的Rhino也使用同样的产品研发周期风格，您可以参考 [[http://www.rhino3d.com/nr.htm|Windows Rhino 产品研发]]。
-
-<--
- 
--->若我购买了Windows版本的Rhino，是否能免费取得Mac版本的Rhino？是否将会有跨系统的升级版？ #
-
-我们当前尚无任何关于升级版的决策。
-
-====== 疑难排解======
--->若我发现问题，如何回报#
-
-请参考[[:zh-tw/rhino/mac/ reportingproblems| Mac Rhino问题回报]]。
-
-<--
-
--->安装相关问题#
-
--->在安装较新版本之前，我需要删除旧版本吗？ #
-
-不需要。 
-<--
--->我不能安装Rhino，该怎么办？#
-
-请检查您下载的dmg文件是否有效，文件可能在下载时损坏。
-
-  - Start the Disk Utility program **/Applications/Utilities/Disk Utility**
-  - From the menu, select **Images > Verify...** An Open File dialog box appears.
-  - Select the .dmg file that you downloaded. It is usually in your Downloads folder and is named rhinoceros_wip_YYYYMMDD.dmg
-  - 若您的下载文件无效，请到 [[http://www.rhino3d.com/download/wenatchee/5.0/wip|下载网页]]并再次申请下载。
-
-<-- 
-
--->我已安装最新版本的Rhino，却显示已过期。该怎么办？#
-
-您安装了超过一个Rhino，并且系统打开已过期的版本，您并去删除**所有**版本的Rhino。 
-
-点击任一3DM文件打开Rhino，若可以打开，代表仍有Rhino安装在某处。 
-  - 在Dock里的Rhino图示上按右键，选择**选项>显示于Finder**了解Rhino安装位置。
-  - 将此Rhino拖动至废纸篓。 
-  - 当所有Rhino皆已删除，双击一个3DM文件将会打开一个文本而非Rhino。
-  - 重新安装您刚下载的最新版Rhinno。
-
-<--
- 
--->当我拖动Rhino到应用程序数据匣时，系统回复因为BGHUDAppKit正在执行，所以不能安装。这是什么情况？#
-
-这是10.7 Finder的一个错误，它不能正确判断是否可以复盖之前的应用程序。
-
-不幸的是，当您看到这个消息时，Finder其实已经部分删除现有的Rhinoceros程序，且新版尚未安装。这代表您当前的Rhino已有问题且若您执行会当机。
-
-若您试着在拖动到应用程序2-3次，最终是可以安装好。或这你可以先将当前的Rhino拖动到废纸篓，然后在安装最新版本。这样Finder就不会有复盖现有版本的问题。
- 
-10.8 Finder并没有这个问题，升级到10.8版也是一个解决方式。
-
-<-- 
-<--
-
--->Mac Rhino当机了，该怎么办？#
-
-请参考[[macrhinocrash|Rhino 当机 – 该怎么办？]]
-
-<--
- 
--->当前的Mac Rhino版本有问题，我想要退回前个版本。#
-
-并不能退回前个WIP Mac Rhino版本。由于您参与开发阶段测试，请回报您发现的问题，请见 [[zh-tw:rhino:mac:reportingproblems|Mac Rhino问题回报]]学习如何回报您的问题，让我们可以发现它并修正它。
-
-<-- 
-
--->Rhino出现一个神秘的对话框，并显示"Program Failure"后，Mac Rhino就完全不能使用。#
-
-当Mac Rhino遇到意想不到的情况，它会显示一个"Program Failure(程序失败)"的消息，之后，Mac Rhino会关闭内部，您不能再执行任何指令，只能存储文件，然后结束Mac Rhino。我们需要知道什么时候发生这个状况。 
-当您使用Rhino时，您可能会看到下列对话框：
-
-Rhino会在下列几个情形下出现此对话框。不是所有功能都已完整植入Mac Rhino，当您使用到未完成的功能，您会看到此对话框。还有一种状况是Rhino的部分代码只能在Windowns版本的Rhino使用。若您试图执行这类代码，您也会看到"Rhino Error"的对话框。最后，有很多早期的错误修正测试，您也可能看到这个对话框为内部测试发现不应产生的情况。
-
-{{:rhino:mac:notimpl.png?nolink|}}
-
-当您看到其中一个类似的对话框出现，请记下文件名称、行号及版本信息，email到<mactech@mcneel.com>，并告知我们您看到这个对话框之前正使用Rhino做那些动作。我们会根据您的说明，尝试复制问题，并找到解决方案，确保未来不会发生同样的错误。
-
-当您看到这类对话框之后，Rhino只限制您做少数几个指令，您将可以存储文件并结束Rhino，其它大部分指令皆不能运作。
-
-<-- 
-
-
---> 我希望可以使用按右键重复上一个指令。#
-
-取消右键菜单功能并打开重复上个指令功能。
-
-  - 在下拉式菜单，请选**Rhinoceros** 然后点选 **Preferences**。
-  - 选择鼠标 **Mouse** 面板。
-  - 在鼠标右键部分**Right Mouse Button** ，取消勾选**Enable Context Menus**。
-
-<--
-
---> 我希望可以使用图示右键功能#
-
-有些图示工具同时具有两个指令功能，您可以在指令提示看到。
-Mac Rhino缺省的是您可以使用 Option+点选指令图示执行第二个(右键)指令。
-
-  - 在下拉式菜单，请选**Rhinoceros** 然后点选 **Preferences**。
-  - 选择 **ToolPalette** 面板。
-  - 在**Execute alternate command when** 设置上，一样使用右键将执行方式切换为点选右键执行。
-
-**请注意：** 若您缺省使用右键执行第二个指令，您将不能使用右键自定工具列，您必须使用View/Customize 工具列取代。
-
-Mac 用户界面标准为右键 (或 control-click) //总是// 执行文字菜单。您可使用ToolPalette面板改变这点。
-
-<--
+======  Rhino for Mac --常见问题 ======
+
+这里有些关于Rhino for Mac的常见问题(及答案)。如果您的疑问在这里得不到解答，请至[[http://chinese.discourse.mcneel.com/c/rhino-for-mac|Rhino for Mac中文论坛]]，看看在那里是否已经有答案。
+
+==== 一般问题 ====
+  *[[http://discourse.mcneel.com/t/rhino-for-mac-release-candidate-1/20047|何时会发表Rhino for Mac呢?]]
+  *[[zh:rhino/mac/release/cost|新产品发布时，售价会是多少?]]
+  *[[zh:rhino/mac/release/windows/update/cost|如果我买的是Windows版Rhino，那么Mac版会是免费的吗?]]
+  *[[zh:rhino/mac/release/updates/service/release|Rhino for Mac发布后，还会有修正版或更新吗?]]
+  *[[http://www.rhino3d.com/mac-feature-compare|Rhino for Mac跟Rhino for Windows有何不同?]]
+  *[[zh:rhino/mac/release/supported/language|Rhino for Mac版除了英文，还提供其他语言吗?]]
+  *[[zh:rhino/mac/wip/definition|什么是WIP?]]
+  *[[zh:rhino/mac/wip/time/limit/expiration|WIP是有时效性的，到期之后怎么办?]]
+
+====兼容性====
+  *[[zh:rhino/mac/windows/3dm/compatible| Rhino for Mac的3DM档与Rhino for Windows兼容吗?]]
+  *[[http://www.rhino3d.com/formats|Rhino for Mac支援哪种档案格式?]]
+  *[[zh:rhino/mac/two/three/button/mouse/compatible|多键按钮的鼠标也可以搭配Mac版本使用吗?]]
+  *[[zh:rhino/mac/spaceball/spacenavigator/spaceexplorer/support|可以在Mac版中使用Spaceball/SpaceNavigator/SpaceExplorer 3D鼠标吗?]]
+  *[[zh:rhino/mac/digitizer/support|Rhino for Mac支援逆向手臂（digitizers）吗?]]
+
+==== 脚本与插件 ====
+  * [[zh:rhino/mac/script/macro|我可以在Mac版本执行指令脚本吗?]]
+  * [[zh:rhino/mac/script/rhinoscript|我可以在Rhino for Mac执行RhinoScript的脚本吗?]]
+  * [[zh:rhino/mac/plugin/third/party|可以在MacRhino上使用第三方的插件吗?]]
+  * [[zh:rhino/mac/plugin/dotnet/support|Mac版本支援.NET插件吗?]]
+  * [[zh:rhino/mac/plugin/c/support|Mac版本支援C/C++插件吗?]]
+====疑难排除====
+  * [[reportingproblems|若我发现问题，如何回报?]]
+  * [[macrhinocrash|Rhino for Mac 当机 - 该怎么办?]]
+  * [[zh:rhino/mac/uninstall/install|在安装新版本之前要先移除Rhino吗?]]
+  * [[zh:rhino/mac/disk/image/could/not/be/opened/rhinoinstall|OS X系统显示"磁碟映像档无法开启。" 我该怎么办?]]
+  * [[zh:rhino/mac/expired|我已安装最新版本的Rhino，却显示已过期。该怎么办？]]
+  * [[zh:rhino/mac/uninstall|如何移除Rhino for Mac?]]
+
+==== 其他杂项 ====
+  * [[zh:rhino:mac:install:previous:version:nopreviousdownload|我可以下载前一个版本吗?]]
+  * [[zh:rhino/mac/no/rightclick/repeat/command/norightclickrepeat|我想要按右键重复上一个指令，为何没有办法执行?]]
+  * [[zh:rhino/mac/plugin/panelingtools|可以使用panelingtools吗?]]
