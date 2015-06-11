@@ -5,14 +5,14 @@ Most of these are plain RhinoScripts, but a couple are more complex and involve 
 
 **Loading the scripts - ** All of these scripts are designed for drag and drop for V4 (and v5 for the most part). Extract, save, and then drag and drop the rvb files onto an open Rhino window. This will add the script to the list of scripts that load on startup (Options>[[developer:rhinoscript|RhinoScript]] page), and it adds one or more aliases to your alias list (Options>Aliases). Typing the alias or putting it on a button will run the script, much like a command.
 
-**Loading the plug-ins -** Pretty much the same as loading scripts -- unzip and save the 'rhp' plug-in files and then drag and drop them onto an open Rhino window. You can also use Options>Plug-ins page > Install button to navigate to the rhp file on your disk.  The fancier ones of these add menus in Rhino.
+**Loading the plug-ins -** Pretty much the same as loading scripts. Unzip and save the 'rhp' plug-in files and then drag and drop them onto an open Rhino window. You can also use Options>Plug-ins page > Install button to navigate to the rhp file on your disk.  The fancier ones of these add menus in Rhino.
 
 I'll add more of these and more info about usage as I go. Let me know if you run into problems with these. Most have been working pretty well for me and others but there are no doubt bugs to squish. <pascal@mcneel.com>
 
 ----
 
 ----
-===Scripts-===
+===Scripts===
 {{:people:UpdateSelectedBlocks.zip|UpdateSelectedBlocks }} Allows the user to select specific linked blocks to update. Adds the following alias- **UpdateSelectedBlocks**
 
 {{:people:HatchDirection.zip|HatchDirection }} Sets the direction of selected hatches, or sets the hatch base point and direction both. Adds the following aliases- **HatchDirection, HatchOrient**
@@ -21,7 +21,7 @@ I'll add more of these and more info about usage as I go. Let me know if you run
 
 {{:people:dimensionoffset.zip|DimensionOffset }} Set the distance of the dimension number from the dimensioned objects. Useful for tidying up drawings. Select multiple linear or aligned dimensions and set the offset distance. Adds the following alias- **DimensionOffset**
 
-{{:people:setbackfillet.zip|SetbackFillet }} Like FilletCorners but fillets to a constant setback from the corner point, not a constant radius. <color blue> //**Updated** 12/27/2012- tune ups to make it more reliable.//</color> Adds the following alias- **SetbackFillet**
+{{:people:setbackfillet.zip|SetbackFillet }} Like FilletCorners but fillets to a constant setback from the corner point, not a constant radius. <color blue> //**Updated** 12/27/2012 - Tune ups to make it more reliable.//</color> Adds the following alias- **SetbackFillet**
 
 {{:people:selparalleltoaxis_2_.zip|SelParallel }} Select lines that are parallel to CPlane axes, or to a selected line, or to a line defined by two points. Adds the following alias- **SelParallel** 
 
@@ -31,13 +31,13 @@ I'll add more of these and more info about usage as I go. Let me know if you run
 
 {{:people:mirror_ex.zip|MirrorEx}} Mirror objects with some fancy options: mirror position only (objects are not inverted, position only for just text, and various nifty mirror plane options including the current cplane and selected planar surfaces. Adds the following alias- **MirrorEx**
 
-{{:people:distribute.zip|Distribute objects}} Evenly distribute objects in one direction by distance between centers or by gap between objects.  <color blue> //**Updated** 11/1/2012 - No longer constrained to 2D. New options for explicitly setting gaps or center to center distance. Limited support for groups, Groups are treated as single objects, unless only a single group is selected. In that case objects are distributed within the group. NOTE: Group support may not work well if objects are members of more than one group.**Updated** 10/1/2014 Fixed group handling. At least top level groups should be respected now.//</color>  Adds the following alias- **Distribute**
+{{:people:distribute.zip|Distribute objects}} Evenly distribute objects in one direction by distance between centers or by gap between objects.  <color blue> //**Updated** 11/1/2012 - No longer constrained to 2D. New options for explicitly setting gaps or center to center distance. Limited support for groups. Groups are treated as single objects, unless only a single group is selected. In that case objects are distributed within the group. Note: Group support may not work well if objects are members of more than one group. **Updated** 10/1/2014 Fixed group handling. At least the top level groups should be respected now.//</color>  Adds the following alias- **Distribute**
 
 {{:people:retrim.zip|Retrim}} Retrim a surface with the current trim curves. This is sometimes all that is needed to fix a bad object, e.g. from SelBadObjects or something that fails Check with a message including the words Trim, or Loop or Edge. <color blue> //**Updated** 2/6/2012 to handle more cases.//</color> Adds the following alias- **ReTrim**
 
 {{:people:qinfo.zip|QInfo}} Quick info about selected curves, surfaces, polysurfaces and block instances. This is a handy script to add to the object context menu- Options > Context Menu  > Object menu. Adds the following alias- **QInfo**
 
-{{:people:filletnonplanar.zip|FilletNonPlanar}} <color blue> //V5 only.//</color> Fillet curves which are out of plane. Since no true-arc fillet exists for these cases, the result is an approximation formed by deforming a true arc along the arc normal. Unlike Fillet, input curves cannot be extended at the moment. <color blue> //**Updated** 5/3/2012 to handle more cases.; **Updated** 12/19/2012 - Tuned up. Should be more reliable and make better fillets when the input curves cross one another.//</color> Adds the following alias- **FilletNonPlanar**
+{{:people:filletnonplanar.zip|FilletNonPlanar}} <color blue> //Rhino 5 only.//</color> Fillet curves which are out of plane. Since no true-arc fillet exists for these cases, the result is an approximation formed by deforming a true arc along the arc normal. Unlike Fillet, input curves cannot be extended at the moment. <color blue> //**Updated** 5/3/2012 to handle more cases.; **Updated** 12/19/2012 - Tuned up. Should be more reliable and make better fillets when the input curves cross one another.//</color> Adds the following alias- **FilletNonPlanar**
 
 {{:people:matchoncrv_2.zip|MatchOnCrv}} Match a curve end to any point on another curve. Select near the end of an open curve to match and select a target curve. Set the target point on the target curve and set the type of continuity. Since the match is not on the end of the curve, you get a chance to flip the direction of the match for Tangency and Curvature matches. Adds the following aliases- **MatchOnCrv**
 
@@ -55,11 +55,11 @@ I'll add more of these and more info about usage as I go. Let me know if you run
 
 [[http://wiki.mcneel.com/_media/legacy/en/CreateOutline.zip|Create outline]]  Automates CurveBoolean to just create the outer perimeter curve in one shot. This adds the following alias- **CreateOutline**
 
-{{:people:aligngrips.zip|Align object grips.}} Allows you to snap grips in line with other points or 3D locations. Adds the folowing aliases- **AlignGrips, AlignGripsCrv**<color blue> //**Updated** 07/12/10 - Clearer prompts, added direction option//</color>
+{{:people:aligngrips.zip|Align object grips.}} Allows you to snap grips in line with other points or 3D locations. Adds the folowing aliases- **AlignGrips, AlignGripsCrv**<color blue> //**Updated** 07/12/10 - Clearer prompts. Added direction option.//</color>
 
 {{:people:curvesymmetryauto.zip|Curve symmetry}} Rearranges control points of a curve to make it symmetrical. Adds the following alias- **CurveSymmetry**
 
-[[http://wiki.mcneel.com/_media/legacy/en/PlanarizeCurve.zip|Planarize curves ]] Makes curves planar to a best fit plane through the current curve. Adds the following alias- **PlanarizeCurve**<color blue> //**Updated** 01/19/10 - fixed a crash on closed curves//</color>
+[[http://wiki.mcneel.com/_media/legacy/en/PlanarizeCurve.zip|Planarize curves ]] Makes curves planar to a best fit plane through the current curve. Adds the following alias- **PlanarizeCurve**<color blue> //**Updated** 01/19/10 - Fixed a crash on closed curves//</color>
 
 [[http://wiki.mcneel.com/_media/legacy/en/OffsetX.zip|Offset subcurves]] Offset entire curves, sub curve segments of polycurves or user defined spans within curves. Add the following alias-  **OffsetX**.
 
@@ -71,7 +71,7 @@ I'll add more of these and more info about usage as I go. Let me know if you run
 
 {{:people:findstackedpoints_11_03_2010.zip|SelStacked}} Locate objects that have stacked control points and locates the the stacked points. Adds the following aliases- **SelStacked, StackedPoints**.
 
-{{:people:intersectplane.zip| IntersectPlane}} Finds the intersection of objects and infinite planes defined by cplanes, planar surfaces, or user defined planes. <color blue> //**Updated** 5/3/2010 Added 'CutPlane' to the variety of planes that can be defined.; **Updated** 8/27/2010 Better workflow on TrimWithplane.; **Updated** 5/21/2012 Added **SplitWithPlane**, **BooelanSplitWithPlane**; **Updated** 12/19/2012 - Fixed some bugs, added tangent plane as a plane type.**Updated** 02/06/2013 - Added clipping planes to available planar objects to select. **Updated** 02/06/2013 - Bug fix //</color> Adds the following aliases- **IntersectPlane, TrimWithPlane**.
+{{:people:intersectplane.zip| IntersectPlane}} Finds the intersection of objects and infinite planes defined by cplanes, planar surfaces, or user defined planes. <color blue> //**Updated** 5/3/2010 - Added 'CutPlane' to the variety of planes that can be defined.; **Updated** 8/27/2010  - Better workflow on TrimWithplane.; **Updated** 5/21/2012 - Added **SplitWithPlane**, **BooelanSplitWithPlane**; **Updated** 12/19/2012 - Fixed some bugs, added tangent plane as a plane type.**Updated** 02/06/2013 - Added clipping planes to available planar objects to select. **Updated** 02/06/2013 - Bug fix //</color> Adds the following aliases- **IntersectPlane, TrimWithPlane**.
 
 
 [[http://wiki.mcneel.com/_media/legacy/en/FileInfo.zip|File info]] Returns information about the currently open file. Adds the following alias- **FileInfo**
@@ -102,16 +102,16 @@ I'll add more of these and more info about usage as I go. Let me know if you run
 
 [[http://wiki.mcneel.com/_media/legacy/en/HighPt.zip|High point]] Finds the local high or low point on a surface or polysurface starting from a user input (pick) point. Adds the following aliases- **HighPt, LowPt**
 
-[[https://github.com/downloads/pgolay/PG_Scripts/MoveProject%20(2).zip|Move-project]] Move objects normal to the cplane until the Move 'from' point hits a target surface, polysurface or mesh. Adds the following aliases- **MoveProject**, **MoveProjectEach** <color blue> //**Updated** 5/13/2011 added **MoveProjectEach**;   **Updated** 10/01/2012 - Works better with block instances, other tune ups.//</color>
+[[https://github.com/downloads/pgolay/PG_Scripts/MoveProject%20(2).zip|Move-project]] Move objects normal to the cplane until the Move 'from' point hits a target surface, polysurface or mesh. Adds the following aliases- **MoveProject**, **MoveProjectEach** <color blue> //**Updated** 5/13/2011 - Added **MoveProjectEach**;   **Updated** 10/01/2012 - Works better with block instances. Other tune ups.//</color>
 
-{{:people:projectobjects.zip|Project objects}} Projects 3d surface, polysurface or mesh objects onto a target surface or polysurface.  Adds the following alias- **ProjectObjects.** <color blue>//**Updated** 09/30/09//</color>
+{{:people:projectobjects.zip|Project objects}} Projects 3D surface, polysurface, or mesh objects onto a target surface or polysurface.  Adds the following alias- **ProjectObjects.** <color blue>//**Updated** 09/30/09//</color>
 
 [[http://wiki.mcneel.com/_media/legacy/en/ExtractWiresDir.zip|Extract surface wireframe in one direction only. ]] Extracts surface wires in U or V. Adds the following alias - **ExtractWiresDir**.
 
-{{:people:RadialSections.zip|Section objects radially or along a path curve. }} Creates section curves radially from a center point at user defined intervals in degrees, or along a path curve at user defineed intervals in file units along the curve. Adds the following aliases-  **SectionRadial, SectionPath**
+{{:people:RadialSections.zip|Section objects radially or along a path curve. }} Creates section curves radially from a center point at user defined intervals in degrees, or along a path curve at user defined intervals in file units along the curve. Adds the following aliases-  **SectionRadial, SectionPath**
 
-===Plug-ins-===
+====Plug-ins====
 
-[[http://wiki.mcneel.com/_media/legacy/en/SelectionSets.zip|Selection Sets]] Create, save and recall named object and control point selection-sets. See the 'read me text file included in the download for more complete usage info. Adds the following commands- **SelectionSet, SelSetList, SelSetName, DeleteSeletionSets, RenameSelectionSet, SubtractSetsList, SubtractSetsName, GripSelectionSet, SelGripsName, DeleteGripSets, RenameGripSet, SubtractGripSets, SelGripsList**
+[[http://wiki.mcneel.com/_media/legacy/en/SelectionSets.zip|Selection Sets]] Create, save, and recall named object and control point selection-sets. See the 'read me text file included in the download for more complete usage info. Adds the following commands- **SelectionSet, SelSetList, SelSetName, DeleteSeletionSets, RenameSelectionSet, SubtractSetsList, SubtractSetsName, GripSelectionSet, SelGripsName, DeleteGripSets, RenameGripSet, SubtractGripSets, SelGripsList**
 
-[[http://wiki.mcneel.com/_media/legacy/en/Light_Utilities.zip|Light utilities]] Adds a menu and a lot of commands to manipulate lights- rectangular lights in particular are hard to handle in Rhino and this adds tools for helping out. The plug-in and commands refer to rectangular lights as 'area lights'. This is just goofy and I'll try to get back and change this to use the normal Rhino name for these lights. Adds the following commands- **AreaLightPlace, AreaLightResize, AreaLightOrient, AreaLightSlide, AreaLightTarget, AreaLightTargetToObjects, AreaLightLevel, LightToPlane, PlaneToLight, AreaLightScale, SpotlightAngl, SpotlightPivot, SpotlightSlide, SpotlightTarget, SpotlightTargetObjects**
+[[http://wiki.mcneel.com/_media/legacy/en/Light_Utilities.zip|Light utilities]] Adds a menu and a lot of commands to manipulate lights. Rectangular lights in particular are hard to handle in Rhino and this adds tools for helping out. The plug-in and commands refer to rectangular lights as 'area lights'. This is just goofy and I'll try to get back and change this to use the normal Rhino name for these lights. Adds the following commands- **AreaLightPlace, AreaLightResize, AreaLightOrient, AreaLightSlide, AreaLightTarget, AreaLightTargetToObjects, AreaLightLevel, LightToPlane, PlaneToLight, AreaLightScale, SpotlightAngl, SpotlightPivot, SpotlightSlide, SpotlightTarget, SpotlightTargetObjects**
