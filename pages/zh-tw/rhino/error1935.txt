@@ -1,0 +1,31 @@
+====== Error 1935(Rhino 5 for Windows) ======
+> **摘要：**//如何修復錯誤代碼1935的錯誤。//
+>**相關安裝說明：**//[[installproblems|安裝Rhino 5疑難排解]]//
+
+====== 問題 ======
+我收到*錯誤1935，安裝組件"Microsoft.VC80.CRT時發生錯誤, ..."
+
+======原因======
+這是Microsoft C++ 2005 Redistributable Package中的錯誤
+
+=====答案=====
+**解決方案 1：**
+  * ** 更新Windows** 一些使用者回報在更新Windows之後就可以解決此問題。
+**解決方案 2：**
+  * ** 停用系統上的防毒軟體。** 一位使用者表示停用AVG，Rhino安裝就可以成功。
+**解決方案 3：**
+  * ** 嘗試安裝幾次**  一位使用者表示他嘗試第三次之後就安裝完成了，他沒有對系統做任何更改。
+**解決方案 4：**
+  - 在Windows Vista或Windows 7，從開始功能表，鍵入功能(Features)。
+  - 按一下**開啟或關閉Windows功能**
+  - 在Windows功能對話方塊中，選擇標有**Windows Communication Foundation HTTP 啟用**的核取方塊。
+  - {{:rhino:rhino_1935_windows_features.png|}}
+  - 按OK
+
+如果您無法啟用此功能，或是Windows功能對話框是空的，那麼此Windows安裝已經損壞需要修理。 請聯絡Microsoft技術支援。
+
+**//更多詳情：//**
+在安裝Rhino時碰到此錯誤的使用者，也無法直接從Microsoft安裝[[http://www.microsoft.com/downloads/zh-tw/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 可轉發套件 (Redistributable Package)]]。因此問題與Windows及可轉發套件有關，而非Rhino安裝程式。
+
+
+{{tag>rhinoinstallationerror＿zh-tw}}
