@@ -8,21 +8,21 @@
   * [[#Rhino 5.0 Install - Specify a Zoo server]]
   * [[rhino:installrhi|Installing RHI Files for All Users]]
 
-======Rhino 5.0 MSI Deployment with Active Directory or SMS======
+======Rhino 5 MSI deployment with Active Directory or SMS======
 =====Overview=====
-These instructions are most useful for System Administrators who want to deploy Rhino 5.0 throughout an organization using Active Directory or SMS.
+These instructions are most useful for System Administrators who want to deploy Rhino 5 throughout an organization using Active Directory or SMS.
 
 These techniques will also work for automated installation by running the MSI from a folder that contains a customized Setup.ini. This does not require Active Directory, SMS, or other deployment tools.
 
 =====Prerequisites=====
-Rhino 5.0 requires the Run the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft DotNet Full Framework]] to be installed on the target system before installation. The installer is included on the DVD in the Installers\Prerequisites folder. If you are installing from a downloaded file, follow these instructions to  [[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|uncompress the Downloaded Rhino 5 EXE into a folder.]]
+Rhino 5 requires the Run the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft DotNet Full Framework]] to be installed on the target system before installation. The installer is included on the DVD in the Installers\Prerequisites folder. If you are installing from a downloaded file, follow these instructions to  [[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|uncompress the Downloaded Rhino 5 EXE into a folder.]]
 
-=====Deployment Preparation=====
+=====Deployment preparation=====
    - Edit the **Setup.ini** file and place it next to the MSI file you are installing. **Note:** All characters following a # sign are ignored by the installer, even if the # character appears in the middle of a line.
 
-=====Deployment Configuration=====
+=====Deployment configuration=====
   - Open **Active Directory Users & Computers**
-  - Right-click the Group or Organizational Unit that contains the users or computers that will receive Rhino 5.0, then click Properties.
+  - Right-click the Group or Organizational Unit that contains the users or computers that will receive Rhino 5, then click Properties.
   - In the Group Policy tab, add a new Group Policy Object named **Install Rhino 5.0**
   - Select the **Install Rhino 5.0** Group Policy Object, then click **Edit...**
   - Determine whether you will be installing per-computer or per-user (read up on Group Policy to determine which works best for your organization).
@@ -33,15 +33,15 @@ Rhino 5.0 requires the Run the [[http://www.microsoft.com/en-us/download/details
   - Select the **Install this application at logon checkbox.** (Or customize the deployment options to fit the needs of your organization).
   - Repeat steps 6-10 to deploy **HelpMedia.msi** and **LanguagePack_en-us.msi** (plus whatever other language packs you need).
 
-======Rhino 5.0 Install with Script (batch file)======
-To install Rhino 5.0 32-bit with English language support as a stand-alone license using the CD-Key "AAAABBBBCCCCDDDDEEEE", run:
+======Rhino 5 install with script (batch file)======
+To install Rhino 5 32-bit with English language support as a stand-alone license using the CD-Key "AAAABBBBCCCCDDDDEEEE", run:
 
 <code>
 msiexec.exe /i"D:\Installers\setup_x86_en-us.msi" INSTALLDIR="C:\Program Files (x86)\Rhinoceros 5" RMA_CDKEY=AAAABBBBCCCCDDDDEEEE INSTALL_EN=1
  
 </code>
  
-To install Rhino 5.0 64-bit with English, French, and German language support as a stand-alone license using the CD-Key "RH50GBG8L8G689AA29898UE8", run:
+To install Rhino 5 64-bit with English, French, and German language support as a stand-alone license using the CD-Key "RH50GBG8L8G689AA29898UE8", run:
  
 <code>
 msiexec.exe /i"D:\Installers\setup_x64_en-us.msi" INSTALLDIR="C:\Program Files\Rhinoceros 5 (64-bit)" RMA_CDKEY=AAAABBBBCCCCDDDDEEEE INSTALL_EN=1 INSTALL_DE=1 INSTALL_FR=1
@@ -53,7 +53,7 @@ msiexec.exe /i"D:\Installers\setup_x64_en-us.msi" INSTALLDIR="C:\Program Files\R
 **Note:** 32- and 64-bit Rhino should be installed in separate directories.
 For an explanation of these parameters, and the other possible ones, see **[[rhino:automatedinstalls|Editing Rhino4Setup.ini]]**
 
-======Rhino 5.0 Install with Script and INI File======
+======Rhino 5 install with script and INI file======
 - Edit the **Setup.ini** in the Installers folder of your installation DVD. If you are installing from a downloaded file, follow these instructions to  [[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|uncompress the Downloaded Rhino 5 EXE into a folder.]] Remove comments (#) from the parameters of that you want to set for the installation process.
 
 **Note:** All characters following a # sign in a line are ignored by the installer, even if the # character appears in the middle of a line. For more configuration details, see **[[rhino:installingrhio:5.0:setupini|Editing Setup.ini]]**.
@@ -62,7 +62,7 @@ For an explanation of these parameters, and the other possible ones, see **[[rhi
 - Launch the MSI file and it will automatically find the INI file in the same folder, read the parameters from it, and run the installer silently.
 
 **Example batch file:**\\
-**Note:** This will install both 32 and 64-bit V5 Rhino with US English language and Help file support assuming you copied the Installers folder from the V5 DVD into C:\Temp\Installers folder, edited the **setup.ini** file as needed, and made a batch file with the following details:
+**Note:** This will install both 32 and 64-bit Rhino 5 with US English language and Help file support assuming you copied the Installers folder from the Rhino 5 DVD into C:\Temp\Installers folder, edited the **setup.ini** file as needed, and made a batch file with the following details:
 <code>
 
 msiexec /i C:\Temp\Installers\rhino5setup_en-us_x64.msi /qb
@@ -72,8 +72,8 @@ msiexec /i C:\Temp\Installers\HelpMedia.msi /qb
 
 </code>
 
-======Incomplete Rhino 5.0 Install Without the Language Pack======
-Are you missing templates, toolbars, or plugins? This is a symptom that the language pack was not installed. This can be a incomplete or "botched" install if you are installing from the CD or an error in the install script if you are installing from an MSI script.
+======Incomplete Rhino 5 install without the language pack======
+Are you missing templates, toolbars, or plug-ins? This is a symptom that the language pack was not installed. This can be a incomplete or "botched" install if you are installing from the CD or an error in the install script if you are installing from an MSI script.
 
 If you install Rhino with the MSI install script above, but forget the language pack line, you will need to manually run the MSI for the language pack on your systems. It is also located on the Rhino 5 CD in the Installers folder.
 
@@ -81,20 +81,20 @@ To verify if the language support is installed look for the localization, plug-i
 C:\Users\<login>\AppData\Roaming\McNeel\Rhinoceros\5.0. 
 
 If these folders are missing or if you have already opened Rhino, you will have found no toolbars, templates, and Help. To fix this, do the following:
-     - Run the MSI for the language pack
+     - Run the MSI for the language pack.
      - Open Rhino and type **ToolbarReset**. 
      - Close Rhino and reopen. This will delete the scheme in the registry, and reopening will reset it with the missing components.
 
 If not, then:
-  - Open Control Panel
-  - Go to Programs and Features
+  - Open Control Panel.
+  - Go to Programs and Features.
   - Scroll to Rhino language pack entry like **Rhinoceros 5 Language Pack Installer (fr-FR).**
-  - Right click and select **change**
+  - Right click and select **change**.
   - Reopen Rhino.
 
 ======Locating the Language Pack MSI======
   - Find the Rhino product CD. If you are installing from a downloaded file, follow these instructions to  [[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|uncompress the Downloaded Rhino 5 EXE into a folder.]]
-  - Browse to the Installer folder
+  - Browse to the Installer folder.
   - Run the LanguagePack_XX-XX.msi
  
 After you install the language pack:
@@ -103,29 +103,29 @@ After you install the language pack:
   - Close and reopen Rhino.
 You should now have templates loaded
 If not, then:
-  - Open Control Panel
-  - Go to Programs and Features
+  - Open Control Panel.
+  - Go to Programs and Features.
   - Scroll to Rhino language pack entry like **Rhinoceros 5 Language Pack Installer (fr-FR).**
-  - Right click and select **change**
+  - Right click and select **change**.
   - Reopen Rhino.
 
-======Rhino 5.0 Install - Specify a Zoo server======
+======Rhino 5 install - Specify a Zoo server======
 To specify a Zoo server during installation, either add this line to your setup.ini file:
 
 <code>
 ZOO_SERVER=host.domain.com # Fully qualified domain name or IP address
 </code>
 
-OR 
+or
 
 Pass the ZOO_SERVER property on the command line:
 <code>
 ZOO_SERVER=host.domain.com
 </code>
 
-OR
+or
 
-[[zoo:findzooserver#using_dns|Set up a DNS entry]]
+[[zoo:findzooserver#using_dns|Set up a DNS entry.]]
 
 \\
 
