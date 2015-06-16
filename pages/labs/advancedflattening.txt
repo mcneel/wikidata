@@ -1,18 +1,11 @@
 ====== Advanced Flattening ======
 > **Summary:** Since the Expander plug-in from Ship Constructor will not be available for Rhino 4.0, we have started developing a replacement. //<color red>This is the first prototype.</color>//
 
-=====Contents=====
 
-  * [[#Background]]
-  * [[#Overview]]
-  * Download & Install:
+  * Download and install:
     * [[#Installation|For Rhino 4.0]].
-    * For Rhino 5.0: Advanced Flattening is included in Rhino 5.0. //[[http://www.rhino3d.com/download/rhino/5/latest?PageSpeed=noscript|Download Rhino 5.0 Now...]]//
-  * [[#Interface]]
-  * [[#Limitations]]
-  * [[#Known bugs]]
-  * [[#To Do]]
-  * [[#Feedback]]
+    * For Rhino 5: Advanced Flattening is included in Rhino 5. //[[http://www.rhino3d.com/download/rhino/5/latest?PageSpeed=noscript|Download Rhino 5 now...]]//
+ 
 
 =====Background=====
 
@@ -22,13 +15,13 @@ Rhino 4.0 has:
   * **Smash** - is a special version of **UnRollSrf** that does not check to see if the surface is developable. It is not recommended now that **Squish** is available.
   * **Squish** //<color red>new</color>// - makes a flat pattern from a 3-D non-developable (curved in two directions) surface or polygon mesh.  In general, try **UnRollSrf** first.
 
-Rhino 4.0 does NOT have:
+Rhino 4.0 does **not** have:
 
   * **Unfold or unbend** - to make a flat pattern from 3-D shapes made from bending up a 2-D pattern. Mostly used to create sheet metal cases, etc. Most MCAD products do this nicely, ojezu.
   * **Flow** - to make a flat pattern for a 3-D shape made by flowing metal over a complex mold. An example is stamping a soda can from the metal disk or stamping an auto interior door panel from a flat pattern.
   * **Peel** - to split surfaces based on where they might rip and flattens the surfaces. An example is flattening a sphere. //Note: if the shape is already split, Squish may work. You can tell when and where a 3-D surface needs to be split by where it has extreme stretching or compression or the 2-D pattern overlaps.//
 
-=====Squish Overview=====
+=====Squish overview=====
 
 The **Squish** command flattens a non-developable (curved in two directions) 3-D mesh or [[rhino:nurbs|NURBs]] surface into a flat 2-D pattern.
 
@@ -47,9 +40,9 @@ Here //compression// means the material will be compressed when the 2-D pattern 
 Up to ten text dots mark the locations with the most dramatic deformation. The number in the text dot is the percent stretching change in length. In the image above, the green text dots displaying "0.3" mean the regions near those dots will be stretched by 0.3% (3/1000) when mapped to 3-D.
 
 {{http://en.wiki.mcneel.com/content/upload/images/Expand-ani.gif}}
-=====SquishBack Overview=====
+=====SquishBack overview=====
 
-The **SquishBack** command lets you place points and curves on a 2-D pattern, that was made with the Squish command, and then "unsquish" them back to the 3-D shape.
+The **SquishBack** command lets you place points and curves on a 2-D pattern that was made with the Squish command, and then "unsquish" them back to the 3-D shape.
 
 For example, suppose we wanted to put a "Rhino" brand name in the black circle on this 3-D [[rhino:nurbs|NURBs]] model of a shoe last.
 
@@ -70,18 +63,18 @@ Finally, use the **SquishBack** command to "unsquish" the white Rhino text onto 
 =====Installation=====
 
 ==== For Rhino 4.0:====
-    - [[http://en.wiki.mcneel.com/content/upload/files/vcredist_x86.exe|Download and Install]] the latest Microsoft runtime libraries (required to run Squish). (You only need to do this once.)
+    - [[http://en.wiki.mcneel.com/content/upload/files/vcredist_x86.exe|Download and install]] the latest Microsoft runtime libraries (required to run Squish). (You only need to do this once.)
     - [[http://download.mcneel.com/download.asp?id=SquishWIP&language=|Download the latest Squish plug-in.]] - //Updated 11-January-2008//
     - Download the plug-in file **[[http://download.mcneel.com/download.asp?id=SquishWIP&language=|Squish.rhp]]** to a folder on your computer.
     - Download the toolbar file **[[http://en.wiki.mcneel.com/content/upload/files/Expand.zip|Expand.tb]]** to a folder on your computer. Activate the toolbar under menu "Tools/ Toolbar layout".
     - From Windows file Explorer, drag and drop Squish.rhp files into an open Rhino 4.0 viewport, or use the 'install' button on the Tools - Options - Plug-ins page.
     - You may also need to download and install [[http://www.microsoft.com/downloads/details.aspx?familyid=766a6af7-ec73-40ff-b072-9112bab119c2|Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package ATL Security Update]].
 
-==== For Rhino 5.0: ====
-1. Download and install the latest version of [[http://www.rhino3d.com/download/rhino/5/latest?PageSpeed=noscript|Rhino 5.0]].
+==== For Rhino 5: ====
+1. Download and install the latest version of [[http://www.rhino3d.com/download/rhino/5/latest?PageSpeed=noscript|Rhino 5]].
 
 
-=====Squish Command Options=====
+=====Squish command options=====
 
   * SplitSeams=Yes/No
     * Use SplitSeams=Yes for meshes from a single surface.
@@ -116,7 +109,7 @@ The CustomSetup option lets you set the parameters used by the custom deformatio
   * BndCompress
   * InteriorStretch
   * InteriorCompress
-The default value for these parameters is 1 and they can be set to any positive number.  A larger value reduces the amount of the specified deformation compared to what happens when all four parameters are equal.  For example, if you want to severly limit interor expansion, you could do something like:
+The default value for these parameters is 1 and they can be set to any positive number.  A larger value reduces the amount of the specified deformation compared to what happens when all four parameters are equal.  For example, if you want to severely limit interior expansion, you could do something like:
 
    BndStretch=1
    BndCompress=1
@@ -132,17 +125,14 @@ If you want to preserve boundary lengths you could use the settings:
 
 =====Limitations=====
 
-  * Does NOT (and will not) unroll, unfold, or peel.
+  * Does **not** unroll, unfold, or peel.
   * Does not work great on developable surfaces. Use the UnRollSrf command.
   * For stamping with extreme deformations, like stamping aluminum beverage cans from aluminum disks, Squish will be worse than useless.
   * No check for overlapping 2-D results.
 
-=====Known Bugs=====
 
+=====To do=====
 
-=====To Do=====
-
-  * <del>Allow selecting additional curves and points that lie near the 3-D surface and flatten them along with the surface.</del>
   * Label lines and surfaces.
   * Polysurface/solids support.
   * Simultaneous "Squishing" of multiple surfaces, and attempt to layout the resulting patterns in the best possible way. (Olivier Suire)
