@@ -3,15 +3,15 @@
 > **Summary:** //An overview of how Rhino finds a Zoo license manager server.//
 
 =====Overview=====
-When Rhino needs a license from a Zoo server, it determines the name of the Zoo server by looking in the following locations in order:
-  - Looks in the Current User hive of the Windows Registry for the host name or IP address of your Zoo server.
-  - Looks in the Local Machine hive of the Windows Registry for the host name or IP address of your Zoo server.
+When Rhino needs a license from a Zoo server, it determines the name of the Zoo server by looking in the following locations in this order:
+  - The Current User hive of the Windows Registry. Looks for the host name or IP address of your Zoo server.
+  - The Local Machine hive of the Windows Registry. Looks for the host name or IP address of your Zoo server.
   - Queries your Domain Name System (DNS) server for the default Zoo server name.
  
 
-=====More Information=====
+=====More information=====
 
-====Registry Lookup - Current User====
+====Registry Lookup - Current user====
 
 When searching in HKEY_CURRENT_USER, of the Windows Registry, for the host name or IP address of your Zoo server, both 32-bit and 64-bit Rhino will look in this location:
 
@@ -23,7 +23,7 @@ Type:  REG_SZ
 Value: <host name or IP address>
 </code>
 
-====Registry Lookup - Local Machine====
+====Registry Lookup - Local machine====
 If you are using a 32-bit version of Windows, then when searching in HKEY_LOCAL_MACHINE, of the Windows Registry, for the host name or IP address of your Zoo server, Rhino 32-bit will look in this location:
 
 <code>
