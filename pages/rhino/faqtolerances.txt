@@ -5,7 +5,7 @@
 =====Tolerances, tolerances, tolerances...?=====
 <color darkslateblue>**//What do all those numbers mean?  How should I set them in Rhino?//**</color>
 
-The subject of file tolerances frequently comes up in new user questions.  Many modeling programs don't allow you to set your tolerances. They are determined for you, whether you like it or not.  Rhino gives you the advantage of letting you set your own tolerances according to your needs, but it takes a bit of experience and understanding to set them correctly.
+The subject of file tolerances frequently comes up in new user questions.  Many modeling programs don't allow you to set your tolerances. They are determined for you whether you like it or not.  Rhino gives you the advantage of letting you set your own tolerances according to your needs, but it takes a bit of experience and understanding to set them correctly.
 
 {{vimeo>85108857?640x360}}A Video on Tolerance and Precision in Rhino.
 
@@ -14,58 +14,58 @@ The subject of file tolerances frequently comes up in new user questions.  Many 
 
 **//<color darkslateblue>Tolerance</color>//** is simply a way of stating how much precision you need, or conversely, how much error you are willing to accept in your project. Nothing is 100% accurate or perfect. Different projects and sizes of objects will have widely varying needs for accuracy. You wouldn't want to try to build a building to the same level of micron precision as a Swiss watch, and the inverse would be equally ridiculous (that is to say impossible).
 
-Engineering methods for specifying tolerances are very precise and involved. We will not go into that kind of detail here. We are simply a guide to set up your projects for modeling in Rhino. Depending on which template you choose currently, Rhino sets your absolute tolerances at 0.01 or 0.001 units (whatever units you are using, inches, mm, meters, etc.). You can also create your own templates with other tolerances.  But what does **//<color darkslateblue>absolute tolerance</color>//** mean, really?
+Engineering methods for specifying tolerances are precise and involved. We will not go into that kind of detail here. We are simply a guide to set up your projects for modeling in Rhino. Depending on which template you choose currently, Rhino sets your absolute tolerances at 0.01 or 0.001 units (whatever units you are using, inches, mm, meters, etc.). You can also create your own templates with other tolerances.  But what does **//<color darkslateblue>absolute tolerance</color>//** mean, really?
 
 
 =====2: Absolute tolerance settings in Rhino=====
 
-In Rhino's terms, the absolute tolerance setting dictates the maximum permissible distance apart that two objects or elements are permitted to be and still be considered to be //close enough// for your purposes.  //Close enough// means that two surfaces or curves will be capable of being joined or that an **//<color darkslateblue>approximate</color>//** operation like a sweep will generate a surface whose edges follow the rails to within the absolute tolerance specified.
+In Rhino's terms, the absolute tolerance setting dictates the greatest permissible distance apart that two objects or elements are permitted to be and still considered //close enough// for your purposes.  //Close enough// means that two surfaces or curves will be capable of being joined or that an **//<color darkslateblue>approximate</color>//** operation like a sweep will generate a surface whose edges follow the rails to within the specified absolute tolerance.
 
 > **Note:** //In joining operations, 2X the absolute tolerance is allowed, so be careful.//
 
 **<color royalblue>What is an "approximate" operation?</color>**
 
-Some objects are possible to define mathematically perfectly to the limits of what your computer's floating point math is able to calculate - extremely tiny tolerances you generally don't need to worry about. However, some commands rely on approximations to **//<color darkslateblue>fit or match</color>//** curves or surfaces to other curves or surfaces. The more exact a solution you need, the more time it will take to calculate, even to the point of locking up your computer. The absolute tolerance tells Rhino at what point you think its "good enough" and stop trying to calculate a closer solution.
+Some objects are possible to define mathematically perfect to the limits of what your computer's floating point math is able to calculate - Generally, you don't need to worry about extremely tiny tolerances. Yet, some commands rely on approximations to **//<color darkslateblue>fit or match</color>//** curves or surfaces to other curves or surfaces. The more exact solution you need, the more time it takes to calculate, even to the point of locking up your computer. The absolute tolerance tells Rhino at what point you think it's "good enough" and to stop trying to calculate a closer solution.
 
-Another downside of specifying a higher than needed absolute tolerance is that Rhino will then generate things like sections or intersections with many, many control points, which are heavier (bigger data size), noisier (not as smooth) and harder to edit.
+Another downside of specifying a higher than needed absolute tolerance is that Rhino will then generate things like sections or intersections with many, many control points. Control points which are heavier (bigger data size), noisier (not as smooth), and harder to edit.
 
 **<color royalblue>Which operations are "approximate"?</color>**
 
-Any command where it is necessary to find the intersection between curves and/or surfaces is one example. Specific commands include but are not limited to: Trim, Split, Intersect, Contour, Section, Offset (curves and surfaces) Project, Sweep 1 and 2 Rails, all of the Boolean operations, FilletSrf, FilletEdge, etc.
+Any command necessary to find the intersection between curves and surfaces is an example. Specific commands include (but are not limited to): Trim, Split, Intersect, Contour, Section, Offset (curves and surfaces) Project, Sweep 1 and 2 Rails, all of the Boolean operations, FilletSrf, FilletEdge.
 
 
 **<color royalblue>So, why don't I just model with loose tolerances?</color>**
 
-The advantage of a looser (larger) tolerance is that computing time and data size may be reduced, but at the expense of accuracy of your model. This is precisely why some experience is needed to set your tolerances, it is always necessary to find a good compromise.
+The advantage of a looser (larger) tolerance is that computing time and data size may be reduced, but at the expense of your model's accuracy. This is precisely why some experience is needed to set your tolerances. It is always necessary to find a good compromise.
 
 For example, the //Intersect// command creates a curve at the intersection of two surfaces. The curve is guaranteed to lie, within the //**<color darkslateblue>absolute tolerance</color>**//, on each of the two surfaces.
 
-Try the Intersect command and save the resulting curve off to one side. Then add a zero to the tolerance setting and run Intersect again. Now turn on the control points for both curves. The second curve will have more control points; will be "heavier," and will stay closer to the two surfaces. Is one curve "better" than the other? It depends on your needs. If your manufacturing process can't benefit from the more closely fitting part, then the first "lighter" curve is better since it results in a smaller file, faster calculations, and better parameterized surfaces.
+Try the Intersect command and save the resulting curve off to one side. Then add a zero to the tolerance setting and run Intersect again. Now turn on the control points for both curves. The second curve will have more control points, will be "heavier," and will stay closer to the two surfaces. Is one curve better than the other? It depends on your needs. If your manufacturing process can't benefit from the more closely fitting part, then the first "lighter" curve is better since it results in a smaller file, faster calculations, and better parameterized surfaces.
 
-Different objects and scales may require widely differing tolerances.  For example, in designing the general form for a car body (which might have important details in the 1.0 mm range) a file tolerance of 0.1 mm might be good enough.  However, for smaller details on that same car, even 0.01 mm may not be enough, and the inner workings of the motor will certainly need a file tolerance of 0.001 or even 0.0001 in the case of bearing surfaces.
+Different objects and scales may require widely differing tolerances.  For example, if you are designing the general form for a car body (which might have important details in the 1.0 mm range) a file tolerance of 0.1 mm might be good enough.  However, for smaller details on that same car, even 0.01 mm may not be enough, and the inner workings of the motor will certainly need a file tolerance of 0.001 or even 0.0001 in the case of bearing surfaces.
 
-Another Rule of Thumb is to use a tolerance setting equal to or one order of magnitude tighter than (1/10 of) the best tolerance you can hold through your manufacturing process; or one order of magnitude tighter than your smallest modeled detail, whichever is smaller.
+Another Rule of Thumb: Use a tolerance setting equal to or one order of magnitude tighter than (1/10 of) the best tolerance you can hold through your manufacturing process -- or one order of magnitude tighter than your smallest modeled detail, whichever is smaller.
 
 **<color royalblue>Overriding or making custom tolerances</color>**
 
-Some commands may let you individually specify the tolerance for that particular operation  as in NetworkSrf or MatchSrf  you will have a dialog box with tolerance options you can set within the command, overriding the general tolerance. Using the Refit option also allows you to specify your own tolerance within certain commands.
+Some commands may let you individually specify the tolerance for that particular operation  as in NetworkSrf or MatchSrf. You will have a dialog box with tolerance options you can set within the command, overriding the general tolerance. Using the Refit option also allows you to specify your own tolerance within certain commands.
 
-And lastly, there are commands like JoinEdge that let you exceed the absolute tolerances locally if you think it might be useful to be used with caution!!  you are deliberately saying its OK to be inaccurate here!
+And lastly, there are commands like JoinEdge that let you exceed the absolute tolerances locally if you think it might be useful. This is to be used with caution!! You are deliberately saying its OK to be inaccurate here!
 
 =====3:  Angular and relative tolerances in Rhino=====
 
-There are two other tolerance settings in Rhino: angular and relative. The relative tolerance is used on very few commands and can generally be left alone. The angular tolerance is important in that it tells Rhino at what point you want two curves or surfaces to be considered "Tangent". The default setting of 1 degree is rather large for fine modeling. Surfaces that are 1 degree out of tangency can still show a visible fold or line. I find a setting of 0.1 degree or even finer to be better.
+There are two other tolerance settings in Rhino: angular and relative. The relative tolerance is used on few commands and can generally be left alone. The angular tolerance is important in that it tells Rhino at what point you want two curves or surfaces to be considered "Tangent". The default setting of 1 degree is rather large for fine modeling. Surfaces that are 1 degree out of tangency can still show a visible fold or line. I find a setting of 0.1 degree or even finer to be better.
 
 =====4:  How tolerances can affect your project and workflow=====
 
-An important thing to note here is that tolerances should be set at the beginning of the modeling process, for, although you can change the tolerances while you work, objects which were modeled previously with lower tolerances will not be fixed if you raise them. A good practice is to continuously check your work by joining up elements as you create them  if they join, you're within your tolerance limits, if they don't, you need to go back and find out why not and correct the situation immediately. This will avoid ending up with a finished model which has problem areas or inaccuracies which may very be hard to fix at that late stage without completely rebuilding certain sections, resulting in much more time spent.
+An important thing to note here is that tolerances should be set at the beginning of the modeling process, for, although you can change the tolerances while you work, objects which were previously modeled with lower tolerances will not be fixed if you raise them. A good practice is to continuously check your work by joining up elements as you create them. If they join, you're within your tolerance limits. If they don't, you need to go back and find out why not and correct the situation immediately. This avoids ending up with a finished model with problem areas or inaccuracies which may be hard to fix at that late stage without completely rebuilding certain sections.
 
-Operations that involve the intersecting function, such as Intersect, Split or the Boolean operations can also be quite sensitive to tolerance settings. Often, if the absolute tolerance is set too low, complete intersections may not be found, and splitting or Boolean operations may fail as a result (note that tolerances are not the only reason for these operations to fail, however).  Too tight a tolerance setting may also be harmful. In addition to creating overly long calculation times, Rhino may even crash. In general you should keep the absolute tolerance setting in the range of 0.01 to 0.0001, and never set it below 1.0e-5. If you need tighter tolerance, use smaller units instead.
+Operations that involve the intersecting function, such as Intersect, Split or the Boolean operations, can also be quite sensitive to tolerance settings. Often, if the absolute tolerance is set too low, complete intersections may not be found. Splitting or Boolean operations may fail as a result. (Note that tolerances are not the only reason for these operations to fail, however.) Too tight a tolerance setting may also be harmful. In addition to creating overly long calculation times, Rhino may even crash. In general you should keep the absolute tolerance setting in the range of 0.01 to 0.0001. And never set it below 1.0e-5. If you need a tighter tolerance, use smaller units instead.
 
 
-=====5:  Exporting to other (downstream) programs:=====
+=====5:  Exporting to other (downstream) programs=====
 
-If objects are to be exported to another downstream application (such as CAM software, or a solid modeler), it is very important to take into account the precision that these programs require for imports to be successful. Experience is the only guide here. When in doubt, ask on the Rhino support newsgroup, there will surely be someone who has had the experience and can give you guidelines. In general, MCAD applications seem to appreciate higher precision objects, so if that's your target, error on the more precise side if possible! Your entire modeling process from start to finish needs to be done at this level of precision in order to be successful with your export.
+If objects are to be exported to another downstream application (such as CAM software or a solid modeler), it is important to take into account the precision that these programs require for imports to be successful. Experience is the only guide here. When in doubt, ask on the Rhino support newsgroup. There will be someone who has had the experience and can give you guidelines. In general, MCAD applications seem to appreciate higher precision objects, so if that's your target, error on the more precise side if possible! Your entire modeling process from start to finish needs to be done at this level of precision to be successful with your export.
 
 \\
 
