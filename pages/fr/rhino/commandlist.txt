@@ -1,1990 +1,858 @@
-====== Liste des commandes ======
-> **Sommaire:** //Une liste des commandes de Rhino avec une petite description.//
-
-> **Actualisation:** //11-novembre-2005. Liste de commandes de la V4 actuelle et descriptions ajoutées.  Traduction en cours.//
-
-> **Remarque:** //Chaque commande devrait avoir sa propre page avec une description de ce qu'elle fait et de comment l'utiliser. Afin de ne pas simplement dupliquer le fichier d'aire, des trucs et astuces, des références et des cas particuliers dans lesquels l'utilisation d'une autre commande est recommandée peuvent être ajoutés. De cette façon, les pages de commande peuvent être ouvertes à partir de la page [[rhino:faqrhino|FAQRhino]] sans avoir trop d'entrées en double.//
-
-> **Remarque:** //Cette page ne demande qu'à être complétée. N'hésitez pas à ajouter des informations à la description de chaque commande. Exemples d'informations pouvant être ajoutées : références à d'autres commandes qui dans certains cas peuvent donner de meilleurs résultats, comment se servir cette commande dans un cas où elle est souvent utilisée. <color maroon>Veuillez créer des sujets liés à la commande pour ajouter du contenu. ~mbecker</color>//
-
-----
-[[#123]] [[#A]] [[#B]] [[#C]] [[#D]] [[#E]] [[#F]] [[#G]] [[#H]] [[#I]] [[#JK]] [[#L]] [[#M]] [[#N]] [[#O]] [[#P]] [[#Q]] [[#R]] [[#S]] [[#T]] [[#U]] [[#V]] [[#WXYZ]]
-
-
-======123======
-=====3Vues (_3View)=====
-Définit la présentation standard avec 3 fenêtres : Dessus, Perspective et Face.
-
-=====4Vues (_4View)=====
-Définit la présentation standard avec 4 fenêtres : Dessus, Perspective, Droite et Face.
-
-======A======
-=====Accrochages (_Osnap)=====
-Définit un accrochage aux objets persistant à partir de la ligne de commandes.
-
-=====ActiverPoints (_PointsOn)=====
-Affiche les points de contrôle sur des courbes et des surfaces.
-
-=====ActiverPointsÉdition (_EditPtOn)=====
-Affiche des points, plus ou moins au niveau des nœuds, sur une courbe.
-
-=====ActiverRégénération (_SetRedrawOn)=====
-Active la régénération de l’écran et les changements de plan de construction ou de caméra pendant l’exécution de scripts.
-
-=====ActualiserOmbrage (_RefreshShade)=====
-Efface le maillage de rendu des objets sélectionnés afin d’actualiser l’ombrage.
-
-=====AdaptationPerspective (_PerspectiveMatch)=====
-Adapte la vue en perspective en fonction de l’image utilisée comme papier peint.
-
-=====AdapterBordsMaillage (_MatchMeshEdge)=====
-Déplace les bords d’une face d’un maillage ouvert pour qu’ils rencontrent de façon exacte les bords d’une face adjacente afin de fermer le maillage.
-
-=====AdapterSurf (_MatchSrf)=====
-Ajuste le bord d’une surface afin qu’il existe une continuité de position, de tangence ou de courbure avec une autre surface.
-
-=====AffichageAvancé (_AdvancedDisplay)=====
-Permet de gérer les options personnalisées de l’affichage ombré.
-
-=====AfficherInviteCommande (_DisplayCommandPrompt)=====
-Utilisée dans un script, affiche l’invite de commande si elle est cachée.
-
-=====Agrandir (_Maximize)=====
-Agrandit la fenêtre principale de Rhino.
-
-=====Aide (_Help)=====
-Ouvre la rubrique de l’aide pour la commande en cours.
-
-=====Aire (_Area)=====
-Calcule l’aire de courbes planes fermées, de surfaces, de polysurfaces ou de maillages.
-
-=====AjouterÀGroupe (_AddToGroup)=====
-Ajoute un objet à un groupe.
-
-=====AjouterLicence (_CheckInLicense)=====
-Ajoute une licence dans le gestionnaire de licences
-
-=====AjouterPrécU (_AddPrevU)=====
-Ajoute à la sélection le point de contrôle suivant dans la direction u négative.
-
-=====AjouterPrécV (_AddPrevV)=====
-Ajoute à la sélection le point de contrôle suivant dans la direction v négative.
-
-=====AjouterSuivantU (_AddNextU)=====
-Ajoute à la sélection le point de contrôle suivant dans la direction u positive.
-
-=====AjouterSuivantV  (_AddNextV)=====
-Ajoute à la sélection le point de contrôle suivant dans la direction v positive.
-
-=====AjusterCourbe (_FitCrv)=====
-Réduit le nombre de points de contrôle d’une courbe tout en gardant la forme générale de la courbe.
-
-=====AjusterSurf (_FitSrf)=====
-Réduit le nombre de points de contrôle d’une surface tout en gardant la forme générale de la surface.
-
-=====Alerte (_Alerter)=====
-Ouvre la boîte de dialogue Options, à la section Alerte.
-
-=====Aligner (_Align)=====
-Aligne les boîtes de contour d’objets au niveau du bas, du centre horizontal, de la gauche, de la droite, du haut ou du centre vertical.
-
-=====AlignerProfils (_AlignProfiles)=====
-Aligne et ajuste la longueur d’une courbe par rapport à une autre en fonction de leurs boîtes de contour.
-
-=====AlignerSommetsMaillage (_AlignMeshVertices)=====
-Force les sommets d’un maillage se trouvant à une certaine distance à se regrouper en un même point.
-
-=====AnalyseAngleDépouille(_DraftAngleAnalysis)=====
-Affiche l’analyse de l’angle de dépouille en fausse couleur sur les surfaces.
-
-=====AnalyseAngleDépouilleDésactivée(_DraftAngleAnalysisOff)=====
-Ferme la boîte de dialogue Angle de dépouille.
-
-=====AnalyseCourbure(_CurvatureAnalysis)=====
-Affiche l’analyse de courbure en fausses couleurs sur les surfaces.
-
-=====AnalyseCourbureDésactivée(_CurvatureAnalysisOff)=====
-Ferme la boîte de dialogue Courbure.
-
-=====AnalyseÉpaisseur(_ThicknessAnalysis)=====
-Utilise un affichage en fausse couleur pour analyser l’épaisseur d’un maillage.
-
-=====AnalyseÉpaisseurDésactivée(_ThicknessAnalysisOff)=====
-Désactive l’affichage de l’analyse d’épaisseur.
-
-=====AnalyserPt(_EvaluatePt)=====
-Affiche les coordonnées d’une position dans l’espace dans le repère général et dans le plan de construction.
-
-=====AnalyserPtUV(_EvaluateUVPt)=====
-Affiche les coordonnées u et v d’une position précise dans l’espace.
-
-=====Angle=====
-Mesure et indique l’angle entre deux lignes.
-
-=====AngleOrtho(_OrthoAngle)=====
-Définit l’angle auquel est restreint le curseur lorsque le mode ortho est actif.
-
-=====AnglePerspective(_PerspectiveAngle)=====
-Définit l’angle de champ de la fenêtre.
-
-=====Annuler (_Cancel)=====
-Annule la commande en cours et la sélection des objets.
-
-=====Annuler (_Undo)=====
-Annule les dernières modifications réalisées sur des objets.
-
-=====AnnulerLimite(_Untrim)=====
-Supprime d’une surface les limites et les surfaces jointes au niveau des courbes de limite.
-
-=====AnnulerPlusieursActions(_UndoMultiple)=====
-Donne une liste des dernières commandes pouvant être annulées.
-
-=====AnnulerSurSélection(_UndoSelected)=====
-Annule les dernières modifications réalisées sur un objet sélectionné.
-
-=====AnnulerVue(_UndoView)=====
-Annule les dernières modifications réalisées sur les vues.
-
-=====AperçuRendu(_RenderPreview)=====
-Calcule le rendu de la fenêtre actuelle, dans la fenêtre de rendu, en utilisant le paramètre de résolution du module de rendu actuel et en définissant les autres paramètres de sorte à minimiser le temps de rendu.
-
-=====AperçuRenduDansRectangle(_RenderPreviewInWindow)=====
-Calcule le rendu d’une zone sélectionnée de la fenêtre actuelle, dans la fenêtre de rendu, en utilisant le paramètre de résolution du module de rendu actuel et en définissant les autres paramètres de sorte à minimiser le temps de rendu.
-
-=====AplatirSurf(_FlattenSrf)=====
-Crée des courbes à partir de bords de surface aplatis sur le plan de construction.
-
-=====AppliquerCourbe(_ApplyCrv)=====
-Dépose une courbe sur une surface en fonction des paramètres de la courbe et de la surface.
-
-=====AppliquerMaillage(_ApplyMesh)=====
-Adapte un maillage avec le même nombre de points de contrôle que le maillage de départ sur une surface.
-
-=====AppliquerMaillageUVN(_ApplyMeshUVN)=====
-Dépose des maillages et des points sur une surface à partir du maillage et des paramètres.
-
-=====ArbreStep(_StepTree)=====
-Permet de parcourir la structure d’un fichier STEP.
-
-=====Arc=====
-Crée une courbe en forme d’arc.
-
-=====AssignerCalqueActuel(_ChangeToCurrentLayer)=====
-Place les objets sélectionnés sur le calque actuel.
-
-=====AssignerTextureUnique(_AssignBlankTexture)=====
-Permet d’assigner automatiquement des textures uniques aux objets sélectionnés.
-
-=====Attirer (_Pull)=====
-Crée des courbes et des points sur une surface en les attirant sur la surface dans la direction normale de celle-ci.
-
-=====AttirerMaillage(_MeshPull)=====
-Crée des courbes et des points sur un maillage représentant les intersections entre le maillage et des courbes ou des points projetés dans la direction normale de la face maillée.
-
-======B======
-=====Balayage1 (_Sweep1)=====
-Crée une surface à partir de courbes de profil qui définissent la forme finale et d’une courbe qui définit un bord de la surface.
-
-=====Balayage2 (_Sweep2)=====
-Crée une surface à partir de courbes de profil qui définissent la forme finale et de deux courbes qui définissent deux bords de la surface.
-
-=====BarreOutils(_Toolbar)=====
-Permet de gérer la configuration des barres d’outils.
-
-=====BipNumériseur(_DigBeep)=====
-Active et désactive le son de la pédale du numériseur.
-
-=====Bloc (_Block)=====
-Définit un objet simple qui combine un ou plusieurs objets.
-
-=====Boîte (_Box)=====
-Crée une boîte solide à partir d’un rectangle de base et d’une hauteur ou des sommets en diagonale.
-
-=====BoîteDeContour(_BoundingBox)=====
-Crée un cadre sous forme de courbe ou de polysurface autour des objets sélectionnés.
-
-=====BoîteMaillée(_MeshBox)=====
-Crée une boîte solide maillée à partir d’un rectangle de base et d’une hauteur ou des sommets en diagonale.
-
-=====Bosse=====
-Crée des zones extrudées dans une surface ou une polysurface à partir d’une courbe plane.
-
-=====Boucher (_Cap)=====
-Remplit des trous plans dans une polysurface avec une surface plane et joint le résultat.
-
-======C======
-=====Cacher (_Hide)=====
-Dissimule les objets sélectionnés.
-
-=====CacherPoints(_HidePt)=====
-Dissimule les points de contrôle et les points d’édition sélectionnés.
-
-=====CadreImage(_PictureFrame)=====
-Crée une surface plane rectangulaire dont la texture est l’image indiquée.
-
-=====Calc=====
-Ouvre la calculatrice et affiche les résultats dans la ligne de commandes.
-
-=====CalcRPN=====
-Ouvre la calculatrice RPN (à notation polonaise inverse) et affiche les résultats dans la ligne de commandes.
-
-=====CalibrerNumériseur(_DigCalibrate)=====
-Calibre un numériseur 3D.
-
-=====Calque (_Layer)=====
-Gère les propriétés des calques.
-
-=====Caméra (_Camera)=====
-Affiche, cache et inverse la visibilité de la caméra.
-
-=====CapturerÉcranVersFichier(_ScreenCaptureToFile)=====
-Enregistre une image de la fenêtre actuelle avec les bordures et les titres dans un fichier image.
-
-=====CapturerÉcranVersPressePapiers(_ScreenCaptureToClipboard)=====
-Enregistre une image de la fenêtre actuelle avec les bordures et les titres dans le presse-papiers de Windows.
-
-=====CapturerVueDansFichier(_ViewCaptureToFile)=====
-Enregistre une image de la vue actuelle dans un fichier.
-
-=====CapturerVueDansPressePapiers(_ViewCaptureToClipboard)=====
-Enregistre une image de la vue actuelle dans le presse-papiers de Windows.
-
-=====CentroïdeAire(_AreaCentroid)=====
-Calcule le centroïde de l’aire de courbes planes fermées, de surfaces et de polysurfaces.
-
-=====CentroïdeVolume(_VolumeCentroid)=====
-Calcule et affiche le centroïde du volume d’une surface ou d’une polysurface fermée.
-
-=====Cercle (_Circle)=====
-Crée un cercle à partir d’un centre et d’un rayon, perpendiculaire au plan de construction, à partir de deux ou trois points sur la circonférence, tangent à d’autres courbes, autour d’une courbe ou passant par des points.
-
-=====ChampHauteur(_Heightfield)=====
-Crée une surface à partir des valeurs de gris des couleurs d’une image.
-
-=====ChampHauteurMaillage(_MeshHeightfield)=====
-Crée un maillage à partir des valeurs de couleur d’une image.
-
-=====Chanfrein (_Chamfer)=====
-Place un segment de ligne pour former un coin biseauté entre deux courbes.
-
-=====ChanfreinSurf(_ChamferSrf)=====
-Place une surface réglée pour former un coin biseauté entre deux bords de surface.
-
-=====ChanfreinVariableBord(_VariableChamferEdge)=====
-Crée une surface réglée entre plusieurs bords d’une polysurface avec plusieurs distances de chanfrein, limite les surfaces de départ et joint les surfaces de chanfrein à ces dernières.
-
-=====ChangerCalque(_ChangeLayer)=====
-Place les objets sélectionnés sur le calque sélectionné.
-
-=====ChangerDegré(_ChangeDegree)=====
-Change le degré d’une courbe ou d’une surface.
-
-=====ChargerScript(_LoadScript)=====
-Charge un VBScript.
-
-=====Cisailler (_Shear)=====
-Déforme un objet en déplaçant ses points de contrôle suivant un angle spécifique, parallèlement au plan de construction.
-
-=====CliquerNumériseur(_DigClick)=====
-Permet de choisir un point avec un numériseur 3D.
-
-=====Coller (_Paste)=====
-Insère des objets à partir du presse-papiers de Windows.
-
-=====Commandes (_Commands)=====
-Ouvre la rubrique de l’aide Liste de commandes.
-
-=====ComprimerTextures(_PackTextures)=====
-Comprime les textures de maillage des objets sélectionnés.
-
-=====Cône (_Cone)=====
-Dessine un cône solide à partir du cercle de la base et du sommet.
-
-=====CôneMaillé(_MeshCone)=====
-Dessine un cône maillé à partir du cercle de la base et du sommet.
-
-=====CôneT(_Tcone)=====
-Crée un cône solide dont le sommet est tronqué par un plan, à partir d’un cercle de base, du deuxième rayon et d’une hauteur.
-
-=====CôneTMaillé(_MeshTcone)=====
-Crée un cône maillé dont le sommet est tronqué par un plan, à partir d’un cercle de base, du deuxième rayon et d’une hauteur.
-
-=====Congé (_Fillet)=====
-Remplace par un arc le sommet formé par deux courbes.
-
-=====CongéBord(_FilletEdge)=====
-Crée une surface tangente entre les bords d’une polysurface avec un profil de rayon constant, limite les surfaces de départ et joint la surface de congé avec ces dernières.
-
-=====CongéPolyligne(_FilletPolyline)=====
-Remplace les sommets d’une polyligne avec des arcs d’un rayon déterminé.
-
-=====CongéSurf(_FilletSrf)=====
-Crée une surface tangente entre deux bords d’une surface avec un profil de rayon constant, limite les surfaces de départ et joint la surface de congé avec ces dernières.
-
-=====CongéVariableBord(_VariableFilletEdge)=====
-Crée une surface de congé entre plusieurs bords d’une polysurface avec plusieurs valeurs de rayons différentes, limite les surfaces de départ et joint les surfaces de congé à ces dernières.
-
-=====Conique (_Conic)=====
-Dessine une courbe de section conique.
-
-=====Connecter (_Connect)=====
-Prolonge les courbes pour qu’elles se rencontrent au niveau de leur extrémité.
-
-=====ContexteCommande (_CommandContext)=====
-Affiche les rubriques de l’aide dans une fenêtre ancrable et montre l’aide pour la commande actuelle.
-
-=====ContG(_Gcon)=====
-Analyse et affiche la continuité géométrique entre deux courbes.
-
-=====ContourMaillage(_MeshOutline)=====
-Crée une courbe représentant le contour dans la vue des surfaces, polysurfaces et maillages sélectionnés.
-
-=====ContrôleFichier3dm (_Audit3dmFile)=====
-Vérifie un fichier de Rhino et recherche des erreurs.
-
-=====Contrôler (_Audit)=====
-Vérifie le fichier Rhino ouvert et recherche des erreurs dans les indices de calques et de matériaux.
-
-=====Convertir (_Convert)=====
-Change la structure d’une courbe en polyligne ou en segments d’arc.
-
-=====ConvertirEnCourbeBézier(_ConvertToBeziers)=====
-Change la structure d’une courbe ou d’une surface NURBS en courbe ou surface de Bézier.
-
-=====Copier (_Copy)=====
-Crée des copies des objets sélectionnés.
-
-=====CopierConfigPlanCPourTous(_CopyCPlaneSettingsToAll)=====
-Change toutes les fenêtres pour qu’elles aient les mêmes paramètres de grille et le même espacement de magnétisme que la fenêtre actuelle.
-
-=====CopierDansPressePapiers(_CopyToClipboard)=====
-Copie les objets sélectionnés dans le presse-papiers de Windows.
-
-=====CopierFenêtreRenduDansPressepapiers(_CopyRenderWindowToClipboard)=====
-Copie dans le presse-papiers l’image contenue dans la fenêtre de rendu.
-
-=====CopierInvitesActivé(_Echo)=====
-Active la copie des commandes de script dans la fenêtre de l’historique.
-
-=====CopierInvitesDésactivé(_NoEcho)=====
-Désactive la copie des commandes de script dans la fenêtre de l’historique.
-
-=====CopierPlanCPourTous(_CopyCPlaneToAll)=====
-Change toutes les fenêtres pour qu’elles aient le même plan de construction que la fenêtre actuelle.
-
-=====CopierSurCalque(_CopyToLayer)=====
-Copie les objets sélectionnés sur un calque spécifique.
-
-=====Cote (_Dim)=====
-Crée une cote linéaire horizontale ou verticale.
-
-=====CoteAlignée(_DimAligned)=====
-Crée une cote linéaire alignée avec deux points.
-
-=====CoteAngle(_DimAngle)=====
-Cote l’angle entre deux lignes.
-
-=====CoteDiamètre(_DimDiameter)=====
-Cote le diamètre d’une courbe.
-
-=====CoteInclinée(_DimRotated)=====
-Crée une cote linéaire inclinée par rapport à l’axe xy.
-
-=====CoteRayon(_DimRadius)=====
-Cote le rayon d’une courbe.
-
-=====Couper (_Cut)=====
-Supprime des objets du modèle et les place dans le presse-papiers de Windows.
-
-=====Courbe (_Curve)=====
-Dessine une courbe à partir des positions des points de contrôle.
-
-=====Courbe2Vues (_Crv2View)=====
-Crée une courbe à partir de courbes planes dans différentes vues.
-
-=====CourbeInterp(_InterpCrv)=====
-Dessine une courbe passant par les points sélectionnés dans l’espace.
-
-=====CourbeInterpSurSurf(_InterpCrvOnSrf)=====
-Dessine une courbe passant par les points sélectionnés sur une surface.
-
-=====CourbeMoyenne(_MeanCurve)=====
-Crée une courbe à mi chemin entre deux courbes de départ.
-
-=====CourbeParPointsContrôleSurSurface(_CrvThroughSrfControlPt)=====
-Crée des courbes passant par les points de contrôle d’une surface.
-
-=====CourbeParPolyligne(_CurveThroughPolyline)=====
-Crée une courbe interpolée sur les sommets d’une polyligne.
-
-=====CourbeParPt(_CurveThroughPt)=====
-Crée une courbe interpolée sur les objets ponctuels sélectionnés
-
-=====CourbePoignée(_HandleCurve)=====
-Dessine des courbes de Bézier enchaînées comme dans les programmes de dessin.
-
-=====Courber (_Bend)=====
-Déforme des objets en alignant leurs points de contrôle sur une courbe de structure créée dynamiquement.
-
-=====CourbeSecTransv(_Csec)=====
-Crée des courbes de section transversale passant par des courbes de profil.
-
-=====CourbesNiveau(_Contour)=====
-Crée une série de courbes planes espacées régulièrement à partir de l’intersection entre des plans de coupe définis et une surface ou polysurface.
-
-=====Courbure (_Curvature)=====
-Analyse la courbure d’une courbe ou d’une surface en un point.
-
-=====CréerCourbesUV(_CreateUVCrv)=====
-Crée des courbes représentant la frontière non limitée et les courbes de limite d’une surface sous forme de courbes planes sur le plan xy du repère général.
-
-=====CréerCourbeUVSurSurface(_CreateUVCrvOnSrf)=====
-Crée des courbes planes sur le plan xy du repère général qui dupliquent la frontière non limitée et les courbes de limite d’une surface ainsi qu’une courbe dessinée sur la surface.
-
-=====CréerSolide(_CreateSolid)=====
-Crée une polysurface fermée à partir des surfaces et des polysurfaces sélectionnées, entourant une région dans l’espace.
-
-=====Cylindre (_Cylinder)=====
-Crée un cylindre solide à partir d’un cercle de base et d’une longueur.
-
-=====CylindreMaillé(_MeshCylinder)=====
-Crée un cylindre maillé à partir d’un cercle de base et d’une longueur.
-
-======D======
-=====Dalle (_Slab)=====
-Décale une polyligne, extrude et bouche le résultat pour créer un solide.
-
-=====Décalage (_Offset)=====
-Copie une courbe de sorte que toutes les positions sur la courbe copiée se trouvent à une distance spécifique de la courbe originale.
-
-=====DécalageVariableSurf(_VariableOffsetSrf)=====
-Copie une surface de sorte que toutes les positions aux sommets de la surface copiée se trouvent à une distance spécifique de la surface originale.
-
-=====DécalerCourbeSurSurf(_OffsetCrvOnSrf)=====
-Copie une courbe sur une surface de sorte que toutes les positions sur la courbe copiée se trouvent à une distance spécifique de la courbe originale et reposent sur la surface.
-
-=====DécalerMaillage(_OffsetMesh)=====
-Copie un maillage de sorte que tous les sommets du maillage copié se trouvent à une distance spécifique des sommets du maillage de départ.
-
-=====DécalerNormale(_OffsetNormal)=====
-Copie une courbe sur une surface dans la direction normale de la surface de sorte que toutes les positions sur la courbe copiée se trouvent à une distance spécifique de la courbe originale.
-
-=====DécalerSurf(_OffsetSrf)=====
-Copie une surface de sorte que toutes les positions sur la surface copiée se trouvent à une distance spécifique de la surface originale.
-
-=====Décomposer (_Explode)=====
-Décompose les objets ainsi : polysurfaces en surfaces, polycourbes en courbes, hachures en lignes, cotes en courbes et en texte, texte en courbes, blocs en objets séparés.
-
-=====DécomprimerTextures(_UnpackTextures)=====
-Décomprime les textures des maillages sélectionnés.
-
-=====DéconnecterNumériseur(_DigDisconnect)=====
-Déconnecte le numériseur 3D.
-
-=====DécouperFil(_WireCut)=====
-Limite une polysurface avec une courbe en procédant de la même façon que pour découper de la mousse avec un fil chauffé.
-
-=====DéfinirCalqueActuelAvecObjet(_SetLayerToObject)=====
-Définit le calque où se trouve un objet sélectionné comme calque actuel.
-
-=====DéfinirÉchelleTypeLigne(_SetLinetypeScale)=====
-Définit l’échelle générale des types de ligne.
-
-=====DéfinirFenêtreActive(_SetActiveViewport)=====
-Définit la fenêtre active en indiquant son nom.
-
-=====DéfinirFenêtreMax(_SetMaximizedViewport)=====
-Agrandit la fenêtre portant un nom déterminé.
-
-=====DéfinirFrontièresZoomÉtendu(_SetZoomExtentsBorder)=====
-Définit la quantité d’espace blanc entre les objets et les bords de la fenêtre quand la commande Zoom est utilisée avec l’option Étendu.
-
-=====DéfinirMagnétisme(_SetSnap)=====
-Active, désactive ou inverse le statut de l’affichage de la grille.
-
-=====DéfinirModuleRenduActuel(_SetCurrentRenderPlugin)=====
-Définit le module de rendu actuel.
-
-=====DéfinirProjecteurSelonVue(_SetSpotlightToView)=====
-Définit un projecteur de sorte que son orientation soit la même que celle de la caméra de la fenêtre.
-
-=====DéfinirPt(_SetPt)=====
-Déplace des objets (en particulier des points et des points de contrôle) dans une position déterminée dans les directions x, y et/ou z.
-
-=====DéfinirRépertoireTravail(_SetWorkingDirectory)=====
-Définit le dossier où Rhino enregistre les fichiers temporaires.
-
-=====DéfinirTraductionNiveauCalqueIges(_SetIgesLayerLevelMap)=====
-Contrôle la correspondance entre les calques Rhino et les niveaux IGES lors de l’importation ou l’exportation IGES à partir de la ligne de commande ou dans un script.
-
-=====DéfinirTypeLigne(_SetLinetype)=====
-Définit le type de ligne de la courbe.
-
-=====DéfinirTypeLigneCalque(_SetLayerLinetype)=====
-Définit l’option type de ligne pour un calque.
-
-=====DéfinirVue(_SetView)=====
-Définit une vue standard (dessus, dessous, gauche, droite, face, arrière ou perspective) du plan de construction actuel ou du repère général.
-
-=====DéfinirVueSelonProjecteur(_SetViewToSpotlight)=====
-Définit une vue de sorte que son orientation soit la même que celle d’un projecteur.
-
-=====DépartCourbe(_CrvStart)=====
-Place un objet ponctuel au niveau du point de départ d’une courbe.
-
-=====Déplacer (_Move)=====
-Déplace des objets d’une position spécifique vers une autre.
-
-=====DéplacerBord(_MoveEdge)=====
-Déplace le bord d’une polysurface et étire les faces adjacentes à la face déplacée.
-
-=====DéplacerBordNonLimité(_MoveUntrimmedEdge)=====
-Déplace un bord de polysurface non limité et étire les faces adjacentes au bord déplacé.
-
-=====DéplacerBordSurf(_MoveSrfEdge)=====
-Déplace le bord d’une polysurface et étire les faces adjacentes à la face déplacée.
-
-=====DéplacerCibleSurObjets(_MoveTargetToObjects)=====
-Déplace la cible d’une fenêtre au centre de la boîte de contour des objets sélectionnés.
-
-=====DéplacerCôté(_MoveSide)=====
-Déplace des faces d’une polysurface et étire les faces adjacentes à la face déplacée.
-
-=====DéplacerFaceNonLimitée(_MoveUntrimmedFace)=====
-Déplace une face de polysurface non limitée et étire les faces adjacentes à celle déplacée.
-
-=====DéplacerFinSegmentCourbe(_MoveCurveSegmentEnd)=====
-Déplace l’extrémité d’une sous-courbe dans une polyligne ou une polycourbe.
-
-=====DéplacerSegmentCourbe(_MoveCurveSegment)=====
-Déplace un segment de polyligne ou de polycourbe.
-
-=====DéplacerSurPlanC(_RemapCPlane)=====
-Réoriente les objets sélectionnés sur un autre plan de construction.
-
-=====DéplacerTrou(_MoveHole)=====
-Déplace ou copie un trou découpé dans une surface plane. Cette commande fonctionne sur une polysurface mais uniquement avec une face de polysurface.
-
-=====DéplacerUVN(_MoveUVN)=====
-Déplace les points de contrôle de la surface sélectionnée le long des directions normale, u et v de la surface.
-
-=====DéplacerUVNDésactivé(_MoveUVNOff)=====
-Ferme la boîte de dialogue DéplacerUVN.
-
-=====DéplacerVue(_Pan)=====
-Déplace la position de la vue vers la gauche, la droite, le haut ou le bas parallèlement au plan de la vue.
-
-=====DéroulerSurf(_UnrollSrf)=====
-Aplatit une surface ou une polysurface sur un plan.
-
-=====DésactiverPoints(_PointsOff)=====
-Désactive l’affichage des points de contrôle et d’édition.
-
-=====DésactiverPointsSélection(_PtOffSelected)=====
-Désactive les points de contrôle et les points d’édition sur les objets sélectionnés.
-
-=====DésactiverRégénération(_SetRedrawOff)=====
-Désactive la régénération de l’écran et les changements de plan de construction ou de caméra pendant l’exécution de scripts.
-
-=====DésactiverUnCalque(_OneLayerOff)=====
-Désactive un calque en sélectionnant un des objets se trouvant dessus.
-
-=====Dessin2D (_Make2D)=====
-Projette la géométrie sur le plan de construction pour créer un dessin en 2 dimensions.
-
-=====Dessouder (_UnWeld)=====
-Ajoute des informations sur les coordonnées de plaquage de texture à chaque sommet de maillage partagé.
-
-=====DessouderBord(_UnweldEdge)=====
-Ajoute des informations sur les coordonnées de plaquage de texture à chaque sommet de maillage partagé sur un bord sélectionné.
-
-=====Détail (_Detail)=====
-Permet de gérer les fenêtres détaillées.
-
-=====Déverrouiller (_Unlock)=====
-Déverrouille tous les objets verrouillés.
-
-=====DéverrouillerObjetsSélectionnés(_UnlockSelected)=====
-Déverrouille les objets sélectionnés.
-
-=====DiagrammeCourbure(_CurvatureGraph)=====
-Active l’affichage du diagramme de courbure des courbes et des surfaces.
-
-=====DiagrammeCourbureDésactivé(_CurvatureGraphOff)=====
-Désactive l’affichage du diagramme de courbure des courbes et des surfaces.
-
-=====DifférenceBooléenne(_BooleanDifference)=====
-Supprime les zones partagées par des polysurfaces ou surfaces sélectionnées avec un autre groupe de polysurfaces ou surfaces.
-
-=====DifférenceBooléenneMaillage(_MeshBooleanDifference)=====
-Supprime les zones partagées par des maillages sélectionnés avec un autre groupe de maillages.
-
-=====Direction (_Dir)=====
-Analyse et permet de changer la direction normale d’un objet.
-
-=====DissocierGroupe(_Ungroup)=====
-Supprime le statut de groupe d’un groupe sélectionné.
-
-=====Distance=====
-Affiche la distance entre deux points.
-
-=====Diviser (_Split)=====
-Divise des objets en plusieurs parties en utilisant d’autres objets pour couper.
-
-=====DiviserBord(_SplitEdge)=====
-Divise un bord de surface en un point.
-
-=====DiviserBordMaillage(_SplitMeshEdge)=====
-Divise un bord de maillage pour créer plusieurs triangles.
-
-=====DiviserFace(_SplitFace)=====
-Divise une face plane de polysurface avec une courbe.
-
-=====DiviserFenêtreHorizontal(_SplitViewportHorizontal)=====
-Divise une fenêtre horizontalement pour former deux fenêtres.
-
-=====DiviserFenêtreVertical(_SplitViewportVertical)=====
-Divise une fenêtre verticalement pour former deux fenêtres.
-
-=====DiviserLeLongDesPlis(_DivideAlongCreases)=====
-Divise une surface en plusieurs parties au niveau des points de rebroussement.
-
-=====DiviserMaillage(_MeshSplit)=====
-Divise un maillage en plusieurs pièces à l’aide d’un autre objet.
-
-=====DiviserMaillageAvecCourbe(_SplitMeshWithCurve)=====
-Attire une courbe sélectionnée sur un objet maillé et utilise la courbe pour diviser le maillage.
-
-=====DiviserMaillageDisjoint(_SplitDisjointMesh)=====
-Divise en plusieurs objets maillés des maillages qui ne sont pas connectés mais qui forment quand même un seul objet.
-
-=====DivisionBooléenne(_BooleanSplit)=====
-Supprime les zones partagées par des polysurfaces ou surfaces sélectionnées et crée des polysurfaces séparées à partir des zones partagées et des zones non partagées.
-
-=====DivisionBoolénneMaillage(_MeshBooleanSplit)=====
-Supprime les zones partagées par des maillages sélectionnés et crée des maillages séparés à partir des zones partagées et des zones non partagées.
-
-=====Domaine (_Domain)=====
-Détermine et affiche le domaine d’une courbe ou d’une surface.
-
-=====Draper (_Drape)=====
-Crée une surface passant par des points définis à l’intersection entre les objets et des points projetés sur le plan de construction dans la fenêtre active.
-
-=====DraperPoints(_DrapePt)=====
-Crée une grille de points à l’intersection entre les objets et des points projetés sur le plan de construction dans la fenêtre active.
-
-=====DupBord(_DupEdge)=====
-Crée une courbe représentant le bord d’une surface.
-
-=====DupBordure(_DupBorder)=====
-Crée une courbe représentant la bordure d’une surface ou d’une polysurface.
-
-=====DupBordureFace(_DupFaceBorder)=====
-Crée une courbe représentant la bordure d’une face sur une polysurface.
-
-=====DupCalque(_DupLayer)=====
-Copie un calque avec tous ses attributs et sa géométrie.
-
-=====DupFrontièreTrouMaillage(_DupMeshHoleBoundary)=====
-Crée une polyligne représentant la frontière d’un trou dans un maillage.
-
-======E======
-=====ÉcartCourbes(_CrvDeviation)=====
-Mesure et affiche les distances maximale et minimale entre deux courbes.
-
-=====ÉcartPoints(_PointDeviation)=====
-Analyse et indique la distance entre les points sélectionnés et une surface.
-
-=====ÉchangerVue(_SwapView)=====
-Échange les vues de deux fenêtres avec une autre.
-
-=====Échelle (_Scale)=====
-Change la taille des objets sélectionnés uniformément dans les directions x, y et z.
-
-=====Échelle1D (_Scale1D)=====
-Change la taille des objets sélectionnés dans une direction.
-
-=====Échelle2D (_Scale2D)=====
-Change la taille des objets sélectionnés dans deux directions
-
-=====ÉchelleBord(_ScaleEdge)=====
-Change la longueur d’une surface plane ou des bords d’une face dans une polysurface plane.
-
-=====ÉchelleNU(_ScaleNU)=====
-Change la taille des objets sélectionnés dans trois directions en utilisant des longueurs différentes dans chaque direction.
-
-=====ÉchelleNumérisation(_DigScale)=====
-Définit le facteur d’échelle des points numérisés.
-
-=====ÉditeurMacro(_MacroEditor)=====
-Ouvre une fenêtre d’édition pour la création et le test de scripts.
-
-=====ÉditionSpatiale(_Sped)=====
-Lie une courbe ou une surface à un objet de contrôle, ainsi lorsque ce dernier est modifié avec ses points de contrôle, la courbe ou la surface est modifiée de la même façon.
-
-=====Effiler (_Taper)=====
-Déforme un objet en déplaçant ses points de contrôle vers un axe déterminé.
-
-=====Égaler (_Match)=====
-Ajuste les extrémités de deux courbes ou deux bords de surface afin qu’il existe une continuité de position, de tangence ou de courbure avec une autre courbe ou un autre bord de surface.
-
-=====ÉgalerCalque(_MatchLayer)=====
-Change les propriétés du calque des objets sélectionnés afin qu’elles correspondent aux propriétés du calque d’un autre objet.
-
-=====Ellipse=====
-Dessine une courbe elliptique fermée perpendiculaire au plan de construction, à partir des sommets d’une boîte de contour, des extrémités des axes, des foyers ou autour d’une courbe.
-
-=====Ellipsoïde (_Ellipsoid)=====
-Dessine un ellipsoïde fermé à partir des sommets d’une boîte de contour, des extrémités des axes, des foyers ou autour d’une courbe.
-
-=====EllipsoïdeMaillé(_MeshEllipsoid)=====
-Dessine un ellipsoïde maillé à partir des sommets d’une boîte de contour, des extrémités des axes, des foyers ou autour d’une courbe.
-
-=====EnleverNœud(_RemoveKnot)=====
-Supprime des nœuds dans une courbe ou une surface.
-
-=====EnregistrementAutomatique(_Autosave)=====
-Sauvegarde le fichier actuel dans le fichier désigné <autosave.3dm>.
-
-=====EnregistrementCompacté(_SaveSmall)=====
-Enregistre les objets de la géométrie sans les maillages de rendu ni d’analyse.
-
-=====EnregistrementIncrémental(_IncrementalSave)=====
-Enregistre des versions de votre modèle désignées automatiquement par le nom du fichier suivi d’un chiffre.
-
-=====Enregistrer (_Save)=====
-Enregistre le modèle en cours.
-
-=====EnregistrerFenêtreRenduSous(_SaveRenderWindowAs)=====
-Enregistre l’image de la fenêtre de rendu dans un fichier.
-
-=====EnregistrerFichierModèle(_SaveAsTemplate)=====
-Enregistre le modèle en tant que fichier modèle.
-
-=====EnregistrerSous(_SaveAs)=====
-Enregistre le modèle actuel sous un autre nom, ferme le modèle actuel et ouvre le nouveau modèle.
-
-=====Entrée (_Enter)=====
-Fonctionne comme si on appuyait sur la touche Entrée. Utilisée dans les scripts ou la programmation de boutons de barres d’outils.
-
-=====Esquisser (_Sketch)=====
-Dessine une courbe en faisant glisser la souris.
-
-=====EsquisserNumériseur(_DigSketch)=====
-Esquisse une courbe avec un numériseur 3D.
-
-=====Étirer (_Stretch)=====
-Déforme un objet en changeant l’échelle de certaines parties dans une direction.
-
-=====ÉtudeIGES(_IgesStudy)=====
-Examine des entités spécifiques dans un fichier IGES en limitant les portions du dossier IGES qui sont analysées.
-
-=====Exporter (_Export)=====
-Enregistre un nouveau fichier au format Rhino ou autre à partir des objets sélectionnés.
-
-=====ExporterAvecOrigine(_ExportWithOrigin)=====
-Enregistre un nouveau fichier au format Rhino ou autre à partir des objets sélectionnés avec une origine et un plan de construction déterminés.
-
-=====ExporterImages(_ExportBitmaps)=====
-Crée des fichiers à partir des images de papier peint et d’arrière-plan enregistrées dans le modèle.
-
-=====ExporterOptions(_ExportOptions)=====
-Enregistre les paramètres des options sélectionnées dans un fichier.
-
-=====ExtraireBordsMaillage(_ExtractMeshEdges)=====
-Sépare du maillage original des faces déterminées par un angle ou le statut soudé.
-
-=====ExtraireBordsMaillageNonManifold(_ExtractNonManifoldMeshEdges)=====
-Sépare du maillage original les faces ayant un bord adjacent à plusieurs faces.
-
-=====ExtraireCourbeIso(_ExtractDuplicateMeshFaces)=====
-Crée des courbes qui représentent les courbes isoparamétriques d’une surface aux positions indiquées sur la surface.
-
-=====ExtraireFacesMaillage(_ExtractMeshFaces)=====
-Sépare du maillage original les faces sélectionnées.
-
-=====ExtraireFacesMaillageDupliquées(_ExtractDuplicateMeshFaces)=====
-Sépare du maillage original les faces identiques.
-
-=====ExtraireFacesMaillageSelonAire(_ExtractMeshFacesByArea)=====
-Sépare du maillage original les faces dont l’aire se trouve dans les limites indiquées.
-
-=====ExtraireFacesMaillageSelonAngleDépouille (_ExtractMeshFacesByDraftAngle)=====
-Sépare du maillage original les faces formant un angle spécifique avec la vue.
-
-=====ExtraireFacesMaillageSelonLongueurBord(_ExtractMeshFacesByEdgeLength)=====
-Sépare du maillage original les faces dont la longueur des bords est supérieure ou inférieure à une valeur spécifique.
-
-=====ExtraireFacesMaillageSelonRapportImage(_ExtractMeshFacesByAspectRatio)=====
-Sépare du maillage original les faces dont le rapport image se trouve dans les limites indiquées.
-
-=====ExtraireFacesMailléesAdjacentes(_ExtractConnectedMeshFaces)=====
-Sépare du maillage original les faces adjacentes à une face sélectionnée lorsque l’angle entre les faces adjacentes est dans les limites définies.
-
-=====ExtraireMaillageRendu(_ExtractRenderMesh)=====
-Copie le maillage de rendu pour créer un nouvel objet maillé.
-
-=====ExtraireMauvaisesFacesMaillage(_ExtractBadMeshFaces)=====
-Sépare les faces d’un maillage dont les normales ne sont pas valides.
-
-=====ExtraireMauvaiseSurf(_ExtractBadSrf)=====
-Sépare des surfaces contenant des erreurs dans une polysurface.
-
-=====ExtraireModèleFilaire(_ExtractWireframe)=====
-Crée des courbes représentant les courbes isoparamétriques d’une surface ou d’une polysurface affichées dans la vue en mode filaire.
-
-=====ExtrairePartieMaillage(_ExtractMeshPart)=====
-Sépare du maillage original les faces entourées de bords non soudés.
-
-=====ExtrairePolygoneContrôle(_ExtractControlPolygon)=====
-Crée un maillage représentant un polygone de contrôle d’une surface ou d’une polysurface.
-
-=====ExtrairePt(_ExtractPt)=====
-Place des objets ponctuels au niveau des points de contrôle ou des points d’édition d’une courbe, des points de contrôle d’une surface ou des sommets d’un maillage.
-
-=====ExtraireSousCourbe(_ExtractSubCrv)=====
-Sépare ou copie des segments de courbe dans une courbe de départ.
-
-=====ExtraireSurf(_ExtractSrf)=====
-Sépare ou copie une surface d’une polysurface.
-
-=====ExtruderCourbe(_ExtrudeCrv)=====
-Crée une surface ou un solide en déplaçant une courbe dans une direction, sur une certaine distance ou le long d’une autre courbe.
-
-=====ExtruderNormale(_Fin)=====
-Crée une surface en extrudant une courbe sur une surface, suivant sa normale.
-
-=====ExtruderSurf(_ExtrudeSrf)=====
-Crée un solide en déplaçant une surface dans une direction, sur une certaine distance ou le long d’une courbe.
-
-======F======
-=====Face3D (_3DFace)=====
-Dessine une face 3D maillée simple.
-
-=====FaireTrou(_MakeHole)=====
-Crée un trou dans une surface en utilisant une courbe fermée pour définir la forme du trou.
-
-=====FenêtreAuPremierPlan(_BringViewportToTop)=====
-Affiche une fenêtre nommée devant toutes les autres fenêtres.
-
-=====FenêtreOrthoSuivante(_NextOrthoViewport)=====
-Active la fenêtre suivante avec projection orthogonale.
-
-=====FenêtrePerspectiveSuivante(_NextPerspectiveViewport)=====
-Active la fenêtre suivante avec projection en perspective.
-
-=====FenêtrePréc(_PrevViewport)=====
-Active la fenêtre précédente.
-
-=====FenêtreSuivante(_NextViewport)=====
-Active la fenêtre suivante.
-
-=====FenêtreSuivanteAuPremierPlan(_NextViewportToTop)=====
-Affiche la fenêtre suivante devant toutes les autres fenêtres.
-
-=====FermerFenêtre(_CloseViewport)=====
-Ferme la fenêtre active.
-
-=====FermerFenêtreRendu(_CloseRenderWindow)=====
-Ferme la fenêtre d’affichage du rendu.
-
-=====FermerPolylignes(_ClosePolylines)=====
-Ferme les polylignes ouvertes avec un segment de polyligne.
-
-=====FinCourbe(_CrvEnd)=====
-Place un objet ponctuel au niveau des extrémités d’une courbe.
-
-=====Flocage (_Splop)=====
-Copie, fait tourner, change l’échelle et enveloppe des objets sur une surface, comme pour le flocage ou les applications en poterie.
-
-=====Fractionner (_Divide)=====
-Crée des objets ponctuels en fractionnant une courbe en un certain nombre de segments de longueur égale ou en segments d’une certaine longueur.
-
-=====FusionnerBord(_MergeEdge)=====
-Combine des bords adjacents de la même surface pour former un seul bord.
-
-=====FusionnerFace(_MergeFace)=====
-Combine deux faces d’une polysurface se trouvant sur un même plan en une seule surface.
-
-=====FusionnerSurf(_MergeSrf)=====
-Combine deux surfaces en une seule au niveau des bords non limités.
-
-=====FusionnerToutesFaces(_MergeAllFaces)=====
-Combine toutes les surfaces et les polysurfaces se trouvant sur un même plan en une seule surface.
-
-======G======
-=====GestionnaireBlocs(_BlockManager)=====
-Permet de gérer les définitions de bloc du modèle.
-
-=====GestionnaireDéfinitionsCalques(_LayerStateManager)=====
-Enregistre la définition actuelle des calques dans un fichier ou restaure la définition des calques à partir d’un fichier.
-
-=====GestionnaireHistorique(_HistoryManager)=====
-Active et désactive la mise en mémoire et l’actualisation des actions sur les objets compatibles avec l’historique.
-
-=====GestionnaireModules(_PluginManager)=====
-Permet de gérer la liste des modules de Rhino installés, chargés et enregistrés.
-
-=====Glisser (_Flow)=====
-Déforme des objets en réalignant leurs points de contrôle en fonction d’une courbe de structure de départ et d’une courbe de structure finale.
-
-=====GlisserSurSurface(_FlowAlongSrf)=====
-Transforme des objets à partir d’une surface source vers une surface cible.
-
-Conseil : Mon expérience avec GlisserSurSurface m'a amené à utiliser cette commande uniquement sur des polysurfaces fermées. Une fois que j'ai eu fermé votre polysurface, le résultat du GlisserSurSurface était une polysurface fermée valide. [Jeffrey Everett - 30/10/2005]
-
-=====GrillePoints(_PointGrid)=====
-Dessine une grille de points rectangulaire à partir des sommets, de deux sommets adjacents et d’une distance, perpendiculaire au plan de construction ou à partir du centre.
-
-=====Grouper (_Group)=====
-Crée un ensemble unique à partir des objets sélectionnés.
-
-=====Guide (_Hbar)=====
-Modifie une courbe ou une surface avec des guides du style courbe de Bézier.
-
-======H======
-=====Hachures (_Hatch)=====
-Crée un motif de lignes pour remplir des courbes de contour.
-
-=====Hélice (_Helix)=====
-Dessine une courbe en forme d’hélice.
-
-=====HistoriqueCommandes(_CommandHistory)=====
-Affiche les dernières commandes utilisées dans la fenêtre de l’historique de commandes.
-
-=====Hydrostatique (_Hydrostatics)=====
-Calcule et affiche les valeurs hydrostatiques (aire de la surface mouillée, longueur de flottaison, largeur maximale de flottaison, aire du plan de flottaison et centre de flottaison) pour les surfaces et les polysurfaces.
-
-=====Hyperbole (_Hyperbola)=====
-Dessine une courbe hyperbolique à partir des valeurs de coefficient, des foyers ou des sommets.
-
-======I======
-=====ImageArrièrePlan(_BackgroundBitmap)=====
-Place et permet de manipuler une image en arrière-plan dans la fenêtre actuelle afin de la calquer ou d’analyser un dessin.
-
-=====Importer (_Import)=====
-Fusionne tous les objets d’un fichier de Rhino ou autre format dans le modèle actuel.
-
-=====ImporterOptions(_ImportOptions)=====
-Restaure les paramètres des options sélectionnées à partir d’un fichier.
-
-=====Imprimer (_Print)=====
-Imprime une image du contenu de la fenêtre.
-
-=====InclinerVue(_TiltView)=====
-Fait tourner la vue autour de l’axe formé par la ligne entre la caméra et la cible de la vue.
-
-=====Info (_What)=====
-Affiche les informations détaillées sur les propriétés d’un objet dans une fenêtre à part.
-
-=====InfoOpenGL(_OpenGLInfo)=====
-Afficher les informations sur la carte graphique de votre ordinateur pour l’assistance technique.
-
-=====Insérer (_Insert)=====
-Importe des objets d’un fichier avec l’option de placer, de changer l’échelle et de faire tourner les objets insérés en tant que groupes, blocs ou objets séparés.
-
-=====InsérerLigneDansCourbe(_InsertLineIntoCrv)=====
-Redresse une courbe entre deux positions sélectionnées pour former une ligne à l’intérieur de la courbe.
-
-=====InsérerNœud(_InsertKnot)=====
-Ajoute des nœuds sur une courbe ou une surface.
-
-=====InsérerPointContrôle(_InsertControlPoint)=====
-Ajoute des points de contrôle dans une courbe ou une ligne de points de contrôle sur une surface.
-
-=====InsérerPointÉdition(_InsertEditPoint)=====
-Ajoute des points d’édition sur une courbe.
-
-=====InsérerPointRebroussement(_InsertKink)=====
-Ajoute des points de rebroussement sur une courbe.
-
-=====Intersection (_Intersect)=====
-Crée des points ou des courbes à l’intersection entre plusieurs courbes et surfaces.
-
-=====IntersectionBooléenne(_BooleanIntersection)=====
-Supprime les zones non partagées entre les polysurfaces ou surfaces sélectionnées.
-
-=====IntersectionBooléenneMaillage(_MeshBooleanIntersection)=====
-Supprime les zones non partagées entre les maillages sélectionnés.
-
-=====IntersectionMaillage(_MeshIntersect)=====
-Crée une courbe à l’intersection d’objets maillés.
-
-=====Intervalledu magnétisme (_SnapSize)=====
-Définit l’intervalle du magnétisme de la grille en unités de Rhino.
-
-=====Inverser (_Flip)=====
-Inverse la direction normale d’une courbe ou d’une surface.
-
-=====Inverser (_Invert)=====
-Annule la sélection en cours et sélectionne tous les objets qui ne l’étaient pas.
-
-=====InverserBordMaillage(_SwapMeshEdge)=====
-Inverse les sommets de triangles de maillage qui partagent un bord.
-
-=====InverserObjetsCachés(_HideSwap)=====
-Dissimule tous les objets visibles et montre tous les objets qui étaient cachés avant de lancer la commande.
-
-=====InverserObjetsVerrouillés(_LockSwap)=====
-Déverrouille tous les objets verrouillés et verrouille tous les objets visibles qui n’étaient pas verrouillés avant.
-
-=====InverserPoints(_InvertPt)=====
-Annule la sélection des points de contrôle et des points d’édition en cours et sélectionne tous les points de contrôle et d’édition qui ne l’étaient pas.
-
-=====InviteCommande(_CommandPrompt)=====
-Permet de gérer l’affichage de la ligne de commandes.
-
-======J,K======
-=====Joindre (_Join)=====
-Connecte plusieurs objets ensemble pour former un seul objet : lignes en polylignes, courbes en polycourbes, surfaces et polysurfaces en polysurfaces et solides.
-
-=====JoindreBord(_JoinEdge)=====
-Joint deux bords libres de surfaces ou polysurfaces différentes, qui coïncident ou qui sont proches l’un de l’autre mais ne sont pas dans les limites de la tolérance.
-
-=====JointureCourbe(_CrvSeam)=====
-Change la position de la jointure (départ/fin) de courbes fermées.
-
-=====JointureSurf(_SrfSeam)=====
-Change la position où les bords de départ et final se rencontrent sur une surface fermée.
-
-======L======
-=====Lancer (_Run)=====
-Lance une autre application à partir de Rhino.
-
-=====LancerScript(_RunScript)=====
-Lance un script VB.
-
-=====Lasso=====
-Sélectionne des objets ponctuels, des points de contrôle et des points d’édition en dessinant une forme irrégulière autour d’eux.
-
-=====LienHypertexte(_Hyperlink)=====
-Joint un lien hypertexte à un objet.
-
-=====LierDonnéesGHS(_AttachGHSData)=====
-Ajoute des informations spécifiques au format GHS à un modèle de Rhino en marquant les surfaces et les maillages comme objets GHS.
-
-=====Ligne (_Line)=====
-Dessine un segment de ligne simple à partir de deux points, normal à une surface, formant un angle spécifique, perpendiculaire au plan de construction, en utilisant quatre points pour définir la direction et la longueur, divisant deux lignes pour former deux angles de même valeur (bissectrice), tangent à une courbe, prolongeant une courbe ou des deux côtés du point de départ.
-
-=====LigneParPoints(_LineThroughPt)=====
-Crée une ligne passant par les objets ponctuels sélectionnés.
-
-=====LigneRepère(_Leader)=====
-Dessine une ligne de repère avec une pointe de flèche et un texte.
-
-=====Lignes (_Lines)=====
-Dessine plusieurs segments de ligne bout à bout.
-
-=====Limiter (_Trim)=====
-Supprime les portions sélectionnées d’un objet à l’intérieur ou à l’extérieur de leur intersection.
-
-=====LimiterMaillage(_MeshTrim)=====
-Supprime les portions sélectionnées d’un maillage à l’intérieur ou à l’extérieur de l’intersection avec un autre objet.
-
-=====LireFenêtresDansFichier(_ReadViewportsFromFile)=====
-Définit la présentation des fenêtres dans le modèle actuel pour qu’elle coïncide avec celle d’un autre modèle de Rhino.
-
-=====LireFichierCommandes(_ReadCommandFile)=====
-Lit et exécute un script de commande à partir d’un fichier de texte.
-
-=====LireToutesEntitésIGES(_ReadEveryIgesEntity)=====
-Importe toutes les entités IGES, quel que soit le type, du prochain fichier IGES importé.
-
-=====Lisser (_Smooth)=====
-Calcule une moyenne des positions des points de contrôle d’une surface ou d’une courbe ou des sommets d’un maillage dans une région donnée.
-
-=====Liste (_List)=====
-Affiche les informations techniques sur la structure de données des objets sélectionnés.
-
-=====Longueur (_Length)=====
-Mesure et affiche la longueur d’une ou plusieurs courbes.
-
-=====LumièreDirectionnelle(_DirectionalLight)=====
-Insère une lumière qui simule le soleil, définie avec des rayons parallèles et une direction.
-
-=====LumièreLinéaire(_LinearLight)=====
-Insère une lumière imitant un néon.
-
-=====LumièrePonctuelle(_PointLight)=====
-Insère un objet lumineux dans le modèle, émettant une lumière à partir d’un seul point dans toutes les directions (lumière omnidirectionnelle).
-
-=====LumièreRectangulaire(_RectangularLight)=====
-Insère un objet lumineux de forme rectangulaire dans le modèle, émettant une lumière à partir d’un tableau de points lumineux dans une seule direction.
-
-======M======
-=====Magnétisme (_Snap)=====
-Active et désactive le magnétisme de la grille.
-
-=====Maillage (_Mesh)=====
-Crée des maillages polygonaux à partir de surfaces ou de polysurfaces NURBS.
-
-=====MaillageÀPartirDePoints(_MeshFromPoints)=====
-Créer un maillage à partir des points sélectionnés ou d’un nuage de points.
-
-=====MaillageEnNURBS(_MeshToNurb)=====
-Transforme chaque polygone d’un maillage en une surface NURBS.
-
-=====Matrice (_Array)=====
-Crée des copies d’objets en formant un tableau avec un nombre spécifique de lignes et de colonnes.
-
-=====MatriceCourbe(_ArrayCrv)=====
-Crée des copies d’objets espacées régulièrement et orientées sur une courbe.
-
-=====MatriceCourbeSurSurf(_ArrayCrvOnSrf )=====
-Crée des copies d’objets espacées régulièrement et orientées sur une courbe se trouvant sur une surface en utilisant la normale de la surface pour déterminer l’orientation des objets copiés.
-
-=====MatricePolaire(_ArrayPolar)=====
-Crée des copies d’objets en formant un cercle autour d’un point central.
-
-=====MatricePolaireTrous(_ArrayHolePolar)=====
-Crée des copies de trous sur une surface plane en formant un cercle autour d’un point central.
-
-=====MatriceSurf=====
-Crée des copies d’objets en formant un tableau avec un nombre spécifique de lignes et de colonnes sur une surface en utilisant la normale de la surface pour orienter les objets.
-
-=====MatriceTrous(_ArrayHole)=====
-Crée des copies de trous sur une surface plane en formant un tableau avec un nombre spécifique de lignes et de colonnes.
-
-=====MaximiserFenêtre(_MaxViewport)=====
-Agrandit une fenêtre de travail.
-
-=====MenuDéroulant(_PopupMenu)=====
-Ouvre un menu au niveau du curseur, contenant les commandes favorites et celles les plus récemment utilisées.
-
-=====MessagerieRhino(_RhinoMail)=====
-Envoie des messages électroniques dans Rhino.
-
-=====MettreFenêtreEnArrièrePlan(_PushViewportToBack)=====
-Envoie une fenêtre nommée derrière toutes les autres fenêtres.
-
-=====MiseEnPage(_Layout)=====
-Crée une fenêtre de mise en page pour l’impression.
-
-=====MiseEnPage4Détails (_Layout4Detail)=====
-Crée une fenêtre de mise en page avec quatre fenêtres détaillées.
-
-=====ModeFilaire(_WireframeViewport)=====
-Définit la fenêtre pour qu’elle affiche toutes les surfaces et les polysurfaces en mode filaire sans ombrage.
-
-=====ModeGlisser(_DragMode)=====
-Active le déplacement des objets parallèlement au plan de construction, à la vue, aux axes x-y du repère général ou à une surface.
-
-=====ModeOmbré(_ShadedViewport)=====
-Définit la fenêtre pour qu’elle affiche toutes les surfaces, les polysurfaces et les maillages en mode ombré.
-
-=====ModeOrtho(_SetOrtho)=====
-Active, désactive ou inverse le statut du mode ortho.
-
-=====ModePlanéité(_SetPlanar)=====
-Active, désactive ou inverse le statut du mode planéité.
-
-=====ModeRendu(_RenderedViewport)=====
-Définit le mode ombré dans la fenêtre actuelle pour une simulation [[rhino:opengl|OpenGL]] de la vue rendue.
-
-=====ModifierLégèrement(_SoftEdit)=====
-Lors de l’édition des points de contrôle d’une surface, déplace légèrement les points de contrôle entourant ceux sélectionnés par rapport à la distance à partir des points sélectionnés.
-
-=====ModifierLumièreEnRegardant(_EditLightByLooking)=====
-Définit la direction du projecteur en fonction de la vue active.
-
-=====ModifierRayon(_ModifyRadius)=====
-Change le rayon d’arcs ou de cercles.
-
-=====ModifierScript(_EditScript)=====
-Ouvre un éditeur de texte pour modifier les fichiers [[developer:rhinoscript|RhinoScript]].
-
-=====ModifierTexte(_EditText)=====
-Ouvre la fenêtre Propriétés, section Texte pour changer les propriétés ou le contenu du texte sélectionné.
-
-=====MomentsAire(_AreaMoments)=====
-Calcule les moments d’inertie de l’aire de courbes planes fermées, de surfaces et de polysurfaces.
-
-=====MomentsVolume(_VolumeMoments)=====
-Calcule et affiche les moments d’inertie du volume d’une surface ou d’une polysurface fermée.
-
-=====Montrer (_Show)=====
-Affiche tous les objets cachés.
-
-=====MontrerAccrochages(_ShowOsnap)=====
-Active, désactive ou inverse le statut de l’affichage de la barre d’outils Accrochages.
-
-=====MontrerBarreOutils(_ShowToolbar)=====
-Montre la barre d’outils indiquée.
-
-=====MontrerBords(_ShowEdges)=====
-Met en surbrillance les bords des surfaces et des polysurfaces.
-
-=====MontrerBordsDésactivé(_ShowEdgesOff)=====
-Désactive l’affichage des bords et ferme la boîte de dialogue Analyse des bords.
-
-=====MontrerObjetsSélectionnés(_ShowSelected)=====
-Montre uniquement les objets cachés sélectionnés.
-
-=====MontrerPoints(_ShowPt)=====
-Affiche tous les points de contrôle et les points d’édition cachés.
-
-
-======N======
-=====NavigateurInternet(_WebBrowser)=====
-Ajoute un fichier HTML ou des adresses Internet sous forme de propriété de document à un fichier 3DM.
-
-=====Nervure (_Rib)=====
-Crée une nervure en décalant une courbe sur une surface et en extrudant les deux courbes vers une frontière.
-
-=====NommerGroupe(_SetGroupName)=====
-Donne un nom à un groupe.
-
-=====Notes=====
-Ouvre une fenêtre où on peut ajouter des notes de texte au modèle.
-
-=====Nouveau (_New)=====
-Crée un nouveau modèle de Rhino en utilisant un fichier modèle.
-
-=====NouvelleFenêtre(_NewViewport)=====
-Crée une nouvelle fenêtre en utilisant les paramètres par défaut.
-
-=====NuagePoints(_PointCloud)=====
-Crée un objet unique à partir d’objets ponctuels afin qu’ils soient plus rapidement affichés et plus faciles à sélectionner.
-
-=====Numériser (_Digitize)=====
-Connecte et démarre une numérisation 3D.
-
-======O======
-=====ObjectifZoom(_ZoomLens)=====
-Ajuste la distance focale de la caméra dans une vue en perspective.
-
-=====ObjetTexte(_TextObject)=====
-Crée des courbes, des surfaces ou des polysurfaces en forme de texte avec des polices TrueType.
-
-=====OmbragePlat(_FlatShade)=====
-Ombre la fenêtre actuelle sans lissage, chaque face de maillage du rendu est donc visible.
-
-=====OmbrageRayonsX(_XrayViewport)=====
-Ombre les surfaces, les polysurfaces et les maillages tout en affichant toutes les courbes isoparamétriques.
-
-=====OmbrageSélection(_ShadeSelected)=====
-Définit la fenêtre pour qu’elle affiche les surfaces, les polysurfaces et les maillages sélectionnés en mode ombré.
-
-=====OmbrageSemiTransparent(_GhostedViewport)=====
-L’affichage des surfaces et des polysurfaces dans la fenêtre actuelle est translucide.
-
-=====Ombrer (_Shade)=====
-Ombre temporairement la fenêtre. Ce n’est pas un « mode de travail ». Les paramètres suivants peuvent être définis : ModeAffichage (Ombré, Rendu, SemiTransparent ou Plat), DessinerCourbes (ou/non), DessinerFils (oui/non), DessinerGrille (oui/non), DessinerAxes (oui/non), ArrièrePlan (couleur).
-
-=====OpBooléenne2Objets (_Boolean2Objects)=====
-Permet de choisir parmi les opérations booléennes (union, intersection, différence, A moins B et B moins A et inversion) avec la souris grâce à l'aperçu du résultat de chaque opération.
-
-=====OpérationBooléenneCourbe(_CurveBoolean)=====
-Limite, divise et joint des courbes en fonction de leurs régions superposées.
-
-=====Options=====
-Permet de gérer les options générales de Rhino.
-
-=====Orienter (_Orient)=====
-Déplace ou copie, fait tourner et change l’échelle d’objets en utilisant deux positions de référence et deux positions cibles.
-
-=====Orienter3Pt (_Orient3Pt)=====
-Déplace ou copie, fait tourner et change l’échelle d’objets en utilisant trois positions de référence et trois positions cibles.
-
-=====OrienterCaméraSurSurf(_OrientCameraToSrf)=====
-Déplace la position de la caméra et de la cible d’une fenêtre pour les aligner le long de la normale de la surface sélectionnée.
-
-=====OrienterCourbeSurBord(_OrientCrvToEdge)=====
-Copie et aligne une courbe sur le bord d’une surface.
-
-=====OrienterSurCourbe(_OrientOnCrv)=====
-Déplace ou copie et fait tourner des objets sur une courbe en utilisant la direction de la courbe pour définir l’orientation.
-
-=====OrienterSurSurf(_OrientOnSrf)=====
-Déplace ou copie et fait tourner des objets sur une surface en utilisant la normale de la surface pour définir l’orientation.
-
-=====Ortho=====
-Restreint le mouvement du curseur aux points se trouvant à un certain angle (ou à des multiples de cet angle) du dernier point créé.
-
-=====Ouvrir (_Open)=====
-Ouvre un fichier de Rhino ou d’un autre format.
-
-=====OuvrirBarreOutils(_PopupToolbar)=====
-Ouvre la barre d’outils indiquée à l’emplacement du curseur.
-
-=====OuvrirModèlesDidacticiels(_OpenTutorialModels)=====
-Ouvre la boîte de dialogue Ouvrir dans le dossier où se trouvent les modèles des didacticiels installés avec Rhino.
-
-=====OuvrirPolyligne(_OpenPolyline)=====
-Supprime un segment sélectionné dans une polyligne.
-
-======P======
-=====Parabole (_Parabola)=====
-Dessine une courbe parabolique à partir de la position du foyer ou du sommet.
-
-=====Paraboloïde (_Paraboloid)=====
-Crée une surface parabolique à partir de la position du foyer ou du sommet.
-
-=====Patch=====
-Crée une surface passant par des courbes et des points sélectionnés.
-
-=====PatchFaceSimple(_PatchSingleFace)=====
-Remplit un trou dans un maillage avec une face maillée.
-
-=====Pause=====
-Arrête un script pour que l’utilisateur puisse réaliser une action.
-
-=====PauseNumériseur(_DigPause)=====
-Interrompt le numériseur 3D afin qu’il ne gêne pas l’utilisation de la souris.
-
-=====PlacerTrou(_PlaceHole)=====
-Découpe des trous dans une surface plane à partir d’une courbe fermée sélectionnée, d’une profondeur et d’une position.
-
-=====Plan (_Plane)=====
-Dessine une surface plane rectangulaire à partir des sommets, de deux sommets adjacents et d’une distance, perpendiculaire au plan de construction ou à partir du centre.
-
-=====PlanC(_Cplane)=====
-Définit l’origine et l’orientation du plan de construction dans la fenêtre active.
-
-=====PlanCNommé(_NamedCPlane)=====
-Permet de gérer la liste des plans de construction pour enregistrer, restaurer et modifier les plans de construction nommés.
-
-=====PlanCoupe(_CutPlane)=====
-Crée des surfaces planes à travers des objets à certains endroits.
-
-=====Planéité (_Planar)=====
-Les points sélectionnés se trouveront à la même élévation au-dessus du plan de construction que le premier point.
-
-=====PlanM(_Mplane)=====
-Définit le plan de construction sur un objet sélectionné et garde les relations entre le plan de construction et l’objet.
-
-=====PlanMaillé(_MeshPlane)=====
-Crée un plan maillé rectangulaire à partir des sommets, de deux sommets adjacents et de la position opposée, perpendiculaire au plan de construction ou à partir du centre.
-
-=====PlanParPoint(_PlaneThroughPt)=====
-Crée une surface plane rectangulaire passant par des objets ponctuels ou par un nuage de points.
-
-=====PlanU(_Uplane)=====
-Définit l’origine de tous les plans de construction au même endroit définit par ses coordonnées dans le repère général.
-
-=====PlaquageEnv(_Emap)=====
-Affiche un plaquage d’environnement ombré pour analyser la surface.
-
-=====PlaquageEnvDésactivé(_EmapOff)=====
-Désactive l’affichage du plaquage d’environnement et ferme la boîte de dialogue Plaquage d’environnement.
-
-=====PlatineTournante(_Turntable)=====
-Fait tourner une vue en continu autour du point cible de la fenêtre.
-
-=====PleinÉcran(_Fullscreen)=====
-Remplit l’écran avec les fenêtres en cachant les menus, la barre d’état, les barres d’outils, l’invite de commandes et le titre de la fenêtre principale.
-
-=====PlierFace(_FoldFace)=====
-Divise et fait tourner autour d’un axe ou d’une ligne des faces d’une polysurface.
-
-=====Poids (_Weight)=====
-Modifie le poids d’un point de contrôle sur une courbe ou une surface.
-
-=====Point=====
-Dessine un objet ponctuel simple à la position indiquée.
-
-=====PointAnnotation(_Dot)=====
-Crée un point d’annotation qui reste parallèle à la vue et garde la même taille d’affichage.
-
-=====PointeFlèche(_Arrowhead)=====
-Crée et supprime une pointe de flèche sur l’extrémité d’une courbe.
-
-=====PointPlusProche(_ClosestPt)=====
-Crée un objet ponctuel au niveau du point le plus proche entre une position définie et un objet sélectionné ou sur deux objets où ils sont les plus proches l’un de l’autre.
-
-=====Points=====
-Dessine plusieurs objets ponctuels.
-
-=====PointsÀPartirDeUV(_PointsFromUV)=====
-Crée des objets ponctuels en indiquant les coordonnées u et v d’une surface.
-
-=====PojeterMaillage(_MeshProject)=====
-Crée des courbes ou des points sur un maillage représentant les intersections entre le maillage et des courbes ou des points projetés sur le plan de construction.
-
-=====Polygone (_Polygon)=====
-Crée une polyligne fermée en indiquant le nombre de côtés, inscrite ou circonscrite par rapport à un cercle, à partir de la longueur d’un bord, en forme d’étoile, perpendiculaire au plan de construction ou autour d’une courbe.
-
-=====Polyligne (_Polyline)=====
-Dessine une polyligne formée de plusieurs segments de ligne ou d’arc.
-
-Remarque : dans le langage Rhino, plusieurs segments de courbe bout à bout et joints forment une polycourbe. Une polyligne, en revanche, est composée uniquement de segments de ligne droits bout à bout et joints. V4 embrouillera un peu les choses puisque la commande Polyligne permet d'ajouter des arcs dans la polyligne... [Pascal - 2005-11-10]
-
-=====PolyligneMaillée(_MeshPolyline)=====
-Remplit une polyligne fermée avec un maillage.
-
-=====PolyligneSurMaillage(_PolylineOnMesh)=====
-Dessine une polyligne formée de plusieurs segments sur un maillage.
-
-=====PrécU(_PrevU)=====
-Sélectionne le point de contrôle suivant dans la direction u négative.
-
-=====PrécV(_PrevV)=====
-Sélectionne le point de contrôle suivant dans la direction v négative.
-
-=====Profiler (_Fair)=====
-Supprime les variations de courbure importantes dans une courbe tout en limitant les changements sur la géométrie à une certaine tolérance.
-
-=====Projecteur (_Spotlight)=====
-Insère un projecteur dans le modèle.
-
-=====Projeter (_Project)=====
-Crée des courbes ou des points sur une surface représentant les intersections entre la surface et des courbes ou des points projetés sur le plan de construction.
-
-=====ProjeterAccrochages(_ProjectOsnap)=====
-Projette les accrochages sur le plan de construction.
-
-=====ProjeterSurPlanC(_ProjectToCPlane)=====
-Aplatit les objets sur le plan de construction.
-
-=====Prolonger (_Extend)=====
-Allonge une courbe jusqu’à ce qu’elle touche une frontière, ce qu’une certaine longueur soit ajoutée ou en faisant glisser son extrémité dans une nouvelle position.
-
-=====ProlongerBordSurf(_ExtendSrfEdge)=====
-Déplace le bord d’une surface pour allonger celle-ci.
-
-=====ProlongerCourbeSurSurface(_ExtendCrvOnSrf)=====
-Allonge une courbe sur une surface jusqu’à ce qu’elle touche une frontière, ce qu’une certaine longueur soit ajoutée ou en faisant glisser son extrémité dans une nouvelle position.
-
-=====ProlongerSurf(_ExtendSrf)=====
-Allonge une surface en utilisant un facteur de prolongement.
-
-=====Propriétés (_Properties)=====
-Permet de gérer les propriétés des objets, des matériaux, des lumières et des cotes.
-
-=====PropriétésDocument(_DocumentProperties)=====
-Ouvre la boîte de dialogue Propriétés du document.
-
-=====PropriétésFenêtre(_ViewportProperties)=====
-Permet de gérer les propriétés d’une fenêtre : caméra, affichage, distance focale, projection, taille, cible, titre, papier peint.
-
-=====PropriétésMiseEnPage(_LayoutProperties)=====
-Permet de gérer les propriétés des fenêtres détaillées.
-
-=====Purger (_Purge)=====
-Supprime les définitions de bloc et les calques inutilisés du modèle.
-
-=====Pyramide (_Pyramid)=====
-Crée une pyramide solide à partir d’une base polygonale et d’une hauteur.
-
-======Q======
-=====QuadrangulationMaillage(_QuadrangulateMesh)=====
-Fusionne les triangles de maillage pour former des quadrilatères.
-
-=====Quitter (_Exit)=====
-Ferme la session de Rhino en cours.
-
-======R======
-=====Raccordement (_Blend)=====
-Dessine une courbe de raccordement entre deux courbes tout en gardant la continuité avec les courbes.
-
-=====RaccordementVariableBord(_VariableBlendEdge)=====
-Crée une surface de raccordement avec une continuité de courbure entre plusieurs bords d’une polysurface avec plusieurs valeurs de rayons différentes, limite les surfaces de départ et joint les surfaces raccordées à ces dernières.
-
-=====RaccorderCourbe(_BlendCrv)=====
-Crée une courbe de raccordement entre des courbes et/ou des bords de surface en permettant de contrôler la symétrie et la continuité avec chaque courbe.
-
-Dans Rhino 4.0, si les deux courbes se touchent sur leur extrémité, cette commande commence où vous cliquez sur la courbe.
-
-=====RaccorderSurf(_BlendSrf)=====
-Crée une surface de raccordement avec une continuité de courbure entre deux surfaces, limite les surfaces de départ et joint les surfaces raccordées aux surfaces de départ.
-
-=====RapportHistorique(_HistoryReport)=====
-Affiche les transformations qui ont été réalisées sur un objet et ses descendants.
-
-=====Rayon (_Radius)=====
-Mesure et affiche le rayon d’une courbe en un point particulier.
-
-=====Rayures (_Zebra)=====
-Plaque des rayures sur des surfaces afin de les analyser.
-
-=====RayuresDésactivées(_ZebraOff)=====
-Désactive l’affichage de l’analyse par rayures et ferme la boîte de dialogue Analyse avec des rayures.
-
-=====RebondLumière(_BounceLight)=====
-Ajoute des lumières ou des lignes auxiliaires au modèle en fonction des positions de reflet définies par l’utilisateur.
-
-=====RecentrerTexteCotation(_DimRecenterText)=====
-Remet à sa position initiale le texte de cotation qui a été déplacé de sa position par défaut.
-
-=====ReconstructionInteractive(_AltRebuild)=====
-Permet de modifier interactivement les courbes reconstruites pour mieux correspondre à l’orignal en espaçant les points de contrôle non uniformément.
-
-=====Reconstruire (_Rebuild)=====
-Reconstruit les courbes et les surfaces sélectionnées avec un degré et un nombre de points de contrôle déterminés.
-
-=====ReconstruireBords(_RebuildEdges)=====
-Restaure les bords originaux d’une surface 3D qui ont été séparés de la surface lors de l’édition.
-
-=====ReconstruireMaillage(_RebuildMesh)=====
-Supprime les coordonnées de texture, les courbes des sommets, les courbures de surface et les paramètres de surface d’un maillage et recrée uniquement les normales des faces et des sommets.
-
-=====ReconstruireNormalesMaillage(_RebuildMeshNormals)=====
-Supprime les normales d’un maillage et reconstruit les normales de la face et des sommets en fonction de l’orientation des faces.
-
-=====Rectangle=====
-Dessine une polyligne rectangulaire à partir des sommets, de deux sommets adjacents et d’une distance, perpendiculaire au plan de construction, à partir du centre ou avec les sommets arrondis.
-
-=====RectangleAperçuRendu(_RenderPreviewWindow)=====
-Calcule le rendu d’une zone sélectionnée de la fenêtre actuelle, dans la fenêtre même, en utilisant la résolution de la fenêtre et en définissant les paramètres de sorte à minimiser le temps de rendu.
-
-=====RectangleRendu(_RenderWindow)=====
-Calcule le rendu d’une zone sélectionnée de la fenêtre actuelle, dans la fenêtre même, avec la résolution de la fenêtre.
-
-=====RécupérerFichier3dm (_Rescue3dmFile)=====
-Récupère des données dans des fichiers de Rhino endommagés.
-
-=====Réduire (_Minimize)=====
-Réduit la fenêtre principale de Rhino.
-
-=====RéduireBordMaillage(_CollapseMeshEdge)=====
-Déplace les sommets d’un bord de maillage en un seul point.
-
-=====RéduireFaceMaillage(_CollapseMeshFace)=====
-Déplace les sommets d’une face de maillage en un seul point.
-
-=====RéduireFaceMaillageSelonAire(_CollapseMeshFacesByArea)=====
-Déplace en un seul point les sommets de faces de maillage dont l’aire est plus grande ou plus petite qu’une certaine valeur.
-
-=====RéduireFacesMaillageSelonLongueurBord(_CollapseMeshFacesByEdgeLength)=====
-Déplace en un seul point les sommets de bords de maillage dont la longueur est plus grande ou plus petite qu’une certaine valeur.
-
-=====RéduireFacesMaillageSelonRapportImage(_CollapseMeshFacesByAspectRatio)=====
-Déplace en un seul point les sommets de faces de maillage dont le rapport entre la longueur et la largeur est plus grand ou plus petit qu’une certaine valeur.
-
-=====RéduireMaillage(_ReduceMesh)=====
-Réduit le nombre de polygones dans un maillage et convertit les quadrilatères du maillage en triangles.
-
-=====RéduireSommetMaillage(_CollapseMeshVertex)=====
-Déplace un sommet de maillage sélectionné sur un autre sommet.
-
-=====RemplirTrou(_FillHole)=====
-Remplit avec des faces triangulaires un trou sélectionné dans un objet maillé.
-
-=====RemplirTrous(_FillHoles)=====
-Remplit avec des faces de maillage triangulaires tous les trous dans un objet maillé.
-
-=====RendreNonPériodique(_MakeNonPeriodic)=====
-Rend une courbe ou une surface périodique non-périodique.
-
-=====RendrePériodique(_MakePeriodic)=====
-Rend une courbe ou une surface non-périodique périodique.
-
-=====Rendu (_Render)=====
-Calcule le rendu de la fenêtre actuelle dans la fenêtre de rendu en utilisant les paramètres du module de rendu actuel.
-
-=====RenduDansRectangle(_RenderInWindow)=====
-Calcule le rendu d’une zone sélectionnée de la fenêtre actuelle, dans la fenêtre de rendu, avec la résolution de la fenêtre.
-
-=====RenflementFinal(_EndBulge)=====
-Ajuste la forme d’une courbe au niveau de ses extrémités ou une surface près d’un bord non limité.
-
-=====Reparamétrer (_Reparameterize)=====
-Recalcule l’espace paramétrique d’un objet afin qu’il ait plus ou moins la même taille que sa géométrie 3D.
-
-=====Restaurer (_Restore)=====
-Restaure la fenêtre de Rhino lorsqu’il est réduit ou agrandi.
-
-=====Rétablir (_Redo)=====
-Rétablit les changements sur la géométrie annulés avec la commande Annuler.
-
-=====RétablirPlusieursActions(_RedoMultiple)=====
-Affiche une liste de modifications réalisées sur la géométrie annulées avec la commande Annuler afin de les rétablir.
-
-=====RétablirVue(_RedoView)=====
-Rétablit les changements de vue annulés avec la commande AnnulerVue.
-
-=====RetirerDeGroupe(_RemoveFromGroup)=====
-Détache de leur groupe les objets sélectionnés.
-
-=====RetirerLicence(_CheckOutLicense)=====
-Retire une licence du gestionnaire de licences
-
-=====RétrécirSurfaceLimitée(_ShrinkTrimmedSrf)=====
-Contracte la surface sous-jacente non limitée près de ses limites.
-
-=====RétrécirSurfSurBord(_ShrinkSrfToEdge)=====
-Contracte la surface non limitée sous-jacente aussi près que possible des frontières de limite.
-
-=====Révolution (_Revolve)=====
-Crée une surface en faisant tourner une courbe de profil qui définit la forme de la surface autour d’un axe.
-
-=====RévolutionRail(_RailRevolve)=====
-Crée une surface en faisant tourner une courbe de profil qui définit la forme de la surface autour d’une courbe guide qui définit le bord de la surface.
-
-=====RienSélectionner(_SelNone)=====
-Désélectionne les objets sélectionnés.
-
-=====Rotation (_Rotate)=====
-Fait tourner des objets autour d’un point déterminé, perpendiculairement au plan de construction actif.
-
-=====Rotation3D (_Rotate3D)=====
-Fait tourner des objets autour d’un axe déterminé dans l’espace 3D.
-
-=====RotationBord(_RotateEdge)=====
-Fait tourner les bords d’une polysurface autour d’un axe.
-
-=====RotationCaméra(_RotateCamera)=====
-Fait tourner la vue autour de la caméra.
-
-=====RotationFace(_RotateFace)=====
-Fait tourner la face d’une polysurface autour d’un axe.
-
-=====RotationTrou(_RotateHole)=====
-Fait tourner un trou dans une surface plane autour d’un axe.
-
-=====RotationVue(_RotateView)=====
-Fait tourner la caméra de la vue autour de la cible.
-
-=====Ruban (_Ribbon)=====
-Crée une surface en décalant une courbe et en créant une surface réglée dans la zone entre les deux courbes.
-
-======S======
-=====Section=====
-Crée une courbe plane à partir de l’intersection entre un plan de coupe défini et une surface ou une polysurface.
-
-=====SectionNuagePoints(_PointCloudSection)=====
-Crée une courbe plane représentant l’intersection entre un plan et un nuage de points.
-
-=====SectionNumérisée(_DigSection)=====
-Crée des sections transversales planes à l’aide d’un numériseur 3D.
-
-=====SectionOptions(_OptionsPage)=====
-Ouvre une section de la boîte de dialogue Options.
-
-=====SectionPropriétés(_PropertiesPage)=====
-Ouvre la fenêtre Propriétés à la section indiquée.
-
-=====SectionPropriétésDocument(_DocumentPropertiesPage)=====
-Ouvre une section de la boîte de dialogue Propriétés du document.
-
-=====SélAdjacents(_SelConnected)=====
-Ajoute les points de contrôle de la courbe ou de la surface adjacente aux points de contrôle déjà sélectionnés.
-
-=====SélCalque(_SelLayer)=====
-Sélectionne tous les objets se trouvant sur un calque déterminé.
-
-=====SélChaîne(_SelChain)=====
-Sélectionne des courbes ou des bords de surface qui se touchent bout à bout.
-
-=====SélCotes(_SelDim)=====
-Sélectionne toutes les cotes et tous les textes d’annotation visibles.
-
-=====SélCouleur(_SelColor)=====
-Sélectionne tous les objets d’une même couleur visibles.
-
-=====SélCourbes(_SelCrv)=====
-Sélectionne toutes les courbes visibles.
-
-=====SélCourbesCourtes(_SelShortCrv)=====
-Sélectionne toutes les courbes visibles plus courtes qu’une certaine longueur.
-
-=====SélCourbesFermées(_SelClosedCrv)=====
-Sélectionne toutes les courbes fermées visibles.
-
-=====SélCourbesOuvertes(_SelOpenCrv)=====
-Sélectionne toutes les courbes ouvertes visibles.
-
-=====SélDerniers(_SelLast)=====
-Sélectionne les objets créés en dernier.
-
-=====SélDup(_SelDup)=====
-Sélectionne tous les objets visibles identiques au niveau de leur géométrie.
-
-=====Sélectionner (_Select)=====
-Sélectionne des objets.
-
-=====SélFenêtre(_SelWindow)=====
-Sélectionne tous les objets visibles entièrement inclus dans un rectangle de sélection.
-
-=====SélGroupe(_SelGroup)=====
-Sélectionne un groupe en indiquant son nom.
-
-=====SélIdentification(_SelID)=====
-Sélectionne un objet avec un numéro d’identification spécifique.
-
-=====SélLumières(_SelLight)=====
-Sélectionne toutes les lumières visibles.
-
-=====SélMaillages(_SelMesh)=====
-Sélectionne tous les objets maillés.
-
-=====SélMaillagesFermés(_SelClosedMesh)=====
-Sélectionne tous les objets maillés fermés visibles.
-
-=====SélMaillagesOuverts(_SelOpenMesh)=====
-Sélectionne tous les objets maillés ouverts visibles.
-
-=====SélMauvaisObjets(_SelBadObjects)=====
-Sélectionne tous les objets visibles présentant des erreurs.
-
-=====SélNom(_SelName)=====
-Sélectionne les objets visibles portant un nom déterminé.
-
-=====SélNomMatériau(_SelMaterialName)=====
-Sélectionne tous les objets visibles dont le matériau de rendu a le même nom.
-
-=====SélNuagePts(_SelPtCloud)=====
-Sélectionne tous les nuages de points visibles.
-
-=====SélNuméroCalque(_SelLayerNumber)=====
-Sélectionne des objets par le numéro de leur calque.
-
-=====SélOccurrenceBloc(_SelBlockInstance)=====
-Sélectionne toutes les occurrences de bloc visibles.
-
-=====SélOccurrenceBlocNommé(_SelBlockInstanceNamed)=====
-Sélectionne toutes les occurrences de bloc d’un certain nom visibles.
-
-=====SélPointsAnnotation(_SelDot)=====
-Sélectionne tous les points d’annotation visibles.
-
-=====SélPolylignes(_SelPolyline)=====
-Sélectionne toutes les polylignes visibles.
-
-=====SélPolysurfaces(_SelPolysrf)=====
-Sélectionne toutes les polysurfaces visibles.
-
-=====SélPolysurfFermées(_SelClosedPolysrf)=====
-Sélectionne toutes les polysurfaces fermées visibles.
-
-=====SélPolysurfOuvertes(_SelOpenPolysrf)=====
-Sélectionne toutes les polysurfaces ouvertes visibles.
-
-=====SélPréc(_SelPrev)=====
-Sélectionne à nouveau les objets utilisés dans la dernière commande.
-
-=====SélPts(_SelPt)=====
-Sélectionne tous les objets ponctuels, les points de contrôle et les points d’édition visibles.
-
-=====SélPtsBordsMaillageLibres(_SelNakedMeshEdgePt)=====
-Sélectionne tous les sommets visibles sur les bords de maillage non soudés.
-
-=====SélRecoupement(_SelCrossing)=====
-Sélectionne les objets visibles inclus entièrement ou partiellement dans un rectangle de sélection.
-
-=====SélSurfaces(_SelSrf)=====
-Sélectionne toutes les surfaces visibles.
-
-=====SélSurfFermées(_SelClosedSrf)=====
-Sélectionne toutes les surfaces fermées visibles.
-
-=====SélSurfLimitées(_SelTrimmedSrf)=====
-Sélectionne toutes les surfaces limitées visibles.
-
-=====SélSurfNonLimitées(_SelUntrimmedSrf)=====
-Sélectionne toutes les surfaces non limitées visibles.
-
-=====SélSurfOuvertes(_SelOpenSrf)=====
-Sélectionne toutes les surfaces ouvertes visibles.
-
-=====SélU(_SelU)=====
-Sélectionne tous les points de contrôle visibles d’une surface dans la direction u à partir des points de contrôle sélectionnés.
-
-=====SélUV(_SelUV)=====
-Sélectionne tous les points de contrôle visibles d’une surface dans les directions u et v à partir des points de contrôle sélectionnés.
-
-=====SélV(_SelV)=====
-Sélectionne tous les points de contrôle visibles d’une surface dans la direction v à partir des points de contrôle sélectionnés.
-
-=====SélVisible(_SelVisible)=====
-Sélectionne avec une fenêtre de recoupement des objets qui seraient visibles dans la fenêtre active si elle était ombrée.
-
-=====Session (_Worksession)=====
-Ouvre un modèle existant en tant que géométrie de référence.
-
-=====Silhouette=====
-Crée des courbes représentant le contour dans la vue de la région couverte par la surface ou polysurface sélectionnée.
-
-=====SimplifierCourbe(_SimplifyCrv)=====
-Combine des segments de ligne colinéaires et des segments d’arc cocirculaires.
-
-=====Souder (_Weld)=====
-Supprime les informations sur les coordonnées de plaquage de texture de tous les sommets de maillage partagés.
-
-=====SouderBord(_WeldEdge)=====
-Supprime les informations sur les coordonnées de plaquage de texture de chaque sommet de maillage partagé sur un bord sélectionné.
-
-=====SouderSommets(_WeldVertices)=====
-Supprime les informations sur les coordonnées de plaquage de texture de chaque sommet de  maillage partagé sélectionné.
-
-=====SousCourbe(_SubCrv)=====
-Limite une courbe en indiquant deux points sur la courbe.
-
-=====Sphère (_Sphere)=====
-Crée une sphère solide à partir du centre et du rayon, de deux points sur le diamètre, de trois points sur le diamètre, tangente à des courbes, autour d’une courbe, passant par quatre points ou passant par des objets ponctuels.
-
-=====SphèreMaillée(_MeshSphere)=====
-Crée une sphère maillée à partir d’un cercle de base, de quatre points sur la sphère ou passant par des points.
-
-=====Spirale (_Spiral)=====
-Dessine une courbe en forme de spirale.
-
-=====StyleNuagePoints(_PointCloudStyle)=====
-Définit le style d’affichage des nuages de points.
-
-=====SuivantU(_NextU)=====
-Sélectionne le point de contrôle suivant dans la direction u positive de la surface.
-
-=====SuivantV(_NextV)=====
-Sélectionne le point de contrôle suivant dans la direction v positive de la surface.
-
-=====Supprimer (_Delete)=====
-Supprime les objets sélectionnés du modèle.
-
-=====SupprimerBord(_DeleteEdge)=====
-Annule la limite des bords de surface sélectionnés.
-
-=====SupprimerFacesDégénérées(_CullDegenerateFaces)=====
-Supprime les faces de maillage dont l’aire est égale à 0.
-
-=====SupprimerFacesMaillage(_DeleteMeshFaces)=====
-Supprime les faces de maillage sélectionnées afin de créer un trou dans le maillage de départ.
-
-=====SupprimerNœudsMultiplesSurface(_RemoveMultiKnotSrf)=====
-Supprime des nœuds multiples mais pas entièrement multiples dans des surfaces.
-
---
-Normalement, les surfaces créées avec la commande Balayage2 (comprenant les surfaces de raccordement qui utilisent la commande Balayage2) et parfois aussi les surfaces décalées présentent des nœuds multiples. Cette commande supprime les nœuds empilés s'ils ne sont pas entièrement multiples. La commande Balayage2 par exemple créera deux nœuds l'un sur l'autre dans la direction V. Si la surface est décalée des nœuds seront ajoutés  et il se peut qu'un troisième se trouve sur les deux premiers, ce qui rendrait le nœud "entièrement multiple" au niveau de ce point, introduisant un point de rebroussement ou un possible point de rebroussement ou un pli dans la surface. Le décalage peut alors créer une polysurface.
-
-Lorsque des nœuds multiples sont supprimés, la surface perd un peu de sa précision mais en pratique ce n'est pas un problème dans la plupart des cas. Un autre avantage de cette commande est que le nombre de points est considérablement réduit (presque la moitié), ce qui peut être intéressant si vous voulez modifier la surface en jouant sur ses points d'édition.
-
-L'option 'simple' dans la boîte de dialogue Balayage de la V4 permet de créer des surfaces sans nœuds multiples mais cette option n'est disponible que dans certains cas très restreints lorsque toutes les courbes sont parfaitement adaptées et placées correctement. Le comportement habituel de Balayage2 permet de créer des balayages précis à partir de courbes de départ très diverses.
-
---
-J'ai remarqué que parfois la structure très dense des surfaces de balayage2 peut entraver les choses. Une solution à essayer, et elle marche dans ce cas précis, est de lancer la commande SupprimerNœudsMultiplesSurface sur les surfaces de balayage présentant un problème et de réessayer. Le problème est que la limite des surfaces est annulée et que vous devez les relimiter ensuite mais le congé fonctionne correctement après. SupprimerNœudsMultiplesSurface devrait être utilisée avec certaines précautions car elle change la surface, en principe de façon microscopique, mais il faut quand même en tenir compte. Sur les surfaces très denses comme ça je pense qu'il n'y a pas de perte. [Pascal - 2005-10-25]
-
-=====SupprimerNormalesInversées(_RemoveFlippedNormals)=====
-Inverse les normales d’une surface NURBS mal orientées.
-
-=====SupprimerPointContrôle(_RemoveControlPoint)=====
-Supprime des points de contrôle dans une courbe ou une ligne de points de contrôle dans une surface.
-
-=====SupprimerSousCourbe(_DeleteSubCrv)=====
-Supprime une portion de courbe entre deux points définis.
-
-=====SupprimerTousMaillages(_ClearAllMeshes)=====
-Supprime les maillages de rendu et d’analyse de toutes les surfaces et polysurfaces.
-
-=====SurfaceParBords(_EdgeSrf)=====
-Crée une surface à partir de deux, trois ou quatre courbes sélectionnées.
-
-=====SurfaceParGrillePoints(_SrfPtGrid)=====
-Crée une surface à partir d’une grille de points sur la surface.
-
-=====SurfaceParGrillePointsContrôle(_SrfControlPtGrid)=====
-Crée une surface à partir d’une grille de points représentant les points de contrôle de la surface.
-
-=====SurfaceParPoints(_SrfPt)=====
-Crée une surface à partir des sommets indiqués.
-
-=====SurfaceParSections(_Loft)=====
-Crée une surface passant par des courbes de profil qui définissent la forme finale.
-
-=====SurfacePlane(_PlanarSrf)=====
-Crée une surface plane à partir de courbes définissant ses bords.
-
-=====SurfaceRéseau(_NetworkSrf)=====
-Crée une surface à partir d’un réseau de courbes.
-
-=====Symétrie (_Mirror)=====
-Crée une copie symétrique d’objets.
-
-=====SymétrieRaccordée(_Symmetry)=====
-Copie des courbes et des surfaces par symétrie, modifie la moitié copiée pour qu’elle soit tangente à l’original et lie les deux objets de sorte que la copie soit actualisée lorsque l’original est modifié.
-
-=====SynchroniserPlansC(_SynchronizeCPlanes)=====
-Actualise toutes les fenêtres pour définir les vues standard en fonction d’un plan de construction sélectionné.
-
-=====SynchroniserVues(_SynchronizeViews)=====
-Définit la distance focale de la caméra de toutes les fenêtres avec projection parallèle avec la même valeur que celle de la fenêtre actuelle.
-
-======T======
-=====Texte (_Text)=====
-Crée des blocs de texte d’annotation en deux dimensions.
-
-=====Tore (_Torus)=====
-Crée un tore solide (forme d’anneau)
-
-=====ToreMaillé(_MeshTorus)=====
-Crée un tore maillé (forme d’anneau) à partir d’un cercle de base et d’un deuxième rayon ou diamètre.
-
-=====Torsion (_Twist)=====
-Déforme des objets en faisant tourner leurs points de contrôle autour d’un axe.
-
-=====Tourbillon (_Maelstrom)=====
-Déforme des objets en déplaçant leurs points de contrôle sur une spirale comme s’ils étaient pris dans un tourbillon.
-
-=====ToutSélectionner(_SelAll)=====
-Sélectionne tous les objets visibles.
-
-=====TriangulationMaillage(_TriangulateMesh)=====
-Divise toutes les faces maillées quadrangulaires pour former deux faces maillées triangulaires.
-
-=====TriangulerQuadrilatèresNonPlans(_TriangulateNonPlanarQuads)=====
-Divise toutes les faces non planes maillées quadrangulaires pour former deux faces maillées triangulaires.
-
-=====TrouRévolution(_RevolvedHole)=====
-Crée des trous dans une polysurface en faisant tourner une courbe de profil qui définit la forme de la surface autour d’un axe et en soustrayant le volume du trou de la polysurface.
-
-=====TrouRond(_RoundHole)=====
-Crée des trous circulaires dans des surfaces ou des polysurfaces.
-
-=====Tube=====
-Crée un cylindre fermé avec un trou cylindrique concentrique.
-
-=====Tuyau (_Pipe)=====
-Crée une surface avec un profil circulaire autour d’une courbe.
-
-======U======
-=====UnCalqueActif(_OneLayerOn)=====
-Active un calque déterminé et désactive tous les autres calques.
-
-=====UnifierNormalesMaillage(_UnifyMeshNormals)=====
-Change la direction normale des faces d’un objet maillé pour qu’elles aient toutes une direction cohérente.
-
-=====Uniformiser (_MakeUniform)=====
-Change une courbe ou une surface de façon à ce que le vecteur de nœud soit uniforme.
-
-=====UnionBooléenne(_BooleanUnion)=====
-Supprime les zones partagées par des polysurfaces ou surfaces sélectionnées et crée une seule polysurface à partir des zones non partagées.
-
-=====UnionBooléenneMaillage(_MeshBooleanUnion)=====
-Supprime les zones partagées par des maillages sélectionnés et crée un seul maillage à partir des zones non partagées.
-
-======V======
-=====Vérifier (_Check)=====
-Détecte et indique les erreurs dans la structure de données des objets.
-
-=====VérifierNouveauxObjets(_CheckNewObjects)=====
-Vérifie et indique les erreurs sur les objets lors de leur création ou de leur importation.
-
-=====Verrouiller (_Lock)=====
-Définit l’état des objets sélectionnés afin qu’ils soient visibles et puissent être utilisés pour les accrochages mais qu’il ne soit pas possible de les sélectionner ni de les modifier.
-
-=====VerrouillerAccrochages(_DisableOsnap)=====
-Permet de gérer l’état des accrochages aux objets persistants.
-
-=====ViderMémoireAnnulation(_ClearUndo)=====
-Libère de la mémoire en vidant la mémoire d’annulation.
-
-=====Volume=====
-Calcule et affiche le volume d’une surface, d’une polysurface ou d’un maillage fermé.
-
-=====VueDégradée(_GradientView)=====
-Affiche un dégradé de couleurs personnalisable en arrière-plan.
-
-=====VueEnPlan(_Plan)=====
-Définit la vue active alignée sur la direction z du plan de construction à 0,0 et définit la fenêtre avec une projection parallèle.
-
-=====VueNommée(_NamedView)=====
-Permet de gérer la liste des vues nommées pour enregistrer, restaurer et modifier les vues nommées.
-
-======W,X,Y,Z======
-=====Zoom=====
-Permet de zoomer en avant ou en arrière dans la vue actuelle.
-
-
-
-
-
-
+====== Liste des commandes de Rhino 5 en anglais et français======
+> **Sommaire:** //Une liste des commandes de Rhino avec leur équivalent en anglais.//
+
+|3Vues|3View|
+|4Vues|4View|
+|Accrochages|Osnap|
+|AccrochageSurVerrouillés|SnapToLocked|
+|ActiverPlanDécoupe|EnableClippingPlane|
+|ActiverPoints|PointsOn|
+|ActiverPointsÉdition|EditPtOn|
+|ActiverPointsSolide|SolidPtOn|
+|ActiverRégénération|SetRedrawOn|
+|ActualiserHistorique|HistoryUpdate|
+|ActualiserOmbrage|RefreshShade|
+|ActualiserToutesTextures|RefreshAllTextures|
+|AdaptationPerspective|PerspectiveMatch|
+|Adapter|Match|
+|AdapterBordsMaillage|MatchMeshEdge|
+|AdapterSurf|MatchSrf|
+|AffichageImpression|PrintDisplay|
+|AffichageTypeLigne|LinetypeDisplay|
+|AfficherInviteCommande|DisplayCommandPrompt|
+|AfficherMaillageRendu|ShowRenderMesh|
+|Agrandir|Maximize|
+|Aide|Help|
+|AideCommande|CommandHelp|
+|Aire|Area|
+|AjouterÀGroupe|AddToGroup|
+|AjouterLicence|CheckInLicense|
+|AjouterPrécU|AddPrevU|
+|AjouterPrécV|AddPrevV|
+|AjouterSuivantU|AddNextU|
+|AjouterSuivantV|AddNextV|
+|AjusterCourbe|FitCrv|
+|AjusterSurf|FitSrf|
+|Alerte|Alerter|
+|Aligner|Align|
+|AlignerProfils|AlignProfiles|
+|AlignerSommetsMaillage|AlignMeshVertices|
+|AnalyseAngleDépouille|DraftAngleAnalysis|
+|AnalyseAngleDépouilleDésactivée|DraftAngleAnalysisOff|
+|AnalyseCourbure|CurvatureAnalysis|
+|AnalyseCourbureDésactivée|CurvatureAnalysisOff|
+|AnalyseÉpaisseur|ThicknessAnalysis|
+|AnalyseÉpaisseurDésactivée|ThicknessAnalysisOff|
+|AnalyserPt|EvaluatePt|
+|AnalyserPtUV|EvaluateUVPt|
+|Angle|Angle|
+|AngleOrtho|OrthoAngle|
+|AnglePerspective|PerspectiveAngle|
+|Annuler|Undo|
+|AnnulerJointureBords|UnjoinEdge|
+|AnnulerLimite|Untrim|
+|AnnulerLimiteBordure|UntrimBorder|
+|AnnulerLimiteTout|UntrimAll|
+|AnnulerLimiteTrous|UntrimHoles|
+|AnnulerPlusieursActions|UndoMultiple|
+|AnnulerSurSélection|UndoSelected|
+|AnnulerVue|UndoView|
+|AperçuRendu|RenderPreview|
+|AperçuRenduDansRectangle|RenderPreviewInWindow|
+|AplatirSurf|FlattenSrf|
+|ApplicationPlacage|MappingWidget|
+|ApplicationPlacageDésactivée|MappingWidgetOff|
+|Appliquer|Splop|
+|AppliquerAdoucissementBord|ApplyEdgeSoftening|
+|AppliquerCourbe|ApplyCrv|
+|AppliquerDéplacement|ApplyDisplacement|
+|AppliquerFiligrane|ApplyWatermark|
+|AppliquerGaineSurCourbe|ApplyCurvePiping|
+|AppliquerLigneFermeture|ApplyShutLining|
+|AppliquerMaillage|ApplyMesh|
+|AppliquerMaillageUVN|ApplyMeshUVN|
+|AppliquerPlacageBoîte|ApplyBoxMapping|
+|AppliquerPlacageCylindrique|ApplyCylindricalMapping|
+|AppliquerPlacagePerso|ApplyCustomMapping|
+|AppliquerPlacagePlan|ApplyPlanarMapping|
+|AppliquerPlacageSphérique|ApplySphericalMapping|
+|AppliquerPlacageSurface|ApplySurfaceMapping|
+|ÀPropos|About|
+|ÀProposRhino|AboutRhino|
+|ArbreStep|STEPTree|
+|Arc|Arc|
+|AssignerCalqueActuel|ChangeToCurrentLayer|
+|AssignerTextureUnique|AssignBlankTexture|
+|Attirer|Pull|
+|Avancer|BringForward|
+|Balayage1|Sweep1|
+|Balayage2|Sweep2|
+|BarreOutils|Toolbar|
+|BaseHachures|HatchBase|
+|Bibliothèques|Libraries|
+|BipNumériseur|DigBeep|
+|Bloc|Block|
+|BlocModifier|BlockEdit|
+|Boîte|Box|
+|BoîteDeContour|BoundingBox|
+|BoîteMaillée|MeshBox|
+|Bosse|Boss|
+|Boucher|Cap|
+|Cacher|Hide|
+|CacherCalquesDansVueDétaillée|HideLayersInDetail|
+|CacherDansVueDétaillée|HideInDetail|
+|CacherMaillageRendu|HideRenderMesh|
+|CacherPoints|HidePt|
+|CadreImage|PictureFrame|
+|Cage|Cage|
+|Calc|Calc|
+|CalcRpn|CalcRPN|
+|CalculerCouleursSommets|ComputeVertexColors|
+|CalibrerNumériseur|DigCalibrate|
+|CalibrerZoom1Sur1|Zoom1To1Calibrate|
+|Calque|Layer|
+|Caméra|Camera|
+|CaméraNumériseur|DigCamera|
+|CapturerÉcranVersFichier|ScreenCaptureToFile|
+|CapturerÉcranVersPressePapiers|ScreenCaptureToClipboard|
+|CapturerVueDansFichier|ViewCaptureToFile|
+|CapturerVueDansPressePapiers|ViewCaptureToClipboard|
+|Catalyst|Catalyst|
+|CentroïdeAire|AreaCentroid|
+|CentroïdeVolume|VolumeCentroid|
+|Cercle|Circle|
+|ChampHauteur|Heightfield|
+|Chanfrein|Chamfer|
+|ChanfreinBord|ChamferEdge|
+|ChanfreinSurf|ChamferSrf|
+|ChanfreinVariableSurface|VariableChamferSrf|
+|ChangerCalque|ChangeLayer|
+|ChangerDegré|ChangeDegree|
+|ChargerScript|LoadScript|
+|CheminCourt|ShortPath|
+|Cisailler|Shear|
+|CliquerNumériseur|DigClick|
+|Coller|Paste|
+|Commandes|Commands|
+|ComprimerTextures|PackTextures|
+|Cône|Cone|
+|CôneMaillé|MeshCone|
+|CôneT|TCone|
+|CôneTMaillé|MeshTCone|
+|Congé|Fillet|
+|CongéBord|FilletEdge|
+|CongéSommets|FilletCorners|
+|CongéSurf|FilletSrf|
+|CongéVariableSurface|VariableFilletSrf|
+|Conique|Conic|
+|Connecter|Connect|
+|ConnecterSurf|ConnectSrf|
+|ContG|GCon|
+|ContinuerCourbe|ContinueCurve|
+|ContinuerCourbeInterp|ContinueInterpCrv|
+|ContourMaillage|MeshOutline|
+|ContrôleFichier3dm|Audit3dmFile|
+|Contrôler|Audit|
+|Convertir|Convert|
+|ConvertirEnCourbeBézier|ConvertToBeziers|
+|ConvertirExtrusion|ConvertExtrusion|
+|ConvertirPointsAnnotation|ConvertDots|
+|Copier|Copy|
+|CopierConfigPlanCPourTous|CopyCPlaneSettingsToAll|
+|CopierDansPressePapiers|CopyToClipboard|
+|CopierDirectionCourbe|MatchCrvDir|
+|CopierFenêtreDansVueDétaillée|CopyViewportToDetail|
+|CopierFenêtreRenduDansPressepapiers|CopyRenderWindowToClipboard|
+|CopierInvitesActivé|Echo|
+|CopierInvitesDésactivé|NoEcho|
+|CopierMiseEnPage|CopyLayout|
+|CopierPlacage|MatchMapping|
+|CopierPlanCPourTous|CopyCPlaneToAll|
+|CopierPropriétés|MatchProperties|
+|CopierSurCalque|CopyToLayer|
+|CopierVueDétailléeDansFenêtre|CopyDetailToViewport|
+|Cote|Dim|
+|CoteAire|DimArea|
+|CoteAlignée|DimAligned|
+|CoteAngle|DimAngle|
+|CoteAnglePli|DimCreaseAngle|
+|CoteCoordonnée|DimOrdinate|
+|CoteDiamètre|DimDiameter|
+|CoteInclinée|DimRotated|
+|CoteLongueurCourbe|DimCurveLength|
+|CoteRayon|DimRadius|
+|Couper|Cut|
+|Courbe|Curve|
+|Courbe2Vues|Crv2View|
+|CourbeIntermédiaire|TweenCurves|
+|CourbeInterp|InterpCrv|
+|CourbeInterpSurSurf|InterpCrvOnSrf|
+|CourbeMoyenne|MeanCurve|
+|CourbeParPolyligne|CurveThroughPolyline|
+|CourbeParPt|CurveThroughPt|
+|CourbeParPtsContrôleSurf|CurveThroughSrfControlPt|
+|CourbePoignée|HandleCurve|
+|Courber|Bend|
+|CourbeSecTransv|CSec|
+|CourbesNiveau|Contour|
+|Courbure|Curvature|
+|CréerCourbesUV|CreateUVCrv|
+|CréerRégions|CreateRegions|
+|CréerSolide|CreateSolid|
+|CréerTrou|MakeHole|
+|Cylindre|Cylinder|
+|CylindreMaillé|MeshCylinder|
+|Dalle|Slab|
+|DécalageVariableSurf|VariableOffsetSrf|
+|Décaler|Offset|
+|DécalerCourbeSurSurf|OffsetCrvOnSrf|
+|DécalerMaillage|OffsetMesh|
+|DécalerNormale|OffsetNormal|
+|DécalerSurf|OffsetSrf|
+|Décomposer|Explode|
+|DécomposerBloc|ExplodeBlock|
+|DécomprimerTextures|UnpackTextures|
+|DéconnecterNumériseur|DigDisconnect|
+|DécouperFil|WireCut|
+|DéfinirAnimationCheminement|SetPathAnimation|
+|DéfinirAnimationPlatineTournante|SetTurntableAnimation|
+|DéfinirAnimationSoleilSaison|SetSeasonalSunAnimation|
+|DéfinirAnimationSoleilUnJour|SetOneDaySunAnimation|
+|DéfinirAnimationSurvol|SetFlythroughAnimation|
+|DéfinirCalqueActuelAvecObjet|SetLayerToObject|
+|DéfinirÉchelleTypeLigne|SetLinetypeScale|
+|DéfinirFenêtreActive|SetActiveViewport|
+|DéfinirFenêtreMax|SetMaximizedViewport|
+|DéfinirFrontièresZoomÉtendu|SetZoomExtentsBorder|
+|DéfinirIndiceRéfraction|SetIndexOfRefraction|
+|DéfinirMagnétisme|SetSnap|
+|DéfinirModeAffichage|SetDisplayMode|
+|DéfinirModeAffichageObjet|SetObjectDisplayMode|
+|DéfinirModuleRenduActuel|SetCurrentRenderPlugIn|
+|DéfinirNomObjet|SetObjectName|
+|DéfinirProjecteurSelonVue|SetSpotlightToView|
+|DéfinirPt|SetPt|
+|DéfinirRépertoireTravail|SetWorkingDirectory|
+|DéfinirStyleCoteActuel|SetCurrentDimStyle|
+|DéfinirTangenteSurface|SetSurfaceTangent|
+|DéfinirTexteUtilisateur|SetUserText|
+|DéfinirTexteUtilisateurDocument|SetDocumentUserText|
+|DéfinirTraductionNiveauCalqueIges|SetIgesLayerLevelMap|
+|DéfinirTypeLigne|SetLinetype|
+|DéfinirTypeLigneCalque|SetLayerLinetype|
+|DéfinirVue|SetView|
+|DéfinirVueSelonProjecteur|SetViewToSpotlight|
+|DépartCourbe|CrvStart|
+|Déplacement|WalkAbout|
+|Déplacer|Move|
+|DéplacerBord|MoveEdge|
+|DéplacerBordNonLimité|MoveUntrimmedEdge|
+|DéplacerCibleSurObjets|MoveTargetToObjects|
+|DéplacerCourbe|MoveCrv|
+|DéplacerFace|MoveFace|
+|DéplacerFaceNonLimitée|MoveUntrimmedFace|
+|DéplacerLégèrement|SoftMove|
+|DéplacerManipulateur|RelocateGumball|
+|DéplacerSurPlanC|RemapCPlane|
+|DéplacerTrou|MoveHole|
+|DéplacerUVN|MoveUVN|
+|Déployer|Squish|
+|DéployerInfos|SquishInfo|
+|DéroulerSurf|UnrollSrf|
+|DéroulerSurfaceUV|UnrollSrfUV|
+|DésactiverBords|ShowEdgesOff|
+|DésactiverPlanDécoupe|DisableClippingPlane|
+|DésactiverPoints|PointsOff|
+|DésactiverPointsSélection|PtOffSelected|
+|DésactiverRégénération|SetRedrawOff|
+|DésactiverUnCalque|OneLayerOff|
+|Désenvelopper|Unwrap|
+|DeskProto|DeskProto|
+|Dessin2D|Make2D|
+|Dessouder|Unweld|
+|DessouderBord|UnweldEdge|
+|Déverrouiller|Unlock|
+|DéverrouillerObjetsSélectionnés|UnlockSelected|
+|DiagrammeCourbure|CurvatureGraph|
+|DiagrammeCourbureDésactivé|CurvatureGraphOff|
+|DialogueOptionsImportationSW|SWImportOptionsDialog|
+|Diamètre|Diameter|
+|DifférenceBooléenne|BooleanDifference|
+|DifférenceBooléenneMaillage|MeshBooleanDifference|
+|Direction|Dir|
+|DissimulerPolygonesContrôle|CullControlPolygon|
+|DissocierGroupe|Ungroup|
+|Distance|Distance|
+|Diviser|Split|
+|DiviserBord|SplitEdge|
+|DiviserBordMaillage|SplitMeshEdge|
+|DiviserFace|SplitFace|
+|DiviserFenêtreHorizontal|SplitViewportHorizontal|
+|DiviserFenêtreVertical|SplitViewportVertical|
+|DiviserLeLongDesPlis|DivideAlongCreases|
+|DiviserMaillage|MeshSplit|
+|DiviserMaillageAvecCourbe|SplitMeshWithCurve|
+|DiviserMaillageDisjoint|SplitDisjointMesh|
+|DivisionBooléenne|BooleanSplit|
+|DivisionBoolénneMaillage|MeshBooleanSplit|
+|DivisionPli|CreaseSplitting|
+|Domaine |Domain|
+|Draper|Drape|
+|DraperPoints|DrapePt|
+|DupBord|DupEdge|
+|DupBordMaillage|DupMeshEdge|
+|DupBordure|DupBorder|
+|DupBordureFace|DupFaceBorder|
+|DupCalque|DupLayer|
+|DupFrontièreTrouMaillage|DupMeshHoleBoundary|
+|DupStyleCote|DupDimStyle|
+|ÉcartCourbes|CrvDeviation|
+|ÉcartPoints|PointDeviation|
+|ÉchangerVue|SwapView|
+|Échelle|Scale|
+|Échelle1D|Scale1D|
+|Échelle2D|Scale2D|
+|ÉchelleHachures|HatchScale|
+|ÉchelleNU|ScaleNU|
+|ÉchelleNumérisation|DigScale|
+|ÉchelleParPlan|ScaleByPlane|
+|ÉchelleStyleCote|ScaleDimstyle|
+|ÉchelleTexte|TextScale|
+|Écraser|Smash|
+|ÉditeurEnvironnement|EnvironmentEditor|
+|ÉditeurMacro|MacroEditor|
+|ÉditeurMatériaux|MaterialEditor|
+|ÉditeurUV|UVEditor|
+|EffacerOrdreDessin|ClearDrawOrder|
+|Effiler|Taper|
+|ÉgalerCalque|MatchLayer|
+|ÉliminerFacesMaillageDégénérées|CullDegenerateMeshFaces|
+|Ellipse|Ellipse|
+|Ellipsoïde|Ellipsoid|
+|EllipsoïdeMaillé|MeshEllipsoid|
+|EnleverNœud|RemoveKnot|
+|EnregistrementAutomatique|Autosave|
+|EnregistrementCompacté|SaveSmall|
+|EnregistrementIncrémental|IncrementalSave|
+|Enregistrer|Save|
+|EnregistrerAnimation|RecordAnimation|
+|EnregistrerFenêtreRenduSous|SaveRenderWindowAs|
+|EnregistrerFichierModèle|SaveAsTemplate|
+|EnregistrerOptionsCopie|RememberCopyOptions|
+|EnregistrerSous|SaveAs|
+|Entrée|Enter|
+|EntréeFin|EnterEnd|
+|Enveloppe|Shell|
+|EnvoyerFichier|SendFile|
+|Esquisser|Sketch|
+|EsquisserNumériseur|DigSketch|
+|Étirer|Stretch|
+|ÉtudeIGES|IGESStudy|
+|Exporter|Export|
+|ExporterAvecOrigine|ExportWithOrigin|
+|ExporterImages|ExportBitmaps|
+|ExporterOptions|OptionsExport|
+|ExtraireBordsMaillage|ExtractMeshEdges|
+|ExtraireBordsMaillageNonManifold|ExtractNonManifoldMeshEdges|
+|ExtraireCourbeGainée|ExtractPipedCurve|
+|ExtraireCourbeIso|ExtractIsocurve|
+|ExtraireDiagrammeCourbure|ExtractCurvatureGraph|
+|ExtraireFacesMaillage|ExtractMeshFaces|
+|ExtraireFacesMaillageDupliquées|ExtractDuplicateMeshFaces|
+|ExtraireFacesMaillageSelonAire|ExtractMeshFacesByArea|
+|ExtraireFacesMaillageSelonAngleDépouille|ExtractMeshFacesByDraftAngle|
+|ExtraireFacesMaillageSelonLongueurBord|ExtractMeshFacesByEdgeLength|
+|ExtraireFacesMaillageSelonRapportImage|ExtractMeshFacesByAspectRatio|
+|ExtraireFacesMailléesAdjacentes|ExtractConnectedMeshFaces|
+|ExtraireMaillageAnalyse|ExtractAnalysisMesh|
+|ExtraireMaillageRendu|ExtractRenderMesh|
+|ExtraireMaillageUV|ExtractUVMesh|
+|ExtraireMauvaiseSurf|ExtractBadSrf|
+|ExtraireModèleFilaire|ExtractWireframe|
+|ExtrairePartieMaillage|ExtractMeshPart|
+|ExtrairePolygoneContrôle|ExtractControlPolygon|
+|ExtrairePt|ExtractPt|
+|ExtraireSousCourbe|ExtractSubCrv|
+|ExtraireSurf|ExtractSrf|
+|ExtruderCourbe|ExtrudeCrv|
+|ExtruderCourbeDépouille|ExtrudeCrvTapered|
+|ExtruderCourbeSurCourbe|ExtrudeCrvAlongCrv|
+|ExtruderCourbeVersPt|ExtrudeCrvToPoint|
+|ExtruderNormale|Fin|
+|ExtruderSurf|ExtrudeSrf|
+|ExtruderSurfaceDépouille|ExtrudeSrfTapered|
+|ExtruderSurfaceSurCourbe|ExtrudeSrfAlongCrv|
+|ExtruderSurfaceVersPoint|ExtrudeSrfToPoint|
+|Face3D|3DFace|
+|FaroConfigMatérielle|FaroHardwareConfig|
+|FaroDéfinirFichierJournal|FaroSetLogFile|
+|FaroDiagnostique|FaroDiagnostics|
+|FaroPalpeurs|FaroProbes|
+|FaroTempérature|FaroTemperature|
+|FenêtreAuPremierPlan|BringViewportToTop|
+|FenêtreOrthoSuivante|NextOrthoViewport|
+|FenêtrePerspectiveSuivante|NextPerspectiveViewport|
+|FenêtrePréc|PrevViewport|
+|FenêtreSuivante|NextViewport|
+|FenêtreSuivanteAuPremierPlan|NextViewportToTop|
+|FermerCourbe|CloseCrv|
+|FermerFenêtre|CloseViewport|
+|FermerFenêtreRendu|CloseRenderWindow|
+|FiltreContenu|ContentFilter|
+|FiltreSélection|SelectionFilter|
+|FinCourbe|CrvEnd|
+|FixerTexture|Bake|
+|Fractionner|Divide|
+|Fusionner2FacesMaillées|Merge2MeshFaces|
+|FusionnerBord|MergeEdge|
+|FusionnerFace|MergeFace|
+|FusionnerNonmanifold|NonmanifoldMerge|
+|FusionnerSurf|MergeSrf|
+|FusionnerTousBords|MergeAllEdges|
+|FusionnerToutesFaces|MergeAllFaces|
+|GestionnaireBlocs|BlockManager|
+|GestionnaireDéfinitionsCalques|LayerStateManager|
+|Glisser|Flow|
+|GlisserSurSurface|FlowAlongSrf|
+|Grille|Grid|
+|GrillePoints|PointGrid|
+|Grouper|Group|
+|GuidePoignée|HBar|
+|Hachure|Hatch|
+|Hélice|Helix|
+|Historique|History|
+|HistoriqueCommandes|CommandHistory|
+|Hydrostatique|Hydrostatics|
+|Hyperbole|Hyperbola|
+|ImageArrièrePlan|BackgroundBitmap|
+|Importer|Import|
+|ImporterMiseEnPage|ImportLayout|
+|ImporterOptions|OptionsImport|
+|ImporterStylesCote|ImportDimStyles|
+|Imprimer|Print|
+|InclinerVue|TiltView|
+|Info|What|
+|Insérer|Insert|
+|InsérerLigneDansCourbe|InsertLineIntoCrv|
+|InsérerNœud|InsertKnot|
+|InsérerPointContrôle|InsertControlPoint|
+|InsérerPointÉdition|InsertEditPoint|
+|InsérerPointRebroussement|InsertKink|
+|Insight|Insight|
+|Interrompre|Cancel|
+|Intersection|Intersect|
+|IntersectionBooléenne|BooleanIntersection|
+|IntersectionBooléenneMaillage|MeshBooleanIntersection|
+|IntersectionDeuxEnsembles|IntersectTwoSets|
+|IntersectionMaillage|MeshIntersect|
+|IntervalleMagnétisme|SnapSize|
+|Inverser|Flip|
+|InverserBordMaillage|SwapMeshEdge|
+|InverserFenêtreFlottante|ToggleFloatingViewport|
+|InverserMaillageRendu|ToggleRenderMesh|
+|InverserObjetsCachés|HideSwap|
+|InverserObjetsVerrouillés|LockSwap|
+|InverserPoints|InvertPt|
+|InverserSél|Invert|
+|InVision|InVision|
+|InviteCommande|CommandPrompt|
+|Isométrique|Isometric|
+|Joindre|Join|
+|JoindreBord|JoinEdge|
+|JointureCourbe|CrvSeam|
+|JointureSurf|SrfSeam|
+|JouerAnimation|PlayAnimation|
+|Lancer|Run|
+|LancerScript|RunScript|
+|Lasso|Lasso|
+|LibérerDeCage|ReleaseFromCage|
+|LienHypertexte|Hyperlink|
+|LierDonnéesGHS|AttachGHSData|
+|Ligne|Line|
+|LigneParPoints|LineThroughPt|
+|LigneRepère|Leader|
+|Lignes|Lines|
+|Limiter|Trim|
+|LimiterMaillage|MeshTrim|
+|LimiterModèleRéférence|LimitReferenceModel|
+|LireFenêtresDansFichier|ReadViewportsFromFile|
+|LireFichierCommandes|ReadCommandFile|
+|LireToutesEntitésIGES|ReadEveryIGESEntity|
+|Lisser|Smooth|
+|Liste|List|
+|ListeCommandes|CommandList|
+|Longueur|Length|
+|LumièreDirectionnelle|DirectionalLight|
+|LumièreLinéaire|LinearLight|
+|LumièrePonctuelle|PointLight|
+|LumièreRectangulaire|RectangularLight|
+|Lumières|Lights|
+|Magnétisme|Snap|
+|Maillage|Mesh|
+|MaillageÀPartirDePoints|MeshFromPoints|
+|MaillageEnNURBS|MeshToNURB|
+|MaillagePlan|PlanarMesh|
+|Manipulateur|Gumball|
+|ManipulateurAlignement|GumballAlignment|
+|MarquerFoyers|MarkFoci|
+|Matrice|Array|
+|MatriceCourbe|ArrayCrv|
+|MatriceCourbeSurSurf|ArrayCrvOnSrf|
+|MatriceLinéaire|ArrayLinear|
+|MatricePolaire|ArrayPolar|
+|MatricePolaireTrous|ArrayHolePolar|
+|MatriceSurf|ArraySrf|
+|MatriceTrous|ArrayHole|
+|MaximiserFenêtre|MaxViewport|
+|MenuDéroulant|PopupMenu|
+|MettreDerrière|SendToBack|
+|MettreDevant|BringToFront|
+|MettreFenêtreEnArrièrePlan|PushViewportToBack|
+|MiseEnPage|Layout|
+|ModeGlisser|DragMode|
+|ModelWorks|ModelWorks|
+|ModeOrtho|SetOrtho|
+|ModePlanéité|SetPlanar|
+|ModificationCage|CageEdit|
+|ModifierAvecBoîte|BoxEdit|
+|ModifierCanalPlacage|EditMappingChannel|
+|ModifierCourbeLongueurFixe|FixedLengthCrvEdit|
+|ModifierCourbeProgressivement|SoftEditCrv|
+|ModifierLumièreEnRegardant|EditLightByLooking|
+|ModifierLumièreParReflet|EditLightByHighlight|
+|ModifierRayon|ModifyRadius|
+|ModifierSurfProgressivement|SoftEditSrf|
+|MomentsAire|AreaMoments|
+|MomentsVolume|VolumeMoments|
+|Montrer|Show|
+|MontrerAccrochages|ShowOsnap|
+|MontrerBarreOutils|ShowToolbar|
+|MontrerBords|ShowEdges|
+|MontrerCalquesDansVueDétaillée|ShowLayersInDetail|
+|MontrerDansVueDétaillée|ShowInDetail|
+|MontrerObjetsSélectionnés|ShowSelected|
+|MontrerPoints|ShowPt|
+|MontrerSélectionDansVueDétaillée|ShowSelectedInDetail|
+|MontrerTamponProfondeur|ShowZBuffer|
+|NavigateurInternet|WebBrowser|
+|NbPolygones|PolygonCount|
+|Nervure|Rib|
+|NommerGroupe|SetGroupName|
+|Notes|Notes|
+|Nouveau|New|
+|NouvelleFenêtre|NewViewport|
+|NouvelleFenêtreFlottante|NewFloatingViewport|
+|NuagePoints|PointCloud|
+|NuageRév|RevCloud|
+|Numériser|Digitize|
+|NumériserLigne|DigLine|
+|ObjectifZoom|ZoomLens|
+|ObjetStudio|ObjetStudio|
+|ObjetTexte|TextObject|
+|ObtenirTexteUtilisateur|GetUserText|
+|ObtenirTexteUtilisateurDocument|GetDocumentUserText|
+|Ombrage|Shade|
+|OmbragePlat|FlatShade|
+|OmbrageSélection|ShadeSelected|
+|OngletsFenêtre|ViewportTabs|
+|OpBooléenne2Objets|Boolean2Objects|
+|OpérationBooléenneCourbe|CurveBoolean|
+|Options|Options|
+|Orienter|Orient|
+|Orienter3Pt|Orient3Pt|
+|OrienterCaméraSurSurf|OrientCameraToSrf|
+|OrienterCourbeSurBord|OrientCrvToEdge|
+|OrienterSurCourbe|OrientOnCrv|
+|OrienterSurSurf|OrientOnSrf|
+|Ortho|Ortho|
+|Ouvrir|Open|
+|OuvrirBarreOutils|PopupToolbar|
+|PaletteTexture|TexturePalette|
+|Panoramique|Pan|
+|Parabole|Parabola|
+|Paraboloïde|Paraboloid|
+|Patch|Patch|
+|PatchFaceSimple|PatchSingleFace|
+|PatchMaillage|MeshPatch|
+|Pause|Pause|
+|PauseNumériseur|DigPause|
+|PlacageEnv|EMap|
+|PlacageEnvDésactivé|EMapOff|
+|PlacerTrou|PlaceHole|
+|Plan|Plane|
+|PlanAuSol|GroundPlane|
+|PlanC|CPlane|
+|PlanCNommé|NamedCPlane|
+|PlanCoupe|CutPlane|
+|PlanDécoupe|ClippingPlane|
+|Planéité|Planar|
+|PlanM|MPlane|
+|PlanMaillé|MeshPlane|
+|PlanParPoint|PlaneThroughPt|
+|PlatineTournante|Turntable|
+|PleinÉcran|Fullscreen|
+|PlierFace|FoldFace|
+|Poids|Weight|
+|Point|Point|
+|PointAncrageTerre|EarthAnchorPoint|
+|PointAngleDépouille|DraftAnglePoint|
+|PointAnnotation|Dot|
+|PointeFlèche|Arrowhead|
+|PointPlusProche|ClosestPt|
+|PointRéférenceModèle|ModelBasepoint|
+|Points|Points|
+|PointsÀPartirDeUV|PointsFromUV|
+|Polygone|Polygon|
+|Polyligne|Polyline|
+|PolyligneMaillée|MeshPolyline|
+|PolyligneSurMaillage|PolylineOnMesh|
+|Populaires|PopupPopular|
+|PositionNommée|NamedPosition|
+|PrécU|PrevU|
+|PrécV|PrevV|
+|Profiler|Fair|
+|Projecteur|Spotlight|
+|Projeter|Project|
+|ProjeterAccrochages|ProjectOsnap|
+|ProjeterSurPlanC|ProjectToCPlane|
+|Prolonger|Extend|
+|ProlongerBordSurf|ExtendSrf|
+|ProlongerCourbeSurSurface|ExtendCrvOnSrf|
+|Propriétés|Properties|
+|PropriétésAffichage|DisplayProperties|
+|PropriétésDocument|DocumentProperties|
+|PropriétésFenêtre|ViewportProperties|
+|PropriétésMiseEnPage|LayoutProperties|
+|PropriétésTexte|TextProperties|
+|Purger|Purge|
+|PurgerObjetsRéf|PurgeRefObjects|
+|Pyramide|Pyramid|
+|PyramideTronquée|TruncatedPyramid|
+|QuadrangulationMaillage|QuadrangulateMesh|
+|Quitter|Exit|
+|RaccordArc|ArcBlend|
+|Raccordement|Blend|
+|RaccordementVariableSurface|VariableBlendSrf|
+|RaccorderBord|BlendEdge|
+|RaccorderCourbe|BlendCrv|
+|RaccorderSurf|BlendSrf|
+|RaccordSymétrique|Symmetry|
+|Rayon|Radius|
+|Rayures|Zebra|
+|RayuresDésactivées|ZebraOff|
+|Rebond|Bounce|
+|RecentrerTexteCotation|DimRecenterText|
+|Reconstruire|Rebuild|
+|ReconstruireBords|RebuildEdges|
+|ReconstruireCourbeNonUniforme|RebuildCrvNonUniform|
+|ReconstruireMaillage|RebuildMesh|
+|ReconstruireNormalesMaillage|RebuildMeshNormals|
+|ReconstruireUV|RebuildUV|
+|Rectangle|Rectangle|
+|RectangleAperçuRendu|RenderPreviewWindow|
+|RectangleRendu|RenderWindow|
+|Reculer|SendBackward|
+|Récupérer|Revert|
+|RécupérerFichier3dm|Rescue3dmFile|
+|Réduire|Minimize|
+|RéduireBordMaillage|CollapseMeshEdge|
+|RéduireFaceMaillage|CollapseMeshFace|
+|RéduireFaceMaillageSelonAire|CollapseMeshFacesByArea|
+|RéduireFacesMaillageSelonLongueurBord|CollapseMeshFacesByEdgeLength|
+|RéduireFacesMaillageSelonRapportImage|CollapseMeshFacesByAspectRatio|
+|RéduireMaillage|ReduceMesh|
+|RéduireSommetMaillage|CollapseMeshVertex|
+|RéinitialiserBarreOutils|ToolbarReset|
+|RemplacerBloc|ReplaceBlock|
+|RemplirTrouMaillage|FillMeshHole|
+|RemplirTrousMaillage|FillMeshHoles|
+|RendreNonPériodique|MakeNonPeriodic|
+|RendrePériodique|MakePeriodic|
+|Rendu|Render|
+|RenduDansRectangle|RenderInWindow|
+|RenduOuvrirDernierRendu|RenderOpenLastRendering|
+|RenduOuvrirImageRendue|RenderOpenRenderImage|
+|RenflementFinal|EndBulge|
+|Reparamétrer|Reparameterize|
+|RéparerMaillage|MeshRepair|
+|RepérageIntelligent|SmartTrack|
+|Répéter|Repeat|
+|ReplierDéploiement|SquishBack|
+|RésistanceDéplacementManipulateur|GumballDragStrength|
+|Restaurer|Restore|
+|Rétablir|Redo|
+|RétablirPlusieursActions|RedoMultiple|
+|RétablirVue|RedoView|
+|RetirerDeGroupe|RemoveFromGroup|
+|RetirerLicence|CheckOutLicense|
+|RétrécirSurfaceLimitée|ShrinkTrimmedSrf|
+|RétrécirSurfaceLimitéeSurBord|ShrinkTrimmedSrfToEdge|
+|Révolution|Revolve|
+|RévolutionRail|RailRevolve|
+|RienSélectionner|SelNone|
+|RolandModelaPlayer|RolandModelaPlayer|
+|Rotation|Rotate|
+|Rotation3D|Rotate3D|
+|RotationCaméra|RotateCamera|
+|RotationTrou|RotateHole|
+|RotationVue|RotateView|
+|RPCDéfinirCadreAnimation|RPCSetAnimationFrame|
+|Ruban|Ribbon|
+|SchémasAcad|AcadSchemes|
+|Section|Section|
+|SectionNuagePoints|PointCloudSection|
+|SectionNumérisée|DigSection|
+|SectionOptions|OptionsPage|
+|SectionPropriétés|PropertiesPage|
+|SectionPropriétésDocument|DocumentPropertiesPage|
+|SélAdjacents|SelConnected|
+|SélApplicationVueNommée|SelNamedViewWidget|
+|SélBoîte|SelBox|
+|SélCadreImage|SelPictureFrame|
+|SélCalque|SelLayer|
+|SélCaptifs|SelCaptives|
+|SélChaîne|SelChain|
+|SélCirculaire|SelCircular|
+|SélContrôles|SelControls|
+|SélCotes|SelDim|
+|SélCouleur|SelColor|
+|SélCouleurRendu|SelRenderColor|
+|SélCourbes|SelCrv|
+|SélCourbesCourtes|SelShortCrv|
+|SélCourbesFermées|SelClosedCrv|
+|SélCourbesOuvertes|SelOpenCrv|
+|SélDerniers|SelLast|
+|SélDup|SelDup|
+|SélDupTout|SelDupAll|
+|Sélectionner|Select|
+|SélEnfants|SelChildren|
+|SélExtrusions|SelExtrusion|
+|SélFenêtre|SelWindow|
+|SélFrontière|SelBoundary|
+|SélGroupe|SelGroup|
+|SélHachures|SelHatch|
+|SélIdentification|SelID|
+|SélLignes|SelLine|
+|SélLignesRepère|SelLeader|
+|SélLumières|SelLight|
+|SélMaillages|SelMesh|
+|SélMaillagesFermés|SelClosedMesh|
+|SélMaillagesOuverts|SelOpenMesh|
+|SélMauvaisObjets|SelBadObjects|
+|SélNom|SelName|
+|SélNomMatériau|SelMaterialName|
+|SélNonManifold|SelNonManifold|
+|SélNuagesPts|SelPtCloud|
+|SélNuméroCalque|SelLayerNumber|
+|SélObjetsAvecHistorique|SelObjectsWithHistory|
+|SélObjetsPlacage|SelMappingWidget|
+|SélOccurrencesBloc|SelBlockInstance|
+|SélOccurrencesBlocNommées|SelBlockInstanceNamed|
+|SélParents|SelParents|
+|SélPetit|SelSmall|
+|SélPinceau|SelBrush|
+|SélPinceauPoints|SelBrushPoints|
+|SélPlanDécoupe|SelClippingPlane|
+|SélPointsAnnotation|SelDot|
+|SélPolylignes|SelPolyline|
+|SélPolysurfaces|SelPolysrf|
+|SélPolysurfFermées|SelClosedPolysrf|
+|SélPolysurfOuvertes|SelOpenPolysrf|
+|SélPréc|SelPrev|
+|SélPts|SelPt|
+|SélPtsBordsMaillageLibres|SelNakedMeshEdgePt|
+|SélRecoupement|SelCrossing|
+|SélStyleCote|SelDimStyle|
+|SélSurfaces|SelSrf|
+|SélSurfFermées|SelClosedSrf|
+|SélSurfLimitées|SelTrimmedSrf|
+|SélSurfNonLimitées|SelUntrimmedSrf|
+|SélSurfOuvertes|SelOpenSrf|
+|SélTexte|SelText|
+|SélTypeLigne|SelLinetype|
+|SélU|SelU|
+|SélUV|SelUV|
+|SélV|SelV|
+|SélVisible|SelVisible|
+|SélVolumeSphère|SelVolumeSphere|
+|SélVolumeTuyau|SelVolumePipe|
+|Session|Worksession|
+|Silhouette|Silhouette|
+|SimplifierCourbe|SimplifyCrv|
+|Soleil|Sun|
+|Souder|Weld|
+|SouderBord|WeldEdge|
+|SouderSommets|WeldVertices|
+|SousCourbe|SubCrv|
+|Sphère|Sphere|
+|SphèreMaillée|MeshSphere|
+|Spirale|Spiral|
+|SuivantU|NextU|
+|SuivantV|NextV|
+|Supprimer|Delete|
+|SupprimerBord|RemoveEdge|
+|SupprimerCanalPlacage|RemoveMappingChannel|
+|SupprimerFacesMaillage|DeleteMeshFaces|
+|SupprimerNœudsMultiples|RemoveMultiKnot|
+|SupprimerPointContrôle|RemoveControlPoint|
+|SupprimerSousCourbe|DeleteSubCrv|
+|SupprimerTousMaillages|ClearAllMeshes|
+|SupprimerTrou|DeleteHole|
+|SurfaceIntermédiaire|TweenSurfaces|
+|SurfaceParBords|EdgeSrf|
+|SurfaceParGrillePoints|SrfPtGrid|
+|SurfaceParGrillePointsContrôle|SrfControlPtGrid|
+|SurfaceParPoints|SrfPt|
+|SurfaceParSections|Loft|
+|SurfacePlane|PlanarSrf|
+|SurfaceRéseau|NetworkSrf|
+|Symétrie|Mirror|
+|SymétrieTrou|MirrorHole|
+|SynchroniserCouleursRendu|SynchronizeRenderColors|
+|SynchroniserPlansC|SynchronizeCPlanes|
+|SynchroniserVues|SynchronizeViews|
+|Texte|Text|
+|Tore|Torus|
+|ToreMaillé|MeshTorus|
+|Torsion|Twist|
+|Tourbillon|Maelstrom|
+|ToutSélectionner|SelAll|
+|TriangulationMaillage|TriangulateMesh|
+|TriangulerMaillagesRendu|TriangulateRenderMeshes|
+|TriangulerQuadrilatèresNonPlans|TriangulateNonPlanarQuads|
+|TrouRévolution|RevolvedHole|
+|TrouRond|RoundHole|
+|TrouverFiligrane|FindWatermark|
+|TrouverTexte|FindText|
+|Tube|Tube|
+|Tuyau|Pipe|
+|UnCalqueActif|OneLayerOn|
+|UnifierNormalesMaillage|UnifyMeshNormals|
+|Uniformiser|MakeUniform|
+|UniformiserV|MakeUniformUV|
+|UnionBooléenne|BooleanUnion|
+|UnionBooléenneMaillage|MeshBooleanUnion|
+|UtiliserExtrusions|UseExtrusions|
+|Vérifier|Check|
+|VérifierNouveauxObjets|CheckNewObjects|
+|VerrouillageBarreOutils|ToolbarLock|
+|Verrouiller|Lock|
+|VerrouillerAccrochages|DisableOsnap|
+|ViderHistorique|HistoryPurge|
+|ViderMémoireAnnulation|ClearUndo|
+|VoirDernièreImage|ViewLastFrame|
+|VoirImageNuméro|ViewFrameNumber|
+|VoirImagePrécédente|ViewPreviousFrame|
+|VoirImageSuivante|ViewNextFrame|
+|VoirPremièreImage|ViewFirstFrame|
+|Volume|Volume|
+|VolumeCoupe|CutVolume|
+|VueDégradée|GradientView|
+|VueDétaillée|Detail|
+|VueEnPlan|Plan|
+|VueNommée|NamedView|
+|Zoom|Zoom|
+|ZoomBordLibre|ZoomNaked|
+|ZoomNonManifold|ZoomNonManifold|
+|ZoomTravelling|DollyZoom|
+|ZPrint|ZPrint|
