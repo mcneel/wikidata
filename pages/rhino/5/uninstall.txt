@@ -1,38 +1,38 @@
 ====== Manually uninstalling Rhino 5.0 ======
 \\
-====Problem:====
+====Problem====
 During the removal of Rhino, you get an error message like "Can't Uninstall - Feature is unavailable (path)"
 
-====Applies To:====
-Rhino 5.0
+====Applies to====
+Rhino 5
 
-====Cause:====
+====Cause====
 The Windows Installer cache cannot find a file required for uninstall.
-====Resolution:====
+====Resolution====
 Manually remove Rhino and the Windows Installer registration for the product.
 
 ===Try standard Program Uninstall==
   - Go to Windows Start menu
   - Select Control Panel
   - Select Add/Remove programs
-  - Find any Rhinoceros 5.0 entries and select uninstall.
+  - Find any Rhinoceros 5 entries and select uninstall
 
 
-**Note:** you should only do the following procedures if uninstall fails from the Programs and Features section of Control Panel.
+**Note:** You should only do the following procedures if uninstall fails from the Programs and Features section of Control Panel.
 
   
-===Stop the McNeelUpdate Service:===
+===Stop the McNeel Update Service===
   - From the **Start** menu, click **Control Panel**, then click **Administrative Tools**
   - In Administrative Tools, double-click **Services**
-  - In the Services dialog, scroll down to **McNeel Update (32-bit)** (On 64-bit computers, you may have McNeel Update (64-bit) instead, or both, depending on which versions of Rhino 5.0 you have installed).
+  - In the Services dialog, scroll down to **McNeel Update (32-bit)** (On 64-bit computers, you may have McNeel Update (64-bit) instead, or both, depending on which versions of Rhino 5 you have installed).
   - Right-click **McNeel Update (32-bit)**, then click **Stop**
   - On 64-bit Windows, also stop the **McNeel Update (64-bit)** service
   
 ===Delete the Rhino install folder:===
-  - Browse to C:\Program Files\ folder and delete the Rhinoceros 5.0 directory
-  - Browse the C:\Program Files (x86)\ folder and delete the Rhinoceros 5.0 directory
+  - Browse to C:\Program Files\ folder and delete the Rhinoceros 5 directory.
+  - Browse the C:\Program Files (x86)\ folder and delete the Rhinoceros 5 directory.
   - Delete **Rhinoceros 5.0 WIP** folder also if you find it in either of the above directories.
-  - Note that you might not be able to delete "RhinoShExt.dll", that's ok, leave the system folder with that one file and delete everything else.
+  - Note that you might not be able to delete "RhinoShExt.dll". That's ok. Leave the system folder with that one file and delete everything else.
   
 ===Delete Registry Keys:===
   - Open the **Registry Editor:**
@@ -49,11 +49,11 @@ Manually remove Rhino and the Windows Installer registration for the product.
   - Click Run Now
 
 
-===NOT RECOMMENDED: Cleaning up the Windows Installer Cache:===
-<color red>**WARNING:**</color> The following procedure may result in registry corruption, and a 1402 error next time you install software. <color red>**Only follow these steps**</color> if the above procedure did not allow you to uninstall Rhino.
+===Not recommendedO: Cleaning up the Windows Installer Cache:===
+<color red>**Warning:**</color> The following procedure may result in registry corruption and a 1402 error next time you install software. <color red>**Only follow these steps**</color> if the above procedure did not allow you to uninstall Rhino.
 
 
-  - Download the [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]]
+  - Download the [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility.]]
   - Unzip the contents of WindowsInstallerCleanupUtility.zip to a "Windows Installer Clean Up" folder on your desktop.
   - Run **msicuu.exe**
   - Scroll down to **(All Users) Rhinoceros 5.0 WIP** (or All Users Rhino 5.0 WIP x64) on 64-bit systems.
