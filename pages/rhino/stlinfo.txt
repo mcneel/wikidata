@@ -1,47 +1,47 @@
 ====== Information about creating and using STL files for Rapid Prototyping applications ======
 
-  * [[http://wiki.daap.uc.edu/groups/infocenter/wiki/354c5/|STL File preparation for 3D printing]] - When using a surface modeling program, only surfaces that form a closed object can be 3D printed. The closed surface model must be converted into a "solid" object, which is described by the STL file. This tutorial helps you prepare your STL file for 3D printing.
+  * [[http://wiki.daap.uc.edu/groups/infocenter/wiki/354c5/|STL File preparation for 3D printing]] - When using a surface modeling program, only surfaces that form a closed object can be 3D printed. The closed surface model must be converted into a solid object, which is described by the STL file. This tutorial helps you prepare your STL file for 3D printing.
   * [[http://download.mcneel.com/download.asp?id=STLRepair|Repair STL files]] - Tutorial by McNeel to repair STL files.
 
 
 
 
 
-======What is an STL?======
+=====What is an STL?=====
 
-An STL is a type of standardized computer exchange file which contains a 3D model.  The representation of the surface(s) of the object(s) in the file is in the form of one or more polygon meshes.  The meshes in an STL file are entirely composed of triangular facets.
+An STL is a standardized computer exchange file which contains a 3D model.  The representation of the surfaces of the objects in the file is in the form of one or more polygon meshes.  The meshes in an STL file are entirely composed of triangular facets.
 
-The name “STL” is taken from its extension, .stl, originally because the files were intended for a rapid prototyping process called Stereolithography.  The file format has become a world standard for exchanging 3D mesh type objects between programs, and .stl’s are now used as input for virtually all rapid prototyping processes, as well as some 3D machining.  Nearly all 3D programs can export an STL and most can import them.
+The name STL is taken from its extension, .stl, originally because the files were intended for a rapid prototyping process called Stereolithography.  The file format has become a world standard for exchanging 3D mesh type objects between programs, and .stl’s are now used as input for virtually all rapid prototyping processes, as well as some 3D machining.  Nearly all 3D programs can export an STL and most can import them.
 
 =====Mesh models and precision=====
 
-Mesh representations of objects are “facetted”, that is to say, they are not smooth, but composed of an array of small faces which, if fine enough, can represent (read: approximate) smooth surfaces with a given degree of accuracy.  This is much the same as how what appears to be a smooth 2D image is actually composed of many tiny discreet dots (pixels).
+Mesh representations of objects are faceted, that is to say, they are not smooth, but composed of an array of small faces which, if fine enough, can represent (read: approximate) smooth surfaces with a given degree of accuracy.  This is much the same as how what appears to be a smooth 2D image is actually composed of many tiny discreet dots (pixels).
 
-If the individual facets in a mesh model are too coarse or there is too much of an angle between them, the appearance of the model will be rough, and it will lack precision.  The parallel to this in the 2D world is an image whose resolution is not fine enough, resulting in a “grainy” look (you can actually distinguish the individual dots).
+If the individual facets in a mesh model are too coarse or there is too much of an angle between them, the model appearance will be rough, and it will lack precision.  The parallel to this in the 2D world is an image whose resolution is not fine enough, resulting in a grainy look (you can actually distinguish the individual dots).
 
-If the individual facets in a mesh model are extremely fine, the surface representation will generally be good, but - the model will be very data heavy and the file very large, which may cause problems with the generating or receiving software, as well as the visual display on the screen.  The goal is to create an STL model which has enough accuracy and resolution for the final purpose/process, without going too far and making the model too fine. The optimum resolution will depend on what that process is to be.
+If the individual facets in a mesh model are extremely fine, the surface representation will generally be good, but the model will be very data heavy and the file very large. This may cause problems with the generating or receiving software, as well as the visual display on the screen.  The goal is to create an STL model with enough accuracy and resolution for the final process, without going too far and making the model too fine. The optimum resolution will depend on what that process is to be.
 
-Mesh precision may be thought of in one way as the maximum difference allowed between the facetted mesh representation of the surfaces and the smooth surfaces themselves.  For objects composed of entirely planar surfaces, this is not really a problem, as the facets will correspond exactly with the surfaces.  For curved surfaces, the triangles will necessarily not lie entirely on the surface, and thus the degree of approximation becomes important.
+In one way, mesh precision may be thought of as the maximum difference allowed between the faceted mesh representation of the surfaces and the smooth surfaces themselves.  For objects composed of entirely planar surfaces, this is not really a problem, as the facets will correspond exactly with the surfaces.  For curved surfaces, the triangles will not necessarily lie entirely on the surface, and thus the degree of approximation becomes important.
 
-Which prototyping process will be used to create the final object will determine which is the optimum level of precision and tolerance that will be required for the model.  Rougher processes like FDM can successfully use models with lower tolerances (lower precision) than something like a machining process which is capable of very fine detail.  In general, the precision target of the model should be around one order of magnitude smaller than (1/10 the size of) the maximum precision of the process.  For FDM, which can reproduce about 0.1mm detail, an STL with .01 is good.  For machining, which can reproduce .01mm and finer, an STL precision of .001 or finer is necessary.
+Which prototyping process will be used to create the final object will determine which is the optimum level of precision and tolerance required for the model.  Rougher processes like FDM can successfully use models with lower tolerances (lower precision) than something like a machining process which is capable of very fine detail.  In general, the precision target of the model should be around one order of magnitude smaller than (1/10 the size of) the maximum precision of the process.  For FDM, which can reproduce about 0.1mm detail, an STL with .01 is good.  For machining, which can reproduce .01mm and finer, an STL precision of .001 or finer is necessary.
 
-Since an STL mesh is composed entirely of triangles, it is the simplest form of mesh model format.  Each facet is necessarily planar.  In principle, for rapid prototyping processes, a completely closed object is required, that is to say, the mesh completely encloses a volume, with no holes, gaps, or overlaps.  We sometimes speak of this as a “watertight solid”.  In addition, some processes require that there is only one object (volume) in the file.
+Since an STL mesh is composed entirely of triangles, it is the simplest form of mesh model format.  Each facet is necessarily planar.  In principle, for rapid prototyping processes, a completely closed object is required. That is to say, the mesh completely encloses a volume, with no holes, gaps, or overlaps.  We sometimes speak of this as a watertight solid.  In addition, some processes require that there is only one object (volume) in the file.
 
-In actual practice, there may be some tolerance allowed.  Small errors or gaps may be tolerated by the prototyping software, or can be quickly repaired.  Each process and software will work differently, some are more error-tolerant than others.  Therefore, in general it is best to aim to achieve a perfect 100% closed model, otherwise, depending on who is doing the prototyping and what process is being used, it may be time consuming (read: expensive) to fix.
+In actual practice, some tolerance is allowed.  Small errors or gaps may be tolerated by the prototyping software, or can be quickly repaired.  Each process and software will work differently. Some are more error-tolerant than others.  Therefore, in general it is best to aim for a perfect 100% closed model. Otherwise, depending on who is doing the prototyping and what process is being used, it may be time consuming (read: expensive) to fix.
 
-=====Creating STL’s from Rhino models=====
+=====Creating STLs from Rhino models=====
 
-Rhino models are created with mathematically determined smooth curves and surfaces called [[rhino:nurbs|NURBs]] (Non Uniform Rational Basis Splines).  These surface models need to be translated into (approximated by) triangular meshes to be exported via STL. The accuracy of the translation is determined by the values input into the custom mesh settings box in Rhino.  The most important setting is the maximum distance edge to surface setting, which determines how closely the mesh will be drawn over the surface (and thus how smooth and accurate it will be).
+Rhino models are created with mathematically determined smooth curves and surfaces called [[rhino:nurbs|NURBs]] (Non Uniform Rational Basis Splines).  These surface models need to be translated into (approximated by) triangular meshes to be exported via STL. The accuracy of the translation is determined by the values input into the custom mesh settings box in Rhino.  The most important setting is the maximum distance edge to surface setting, which determines how closely the mesh will be drawn over the surface (and how smooth and accurate it will be).
 
-For RP purposes is very important that the Rhino surface model be a closed volume (closed valid surface or polysurface).  Even when it is, under some conditions the mesh translation of the object may be open (have gaps somewhere).  In general, these are minor and usually repaired easily, oftentimes directly in Rhino.   It is a good idea to reimport your STL into Rhino and check for naked edges.  If none are found, great! – you’re done.
+For RP purposes it is very important that the Rhino surface model be a closed volume (closed valid surface or polysurface).  Even when it is, under some conditions the mesh translation of the object may be open or have gaps somewhere.  In general, these are minor and usually repaired easily, often directly in Rhino.   It is a good idea to reimport your STL into Rhino and check for naked edges.  If none are found, great! – You’re done.
 
-If there are a few, you can usually use the V3 bonus mesh tools or V4 mesh tools to fix them.  Commands like MatchMeshEdge, AlignMeshVertices and UnifyMeshNormals are very useful.  You can also go in and create/delete individual mesh faces.  Once fixed, you can re-export the mesh as a new STL.  Otherwise, you can also just mesh your model in Rhino, check and edit it if necessary, and then export the mesh as an STL.  The custom settings for Mesh and STL export are the same.  See the [[rhino:meshfaq|Mesh FAQ page]] for more info on meshing.
+If there are a few, you can usually use the V3 bonus mesh tools or V4 mesh tools to fix them.  Commands like MatchMeshEdge, AlignMeshVertices and UnifyMeshNormals are very useful.  You can also go in and create or delete individual mesh faces.  Once fixed, you can re-export the mesh as a new STL.  Otherwise, you can also just mesh your model in Rhino, check and edit it if necessary, and then export the mesh as an STL.  The custom settings for Mesh and STL export are the same.  See the [[rhino:meshfaq|Mesh FAQ page]] for more info on meshing.
 
 =====Export mesh settings=====
 
 It is recommended that you use the custom/detailed settings to produce your mesh model or export STL.  Each different process will have a different group of settings. Below is a listing of settings people have found useful for various RP processes:
 
-<color red>(please contribute your settings, we can format them later!)</color>
+<color red>(Please contribute your settings, we can format them later!)</color>
 
 Stereolithography
 
@@ -53,7 +53,7 @@ Polyjet printer (Objet)
 
 Z-Corp machine
 
-[[rhino:solidscape|SolidScape]] Wax printer
+[[rhino:solidscape|Solidscape]] Wax printer
 
 Invision
 
@@ -78,7 +78,7 @@ All others unchecked.
 //_////_////_////_////_////_////_////_////_////_////_////_////_////_////_////_//__
 
 
-For Jewellery (rings) printing on a [[rhino:solidscape|SolidScape]] t66 I found a simple set of settings. Units are millimeters. (Don't use these settings on big models!):
+For Jewelery (rings) printing on a [[rhino:solidscape|Solidscape]] t66 I found a simple set of settings. Units are millimeters. (Don't use these settings on big models!):
 
 Min Edge length: 0.02
 
