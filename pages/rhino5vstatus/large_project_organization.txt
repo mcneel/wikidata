@@ -2,77 +2,77 @@
 **Or: When to use linked blocks and when to attach files using worksessions.**
 
 =====Overview=====
-This whitepaper describes the features in Rhino 5.0 that enable a team of people to work on a large project together. The strategy is to divide the project into multiple files and use both blocks and attached files appropriately.
+This whitepaper describes the features in Rhino 5 that enable a team of people to work on a large project together. The strategy is to divide the project into multiple files and use both blocks and attached files appropriately.
 
-====Inserting Blocks versus Attaching Reference Files====
-Rhino has two ways to include multiple files in a single scene: inserting linked blocks and attaching reference models. At first they seem similar, but they are designed to solve different problems.
+====Inserting blocks versus attaching reference files====
+Rhino has two ways to include multiple files in a single scene: inserting linked blocks and attaching reference models. At first they seem similar, but they solve different problems.
 
-====Inserting Blocks for Part Libraries:====
-Block insertion is used to include parts from a library in your model. For example, you may insert a conference chair block 10 times around a conference table. Using blocks reduces the amount of memory used to represent the objects and makes it easy to replace one style of conference chair with another.
+====Inserting blocks for part libraries====
+Use block insertion to include parts from a library in your model. For example, you may insert a conference chair block 10 times around a conference table. Using blocks reduces the amount of memory used to represent the objects and makes it easy to replace one style of conference chair with another.
 
-====Inserting Linked Blocks in Master Models:====
-Linked blocks can be used to combine elements of a project into a master file. In this scenario, none of the geometry in any of the linked files needs to be modified. The linked geometry is source geometry for rendering, animation, or 2-D drawing production.
+====Inserting linked blocks in master models====
+Linked blocks can be used to combine elements of a project into a master file. In this scenario, none of the geometry in any of the linked files needs modified. The linked geometry is source geometry for rendering, animation, or 2-D drawing production.
 
 When geometry is inserted as Linked Blocks with Layer State set to Active, changes can be made to all active layer properties. These layer changes are saved in the master model and are applied regardless of changes to the underlying geometry and layers in the linked blocks. This allows the master model to be reused throughout the project lifecycle.
 
-====Attaching Files to Overlay Geometry:====
-While actively modeling an element of the project, a user may need to overlay geometry from another part of the project. It is possible to use linked blocks to overlay this external geometry, but linking information is saved within the active model. Imagine a user working on the exterior of a building but wanting interior walls for reference. If the interior walls were inserted as linked blocks, another user wanting to reference only the building exterior would also get interior walls. (Option: The linked block can be inserted on a unique layer, and this layer is called the block reference layer. If the reference layer were turned off, the entire block would not be displayed.) Creating permanent links increases the organizational complexity of the project.
+====Attaching files to overlay geometry====
+While actively modeling an element of the project, you may need to overlay geometry from another part of the project. It is possible to use linked blocks to overlay this external geometry, but linking information is saved within the active model. Imagine working on the building exterior but wanting interior walls for reference. If the interior walls were inserted as linked blocks, another user wanting to reference only the building exterior would also get interior walls. (Option: The linked block can be inserted on a unique layer and this layer is called the block reference layer. If the reference layer is turned off, the entire block does not be display.) Creating permanent links increases the organizational complexity of the project.
 
-To solve this problem, Rhino allows you to attach one or more files. The attached file is read into the scene as read-only overlay geometry. Information about attached files is not saved in the active model, and only a subset of attached layer properties can be modified: visibility, locked, color, and print color. The origin of the attached file will always correspond to the origin of the active model, and the attached file always displays full size.  
+To solve this problem, Rhino lets you attach one or more files. The attached file is read into the scene as read-only overlay geometry. Information about attached files is not saved in the active model, and only a subset of attached layer properties can be modified: visibility, locked, color, and print color. The origin of the attached file will always correspond to the origin of the active model, and the attached file always displays full size.  
 To maintain the overlay state between modeling sessions, a worksession file (.RWS) can be saved. The worksession file stores the path to the active model and any attached models, the modified layer states for referenced geometry, and the current views.
 
-Worksession files are not designed to be shared with other users – they are designed to keep track of an individual user’s state while working with projects that have geometry spread across many files.
+Worksession files are not designed to share with others. They are designed to keep track of an individual user’s state while working with projects that have geometry spread across many files.
 
-=====A Working Example=====
-==== The Project ====
+=====A working example=====
+==== The project ====
 The goal of this project is to develop a parking lot at a growing university. On the site will be two buildings: a coffee bar and an administrative building. A courtyard with a fountain will be the focus of the property, and an underground parking garage doubles the parking capacity of the existing lot.
 
 ==== The Zeichnenspass Architecture Team ====
-    * Matt is a junior architect responsible for 3d modeling of each element.
+    * Matt is a junior architect responsible for 3D modeling of each element.
     * Paul will do the plumbing layout.
     * David is the production drafter responsible for producing the contract documentation. 
     * Fabio is a rendering and animation specialist that will produce animations and still renderings of the design as it progresses.
 
-==== The Tasks ====
+==== The tasks ====
 Each team member has a different job to do. Each job requires a different set of tools.
 
-=== Modeling The Coffee Shop Exterior ===
-The modeling process begins with Matt modeling each building. Because Matt is actively modeling the each building exterior, he will create a new model for each building and attach any files that he needs to overlay during modeling.
+=== Modeling the coffee shop exterior ===
+The modeling process begins with Matt modeling each building. Because Matt is actively modeling the building exterior, he will create a new model for each building and attach any files that he needs to overlay during modeling.
 
-Matt creates **Coffee Shop – Exterior.3dm** and attaches **Site.3dm**. Matt doesn’t need to see most of the layers in the **Site.3dm** file, so he turns all but the Ground layer off. He changes the color of the Ground layer to light gray so that it is less prominent visually while he models. Since it takes several days to model the exterior, Matt saves the state of his attached files in a worksession file on his local computer – there is no need to save this transient information in the project folder on the network, as that just clutters the files that everyone sees. 
+Matt creates **Coffee Shop – Exterior.3dm** and attaches **Site.3dm**. Matt doesn’t need to see most of the layers in the **Site.3dm** file, so he turns all but the Ground layer off. He changes the color of the Ground layer to light gray so that it is less prominent visually while he models. Since it takes several days to model the exterior, Matt saves the state of his attached files in a worksession file on his local computer. There is no need to save this transient information in the project folder on the network, as that just clutters the files that everyone sees. 
 
-=== Modeling the Coffee Shop Interior ===
+=== Modeling the coffee shop interior ===
 After modeling the exterior, Matt will switch to modeling the interior of the coffee shop. He’ll create a new model called **Coffee Shop – Interior.3dm**. Matt has decided to use a different worksession file to model the interior because he wants to have different files attached and different layer colors for the attached files. Matt attaches **Coffee Shop – Exterior.3dm** and saves **Coffee Shop – Interior.rws**.
 
-The Coffee Shop has two restrooms. The plumbing fixtures are the same in both restrooms, but there are multiple sinks and toilets in each model. To make it easy to change the style or vendor of each fixture, Matt inserts the **Toilet.3dm** and **Sink.3dm** models as linked blocks. To change the toilet style, Matt uses the BlockManager command to replace the existing block definition with a different one.
+The coffee shop has two restrooms. The plumbing fixtures are the same in both restrooms, but there are multiple sinks and toilets in each model. To make it easy to change the style or vendor of each fixture, Matt inserts the **Toilet.3dm** and **Sink.3dm** models as linked blocks. To change the toilet style, Matt uses the BlockManager command to replace the existing block definition with a different one.
 
-=== Modeling Other Buildings ===
-Modeling the rest of the structures on the site follows the same organizational principles as the Coffee Shop. Once the exterior of each structure is complete, preliminary exterior renderings can begin.
+=== Modeling other buildings ===
+Modeling the rest of the structures on the site follows the same organizational principles as the coffee shop. Once the exterior of each structure is complete, preliminary exterior renderings can begin.
 
-=== Rendering the Exterior ===
+=== Rendering the exterior ===
 Once the site and the building exteriors are complete, Fabio can set up scenes for rendering and walk-through animations. Fabio wants to have control of the material properties, saved views, and rendering environment even if other people change the information for each building.
 
-Fabio will create a new model file called **Master Rendering.3dm** and will insert linked blocks for the files **Site.3dm**, **Coffee Shop – Exterior.3dm**, **Courtyard – Fountain.3dm**, **Courtyard – Paths.3dm**,  **Administrative - Exterior.3dm**, and **Garage - Entry.3dm** as linked blocks. All of the linked blocks are inserted with **Layer Style** set to **Active**.
+Fabio creates a new model file called **Master Rendering.3dm** and inserts linked blocks for the files **Site.3dm**, **Coffee Shop – Exterior.3dm**, **Courtyard – Fountain.3dm**, **Courtyard – Paths.3dm**,  **Administrative - Exterior.3dm**, and **Garage - Entry.3dm** as linked blocks. All of the linked blocks are inserted with **Layer Style** set to **Active**.
 
 Inserting the blocks with Layer Style set to Active allows Fabio to control the material properties of each layer without having to modify the original model. This means that other members of the team can continue working on those models while Fabio tweaks materials and develops the final renderings.
 
 Initially Fabio thought about attaching reference files and saving a worksession for this project. He decided not to because he wanted all the rendering material information to be in a file he controls – **Master Rendering.3dm** – instead of the models that contain the geometry. This allows Fabio to control the rendering attributes for his needs, while making it possible for other users to make their own renderings of each file as they need.
 
-**Note:** The Zeichnenspass team has developed a set of drawing standards. These drawing standards include file and layer naming schemes that dovetail with the team’s use of blocks and worksessions. For example, all exterior windows are placed on a layer named “Fenestration”. When the linked blocks are inserted into Fabio’s Master Rendering model, a single Fenestration layer contains all the geometry from all the Fenestration layers in the inserted models. Changing the exterior glass across all files is easy because all the glass is on one layer.
+**Note:** The Zeichnenspass team has developed a set of drawing standards. These drawing standards include file and layer naming schemes that dovetail with the team’s use of blocks and worksessions. For example, all exterior windows are placed on a layer named //Fenestration//. When the linked blocks are inserted into Fabio’s Master Rendering model, a single fenestration layer contains all the geometry from all the fenestration layers in the inserted models. Changing the exterior glass across all files is easy because all the glass is on one layer.
 
 Fabio creates named views, sets up Bongo path animations, and creates sun study animation sequences all within the Master Rendering model. As the project becomes more and more complete, Fabio can open the Master Rendering model, and easily produce updated sets of renderings and animations.
 
-=== Creating Production Drawings ===
-Production drawings are laid out much like the exterior renderings using linked blocks. To create the drawing set for the Coffee Shop, David creates a **Master Drawings - Coffee Shop.3dm** file, and inserts Linked Blocks with Layer Style set to Active for every model required to do the drawing set.
+=== Creating production drawings ===
+Production drawings are laid out much like the exterior renderings using linked blocks. To create the drawing set for the coffee shop, David creates a **Master Drawings - Coffee Shop.3dm** file, and inserts Linked Blocks with Layer Style set to Active for every model required to do the drawing set.
 
-Layouts for each drawing sheet are saved in the Coffee Shop – Drawing Set model. These layouts may contain additional dimensions, layer styles for print width, line type, and print color.
+Layouts for each drawing sheet are saved in the coffee shop – drawing set model. These layouts may contain additional dimensions, layer styles for print width, line type, and print color.
 
 By inserting linked blocks, David is able to work on the drawing set while changes are made by other members of the team.
 
-=== Plumbing Details ===
+=== Plumbing details ===
 
 Detailing the plumbing layout is achieved by attaching files because one model needs to be modified while geometry from other files is needed for reference. Paul creates a new model called **Coffee Shop – Plumbing.3dm** and attaches **Coffee Shop – Exterior** and **Coffee Shop – Interior**. The electrical and HVAC detailing could be done in much the same way.
 
-==== Final Thoughts ====
+==== Final thoughts ====
 Planning and standards are required to successfully organize projects. It is important that the project be broken into enough separate files that users can work concurrently on the project without being hindered by another user having the file locked. But having too many files can mean constantly switching the active model in a worksession, which can be both time consuming and irritating.
 
