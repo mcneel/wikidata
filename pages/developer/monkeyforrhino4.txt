@@ -12,7 +12,7 @@ This plug-in is included in the [[http://download.rhino3d.com/rhino/5.0/wip/|Rhi
 
 Monkey is a new script editor in Rhino 4 which can be used to edit, run, debug, and compile scripts. It contains all the standard programmer editor features such as Find/Replace (with regular expressions), multi-document interface, code trees, and integrated helpfiles. Monkey also comes with a separate application called the //Monkey Script Compiler//. This standalone exe turns **.rvb scripts into **.rhp plug-ins. More information on the script compiler can be found [[developer:monkeyscriptcompiler|here]].
 
-This wiki page focuses on the Monkey plug-in features. Monkey is a DotNET plug-in, meaning you need the Microsoft DotNET Framework 2.0 installed on your machine. Note that many computers already are DotNET compliant, so you only need to download and install this if Monkey doesn't run (you'll get an error message telling you when this happens).
+This wiki page focuses on the Monkey plug-in features. Monkey is a DotNET plug-in, meaning you need the Microsoft DotNET Framework 2.0 installed on your machine. Note that many computers already are DotNET compliant, so you only need to download and install this if Monkey doesn't run. (You'll get an error message telling you when this happens)
 
 If you are a plug-in developer and have extended [[developer:rhinoscript|RhinoScript]] to use your plug-in methods, then you can access your methods from Monkey.  Click [[developer:monkeyscripting|here]] for details.
 
@@ -101,11 +101,11 @@ The following sections deal with all the user interface elements of the Monkey w
 
 \\
 
-The most important item on the Monkey Editor is the Code Editor. It is here that you make your scripts. As you can see, the editor is much more than a simple text editor (a la notepad). It performs automatic syntax parsing meaning you get properly coloured keywords, collapsible code groups which encapsulate Sub() and Function() blocks, automatic indenting, autocompletion and error highlighting. These are features that we have come to expect from any developer tool and Monkey brings them to Rhino for the first time.
+The most important item on the Monkey Editor is the Code Editor. It is here that you make your scripts. As you can see, the editor is much more than a simple text editor (a la notepad). It performs automatic syntax parsing, meaning you get properly coloured keywords, collapsible code groups which encapsulate Sub() and Function() blocks, automatic indenting, autocompletion, and error highlighting.
 
 \\
 
-Autocompletion and parameter tips are generally grouped under the catch-phrase [[http://en.wikipedia.org/wiki/Intellisense|IntelliSense]] . Since [[developer:rhinoscript|RhinoScript]] is not a strongly typed language, it is very difficult to provide a fully functional IntelliSense system, which is why IntelliSense in Monkey is limited to [[developer:rhinoscript|RhinoScript]] methods and Script Scope procedures. We may expand this functionality later on to include vbScript specific procedures and classes as well. An example of IntelliSense in action can be seen below:
+Autocompletion and parameter tips are generally grouped under the catch-phrase [[http://en.wikipedia.org/wiki/Intellisense|IntelliSense]] . Since [[developer:rhinoscript|RhinoScript]] is not a strongly typed language, it is difficult to provide a fully functional IntelliSense system, which is why IntelliSense in Monkey is limited to [[developer:rhinoscript|RhinoScript]] methods and Script Scope procedures. We may expand this functionality later on to include vbScript specific procedures and classes. An example of IntelliSense in action can be seen below:
 
 \\
 
@@ -113,12 +113,12 @@ Autocompletion and parameter tips are generally grouped under the catch-phrase [
 
 \\
 
-Note that the autocompletion list pops up as soon as //Rhino// is typed anywhere. The list updates as you type to reflect the best possible match with your current text. In this case, we want to use the Rhino.GetObject() method but we have to type at least //geto// in order to get it (Rhino.GetAngle() comes earlier in the alphabet and is the initial provided solution). Once the Rhino.GetObject() method is highlighted in the pop up list, we can simply press [Enter] and the complete method name will be inserted into the script. Once the method name is in place, we have to supply the arguments. IntelliSense displays a tooltip showing us the required arguments and which one we are currently setting.
+Note that the autocompletion list pops up as soon as //Rhino// is typed anywhere. The list updates as you type to reflect the best possible match with your current text. In this case, we want to use the Rhino.GetObject() method but we have to type at least //geto// to get it (Rhino.GetAngle() comes earlier in the alphabet and is the initial provided solution). Once the Rhino.GetObject() method is highlighted in the pop up list, we can simply press [Enter] and the complete method name is inserted into the script. Once the method name is in place, we have to supply the arguments. IntelliSense displays a tooltip showing us the required arguments and which one we are currently setting.
 
 \\
 \\
 
-Above the code editor you will find the document tab. Monkey is multi-document capable and you can switch between documents by clicking on the appropriate tab. You can also add existing files quickly by dragging them onto the file tab. If there are too many files in the tab to be shown on a single screen, you can scroll the bar left and right by click+dragging the ◄ ► icon. Also, if you press the right mouse button on the tab, you'll get a menu with all loaded files so you can quickly locate the correct one.
+Above the code editor you will find the document tab. Monkey is multi-document capable and you can switch between documents by clicking on the appropriate tab. You can also quickly add existing files by dragging them onto the file tab. If there are too many files in the tab to show on a single screen, you can scroll the bar left and right by click+dragging the ◄ ► icon. Also, if you press the right mouse button on the tab, you'll get a menu with all loaded files so you can quickly locate the correct one.
 
 ----
 
@@ -224,7 +224,7 @@ Above you see the File, Source, and Tools menu. Since the Source menu is pretty 
 
 **File » Recent Files**
 
-The MRU list (**M**ost **R**ecently **U**sed) in Monkey is one of my most precious creations. Not that it is extremely advanced, it's just more advanced than other MRU menus out there. It displays a list of 15 files (15 by default, you can set a different number in the options) that were last saved by Monkey. The cool part is that it automatically hides files from the list that no longer exist, without shortening the list. Also, if you then restore these files, they will reappear in the menu. Not just when Monkey starts, but whenever you open the menu. I guess you have to be a fairly lost cause to appreciate that kind of thing... so be it.
+The MRU list (**M**ost **R**ecently **U**sed) in Monkey is one of my most precious creations. Not that it is extremely advanced, it's just more advanced than other MRU menus out there. It displays a list of 15 files (15 by default -- you can set a different number in the options) that were last saved by Monkey. The cool part is that it automatically hides files from the list that no longer exist, without shortening the list. Also, if you then restore these files, they will reappear in the menu. Not just when Monkey starts, but whenever you open the menu. I guess you have to be a fairly lost cause to appreciate that kind of thing... so be it.
 
 \\
 
@@ -242,7 +242,7 @@ This menu item will enable/disable the ASCII browser dialog. If you ever use Chr
 
 **Tools » Constant browser**
 
-This menu item will enable/disable the vbScript Constant browser dialog. vbScript comes with a number of predefined constants, all of which are listed in this little dialog.
+This menu item will enable/disable the vbScript Constant browser dialog. vbScript comes with many predefined constants, all which are listed in this little dialog.
 
 \\
 
