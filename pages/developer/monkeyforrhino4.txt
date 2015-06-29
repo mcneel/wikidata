@@ -16,7 +16,7 @@ This wiki page focuses on the Monkey plug-in features. Monkey is a DotNET plug-i
 
 If you are a plug-in developer and have extended [[developer:rhinoscript|RhinoScript]] to use your plug-in methods, then you can access your methods from Monkey.  Click [[developer:monkeyscripting|here]] for details.
 
-[[David@McNeel.com|Contact]] the [[:people:davidrutten|author]]
+[[David@McNeel.com|Contact]] the [[:people:davidrutten|author]].
 
 
 ----
@@ -75,9 +75,8 @@ The Script Compiler is a standalone program (not a Rhino plug-in), that allows y
 
 =====The Script Editor=====
 
-The Monkey script editor is a Rhino plug-in, not a standalone application, meaning it can only be run inside of Rhino 4. You can either run the _Monkey command or open the editor via the Monkey menu. After a short delay (Yes, yes, we know. We're working hard to get it to load faster.) the Monkey Editor will be displayed. Since the editor is likely to be displayed as a large window, we've made it non-dockable. By default, the window is linked to Rhino, meaning that if you minimize Rhino, Monkey will also disappear. It is possible to unlink Rhino and Monkey, but we'll get to that in the menu section.
+The Monkey script editor is a Rhino plug-in, not a standalone application, meaning it can only be run inside of Rhino 4. You can either run the _Monkey command or open the editor via the Monkey menu. After a short delay the Monkey Editor will be displayed.  (Yes, yes, we know. We're working hard to get it to load faster.) Since the editor is likely to be displayed as a large window, we've made it non-dockable. By default, the window is linked to Rhino, meaning that if you minimize Rhino, Monkey will also disappear. It is possible to unlink Rhino and Monkey, but we'll get to that in the menu section.
 
-\\
 
 The following sections deal with all the user interface elements of the Monkey window.
 
@@ -103,7 +102,6 @@ The following sections deal with all the user interface elements of the Monkey w
 
 The most important item on the Monkey Editor is the Code Editor. It is here that you make your scripts. As you can see, the editor is much more than a simple text editor (a la notepad). It performs automatic syntax parsing, meaning you get properly coloured keywords, collapsible code groups which encapsulate Sub() and Function() blocks, automatic indenting, autocompletion, and error highlighting.
 
-\\
 
 Autocompletion and parameter tips are generally grouped under the catch-phrase [[http://en.wikipedia.org/wiki/Intellisense|IntelliSense]] . Since [[developer:rhinoscript|RhinoScript]] is not a strongly typed language, it is difficult to provide a fully functional IntelliSense system, which is why IntelliSense in Monkey is limited to [[developer:rhinoscript|RhinoScript]] methods and Script Scope procedures. We may expand this functionality later on to include vbScript specific procedures and classes. An example of IntelliSense in action can be seen below:
 
@@ -115,8 +113,6 @@ Autocompletion and parameter tips are generally grouped under the catch-phrase [
 
 Note that the autocompletion list pops up as soon as //Rhino// is typed anywhere. The list updates as you type to reflect the best possible match with your current text. In this case, we want to use the Rhino.GetObject() method but we have to type at least //geto// to get it (Rhino.GetAngle() comes earlier in the alphabet and is the initial provided solution). Once the Rhino.GetObject() method is highlighted in the pop up list, we can simply press [Enter] and the complete method name is inserted into the script. Once the method name is in place, we have to supply the arguments. IntelliSense displays a tooltip showing us the required arguments and which one we are currently setting.
 
-\\
-\\
 
 Above the code editor you will find the document tab. Monkey is multi-document capable and you can switch between documents by clicking on the appropriate tab. You can also quickly add existing files by dragging them onto the file tab. If there are too many files in the tab to show on a single screen, you can scroll the bar left and right by click+dragging the ◄ ► icon. Also, if you press the right mouse button on the tab, you'll get a menu with all loaded files so you can quickly locate the correct one.
 
@@ -141,7 +137,6 @@ Above the code editor you will find the document tab. Monkey is multi-document c
 
 The status bar provides feedback on the location of the caret in the currently active script. It gives both line and column coordinates, as well as procedure scope coordinate. You can jump to a specific line in your script by using the //Go to line...// dialog, but you can also scroll the line index field in the status bar. Just click+drag up and down and the currently selected line will be scrolled.
 
-\\
 
 The status bar exposes another quick navigation tool. If you click on the procedure scope field (the last field on the status bar) you will pop up a menu listing all defined Sub() and Function() procedures. Click on one of the names to jump to that procedure. If the caret is not inside any procedure body, the status bar will read //Global scope//.
 
@@ -193,7 +188,7 @@ The toolbar exposes some standard functionality which can also be found in the m
 
 \\
 
-The toolbar can be deactivated through the View menu...
+The toolbar can be deactivated through the View menu.
 
 \\
 
@@ -218,7 +213,7 @@ The menu provides access to all Monkey features. Most menus are fairly straightf
 
 \\
 
-Above you see the File, Source, and Tools menu. Since the Source menu is pretty much identical to the [Breakpoint] button, it needs no further explanation. More information on using breakpoints will be available shortly on a separate wiki page. I will highlight some menu items that are not completely standard:
+Above is the File, Source, and Tools menu. Since the Source menu is pretty much identical to the [Breakpoint] button, it needs no further explanation. I will highlight some menu items that are not completely standard:
 
 \\
 
