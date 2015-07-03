@@ -1,0 +1,26 @@
+=====Installation von Penguin 2.0 =====
+> **Zusammenfassung:** //Installation von [[penguin:home|Penguin]] mittels Skript.//
+
+=====Überblick=====
+
+Die Installation von [[penguin:home|Penguin]] mittels Skript funktioniert ähnlich wie bei Rhino und Flamingo.
+
+Die Anweisung zur Ausführung der Installation über eine Batch-Datei (*.bat) lautet:
+
+   msiexec /i <Pfad_zur_Installationsdatei.msi> /qn <Lizenzoptionen>
+
+Die Lizenzoptionen sind:
+
+  * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** Verwenden Sie den zwölfstelligen Penguin-Lizenzschlüssel ohne "PE20". Diesen Parameter benötigen Sie auf jeden Fall, es sei denn, Sie installieren Penguin als Mehrplatzsystem.
+  * **ZOO_NETWORK="network"** "network" bedeutet, dass [[penguin:home|Penguin]] seine Lizenz vom Zoo-Server erhält. Dieser Parameter ist optional.
+  
+=====Beispiele=====
+
+   "msiexec /i Penguin20_Release_SR4_x64.msi /qn LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX""
+
+   "msiexec /i Penguin20_Release_SR4_x86.msi /qn ZOO_NETWORK="network""
+
+=====Hinweise=====
+
+Wenn Sie eine Protokoll benötigen, hängen Sie einfach die Anweisung "/L*v "Setup.log"" an.
+
