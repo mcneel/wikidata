@@ -31,7 +31,7 @@ Public Class MaximizeViewCommand
   Protected Overrides Function RunCommand(doc As RhinoDoc, mode As RunMode) As Result
     Dim view As RhinoView = doc.Views.ActiveView
     
-    If view IsNot None Then
+    If view IsNot Nothing Then
       view.Maximized = True
     End If
     
