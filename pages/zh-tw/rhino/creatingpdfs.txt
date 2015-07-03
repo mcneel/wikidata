@@ -1,0 +1,52 @@
+====== 在Rhino建立PDF檔 ======
+> **摘要：** //Rhino 4現在有更先進的PDF支援。以下解釋如何建立及控制PDF的匯出。 <color red>需要安裝Rhino 4</color>//
+
+
+==== 概要 ====
+
+有兩種獨立的PDF式樣，傳統為2D PDF格式。 Adobe現在加入了3D格式的PDF檔。
+
+\\
+
+| 2D PDF是一般正常的頁面配置格式，利用PDF 紀錄Rhino列印輸出來建立PDF檔案。在Rhino 4，您可以控制PDF檔中的頁面配置、線條粗細型態。 Rhino 並不支援建立2D PDF圖層。|    | 3D PDF 是Adobe新推出的格式，允許PDF模型旋轉，改變了3D物件顯示的方式。能夠將3D模型、材料及紋理資訊一同建立在PDF檔案裡。 以下為3D PDF詳情。|
+|{{:legacy:en:BOTTLE_2D.jpg}}|   |{{:legacy:en:hydropdf.jpg}}|
+
+
+=====目前可用的2D 繪圖PDF Writers =====
+
+建立2D PDF繪圖需要PDF列表驅動程式。有些需要付費，有些免費。 以下為可用驅動程式清單：
+
+  * [[http://www.adobe.com/products/acrobat/|Adobe Acrobat Professional]]
+  * [[http://www.cutepdf.com/|CutePDF]]
+  * [[http://www.pdf995.com/|PDF995]]
+  * [[http://www.primopdf.com/|PrimoPDF]]
+
+想要列印2D PDF時，您需要確定要向量PDF檔或是點陣PDF檔。向量檔的好處在於列印較大尺寸時，也有清晰的線條。 點陣式PDF則處理Rhino的影像及陰影，不過只有預設PDF的清晰度。 以下為2D PDF列印詳情。
+
+\\
+
+|{{:legacy:en:bottle_vector.jpg}}|{{:legacy:en:bottle_raster.jpg}}|
+|向量式線條|點陣式輸出|
+
+\\
+
+一旦安裝了以上驅動程式之一，建立PDF檔步驟如下：
+
+  - 在Rhino開啟想要轉換的繪圖。
+  - 執行 Print指令。
+  - 選擇您的列印目的地。
+  - 選擇頁面大小。
+  - 不要選擇列印至檔案，會造成錯誤檔案格式。
+  - 選擇列印方式，向量或點陣。如果向量形式印出來是整片灰，表示列印的項目不適合用向量方式，比如著色模式。
+
+> **注意：** //大部分的PDF轉換器允許使用者設定檔案的解析度 (DPI)。這個設定對向量或點陣列印都會造成影響。在點陣模式中可以控制整體解析度，在向量模式則是可以控制檔案列印時的準確度。
+
+=====目前可用的3D 繪圖PDF Writers =====
+
+
+> **備註：**//Acrobat Professional目前並不支援3D PDF。您必須安裝Acrobat DC以支援3D模型。 Acrobat DC內含Acrobat DC 驅動程式。
+  * [[http://www.adobe.com/products/acrobat3d/|Adobe Acrobat 3D]]
+
+目前Acrobat DC只支援Rhino 3的檔案格式。如試圖讀取Rhino 4 的檔案，Acrobat將回報檔案中沒有可顯示的幾何。您可以將Rhino 4檔案存回Rhino 3的格式再由Acrobat讀取。
+
+> **更新：**// 根據Acrobat DC的版本，您可能可以用Windows"列印螢幕"功能，直接將Rhino 4的模型帶進Acrobat DC。 貼圖的分配將保持不變。
