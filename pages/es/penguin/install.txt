@@ -1,0 +1,26 @@
+** Instalación de [[penguin:home|Penguin 2.0]] **
+> **Resumen:** //Cómo automatizar la instalación de [[penguin:home|Penguin]] mediante scripts.//
+
+=====Descripción=====
+
+La instalación de [[penguin:home|Penguin]] mediante scripts es similar a la de Rhino y Flamingo.
+
+El formato de la línea de comandos que debe ejecutarse desde un archivo *.bat es:
+
+   msiexec /i <ruta al instalador .msi> /qn <license-options>
+
+Los parámetros de license-options son:
+
+  * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** Utilice el código de CD de 12 caracteres de Penguin, sin los caracteres “PE20”. Este parámetro es obligatorio a no ser que instale Penguin como nodo de grupo de trabajo.
+  * **ZOO_NETWORK="network"** "network" significa que quiere obtener la licencia de [[penguin:home|Penguin]] desde el servidor del Zoo. Este parámetro no es obligatorio.
+  
+=====Ejemplos=====
+
+   "msiexec /i Penguin20_Release_SR4_x64.msi /qn LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX""
+
+   "msiexec /i Penguin20_Release_SR4_x86.msi /qn ZOO_NETWORK="network""
+
+=====Notas=====
+
+Si necesita un archivo de registro, puede añadir el texto "/L*v "Setup.log"" en la parte superior de la línea de comandos.
+
