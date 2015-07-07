@@ -6,7 +6,7 @@
 
 
 ====== Peter's Tools 1.93 ======
-> **Summary:** //Miscellaneous scripts compiled into a plugin (developed primarily by peter harris).  Download includes toolbar for easy access and setup.//
+> **Summary:** //Miscellaneous scripts compiled into a plug-in (developed primarily by Peter Harris).  Download includes toolbar for easy access and setup.//
 
 //<color red>I'm not supporting Rhino V4 anymore. Also, please remember that these are free tools that you use at your own risk, of course.</color>//
 
@@ -16,7 +16,7 @@
 =====What's new since Version 1.90=====
 
 
-  * **This update is primarily designed to fix BOM tools. The file that was supposed to save materials definitions was not being created correctly**
+  * **This update is primarily designed to fix BOM tools. The file that was supposed to save materials definitions was not being created correctly.**
 
 
 
@@ -25,23 +25,23 @@
 
 
 =====Overview=====
-I've created a plugin from the most useful of the scripts that I've written  (with help of many people), and a toolbar to go with it.  The download link is at the bottom of the page.  If you'd like a copy of the original scripts, just email me! Thanks to all who have helped me on these scripts! Especially Pascal, David, Dale, and Mitch.
+I've created a plug-in from the most useful of the scripts that I've written  (with the help of many people), and a toolbar to go with it.  The download link is at the bottom of the page.  If you'd like a copy of the original scripts, just email me! Thanks to all who have helped me on these scripts! Especially Pascal, David, Dale, and Mitch.
 
 
 =====Commands=====
-The commands currently available in the PetersTools plug-in are as follows:
+The commands currently available in the PetersTools plug-in are:
 
 \\
-BOM and object properties tools:
+**BOM and object properties tools**
 
-        - **BOM**  - Calculates object weights based on density and exports object notes and other attributes to a .csv file or to the clipboard.  (note:  objects need to have a 'real material' assigned in order to do the weight calculations.  See next tool...) Now includes more options & lets users select which columns to export. Items that can be exported to the bill of materials includes Part Name, Real Material & Weight, Box Size (bounding box), Object Notes, Volume, Surface Area, Layer, Volume Centroid, and Area Centroid. This tool has a lot in common with Rhino's built-in properties export (export -> .csv), except that this includes real material & weight, so if you don't need those properties, try the built-in tool first!
+        - **BOM**  - Calculates object weights based on density and exports object notes and other attributes to a .csv file or to the clipboard.  (Note:  Objects need to have a //real material// assigned in order to do the weight calculations.  See next tool...) Now includes more options and lets users select which columns to export. Items that can be exported to the bill of materials includes Part Name, Real Material & Weight, Box Size (bounding box), Object Notes, Volume, Surface Area, Layer, Volume Centroid, and Area Centroid. This tool has a lot in common with Rhino's built-in properties export (export -> .csv), except that this includes real material and weight, so if you don't need those properties, try the built-in tool first!
         - **RealMaterialTools** - Includes options to set a real material to objects (includes a way to create custom materials based on the density, and it comes with some plastics already in there), match real materials, select objects with no real material, or delete real material data from selected objects.
          - **ObjectNoteTools** - Includes options to set an object note to objects, match object notes, select objects with no object notes, or delete notes from objects. Object notes show up in the BOM or in the DotWithData tool.
         - **DotWithData**  - Adds annotation dots to selected objects with text option of either part names, layer, real materials, weight, object volumes, object surface areas, object notes, volume centroid, area centroid, or bounding box dimensions.
         - **SelUnnamed**  - Selects all unnamed objects.
         - **NameObjects**  - Lets you name a bunch of objects in serial fashion (brings up a box for each selected object one by one.)
 \\
-Geometry-creating or editing tools:
+**Geometry-creating or editing tools**
 
         - **MagicCap**  - Creates a planar surface from any selection of curves and/or surface edges. Here's how it works:{{:people:magiccapanimation.gif?590}}
         - **JoinCurvesByClosestEnds**  - Joins two curves by closest ends by adding two straight lines.
@@ -57,36 +57,35 @@ Geometry-creating or editing tools:
         - **SetZ**  - Flattens an object in the world  Z direction.
         - **SetZ_To_0**  - Flattens an object in the world  Z direction to 0.
 \\
-File utilities:
+**File utilities**
 
-        - **BatchSaveSmall**  - Lets you automate saving a folder of Rhino files small (including subfolders, optionally) This command does not work well on Rhino 4 files if you are running the command from Rhino 5 because it will ask if you really want to save as V5 for each file. I cannot find a way around that warning.
-        - **Open3dmFileInNewWorkspace**  - Opens a Rhino file without closing the currently open rhino file. 
+        - **BatchSaveSmall**  - Lets you automate saving a folder of Rhino files small (including subfolders, optionally). This command does not work well on Rhino 4 files if you are running the command from Rhino 5 because it will ask if you really want to save as V5 for each file. I cannot find a way around that warning.
+        - **Open3dmFileInNewWorkspace**  - Opens a Rhino file without closing the currently open Rhino file. 
         - **OpenSelectedInNewWorkspace**  - Opens the currently selected objects in a new Rhino window. 
         - **PickScriptFromFolder**  - This script creates a list of the scripts that are on your computer and that are listed in your search paths in the Rhino options. You can click on any script in the list to run it.
 
 \\
-Misc tools:
+**Misc tools**
 
         - **TimerTools**  - Simple tools for keeping track of time spent on a task. Nested options include StartTimer, StopTimer, SetProjectNumber, and TimerLog. If you StartTimer or StopTimer without a project name, you'll be prompted to add one. The TimerLog is a text file of the start and stop times along with project numbers.
         - **DetailsTools**  - Tools for modifying all details in a layout at once. Includes ability to change display mode in all, zoom extents in all, make scale match in all, or apply your own macro or command to all details.
         - **HideCurves**  - Hides all visible curves.
         - **HidePoints**  - Hides all visible points.
-        - **ZoomToUnlocked**  - Zooms to all unlocked objects ('normal' objects)
-        - **ZoomToUnlockedAll**  - Same as zoom to unlocked, but all views
-        - **AboutPetersTools**  - Brings up a box showing you what version you are running
+        - **ZoomToUnlocked**  - Zooms to all unlocked objects ('normal' objects).
+        - **ZoomToUnlockedAll**  - Same as zoom to unlocked, but all views.
+        - **AboutPetersTools**  - Brings up a box showing you what version you are running.
 
 \\
 
 =====Installation in Rhino 5=====
 
   - Download the zip file to either your downloads folder or a user folder (C:\Users\(user-name). Unzip to the same place.
-  - Right-click on the PetersTools.rhp file and select Properties. On the General tab, see if the file is blocked (it'll say so near the bottom of the page.) If so, unblock it. This cannot be done unless the file is in your downloads or user folder (actually, I've heard that desktop works, too.)
-  - If you've installed this plugin before, delete the old PetersTools.rhp.
-  - Copy the "PetersTools.rhp" file to your "Rhinoceros 5.0 (64-bit)\Plug-ins" folder).
-  - Copy the "PetersTools.rui" file to wherever you like to keep toolbars.
+  - Right-click on the PetersTools.rhp file and select **Properties**. On the General tab, see if the file is blocked. (It'll say so near the bottom of the page.) If so, unblock it. This cannot be done unless the file is in your downloads or user folder. (Actually, I've heard that desktop works, too.)
+  - Copy the //PetersTools.rhp// file to your //Rhinoceros 5.0 (64-bit)\Plug-ins// folder.
+  - Copy the //PetersTools.rui// file to wherever you like to keep toolbars.
   - Start Rhino.
-  - Run "PluginManager" and press the install button. Browse to your "Rhinoceros 5.0 (64-bit)\Plug-ins" directory and select "PetersTools.rhp".
-  - Load the toolbar that you saved by going to the Tools menu, pick Toolbar Layout, then File/Open the toolbar file.
+  - Run //PluginManager// and press the install button. Browse to your //Rhinoceros 5.0 (64-bit)\Plug-ins// directory and select //PetersTools.rhp//.
+  - Load the toolbar that you saved by going to the Tools menu, pick **Toolbar Layout**, then File/Open the toolbar file.
 
 \\
 \\
