@@ -1,23 +1,21 @@
 ====== Everything you learned about saving files is wrong====== 
 
-Apple has turned file saving on its head in OS X.  //You cannot save a file any more//.  You need to be aware of this, or you may constantly cause yourself problems, not only in Rhino, but in other applications, too.
+Apple has turned file saving on its head in OS X.  //You cannot save a file any more//.  You need to be aware of this, or you may constantly cause yourself problems, not only in Rhino, but in other applications too.
 
-This information is not specific to Rhino for Mac, but applies to all applications that implement OS X's Auto Save and Versions.  What you learn here applies everywhere in OS X that uses Autosave and Versions.
+This information is not specific to Rhino for Mac, but applies to all applications that implement OS X's Auto Save and Versions.  What you learn here applies everywhere in OS X that uses Auto Save and Versions.
 
-The following paragraph has been in each recent Rhino for Mac release note, but not everyone has read the article.  You should do that now, and also read all the other articles that are referenced in the following URL.
+The following paragraph was in a recent Rhino for Mac release note, but not everyone has read the article.  You should do that now, and also read all the other articles that are referenced in the following URL.
 
->
-> Additional information about Versions and Auto Save specific to Rhino can be found [[rhino:mac:autosaving|here]] (http://wiki.mcneel.com/rhino/mac/autosaving/).
->
->
 
-Everything below is also stated in the referenced articles.  It is merely stated much more bluntly here so you will realize how things have changed.
+> More information about Versions and Auto Save specific to Rhino: [[rhino:mac:autosaving|http://wiki.mcneel.com/rhino/mac/autosaving/]]. 
+
+Everything below is also stated in the articles.  We merely state it much more bluntly here so you will realize how things have changed.
 
 **Auto Save does not mean autosaving**
 
-On OS X prior to Lion and on Windows computers, the term autosaving means "writing a single backup copy of your file somewhere else that you or the program can find later".  The term autosaving has meant the above for a long time.  You still were responsible for saving your file on a regular basis, but Rhino and other programs would create a backup file just in case you forgot to save your file.
+On OS X prior to Lion and on Windows computers, the term autosaving means //writing a single backup copy of your file somewhere else that you or the program can find later//.  The term autosaving has meant this for a long time.  You still were responsible for saving your file on a regular basis, but Rhino and other programs created a backup file just in case you forgot to save your file.
 
-In OS X, Apple unfortunately uses almost the same term, //Auto Save//, to describe something entirely different.  In OS X, Auto Save means "saving your file automatically".  As in, overwriting your file automatically.  As in, there is no secret backup somewhere else --- your original file is getting overwritten.  All the time.
+In OS X, Apple unfortunately uses almost the same term, //Auto Save//, to describe something entirely different.  In OS X, Auto Save means //saving your file automatically// -- as in, overwriting your file automatically.  As in, there is no secret backup somewhere else. Your original file is getting overwritten.  All the time.
 
 **How often is a file saved? **   //All the time.//
 
@@ -27,20 +25,20 @@ This is how Apple describes it:
 Try the following experiment:
 
   * Copy one of your Rhino models to the Desktop and place it where it will not be covered by a Rhino window.  
-  * Select the copied Rhino file and select File > Get Info in the Finder menu.  A file info window will appear.
-  * Note the Modified time of the file.
-  * Select the Rhino file on the Desktop again and press Command-O to open the model in Rhino.
+  * Select the copied Rhino file and select **File > Get Info** in the Finder menu.  A file info window will appear.
+  * Note the modified time of the file.
+  * Select the Rhino file on the Desktop again and press **Command-O** to open the model in Rhino.
   * Adjust your Rhino window and your file icon on the Desktop so you can still see both, and note the preview image of the Desktop file icon.
   * In Rhino, select some object in the Perspective view.
-  * Type Option-left arrow then Option-right arrow.  This will nudge the selected object a little bit, then put it back where it was.  This will mark the model as modified, but it is no different than it was before.
+  * Type Option-left arrow, then Option-right arrow.  This will nudge the selected object a little bit, then put it back where it was.  This will mark the model as modified, but it is no different than it was before.
   * Rotate the Perspective view a little, so you will be able to tell when the preview image has changed.
   * Now, do nothing.
 
-Within 10 - 20 seconds, the preview image of your file icon on the Desktop will change to match the Perspective view of your model.  Select the Rhino file on the Desktop and select File > Get Info in the Finder menu. You will see that the file modification date has changed.  Your file has been updated on disk.
+Within 10-20 seconds, the preview image of your file icon on the Desktop will change to match the Perspective view of your model.  Select the Rhino file on the Desktop and select **File > Get Info** in the Finder menu. You will see that the file modification date has changed.  Your file has been updated on the disk.
 
 The same thing happens when you switch from Rhino to another application.  OS X Auto Save will save your file immediately when you switch to another application.  In the experiment above, instead of doing nothing for 10-20 seconds, switch to the Finder instead.  Your file is immediately updated.
 
-Lastly, your model is saved when you close the model window or quit Rhino.  You will never see a "Do you want to save your changes?" dialog.
+Lastly, your model is saved when you close the model window or quit Rhino.  You will never see a //Do you want to save your changes?// dialog.
  
 There are safeguards that are custom to each application to ensure that Auto Save does not happen while you are modifying the model.  Each copy written to disk is an accurate and consistent copy of your model at the time it is written.  For example, Rhino will never perform an Auto Save when you are in the middle of a command.  Rhino also creates a snapshot of your model in memory and then writes the snapshot to disk.  The writing to disk is done on a background thread, so even if your model is stored on a slow network drive, the Auto Save will not block you from working while waiting for your model to be written to a slow disk.
 
@@ -48,11 +46,11 @@ There are safeguards that are custom to each application to ensure that Auto Sav
 
 Or, perhaps more accurately, you cannot decide when your model will be saved on disk.  The system is doing it for you instead, and does so all the time.  You cannot save a file, because it has already been saved for you.
 
-Apple's goal is two-fold.  One, what you see on the screen is what is stored on the disk.  You no longer have two versions of your model, the last saved version on disk and the currently modified version in the Rhino application.  Now, they are one and the same.  Two, you are much less likely to lose work because of a crashed program or a crashed operating system.
+Apple's goal is two-fold.  One, what you see on the screen is what is stored on the disk.  You no longer have two versions of your model: the last saved version on disk and the currently modified version in the Rhino application.  Now, they are one and the same.  Two, you are much less likely to lose work because of a crashed program or a crashed operating system.
 
 **Command-S does not mean Save A File**
 
-If you are used to typing Command-S all the time to save your model, this is now a //bad habit//, because Command-S no longer saves a file.  It does something entirely different, and it is probably not what you want.
+If you type Command-S all the time to save your model, this is now a //bad habit//, because Command-S no longer saves a file.  It does something entirely different, and it is probably not what you want.
 
 Open one of your models and look in Rhino's File menu.  The Save menu choice is no longer there.  Instead, Command-S is associated with the new menu choice **Save A Version**.  When you Save a Version, you are creating the equivalent of a Time Machine backup of your file.  This is a backup copy of your model that you can retrieve any time in the future.  Also, even if you never explicitly Save A Version, the system automatically creates versions for you, approximately one an hour.  These are also backup copies that you can retrieve in the future.  
 
@@ -60,9 +58,9 @@ Each separate version that you save is retained by the system.  Creating a new v
 
 Every time you type Command-S, you add another Version to your file.  Pressing Command-S a lot means you create a //lot// of Versions of your file, and you probably do not need or want all those distinct backups in the future.  You should instead stop typing Command-S all the time if you just want to save your model.  This is no longer necessary.  The system is already saving your model for you.
 
-The system also provides a Time Machine-like interface to look at these saved versions.  Navigate to the **File** > **Revert To** menu.  Choose **Browse all versions** and OS X will present you with a browser to view all the past saved versions.  This is explained in detail in other articles that are referenced at the beginning of this article.  The point here is that Command-S does not save your file to disk; it is instead doing much more work by creating a backup, a duplicate and browsable version of your file.
+The system also provides a Time Machine-like interface to look at these saved versions.  Navigate to the **File** > **Revert To** menu.  Choose **Browse all versions** and OS X will present you with a browser to view all the past saved versions.  This is explained in detail in other articles that are referenced at the beginning of this article.  The point here is that Command-S does not save your file to disk. It is instead doing much more work by creating a backup, a duplicate, and browsable version of your file.
 
-**New Models**
+**New models**
 
 If you are working on a new model and have never saved it, then typing Command-S brings up the standard File Save dialog (just as it did before) and you pick where you wish to store your model.  But after this initial save, the system will decide when to save your model.
 
@@ -74,16 +72,16 @@ If you are used to using Rhino's Incremental Save, Versions provides a built-in 
 
 Apple made some additional changes to Auto Save in OS X Mountain Lion (10.8).
 
-In 10.8, Apple changed the File > Save A Version menu title back to File > Save.  However, the behavior is still as described above.  File > Save on OS X 10.8 archives a version of your model along with writing the model to disk.
+In 10.8, Apple changed the File > Save A Version menu title back to File > Save.  But, the behavior is still as described above.  File > Save on OS X 10.8 archives a version of your model along with writing the model to disk.
 
-Starting with OS X Lion, any standard OS X application has a File > Duplicate menu choice, and this opens another document with a copy of the contents of the current document.  To save a copy of your model, you needed to duplicate it first, then same the duplicated model with a new name.  Starting with 10.8, when you hold down the **Option** key, the **File** > **Duplicate** menu choice menu choice changes to **File** > **Save As...** and you can save a copy of your current document directly to disk with a new name in a single step.
+Starting with OS X Lion, any standard OS X application has a File > Duplicate menu choice. This opens another document with a copy of the contents of the current document.  To save a copy of your model, you needed to duplicate it first, then same the duplicated model with a new name.  Starting with 10.8, when you hold down the **Option** key, the **File** > **Duplicate** menu choice menu choice changes to **File** > **Save As...** and you can save a copy of your current document directly to disk with a new name in a single step.
 
 Auto Save constantly saves to disk any changes you make to a model.  If you wanted to experiment with a model and then close the model without saving any of the changes, Auto Save in 10.7 made that difficult.  If you just closed the model, all the current changes would be automatically saved to disk by Auto Save.  You had to explicitly revert your model back to a previous version to undo your changes.
 
-In 10.8, there is a new setting in **System Preferences** > **General** for changing that behavior.  There is a checkbox titled "Ask to keep changes when closing documents".  We suggest that you check this checkbox.  Now when you make changes to a model and do not explicitly save your changes before closing the model, the system will ask if you want to save your changes.  The "Don't Save" button lets you discard any changes that you made to the model since your last save.  Note that this is a system-wide setting and will change the behavior of all programs, not just Rhino.
+In 10.8, there is a new setting in **System Preferences** > **General** for changing that behavior.  There is a checkbox titled //Ask to keep changes when closing documents//.  We suggest that you check this checkbox.  Now when you make changes to a model and do not explicitly save your changes before closing the model, the system will ask if you want to save your changes.  The //Don't Save// button lets you discard any changes that you made to the model since your last save.  Note that this is a system-wide setting and will change the behavior of all programs, not just Rhino.
 
 **Going forward**
 
-As you work on a model, there will be natural break points or phases in your work and these would be good places to use Save A Version to take a snapshot of your work so far.  Remember that the system will also be making regular snapshots of your model about once an hour, so you will have a number of recovery points if you ever need to go back and retrieve previous work.
+As you work on a model, there will be natural break points or phases in your work. These are good places to use Save A Version to take a snapshot of your work so far.  Remember that the system will also be making regular snapshots of your model about once an hour, so you will have many recovery points if you ever need to go back and retrieve previous work.
 
 Apple has fundamentally changed how we are used to working with our documents.  There no longer is a distinction between what we see on the screen and what is stored on the disk.  They are always kept in sync.  It is going to take some new habits and retraining ourselves to adapt to the new paradigm.  It is also going to be a rocky transition as some applications are converted to Auto Save and Versions, while others are still using the previous File > Save paradigm.  It will require us to remember how to work with each program until all programs have made the transition to Auto Save and Versions.
