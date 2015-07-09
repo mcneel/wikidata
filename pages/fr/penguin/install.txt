@@ -1,29 +1,27 @@
-** Installation de [[penguin:home|Penguin]] **
-> **Résumé :** //Comment scripter l'installation de [[penguin:home|Penguin]].//
+** Installing [[penguin:home|Penguin 2.0]] **
+> **Summary:** //How to script the installation of [[penguin:home|Penguin]].//
 
-=====Installation=====
+=====Overview=====
 
-L'installation de [[penguin:home|Penguin]] avec des scripts est similaire à celle de Rhino et Flamingo.
+[[penguin:home|Penguin]] installation scripting is similar to Rhino and Flamingo.
 
-Format de la ligne de commande que vous exécuterez normalement à partir d'un fichier batch (*.bat) :
+The format of the command line you would usually execute from a batch file (*.bat) is:
 
-   <chemin vers le fichier d'installation .exe> <paramètres>
+   msiexec /i <path to installer .msi> /qn <license-options>
 
-Paramètres de la ligne de commande :
+The license-options parameters are:
 
-  * **/RhinoVer=[2|3|4]**    Définit la version de Rhino où installer Penguin. Ce paramètre est obligatoire.
-  * **/CDKey=XXXXXXXXXXXX**    Utilisez le code CD à 12 caractères de [[penguin:home|Penguin]], sans tirets ni la partie "PE10". Ce paramètre est obligatoire sauf si vous installez [[penguin:home|Penguin]] en tant que nœud de groupe de travail. 
-  * **/WorkgroupNode=[Y|N]**    N signifie que Penguin sera installé en autonome et vous devrez utiliser le paramètre CDKey, Y signifie que vous voulez que [[penguin:home|Penguin]] obtienne sa licence du Zoo. Ce paramètre est obligatoire.
-  * **/Workspace=[Y|N]**    Indique si la barre d’outils de [[penguin:home|Penguin]] doit être ouverte ou non dans Rhino.
-  * **/InstallPath=<chemin complet vers le dossier>**   Ignorez ce paramètre si vous voulez réaliser l'installation dans le dossier défini par défaut ...Program Files\Rhinoceros\Plug-ins\[[penguin:home|Penguin]]
+  * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** Use the 20-character Penguin CD-Key, without the “PE20” characters. This parameter is mandatory unless you install Penguin as a workgroup node.
+  * **ZOO_NETWORK="network"** "network" means you want [[penguin:home|Penguin]] to get its license from the Zoo server. This parameter is not mandatory.
+  
+=====Examples=====
 
-=====Exemples=====
+   "msiexec /i Penguin20_Release_SR4_x64.msi /qn LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX""
 
-   "c:\mon dossier d'installation\penguin_en_20050726.exe" /RhinoVer=3 /CDKey=123456789ABC WorkgroupNode=N /Workspace=Y
+   "msiexec /i Penguin20_Release_SR4_x86.msi /qn ZOO_NETWORK="network""
 
-   penguin_en_20050726.exe /RhinoVer=2 /WorkgroupNode=Y /Workspace=N /InstallPath="C:\Program Files\Renderers\Penguin"
+=====Notes=====
 
-=====Remarques=====
+If you need a log file, you can add "/L*v "Setup.log"" text piece to the command line.
 
-Certains utilisateurs ont rencontré des problèmes d'installation de [[penguin:home|Penguin]]  en suivant ces instructions. Ils ont pu les résoudre en ajoutant les options **/s /autoinstall**.
 
