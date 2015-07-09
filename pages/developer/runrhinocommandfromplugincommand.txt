@@ -1,10 +1,10 @@
 ======How to run a Rhino command from a plug-in command======
 > **Developer:** //[[developer:cplusplusplugins|C++]], [[developer:dotnetplugins|.NET]], [[developer:rhinocommon|RhinoCommon]]//
-> **Summary:** //Discusses the proper techniques to use when running Rhino command from within the context of a plug-in command.//
+> **Summary:** //Discusses the proper techniques to use when running a Rhino command from within the context of a plug-in command//
 
-One of the most common questions asked by new plug-in developers is how to run, or script, existing Rhino commands from a plug-in command. Rhino doesn't allow plug-in commands to run other command except under very special circumstances.
+One of the most common questions asked by new plug-in developers is how to run, or script, existing Rhino commands from a plug-in command. Rhino doesn't allow plug-in commands to run other commands except under very special circumstances.
 
-//Here's the problem: //If you have a command that is modifying the run-time database, and you run another command, problems can happen.
+//Here's the issue: //If you have a command that is modifying the run-time database, and you run another command, problems can happen.
 
 To work around this, the Rhino SDK provides a special kind of command called a **script command**. You can create a script command as follows:
 
@@ -141,9 +141,9 @@ End Function
 
 \\
 
-=====More Information=====
+=====More information=====
 ----
-> Note, this section specifically mentions the Rhino C++ SDK. But, the information also applies to Rhino.NET and RhinoCommon.
+> Note: This section specifically mentions the Rhino C++ SDK. But the information also applies to Rhino.NET and RhinoCommon.
 
 This kind of command can be //very dangerous//. Please be sure you understand the following:
 
