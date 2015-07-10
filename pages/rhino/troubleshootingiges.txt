@@ -1,51 +1,51 @@
 ====== White Paper: IGES ======
 ======Troubleshooting IGES Files with Rhinoceros®======
 
-> **Note:** //This document was originally put together using the tools available in V2 Rhino.  While these tools remain in Rhino V3 and V4, you may have developed different techniques for "repairing" troublesome IGES files.  Please share those techniques here - John Brock//
+> **Note:** //This document was originally put together using the tools available in Rhino V2.  While these tools remain in Rhino V3 and V4, you may have developed different techniques for //repairing// troublesome IGES files.  Please share those techniques here. - John Brock//
 
-=====Use Rhino to Troubleshoot IGES Files=====
+=====Use Rhino to troubleshoot IGES files=====
 
 One powerful use of Rhino’s file translation ability is to clean up poorly written IGES files. You may have received IGES files from your clients or suppliers that do not read properly into your solid based modeling application. Often this is the result of an improperly formatted IGES file, missing or duplicate surfaces, gaps or overlaps, or bad surface trimming information.
 
 No amount of relaxed tolerances in the healing process can automatically fix these problems. After a long wait, you end up with incomplete solids, missing surfaces, or perhaps nothing at all. Your job depends on importing and using this data. What do you do?
 
-Rhino has the basic tools needed to overcome all of these problems. With a little practice and good problem solving skills, you can repair these problem files and get the data imported into your solid modeling application. The effort and time required will vary a great deal depending on the number of problems and the size of the IGES file.
+Rhino has the basic tools needed to overcome all these problems. With a little practice and good problem solving skills, you can repair these problem files and import the data into your solid modeling application. The effort and time required will vary a great deal depending on the number of problems and the size of the IGES file.
 
-Fortunately, most problem IGES files can be repaired fairly quickly with a little practice. However, some can take several days of effort. With Rhino you have the tools to fix the most difficult IGES problems and get on with the job.
+Fortunately, most problem IGES files can be repaired quickly with a little practice. However, some can take several days of effort. With Rhino you have the tools to fix the most difficult IGES problems and get on with the job.
 
-Since Rhino is a surface modeler that supports solids, it does not require that the IGES data consist of a closed solid. Rhino will read in as much valid information from the model as it can, skipping corrupt objects but reading all the point, curve, and surface data. Rhino’s IGES importing process will often read the file and fix the problems automatically. All you have to do then is save it back as a new IGES file and read it into your application. If the repair isn’t automatic, you can use Rhino to replace missing surfaces, fix bad trim curves, smooth surface discontinuities, and export a solid model to your application.
+Since Rhino is a surface modeler that supports solids, it does not require that the IGES data consist of a closed solid. Rhino will read in as much valid information from the model as it can, skipping corrupt objects, but reading all the point, curve, and surface data. Rhino’s IGES importing process will often read the file and fix the problems automatically. All you have to do then is save it back as a new IGES file and read it into your application. If the repair isn’t automatic, you can use Rhino to replace missing surfaces, fix bad trim curves, smooth surface discontinuities, and export a solid model to your application.
 
-Generally, you can salvage most of the data in the IGES file. Sometimes, there is no choice but to re-modeling portions of the file. Even in this extreme case, Rhino contains the tools to harvest isoparms, sections, and edge curves that can be used to replace these unusable surfaces while preserving the original design intent.
+Generally, you can salvage most of the data in the IGES file. Sometimes, there is no choice but to remodel portions of the file. Even in this extreme case, Rhino contains the tools to harvest isoparms, sections, and edge curves that can replace these unusable surfaces while preserving the original design intent.
 
-=====General Strategy=====
+=====General strategy=====
 The general strategy in repairing IGES files will vary depending on the individual files. Over time, you will discover patterns of problems in the IGES files produced by specific applications and individual users.
 
-=====Guidelines for Repairing IGES Files=====
+=====Guidelines for repairing IGES files=====
   -**Open the IGES file.**
-  -**Hide or delete extra data** - Use the**SelDup** command to find duplicate entities and move the extra ones to a "duplicate" layer and turn it off. You may need them later.
-  - Use**SelCrv** and**SelPt** to select and**Hide** the curves and points - Use**SelSrf** to select all the surfaces and**Invert** the selection. This will leave any curves and points highlighted. Delete the curves that are not on or near the surfaces. Carefully inspect the remaining curves on the surfaces. These are probably the remains of incomplete trimming curves. Move them to another layer for later use. This will leave only surfaces on the screen.
-  -**Shade and visually inspect the model** - Does it look like you expected it to? Are there obviously missing surfaces? Do surfaces extend beyond where they should? The trimming curves needed to fix them may be saved on the layer from step 3.
-  -**Check for bad surfaces** - The**Check** and**SelBadObjects** commands will determine if some of the surfaces in the model have problems in their definitions. They may have stacked control points, bad edge curves, or a variety of other problems. Move these surfaces to a "bad surfaces" layer for later clean up.
-  - **Look at theunits and absolute modeling tolerance settings in file properties** - Are they reasonable? Most applications that can produce IGES files do not match the unit and tolerance settings without user intervention. Rhino does match the settings on export. Free-form surface modeling requires an intelligent compromise in modeling tolerance. [[rhino:nurbs|NURBs]] curves are chains of polynomial expression segments joined by knots that carry continuity information between the segments. These segments are fitted to neighboring curves within the specified modeling tolerance. The tighter the tolerance, the more complex these curves become and system performance suffers. There is no point in calculating high density curve fitting to tolerance values that are not supported by your down-stream manufacturing processes.
-  -**Join the surfaces** - When joining, adjacent edges are tagged as joined if they fit within the specified modeling tolerance. If they are outside the tolerance, they are not joined. Joining does not alter the geometry. It only tags the edges as being close enough to be treated as coincidental. Look at the results on the command line. Did you get as many polysurfaces as you thought you would? Sometimes there are double surfaces after importing an IGES file. Usually, one will be complete and the second one will be missing interior trims. When the**join** happens, you have no control over which of the two surfaces it will select. If you suspect this has occurred, try joining two naked edges. If there is no nearby naked edge where one should be, undo the join, and select for duplicate surfaces. Delete the less complete surfaces and try the join again.
-  - **Check for naked edges** - Naked edges are surface edges that aren't joined to other edges. During the join process, they were farther apart than the specified modeling tolerance. This may be from sloppy initial modeling, a misleading tolerance setting in the imported IGES file, or duplicate surfaces. If there are a lot of naked edges showing when you run the**ShowNakedEdges** command, consider undoing the join and relaxing the absolute tolerance. It is likely that the original modeling was done at a more relaxed tolerance and the exported file setting wasn't true.   Note: You can not improve the tolerance fitting between surfaces without substantial remodeling.
-  -**Join naked edges or remodel** - The joining of naked edges can be a mixed blessing. It is a trade off and may cause problems down-stream. If your reason for joining the edges is for later import as a solid or a meshing operation like making an STL file, using the**JoinEdge** command will not generally cause any problems. If you will be cutting sections and most other "curve harvesting" operations, the sections will have gaps as they cross edges that were joined outside of tolerance. The gap to be spanned is displayed prior to joining. If the gap is less than twice of your tolerance setting, you can proceed without worry. If the gap is too wide, consider editing or rebuilding the surfaces to reduce the gap.**Join** and**JoinEdge** do not alter the surface geometry. They only tag edges as being coincident within the specified or override tolerance.
-  - **Repair the bad surfaces** - It's best to repair one bad surface at a time, and join them into the main polysurface as you go. In order of least destructive method to most radical, the problems that caused them to fail check can be repaired by the following:
+  -**Hide or delete extra data** - Use the **SelDup** command to find duplicate entities and move the extra ones to a //duplicate// layer and turn it off. You may need them later.
+  - Use **SelCrv** and **SelPt** to select and **Hide** the curves and points - Use **SelSrf** to select all the surfaces and **Invert** the selection. This will leave any curves and points highlighted. Delete the curves that are not on or near the surfaces. Carefully inspect the remaining curves on the surfaces. These are probably the remains of incomplete trimming curves. Move them to another layer for later use. This will leave only surfaces on the screen.
+  -**Shade and visually inspect the model** - Does it look like you expected it to? Are there obviously missing surfaces? Do surfaces extend beyond where they should? The trimming curves to fix them may be saved on the layer from step 3.
+  -**Check for bad surfaces** - The **Check** and **SelBadObjects** commands determine if some of the surfaces in the model have problems in their definitions. They may have stacked control points, bad edge curves, or a various other problems. Move these surfaces to a //bad surfaces// layer to clean up later.
+  - **Look at the units and absolute modeling tolerance settings in file properties** - Are they reasonable? Most applications that produce IGES files do not match the unit and tolerance settings without user intervention. Rhino does match the settings on export. Free-form surface modeling requires an intelligent compromise in modeling tolerance. [[rhino:nurbs|NURBs]] curves are chains of polynomial expression segments joined by knots that carry continuity information between the segments. These segments fit to neighboring curves within the specified modeling tolerance. The tighter the tolerance, the more complex these curves become and system performance suffers. There is no point in calculating high density curve fitting to tolerance values that are not supported by your downstream manufacturing processes.
+  -**Join the surfaces** - When joining, adjacent edges are tagged as joined if they fit within the specified modeling tolerance. If they are outside the tolerance, they are not joined. Joining does not alter the geometry. It only tags the edges as being close enough to be treated as coincidental. Look at the results on the command line. Did you get as many polysurfaces as you thought you would? Sometimes there are double surfaces after importing an IGES file. Usually, one will be complete and the second one will be missing interior trims. When the **join** happens, you have no control over which of the two surfaces it will select. If you suspect this has occurred, try joining two naked edges. If there is no nearby naked edge where one should be, undo the join, and select for duplicate surfaces. Delete the less complete surfaces and try the join again.
+  - **Check for naked edges** - Naked edges are surface edges that aren't joined to other edges. During the join process, they were farther apart than the specified modeling tolerance. This may be from sloppy initial modeling, a misleading tolerance setting in the imported IGES file, or duplicate surfaces. If there are a lot of naked edges showing when you run the **ShowNakedEdges** command, consider undoing the join and relaxing the absolute tolerance. It is likely that the original modeling was done at a more relaxed tolerance and the exported file setting wasn't true.   Note: You can not improve the tolerance fitting between surfaces without substantial remodeling.
+  -**Join naked edges or remodel** - The joining of naked edges can be a mixed blessing. It is a trade off and may cause problems downstream. If your reason for joining the edges is for later import as a solid or a meshing operation like making an STL file, using the **JoinEdge** command will not generally cause any problems. If you will be cutting sections and most other //curve harvesting// operations, the sections will have gaps as they cross edges that were joined outside of tolerance. The gap to be spanned is displayed prior to joining. If the gap is less than twice of your tolerance setting, you can proceed without worry. If the gap is too wide, consider editing or rebuilding the surfaces to reduce the gap. **Join** and **JoinEdge** do not alter the surface geometry. They only tag edges as being coincident within the specified or override tolerance.
+  - **Repair the bad surfaces** - It's best to repair one bad surface at a time, and join them into the main polysurface as you go. In order of least destructive method to most radical, repair the problems that caused them to fail check by:
     - Rebuilding edges
-    - Detaching trim curves and re-trimming
+    - Detaching trim curves and retrimming
     - Rebuilding surfaces
-    - Replacing surfaces - harvesting edges from surrounding surfaces, cutting sections through bad surfaces and building replacement surfaces from the collected curves.
-  -**Check for bad objects** - Sometimes joining surfaces that pass check can result in a polysurface that fails check. Generally this is caused by tiny segments in the edge or trimming curves that are shorter than the modeling tolerance. Extract the adjoining surfaces, check them, edit the boundary curves to eliminate these tiny segments, and join them back in. You are finished when you have a closed polysurface that passes check and has no naked edges. As you are joining and fixing surfaces, it is generally a good idea to run check from time to time as you work.
-  - **Export** - Now that the IGES file has been cleaned up and repaired, you can export it as IGES, Parasolid, STEP, or ACIS for import into your application. There are differences between these formats. Some applications differ in their support of these formats. Experiment with all that are support by your application to determine the best format for you needs.
+    - Replacing surfaces - Harvesting edges from surrounding surfaces, cutting sections through bad surfaces, and building replacement surfaces from the collected curves.
+  -**Check for bad objects** - Sometimes joining surfaces that pass check result in a polysurface that fails check. Generally this is caused by tiny segments in the edge or trimming curves that are shorter than the modeling tolerance. Extract the adjoining surfaces, check them, edit the boundary curves to eliminate these tiny segments, and join them back in. You are finished when you have a closed polysurface that passes check and has no naked edges. As you are joining and fixing surfaces, it is generally a good idea to run check from time to time as you work.
+  - **Export** - Now that you have cleaned up and repaired the IGES file, you can export it as IGES, Parasolid, STEP, or ACIS for import into your application. There are differences between these formats. Some applications differ in their support of these formats. Experiment with all that are support by your application to determine the best format for you needs.
 
-=====Start with a Clean File=====
-The old adage, "An ounce of prevention is worth a pound of cure," applies to IGES file transfers too. When possible, spending a little time in the originating application to export a "clean" file will save a great deal of clean-up work later. Unfortunately, this is not always an option. Two common creators of IGES data are CATIA and Pro/Engineer. The following procedures and settings will minimize the problems associated with importing IGES data from these applications.
+=====Start with a clean file=====
+The old adage, //An ounce of prevention is worth a pound of cure,// applies to IGES file transfers too. When possible, spend a little time in the originating application to export a //clean// file. This will save a great deal of clean-up work later. Unfortunately, this is not always an option. Two common creators of IGES data are CATIA and Pro/Engineer. The following procedures and settings minimize the problems associated with importing IGES data from these applications.
 
 
 =====CATIA=====
-Export from CATIA by preparing the model mainly to improve the trimming curves. Here are the procedures one of our customers (Black & Decker/DeWalt) uses in CATIA to minimize their down-stream clean up tasks.
+Export from CATIA by preparing the model to improve the trimming curves. Here are the procedures one of our customers (Black & Decker/DeWalt) uses in CATIA to minimize their downstream clean up tasks.
 
-{@
+
 1.  To prepare the model for transfer, work with the volume:
 
    SOLID + EXTRACT + VOLUME
@@ -63,12 +63,12 @@ Export from CATIA by preparing the model mainly to improve the trimming curves. 
 
 7.  The model is now ready for IGES export.
 
-}@
+
 
 =====Pro/Engineer=====
-**To optimize export of Pro/E files into Rhino:**
+**To optimize export of Pro/E files into Rhino**
 
-Use these settings in the Pro/E "**config.pro**" file or save them as a "**rhino.pro**" file and read it in before exporting.
+Use these settings in the Pro/E **config.pro** file or save them as a **rhino.pro** file and read it in before exporting.
 
 {@
 IGES_OUT_ALL_SRFS_AS 128
@@ -101,21 +101,21 @@ IGES_IN_DWG_COLOR YES
 
 FIX_BOUNDARIES_ON_IMPORT YES
 
-}@
 
-**[[ProEFileExchange|ProE File Exchange]]**
+
+**[[ProEFileExchange|Pro/E file exchange]]**
 
 ----
 Information about successful exchange of Rhino files with Pro/E.
 
-**[[SoftimageFileExchange|Softimage File Exchange]]**
+**[[SoftimageFileExchange|Softimage file exchange]]**
 
 ----
 Information about successful exchange of Rhino files with Softimage.
 
-**[[SolidWorksFileExchange|SolidWorks IGES File Exchange]]**
+**[[SolidWorksFileExchange|SOLIDWORKS IGES file exchange]]**
 
 ----
-Information about successful exchange of Rhino files with [[rhino:solidworks|SolidWorks]].
+Information about successful exchange of Rhino files with SOLIDWORKS.
 
 
