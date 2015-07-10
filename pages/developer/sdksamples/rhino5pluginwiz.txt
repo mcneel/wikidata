@@ -2,13 +2,13 @@
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //This hands-on tutorial is designed to show you how to build a functioning Rhino 5 plug-in. If you are using the Rhino 4.0 C++ SDK, see [[pluginappwizard|Creating Your First Rhino 4.0 Plug-in]].//
 =====Requirements=====
-In order to complete this tutorial, you will need to have the following installed on your system:
+In order to complete this tutorial, you will need the following installed on your system:
 
   * Microsoft Visual C++ 2010 (for Rhino 5 64-bit)
   * Microsoft Visual C++ 2005 (for Rhino 5 32-bit)
   * [[http://www.rhino3d.com/download/rhino-sdk/5.0/commercial|Rhino 5 C++ SDK]]
-=====What is a Plug-In?=====
-From a user’s standpoint, a Rhino plug-in is a software module that extends the functionality of Rhino by adding new commands, features, or capabilities. From a programmer’s perspective, a Rhino plug-in is a regular [[http://msdn.microsoft.com/en-us/library/windows/desktop/ms682589(v=vs.85).aspx|Windows Dynamic Link Libraries]], or DLLs that links with the Rhino SDK libraries. 
+=====What is a plug-in?=====
+From a user’s standpoint, a Rhino plug-in is a software module that extends the functionality of Rhino by adding new commands, features, or capabilities. From a programmer’s perspective, a Rhino plug-in is a regular [[http://msdn.microsoft.com/en-us/library/windows/desktop/ms682589(v=vs.85).aspx|Windows dynamic-link library]], or DLL that links with the Rhino SDK libraries. 
 
 Examples of Rhino plug-ins include:
 
@@ -17,20 +17,20 @@ Examples of Rhino plug-ins include:
   * [[http://nxt.flamingo3d.com|Flamingo]]
   * [[http://www.penguin3d.com/|Penguin]]
   * [[http://www.rhino3d.com/resources|More...]]
-=====Plug-in Type=====
+=====Plug-in type=====
 There are five different types of Rhino plug-ins.
-  - **General Utility**. A general utility plug-in is a general purpose extension that can contain one or more commands.
-  - **File Import**. A file import plug-in is an extension that imports data from other file formats into Rhino. A single file import plug-in can support more that one file type.
-  - **File Export**. A file export plug-in is an extension that exports data from Rhino to other file formats. A single file export plug-in can support more than one file type.
-  - **Custom Rendering**. A custom rendering plug-in applies materials, textures, and lights to a scene to produce rendered images.
-  - **3-D Digitizing**. A 3-D digitizing plug-in interfaces with 3-D digitizing and measurement devices.
+  - **General utility**. A general utility plug-in is a general purpose extension that can contain one or more commands.
+  - **File import**. A file import plug-in is an extension that imports data from other file formats into Rhino. A single file import plug-in can support more that one file type.
+  - **File export**. A file export plug-in is an extension that exports data from Rhino to other file formats. A single file export plug-in can support more than one file type.
+  - **Custom rendering**. A custom rendering plug-in applies materials, textures, and lights to a scene to produce rendered images.
+  - **3-D digitizing**. A 3-D digitizing plug-in interfaces with 3-D digitizing and measurement devices.
 
 > **Note:** //File Import, File Export, Custom Rendering and 3-D Digitizing plug-ins are all specialized enhancements to the General Utility plug-in. Thus, all plug-in types can contain one or more commands.//
 
-=====The "Do-Nothing" Plug-in=====
-The Rhino SDK includes a Visual Studio Project Wizard. The wizard program generates the code a functioning plug-in. Follow these steps to build the plug-in.
+=====The "Do-Nothing" plug-in=====
+The Rhino SDK includes a Visual Studio Project Wizard. The wizard program generates the code for a functioning plug-in. Follow these steps to build the plug-in.
 
-====1. Run Wizard to Generate Plug-in Source Code====
+====1. Run wizard to generate plug-in source code====
 Launch Visual Studio 20100 and select **File -> New -> Project…**. From the //New Project// dialog, select the **Rhino 5.0 Plug-in** template from the list of installed templates.
 
 \\
@@ -47,7 +47,7 @@ Don’t forget to choose a location to store the project. When finished, click t
 
 Upon clicking **OK**, the Overview page of the //Rhino 5.0 Plug-In Wizard// dialog will appear. This page gives you an overview of the type of project that the wizard is going to create. By default, the wizard will do the following:
 
-  * Create a general utility plug-in
+  * Create a general utility plug-in.
   * Include source file comments.
   * Include support for online help.
 
@@ -80,7 +80,7 @@ For this tutorial, just accept the default settings. Click the **Finish** button
   * **Test.rc** – Resource script.
   * **Test.def** – Module definition.
  
-====2. Examining Project Settings====
+====2. Examining project settings====
 With Visual Studio 2010, a project can target a different version of the Visual C++ libraries and compiler. This is done by configuring the project use a different **Platform toolset**.
 
 {{developer:sdksamples:rhino5pluginwiz5.png?500}}
@@ -91,7 +91,7 @@ If you change the active platform from Win32 to x64, you will see that 64-bit bu
 
 The advantage that platform toolsets provide is that they enable you to take advantage of the IDE enhancements in Visual Studio 2010 while you continue to use an older version of the Visual C++ libraries and compiler.
 
-====3. Compile and Link the Generated Code====
+====3. Compile and link the generated code====
 The Rhino plug-in wizard, in addition to generating code, creates a custom project file for your plug-in. This file, **Test.vcxproj**, specifies all of the file dependencies together with the compile and link option flags.
 
 Before we can build our project, we need to fill in the Rhino plug-in developer declarations. These declarations will let the user of our plug-in know who produced the plug-in and where they can support information if needed. Open **TestPlugIn.cpp** and modify the following lines of code, providing your company name and other support information.
@@ -114,16 +114,16 @@ When finished, delete the following line of source code as the //#error// direct
 </code>
 
 If you do not delete this line, the plug-in will build. You are now ready to build the project by picking //Build Test// from the Build menu. If the build was successful, a plug-in file named **Test_d.rhp** is created in the project’s Debug folder.
-====4. Test the Resulting Plug-in====
+====4. Test the resulting plug-in====
 From Visual Studio, select **Debug -> Start Debugging**. This will load Rhino. The version of Rhino that is launched depends on the configuration that you build. The wizard adds the following configurations to your project.
 
   * **Debug** - The Debug configuration of your program is compiled with full symbolic debug information and no optimization. Optimization complicates debugging, because the relationship between source code and generated instructions is more complex. The Debug configuration also links with debug runtime libraries. Plug-ins built with the Debug configuration will only load in the debug version of Rhino included with the Rhino C++ SDK.
-  * **PseudoDebug** - The PseudoDebug project is a Release project that disables optimizations and generates debugging information using the compiler’s Program Database (/Zi) option and the linker’s Generate Debug Information (/DEBUG) option. These option settings allow you to use the debugger while you are developing your custom plug-in. The PseudoDebug configuration also links with release runtime libraries. Plug-ins built with the PseudoDebug configuration will only load in the release version of Rhino that was installed from your Rhino CD.
+  * **PseudoDebug** - The PseudoDebug project is a Release project that disables optimizations and generates debugging information using the compiler’s Program Database (/Zi) option and the linker’s Generate Debug Information (/DEBUG) option. These option settings let you use the debugger while you are developing your custom plug-in. The PseudoDebug configuration also links with release runtime libraries. Plug-ins built with the PseudoDebug configuration will only load in the release version of Rhino that was installed from your Rhino CD.
   * **Release** - The Release configuration of your program contains no symbolic debug information and is fully optimized. Debug information can be generated in PDB Files (C++) depending on the compiler options used. Creating PDB files can be very useful if you later need to debug your release version. The Release configuration also links with release runtime libraries. Plug-ins built with the Release configuration will only load in the release version of Rhino that was installed from your Rhino CD.
 
 For this tutorial, build the **Debug** configuration.
 
-From within Rhino, select **Tools -> Options**. Navigate to the **Plug-ins** page under **Rhino Options** and install your plug-in. Note, being that the debug version of Rhino will only load debug plug-ins, no other plug-ins will show up in the list.
+From within Rhino, select **Tools -> Options**. Navigate to the **Plug-ins** page under **Rhino Options** and install your plug-in. Note, since the debug version of Rhino will only load debug plug-ins, no other plug-ins will show up in the list.
 
 \\
 {{:developer:sdksamples:rhino5pluginwiz4.png?500}}
