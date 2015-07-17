@@ -1,23 +1,23 @@
-====== Rhino 5.0 - Layer Names and Trees ======
+====== Rhino 5 - Layer Names and Trees ======
 {{:rhino:v5_samenamedlayers.png|Here are two sublayers named "Walls" and two sublayers named "Doors"}}
 
-Rhino 5.0 allows sublayers to have the same layer name as shown in the example above. In the example there are two sublayers named "Walls" and two sublayers named "Doors". 
+Rhino 5 allows sublayers to have the same layer name, shown in the example above. In the example there are two sublayers named //Walls// and two sublayers named //Doors//. 
 
-The ability to have sublayers with the same layer name was requested by some Rhino users to help them organize layers in a way that makes it easier find similar small features in a large model.  
+Some Rhino users requested this ability to have sublayers with the same layer name to help them organize layers to make it easier to find similar small features in a large model.  
 
-Other users have designed their work flows and parts libraries assuming that there are not duplicate layer names. If you are one of these users, the section below explains how you can configure Rhino so it will not create duplicate sublayers when importing models.
-
-
+Other users have designed their work flows and parts libraries assuming that there are no duplicate layer names. If you are one of these users, the section below explains how you can configure Rhino so it will not create duplicate sublayers when importing models.
 
 
-==== Controlling layer names when importing files: ====
-For some users, having more than one layer with the same name disrupts their workflow, so Rhino 5.0 lets you control how layers are combined when Rhino imports an external model into an existing model.
 
-Note that there are many ways to "import" an external model into the existing model including:
-  * Using the Import command
-  * Using the Paste command
-  * Using the Insert command to insert a file as a group or as objects.
-  * Using the Insert command to insert a linked block with reference layers as a group or as objects.
+
+==== Controlling layer names when importing files ====
+For some users, having more than one layer with the same name disrupts their workflow. So Rhino 5 lets you control how layers are combined when Rhino imports an external model into an existing model.
+
+**Note** There are many ways to //import// an external model into the existing model including:
+  * Use the Import command
+  * Use the Paste command
+  * Use the Insert command to insert a file as a group or as objects
+  * Use the Insert command to insert a linked block with reference layers as a group or as objects
 
 The **Rhino Options > Files** tab in the **Options** command dialog offers two options for managing layer names.
   * **Use complete layer tree from source file** Rhino will create a copy of the imported model's layer tree in the existing model.
@@ -26,17 +26,18 @@ The **Rhino Options > Files** tab in the **Options** command dialog offers two o
 {{:rhino:rhinooptionsfilesimportedfilelayers.jpg|}}
 
 ==== Example ====
-You may download the files used in this example from {{:rhino:stoogesimportexample.zip|}}.
 
-Below is an example that shows what happens when you open a model named "ThreeStooges.3dm" that has empty layers named "Curly", "Larry" and "Moe" and then import geometry from models named "Curly Howard.3dm", "Larry Fine.3dm" and "Moe Howard.3dm", which respectively contain layers named "Curly","Larry" and "Moe". 
+Below is an example that shows what happens when you open a model named //ThreeStooges.3dm// that has empty layers named //Curly//, //Larry//, and //Moe// and then import geometry from models named //Curly Howard.3dm//, //Larry Fine.3dm// and //Moe Howard.3dm//, which respectively contain layers named //Curly//, //Larry//, and //Moe//. 
+
+You may download the files used in this example from {{:rhino:stoogesimportexample.zip|}}.
 
 {{:rhino:stoogesexample.png|}}
 
-====== Layer names in Linked Block Definitions: ======
+===== Layer names in linked block definitions =====
 {{ :rhino:insertlinkedblocklayerstylesettings.png|}}
-Rhino 5.0 has full support for linked block definitions.  A linked block definition references an external file.  Every time a model containing a linked block definition is loaded, Rhino also reads the referenced file to create the contents of the linked block definition. When you create a linked block definition (or edit its properties using the BlockManager command) you can specify one of two linked block definition layer styles:
-  * **Active:** All layers for the linked block definition are in the active model and are saved in the active model.  All layer attributes, including rendering material, can be edited and are saved. For each layer in the reference model, if there is a layer in the active model with a matching short name, then that active layer is used, otherwise an active layer is created.
-  * **Reference:** The layer tree from the reference model is added to the active model as reference layers under a “grandparent” layer that has the name of the reference file.  All of the added layers are "reference layers".  You cannot modify the settings of a reference layer except for the visibility, locked and color settings.
+Rhino 5 has full support for linked block definitions.  A linked block definition references an external file.  Every time a model containing a linked block definition is loaded, Rhino also reads the referenced file to create the contents of the linked block definition. When you create a linked block definition (or edit its properties using the BlockManager command) you can specify one of these linked block definition layer styles:
+  * **Active** All layers for the linked block definition are in the active model and are saved in the active model.  All layer attributes, including rendering material, can be edited and are saved. For each layer in the reference model, if there is a layer in the active model with a matching short name, then that active layer is used. Otherwise an active layer is created.
+  * **Reference** The layer tree from the reference model is added to the active model as reference layers under a //grandparent// layer that has the name of the reference file.  All the added layers are //reference layers//.  You cannot change the reference layer settings except for the visibility, locked, and color settings.
   * This image shows where you specify the linked block definition layer style when creating a linked block. 
 
 
@@ -44,9 +45,9 @@ Rhino 5.0 has full support for linked block definitions.  A linked block definit
 ==== Example ====
 You may download the files used in this example from {{:rhino:producelinkedblockexample.zip|}}.
 
-This example demonstrates the two ways Rhino 5.0 manages layer names for the contents of a linked block definition.
+This example demonstrates the two ways Rhino 5 manages layer names for the contents of a linked block definition.
 
-The model called "ProduceDepartment.3dm" that has four linked blocks that reference files called "Apple.3dm", "Banana.3dm", "Squash.3dm" and "Carrot.3dm".
+The model called //ProduceDepartment.3dm// has four linked blocks that reference files called //Apple.3dm//, //Banana.3dm//, //Squash.3dm//, and //Carrot.3dm//.
 
 {{:rhino:v5_linkedblockitemlayers.png|}}
 
@@ -54,4 +55,4 @@ The model called "ProduceDepartment.3dm" that has four linked blocks that refere
 
 
 
-Back to [[rhinov5status|Rhino 5.0 Status]]
+Back to [[rhinov5status|Rhino 5 Status]].
