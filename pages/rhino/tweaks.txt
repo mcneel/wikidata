@@ -1,42 +1,48 @@
 ======Tweaking Rhino's Interface======
-//Tips and tweaks for enhancing Rhino's interface via registry editing or external scripting//
+>//Tips and tweaks for enhancing Rhino's interface via registry editing or external scripting//.
 
 =====Changing the world axis icon colors=====
->  Note: this is the small 3 axis indicator in the lower left corner of your viewport, normally dark grey.
 
-====For Rhino 3.0:====
-**//Make sure all instances of Rhino are closed first, then run Regedit//**
+**Note** This is the small 3-axis indicator in the lower left corner of your viewport, normally dark grey.
+
+====For Rhino 3.0====
+**//First close all instances of Rhino, then run Regedit.//**
 
 Edit the following registry key:
 //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme:Default\Options\AppearanceSettings//
 
-The last 3 keys are the icon colours. Enter an RGB value for each
-(for example 0,255,0 for green or 255,255,0 for yellow)
+The last three keys are the icon colours. Enter an RGB value for each
+(for example 0,255,0 for green or 255,255,0 for yellow).
 
-====For Rhino 4.0 and 5.0:====
+====For Rhino 4.0 and 5====
 
-These settings are now mostly accessible directly from the Rhino interface.  The icon colors are adjustable individually for each display mode (there is no global setting).
+These settings are now mostly accessible directly from the Rhino interface.  The icon colors are adjustable individually for each display mode. There is no global setting.
 
-In **Options > Appearance > Advanced Settings**, for each display mode (Wireframe, Shaded, etc.), expand the tree and go to the Grid section.  Under "World Axes Settings", you will find three choices - "Use application settings" will use the standard gray, or you can set them to be the same as the normal CPlane X,Y,Z axis colors, or specify another custom color scheme.  You will need to do this for ALL display modes you want to customize.
+In **Options > Appearance > Advanced Settings**, for each display mode (Wireframe, Shaded, etc.), expand the tree and go to the Grid section.  Under //World Axes Settings//, you will find three choices:
+  *//Use application settings// will use the standard gray
+  *You can set them to be the same as the normal CPlane X,Y,Z axis colors
+  *Or specify another custom color scheme 
 
-If you want to change the default "application settings" dark gray, follow the same procedure for editing the registry as above for Rhino 3.0 - just edit the key //Software\McNeel\Rhinoceros\**4.0**\Scheme:Default\Options\AppearanceSettings//
+You will need to do this for **all** display modes you want to customize.
+
+If you want to change the default //application settings// dark gray, follow the same procedure for editing the registry as above for Rhino 3.0 -- Just edit the key //Software\McNeel\Rhinoceros\**4.0**\Scheme:Default\Options\AppearanceSettings//
 
 ----
 \\ 
 
-=====Re-allocating the 2nd and 3rd Mouse Buttons.=====
+=====Reallocating the second and third mouse buttons=====
 
->  <color darkslategray> This change will swap the Middle Mouse Button with the Right Mouse Button, for users used to having the middle button manipulate the view as in a number of other programs.</color>
+<color darkslategray> This change will swap the middle mouse button with the right mouse button, for those who are used to having the middle button manipulate the view.</color>
 
->  <color red> **//Important: In Rhino V5, this is no longer necessary - this functionality is included in Options > Mouse//** </color>
+**Important** In Rhino 5, this is no longer necessary. This functionality is included in Options > Mouse.
 
 
-//Ensure you have closed all instances of Rhino before making these changes.//
+//Close all instances of Rhino before making these changes.//
 
 Edit the following registry key:
 //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0(or 4.0)\Scheme:Default\Options\MouseSettings//
 
-====In this registry key you will find the following 8 entries:====
+===In this registry key you will find the following eight entries:===
 
 middle_mouse_dblclk_remap       3\\ 
 middle_mouse_down_remap         3\\ 
@@ -47,8 +53,8 @@ right_mouse_down_remap          2\\
 right_mouse_move_remap          2\\ 
 right_mouse_up_remap            2\\ 
 
-====Simply edit each one of these entries, replacing the 3's for 2's and the 2's for 3's, respectively.\\ 
-The Result should be as follows:====
+Simply edit each one of these entries, replacing the 3's for 2's and the 2's for 3's.\\ 
+The result should be:
 
 middle_mouse_dblclk_remap       2\\ 
 middle_mouse_down_remap         2\\ 
