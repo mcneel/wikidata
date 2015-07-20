@@ -1,74 +1,66 @@
 ====== Tutorial: Create a 3-D model of a bridge in Google Earth ======
 
-======Flevodam created with Rhino for Google Earth======
+=====Flevodam created with Rhino for Google Earth=====
 {{:legacy:en:45_resized.jpg}}
-This tutorial explains how to create a 3d building or construction at a desired place on Earth. The scaling, location, and orientation of the 3-D model is important for a correct presentation.
+This tutorial explains how to create a 3-D building or construction at a desired place on Earth. The scaling, location, and orientation of the 3-D model is important for a correct presentation.
 
 <color white>.</color>
 
-The Flevodam concept is created by **Gerard Petersen** of the [[http://www.rhinocentre.nl|RHINOCENTRE]]
+The Flevodam concept is created by **Gerard Petersen** of the [[http://www.rhinocentre.nl|RhinoCentre]].
 
 All rights reserved and all information may only be used for educational purposes.
 
 ----
-**Resources:**
+====Resources====
 
-* [[http://wiki.mcneel.com/_media/legacy/en/Flevodam_Example.3dm|Flevodam 3-D model]]
-* [[http://bbs.keyhole.com/ubb/showthreaded.php/Cat/0/Number/617560/an/0/page/0#617560|KML model, KMZ Viewpoints, and PDF presentation]]
-
-----
-
-=====Content=====
-  * [[#Place a Background bitmap from Google Earth in Rhino]]
-  * [[#Create 3-D model]]
-  * [[#Create Earth Location Point]]
-  * [[#Create Tour in Google Earth]]
+  * [[http://wiki.mcneel.com/_media/legacy/en/Flevodam_Example.3dm|Flevodam 3-D model]]
+  * [[http://bbs.keyhole.com/ubb/showthreaded.php/Cat/0/Number/617560/an/0/page/0#617560|KML model, KMZ Viewpoints, and PDF presentation]]
 
 ----
 
-=====Place a Background Bitmap from Google Earth in Rhino=====
-  - Make a picture of the desired location in Google Earth and save this image. Zoom in until the site is filing your screen to the max for accurate results. It is very important to look straight down to the earth in order to have little perspective distortion.
+=====Place a background bitmap from Google Earth in Rhino=====
+  - Make a picture of the desired location in Google Earth and save this image. For accurate results, zoom in until the site is fills your screen to the max. It is important to look straight down to the earth, with little perspective distortion.
   - Open in  Rhino a new model and set the units. For a building it might be meters.
   - Place this image from Google Earth as a background bitmap (**BackgroundBitmap** command, **Place** option) in your **Top** viewport in Rhino.
   - In the left bottom corner of the bitmap image, you see the scale of your current bitmap.
   - Draw a **Line** with this length from 0,0,0 to the right.
   - **Move** the background bitmap (**BackgroundBitmap** command, **Move** option) placing the left starting point of the scale at 0,0,0.
-  - **Scale** the background bitmap (**BackgroundBitmap** command, **Scale** option) from the endpoint of the scale to the endpoint of your earlier created line.
+  - **Scale** the background bitmap (**BackgroundBitmap** command, **Scale** option) from the endpoint of the scale to the endpoint of the line you created earlier.
   - Now your background bitmap should scale with your Rhino model.
 {{:legacy:en:Scale_example_resized.jpg}}
 
 ----
 
-=====Create 3-D model=====
+=====Create a 3-D model=====
 If you need a contour on the ground to mark the available space, it is easy to draw a rough line and later match the control points to the background bitmap at the exact location.
 
 **Now you can actually draw your 3-D model.**
 
-In this case you can download the model to see how several details where done.
+In this case you can download the model to see how several details were done.
 
-The Islands can be created by **ArrayCrv** the first Island. This can also be done for the Pylons and Bridge struts. Delete the ones which are not necessary.
+To create the islands **ArrayCrv** the first Island. You can also do this for the pylons and bridge struts. Delete the ones which are not necessary.
 
 To create the bridge, use the **Sweep1** at the cross section of the bridge at the earth anchor point.
 
 ----
 
-=====Create Earth Location Point=====
-A correct location and orientation is very important for the correct representation of the 3-D model in Google Earth. 
+=====Create the earth location point=====
+Correct location and orientation is important for the correct representation of the 3-D model in Google Earth. 
 
 **North/South orientation**
-  - In the compass graphic in the background Google Earth image, draw a **Line** from the North to the South. 
-  - **Move** this line to the point that will be the earth anchor, for example, a corner of your building. In this case you can see a red arrow pointing to the North.
-  - In Google Earth create a placemark at the exact location for your model. In this case it is the starting point of the red arrow.
-  - In Google Earth change the setting Lat/Lon from 'degrees, minutes, seconds' to 'degrees' (under Tools > Options View).
-  - Read the coordinates (latitude and longitude) of this place mark (right-click on Placemark > Properties > View).
-  - In Rhino using the **EarthAnchorPoint** command, fill in these latitude and longitude degrees. (52.367450 / 4.972769).
+  - In the compass graphic in the background Google Earth image, draw a **Line** from the north to the south. 
+  - **Move** this line to the point that will be the earth anchor -- for example, a corner of your building. In this case you can see a red arrow pointing to the north.
+  - In Google Earth, create a placemark at the exact location for your model. In this case it is the starting point of the red arrow.
+  - In Google Earth, change the setting Lat/Lon from //degrees, minutes, seconds// to //degrees//  (under Tools > Options View).
+  - Read the coordinates (latitude and longitude) of this placemark (right-click on Placemark > Properties > View).
+  - In Rhino, using the **EarthAnchorPoint** command, fill in these latitude and longitude degrees. (52.367450 / 4.972769).
   - In the model, pick the starting point of the red arrow.
-  - Select the other end of the arrow as the North Point. Now you should also be able to orient for the east direction.
+  - Select the other end of the arrow as the north point. Now you should also be able to orient for the east direction.
   - Specify this point with a name and URL.
 
 ----
 
-=====Create a Tour in Google Earth=====
+=====Create a tour in Google Earth=====
   - Download the KML and KMZ file to see how you can use the model in Google Earth and make a presentation. 
   - Import both the KML and KMZ file in Google Earth.
   - In Google Earth, fly to the desired position and add a placemark. Use the controls in the right upper corner to **Move**, **Zoom**, **Tilt**, **Rotate** until you are satisfied with the view.
