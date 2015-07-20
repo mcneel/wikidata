@@ -7,31 +7,31 @@ The openNURBS Toolkit consists of C++ source code for a library that will read a
 
 
 =====Audience=====
-The openNURBS Toolkit is intended for use by C++ and .NET programmers. The toolkit includes complete source code to create a library that will read and write 3dm files.  In addition, source code for several example programs is included.
+The openNURBS Toolkit is intended for C++ and .NET programmers. The toolkit includes complete source code to create a library that will read and write 3dm files.  In addition, source code for several example programs is included.
 
-=====Overview:=====
+=====Overview=====
 Currently, the openNURBS Toolkit will read and write all information in Rhino version 2, 3, 4 and 5 files and read Rhino version 1 files.
 
-In addition, the openNURBS Toolkit provides [[rhino:nurbs|NURBs]] evaluation tools and elementary geometric and 3-D view manipulation tools.
+Also, the openNURBS Toolkit provides [[rhino:nurbs|NURBs]] evaluation tools and elementary geometric and 3-D view manipulation tools.
 
 =====Supported C++ compilers=====
 
 The openNURBS C++ toolkit has been successfully used with the following compilers:
 
   * **Microsoft Visual Studio 2010 (VC 10.0 SP1)** (Windows 7 Professional SP1)
-    * To build opennurbs and the examples with Visual Studio 2010 SP1, use the solution build_opennurbs_vs2010.sln.
+    * To build openNURBS and the examples with Visual Studio 2010 SP1, use the solution build_opennurbs_vs2010.sln.
   * **gcc version 4.2.1** (Apple Build 5658)
-    * To build opennurbs and the examples with gcc use the makefile.
+    * To build openNURBS and the examples with gcc use the makefile.
   * **Apple Xcode 4.6.3** (4H1503) (OSX 10.8.2)
-    * To build opennurbs and the examples with Xcode 4.5, use the workspace build_opennurbs_xcode.workspace.
+    * To build openNURBS and the examples with Xcode 4.5, use the workspace build_opennurbs_xcode.workspace.
 
-The openNURBS C++ source code is clean and fairly simple.  You
+The openNURBS C++ source code is clean and simple.  You
 should be able to use any good C++ compiler that has 32-bit
 integers, 32-bit or 64-bit pointers, and wchar_t support.
 
 If you are using a good quality C++ compiler and run into some toolkit code that causes problems, please let us know and we'll attempt to change the code to accommodate the compiler.
-=====Getting Started=====
-If your goal is to read and write 3dm files, then you may find that the class ONX_Model::Read() and ONX_Model::Write() to be an easy way to attain your goal. See example_read.cpp and example_write.cpp for more details.
+=====Getting started=====
+If your goal is to read and write 3dm files, then you may find that the class ONX_Model::Read() and ONX_Model::Write() an easy way to attain your goal. See example_read.cpp and example_write.cpp for more details.
 
   - Compile the openNURBS Toolkit library. In order to compile the example programs you must link with the openNURBS Toolkit library.  Compile the library as described in the first paragraph of the Instructions section.
   - Study example_read\example_read.cpp. All of the openNURBS geometry classes are derived from the ON_Geometry class.  If you need generic attribute information, there is probably a ON_Geometry member function that will answer your query.  See the Dump() function in example_read.cpp for code that demonstrates how to use the Cast() function to get at the actual class definitions.
@@ -40,7 +40,7 @@ If your goal is to read and write 3dm files, then you may find that the class ON
   - The comments in the openNURBS Toolkit header files are intended to be the primary source of documentation.  I suggest that you use a development environment that has high quality tags capabilities and a good class browser.
   - In the code you write include only opennurbs.h.  The opennurbs.h header file includes the necessary openNURBS toolkit header files in the appropriate order.
   - Other
-    * OpenNURBS uses UTF-16 to store text information in 3DM files and provides tools for converting UTF-16 strings to and from UTF-8, UTF-32 and wchar_t strings. The ON_wString class has wchar_t characters.
+    * OpenNURBS uses UTF-16 to store text information in 3dm files and provides tools for converting UTF-16 strings to and from UTF-8, UTF-32 and wchar_t strings. The ON_wString class has wchar_t characters.
     * All memory allocations and frees are done through onmalloc(), onfree(), and onrealloc().  The source code that ships with openNURBS simply has onmalloc() call malloc() and onfree() call free().
     * If you want to use Open GL to render openNURBS geometry, then you may want to include opennurbs_gl.h after opennurbs.h and add opennurbs_gl.cpp to your openNURBS Toolkit library. See example_gl.cpp for more details.
     * The openNURBS Toolkit is works correctly on both big and little endian CPUs.  (Generally, Intel CPUs use little endian byte order and MIPS, Motorola, and Sparc CPUs use big endian byte order.)
@@ -67,10 +67,10 @@ If you have a question concerning the openNURBS Toolkit that is not answered her
 
 ===The Open GL example:===
 
-Past versions of opennurbs have included a crude version of an Open GL example.  The code for this example is still included in the current version, but we no longer provide support for using OpenGL with opennurbs.  Nothing has changed in opennurbs to with respect to using OpenGL; we simply do not have the resources to provide quality OpenGL support on the wide variety of platforms where opennurbs is used.
+Past versions of openNURBS have included a crude version of an Open GL example.  The code for this example is still included in the current version, but we no longer provide support for using OpenGL with openNURBS.  Nothing has changed in openNURBS to with respect to using OpenGL; we simply do not have the resources to provide quality OpenGL support on the wide variety of platforms where openNURBS is used.
 
 
-=====Versions of 3DM files=====
+=====3DM file versions=====
 
   - **Version 1 3DM files.** The openNURBS toolkit will read version 1 files. Rhino 1 and other applications using the old Rhino I/O toolkit create version 1 files.
   - **Version 2 3DM files.** The openNURBS toolkit will read and write version 2 files. Rhino 2 and applications using an openNURBS toolkit released on or after December 2000 create version 2 files.  (Rhino 1 and the old Rhino I/O toolkit will not read version 2 files.)
@@ -79,7 +79,7 @@ Past versions of opennurbs have included a crude version of an Open GL example. 
   - **Version 5 3DM files.** The openNURBS toolkit will read and write version 5 files. Rhino 5 and applications using an openNURBS toolkit released on or after September 2009 create version 5 files.  (Rhino 1, Rhino 2, Rhino 3 and Rhino 4 will not read version 5 files.)
 
 
-=====Common Questions=====
+=====Common questions=====
 
 ====ON_Mesh:====
 
