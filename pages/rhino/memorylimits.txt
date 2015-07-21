@@ -5,7 +5,7 @@
 
 When talking about the performance of an application, the question of how much memory it can access comes up. Often the answer is that there is a //4GB memory limit//. The //Windows 4GB memory limit// means that an application on a 32-bit Windows system can only access 4GB of memory. But how is this derived?
 
-By definition, a 32-bit processor uses 32 bits to identify the location of each byte of memory. 2^32 = 4.2 billion.  This means a memory address that's 32 bits long can only refer to 4.2 billion unique locations. The 4.2 billion is equivalent to 4GB.
+By definition, a 32-bit processor uses 32 bits to identify the location of each byte of memory. 2^32 = 4.2 billion.  This means a memory address that's 32 bits long can only refer to 4.2 billion unique locations. The 4.2 billion is equal to 4GB.
 
 In the 32-bit Windows environment, each application has its own //virtual// 4GB memory space. The system's memory manager keeps track of memory mapping, page file management, and more.
 
@@ -15,38 +15,38 @@ This 4GB space is evenly divided into two parts:
   * 2GB left for application use
 Each application gets allocated its own 2GB, but all applications have to share the same 2GB kernel space.
 
-With the 32-bit XP, XP x64 and 32-bit Vista operating systems, there is a 3GB boot.ini switch which modifies the partition between the application memory space and kernel memory space. This switch gives each application 3GB of memory, which leaves only 1GB for the kernel. This is not a problem on most computers. However, some environments like terminal servers do not fare well with this configuration. For more information see this [[rhino:memoryincrease|McNeel Wiki page ]] .
+With the 32-bit XP, XP x64 and 32-bit Vista operating systems, there is a 3GB boot.ini switch which modifies the partition between the application memory space and the kernel memory space. This switch gives each application 3GB of memory, which leaves only 1GB for the kernel. This is not a problem on most computers. Yet, some environments like terminal servers do not fare well with this configuration. For more information see this [[rhino:memoryincrease|McNeel Wiki page]].
 
-Today, the option of buying a computer with 64-bit architecture increases the memory ceiling to 2^64 addresses, equivalent to approximately 17.2 billion gigabytes, 16.8 million terabytes, or 16 exabytes of memory space.
+Today, the option of buying a computer with 64-bit architecture increases the memory ceiling to 2^64 addresses, equal to approximately 17.2 billion gigabytes, 16.8 million terabytes, or 16 exabytes of memory space.
 
-A 64-bit system could theoretically address up to 16 exabytes of RAM. That is more than 16,000,000 GB of RAM. In other words, the ceiling of 2^64 addresses is about ten billion times larger than the 2^32 or 32-bit architecture systems. In reality, there are few, if any, 64-bit systems that support 16 exabytes of RAM. There is no Windows version that supports that.
+A 64-bit system could theoretically address up to 16 exabytes of RAM. That is more than 16,000,000 GB of RAM. In other words, the ceiling of 2^64 addresses is about ten billion times larger than the 2^32 or 32-bit architecture systems. 
 
-Building a machine that supports this much memory is prohibitive to most computer hardware budgets. Computer manufacturers impose RAM address space design limits that fall somewhere between 8 GB and 256 TB.
+In reality, there are few, if any, 64-bit systems that support 16 exabytes of RAM. There is no Windows version that supports that. Building a machine that supports this much memory is prohibitive to most computer hardware budgets. Computer manufacturers impose RAM address space design limits that fall somewhere between 8 GB and 256 TB.
 
-In theory, 64-bit applications running on a 64-bit operating system are allotted 8 TB in virtual memory for user processes and 8 TB for kernel processes which make the virtual memory total equal 16 TB.
+In theory, 64-bit applications running on a 64-bit operating system are allotted 8 TB in virtual memory for user processes and 8 TB for kernel processes, which make the virtual memory total equal 16 TB.
 
-Currently, all 64-bit versions of Microsoft operating systems do not use the 16 TB limit, but impose a practical limit on the address space and allow no more than 128 GB of physical memory to be accessed.  In addition non-business or home versions have more stringent limits:
+Currently, not all 64-bit versions of Microsoft operating systems use the 16 TB limit. Instead, they impose a practical limit on the address space and allow no more than 128 GB of physical memory to be accessed.  Also, non-business or home versions have more stringent limits:
 
   * Vista Home Basic is limited to 8GB
   * Home Vista Home Premium is limited to 16GB
   * Vista Business, Enterprise, and Ultimate allow use of the entire 128GB
 
-If you buy a 64-bit machine today, you may purchase it with 64-bit operating system like XP x64 or Vista x64. Many Windows applications have not been updated to 64-bit mode. The 32-bit applications running on 64-bit machines tend to run more slowly in an emulated 32-bit mode than they would run natively. This is because of the additional overhead involved in translating the 32-bit code into a 64-bit format.
+If you buy a 64-bit machine today, you may purchase it with 64-bit operating system like XP x64 or Vista x64. Many Windows applications have not been updated to 64-bit mode. The 32-bit applications running on 64-bit machines tend to run slower in an emulated 32-bit mode than they run natively. This is because of the extra overhead involved in translating the 32-bit code into a 64-bit format.
 
-However, the 3GB switch that is used to extend the 2GB limit for 32-bit applications running on XP, XP x64, and Vista x32 is not required for Vista x64. Vista x64 will allow 32-bit applications to access 3GB without additional configuration.
+However, the 3GB switch used to extend the 2GB limit for 32-bit applications running on XP, XP x64, and Vista x32 is not required for Vista x64. Vista x64 will allow 32-bit applications to access 3GB without more configuration.
 
-Rhino 4 will not be available in 64-bit. Rhino 5 is. So you will see the first native 64-bit Rhino application in the Rhino 5 life cycle. 
+Rhino 4 is not available in 64-bit. Rhino 5 is. So you will see the first native 64-bit Rhino application in the Rhino 5 life cycle. 
 
 =============================================================================
 **Rhino/Flamingo: Windows Process Virtual Memory Limit 2GB**
 
-Window Vista, 2000, and XP (32-bit versions) have a 32-bit virtual address space of 4 gigabytes (GB) of virtual memory. A 2GB of that is accessible to applications like Rhino. The other 2GB is allocated to the Windows executive.
+Windows Vista, 2000, and XP (32-bit versions) have a 32-bit virtual address space of 4 gigabytes (GB) of virtual memory. A 2GB of that is accessible to applications like Rhino. The other 2GB is allocated to the Windows executive.
 
-This means that the maximum amount of memory space that can be allocated to Rhino (or Rhino and Flamingo) is 2GB.
+This means that the greatest amount of memory space that can be allocated to Rhino (or Rhino and Flamingo) is 2GB.
 
-If Rhino (or Rhino and Flamingo) is stopping with //Out of Memory// messages, you can investigate the cause by watching Rhino's memory allocation dynamically:
+If Rhino (or Rhino and Flamingo) is stopping with //Out of Memory// messages, you can investigate by watching Rhino's memory allocation dynamically:
 
-  - Run Task Manager (taskmgr.exe) by right-clicking in an empty area of the Windows Task Bar, and choosing **Task Manager**.
+  - Run Task Manager (taskmgr.exe) by right-clicking in an empty area of the Windows Task Bar. Choose **Task Manager**.
   - On the View pulldown menu pick **SelectColumns** and check the option **Virtual Memory Size** and click **OK**.
   - A new column labeled VM Size shows on the Processes tab.
   - Launch Rhino and start your job that is getting //Out of Memory//.
