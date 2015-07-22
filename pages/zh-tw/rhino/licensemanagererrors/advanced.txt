@@ -1,0 +1,144 @@
+====== 在Rhino 3及Rhino 4"無法與授權管理員溝通"的錯誤======
+
+>**更新：**//2012,9,20//
+
+另請參考[[http://wiki.mcneel.com/zh-tw/rhino/licensemanagererrors|解決授權管理員問題]]
+====== 問題 ======
+當你執行Rhino 3.0或Rhino 4.0的時候收到以下錯誤訊息：
+
+{{:legacy:en:rhinolicensemanager.png}}
+\\
+
+====原因====
+"無法與授權管理員溝通"的原因是由Rhion無法予以下模組通信所引起，獨立或工作組節點安裝中會出現此錯誤。
+
+此錯誤是由於以下情況之一：
+
+  - 缺少授權管理員檔案。
+  - 缺少Windows系統登錄機碼。
+  - 缺少執行庫支援檔。
+  - 錯誤的授權管理員正在執行中。
+  - Windows登錄檔安全性問題。
+\\
+
+=====解決方案 1 - 取得最新修正版本。=====
+
+下載並更新至[[http://www.rhino3d.com/download|最新修正版本]] 。
+
+在Vista或Windows 7之下執行Rhino 4有可能導致此錯誤，原因與使用者帳戶控制的衝突有關。 滑鼠右鍵點擊Rhino 4的圖像，選擇以管理員身分執行。 如果這個問題解決了，接下來一定要安裝Rhino 4服務版本7。安裝SR7之後應該就能修復此問題。
+
+=====解決方案 2 - 缺少授權管理員檔案=====
+在Rhino英文版，授權管理員的位置在以下資料夾：
+
+   C:\Program Files\Common Files\McNeel Shared\License Manager
+
+Rhino 3.0與Rhino 4.0使用不同授權管理模組：
+
+  * Rhino 3.0授權管理員被命名為**McNeelLM.exe**。
+  * Rhino 4.0授權管理員被命名為**RhinoLM.exe**。
+
+如果您正在使用版本的的Rhino授權管理員模組並不存在，那麼請您必須重新從CD安裝Rhino。
+
+是Rhino 4及Rhino 5的外掛很常使用RhinoLM，例如Flamingo 2、Flamingo nXt、 Bongo 1.0/2.0，以上都是能夠在Rhino 4或5使用。
+\\
+=====解決方案 3 - 移除/重新安裝=====
+如果找不到授權管理員或是登錄機碼，您必須作完全卸載並且重新安裝，包括刪除Rhino登錄碼、刪除Rhino授權管理員檔案，並重新安裝。
+  - 確認您以管理員或有相同權限的使用者身分登入工作站。
+  - 確認停用病毒探測及反間諜軟體。
+  - 根據這些[[http://wiki.mcneel.com/zh-tw/rhino/uninstalling|建議]]移除並清理系統。
+  - 移除後，利用瀏覽器找到**C:\Program Files\Common Files\McNeel Shared\**，並刪除授權管理員的子資料夾。
+  - 重新開機
+  - 利用CD重新安裝Rhino 4，如果需要的話可以到此下載並安裝[[http://www.rhino3d.com/download|最新服務版本。]]
+
+
+===== 解決方案 4 -  缺少Windows系統登錄機碼=====
+如果正在使用的Rhino版本授權管理器模組存在，那麼此模組有可能未註冊，Windows登錄檔尚未有資訊能夠找到此模組，要解決此問題：
+
+  - 確認您以管理員或有相同權限的使用者身分登入工作站。
+  - 確認停用病毒探測及反間諜軟體。
+  - 利用瀏覽器到以上提到的資料夾。(C:\Program Files\Common Files\McNeel Shared\License Manager)
+
+====Rhino 3.0版====
+
+如果執行**Rhino 3.0**時發生錯誤：
+
+  - **[[http://wiki.mcneel.com/_media/legacy/en/REGISTER_MCNEELLM.zip|下載]]**並解壓縮此批次檔至**McNeelLM.exe**同個資料夾裡。
+  - 在**Register_McNeelLM.bat**批次檔上按兩下。
+  - Windows Vista使用者：按右鍵並選擇"以管理員身分執行"。
+
+批次檔將回顯結果至指令列，進而驗證成功或是失敗。要確認此方法是否解決問題，請執行Rhino 3.0。
+====Rhino 4.0 與 5版====
+如果在執行**Rhino 4.0**或在Rhino 5內執行Flamingo 或Bongo時發生錯誤：
+
+  - **[[http://wiki.mcneel.com/_media/legacy/en/REGISTER_RHINOLM.zip|下載]]**並解壓縮此批次檔至**RhinoLM.exe**同個資料夾裡。
+  - 在**Register_RhinoLM.bat**批次檔上按兩下。
+  - Windows Vista使用者：按右鍵並選擇"以管理員身分執行"。
+
+批次檔將回顯結果至指令列，進而驗證成功或是失敗。要確認此方法是否解決問題，請執行Rhino。
+
+或是
+
+欲重新安裝McNeelLM但不需要重裝Rhino 4，請下載、解壓縮並執行[[http://s3.amazonaws.com/mcneel/flamingo/nxt/rhinolm_20110309.zip|rhinolm_20110309.zip file.]]內的**rhinolm_20110309_x86.exe** 。
+
+您必須有權限修改登錄檔以執行rhinolm_20110309_x86.exe。
+如果您使用的權利被拒絕，請電腦系統管理員利用權限較高的帳戶登入，並執行**rhinolm_20110309_x86.exe**。 
+- Windows Vista使用者：按右鍵並選擇**以管理員身分執**。
+
+\\
+
+===== 解決方案 5 -  缺少執行庫支援檔=====
+如果在執行以上批次檔時發生錯誤，**[[http://www.microsoft.com/en-us/download/details.aspx?id=26347|下載]]**並安裝最新Microsoft執行庫，並再試一次。
+===== 解決方案 6 -  錯誤的授權管理員正在執行中 =====
+請重新開機。以上步驟有可能已經成功，但在Windows中執行錯誤的授權管理員有可能繼續造成問題。 重新開機後Rhino執行正常嗎?
+\\
+=====解決方案 7 - Comodo防毒軟體阻擋了COM=====
+[[http://www.comodo.com/|Comodo Internet Security]] - 我們發現Comodo會阻擋COM與Rhino授權管理員的內部程序通訊。您可以經由檢查這些[[https://help.comodo.com/topic-72-1-284-2956-Starting-Comodo-Internet-Security.html|介面]]來確認Comodo是否正在執行。 如果您有安裝Comodo，請按照以下步驟來解除阻擋：
+
+  - 請至[[https://help.comodo.com/topic-72-1-284-2956-Starting-Comodo-Internet-Security.html|Comodo 防毒軟體設定]]
+  - 按一下[[https://help.comodo.com/topic-72-1-284-2945-Defense+-Tasks---Introduction.html|Defense+ Settings]]。
+  - 按下 [[https://help.comodo.com/topic-72-1-284-3039-Monitoring-Settings.html|Monitor Settings Tab]]。
+  - 取消選取 "Protected COM Interfaces"方塊。
+  - 按OK並離開對話。
+
+Rhino 4現在應該可以正常執行。
+
+\\
+=====解決方案 8 - Windows Vista登錄安全問題=====
+如果您目前使用Rhino版本的授權管理員模組存在並且已經註冊 - 您可能沒有足夠權限讀取Windows登錄檔。
+
+-執行**Regedit.exe** 
+
+//不當使用登錄編輯程式可能會造成嚴重的系統問題，導致您需要重新安裝Windows來改正問題。 Robert McNeel & Associates以及Microsoft無法保證能夠解決登錄編輯器造成的問題，使用此工具風險自負，如需協助請與[[http://www.rhino3d.com/support|McNeel Support]]聯絡//
+
+打開後，在HKEY_CLASSES_ROOT找到**RhinoLicenseManager.RhinoLicense**Key，如：
+
+    - 瀏覽至**HKEY_LOCAL_MACHINE\Software\Classes**
+    - 在**Classes**key上按右鍵，接著按**Permissions**。
+    - 在Security之下的**Group or User Names**，您可以看到至少四項許可登錄。有時候"無法與授權管理員溝通"的問題就是在於沒有Classes registry key許可。
+
+**如果<color blue>只是</color>缺少授權，請將授權加入：**
+    - 按一下**Add**按鈕。  
+    - 鍵入**Creator Owner**，並按**OK**。
+    - 選取**Creator Owner**，並清除所有Permission下針對Creator Owner區塊允許行(Allow)的核取方塊：
+    - {{:rhino:classes_permissions_1.png|}}
+    - 按一下**Add**按鈕。  
+    - 鍵入**SYSTEM**，並按**OK**。
+    - 選取**SYSTEM**，再選取Permission for SYSTEM下Allow行**Full Control**的核取方塊：
+    - {{:rhino:classes_permissions_2.png|}}
+    - 按一下**Add**按鈕。  
+    - 鍵入**Administrator**，並按**OK**。
+    - 選取**Administrators**，再選取Permission for Administrators下Allow行**Full Control**的核取方塊：
+    - {{:rhino:classes_permissions_3.png|}}
+    - 鍵入**Users**，並按**OK**。
+    - 選取**Users**，再選取Permission for Users下Allow行**Read**的核取方塊：
+    - {{:rhino:classes_permissions_4.png|}}
+    - 按一下**Advanced**按鈕。
+    - 在**Advanced Security Settings for Classes**對話框中選取**Replace all child object permissions with inheritable permissions from this object.**
+    - 在**Advanced Security Settings for Classes**對話框中選取**Include inheritable permissions from this objects' parent.**核取方塊。
+    - {{:rhino:classes_permissions_5.png|}}
+    -按**OK** - 可能需要幾分鐘來完成此操作。
+    - 在**Permissions for Classes**對話框中，按**OK**。
+  
+如果前面的步驟執行失敗，您可能需要使用[[http://technet.microsoft.com/en-us/sysinternals/bb897553|PsExec]]以系統帳號的身份執行RegEdit。 下載psexec，並執行//psexec -i -d -s c:\windows\regedit.exe//。
+  
+現在應該能夠執行Rhino並與授權管理員溝通了。
