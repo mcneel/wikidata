@@ -12,14 +12,14 @@
 授權碼選項參數為:
 
   * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** 請填入Penguin CD-Key除了“PE20”以外的20個字母。 此參數請一定要輸入除非您要使用工作單機方式使用Penguin。
-  * **ZOO_NETWORK="network"** "network" 意思means you want [[penguin:home|Penguin]] to get its license from the Zoo server. This parameter is not mandatory.
+  * **ZOO_NETWORK="network"** "network"的意思是你要從Zoo server取[[penguin:home|Penguin]]浮動授權。此參數非強制性。
+  
+=====範例=====
 
-======範例======
+   "msiexec /i Penguin20_Release_SR4_x64.msi /qn LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX""
 
-   "c:\my installers\penguin_en_20050726.exe" /RhinoVer=3 /CDKey=123456789ABC WorkgroupNode=N /Workspace=Y
+   "msiexec /i Penguin20_Release_SR4_x86.msi /qn ZOO_NETWORK="network""
 
-   penguin_en_20050726.exe /RhinoVer=2 /WorkgroupNode=Y /Workspace=N /InstallPath="C:\Program Files\Renderers\Penguin"
-
-===== 備註 =====
-
-部分使用者遵循此指南進行[[penguin:home|Penguin]]腳本安裝，但還是有問題。 請加入**/s /autoinstall** 選項，即可解決。
+=====備註=====
+  * **重要:** 您需要使用管理員權來執行執行。
+  * 若您需要一個log檔案，你可以在command line增加"/L*v "Setup.log""。
