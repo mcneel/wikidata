@@ -1,0 +1,27 @@
+======"Failed to write to client mailslot" 的錯誤======
+>**產品：**//[[zh-tw:zoo:home|Zoo 4.0]]//
+>**摘要：**//解決"Failed to write to client mailslot" 的錯誤//
+
+=====問題=====
+我已在我們的伺服器安裝Zoo，但所有的Rhino客戶都無法獲得許可授權，當我檢查Zoo的日誌檔，發現以下錯誤：
+
+<code>
+<date> <time>  ERROR: Failed to write to client mailslot on: <computer>
+<date> <time>  LAST ERROR 183: Cannot create a file when that file already exists.
+</code>
+
+=====解答=====
+此錯誤訊息指出Zoo能夠建立**[[zoo:mailslot|mailslot]]** 但無法對其進行寫入。
+
+=====解決方法=====
+  - 請確認**Client for Microsoft Networks**已安裝也確定能夠在執行Zoo系統的網路連線上啟用。
+  - 請確認執行Zoo的系統的網路連線進階選項**Enable NetBIOS over TCP/IP**是勾選的。
+  - 如果執行Zoo的電腦使用防火牆，請確認**UDP Ports 137 、138 及TCP Port 139**是開啟的。
+  - 如果您Rhino的系統與Zoo之間有不只一個路由器，請確認路由器上的**UDP Ports 137 、 138 及TCP Port 139**是開啟的。
+  - 請確認執行Zoo伺服器的系統能夠"看到"網路上的其他系統。 在其他工作裡來說，這些就是操作上的設定查詢，不管是DNS或是WINS。
+
+請注意，這些都是這個問題已知的修復方式。//"Cannot create a file when that file already exists"//，是常見Windows錯誤。所以能夠解決這個問題的方法，在您的情況下，也許並沒有包括在以上列表。
+
+\\
+
+{{tag>Zoo4_zh-tw}}
