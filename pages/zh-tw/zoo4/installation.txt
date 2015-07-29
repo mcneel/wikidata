@@ -1,0 +1,79 @@
+====== Zoo Installation and Configuration ======
+>**產品：**//[[zh-tw:zoo:home|Zoo 4.0]]//
+>**摘要：**//安裝Zoo工作組授權管理器的提示。//
+
+==== 概要 ====
+Zoo讓您與在同個網路工作組裡的使用這共用Rhino、Flamingo、Penguin以及Bongo的CD Key。Zoo 4.0是專門設計來用在Rhino 4.0 CD-Key上，也可以用在Rhino、Flamingo、Bongo以及[[penguin:home|Penguin]]的較早版本。
+
+=====拓樸結構=====
+**1.小型網絡**
+
+Zoo跟所有Rhino用戶端電腦都在同一個網絡的子網、虛擬局部區域網絡以及同樣的防火牆後。Zoo與所有Rhino用戶端電腦都能配合，無須另外的網路設定。
+
+{{:legacy:en:ZooConfigBroadcast.png}}
+
+**2.路由網絡**
+
+Zoo是在Rhino用戶電腦端路由器的另外一邊，Rhino用戶端電腦可以在不同網段、在不同路由器的後面並且在不同虛擬局部區域網絡。要讓Rhino找到Zoo，需要額外的網路或是用戶端電腦的配置。詳情請參考以下的[[#Zoo在路由網路的配置]] 。
+
+{{:legacy:en:ZooConfigDns.png}}
+=====安裝=====
+
+  *如果您要安裝的系統上已經有前一個版本的Zoo，那麼在安裝Zoo 4.0之前要先停止舊版本。
+  *如果Zoo 4.0安裝程式偵測到系統中有前一版的Zoo，它將會在前一個版本的相同資料夾中安裝。
+  *如果您安裝Zoo 4.0在前一個版本的資料夾裡，安裝程式會將兩個版本的Zoo (Zoo.exe)以及授權檔案(Zoo.key)都備份。所以第一次執行Zoo 4.0的時候，系統會自動導入舊的授權。
+
+=====配置=====
+  - 開啟Zoo 4.0
+  - 將您的CD-Key加入Zoo 4.0以及包括任何Rhino、Penguin、Bongo、Brazil或Flamingo等您計畫想要使用的程式。
+  - 開啟Zoo的服務。
+
+
+=====配置在路由網絡上的Zoo=====
+預設情況下，Rhino通過在您的網路上廣播一條訊息尋找Zoo。只要是在一個VLan或是子網下，並且所有的電腦都在路由器的同一邊，這是一個很好的方法。但如果您有多重VLans，就需要額外的配置。
+
+**路由網絡配置選項**
+
+選擇以下配置選項的一種：
+
+    -**DNS：**在DNS伺服器上設立一個DNS 文字記錄。這樣Rhino無須在用戶端上有額外的配置就可以找到Zoo。
+    - **登錄碼：**在每個用戶端的電腦上都建立一個登錄碼。如果您沒有DNS，或您沒有能力去改變DNS，這將會是您的選擇。
+
+**設置DNS：**
+
+    -確認每個用戶端的網域名稱。在"我的電腦"上按右鍵，選擇內容 (Properties)。網域名稱在系統內容對話框的電腦名稱內。
+    -在您的網路的主要DNS伺服器上，建立一個新的TXT檔格式如**Zoo4=<hostname>** <hostname>就是[[zh-tw:rhino:netbios|NetBIOS]] 的主機名稱。舉例來說，如果一個完全限定的主機名稱是"ZooServer.bcn.es.mycorp.com"，而網域是"bcn.es.mycorp.com"，然後[[zh-tw:rhino:netbios|NetBIOS]]主機名稱為**ZooServer**。
+    -在用戶端這邊利用**[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zoo Bonus Tools]]**的**ZooDnsResolver**工具，來測試DNS的配置。
+
+**若要在每台電腦上設置登錄碼：**
+
+    - 在每個裝有Rhino 4.0的電腦上建立以下登錄碼，如果電腦裡還沒有的話：**HKEY_LOCAL_MACHINE\Software\McNeel\RhinoLM**
+    -在**RhinoLM**下建立新的**String Value**命名為**zoo4**。
+    -將zoo4的資料設置為Netbios主機名稱。假如完全限定的主機名稱是"ZooServer.bcn.es.mycorp.com"，網域的名稱是"ben.es.mycorp.com",那麼[[zh-tw:rhino:netbios|NetBIOS]]的主機名稱是**ZooServer**。
+    -利用**[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zoo Bonus Tools]]**的**SetZooServer"工具，建立登錄碼。
+
+<code>
+x64位元版本Windows使用者請注意：
+安裝x64位元Windows的電腦使用不同登錄布局來處理32位元及64位元的程式。 
+
+‧在本機模式下運作的64位元程式、存取碼及數值都存在以下登錄子項： 
+
+HKEY_LOCAL_MACHINE\Software 
+
+‧在WOW64模式下運作的32位元程式、存取碼及數值都存在以下登錄子項： 
+
+HKEY_LOCAL_MACHINE\Software\WOW6432node 
+
+Rhino 4.0 is a 32-bit application. Thus, if Rhino 4.0 is running on an x64-based version of Windows, you will want to add the Zoo Registry Key Lookup entry in this location:
+
+HKEY_LOCAL_MACHINE\Software\WOW6432node\McNeel\RhinoLM 
+</code>
+
+=====雜項=====
+  *Zoo不是為了在WAN上使用而設計，有一些人能夠調整網路位置的設定並讓zoo可以運作。然而我們尚未對那樣的配置進行測試或是認證。
+    * 以下是基本需求：
+      *請確認所有電腦都在同項windows網域底下。
+      *<color red>不推薦：</color>在所有防火牆，打開UDP的137及138埠，還有TCP的139埠。 <color red>請注意，這是一個很大的安全性漏洞。</color>，我們並不推薦對網際網路開啟這些埠。想了解更多詳情，請在網路上搜尋"[[zh-tw:rhino:netbios|NetBIOS]] 安全性漏洞"
+  *我們建議將VPN分配到每台電腦唯一的ip位置。
+    *Zoo可能無法與網路位置轉譯 (NAT)，我們尚未做詳盡的測試來證明其是否有效。
+  *確認只有一個zoo在網域上運作。大部分的問題都是因為有另外一個測試的Zoo(有時是在試圖執行Rhino的同一台電腦上)，才引起問題 (mailshot collisions)。
