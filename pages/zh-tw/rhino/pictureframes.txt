@@ -1,0 +1,47 @@
+**PictureFrames**圖框平面指令能夠製作更靈活更強大的Rhino [[zh-tw:rhino:backgroundbitmap|BackgroundBitmap背景圖]]。建立一個矩形平面，賦予以選取的圖片為貼圖的材質，不論作業視窗的顯示模式為何，該矩形平面永遠以彩現模式顯示，
+
+使用PictureFrames的優點：
+
+  * 能在場景中放置無限數量的圖片，也能在所有或任何視圖中檢視。
+  * 能夠依照需要縮放、旋轉圖片，不像[[zh-tw:rhino:backgroundbitmap|BackgroundBitmap背景圖]]只能與工作平面的X與Y軸對齊。
+  * 圖片可以調暗，透明度也可以調整。
+
+可能的缺點是無法保證圖片永遠出現在空間中每件物件的後面，PictureFrames只是3D空間中的物件而已。
+
+----
+
+====== 利用PictureFrames圖框平面指令當作背景參考圖片 ======
+
+執行**PictureFrame**圖框平面指令 ( 曲面 > 平面 > 圖框平面，或直接輸入PictureFrame並<Enter>)。您將會看到檔案瀏覽開啟，讓您找出想要使用的圖片。只要選擇了圖片，系統會提示您放置平面，就像直式選單裡的曲面 > 平面 > 三點。  請注意您雖能夠任意調整平面大小但必須與您所用的圖片比例相符。 將平面的第一點對應於圖像的左下角，第二點對應至右下角，第三點則對應至上邊緣。
+
+平面會自動分配影像作為貼圖，映射至UV曲面。您能夠在平面的物件內容 > 材質 看到分配的貼圖。 平面已分配基本材質，圖片會在貼圖通道裡。
+
+由於這是一個材質通道，僅在彩現視圖模式下的視圖區顯示。在V4其他材質的顯示模式 (選項 > 外觀 > 進階設定。顯示物件材質的設定在模式頁面上方 著色設定 > 顏色材質使用 ) 彩現模式的設定是預設的，但也可以讓新的模式有同樣設定。 這些模式必須要視圖區設定或是以**SetObjectDisplayMode**指令設定每件物件的顯示模式。 無論視圖顯示如何設定，第二種方法允許平面與圖像一起顯示。 請注意，執行指令的時候物件顯示模式在當前視圖區中設定，要在其他視圖看到貼圖，您必須再度執行指令。
+
+<color white>.</color>
+
+{{:legacy:en:PictureFrames_as_reference.png}}
+
+//三張PictureFrame平面設置之後可顯示參考圖//
+
+<color white>.</color>
+
+設定完後，就像在Rhino裡利用指令調整任何物件一樣，可以依需要對齊或旋轉。Orient定位指令能夠縮放或對齊已知尺寸和位置圖像上的點。圖像強度可以在 內容> 材質頁 - 透明度與圖像強度是最有用的調整。請用材質貼圖 以材質透明度工具列來調整。
+
+<color white>.</color>
+
+{{:legacy:en:Material_Presets.png}}
+//材質預設工具列//
+
+<color white>.</color>
+
+把picture frames放置在不同圖層以便於選擇、鎖定或隱藏。 如果你的設定比在標準彩現模式下還要Tweaked在V4設定一個特殊顯示模式。比如關掉背面可以讓圖像顯示在物件的每一個面，而不擋到視線。
+
+以下是一個可以加到按鈕或是指令別名的指令巨集，以便能夠在V4中自動應用圖像還有顯示模式。將90替換成0至100之間的數字來改變平面的透明度。
+
+
+  ! //PictureFrame //Pause //Pause //Pause
+  _SelLast
+  //-Properties //Material //Object //Enter _Transparency 90
+  //Enter //Object //ShowIsocurves //No //Enter //Enter
+  //SetObjectDisplayMode //Mode=Rendered
