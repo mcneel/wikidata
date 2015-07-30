@@ -1,0 +1,45 @@
+======Rhino for Mac如何尋找Zoo伺服器主機？======
+> **產品： ** //[[zh-tw:zoo:home|Zoo]]//
+> **摘要：** //Rhino for Mac如何尋找Zoo伺服器管理主機概述。//
+
+=====概述=====
+當Rhino需要從Zoo伺服器取得一個授權，會依照以下順序確認查找Zoo伺服器主機名稱。
+  - 設定檔案在應用程式支援資料夾，尋找你的Zoo伺服器主機名稱或IP。
+  - 查詢你的DNS伺服器為預設的Zoo主機名稱。
+
+=====更多訊息=====
+
+====設定檔案====
+
+當您使用網路單機設定，Rhino首先**LicenseZooCLient.Settings**檔案去尋找會到Zoo授權伺服器名稱，這個檔案放在以下路徑資料夾：
+
+<code>
+/Library/Application Support/McNeel/Rhinoceros/License Manager
+</code>
+
+檔案內容將會與下列相似：
+
+<code>
+<?xml version="1.0" encoding="utf-8"?>
+<!--Zoo client settings file written by Rhino-->
+<ZooClient>
+  <Software_McNeel_Rhinoceros_5.0_License_Manager Server="host name or IP address"/>
+</ZooClient>
+</code>
+
+====使用DNS====
+若Rhino輸入Zoo授權伺服器名稱無法確認您的Zoo伺服器主機名稱， 則會查詢您的DNS伺服器名稱為Zoo預設名稱，以下則是主機名稱：
+
+<code>
+__mcneel.__zoo5
+</code>
+
+舉例，若貴公司主機名稱為"mcneel.com"，那摩您可以增加一個DNS別名為
+
+<nowiki>"__mcneel.__zoo5.mcneel.com"</nowiki>用來指向您的Zoo伺服器名稱。
+
+{{:zoo:dnsalias.png}}
+
+\\
+
+{{tag>Zoo_zh-tw}}
