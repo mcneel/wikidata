@@ -1,27 +1,26 @@
-** Installing [[penguin:home|Penguin 2.0]] **
-> **Summary:** //How to script the installation of [[penguin:home|Penguin]].//
+** Installare [[penguin:home|Penguin 2.0]] **
+> **Sommario:** //Come installare [[penguin:home|Penguin]] tramite script.//
 
-=====Overview=====
+=====Informazioni generali=====
 
-[[penguin:home|Penguin]] installation scripting is similar to Rhino and Flamingo.
+Lo scripting per l'installazione di [[penguin:home|Penguin]] è simile a quello di Rhino e Flamingo.
 
-The format of the command line you would usually execute from a batch file (*.bat) is:
+Il formato della riga di comando per eseguire il programma di installazione da un file batch (*.bat) è:
 
-   msiexec /i <path to installer .msi> /qn <license-options>
+   msiexec /i <percorso del file di installazione .msi> /qn <license-options>
 
-The license-options parameters are:
+I parametri license-options sono:
 
-  * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** Use the 20-character Penguin CD-Key, without the “PE20” characters. This parameter is mandatory unless you install Penguin as a workgroup node..
-  * **ZOO_NETWORK="network"** "network" means you want [[penguin:home|Penguin]] to get its license from the Zoo server. This parameter is not mandatory.
+  * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** Si usi il codice CD-Key a 20 caratteri di Penguin, senza i caratteri “PE20”. Questo parametro è obbligatorio, a meno che non si installi Penguin come nodo di gruppo.
+  * **ZOO_NETWORK="network"** "network" significa che si desidera che [[penguin:home|Penguin]] ottenga la licenza dal server dello Zoo. Questo parametro non è obbligatorio.
   
-=====Examples=====
+=====Esempi=====
 
    "msiexec /i Penguin20_Release_SR4_x64.msi /qn LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX""
 
    "msiexec /i Penguin20_Release_SR4_x86.msi /qn ZOO_NETWORK="network""
 
-=====Notes=====
-  * **IMPORTANT:** you must run command line with administrator privileges.
-  * If you need a log file, you can add "/L*v "Setup.log"" text piece to the command line.
-
+=====Note=====
+  * **IMPORTANTE:** è necessario eseguire la riga di comando con privilegi di amministratore.
+  * Se si ha bisogno di un file di registro, si può aggiungere il testo "/L*v "Setup.log"" nella parte superiore della riga di comando.
 
