@@ -1,8 +1,8 @@
 [[accurender:nxt:documentation|Online help home]]
 ====== The nXt Render Farm ======
 
-A Render Farm consists of a group of networked computers working together to complete large rendering tasks.  Normally, render farms proceed silently, without graphically displaying the renderings as they progress.  Rendering in this manner allows you to use more computer power for lengthy tasks at the expense of some interactivity.\\ 
-Many third-party render farm products are currently available.  The nXt Render Farm Software allows you to work with one of these, or you can set up a simple render farm just using the software provided.  //The nXt Render Farm Software is sold separately// from the nXt platform plugins, such as AccuRender nXt.  The software itself is platform independent; AutoCAD is not required on computers which will only be used for render farming.
+A render farm is a group of networked computers working together to complete large rendering tasks.  Normally, render farms proceed silently, without graphically displaying the renderings as they progress.  Rendering this way lets you use more computer power for lengthy tasks, at the expense of some interactivity.\\ 
+Many third-party render farm products are currently available.  The nXt Render Farm Software allows you to work with one of these, or you can set up a simple render farm just using the software provided.  //The nXt Render Farm Software is sold separately// from the nXt platform plug-ins, such as AccuRender nXt.  The software itself is platform independent; AutoCAD is not required on computers used only for render farming.
 
 The nXt Render Farm includes two basic pieces of software:
 
@@ -11,9 +11,9 @@ The nXt Render Farm includes two basic pieces of software:
 
 The following procedures apply to nXt's included render farm. If you are planning to use third-party render farm software, some of these procedures will be different.
 
-===== Installing and Configuring the Render Farm =====
+===== Installing and configuring the render farm =====
 
-Create a shared folder for use by the render farm.  All of the network rendering computers must have read/write access to this folder. The shared folder should have a lot of available disk space to store both data (input) and images (output.)  20 - 200 GB of available storage are recommended.  You must perform the following four steps on //each// computer you plan to use in the render farm, including any nXt workstations which will submit jobs to the render farm:
+Create a shared folder for use by the render farm.  All the network rendering computers must have read/write access to this folder. The shared folder should have a lot of available disk space to store both data (input) and images (output.) We recommend 20 - 200 GB available storage.  You must perform the following four steps on //each// computer you plan to use in the render farm, including any nXt workstations which will submit jobs to the render farm:
 
   - Install the nXt Render Farm Software.
   - From the Start menu, run the Render Farmer on each machine.  The Render Farmer will appear as an icon in the system tray.
@@ -23,7 +23,7 @@ Create a shared folder for use by the render farm.  All of the network rendering
 The Render Farm is now configured. To verify that the farmer machines are responding run the Render Farm Monitor from the Start menu on any of the workstations.  The machines should appear in the upper list box. If you wish to exclude a machine from participating in the render farm, you can select it, right click, and choose Suspend.
 
 
-**Updating the Render Farm Software**
+**Updating the render farm software**
 
 All participating computers must be updated before a new job can be submitted to the farm.  Use the following procedure:
 
@@ -34,7 +34,7 @@ All participating computers must be updated before a new job can be submitted to
     - Run the Render Farmer from the Start Menu.  The tray icon should appear. 
 
 
-===== Licensing the Render Farm =====
+===== Licensing the render farm =====
 
 The evaluation version of the render farm allows two network machines (nodes) to work on jobs simultaneously. If you wish to have more network nodes running simultaneously you can purchase an unlimited node license [[https://www2.mcneel.com/commerce/accurender/buy-farm.asp|here]].
 
@@ -72,20 +72,20 @@ Once you have purchased your license and have acquired a Product Key, use one of
 
 
 
-===== Submitting Jobs to the Render Farm from AccuRender nXt =====
+===== Submitting jobs to the render farm from AccuRender nXt =====
 
-Currently, four types of jobs can be submitted to the render farm for processing by multiple computers: Single Images from WalkAbout, Batch Jobs, and 3D Slide Shows.
+Currently, four types of jobs can be submitted to the render farm for processing by multiple computers: single images from WalkAbout, batch jobs, 3D slide shows, and animation.
 
-===Single Images===
+===Single images===
 
-Single views can be split into smaller tasks and distributed to multiple machines.  Once the job is complete, the images from these tasks can be reconstructed into a single image using the nXt Image Editor.  //Using the Path Tracer to render single images on the farm is not recommended at this time due to several known problems resulting in reconstruction artifacts.//
+Single views can be split into smaller tasks and distributed to multiple machines.  Once the job is complete, the images from these tasks can be reconstructed into a single image using the nXt Image Editor.  //At this time, using the Path Tracer to render single images on the farm is not recommended due to several known problems resulting in reconstruction artifacts.//
 
 Perform the following steps to submit a single image job to the render farm:
 
   - Launch WalkAbout and configure your rendering and view.
   - Press the Render Farm button on the WalkAbout toolbar.
   - Name the job or accept the default.  The date and time is automatically pre-pended to the name you choose.  A sub-folder for the job is created in the Render Farm shared folder.  An Output folder is also created in the new job folder.
-  - Choose to either run the job "now", "later", or "after" a scheduled time.  If you choose "later" you will need to use the nXt Render Farm Monitor to manually start the job.
+  - Choose to either run the job //now//, //later//, or //after// a scheduled time.  If you choose //later// you will need to use the nXt Render Farm Monitor to manually start the job.
 
 After the job is complete, output can be found in the job's Output folder.  To reconstruct the output into a single image use the following steps:
 
@@ -94,29 +94,29 @@ After the job is complete, output can be found in the job's Output folder.  To r
   - From the menu, select Image->Arithmetic->Add for the standard engine --OR-- Image->Arithmetic->Combine Path Tracings... for the Path Tracing engine.
   - Select all of the other images in the sequence (do not select 000000.nXtImage again or it will be counted twice)
 
-===Batch Jobs===
+===Batch jobs===
 
 Each batch task will be rendered by a single machine.
 
 Perform the following steps to submit a Batch job to the render farm:
 
-  - Configure your Batch tasks in the usual way.
+  - Configure your batch tasks in the usual way.
   - Press the Farm... button on the Batch DB.
   - Name the job or accept the default.  The date and time is automatically pre-pended to the name you choose.  A sub-folder for the job is created in the Render Farm shared folder.  An Output folder is also created in the new job folder.
-  - Choose to either run the job "now", "later", or "after" a scheduled time.  If you choose "later" you will need to use the nXt Render Farm Monitor to manually start the job.
+  - Choose to either run the job //now//, //later//, or //after// a scheduled time.  If you choose //later// you will need to use the nXt Render Farm Monitor to manually start the job.
 
 After the job is complete, output can be found in the job's Output folder.  The output format from Batch jobs is always .nXtImage.
 
-===3D Slide Show===
+===3D slide show===
 
 Each transition between two slides will be rendered by a single machine.  For example, a slide show with five slides will have four transitions and will produce four tasks for the render farm.
 
-Perform the following steps to submit a 3D Slide Show job to the render farm:
+Perform the following steps to submit a 3D slide show job to the render farm:
 
-  - Configure your 3D Slide Show in the usual way.
+  - Configure your 3D slide show in the usual way.
   - Press the Farm... button on the 3D Slide Show DB.
   - Name the job or accept the default.  The date and time is automatically pre-pended to the name you choose.  A sub-folder for the job is created in the Render Farm shared folder.  An Output folder is also created in the new job folder.
-  - Choose to either run the job "now", "later", or "after" a scheduled time.  If you choose "later" you will need to use the nXt Render Farm Monitor to manually start the job.
+  - Choose to either run the job //now//, //later//, or //after// a scheduled time.  If you choose //later// you will need to use the nXt Render Farm Monitor to manually start the job.
 
 After the job is complete, output can be found in the job's Output folder.  The output format from 3D Slide Show jobs is always png.  Your alpha channel choice will be preserved.
 
@@ -124,11 +124,11 @@ After the job is complete, output can be found in the job's Output folder.  The 
 
 The animation will be split into tasks consisting of 20 contiguous frames.
 
-Perform the following steps to submit an Animation job to the render farm:
+Perform the following steps to submit an animation job to the render farm:
 
-  - Configure your 3D Slide Show in the usual way.
+  - Configure your 3D slide show in the usual way.
   - Press the Farm... button on the Animation DB.
   - Name the job or accept the default.  The date and time is automatically pre-pended to the name you choose.  A sub-folder for the job is created in the Render Farm shared folder.  An Output folder is also created in the new job folder.
-  - Choose to either run the job "now", "later", or "after" a scheduled time.  If you choose "later" you will need to use the nXt Render Farm Monitor to manually start the job.
+  - Choose to either run the job //now//, //later//, or //after// a scheduled time.  If you choose //later// you will need to use the nXt Render Farm Monitor to manually start the job.
 
-After the job is complete, output can be found in the job's Output folder.  The output format from Animation jobs is always png.  Your alpha channel choice will be preserved.
+After the job is complete, output can be found in the job's Output folder.  The output format from animation jobs is always png.  Your alpha channel choice will be preserved.
