@@ -1,16 +1,16 @@
-====== Bongo 설치 문제 해결 안내 ======
-> 이 항목은 Bongo 1.0과 Bongo 2.0용입니다. 
+====== Bongo 설치 문제 해결 ======
+> 이 항목은 Bongo 1.0과 Bongo 2.0 용입니다. 
 
 ===== 일반 =====
 
 
 -->설치 문제 보고#
-Bongo 설치관리자로 설치에 실패하셨다면 McNeel 지원팀에게 연락하시고 다음 정보를 알려 주시기 바랍니다: 
+Bongo 설치 관리자로 설치가 되지 않을 경우, McNeel 지원에게 연락하셔서 다음 정보를 알려 주세요.: 
   - 오류 메시지가 표시되는 경우, 해당 메시지의 정확한 내용 또는 해당 오류 메시지를 캡처하여 첨부 
   - Bongo를 설치하고자 하시는 컴퓨터의 운영 체제(OS)
-  - 설치하신 Rhino 5 버전. 명령행에 About 명령을 입력하여 실행하시면 해당 정보가 표시됩니다.
+  - 설치하신 Rhino 5 버전을 알려 주세요. Rhino의 명령행에 About을 입력하고 Enter 키를 누르시면 이 정보를 확인하실 수 있습니다.
 
-상기 정보를 이메일에 적어 [[tech@mcneel.com]] 에게 보내 주세요.
+이 정보를 [[tech@mcneel.com]] 에게 이메일로 보내 주시기 바랍니다.
 
 ===== 오류 메시지 =====
 
@@ -28,7 +28,7 @@ Bongo 설치관리자로 설치에 실패하셨다면 McNeel 지원팀에게 연
   - 오류 메시지에 안내된 드라이브 글자가 포함된 디렉터리를 찾습니다. 
 
 **안내:** 이 방법 또는 작업에는 레지스트리를 수정하는 방법이 포함되어 있습니다. 레지스트리를 잘못 수정하면 심각한 문제가 발생할 수 있습니다. 따라서 주의하여 이 과정을 실행하시기 바랍니다. 레지스트리를 수정하시기 전에 레지스트리를 백업하시면, 문제 발생 시 원래 레지스트리를 복구하실 수 있습니다. 레지스트리의 백업과 복구에 대한 자세한 정보는 Microsoft Knowledge Base의 다음 글을 클릭하셔서 참조하시기 바랍니다:
-[[http://support.microsoft.com/kb/322756|Windows에서 레지스트리를 백업하고 복구하는 방법]]
+[[http://support.microsoft.com/kb/322756/ko|Windows에서 레지스트리를 백업하고 복구하는 방법]]
 
 <--
 
@@ -46,7 +46,7 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 
 **//해결책 2://**
 //경고: 다음 과정에는 Windows 레지스트리 편집이 해당됩니다. 레지스트리를 잘못 편집하면 사용자의 컴퓨터에 손상이 발생할 수 있으며, 컴퓨터가 시작하지 않을 수도 있습니다. 다음 과정을 실행하시기 어려우시다면 McNeel 지원팀에게 문의하시기 바랍니다.//
-  - Microsoft TechNet에서 [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] 을 다운로드하고 바탕 화면에 압축 해제하세요.
+  - Microsoft TechNet에서  [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] 를 다운로드하여 컴퓨터 바탕화면에 압축을 해제합니다.
   - Windows 명령 셸을 엽니다.
   - 디렉터리를 바탕화면으로 변경합니다.
   - 명령 셸에 다음을 입력합니다: **psexec -i -d -s c:\windows\regedit.exe** 이것은 Windows 에서 시스템 계정 권한으로 레지스트리 편집기를 실행하게 합니다. 시스템 계정에는 관리자 계정보다 훨씬 강력한 권한이 있습니다.
@@ -60,26 +60,26 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 
 <--
 
--->오류 1603#
+-->오류1603#
 1603 오류에는 다양한 원인이 있을 수 있습니다. 아래 안내된 모든 과정을 그대로 실행하시기 바랍니다.
 \\
 \\
 **Step 1: .NET 4.0 Framework를 설치합니다.**
   - **Windows 탐색기**를 열어 Rhino 설치 관리자 DVD 위치를 찾습니다.
   - **Installers\Prerequisites** 폴더를 엽니다.
-  - [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]] 를 실행합니다.
+  - [[http://www.microsoft.com/ko-kr/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]] 를 실행합니다.
   - Microsoft .NET 설치 관리자에서 **오류가 발생한다면**: 
     - 오류 메시지를 적어두시기 바랍니다. 
     - **Step 2로 넘어갑니다**.
   - 64 비트 Windows XP만 해당:
-    - [[http://www.microsoft.com/en-us/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]]을 다운로드하여 설치합니다.
-  - **Step 3을 건너뜁니다**.
+    - [[http://www.microsoft.com/ko-kr/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]]을 다운로드하여 설치합니다.
+  - **Step 3으로 건너뜁니다**.
 \\
 **Step 2: Windows 업데이트를 실행합니다**.
-  - [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows 업데이트 서비스]]를 실행합니다.
+  - [[http://windows.microsoft.com/ko-kr/windows/help/windows-update|Windows 업데이트 서비스]]를 실행합니다.
   - 설치해야 할 중요 업데이트가 있으면 **지금 업데이트**를 클릭하여 업데이트를 설치합니다. 이 과정은 오랜 시간이 걸릴 수 있습니다.
   - Windows 업데이트 설치 관리자를 실행하려고 할 때 오류가 발생하면 [[http://support.microsoft.com/kb/906602/ko|공용 Windows Update, Microsoft Update 및 Windows Server 업데이트 설치 문제를 해결하는 방법]]을 참조하세요.
-  - Windows 업데이트 문제를 해결하고 [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows 업데이트 서비스]] 실행을 완료했다면 **Step 1로 되돌아갑니다**.
+  - Windows 업데이트 문제를 해결하고 [[http://windows.microsoft.com/ko-kr/windows/help/windows-update|Windows 업데이트 서비스]] 실행을 완료했다면 **Step 1로 되돌아갑니다**.
 \\
 **Step 3: Rhino를 설치합니다.**
   - **Windows 탐색기를 엽니다.**
@@ -131,7 +131,7 @@ secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 이 기능을 설정할 수 없거나 Windows 기능 대화상자가 공백인 상태로 표시된다면 사용자의 컴퓨터에 설치된 Windows 가 손상된 상태이므로 복구하셔야 합니다. 도움이 필요하시면 Microsoft 지원에 문의하시기 바랍니다.
 
 **//자세히://**
-Rhino를 설치하는 동안 이 오류가 발생하는 경우, Microsoft의[[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 재배포 가능 패키지]]를 곧바로 설치할 수 없습니다. 따라서, 이것은 Windows와 Microsoft 재배포 가능 패키지와 관련된 문제이며, Rhino 설치 관리자의 문제가 아닙니다.
+Rhino를 설치하는 동안 이 오류가 발생하는 경우, Microsoft의  [[http://www.microsoft.com/ko-kr/download/details.aspx?id=3387|Microsoft Visual C++ 2005 재배포 가능 패키지(x86)]]도 설치하실 수 없습니다. 이는 Windows와 Microsoft 재배포 가능 패키지 관련 문제이며, Rhino 설치 관리자의 문제가 아닙니다.
 
 <--
 
@@ -147,5 +147,20 @@ Rhino를 설치하는 동안 이 오류가 발생하는 경우, Microsoft의[[ht
   - "관리자 권한으로 실행"을 선택합니다.
   - Rhino 5를 시작하면 설치할 새 업데이트가 있다는 메시지가 표시됩니다.
   - 업데이트 설치를 선택합니다.
+
+<--
+-->오류: 라이선스 관리자와 통신할 수 없습니다#
+**//질문://** Rhino 5 가 시작할 때 "라이선스 관리자와 통신할 수 없습니다. Bongo가 실행되지 않습니다."라는 메시지가 표시됩니다.
+
+**{{:bongo:2:bongolicensemanager.png|}}**
+
+**//원인://** Rhino 라이선스 관리자에 문제가 있습니다.
+
+**//해결책://**
+다음 페이지를 참조하세요:
+http://wiki.mcneel.com/ko/rhino/licensemanagererrors
+
+문제 해결에 도움이 될 것입니다.
+
 
 <--
