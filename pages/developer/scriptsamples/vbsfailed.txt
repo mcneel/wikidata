@@ -109,9 +109,12 @@ C:\Program Files\McAfee\VirusScan Enterprise\scriptcl.dll\\
 Manually changing the registry key to the windows default: **\[HKEY_CLASSES_ROOT\CLSID{B54F3741-5B07-11cf-A4B0-00AA004A55E8}\InprocServer32]\\
 ** to: **\\C:\Windows\System32\vbscript.dll\\** fixes the problem for 64-bit V5 Rhino.
 
-For 32-bit V5 on 64-bit Windows, this key: **\\HKEY_CLASSES_ROOT\Wow6432Node\CLSID{B54F3741-5B07-11cf-A4B0-00AA004A55E8\InprocServer32}\\** should point to: **\\C:\Windows\SysWOW64\vbscript.dll\\**
+For 32-bit V5 on 64-bit Windows, this key:
+**\HKEY_CLASSES_ROOT\Wow6432Node\CLSID{B54F3741-5B07-11cf-A4B0-00AA004A55E8\InprocServer32}\\** 
+should point to: **\\C:\Windows\SysWOW64\vbscript.dll\\**
 
 -John Brock
+
 ===== Windows Registry security issue =====
 If **VBSCRIPT.DLL** is present on your system and the module is properly registered, then you might not have enough rights to read the Windows Registry.
 
@@ -142,6 +145,5 @@ To set the permissions, navigate to the top of the hive, **HKEY_CLASSES_ROOT**, 
 \\
 
 {{tag>Developer RhinoScript}}
-
 
 
