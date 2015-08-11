@@ -1,12 +1,12 @@
 ======Using .Net Classes with VBScript======
 > **Developer:** //[[developer:rhinoscript|RhinoScript]]//
-> **Summary:** //Demonstrates a number of .NET classes that work with RhinoScript.//
+> **Summary:** //Demonstrates several .NET classes that work with RhinoScript.//
 
 =====Overview=====
-VBScript lacks support of complex data structures unlike other programming languages. This sometimes make life a bit difficult. We need to code our own algorithms to achieve simple tasks like sorting of an array or reversing it. .NET has support for complex data structures which come with build-in functions for these simple tasks. So if we can use .NET data structure then we can save reinvention of wheel for some of these tasks. Well the good news is some of .NET libraries are exposed to COM and can be used in VBScript.
+Unlike other programming languages, VBScript lacks support of complex data structures. Sometimes this makes life a bit difficult. We need to code our own algorithms to achieve simple tasks like sorting or reversing an array. .NET has support for complex data structures which come with build-in functions for these simple tasks. So if we can use .NET data structure then we can eliminate the reinvention of the wheel for some of these tasks. Well, the good news is that some .NET libraries are exposed to COM and can be used in VBScript.
 
 =====ArrayList=====
-An **[[http://msdn.microsoft.com/en-us/library/system.collections.arraylist(v=vs.100).aspx|ArrayList]]** is an array array whose size is dynamically increased as required. Here is an example of it's usage.
+An **[[http://msdn.microsoft.com/en-us/library/system.collections.arraylist(v=vs.100).aspx|ArrayList]]** is an array whose size is dynamically increased when needed. Here is an example of its use:
 
 <code vb>
 Set objArrayList = CreateObject("System.Collections.ArrayList")
@@ -51,10 +51,10 @@ objArrayList.RemoveAt 6
 objArrayList.Clear  
 </code>
 
-For VBScript **Dictionary** objects we don’t need to redim while appending/removing elements; also an element can be directly searched without iterating through each of them. Both of these features are available with **ArrayList** as well but one of the most important dictionary object feature ‘Key-Value pair’ is not present in **ArrayList**.** SortedList** is alternative if you want utilize power of both **ArrayList** and **Dictionary**. 
+For VBScript **Dictionary** objects we don’t need to redim while appending or removing elements. Also, an element can be directly searched without iterating through each of them. Both of these features are available with **ArrayList** as well but one of the most important dictionary object features, //Key-Value pair//, is not in **ArrayList**.** SortedList** is an alternative if you want the power of both **ArrayList** and **Dictionary**. 
 
 =====SortedList=====
-A **[[http://msdn.microsoft.com/en-us/library/system.collections.sortedlist.aspx|SortedList]]** a is sorted **Dictionary**. Every time we add/remove a key value pair in dictionary, it automatically gets sorted by Key. Also you can also access elements based on its index (just like arrays) which makes this even more powerful. Here is an example of it's usage.
+A **[[http://msdn.microsoft.com/en-us/library/system.collections.sortedlist.aspx|SortedList]]** a is sorted **Dictionary**. Every time we add or remove a key value pair in the dictionary, it automatically gets sorted by Key. You can also access elements based on its index (just like arrays) which makes this even more powerful. Here is an example:
 
 <code vb>
 Set objSortedList = CreateObject("System.Collections.SortedList")
@@ -100,7 +100,7 @@ objSortedList.Clear
 </code>
 
 =====Stack=====
-A **[[http://msdn.microsoft.com/en-us/library/system.collections.stack.aspx|Stack]]** is a simple last-in-first-out (LIFO) non-generic collection of objects or data. By last-in-first-out, what we mean is if a set of objects are put into a stack, the last object that was put in, will be the first object to be taken out. For example, if you see in restaurants that have an automatic plate dispenser, a stack of plates are kept and as each person takes a plate, the next plate in the stack becomes available. Here is an example of it's usage.
+A **[[http://msdn.microsoft.com/en-us/library/system.collections.stack.aspx|Stack]]** is a simple last-in, first-out (LIFO) non-generic collection of objects or data. By last-in, first-out, what we mean is if a set of objects is put into a stack, the last object that was put in will be the first object to be taken out. For example, in a restaurants with an automatic plate dispenser, the stack of plates are added to from the top. As each person takes a plate, the next plate in the stack becomes available. Here is an example of using **Stack**:
 
 <code vb>
 Set objStack = CreateObject("System.Collections.Stack")
@@ -138,7 +138,7 @@ objStack.Clear
 </code>
 
 =====Queue=====
-Unlike a **Stack**, a **[[http://msdn.microsoft.com/en-us/library/system.collections.queue(v=vs.100).aspx|Queue]]** represents a first-in, first-out collection of objects or data.  Here is an example of it's usage.
+Unlike a **Stack**, a **[[http://msdn.microsoft.com/en-us/library/system.collections.queue(v=vs.100).aspx|Queue]]** represents a first-in, first-out collection of objects or data.  Here is an example:
 
 <code vb>
 Set objQueue = CreateObject("System.Collections.Queue")
