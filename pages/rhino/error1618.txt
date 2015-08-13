@@ -1,0 +1,22 @@
+====== Install Error 1618 (Rhino 5 for Windows) ======
+> **Summary:** //How to fix the installation Error 1618.//
+> **Related Installation Help:** //[[installproblems|Troubleshooting Rhino 5 Installation]]//
+
+=====Problem=====
+The log file shows "Error 1618. Another installation is already in progress"
+
+=====Answer=====
+The meaning of an exit value of 1618 of msiexec is ERROR_INSTALL_ALREADY_RUNNING. It’s one of the most common codes of Windows Installer.
+This happens if an installation started while another one was already running. There cannot be two instances of msiexec running at the same time.
+
+**//Solution 1://**
+
+  * Wait for the first installation to end, then start the second one.
+\\
+**//Solution 2://**
+If you need to automate this in a wrapper, you can check if there’s an installation in progress and wait for it to end. Check for msiexec /i or msiexec /x or msiexec /<something> using pv.
+(not recommended) If you think that the installation in progress is hanging and should be stopped(or something similar), you can try to end it, by killing the running msiexec.exe instances.
+(not recommended) Reboot the machine. This will kill any installation in progress.  Then try again.
+InstallSite.org mentions 3 extra solutions to the problem. Ont might want to check those as well, if the ones presented above haven’t solved the issue.
+
+{{tag>rhino5installationerror_en}}
