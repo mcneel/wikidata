@@ -1,25 +1,26 @@
-====== Using Rhino's Undo function together with the Windows clipboard to move forward or backward in time... ======
-======Future History======
+====== Future History======
+
+>Using Rhino's Undo function together with the Windows clipboard to move forward or backward in time...
 
 =====The Undo Stack=====
 
-Rhino was one of the first CAD programs to have virtually unlimited undos.  In fact, many CAD programs didn’t have any for a long time, some still don’t, or perhaps they only have one – the last operation.
+Rhino was one of the first CAD programs to have virtually unlimited undos.  In fact, many CAD programs didn’t have any for a long time. Some still don’t, or perhaps they only have one – the last operation.
 
-Rhino’s "Undo Stack" (list of commands that are available to undo) allows you to try out a lot of things without fear and see if you like them, you can always go back if you don’t.
+Rhino’s //Undo Stack// (list of commands that are available to undo) allows you to try out a lot of things without fear and see if you like them. You can always go back if you don’t.
 
-Undo needs memory, of course.  Rhino allocates as much memory to the undo stack (buffer) as you tell it – the setting is in the **Options  > General** tab.  If you have a sufficient amount of RAM, you can set this pretty high.  I’ve got mine set to 100 undos and 10Mb of memory.
+Undo needs memory, of course.  Rhino allocates as much memory to the undo stack (buffer) as you tell it. The setting is in the **Options  > General** tab.  If you have enough RAM, you can set this pretty high.  I’ve got mine set to 100 undos and 10MB of memory.
 
-=====Future History, or a Blast from the Past=====
+=====Future History, or a blast from the past=====
 
-The undo capability of Rhino, combined with the ability to be able to use the Windows clipboard copy/paste (also between multiple instances of  the program) allows you to use what I like to call "Future History". It allows you to go into the future by doing a number of operations, copying the result to the clipboard, backing up and pasting your future object back in to the present.
+Rhino's undo capability, combined with the ability to use the Windows clipboard copy/paste (also between multiple instances of  the program) lets you use what I like to call //Future History//. You can go into the future by doing a number of operations, copying the result to the clipboard, backing up, and pasting your future object back in to the present.
 
-Or, you get to a stage where you realize you need something many operations in the past, but you deleted it. You don’t want to have to redo all your subsequent operations, but you need that deleted object.  No problem, **Undo** back to the point just before you deleted it, use **Ctrl+C** (**CopyClip**) to copy the object you want to the clipboard.  **Redo** all your operations (it will also re-do the delete, but don’t worry, you’ve got the object on the clipboard) and use **Ctrl+V** (**Paste**) to paste your object back in.  Voilà, you have rescued an object from the past!
+Or, you get to a stage where you realize you need something many operations in the past, but you deleted it. You don’t want to have to redo all your later operations, but you need that deleted object.  No problem, **Undo** back to the point just before you deleted it, use **Ctrl+C** (**CopyClip**) to copy the object you want to the clipboard.  **Redo** all your operations (it will also re-do the delete, but don’t worry, you’ve got the object on the clipboard) and use **Ctrl+V** (**Paste**) to paste your object back in.  Voilà, you have rescued an object from the past!
 
 =====Undo or Redo many steps at once=====
 
-A couple of commands that are useful here are **UndoMultiple** and its companion **RedoMultiple**.  These commands give you a list of all commands that have been executed that are in the undo stack and you simply choose up to what point you want to go back (or forward in the case of **RedoMultiple**).
+A couple of commands that are useful are **UndoMultiple** and its companion **RedoMultiple**.  These commands give you a list of all commands that have been executed that are in the undo stack. You simply choose up to what point you want to go back (or forward in the case of **RedoMultiple**).
 
-One important thing to remember is that once you have undone a number of commands, if you will want to go forward again, //**do not execute a new command!**//  This will erase the redo stack, and all subsequent operations will be lost.
+**Note:** Once you have undone several commands, if you want to go forward again, //**do not execute a new command!**//  This will erase the redo stack, and all subsequent operations will be lost.
 
 If you decide you want to have a new file with a copy of the model at a previous state in the session, you can back up to the point you want – but – do not use the command **Export** or **SaveAs**.  These count as commands and will erase the redo stack!  Instead, copy (Ctrl+C) the geometry to the clipboard, open a new instance of Rhino with a blank file, and paste the geometry in to the new file and save that.  Then **RedoMultiple** back to where you were in the original file.
 
@@ -27,14 +28,14 @@ A limitation on this technique may be the memory capacity of the Windows clipboa
 
 =====Undo for selected objects=====
 
-**UndoSelected** allows the user to undo operations that were preformed on a particular object without undoing subsequent operations. For example- make a box, move the box,  move the box again, fillet the edges of the box. Make a circle, make a rectangle. Select the box and start **UndoSelected**. If the operations on the box are still in the undo stack, you will get a list of operations to undo. You can undo these without affecting the circle and the rectangle that were made after these operations. Note that the entire operation is undone- if other objects were moved with the box, they will also be 'unmoved' by **UndoSelected** on the box.
+**UndoSelected** lets you undo operations performed on a particular object without undoing subsequent operations. For example: make a box, move the box,  move the box again, fillet the edges of the box. Make a circle, make a rectangle. Select the box and start **UndoSelected**. If the operations on the box are still in the undo stack, you get a list of operations to undo. You can undo these without affecting the circle and the rectangle that were made after these operations. Note that the entire operation is undone. If other objects were moved with the box, they will also be //unmoved// by **UndoSelected** on the box.
 
 
-=====Incremental Save=====
+=====Incremental save=====
 
-Of course, this sort of “history” only applies to the working session – once you have closed the file, the undo is erased, so your history is definitely lost at that point.
+Of course, this sort of //history// only applies to the working session. Once you have closed the file, the undo is erased. So your history is definitely lost at that point.
 
-One way to have previous versions to back up to in between sessions on a particular file is to use **IncrementalSave**.  Incremental save will save a new version of the file with a number attached (filename001, filename002, etc.) every time you use it – thus you can also “go back in time” between sessions.  This way you can have as many previous states of your model as you want saved.
+One way to have previous versions go back to between sessions on a particular file is to use **IncrementalSave**.  Incremental save will save a new version of the file with a number attached (filename001, filename002, etc.) every time you use it. Thus you can also //go back in time// between sessions.  This way you can have as many previous states of your model as you want saved.
 
 
 
