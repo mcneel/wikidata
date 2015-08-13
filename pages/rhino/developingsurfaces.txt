@@ -1,116 +1,74 @@
-====== Some tips from Rhino user Steve Howden for flattening surfaces to 2d patterns. The specific context of this post to the Rhino news group was flattening for fabric but most of  this should apply to compund curve surface development from Rhino. ======
+====== Tips for flattening surfaces to 2D patterns====== 
+
+**by Rhino user Steve Howden**
+
+>The specific context of this post to the Rhino news group was flattening for fabric, but most of  this should apply to compound curve surface development from Rhino. 
 
 
-There are a variety of ways of doing this, but first (to make sure we are
+There are several ways to do this, but first (to make sure we are speaking the same language) let me point out that there are two types of surfaces:
 
-speaking the same language) let me point out that there are two types of
+  - Developable, no curvature in one dimension. Examples: cylinders, cones.
+  - Double curvature. Example: spheres.
 
-surfaces;
+So you have two options:
 
-a/. developable, ie. no curvature in one dimension, eg cylinders. cones
+  * Design your bags by creating the seam lines and lofting (developable) between them. Then use ** _Unrollsrf** to get your patterns.
+  * Or model your shapes using whatever method you like and then projecting or pulling seam lines to the surface and splitting that surface up. This gives you more design flexibility. **Note:** In V4 there is a very handy tool,  _Shortpath, that is good for this. It gives //geodesic// curves on the surface.
 
-b/ double curvature eg spheres
-
-So you have two options.
-
-  * You could design your bags by creating the seam lines and lofting
-(developable) between them and then using ** _Unrollsrf** to get your patterns
-
-  * Or (and this will give you more flexibilty in designing) model up your
-shapes useing whatever method you like and then projecting or pulling seam
-
-lines to the surface and splitting that surface up. Note, in V4 there is a
-
-very handy tool called _Shortpath that gives a "geodesic" curves on the
-
-surface which can be good for this.
-
-Once you have these split surfaces you can flatten them useing one of the
-
-available methods for dealing with double curvature (ie non developable)
-
-surfaces. Note that any surface flattened in this way WILL be an
-
-approximation, but sensible seaming will minimize this.
+Once you have these split surfaces you can flatten them using one of the available methods for dealing with double curvature (i.e. non developable) surfaces. **Note:** Any surface flattened in this way **will** be an approximation, but sensible seaming will minimize this.
 
 ---
 
-**The tools currently available are:**
+=====Currently available tools=====
 
-=====Smash.=====
-This is free (part of V4). Be careful to try both of the unrolling
+====Smash====
+This is free (part of V4). Try both the unrolling directions along U and V to see which gives the best result. Also, watch the dialogue which will tell you what percent change in surface area the unrolling caused. If it tells you that the surface is 65% smaller after unrolling then you know it has all gone horribly wrong.
 
-directions along U and V to see which gives best result. Also watch the
+====Expander====
 
-dialogue which will tell you what % change in surface area the unrolling
+*Discontinued as of January 31, 2007
 
-caused. If it tells you the resulting surface is 65% smaller afetr unrolling
+Not a free plug-in for V3. This is my current favorite. It gives extremely
+good results and has the major advantage of giving you a color gradient map
+that shows how much stretch and compression is needed to create the
+flattened surface. 
 
-then you know it has all gone horribly wrong.
-
-=====Expander=====
-
-*Discontinued as of Jan 31'st 2007
-
-Not free plugin for V3. This is my current favourite. It gives extremely
-
-good results and has the major advantage of giving you a colour gradient map
-
-showing clearly how much stretch and compression was needed to create the
-
-flattened surface. Available from:
-
-http://www.shipconstructor.com/productsandsolutions/companionproducts/expander.html
+Available from: http://www.shipconstructor.com/productsandsolutions/companionproducts/expander.html
 
 For an alternative to expander in V4, see:
-
-[[labs:advancedflattening|AdvancedFlattening]]
-
+[[labs:advancedflattening|AdvancedFlattening]].
 
 
-=====Laminadesign=====
-Rather nice stand alone program that can read .obj files from Rhino. Suffers
 
+====Laminadesign====
+Rather nice standalone program that can read .obj files from Rhino. Suffers
 from not having a good way to split up surfaces, so you have to do it all
-
 first in Rhino, then export and expand. If you don't like the results you
-
-have to go back to rhino, resplit, export again and re-expand.
+have to go back to Rhino, resplit, export again, and re-expand.
 
 Available from: http://laminadesign.com/
 
-=====TouchCAD=====
-Stand alone program with a modelling methodolgy that does my head in. It
-
-does have the MAJOR advantage of real time flattening, ie. change a model in
-
-3D and it istantly updates the 2D patterns. This brilliant for getting
-
-optimum fabric useage.
+====TouchCAD====
+Standalone program with a modeling method that does my head in. It
+does have the **major** advantage of real time flattening, i.e. change a model in
+3D and it instantly updates the 2D patterns. This is brilliant for getting
+optimum fabric use.
 
 Available from: http://www.touchcad.com/
 
-Note you cannot get rhino surfaces into TouchCAD. You have to model in TC.
+**Note:** You cannot get Rhino surfaces into TouchCAD. You have to model in TC.
 
-=====Optitex=====
-Not a flattening program per se but it has some very nice 3d features which
-
-allow you to take your flat patterns and stitch them together, then simulate
-
+====Optitex====
+Not a flattening program per se but it has some nice 3D features which
+let you take your flat patterns and stitch them together, then simulate
 how the final product will pull together. You can define the fabric
-
-characteristics, seam tension and it gives a VERY accurate model of the
-
+characteristics and seam tension and it gives a **very** accurate model of the
 final product right down to seam wrinkles and folds. It is also a complete
-
-pattern design, nesting, grading and CNC cutting controller. We've been
-
+pattern design, nesting, grading, and CNC cutting controller. We've been
 using it for ages and love it. Expensive as hell but worth every cent.
 
-I was told yesterday by the CEO that flattening is in Alpha and will be
-
+I was told yesterday by the CEO that flattening is in alpha and will be
 available in the next version. Fingers crossed.
 
 Available from: http://www.optitex.com
-
 
