@@ -3,18 +3,18 @@
 > **Summary:** //Discusses how to determine the dimension and the upper bounds of arrays in [[developer:rhinoscript|RhinoScript]].//
 
 =====Question=====
-If I have a two-dimensional array, how can I determine the upper bounds of the array for each dimension? Also, how do you handle jagged arrays? That is, an array whose elements themselves are arrays? How would I be able to find the uppper bounds of two, three, or n-dimensional array whether the array is rectangular or jagged?
+If I have a two-dimensional array, how can I determine the upper bounds of the array for each dimension? Also, how do you handle jagged arrays? That is, an array whose elements themselves are arrays? How do I find the upper bounds of two, three, or n-dimensional array when the array is rectangular or jagged?
 
 =====Answer=====
-To determine the upper bounds of an array, use VBScript's **UBound** method. The **UBound** method returns the largest available subscript for the indicated dimension of an array. The syntax for **UBound** is a follows:
+To determine the upper bounds of an array, use VBScript's **UBound** method. The **UBound** method returns the largest available subscript for the indicated dimension of an array. The syntax for **UBound** is:
 
 <code vb>
  UBound(arrayname [,dimension])
 </code>
 
 Where:
-  * arrayname (Required) - The name of the array variable.
-  * dimension (Optional) - A whole number indicating which dimension's upper bound is returned. Use 1 for the first dimension, 2 for the second, and so on. If dimension is omitted, 1 is assumed.
+  * array name (required) - The name of the array variable.
+  * dimension (optional) - A whole number indicating which dimension's upper bound is returned. Use 1 for the first dimension, 2 for the second, and so on. If dimension is omitted, 1 is assumed.
 
 For example:
 
@@ -26,9 +26,9 @@ For example:
  UBound(A, 3) ' 4 
 </code>
 
-But, what if you do not know the dimensions of an array, which might be the case with a jagged array? How do you know what dimension values are valid to pass to **UBound**?
+But, what if you do not know an array's dimensions, which might be the case with a jagged array? How do you know what dimension values are valid to pass to **UBound**?
 
-VBScript does not have a function that returns the number of dimensions of an array. But, using the **UBound** method and some simple error checking, we can write our own function that determines the number of dimension of an array.
+VBScript does not have a function that returns the number of dimensions of an array. But, by using the **UBound** method and some simple error checking, we can write our own function that determines the number of dimension of an array.
 
 Consider the following function:
 
@@ -60,7 +60,7 @@ Consider the following function:
 
 **GetArrayDim** simply calls **UBound** with a different dimension parameter until an error is thrown. Note, since VBScript allows arrays of up to 60 dimensions, we must check up to this value.
 
-Now that we have a function that will return the dimensions of an array, we can write a subroutine that dump out the dimensions and upper bounds of either a rectangular or jagged array.
+Now that we have a function that will return the dimensions of an array, we can write a subroutine that dumps out the dimensions and upper bounds of either a rectangular or jagged array.
 
 For example:
 
@@ -97,7 +97,9 @@ For example:
  End Sub
 </code>
 
-For every element in an array, **DumpArrayInfo** calls **GetArrayDim** to determine the dimension of the array element. If **GetArrayDim** return a valid result, then the subroutine determines the upper bounds in each dimension of the array element and prints the results to the Rhino command line. Note, **DumpArrayInfo** uses a **UBound** helper function named **GetArrayUBound** that is a little safer than just using **UBound**.
+For every element in an array, **DumpArrayInfo** calls **GetArrayDim** to determine the dimension of the array element. If **GetArrayDim** returns a valid result, then the subroutine determines the upper bounds in each dimension of the array element and prints the results to the Rhino command line. 
+
+Note, **DumpArrayInfo** uses a **UBound** helper function named **GetArrayUBound** that is a little safer than just using **UBound**.
 
 <code vb>
  'Description
