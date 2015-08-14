@@ -2,12 +2,12 @@
 > **Developer:** [[developer:rhinoscript|RhinoScript]]
 > **Summary:** //Overview of VBScript coding conventions.//
 
-=====See Also=====
+=====See also=====
 [[developer:vbsfundamentals|VBScript Fundamentals]]
 
 =====Overview=====
 
-Coding conventions are suggestions are designed to help you write VBScript and [[developer:rhinoscript|RhinoScript]] code. Coding conventions can include the following:
+Coding conventions are suggestions designed to help you write VBScript and [[developer:rhinoscript|RhinoScript]] code. Coding conventions can include the following:
 
   * Naming conventions for objects, variables, and procedures
   * Commenting conventions
@@ -15,7 +15,7 @@ Coding conventions are suggestions are designed to help you write VBScript and [
 
 The main reason for using a consistent set of coding conventions is to standardize the structure and coding style of a script or set of scripts so that you and others can easily read and understand the code. Using good coding conventions results in clear, precise, and readable source code that is consistent with other language conventions and is intuitive.
 
-=====Constant Naming Conventions=====
+=====Constant naming conventions=====
 
 Earlier versions of VBScript had no mechanism for creating user-defined constants. Constants, if used, were implemented as variables and distinguished from other variables using all uppercase characters. Multiple words were separated using the underscore (_) character. For example:
 
@@ -24,13 +24,13 @@ Earlier versions of VBScript had no mechanism for creating user-defined constant
  NEW_LINE
 </code>
 
-While this is still an acceptable way to identify your constants, you may want to use an alternative naming scheme, now that you can create true constants using the **Const** statement. This convention uses a mixed-case format in which constant names have a "con" prefix. For example:
+While this is still an acceptable way to identify your constants, you may want to use an alternative naming scheme now that you can create true constants using the **Const** statement. This convention uses a mixed-case format in which constant names have a "con" prefix. For example:
 
 <code vb>
  conYourOwnConstant
 </code>
 
-=====Variable Naming Conventions=====
+=====Variable naming conventions=====
 
 To enhance readability and consistency, use the following prefixes with descriptive names for variables in your VBScript code.
 
@@ -48,7 +48,7 @@ To enhance readability and consistency, use the following prefixes with descript
 |String|str|strFirstName|
 \\
 
-=====Variable Scope=====
+=====Variable scope=====
 
 Variables should always be defined with the smallest scope possible. VBScript variables can have the following scope.
 
@@ -57,7 +57,7 @@ Variables should always be defined with the smallest scope possible. VBScript va
 |Script-level|Outside any procedure.|Visible in every procedure in the script.|
 \\
 
-=====Variable Scope Prefixes=====
+=====Variable scope prefixes=====
 
 As script size grows, so does the value of being able to quickly differentiate the scope of variables. A one-letter scope prefix preceding the type prefix provides this, without unduly increasing the size of variable names.
 
@@ -66,13 +66,13 @@ As script size grows, so does the value of being able to quickly differentiate t
 |Script-level|s|sblnCalcInProgress|
 \\
 
-=====Descriptive Variable and Procedure Names=====
+=====Descriptive variable and procedure names=====
 
-The body of a variable or procedure name should use mixed case and should be as descriptive as necessary. In addition, procedure names should begin with a verb, such as //InitNameArray// or //ValidateLayer//.
+The body of a variable or procedure name should use mixed case and should be as descriptive as necessary. Also, procedure names should begin with a verb, such as //InitNameArray// or //ValidateLayer//.
 
 For frequently used or long terms, standard abbreviations are recommended to help keep name length reasonable. In general, variable names greater than 32 characters can be difficult to read. When using abbreviations, make sure they are consistent throughout the entire script. For example, randomly switching between //Cnt// and //Count// within a script or set of scripts may lead to confusion.
 
-=====Code Commenting Conventions=====
+=====Code commenting conventions=====
 
 All procedures should begin with a brief comment describing what they do. This description should not describe the implementation details (how it does it) because these often change over time, resulting in unnecessary comment maintenance work, or worse, erroneous comments. The code itself and any necessary inline comments describe the implementation.
 
@@ -93,7 +93,7 @@ Remember the following points:
   * Variables, controls, and procedures should be named clearly to ensure that inline comments are only needed for complex implementation details.
   * At the beginning of your script, you should include an overview that describes the script, enumerating objects, procedures, algorithms, dialog boxes, and other system dependencies. Sometimes a piece of pseudocode describing the algorithm can be helpful.
 
-=====Formatting Your Code=====
+=====Formatting your code=====
 
 Screen space should be conserved as much as possible, while still allowing code formatting to reflect logic structure and nesting. Here are a few suggestions:
 
