@@ -1,33 +1,20 @@
-** [[labs:panelingtools|PanelingTools]] Commands **
+======PanelingTools Commands======
 
-> **Summary:** //Commands description of [[labs:panelingtools|PanelingTools]] Plugin for Rhino4.0.//
-\\
-
-=====Contents=====
-
-  * [[#Background]]
-  * [[#Commands Description]]
-  * [[labs:panelingexamples|Short Video Tutorial]]
-\\
+> **Summary:** //Command descriptions of [[labs:panelingtools|PanelingTools]] Plug-in for Rhino 4.0.//
 \\
 
 
+=====Background=====
 
-| [[#Back to top]]|
 
-----
-=====BACKGROUND=====
-\\
+Panels are repeated patterns on surfaces, polysurfaces or a grid of points.  [[labs:panelingtools|PanelingTools]] offers two ways to create panels.  The first is to use an ordered paneling grid of points (ordered by row and column) and the second is by objects ([[rhino:nurbs|NURBs]] surface or polysurface). Panels are added in the form of edges, faces borders, face patches, flat faces, and a mesh. All panels are serialized.
 
-Panels are repeated patterns on surfaces, polysurfaces or a grid of points.  [[labs:panelingtools|PanelingTools]] offer two ways to create panels.  The first is to use an ordered paneling grid of points (ordered by row and column) and the second is by objects ([[rhino:nurbs|NURBs]] surface or polysurface). Panels are added in the form of edges, faces borders, face patches, flat faces and a mesh. All panels are serialized.
 
-\\
-
-[[labs:panelingtools|PanelingTools]] use some geometry concepts such as [[rhino:nurbs|NURBs]] curves and surfaces, the U and V direction of a [[rhino:nurbs|NURBs]] surface, trimmed vs untrimmed surfaces and polysurfaces.  For a quick review, you can check the [[rhino:nurbssurfaces|NurbsSurfaces]] wiki page.
+[[labs:panelingtools|PanelingTools]] use some geometry concepts such as [[rhino:nurbs|NURBs]] curves and surfaces, the U and V direction of a [[rhino:nurbs|NURBs]] surface, trimmed vs untrimmed surfaces and polysurfaces.  For a quick review, you can check the [[rhino:nurbssurfaces|Nurbs Surfaces]] wiki page.
 
 \\
 
-**Paneling by ordered grid of points:**
+**Paneling by ordered grid of points**
 
   * Step one: Create an ordered grid of points
 Points must be ordered in rows and columns.  Each point location is marked in its object name (shows in the object properties).
@@ -36,16 +23,16 @@ Points must be ordered in rows and columns.  Each point location is marked in it
 
 {{:legacy:en:pt_top.PNG}}
 
-While [[labs:panelingtools|PanelingTools]] offers many commands to create the ordered grid, users can create their own, through scripting for example.  All that is required is to name point-objects and use for paneling.
+While [[labs:panelingtools|PanelingTools]] offers many commands to create the ordered grid, you can create your own, through scripting for example.  All that is required is to name point-objects and use for paneling.
 
-Another advantage of separating grid generation from paneling is that users can edit the grid before paneling.  They can run commands like pull, project or transform to edit the grid, then panel.
+Another advantage of separating grid generation from paneling is that you can edit the grid before paneling.  You can run commands like pull, project, or transform to edit the grid, then panel.
 
   * //Step two: Create panels//
-Select an ordered point grid, a reference object (optional), pattern and the kind of output you like to get.  Custom paneling and quads is also possible.
+Select an ordered point grid, a reference object (optional), pattern, and the kind of output you like to get.  Custom paneling and quads is also possible.
 
 \\
 
-**Paneling surfaces and polysurfaces directly:**
+**Paneling surfaces and polysurfaces directly**
 
 These are tools to panel directly using a reference surface or polysurface.
 
@@ -58,28 +45,25 @@ It is also possible to combine grid generation commands with paneling by grid co
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
-=====COMMAND DESCRIPTIONS=====
+=====Command descriptions=====
 \\
 \\
 
-=====Toolbars=====
-[[labs:panelingtools|PanelingTools]] toolbars offer two sets of scripted commands that combine grid generation with paneling. Toolbars are available for download.
+====Toolbars====
+[[labs:panelingtools|PanelingTools]] toolbars offers two sets of scripted commands that combine grid generation with paneling. Toolbars are available for download.
 
 {{:legacy:en:menu_6_8_2009.PNG}}
 \\
 \\
 
-=====Menu=====
-Note that [[labs:panelingtools|PanelingTools]] drop-down menu shows only after [[labs:panelingtools|PanelingTools]] is loaded (usually after calling one of the plugin commands for the first time in a session).
+====Menu====
+Note that [[labs:panelingtools|PanelingTools]] drop-down menu shows only after [[labs:panelingtools|PanelingTools]] is loaded (usually after calling one of the plug-in commands for the first time in a session).
 
 \\
 \\
 
-=====Available Commands=====
+====Available commands====
 
 |Grid Creation|Grid Editing|Paneling|Others|
 | {{:legacy:en:i_dividecrv.PNG}} [[#ptDivideCurveSpan]] | {{:legacy:en:i_dir.PNG}} [[#ptDirection]] | {{:legacy:en:i_panelbysrf.PNG}} [[#ptPanelSurface]] | {{:legacy:en:i_tag.PNG}} [[#ptTagObject]] |
@@ -105,8 +89,6 @@ Note that [[labs:panelingtools|PanelingTools]] drop-down menu shows only after [
 
 
 
-| [[#Back to top]]|
-
 ----
 
 **ptDivideCurveSpan**
@@ -130,9 +112,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptDivideCurveByDirectDistance**
@@ -151,8 +130,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
 
 ----
 
@@ -198,9 +175,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptPanelCurve**
@@ -210,7 +184,7 @@ Command Options:
 Generate panels for a surface or polysurface using direction curve.  Curve can be open or closed.
 
 {{:legacy:en:panelcrv.PNG}}
-Command Options:
+Command options:
 
    Line: Option to define direction curve with two points
    CurveOptions
@@ -241,20 +215,17 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptManage3dPatterns**
 
 \\
 
-User can create new 3D patterns that connect grid points, save, delete or edit them.  These patterns are saved to document and are listed in commands like ptPanel3D with other built-in patterns.
+You can create new 3D patterns that connect grid points, save, delete, or edit them.  These patterns are saved to document and are listed in commands like ptPanel3D with other built-in patterns.
 
 {{:legacy:en:panel3d_2.PNG}}
 
-Command Options:
+Command options:
 
    New: For creating new pattern
    Edit: To edit existing patterns
@@ -263,15 +234,13 @@ Command Options:
 \\
 
 
-| [[#Back to top]]|
-
 ----
 
 **ptPanel3D**
 
 \\
 
-Panel with 2 grids. There are few pre-defined patterns to select from. There is also the option to create new pttern that connects grid points. Panels are added in the form of edges, faces and polysurfaces. Spacing of unit patterns depends on grid spacing.
+Panel with two grids. There are a few pre-defined patterns to select from. There is also the option to create a new pattern that connects grid points. Panels are added in the form of edges, faces, and polysurfaces. Spacing of unit patterns depends on grid spacing.
 
 {{:legacy:en:panel3d.PNG}}
 Command Options:
@@ -285,15 +254,13 @@ Command Options:
 \\
 
 
-| [[#Back to top]]|
-
 ----
 
 **ptPanel3DCustom**
 
 \\
 
-Morphes 3D patterns between 2 bounding grids.  There is the option to select a base surfaces.
+Morphes 3D patterns between two bounding grids.  There is the option to select a base surfaces.
 
 {{:legacy:en:panel3dcustom.png}}
 Command Options:
@@ -310,15 +277,13 @@ Command Options:
 \\
 
 
-| [[#Back to top]]|
-
 ----
 
 **ptOrientToGrid**
 
 \\
 
-It allows selecting any number of objects, then orient (flow) them along paneling grid.  It is possible to select a base surface.  the user select 3 reference points and the fourth point is option to deform pattern to fit the grid.
+It allows selecting any number of objects, then orient (flow) them along paneling grid.  It is possible to select a base surface.  You can select three reference points and the fourth point is an option to deform pattern to fit the grid.
 
 {{:legacy:en:orient.PNG}}
 Command Options:
@@ -334,16 +299,13 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptManage2dPatterns**
 
 \\
 
-User can create new patterns that connect grid points, save, delete or edit them.  These patterns are saved to document and are listed in commands like ptPanelGrid with other built-in patterns.
+You can create new patterns that connect grid points, save, delete, or edit them.  These patterns are saved to the document and are listed in commands like ptPanelGrid with other built-in patterns.
 
 {{:legacy:en:w_newp.PNG}}
 Command Options:
@@ -355,16 +317,13 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptPanelGrid**
 
 \\
 
-Panel with ordered grid of points. Reference object (surface or polysurface) is optional.  There are few pre-defined patterns to select from. There is also the option to create new pttern that connects grid points. Panels are added in the form of edges, faces borders, faces (edgesrf or patches), flat faces and a mesh.
+Panel with ordered grid of points. Reference object (surface or polysurface) is optional.  There are a few predefined patterns to select from. There is also the option to create a new pattern that connects the grid points. Panels are added in the form of edges, faces borders, faces (edgesrf or patches), flat faces, and a mesh.
 
 {{:legacy:en:w_patterns.PNG}}
 Command Options:
@@ -390,9 +349,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptPanelGridCustom**
@@ -415,9 +371,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptPanelGridQuads**
@@ -426,7 +379,7 @@ Command Options:
 
 Adjust paneling grid to create maximum number of quads within tolerance.
 
-One way to have better quads coverage is by increasing **MaxDeviation**, but that wouls increase distortion. Another way is to use more dense grid.
+One way to have better quads coverage is by increasing **MaxDeviation**, but that increases distortion. Another way is to use a more dense grid.
 
 {{:legacy:en:w_quads.PNG}}
 Command Options:
@@ -438,9 +391,6 @@ Command Options:
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 
@@ -455,16 +405,13 @@ Color panels or faces (perviously created with FlatFaces option in paneling comm
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptPanelRandomPoints**
 
 \\
 
-Select base surface, any number of points on surface or have the command generate points.
+Select base surface, any number of points on surface, or have the command generate points.
 
 {{:legacy:en:w_panelrandom.PNG}}
 Command Options:
@@ -475,9 +422,6 @@ Command Options:
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 
@@ -497,9 +441,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptTriangulatePoints**
@@ -511,9 +452,6 @@ Use Delauney triangulation to create a mesh from points.
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 
@@ -528,17 +466,13 @@ Group similar curves together within given tolerance.
 \\
 \\
 
-
-
-| [[#Back to top]]|
-
 ----
 
 **ptGridArray**
 
 \\
 
-Create array of ordered points.  User defines first and second directions (these need not be orthogonal).
+Create an array of ordered points. You define the first and second directions. (These need not be orthogonal.)
 
 {{:legacy:en:w_gridbyarray.PNG}}
 Command Options:
@@ -555,16 +489,13 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptGridArrayPolar**
 
 \\
 
-Array need not be flat.  User selects rotation center and axis, then sets base point and direction of the polar array.
+Array need not be flat.  You select rotation center and axis, then set base point and direction of the polar array.
 
 {{:legacy:en:w_gridbyarraypolar.PNG}}
 Command Options:
@@ -580,8 +511,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
 
 ----
 
@@ -615,16 +544,13 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptGridExtrude2**
 
 \\
 
-Sort of like extrude along a curve.  Select 2 curves and define the divide method of each curve (by number, by distance or by direct distance).
+Sort of like extrude along a curve.  Select two curves and define the divide method of each curve (by number, by distance, or by direct distance).
 
 {{:legacy:en:w_gridbydirecton.PNG}}
 Command Options:
@@ -652,9 +578,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptGridUCurves**
@@ -680,9 +603,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptGridUVCurves**
@@ -702,18 +622,15 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 
 **ptGridPoints**
 
 \\
 
-Input grid u and v directions, base point, and u and v spacing.  Using input, a base grid is created.  Input points are rounded to the closest grid intersection points. This is why the result might be fewer points then the input (multiple points can be rounded to same index).  For random set of points, the higher the spacing, the more successful it will be to panel these points as illustrated in the image below.
+Input grid u and v directions, base point, and u and v spacing.  Using input, a base grid is created.  Input points are rounded to the closest grid intersection points. This is why the result might be fewer points then the input. (Multiple points can be rounded to same index.)  For a random set of points, the higher the spacing the more successful it will be to panel these points as illustrated in the image below.
 
-If align option is set to “Yes”, points will shift location slightly to align with the defined spacing.
+If align option is set to //Yes//, points will shift location slightly to align with the defined spacing.
 
 {{:legacy:en:gridbypoints1.PNG}}
 Command Options:
@@ -729,9 +646,6 @@ Command Options:
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 
@@ -754,9 +668,6 @@ Command Options:
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 
@@ -785,8 +696,6 @@ Command Options:  DivideMethod (BySurfaceUV, BySurfaceDistance)
 
 
 
-| [[#Back to top]]|
-
 ----
 **ptGridSurfaceDistance**
 
@@ -804,9 +713,6 @@ Command Options:
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 **ptGridCurve**
@@ -838,14 +744,11 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 **ptGridCurve2**
 
 \\
-Generate a grid based on an object and 2 direction curves.  Curves can be repeated in parallel or polar direction.
+Generate a grid based on an object and two direction curves.  Curves can be repeated in parallel or polar direction.
 
 {{:legacy:en:ptgridcurve2.PNG}}
 Command Options:
@@ -870,8 +773,6 @@ Command Options:
 \\
 
 
-| [[#Back to top]]|
-
 ----
 **ptDirection**
 
@@ -889,9 +790,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 **ptRowsDirection**
 
@@ -904,9 +802,6 @@ Reverse row directions in a grid.
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 **ptCompactGrid**
 
@@ -918,9 +813,6 @@ Remove holes in the selected grid.
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 **ptCloseGrid**
 
@@ -931,9 +823,6 @@ Close selected grid in U or V direction.
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 **ptGridSeam**
@@ -947,9 +836,6 @@ Change grid seam. The selected grid must be closed.
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 **ptCleanOverlap**
 
@@ -962,9 +848,6 @@ Remove overlapped points in a grid or merge them within tolerance:
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 **ptShiftGrid**
@@ -981,9 +864,6 @@ Command Options:
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 **ptOffsetPoints**
 
@@ -999,9 +879,6 @@ Command Options:
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 **ptTagObjects**
@@ -1020,8 +897,6 @@ Command Options:
 \\
 
 
-| [[#Back to top]]|
-
 ----
 **ptSerializeObjects**
 
@@ -1034,7 +909,7 @@ Adds serializing to objects (points, curves, surfaces) relative to:
      c. User-defined direction
      d. Reference surface
 
-Command Options:
+Command options:
 
    SortMethod: using the above four methods
    Prefex: Name that shown before serial number
@@ -1043,8 +918,6 @@ Command Options:
 \\
 \\
 
-
-| [[#Back to top]]|
 
 ----
 **ptUnifyCurvesDirection**
@@ -1056,9 +929,6 @@ Unify the direction of curves to point in the same general direction.
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 **ptSurfaceFromGridOfEditPoints**
@@ -1072,9 +942,6 @@ Create a [[rhino:nurbs|NURBs]] surface using grid as edit points.
 \\
 
 
-
-| [[#Back to top]]|
-
 ----
 **ptSurfaceFromGridOfControlPoints**
 
@@ -1086,9 +953,6 @@ Create a [[rhino:nurbs|NURBs]] surface using a point grid as surface control poi
 \\
 \\
 
-
-
-| [[#Back to top]]|
 
 ----
 **ptExtrudeEdges**
@@ -1105,8 +969,6 @@ Command Options:
 \\
 
 
-| [[#Back to top]]|
-
 ----
 **ptOffsetEdges**
 
@@ -1114,15 +976,13 @@ Command Options:
 
 Offset paneling edges uing base surface.
 
-Command Options:
+Command options:
 
    Distance: Offset distance
    NameEnding: suffex added to edge name to serialize offsetted curves
 \\
 \\
 
-
-| [[#Back to top]]|
 
 ----
 **ptFinEdges**
@@ -1131,7 +991,7 @@ Command Options:
 
 Fin paneling edges using pase surface.
 
-Command Options:
+Command options:
 
    Distance: Fin distance
    NameEnding: suffex added to edge name to serialize fins
