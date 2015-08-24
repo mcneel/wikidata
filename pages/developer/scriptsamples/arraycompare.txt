@@ -3,7 +3,7 @@
 > **Summary:** //Discuss efficient VBScript array comparison.//
 
 =====Question=====
-I need to take two collections of items and determine how many of those items had the same name. I am currently using this method for comparison:
+I need to take two collections of items and determine how many of those items have the same name. I currently use this method for comparison:
 
 <code vb>
 intSame = 0
@@ -20,7 +20,7 @@ Next
 This method, although straightforward, is extremely slow. Is there anything I can do to speed this up?
 
 =====Answer=====
-Let's say there were 5000 items in //arrFirst//, 3000 items in //arrSecond//, and 1500 of them had the same value. Every one of the 3500 unsuccessful searches checked all 3000 //arrSecond// items, and the 1500 successful searches on average checked 1500 //arrSecond// items each. Each time through the inner loop does one loop iteration and one string comparison. Add all those up and you get millions of function calls to determine this count. Now each individual function call was only taking a few microseconds, but all of these calls adds up!
+Let's say there are 5000 items in //arrFirst//, 3000 items in //arrSecond//, and 1500 of them have the same value. Every one of the 3500 unsuccessful searches checks all 3000 //arrSecond// items, and the 1500 successful searches on average check 1500 //arrSecond// items each. Each time through, the inner loop does one loop iteration and one string comparison. Add all those up and you get millions of function calls to determine this count. Now, each individual function call is only taking a few microseconds, but all of these calls add up!
 
 Try building a faster lookup table rather than doing a full search through the collection every time.
 
@@ -34,7 +34,7 @@ For Each strSecond In arrSecond
 Next
 </code>
 
-Which is much, much faster. That's only a couple of thousand function calls. Thus, we at have good reason to believe that this is going to be several times faster. 
+This is only a couple of thousand function calls. So we believe that this will be much, much faster. 
 
 \\
 
