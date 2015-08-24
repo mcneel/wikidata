@@ -1,15 +1,15 @@
 ======Creating an Isometric View======
 
-For a "fakey" isometric view (won't scale correctly until you finish the [[rhino:make2d|Make2D]] process described below):
+For a //fakey// isometric view (won't scale correctly until you finish the Make2D process described below).
 
-In your right viewport, rotate the CPlane 45 degrees about the y axis, so that in the top view it is aligned with the axis of view that you want. In the old Right viewport, which we will now call the 45 viewport, set camera to CPlane Top. Draw a "camera view" line from the base of the object in the 45 viewport to the camera point. The angle that you draw that line at is = Arcsin(Tan(angle of the isometric)), so for 15 degrees, it would be Arcsin(Tan15) = 15.542 degrees, and for 20 it would be ArcSin(Tan20) = 21.344 degrees.
-
-
-
-Now, in the Viewport to be the Isometric, be sure that it is set to parallel, set the target at the "base" (object side) of the "camera view" line, and set the camera at the other end. With the camera set, you can set the CPlane to the view using Cplane -> **V**iew, now you can pan and zoom around in your Isometric without losing your setup.
+In your right viewport, rotate the CPlane 45 degrees about the y axis, so that in the top view it is aligned with the axis of view that you want. In the old Right viewport, which we will now call the 45 viewport, set camera to CPlane Top. Draw a //camera view// line from the base of the object in the 45 viewport to the camera point. The angle that you draw that line at is = Arcsin(Tan(angle of the isometric)). So for 15 degrees, it would be Arcsin(Tan15) = 15.542 degrees, and for 20 it would be ArcSin(Tan20) = 21.344 degrees.
 
 
-The problem with this method is that you have to scale the output of the [[rhino:make2d|Make2D]] a bit. So if you had a cube that was 1 x 1 x 1, the length of the resulting isometric at 15 degrees is going to be 0.732, not 1, which is (L * square root of 0.5)/Cos(isometric angle).
+
+Now, for the Viewport to be the Isometric, be sure that it is set to parallel, set the target at the //base// (object side) of the //camera view// line, and set the camera at the other end. With the camera set, you can set the CPlane to the view using Cplane -> **V**iew. Now you can pan and zoom around in your Isometric without losing your setup.
+
+
+The problem with this method is that you have to scale the output of the Make2D a bit. So if you had a cube that was 1x1x1, the length of the resulting isometric at 15 degrees is going to be 0.732, not 1, which is (L * square root of 0.5)/Cos(isometric angle).
 
 
 
