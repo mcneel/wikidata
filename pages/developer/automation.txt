@@ -4,13 +4,13 @@
 
 =====Introduction=====
 
-With the release of version 3.0, Rhino introduced support to ActiveX Automation. Using Rhino 3.0, it was possible to control, or automate, Rhino from an external application written in a language that supported COM, such as Microsoft Visual Basic.
+In version 3.0, Rhino introduced support to ActiveX Automation. Using Rhino 3.0, it was possible to control, or automate, Rhino from an external application written in a language that supported COM, such as Microsoft Visual Basic.
 
-The Rhino 3.0 implementation was not without shortcomings. If a copy of Rhino 3.0 was already running, it was not possible to create new instances of the Application object using CreateObject (VB) or CreateDispatch (C++). For developers writing utilities that were intended to hook onto a running copy of Rhino, this was more of a feature than a problem. But, for developers using Rhino as an “invisible” file conversion engine, this could be problematic. Especially if Rhino was already running and had a model opened for editing.
+The Rhino 3.0 implementation did have shortcomings. If a copy of Rhino 3.0 was already running, you could not create new instances of the Application object using CreateObject (VB) or CreateDispatch (C++). For developers writing utilities that hook onto a running copy of Rhino, this was more of a feature than a problem. But, for developers using Rhino as an //invisible// file conversion engine, this could be a problem, especially if Rhino was already running and had a model opened for editing.
 
 =====Rhino4.Application=====
 
-In Rhino 4.0, we have changed what happens when you create the Application object (Rhino4.Application). When automating Rhino 3.0, when you created the Application object, if an instance of Rhino was already running, you were given a reference to this existing object. According to Microsoft, this is incorrect behavior for applications that only process a single document at a time. Now, when you automate Rhino 4.0, creating the Application object will always result in a new running instance of Rhino.
+In Rhino 4.0, we changed what happens when you create the Application object (Rhino4.Application). When you created the Application object while automating Rhino 3.0, if an instance of Rhino was already running you were given a reference to this existing object. According to Microsoft, this is incorrect behavior for applications that only process a single document at a time. Now, when you automate Rhino 4.0, creating the Application object will always result in a new running instance of Rhino.
 
 <code vb>
 Dim objRhino As Object
@@ -19,27 +19,27 @@ Set objRhino = CreateObject("Rhino4.Application")
 
 =====Rhino4.Interface=====
 
-For those developers who want to hook onto a running instance of Rhino, the new Application object behavior found in Rhino 4.0 is going to cause problems. Thus, we have added a new Interface object (Rhino4.Interface) that works like Rhino 3.0’s Application object.  When you create the Interface object, if an instance of Rhino is already running, you will be given a reference to this existing Interface object. If Rhino is not running, it will be launched and you be given a reference to this newly created object.
+For those developers who want to hook onto a running instance of Rhino, the new Application object behavior found in Rhino 4.0 will cause problems. So we have added a new Interface object (Rhino4.Interface) that works like Rhino 3.0’s Application object.  When you create the Interface object, if an instance of Rhino is already running you will be given a reference to this existing Interface object. If Rhino is not running, it will launch and you'll be given a reference to this newly created object.
 
 <code vb>
 Dim objRhino As Object
 Set objRhino = CreateObject("Rhino4.Interface")
 </code>
 
-=====What To Use?=====
-If you are planning on writing an application that will automate Rhino 4.0, you will have to decide which automation object to use.
+=====What to use?=====
+If you are writing an application that automates Rhino 4.0, you will have to decide which automation object to use.
 
-  * If your application will be using Rhino as a file conversion engine or to create geometry without displaying the interface, you will want to use Rhino's Application object.
-  * If your application must always create a new running instance of Rhino, then you will want to use Rhino's Application object.
-  * If your application contains tools to automate tasks or to assist the Rhino user in generating geometry, then you will want to use Rhino's Interface object.
+  * If your application is using Rhino as a file conversion engine or to create geometry without displaying the interface, use Rhino's Application object.
+  * If your application must always create a new running instance of Rhino, then use Rhino's Application object.
+  * If your application contains tools to automate tasks or to assist the Rhino user in generating geometry, then use Rhino's Interface object.
 
 =====Connecting to RhinoScript=====
 
-Like Rhino 3.0, the [[developer:rhinoscript|RhinoScript]] object for Rhino 4.0 resides in a plug-in (DLL). Having the [[developer:rhinoscript|RhinoScript]] object reside in a plug-in allows us to fix bug and add additional features between Rhino releases.
+Like Rhino 3.0, the [[developer:rhinoscript|RhinoScript]] object for Rhino 4.0 resides in a plug-in (DLL). Having the [[developer:rhinoscript|RhinoScript]] object reside in a plug-in lets us fix bugs and add extra features between Rhino releases.
 
-But, this flexibility can also cause some problems when trying to get this object from an automation-aware application. As is often the case, by the time your application has created the Automation (or Interface) object and is ready to ask that object for RhinoScript, Rhino has not had sufficent time to load the [[developer:rhinoscript|RhinoScript]] plug-in. Thus, you get a runtime error.
+But this flexibility can also cause problems when trying to get this object from an automation-aware application. Often, by the time your application has created the Automation (or Interface) object and is ready for RhinoScript, Rhino has not had sufficent time to load the [[developer:rhinoscript|RhinoScript]] plug-in. So you get a runtime error.
 
-The solution to this problem is to make your application to wait, after creating the Application (or Interface) object, before attempting to get [[developer:rhinoscript|RhinoScript]]. This delay can be performed by using the Win32 API Sleep() function. For example:
+The solution is to make your application wait after creating the Application (or Interface) object, before attempting to get [[developer:rhinoscript|RhinoScript]]. Perform this delay by using the Win32 API Sleep() function. For example:
 
 <code vb>
 'GLOBAL.BAS
@@ -81,9 +81,13 @@ End Sub
 </code>
   
 =====Schemes=====
-Rhino [[rhino:schemes|Schemes]] are different sets of Rhino Options that are stored in the Windows Registry. Everything in the Options section of Rhino can be stored in a [[rhino:schemes|scheme]]. In this way, Rhino can be started with different combinations of workspaces, languages, colors, etc. depending on the need or the user, just by starting Rhino from the appropriate desktop shortcut. The [[rhino:schemes|schemes]] exist independently of each other, and can be modified as desired.
+Rhino [[rhino:schemes|Schemes]] are different sets of Rhino options stored in the Windows Registry. Everything in the Options section of Rhino can be stored in a [[rhino:schemes|scheme]]. This way Rhino can start with different combinations of workspaces, languages, colors, etc. depending on the need or the user. Just start Rhino from the appropriate desktop shortcut. The [[rhino:schemes|schemes]] exist independently of each other, and can be modified as desired.
 
-If Rhino is launched via ActiveX automation, there is no way to specify an alternate [[rhino:schemes|scheme]] (being that you cannot pass command line arguments when creating COM objects). But, we have provided a super-sneaky registry key that you can use to specify an alternate [[rhino:schemes|scheme]]. Note, this registry key only works if Rhino is launched via ActiveX automation. The super-sneaky registry key is:
+If Rhino launches via ActiveX automation, there is no way to specify an alternate [[rhino:schemes|scheme]], as you cannot pass command line arguments when creating COM objects. But, we have provided a super-sneaky registry key that you can use to specify an alternate [[rhino:schemes|scheme]]. 
+
+**Note:** This registry key only works if Rhino launches via ActiveX automation. 
+
+The super-sneaky registry key is:
 
    HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\4.0\Global Options\Automation
    Name: Scheme
