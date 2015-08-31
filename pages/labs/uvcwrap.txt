@@ -16,10 +16,10 @@ UVcWrap is a set of commands to create an unwrap from a mesh (or render mesh), t
 
 //This software is provided as is. The author accepts no liability or responsibility for damages in any form, regardless of cause. By using this software, you agree to the terms stated here and within the accompanying documentation.//
 
-[[http://www.cg3d.de/pub/UVcWrap/UVcWrap_21042009.zip|Download plug-n]] (version 21042009)
+[[http://www.cg3d.de/pub/UVcWrap/UVcWrap_21042009.zip|Download plug-in]] (version 21042009)
 
 ===== Example=====
-[[http://www.cg3d.de/pub/UVcWrap/Examples/UVcWrapExample.rar|Example]] object and some annotations to explain the UVcWrap workflow. It might be needed to reassign the map paths if they are not found in the file search paths or if you cannot see the standard texture.
+[[http://www.cg3d.de/pub/UVcWrap/Examples/UVcWrapExample.rar|Example]] object and some annotations to explain the UVcWrap workflow. You may need reassign the map paths if they are not found in the file search paths or if you cannot see the standard texture.
 
 \\
 
@@ -42,14 +42,14 @@ The plug-in doesn't require any specific renderer or RDK installation. It should
 Extract the contents of the "UVcWrap.zip" file anywhere. Make sure to **preserve the folder structure and folder name**.
 
 
-1. Copy the plug-in file UVcWrap.rhp to plug-ins folder \\
-2. Open Rhino, install the UVcWrap.rhp plug-in \\
+1. Copy the plug-in file UVcWrap.rhp to the plug-ins folder \\
+2. Open Rhino and install the UVcWrap.rhp plug-in \\
 3. Set up a new file search path pointing to the UVcWrap folder \\
 4. Load the display mode named //UVcWrap.ini// \\
 5. Load the toolbar file named //UVcWrap.tb//
 
 
-After installation, start to unwrap a mesh, e.g. a cube using the UVcWrapCreate command. Or if a [[rhino:nurbs|NURBs]] cube is selected, unwrap the render mesh of this [[rhino:nurbs|NURBs]] object (original [[rhino:nurbs|NURBs]] inputs will be hidden). Here is the list of all currently available commands:
+After installation, start to unwrap a mesh, e.g. a cube, using the UVcWrapCreate command. Or if a [[rhino:nurbs|NURBs]] cube is selected, unwrap the render mesh of this [[rhino:nurbs|NURBs]] object (original [[rhino:nurbs|NURBs]] inputs will be hidden). Here is the list of all currently available commands:
 
 \\
 
@@ -87,11 +87,11 @@ UVcWrapFlip \\
 
 \\
 
-Below is a short description how to use each command, most of the commands are scriptable:
+Below is a short description how to use each command. Most of the commands are scriptable:
 
 ===== UVcWrapCreate=====
 
-> **Use:** //Unwraps a mesh or render mesh to the user definable frame plane. The frame plane is a single mesh quad which is positioned behind the unwrapped objects to show the assigned texture.//
+> **Use:** //Unwraps a mesh or render mesh to the user definable frame plane. The frame plane is a single mesh quad positioned behind the unwrapped objects to show the assigned texture.//
 
 1. Select a mesh to unwrap.
 
@@ -105,7 +105,7 @@ To see the transformed result use:
 
 ===== UVcWrapApply=====
 
-> **Use:** //After you´ve done some transformation on your unwrapped meshes, use the UVcWrapApply command to apply the changes to the original mesh.//
+> **Use:** //After you´ve transformed some of your unwrapped meshes, use the UVcWrapApply command to apply the changes to the original mesh.//
 
 1. Start the UVcWrapApply command and click on the frame plane to apply from. If only one frame plane is in the document, it will not ask for a frame plane but will apply it immediately
 
@@ -113,7 +113,7 @@ To see the transformed result use:
 
 ===== UVcWrapFind=====
 
-> **Use:** //Use this command to quickly find unwraps when it gets to complex, click in the middle of a mesh (sub)face of your original object.//
+> **Use:** //Use this command to quickly find unwraps when it gets too complex, click in the middle of a mesh (sub)face of your original object.//
 
 1. Start the UVCwrapFind command and click on a mesh face of the original object.
 
@@ -129,7 +129,7 @@ To see the transformed result use:
 
 ===== UVcWrapMapSize=====
 
-> **Use:** //By default, if no texture is assigned to the mesh before unwrapping it, a standard texture with some numbers will be applied. Use this command to change the map size of this standard texture.//
+> **Use:** //By default, if no texture is assigned to the mesh before unwrapping it, a standard texture with some numbers is applied. Use this command to change the map size of this standard texture.//
 
 1. Start the UVcWrapMapSize command.
 
@@ -177,7 +177,7 @@ To see the transformed result use:
 
 2. All UVcWraps, frame planes, and associated control cages are deleted from the document.
 
-===== UVcWrapSavePostions=====
+===== UVcWrapSavePositions=====
 
 > **Use:** //Saves the position of one or more UVcWraps in relation to their frame planes.//
 
@@ -187,7 +187,7 @@ To see the transformed result use:
 
 ===== UVcWrapRestorePositions=====
 
-> **Use:** //Restores the saved position of one or more UVcWraps in relation to their frame plane. If no position has been saved before, the initial position after the unwrap will be restored.//
+> **Use:** //Restores the saved position of one or more UVcWraps in relation to their frame plane. If no position was saved before, the initial position after the unwrap will be restored.//
 
 1. Start the UVcWrapRestorePositions command.
 
@@ -215,7 +215,7 @@ Transformation commands:
 
 ===== UVcWrapMove=====
 
-> **Use:** //Moves one or more unwrapped meshes, updates after move.//
+> **Use:** //Moves one or more unwrapped meshes. Updates after move.//
 
 1. Select unwrapped meshes and start the UVcWrapMove command.
 
@@ -223,7 +223,7 @@ Transformation commands:
 
 ===== UVcWrapMoveCenter=====
 
-> **Use:** //Moves one or more unwrapped meshes from center point to a point, updates after move.//
+> **Use:** //Moves one or more unwrapped meshes from center point to a point. Updates after move.//
 
 1. Select unwrapped meshes and start the UVcWrapMoveCenter command.
 
@@ -231,7 +231,7 @@ Transformation commands:
 
 ===== UVcWrapRotate=====
 
-> **Use:** //Rotates one or more unwrapped meshes, updates after rotation.//
+> **Use:** //Rotates one or more unwrapped meshes. Updates after rotation.//
 
 1. Select unwrapped meshes and start the UVcWrapRotate command.
 
@@ -239,15 +239,15 @@ Transformation commands:
 
 ===== UVcWrapRotateCenter=====
 
-> **Use:** //Rotates one or more unwrapped meshes around center point, updates after rotation.//
+> **Use:** //Rotates one or more unwrapped meshes around center point. Updates after rotation.//
 
 1. Select unwrapped meshes and start the UVcWrapRotateCenter command.
 
-2. Rotation will be done immediately in 90 degree steps from the center point of the selection.
+2. Rotation is done immediately in 90 degree steps from the center point of the selection.
 
 ===== UVcWrapScale=====
 
-> **Use:** //Scales one or more unwrapped meshes, updates after scale.//
+> **Use:** //Scales one or more unwrapped meshes. Updates after scale.//
 
 1. Select unwrapped meshes and start the UVcWrapScale command.
 
@@ -255,7 +255,7 @@ Transformation commands:
 
 ===== UVcWrapScaleCenter=====
 
-> **Use:** //Scales one or more unwrapped meshes from center point, updates after scale.//
+> **Use:** //Scales one or more unwrapped meshes from center point. Updates after scale.//
 
 1. Select unwrapped meshes and start the UVcWrapScaleCenter command.
 
@@ -263,7 +263,7 @@ Transformation commands:
 
 ===== UVcWrapScale1D=====
 
-> **Use:** //Scales one or more unwrapped meshes in one direction, updates after scale.//
+> **Use:** //Scales one or more unwrapped meshes in one direction. Updates after scale.//
 
 1. Select unwrapped meshes and start the UVcWrapScale1D command.
 
@@ -271,7 +271,7 @@ Transformation commands:
 
 ===== UVcWrapScaleNU=====
 
-> **Use:** //Scales one or more unwrapped meshes non uniform, updates after scale.//
+> **Use:** //Scales one or more unwrapped meshes non uniform. Updates after scale.//
 
 1. Select unwrapped meshes and start the UVcWrapScaleNU command.
 
@@ -280,7 +280,7 @@ Transformation commands:
 
 ===== UVcWrapOrient=====
 
-> **Use:** //Orients one or more unwrapped meshes, updates after orientation.//
+> **Use:** //Orients one or more unwrapped meshes. Updates after orientation.//
 
 1. Select an unwrapped meshes and start the UVcWrapOrient command.
 
@@ -288,17 +288,17 @@ Transformation commands:
 
 ===== UVcWrapFlow=====
 
-> **Use:** //Flows a single unwrapped mesh, similar to Rhino's "FlowAlongSrf" command, updates after flow.//
+> **Use:** //Flows a single unwrapped mesh, similar to Rhino's //FlowAlongSrf// command. Updates after flow.//
 
 1. Very experimental command.
 
 2. Works like the standard FlowAlongSrf command.
 
-3. Check your surface directions of the source and destination surfaces for best results !
+3. Check your surface directions of the source and destination surfaces for best results!
 
 ===== UVcWrapFlip=====
 
-> **Use:** //Flips an unwrapped mesh either along U or V direction of the frame plane. Note that the actual mesh normal direction of the unwrapped mesh is not flipped, instead the order of the texture coordinates is just reversed. Original mesh is automatically updated after using this command.//
+> **Use:** //Flips an unwrapped mesh either along U or V direction of the frame plane. Note that the actual mesh normal direction of the unwrapped mesh is not flipped. Instead the order of the texture coordinates is just reversed. Original mesh is automatically updated after using this command.//
 
 1. Select an unwrapped mesh and start the UVcWrapFlip command.
 
@@ -323,9 +323,9 @@ _RemoveFlippedNormals \\
 _Join \\
 ''
 
-2. If you get flickering (z-fighting) between the unwrapped meshes and the frame plane, enable the option to //draw objects behind all others for locked objects// in Rhino's Advanced options / Rendered Display.
+2. If you get flickering (z-fighting) between the unwrapped meshes and the frame plane, enable the option to //draw objects behind all others for locked objects// in Rhino's Advanced Options / Rendered Display.
 
-3. Create the unwrap in the perspective viewport, draw the frame plane on the CPlane, eg. from the origin to an even coordinate like 40,40. This way you can use the grid to snap to and make it easier to orient the unwrapped meshes.
+3. Create the unwrap in the perspective viewport, draw the frame plane on the CPlane, e.g. from the origin to an even coordinate like 40,40. This way you can use the grid to snap to and make it easier to orient the unwrapped meshes.
 
 4. Use an appropriate mesh resolution before creating an unwrap.
 
@@ -338,9 +338,9 @@ _Join \\
 
 =====Known issues=====
 
-1. Doesn`t rewrap a single sphere mesh because of the way its texture coordinates are assigned.
+1. Doesn't rewrap a single sphere mesh because of the way its texture coordinates are assigned.
 
-2. Doesn`t rewrap a torus mesh primitive because of the same problem.
+2. Doesn't rewrap a torus mesh primitive because of the same problem.
 
 3. You can create overlapping unwraps if the source mesh has a single texture space (unpacked texture coordinates).
 
