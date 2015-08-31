@@ -3,24 +3,22 @@
 > **Summary:** //Discusses how to create plug-ins for Zoo 5.//
 
 ===== Overview =====
-Zoo 5 allows 3rd party plug-in developers to add licensing support for their products to the Zoo.
+Zoo 5 lets third party plug-in developers add licensing support for their products to the Zoo.
 
-When a customer attempts to add a product license to the Zoo, the product's plug-in is called to validate the user's request. Upon valuation, the plug-in will return the product's licensing information back to the Zoo. The Zoo will, in turn, serialize, maintain, and distribute this license.
+When a customer attempts to add a product license to the Zoo, the product's plug-in is called to validate the user's request. Upon validation, the plug-in will return the product's licensing information back to the Zoo. In turn, the Zoo will serialize, maintain, and distribute this license.
 
 ===== Requirements =====
-Zoo plug-ins are .NET Framework 4.0 assemblies. Thus, to create a plug-in for Zoo 5, you will need one of the following development tools:
+Zoo plug-ins are .NET Framework 4.0 assemblies. To create a plug-in for Zoo 5, you need one of the following development tools:
 
   - Microsoft Visual C# 2010.
   - Microsoft Visual Basic .NET 2010.
 
-Also, all plug-ins that use the Zoo license system must be signed with an Authenticode certificate issued by McNeel Plugin Security. These certificates are free, but must be requested by each developer. Developers must agree to the //Terms of Use// before a certificate is issued. For more information on plug-in signing, see the following
+Also, all plug-ins that use the Zoo license system must be signed with an Authenticode certificate issued by McNeel Plug-in Security. These certificates are free, but must be requested by each developer. Developers must agree to the //Terms of Use// before a certificate is issued. For more information on plug-in signing, see **[[developer:digital-signatures/create-request|Digitally Signing Plug-ins]]**.
 
-**[[developer:digital-signatures/create-request|Digitally Signing Plug-ins]]**
+===== Writing a Zoo plug-in =====
+The general steps required to create a Zoo plug-in are: 
 
-===== Writing a Zoo Plug-in =====
-The following are the general steps required to create a Zoo plug-in. 
-
-  - Make sure you have **[[http://download.rhino3d.com/Zoo/5.0/release/download/|Zoo 5]]** installed.
+  - Make sure you have **[[http://download.rhino3d.com/Zoo/5.0/release/download/|Zoo]]** installed.
   - Launch Microsoft Visual Studio 2010.
   - Create a new Class Library project using either Visual C# or Visual Basic .NET.
   - Add a reference to **ZooPlugin.dll**, which is found in the Zoo installation folder. Make sure to set the reference's **Copy Local** property to **False**.
@@ -28,16 +26,17 @@ The following are the general steps required to create a Zoo plug-in.
   - Implement the interface members. //(For detailed information about the interface members, see the sample Zoo plug-ins listed below.)//
   - Build your plug-in.
   - [[developer:digital-signatures/create-request|Digitally sign your plug-in.]]
-===== Installing a Zoo Plug-in =====
-Once you have built your Zoo plug-in, you can install it and test it as follow:
-  - Run **ZooAdmin.exe** and make sure the Zoo licensing service has been stopped.
-  - Copy your plug-in assembly (.DLL) and any dependent support libraries to the Zoo's plug-in's folder (i.e. C:\Program Files\Zoo 5.0\Plugins).
+
+===== Installing a Zoo plug-in =====
+Once you have built your Zoo plug-in, you can install it and test it:
+  - Run **ZooAdmin.exe** and make sure the Zoo licensing service has stopped.
+  - Copy your plug-in assembly (.DLL) and any dependent support libraries to the Zoo's plug-in folder (i.e. C:\Program Files\Zoo 5.0\Plugins).
   - Restart the Zoo license service.
   - When the service has restarted, click the **Add License** button. Your product should be one of the available products for which to add a license.
 
 {{:developer:zoopluginaddlicense.png|}}
 
-===== Zoo Plugin Samples =====
+===== Zoo plug-in samples =====
 [[https://github.com/mcneel/Zoo5|Sample Zoo plug-in projects on GitHub]]
 
 \\
