@@ -1,11 +1,11 @@
 ====== Using Rhino with Epilog Laser Cutters ======
 
-Via the Epilog laser driver, Rhino can directly control the Epilog laser functions: vector and raster modes and laser speeds and feeds. The laser driver is like a Windows printer driver; once installed, it will appear in the list of printers available in Rhino and Windows in general.
+Via the Epilog laser driver, Rhino can directly control the Epilog laser functions: vector and raster modes and laser speeds and feeds. The laser driver is like a Windows printer driver. Once installed, it will appear in the list of printers available in Rhino and Windows in general.
 
-======Basic Laser Setup and Cutting======
-=====Vector and Raster projects=====
+=====Basic laser setup and cutting=====
+====Vector and raster projects====
 
-The Epilog can print in a raster, vector or combined mode. The Epilog Owner's Manual covers the reasons you may want to run projects in a raster or vector cutting mode. Normally the printer driver should be set to Combined mode, which allows control of both vector and raster operations.
+The Epilog can print in a raster, vector, or combined mode. The Epilog Owner's Manual covers the reasons you may want to run projects in a raster or vector cutting mode. Normally the printer driver should be set to Combined mode, which allows control of both vector and raster operations.
 
 
 Some Rhino objects (text, solid hatches, bitmap backgrounds, and shaded views) will automatically cut in Raster mode.
@@ -21,11 +21,11 @@ The Default lineweight in Rhino will plot as a vector line on the cutter.
 
 ----
 
-=====Set the size of stock=====
+====Set the size of stock====
 
   * In the **Printer Properties**, set the **Piece Size**.
 
-=====To locate objects on stock=====
+====To locate objects on stock====
 
   - Draw a rectangle the size of the stock size.
   - Move the rectangle around your art work.
@@ -36,25 +36,25 @@ The Default lineweight in Rhino will plot as a vector line on the cutter.
   - Use object snaps to move the print window to the edge of the border rectangle.
 Drawing the rectangle of the outside of the art work lets you consistently place the print in the same position on the stock.
 
-=====Alternate placement method: "The Table-Lock"=====
+====Alternate placement method: "The Table-Lock"====
 
 //This method practically guarantees a perfect placement of the file to be cut relative to the material.//
 
-  - Create a "laser template" in Rhino by opening a blank file and drawing a rectangle the //exact// size of the cutting table with the origin on the upper left corner. Set the print width of this rectangle to "No Print" and lock it; place it on a "Table" layer and lock the layer as well.  Then save this file as your laser template.
-  - In the Epilog printer properties, make sure the exact //table// size is entered under "Piece Size".
-  - In the Rhino print dialog, make sure View is set to "Extents"; Scale is set 1:1, All margins set to 0; Position set to Offset from Upper Left ("Centered" unchecked) and Offset values both 0.
+  - Create a //laser template// in Rhino by opening a blank file and drawing a rectangle the //exact// size of the cutting table with the origin on the upper left corner. Set the print width of this rectangle to **No Print** and lock it. Place it on a //Table// layer and lock the layer as well.  Then save this file as your laser template.
+  - In the Epilog printer properties, make sure the exact //table// size is entered under **Piece Size**.
+  - In the Rhino print dialog, make sure View is set to //Extents//. Scale is set 1:1. All margins set to 0. Position set to Offset from Upper Left (**Centered** unchecked) and Offset values both 0.
 
-//The effect of the above is to "lock" the print area to the same size and placement as the laser table itself.  It will never accidentally move, you will never have to adjust the print window.//
+//The effect of the above is to //lock// the print area to the same size and placement as the laser table itself.  It will never accidentally move. You will never have to adjust the print window.//
 
-  - Now, when you draw/import your geometry, place it inside the rectangle in your laser template at the same location as it will be placed on the table of the machine.  I recommend placing it in the upper left corner (machine origin), which corresponds to the edges of the guide rulers.
+  - Now, when you draw or import your geometry, place it inside the rectangle in your laser template at the same location as it will be placed on the table of the machine.  I recommend placing it in the upper left corner (machine origin), which corresponds to the edges of the guide rulers.
   - Place your piece of material at the same location in the machine, that is to say in the upper left corner against the guide rulers.
-  - Hit Print, make sure your settings are as above and that you have also set the speed/power correctly for the material, then **//Go!//**
+  - Press **Print**. Make sure your settings are as above and that you have also set the speed/power correctly for the material, then **//Go!//**
 
 ----
 
-=====To set the order of operation=====
+====To set the order of operation====
 
-Rhino has a sophisticated order that it prints objects to the laser that is is programmed into Rhino. The normal draw order is as follows.
+Rhino has a sophisticated order that it prints objects to the laser that is is programmed into Rhino. The normal draw order is:
 
   - LockedHatches
   - LockedCurves
@@ -75,27 +75,27 @@ Rhino has a sophisticated order that it prints objects to the laser that is is p
   - TransparentObjects
   - NormalTextDots
 
-> **Note:** //The Epilog driver will automatically print raster objects before any vector lines.//
+ **Note:** //The Epilog driver will automatically print raster objects before any vector lines.//
 
-=====Control laser strength and speed=====
+====Control laser strength and speed====
 
-Use the raster and vector controls on the general tab of the Legend printer driver to controls in the Epilog driver to control the strength and speed of the raster lines and the vector lines of the laser.
+Use the raster and vector controls on the general tab of the Legend printer driver controls in the Epilog driver to control the strength and speed of the raster lines and the vector lines of the laser.
 
 Lines with lineweights thinner than .175mm (.007 inches) will plot as vector. Lines with lineweights over .175 mm (.007 inches) will plot as raster. In Vector-only cutting modes, lineweights greater than the above threshold are **//ignored//**!
 
 If you require more control of strength and speed of the laser, map individual colored lines in Rhino to different strength and speed of laser within a single print. See the Advanced Laser projects section under Color Mapping Strength and Speed of Laser.
 
-> **Note:** //Be careful when switching between Raster and Vector modes. On many materials, switching an object from raster to vector can greatly effect the material. Simply changing a lineweight can change a vector cut to a raster cut.//
+**Note:** //Be careful when switching between Raster and Vector modes. On many materials, switching an object from raster to vector can greatly effect the material. Simply changing a lineweight can change a vector cut to a raster cut.//
 
-=====Multipass Printing/Cutting=====
+====Multipass printing/cutting====
 
 Simple multipass printing may be neccesary to cut completely through the material or to control the speed and raster/vector mode. Time constraints may also require you to stop a session and restart it later.
 
 
 
-======Advanced laser projects======
+=====Advanced laser projects=====
 
-=====Color mapping strength and speed=====
+====Color mapping strength and speed====
 
 Use Epilog's advanced Color Mapping mode to set the order, strength, and speed of the job based on the color of the lines in the plot.
 
@@ -104,9 +104,8 @@ Color mapping works on vector lines only. This means only lineweights thinner th
 
 When color mapping is used, the laser always cuts the colors in the color list first. If there are any other lines in the image, they will be cut after the assigned colors, and they will use the **Vector** Settings from the **General** tab.
 
-=====Stamps=====
 
-=====3-D Engraving Raster mode=====
+====3D engraving raster mode====
 
 The Epilog manual mentions the difficulty of using the **3D Engraving** mode on the **Advanced** tab, //"Creating a 3D image that will look good after engraving can be very difficult to achieve because most software packages do not provide the necessary tools to take complex objects and blend them in more than one direction from dark to light (or, visa versa)."//  Rhino, however, can create these models without resorting to the 3D Engraving Raster mode.
 
