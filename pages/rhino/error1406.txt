@@ -1,0 +1,19 @@
+====== Install Error 1406 (Cannot write the value to the registry key...) ======
+> **Summary:** //How to fix the installation Error 1406 (Cannot write the value to the registry key...).//
+> **Related Installation Help:** //[[installproblems|Troubleshooting Rhino 5 Installation]]//
+
+=====Problem=====
+A message "Error 1406. Cannot write the value to the registry key \Software\Classes\CLSID\{(lots of letters and numbers)}\LocalServer32. Verify that you have sufficient access to that key or contact you support personnel. (1406)"
+
+=====Cause====
+HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{lots of letters and numbers} does not exist and writing the registry key is blocked by antivirus protection.
+
+=====Answer=====
+Disable your antivirus protection and try to install Rhino again.\\ \\
+The settings in some antivirus application are pretty complicated. If you don't know how to disable your antivirus protection completely, you can remove the antivirus application before install Rhino. Re-install the antivirus application after Rhino has been installed successfully.
+
+=====Note=====
+This problem only happens on the Windows that has never had Rhino installed. Those registry keys don't exist and the antivirus application blocks Rhino installer from writing the registry keys.\\ \\
+If a Windows that ever had Rhino 5 installed previously, even though it has been uninstalled, those registry keys already exist. Rhino 5 installer won't try to write those registry keys again and antivirus protection won't cause the problem.
+
+{{tag>rhino5installationerror_en}}
