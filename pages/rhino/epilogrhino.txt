@@ -47,7 +47,7 @@ Drawing the rectangle of the outside of the art work lets you consistently place
 //The effect of the above is to //lock// the print area to the same size and placement as the laser table itself.  It will never accidentally move. You will never have to adjust the print window.//
 
   - Now, when you draw or import your geometry, place it inside the rectangle in your laser template at the same location as it will be placed on the table of the machine.  I recommend placing it in the upper left corner (machine origin), which corresponds to the edges of the guide rulers.
-  - Place your piece of material at the same location in the machine, that is to say in the upper left corner against the guide rulers.
+  - Place your piece of material at the same location in the machine (upper left corner against the guide rulers).
   - Press **Print**. Make sure your settings are as above and that you have also set the speed/power correctly for the material, then **//Go!//**
 
 ----
@@ -81,11 +81,11 @@ Rhino has a sophisticated order that it prints objects to the laser that is is p
 
 To control the strength and speed of the raster and vector lines of the laser, use the raster and vector controls on the general tab of the Legend printer driver controls in the Epilog driver.
 
-Lines with lineweights thinner than .175mm (.007 inches) will plot as vector. Lines with lineweights over .175 mm (.007 inches) will plot as raster. In Vector-only cutting modes, lineweights greater than the above threshold are **//ignored//**!
+Lines with lineweights thinner than .175mm (.007 inches) will plot as vector. Lines with lineweights over .175 mm (.007 inches) will plot as raster. In vector-only cutting modes, lineweights greater than the above threshold are **//ignored//**!
 
 If you need more control of strength and speed of the laser, map individual colored lines in Rhino to different strength and speed of laser within a single print. See the Advanced Laser projects section under Color Mapping Strength and Speed of Laser.
 
-**Note:** //Be careful when switching between Raster and Vector modes. On many materials, switching an object from raster to vector can greatly effect the material. Simply changing a lineweight can change a vector cut to a raster cut.//
+**Note:** //Be careful when switching between raster and vector modes. On many materials, switching an object from raster to vector can greatly effect the material. Simply changing a lineweight can change a vector cut to a raster cut.//
 
 ====Multipass printing/cutting====
 
@@ -100,9 +100,9 @@ Simple multipass printing may be necessary to cut completely through the materia
 Use Epilog's advanced Color Mapping mode to set the order, strength, and speed of the job based on the color of the lines in the plot.
 
 
-Color mapping works on vector lines only. This means only lineweights thinner than .175mm (.007 inches) can be controlled this way. Thicker lines will be plotted before any of the color-mapped lines and will be controlled by the general raster setting on the **General** tab.
+Color mapping works on vector lines only. This means only lineweights thinner than .175mm (.007 inches) can be controlled this way. Thicker lines are plotted before any of the color-mapped lines and are controlled by the general raster setting on the **General** tab.
 
-When color mapping is used, the laser always cuts the colors in the color list first. If there are any other lines in the image, they will be cut after the assigned colors, and they will use the **Vector** Settings from the **General** tab.
+When color mapping is used, the laser always cuts the colors in the color list first. If there are any other lines in the image, they aree cut after the assigned colors, and they use the **Vector** Settings from the **General** tab.
 
 
 ====3D engraving raster mode====
