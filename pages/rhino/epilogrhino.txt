@@ -1,6 +1,6 @@
 ====== Using Rhino with Epilog Laser Cutters ======
 
-Via the Epilog laser driver, Rhino can directly control the Epilog laser functions: vector and raster modes and laser speeds and feeds. The laser driver is like a Windows printer driver. Once installed, it will appear in the list of printers available in Rhino and Windows in general.
+With an Epilog laser driver, Rhino can directly control the Epilog laser functions: vector and raster modes and laser speeds and feeds. The laser driver is like a Windows printer driver. Once installed, it will appear in the list of printers available in Rhino and Windows in general.
 
 =====Basic laser setup and cutting=====
 ====Vector and raster projects====
@@ -41,7 +41,7 @@ Drawing the rectangle of the outside of the art work lets you consistently place
 //This method practically guarantees a perfect placement of the file to be cut relative to the material.//
 
   - Create a //laser template// in Rhino by opening a blank file and drawing a rectangle the //exact// size of the cutting table with the origin on the upper left corner. Set the print width of this rectangle to **No Print** and lock it. Place it on a //Table// layer and lock the layer as well.  Then save this file as your laser template.
-  - In the Epilog printer properties, make sure the exact //table// size is entered under **Piece Size**.
+  - In the Epilog printer properties, be sure to enter the exact //table// size under **Piece Size**.
   - In the Rhino print dialog, make sure View is set to //Extents//. Scale is set 1:1. All margins set to 0. Position set to Offset from Upper Left (**Centered** unchecked) and Offset values both 0.
 
 //The effect of the above is to //lock// the print area to the same size and placement as the laser table itself.  It will never accidentally move. You will never have to adjust the print window.//
@@ -79,17 +79,17 @@ Rhino has a sophisticated order that it prints objects to the laser that is is p
 
 ====Control laser strength and speed====
 
-Use the raster and vector controls on the general tab of the Legend printer driver controls in the Epilog driver to control the strength and speed of the raster lines and the vector lines of the laser.
+To control the strength and speed of the raster and vector lines of the laser, use the raster and vector controls on the general tab of the Legend printer driver controls in the Epilog driver.
 
 Lines with lineweights thinner than .175mm (.007 inches) will plot as vector. Lines with lineweights over .175 mm (.007 inches) will plot as raster. In Vector-only cutting modes, lineweights greater than the above threshold are **//ignored//**!
 
-If you require more control of strength and speed of the laser, map individual colored lines in Rhino to different strength and speed of laser within a single print. See the Advanced Laser projects section under Color Mapping Strength and Speed of Laser.
+If you need more control of strength and speed of the laser, map individual colored lines in Rhino to different strength and speed of laser within a single print. See the Advanced Laser projects section under Color Mapping Strength and Speed of Laser.
 
 **Note:** //Be careful when switching between Raster and Vector modes. On many materials, switching an object from raster to vector can greatly effect the material. Simply changing a lineweight can change a vector cut to a raster cut.//
 
 ====Multipass printing/cutting====
 
-Simple multipass printing may be neccesary to cut completely through the material or to control the speed and raster/vector mode. Time constraints may also require you to stop a session and restart it later.
+Simple multipass printing may be necessary to cut completely through the material or to control the speed and raster/vector mode. Time constraints may also require you to stop a session and restart it later.
 
 
 
@@ -100,7 +100,7 @@ Simple multipass printing may be neccesary to cut completely through the materia
 Use Epilog's advanced Color Mapping mode to set the order, strength, and speed of the job based on the color of the lines in the plot.
 
 
-Color mapping works on vector lines only. This means only lineweights thinner than .175mm (.007 inches) can be controlled this way. Thicker lines thicker will be plotted before any of the color-mapped lines and will be controlled by the general raster setting on the **General** tab.
+Color mapping works on vector lines only. This means only lineweights thinner than .175mm (.007 inches) can be controlled this way. Thicker lines will be plotted before any of the color-mapped lines and will be controlled by the general raster setting on the **General** tab.
 
 When color mapping is used, the laser always cuts the colors in the color list first. If there are any other lines in the image, they will be cut after the assigned colors, and they will use the **Vector** Settings from the **General** tab.
 
