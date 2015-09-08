@@ -1,15 +1,15 @@
 ====== UI Controls and multiple threads (Event Watchers) ======
-If you have some controls that are using an event watcher to synchronize a control's appearance with what is going on in Rhino, please read the following.
+>If you have some controls that are using an event watcher to synchronize a control's appearance with what is going on in Rhino, please read the following.
 
-An event handler that that modifies a UI property could potentially be called from a thread that is NOT your main user interface thread. This happens in the case where a long running command has started a thread to allow a user to cancel a command. A sample case where this occurs is in the contour command and the RhinoDoc.AddRhinoObject event.
+An event handler that modifies a UI property could potentially be called from a thread that is **not** your main user interface thread. This happens in the case where a long running command has started a thread to allow a user to cancel a command. A sample case where this occurs is in the contour command and the RhinoDoc.AddRhinoObject event.
 
-=====Why is this of any interest to you?=====
-Windows applications can not update any user interface controls from any thread other than the main UI thread. Changing a property on a windows control typically causes the control to immediately update its display but if the call is made from another thread than the UI thread windows will crash the application.
+=====Why is this of interest to you?=====
+Windows applications can not update any user interface controls from any thread other than the main UI thread. Changing a property on a windows control typically causes the control to immediately update its display. But if the call is made from another thread than the UI thread windows will crash the application.
 
 =====So... what can I do about this?=====
 If you are updating a control from inside your event handler, you should check to see if CheckAccess() on the Dispatcher associated with your control evaluates to True. If this is the case, you must invoke a delegate that handles the UI updating and make sure that this delegate is called from the UI thread.  This is actually easier than it sounds.
 
-Here is a C# sample of RhinoDoc.AddRhinoObject event handler that handles the thrown exception when called from a thread other than the UI threard.
+Here is a C# sample of RhinoDoc.AddRhinoObject event handler that handles the thrown exception when called from a thread other than the UI thread.
 <code c#>
   private void rhinoObjectAdded(Object sender, Rhino.DocObjects.RhinoObjectEventArgs e)
   {
@@ -27,8 +27,8 @@ Here is a C# sample of RhinoDoc.AddRhinoObject event handler that handles the th
     } catch (InvalidOperationException ioe) {RhinoApp.WriteLine(ioe.Message);}
   }
 </code>
-=====But... I really do need to update my control's state even when in the wrong thread!=====
-This is where Dispatcher.Invoke or Dispatcher.BeginInvoke comes into play. You can force the code that modifies the control to be run from the UI thread. Here is a C# sample of how to do this.
+=====But... I really do need to update my control's state, even when in the wrong thread!=====
+This is where Dispatcher.Invoke or Dispatcher.BeginInvoke comes into play. You can force the code that modifies the control to run from the UI thread. Here is a C# sample of how to do this.
 <code C#>
   private void rhinoObjectAddedSafe(Object sender, Rhino.DocObjects.RhinoObjectEventArgs e)
   {
@@ -51,7 +51,7 @@ This is where Dispatcher.Invoke or Dispatcher.BeginInvoke comes into play. You c
     }
   }
 </code>
-The above function could be rewritten to just always call the delegate
+The above function could be rewritten to just always call the delegate.
 <code c#>
   private void rhinoObjectAddedSafe(Object sender, Rhino.DocObjects.RhinoObjectEventArgs e)
   {
@@ -66,7 +66,7 @@ The above function could be rewritten to just always call the delegate
     _label.Dispatcher.Invoke(setLabelTextDelegate, new String[] { msg });
   }
 </code>
-**note**: if Windows Forms is used instead of WPF then _label.Dispatcher.CheckAccess() becomes _label.InvokeRequired and _label.Dispatcher.Invoke(...) becomes _label.Invoke(...).
+**Note:** If Windows Forms is used instead of WPF then _label.Dispatcher.CheckAccess() becomes _label.InvokeRequired and _label.Dispatcher.Invoke(...) becomes _label.Invoke(...).
 
 Here is the complete example:
 <code c#>
