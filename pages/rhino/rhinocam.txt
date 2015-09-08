@@ -1,7 +1,7 @@
 ====== Using RhinoCAM ======
-//This page is for advice, tips, tricks and user experiences using the RhinoCAM plug-in.//
+>Advice, tips, tricks and user experiences using the RhinoCAM plug-in.
 
-For support questions concerning RhinoCAM and RhinoCAM Pro, please go directly to the [[http://www.mecsoft.com/phpbb/|MecSoft support forum]].
+For support questions about RhinoCAM and RhinoCAM Pro, please go directly to the [[http://www.mecsoft.com/phpbb/|MecSoft support forum]].
 
 [[http://www.mecsoft.com/rhinocam.shtml|MecSoft's RhinoCAM homepage.]]
 
@@ -11,11 +11,11 @@ For tutorials and videos, go to [[http://www.mecsoft.com/SelfTraining.shtml|Rhin
 
 Environment variables is a Windows feature that allows software manufacturers to configure certain options for the operating environment of their programs.
 
-Environment variables are created and accessed in the following way: Right click on **My Computer**, select **Properties**, **Advanced tab**, **Environment Variables**.  They can then be added with the **New** button.  These variables may be placed in the **User** section to have different possibilities for different users, or the **System** section to act globally for all users.
+Create and access environment variables the following way: Right click on **My Computer**, select **Properties**, **Advanced tab**, **Environment Variables**.  Add with the **New** button.  These variables may be placed in the **User** section to have different possibilities for different users, or the **System** section to act globally for all users.
 
 [[http://support.microsoft.com/default.aspx?scid=kb;en-us;310519&sd=tech|More info on using Environment Variables.]]
 
-The following variables lets you set certain options in RhinoCAM that are not directly accessible via options from inside the program.
+The following variables let you set certain options in RhinoCAM not directly accessible via options from inside the program.
 
   * **VMILL_HFINISH_LEVELFIRST** - 1/0 - Allows Level first machining in Horizontal Finishing
 
@@ -35,15 +35,15 @@ The following variables lets you set certain options in RhinoCAM that are not di
 
 =====Using the user defined tool tab to create custom tools=====
 
-//Question:// How is the user defined tool tab in the tool definition setup used? Is it possible to generate custom profile tools using this feature in RhinoCam from tool drawings?
+//Question:// How is the user defined tool tab in the tool definition setup used? Is it possible to generate custom profile tools from tool drawings using this feature in RhinoCam?
 
 //Answer:// User defined tools can be created and used in RhinoCAM in 2-1/2 axis profiling operations only. To create a user defined tool follow these steps:
 
   - Draw the profile of the tool in the XY plane (only to the centerline, i.e. half profile).
   - Make sure the starting point is at 0,0.
-  - In RhinoCAM 2.0, select the profile of the tool created in the XY plane, from the Rhino menu bar use File->Export Selected and save this as a Rhino (*.3dm) file. Make sure that this is the only region in the file before exporting. This file will be the tool profile file. //In RhinoCAM 1.0, save the file as .mrg (using export region in the file menu).//
+  - In RhinoCAM 2.0, select the profile of the tool created in the XY plane from the Rhino menu bar use File->Export Selected and save this as a Rhino (*.3dm) file. Make sure that this is the only region in the file before exporting. This file will be the tool profile file. //In RhinoCAM 1.0, save the file as .mrg (using export region in the file menu).//
   - In RhinoCAM 2.0, from the Cutting Tools Browser under the Create/Select Tools menu – select User Defined Mill tool. //In RhinoCAM 1.0, in the Create/Select Tools menu – select User Defined Mill tool.//
-  - Select a name for the user-defined tool and enter the relevant information and comments. The parameter for the tool diameter should be twice the profile radius. You can also enter a different tool diameter if you need a different size tool. The system computes the tool diameter as the twice the largest X coordinate in the tool profile. It will then scale the profile by (input diameter/computed diameter). Example: If the input diameter is same as computed diameter then the scale factor is one.
+  - Select a name for the user-defined tool and enter the relevant information and comments. The parameter for the tool diameter should be twice the profile radius. You can also enter a different tool diameter if you need a different size tool. The system computes the tool diameter as twice the largest X coordinate in the tool profile. It will then scale the profile by (input diameter/computed diameter). Example: If the input diameter is same as computed diameter then the scale factor is one.
   - Provide the path to the user-defined tool profile file.
   - Save as a new tool.
 
