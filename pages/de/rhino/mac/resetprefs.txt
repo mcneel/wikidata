@@ -1,7 +1,29 @@
-====== Rhino-Einstellungen zurücksetzen ======
+====== Rhino für Mac - Optionen ======
+Im Folgenden finden Sie einige Möglichkeiten zur Verwaltung Ihrer Optionssammlung von Rhino für Mac.
+
+==== Speichern einer Kopie der aktuellen Optionen von Rhino für Mac ====
+  - **Beenden** Sie Rhino vollständig.
+  - Halten Sie im **Finder**-Menü die **Wahltaste** gedrückt und wählen Sie aus dem **Startmenü** den Eintrag **Library**.
+  - Öffnen Sie den Ordner **Preferences**.
+  - Suchen Sie die Datei **com.mcneel.rhinoceros.plist**.  Klicken Sie mit der rechten Maustaste darauf und wählen Sie im Kontextmenü **Duplizieren**.  Die Kopie erhält automatisch den Namen **com.mcneel.rhinoceros Kopie.plist**.
+
+==== Rhino-Optionen zurücksetzen ====
 Mit der folgenden Methode können Sie alle benutzerdefinierten Rhino-Einstellungen rückgängig machen und die Ursprungswerte wiederherstellen.
 
   - **Schließen** Sie Rhino.
-  - Halten Sie im **Finder**-Menü die **Wahltaste** gedrückt und wählen Sie aus dem **Startmenü** den Eintrag **Library**. \\ Der Library-Ordner wird daraufhin geöffnet.
-  - wählen Sie in der **Library** den Ordner **Einstellungen** aus.
-  - Suchen Sie die Datei **com.mcneel.rhinoceros.plist** und ziehen Sie sie in den **Papierkorb**.  \\ Alternativ können Sie die Datei auch auf Ihren Desktop ziehen, wenn Sie diese Einstellungen zu einem späteren Zeitpunkt eventuell wiederherstellen möchten.
+  - Öffnen Sie das **Terminal** im Ordner **Anwendungen** > **Dienstprogramme**. \\ Daraufhin wird ein Fenster mit einer Eingabeaufforderung geöffnet.
+  - Geben sie dort **defaults delete com.mcneel.rhinoceros** ein und drücken Sie die Eingabetaste.
+  - Schließen Sie das Terminal.
+
+==== Rhino-Optionen wiederherstellen ====
+Auf die folgende Weise können Sie alle aktuellen Rhino-Optionen mit einer vorher erstellten Kopie ersetzen.
+
+  - **Schließen** Sie Rhino.
+  - Halten Sie im **Finder**-Menü die **Wahltaste** gedrückt und wählen Sie aus dem **Startmenü** den Eintrag **Library**.
+  - Öffnen Sie den Ordner **Preferences**.
+  - Suchen Sie die Datei **com.mcneel.rhinoceros.plist**.  Ziehen Sie sie in den Papierkorb.
+  - Ändern Sie den Namen Ihrer vorher gespeicherten Optionsdatei in **com.mcneel.rhinoceros.plist**.
+    - Hinweis: Wenn Sie Ihre gespeicherte PLIST-Datei in einen anderen Ordner verschoben hatten, müssen Sie sie zurück in den Ordner **Preferences** verschieben.
+  - Öffnen Sie das **Terminal** im Ordner **Anwendungen** > **Dienstprogramme**. \\ Daraufhin wird ein Fenster mit einer Eingabeaufforderung geöffnet.
+  - Geben sie dort **defaults read com.mcneel.rhinoceros** ein und drücken Sie die Eingabetaste.  Daraufhin werden Ihnen im Terminal-Fenster zahlreiche Statusmeldungen angezeigt.
+  - Schließen Sie das Terminal.
