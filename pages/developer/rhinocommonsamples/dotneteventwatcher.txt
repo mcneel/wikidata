@@ -1,10 +1,10 @@
 ====== UI Controls and multiple threads (Event Watchers) ======
->If you have some controls that are using an event watcher to synchronize a control's appearance with what is going on in Rhino, please read the following.
+>If you have controls that are using an event watcher to synchronize a control's appearance with what is going on in Rhino, please read the following.
 
 An event handler that modifies a UI property could potentially be called from a thread that is **not** your main user interface thread. This happens in the case where a long running command has started a thread to allow a user to cancel a command. A sample case where this occurs is in the contour command and the RhinoDoc.AddRhinoObject event.
 
 =====Why is this of interest to you?=====
-Windows applications can not update any user interface controls from any thread other than the main UI thread. Changing a property on a windows control typically causes the control to immediately update its display. But if the call is made from another thread than the UI thread windows will crash the application.
+Windows applications can not update any user interface controls from any thread other than the main UI thread. Changing a property on a windows control typically causes the control to immediately update its display. But if the call is made from another thread then the UI thread windows will crash the application.
 
 =====So... what can I do about this?=====
 If you are updating a control from inside your event handler, you should check to see if CheckAccess() on the Dispatcher associated with your control evaluates to True. If this is the case, you must invoke a delegate that handles the UI updating and make sure that this delegate is called from the UI thread.  This is actually easier than it sounds.
