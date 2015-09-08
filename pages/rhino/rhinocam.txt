@@ -1,76 +1,64 @@
 ====== Using RhinoCAM ======
-//This page is for advice, tips, tricks and user experiences using the RhinoCAM plug-in//
+//This page is for advice, tips, tricks and user experiences using the RhinoCAM plug-in.//
 
-**[[http://www.mecsoft.com/phpbb/|For suport questions concerning RhinoCAM and RhinoCAM Pro, please go directly to the MecSoft support forum]]**
+For support questions concerning RhinoCAM and RhinoCAM Pro, please go directly to the [[http://www.mecsoft.com/phpbb/|MecSoft support forum]].
 
-**[[http://www.mecsoft.com/rhinocam.shtml|MecSoft's RhinoCAM Homepage]]**
+[[http://www.mecsoft.com/rhinocam.shtml|MecSoft's RhinoCAM homepage.]]
 
-For tutorials and videos, go to: **[[http://www.mecsoft.com/SelfTraining.shtml|RhinoCAM tutorials]]**
+For tutorials and videos, go to [[http://www.mecsoft.com/SelfTraining.shtml|RhinoCAM tutorials]].
 
 =====Environment variables=====
 
-//Environment variables are a Windows feature that allow software manufacture to configure certain options for the operating environment of their programs//
+Environment variables is a Windows feature that allows software manufacturers to configure certain options for the operating environment of their programs.
 
-Environment variables are created/accessed in the following way:
+Environment variables are created and accessed in the following way: Right click on **My Computer**, select **Properties**, **Advanced tab**, **Environment Variables**.  They can then be added with the **New** button.  These variables may be placed in the **User** section to have different possibilities for different users, or the **System** section to act globally for all users.
 
-Right click on **My Computer**, select **Properties**, **Advanced tab**, **Environment Variables**.  They can then be added with the **New** button.  These variables may be placed in the **User** section to have different possibilities for different users, or the **System** section to act globally for all users.
+[[http://support.microsoft.com/default.aspx?scid=kb;en-us;310519&sd=tech|More info on using Environment Variables.]]
 
-[[http://support.microsoft.com/default.aspx?scid=kb;en-us;310519&sd=tech|For more info on using Environment Variables, look here]]
+The following variables lets you set certain options in RhinoCAM that are not directly accessible via options from inside the program.
 
-**//The following variables allow one to set certain options in RhinoCAM that are not directly accessible via options from inside the program.//**
+  * **VMILL_HFINISH_LEVELFIRST** - 1/0 - Allows Level first machining in Horizontal Finishing
 
-**VMILL_HFINISH_LEVELFIRST** - 1/0 - Allows Level first machining in Horizontal Finishing\\
-\\
-**VMILL_ZTRANS_FFACTOR** - [0.1-1.0] – Scales federates for plunge Z motions between Z levels in 2-1/2 axis operations\\
-\\
-**VMILL_SORT_PROFILES** – [1/0] – Sorts profiles based on minimum distance to each other if set to 1\\
-\\
-**VMILL_DORETRACT_TABLEROTATE** – [1/0] - Does retract to toolchange position before performing the table rotate if set to 1\\
-\\
-**VMILL_BEEP_TYPE** - [0/1/2] 0 – Waveform beep, 1 – computer beep, 2 – No beep\\
-\\
-**VMILL_LICENSE_HOST** – [IP Address] – Set to IP address of machine that has the network dongle for network licensing\\
-\\
-**VMILL_DISPLAYTOOLTIP** - [1/0] - Displays a point at the tool tip during simulation if set to 1\\
-\\
-**VMILL_TOOLPATH_THICKNESS** – [0.1-10.0] – [[rhino:opengl|OpenGL]] thickness value for displaying toolpath using thick lines
+  * **VMILL_ZTRANS_FFACTOR** - [0.1-1.0] – Scales federates for plunge Z motions between Z levels in 2-1/2 axis operations
+
+  * **VMILL_SORT_PROFILES** – [1/0] – Sorts profiles based on minimum distance to each other if set to 1
+
+  * **VMILL_DORETRACT_TABLEROTATE** – [1/0] - Does retract to toolchange position before performing the table rotate if set to 1
+
+  * **VMILL_BEEP_TYPE** - [0/1/2] 0 – Waveform beep, 1 – computer beep, 2 – No beep
+
+  * **VMILL_LICENSE_HOST** – [IP Address] – Set to IP address of machine that has the network dongle for network licensing
+
+  * **VMILL_DISPLAYTOOLTIP** - [1/0] - Displays a point at the tool tip during simulation if set to 1
+
+  * **VMILL_TOOLPATH_THICKNESS** – [0.1-10.0] – [[rhino:opengl|OpenGL]] thickness value for displaying toolpath using thick lines
 
 =====Using the user defined tool tab to create custom tools=====
 
-//Question// - How is the user defined tool tab in the tool definition setup used? Is it possible to generate custom profile tools using this feature in RhinoCam from tool drawings?
+//Question:// How is the user defined tool tab in the tool definition setup used? Is it possible to generate custom profile tools using this feature in RhinoCam from tool drawings?
 
-//Answer// - User defined tools can be created and used in RhinoCAM in 2-1/2 axis profiling operations only. To create a user defined tool follow these steps:
+//Answer:// User defined tools can be created and used in RhinoCAM in 2-1/2 axis profiling operations only. To create a user defined tool follow these steps:
 
-1. Draw the profile of the tool in the XY plane (only to the centerline, i.e. half profile)
-
-2. Make sure the starting point is at 0,0
-
-3. In RhinoCAM 2.0, select the profile of the tool created in the XY plane, from the Rhino menu bar use File->Export Selected and save this as a Rhino (*.3dm) file. Make sure that this is the only region in the file before exporting. This file will be the tool profile file.
-
-//In RhinoCAM 1.0, save the file as .mrg (using export region in the file menu).//
-
-4. In RhinoCAM 2.0, from the Cutting Tools Browser under the Create/Select Tools menu – select User Defined Mill tool.
-
-//In RhinoCAM 1.0, in the Create/Select Tools menu – select User Defined Mill tool.//
-
-5. Select a name for the user-defined tool and enter the relevant information and comments. Parameter for the tool diameter should be twice the profile radius. You can also input a different tool diameter if you need a different size tool. The system computes the tool diameter as the twice largest X coordinate in the tool profile. It will then scale the profile by (input diameter/computed diameter). Example: if the input diameter is same as computed diameter then the scale factor is one.
-
-6. Provide the path to the user-defined tool profile file
-
-7. Save as a new tool
+  - Draw the profile of the tool in the XY plane (only to the centerline, i.e. half profile).
+  - Make sure the starting point is at 0,0.
+  - In RhinoCAM 2.0, select the profile of the tool created in the XY plane, from the Rhino menu bar use File->Export Selected and save this as a Rhino (*.3dm) file. Make sure that this is the only region in the file before exporting. This file will be the tool profile file. //In RhinoCAM 1.0, save the file as .mrg (using export region in the file menu).//
+  - In RhinoCAM 2.0, from the Cutting Tools Browser under the Create/Select Tools menu – select User Defined Mill tool. //In RhinoCAM 1.0, in the Create/Select Tools menu – select User Defined Mill tool.//
+  - Select a name for the user-defined tool and enter the relevant information and comments. The parameter for the tool diameter should be twice the profile radius. You can also enter a different tool diameter if you need a different size tool. The system computes the tool diameter as the twice the largest X coordinate in the tool profile. It will then scale the profile by (input diameter/computed diameter). Example: If the input diameter is same as computed diameter then the scale factor is one.
+  - Provide the path to the user-defined tool profile file.
+  - Save as a new tool.
 
 Use the tool in 2-1/2 axis profiling operations.
 
 
 ----
-=====To capture the active window with an image in RhinoCAM:=====
-ScreenCaptureToFile and ScreenCaptureToClipboard work fine in RhinoCAM to capture the active window with an image of a RhinoCAM simulation. ViewCaptureToFile/Clipboard, do not, however.
+=====To capture the active window with an image in RhinoCAM=====
+ScreenCaptureToFile and ScreenCaptureToClipboard work fine in RhinoCAM to capture the active window with an image of a RhinoCAM simulation. ViewCaptureToFile/Clipboard does not work.
 
 
 ----
-=====How to display a "Tool Guide" in VisualMill:=====
-Go in to your registry, open up HKEY_CURRENT_USER folder , scroll down to the "Software" folder and open it. Next find "Mecsoft Corporation" folder open that. Find the "settings" folder , open it up. Find the "DisplayToolAtCursor" reg_dword, double click it and change the value data from a 0 to a 1.
+=====How to display a "Tool Guide" in VisualMill=====
+Go in to your registry, open up HKEY_CURRENT_USER folder, scroll down to the //Software// folder and open it. Next find //Mecsoft Corporation// folder and open it. Find the //settings// folder and open it. Find the //DisplayToolAtCursor// reg_dword, double click on it and change the value data from a 0 to a 1.
 
-Now it will display whatever tool you have loaded while making a boundary or creating geometry.
+Now it will display the tool you have loaded while making a boundary or creating geometry.
 
 
