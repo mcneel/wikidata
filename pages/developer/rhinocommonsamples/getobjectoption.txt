@@ -1,16 +1,16 @@
 ====== Object Selection with Command Line Options ======
-
-===== Question =====
-I am writing a command where I would like to be able to pick some objects, then click some command line options, and then return to picking more objects. But, after picking some objects, if I click a command line option and then return to pick more objects, I loose my current selection set. How can I accomplish this?
+\\
+==== Question ====
+I am writing a command where I would like to be able to pick some objects, click some command line options, and then return to picking more objects. But, after picking some objects, if I click a command line option and then return to pick more objects, I lose my current selection set. How can I keep my selection set?
 
 ==== Answer ====
-RhinoCommon's GetObject class has a few properties and methods that you will need to use, including:
+RhinoCommon's GetObject class has a few properties and methods that you need to use, including:
 
   * GetObject.EnableClearObjectsOnEntry
   * GetObject.EnableUnselectObjectsOnExit
   * GetObject.DeselectAllBeforePostSelect
 
-Also, after clicking a command line option, will need to turn off pre-selection, using GetObject.EnablePreSelect. Otherwise, GetObject.GetMultiple will return with a GetResult.Object return code.
+Also, after clicking a command line option, turn off pre-selection, using GetObject.EnablePreSelect. Otherwise, GetObject.GetMultiple will return with a GetResult.Object return code.
 
 For example:
 
