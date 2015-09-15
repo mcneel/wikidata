@@ -1,6 +1,7 @@
-====== Install Error 1402 (Could not open key: UNKNOWN\Components) (Rhino 5 for Windows) ======
+====== Install Error 1402 (Could not open key: UNKNOWN\Components)======
+======Rhino 5 for Windows======
 > **Summary:** //How to fix the installation Error 1402 or 1406 (Could not open key: UNKNOWN\Components).//
-> **Related Installation Help:** //[[installproblems|Troubleshooting Rhino 5 Installation]]//
+> **Related installation help:** //[[installproblems|Troubleshooting Rhino 5 Installation]]//
 
 =====Problem=====
 A message "Could not open key: UNKNOWN\Components\(lots of letters and numbers). Error 1402. Verify that you have sufficient access to that key, or contact your support personnel."
@@ -10,24 +11,25 @@ HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
 
 =====Answer=====
 **//Solution 1://**
-On the Windows Start menu, enter "CMD" to the search box. Right-click on the "cmd.exe" and select "Run as administrator". Copy the following line and paste it into the cmd window, press Enter. Then Rhino will be able to install.
+On the Windows Start menu, enter **CMD** to the search box. Right-click on the **cmd.exe** and select **Run as administrator**. Copy the following line and paste it into the cmd window, press **Enter**. Then Rhino will be able to install.
 
 <code>
 secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 </code>
 
 **//Solution 2://**
-//WARNING: The following procedure involves editing the Windows Registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
-  - Download [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] from Microsoft TechNet, and extract the contents to your desktop.
-  - Open a Windows command shell
+>//**Warning:** The following procedure involves editing the Windows registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
+
+  - Download [[http://technet.microsoft.com/en-us/sysinternals/bb897553|PsExec]] from Microsoft TechNet, and extract the contents to your desktop.
+  - Open a Windows command shell.
   - Change directories to your desktop.
-  - In the command shell, enter: **psexec -i -d -s c:\windows\regedit.exe** This causes Windows to run the registry editor with the permissions of the System account - an account even more powerful than Administrator.
+  - In the command shell, enter **psexec -i -d -s c:\windows\regedit.exe**. This causes Windows to run the registry editor with the permissions of the System account -- an account even more powerful than Administrator.
   - Browse to HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
   - Right-click the **UserData** folder, then click **Permissions...**
-  - In the Permissions for UserData dialog box, click **Advanced**
-  - Ensure that "Administrators" has "Full Control" Permissions in this folder, and that "Users" has "Read" Permissions. There will be other user permissions, too - but Administrators and Users are what matter most.
-  - Select the **Replace all child object permissions with inheritable permissions from this object**
-  - Click **OK** twice to apply permissions
+  - In the Permissions for UserData dialog box, click **Advanced**.
+  - Be sure that **Administrators** has **Full Control** permissions in this folder, and that **Users** has **Read** permissions. There will be other user permissions, too, but Administrators and Users are what matter most.
+  - Select the **Replace all child object permissions with inheritable permissions from this object**.
+  - Click **OK** twice to apply permissions.
   - Install Rhino again.
 
 
