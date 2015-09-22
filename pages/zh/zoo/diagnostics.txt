@@ -1,0 +1,37 @@
+======Zoo - 检查工具======
+> **产品：:** //[[zh:zoo:home|Zoo]]//
+> **摘要：** //Zoo for Rhino 5检查工具相关讨论。//
+
+[[zoo:zoo5diagnostics|{{:zoo:zoodiagnostics.png|Zoo检查工具}}]]
+
+=====简介=====
+Zoo检查工具可于Rhino 5工作机执行，此实用工具提供下列工具：
+  - 提供了一些实用网络诊断工具，协助您解决Rhino 5工作机及[[zh:zoo:determinezoohost|Zoo服务器]]之间的连接问题。
+  - 可让您由Rhino工作机查看及修改Zoo Server的名称。Zoo Server名称被储存在[[http://wiki.mcneel.com/zh/zoo/findzooserver|Windows登录档]]。
+
+
+[[zoo:zoo5diagnostics|{{:zoo:zoo_diagnostics.png|Zoo Diagnostics}}]]
+
+=====检查工具说明=====
+Zoo检查工具提供下列实用网络检测功能：
+
+1. **[[http://support.microsoft.com/kb/814155|Ping]]** - Ping (PING) 检查TCP/IP连线是否畅通及计算机名称解析是否正确的主要工具，Ping经由TCP/IP送出ICMP（Internet Control Message Protocol，Internet 控制讯息通讯协定）回应请求封包给目的计算机，得到回应时会显示目的计算机回传的信息。
+
+//<color red>请注意，Windows防火墙预设会回应ICMP的请求，如果您确定TCP/IP连线正常但目的计算机却未回应，可能是控制台 > 系统及安全性 > Windows防火墙 > 进阶设定> 输入规则内的档案及打印机共享（回应要求 - ICMPv4-In）规则已停用，也可能是遭到其它防火墙软件或路由器的防火墙所阻挡。</color>//
+
+2. **[[http://support.microsoft.com/kb/200525|DNS查询]]** -以NSLOOKUP指令检查DNS（Domain Name System，网域名称系统）的运作是否正常。
+
+3.  **[[http://support.microsoft.com/kb/314868|追踪路由]]** - 以TRACERT指令追踪ICMP封包到达目的计算机所经过的路由器。ICMP封包带有TTL（Time To Live，存活时间）值，TTL的起始值是30，ICMP封包每经过一个路由器TTL值就会减1，当有一台路由器发现收到的ICMP封包的TTL值为0时会将它舍弃，停止继续查询目的计算机，并回传ICMP time exceeded讯息给发出ICMP封包的计算机。
+
+4. **检查Zoo连接埠** - 检查Zoo 5是否有在服务器上听候连接埠80。
+
+//<color red>若测试失败，请检查Zoo服务器[[zh-tw:zoo:window7firewall|防火墙是否有开启连接埠80]]，包括在Zoo系统上传出及传入的流量。</color>//
+
+5. **Zoo 连接测试** -可以了解Zoo 5服务是否在服务器上执行。 
+
+//<color red>若此测试失败但其他测试皆成功，请确认Zoo 5.0服务有正确执行。您可以到控制台 > 系统及安全性 > 系统管理工具 >服务检查Zoo 5.0服务的状态是否为已启动，或从Zoo 5.0的管理视窗检查。同时请检查Zoo服务器[[zh-tw:zoo:window7firewall|防火墙是否有开启连接埠80]]，包括在Zoo系统上传出及传入的流量。</color>//
+
+=====下载=====
+* 需先安装[[http://www.microsoft.com/zh/download/details.aspx?id=17851|Microsoft .NET Framework 4]].
+
+{{:zoo:zoodiagnostics.zip|下载Zoo检查工具}}
