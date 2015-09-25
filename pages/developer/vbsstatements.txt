@@ -6,7 +6,7 @@
 [[developer:vbsfundamentals|VBScript Fundamentals]]
 
 =====Overview=====
-Many scripting and programing languages such as JScript, C#, and C++ do not attempt to match the code that is run by the actual physical lines typed into the text editor. This is because they do not recognize the end of a line of code until they see the termination character (in these cases, the semicolon). So, the actual physical lines of type taken up by the code are irrelevant.
+Many scripting and programing languages such as JScript, C#, and C++ do not attempt to match the code of the actual physical lines typed into the text editor. This is because they do not recognize the end of a line of code until they see the termination character (in these cases, the semicolon). So, the actual physical lines of type taken up by the code are irrelevant.
 
 By contrast, VBScript uses the //carriage return// instead of a special line termination character. To end a statement in VBScript, you do not have to type in a semicolon or other special character. You simply press **Enter**. For example, this code will generate a syntax error:
 
@@ -23,7 +23,7 @@ This will not:
    Set objFSO = CreateObject("Scripting.FileSystemObject")
 </code>
 
-In general, not requiring a statement termination character simplifies script writing in VBScript. However, there is one complication: To enhance readability, we recommend that you limit the length of any single line of code to 80 characters. But what happens if you have a line of code that contains more than 80 characters?
+In general, not requiring a statement termination character simplifies script writing in VBScript. But there is one complication: To enhance readability, we recommend that you limit the length of any single line of code to 80 characters. But what happens if you have a line of code that contains more than 80 characters?
 
 Although it might seem like the obvious solution, you cannot split a statement into multiple lines with a carriage return. For example, the following code snippet returns a run-time error in VBScript because a statement was split by using **Enter**.
 
@@ -33,9 +33,9 @@ Although it might seem like the obvious solution, you cannot split a statement i
    Rhino.Print strMessageToDisplay
 </code>
 
-You cannot split a statement into multiple lines in VBScript with **Enter** because VBScript sees a carriage return as marking the end of a statement. In the preceding example, VBScript interprets the first line as the first statement in the script. Next, it interprets the second line as the second statement in the script, and the error occurs because //strUserLastName// is not a valid VBScript statement.
+You cannot split a statement into multiple lines in VBScript with **Enter** because VBScript sees a carriage return as marking the end of a statement. In the preceding example, VBScript interprets the first line as the first statement in the script. Next, it interprets the second line as the second statement in the script. The error occurs because //strUserLastName// is not a valid VBScript statement.
 
-Instead, use the **underscore** (_) to indicate that a statement continues on the next line. In the revised version of the script, a blank space and an underscore indicates that the statement started on line 1 is continued on line 2. To make it more clear that line 2 is a continuation of line 1, line 2 is also indented four spaces. (This is for improved readability, but you do not have to indent continued lines.)
+Instead, use the **underscore** (_) to indicate that a statement continues on the next line. In the revised version of the script, a blank space and an underscore indicates that the statement started on line 1 continues on line 2. To make it more clear that line 2 is a continuation of line 1, line 2 is also indented four spaces. (This is for improved readability, but you do not have to indent continued lines.)
 
 <code vb>
    strMessageToDisplay = strUserFirstName & " " & strUserMiddleInitial & " " _
@@ -57,7 +57,7 @@ If you run this script, you will encounter a run-time error. This is because the
   - Use an ampersand at the beginning of the second line. This indicates that line two is a continuation of the interrupted string in line 1.
   - Add quotation marks before continuing the statement.
 
-These quotation marks show that this line should be included as part of the quoted string started on the previous line. Without the quotation marks, the script engine would interpret the continued line as a VBScript statement. Because this is not a valid VBScript statement, an error would occur.
+These quotation marks show that this line should be part of the quoted string started on the previous line. Without the quotation marks, the script engine would interpret the continued line as a VBScript statement. Because this is not a valid VBScript statement, an error would occur.
 
 The revised statement looks like this:
 
