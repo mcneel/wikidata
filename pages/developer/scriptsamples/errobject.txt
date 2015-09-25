@@ -5,14 +5,14 @@
 The VBScript **Err** object provides access to run-time error information. 
 
 ===== More information =====
-The **Err** object encapsulates errors for a VBScript script. By default, if an error occurs, VBScript terminates script execution and RhinoScript reports the error back to the user. Sometimes this default error processing is not desirable. In this case, the **Err** object and the **On Error statement** can be used to let scripts perform their own error handling.
+The **Err** object encapsulates errors for a VBScript script. By default, if an error occurs, VBScript terminates script execution and RhinoScript reports the error back to the user. Sometimes this default error processing is not desirable. In this case, the **Err** object and the **On Error** statement can be used to let scripts perform their own error handling.
  
 The **Err** object is a predefined global object. It does not need to be declared before it can be used. The object is used to encapsulate all the information relating to an error condition. This information is presented as a series of properties:
 
   * The **.Number** property is the error number (or code) for the error. This is the default property of the **Err** object.
   * The **.Source** property contains a string that specifies the source of the error. This is typically the ProgID (Programmatic Identifier) of the object that generated the error.
   * The **.Description** property contains a string describing the error. 
-  * The **.HelpFile** and **.HelpContext** properties store information to reference a help topic in a help file. This allows the error to refer the user to information on possible causes of the error.
+  * The **.HelpFile** and **.HelpContext** properties store information to reference a help topic in a help file. This allows the error to refer to information on possible causes of the error.
  
 To generate a user-defined run-time error, first clear the **Err** object using the **.Clear** method. Then raise the error using the **.Raise** method. This method takes up to five arguments that correspond, in order, to the properties previously listed. For example:
 
@@ -53,7 +53,7 @@ If Err.Number <> 0 Then
 End If
 </code>
 
-Here, an attempt is made to convert the string "foo" into an integer. Because this is an invalid conversion, a run-time type mismatch error is generated. The information on this error is placed in the **Err** object, and this is then processed by the **If** statement.
+Here, an attempt is made to convert the string "foo" into an integer. Because this is an invalid conversion, a run-time type mismatch error is generated. The information on this error is placed in the **Err** object. This is then processed by the **If** statement.
  
 After an **On Error** statement executes, it remains in effect for the rest of the procedure in which it executes. If the **On Error** statement executes in global scope, it remains in effect until the script terminates. Nested procedures can each have their own **On Error** statement. For example, subroutine A can execute an **On Error** statement and then execute subroutine B, which in turn, executes an **On Error** statement.
  
@@ -137,9 +137,9 @@ End
 ===== Structured exception handling =====
 The **On Error** statement is a simple form of a technique known as structured exception handling. The basic idea behind this technique is to centralize all the error handling code in a single location outside of the main //flow// of the program. This is the reason for the complex behavior of the **On Error** statement.
  
-The assumption is that a large script might contain many procedures that interact in complex ways. It is possible that an error will occur when procedures are nested very deeply. Without the **On Error** statement, each procedure must return some form of error code to the procedure from which it was called. In turn, this procedure must do the same thing, and so on for all the nested procedures. This can add greatly to the complexity of the script.
+The assumption is that a large script might contain many procedures that interact in complex ways. It is possible that an error will occur when procedures are nested very deeply. Without the **On Error** statement, each procedure must return some form of error code to the procedure from which it was called. In turn, this procedure must do the same thing, and so on for all the nested procedures. This can greatly add to the complexity of the script.
  
-With the **On Error** statement, this complexity can be avoided. When an error occurs, VBScript automatically takes care of unwinding out of the complex nest of procedures back to the statement following the original procedure invocation.
+With the **On Error** statement, this complexity can be avoided. When an error occurs, VBScript automatically takes care of unwinding out of the complex nest of procedures back to the statement that followed the original procedure invocation.
 
 \\
 
