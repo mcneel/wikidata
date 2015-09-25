@@ -55,7 +55,7 @@ End If
 
 Here, an attempt is made to convert the string "foo" into an integer. Because this is an invalid conversion, a run-time type mismatch error is generated. The information on this error is placed in the **Err** object, and this is then processed by the **If** statement.
  
-After an **On Error** statement executes, it remains in effect for the remainder of the procedure in which it executes. If the **On Error** statement executes in global scope, it remains in effect until the script terminates. Nested procedures can each have their own **On Error** statement. For example, subroutine A can execute an **On Error** statement and then execute subroutine B, which in turn, executes an **On Error** statement.
+After an **On Error** statement executes, it remains in effect for the rest of the procedure in which it executes. If the **On Error** statement executes in global scope, it remains in effect until the script terminates. Nested procedures can each have their own **On Error** statement. For example, subroutine A can execute an **On Error** statement and then execute subroutine B, which in turn, executes an **On Error** statement.
  
 If an error occurs while an **On Error** statement is active, execution continues with the following statement in the same scope as the most recently executed **On Error** statement. For example:
 
@@ -79,7 +79,7 @@ Enter Sub1
 End 
 </code>
 
-Notice that the final **Rhino.Print** statement in Sub1 never executes. When an error occurs, VBScript immediately abandons execution of whatever running procedures are necessary in order to resume with the correct statement after an error. For example:
+Notice that the final **Rhino.Print** statement in Sub1 never executes. When an error occurs, VBScript immediately abandons execution of any running procedures necessary to resume with the correct statement after an error. For example:
 
 <code vb>
 On Error Resume Next
@@ -100,7 +100,7 @@ Sub Sub2
 End Sub 
 </code>
 
-Here, the **Err.Raise** method invocation is nested even more deeply. In this case, when the error occurs, VBScript abandons further execution of both Sub1 and Sub2 in order to continue execution at the global level.
+Here, the **Err.Raise** method invocation is nested even more deeply. In this case, when the error occurs, VBScript abandons further execution of both Sub1 and Sub2 to continue execution at the global level.
  
 Because VBScript abandons execution of procedures only until it finds the most recently executed **On Error** statement, it is possible to capture an error within a procedure simply by placing an **On Error** statement in that procedure. For example:
 
@@ -135,7 +135,7 @@ End
 </code>
 
 ===== Structured exception handling =====
-The **On Error** statement is a simple form of a technique known as structured exception handling. The basic idea behind this technique is to centralize all the error handling code in a single location outside of the main //flow// of the program. This is the reason for the apparently complex behavior of the **On Error** statement.
+The **On Error** statement is a simple form of a technique known as structured exception handling. The basic idea behind this technique is to centralize all the error handling code in a single location outside of the main //flow// of the program. This is the reason for the complex behavior of the **On Error** statement.
  
 The assumption is that a large script might contain many procedures that interact in complex ways. It is possible that an error will occur when procedures are nested very deeply. Without the **On Error** statement, each procedure must return some form of error code to the procedure from which it was called. In turn, this procedure must do the same thing, and so on for all the nested procedures. This can add greatly to the complexity of the script.
  
