@@ -31,15 +31,15 @@ Yes you can. Consider the following VBScript subroutine that reads a text file:
  End Sub
 
 </code>
-Note how every line that is read from the text file is assigned to the strLine variable before it is printed.
+Note how every line read from the text file is assigned to the strLine variable before it is printed.
 
-Everything read from a text file using VBScript comes in as a string data type. Thus, if you are expecting something that you have read to be an integer or a floating point number, then you will need to convert the string to that data type. For example, let's say that you have a text file:
+Everything read from a text file using VBScript comes in as a string data type. If you want something that you have read to be an integer or a floating point number, then you need to convert the string to that data type. For example, if you have a text file:
 
    7
    3.14159
    Hello Rhino!
 
-If you use VBScript to read this file, all three lines will be read in as strings. If you want line one to be read as an integer and line two to be read as a double, then you can do use some of VBScript's data conversion functions to convert the string to the proper data type. For example:
+If you use VBScript to read this file, all three lines are read in as strings. If you want line one read as an integer and line read as a double, then you can use some of VBScript's data conversion functions to convert the string to the proper data type. For example:
 
 
 <code vb>
@@ -49,7 +49,7 @@ If you use VBScript to read this file, all three lines will be read in as string
  strThird  = objFile.ReadLine
 
 </code>
-Note, the above example does have the limitation that you have to know what kind of data is on each line. If you think it might not be possible to know what kind of data is on each line, then consider exporting a //data type identifier// along with the data from your C++ program. This way, when you read a line from VBScript, you will know what kind of data you have.
+Note, the above example does have the limitation that you have to know what kind of data is on each line. If you don't know what kind of data is on each line, then consider exporting a //data type identifier// along with the data from your C++ program. This way, when you read a line from VBScript, you will know what kind of data you have.
 
 VBScript's VarType function will return a value indicating the type of variable. The possible values are:
 
@@ -71,13 +71,13 @@ VBScript's VarType function will return a value indicating the type of variable.
    vbByte       17 Byte subtype
    vbArray    8192 Array
 
-Thus, above text file written to included the data's type identifier would like like the following:
+The text file above written to include the data's type identifier would look like this:
 
    2;7
    5;3.14159
    8;Hello Rhino!
 
-Now each line in the text file contains both the data type and the data. Using VBScript's Split function, we can separate the data type from the data. Then, it is just a matter of testing for the types of data that our script supports and then performing the proper data coersion. For example:
+Now each line in the text file contains both the data type and the data. Using VBScript's Split function, we can separate the data type from the data. Then, it is just a matter of testing for the types of data that our script supports and then performing the proper data conversion. For example:
 
 
 <code vb>
