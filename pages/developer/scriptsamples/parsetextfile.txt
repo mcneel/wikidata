@@ -3,7 +3,7 @@
 > **Summary:** //Discusses how to convert data read from a text file into its proper data type.//
 
 =====Question=====
-I have a text file that I am outputting from a C++ program and then trying to use within Rhino to change a model. We have the model made up and know how to read in the text file and parse it with VBScript.  What I am having trouble doing is connecting the two.  Can I read the information the text file and assign it as a variable?
+I have a text file that I am outputting from a C++ program and then trying to use within Rhino to change a model. We have the model made up and know how to read in the text file and parse it with VBScript.  My trouble is connecting the two.  Can I read the information in the text file and assign it as a variable?
 
 =====Answer=====
 Yes you can. Consider the following VBScript subroutine that reads a text file:
@@ -33,7 +33,7 @@ Yes you can. Consider the following VBScript subroutine that reads a text file:
 </code>
 Note how every line that is read from the text file is assigned to the strLine variable before it is printed.
 
-Everything read from a text file using VBScript comes in as a string data type. Thus, if you are expecting something that you have read to be an integer or a floating point number, then you will need to convert the string to that data type. For example, let's say that you have a text file appears as follows:
+Everything read from a text file using VBScript comes in as a string data type. Thus, if you are expecting something that you have read to be an integer or a floating point number, then you will need to convert the string to that data type. For example, let's say that you have a text file:
 
    7
    3.14159
@@ -49,9 +49,9 @@ If you use VBScript to read this file, all three lines will be read in as string
  strThird  = objFile.ReadLine
 
 </code>
-Note, the above example does have have the limitation of you having to know what kind of data is on each line. If you think might not be possible to know what kind of data is on each line, then you might consider exporting a "data type identifier" along with the data from your C++ program. This way, when you read a line from VBScript, you will know what kind of data it is that you have.
+Note, the above example does have the limitation that you have to know what kind of data is on each line. If you think it might not be possible to know what kind of data is on each line, then consider exporting a //data type identifier// along with the data from your C++ program. This way, when you read a line from VBScript, you will know what kind of data you have.
 
-VBScript's VarType function that will return a value indicating the type of variable. The possible values are as follows:
+VBScript's VarType function will return a value indicating the type of variable. The possible values are:
 
    vbEmpty       0 Uninitialized (default)
    vbNull        1 Contains no valid data
