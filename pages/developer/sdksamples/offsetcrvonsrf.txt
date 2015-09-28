@@ -3,10 +3,10 @@
 > **Summary:** //Demonstrates how to offset a curve on a surface using the Rhino SDK.//
 
 =====Question=====
-I am using **RhinoOffsetCurveOnSrf** SDK function to offset a curve which was interpolated on a cylindrical surface. The problem is that the results do not seem to match those of Rhino's **OffsetCrvOnSrf** command. That is, the offset curve do not extend to the edges of the surfaces. Why is this?
+I am using the **RhinoOffsetCurveOnSrf** SDK function to offset a curve which was interpolated on a cylindrical surface. The problem is that the results do not seem to match those of Rhino's **OffsetCrvOnSrf** command. That is, the offset curve does not extend to the edges of the surfaces. Why is this?
 
 =====Answer=====
-After calculating the offset curve, the **OffsetCrvOnSrf** command extends both ends of that curve to edge of the surface using **RhinoExtendCrvOnSrf**. Below is an example of how you can do this using the SDK:
+After calculating the offset curve, the **OffsetCrvOnSrf** command extends both ends of that curve to the surface edge using **RhinoExtendCrvOnSrf**. Below is an example of how you can do this using the SDK:
 
 
 <code c++>
