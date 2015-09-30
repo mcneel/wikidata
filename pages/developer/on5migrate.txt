@@ -3,19 +3,19 @@
 > **Summary:** //Information to help you migrate your application to openNURBS 5.0.//
 
 ===== More information =====
-More information and downloads for the toolkit and sample files are available from [[http://www.opennurbs.org|openNURBS Initiative Web Site]].
+More information and downloads for the toolkit and sample files are available from the [[http://www.opennurbs.org|openNURBS Initiative web site]].
 
 ===== Overview =====
-The openNURBS 5.0 toolkit builds upon openNURBS 4.0 by adding the ability to read and write Rhino version 5 3DM files.
+The openNURBS 5.0 toolkit builds upon openNURBS 4.0 by adding the ability to read and write Rhino 5 3dm files.
 
-For most developers, migrating to openNURBS 5.0 will be a simple as recompiling their application against the new toolkit.
+For most developers, migrating to openNURBS 5.0 is as simple as recompiling their application against the new toolkit.
 
 ===== New Features =====
 
 ==== Lightweight Extrusions ====
-Lightweight Extrusion objects allow creation of simple extruded shapes using a much more lightweight representation than Brep (polysurface) objects. Lightweight Extrusions are represented by the **ON_Extrusion** class and have the object type of **ON::extrusion_object**.
+Lightweight Extrusion objects creates simple extruded shapes using a much more lightweight representation than Brep (polysurface) objects. Lightweight Extrusions are represented by the **ON_Extrusion** class and have the object type of **ON::extrusion_object**.
 
-When reading 3DM files, in most cases, you will want to convert the Lightweight Extrusion object to a Brep, and then just pass the Brep to the Brep handling code that you've already written.
+In most cases, when you read 3dm files, you will want to convert the Lightweight Extrusion object to a Brep, and then just pass the Brep to the Brep handling code that you've already written.
 
 <code c++>
 ONX_model model = ...
@@ -90,5 +90,5 @@ for( int i = 0; i < model.m_object_table.Count(); i++ )
     * IsChildOf()
     * ParentId()
     * SetParentId()
-  * New support for Tolerances, Text Masks and Scaling per dimstyle
+  * New support for Tolerances, Text Masks, and Scaling per dimstyle
 
