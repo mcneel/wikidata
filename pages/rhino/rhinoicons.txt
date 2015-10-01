@@ -28,7 +28,7 @@ All pixel images are stored in (usually a combination of) channels. The most fam
 =====Pixels=====
 [[http://en.wikipedia.org/wiki/Anti-alias|Anti-aliasing]] is more than just a few semi-transparent pixels near shape edges. Since there is plenty of reading material available on this topic on the web, I will only briefly dive into it.
 
-Anti-aliasing is an intelligent way of adding sub-pixel detail to images. Instead of finding the object in the drawing which is the dominant one for any given pixel, all objects are sampled and combined based on their relative dominance. For every pixel in the image, the amount of overlap with every object is measured and the resulting color of that pixel becomes the weighted average of the colors of all overlapping objects. 
+Anti-aliasing is an intelligent way of adding sub-pixel detail to images. Instead of finding the object in the drawing which is the dominant one for any given pixel, all objects are sampled and combined based on their relative dominance. For every pixel in the image, the amount of overlap with every object is measured. The color of that pixel becomes the weighted average of the colors of all overlapping objects. 
 
 **Note:** Applications who render anti-aliased geometry onto the screen use a method like this, but downsizing a pixel image (downsampling) has the same effect.
 
@@ -37,7 +37,7 @@ I'd love to type a thousands words on the subject right now, but I think I'll ge
 \\
 
 |    {{:legacy:en:ProperPixelAlignment_Vector.png}} {{:legacy:en:ProperPixelAlignment_Pixel.png}}    |
-| Here are two images representing two manifestations of the same drawing. The first image is a screenshot of the program used to draw the image. It shows the on-screen rendering of vector objects. All the shapes are defined by line and bezier segments in a continuous space (i.e. not gridded such as pixel-images). The second image shows the anti-aliased pixel bitmap extracted from the vector-drawing. Both images have been blended with a pink background. |
+| Here are two images representing two manifestations of the same drawing. The first image is a screenshot of the program used to draw the image. It shows the on-screen rendering of vector objects. All the shapes are defined by line and bezier segments in a continuous space (i.e. not gridded such as pixel-images). The second image shows the anti-aliased pixel bitmap extracted from the vector-drawing. Both images are blended with a pink background. |
 
 \\
 
@@ -49,11 +49,11 @@ The only object which overlaps with this column is the black outline of the box.
 
 |    {{:legacy:en:FaultyPixelAlignment_Vector.png}} {{:legacy:en:FaultyPixelAlignment_Pixel.png}}    |
 
-| Here, the vector objects have been moved half a pixel left and upwards. You can see that there are many more pixels partly obscured by the black outline and no pixels at all which are completely obscured. The resulting 24×24 icon lacks all the crisp features of its aligned brother. |
+| Here, the vector objects have moved half a pixel left and upwards. You can see that there are many more pixels partly obscured by the black outline and no pixels at all which are completely obscured. The resulting 24×24 icon lacks all the crisp features of its aligned brother. |
 
 \\
 
-The lesson so far: Do not use anti-aliasing if you can get away without it. (Near) vertical and horizontal lines should always be drawn without anti-aliasing, but tilted and curved lines do not rely on accurate alignment and so they //can// be drawn with anti-aliasing. If you use anti-aliasing, try to optimally align the shapes to the pixel-grid.
+The lesson so far: Do not use anti-aliasing if you can get away without it. Alway draw (near) vertical and horizontal lines without anti-aliasing. Tilted and curved lines do not rely on accurate alignment and so they //can// be drawn with anti-aliasing. If you use anti-aliasing, try to align the shapes to the pixel-grid.
 
 \\
 
@@ -66,14 +66,14 @@ The lesson so far: Do not use anti-aliasing if you can get away without it. (Nea
 
 \\
 
-The above table shows the difference between anti-aliased and pixelated lines at different tilting angles. It becomes clear that low angles (near 0° or 90°) result in extreme fuzziness of anti-aliased lines.
+This table shows the difference between anti-aliased and pixelated lines at different tilting angles. It becomes clear that low angles (near 0° or 90°) result in extreme fuzziness of anti-aliased lines.
 
 
 ----
 
 
 =====Creating your own icons=====
-If you want to change an existing icon into something slightly different (for example, you've written a script in which you would like to add to a button), there are three things you can do:
+To change an existing icon into something a little different (for example, you've written a script in which you would like to add to a button), there are three things you can do:
 
       * Change pixels in the icon image  //(for adding pixelated image elements)//
       * Change pixels in the base image //(for adding anti-aliased image elements)//
@@ -113,12 +113,12 @@ Other examples of pixelated geometry are arrows and texts. You can easily add th
 
 
 | {{:legacy:en:PixelRules.png}} |
-|//Every red square is synonymous with a single pixel//|
+|//Every red square is synonymous with a single pixel.//|
 
 
 **//Changing the base image//**
 
-To help with the creation of anti-aliased icons, all images have been rendered to large bitmaps as well. All the icon images are available as full-color, full-alpha png images. These //base images// can be used to add anti-aliased geometry to icons. Since base images are much larger than actual icons, anything drawn into the base image is downsampled several times and thus automatically anti-aliased. You'll need a separate pixel-editor for this job such as Photoshop, PaintShop, or anything else which exceeds Microsoft Paint. In this case, I used JASC PaintShop Pro, but the method is fairly general.
+To help with the creation of anti-aliased icons, all images have been rendered to large bitmaps as well. All the icon images are available as full-color, full-alpha png images. You can use these //base images// to add anti-aliased geometry to icons. Since base images are much larger than actual icons, anything drawn into the base image is downsampled several times and automatically anti-aliased. For this job you'll need a separate pixel-editor such as Photoshop, PaintShop, or anything else which exceeds Microsoft Paint. In this case, I used JASC PaintShop Pro, but the method is fairly general.
 
 First, you need to load the base image into the editor and apply the alpha channel (some editors will load the alpha automatically). You will see something like this:
 
@@ -130,11 +130,11 @@ First, you need to load the base image into the editor and apply the alpha chann
 
 Now imagine we have a command (or a macro or alias or whatever) which applies a green glass material to an object and we use this command more than 261 times a day. It would be nice to have a button that runs the command for us, and it would be even nicer to have a neat icon that accompanies it. Obviously this icon needs to be a green, transparent something. Since we've used the box icon before, we'll use it again here.
 
-To make the box icon transparent and green, we cannot use the simple method of changing individual pixels. First off, the transitions between the sides of the box are anti-aliased, so we would manually have to invent all those new blending colors. This is not impossible to do, it's just boring. After we've changed the image hue, we also need to make it transparent. A good illusion of transparency is to highlight some occluded faces and to darken others. This would also be very tedious to do on a per-pixel basis. If you have a good pixel-editor, these adjustments are peanuts:
+To make the box icon transparent and green, we cannot use the simple method of changing individual pixels. First off, the transitions between the sides of the box are anti-aliased, so we have to manually invent all those new blending colors. This is not impossible to do, it's just boring. After we've changed the image hue, we also need to make it transparent. A good illusion of transparency is to highlight some occluded faces and to darken others. This is also be tedious to do on a per-pixel basis. If you have a good pixel-editor, these adjustments are peanuts:
 
 
 | {{:legacy:en:JASC_Box_Changed.png}} |
-| I have applied new colors to the faces using the paintbucket tool, then I've copied the two vertical faces of the box onto the opposite sides using the magicwand selection tool, changed their colors (to white and black respectively) and made them very translucent. These faces should be behind the box, but we can draw them on top of the box using such trickery. You can see that the image conveys a strong sense of transparency.|e
+| I applied new colors to the faces using the paint bucket tool. Then I copied the two vertical faces of the box onto the opposite sides using the magicwand selection tool, changed their colors (to white and black respectively) and made them very translucent. These faces should be behind the box, but we can draw them on top of the box using such trickery. You can see that the image conveys a strong sense of transparency.|e
 \\
 
 My edited image has collected a few extra layers on the way and before I can put the image into Rhino, I need to combine all superimposed layers and turn it into a small icon (say, 24×24 pixels). If you need to merge (combine) layers, make sure you do not simply flatten the image. Flattening typically destroys any existent alpha-channels. JASC PaintShop Pro provides several merging modes. Merge Visible is the one we need:
@@ -144,7 +144,7 @@ My edited image has collected a few extra layers on the way and before I can put
 
 \\
 
-After the image has been merged into a single layer including an alpha-channel (provided this was necessary), the drawing has to be downsampled to the size of the icon. 
+After the image has merged into a single layer including an alpha-channel (provided this was necessary), the drawing has to be downsampled to the size of the icon. 
 
 **Note:** Many high-end pixel editors provide more ways than one to deal with transparent pixels. The most common modes are alpha-channels and mask-layers. The difference between the two is that alpha-channels contain the transparency information in the color of the pixels itself. Mask-layers simply use a separate grayscale image to control the transparency. If you're having problems saving *.png files with proper transparency information, try switching between these modes.
 
@@ -158,18 +158,18 @@ Be sure to use a good sampling algorithm when resizing the image (for example, b
 
 **//Changing the vector drawing//**
 
-Sometimes, we need to make so many changes to an icon, that adjusting the base or icon image is not an effective approach. In that case (or even if you need to create a new icon from scratch), you're better off using a vector editor to fiddle with the vector objects that make the icon. All Rhino 4 icons were drawn in [[http://www.xara.com/products/xtreme/default.asp?t=|Xara]], but you can also use [[http://www.adobe.com/products/illustrator/index.html|Illustrator]] or any other illustration package. The source files (each containing many related icons) are available for download from this wiki page.
+Sometimes, we need to make so many changes to an icon, that adjusting the base or icon image is not an effective approach. In that case (or even if you need to create a new icon from scratch), you're better off using a vector editor to fiddle with the vector objects that make the icon. All the Rhino 4 icons were drawn in [[http://www.xara.com/products/xtreme/default.asp?t=|Xara]], but you can also use [[http://www.adobe.com/products/illustrator/index.html|Illustrator]] or any other illustration package. The source files (each containing many related icons) are available for download from this wiki page.
 
-The first order of business when creating new icons is to find one which reasonably resembles our goal. It is of course possible that no existing icon looks anything like what you're after, but those cases are rare. Let's assume we once more need the box icon:
+The first order of business when creating new icons is to find one which resembles our goal. It is of course possible that no existing icon looks anything like what you're after, but those cases are rare. Let's assume we once more need the box icon:
 
 
 | {{:legacy:en:XARA_Box_Base.png}} |
 
 \\
 
-The vector source images have been layered to lubricate the alignment and export tasks. In Xara, layers can reside either in the background or the foreground. Layers in the background (Guides and Background) will not be included when Xara converts the vector drawing to a pixel image. The only object in the Background layer is the green square behind the icon. This square is used to preserve the alignment and positioning of the foreground objects with respect to the pixel-grid. It is not important yet.
+The vector source images have been layered to lubricate the alignment and export tasks. In Xara, layers can reside either in the background or the foreground. Layers in the background (Guides and Background) are not included when Xara converts the vector drawing to a pixel image. The only object in the Background layer is the green square behind the icon. This square is used to preserve the alignment and positioning of the foreground objects with respect to the pixel-grid. It is not important yet.
 
-The Guides layer contains a set of infinite lines that mark the boundaries of all icon areas (the red, dotted lines). It, too, can be ignored at this time.
+The Guides layer contains a set of infinite lines that mark the boundaries of all icon areas (the red, dotted lines). For now, it can be ignored also.
 
 The Obj_Base layer contains all the objects that make up our icon. The blue faces and the black outline in this particular case.
 
@@ -192,7 +192,7 @@ Once you are happy with the new image, you have to create an icon file that Rhin
 If your vector illustration program delivers good anti-aliasing on a small scale, you can simply save the vector objects directly to a 24×24 *.png file:
 
 | {{:legacy:en:XARA_ExportToSize.png}} |
-| In Xara, this method works well, especially with properly aligned vectors. Xara's internal renderer automatically snaps certain objects to the pixelgrid, so crispness is easy to attain. The leftmost pane shows the image as it will be saved. The icon itself is only 17 pixels wide and 22 pixels high, but it needs to be positioned in the center of the square icon area, hence the need for a background rectangle.|
+| In Xara, this method works well, especially with properly aligned vectors. Xara's internal renderer automatically snaps certain objects to the pixelgrid, so crispness is easy to attain. The leftmost pane shows the image as it will be saved. The icon itself is only 17 pixels wide and 22 pixels high, but it needs to be positioned in the center of the square icon area. Hence the need for a background rectangle.|
 
 
 **//Creating a base image//**
