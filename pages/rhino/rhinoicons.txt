@@ -1,9 +1,9 @@
 ====== Documentation about the Rhino toolbar images ======
 
 
-The toolbars in Rhino underwent a rigorous rewrite between versions 3 and 4. Among other new features, Rhino 4 toolbar buttons support images with alpha-channels. Earlier versions of Rhino only contained a one-bit transparency mask (yes-or-no, transparent-or-opaque). 
+The toolbars in Rhino underwent a rigorous rewrite between versions 3 and 4. Among other new features, Rhino 4 toolbar buttons support images with alpha channels. Earlier versions of Rhino only contained a one-bit transparency mask (yes-or-no, transparent-or-opaque). 
 
-Alpha-channel blending allows a better integration of icons into the workspace. This wiki page provides information about how alpha-channeled icons work, how you can change existing icons, and how to make new icons that look like the default set. There is also some good information in the [[http://msdn2.microsoft.com/en-us/library/ms997636.aspx|Microsoft web site]] about this.
+Alpha channel blending allows a better integration of icons into the workspace. This wiki page provides information about how alpha channeled icons work, how you can change existing icons, and how to make new icons that look like the default set. There is also some good information in the [[http://msdn2.microsoft.com/en-us/library/ms997636.aspx|Microsoft web site]] about this.
 
 
 ----
@@ -27,7 +27,7 @@ In an RGBA (Red-Green-Blue-Alpha) image, there are four channels. The alpha chan
 |**Note:** These partially transparent pixels typically only occur along the edges of the image. This is called **anti-aliasing**. In anti-aliasing, 8-bit alpha channels provide enough blending range to make icons that work well on **any** background.|
 
 
-|**Note:** Properly aligned vertical and horizontal lines look exactly the same whether they have anti-aliasing or not. Alpha-channels are an additional feature to be used when applicable. They do not replace existent functionality. In other words, images with alpha-channels can behave exactly the same as images without alpha-channels, but not the other way around.|
+|**Note:** Properly aligned vertical and horizontal lines look exactly the same whether they have anti-aliasing or not. Alpha-channels are an additional feature to be used when applicable. They do not replace existent functionality. In other words, images with alpha channels can behave exactly the same as images without alpha channels, but not the other way around.|
 
 
 ----
@@ -136,16 +136,16 @@ First, you need to load the base image into the editor and apply the alpha chann
 
 \\
 
-Now imagine we have a command (or a macro or alias or whatever) which applies a green glass material to an object and we use this command more than 261 times a day. It would be nice to have a button that runs the command for us, and it would be even nicer to have a neat icon that accompanies it. Obviously this icon needs to be a green, transparent something. Since we've used the box icon before, we'll use it again here.
+Now imagine we have a command (or a macro or alias or whatever) which applies a green glass material to an object and we use this command more than 261 times a day. It would be nice to have a button that runs the command for us, and it would be even nicer to have a neat icon to accompany it. Obviously this icon needs to be a green, transparent something. Since we've used the box icon before, we'll use it again here.
 
-To make the box icon transparent and green, we cannot use the simple method of changing individual pixels. First off, the transitions between the sides of the box are anti-aliased, so we have to manually invent all those new blending colors. This is not impossible to do, it's just boring. After we've changed the image hue, we also need to make it transparent. A good illusion of transparency is to highlight some occluded faces and to darken others. This is also be tedious to do on a per-pixel basis. If you have a good pixel-editor, these adjustments are peanuts:
+To make the box icon transparent and green, we cannot use the simple method of changing individual pixels. First, the transitions between the sides of the box are anti-aliased, so we have to manually invent all those new blending colors. This is not impossible to do, it's just boring. After we've changed the image hue, we also need to make it transparent. A good illusion of transparency is to highlight some occluded faces and to darken others. This is also tedious to do on a per-pixel basis. If you have a good pixel-editor, these adjustments are peanuts:
 
 
 | {{:legacy:en:JASC_Box_Changed.png}} |
 | I applied new colors to the faces using the paint bucket tool. Then I copied the two vertical faces of the box onto the opposite sides using the magicwand selection tool, changed their colors (to white and black respectively) and made them very translucent. These faces should be behind the box, but we can draw them on top of the box using such trickery. You can see that the image conveys a strong sense of transparency.|e
 \\
 
-My edited image has collected a few extra layers on the way and before I can put the image into Rhino, I need to combine all superimposed layers and turn it into a small icon (say, 24×24 pixels). If you need to merge (combine) layers, make sure you do not simply flatten the image. Flattening typically destroys any existent alpha-channels. JASC PaintShop Pro provides several merging modes. Merge Visible is the one we need:
+My edited image has collected a few extra layers on the way and before I can put the image into Rhino, I need to combine all superimposed layers and turn it into a small icon (say, 24×24 pixels). If you need to merge (combine) layers, make sure you do not simply flatten the image. Flattening typically destroys existing alpha channels. JASC PaintShop Pro provides several merging modes. Merge Visible is the one we need:
 
 
 | {{:legacy:en:JASC_Layer_palette.png}} |
@@ -154,7 +154,7 @@ My edited image has collected a few extra layers on the way and before I can put
 
 After the image has merged into a single layer including an alpha-channel (provided this was necessary), the drawing has to be downsampled to the size of the icon. 
 
-**Note:** Many high-end pixel editors provide more ways than one to deal with transparent pixels. The most common modes are alpha-channels and mask-layers. The difference between the two is that alpha-channels contain the transparency information in the color of the pixels itself. Mask-layers simply use a separate grayscale image to control the transparency. If you're having problems saving *.png files with proper transparency information, try switching between these modes.
+**Note:** Many high-end pixel editors provide more ways than one to deal with transparent pixels. The most common modes are alpha channels and mask-layers. The difference between the two is that alpha channels contain the transparency information in the color of the pixels itself. Mask-layers simply use a separate grayscale image to control the transparency. If you're having problems saving *.png files with proper transparency information, try switching between these modes.
 
 
 Be sure to use a good sampling algorithm when resizing the image (for example, bicubic, bilinear or lances). If you're using an unsuitable algorithm, your icon will end up looking fuzzy or pixelated:
