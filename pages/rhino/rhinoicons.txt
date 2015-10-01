@@ -1,25 +1,33 @@
 ====== Documentation about the Rhino toolbar images ======
 
 
-The toolbars in Rhino underwent a rigorous rewrite between versions 3 and 4. Among other new features, Rhino 4 toolbar buttons now support images with alpha-channels. Earlier versions of Rhino only contained a one-bit transparency mask (yes-or-no, transparent-or-opaque). Alpha-channel blending allows a better integration of icons into the workspace. This wiki page provides information about how alpha-channeled icons work, how you can change existing icons, and how to make new icons that look like the default set. There is also some good information in the [[http://msdn2.microsoft.com/en-us/library/ms997636.aspx|Microsoft web site]] about this.
+The toolbars in Rhino underwent a rigorous rewrite between versions 3 and 4. Among other new features, Rhino 4 toolbar buttons support images with alpha-channels. Earlier versions of Rhino only contained a one-bit transparency mask (yes-or-no, transparent-or-opaque). 
+
+Alpha-channel blending allows a better integration of icons into the workspace. This wiki page provides information about how alpha-channeled icons work, how you can change existing icons, and how to make new icons that look like the default set. There is also some good information in the [[http://msdn2.microsoft.com/en-us/library/ms997636.aspx|Microsoft web site]] about this.
 
 
 ----
 
 =====Channels=====
-All pixel images are stored in (usually a combination of) channels. The most famous combination is the **<color red>R</color><color green>G</color><color blue>B</color>** (Red-Green-Blue) mix. An RGB image contains three channels. Each controls a specific property of every pixel, namely the amount of red, green and blue that goes into making the final color. Grayscale images contain only one channel, which controls the amount of white for every pixel. In an RGBA (Red-Green-Blue-Alpha) image, there are four channels. The alpha channel controls the level of transparency per pixel. Since this level can have 256 different values (0 equals completely transparent, 255 equals completely opaque, and the between values equal a partial transparency), we can now use varying levels of transparency per pixel in toolbar icons:
+All pixel images are stored in (usually a combination of) channels. The most famous combination is the **<color red>R</color><color green>G</color><color blue>B</color>** (Red-Green-Blue) mix. An RGB image contains three channels. Each controls a specific property of every pixel, namely the amount of red, green and blue that goes into making the final color. 
+
+Grayscale images contain only one channel, which controls the amount of white for every pixel. 
+
+In an RGBA (Red-Green-Blue-Alpha) image, there are four channels. The alpha channel controls the level of transparency per pixel. Since this level can have 256 different values (0 equals completely transparent, 255 equals completely opaque, and the between values equal a partial transparency), we can now use varying levels of transparency per pixel in toolbar icons:
 
 \\
 
 |    {{:legacy:en:PixelsWithoutAlpha.png}}    |
 |    {{:legacy:en:Blend1BitAlpha.png}}    |
-| Here you see an image with a binary alpha channel. Pixels are either completely opaque or completely transparent. No middle ground. Binary alpha channels do not mix well into variable backgrounds. This is why anti-aliasing is impossible with 1-bit alpha channels.|
+| Here is an image with a binary alpha channel. Pixels are either completely opaque or completely transparent. No middle ground. Binary alpha channels do not mix well into variable backgrounds. This is why anti-aliasing is impossible with 1-bit alpha channels.|
 |    {{:legacy:en:PixelsWithAlpha.png}}    |
 |    {{:legacy:en:Blend8BitAlpha.png}}    |
-|The same icon with a smooth alpha channel (256 different levels of transparency). **Note:** These partially transparent pixels typically only occur along the edges of the image. This is called **anti-aliasing**. In anti-aliasing, 8-bit alpha channels provide enough blending range to make icons that work well on **any** background.|
+|The same icon with a smooth alpha channel (256 different levels of transparency).|
+
+|**Note:** These partially transparent pixels typically only occur along the edges of the image. This is called **anti-aliasing**. In anti-aliasing, 8-bit alpha channels provide enough blending range to make icons that work well on **any** background.|
 
 
-**Note:** Properly aligned vertical and horizontal lines look exactly the same whether they have anti-aliasing or not. Alpha-channels are an additional feature to be used when applicable. They do not replace existent functionality. In other words, images with alpha-channels can behave exactly the same as images without, but not the other way around.
+|**Note:** Properly aligned vertical and horizontal lines look exactly the same whether they have anti-aliasing or not. Alpha-channels are an additional feature to be used when applicable. They do not replace existent functionality. In other words, images with alpha-channels can behave exactly the same as images without alpha-channels, but not the other way around.|
 
 
 ----
@@ -28,7 +36,7 @@ All pixel images are stored in (usually a combination of) channels. The most fam
 =====Pixels=====
 [[http://en.wikipedia.org/wiki/Anti-alias|Anti-aliasing]] is more than just a few semi-transparent pixels near shape edges. Since there is plenty of reading material available on this topic on the web, I will only briefly dive into it.
 
-Anti-aliasing is an intelligent way of adding sub-pixel detail to images. Instead of finding the object in the drawing which is the dominant one for any given pixel, all objects are sampled and combined based on their relative dominance. For every pixel in the image, the amount of overlap with every object is measured. The color of that pixel becomes the weighted average of the colors of all overlapping objects. 
+Anti-aliasing is an intelligent way of adding sub-pixel detail to images. Instead of finding the object in the dominant drawing for any given pixel, all objects are sampled and combined based on their relative dominance. For every pixel in the image, the amount of overlap with every object is measured. The color of that pixel becomes the weighted average of the colors of all overlapping objects. 
 
 **Note:** Applications who render anti-aliased geometry onto the screen use a method like this, but downsizing a pixel image (downsampling) has the same effect.
 
@@ -41,9 +49,9 @@ I'd love to type a thousands words on the subject right now, but I think I'll ge
 
 \\
 
-The size of the extracted image is 24×24 pixels. Since this information was available when the vector drawing was made, the vector shapes have been neatly aligned to a 24×24 grid. Let's take a closer look at column #4.
+The size of the extracted image is 24×24 pixels. Since this information was available when the vector drawing was made, the vector shapes have neatly aligned to a 24×24 grid. Let's take a closer look at column #4.
 
-The only object which overlaps with this column is the black outline of the box. Eleven pixels in column #4 are not overlapped by any object and are thus left completely transparent. Nine pixels are completely overlapped by the outline and thus inherit the color of the outline without modification. None of these pixels contain any anti-aliasing. It is the four pixels at the top and bottom of the outline shape which are interesting right now. They are only **partly** obscured by the outline shape and as a result, the color of these pixels is not 100% black. The amount of transparency in these pixels is directly linked to their amount of overlap. Actually, only the topmost pixel (column:4 row:8) has a notable blending. The overlap in the other three pixels is so //all-or-nothing// that the blending is hardly visible. This is not an accident. Anti-aliasing is all fine and dandy, but it works by averaging pixels. This means that an anti-aliased line is always more fuzzy than an aliased (or //pixelated//) line. Anti-aliasing is a bit like a jack-hammer in this respect. It's a useful tool but you don't necessarily want to use it to change a light bulb. If you do, you'll end up with the following:
+The only object which overlaps with this column is the black outline of the box. Eleven pixels in column #4 are not overlapped by any object and are left completely transparent. Nine pixels are completely overlapped by the outline and inherit the color of the outline without modification. None of these pixels contain any anti-aliasing. It is the four pixels at the top and bottom of the outline shape which are interesting right now. They are only **partly** obscured by the outline shape and as a result, the color of these pixels is not 100% black. The amount of transparency in these pixels is directly linked to their amount of overlap. Actually, only the topmost pixel (column:4 row:8) has a notable blending. The overlap in the other three pixels is so //all-or-nothing// that the blending is hardly visible. This is not an accident. Anti-aliasing is all fine and dandy, but it works by averaging pixels. This means that an anti-aliased line is always more fuzzy than an aliased (or //pixelated//) line. Anti-aliasing is a bit like a jack-hammer in this respect. It's a useful tool but you don't necessarily want to use it to change a light bulb. If you do, you'll end up with the following:
 
 \\
 
@@ -53,7 +61,7 @@ The only object which overlaps with this column is the black outline of the box.
 
 \\
 
-The lesson so far: Do not use anti-aliasing if you can get away without it. Alway draw (near) vertical and horizontal lines without anti-aliasing. Tilted and curved lines do not rely on accurate alignment and so they //can// be drawn with anti-aliasing. If you use anti-aliasing, try to align the shapes to the pixel-grid.
+The lesson so far: Do not use anti-aliasing if you can get away without it. Always draw (near) vertical and horizontal lines without anti-aliasing. Tilted and curved lines do not rely on accurate alignment and so they //can// be drawn with anti-aliasing. If you use anti-aliasing, try to align the shapes to the pixel-grid.
 
 \\
 
@@ -66,7 +74,7 @@ The lesson so far: Do not use anti-aliasing if you can get away without it. Alwa
 
 \\
 
-This table shows the difference between anti-aliased and pixelated lines at different tilting angles. It becomes clear that low angles (near 0° or 90°) result in extreme fuzziness of anti-aliased lines.
+|This table shows the difference between anti-aliased and pixelated lines at different tilting angles. It becomes clear that low angles (near 0° or 90°) result in extreme fuzziness of anti-aliased lines.|
 
 
 ----
@@ -84,7 +92,7 @@ To change an existing icon into something a little different (for example, you'v
 
 **//Changing the icon image//**
 
-This is the simplest method of changing icons. You do not need any software besides Rhino. It is ideal for adding pixelated geometry such as texts, arrows or simple lines (0°, 45° or 90°).
+This is the simplest method of changing icons. You do not need any software besides Rhino. It is ideal for adding pixelated geometry such as texts, arrows, or simple lines (0°, 45° or 90°).
 
 **Note:** If you have access to a good pixel-editor you could technically use a whole range of tools and filters (blurring, hue changes, contrast adjustments to name a few) on the small icon images. You'll have to extract the icon from the button onto the hard-drive and edit it separately though. Rhino only provides the most basic drawing tools.
 
