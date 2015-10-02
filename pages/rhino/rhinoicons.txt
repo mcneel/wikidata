@@ -166,20 +166,20 @@ Be sure to use a good sampling algorithm when resizing the image (for example, b
 
 **//Changing the vector drawing//**
 
-Sometimes, we need to make so many changes to an icon, that adjusting the base or icon image is not an effective approach. In that case (or even if you need to create a new icon from scratch), you're better off using a vector editor to fiddle with the vector objects that make the icon. All the Rhino 4 icons were drawn in [[http://www.xara.com/products/xtreme/default.asp?t=|Xara]], but you can also use [[http://www.adobe.com/products/illustrator/index.html|Illustrator]] or any other illustration package. The source files (each containing many related icons) are available for download from this wiki page.
+Sometimes, we make so many changes to an icon that adjusting the base or icon image is not an effective approach. In that case (or even if you need to create a new icon from scratch), you're better off using a vector editor to fiddle with the vector objects that make the icon. All the Rhino 4 icons were drawn in [[http://www.xara.com/products/xtreme/default.asp?t=|Xara]], but you can also use [[http://www.adobe.com/products/illustrator/index.html|Illustrator]] or any other illustration package. The source files (each containing many related icons) are available for download from this wiki page.
 
-The first order of business when creating new icons is to find one which resembles our goal. It is of course possible that no existing icon looks anything like what you're after, but those cases are rare. Let's assume we once more need the box icon:
+When creating new icons first find one which resembles your goal. It is possible that no existing icons looks anything like what you're after, but those cases are rare. Let's assume we once more need the box icon:
 
 
 | {{:legacy:en:XARA_Box_Base.png}} |
 
 \\
 
-The vector source images have been layered to lubricate the alignment and export tasks. In Xara, layers can reside either in the background or the foreground. Layers in the background (Guides and Background) are not included when Xara converts the vector drawing to a pixel image. The only object in the Background layer is the green square behind the icon. This square is used to preserve the alignment and positioning of the foreground objects with respect to the pixel-grid. It is not important yet.
+The vector source images have been layered to ease the alignment and export tasks. In Xara, layers can reside either in the background or the foreground. Layers in the background (Guides and Background) are not included when Xara converts the vector drawing to a pixel image. The only object in the Background layer is the green square behind the icon. This square is used to preserve the alignment and positioning of the foreground objects with respect to the pixel-grid. It is not important yet.
 
 The Guides layer contains a set of infinite lines that mark the boundaries of all icon areas (the red, dotted lines). For now, it can be ignored also.
 
-The Obj_Base layer contains all the objects that make up our icon. The blue faces and the black outline in this particular case.
+The Obj_Base layer contains all the objects that make up our icon, in this case, the blue faces and the black outline.
 
 The Pixelgrid layer contains a red grid which corresponds with the pixels of a 24×24 icon. You can use this grid to align your objects. Also, the Xara file has a predefined grid (just like Rhino) which has been preset at half-pixel intervals. This means you can easily snap to pixel-centers and pixel-borders. Using Xara's illustration tools, you can quickly adjust the vector objects to make new icons:
 
@@ -209,15 +209,15 @@ If saving images at small sizes does not give you satisfactory results, you can 
 
 
 | Factor | Dimensions | Downsampling |
-|      8× |    192×192    |      64 |
-|     16× |    384×384    |     256 |
-|     24× |    576×576    |     576 |
-|     32× |    768×768    |    1024 |
+|      8× |    192×192    |     64 |
+|     16× |    384×384    |    256 |
+|     24× |    576×576    |    576 |
+|     32× |    768×768    |   1024 |
 
 \\
 
 | {{:legacy:en:XARA_Export.png}} |
-| Always remember to include the alpha channel in the exported png file. |
+| Remember to include the alpha channel in the exported png file. |
 
 \\
 
