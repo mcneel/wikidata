@@ -1,14 +1,14 @@
-====== Essentials of DotNET plugin programming ======
+====== Essentials of DotNET plug-in programming ======
 
-======So, you are new to DotNET?======
-
-\\
-
-So, you're probably pretty excited and scared right now? So, you have no idea where to start. So, you're likely to make some major mistakes in the first few hours which will prove to be frustrating? So, you'd like some basic advice? So, let's get started...
+=====So, you are new to DotNET?=====
 
 \\
 
-People who start writing DotNET plugins for Rhino basically fall into 3 groups:
+So, you're probably pretty excited and scared right now? You have no idea where to start. You're likely to make some major mistakes in the first few hours which will prove to be frustrating? You'd like some basic advice? So, let's get started...
+
+\\
+
+People who start writing DotNET plug-ins for Rhino basically fall into three groups:
 
   * C++ programmers who want to be hep
   * [[developer:rhinoscript|RhinoScript]] programmers who want to do more
@@ -16,31 +16,31 @@ People who start writing DotNET plugins for Rhino basically fall into 3 groups:
 
 \\
 
-Unfortunately, none of these three groups has a smooth transitional period. It's difficult for C++ programmers because the DotNET paradigm differs in key areas from "unmanaged" code (no pointers, no references, no memory management), it's difficult for RhinoScripters because they suddenly have to deal with [[http://en.wikipedia.org/wiki/Object-oriented_programming|OOP]] and it's difficult for dyed-in-the-wool DotNETters because the Rhino SDK doesn't work much like the DotNET platform namespaces and classes.
+Unfortunately, none of these three groups has a smooth transitional period. It's difficult for C++ programmers because the DotNET paradigm differs in key areas from "unmanaged" code (no pointers, no references, no memory management). It's difficult for RhinoScripters because they suddenly have to deal with [[http://en.wikipedia.org/wiki/Object-oriented_programming|OOP]]. And it's difficult for dyed-in-the-wool DotNETters because the Rhino SDK doesn't work much like the DotNET platform namespaces and classes.
 
 \\
 
 | {{:legacy:en:NonObsceneGuyGoingNuts.gif}}  |
-If you're a scripter, you have a lot to learn about classes, types, instances and encapsulation (among rather a lot else), and this isn't the place for that. The web is frothing with generic DotNET developer forums and repositories which will get you a long way down the road. If however you're already getting comfortable with the idea of object-oriented-programming, this page will teach you some key concepts about the Rhino SDK without which plugin development is an exercise in frustration.
+If you're a scripter, you have a lot to learn about classes, types, instances and encapsulation (among a lot else), and this isn't the place for that. The web is frothing with generic DotNET developer forums and repositories which will get you a long way down the road. If however you're already getting comfortable with the idea of object-oriented-programming, this page will teach you some key concepts about the Rhino SDK without which plug-in development is an exercise in frustration.
 
 \\
 
-This Wiki page explains some of the key concepts of Rhino Plugin Development (in no particular order) which are not immediately obvious to newcomers.
+This wiki page explains some of the key concepts of Rhino Plug-in Development (in no particular order) which are not immediately obvious to newcomers.
 
 \\
 \\
 
 ----
 
-======Const and Non-Const instances======
+======Const and non-const instances======
 
 \\
 
-Every class in the Rhino SDK comes in 2 flavours, a const and a non-const one. Const instances all start with "I" (such as IOnPlane, IOnBoundingBox,
+Every class in the Rhino SDK comes in two flavors, a const and a non-const one. Const instances all start with "I" (such as IOnPlane, IOnBoundingBox,
 
 IRhinoCurveObject and IRhinoEventWatcher). You are not allowed to change these instances, and indeed they lack all the functions that would in some way alter the memory state. For example, IOn3dPoint allows you to retrieve x, y and z coordinates, but not set them.
 
-Non-const objects start with "On" if they are part of [[developer:opennurbs|opennurbs]] or "MRhino" if they are part of Rhino (such as OnPlane, OnBoundingBox, MRhinoCurveObject and MRhinoEventWatcher). These instances can be altered without problems.
+Non-const objects start with "On" if they are part of opennurbs or "MRhino" if they are part of Rhino (such as OnPlane, OnBoundingBox, MRhinoCurveObject and MRhinoEventWatcher). These instances can be altered without problems.
 
 
 If you need to alter a plane, but the instance you've got is of type IOnPlane, you'll need to make a copy of the const instance. All the types in the SDK have "copy constructors", which take another instance of the same type and make an exact (but always non-const) duplicate:
@@ -70,15 +70,15 @@ Since OnCurve is an abstract class, it doesn't have any constructors to begin wi
 \\
 
 | Gotcha for C++ developers |
-| You've probably caught on to the fact that having two versions for each class is a way to mimic the 'const' keyword in C++. Rhino is written in C++ and as such uses constness all over the place. The DotNET framework however lacks a keyword that operates like 'const' and we had to use this horrific hack to allow DotNET plugins to use Rhino's unmanaged C++ kernel. Hence, On3dPoint in DotNET is the same as ON_3dPoint in C++ and IOn3dPoint is the same as const ON_3dPoint. |
+| You've probably caught on to the fact that having two versions for each class is a way to mimic the 'const' keyword in C++. Rhino is written in C++ and as such uses constness all over the place. The DotNET framework however lacks a keyword that operates like 'const' and we had to use this horrific hack to allow DotNET plug-ins to use Rhino's unmanaged C++ kernel. Hence, On3dPoint in DotNET is the same as ON_3dPoint in C++ and IOn3dPoint is the same as const ON_3dPoint. |
 
 \\
 \\
 
 ----
-======SDK Class hierarchy======
+======SDK class hierarchy======
 
-The class hierarchy in [[developer:opennurbs|opennurbs]] and Rhino is reasonably straightforward, although a bit counter-intuitive at times. For example, any curve object in Rhino (when I say "object" I mean something which can be selected with the mouse) is an instance of MRhinoCurveObject. MRhinoCurveObject itself has a member of the abstract type OnCurve, meaning that it can contain all the different curve types that inherit from this abstract class (such as OnNurbsCurve, OnArcCurve, OnLineCurve and OnPolyCurve (not a complete list)). However, you'll find types in [[developer:opennurbs|opennurbs]] which are clearly mathematical curves, and yet they do not derive from OnCurve. Examples are OnCircle, OnArc, OnLine and OnBezierCurve. The thinking is that these classes are so atomic, that they should be as light-weight as possible. That is why there is both an OnArc and an OnArcCurve class.
+The class hierarchy in opennurbs and Rhino is reasonably straightforward, although a bit counter-intuitive at times. For example, any curve object in Rhino ("object" is something which can be selected with the mouse) is an instance of MRhinoCurveObject. MRhinoCurveObject itself has a member of the abstract type OnCurve, meaning that it can contain all the different curve types that inherit from this abstract class (such as OnNurbsCurve, OnArcCurve, OnLineCurve and OnPolyCurve (not a complete list)). However, you'll find types in opennurbs which are clearly mathematical curves, and yet they do not derive from OnCurve. Examples are OnCircle, OnArc, OnLine and OnBezierCurve. The thinking is that these classes are so atomic, that they should be as light-weight as possible. That is why there is both an OnArc and an OnArcCurve class.
 
 \\
 
@@ -118,13 +118,10 @@ The SDK helpfile lists the inheritance tree of each type (including all the inte
 
 \\
 
-Everything inside the Document is fixed. You are not allowed to change anything. This may sound odd, since you're changing things all the time as a regular user. The thing to realize is that 'changing' is not the same as 'replacing'. Once a curve made it into the Rhino document, the only way to modify it is to replace it with another curve that looks vaguely similar. The reason for this bottlenecking is that we need to keep track of all the changes made, so we can keep the undo records in synch. If plugins were allowed to change the colour of an object without telling anybody about it, there'd be no way to maintain a correct undo-stack.
+Everything inside the Document is fixed. You are not allowed to change anything. This may sound odd, since you're changing things all the time as a regular user. The thing to realize is that 'changing' is not the same as 'replacing'. Once a curve makes it into the Rhino document, the only way to modify it is to replace it with another curve that looks vaguely similar. The reason for this bottlenecking is that we need to keep track of all the changes made, so we can keep the undo records in synch. If plug-ins were allowed to change the color of an object without telling anybody, there'd be no way to maintain a correct undo-stack.
 
-\\
 
-If you want to transform an object, or change it's layer, or trim the end of a curve, or..., you have to get the const object, make a duplicate, change the
-
-duplicate, then switch it out with the old object. For example:
+If you want to transform an object, or change its layer, or trim the end of a curve, or..., you have to get the const object, make a duplicate, change the duplicate, then switch it out with the old object. For example:
 
   VB.NET:
   1. Dim obj_ref As New MRhinoObjRef(some_object_id)
@@ -158,7 +155,7 @@ duplicate, then switch it out with the old object. For example:
 
 \\
 
-This particular example is a bit of a redundant one, since the Document already has a function called TransformObject() which does all this duplicating/replacing behind the scenes.
+This particular example is a bit redundant, since the Document already has a function called TransformObject() which does all this duplicating and replacing behind the scenes.
 
 \\
 \\
@@ -169,11 +166,10 @@ This particular example is a bit of a redundant one, since the Document already 
 
 \\
 
-Rhino is primarily a command-line based application. We of course have menus and toolbars, but these UI elements merely send a text command into the command-line, which then parses the text and calls the appropriate code. Because we know that 99% of all rhino functionality is executed inside commands, we can make assumptions about optimization and framework design which make it easier for people to write plugin, provided they agree to play nice.
+Rhino is primarily a command-line based application. We of course have menus and toolbars, but these UI elements merely send a text command into the command-line, which then parses the text and calls the appropriate code. Because we know that 99% of all Rhino functionality is executed inside commands, we can make assumptions about optimization and framework design which make it easier for people to write plug-ins, provided they agree to play nice.
 
-\\
 
-For example, if you stick with commands, you never have to worry about undo-records, scriptability and error trapping since all this is being taken care of by Rhino. As soon as you start doing stuff 'out of the blue', you are responsible for making sure everything keeps on running smoothly. A prime example of non-command features would be the ones that are initiated from a non modal dialog. Non modal dialogs are usually displayed by calling a certain command, but because they are **non** modal, the command immediately completes while leaving the dialog on the screen. There is absolutely no reason why you couldn't use the aforementioned code from within a button on a non modal dialog, but, there is a huge difference in practice:
+For example, if you stick with commands, you never have to worry about undo-records, scriptability and error trapping since all this is taken care of by Rhino. As soon as you start doing stuff 'out of the blue', you are responsible for making sure everything keeps on running smoothly. A prime example of non-command features would be the ones that are initiated from a non modal dialog. Non modal dialogs are usually displayed by calling a certain command, but because they are **non** modal, the command immediately completes while leaving the dialog on the screen. There is no reason why you couldn't use the aforementioned code from within a button on a non modal dialog, but, there is a huge difference in practice:
 
   * Any exceptions that you fail to catch in time will crash Rhino. Commands themselves are smart enough not to allow crashes to propagate too far.
   * Any objects you add/delete/modify in your code are not included in the undo records. You have to specifically start and end undo records if you want to do stuff outside of commands.
