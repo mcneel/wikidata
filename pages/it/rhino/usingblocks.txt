@@ -1,0 +1,82 @@
+====== Uso dei blocchi ======
+I fondamenti dei blocchi sono gli stessi in Rhino 4 e 5. Tuttavia, Rhino 5 offre agli utenti ulteriori funzionalità e comandi elencati [[http://www.rhino3d.com/new/large|qui]].
+ 
+> **Sommario:** //I blocchi consentono la gestione degli oggetti ripetuti in un file.//
+
+=====Tra i vantaggi di usare i blocchi, troviamo:=====
+
+  * Possibilità di modificare un numero qualsiasi di copie di un oggetto se si tratta di istanze di blocco modificando la geometria che definisce il blocco.
+  * Possibilità di aggiornare gli oggetti da file esterni.
+  * La ripetizione di istanze di una singola definizione non fa aumentare di molto le dimensioni del file, visto che di fatto nel file è contenuta solo una definizione del blocco. Tutte le istanze fanno riferimento ai dati della definizione originale. Rhino usa dei trucchi per mostrare le varie istanze in altre posizioni e con altri orientamenti.
+
+=====Come funzionano i blocchi:=====
+Quando si crea un blocco in Rhino a partire da alcune geometrie del file corrente con il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/block.htm|Blocco]], Rhino sostituisce la geometria selezionata con un'//istanza// di blocco. Salva la definizione del blocco (la geometria selezionata dall'utente per definire il blocco) nel file. Con il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/insert.htm|Inserisci]], è possibile inserire tutte le istanze necessarie di questa definizione. Le definizioni esistenti disponibili per l'inserimento si trovano nell'elenco a discesa della finestra di dialogo del comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/insert.htm|Inserisci]].
+
+Se si inserisce un altro file 3dm come istanza di blocco, succede una cosa simile. La definizione di blocco viene integrata nel file corrente e salvata con esso. Ciò che si vede sullo schermo è un'//istanza// della geometria. Naturalmente, la differenza sta nel fatto che la definizione fa riferimento al file esterno e può venire aggiornata, come pure tutte le eventuali altre istanze sistemate, se il file esterno viene modificato. Per farlo, si usi il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/blockmanager.htm|GestioneBlocchi]].
+
+In entrambi i casi, non è necessario che venga sistemata nessuna istanza nel file affinché la definizione del blocco esista nel file. È per questo che a volte si riscontrano dei problemi nell'eliminazione di alcuni livelli. Se la definizione di un blocco usa un livello, non è possibile eliminarlo. Ciò può succedere quando tutte le istanze di un blocco sono state eliminate. Si usi il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/purge.htm|EliminaSuperflui]] per eliminare le definizioni di blocco non usate.
+
+Per aggiornare tutte le istanze di blocco di un determinato blocco nel file, occorre ridefinire la definizione del blocco. 
+[[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/explode.htm|Esplodere]] un'istanza di blocco.
+  - Effettuare delle modifiche sugli oggetti.
+  - Usare il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/block.htm|Blocco]] per creare di nuovo un blocco con gli oggetti usando lo stesso nome.  \\ Apparirà un messaggio di avviso per la conferma delle modifiche apportate alla definizione. 
+  - Oppure, si può ridefinire il blocco con un gruppo diverso di oggetti.
+
+
+====Un esempio per provare====
+  - **//Creare un parallelepipedo//** ed usare il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/block.htm|Blocco]] per definire un blocco. 
+  - Denominarlo **Parallelepipedo1**. \\ Sistemare il punto di inserimento su uno dei vertici del parallelepipedo.  \\ Dopo questa operazione, il parallelepipedo non è più un parallelepipedo. Ha l'aspetto di un parallelepipedo, ma se lo si seleziona e si osservano le informazioni che appaiono nel pannello [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/properties.htm|Proprietà]] > Dettagli, si vedrà che si tratta di un'istanza di blocco. 
+  - [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/explode.htm|Esplodere]] il blocco. 
+  - Controllare di nuovo le [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/properties.htm|Proprietà]]. \\ Il parallelepipedo è di nuovo un parallelepipedo e non ha niente a che vedere con il blocco denominato **Parallelepipedo1**. 
+  - Eliminare il parallelepipedo. 
+  - Quindi, usare il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/insert.htm|Inserisci]]. 
+  - Nell'elenco a discesa della finestra di dialogo [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/insert.htm|Inserisci]], reperire **Parallelepipedo 1**. \\ Si tratta della definizione di blocco creata quando si è creato il blocco.  
+  - [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/insert.htm|Inserirla]] come istanza di blocco e quindi copiare l'istanza varie volte. 
+
+**//Ridefinire il blocco in Rhino 4://** 
+  - Selezionare una delle istanze di **Parallelepipedo1**.
+  - [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/explode.htm|Esploderla]] per farla ritornare ad essere un parallelepipedo normale. 
+  - [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/fillet.htm|Raccordare]] i bordi del parallelepipedo. 
+  - Quindi eseguire il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/block.htm|Blocco]].
+  - Selezionare il parallelepipedo raccordato e selezionare un punto di inserimento. 
+  - Selezionare **Parallelepipedo1** come nome per il nuovo blocco. \\ Tutte le istanze di Parallelepipedo1 ora sono dei parallelepipedi raccordati. \\ Questi possono spostarsi se per la nuova definizione si è specificato un punto di inserimento diverso da quello originale.
+
+**//Ridefinire il blocco in Rhino 5://** \\
+In Rhino 5 si può usare il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/blockedit.htm|ModificaBlocco]]. 
+  - Avviare ModificaBlocco facendo doppio clic su un'istanza di blocco. 
+  - Apparirà la finestra di dialogo del comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/blockedit.htm|ModificaBlocco]]. 
+  - Aggiungere ed eliminare degli oggetti e reimpostare il punto di inserimento. 
+  - È possibile modificare direttamente la geometria nel bloccok. 
+  - Terminare [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/blockedit.htm|ModificaBlocco]] per salvare i cambiamenti ed aggiornare tutte le istanze del blocco nel modello. 
+  - Selezionare "x" oppure premere ESC per annullare la ridefinizione.
+
+  - **//Creare una sfera.//** 
+  - Eseguire il comando **[[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/block.htm|Blocco]]** e selezionare un punto di inserimento. 
+  - Denominare il blocco **Parallelepipedo1**. \\ I parallelepipedi raccordati ora sono tutti delle sfere.
+ 
+=====Riferimenti di blocco esterni=====
+Le definizioni di blocco che provengono da file esterni possono essere aggiornate modificando e salvando il file esterno e quindi aggiornando la definizione con [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/blockmanager.htm|GestioneBlocchi]] La definizione considera il percorso assoluto, per cui se si spostano i file esterni usati nelle definizioni di blocco, l'aggiornamento non funzionerà; la definizione corrente rimane comunque nel file corrente.
+
+
+====Esempio per provare====
+  - **Creare un parallelepipedo** e salvare il file. 
+  - Aprire un nuovo file ed eseguire **[[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/insert.htm|Inserisci]]**. \\ Usare il pulsante **File** della finestra di dialogo per accedere al file del parallelepipedo. 
+  - Inserirlo come istanza di blocco. 
+  - Creare varie copie del blocco e scalarle, ruotarle, spostarle a piacimento.
+  - In un'altra istanza di Rhino, aprire il file del parallelepipedo e raccordare i bordi. 
+  - Creare una sfera. 
+  - Salvare il file. 
+  - Ritornare al file con i blocchi inseriti ed eseguire il comando [[http://docs.mcneel.com/rhino/5/help/it-it/index.htm#commands/blockmanager.htm|GestioneBlocchi]].  \\ Appare un riferimento al file del parallelepipedo inserito. 
+  - Selezionarlo dall'elenco e fare clic su **Aggiorna**. \\ Le istanze che si trovano nel file ora dovrebbero essere tutte dei parallelepipedi raccordati con una sfera.
+  
+**Note sui livelli:** 
+  * In tutti i casi, i livelli in cui si trovano gli oggetti della definizione di blocco vengono mantenuti nelle istanze. 
+  * Disattivando qualsiasi livello usato da qualsiasi parte di un'istanza di blocco, si disattiverà quella parte del blocco nella finestra di Rhino per tutte le istanze di quel blocco. 
+  * Disattivando il livello in cui si è inserita l'istanza, si disattiverà tutto il blocco a prescindere dallo stato degli altri livelli usati dal blocco.
+
+=====Tecniche avanzate=====
+
+**[[developer:scriptsamples/superexplodeblock|Script SuperExplodeBlock]]**\\ 
+(Ora parte degli [[labs:rhinolabstools|Strumenti Labs per Rhino]] per la V4 ed integrato nella V5 come comando)
+
+**[[developer:scriptsamples/countblocks|Script per il conteggio delle istanze di blocco]]**
