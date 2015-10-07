@@ -5,54 +5,78 @@ Blöcke funktionieren unter Rhino 4 und 5 prinzipiell gleich. Rhino 5 bietet all
 
 =====Vorteile der Verwendung von Blöcken:=====
 
-**1.** Sie können eine beliebige Anzahl Kopien eines Objekts ändern, wenn es sich um Blockinstanzen handelt, indem Sie Änderungen an der Geometrie vornehmen, die den Block definiert.
-
-**2.** Objekte können aus externen Dateien aktualisiert werden.
-
-**3.** Wiederholte Instanzen einer einzigen Definition erhöhen die Dateigröße nicht groß, da nur eine tatsächliche Definition für den Block in der Datei vorhanden ist. Alle Instanzen referenzieren die Daten für die Originaldefinition. Rhino zeigt die referenzierten Objekte an anderen Positionen oder in anderen Ausrichtungen an.
+  * Sie können eine beliebige Anzahl Kopien eines Objekts ändern, wenn es sich um Blockinstanzen handelt, indem Sie Änderungen an der Geometrie vornehmen, die den Block definiert.
+  * Objekte können aus externen Dateien aktualisiert werden.
+  * Wiederholte Instanzen einer einzigen Definition erhöhen die Dateigröße nicht groß, da nur eine tatsächliche Definition für den Block in der Datei vorhanden ist. Alle Instanzen referenzieren die Daten für die Originaldefinition. Rhino zeigt die referenzierten Objekte an anderen Positionen oder in anderen Ausrichtungen an.
 
 =====Funktionsweise der Blöcke:=====
-Wenn Sie einen Block in Rhino aus Geometrie in der aktuellen Datei erzeugen (Befehl Block), ersetzt Rhino die ausgewählte Geometrie mit einer Blockinstanz. Speichert die Blockdefinition (die ausgewählte Geometrie, um den Block zu definieren) in der Datei. Sie können so viele Instanzen dieser Definition wie nötig (Befehl Einsetzen) einsetzen. Bestehende Blockdefinitionen, die zum Einsetzen erhältlich sind, befinden sich auf einer Dropdown-Liste im Dialog Einsetzen.
+Wenn Sie in Rhino mit dem Befehl [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/block.htm|Block]] einen Block aus Geometrie in der aktuellen Datei erzeugen, wird die ausgewählte Geometrie durch eine //Blockinstanz// ersetzt. Speichert die Blockdefinition (die ausgewählte Geometrie, um den Block zu definieren) in der Datei. Mit dem Befehl [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/insert.htm|Einsetzen]] können beliebig viele Instanzen dieser Definition eingesetzt werden. Vorhandene Blockdefinitionen sind in einer Dropdown-Liste im Dialogfenster [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/insert.htm|Einsetzen]] verfügbar.
 
-Wenn Sie eine andere 3dm Datei als Blockinstanz einsetzen, geschieht etwas ähnliches- die Blockdefinition wird in die aktuelle Datei einbezogen und mit dieser Datei gespeichert. Was Sie auf dem Bildschirm sehen ist eine Geometrieinstanz. Der Unterschied besteht natürlich darin, dass die Definition sich auf die externe Datei zurück bezieht und wie eine beliebige Instanz, die platziert wird, wenn die externe Datei geändert wird, aktualisiert werden kann. Dies wird über den [[http://wiki.mcneel.com/rhino/blockmanager|BlockManager]] geregelt.
+Wenn Sie eine andere 3DM-Datei als Blockinstanz einsetzen, wird dies ähnlich umgesetzt. Die Blockdefinition wird in die aktuelle Datei eingefügt und mit ihr gespeichert. Was Sie auf dem Bildschirm sehen ist eine Geometrieinstanz. Der Unterschied besteht natürlich darin, dass sich die Definition auf die externe Datei zurück bezieht und wie eine beliebige Instanz, die platziert wird, wenn die externe Datei geändert wird, aktualisiert werden kann. Dies wird über den [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/blockmanager.htm|Blockmanager]] erledigt.
 
-(In beiden Fällen müssen keine tatsächlichen Instanzen in der Datei platziert werden, damit die Blockdefinition in der Datei existiert. Deshalb haben Sie manchmal beim Löschen von Ebenen Probleme- wenn eine Blockdefinition die Ebene verwendet, können Sie sie nicht löschen. Das kann geschehen, wenn alle Instanzen eines Blocks gelöscht wurden. Verwenden Sie Säubern, um nicht verwendete Blockdefinitionen zu entfernen.)
-Um alle Blockinstanzen eines bestimmten Blocks in der Datei zu aktualisieren, müssen Sie die Blockdefinition neu definieren. Sie können dies tun, indem Sie eine Blockinstanz zerlegen, Änderungen vornehmen und den Block mit dem gleichen Namen neu definieren. Sie werden eine Warnung sehen, um die Änderung an der Definition zu bestätigen. Oder Sie können die Änderung vornehmen, indem Sie den Block mit einem anderen Satz von Objekten neu definieren.
+In beiden Fällen müssen keine tatsächlichen Instanzen in der Datei platziert werden, damit die Blockdefinition in der Datei existiert. Deshalb haben Sie manchmal beim Löschen von Ebenen Probleme. Wenn eine Blockdefinition die Ebene verwendet, können Sie sie nicht löschen. Das kann geschehen, wenn alle Instanzen eines Blocks gelöscht wurden. Verwenden Sie den Befehl [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/purge.htm|ÜberflüssigesLöschen]], um überflüssige Blockdefinitionen loszuwerden.
+
+Um alle Blockinstanzen eines bestimmten Blocks in der Datei zu aktualisieren, müssen Sie die Blockdefinition neu definieren. 
+  - [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/explode.htm|Zerlegen]] Sie eine Blockinstanz.
+  - Ändern Sie die Objekte.
+  - Verwenden Sie den Befehl [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/block.htm|Block]], um die Objekte erneut unter demselben Namen zu einem Block zu verbinden.  \\ Es wird eine Warnung angezeigt, die Änderung an der Definition zu bestätigen. 
+  - Oder redefinieren Sie den Block mit einer neuen Objektmenge.
+
 
 ====Ein Beispiel====
->  **//Erstellen Sie eine Box//** und verwenden Sie den Befehl **Block**, um einen Block zu definieren. Nennen Sie ihn //Box1//. Legen Sie den Einfügungspunkt an einem Eckpunkt der Box fest.  Wenn Sie das gemacht haben, ist die Box nicht mehr eine Box- sie sieht zwar aus wie eine Box, aber wenn Sie sie auswählen und unter Eigenschaften>Details nachschauen, sehen Sie, dass daraus eine Blockinstanz wurde.
->  
->  **//Zerlegen Sie den Block.//** Überprüfen Sie erneut die Eigenschaften. Die Box ist wieder eine Box und hat nichts mit dem Block //Box1// zu tun. Löschen Sie die Box. Verwenden Sie nun den Befehl **Einsetzen**. Suchen Sie die //Box 1// in der Dropdown-Liste des Dialogs **Einsetzen**. Dies ist die Blockdefinition, die Sie beim Erstellen des Blocks erzeugt haben.  Fügen Sie sie als Blockinstanz ein und kopieren Sie dann die Instanz mehrere Male.
->  
->  **//Umwandlung des Blocks in Rhino 4://** Wählen Sie eine der Instanzen von //Box1// und **zerlegen** Sie sie, damit sie erneut als normale Box erscheint. Verrunden Sie die Kanten der Box. Starten Sie nun den Befehl **Block** und wählen Sie die verrundete Box und einen Einfügungspunkt. Wählen Sie Box1 als Namen für den neuen Block. Alle Instanzen von //Box1// sind nun verrundete Boxen. Sie könnten verschoben werden, wenn Sie einen Einfügungspunkt auf der neuen Definition auswählen, der vom Original abweicht.
->
->  **//Umwandlung des Blocks in Rhino 5://** Nutzen Sie dazu den Befehl BlockBearbeitung. Bearbeiten Sie den Block, indem Sie doppelt darauf klicken. Daraufhin öffnet sich der Dialog BlockBearbeitung. Sie können Objekte hinzufügen oder löschen und den Einfügungspunkt neu einstellen. Außerdem können Sie auch die Geometrie des Blocks direkt bearbeiten. Durch Schließen der BlockBearbeitung werden die Änderungen gespeichert und alle Instanzen des Blocks im Modell aktualisiert. Durch Klicken auf "x" oder drücken von ESC wird das Redefinieren abgebrochen.
+  - **//Erstellen Sie einen Quader//** und verwenden Sie den Befehl [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/block.htm|Block]], um einen solchen zu definieren. 
+  - Nennen Sie ihn **Quader1**. \\ Legen Sie den Einfügungspunkt an einem Eckpunkt des Quaders fest.  \\ Der Quader ist nun kein Quader mehr. Er sieht noch immer wie ein Quader aus, aber wenn Sie ihn auswählen und sich [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/properties.htm|Eigenschaften]] > Details anschauen, sehen Sie, dass es sich um eine Blockinstanz handelt. 
+  - [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/explode.htm|Zerlegen]] Sie den Block. 
+  - Sehen Sie erneut in den [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/properties.htm|Eigenschaften]] nach. \\ Der Quader ist wieder ein Quader und hat nichts mehr mit dem Block **Quader1** zu tun. 
+  - Löschen Sie den Quader. 
+  - Verwenden Sie nun den Befehl [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/insert.htm|Einsetzen]]. 
+  - Suchen Sie in der Dropdownliste des Befehlsdialogs von [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/insert.htm|Einsetzen]] den Eintrag **Quader1**. \\ Dies ist die Blockdefinition, die Sie beim Erstellen des Blocks erzeugt hatten.  
+  - [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/insert.htm|Setzen Sie sie als Blockinstanz ein]] und kopieren Sie diese Instanz mehrere Male. 
 
->  **//Machen Sie eine Kugel.//** Führen Sie **Block** aus und wählen Sie einen Einfügungspunkt. Nennen Sie den Block //Box1//. Die verrundeten Boxen sind nun alles Kugeln.
-\\ 
+**//Redefinition des Blocks in Rhino 4://** 
+  - Wählen Sie eine der Instanzen von **Quader1**.
+  - [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/explode.htm|Zerlegen]] Sie sie, sodass daraus wieder ein normaler Quader entsteht. 
+  - [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/fillet.htm|Verrunden]] Sie die Kanten des Quaders. 
+  - Führen Sie nun erneut den Befehl [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/block.htm|Block]] aus.
+  - Wählen Sie den verrundeten Quader und einen Einfügungspunkt. 
+  - Wählen Sie **Quader1** als Namen des neuen Blocks. \\ Alle Instanzen von Quader1 sind nun verrundete Quader. \\ Sie können verschoben werden, wenn Sie einen Einfügungspunkt auf der neuen Definition auswählen, der vom Original abweicht.
+
+**//Redefinition des Blocks in Rhino 5://** \\
+In Rhino 5 können Sie den Befehl [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/blockedit.htm|Blockbearbeitung]] verwenden. 
+  - Führen Sie die Blockbearbeitung aus, indem Sie auf eine Blockinstanz klicken. 
+  - Daraufhin wird der [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/blockedit.htm|Blockbearbeitung]]sdialog geöffnet. 
+  - Löschen Sie Objekte, fügen Sie neue hinzu und setzen Sie den Einfügungspunkt zurück. 
+  - Die Geometrie des Blocks kann direkt bearbeitet werden. 
+  - Schließen Sie die [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/blockedit.htm|Blockbearbeitung]] ab, um die Änderungen zu speichern und alle Instanzen des Blocks im Modell zu speichern. 
+  - Klicken Sie auf das "x" oder drücken Sie Esc, um die Redefinition abzubrechen.
+
+  - **//Erstellen Sie eine Kugel.//** 
+  - Führen Sie den Befehl **[[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/block.htm|Block]]** aus und wählen Sie einen Einfügungspunkt. 
+  - Nennen Sie den Block **Quader1**. \\ Die verrundeten Quader sind nun Kugeln.
+ 
 =====Externe Blockreferenzen=====
-Blockdefinitionen aus externen Dateien können aktualisiert werden, indem die externe Datei bearbeitet und gespeichert und dann die Definition im [[http://wiki.mcneel.com/rhino/blockmanager|BlockManager]] aktualisiert wird. Die Definition betrachtet übrigens den absoluten Pfad, also können Sie nicht externe Dateien, die in Blockdefinitionen verwendet werden, verschieben und dabei funktioniert die Aktualisierung. Aber die aktuelle Definition interessiert es nicht, wenn die Originaldatei verschoben wurde- die aktuelle Definition befindet sich in der aktuellen Datei.
+Blockdefinitionen aus externen Dateien können aktualisiert werden, indem die externe Datei bearbeitet und gespeichert sowie anschließend die Definitnion im [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/blockmanager.htm|Blockmanager]] aktualisiert wird. Die Definition sucht nach dem absoluten Pfad, sodass Sie externe Dateien nicht verschieben können, wenn Sie die Blockdefinition aktualisieren möchten. Die aktuelle Definition hingegen ist in der aktuellen Datei gespeichert und benötigt die Originaldatei nicht mehr, solange die Definition nicht aktualisiert werden soll.
 
 
 ====Ein Beispiel====
->  **Erstellen Sie eine Box** und speichern Sie die Datei. Öffnen Sie eine neue Datei und starten Sie den Befehl **Einsetzen**. Verwenden Sie die Schaltfläche //Datei//, um zur Boxdatei zu navigieren. Setzen Sie sie als Blockinstanz ein. 
->  
->  **Machen Sie mehrere Kopien des Blocks** - skalieren, rotieren und bewegen Sie sie.
->  
->  Öffnen Sie die Boxdatei **in einer anderen Rhino-Instanz** und verrunden Sie die Kanten. Erstellen Sie eine Kugel. Speichern Sie die Datei. 
->  
-> **Gehen Sie nun zur Datei mit den eingesetzten Blöcken** zurück und führen Sie den Befehl [[http://wiki.mcneel.com/rhino/blockmanager|BlockManager]] aus. Sie werden eine Referenz zur eingefügten Boxdatei sehen. Wählen Sie sie aus der Liste aus und klicken Sie auf //__Aktualisieren__//. 
->  
->  **//Die Instanzen in der Datei sollten nun verrundete Boxen mit einer Kugel sein.//**
->  
->  **Eine Anmerkung zu Ebenen:** die Ebenen, auf denen sich die Objekte der Blockdefinition befinden, werden in den Instanzen beibehalten. Wenn Sie also eine Ebene ausblenden, auf der sich ein Teil einer Blockdefinition befindet, wird dieser Teil in allen Instanzen dieses Blocks ausgeblendet. Beim Deaktivieren der Ebene, auf der die Instanz eingefügt wurde, wird der gesamte Block deaktiviert, unabhängig davon, welchen Status die anderen Ebenen inne hatten, die vom Block verwendet wurden.
+  - **Erstellen Sie einen Quader** und speichern Sie die Datei. 
+  - Öffnen Sie eine neue Datei und führen Sie den Befehl **[[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/insert.htm|Einsetzen]]** aus. \\ Verwenden Sie die Schaltfläche **Datei** im Dialogfenster, um zur Quaderdatei zu navigieren. 
+  - Setzen Sie sie als Blockinstanz ein. 
+  - Machen Sie mehrere Kopien des Blocks - skalieren, rotieren und bewegen Sie ihn ganz nach Belieben.
+  - Öffnen Sie eine neue Rhino-Instanz, öffnen Sie die Quaderdatei und verrunden Sie die Kanten. 
+  - Erstellen Sie eine Kugel. 
+  - Speichern Sie die Datei. 
+  - Gehen Sie zurück zur Datei mit den eingesetzten Blöcken und führen Sie den Befehl [[http://docs.mcneel.com/rhino/5/help/de-de/index.htm#commands/blockmanager.htm|Blockmanager]] aus.  \\ Es wird eine Referenz zur eingefügten Quaderdatei angezeigt. 
+  - Wählen Sie sie aus der Liste aus und klicken Sie auf **Aktualisieren**. \\ Die Instanzen in der Datei sollten nun verrundete Quader mit einer Kugel sein.
+  
+**Hinweise zu Ebenen:** 
+  * In allen Fällen werden die Ebenen, auf denen sich die Objekte der Blockdefinition befinden, in den Instanzen beibehalten. 
+  * Wenn Sie eine Ebene ausblenden, auf der sich ein Teil einer Blockdefinition befindet, wird dieser Teil in allen Instanzen dieses Blocks ausgeblendet. 
+  * Beim Deaktivieren der Ebene, auf der die Instanz eingefügt wurde, wird der gesamte Block deaktiviert, unabhängig davon, welchen Status die anderen Ebenen inne hatten, die vom Block verwendet wurden.
 
 =====Fortgeschrittene Techniken=====
 
 **[[developer:scriptsamples/superexplodeblock|SuperExplodeBlock Script]]**\\ 
-(Nun ein Teil von [[labs:rhinolabstools|Rhino Labs Tools]] für Rhino 4 und als Befehl in Rhino 5 integriert)
+(Nun ein Teil von [[de:labs:home|Rhino Labs Tools]] für Rhino 4 und als Befehl in Rhino 5 integriert)
 
 **[[developer:scriptsamples/countblocks|Count Blocks Script]]**
-
-
-
