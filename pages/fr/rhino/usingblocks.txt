@@ -1,46 +1,83 @@
-====== Utiliser les blocs ======
 
-> **Sommaire:** //Les blocs permettent de contrôler les objets répétés dans un fichier.//
-Avantages de l'utilisation des blocs :
+====== Utiliser les blocs======
+Les bases d'utilisation des blocs sont les mêmes dans Rhino 4 et 5. Toutefois, Rhino 5 propose des fonctions et commandes supplémentaires que vous trouverez [[http://www.rhino3d.com/new/large|ici]].
+  
+> **Résumé:** //Les blocs permettent de gérer les objets répétés dans un fichier.//
 
-**1.** Vous pouvez modifier toutes les copies d'un objet s'il s'agit d'occurrences de bloc en réalisant les modifications sur la géométrie qui définit le bloc.
+=====Parmi les avantages de l'utilisation des blocs=====
 
-**2.** Les objets peuvent être actualisés à partir de fichiers externes.
+  * Vous pouvez modifier toutes les copies d'un objet s'il s'agit d'occurrences de bloc en réalisant les modifications sur la géométrie qui définit le bloc.
+  * Les objets peuvent être actualisés à partir de fichiers externes.
+  * Les différentes occurrences d'une définition ne font pas beaucoup augmenter la taille du fichier puisqu'il n'y a qu'une seule définition pour tout le bloc dans le fichier. Toutes les concurrences tirent leurs données de la définition originale. Rhino tient un "livre comptable" et utilise des tours pour afficher les différentes occurrences dans les autres positions avec la bonne orientation.
 
-**3.** Les différentes occurrences d'une définition ne font pas beaucoup augmenter la taille du fichier puisqu'il n'y a qu'une seule définition pour tout le bloc dans le fichier. Toutes les concurrences tirent leurs données de la définition originale. Rhino tient un "livre comptable" et utilise des tours pour afficher les différentes occurrences dans les autres positions avec la bonne orientation.
+=====Comment fonctionnent les blocs=====
+Quand vous créez un bloc dans Rhino à partir de la géométrie du fichier actuel avec la commande [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/block.htm|Bloc]], Rhino remplace la géométrie que vous avez sélectionnée par une //occurrence de bloc//. Il enregistre la définition de bloc (la géométrie sélectionnée pour définir le bloc) dans le fichier. Vous pouvez insérer autant d'occurrences de cette définition que vous voulez à l'aide de la commande [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/insert.htm|Insérer]]. Les définitions de bloc pouvant être insérées sont répertoriées dans une liste déroulante de la boîte de dialogue [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/insert.htm|Insérer]].
 
-Quand vous créez un bloc dans Rhino à partir de la géométrie du fichier actuel (commande Bloc), Rhino remplace la géométrie que vous avez sélectionnée par une occurrence de bloc. Il enregistre la définition de bloc (la géométrie sélectionnée pour définir le bloc) dans le fichier. Vous pouvez insérer autant d'occurrences de cette définition que vous voulez à l'aide de la commande Insérer. Les définitions de bloc disponibles sont répertoriées dans une liste dans la boîte de dialogue Insérer.
+Si vous insérez un autre fichier 3dm en tant qu'occurrence de bloc, une chose semblable se produit. La définition de bloc est intégrée dans le fichier actuel et enregistrée avec lui. Ce que vous voyez à l'écran est une //occurrence// de la géométrie. La différence, bien sûr, est que la définition fait référence au fichier externe et peut s'actualiser comme toutes les autres occurrences si le fichier externe est modifié. L'actualisation est contrôlée à travers le [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/blockmanager.htm|Gestionnaire de blocs]].
 
-Si vous insérez un autre fichier 3dm en tant qu'occurrence de bloc, une chose semblable se produit - la définition de bloc est intégrée dans le fichier actuel et enregistré avec lui. Ce que vous voyez à l'écran est une occurrence de la géométrie. La différence bien sûr est que la définition peut regarder dans le fichier externe et s'actualiser avec toutes les autres occurrences si le fichier externe est modifié. À faire avec la commande Gestionnaire de blocs.
+Dans les deux cas, il n'y a pas besoin d'avoir des occurrences de bloc dans le fichier pour que la définition existe. C'est pour cela que vous avez parfois des problèmes pour supprimer des calques, si une définition de bloc utilise le calque vous ne pouvez pas le supprimer. Ceci peut se produire lorsque toutes les occurrences d'un bloc ont été supprimées. Utilisez la commande [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/purge.htm|Purger]] pour éliminer les définitions de bloc inutilisées. 
 
-(Dans les deux cas, il n'y a pas besoin d'avoir des occurrences de bloc dans le fichier pour que la définition existe. C'est pour cela que vous avez parfois des problèmes pour supprimer des calques - si une définition de bloc utilise le calque vous ne pouvez pas le supprimer. Ceci peut se produire lorsque toutes les occurrences d'un bloc ont été supprimées. Utilisez Purger pour éliminer les définitions de bloc non utilisées.)
-Pour actualiser toutes les occurrences de bloc dans le fichier, vous devez redéfinir la définition du bloc. Pour ce faire, décomposez une occurrence du bloc, modifiez les différentes parties et redéfinissez le bloc avec le même nom. Vous verrez un message d'avertissement pour confirmer la modification de la définition. Ou vous pouvez simplement redéfinir le bloc avec un autre ensemble d'objets.
-
-----
-===Essayez:===
-Créez une boîte et utilisez la commande Bloc pour définir un bloc. Appelez-le Boîte1. Placez le point d'insertion sur un coin de la boîte.  À ce moment, la boîte n'est plus une boîte - elle ressemble à une boîte mais si vous regardez dans Propriétés > Infos, vous verrez qu'il s'agit d'une occurrence de bloc.
-
-Décomposez le bloc. Vérifiez une nouvelle fois les propriétés. La boîte est à nouveau une boîte et n'a rien à voir avec le bloc appelé Bloc1. Supprimez la boîte. Utilisez maintenant la commande Insérer. Dans la liste déroulante, sélectionnez Boîte1. Il s'agit de la définition de bloc que vous avez générée lorsque vous avez créé le bloc.  Insérez-la en tant qu'occurrence et copiez l'occurrence plusieurs fois.
-
-//Redéfinir le bloc : //Sélectionnez une des occurrences de Boîte1, décomposez-la pour revenir à une boîte normale. Créez des congés sur le bords de la boîte. Lancez la commande Bloc - sélectionnez la boîte avec les bords arrondis et choisissez un point d'insertion. Nommez le nouveau bloc Boîte1. Toutes les occurrences de Boîte1 sont maintenant des boîtes aux bords arrondis. Elles seront peut-être déplacées si vous choisissez un point d'insertion différent de l'original sur la nouvelle définition.
-
-Dessinez une sphère. Lancez la commande Bloc et choisissez un point d'insertion. Appelez le bloc Boîte1. Toutes les boîtes arrondies sont maintenant des sphères.
-
-----
-
-Les définitions de bloc provenant de fichiers externes peuvent être actualisées en modifiant et en enregistrant le fichier externe puis en mettant à jour la définition dans le gestionnaire de blocs. La définition recherche dans le chemin absolu, vous ne pouvez donc pas déplacer les fichiers externes utilisés dans les définitions de bloc et actualiser les données par la suite, en revanche ce n'est pas un problème pour la définition actuelle si le fichier source est déplacé - la définition est enregistrée dans le fichier actuel.
-
-----
-===Essayez:===
-Créez une boîte, enregistrez le fichier. Ouvrez un nouveau fichier, et lancez la commande Insérer. Utilisez le bouton Fichier pour naviguer jusqu'au fichier de la boîte créé avant. Insérez-le en tant qu'occurrence de bloc. Créez plusieurs copies, changez l'échelle, tournez, déplacez les copies pour voir le résultat.  Maintenant, dans une autre session de Rhino, ouvrez le fichier de la boîte et créez des congés. Dessinez une sphère. Enregistrez le fichier. Revenez au fichier contenant les insertions de blocs et lancez la commande GestionnaireBlocs. Vous verrez le fichier de la boîte que vous avez inséré. Sélectionnez-le dans la liste et cliquez sur Actualiser. Les occurrences dans le fichier sont maintenant des boîtes avec des congés accompagnées de sphères.
-
-----
-Remarquez que dans tous les cas les calques utilisés par la définition de bloc sont gardés dans les occurrences. Si vous désactivez un calque utilisé par une partie d'une occurrence de bloc, cette partie du bloc sera désactivée dans la fenêtre de Rhino. Si vous désactivez le calque sur lequel l'occurrence a été insérée, tout le bloc sera désactivé, quel que soit le statut des autres calques utilisés par le bloc.
+Pour actualiser toutes les occurrences de bloc dans le fichier, vous devez redéfinir la définition du bloc. 
+[[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/explode.htm|Décomposez]] une occurrence de bloc. 
+  - Réalisez des modifications sur les objets. 
+  - Utilisez la commande [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/block.htm|Bloc]] pour recréer le bloc avec les objets en utilisant le même nom. \\ Vous verrez un message d'avertissement pour confirmer la modification de la définition. 
+  - Ou vous pouvez redéfinir le bloc avec un autre ensemble d'objets.
 
 
+====Exemple à essayer====
+  - **//Créez une boîte//** et utilisez la commande [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/block.htm|Bloc]] pour créer un bloc. 
+  - Appelez-le **Boîte1**. \\ Placez le point d'insertion sur un coin de la boîte.  \\ À ce moment, la boîte n'est plus une boîte, Elle ressemble à une boîte mais si vous la sélectionnez et regardez dans les [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/properties.htm|Propriétés]] > Infos, vous verrez qu'il s'agit d'une occurrence de bloc. 
+  - [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commlesnds/explode.htm|Décomposez]] le bloc. 
+  - Vérifiez à nouveau les [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/properties.htm|Propriétés]]. \\ La boîte est à nouveau une boîte et n'a rien à voir avec le bloc appelé **Boîte1**. 
+  - Supprimez la boîte. 
+  - Utilisez maintenant al commande [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/insert.htm|Insérer]]. 
+  - Dans la liste déroulante de la boîte de dialogue [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/insert.htm|Insérer]], recherchez **Boîte1**. \\ Il s'agit de la définition de bloc que vous avez générée lorsque vous avez créé le bloc.  
+  - [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/insert.htm|Insérez]]-la en tant qu'occurrence de bloc et copiez l'occurrence plusieurs fois. 
+
+**//Redéfinir le bloc dans Rhino 4//** 
+  - Sélectionnez une des occurrences de **Boîte1**.
+  - [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/explode.htm|Décomposez]]-la pour retrouver une boîte normale. 
+  - Créez un [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/fillet.htm|congé]] au niveau des bords de la boîte. 
+  - Lancez maintenant la commande [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/block.htm|Bloc]].
+  - Sélectionnez la boîte avec les bords arrondis et choisissez un point d'insertion. 
+  - Nommez le nouveau bloc **Boîte1**. \\ Toutes les occurrences de Boîte1 sont maintenant des boîtes aux bords arrondis. \\ Elles seront peut-être déplacées si vous choisissez un point d'insertion différent de l'original sur la nouvelle définition.
+
+**//Redéfinir le bloc dans Rhino 5://** \\
+Dans Rhino 5, vous pouvez utiliser la commande [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/blockedit.htm|BlocModifier]]. 
+  - Lancez BlocModifier en double cliquant sur une occurrence de bloc. 
+  - La boîte de dialogue [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/blockedit.htm|BlocModifier]] apparaîtra. 
+  - Ajoutez et supprimez des objets puis redéfinissez le point d'insertion. 
+  - Vous pouvez modifier directement la géométrie dans le bloc. 
+  - Fermez [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/blockedit.htm|BlocModifier]] pour enregistrer les modifications et actualiser toutes les occurrences du bloc dans le modèle. 
+  - Cliquez sur "x" ou appuyez sur Échap pour annuler la modification.
+
+  - **//Dessinez une sphère.//** 
+  - Lancez la commande **[[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/block.htm|Bloc]]** et choisissez un point d'insertion. 
+  - Appelez le bloc **Boîte1**. \\ Toutes les boîtes arrondies sont maintenant des sphères.
+  
+=====Références de bloc externes=====
+Les définitions de bloc provenant de fichiers externes peuvent être actualisées en modifiant et en enregistrant le fichier externe puis en mettant à jour la définition dans le [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/blockmanager.htm|gestionnaire de blocs]] La définition recherche dans le chemin absolu, vous ne pouvez donc pas déplacer les fichiers externes utilisés dans les définitions de bloc et actualiser les données par la suite, en revanche ce n'est pas un problème pour la définition actuelle si le fichier source est déplacé - la définition est enregistrée dans le fichier actuel.
 
 
+====Exemple à essayer====
+  - **Créez une boîte** et enregistrez le fichier. 
+  - Ouvrez un nouveau fichier et lancez la commande **[[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/insert.htm|Insérer]]**. \\ Utilisez le bouton **Fichier** de la boîte de dialogue pour naviguer jusqu'au fichier de la boîte créé avant. 
+  - Insérez-le en tant qu'occurrence de bloc. 
+  - Créez plusieurs copies du bloc, changez l'échelle, tournez, déplacez les copies pour voir le résultat.
+  - Maintenant, dans une autre session de Rhino, ouvrez le fichier de la boîte et créez des congés. 
+  - Dessinez une sphère. 
+  - Enregistrez le fichier. 
+  - Revenez dans le fichier où les blocs sont insérés et lancez la commande [[http://docs.mcneel.com/rhino/5/help/fr-fr/index.htm#commands/blockmanager.htm|GestionnaireBlocs]].  \\ Vous verrez le fichier de la boîte que vous avez inséré. 
+  - Sélectionnez-le dans la liste et cliquez sur **Actualiser**. \\ Les occurrences dans le fichier devraient maintenant être des boîtes avec des congés accompagnées de sphères.
+  
+**Remarques sur les calques** 
+  * Dans tous les cas, les calques où se trouvent les objets constituant la définition de bloc sont conservés dans les occurrences. 
+  * Si un calque utilisé par une partie de l'occurrence de bloc est désactivé, cette partie du bloc sera désactivée dans la fenêtre de Rhino pour toutes les occurrence de ce bloc. 
+  * Si vous désactivez le calque sur lequel l'occurrence a été insérée, tout le bloc sera désactivé, quel que soit le statut des autres calques utilisés par le bloc.
 
+=====Techniques avancées=====
 
+**[[developer:scriptsamples/superexplodeblock|Script SuperExplodeBlock]]**\\ 
+(Inclus maintenant dans les [[en:labs:rhinolabstools|Outils des laboratoires de Rhino]] pour la version 4 et intégré dans la version 5 comme commande SuperDécompositionBloc)
 
-
+**[[developer:scriptsamples/countblocks|Script pour compter les blocs]]**
