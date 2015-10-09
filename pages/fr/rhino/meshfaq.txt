@@ -1,94 +1,153 @@
-====== Configuration du maillage dans Rhino ======
-//Bref aperçu des paramètres de maillage personnalisés de Rhino//
+====== Configuration du maillage dans Rhino - Informations détaillées ======
+//Éclaircir les mystères des paramètres de maillage dans Rhino -- Solutions à des problèmes courants de maillage.//
 
-> <color slategray> Remarque: Les informations contenues dans cette page ont été condensées pour plus de clarté. Si vous souhaitez en savoir plus, les explications détaillées sont toujours disponibles, [[fr:rhino:meshfaqdetails|vous les trouverez sur cette page]].    </color>
+> <color slategray> Remarque: Cette page contient des informations détaillées sur le fonctionnement des maillages dans Rhino. Il s'agit d'une compilation de faits et expériences provenant des forums d'assistance, des développeurs de McNeel et des utilisateurs expérimentés de Rhino.   </color>
 
-
-====Accéder aux paramètres de maillage====
-Les contrôles des paramètres du maillage de rendu (maillage d'affichage) font partie des propriétés du fichier .3dm (**Fichier > Propriétés > Maillage** ou **Outils > Options > Maillage**).   
-
-Ils sont normalement définis pour tout le modèle mais à partir de la version 4 vous pouvez également les définir par objet dans le panneau des propriétés.  
-
-Rhino vous propose deux configurations //standard//, **//Denté et plus rapide//** et **//Lisse et plus lent//** ainsi qu'une configuration **//Personnalisée//** qui vous permet de définir les options supplémentaires.
-
-====Les paramètres standard====
-  * **Denté et plus rapide** est le paramètre par défaut pour les maillages de rendu, il convient à la visualisation.
-
-  * **Lisse et plus lent** offre une meilleure résolution mais le temps de rendu est plus long.\\
-  * //(Dans la version 4, le paramètre Lisse et plus lent ne fonctionnait pas correctement, dans la version 5, il fonctionne mieux !)//
-
-  * **Personnalisé** offre à l'utilisateur la plus grande flexibilité possible pour définir les paramètres du maillage en fonction de ses besoins, en revanche les options sont un peu plus compliquées à comprendre et à définir. 
-
-> //**[[http://www.hydraulicdesign.net/meshes.htm|Consultez aussi les excellentes explications de James Carruthers sur les maillages utilisés pour l'affichage (en anglais)]]**//
+> //**[[http://www.hydraulicdesign.net/meshes.htm|Consultez aussi les excellentes explications de James Carruthers sur les problèmes liés au maillage d'affichage (en anglais)]]**//
 
 
-----
+=====Pourquoi suis-je ici ?=====
+
+**//Presque tous ceux//** qui ont utilisé Rhino ont rencontré un mystérieux problème d'affichage à un moment ou un autre. Des choses comme :
+
+  * obtenir un //rendu à facettes// là où vous attendiez une surface courbée lisse et parfaite
+  * un affichage qui //ralentit énormément// avec un grand modèle
+  * de mystérieuses //"surfaces fantômes"// qui apparaissent dans des endroits inattendus
+  * des surfaces ou des objets entiers qui disparaissent
+
+La cause de tous ces problèmes se trouve souvent dans le maillage du modèle ou les paramètres de maillage en général.  
+
+//Vous avez dit MAILLAGE ?//  //Mais je n'ai créé aucun maillage, uniquement des surfaces NURBS.//  
+
+Et bien, sans le savoir, vous avez créé des maillages...  //lisez ce qui suit//.
+
+=====Pourquoi avons-nous besoin des maillages ?=====
+Même si Rhino est un modeleur de surfaces [[rhino:nurbs|NURBs]], il utilise des maillages créés à partir de ces surfaces à des fins de visualisation. Ainsi, ce que vous voyez à l'écran, lorsque le modèle est ombré est en réalité un maillage invisible spécial (le "maillage de rendu") qui est lié à la surface [[rhino:nurbs|NURBs]] en question.
+
+Pourquoi ? Pour que l'ombrage et le rendu soient rapides.  Cependant, alors que le maillage présente des avantages en termes de vitesses et de réglage de l'ombrage, il présente aussi des inconvénients. Le maillage de rendu est toujours une approximation de la surface, il y a donc presque toujours des écarts entre le maillage de rendu à facettes et la surface lisse réelle.
+
+Le même moteur de maillage dans Rhino est utilisé pour la création des maillages d'analyse pour les fonctions telles que l'analyse de l'angle de dépouille et de la courbure, le plaquage d'environnement, etc., et par la commande **Maillage** (Outils > Maillage polygonal > À partir d'objets [[rhino:nurbs|NURBs]]), qui crée un objet maillé "réel" à partir d'un objet [[rhino:nurbs|NURBs]].
+
+L'exportation à partir de Rhino vers certains formats travaillant avec des polygones (tels que .stl) créera aussi des objets maillés (dans le fichier exporté).  Même si vous ne pouvez pas modifier ces objets dans le fichier original de Rhino, vous pouvez contrôler comment ils sont créés avec les paramètres de maillage.
+
+Les fonctions qui créent de véritables objets maillés telles que **Maillage** et **Exporter** (.stl) sont très importantes dans de nombreuses applications car les autres programmes ou processus "en aval" travaillent souvent sur des objets maillés.
+
+Tous les types d'objets maillés peuvent coïncider dans un fichier, ils n'influent pas les uns sur les autres et peuvent avoir leurs propres paramètres. Même si tous les maillages sont créés avec le même moteur, il existe certaines différences importantes entre eux.
+
+=====Les différents types de maillage=====
+
+  * Les **maillages de rendu** sont créés sur les surfaces et polysurfaces [[rhino:nurbs|NURBs]] pour la visualisation lorsque des fenêtres ombrées ou rendues sont utilisées.  Il ne sont pas directement accessibles ni modifiables par l'utilisateur. Ils restent liés à l'objet [[rhino:nurbs|NURBs]] à partir duquel ils ont été créés. Ils peuvent être supprimés en utilisant la commande **SupprimerTousMaillages** et régénérés avec la commande **ActualiserOmbrage** ou en changeant les paramètres (Fichier > Propriétés > Maillage) (qui force une régénération générale de tous les maillages de rendu). Pour Rhino 4, vous pouvez également transformer le maillage de rendu en un objet maillé réel avec la commande ** ExtraireMaillageRendu**. 
+
+
+  * Les **maillages d'analyse** sont similaires aux maillages de rendu dans le sens où ils ne peuvent pas être modifiés ni séparés de leur objet [[rhino:nurbs|NURBs]].  Ils ont juste un autre groupe de contrôles et existent séparément des maillages de rendu.  Vous //pouvez// toutefois les voir temporairement quand vous utilisez le bouton "ajuster maillage" ou le bouton "aperçu" dans le panneau de paramètres de la boîte de dialogue des commandes d'analyse.  Dans Rhino 5, vous pouvez transformer un maillage d'analyse en objet maillé réel avec la commande **ExtractAnalysisMesh**.
+
+
+  * **Les maillages créés avec la commande Maillage** sont visibles et peuvent être modifiés et séparés des objets [[rhino:nurbs|NURBS]] à partir desquels ils ont été créés.  Ce sont des objets à part entière et peuvent être vus et modifiés avec les différentes commandes de Rhino qui s'appliquent aux maillages (voir Extra > Maillage). Ils peuvent également être exportés vers des formats utilisant les maillages tels que STL, DXF, 3DS et OBJ.
+
+
+  * **Les maillages créés pendant l'enregistrement et l'exportation** (.STL par exemple) ont la même boîte de dialogue pour le paramétrage du maillage ("Options supplémentaires") que les autres types.  Vous pouvez aussi les voir temporairement quand vous utilisez le bouton "aperçu" dans le panneau des paramètres mais ils ne sont pas enregistrés dans le fichier original (uniquement exporté).
+
+> <color slategray>//**Willem:**  Lors du maillage d'un objet pour l'exportation, je crée toujours d'abord un maillage et je le regarde dans une fenêtre en mode d'ombrage plat (commande **OmbragePlat**) avant de l'exporter dans le format désiré. Le mode d'ombrage plat "ombre la fenêtre actuelle sans lissage, chaque face de maillage du rendu est donc visible".// </color>
+
+
+=====La boîte de dialogue des paramètres de maillage=====
+<color darkslateblue>**//Pourquoi avons-nous besoin des paramètres de maillage ?  Rhino n'est-il pas assez intelligent pour voir tout cela sans que j'ai à lui dire ce qu'il doit faire ?//**</color>
+
+<color darkslategray>**//C'est une bonne question//**</color> --- et un sujet à débattre.  Nous entrerons pas dans le débat ici, mais oui, si vous voulez optimiser le maillage dans Rhino, vous devrez comprendre comment ces paramètres fonctionnent et comment les manipuler.  Voilà la raison de cette longue page pleine d'info et de conseil.  Ne désespérez pas....
+
+<color darkslateblue>**//OK, alors pourquoi ne pas marier tous les objets avec une très haute résolution et un maillage très fin? Cela ne devrait-il pas mon problème ??//**</color? 
+
+<color darkslategray>**//En fait non//**</color> --- cette solution empirera probablement les choses.  Les maillages sont un peu comme les pixels dans une image, lorsque le nombre de pixels //(faces de maillage)// augmente, la résolution de l'image //(modèle)// est plus précise mais il faut également plus de données pour décrire l'image //(modèle)//. Si on va trop loin, l'ensemble des données peut devenir "énorme". Ces données doivent également être dynamiques //(pour faire tourner votre modèle ombré et le regarder par exemple)//, la capacité de votre ordinateur à traiter rapidement ces données en temps réel atteint alors sa limite.
+
+Le maillage est donc un jeu d'équilibrisme.  L'idée est d'utiliser le plus petit nombre de faces de maillage pour obtenir la résolution adaptée à votre travail - et pas plus.  Pour ce faire, vous devez comprendre comment fonctionne le système de maillage. //C'est d'ailleurs pourquoi vous êtes ici.// :-)
+
+====Les contrôles====
+Les contrôles pour les différents types de maillage sont virtuellement identiques.  Les contrôles des paramètres du maillage de rendu (maillage d'affichage) font partie des propriétés du fichier .3DM (**Propriétés > Maillage**). Ils sont définis pour tout le modèle mais à partir de la version 4 vous pouvez également les définir par objet.  Rhino vous propose deux configurations //standard//, **//denté et plus rapide//** et **//lisse et plus lent//** ainsi qu'une configuration **//personnalisée//** qui vous permet de définir les options supplémentaires.  
+
+Lors de la création d'un maillage à partir d'un objet NURBS ou lors de l'exportation vers un format maillé tel que STL, DXF, 3DS et OBJ, vous pouvez choisir d'utiliser les contrôles "simples" qui se résument à un glisseur grossier <==> fin : **moins de polygones <==> plus de polygones**.
+
+Les contrôles détaillés offrent plus d'options à l'utilisateur.  Ils sont virtuellement identiques pour tous les types de maillages et son décrits en détails ci-dessous.
+
+====Les paramètres par défaut====
+  * **Denté et plus rapide**, le paramètre par défaut pour les maillages de rendu, convient à la visualisation mais n'est pas très bon pour le reste.
+
+  * **Lisse et plus lent** offre //théoriquement// une meilleure résolution mais le temps de rendu est plus long. Dans la pratique, même si le rendu prend effectivement plus de temps, il reste souvent encore des trous où vous n'en voulez pas, nous vous conseillons donc d'essayer les paramètres personnalisés. 
+
+  * **Personnalisé** offre à l'utilisateur la plus grande flexibilité possible pour définir les paramètres du maillage en fonction de ses besoins, en revanche les options sont un peu compliquées à comprendre et à définir. 
+
+  * Les paramètres du glisseur "simple" par défaut pour les maillages d'analyse et pour l'exportation est une moyenne //"quelque part au milieu"//...
+
+  * Le paramètre par défaut pour la boîte de dialogue spéciale d'exportation STL est généralement le dernier paramètre //"Distance max entre bord et surface"// utilisé dans la boîte de dialogue "personnalisé" (voir plus loin) ou la valeur de la tolérance absolue dans Fichier > Propriétés > Unités si la distance n'était pas définie.
 
 ====Les paramètres personnalisés====
 <color darkslateblue>//**Si vous voulez réellement contrôler le processus de maillage, commencez ici !**//</color>
 
-Lorsque vous cochez **Personnalisé** dans la version 5, un simple glisseur apparaît afin de contrôler le paramètre de **//Densité//**.  En le déplaçant vers la gauche, le nombre de polygones sera moins important et le maillage plus grossier, vers la droite, le nombre de polygones sera plus important et le maillage plus fin. 
+Il y a //sept// paramètres numériques et //trois// cases.  Chacune de ces options est une méthode différente de contrôle sur le maillage et certaines peuvent fonctionner ensemble.  Les interactions et les effets combinés de ces paramètres sont complexes à comprendre.  Ils sont toutefois bien décrits individuellement dans l'aide en ligne et vous aurez une bonne idée générale de leur fonction en lisant ces informations.
 
-Si vous cliquez sur le bouton **Options supplémentaires**, d'autres contrôle apparaîtront afin de vous permettre de contrôler tout le processus. //Dans la version 4, les contrôles sont présentés directement ; le paramètre de //Densité// n'est pas disponible sous forme de glisseur//. 
+**[[rhino:meshsettings|Une copie de la page de l'aide sur les maillages dans Rhino se trouve ici.]]**
 
-Il y a //sept// paramètres numériques et //trois// cases.  Chacune de ces options est une méthode différente de contrôle sur le maillage et certaines peuvent fonctionner ensemble.  Les interactions et les effets combinés de ces paramètres sont complexes à comprendre.  Ils sont toutefois bien décrits individuellement dans l'aide en ligne et vous aurez une bonne idée générale de leur fonction en lisant ces informations.  
+==Quelques instructions rapides==
+Vous trouverez ci-dessous un point de départ pour les paramètres personnalisés, faites des essais avec ces paramètres sur votre modèles.\\//Si un paramètre est sur 0, il est désactivé (pas pris en compte).//
 
-[[fr:rhino:meshsettings|Une copie de la page de l'aide sur les maillages dans Rhino se trouve ici.]]
-
-[[fr:rhino:meshfaqdetails|Cette page apporte des informations supplémentaires sur les maillages]]
-
-**Vous trouverez ci-dessous un point de départ pour les paramètres personnalisés**, faites des essais avec ces paramètres sur votre modèles. //Si un paramètre est sur 0, il est désactivé (pas pris en compte).//
-
-|**Densité**|  <color slategray>**0.0**</color>|
+|**Densité** //(nouveau dans Rhino 4)//|  <color slategray>**0.0**</color>|
 |**Angle maximal**|  <color slategray>**35**</color>|
 |**Rapport image maximal**|  <color slategray>**0.0**</color>|
 |**Longueur maximale des bords**|  <color slategray>**0.0**</color>|
-|**Distance maximale entre bord et surface**  |  <color orangered>**voir ci-dessous**</color>|
+|**Distance maximale entre bord et surface**  |  **%%**%%**|
 |**Division minimale de la grille initiale**|  <color slategray>**16**</color>|
 
-Raffinement du maillage **cochée**\\
-Jointures dentées **//pas cochée//**\\
-Plans simples **//pas cochée//**\\
+> <color slategray>Dans Rhino 4, vous pouvez faire des essais avec le paramètre de densité.  Il est indépendant de l'échelle. Voir ci-dessous pour une explication détaillée de son action. Le paramètre de densité n'existe pas dans Rhino 3, vous pouvez insérer une //valeur en fonction de l'échelle// dans la case Distance maximale entre bord et surface.  Pour les modèles en millimètres, essayez une valeur entre 0.10 et 0.01</color>
 
-
-  * La méthode de l'//angle maximum// force la création d'un plus grand nombre de triangles dans les zones très courbées. Ainsi, les petites parties se trouvant en dehors de la valeur maximale seront divisées un peu. Vous obtiendrez peut-être de bons résultats avec une distance maximale un peu plus grande en laissant le paramètre d'angle gérer les objets les plus petits.
+  * Raffinement du maillage **cochée**
+  * Jointures dentées **//pas cochée//**
+  * Plans simples **//pas cochée//**
 
   * La méthode //Distance maximale entre bord et surface// force Rhino à créer un maillage qui n'est pas plus loin de la surface que la valeur indiquée en unités actuelles du fichier.  Elle permet à Rhino de définir moins de polygones dans les zones moins détaillées et plus de polygones dans les zones plus détaillées, ce qui donne un maillage plus efficace.
   * Le paramètre //Division initiale minimale de la grille// vérifie que les zones les plus plates ont assez de polygones pour paraître lisses.
 
+> <color darkslategray>//**Pascal:** Je préfère attribuer une valeur assez grande à "Angle maximal" plutôt que laisser zéro (désactivé), peut-être 35-45 degrés. Ainsi, les 'fonctions' se trouvant en dehors de la valeur maximale seront divisées un peu. Vous obtenir de bons résultats avec une distance maximale un peu plus grande dans certains cas si vous laissez un paramètre d'angle élevé agir sur les objets les plus petits. Lorsque la différence entre un objet et les paramètres de maillage généraux est trop grande, il est souvent utile d'utiliser la commande Maillage sur ces objets. Définissez le maillage selon vos besoins pour cet objet puis lancez le rendu sur l'objet maillé uniquement, cachez ou supprimez la surface %%NURBS%%. Les tout petits détails répétés peuvent être maillés de façon très lâche par exemple, sans influer sur la qualité de l'image.//</color>
 
-**Le paramètre le plus important est //distance maximale entre bord et surface//**. Cette valeur est données en unités du fichier et ne dépend pas de la taille - ce qui signifie que vous devrez l'ajuster à la taille et au niveau de détail des objets de votre modèle. 
+> <color darkslategray>//**Mitch:** Je donne parfois une valeur de 6.0 à l'option "Rapport image maximal" afin d'éviter que Rhino ne crée des triangles longs et fins pour mailler les objets fins ; les triangles sont divisés pour en former d'autres plus petits.  Cependant, cette division se fait aux dépens de la taille du fichier (beaucoup plus importante) et des temps de rendu (plus longs.//</color>
 
-Le paramètre dépend de l'utilisation que vous voulez faire de votre maillage.  Pour afficher les objets, votre valeur peut être un peu plus grande (plus grossière), puisqu'il ne s'agit que d'une visualisation à l'écran. De plus si le nombre de polygones est moins important, les temps de maillage seront moins longs et l'affichage plus rapide lors de déplacements, de zoom, etc. Si vous avez besoin d'un maillage plus précis sur les détails les plus petits pour un rendu haute résolution (ou pour la fabrication), la valeur devra être plus petite (plus fine). 
+> <color darkslategray>//**Ricardo:** Je fait du prototypage rapide pour la bijouterie. Mes paramètres par défaut sont 0.001 pour la distance maximale et 12 degrés pour l'angle maximal. Les angles plus grands ont tendances à laisser apparaître les bords des triangles sur le produit final. Les tailles des maillages atteignent les 30 Mo sur les modèles très complexes. Les unités sont en millimètres//</color>
 
-  * Si vous créez des objets de la taille d'un micro-ondes, 0,01 mm (0,0005 pouce) fonctionne normalement assez bien. 
+> <color darkslategray>//**Olivier:** Je travaille sur des structures élastiques qui sont composées de grandes membranes et de structures en métal. La membrane doit être maillée avec précision mais les tubes en acier et les fixations entraînent des maillages très lourds. Afin de traiter aussi bien les grande courbures que les toutes petites, je définis toujours une 'longueur minimale du bord' pour limiter le nombre de polygones sur les petits détails courbés. //</color>
 
-  * Pour de petits objets avec beaucoup de détails, tels que des montres ou bijoux, essayez une valeur plus petite, telle que 0,002 mm (0,00001 pouce). 
+**Le paramètre principal est celui de la //distance maximale entre bord et surface//**. Si vous y réfléchissez pendant un instant, vous comprendrez que cette valeur dépend de l'échelle (taille), d'où la question suivante :
 
-  * Pour de grands objets tels que des bâtiments, elle peut être beaucoup plus grande, comme 0,1 voire 1 mm (entre 0,005 et 0,05 pouce) ou plus.
+<color darkslateblue>//**Qu'est-ce qu'une valeur adaptée à l'échelle ?**//</color>
 
-  * Si vous allez exporter vos objets pour les utiliser dans un autre programme ou dans un traitement PP ou si vous allez faire des rendus très détaillés, vous devrez peut-être réduire un peu les valeurs, en fonction de la précision nécessaire.  Pour une pièce de stéréolithographie, 0.01 devrait toujours être bon par exemple mais pour une bonne pièce usinée, 0.001 - 0.002&nbsp;mm sera sûrement mieux approprié.
+En premier lieu, elle dépend de l'utilisation que vous voulez faire de votre maillage.  Pour afficher les objets, votre valeur peut être un peu plus grande (plus lâche), puisqu'il ne s'agit que d'une visualisation à l'écran. De plus si le nombre de polygones est moins important, les temps de maillage seront moins longs et l'affichage plus rapide lors de déplacements, de zoom, etc.
 
-Tout ceci peut paraître un peu compliqué au premier abord mais après un peu de pratique, vous trouverez quelques paramètres standard qui fonctionnent dans la plupart des cas pour vous.  Ces paramètres peuvent même ensuite être programmés dans une macro ou un script pour lancer rapidement le maillage d'un objet avec les caractéristiques désirées.
+  * Si vous créez des objets de la taille d'un ordinateur, 0.01 fonctionne assez bien. Pour les montres et les bijoux, il vaut mieux une plus petite valeur, comme par exemple 0.002 mm. Pour les objets plus grands, tels que les bâtiments, choisissez une valeur beaucoup plus grande, 1 mm voire plus.
 
-----
+  * Si vous allez exporter vos objets pour les utiliser dans un autre programme ou dans un traitement PP ou si vous allez faire des rendus très détaillés, vous devrez peut-être réduire un peu les valeurs, en fonction de la précision nécessaire.  Pour une pièce de stéréolithographie, 0.01 devrait toujours être bon par exemple mais pour une bonne pièce usinée, 0.001 - 0.002 mm sera sûrement mieux approprié.
 
+Tout ceci peut paraître très compliqué au premier abord mais après un peu de pratique, vous trouverez quelques paramètres standard qui fonctionnent dans la plupart des cas pour vous.  Ces paramètres peuvent même ensuite être programmés dans une macro ou un script pour lancer rapidement le maillage d'un objet avec les caractéristiques désirées.
 
-=====Autres problèmes au niveau des maillages et solutions possibles=====
+<color darkslategray>Détails du paramètre **//Densité//** : \\ //Le paramètre de Densité dans la version 4 utilise une formule pour contrôler la distance entre les bords du polygone et la surface originale.  La plage de valeur va de zéro (désactivé, ou ignoré) à 1 (densité maximale). Les valeurs plus élevées donnent un maillage avec un plus grand nombre de polygones. Utilisée seule (tous les autres paramètres sur 0), elle semble créer des maillages bien équilibrés. La densité n'est pas directement liée aux unités ni à l'échelle.//\\ 
+\\ 
+//La Densité est utilisée par Rhino pour le calcul interne par objet, elle permet ensuite de générer un nombre tel que le paramètre "Distance maximale entre bord et surface", c'est-à-dire un nombre dans les unités du modèle qui indique au moteur de maillage à quelle distance le milieu des bords de maillage peut se trouver par rapport à la surface originale. Le calcul se base sur la taille de l'objet entre autres. Plus la densité sera proche de 1, plus ce nombre sera petit. L'utilisateur ne verra jamais ce nombre final et il est différent pour chaque objet maillé. Si une valeur explicite est indiquée pour l'option Distance maximale entre bord et surface dans la boîte de dialogue, le moteur de maillage utilisera le nombre le plus petit pour le paramètre de distance maximale pour chaque objet.//</color>
 
-Vous verrez parfois que même en suivant les instructions ci-dessus vous n'obtiendrez toujours pas de bons résultats.  Le maillage dans Rhino 5 a été entièrement réécrit et produit dans la plupart des cas de bien meilleurs résultats que les versions précédentes ; mais il se peut que certains cas ne soient pas encore parfaits. Si vous rencontrez des problèmes de maillage que vous ne pouvez pas résoudre, laissez un message sur le [[http://discourse.mcneel.com/category/rhino-for-windows|forum d'assistance de Rhino]] ou envoyez un message à [[tech@mcneel.com|l'équipe d'assistance de McNeel]].
+=====Problèmes et points faibles connus des maillages=====
 
-Certains problèmes peuvent être causés par une réaction du moteur de maillage par rapport aux modèles contenant des défauts géométriques cachés. Dans ce cas, il se pourrait que la seule façon de les corriger soit de reconstruire une ou plusieurs parties du modèle.  Les défauts sont souvent situés près des erreurs de maillage visibles. 
+Vous verrez parfois que même en suivant les instructions ci-dessus vous n'obtiendrez toujours pas de bons résultats.  Vous vous battrez peut-être avec des surfaces fantôme, des ombrages irréguliers ou des facettes de maillage triangulaires qui traversent des espaces vides alors qu'elles ne le devraient pas.  Certains de ces problèmes peuvent être causés par une réaction du moteur de maillage de Rhino à certains types de structures géométriques.  La seule façon de les corriger actuellement est de reconstruire vos structures.
 
 ====Choses à regarder :====
 //Même si ces conditions ne causent pas toujours des problèmes de maillage, nous savons qu'elles l'ont déjà fait, il vaut donc mieux les vérifier si vous rencontrez des difficultés.//
 
   * <color darkslateblue>**Mauvais objets.**</color> Bien qu'ils ne donnent pas toujours des problèmes de maillage, ils sont assez faciles à trouver, c'est donc un bon point de départ.  Si vous en trouvez un, essayez de le cacher. Si votre problème disparaît, vous n'aurez alors peut-être qu'à réparer l'objet (le rendre valide) pour obtenir un résultat correct.
 
-  * <color darkslateblue>**Longues surfaces fines.**</color>  Cas difficiles pour le moteur de maillage de Rhino 4, la version 5 a ét nettement améliorée et ne pose plus de problème à ce niveau.
+  * <color darkslateblue>**Surfaces longues et fines.**</color> Le moteur de rendu a du mal à les traiter actuellement.  Plus elles sont longues et fines, plus c'est dur et long de les mailler.  Un exemple typique se trouve dans les longs congés continus avec un petit rayon sur des bords de votre modèle. Si le maillage est infiniment long et que vous pensez que votre géométrie ne devrait pas être si longue à mailler, votre modèle présente peut-être une minuscule surface très fine qui bloc le moteur de maillage.
 
-  * <color darkslateblue>**Des lignes et des arcs tangents joints ont été extrudés ou utilisés pour une révolution.**</color> Exemple - extrusion d'un rectangle arrondi.  Dans ces conditions, une surface simple avec des zones G1 internes est créée et le moteur de maillage a beaucoup de peine à les traiter.  Solution : **Décomposer** les courbes avant de les extruder ou utiliser **Diviser > Courbes isoparamétriques** aux points G1 pour créer une structure avec des surfaces tangentes jointes au lieu d'une seule surface.  Dans le cas du rectangle arrondi extrudé, vous aurez huit surfaces jointes au lieu d'une.  Dans la version 5, vous pouvez utiliser la commande **Extruder** avec l'option **//DiviserSurTangentes=Oui//** pour diviser automatiquement l'extrusion obtenue. 
+  * <color darkslateblue>**Des lignes et des arcs tangents joints ont été extrudés ou utilisés pour une révolution.**</color> Exemple - extrusion d'un rectangle arrondi.  Dans ces conditions, une surface simple avec des zones G1 internes est créée et le moteur de maillage a beaucoup de peine à les traiter.  Solution - **Décomposer** les courbes avant de les extruder ou utiliser **Diviser > Courbes isoparamétriques** aux points G1 pour créer une structure avec des surfaces tangentes jointes au lieu d'une seule surface.  Dans le cas du rectangle arrondi extrudé, vous aurez huit surfaces jointes au lieu d'une.
 
   * <color darkslateblue>**Surfaces repliées.**</color>  Causées normalement par **DivisionPli** (V5 ou module complémentaire dans V4) ou avec la commande **FusionnerSurf Lisse=Non** sur des surfaces qui ne sont pas au moins tangentes l'une par rapport à l'autre.  Dans ce cas aussi il vaut mieux avoir plusieurs surfaces jointes au lieu d'une seule avec un repli.  Utilisez **Outils d'édition pour les surfaces > Diviser une surface le long des plis** ou **Diviser > Courbes isoparamétriques** au niveau des replis afin de diviser la surface en plusieurs parties.
 
-  * <color darkslateblue>**Surfaces triangulaires avec des trous**</color>  //Il s'agit d'une erreur connue dans Rhino V4.//  Le trou était présent en mode filaire mais invisible en mode ombré. Un mode "Personnalisé" était nécessaire pour rendre ces surfaces correctement.  //Ce problème a été corrigé dans la version 5 !//
+* <color darkslateblue>**Surfaces triangulaires avec des trous**</color> //Il s'agit d'un bogue connu dans Rhino 4.//  Le paramètre "Utiliser des plans simples" (souligné ci-dessus) s'embrouille avec un surface plane triangulaire comportant un trou au milieu ou une surface plane comportant un trou triangulaire au milieu.  Le symptôme est un trou qui ne s'affiche pas en mode ombré, même s'il est là.  La solution est de désactiver la case "Utiliser des plans simples" dans la boîte de dialogue des options détaillées du maillage. Si vous utilisez "Denté et plus rapide", l'option "plans simples" est cochée par défaut et ne peut pas être désactivée, vous devrez donc passer en mode "Personnalisé". 
+
+=====Diagnostic (Fichier d'aide de Rhino)=====
+**[[rhino:meshdiagnostics|L'explication de Diagnostic est un peu dure à trouver dans l'aide, nous l'avons donc reproduite ici]]**
+
+----
+
