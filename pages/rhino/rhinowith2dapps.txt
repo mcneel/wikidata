@@ -1,38 +1,29 @@
-====== Using Rhino in conjunction with 2D image, illustration and drafting applications ======
+====== Using Rhino in with 2D Image, Illustration, and Drafting Applications ======
 
-=====Rhino Terrain Surface from Image, Using Heightfield and Bump Texture Tools and GIMP, CGSD=====
+>Rhino Terrain Surface from image using Heightfield and Bump Texture Tools and GIMP, CGSD
 
-The Rhino feature that I have been working with the most is your Heightfield map generator command.
+The Rhino feature that I have been working with the most is the Heightfield map generator command.
 
-It took me a while to figure out that this command is not optimally used with just a bitmap image taken with a digital camera.
-
-I learned that making a real heightmap (I used the shape-from-shading filter in GIMP) and saving it as a bitmap is the way to go.
+It took me a while to figure out that this command is not optimally used with just a bitmap image taken with a digital camera. I learned that making a real heightmap (I used the shape-from-shading filter in GIMP) and saving it as a bitmap is the way to go.
 
 When the real heightmap of the image is imported into Rhino 3.0 and the Heightfield from image command is used on that, the result is a very detailed and accurate [[rhino:nurbs|NURBs]] surface of the terrain.
 
 Just a bit of Gaussian blur of the image before using it in Rhino 3.0 helps smooth out the few rough edges.
 
-I recently uncovered a better heightmap maker than GIMP.
+I recently uncovered a better heightmap maker than GIMP. It is a Photoshop plug-in from CGSD that is part of their Bump Texture Tools package. It is called //Shape from Shading//.
 
-It is a photoshop plug in from CGSD that is part of their Bump Texture Tools package. It is called "shape from shadow".
+The CGSD package also includes a stereo image inverter.
 
-The CGSD package includes also a stereo image inverter.
+The GIMP program makes heightmaps OK but GIMP's shape from shadow filter was written for a satellite, and that won't help most of you.
 
-The GIMP program makes heightmaps OK but GIMP's shape from shadow filter was written for a satellite, and that won't help most of you users.
+The CGSD plug-in for Photoshop is much more general in its application. See this site: www.cgsd.com/bumptexture
 
-The CGSD plugin for Photoshop is much more general in its application.
-
-See this site: www.cgsd.com/bumptexture
-
-I forgot to mention that another good pre-processing program is the shadow reduction filter plugin for Photoshop
-
-SR Pro which is found at www.fredmiranda.com/sr/
+Another good preprocessing program is the shadow reduction filter plug-in for Photoshop, [[http://www.fredmiranda.com/shopping/SRpro|SR Pro]].
 
 This works well on the original image before converting it to a heightmap with the CGSD filter shape from shading.
 
-When these two pre-processing filters are used, the level of detail in terrain maps generated with your Heightfield command are infinitely better than just using a regular digital camera photo image without any preprocessing.
+When these two preprocessing filters are used, the level of detail in terrain maps generated with your Heightfield command is infinitely better than just using a regular digital camera photo image without any preprocessing.
 
 [[revans_01420@yahoo.com|--Richard 'Rick' Evans]]
-
 
 
