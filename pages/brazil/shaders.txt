@@ -15,16 +15,17 @@
     * [[#BAM Lambert]]
     * [[#BAM Velvet]]
     * [[#BAM Wax]]
-  * Additional Brazil Shaders
+  * Additional Brazil shaders
     * [[#Brazil Chrome Shader]]
     * [[#Brazil Glass Shader]]
 
+\\
 
 =====What are shaders?=====
 
-In Brazil, everything that ends up making a visible impact on a rendering is referred to as a //shader//. This includes lights, environments, materials, textures, and even camera lenses. Essentially, shaders are predefined behavioral patterns that affect the rays during the ray-tracing process.
+In Brazil, everything that makes a visible impact on a rendering is referred to as a //shader//. This includes lights, environments, materials, textures, and even camera lenses. Essentially, shaders are predefined behavioral patterns that affect the rays during the ray-tracing process.
 
-For example, imagine the process as it takes place for the solution of a single pixel during a Brazil rendering. First, a ray is shot from the pixel in question into the camera lens shader (**A»B**). The lens shader then changes the direction of the ray so that it adheres to the current camera projection and depth-of-field settings. The ray is now in the Model space and it is liable to hit an object, such as a green, partially reflective sphere. Once the ray hits the sphere at **C** it is scattered into a number of new rays. First, from the impact point new rays are traced towards all light-sources in the model (**C»D**). These shadow rays are used to determine the intensity and color (if any) of the effect of every light on the little patch of geometry at **C**. All this lighting information is combined by the material shader of the sphere in a specific way (could be a Lambertian algorithm, or maybe an Oren-Nayar, or a million things more) to calculate the color at **C**. However, this is not the end of the process. Since our sphere is partially reflective, the material shader needs to know both the total of all lighting and the color of whatever is visible in the mirror. Thus it needs to cast yet another ray into the model (**C»E**) which again might intersect with geometry, setting off a new iteration. However, this is a simplified case and our reflecting ray does not intersect any other objects, but instead terminates at the environment shader:
+For example, imagine the process as it takes place for the solution of a single pixel during a Brazil rendering. First, a ray is shot from the pixel in question into the camera lens shader (**A»B**). The lens shader then changes the ray's direction so that it adheres to the current camera projection and depth-of-field settings. The ray is now in the Model space and it is liable to hit an object, such as a green, partially reflective sphere. Once the ray hits the sphere at **C** it scatters into multiple new rays. First, from the impact point new rays are traced towards all light sources in the model (**C»D**). These shadow rays determine the intensity and color (if any) of the effect of every light on the little patch of geometry at **C**. All this lighting information is combined by the material shader of the sphere in a specific way (could be a Lambertian algorithm, or maybe an Oren-Nayar, or a million things more) to calculate the color at **C**. Yet, this is not the end of the process. Since our sphere is partially reflective, the material shader needs to know both the total of all lighting and the color of what is visible in the mirror. Thus it needs to cast yet another ray into the model (**C»E**) which again might intersect with geometry, setting off a new iteration. However, this is a simplified case. So our reflecting ray does not intersect any other objects, but instead terminates at the environment shader:
 
 \\
 \\
@@ -34,7 +35,7 @@ For example, imagine the process as it takes place for the solution of a single 
 \\
 \\
 
-In a complex rendering with Skylight, GI, glossy reflection or subsurface scattering, the amount of rays that are spawn from a single pixel-ray can be truly astonishing. Many settings in the Brazil options and shader options in fact directly specify the amount of new rays that are allowed in order to estimate the actual color of a specific effect. Add to this the fact that most materials in Brazil are actually compositions of many small shaders, and the numbers start to grow beyond comprehension. The diagram below is a schematic representation of such a Brazil composite shader. It shows how different effects are combined to form the complete shader:
+In a complex rendering with Skylight, GI, glossy reflection or subsurface scattering, the amount of rays that are spawn from a single pixel-ray can be truly astonishing. In fact, many settings in the Brazil and shader options directly specify the amount of new rays that are allowed to estimate the actual color of a specific effect. Add to this the fact that most materials in Brazil are actually compositions of many small shaders, and the numbers start to grow beyond comprehension. The diagram below is a schematic representation of such a Brazil composite shader. It shows how different effects are combined to form the complete shader:
 
 \\
 \\
@@ -52,7 +53,6 @@ Our material is composed of five different effects:
   - A reflection shader.
   - A refraction shader used to simulate transparency.
 
-\\
 
 Each of these sub-shaders (or shader-nodes) can be controlled individually in most cases, but some advanced material shaders provide a much simpler interface which only exposes a small number of settings. This doesn't mean they are less complex. It only means they deal with all the sub-shaders behind the scenes. More on shader compositing later...
 
@@ -86,13 +86,13 @@ First, Brazil understands the basic Rhino material and all that that implies. In
   * Emission color
 
 
-Each can be represented by Brazil. The interesting part of this is that other render engines such as (but not limited to) Flamingo and VRay can create simulations of their own materials, including textures, which can then be rendered by proxy through Brazil. This also works the other way around. VRay should be capable of rendering a fair approximation of Brazil shaders.
+Each can be represented by Brazil. This is interesting as other render engines such as Flamingo and VRay can create simulations of their own materials, including textures, which can then be rendered by proxy through Brazil. This also works the other way around. VRay should be capable of rendering a fair approximation of Brazil shaders.
 
 
-Brazil also supplies several Brazil specific shaders which capitalize on the advanced features that the Brazil Render Core exposes. These include effects that cannot be properly represented as a Rhino Material such as dispersion, absorption, glossy reflection, sub-surface scattering and so on. Most Brazil shaders are grouped under an overarching master shader called the //Brazil Advanced Material// (BAM). All the shaders that are located in the BAM shader share a lot of sub-shaders and thus a lot of settings. Some Brazil shaders do not fit into the BAM because they are too unique. Examples of these are the Toon, Glass, and Chrome shaders.
+Brazil also supplies several Brazil specific shaders which capitalize on the advanced features that the Brazil Render Core exposes. These include effects that cannot be properly represented as a Rhino Material such as dispersion, absorption, glossy reflection, sub-surface scattering, and so on. Most Brazil shaders are grouped under an overarching master shader called the //Brazil Advanced Material// (BAM). All the shaders located in the BAM shader share a lot of sub-shaders and thus a lot of settings. Some Brazil shaders do not fit into the BAM because they are too unique. Examples of these are the Toon, Glass, and Chrome shaders.
 
 
-Finally, there is a category of intimidating shaders called //utility shaders// which are mostly part of the beta process and will be phased out in further development. 
+Finally, there is a category of intimidating shaders called //utility shaders// which are part of the beta process and will be phased out in further development. 
 
 \\
 
@@ -118,9 +118,9 @@ The BAM Default shader is an all-purpose shader which can be likened to the Rhin
 
 | **BAM Default shader** |
 |    {{:legacy:en:BR_BAMDefault_Default.png}}    |    {{:legacy:en:BR_BAMDefault_Green.png}}    |    {{:legacy:en:BR_BAMDefault_Blinn.png}}    |    {{:legacy:en:BR_BAMDefault_BlinnAnisotropic.png}}    |
-| This is the default shader with a white color and no highlight. The surfaces are completely diffuse. The spheres are lit by a pointlight and a skydome and some of them are displaced. This is a property of the geometry, not the shader. | We can change the diffuse color of the shader to be any HDR color or texture. In this case we choose a simple olive green. | The BAM shader comes with three different types of specular highlight shader: Blinn, Phong and Sheen. Blinn and Phong are visually very similar; they both boost the intensity of the surface sections that //reflect// light sources in the model. This is merely a computational trick. There is no actual reflection going on. You can use highlights to invoke a sensation of shininess without compromising your render time performance. | The Blinn highlight is capable of anisotropicity, meaning the highlight becomes stretched instead of round. This is useful for simulating shinyness of materials with micro-grooves such as brushed metals or plastics. |
+| This is the default shader with a white color and no highlight. The surfaces are completely diffuse. The spheres are lit by a pointlight and a skydome and some of them are displaced. This is a property of the geometry, not the shader. | We can change the diffuse color of the shader to be any HDR color or texture. In this case we choose a simple olive green. | The BAM shader comes with three different types of specular highlight shader: Blinn, Phong and Sheen. Blinn and Phong are visually similar. They both boost the intensity of the surface sections that //reflect// light sources in the model. This is merely a computational trick. There is no actual reflection going on. You can use highlights to invoke a sensation of shininess without compromising your render time performance. | The Blinn highlight is capable of anisotropicity, meaning the highlight becomes stretched instead of round. This is useful for simulating shinyness of materials with micro-grooves such as brushed metals or plastics. |
 |    {{:legacy:en:BR_BAMDefault_Sheen.png}}    |    {{:legacy:en:BR_BAMDefault_Reflect.png}}    |    {{:legacy:en:BR_BAMDefault_GlossyReflect.png}}    |    {{:legacy:en:BR_BAMDefault_TextureReflect.png}}    |
-| The Sheen highlight is used to mimic the reflection of light sources on surfaces with micro-faceting. In order words, non-smooth surfaces such as fabrics and some plastics. Sheen highlights always appear along the edges of surfaces and they are integral to shaders such as Wax and Velvet. | The BAM Default is also capable actual reflections and refractions. Here, the highlight shader has been disabled and the reflectivity of the material has been set to 50%. The green color of the diffuse illumination is almost swamped by the blueness of the reflection. By setting the Tint of the reflection, this desaturation can be countered (not shown). | Reflection in the BAM shaders is sharp by default, but it can be made glossy (blurry). Glossy reflections take longer to render (sometimes significantly so). | Using a texture override in the base colour and a faint reflection, the BAM Default shader can be use to mimic a wide range of mirroring objects. |
+| Use the Sheen highlight to mimic the reflection of light sources on surfaces with micro-faceting. In order words, non-smooth surfaces such as fabrics and some plastics. Sheen highlights always appear along the edges of surfaces and they are integral to shaders such as Wax and Velvet. | The BAM Default is also capable actual reflections and refractions. Here, the highlight shader is disabled and the reflectivity of the material has been set to 50%. The green color of the diffuse illumination is almost swamped by the blueness of the reflection. By setting the Tint of the reflection, this desaturation can be countered (not shown). | Reflection in the BAM shaders is sharp by default, but it can be made glossy (blurry). Glossy reflections take longer to render (sometimes significantly so). | Using a texture override in the base colour and a faint reflection, the BAM Default shader can be use to mimic a wide range of mirroring objects. |
 
 \\
 
@@ -129,7 +129,7 @@ The BAM Default shader is an all-purpose shader which can be likened to the Rhin
 
 =====BAM Carpaint=====
 
-The Carpaint shader is, obviously, designed to simulate metallic painted surfaces. There's more to real carpaint than just reflection and this shader aims to capture those evanescent properties. In addition to the BAM Default shader, Carpaint adds three effects that can be used individually or in conjunction:
+The Carpaint shader is, obviously, designed to simulate metallic painted surfaces. There's more to real carpaint than just reflection and this shader aims to capture those evanescent properties. In addition to the BAM Default shader, Carpaint adds these three effects. Use these individually or in conjunction:
 
   * Falloff (Controls the mutation of paint color at shallow angles)
   * Candy (Controls the mutation of paint color at light reflecting angles)
@@ -139,9 +139,9 @@ The Carpaint shader is, obviously, designed to simulate metallic painted surface
 
 | **BAM Carpaint Shader (Flakes)** |
 |    {{:legacy:en:Br_BAMCarPaintNoFlakes.png}}    |    {{:legacy:en:Br_BAMCarPaint05Flakes.png}}    |    {{:legacy:en:Br_BAMCarPaint10Flakes.png}}    |    {{:legacy:en:Br_BAMCarPaintSmallFlakes.png}}    |
-| A BAM Carpaint shader without flakes looks a bit like a BAM Default with reflection, but there is an unmistakeable hue gradient in the upper left area of the sphere which is impossible to achieve using the BAM Default. This is the Candy effect. The diffuse color of this shader is orange, the Candy is pink, and the falloff is dark red. You can see all those colours fighting for dominance on the surface. | By adding a few faint flakes, the surface becomes more crisp. Also, the scale of the flake noise immediately conveys a scale for the entire object. It is no longer a hypothetical sphere. | My making the flakes less faint (but not bigger or more numerous) the effect is amplified. However, the flakes are slightly too big to give a proper Carpaint feel. | Adjusting the flake size helps to increase the realism of the image. Note that flakes are a microscopic effect (same as anisotropicity and micro-faceting) which should not be viewed up close. |
+| A BAM Carpaint shader without flakes looks a bit like a BAM Default with reflection, but there is an unmistakable hue gradient in the upper left area of the sphere which is impossible to achieve using the BAM Default. This is the Candy effect. The diffuse color of this shader is orange, the Candy is pink, and the falloff is dark red. You can see all those colours fighting for dominance on the surface. | By adding a few faint flakes, the surface becomes more crisp. Also, the scale of the flake noise immediately conveys a scale for the entire object. It is no longer a hypothetical sphere. | My making the flakes less faint (but not bigger or more numerous) the effect is amplified. However, the flakes are slightly too big to give a proper Carpaint feel. | Adjusting the flake size helps to increase the realism of the image. Note that flakes are a microscopic effect (same as anisotropicity and micro-faceting) which should not be viewed up close. |
 |    {{:legacy:en:Br_BAMCarPaintMediumFlakes.png}}    |    {{:legacy:en:Br_BAMCarPaintLargeFlakes.png}}    |    {{:legacy:en:Br_BAMCarPaintHugeFlakes.png}}    |    {{:legacy:en:Br_BAMCarPaintFunkyColours.png}}    |
-| Increasing flake size... | Increasing flake size... | Increasing flake size... | Typically, the best Carpaint shaders use colours that have similar hue values. When one departs from this rule of thumb, some pretty funky (but not very realistic) results can be yielded. |
+| Increasing flake size... | Increasing flake size... | Increasing flake size... | Typically, the best Carpaint shaders use colors that have similar hue values. When one departs from this rule of thumb, some pretty funky (but not very realistic) results can be yielded. |
 
 \\
 
@@ -160,13 +160,13 @@ The BAM Ghost subshader is not yet available in Brazil r/s for Rhino.
 
 =====BAM Glow Worm=====
 
-The Glow Worm shader is a physically incorrect shader which can nevertheless be used to create realistic results. Essentially, it is identical to the BAM Lambert shader except it has an incandescense factor. Whenever a Glow Worm shader receives little light, it starts to emit its own:
+The Glow Worm shader is a physically incorrect shader. Even so, it can create realistic results. Essentially, it is identical to the BAM Lambert shader except it has an incandescense factor. Whenever a Glow Worm shader receives little light, it starts to emit its own:
 
 \\
 
 | **BAM Glow Worm shader** |
 |    {{:legacy:en:BR_BAMGlowWorm_NoGlow.png}}    |    {{:legacy:en:BR_BAMGlowWorm_WeakGlow.png}}    |    {{:legacy:en:BR_BAMGlowWorm_StrongGlow.png}}    |
-| With incandescense disabled, the Glow Worm behaves identical to BAM Lambert. | With weak incandesensce, the portion of the sphere which is unlit by the spotlight starts to glow, casting a GI glow over the groundplane. | Strong incandescense amplifies the effect. Use the Glow Worm to mimic sub-surface scattering without all the computational overhead. |
+| With incandescense disabled, the Glow Worm behaves identical to BAM Lambert. | With weak incandesensce, the part of the sphere which is unlit by the spotlight starts to glow, casting a GI glow over the groundplane. | Strong incandescense amplifies the effect. Use the Glow Worm to mimic sub-surface scattering without all the computational overhead. |
 
 \\
 
@@ -199,13 +199,13 @@ Use Velvet to approximate cloth and fabric materials. The integrated Sheen highl
 
 =====BAM Wax=====
 
-Wax is one of the most advanced shaders in the BAM section. It is the all-purpose sub-surface scattering shader which can be used to mimic real-world materials such as wax, jade, skin, milk, marble, and plastics. Sub-surface scattering (SSS) is the effect of light being diffusely spread across the interior of a shape. SSS is usually a very subtle effect but it can make all the difference in the world when it comes to photorealism. Note that it is a computationally expensive shader which will increase your render times.
+Wax is one of the most advanced shaders in the BAM section. It is the all-purpose sub-surface scattering shader which can be used to mimic real-world materials such as wax, jade, skin, milk, marble, and plastics. Sub-surface scattering (SSS) is the effect of light being diffusely spread across the interior of a shape. SSS is usually a subtle effect but it can make all the difference in the world when it comes to photorealism. Note that it is a computationally expensive shader which will increase your render times.
 
 \\
 
 | **BAM Wax Shader** |
 |    {{:legacy:en:Br_BAMWaxNoSSS.png}}    |    {{:legacy:en:Br_BAMWaxDepth2.png}}    |    {{:legacy:en:Br_BAMWaxDepth5.png}}    |    {{:legacy:en:Br_BAMWaxDepth20.png}}    |
-| With SSS disabled the Wax shader resembles BAM Lambert. The material completely absorbs or reflects all light that falls upon its surface. | SSS can be used to convey a sense of scale about your scene. By picking progressively higher Sub-surface thickness values we allow the light to penetrate the shape deeper and deeper, making our object feel smaller and smaller. 2mm thickness. | 5mm thickness. | 20mm thickness. |
+| With SSS disabled the Wax shader resembles BAM Lambert. The material completely absorbs or reflects all light that falls upon its surface. | SSS can convey a sense of scale about your scene. By picking progressively higher Sub-surface thickness values we allow the light to penetrate the shape deeper and deeper, making our object feel smaller and smaller. 2mm thickness. | 5mm thickness. | 20mm thickness. |
 | {{:legacy:en:Br_BAMWaxReflectionNoSSS.png}} | {{:legacy:en:Br_BAMWaxReflectionYesSSS.png}} |
 | SSS usually works very well together with reflection. Materials such as wax, marble, jade, and milk are all very shiny. Here you see marble without SSS. | Marble with SSS. Note how the light source illuminates the inside of the tube through the wall. |
 
@@ -222,9 +222,9 @@ Chrome is a very specific shader that can only be used for extremely reflective 
 
 | **Brazil Chrome shader** |
 |    {{:legacy:en:Br_ChromeDefault.png}}    |    {{:legacy:en:Br_ChromeDarkFilter.png}}    |    {{:legacy:en:Br_ChromeGradientFilter.png}}    |    {{:legacy:en:Br_ChromeDecay.png}}    |
-| The default Chrome shader reflects 100% of the incoming light. This is unrealistic behavior. The highest reflectivity achieved by human made materials to date is about 97-98% | By setting a filter color, the reflectivity can be dampened significantly. The color of the reflected image is also controlled through the filter property. | You can use textures instead of single colors for the filter property, such as gradient from green to purple. | One of the advanced features of chrome reflection is the Reflection Decay control, which reduces the effect of reflected light based on distance to the shader. This is a very unrealistic material property but it can be used to simulate absorption of the volumetric environment, such as fog. It can also be used to fade sharp edges in the reflection. Note how the horizon of the ground plane is no longer visible in this image, since the decay has blended the ground plane with the environment before the edge of the ground plane has been reached. |
+| The default Chrome shader reflects 100% of the incoming light. This is unrealistic behavior. The highest reflectivity achieved by human made materials to date is about 97-98% | By setting a filter color, the reflectivity can be dampened significantly. The color of the reflected image is also controlled through the filter property. | You can use textures instead of single colors for the filter property, such as gradient from green to purple. | One of the advanced features of chrome reflection is the Reflection Decay control, which reduces the effect of reflected light based on distance to the shader. This is an unrealistic material property but it can simulate absorption of the volumetric environment, such as fog. It can also fade sharp edges in the reflection. Note how the horizon of the ground plane is no longer visible in this image, since the decay has blended the ground plane with the environment before it reached the edge of the ground plane. |
 |    {{:legacy:en:Br_ChromeGlossy100.png}}    |    {{:legacy:en:Br_ChromeGlossy95.png}}    |    {{:legacy:en:Br_ChromeGlossy90.png}}    |    {{:legacy:en:Br_ChromeGlossy80.png}}    |
-| Reflection can also be glossy (blurred). The first image is without glossyness for purposes of comparison (100% angular glossyness). | 95% angular glossyness.  | 90% angular glossyness. | 80% angular glossiness. Since my environment is an HDR environment it contains colors that are brighter than white. These colors start to //leak// into neighbouring pixels when they are blurred. These effects are called [[http://en.wikipedia.org/wiki/Bokeh|Bokeh abberations]] and they also appear when HDR colors are used in combination with Depth-of-Field camera settings. |
+| Reflection can also be glossy (blurred). The first image is without glossyness for purposes of comparison (100% angular glossyness). | 95% angular glossyness.  | 90% angular glossyness. | 80% angular glossiness. Since my environment is an HDR environment it contains colors that are brighter than white. These colors start to //leak// into neighboring pixels when they are blurred. These effects are called [[http://en.wikipedia.org/wiki/Bokeh|Bokeh abberations]]. They also appear when HDR colors are used in combination with Depth-of-Field camera settings. |
 
 \\
 
@@ -233,13 +233,13 @@ Chrome is a very specific shader that can only be used for extremely reflective 
 
 =====Brazil Glass shader=====
 
-Like Chrome, the Brazil Glass shader lacks a diffuse component. The material only deals with refractions and reflections. It has a number of extra controls over the refraction properties of the BAM shaders:
+Like Chrome, the Brazil Glass shader lacks a diffuse component. The material only deals with refractions and reflections. It has extra controls over the refraction properties of the BAM shaders:
 
 \\
 
 | **Brazil Glass shader** |
 |    {{:legacy:en:Br_GlassDefault.png}}    |    {{:legacy:en:Br_GlassBlueFilter.png}}    |    {{:legacy:en:Br_GlassAbsorption.png}}    |    {{:legacy:en:Br_GlassDispersion.png}}    |
-| The default glass is completely transparent with no extra properties. Again, this is unrealistic since all materials absorb at least some photons which means the light comes out darker than it went in. The purple and orange colours are reflections of the HDR environment texture. Glass (in fact most materials) becomes higly reflective at shallow angles which means that there is a lot of internal reflection going on inside organic shapes. This is partly what makes the glass look so good. | By applying a filter, we can tint and darken the glass without adding any computational overhead. The effect of a filter color is the same as though the glass were coated in a thin layer of transparent material. | When you want to simulate colored glass, you need to use absorption factors. Truly colored glass absorbs more light in thicker areas since the light has to travel further through the glass. As you can see the above shape has a varying thickness and the glass is still very transparent near the thin parts whereas it becomes increasingly dark in the thick areas. | Dispersion is another property that all refractive materials share in the real world but which is rarely included in renderings. Typically we assign transparent materials an Index-Of-Refraction (or IOR for short) value which controls how sharply the light is bend when it enters the material. In reality, the IOR differs per photon wavelenght. Red light contains less energy than blue light and tends to bend less when refracted (it has a lower IOR for any given material than blue light). Dispersion is also an extremely expensive shader property which will increase render times significantly. |
+| The default glass is completely transparent with no extra properties. Again, this is unrealistic since all materials absorb at least some photons which means the light comes out darker than it went in. The purple and orange colors are reflections of the HDR environment texture. Glass (in fact most materials) becomes highly reflective at shallow angles which means that there is a lot of internal reflection going on inside organic shapes. This is partly what makes the glass look so good. | By applying a filter, we can tint and darken the glass without adding any computational overhead. The effect of a filter color is as if the glass is coated in a thin layer of transparent material. | When you want to simulate colored glass, you need to use absorption factors. Truly colored glass absorbs more light in thicker areas since the light has to travel further through the glass. The shape's thickness varies and the glass is still very transparent near the thin parts, whereas it becomes increasingly dark in the thick areas. | Dispersion is another property that all refractive materials share in the real world but which is rarely included in renderings. Typically we assign transparent materials an Index-Of-Refraction (IOR) value. IOR controls how sharply the light is bend when it enters the material. In reality, the IOR differs per photon wavelenght. Red light contains less energy than blue light and tends to bend less when refracted (it has a lower IOR for any given material than blue light). Dispersion is also an extremely expensive shader property which will increase render times significantly. |
 |    {{:legacy:en:Br_GlassNoGlossy.png}}    |    {{:legacy:en:Br_Glass50000Glossy.png}}    |    {{:legacy:en:Br_Glass5000Glossy.png}}    |    {{:legacy:en:Br_Glass500Glossy.png}}    |
 | Refractions, like reflections, can become glossy, giving the impression of imperfect or opalescent materials. This image has no glossy refractions. | Glossy refractions enabled (phong = 50,000) | (phong = 5,000) | (phong = 500) |
 
