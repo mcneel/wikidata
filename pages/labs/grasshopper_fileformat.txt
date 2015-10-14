@@ -7,7 +7,7 @@
 
 Since it was first released, Grasshopper (then //Explicit History//) has used the *.wrm format. Although the format was extensible and supported versioning, it was difficult -- to the point of being impossible -- for third party developers to parse. It was also extremely sensitive to corruption since the content was sequential.
 
-As of Grasshopper 0.5 onwards, the WRM format has been marked obsolete and it can no longer be written (though *.wrm files can still be opened). Instead, Grasshopper data is now stored in **.gh or **.ghx files. These are respectively Binary and Xml representations of non-sequential, nested dictionaries. We have also provided a stand-alone DotNET assembly which can read and write **.gh and **.ghx files.
+As of Grasshopper 0.5 and later, the WRM format has been marked obsolete and it can no longer be written (though *.wrm files can still be opened). Instead, Grasshopper data is now stored in **.gh or **.ghx files. These are respectively Binary and Xml representations of non-sequential, nested dictionaries. We have also provided a stand-alone DotNET assembly which can read and write **.gh and **.ghx files.
 
 \\
 
@@ -30,7 +30,7 @@ As of Grasshopper 0.5 onwards, the WRM format has been marked obsolete and it ca
 
 ===== EHC and GHA files=====
 
-EHC and GHA files are DotNET dll assemblies which reference the Rhino DotNET SDK and the Grasshopper plug-in. As of Version 0.5, the GHA format has superseded the EHC format, though EHC files will still be loaded. These assemblies are parsed using Reflection. All defined non-abstract types which implement certain interfaces, derive from certain base classes or adhere to certain rules will be merged into the Grasshopper runtime. At the time of writing, GHA files can contain Components, Parameters, Custom Objects and Graph Mapper definitions, and they can of course define as many custom types, dialogs and resources as needed.
+EHC and GHA files are DotNET dll assemblies which reference the Rhino DotNET SDK and the Grasshopper plug-in. As of Version 0.5, the GHA format has superseded the EHC format, though EHC files will still load. These assemblies are parsed using Reflection. All defined non-abstract types which implement certain interfaces, derive from certain base classes, or adhere to certain rules will be merged into the Grasshopper runtime. At this time, GHA files can contain Components, Parameters, Custom Objects and Graph Mapper definitions, and they can of course define as many custom types, dialogs, and resources as needed.
 
 \\
 
@@ -42,7 +42,7 @@ WRM is a binary, sequential format that is a direct representation of runtime ob
 
 ===== GH and GHX files=====
 
-These are two new flavors of file format that were first included in Grasshopper 0.5. GHX files are human-readable text files that conform with the XML1.0 specification (at least, I hope they do). GHX files are direct representations of the nested dictionary structure defined by GH_IO.dll. As is typical, the Xml flavour can be easily read and adjusted by third party code or even by hand. No schema is available yet, but with questions you can always contact the [[David@McNeel.com|developer]].
+These are two new flavors of file format that were first included in Grasshopper 0.5. GHX files are human-readable text files that conform with the XML1.0 specification (at least, I hope they do). GHX files are direct representations of the nested dictionary structure defined by GH_IO.dll. As is typical, the Xml flavor can be easily read and adjusted by third party code or even by hand. No schema is available yet, but with questions you can always contact the [[David@McNeel.com|developer]].
 
 
 GH files are binary representations of the exact same dictionary structure. GH and GHX files are completely interchangeable and both deserialize to an identical runtime structure. The only difference is that *.gh files do not store comments which are present in the dictionary structure. Since the format is not humanly readable, and since comments are never deserialized, this was not deemed a useful feature.
