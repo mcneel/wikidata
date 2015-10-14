@@ -3,12 +3,12 @@
 > **Summary:** //Demonstrates how to trim curves using RhinoScript.//
 
 =====Question=====
-I need to trim a lot of lines where ever they intersect. How can i do this?  Also, can you clarify what is meant by 'domain'?
+I need to trim a lot of lines where they intersect. How can I do this?  Also, can you clarify what is meant by 'domain'?
 
 =====Answer=====
 If you can remember back to your pre-calculus days, a domain is most often defined as the set of values for which a function is defined. As curves in Rhino have starting and ending points, they also have starting (minimum) and ending (maximum) domain values (parameters). You can obtain a curve's minimum and maximum domain values using the **CurveDomain** function.
 
-In order to trim a curve using **TrimCurve**, you must provide an interval, or sub-domain, of the curve that you want to keep. For example, lets say you have a curve with a minimum domain value of 0 and a maximum domain value of 5 and you wanted everything from t=2 to the end of the curve trimmed away, then you'd do something like this:
+In order to trim a curve using **TrimCurve**, you must provide an interval, or sub-domain, of the curve that you want to keep. For example, if you have a curve with a minimum domain value of 0 and a maximum domain value of 5 and you wanted everything from t=2 to the end of the curve trimmed away, then you'd do something like this:
 
 <code vb>
 domain = Rhino.CurveDomain(curve)
