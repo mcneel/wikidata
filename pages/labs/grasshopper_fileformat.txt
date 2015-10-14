@@ -1,44 +1,37 @@
 ====== Grasshopper File Format page ======
 
 
-> **Summary:** //Basic information about Grasshopper file format flavours and utilities.//
+> **Summary:** //Basic information about Grasshopper file format flavors and utilities.//
 
-====== Grasshopper formats:======
 
-\\
 
-Since it was first released, Grasshopper (then "Explicit History") has used the *.wrm format. Although the format was extensible and supported versioning, it was difficult - to the point of being impossible - for 3rd party developers to parse. It was also extremely sensitive to corruption since the content was sequential.
+Since it was first released, Grasshopper (then //Explicit History//) has used the *.wrm format. Although the format was extensible and supported versioning, it was difficult -- to the point of being impossible -- for third party developers to parse. It was also extremely sensitive to corruption since the content was sequential.
 
-\\
+As of Grasshopper 0.5 onwards, the WRM format has been marked obsolete and it can no longer be written (though *.wrm files can still be opened). Instead, Grasshopper data is now stored in **.gh or **.ghx files. These are respectively Binary and Xml representations of non-sequential, nested dictionaries. We have also provided a stand-alone DotNET assembly which can read and write **.gh and **.ghx files.
 
-As of Grasshopper 0.5 onwards, the WRM format has been marked obsolete and it can no longer be written (though *.wrm files can still be opened). Instead, Grasshopper data is now stored in **.gh or **.ghx files. These are respectively Binary and Xml representations of non-sequential, nested dictionaries. We have also provided a standalone DotNET assembly which can read and write **.gh and **.ghx files.
-
-\\
 \\
 
 ----
 \\
-\\
 
-====== Format Table:======
+===== Format table=====
 
-\\
 
-| Format | Description |
-| {{:legacy:en:GH_Ehc_icon.png}} | *.ehc | **Explicit History Components**. <color red> This format is obsolete as of version 0.5+ |</color>
-| {{:legacy:en:GH_Assembly_48.png}} | *.gha | **Grasshopper Assembly**. GHA files define Types, Parameters, Components and Graph Mappings. |
-| {{:legacy:en:GH_Wrm_icon.png}} | *.wrm | Grasshopper definition file. <color red> This format is obsolete as of version 0.5+ |</color>
-| {{:legacy:en:GH_Xml_icon.png}} | *.ghx | **Grasshopper Xml**. Grasshopper definition file. This format was introduced in Grasshopper 0.5 and is the default file format. |
-| {{:legacy:en:GH_Bin_icon.png}} | **.gh | **Grasshopper Binary**. Grasshopper definition file. This format was introduced in Grasshopper 0.5 and is the binary version of the **.ghx format. |
+| Format                                    | Description |
+| {{:legacy:en:GH_Ehc_icon.png}}    | *.ehc | **Explicit History Components**. <color red> This format is obsolete as of version 0.5+. </color>|
+| {{:legacy:en:GH_Assembly_48.png}} | *.gha | **Grasshopper Assembly**. GHA files define Types, Parameters, Components and Graph Mappings.| 
+| {{:legacy:en:GH_Wrm_icon.png}} | *.wrm | **Grasshopper definition file**. <color red> This format is obsolete as of version 0.5+.</color>|
+| {{:legacy:en:GH_Xml_icon.png}} | *.ghx | **Grasshopper Xml**. Grasshopper definition file. This format was introduced in Grasshopper 0.5 and is the default file format.|
+| {{:legacy:en:GH_Bin_icon.png}} | *.gh  | **Grasshopper Binary**. Grasshopper definition file. This format was introduced in Grasshopper 0.5 and is the binary version of the *.ghx format.| 
+
 
 \\
 \\
 
 ===== EHC and GHA files=====
 
-EHC and GHA files are DotNET dll assemblies which reference the [[developer:rhino4dotnetplugins|Rhino DotNET SDK]] and the Grasshopper plugin. As of Version 0.5, the GHA format has superseded the EHC format, though EHC files will still be loaded. These assemblies are parsed using Reflection and all defined non-abstract types which implement certain interfaces, derive from certain base classes or adhere to certain rules will be merged into the Grasshopper runtime. At the time of writing, GHA files can contain Components, Parameters, Custom Objects and Graph Mapper definitions, and they can of course define as many custom types, dialogs and resources as needed.
+EHC and GHA files are DotNET dll assemblies which reference the Rhino DotNET SDK and the Grasshopper plug-in. As of Version 0.5, the GHA format has superseded the EHC format, though EHC files will still be loaded. These assemblies are parsed using Reflection. All defined non-abstract types which implement certain interfaces, derive from certain base classes or adhere to certain rules will be merged into the Grasshopper runtime. At the time of writing, GHA files can contain Components, Parameters, Custom Objects and Graph Mapper definitions, and they can of course define as many custom types, dialogs and resources as needed.
 
-\\
 \\
 
 ===== WRM files=====
@@ -46,13 +39,11 @@ EHC and GHA files are DotNET dll assemblies which reference the [[developer:rhin
 WRM is a binary, sequential format that is a direct representation of runtime objects in the Grasshopper definition. This format has been marked Obsolete in Grasshopper 0.5+. Support for reading WRM files is still available, but they can no longer be written.
 
 \\
-\\
 
-===== GH & GHX files=====
+===== GH and GHX files=====
 
-These are two new flavours of file format that were first included in Grasshopper 0.5. GHX files are human-readable textfiles that conform with the XML1.0 specification (at least, I hope they do). GHX files are direct representations of the nested dictionary structure defined by GH_IO.dll. As is typical, the Xml flavour can be easily read and adjusted by 3rd party code or even by hand. No schema is available as of yet, but with questions you can always contact the [[David@McNeel.com|developer]]
+These are two new flavors of file format that were first included in Grasshopper 0.5. GHX files are human-readable text files that conform with the XML1.0 specification (at least, I hope they do). GHX files are direct representations of the nested dictionary structure defined by GH_IO.dll. As is typical, the Xml flavour can be easily read and adjusted by third party code or even by hand. No schema is available yet, but with questions you can always contact the [[David@McNeel.com|developer]].
 
-\\
 
 GH files are binary representations of the exact same dictionary structure. GH and GHX files are completely interchangeable and both deserialize to an identical runtime structure. The only difference is that *.gh files do not store comments which are present in the dictionary structure. Since the format is not humanly readable, and since comments are never deserialized, this was not deemed a useful feature.
 
@@ -61,39 +52,38 @@ GH files are binary representations of the exact same dictionary structure. GH a
 
 ----
 \\
+
+===== File tools=====
+
 \\
 
-====== File tools======
-
-\\
-
-===== GH_IO.dll=====
+==== GH_IO.dll====
 
 The File IO code is no longer part of the Grasshopper kernel, and if you're using a DotNet language and wish to read/write/translate grasshopper files you can reference the file format library (GH_IO.dll) which provides ways to read and write both Binary and Xml files into dictionary structures. An up-to-date version of GH_IO.dll ships with every Grasshopper 0.5+ release.
 
 \\
 
-| {{:legacy:en:GH_IO_DLL.png}} | [[http://download.rhino3d.com/download_rel.asp?rel=400|Download the latest Grasshopper release which includes the most recent GH_IO.dll library]]  You can reference this library from any DotNET assembly since it only depends on standard System namespaces. Library is fully documented. |
-| {{:legacy:en:GH_VS_project_icon.png}} | [[David@McNeel.com|Request GH_IO source]]  GH_IO.dll is an open source project (written in Microsoft Visual Studio 2005 C#). In order to avoid versioning hell, the source is not available for download yet. GH_IO is distributed under the [[http://www.opensource.org/licenses/gpl-3.0.html|GNU Public license]] |
+| {{:legacy:en:GH_IO_DLL.png}} | [[http://download.rhino3d.com/download_rel.asp?rel=400|Download the latest Grasshopper release which includes the most recent GH_IO.dll library.]]  You can reference this library from any DotNET assembly since it only depends on standard System namespaces. Library is fully documented. |
+| {{:legacy:en:GH_VS_project_icon.png}} | [[David@McNeel.com|Request GH_IO source.]]  GH_IO.dll is an open source project (written in Microsoft Visual Studio 2005 C#). To avoid versioning hell, the source is not available for download yet. GH_IO is distributed under the [[http://www.opensource.org/licenses/gpl-3.0.html|GNU Public license.]] |
 
 \\
 \\
 
 ===== GH_IO_Viewer.exe=====
 
-A standalone file viewer application which can read and write both **.gh and **.ghx flavours. It displays the content of a Grasshopper dictionary archive as a standard tree-view.
+A stand-alone file viewer application which can read and write both **.gh and **.ghx flavors. It displays the content of a Grasshopper dictionary archive as a standard tree-view.
 
 \\
 
-| {{:legacy:en:GH_IO_Viewer.png}} | [[http://download.rhino3d.com/download_rel.asp?rel=400|Download the latest Grasshopper release which includes the most recent GH_IO_Viewer.exe runtime]]  You can run this application on any windows computer that has the DotNET Framework 2.0 or later installed. |
-| {{:legacy:en:GH_VS_project_icon.png}} | [[David@McNeel.com|Request GH_IO_Viewer source]]   GH_IO_Viewer.exe is an open source project (written in Microsoft Visual Studio 2005 C#). In order to avoid versioning hell, the source is not available for download yet. GH_IO is distributed under the [[http://www.opensource.org/licenses/gpl-3.0.html|GNU Public license]] |
+| {{:legacy:en:GH_IO_Viewer.png}} | [[http://download.rhino3d.com/download_rel.asp?rel=400|Download the latest Grasshopper release which includes the most recent GH_IO_Viewer.exe runtime.]]  You can run this application on any windows computer that has the DotNET Framework 2.0 or later installed. |
+| {{:legacy:en:GH_VS_project_icon.png}} | [[David@McNeel.com|Request GH_IO_Viewer source.]]   GH_IO_Viewer.exe is an open source project (written in Microsoft Visual Studio 2005 C#). To avoid versioning hell, the source is not available for download yet. GH_IO is distributed under the [[http://www.opensource.org/licenses/gpl-3.0.html|GNU Public license.]] |
 
 \\
 
 ----
 \\
 
- (this page was last updated on october 10th, 2008.) 
+ (This page was last updated on October 10th, 2008.) 
 
 
 
