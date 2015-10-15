@@ -14,9 +14,9 @@ Examples using all methods are attached to toolbar buttons.  Toolbars (//[[labs:
 
 \\
 
-**Accessing methods: how to get **PanelingTools** plug-in object:**
+**Accessing methods: how to get PanelingTools plug-in object:**
 
-First step is to get hold of //PanelingTools// plug-in object.  Make sure **[[labs:panelingtools|PanelingTools]].rhp** plug-in is loaded when you start Rhino (use //PluginManager// command to load //[[labs:panelingtools|PanelingTools]].rhp// for the first time).
+The first step is to get hold of //PanelingTools// plug-in object.  Make sure **[[labs:panelingtools|PanelingTools]].rhp** plug-in is loaded when you start Rhino. (Use //PluginManager// command to load //[[labs:panelingtools|PanelingTools]].rhp// for the first time.)
 
 \\
 
@@ -42,7 +42,7 @@ The plug-in object is accessed using **GetPluginObject("Plugin Name")** as shown
 {{:legacy:en:script_menu.PNG}}
 \\
 
-To access **[[labs:panelingtools|PanelingTools]] ( PT )** methods from within the Rhino Script Editor, you need to save **{{:labs:panelingtoolssyntaxml.zip|PanelingTools.syntaxml}}** file in the **%ProgramData%\McNeel\Rhinoceros\5.0\MonkeyEditor\Resources** folder.
+To access **[[labs:panelingtools|PanelingTools]] (PT)** methods from within the Rhino Script Editor, you need to save **{{:labs:panelingtoolssyntaxml.zip|PanelingTools.syntaxml}}** file in the **%ProgramData%\McNeel\Rhinoceros\5.0\MonkeyEditor\Resources** folder.
 
 \\
 
@@ -54,8 +54,6 @@ To access **[[labs:panelingtools|PanelingTools]] ( PT )** methods from within th
 
 
 
-
-| [[#Back to top]]|
 
 ----
 =====Methods description=====
@@ -96,7 +94,6 @@ To access **[[labs:panelingtools|PanelingTools]] ( PT )** methods from within th
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_dividecrvbynum.PNG}} **Divide curve span ( by number or by distance)**
@@ -127,7 +124,6 @@ Finds dividing points of a curve by distance or number.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_dividecrvbydis.PNG}} **Divide curve by distance on curve**
@@ -154,7 +150,6 @@ Finds dividing points of a curve by distance on curve.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_dividecrvbydirdis.PNG}} **Divide curve by exact or direct distance**
@@ -180,11 +175,10 @@ Finds dividing points of a curve by direct distance.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_dividesrfuv.PNG}} **Generate surface divide points based on surface UV directions**
-Generates surface grid of points by number or distance following surface U & V directions. In case of dividing by distance, the defined distance is applied only on the first iso-curve in each direction.  It will therefore varies if the surface is doubly curved.
+Generates surface grid of points by number or distance following surface U & V directions. In case of dividing by distance, the defined distance is applied only on the first iso-curve in each direction.  It varies if the surface is doubly curved.
 
 \\
 
@@ -214,11 +208,10 @@ Generates surface grid of points by number or distance following surface U & V d
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_dividesrfdis.PNG}} **Generate surface divide points based on direct distance**
-Generates surface grid of points by direct distance between points. This method is a bit fragile. Each new point is based on previously calculated points.  If for any reason a point fail to generate, subsequent point of that row fail as well.  Setting extend option to true helps creating more predictable results in most cases (unless when extending the suface create self intersecting or weird result)
+Generates surface grid of points by direct distance between points. This method is a bit fragile. Each new point is based on previously calculated points.  If a point fails to generate, subsequent points of that row fail as well.  Setting extend option to true helps to create more predictable results in most cases (unless when extending the surface creates self intersecting or weird results).
 
 \\
 
@@ -241,7 +234,6 @@ Generates surface grid of points by direct distance between points. This method 
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_psub.PNG}} **Sub paneling**
@@ -268,7 +260,6 @@ Paneling surface using seed polylines.  Polylines are sub divided and pulled bac
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_prand1.PNG}} **Random paneling – Generate points randomly**
@@ -293,7 +284,6 @@ Triangular paneling using random set of points on surface.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_prand2.PNG}} **Random paneling – Select points**
@@ -318,7 +308,6 @@ Triangular paneling using random set of points on surface.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_pe.PNG}} **Paneling edges of a grid**
@@ -344,7 +333,6 @@ Creates edge panels from an ordered paneling grid of points.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_pf.PNG}} **Paneling faces of a grid**
@@ -370,7 +358,6 @@ Creates face panels (outline border) from an ordered paneling grid of points.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_pff.PNG}} **Paneling flat faces of a grid**
@@ -396,8 +383,6 @@ Creates flat face panels (trimmed planar surfaces) from an ordered paneling grid
 \\
 
 
-| [[#Back to top]]|
-
 ----
 {{:legacy:en:is_pm.PNG}} **Mesh of a grid**
 Creates a mesh from an ordered paneling grid of points.
@@ -421,11 +406,10 @@ Creates a mesh from an ordered paneling grid of points.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_pcustom.PNG}} **Custom paneling of a grid**
-Creates a custom pattern from pattern curves and points and ordered paneling grid of points. Pattern can be either curves, points or both.
+Creates a custom pattern from pattern curves and points and ordered paneling grid of points. Pattern can be either curves, points, or both.
 
 \\
 
@@ -449,7 +433,6 @@ Creates a custom pattern from pattern curves and points and ordered paneling gri
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_pquad.PNG}} **Panel quads with ordered points**
@@ -473,7 +456,6 @@ Create quads point grid within deviation.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_gbyarray.PNG}} **Grid by array**
@@ -504,7 +486,6 @@ Create ordered grid of points by array.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_gbyarraypolar.PNG}} **Grid by array polar**
@@ -536,7 +517,6 @@ Create ordered grid of points by array polar.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_gby1crv.PNG}} **Grid by one direction curves**
@@ -571,7 +551,6 @@ Create ordered grid of points using one directional curve.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_gby2crv.PNG}} **Grid by two direction curves**
@@ -608,7 +587,6 @@ Create ordered grid of points using two directional curves.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_gbyucrvs.PNG}} **Grid by U curves**
@@ -639,7 +617,6 @@ Create ordered grid of points using array of curves.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_gbyuvcrvs.PNG}} **Grid by UV curves**
@@ -665,7 +642,6 @@ Create ordered grid of points using array of curves in two directions. Grid is m
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_gbydir.PNG}} **Grid by object direction**
@@ -701,7 +677,6 @@ Create ordered grid of points using base object and direction curve.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_gbysrfuv.PNG}} **Grid by surface UV**
@@ -736,11 +711,10 @@ Create ordered grid of points following input surface UV direction.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_gbysrfdis.PNG}} **Grid by direct distance on surface**
-Create ordered grid of points using input surface and distance bewteen points.
+Create ordered grid of points using input surface and distance between points.
 
 \\
 
@@ -764,7 +738,6 @@ Create ordered grid of points using input surface and distance bewteen points.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_myg.PNG}} **Insert a point in a grid**
@@ -790,7 +763,6 @@ This is useful for building custom grid of points.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_srfbygrid.PNG}} **Surface by edit point grid**
@@ -813,7 +785,6 @@ Create a [[rhino:nurbs|NURBs]] surface from a point grid.
 \\
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_srfbycgrid.PNG}} **Surface by control point grid**
@@ -837,7 +808,6 @@ Create a [[rhino:nurbs|NURBs]] surface from a grid of control points.
 
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_varcrv.PNG}} **Divide Curve with Variable Distances**
@@ -863,11 +833,10 @@ Use a list of parameters to divide a curve.
 
 
 
-| [[#Back to top]]|
 
 ----
 {{:legacy:en:is_varsrf.PNG}} **Divide Surface with Variable Distances**
-Use a list of parameters n U and V directions to divide a surface.
+Use a list of parameters in U and V directions to divide a surface.
 
 \\
 
