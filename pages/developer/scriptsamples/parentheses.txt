@@ -3,7 +3,7 @@
 > **Summary:** //Why the "Cannot use parentheses when calling a Sub" error occurs in RhinoScript.//
 
 =====Question=====
-Every now and then, I get the error message "Cannot use parentheses when calling a Sub" when calling a function or method. But it does not happen all of the time. For example, the following code appears to work:
+Every now and then, I get the error message //Cannot use parentheses when calling a Sub// when calling a function or method. But it does not happen all the time. For example, the following code appears to work:
 
 <code vb>
  Result = MyFunc(MyArg)
@@ -16,6 +16,7 @@ But, this code does not work:
  Result = MyOtherFunc(MyArg1, MyArg2)
  MyOtherSub(MyArg1, MyArg2)
 </code>
+\\
 
 =====Answer=====
 In VBScript, parentheses mean several different things:
@@ -55,9 +56,11 @@ And, there are additional rules that apply to item 3:
 
 3.3) If 3.1 and 3.2 do not apply, then the list must not be surrounded by parentheses.
 
-Finally, there is the ByRef rule: arguments are passed ByRef when possible. But, if there are extra parentheses around a variable. then the variable is passed ByVal, not ByRef.
+Finally, there is the ByRef rule: arguments are passed ByRef when possible. But, if there are extra parentheses around a variable, then the variable is passed ByVal, not ByRef.
 
 From these rules, it should be clear why the statement MySub(MyArg) is legal but MyOtherSub(MyArg1, MyArg2) is not. The first case appears to be a subroutine call with parentheses around the argument list, but that would violate rule 3.3. Then why does this work? In fact, it is a subroutine call with no parentheses around the argument list, but parentheses around the first argument. This passes the argument by value. The second case is a clear violation of rule 3.3, and there is no way to make it legal, so an error is given.
+
+\\
 
 =====Examples=====
 Here are some examples to what is legal and what is not in VBScript. Suppose X and Y are variables, Func1 is a one argument procedure, and Func2 is a two argument procedure.
