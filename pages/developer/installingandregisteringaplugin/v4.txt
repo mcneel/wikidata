@@ -3,14 +3,14 @@
 > **Summary:** //Step-by-step instructions for registering your plug-in to load in Rhino 4.//
 > **Note:** //This article is for Rhino 4. [[developer:installingandregisteringaplugin|View the Rhino 5 version]].//
 
-=====Overview=====
-While a Rhino plug-in can simply be distributed as an **RHP** file, and loaded using Rhino's **PlugInManager** command, it is often necessary to install the plug-in as part of a product installation process. To install plug-ins from an installer, your installer will be required to access a number of entries in the Windows Registry.
+
+While a Rhino plug-in can simply be distributed as an **RHP** file, and loaded using Rhino's **PlugInManager** command, it is often necessary to install the plug-in as part of a product installation process. To install plug-ins from an installer, your installer will be required to access several entries in the Windows Registry.
 
 While reading this article, it is helpful to use the standard Windows Registry editing tool, **REGEDIT.EXE**, to follow along and see how Rhino's Registry entries are structured.
 
 Registering plug-ins for Rhino 5 is a little different from registering Rhino 4.0 plug-ins. Details are listed in each step:
 
-=====Finding the Current Rhino=====
+=====Finding the current Rhino=====
 
 Each service release of Rhino 4.0 has its own registry location for installation, settings, and plug-in registration. To find the currently installed service release, look for the **MostRecent** registry value name, which can be found in the following key location:
 
@@ -34,10 +34,10 @@ For the sake of brevity, this article assumes a 32-bit version of Windows. But t
 
 The data in this value is a 10-character date string (REG_SZ) in the form of YYYY-MM-DD that identifies the build date of Rhino. An example date string is "2011-03-09" which identifies Rhino 4.0 SR9. If the **MostRecent** value does not exist, or if the string value is empty, then Rhino is not installed on the computer, or the installation is damaged.
 
-=====Finding the Rhino Registry Key=====
+=====Finding the Rhino registry key=====
 
 ====Rhino 4.0====
-If the **MostRecent** Registry value contains a valid date string, then you can find Rhino 4.0's Registry key in the following locations depending on the Rhino version:
+If the **MostRecent** registry value contains a valid date string, then you can find Rhino 4.0's registry key in the following locations, depending on the Rhino version:
 
 <code>
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Install
