@@ -2,7 +2,7 @@
 
 A render farm is a group of networked computers working together to complete large rendering tasks.  Normally, render farms proceed silently, without graphically displaying the renderings as they progress.  Rendering in this manner lets you to use more computer power for lengthy tasks, at the expense of some interactivity. \\ 
 
-Many third-party render farm products are currently available.  The nXt Render Farm software lets you to work with one of these, or you can set up a simple render farm just using the software provided.  //The nXt Render Farm software is sold separately// from the nXt platform plug-ins such as Flaminog nXt.  The software itself is platform independent -- Rhino is not required on computers which will only be used for render farming.
+Many third-party render farm products are currently available.  The nXt Render Farm software lets you to work with one of these, or you can set up a simple render farm just using the software provided.  //The nXt Render Farm software is sold separately// from the nXt platform plug-ins such as Flaminog nXt.  The software itself is platform independent -- Rhino is not required on computers used only for render farming.
 
 The nXt Render Farm includes two basic pieces of software:
 
@@ -13,12 +13,12 @@ The following procedures apply to nXt's included render farm. If you are plannin
 
 ===== Installing and configuring the Render Farm =====
 
-Create a shared folder for use by the Render Farm.  All the network rendering computers must have read/write access to this folder. The shared folder should have lots of available disk space to store both data (input) and images (output).  We recommend 20-200 GB available storage.  You must perform the following four steps on //each// computer you plan to use in the Render Farm, including any nXt workstations which submit jobs to the Render Farm:
+Create a shared folder for use by the Render Farm.  All the network rendering computers must have read/write access to this folder. The shared folder should have lots of available disk space to store both data (input) and images (output).  We recommend 20-200 GB available storage.  You must perform the following four steps on //each// computer you plan to use in the Render Farm. This includes any nXt workstations which submit jobs to the Render Farm.
 
   - Install the nXt Render Farm software.
   - From the Start menu, run the Render Farmer on each machine.  The Render Farmer will appear as an icon in the system tray.
   - Right click on the icon and select **Restore**.  A window title nXt Farmer should appear.
-  - Select **Options->Path...** from the menu and select the path to the render farm.  The Farmer window can now be minimized to the tray.
+  - Select **Options->Path...** from the menu and select the path to the render farm.  You can now minimize the Farmer window to the tray.
 
 The Render Farm is now configured. To verify that the farmer machines are responding run the Render Farm Monitor from the Start menu on any of the workstations.  The machines should appear in the upper list box. If you wish to exclude a machine from participating in the render farm, you can select it, right click, and choose **Suspend**.
 
@@ -36,15 +36,15 @@ All participating computers must be updated before a new job can be submitted to
 
 ===== Licensing the Render Farm =====
 
-The evaluation version of the Render Farm lets two network machines (nodes) work on jobs simultaneously. If you wish to have more network nodes running simultaneously you can purchase an unlimited node license [[https://www2.mcneel.com/commerce/accurender/buy-farm.asp|here]].
+The evaluation version of the Render Farm lets two network machines (nodes) work on jobs simultaneously. If you wish to have more network nodes running simultaneously you can buy an unlimited node license [[https://www2.mcneel.com/commerce/accurender/buy-farm.asp|here]].
 
 Once you have purchased your license and have acquired a Product Key, use one of the following procedures to license your farm.
 
 //**Post-build 244 procedure (recommended):**//
 
   - Wait for any active farm jobs to complete before beginning your licensing.
-  - Save your Product Key to a network location so you can easily cut and paste it into each node.
-  - //For each participating computer://
+  - Save your Product Key to a network location so you can cut and paste it into each node.
+  - For each participating computer:
      - If the node is currently active, shut it down by right-clicking on the Render Farm tray icon, and selecting **Close**.
      - Run the Authorize Farm applet from the nXt Render Farm folder in the Start Menu.     
      - Paste in your Product Key and select **OK**.  A message box indicating success should appear.  If an error condition is indicated the licensing procedure has failed and tech support may be necessary. Click **OK**.
@@ -54,14 +54,14 @@ Once you have purchased your license and have acquired a Product Key, use one of
 
   - Wait for any active farm jobs to complete before beginning your licensing.
   - Shut down all network nodes first by visiting each machine, right-clicking on the Render Farm tray icon, and selecting **Close**.
-  - Save your Product Key to a network location so you can easily cut and paste it into each node.
-  - //For each participating computer://
+  - Save your Product Key to a network location so you can cut and paste it into each node.
+  - For each participating computer:
      - Run the Render Farmer from the Start Menu.  The tray icon should appear.
      - Right click on the icon and select **Restore**.
      - Select **Options->Enter Product Key...**
      - Paste in your Product Key and select **OK**.
      - Shut down the node by closing the window.
-   - Once all computers have been licensed you can restart each node.
+   - Once all computers are licensed you can restart each node.
     
 **To verify that you are now running a licensed copy, view the About... box:**
 
@@ -92,11 +92,11 @@ After the job is complete, output can be found in the job's Output folder.  To r
   - Open the nXt Image Editor.
   - Load the first image of the sequence, 000000.nXtImage
   - From the menu, select **Image->Arithmetic->Add** for the standard engine or **Image->Arithmetic->Combine Path Tracings...** for the Path Tracing engine.
-  - Select all of the other images in the sequence. (Do not select 000000.nXtImage again or it will be counted twice.)
+  - Select all the other images in the sequence. (Do not select 000000.nXtImage again or it will be counted twice.)
 
 ===Batch jobs===
 
-Each batch task will be rendered by a single machine.
+Each batch task is rendered by a single machine.
 
 Perform the following steps to submit a batch job to the render farm:
 
@@ -122,7 +122,7 @@ After the job is complete, output can be found in the job's Output folder.  The 
 
 === Animation ===
 
-The animation will be split into tasks consisting of 20 contiguous frames.
+The animation is split into tasks consisting of 20 contiguous frames.
 
 Perform the following steps to submit an animation job to the render farm:
 
