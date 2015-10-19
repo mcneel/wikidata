@@ -1,40 +1,23 @@
 ====== Brazil Features ======
 
-|{{:legacy:en:SplutterFishGlassLogo.png}} {{:legacy:en:RhinoGlassLogo.png}}|//**Brazil r/s for Rhino Wiki pages**// \\ [[http://www.SplutterFish.com|SplutterFish]] / [[http://www.mcneel.com|Robert McNeel & Associates]]|
+|{{:legacy:en:SplutterFishGlassLogo.png}} {{:legacy:en:RhinoGlassLogo.png}}|//**Brazil r/s for Rhino Wiki pages**// 
 
 =====Brazil Rendering System feature list=====
 
 > **Summary:** //This page discusses some of advanced features that are available in Brazil r/s.//
 
-\\
 
 
-  * [[#Technical description]]
-  * [[#An Example Image]]
-    * [[#Ray tracing]]
-    * [[#Advanced lighting]]
-    * [[#Toon Rendering]]
-    * [[#Depth Of Field]]
-    * [[#Procedural textures]]
-  * [[#Other features]]
-    * [[#High Dynamic Range Colours]]
-    * [[#Global and Indirect illumination]]
-
-\\
-
-----
 \\
 \\
 
 =====Technical description=====
 
-On the [[http://www.splutterfish.com/sf/WebContent/BrazilFeatures|Splutterfish web site]] you can read that Brazil is an Adaptive QMC Sampling, Global Illumination and Ray Tracer implementation of the Bucketed Rendering paradigm. The Splutterfish web site will not tell you what that actually means. This wiki page aims to highlight several Brazil features (This is not a complete list, indeed... far from it) and describe them in layman terms. I will not shy away from the official jargon, but I promise I won't use terminology to confuse or impress you.
+This wiki page aims to highlight several Brazil features (This is not a complete list, indeed... far from it) and describe them in layman terms. I will not shy away from the official jargon, but I promise I won't use terminology to confuse or impress you.
 
-\\
 
 I might be able to describe what Brazil actually is and does and I might jujujuju even pull it off in less than a hundred pages, but what you need to know about Brazil is:
 
-\\
 
   * It's a great rendering engine.
   * It's not the only great rendering engine.
@@ -42,9 +25,8 @@ I might be able to describe what Brazil actually is and does and I might jujujuj
   * It's not easy to master, but very few things worth doing are.
   * There are very few things you cannot do with Brazil if you set your mind to it.
 
-\\
 
-Everything else is hearsay. The only way to choose a rendering platform which will work best for you is to try it and see for yourself. Listen carefully to opinions and reviews, but make up your own mind in the end. Have a look at [[http://splutterfish.com/sf/WebContent/Gallery/|user galleries]] and be impressed by the expertise and workmanship you'll encounter, but do not belittle the artists by thinking that you too will be able to effortlessly make images like that on a rainy Sunday afternoon. Software cannot be judged on feature lists alone.
+Everything else is hearsay. The only way to choose a rendering platform which will work best for you is to try it and see for yourself. Listen carefully to opinions and reviews, but make up your own mind in the end. Have a look at [[http://gallery.mcneel.com/?language=en&g=84|user galleries]] and be impressed by the expertise and workmanship you'll encounter, but do not belittle the artists by thinking that you too will be able to effortlessly make images like that on a rainy Sunday afternoon. Software cannot be judged on feature lists alone.
 
 
 \\
@@ -65,13 +47,12 @@ This image was rendered in a (early 2007) beta version of Brazil for Rhino and i
 
 I have highlighted five details in this image each of which represents an advanced feature:
 
-\\
 
-  - [[#Ray tracing]]
-  - [[#Advanced lighting]]
-  - [[#Toon Rendering]]
-  - [[#Depth Of Field]]
-  - [[#Procedural textures]]
+  - Ray tracing
+  - Advanced lighting
+  - Toon Rendering
+  - Depth-of-Field
+  - Procedural textures
 
 \\
 
@@ -119,7 +100,7 @@ I have highlighted five details in this image each of which represents an advanc
 \\
 
 ----
- //Procedural Textures// 
+ //Procedural textures// 
 
 | {{:legacy:en:Brazil_proctex_Thumb.jpg}} |  Brazil supports two types of textures; bitmaps and procedurals. You're all familiar with bitmap images already and I'm guessing that procedurals will not come as a shock either. Essentially, procedurals are images which are defined by a mathematical function rather than a grid of colored pixels. This means that procedurals do not suffer from any resolution or tiling problems. It also means that it is very easy to change the procedural's behavior. Brazil has several procedural algorithms build in: Checker, Dots, Gradient, Marble, Noise, Tile, and Wrinkled. But we're looking into more advanced procedural definitions which will enable users to easily set up other realistic materials such as wood and stone as well. Procedural textures can be nested ad infinitum. So there is no upper limit to the complexity one can achieve. Also, procedurals are simulated in the viewport as bitmap textures so you can easily see and tweak the settings. |
 
@@ -128,9 +109,9 @@ I have highlighted five details in this image each of which represents an advanc
 \\
 
 ----
- //High Dynamic Range colors// 
+ //High-dynamic-range colors// 
 
-Brazil is a [[http://en.wikipedia.org/wiki/High_dynamic_range_rendering|High-Dynamic-Range]] engine, meaning that its colors are not limited to the Black~White range. You can in fact have colors that are brighter than white and even darker than black, even though the latter is a physically impossible property. You might wonder why it is so important to have "brighter-than-white" colors if the computer screen cannot display them. The answer is that colors in a rendering are often diluted by partial reflection or refraction. Take a look at the following scene with GI and partial reflection:
+Brazil is a [[http://en.wikipedia.org/wiki/High_dynamic_range_rendering|High-dynamic-range]] engine, meaning that its colors are not limited to the Black~White range. You can in fact have colors that are brighter than white and even darker than black, even though the latter is a physically impossible property. You might wonder why it is so important to have "brighter-than-white" colors if the computer screen cannot display them. The answer is that colors in a rendering are often diluted by partial reflection or refraction. Take a look at the following scene with GI and partial reflection:
 
 \\
 
@@ -152,7 +133,7 @@ Colors can also be diluted through indirect lighting, as the following table sho
 \\
 
 ----
- //Global Illumination// 
+ //Global illumination// 
 
 [[http://en.wikipedia.org/wiki/Global_illumination|Global Illumination]] (GI) is a feature you will find in most modern rendering platforms and indeed in Brazil. GI uses both direct and indirect illumination to generate a realistic image. Direct lighting is the process where light objects cast light onto objects, thus creating bright areas on surfaces that face the lightsource, darker areas on surfaces that do not and shadows when surfaces cannot //see// the lightsource directly due to some obstruction. After a surface has been lit directly, it too emits photons (after all, we are able to see it) and some of those photons are captured by yet other surfaces. Some of these photons are bounced around again and some of //those// photons are finally caught by our eyes or a camera. I used the phrase //some of// quite a lot in the previous sentence, indicating that the effect of indirect illumination is relatively small compared to that of direct illumination. Yet, it is the details that sell an image. And humans are very fussy about correct lighting since we are used to seeing so much of it in real life around us.
 
