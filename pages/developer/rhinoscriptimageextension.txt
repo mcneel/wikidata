@@ -1,40 +1,39 @@
 ======GDI Bitmap extension for RhinoScript======
 > **Developer:** [[developer:rhinoscript|RhinoScript]]
-> **Summary:** //A plugin which exposes the Microsoft GDI+ API to RhinoScript.//
+> **Summary:** //A plug-in which exposes the Microsoft GDI+ API to RhinoScript.//
 
-=====Overview=====
 
-The Graphics Device Interface (or GDI) in Microsoft Windows is a base library for all platform graphics calls. Rhino supports a newer version of these libraries called GDI+ which enable the developer to use advanced drawing techniques such as anti-aliasing, transparancies, gradients and cleartype fonts. The essentials of GDI+ are now available for RhinoScripters through the use of this plugin. This project is aimed at those scripters who need to either analyze or create graphic data through automated processes. It is **not** a graphic editor and it is **not** for you if you're unfamiliar with [[developer:rhinoscript|RhinoScript]].
+The Graphics Device Interface (or GDI) in Microsoft Windows is a base library for all platform graphics calls. Rhino supports a newer version of these libraries called GDI+ which enable the developer to use advanced drawing techniques such as anti-aliasing, transparencies, gradients and cleartype fonts. The essentials of GDI+ are now available for RhinoScripters through the use of this plug-in. This project is aimed at those scripters who need to either analyze or create graphic data through automated processes. It is **not** a graphic editor and it is **not** for you if you're unfamiliar with [[developer:rhinoscript|RhinoScript]].
 
-For further questions slash requests, please:
+For further questions and requests, please:
 
-[[David@McNeel.com|Contact]] the [[people:davidrutten|author]]
+[[David@McNeel.com|Contact]] the [[people:davidrutten|author.]]
 
 =====Downloads=====
 
-[[http://wiki.mcneel.com/_media/legacy/en/RhPicture.zip|Download the plugin, the Monkey autocompletion file and the example scripts. Install instructions are located inside the Archive.]]
+[[http://wiki.mcneel.com/_media/legacy/en/RhPicture.zip|Download the plug-in, the Monkey autocompletion file, and the example scripts]] Install instructions are located inside the Archive.
 
 =====Nested Object definitions=====
 
-RhPicture contains a number of Object definitions which are available only through RhPicture. These objects all have their own Wiki pages with information:
+RhPicture contains several Object definitions which are available only through RhPicture. These objects all have their own wiki pages with information:
 
   * [[developer:rhpicture:gdicolor|GDI+ Color data]]
   * [[developer:rhpicture:gdipen|GDI+ Pen Objects]]
   * [[developer:rhpicture:gdibrush|GDI+ Brush Objects]]
   * [[developer:rhpicture:gdifont|GDI+ Font Objects]]
 
-=====Namespace Description=====
+=====Namespace description=====
 
-Since this project comes with autocompletion definitions for the Monkey Script editor, I will not discuss every function in this plugin. Rather, I will give you a small breakdown on how the thing fits together from a logical point of view. For a more in depth reference to function parameters, see the other pages of this Wiki group.
+Since this project comes with autocompletion definitions for the Monkey Script editor, I will not discuss every function in this plug-in. Rather, I will give you a small breakdown on how the thing fits together from a logical point of view. For a more in depth reference to function parameters, see the other pages of this wiki group.
 
-Before you can use the tools exposed in this plugin, you first need to create an instance of it in your script. There's no limit to the amount of instances you can make, but be aware that every one potentially stores a large bitmap in the memory of your computer. In order to create a new instance of the RhPicture plugin, do the following:
+Before you can use the tools exposed in this plug-in, you need to create an instance of it in your script. There's no limit to the amount of instances you can make, but be aware that every one potentially stores a large bitmap in your computer memory. To create a new instance of the RhPicture plug-in, do the following:
 
 <code vb>
  Dim RhPicture
  Set RhPicture = Rhino.GetPluginObject("RhPicture")
 </code>
 
-Note that autocompletion in Monkey only works if you name this variable "RhPicture". Once the subroutine completes the instance will be destroyed and the memory will be released. It is usually considered good practise to specifically release object instances once you no longer need them, thus:
+Note that autocompletion in Monkey only works if you name this variable "RhPicture". Once the subroutine completes the instance will be destroyed and the memory will be released. It is usually considered good practice to specifically release object instances once you no longer need them, thus:
 
 <code vb>
  Dim RhPicture : Set RhPicture = Rhino.GetPluginObject("RhPicture")
@@ -42,7 +41,7 @@ Note that autocompletion in Monkey only works if you name this variable "RhPictu
  Set RhPicture = Nothing
 </code>
 
-**//File IO Methods//**
+**//File IO methods//**
 
 Once you have your RhPicture instance, you can call its methods. By default, any new instance does not contain an image yet. You'll either have to load or create one before you can start drawing. There are several ways in which to load an image into an RhPicture instance:
 
@@ -57,7 +56,7 @@ Once you have your RhPicture instance, you can call its methods. By default, any
                                   Optional ByVal IncludeTitle As Boolean = True) As Boolean
 </code>
 
-The RhPicture plugin can load and save images in the following file formats:
+The RhPicture plug-in can load and save images in the following file formats:
 
 \\
 
@@ -94,14 +93,14 @@ All image data inside RhPicture instances is stored as 32bppARGB (32 bits-per-pi
 \\
 \\
 
-**//Analysis Methods//**
+**//Analysis methods//**
 
-Once you have your image (be it loaded or created), you can start to query its properties. There are both global and local properties:
+Once you have your image (be it loaded or created), you can query its properties. There are both global and local properties:
 
 \\
 
 | Global Properties |
-| Name | Description |
+| Name                  | Description |
 |IsImage() | Returns TRUE if an image is currently loaded, FALSE if there is no image available. |
 |Width() | The width of the loaded image in pixels or NULL on error. |
 |Height() | The height of the loaded image in pixels or NULL on error. |
@@ -131,7 +130,7 @@ Once you have your image (be it loaded or created), you can start to query its p
 
 **//Drawing methods//**
 
-There are many methods available for drawing geometry. See this wiki page for further details:
+There are many methods available for drawing geometry. See this wiki page for more details:
 
 [[developer:rhpicture:drawgeometry|RhPicture drawing routines]]
 
@@ -144,7 +143,7 @@ There are many methods available for drawing geometry. See this wiki page for fu
 
 **//Filter methods//**
 
-There are many methods available for applying effects and filters to RhPicture images. See this wiki page for further details:
+There are many methods available for applying effects and filters to RhPicture images. See this wiki page for more details:
 
 [[developer:rhpicture:filtermethods|RhPicture filter routines]]
 
