@@ -8,7 +8,7 @@ While a Rhino plug-in can simply be distributed as an **RHP** file, and loaded u
 
 While reading this article, it is helpful to use the standard Windows Registry editing tool, **REGEDIT.EXE**, to follow along and see how Rhino's Registry entries are structured.
 
-Registering plug-ins for Rhino 5 is a little different from registering Rhino 4.0 plug-ins. Details are listed in each step:
+Registering plug-ins for Rhino 4.0 is a little different from registering Rhino 5 plug-ins. Details are listed in each step:
 
 =====Finding the current Rhino=====
 
@@ -32,7 +32,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\4.0
 
 For the sake of brevity, this article assumes a 32-bit version of Windows. But the same information applies to 64-bit versions, just with the above path modification.
 
-The data in this value is a 10-character date string (REG_SZ) in the form of YYYY-MM-DD that identifies the build date of Rhino. An example date string is "2011-03-09" which identifies Rhino 4.0 SR9. If the **MostRecent** value does not exist, or if the string value is empty, then Rhino is not installed on the computer, or the installation is damaged.
+The data in this value is a 10-character date string (REG_SZ) in the form of YYYY-MM-DD that identifies the build date of Rhino. An example date string is //2011-03-09// which identifies Rhino 4.0 SR9. If the **MostRecent** value does not exist, or if the string value is empty, then Rhino is not installed on the computer, or the installation is damaged.
 
 =====Finding the Rhino registry key=====
 
@@ -45,18 +45,18 @@ HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Install
 
 where <date> is the string value identified by the **MostRecent** value.
 
-In this key, you will find the **Edition** key value that will identify the edition, or type, of Rhino: Beta, Release, or Evaluation. If the value of **Edition** is Evaluation, then the Evaluation version of Rhino was either the most recently installed or most recently run edition. Every time Rhino is installed, or run and then closed, the **MostRecent** key value is modified to reflect that Rhino's build date.
+In this key, you will find the **Edition** key value that will identify the edition, or type, of Rhino: Beta, Release, or Evaluation. If the value of Edition is **Evaluation**, then the Evaluation version of Rhino was either the most recently installed or run edition. Every time Rhino is installed, or run and then closed, the **MostRecent** key value is modified to reflect that Rhino's build date.
 
-If the value of **Edition** is "Release", then the Commercial version of Rhino version of Rhino was either the most recently installed or most recently run edition. This includes any Rhino that can be installed from a Rhino CD, including Commercial, Educational, and Not-for-Resale versions. Note, these versions only differ in their CD keys.
+If the value of Edition is **Release**, then the Commercial version of Rhino was either the most recently installed or most recently run edition. This includes any Rhino that can be installed from a Rhino CD, including Commercial, Educational, and Not-for-Resale versions. Note, these versions only differ in their CD keys.
 
 =====Using the Edition Value=====
-**Beta** - Unless your intent is for your plug-in to run with Beta editions of Rhino, you will probably want to avoid installing your plug-in on these editions. For one reason, Rhino 3.0 and 4.0 Beta editions have long since expired and no longer run. Also, for your plug-in to work with Beta editions, they are requried to be built with the same SDK version.
+**Beta** - Unless your intent is for your plug-in to run with Beta editions of Rhino, you will probably want to avoid installing your plug-in on these editions. For one reason, Rhino 3.0 and 4.0 Beta editions have long since expired and no longer run. Also, for your plug-in to work with Beta editions, they are required to be built with the same SDK version.
 
 **Commercial** - This edition should be your primary target.
 
-**Evaluation** - Supporting this edition is a good way for customers to evaluate your plug-in. Note, when the Rhino evaluation period has expired, it will no longer load all 3rd-party plug-ins.
+**Evaluation** - Supporting this edition is a good way for customers to evaluate your plug-in. Note, when the Rhino evaluation period has expired, it will no longer load all third party plug-ins.
 
-=====Other Useful Values=====
+=====Other useful values=====
 There are other useful key values that are found in the following locations depending on the Rhino version:
 
 <code>
@@ -83,7 +83,7 @@ The name of the Registry key will be your plug-in's GUID, the value returned by 
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Plug-ins\<your_plugin_guid>
 </code>
 
-Under this new Registry key, create two new value names, **Name** and **FileName** that contain strings that identify your plug-in's name and the full path to the .RHP file, respectively. For example, if I had created a new plug-in named "FooBar" that I has installed in Rhino's system folder, The registry would look like the following:
+Under this new Registry key, create two new value names, **Name** and **FileName** that contain strings that identify your plug-in's name and the full path to the .RHP file, respectively. For example, if I had created a new plug-in named **FooBar** that I has installed in Rhino's system folder, the Registry would look like the following:
 
 <code>
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Plug-Ins\F3CF4A28-EA9E-4E08-BABA-5FC6645A5D72
@@ -95,15 +95,15 @@ Value:  FileName
 Data:   C:\Program Files\Rhinoceros 4.0\System\FooBar.rhp  (REG_SZ)
 </code>
 
-=====Automatic Loading=====
-Rhino will attempt to load your plug-in the next time Rhino launches if the **Name** and **FileName** Registry values and data are present in your plug-in's Registry key. Rhino will briefly display a "Preparing plug-ins for first use" dialog if the plug-in loads correctly.
+=====Automatic loading=====
+Rhino will attempt to load your plug-in the next time Rhino launches if the **Name** and **FileName** Registry values and data are present in your plug-in's Registry key. Rhino will briefly display a //Preparing plug-ins for first use// dialog if the plug-in loads correctly.
 
-When your plug-in loads for the first time, the rest of the normal Registry keys/value pairs in your plug-in's Registry key fill be filled in.
+When your plug-in loads for the first time, the rest of the normal Registry keys/value pairs in your plug-in's Registry key fill in.
 
 =====Hints=====
 Look in the Registry with **REGEDIT.EXE** and confirm that existing plug-ins follow these conventions.
 
-Use the right-click context menu in **REGEDIT.EXE** to access the "Copy Key Name" and "Rename" functions so you can get accurate copies of names and values in the Registry.
+Use the right-click context menu in **REGEDIT.EXE** to access the //Copy Key Name// and //Rename// functions so you can get accurate copies of names and values in the Registry.
 
 Test your installer to handle all of these situations:
 
