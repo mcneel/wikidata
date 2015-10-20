@@ -30,13 +30,12 @@ Thus, Rhino 4.0 uses the following location on 64-bit versions of Windows:
 HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\4.0
 </code> 
 
-For the sake of brevity, this article assumes a 32-bit version of Windows. But the same information applies to 64-bit versions, just with the above path modification.
+For brevity, this article assumes a 32-bit version of Windows. But the same information applies to 64-bit versions, just with the above path modification.
 
 The data in this value is a 10-character date string (REG_SZ) in the form of YYYY-MM-DD that identifies the build date of Rhino. An example date string is //2011-03-09// which identifies Rhino 4.0 SR9. If the **MostRecent** value does not exist, or if the string value is empty, then Rhino is not installed on the computer, or the installation is damaged.
 
 =====Finding the Rhino registry key=====
 
-====Rhino 4.0====
 If the **MostRecent** registry value contains a valid date string, then you can find Rhino 4.0's registry key in the following locations, depending on the Rhino version:
 
 <code>
@@ -50,14 +49,14 @@ In this key, you will find the **Edition** key value that will identify the edit
 If the value of Edition is **Release**, then the Commercial version of Rhino was either the most recently installed or most recently run edition. This includes any Rhino installed from a Rhino CD, including Commercial, Educational, and Not-for-Resale versions. Note, these versions only differ in their CD keys.
 
 =====Using the Edition Value=====
-**Beta** - Unless your intend your plug-in to run with Beta editions of Rhino, avoid installing your plug-in on these editions. For one reason, Rhino 3.0 and 4.0 Beta editions have long since expired and no longer run. Also, for your plug-in to work with Beta editions, they are required to be built with the same SDK version.
+**Beta** - Unless you intend your plug-in to run with Beta editions of Rhino, avoid installing your plug-in on these editions. One reason is that Rhino 3.0 and 4.0 Beta editions have long since expired and no longer run. Also, for your plug-in to work with Beta editions, they are required to be built with the same SDK version.
 
 **Commercial** - This edition should be your primary target.
 
 **Evaluation** - Supporting this edition is a good way for customers to evaluate your plug-in. Note, when the Rhino evaluation period has expired, it will no longer load all third party plug-ins.
 
 =====Other useful values=====
-There are other useful key values found in the following locations depending on the Rhino version:
+There are other useful key values found in the following locations, depending on the Rhino version:
 
 <code>
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Install
@@ -71,8 +70,8 @@ HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Install
 
 **Path** - contains the full path to the System folder under the Rhino folder.
 
-=====Registering Your Plug-in=====
-To register your plug-in with Rhino, you will need to create a new Registry key in the following locations depending on the Rhino version:
+=====Registering your plug-in=====
+To register your plug-in with Rhino, you will need to create a new Registry key in the following locations, depending on the Rhino version:
 <code>
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Plug-Ins
 </code>
@@ -83,7 +82,7 @@ The name of the Registry key will be your plug-in's GUID, the value returned by 
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Plug-ins\<your_plugin_guid>
 </code>
 
-Under this new Registry key, create two new value names, **Name** and **FileName** that contain strings that identify your plug-in's name and the full path to the .RHP file, respectively. For example, if I had created a new plug-in named **FooBar** that I has installed in Rhino's system folder, the Registry would look like the following:
+Under this new Registry key, create two new value names, **Name** and **FileName** that contain strings that identify your plug-in's name and the full path to the .RHP file, respectively. For example, if I had created a new plug-in named **FooBar** that I installed in Rhino's system folder, the Registry would look like the following:
 
 <code>
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Plug-Ins\F3CF4A28-EA9E-4E08-BABA-5FC6645A5D72
