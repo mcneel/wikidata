@@ -1,0 +1,82 @@
+====== Uso de bloques ======
+Los conceptos básicos de los bloques son los mismos en Rhino 4 y en Rhino 5. Sin embargo, Rhino 5 ofrece funciones y comandos nuevos que puede encontrar [[http://www.rhino3d.com/new/large|aquí]].
+ 
+> **Resumen:** //Los bloques permiten gestionar los objetos repetidos de un archivo.//
+
+=====Ventajas del uso de bloques=====
+
+* Puede cambiar cualquier número de copias de un objeto si son instancias de bloque haciendo cambios en la geometría que define el bloque.
+  * Los objetos se pueden actualizar desde archivos externos.
+* Las instancias repetidas de una definición no aumentan mucho el tamaño de archivo ya que solo hay una definición del bloque contenido en el archivo. Todas las instancias referencian los datos de una definición original. Rhino usa algunos trucos para mostrar las distintas instancias en otras posiciones y orientaciones.
+
+=====Cómo funcionan los bloques=====
+Cuando crea un bloque en Rhino desde geometría del archivo actual con el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/block.htm|Bloque]], Rhino reemplaza la geometría seleccionada por un //instancia//. Guarda la definición de bloque (la geometría seleccionada para definir el bloque) en el archivo. Puede insertar tantas instancias de esta definición como necesite con el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/insert.htm|Insertar]]. Las definiciones de bloque existentes disponibles para su inserción se encuentran en una lista desplegable en el cuadro de diálogo [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/insert.htm|Insertar]].
+
+Si inserta otro archivo 3DM como referencia de bloque, para algo similar. La definición de bloque se guarda en el archivo actual. Lo que se ve en pantalla es una //instancia// de geometría. La diferencia es que la definición se refiere al archivo externo y se puede actualizar, además de cualquier instancia que se coloque si se modifica el archivo externo. Esto se hace mediante el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/blockmanager.htm|AdministradorDeBloques]].
+
+En ambos casos, no es necesario colocar ninguna instancia en el archivo para que la definición de bloque exista en el archivo. Por este motivo, a veces hay problemas para eliminar capas. Si una definición de bloque utiliza la capa, no se puede eliminar. Esto puede ocurrir cuando se han eliminado todas las instancias de un bloque. Utilice el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/purge.htm|Depurar]] para eliminar las definiciones de bloque no usadas.
+
+Para actualizar todas las instancias de bloque de un determinado bloque en el archivo, es necesario redefinir la definición de bloque. 
+[[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/explode.htm|Descomponga]] una definición de bloque.
+  - Haga cambios en los objetos.
+  - Utilice el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/block.htm|Bloque]] para volver a crear bloques de los objetos con el mismo nombre.  \\ Verá un diálogo de advertencia para confirmar el cambio de la definición. 
+  - O bien, puede redefinir el bloque con un conjunto diferente de objetos.
+
+
+====Un ejemplo para probar====
+  - **//Cree una caja//** y utilice el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/block.htm|Bloque]] para definir un bloque. 
+  - Asígnele el nombre **Caja1**. \\ Ponga el punto de inserción en una esquina de la caja.  \\ Una vez hecho, la caja ya no será una caja. Parece una caja, pero si la selecciona y observa sus [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/properties.htm|Propiedades]] > Detalles, verá que se trata de una instancia de bloque. 
+  - [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/explode.htm|Descomponga]] el bloque. 
+  - Revise las [[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/properties.htm|Propiedades]] de nuevo. \\ La caja vuelve a ser una caja y no tiene nada que ver con el bloque denominado **Caja1**. 
+  - Elimine la caja. 
+  - Ahora, utilice el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/insert.htm|Insertar]]. 
+  - En la lista desplegable del diálogo [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/insert.htm|Insertar]], localice **Caja 1**. \\ Esta es la definición de bloque creada cuando se hizo el bloque.  
+  - [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/insert.htm|Insértelo]] como instancia de bloque y luego copie la instancia varias veces. 
+
+**//Redefinir el bloque en Rhino 4://** 
+  - Seleccione una de las instancias de **Caja1**.
+  - [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/explode.htm|Descompóngalo]] para que vuelva a ser una caja normal. 
+  - [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/fillet.htm|Empalme]] los bordes de la caja. 
+  - Ahora ejecute el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/block.htm|Bloque]].
+  - Seleccione la caja empalmada y elija un punto de inserción. 
+  - Seleccione **Caja1** como nombre del nuevo bloque. \\ Todas las instancias de Caja1 ahora son cajas empalmadas. \\ Pueden moverse si se ha designado un punto de inserción en la nueva definición que es diferente de la original.
+
+**//Redefinir el bloque en Rhino 5://** \\
+En Rhino 5, puede utilizar el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/blockedit.htm|EdiciónDeBloques]]. 
+  - Ejecute el comando EdiciónDeCaja haciendo doble clic en una referencia de bloque. 
+  - El diálogo [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/blockedit.htm|EdiciónDeBloques]] aparecerá. 
+  - Añada y elimine objetos y restablezca el punto de inserción. 
+  - Puede editar la geometría directamente en el bloque. 
+  - Cierre el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/blockedit.htm|EdiciónDeBloques]] para guardar los cambios y actualizar todas las referencias del bloque en el modelo. 
+  - Haga clic en la "x" o pulse ESC para cancelar la redefinición.
+
+  - **//Crear una esfera.//** 
+  - Ejecute **[[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/block.htm|Bloque]]** seleccione un punto de inserción. 
+  - Asígne el nombre **Caja1** al bloque. \\ Las cajas empalmadas ahora todas son esferas.
+ 
+=====Referencias de bloque externas=====
+Las definiciones de bloque que son de archivos externos se pueden actualizar editando y guardando el archivo externo y luego actualizando la definición en el [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/blockmanager.htm|AdministradorDeBloques.|AdministradorDeBloques]]. La definición mira la ruta absoluta, para que no se puedan mover los archivos externos usados en las definiciones de bloque y tengan el trabajo de actualización, pero a la definición actual no le importa si el archivo original se ha modivdo (la definición actual se encuentra en el archivo actual).
+
+
+====Un ejemplo de prueba====
+  - **Cree una caja** y guarde el archivo. 
+  - Abra un archivo nuevo y ejecute **[[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/insert.htm|Insertar]]**. \\ Utilice el botón "Archivo" en el diálogo para navegar al archivo de la carpeta. 
+  - Insértelo como referencia de bloque. 
+  - Haga varias copias del bloque y ejecute los comandos para escalar, rotar y mover.
+  - En otra instancia de Rhino, abra el archivo de caja y redondee los bordes. 
+  - Cree una esfera. 
+  - Guarde el archivo. 
+  - Vuelva al archivo con los bloques insertados y ejecute el comando [[http://docs.mcneel.com/rhino/5/help/es-es/index.htm#commands/blockmanager.htm|AdministradorDeBloques]].  \\ Verá una referencia al archivo de caja insertado. 
+  - Selecciónelo en la lista y haga clic en **Actualizar**. \\ Las instancias del archivo ahora deberían ser todas cajas empalmadas con una esfera.
+  
+**Notas acerca de las capas:** 
+  * En todos los casos, las capas en las que se encuentran los objetos de la definición de bloque se mantienen en las instancias. 
+ * Desactivar cualquier capa que utiliza alguna parte de una instancia de bloque desactivará esa parte del bloque en la ventana de Rhino para todas las instancias de ese bloque. 
+  * Desactivar la capa en la que se insertó la instancia desactivará todo el bloque independientemente del estado de las otras capas usadas por el bloque.
+
+=====Técnicas avanzadas=====
+
+**[[developer:scriptsamples/superexplodeblock|Script SuperExplodeBlock]]**\\ 
+(Ahora forma parte de [[labs:rhinolabstools|Rhino Labs Tools]] para V4 está integrado en V5 como comando)
+
+**[[developer:scriptsamples/countblocks|Script para contar bloques]]**
