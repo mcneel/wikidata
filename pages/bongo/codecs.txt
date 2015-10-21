@@ -2,13 +2,13 @@
 
 ======Choosing a video format for your animation.======
 
-Chosing a method of encoding your animation for video playback is one of the most complicated and difficult problems you will face when you first start producing video.  In general, most of the basic choices are flawed in some one and you will always have to make some kind of compromise.
+Choosing a method of encoding your animation for video playback is one of the most complicated and difficult problems you will face when you first start producing video.  In general, most of the basic choices are flawed in some way and you will always have to make some kind of compromise.
 
-First - some basics.  The output of any rendering software is a single image, usually some kind of bitmap.  In order to create an animation from a rendering program, you will need to create a sequence of these images.  Bongo's "BongoRenderAnimation" command enables you to easily create this sequence ready to convert to a ready video format.  However, it is not possible to view this sequence of images as a video until they have been encoded into one of the many video formats available.
+First, some basics.  The output of any rendering software is a single image, usually some kind of bitmap.  To create an animation from a rendering program, you will need to create a sequence of these images.  Bongo's //BongoRenderAnimation// command enables you to easily create this sequence ready to convert to a ready video format.  However, it is not possible to view this sequence of images as a video until they have been encoded into one of the many video formats available.
 
 It is crucially important to save the sequence of images once an animation is rendered because each type of video format throws away an enormous amount of data from the original renderings.  Re-encoding a new video file from another means that you will reduce the quality each time you do it.  This is especially true of older video formats such as Cinepak or Indeo.
 
-=====Codecs and Formats.=====
+=====Codecs and formats=====
 
 Most video players are able to cope with a large number of video formats.  However, it's the differences that are important.  The most important video players are:
 
@@ -16,47 +16,47 @@ Windows Media Player:  Video for Windows (AVI)*, MPEG, Windows Media (WMV)
 
 Apple Quicktime:  Video for Windows (AVI)*, MPEG, Quicktime Video (MOV)
 
-As you can see, MPEG and AVI are the common format.  However, these formats are quite dated and have a number of problems associated with them.  In addition, it is not possible to run Windows Media Player (and therefore WMV files) on an Apple Mac.
+As you can see, MPEG and AVI are the common format.  However, these formats are quite dated and have a number of problems associated with them.  Also, it is not possible to run Windows Media Player (and therefore WMV files) on an Apple Mac.
 
-======Video Formats:======
+=====Video formats=====
 
-=====Video for Windows (AVI).=====
+====Video for Windows (AVI)====
 
-The AVI file format is the format of the Video for Windows system - a rather out of date video platform.  It is not actually a method of encoding video - in fact the format uses something called a "codec" (Compressor/Decompresor) which needs to be installed on both the machine doing the encoding and also on the machine doing the playing.  This is the main problem with AVI since in general is it only possible to rely on some very old codecs being present on playback machines.
+The AVI file format is the format of the Video for Windows system -- a rather out of date video platform.  It is not actually a method of encoding video. In fact the format uses something called a //codec// (Compressor/Decompresor) which needs to be installed on both the encoding machine and also on the playing machine.  This is the main problem with AVI since in general is it only possible to rely on some very old codecs being present on playback machines.
 
-That said, there are some excellent modern codecs available - including the popular DivX ( [[http://www.divx.com|www.divx.com]] ).  However, in order to use these you must download and install the codec on both the encoding and the playback computer.  This is fine if you have access to both machines, but if you are distributing your video you will inevitably get into problems with users who don't know how to view your animation.
+That said, there are some excellent modern codecs available - including the popular DivX ([[http://www.divx.com|www.divx.com]]).  But, to use these you must download and install the codec on both the encoding and the playback computer.  This is fine if you have access to both machines, but if you are distributing your video you will inevitably get into problems with users who don't know how to view your animation.
 
-It is best to avoid AVI completely unless you have complete control over all playback targets.  That said, AVI is convienient since it can be produced automatically from Bongo.
+It is best to avoid AVI completely unless you have complete control over all playback targets.  That said, AVI is convenient since it can be produced automatically from Bongo.
 
-DivX is also a good choice for transferring video to other formats (such as WMV or Quicktime) by re-encoding since it is very high quality.  Don't try this with other older AVI  codecs - the quality loss will be dramatic.
+DivX is also a good choice for transferring video to other formats (such as WMV or Quicktime) by re-encoding since it is very high quality.  Don't try this with other older AVI  codecs. The quality loss will be dramatic.
 
-Note that the open source XVid codec is also a popular choice for AVI encoding, but is less prevelent on computers.  [[http://www.xvid.org|www.xvid.org]]
+Note that the open source XVid codec is also a popular choice for AVI encoding, but is less prevalent on computers.  [[http://www.xvid.org|www.xvid.org]]
 
-=====Quicktime (MOV)=====
+====Quicktime (MOV)====
 
-Apple's Quicktime was conceived as a cross platform alternative to AVI and has been extremely successful.  It is installed by default on all Macs and many PCs - the download is free.  However, it is no longer particularly easy to install for PCs and the download is quite large.
+Apple's Quicktime was conceived as a cross platform alternative to AVI and has been extremely successful.  It is installed by default on all Macs and many PCs. The download is free.  However, it is no longer particularly easy to install for PCs and the download is quite large.
 
-That said, the Quicktime format is standardised in the way that AVI and its codec mess is not.  You can pretty much guarantee that an animation encoded with Quicktime will run on Quicktime anywhere so long as the user as a fairly up-to-date version of the player.  Modern Quicktime video is extremely high quality and based on a very similar encoding method to DivX and WMV.
+That said, the Quicktime format is standardized in the way that AVI and its codec mess is not.  You can pretty much guarantee that an animation encoded with Quicktime will run on Quicktime anywhere so long as the user has a fairly up-to-date version of the player.  Modern Quicktime video is extremely high quality and based on a very similar encoding method to DivX and WMV.
 
-In order to create Quicktime video you will need the Quicktime Pro product which you can purchase from www.apple.com.  It is very reasonably priced and is excellent value considering the usefulness of the format.  You can create the video from either the single frame sequence are another high quality format such as DivX or "Full Frames Uncompressed" AVI.
+In order to create Quicktime video you will need the Quicktime Pro product which you can purchase from www.apple.com.  It is very reasonably priced and an excellent value considering the usefulness of the format.  You can create the video from either the single frame sequence are another high quality format such as DivX or //Full Frames Uncompressed// AVI.
 
-=====MPEG=====
+====MPEG====
 
-MPEG is an evolving format supported by most players.  The original MPEG1 format (supported by Bongo) is quite basic and only supports small image sizes and certain fixed frame rates.  This limits its usablility somewhat, but if it fits your needs then this is an excellent format.
+MPEG is an evolving format supported by most players.  The original MPEG1 format (supported by Bongo) is quite basic and only supports small image sizes and certain fixed frame rates.  This somewhat limits its usefullness, but if it fits your needs then this is an excellent format.
 
-Modern MPEG4 video is very high quality - and is the technology behind DivX, Quicktime and WMV.  However, tough licencing conditions have meant that the pure MPG format has never really caught on.  It is tricky to find encoding software to produce this kind of video - however, high end programs such as Adobe Premiere should have no problem.
+Modern MPEG4 video is very high quality and it is the technology behind DivX, Quicktime, and WMV.  However, tough licensing conditions have meant that the pure MPG format has never really caught on.  It is tricky to find encoding software to produce this kind of video. Yet, high end programs such as Adobe Premiere should have no problem.
 
-=====Windows Media (WMV).=====
+====Windows Media (WMV)====
 
-Windows Media is another excellent high quality format.  However, the WMV format is only supported on Windows - you won't be able to play it (easily) on a Mac.   That said, if your only target is Windows machines, you can be virtually guaranteed that any computer build during the last 8 years will play it - and many older ones too if they have used Windows Update to get the latest Windows Media Players.
+Windows Media is another excellent high quality format.  But the WMV format is only supported on Windows. You won't be able to play it (easily) on a Mac.   That said, if your only target is Windows machines, you can be virtually guaranteed that any computer build during the last eight years will play it -- and many older ones too if they have used Windows Update to get the latest Windows Media Players.
 
-The difficulty with this format is that you will need to use Windows Media Encoder - available as a free download from Microsoft - to produce these files from the original files.  We have found that the best way of doing this is to re-encode from a DivX or Full Frames AVI.
+The difficulty with this format is that you will need to use Windows Media Encoder (available as a free download from Microsoft) to produce these files from the original files.  We have found that the best way of doing this is to re-encode from a DivX or Full Frames AVI.
 
-=====Flash=====
+====Flash====
 
-A relative newcomer on the scene is Macromedia/Adobe's Flash format.  For years the standard for web based vector graphics, Flash has recently started supporting a type of high quality video encoding.  This means that all computers with recent versions of the Flash/Shockwave browser plug-in will be able to play these videos.
+A relative newcomer on the scene is Macromedia, Adobe's Flash format.  For years the standard for web based vector graphics, Flash has recently started supporting a type of high quality video encoding.  This means that all computers with recent versions of the Flash/Shockwave browser plug-in will be able to play these videos.
 
-Macromedia is already claiming that nearly 95% of internet browsers are enabled with this technology, so this might actually be an excellent method of delivering high quality cross-platform video in the future.  The only drawback is that you will need a copy of Flash to encode the video.  Flash can easily import your single frame sequence.
+Macromedia is already claiming that nearly 95% of Internet browsers are enabled with this technology, so this might actually be an excellent method of delivering high quality cross-platform video in the future.  The only drawback is that you will need a copy of Flash to encode the video.  Flash can easily import your single frame sequence.
 
 
 
