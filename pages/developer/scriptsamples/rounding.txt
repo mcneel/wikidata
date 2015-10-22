@@ -2,10 +2,9 @@
 > **Developer:** //[[developer:rhinoscript|RhinoScript]]//
 > **Summary:** //Discusses number rounding in RhinoScript.//
 
-=====Overview=====
 You need to round when you want to convert a number of greater precision into a number of lesser precision. The most common case is when you need to convert a floating-point number into an integer.
 
-=====Rounding Down=====
+=====Rounding down=====
 The simplest form of rounding is truncation. Any digits after the desired precision are simply ignored. The **Fix** function is an example of truncation. For example:
 
 <code vb>
@@ -29,7 +28,7 @@ RhinoScript has a **Floor** function that truncates positive values, but does no
  Rhino.Print Rhino.Floor(-3.5) ' -4
 </code>
 
-=====Rounding Up=====
+=====Rounding up=====
 
 RhinoScript has a **Ceil** function which always rounds fraction values up (more positive) to the next value.
 
@@ -40,7 +39,7 @@ RhinoScript has a **Ceil** function which always rounds fraction values up (more
 
 VBScript does not have a corresponding round-up function. However, for negative numbers, both **Fix** and **Int** can be used to round upward, in different ways.
 
-**Fix** rounds towards 0 (up in the absolute sense, but down in terms of absolute magnitude).
+**Fix** rounds towards 0 (up in the absolute sense, but down in absolute magnitude).
 
 <code vb>
  Rhino.Print Fix( 3.5) '  3
@@ -54,36 +53,36 @@ VBScript does not have a corresponding round-up function. However, for negative 
  Rhino.Print Int(-3.5) ' -4
 </code>
 
-=====Arithmetic Rounding=====
-When rounding always down or up, the resulting number is not necessarily the closest to the original number. For example, if you round 1.9 down to 1, the difference is a lot larger than if you round it up to 2. It is easy to see that numbers from 1.6 to 2.4 should be rounded to 2.
+=====Arithmetic rounding=====
+When you always round one direction, the resulting number is not necessarily the closest to the original number. For example, if you round 1.9 down to 1, the difference is a lot larger than if you round it up to 2. It is easy to see that numbers from 1.6 to 2.4 should be rounded to 2.
 
-However, what about 1.5, which is equidistant between 1 and 2? By convention, the half-way number is rounded up.
+But, what about 1.5, which is equidistant between 1 and 2? By convention, the half-way number is rounded up.
 
 You can implement rounding half-way numbers in a symmetric fashion, such that -.5 is rounded down to -1, or in an asymmetric fashion, where -.5 is rounded up to 0.
 
 VBScript does not have any functions that do arithmetic rounding.
 
-=====Banker's Rounding=====
-When you add rounded values together, always rounding .5 in the same direction results in a bias that grows with the more numbers you add together. One way to minimize the bias is with banker's rounding.
+=====Banker's rounding=====
+When you add rounded values together, always rounding .5 in the same direction results in a bias that grows the more numbers you add together. One way to minimize the bias is with banker's rounding.
 
 Banker's rounding rounds .5 up sometimes and down sometimes. The convention is to round to the nearest even number, so that both 1.5 and 2.5 round to 2, and 3.5 and 4.5 both round to 4. Banker's rounding is symmetric.
 
 In VBScript, the following numeric functions perform banker's rounding: **CByte**, **CInt**, **CLng**, **CCur**, and **Round**.
 
-=====Random Rounding=====
+=====Random rounding=====
 Even banker's rounding can bias totals. You can take an extra step to remove bias by rounding .5 up or down in a truly random fashion. This way, even if the data is deliberately biased, bias might be minimized. However, using random rounding with randomly distributed data might result in a larger bias than banker's rounding. Random rounding could result in two different totals on the same data.
 
 VBScript does not have any functions that do random rounding.
 
-=====Alternate Rounding=====
+=====Alternate rounding=====
 Alternate rounding is rounding between .5 up and .5 down on successive calls.
 
 VBScript does not have any functions that do alternate rounding.
 
-=====Sample User-Defined Rounding Functions=====
+=====Sample user-defined rounding functions=====
 The code that follows provides sample implementations for each of the rounding types described.
 
-All of these functions take two arguments: the number to be rounded and a factor. If the factor is 1, then the functions return an integer created by one of the above methods. If the factor is something other than 1, the number is scaled by the factor to create different rounding effects. For example AsymArith(2.55, 10) produces 2.6, that is, it rounds to 1/factor = 1/10 = 0.1.
+All these functions take two arguments: the number to be rounded and a factor. If the factor is 1, then the functions return an integer created by one of the above methods. If the factor is something other than 1, the number is scaled by the factor to create different rounding effects. For example AsymArith(2.55, 10) produces 2.6, that is, it rounds to 1/factor = 1/10 = 0.1.
 
 Note, a factor of 0 generates a run-time error: 1/factor = 1/0.
 
@@ -197,14 +196,14 @@ The following table shows the effects of various factors:
 |SymDown(25, .1)|20|Rounds down to an even multiple of 10.|
 \\
 
-=====Floating Point Limitations=====
-All of the rounding implementations presented here use the double data type, which can represent approximately 15 decimal digits.
+=====Floating point limitations=====
+All the rounding implementations presented here use the double data type, which can represent approximately 15 decimal digits.
 
 Since not all fractional values can be expressed exactly, you might get unexpected results because the display value does not match the stored value.
 
 For example, the number 2.25 might be stored internally as 2.2499999..., which would round down with arithmetic rounding, instead of up as you might expect. Also, the more calculations a number is put through, the greater possibility that the stored binary value will deviate from the ideal decimal value.
 
-=====Dropping Precision as a Shortcut in Rounding=====
+=====Dropping precision as a shortcut in rounding=====
 As taught in school, rounding is usually arithmetic rounding using positive numbers. With this type of rounding, you only need to know the number to 1 digit past where you are rounding to. You ignore digits past the first decimal place. In other words, precision is dropped as a shortcut to rounding the value.
 
 For example, both 2.5 and 2.51 round up to 3, while both 2.4 and 2.49 round down to 2.
