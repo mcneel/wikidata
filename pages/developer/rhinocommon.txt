@@ -2,7 +2,7 @@
 [[http://wiki.mcneel.com/developer/rhinocommon|{{:developer:rhino_plugin.png?128|RhinoCommon}}]]
 
 =====Downloads and links=====
-  * [[http://visualstudiogallery.msdn.microsoft.com/16053049-7db2-4c9f-961a-53274ac92ace|Project Wizards]] for plug-ins and commands in Visual Studio 2010, 2012, 2013 and 2015, both in C# and Vb.Net, and included in Ultimate, Professional, Premium, C# Express, Vb Express and Windows Desktop Express where available. Same as installing from VS 'Extension Manager'. After installing the wizards with the Extensions Manager, and when you create a new project in Visual Studio, set the Framework to 4.0 in order to see the Rhino plug-in in the list.
+  * [[http://visualstudiogallery.msdn.microsoft.com/16053049-7db2-4c9f-961a-53274ac92ace|RhinoCommon Wizards]] for plug-ins and commands in Visual Studio 2010, 2012, 2013 and 2015, both in C# and Vb.Net. Included in Ultimate, Professional, Premium, C# Express, Vb Express and Windows Desktop Express where available. Same as installing from VS Extension Manager. After installing the wizards with the Extension Manager, when you create a new project in Visual Studio, set the Framework to 4.0 to see the Rhino plug-in in the list.
   * API Documentation
      * [[http://www.rhino3d.com/5/rhinocommon/|Online SDK documentation]] is synchronized with the [[https://github.com/mcneel/rhinocommon|GitHub source]].
      * [[http://www.rhino3d.com/5/rhinocommon/rhinocommon.chm|Offline help file]] that is not synchronized and changes with every new RhinoCommon version. (You might need to right-click it and choose unblock after downloading it.)
@@ -42,36 +42,37 @@ RhinoCommon is meant to be //version 2// of the Rhino.NET SDK, and it improves o
   * **Improved documentation:**
     * We are making an effort to provide descriptive XML comments for all classes/functions/properties
     * The current SDK documentation can be found [[http://www.rhino3d.com/5/rhinocommon/index.html|here]]
-  * **Platform neutral:** RhinoCommon is built to run on Windows 32 bit, Windows 64 bit, and Mac OSX (currently only 32 bit)
+  * **Platform neutral:** RhinoCommon is built to run on Windows 32 bit, Windows 64 bit, and Mac OS X (currently only 32 bit)
 =====Eating our own dog food=====
 The Python plug-in for Windows/Mac, [[http://www.grasshopper3d.com/|Grasshopper]], and all Mac based .NET plug-ins are being built against RhinoCommon. This lets us figure out where the problem spots are in RhinoCommon and make changes.
 
-During 2011, [[http://www.grasshopper3d.com/|Grasshopper]] was rewritten to be based on RhinoCommon. This was a big project and took some time to complete, but once done it provided performance improvements and better memory management. This has also been a step toward being able to run Grasshopper on Rhino for Mac!
+In 2011 [[http://www.grasshopper3d.com/|Grasshopper]] was rewritten to be based on RhinoCommon. This was a big project and took some time to complete, but once done it provided performance improvements and better memory management. This has also been a step toward being able to run Grasshopper on Rhino for Mac!
 
-Grasshopper will maintain a special build of RhinoCommon to allow it to continue to run on Rhino 4. Because Grasshopper needs to run on Rhino 4, there will still be some dependencies in Grasshopper on the older Rhino.NET SDK.
+Grasshopper will maintain a special build of RhinoCommon to let it continue running on Rhino 4. Because Grasshopper needs to run on Rhino 4, there will still be some dependencies in Grasshopper on the older Rhino.NET SDK.
 
-The [[python|Python]] script engine is entirely based on RhinoCommon. All python scripts directly use RhinoCommon to work with Rhino. Typically if something in RhinoCommon is difficult to write a python script for, then the RhinoCommon SDK needs to be fixed in that area. 
+The [[python|Python]] script engine is entirely based on RhinoCommon. All Python scripts directly use RhinoCommon to work with Rhino. Typically if something in RhinoCommon is difficult to write a Python script for, then the RhinoCommon SDK needs to be fixed in that area. 
 
 =====Mono on the Mac======
 RhinoCommon on Mac is executed through an embedded [[http://www.mono-project.com|Mono framework]].
 
-I'm still learning all of the ins and outs of Mono so there will probably be some hiccups along the way. I'm currently trying to figure out the best way to write user interfaces for OSX and Mono. System.Windows.Forms has some problems which I am trying to better understand, but there are other user interface frameworks that I need to experiment with for writing more "pure" OSX style user interfaces.
+I'm still learning all of the ins and outs of Mono so there will probably be some hiccups along the way. I'm currently trying to figure out the best way to write user interfaces for OS X and Mono. System.Windows.Forms has some problems which I am trying to better understand, but there are other user interface frameworks that I need to experiment with for writing more "pure" OS X style user interfaces.
 
-The Mono development team appears to be pretty active and are adding more and more improvements to their OSX version.
+The Mono development team appears to be pretty active and are adding more and more improvements to their OS X version.
 
-One of the areas that developers need to be aware of is any .NET code that uses P/invoke will have problems on OSX/Mono. P/invoke is a technique to call unmanaged native functions from .NET code and typically these native functions are functions made available by the Windows Operating System. These native functions won't exist on Mac and therefore will throw an exception at run time.
+One of the areas that developers need to be aware of is any .NET code that uses P/invoke will have problems on OS X/Mono. P/invoke is a technique to call unmanaged native functions from .NET code and typically these native functions are functions made available by the Windows Operating System. These native functions won't exist on Mac and therefore will throw an exception at run time.
 
 All of .NET is not yet implemented in Mono (although an awful lot is.) A good tool to use for finding potential problem spots is the [[http://www.mono-project.com/MoMA|Mono Migration Analyzer (MoMA)]]. This application can examine your DLLs to see find functions that are not supported by Mono.
 
 Many commercial .NET components use P/invoke so this is something I highly recommend you investigate.
+
 =====Technically, what is it?=====
-RhinoCommon is composed of the following pieces. These files are included with Rhino 5 / Mac Rhino.
+RhinoCommon is composed of the following pieces. These files are included with Rhino 5 for Windows / Rhino for Mac.
   * RhinoCommon.dll - This is a pure .NET DLL that plug-ins can reference and use to work with Rhino.
   * RhinoCommon.xml - This is an XML file that contains SDK documentation comments specific to RhinoCommon.dll. Programming development environments like Visual Studio and MonoDevelop use this XML file to display tooltips and other helpful information while the developer writes code.
-  * rhcommon_c.dll, monomanager.rhnp - These are C++ shared libraries compiled for specific target platforms (Win32, Win64, and OSX). These libraries are used by RhinoCommon, but should never be directly accessed by plug-in developers.
+  * rhcommon_c.dll, monomanager.rhnp - These are C++ shared libraries compiled for specific target platforms (Win32, Win64, and OS X). These libraries are used by RhinoCommon, but should never be directly accessed by plug-in developers.
 ===== Samples =====
 Sample projects that demonstrate specific functionality can be found at
-[[https://github.com/dalefugier?tab=repositories|Dale Fugier's Github site]]
+[[https://github.com/dalefugier?tab=repositories|Dale Fugier's GitHub site]].
 {{topic>rhinocommon}}
 //
 
