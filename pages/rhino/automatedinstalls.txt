@@ -1,4 +1,4 @@
-====== How to provide parameters for automated deployment of Rhino 4.0 ======
+====== How to Provide Parameters for Automated Deployment of Rhino 4.0 ======
 > **Note:** This document is for Rhino 4.0. A newer version of this document exists for [[rhino:installingrhino:5.0#rhino_50_install_with_script_and_ini_file|Rhino 5]].
 
 
@@ -6,32 +6,26 @@
 
 
 
-====== How to Edit the Rhino 4.0 Setup .INI file for automated installs======
-At the bottom of this page is displayed the literal content of the Rhino4Setup.INI file that is used when installing Rhino 4.0 from ActiveDirectory or SMS, or via a batch script, see **[[InstallingRhino.|Installing Rhino]]**
+===== How to edit the Rhino 4.0 setup .INI file for automated installs=====
+The literal content of the Rhino4Setup.INI file used when installing Rhino 4.0 from ActiveDirectory or SMS, or via a batch script, is displayed at the bottom of this page. See **[[InstallingRhino.|Installing Rhino]]**.
 
-You should get a fresh copy of that file from **[[http://wiki.mcneel.com/_media/legacy/en/Rhino4Setup.zip|Rhino4Setup.ini]]**  or from the [[rhino:rhinoceros|RhinoCeros]] folder of your Rhino 4.0 CD.
+You should get a fresh copy of that file from **[[http://wiki.mcneel.com/_media/legacy/en/Rhino4Setup.zip|Rhino4Setup.ini]]**  or from the Rhinoceros folder of your Rhino 4.0 CD.
 
-Edit this .INI file with a text editor like NotePad.
+Edit this .INI file with a text editor like Notepad.
 
-The capitalized parts are the special keywords (MSI Properties) that the Rhino installer recognizes.  To have one of them be fed to the installer MSI, remove the pound sign # at the beginning of the line, and set the content on the right of the equal sign appropriately.  If you were to use the file as it is at the bottom of this page, the only parameters that would affect the install would be "INSTALL_EN=1" and "RMA_CDKEY=" (Please note, you will need to remove the "#" before your serial number, on the "RMA_CDKEY=" parameter.)
+The capitalized parts are the special keywords (MSI Properties) that the Rhino installer recognizes.  To have one of them feed to the installer MSI, remove the pound sign # at the beginning of the line, and set the content on the right of the equal sign appropriately.  If you were to use the file as it is at the bottom of this page, the only parameters that would affect the install would be **INSTALL_EN=1** and **RMA_CDKEY=**. (Please note, you will need to remove the **#** before your serial number, on the **RMA_CDKEY=** parameter.)
 
-=====Parameters=====
-AUTOINSTALL=1 - Tells the installer to run automatically without asking questions and without dialogs.  Without this, the dialogs will appear, but will be filled out already from your other parameters.
+====Parameters====
+  * **AUTOINSTALL=1** - Tells the installer to run automatically without asking questions and without dialogs.  Without this, the dialogs will appear, but will already be filled out from your other parameters. 
+  * **FOLDER="C:\Program Files\Rhinoceros 4.0"**   -  Specify the folder to install into. Can be any location and must be surrounded by quotes if the path contains spaces. 
+  * **RMA_CDKEY=AAAA-BBBB-CCCC-DDDD-EEEE** - Provides the CD-Key for the installation. Use this to install as a stand-alone node. The CD-Key can also be entered with no dashes. Including RH40- at the beginning is optional.
+  * **INSTALL_EN=1**   -  Install English language support. Supports running Rhino in English, and includes English Help, Tutorials, Sample Files, etc.
 
-FOLDER="C:\Program Files\[[rhino:rhinoceros|RhinoCeros]] 4.0"   -  Specify the folder to install into, can be any location.  Must be surrounded by quotes if the path contains spaces.
-
-RMA_CDKEY=AAAA-BBBB-CCCC-DDDD-EEEE - provides the CD-Key for the installation. Use this to install as a standalone node. The CD-Key can also be entered with no dashes, and may include RH40- at the beginning or not.
-
-INSTALL_EN=1   -  Install English language support -- Supports running Rhino in English, and includes English Help, Tutorials, Sample Files, etc.
-
-=====Optional Parameters:=====
-WORKGROUP_NODE=1  -  Alternative to the RMA_CDKEY entry, when you want the station to get its Rhino CDKey from the Zoo license manager (www.rhino3d.com/zoo.htm) each time it starts.
-
-USERNAME="Rodney Dangerfield"
-
-COMPANYNAME="Universal Pictures"
-
-INSTALL_XX=1   -  Install support for language XX
+====Optional parameters====
+  * **WORKGROUP_NODE=1**  -  Alternative to the RMA_CDKEY entry, when you want the station to get its Rhino CD Key from the Zoo license manager (www.rhino3d.com/zoo.htm) each time it starts. 
+  * **USERNAME="Rodney Dangerfield"** 
+  * **COMPANYNAME="Universal Pictures"** 
+  * **INSTALL_XX=1**   -  Install support for language XX.
 
      #############################################################
      # Configuration file for installation of Rhino 4.0.
@@ -112,4 +106,3 @@ INSTALL_XX=1   -  Install support for language XX
      # INSTALL_JA = 1   # Install Japanese Language support
      # INSTALL_JA = 0  # Do NOT Install Japanese Language support
      
-
