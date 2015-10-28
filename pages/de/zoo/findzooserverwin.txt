@@ -1,0 +1,60 @@
+======Wie findet Rhino für Windows einen Zoo-Server?======
+> **Produkt:** //[[de:zoo:home|Zoo]]//
+> **Zusammenfassung:** //Überblick über die Verbindung von Rhino für Windows mit einem Zoo-Lizenzmanager-Server.//
+
+=====Überblick=====
+Wenn Rhino die Lizenz eines Zoo-Servers benötigt, bestimmt es den Namen des Servers, indem es der Reihe nach die folgenden Orte durchsucht:
+  - Die aktuelle Benutzerstruktur in der Windows-Registrierung. Es wird nach dem Hostnamen oder der IP-Adresse des Zoo-Servers gesucht.
+  - Die Lokaler-Computer-Struktur der Windows-Registrierung. Es wird nach dem Hostnamen oder der IP-Adresse des Zoo-Servers gesucht.
+  - Zuletzt befragt es Ihren Domänennamenserver (DNS) nach dem Standardnamen Ihres Zoo-Servers.
+ 
+
+=====Weitere Informationen=====
+
+====Suche im Registrierungsschlüssel des Aktuellen Benutzers====
+
+Sowohl die 32- als auch die 64-Bit-Version von Windows suchen beim Durchsuchen des Schlüssels HKEY_CURRENT_USER in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres Zoo-Servers an folgendem Ort:
+
+<code>
+Hive:  HKEY_CURRENT_USER
+Schlüssel:   Software\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Typ:  REG_SZ
+Wert: <Hostname oder IP-Adresse>
+</code>
+
+====Suche im Registrierungsschlüssel des Lokalen Computers====
+Wenn Sie eine 32-Bit-Version von Windows verwenden, sucht die 32-Bit-Version von Rhino beim Durchsuchen des Schlüssels HKEY_LOCAL_MACHINE in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres Zoo-Servers an folgendem Ort:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Schlüssel:   Software\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Typ:  REG_SZ
+Wert: <Hostname oder IP-Adresse>
+</code>
+
+Wenn Sie eine 64-Bit-Version von Windows verwenden, suchen sowohl die 32- als auch die 64-Bit-Version von Rhino beim Durchsuchen des Schlüssels HKEY_LOCAL_MACHINE in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres Zoo-Servers an folgendem Ort:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Schlüssel:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Typ:  REG_SZ
+Wert: <Hostname oder IP-Adresse>
+</code>
+
+====Verwendung eines DNS====
+Wenn Rhino den Namen des Zoo-Servers bei seiner Suche in der Windows-Registrierung nicht feststellen kann, sendet es an Ihren DNS-Server eine Anfrage nach dem Standard-Zoo-Server, der den folgenden Hostnamen hat:
+
+<code>
+__mcneel.__zoo5
+</code>
+
+Wenn also beispielsweise die Domäne Ihres Unternehmens "meinefirma.com" ist, können Sie einen DNS-Alisas namens <nowiki>"__mcneel.__zoo5.meinefirma.com"</nowiki> hinzufügen, der auf Ihren Zoo-Server verweist.
+
+{{:zoo:dnsalias.png}}
+
+\\
+
+{{tag>Zoo_de}}
