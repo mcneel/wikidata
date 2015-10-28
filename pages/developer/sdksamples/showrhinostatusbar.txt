@@ -2,12 +2,11 @@
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates how to programmatically show or hide the Rhino status bar.//
 
-===== Overview=====
-All of Rhino's options, or application settings, that you see when you run the Options command are maintained by a **CRhinoAppSettings** class which is stored on the Rhino application object. This class is a container class in that it holds a number of other CRhinoApp_xxx_Settings classes that help to organize all of the options.
+All Rhino's options, or application settings, that you see when you run the Options command are maintained by a **CRhinoAppSettings** class stored on the Rhino application object. This class is a container class in that it holds several other CRhinoApp_xxx_Settings classes that help to organize all the options.
 
-The process for modifying any Rhino option is as follows:
+The process for modifying any Rhino option is:
 
-  - Find the container class in CRhinoAppSettings that holds the option you want to modify.
+  - Find the container class in CRhinoAppSettings that holds the option you want to change.
   - Make a copy of that container class.
   - Modify the appropriate members.
   - Replace Rhino's copy of that container class with yours by calling one of CRhinoAppSettings' Set_xxx_Settings() member functions.
