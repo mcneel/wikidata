@@ -12,22 +12,22 @@ The screen shots of the **Brazil Settings** dialog box below show the detailed c
 
 {{:legacy:en:RenderCache_AO_tutorial_0003_Layer_Comp_4.jpg}}
 
-====Luma Server Settings====
+====Luma Server settings====
 
-This scene contains two point lights that supply both direct and global illumination (GI). The skylight also supplies direct and global illumination. In order to utilize GI for the skylight, set the number of **Bounces** to 2 or more.
+This scene contains two point lights that supply both direct and global illumination (GI). The skylight also supplies direct and global illumination. To use GI for the skylight, set the number of **Bounces** to 2 or more.
 
-====Render Cache Settings====
-The **Creation shade rate**, **Resample filtering**, and **End** parameters dramatically reduce the render time required for the resolution specified in this example. For a full explanation of these settings, see the [[BrazilRenderCacheTutorial.|Render Cache tutorial]]
+====Render Cache settings====
+The **Creation shade rate**, **Resample filtering**, and **End** parameters dramatically reduce the render time required for the resolution specified in this example.
 
 
-====Photon Map Settings====
-Brazil can use either **GI** (global illumination) or **Caustic** photons. This scene uses **Caustic** photons. Caustics are the phenomena of dispersed light bouncing off reflective surfaces or through translucent materials. Since gemstones are known to scatter light beautifully, using this effect makes the rendering more engaging.
+====Photon Map settings====
+Brazil can use either **GI** (global illumination) or **Caustic** photons. This scene uses **Caustic** photons. Caustics are the phenomena of dispersed light bouncing off reflective surfaces or through translucent materials. Since gemstones scatter light beautifully, using this effect makes the rendering more engaging.
 
 The most important **Photon Map** setting is the **Max Search Radius**. The larger this value is, the farther Brazil will search for scattered photons. The lower this value, the faster the caustic photon map will be calculated. A value of 1 renders this scene quickly while still producing the scattered flecks of light seen beside the diamond on the ground plane.
 
 
 =====Light Properties=====
-In order to create the effect of caustics in this rendering, light sources in addition to **Skylight** must be used. Two point lights are added to this scene - one on the ground plane beside the diamond and the other over the ruby in the ring on the left. The screen shot shows the **Light Properties** for the point light next to the diamond. The properties for any light object are accessible through the Rhino **Properties** dialog box.
+To create the effect of caustics in this rendering, light sources in addition to **Skylight** must be used. Two point lights are added to this scene - one on the ground plane beside the diamond and the other over the ruby in the ring on the left. The screen shot shows the **Light Properties** for the point light next to the diamond. The properties for any light object are accessible through the Rhino **Properties** dialog box.
 
 {{:legacy:en:RenderCache_AO_tutorial_0001_Layer_Comp_2.jpg}}
 
@@ -38,7 +38,7 @@ The **Shadow** option for this light has been disabled, since we only want to ad
 The **Photons** option is required for this light to produce the caustic effect. The other point light in this scene is not creating caustics but is still adding light. Brazil lets you set photon parameters individually for each light in the scene.
 
 ====Focus override====
-The **Focus override** alters the way the light emanating from the point light source is focused. The use of the **Rect area focus** type along with changing the **Hotspot** and **Falloff** values to **180** degrees decreases splotches in the render.
+The **Focus override** alters the way the light emanating from the point light source is focused. Using the **Rect area focus** type, along with changing the **Hotspot** and **Falloff** values to **180** degrees, decreases splotches in the render.
 
 
 These splotches are the result of the light from the point light source shining up and bouncing off of the underside of the ruby ring. The **Max search radius** value set in the **Photon Map** section creates the splotches shown in some areas. If we only focus the light to the sides and down, this reduces the artifacts.
@@ -94,7 +94,7 @@ The index of refraction (**IOR**)settings for each of these sections control how
 
 When rendering highly reflective objects, the environment has a big effect on the result. The demonstration file has two environments embedded in it for comparison. Both environments were based on the **Brazil GI Environment**, which accepts high-dynamic-range textures. The **GI** (global illumination) environment uses these textures for global illumination and for reflection in the scene. Changing the environments will change the look of the materials significantly.
 
-In the case of the photographic HDR texture, the ability to blur the reflections was allowed in the GI environment. There are many free HDR textures available on the Internet including those on this [[BrianJames#HDRIs.|Wiki site]]
+In the case of the photographic HDR texture, the ability to blur the reflections was allowed in the GI environment. There are many free HDR textures available on the Internet.
 
 
 Experimenting with different environments is a great way to use Brazil for Rhino without making changes to materials or lighting set ups.
