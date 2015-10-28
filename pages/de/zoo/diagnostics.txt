@@ -1,0 +1,37 @@
+======Zoo-Diagnosetool für Rhino für Windows======
+> **Produkt:** //[[zoo:home|Zoo]]//
+> **Zusammenfassung:** //Beschreibung des Zoo-Diagnosetools für Rhino 5 für Windows.//
+
+[[zoo:zoo5diagnostics|{{:zoo:zoodiagnostics.png|Zoo Diagnostics}}]]
+
+=====Überblick=====
+Das Hilfsprogramm Zoo Diagnostics läuft auf jedem Arbeitsplatz mit **Rhino 5 für Windows**. Es beinhaltet folgende Werkzeuge:
+  - Eine Reihe nutzlicher Netzwerkdiagnosetools zur Fehlersuche und -behebung bei Verbindungsproblemen zwischen Rhino-Arbeitsplätzen und dem [[de:zoo:determinezoohost|Zoo-Server]].
+  - Ein Tool zur Anzeige und Bearbeitung des Namens des Zoo-Servers, der von den Rhino-Arbeitsplätzen benutzt wird. Der Name des Zoo-Servers ist in der Windows-Registrierung gespeichert.
+
+[[zoo:zoo5diagnostics|{{:zoo:zoo_diagnostics.png|Zoo Diagnostics}}]]
+
+=====Diagnose=====
+Zoo Diagnostics bietet die folgenden nützlichen Netzwerktests:
+
+1. **[[http://support.microsoft.com/kb/814155|Ping]]** - Das Ping-Diagnosetool (PING) ist das wichtigste TCP/IP-Tool zur Fehlersuche und -behebung bei Problemen mit der Konnektivität, der Erreichbarkeit und der Namensauflösung. Ping überprüft die Konnektivität mit einem anderen TCP/IP-Computer auf IP-Ebene, indem es diesem ICMP-Echoanforderungen sendet. Anschließend zeigt es den Empfang der entsprechenden Anwort zusammen mit der Umlaufzeit an.
+
+>**Hinweis:** Standardmäßig werden ICMP-Echoanforderungen, die für den Ping-Befehl benötigt werden, von der Windows-Firewall geblockt. Um diese Art von Verbindung zuzulassen, gehen Sie auf Systemsteuerung -> Windows-Firewall -> Erweiterte Einstellungen -> Eingehende Regeln und aktivieren Sie im aktiven Sicherheitsprofil die Datei- und Druckerfreigabe (Netzwerk - Echoanforderung (ICMPv4 eingehend)).
+
+
+2. **[[http://support.microsoft.com/kb/200525|DNS Lookup]]** - Das Diagnosetool DNS Lookup zeigt Ihnen Informationen zu Ihrer DNS-Infrastruktur an.
+
+3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]** - Mit Trace Route (TRACERT) können Sie den Weg zu einem Ziel ermitteln. Dies wird erreicht, indem das Programm ICMP-Echopakete mit wechselnden IP Time-To-Live (TTL)-Werten an das Ziel sendet. Jeder Router auf dem Weg muss die TTL des Pakets mindestens um 1 herunterzählen, bevor das Paket weitervermittelt wird, sodass die TTL praktisch ein "Hop-Zähler" ist. Wenn der TTL-Wert für ein Paket den Wert 0 erreicht, sendet der Router die ICMP-Meldung "Zeitüberschreitung" an den Quellcomputer zurück.
+
+4. **Zoo Port Check** - Der Zoo Port Check überprüft, ob ein Zoo-5-Service den TCP-Port 80 auf einem Server oder einem Arbeitsplatz abhört.
+
+//Wenn dieser Test fehlschlägt, stellen Sie sicher, dass der Zoo-Server wirklich läuft. Dafür nutzen Sie entweder das Tool ZooAdmin.exe oder überprüfen es in der Systemsteuerung unter Dienste. Stellen Sie ebenfalls sicher, dass der __[[de:zoo:window7firewall|TCP-Port 80 in allen Firewalls]]__ des Zoo-Servers sowohl für eingehende als auch ausgehende Verbindungen geöffnet ist.//
+
+5. **Zoo Connectivity** - Zoo Connectivity überprüft, ob der Zoo-5-Service korrekt ausgeführt wird (auf einem Server oder einem Arbeitsplatz). 
+
+//Wenn dieser Test fehlschlägt und alle anderen Tests erfolgreich waren, stellen Sie sicher, dass der Zoo-Server wirklich läuft. Dafür nutzen Sie entweder das Tool ZooAdmin.exe oder überprüfen es in der Systemsteuerung unter Dienste. Stellen Sie ebenfalls sicher, dass der __[[de:zoo:window7firewall|TCP-Port 80 in allen Firewalls]]__ des Zoo-Servers sowohl für eingehende als auch ausgehende Verbindungen geöffnet ist.//
+
+=====Download=====
+* Sie benötigen das [[http://www.microsoft.com/de-de/download/details.aspx?id=17851|Microsoft .NET Framework 4]].
+
+{{:zoo:zoodiagnostics.zip|Download Zoo Diagnostics}}
