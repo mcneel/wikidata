@@ -1,15 +1,15 @@
-====== Preparing Rhino files for laser/knife cutting ======
+====== Preparing Rhino Files for Laser/Knife Cutting ======
 
 This is a summary of how we run our [[http://www.epiloglaser.com/|Epilog]] lasers and [[http://www.zund.com/en/|Zünd]] rotary knife cutters at our school model lab at the EPFL. Our students design in all kinds of software, including Rhino.
  
-  - For the lasers, we run directly out of Rhino.  The lasers have a printer-driver type interface so everything is done with just “Print”.  
-  - Unfortunately for the Zünd, there is no printer driver available, so it needs to be run with some other software. The software that we use is Type3, it’s powerful but pretty painful to use. It can act as a machine control for the Zünd, but it’s DXF import is glitchy with certain types of objects.   
+  - For the lasers, we run directly out of Rhino.  The lasers have a printer-driver type interface so everything is done with just //Print//.  
+  - Unfortunately for the Zünd, there is no printer driver available, so it needs to be run with other software. The software that we use is Type3. It’s powerful but pretty painful to use. It can act as a machine control for the Zünd, but its DXF import is glitchy with certain types of objects.   
   - We thus need to create a DXF export model that works both for Rhino and Type3.  Rhino can take pretty much anything, but Type3 is a bit more particular, especially with polycurves – which is why they are set to export as Splines.  Even with that, it doesn’t like degree 2 splines much.  Programs like Vectorworks produce these with regularity.
   - The other reason for needing to create a special export model is that Default DXF scheme explodes polylines/polycurves, which is unwanted for either machine.
-  - Exploded curves will be cut as separate entities, which can substantially lengthen cutting times and even lock the machines up if there are many, many small segments.  Joined curves cut as one entity, which is much better. Both the Epilog laser and the Zünd CAN accept spline curves, so we would like to leave them as splines if possible. 
-  - Therefore, we need to create an export scheme where polylines/curves are neither exploded nor tessellated. [[http://enac-oc.epfl.ch/files/content/sites/enacco/files/shared/am/Dcoupe/Export-DXF-Rhino-EN|This PDF explains how.]]
-  - Since the files are set up for 2-D cutting, in principle there shouldn’t be any surfaces in them. But if there are accidentally, we would rather have them come in as curves and not meshes, hence the appropriate setting in the export scheme above. The curves representing the surface edges will cut, whereas meshes wouldn't.
-  - In addition to the export scheme, we have a set of rules to follow for setting up cutting files, which include how to lay out the geometry on the page, colors to use, size and spacing constraints, etc.  If the rules are followed correctly, the student's files usually cut perfectly.
+  - Exploded curves will be cut as separate entities, which can substantially lengthen cutting times and even lock the machines up if there are many, many small segments.  Joined curves cut as one entity, which is much better. Both the Epilog laser and the Zünd **can** accept spline curves, so we like to leave them as splines if possible. 
+  - So, we create an export scheme where polylines/curves are neither exploded nor tessellated. [[http://enac-oc.epfl.ch/files/content/sites/enacco/files/shared/am/Dcoupe/Export-DXF-Rhino-EN|This PDF explains how.]]
+  - Since the files are set up for 2-D cutting, in principle there shouldn’t be any surfaces in them. But if there are accidentally, we would rather have them come in as curves and not meshes, hence the appropriate setting in the export scheme above. The curves representing the surface edges will cut, whereas meshes won't.
+  - In addition to the export scheme, we have a set of rules for setting up cutting files. The rules include how to lay out the geometry on the page, colors to use, size and spacing constraints, etc.  If the rules are followed correctly, the student's files usually cut perfectly.
 
 Mitch Heynick
 
