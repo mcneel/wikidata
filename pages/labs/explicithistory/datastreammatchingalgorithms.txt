@@ -1,7 +1,7 @@
 ====== Grasshopper Data Stream Matching ======
 
 | {{:legacy:en:ExplicitHistoryBanner.png}} |  //**Grasshopper Wiki Pages**// |
-|  [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
+|  [[http://www.mcneel.com|Robert McNeel & Associates]] |
 
 ----
 
@@ -11,16 +11,15 @@
 
 ===== Data matching=====
 
-Data matching is a problem without a clean solution. It occurs when a component has access to differently sized inputs. Imagine a component which creates line segments between points. It will have two input parameters which both supply point coordinates (Stream A and Stream B). It is irrelevant where these parameters collect their data from, a component cannot "see" beyond its in- and output parameters:
+Data matching is a problem without a clean solution. It occurs when a component has access to different sized inputs. Imagine a component which creates line segments between points. It will have two input parameters which both supply point coordinates (Stream A and Stream B). It is irrelevant where these parameters collect their data from. A component cannot //see// beyond its in- and output parameters:
 
 \\
 
 {{:legacy:en:StreamComparisonProblem.png}}
 
 \\
-\\
 
-As you can see there are different ways in which we can draw lines between these sets of points. The Explicit History plugin currently supports three matching algorithms, but many more are possible. The simplest way is to connect the inputs one-on-one until one of the streams runs dry. This is called the "Shortest List" algorithm:
+As you can see there are different ways to draw lines between these sets of points. The Explicit History plug-in currently supports three matching algorithms, but many more are possible. The simplest way is to connect the inputs one-on-one until one of the streams runs dry. This is called the //Shortest List// algorithm:
 
 \\
 
@@ -29,7 +28,7 @@ As you can see there are different ways in which we can draw lines between these
 \\
 \\
 
-the "Longest List" algorithm keeps connecting inputs until all streams run dry, this is the default behaviour for components:
+The //Longest List// algorithm keeps connecting inputs until all streams run dry. This is the default behavior for components:
 
 \\
 
@@ -38,7 +37,7 @@ the "Longest List" algorithm keeps connecting inputs until all streams run dry, 
 \\
 \\
 
-Finally, the "Cross Reference" method makes all possible connections:
+Finally, the //Cross Reference// method makes all possible connections:
 
 \\
 
@@ -49,7 +48,7 @@ Finally, the "Cross Reference" method makes all possible connections:
 
 This is potentially dangerous since the amount of output can be humongous. The problem becomes more intricate as more input parameters are involved and when the volatile data inheritance starts to multiply data, but the logic remains the same.
 
-Imagine we have a point component which inherits its x, y and z values from remote parameters which contain the following data:
+Imagine we have a point component which inherits its x, y, and z values from remote parameters which contain the following data:
 
 \\
 
@@ -66,7 +65,7 @@ Z coordinate: {0.0, 1.0}
 \\
 \\
 
-If we combine this data in the "Shortest List" fashion, we get only two points since the "Z coordinate" contains only two values. Since this is the shortest list it defines the extent of the solution:
+If we combine this data in the //Shortest List// fashion, we get only two points since the //Z coordinate// contains only two values. Since this is the shortest list it defines the extent of the solution:
 
 \\
 
@@ -75,7 +74,7 @@ If we combine this data in the "Shortest List" fashion, we get only two points s
 \\
 \\
 
-The "Longest List" algorithm will create ten points, recycling the highest possible values of the Y and Z streams:
+The //Longest List// algorithm will create ten points, recycling the highest possible values of the Y and Z streams:
 
 \\
 
@@ -84,7 +83,7 @@ The "Longest List" algorithm will create ten points, recycling the highest possi
 \\
 \\
 
-"Cross Reference" will connect all values in X with all values in Y and Z, thus resulting in 10×5×2 = a hundred points:
+//Cross Reference// will connect all values in X with all values in Y and Z, thus resulting in 10×5×2 = a hundred points:
 
 \\
 
@@ -93,10 +92,10 @@ The "Longest List" algorithm will create ten points, recycling the highest possi
 \\
 \\
 
-Every component can be set to obey one of these rules (the setting is available in the menu).
+Every component can be set to obey one of these rules. (The setting is available in the menu.)
 
 \\
 
-Note the one big exception to this behaviour. Some components EXPECT to get a list of data in one or more of their input fields. The polyline component for example creates a polyline curve through an array of input points. More points in the input parameter will result in a longer polyline, not in more polylines. Input parameters which are expected to yield more than one value are called List Parameters and they are ignored during data matching.
+Note the one big exception to this behavior: Some components **expect** to get a list of data in one or more of their input fields. The polyline component, for example, creates a polyline curve through an array of input points. More points in the input parameter result in a longer polyline, not in more polylines. Input parameters which are expected to yield more than one value are called List Parameters. They are ignored during data matching.
 
 
