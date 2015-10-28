@@ -8,12 +8,12 @@
 
 In Rhino 4 we added new technology to prepare files for the Solidscape printers and their software ModelWorks.  This new technology has many benefits over the traditional STL file transfer methods:
 
-  - Files can be made of multiple solid bodies that intersect.  There is no need to Boolean all the parts together into one. <color blue>(really, it's true!)</color>.  Multiple overlapping solids will build together into one.
-  - Slices can be made through a [[rhino:nurbs|NURBs]] model, increasing accuracy of the build
-  - If the [[rhino:nurbs|NURBs]] objects are closed with no naked edges, the result will be closed.  There were situations in Rhino 3 where this was not true.
-  - In some cases, small gaps in the model will be closed
-  - Better determination of support vs build material
-  - Slices can be made through the Mesh objects also, using less memory and allowing you to "fix" STL files from other systems.
+  - Files can be made of multiple solid bodies that intersect.  There is no need to Boolean all the parts together into one. <color blue>(Really, it's true!)</color>  Multiple overlapping solids will build together into one.
+  - Slices can be made through a [[rhino:nurbs|NURBs]] model, increasing accuracy of the build.
+  - If the NURBs objects are closed with no naked edges, the result will be closed.  There were situations in Rhino 3 where this was not true.
+  - In some cases, small gaps in the model will be closed.
+  - Better determination of support vs build material.
+  - Slices can also be made through the Mesh objects, using less memory and allowing you to //fix// STL files from other systems.
 
 =====Solid requirements before going to Solidscape=====
 
@@ -21,7 +21,7 @@ One of the major differences with the new process is that you do not have to Boo
 
 {{:legacy:en:ringsample.jpg}} {{:legacy:en:solidscapclose.jpg}}
 
-For example in the ring above, the ring, prongs, sprue and collets are modeled as separate solids.  During the ModelWorks command, these objects will become one solid as long as they physically overlap. This allows you to export a much greater range of models and keep the models in a configuration that is easier to edit.
+For example, in the ring above the ring, prongs, sprue and collets are modeled as separate solids.  During the ModelWorks command, these objects will become one solid as long as they physically overlap. This lets you export a much greater range of models and keep the models in a configuration that is easier to edit.
 
 It needs to be noted that we do require that each object be a solid and water tight.  In this case each prong is its own solid. The ring needs to be a solid and the collets are solids.
 
@@ -31,7 +31,7 @@ You can check for Naked Edges to see if all objects are solid.
 
 There are two ways to get models to the Solidscape machine.
 
-  * If you have a computer with Rhino, directly hooked up the Solidscape machine you can go to File Pulldown > Print 3D > //ModelWorks//.  This will take you through the steps of creating a SLC file and sending it to ModelWorks. Not only will it send the model directly to ModelWorks, it will save out the SLC that you used if you would like to go back to it at a later date.
+  * If you have a computer with Rhino, directly hooked up the Solidscape machine, you can go to File Pulldown > Print 3D > //ModelWorks//.  This will take you through the steps of creating a SLC file and sending it to ModelWorks. Not only will it send the model directly to ModelWorks, it will save out the SLC that you used in case you would like to go back to it at a later date.
   * If you need to send a file to another computer in the office to print, or a Service bureau, create a SLC file using the //ModelWorks// command in Rhino or send them the Rhino model.
 
 =====Steps for using the ModelWorks command in Rhino=====
@@ -41,14 +41,14 @@ If you use the Print3D command or the //ModelWorks// command in Rhino you will e
 
 {{:legacy:en:slc.jpg}}
 
-In the Slice file edit box, enter the name of the SLC file you want to save.  The button to the left with the three dots allows you to browse for a location for the file.
+In the **Slice file** edit box, enter the name of the SLC file you want to save.  The button to the left with the three dots lets you browse for a location for the file.
 
-The Slice thickness drop down allows you to set your build thickness.
+The Slice thickness drop down lets you set your build thickness.
 
-Use Meshes to Generate Slices will create a mesh from the [[rhino:nurbs|NURBs]] models first and then slice through the mesh instead of the [[rhino:nurbs|NURBs]] model.  This can be an advantage in that slicing through the mesh is faster, uses less memory, and can help if there are problem slices in the file. The disadvantage to mesh slicing is that [[rhino:nurbs|NURBs]] slicing can potentially be more accurate.
+**Use meshes to generate slices** will create a mesh from the NURBs models first and then slice through the mesh instead of the NURBs model.  This can be an advantage in that slicing through the mesh is faster, uses less memory, and can help if there are problem slices in the file. The disadvantage to mesh slicing is that NURBs slicing can be more accurate.
 
-The Mesh resolution value represents the furthest distance the mesh will be from the original [[rhino:nurbs|NURBs]] surface.  The smaller this number the more accurate the mesh, but the more memory it will take.
+The Mesh resolution value represents the furthest distance the mesh will be from the original NURBs surface.  The smaller this number the more accurate the mesh, but the more memory it will take.
 
-The Open Directly in ModelWorks check box will be active if Modelworks is loaded on your machine.  This will Open the Model Automatically in ModelWorks after exporting the SLC file.
+The **Open directly in ModelWorks** check box will be active if Modelworks is loaded on your machine.  This will open the model automatically in ModelWorks after exporting the SLC file.
 
 
