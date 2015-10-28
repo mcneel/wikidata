@@ -1,0 +1,43 @@
+======Wie findet Rhino für Mac einen Zoo-Server?======
+> **Produkt:** //[[zoo:home|Zoo]]//
+> **Zusammenfassung:** //Überblick über die Verbindung von Rhino für Mac mit einem Zoo-Lizenzmanager-Server.//
+
+=====Überblick=====
+Wenn Rhino die Lizenz eines Zoo-Servers benötigt, bestimmt es den Namen des Servers, indem es der Reihe nach die folgenden Orte durchsucht:
+  - Die Einstellungen im Ordner Application Support. Es wird nach dem Hostnamen oder der IP-Adresse des Zoo-Servers gesucht.
+  - Zuletzt befragt es Ihren Domänennamenserver (DNS) nach dem Standardnamen Ihres Zoo-Servers.
+
+=====Weitere Informationen=====
+
+====Settings-Datei====
+
+Wenn Rhino als Netzwerkknoten ausgeführt wird, wird der Name des Zoo-Servers zuerst dadurch bestimmt, dass die Datei **LicenseZooClient.Settings** im folgenden Ordner durchsucht wird:
+
+<code>
+/Library/Application Support/McNeel/Rhinoceros/License Manager
+</code>
+
+Diese Datei sieht in etwa folgendermaßen aus:
+
+<code>
+<?xml version="1.0" encoding="utf-8"?>
+<!--Zoo client settings file written by Rhino-->
+<ZooClient>
+  <Software_McNeel_Rhinoceros_5.0_License_Manager Server="host name or IP address"/>
+</ZooClient>
+</code>
+
+====Verwendung eines DNS====
+Wenn Rhino den Namen des Zoo-Servers bei seiner Suche in der Settings-Datei nicht findet, sendet es an Ihren DNS-Server eine Anfrage nach dem Standard-Zoo-Server, der den folgenden Hostnamen hat:
+
+<code>
+__mcneel.__zoo5
+</code>
+
+Wenn also beispielsweise die Domäne Ihres Unternehmens "meinefirma.com" ist, können Sie einen DNS-Alisas namens <nowiki>"__mcneel.__zoo5.meinefirma.com"</nowiki> hinzufügen, der auf Ihren Zoo-Server verweist.
+
+{{:zoo:dnsalias.png}}
+
+\\
+
+{{tag>Zoo_de}}
