@@ -1,0 +1,28 @@
+======Rhino und Desktop-Virtualisierung======
+> **Produkt:** //[[de:zoo:home|Zoo]]//
+> **Zusammenfassung:** //Ausführung von Rhino für Windows auf Desktop-Virtualisierungs-Servern.//
+
+=====Frage=====
+Unsere Schule verwendet [[http://www.microsoft.com/windows/multipoint|Microsoft Windows MultiPoint Server]]. Ist Rhino kompatibel mit diesem System? 
+
+=====Antwort=====
+Es wird **nicht empfohlen**, Rhino in VDI-Umgebungen (Virtual Desktop Infrastructure) wie Microsoft Windows MultiPoint auszuführen.
+
+Windows MultiPoint Server ist in seiner Funktionsweise ähnlich wie andere VDI-Umgebungen wie Microsoft Terminal Services, Citrix Server usw. MultiPoint Server funktioniert in etwa folgendermaßen:
+
+//Mit Windows MultiPoint Server kann auf eine relativ günstige Art und Weise mehreren Schülern oder Studenten ein jeweils eigener Arbeitsplatz mit Monitor, Tastatur und Maus bereitgestellt werden, wobei sich diese Arbeitsplätze die Rechenkraft eines einzigen Computers teilen.//
+
+Bei Rhino handelt es sich um eine sehr rechen-, speicher- und grafikintensive Anwendung. Stellen Sie sich vor, Sie würden sich auf Ihrem PC mit 5, 10, 20 oder sogar 30 verschiedenen Benutzern anmelden und in jeder Sitzung eine separate Rhino-Instanz ausführen. Die Leistung und vielleicht auch die Zuverlässigkeit würden darunter sehr leiden. Rhino würde dadurch für alles außer den einfachsten Operationen praktisch unbrauchbar.
+
+Rein technisch gesehen funktioniert Rhino in einer solchen Umgebung, wenn es als Einzelplatzsystem unter Verwendung einer Lab-Lizenz ausgeführt wird. **Einzelnutzerlizenzen funktionieren nicht**.
+
+Eine weitere Möglichkeit ist die Installation von Rhino als Netzwerkknoten unter Verwendung eines Zoo-Servers zur Verteilung der Lizenzen.
+
+Rhino 4.0 funktioniert in keinem der beschriebenen Szenarien.
+
+=====Weitere Infos=====
+[[http://wiki.mcneel.com/de/rhino/windowsterminalserver|Ausführung von Rhino auf einem Windows Terminal Server]]
+
+\\
+
+{{tag>Zoo_de}}
