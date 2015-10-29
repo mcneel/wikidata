@@ -1,0 +1,45 @@
+======Öffnen des TCP-Ports 80 in der Windows-Firewall unter Verwendung von Netsh======
+> **Produkt:** //[[de:zoo:home|Zoo]]//
+> **Summary:** //Verwendung von Netsh zum Öffnen des für den Zoo benötigten TCP-Ports 80.//
+
+=====Überblick=====
+Der Zoo kommuniziert mit Rhino-Clients über den TCP-Port 80 (HTTP).
+
+Nach der Installation des Zoos müssen Sie sicherstellen, dass der TCP-Port 80 in der Firewall-Software des Server-Systems //sowohl für eingehende als auch ausgehende Verbindungen// geöffnet ist.
+
+Beachten Sie, dass der TCP-Port 80 in den meisten Firewall-Softwares standardmäßig geöffnet ist. Es sollte daher nicht nötig sein, Ports in der Firewall-Software eines Rhino-Arbeitsplatzes extra zu öffnen. 
+
+=====Weitere Informationen=====
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|Netsh]]** ist ein Windows-Befehlszeilen-Skriptingwerkzeug zur lokalen oder entfernten Anzeige oder Änderung der Netzwerkkonfiguration des aktuell ausgeführten Computers.
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|Netsh]]** bietet außerdem eine Funktion zur Stapelausführung einer Reihe von Befehlen auf einem bestimmten Computer.
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|Netsh]]** kann statt der Firewall-Steuerung in der Systemsteuerung dazu verwendet werden, das Öffnen der benötigten TCP/IP-Ports zu automatisieren.
+
+ Die Syntax unterscheidet sich, je nachdem, ob Sie Windows XP, Windows Server 2008, Windows Vista oder neuer verwenden.
+
+====Windows XP====
+**Wichtig:** Wenn Sie Administrator sind, führen Sie die Befehle aus einer Eingabeaufforderung heraus aus. Zur Ausführung einer Eingabeaufforderung, verwenden Sie das Startsymbol im Startmenü.
+
+<code>
+rem Open TCP Port 80
+netsh firewall add portopening TCP 80 "Zoo TCP Port 80"
+</code>
+
+====Windows Server 2008, Windows Vista oder neuer====
+
+**Wichtig:** Wenn Sie Administrator sind und die Benutzerkontensteuerung auf Ihrem Computer aktiviert ist, führen Sie die Befehle aus einer Eingabeaufforderung mit erhöhten Berechtigungen heraus aus. Zur Ausführung einer Eingabeaufforderung mit erhöhten Berechtigungen klicken Sie im Startmenü auf das entsprechende Startsymbol mit der rechten Maustaste und wählen Sie **Als Administrator ausführen**.
+
+<code>
+rem Open TCP Port 80 inbound and outbound
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=in action=allow protocol=TCP localport=80
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=out action=allow protocol=TCP localport=80
+</code>
+
+=====Referenz=====
+[[http://support.microsoft.com/kb/947709|Verwendung des Kontexts "netsh advfirewall firewall"]]
+
+\\
+
+{{tag>Zoo_de}}
