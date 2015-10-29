@@ -1,12 +1,12 @@
-====== Zoo 5 startet nicht auf Webservern ======
-> **Produkt:** //[[de:zoo:zoo5|Zoo 5]]//
-> **Zusammenfassung:** //Zoo 5 benötigt Zugriff auf den TCP-Port 80. Dies ist auf Systemen mit Webdiensten nicht möglich.//
+====== Zoo startet nicht auf Webservern ======
+> **Produkt:** //[[de:zoo:home|Zoo]]//
+> **Zusammenfassung:** //Der Zoo benötigt Zugriff auf den TCP-Port 80. Dies ist auf Systemen mit Webdiensten nicht möglich.//
 
 ===== Problem =====
-Beim Neustart meines Servers wird der Zoo 5 nicht gestartet. Im Windows-Ereignisprotokoll (Systemsteuerung -> Verwaltung > Ereignisprotokoll) finde ich den folgenden Fehler des Zoo-Dienstes:
+Beim Neustart meines Servers wird der Zoo nicht gestartet. Im Windows-Ereignisprotokoll (Systemsteuerung -> Verwaltung > Ereignisprotokoll) finde ich den folgenden Fehler des Zoo-Dienstes:
 
 <code>
-Dienst Zoo 5.0 wurde auf Lokaler Computer gestartet und dann angehalten.
+Dienst Zoo wurde auf Lokaler Computer gestartet und dann angehalten.
 Einige Dienste werden automatisch angehalten, wenn sie nicht von anderen 
 Diensten oder Programmen verwendet werden.
 </code>
@@ -15,23 +15,24 @@ In den Details des Fehlers findet sich im Ereignisprotokoll der folgende Eintrag
 
 <code>
 Adresse wird bereits von einem anderen Prozess verwendet.
-Führen Sie in der Befehlszeile 'netstat -o -n -a' aus, um die ID des
-konfliktverursachenden Prozesses zu finden und suchen Sie im Task Manager den Namen des Prozesses.
+Führen Sie in der Befehlszeile 'netstat -o -n -a' aus, um die ID des 
+konfliktverursachenden Prozesses zu finden und suchen Sie im Task Manager den 
+Namen des Prozesses.
 </code>
 
   - Führen Sie in der Befehlszeile **NETSTAT -ano** aus und notieren Sie sich die PID-Nummer des geöffneten Ports, den Sie frei machen möchten.
   - Im Task-Manager können Sie an der PID ablesen, zu welchem Prozess sie gehört und somit, welcher Prozess den entsprechenden Port benutzt.
 
-Der Grund des Fehlers ist, dass bereits eine andere Anwendung Port 80 benutzt. Da nur immer eine Anwendung an einem Port lauschen kann, ist es dem Zoo unmöglich, mit dem Port 80 zu kommunizieren. Bekannte Programme, die diesen Fehler verursachen, sind unter anderem:
+Der Grund des Fehlers ist, dass bereits eine andere Anwendung den TCP-Port 80 benutzt. Da nur immer eine Anwendung an einem Port lauschen kann, ist es dem Zoo unmöglich, mit dem TCP-Port 80 zu kommunizieren. Bekannte Programme, die diesen Fehler verursachen, sind unter anderem:
 
   * [[http://www.iis.net/|Internetinformationsdienste (IIS) für Windows-Dienste]]
   * [[http://httpd.apache.org/|Apache HTTP-Server]]
   * [[http://www.java.com|Java]]
   * [[zoo:zooskype|Skype]]
-===== Lösung =====
+===== Lösungen=====
   - Installieren Sie den Zoo auf einem Gerät, das keine Webdienste verwendet.  Dies kann ein Druckerserver, ein stets eingeschalteter PC oder ein zusätzlicher virtueller Server sein.
   - Konfigurieren Sie den Webdienst so, dass er einen anderen Port verwendet. Sowohl Apache als auch IIS können so konfiguriert werden, dass sie auf einem anderen Port laufen.
 
 \\
 
-{{tag>Zoo5}}
+{{tag>Zoo_de}}
