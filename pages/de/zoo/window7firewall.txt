@@ -1,16 +1,19 @@
-======Öffnen des TCP Port 80 in der Windows 7 Firewall======
-> **Produkt:** //[[de:zoo:zoo5|Zoo 5]]//
-> **Zusammenfassung:** //So können Sie den TCP-Port 80 in der Windows-7-Firewall öffnen.//
+======Öffnen des TCP-Ports 80 in der Windows-Firewall======
+> **Produkt:** //[[de:zoo:home|Zoo]]//
+> **Zusammenfassung:** //So können Sie den TCP-Port 80 in der Windows-Firewall öffnen.//
 
-Beachten Sie, dass der Port 80 für alle ein- und ausgehenden Kommunikationen der Windows-Firewall benötigt wird. Sie sollten daher nicht einfach den Port 80 im Zoo öffnen. Rhino-Clients können erst mit dem Zoo kommunizieren, wenn Sie an der Firewall Ihres Zoo-Servers die folgenden Einstellungen vornehmen.
+===== Überblick=====
+Der Zoo kommuniziert mit Rhino-Clients über den TCP-Port 80 (HTTP).
 
-===== WICHTIG =====
-Sie können nicht einfach den ein- und ausgehenden Verkehr nur für das //Programm// oder den //Dienst// öffnen.
-Sie sollten die Regeln, wie in Schritt 6 erklärt, daher nur für den //**Port**// einstellen, da es ansonsten //**nicht**// funktioniert. 
+Nach der Installation des Zoos müssen Sie sicherstellen, dass der TCP-Port 80 in der Firewall-Software des Server-Systems //sowohl für eingehende als auch ausgehende Verbindungen// geöffnet ist.
 
-==== Schritte====
+Beachten Sie, dass der TCP-Port 80 in den meisten Firewall-Softwares standardmäßig geöffnet ist. Es sollte daher nicht nötig sein, Ports in der Firewall-Software eines Rhino-Arbeitsplatzes extra zu öffnen. 
 
-1. Öffnen Sie die **Systemsteuerung** aus dem Startmenü.
+===== Schritte=====
+Die folgende Anleitung beschreibt das Öffnen des TCP-Ports 80 in der Windows-Firewall. Wenn Sie eine alternative Firewall verwenden, konsultieren Sie bitte die entsprechende Dokumentation.
+
+> <color red>**Wichtig: Es ist keine adäquate Lösung, den ein- und ausgehenden Verkehr nur für das Programm oder den Dienst zu öffnen. Sie sollten vielmehr __Port__-Regeln erstellen, wie dies in Schritt 6 erklärt wird, da es sonst __nicht__ funktioniert**. </color>
+1. Öffnen Sie im Windows-Startmenü die **Systemsteuerung**.
 
 2. Wählen Sie **Windows Firewall**.
 
@@ -52,4 +55,4 @@ Der TCP-Port 80 ist nun offen und kann verwendet werden.
 
 \\
 
-{{tag>Zoo5}}
+{{tag>Zoo_de}}
