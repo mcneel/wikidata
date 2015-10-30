@@ -2,15 +2,14 @@
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //The Rhino Application Platform (RAP) provides the tools for C++ developers to wrap their application around Rhino by creating a custom Skin.//
 
-=====Overview=====
-Rhino lets developers customize most of Rhino's interface so that the application appears to be their own. We call this a custom //Skin//. With a custom Skin, you can change the application icon, splash screen, the menu bar, the application title bar, the about box, and the toolbars.
+Rhino lets developers customize most of Rhino's interface so that the application appears to be their own. We call this a custom //Skin//. With a custom Skin, you can change the application icon, splash screen, menu bar, application title bar, about box, and toolbars.
 
 {{:legacy:en:hippo.gif}}
 
 Creating a custom Skin for Rhino involves creating two code modules:
 
-  * **<skin name>.rhs** is a regular MFC DLL that implements the Skin's icon, splash screen, and, optionally, a menu. In this article, we will refer to this as the Skin DLL.
-  * **<skin name>.rhp** is a Rhino utility plug-in that implements the menu handler, if necessary, and one or more custom commands. In this article, we will refer to this as the Skin Plug-in.
+  * **<skin name>.rhs** is a regular MFC DLL that implements the Skin's icon, splash screen, and, optionally, a menu. In this article, we refer to this as the Skin DLL.
+  * **<skin name>.rhp** is a Rhino utility plug-in that implements the menu handler, if necessary, and one or more custom commands. In this article, we refer to this as the Skin Plug-in.
 
 =====Create the Skin DLL=====
   * A Skin DLL is a regular MFC DLL that implements the Skin's icon, splash screen, and, optionally, a menu.
@@ -19,7 +18,7 @@ Creating a custom Skin for Rhino involves creating two code modules:
     - A CWinApp-derived class. This is the entry point of the DLL.
     - A CRhinoSkinDLL-derived class. This class lets you specify Rhino's icon, splash screen, and menu. For more information on this class, see rhinoSdkSkinDLL.h.
     - CSplashWnd. This is a basic implementation of a splash screen class. If you need something fancier, feel free to replace it with your own implementation.
-  * Modify the project's icon and splash screen bitmap. If your Skin is going to override Rhino's main menu, then you will need to create your menu resources as well.
+  * Modify the project's icon and splash screen bitmap. If your Skin is going to override Rhino's main menu, then you need to create your menu resources as well.
   * Remember to fill out the developer information block found at the top of your DLL's .CPP file. This block is similar to that of Rhino plug-ins.
 
 =====Create the Skin Plug-in=====
@@ -126,7 +125,7 @@ To install your custom Skin, use **REGEDIT.EXE** to add a scheme key to your reg
 |Type|REG_SZ|
 |Data value|C:\Src\MySkin\MySkinDLL\Release\MySkinDLL.rhs|
 
-You can now test your custom Skin by creating shortcut to your Rhino executable with /scheme="<scheme name from the previous step>" as command line argument. For example:
+You can now test your custom Skin by creating a shortcut to your Rhino executable with /scheme="<scheme name from the previous step>" as command line argument. For example:
 
 <code>
 "C:\Program Files\Rhinoceros 4.0\System\Rhino4.exe" /scheme=MySkin
