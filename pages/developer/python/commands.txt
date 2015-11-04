@@ -50,10 +50,14 @@ In the 'dev' sub-folder that is created in the plug-in folder, create a py file 
 
  
  line 1 has the UUID from the plug-in, found in the folder name.
+
  line 2 has the version - it would be up to you to keep that current.
- line 3 has the command name
+
+ line 3 has the command name.
+
+(note the "double-quotes" above)
  
-If this file is in place in the dev folder, then you can zip the containing plug-in folder (MyNewPLugIn{146e099d etc etc}) and then rename it from **.zip** to the **.rhi** extension.  Double clicking this file on another system should install all the files in the correct location for that user. Rhino should then see the command as a regular command.
+With this file in place in the dev sub-folder, then you can zip the containing plug-in folder (MyNewPLugIn{146e099d etc etc}) and then rename it from **.zip** to the **.rhi** extension.  Double clicking this rhi file on another system (Rhino closed) should install all the files in the correct location for that user. Rhino should then see the command as a regular command.
 
 Note: using this system, I've seen, at least sometimes, that Rhino requires that Python be loaded before it can see the command the first time in a session - running EditPythonScript, or any other script will kick Python into gear and let the command work. This is a bug as far as I know.
  
