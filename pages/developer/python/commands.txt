@@ -1,0 +1,56 @@
+Start in the Rhino Python editor - EditPythonScript command.
+Click New and choose **Command**. -
+
+-Pic
+
+Name the command and name the plug-in that you'd like to have the command used in - it can be a new name or the one (last used) that is provided.
+
+-Pic
+
+A new script is generated with the framework for the new command.
+
+The code that the command calls is in this function: 
+
+**def RunCommand( is_interactive ):**
+
+
+Add your script code here - the template provides some dummy code and a couple of comments. The whole script can be in this one function or you can add other functions as you normally would, as needed, to be called from this part of the script.
+
+What I do while developing the script is add this line at the bottom of the page:
+
+**RunCommand(True)**
+
+This allows me to test the script from the editor, debug etc. Just remember comment that line before you distribute the script or try to use it as a command. It is also possible to write a more 'normal' script test etc as needed then just copy and paste into this formatted command script template. 
+
+In order for this to run as a command in Rhino, the script location needs to be exactly right so that Rhino knows where to look. On Windows, the folder where the script is installed is under
+
+//C:\Users\USERNAME\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\PythonPlugIns\MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}//
+
+On OSX, the folder goes is:
+
+///Users/USERNAME/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/PythonPlugIns/MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}//
+
+The last folder may need to be created.
+
+and it must keep that crazy name and structure that the editor set up when you created the command
+
+To distribute the script as a plug-in, zip the entire folder, in this case making //MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}.zip//
+
+On Windows, users will need to unzip to the plug-ins folder listed above, with Rhino closed.
+
+To make an installer for Windows:
+
+In the 'dev' sub-folder that is created in the plug-in folder, create a py file named "__plugin__.py"  that has only these three lines:
+
+ id="{146e099d-760d-4a6c-8662-96119f3fd62f}"
+ version="1.0.0.1"
+ title="MyNewCommand" 
+ 
+ line 1 has the UUID from the plug-in, found in the folder name.
+ line 2 has the version - it would be up to you to keep that current.
+ line 3 has the command name
+ 
+If this file is in place in the dev folder, then you can zip the containing plug-in folder (MyNewPLugIn{146e099d etc etc}) and then rename it from **.zip** to the **.rhi** extension.  Double clicking this file on another system should install all the files in the correct location for that user. Rhino should then see the command as a regular command.
+
+Note: using this system, I've seen, at least sometimes, that Rhino requires that Python be loaded before it can see the command the first time in a session - running EditPythonScript, or any other script will kick Python into gear and let the command work. This is a bug as far as I know.
+ 
