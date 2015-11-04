@@ -1,6 +1,10 @@
 ====Creating Rhino commands using the Python script editor====
 ----
 
+It is possible, if a little convoluted, to create 'real' Rhino commands from Python scripts. Below I've outlined the procedure on Windows Rhino, with a couple of comments about where the files need to go for this all to work with Rhino for Mac. The initial template for the commands, along with a new GUID and the appropriate folders are created automatically by the Python script editor on Windows. So far it is not possible* to //create// all this on Rhino for Mac, but it is possible to //install// the folders and scripts for an existing Python command on the Mac and have it all work. 
+
+----
+
 Start in the Rhino Python editor - EditPythonScript command.
 Click New and choose **Command**.
 
@@ -28,6 +32,7 @@ What I do while developing the script is add this line at the bottom of the page
 **RunCommand(True)**
 
 This allows me to test the script from the editor, debug etc. Just remember comment that line before you distribute the script or try to use it as a command. It is also possible to write a more 'normal' script test etc as needed then just copy and paste into this formatted command script template. 
+
 
 In order for this to run as a command in Rhino, the script location needs to be exactly right so that Rhino knows where to look. On Windows, the path for a command script looks like this:
 
@@ -70,3 +75,4 @@ With this file in place in the "dev" sub-folder, then you can zip the containing
 
 Note: using this system, I've seen, at least sometimes, that Rhino requires that Python be loaded before it can see the command the first time in a session - running EditPythonScript, or any other script will kick Python into gear and let the command work. This is a bug as far as I know.
  
+*it may actually be possible if a GUID is generated and put in the right places. I will test and update this if it works.
