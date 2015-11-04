@@ -4,13 +4,17 @@
 Start in the Rhino Python editor - EditPythonScript command.
 Click New and choose **Command**.
 
--Pic
+{{:developer:python:startanewcommandscript.png?200|-Pic}}
 
 Name the command and name the plug-in that you'd like to have the command used in - it can be a new name or the one (last used) that is provided. I used MyNewCommand in MyNewPlug-In for this example.
 
--Pic
+A new script file is generated with the framework for the new command.
 
-A new script is generated with the framework for the new command.
+{{:developer:python:newcommandsscript.png?200|}}
+
+On windows,thhe script is automatically saved in a special location
+
+{{:developer:python:newcommandpyfile.png?200|}}
 
 The code that the command calls is in this function: 
 
@@ -29,6 +33,8 @@ In order for this to run as a command in Rhino, the script location needs to be 
 
 //C:\Users\USERNAME\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\PythonPlugIns\MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}//
 
+{{:developer:python:newcommandpluginfolder.png?200|}}
+
 On OSX, the path is like this:
 
 ///Users/USERNAME/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/PythonPlugIns/MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}//
@@ -37,7 +43,7 @@ The last folder may need to be created.
 
 and it must keep that crazy name and structure that the editor set up when you created the command
 
-To distribute the script as a plug-in, zip the entire folder, in this case making //MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}.zip//
+To distribute the script as a plug-in, zip the entire folder, in this case making //MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}.zip// The user will need to place the folder in the correct location (PythonPlugIns folder) with Rhino closed.
 
 On Windows, users will need to unzip to the plug-ins folder listed above, with Rhino closed.
 
