@@ -5,6 +5,8 @@ It is possible, if a little convoluted, to create 'real' Rhino commands from Pyt
 
 ----
 
+===Rhino for Windows===
+
 Start in the Rhino Python editor - EditPythonScript command.
 Click on the **New** icon, and choose **Command** in the ensuing dialog.
 
@@ -16,22 +18,23 @@ A new script file is generated with the framework for the new command.
 
 {{:developer:python:newcommandsscript.png?}}
 
-On windows,thhe script is automatically saved in a special location
+On Rhino for Windows,the script is automatically saved in a special location
 
 {{:developer:python:newcommandpyfile.png?}}
+
 
 The code that the command calls is in this function: 
 
 **def RunCommand( is_interactive ):**
 
 
-Add your script code here - the template provides some dummy code and a couple of comments. The whole script can be in this one function or you can add other functions as you normally would, as needed, to be called from this part of the script.
+Add your script code here - the template provides some dummy code and a couple of comments. , to be called from this part of the script. The whole script can be in this one function or you can add other functions as you normally would, as needed. Make sure to modify the initial "import" statements to suit the script you are writing - the automatic template "imports' are there for the example script provided.
 
-What I do while developing the script is add this line at the bottom of the page:
+What I do while developing the script is add this line at the bottom of the script:
 
 **RunCommand(True)**
 
-This allows me to test the script from the editor, debug etc. Just remember comment that line before you distribute the script or try to use it as a command. It is also possible to write a more 'normal' script test etc as needed then just copy and paste into this formatted command script template. 
+This allows me to test the script from the editor, debug etc. Just remember to comment that line before you distribute the script or try to use it as a command. It is also possible to write a more 'normal' script, test, etc. as needed in the usual way, then just copy and paste into this formatted command script template.
 
 
 In order for this to run as a command in Rhino, the script location needs to be exactly right so that Rhino knows where to look. On Windows, the path for a command script looks like this:
@@ -40,20 +43,16 @@ In order for this to run as a command in Rhino, the script location needs to be 
 
 {{:developer:python:newcommandpluginfolder.png?}}
 
-On OSX, the path is like this:
+and it must keep that crazy name with the GUID in brackets, and the path that the editor set up when you created the command initially.
 
-///Users/USERNAME/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/PythonPlugIns/MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}//
+To distribute the script as a plug-in, zip the entire folder, in this case making
 
-The last folder may need to be created.
-
-and it must keep that crazy name and structure that the editor set up when you created the command
-
-To distribute the script as a plug-in, zip the entire folder, in this case making //MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}.zip// The user will need to place the folder in the correct location (PythonPlugIns folder) with Rhino closed.
+ //MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}.zip// 
 
 On Windows, users will need to unzip to the plug-ins folder listed above, with Rhino closed.
 
 
-=== To make an installer for Windows: ===
+=== To make an "rhi" installer for Windows: ===
 
 In the 'dev' sub-folder that is created in the plug-in folder, create a py file named "__plugin__.py"  that has only these three lines:
 
@@ -77,5 +76,37 @@ With this file in place in the "dev" sub-folder, then you can zip the containing
 Note: using this system, I've seen, at least sometimes, that Rhino requires that Python be loaded before it can see the command the first time in a session - running EditPythonScript, or any other script will kick Python into gear and let the command work. This is a bug as far as I know.
 
 ===Mac users:===
-To //create// a command script on a mac from scratch, you need to generate a GUID for the plug-in folder. This can be done on-line, for example [[https://www.guidgenerator.com/online-guid-generator.aspx|here.]] Once you have the GUID, use it to name the folders exactly as described above.
+
+
+On OSX, the path to the plugIn folder must be here:
+///Users/USERNAME/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/PythonPlugIns///
+If the folder does not yet exist, you'll have to create it.
+
+within that folder there is a folder for each plug-in such as
+
+//MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}// 
+
+within this folder there is a /dev folder - that is where the script itself should be saved.
+
+The long number in braces is a GUID - that GUID, and in fact the folder itlself, is automatically generated on Rhino for Windows when you tell the editor you want to create a command - on OSX you need to create the GUID and the folder and sub-folder yourself. [[https://www.guidgenerator.com/online-guid-generator.aspx|Here]] is an on-line GUID generator - there are others, but this one worked in my tests. Generate a GUID and then use it in the folder name as indicated above - PlugInName{GUID}
+
+The Python script itself has to be set up and named correctly as well - this is done from a template on Rhino for Windows, we'll need to do it by hand, so to speak, on OSX. The py file should be set up like this:
+
+    #import statements as needed:
+    import rhinoscriptsyntax as rs
+    import scriptcontext as sc
+    import Rhino
+    #this line with the name of the command:
+    __commandname__ = "MyNewCommand"
+    def RunCommand( is_interactive ):
+         #Your code in here
+         obj = rs.GetObject()
+         etc.
+     
+     
+Again this command script must be saved to 
+
+///Users/USERNAME/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/PythonPlugIns/PlugInName{GUID}/dev//
+
+
  
