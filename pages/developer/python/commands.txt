@@ -76,22 +76,27 @@ With this file in place in the "dev" sub-folder, then you can zip the containing
 Note: using this system, I've seen, at least sometimes, that Rhino requires that Python be loaded before it can see the command the first time in a session - running EditPythonScript, or any other script will kick Python into gear and let the command work. This is a bug as far as I know.
 
 ====Rhino for Mac:====
-Setting this up on OSX is a bit more labour intensive, but once you see how it works, I think it should be fairly straightforward. 
+Setting this up on OSX is a bit more labour intensive, but once you see how it works, I think it should be fairly straightforward. There are four things you need to pay attention to:
 
-On OSX, the path to the plugIn folder must be:
+The py script file 
+The plug-in name
+The command name
+The plug-in GUID
+
+On OSX, the location of the plug-in folders must be in:
 ///Users/USERNAME/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/PythonPlugIns///
-If the folder does not yet exist, you'll have to create it.
+If the PythonPlugIns folder does not yet exist, you'll have to create it.
 
 Within that folder there needs to be a folder for each command plug-in such as
 
-//MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}// 
+//PythonPlugIns/MyNewPlug-In {146e099d-760d-4a6c-8662-96119f3fd62f}// 
 
 and within the individual plug-in's folder there is yet another folder called "dev" - that is where the Python script itself should be saved. The script name must have a special format as well - again, not automatic on Rhino for Mac, so you'll need to be careful to get it right. The file name must be in the format
 
 CommandName_cmd.py
 There can be multiple command files in the folder - one for each command in the plug-in.
 
-The long messy number thing in braces is a GUID - that GUID, and in fact the folder itself, is automatically generated on Rhino for Windows when you tell the editor you want to create a command - on OSX you need to create the GUID and the folder and sub-folder yourself. [[https://www.guidgenerator.com/online-guid-generator.aspx|Here]] is an on-line GUID generator - there are others, but this one worked in my tests. Generate a GUID and then use it in the folder name as indicated above - PlugInName{GUID}
+The long messy number thing in braces is the GUID - that GUID, and in fact the folder itself, is automatically generated on Rhino for Windows when you tell the editor you want to create a command - on OSX you need to create the GUID and the folder and "dev" sub-folder yourself. [[https://www.guidgenerator.com/online-guid-generator.aspx|Here]] is an on-line GUID generator - there are others, but this one worked in my tests. Generate a GUID and then use it in the folder name as indicated above - PlugInName{GUID}
 
 The Python script itself has to be set up and named correctly as well - this is done from a template on Rhino for Windows, we'll need to do it by hand, so to speak, on OSX. The py file should be set up like this:
 
