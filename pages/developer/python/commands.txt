@@ -1,7 +1,7 @@
 ====Creating Rhino commands using the Python script editor====
 ----
 
-It is possible, if a little convoluted, to create 'real' Rhino commands from Python scripts. Below I've outlined the procedure on Windows Rhino, with a couple of comments about where the files need to go for this all to work with Rhino for Mac. The initial template for the commands, along with a new GUID and the appropriate folders are created automatically by the Python script editor on Windows. So far it is possible but not obvious or automatic to //create// all this on Rhino for Mac. It is possible to //install// the folders and scripts for an existing Python command on the Mac and have it all work. 
+It is possible, if a little convoluted, to create 'real' Rhino commands from Python scripts. Below I've outlined the procedure on Windows Rhino, with a couple of comments about where the files need to go for this all to work with Rhino for Mac. The initial template for the commands, along with a new [[developer:python:commands|GUID]] and the appropriate folders are created automatically by the Python script editor on Windows. So far it is possible but not obvious or automatic to //create// all this on Rhino for Mac - see the note at the bottom of the page.. It is possible to install the folders and scripts for an existing Python command on the Mac and have it all work. 
 
 ----
 
@@ -74,7 +74,7 @@ In the 'dev' sub-folder that is created in the plug-in folder, create a py file 
 With this file in place in the "dev" sub-folder, then you can zip the containing plug-in folder (MyNewPLugIn{146e099d etc etc}) and then rename it from **.zip** to the **.rhi** extension.  Double clicking this rhi file on another system (Rhino closed) should install all the files in the correct location for that user. Rhino should then see the command as a regular command.
 
 Note: using this system, I've seen, at least sometimes, that Rhino requires that Python be loaded before it can see the command the first time in a session - running EditPythonScript, or any other script will kick Python into gear and let the command work. This is a bug as far as I know.
-
-**Mac users:**
+==Mac user==
+**{{anchor:macusers:Mac users:}}**
 To //create// a command script on a mac from scratch, you need to generate a GUID for the plug-in folder. This can be done on line [[https://www.guidgenerator.com/online-guid-generator.aspx|here.]] Once you have the GUID, use it to name the folders exactly as described above.
  
