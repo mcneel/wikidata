@@ -97,6 +97,7 @@ Within that folder there needs to be a folder for each command plug-in such as
 and within the individual plug-in's folder there is yet another folder called "dev" - that is where the Python script itself should be saved. The script name must have a special format as well - again, not automatic on Rhino for Mac, so you'll need to be careful to get it right. The file name must be in the format
 
 CommandName_cmd.py
+
 There can be multiple command files in the folder - one for each command in the plug-in.
 
 The long messy number thing in braces is the GUID - that GUID, and in fact the folder itself, is automatically generated on Rhino for Windows when you tell the editor you want to create a command - on OSX you need to create the GUID and the folder and "dev" sub-folder yourself. [[https://www.guidgenerator.com/online-guid-generator.aspx|Here]] is an on-line GUID generator - there are others, but this one worked in my tests. Generate a GUID and then use it in the folder name as indicated above - PlugInName{GUID}
@@ -121,7 +122,7 @@ Again this command script must be saved to
 
 ///Users/USERNAME/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/PythonPlugIns/PlugInName{GUID}/dev//
 
-Note the command name must match the script file name, so in this example the file name would be
+Note the command name must match the script file file name, so in this example the file name would be
 
 MyNewCommand_cmd.py
 
