@@ -28,6 +28,13 @@ C:\Program Files\Common Files\McNeel Shared\License Manager (32 bit)\\
 
 <color darkslategray>**//Question://** //"Can I have both the 32 bit and 64 bit versions of Rhino 5 installed on the same computer?"//</color>\\ 
 **Answer:** Yes, no problem, except for the license manager issue as above.\\
+
+<color darkslategray>**//Question://** //"When I try to open a file, I get an error message about something being unreadable."//</color>\\
+**Answer:** Here's how the system works. There are two parts:
+  - **Autosave.** If you have Autosave turned on in Rhino, then temporary files are written to the folder specified in Options, and a flag is set that Rhino is running. When Rhino closes normally, it deletes this Autosave file and Rhino clears the flag. If Rhino crashes, the flag was not cleared and the Autosave file still exists when Rhino starts the next time. In that event, you are warned that Rhino did not close properly and you have one chance to save your work from the AutoSave file. If you say no, you lose the file.
+  - **Backup.** As of V4 SR7, we added an automatic backup features. If the feature has not been disabled, when you open an existing file the changes in this new editing session are saved to a new copy of the file and the existing file you opened has //.bak// concatenated to its name and the file is left in the same folder.
+         - Rhino 5 now makes //*.3dmbak// files and has a file type listing to open them.
+         - For Rhino 4, use your file Explorer in a List or Detailed view, with Windows Folder Options set to show the file extensions for known file types, and rename the file from //<filename>.3dm.bak// to //<newfilename>.3dm.// Then you can open it like any other Rhino 3dm file.
  
 ====Remove Rhino 4.0 Manually====
 <color darkslategray>**//Question://** //I tried to uninstall Rhino 4.0, but an error occurred and Rhino could not be removed.//</color>\\
