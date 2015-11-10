@@ -1,0 +1,17 @@
+====== Installationsfehler: "Nicht unterstützte Windows-Version gefunden" (Rhino 5 für Windows) ======
+> **Zusammenfassung:** //Das Rhino-Installationsprogramm meldet eine nicht unterstützte Windows-Version//
+> **Weitere Infos:** //[[de/rhino/installproblems|Installationsfehler bei Rhino 5]]//
+
+**Problem:**\\ Ich verwende Windows 7/8, aber Rhino behauptet, dass mein System nicht unterstützt wird.\\ {{:rhino:rhino5:unsupported_system_en.png?nolink&600|}}
+
+**Ursache:**\\ Vermutlich wurde ein früherer Versuch einer Rhino-Installation abgebrochen.\\ Der Windows **Program Compatibility Assistant (PCA)** wurde geöffnet.\\ {{http://wiki.mcneel.com/_media/rhino/rhino5/pca.png}}\\ Sie haben die Option **Erneut mit den empfohlenen Einstellungen installieren** ausgewählt.\\ Windows hat daraufhin den Kompatibilitätsmodus für **Windows XP SP2** für den Rhino-Installer eingestellt.
+
+**Lösung:**\\ 
+  - Klicken Sie mit der rechten Maustaste auf den **Rhino-Installer** und wählen Sie **Eigenschaften**.\\ <color #999999>Wenn Ihr Installationsprogramm von unserer Website heruntergeladen wurde, hat der Installer einen Namen wie **rh50_xx-xx_5.8.40315.18095.exe**.\\ Wenn Sie Rhino von einer DVD installieren, handelt es sich beim Installer um die **setup.exe** im Stammverzeichnis der DVD. </color>
+  - Wechseln Sie zum Reiter **Kompatibilität**.\\ <color #999999>Es ist möglich, dass der Kompatibilitätsmodus auf "Windows XP (Service Pack 2)" gesetzt ist und nicht geändert werden kann.</color>
+  - Klicken Sie auf **Einstellungen für alle Benutzer ändern** im unteren Bereich.
+  - Deaktivieren Sie das Kontrollkästchen **Programm im Kompatibilitätsmodus ausführen**. 
+  - Klicken Sie zwei Mal auf **OK**, um den Dialog zu schließen.
+  - Klicken Sie mit der rechten Maustaste erneut auf den exe-Installer und wählen Sie **Als Administrator ausführen**.
+
+{{tag>rhino5installationerror_de}}
