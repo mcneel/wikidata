@@ -1,0 +1,81 @@
+====== ¿Cómo hago un modelo sólido? ¿Qué es un sólido en Rhino?======
+
+=====¿Cómo obtengo un archivo .stl "hermético" de mis objetos de Rhino?=====
+
+Se ha ofrecido bastante ayuda para la producción de archivos STL. Lo más importante es lo siguiente:
+
+El objeto de Rhino debe ser un '''sólido cerrado''' antes de poder generar un archivo STL válido.
+
+//<color darkslateblue>Mitch dice: La terminología oficial de un sólido cerrado en Rhino es una **polisuperficie cerrada**.</color>//
+
+Un sólido '''no tiene bordes desnudos'''. Esta es una definición concisa. Otra manera de comprender un sólido es verlo como un globo. Si hay un pequeño agujero se desinflará, por lo que no es hermético, no es volumétrico. Un sólido es un volumen. Un sólido **está formado por** sus superficies exteriores, una vez están completamente unidas.
+
+//<color green>JB dice: Utilice el comando **MostrarBordes** con la visualización de "bordes desnudos" activada para encontrar los bordes desunidos.</color>//
+
+La terminología de los "sólidos" parece confundir a mucha gente y a menudo hay discusiones sobre este tema, en particular sobre cómo obtener sólidos "herméticos" para el prototipado rápido.  Algunas personas se preocupan por el hecho de que si se corta un "sólido" en Rhino, no se obtienen planos de superficie, sinó una curva de contorno externo de cada lámina.  **Es normal.** Los programas y las máquinas de prototipado rellenan esas láminas.  Recuerde también que el proceso de prototipado rápido no lamina el objeto [[rhino:nurbs|NURBs]], sino una **malla** de la forma de su objeto, a través de un archivo STL.  ¿Y sabe qué?  Las mallas no son más "sólidos" que los objetos [[rhino:nurbs|NURBS]] de Rhino...  Cuando se seccionan, se obtienen curvas de contorno.
+
+**[[rhino:soliddiscussion|Para obtener más información sobre el concepto de Sólidos, eche un vistazo aquí.]]**
+
+=====Las tolerancias tienen un papel importante en la creación de volúmenes cerrados=====
+Es necesario comprender la **[[rhino:faqtolerances|tolerancia absoluta]]** para generar sólidos válidos. Un buen procedimiento a seguir es cambiar la tolerancia absoluta del valor predeterminado de .01 a .0001 o .001. Empiezo todos mis proyectos de joyería en 0.001, entonces tengo margen para reducir la tolerancia si es necesario.
+
+//<color green>JB dice: Otro procedimiento es que su tolerancia tenga un orden de magnitud más ajustado que la precisión que se puede lograr a través del proceso de facturación, o un orden de magnitud inferior al detalle modelado más pequeño. Para joyeros como Jeffrey, que trabaja con detalles muy finos en partes relativamente pequeñas, 0.001 milímetros o 0.0001 pulgadas debería funcionar bien. </color>//
+
+//<color darkslateblue>Mitch dice: Si se empieza con una tolerancia más ajustada de lo necesario, puede desajustarla un poco al final para facilitar los puntos de unión más complejos. [[rhino:faqtolerances|Asegúrese de leer la página Wiki sobre las tolerancias.]] </color>//
+
+=====Mantener los objetos alineados=====
+El uso del **forzado** y las **referencias a objetos ** es muy útil, casi esencial, para que los bordes se unan bien.
+
+=====Información sobre el objeto=====
+**Analizar** un objeto de Rhino es una parte importante del proceso. La forma más rápida de comprobar si un objeto es un sólido (<color darkslateblue>polisuperficie cerrada</color>) o no es hacer clic en el botón de detalles en el panel de Propiedades, que dejo abierto y acoplado en el lado derecho de la pantalla, con el panel de Capas acoplado debajo.
+
+//<color green>JB dice: O bien, puede usar el comando Info si no suele tener la ventana de Propiedades abierta.</color>//
+
+=====Obtener consejos=====
+Publique los objetos con los que tenga problemas para unir en el foro de Rhino. Si lo sigue intentando, lo conseguirá. Solo tiene que buscar los bordes desnudos y hacer mucho zoom. Podrá ver las partes que no están unidas. La experiencia y la práctica aportan conocimiento. Es algo muy básico. Continúe modelando teniendo en cuenta la creación de sólidos desde el principio, y no a posteriori.
+
+Una vez que tenga un **sólido válido**, expórtelo como archivo STL. Si utiliza el valor por defecto de 0,01 para la distancia máxima, borde a superficie, el archivo stl servirá para cualquier máquina. Puede probar el archivo STL volviéndo a abrirlo en Rhino y ejecutando los comandos MostrarBordes con la opción Bordes desnudos.  Crear un sólido válido desde el que exportar es la parte difícil. Es necesario trabajar en ello. No hay ningún misterio para generar archivos STL. Simplemente son mallas formadas por triángulos.
+
+//<color darkslateblue>Mitch dice:  Supuetamente la Exportación STL funciona, pero a la práctica Rhino a veces tiene problema al mallar los objetos. Una buena manera de comprobar los resultados de la exportación .stl es abrir el archivo STL que acaba de crear en una nueva instancia de Rhino y verlo con la vista Perspectiva en modo **SombreadoPlano** (hay un botón de la barra de herramientas para hacerlo, o bien puede escribir el comando o seleccionarlo desde el menú del título de la vista).  Si el modelo se ve bien con el modo **SombreadoPlano** activado, probablemente no tenga que hacer nada más.  [[rhino:meshfaq|Consulte también la página Wiki sobre el mallado.]] </color>//
+
+Envíe sus preguntas y analice las respuestas.  Saber cómo se modela con Rhino es clave, además de tener conocimientos de [[rhino:nurbs|NURBs]] en general. Convertirse en un buen modelador de CAD necesita mucha dedicación. 
+
+Si necesita ayuda, envíe un mensaje al foro de Rhino.
+
+Jeffrey Everett
+
+
+
+
+----
+
+===== Otros consejos para obtener sólidos válidos =====
+
+===Unión de piezas===
+Realice la unión de piezas y trabaje mientras modela.  Utilice el comando **MostrarBordes**>Bordes desnudos.  Si encuentra algunos, tendrá que averiguar por qué se produjo el problema y corregirlo.  Es mucho más fácil corregir sobre la marcha en lugar de intentar arreglar las cosas una vez está finalizado el modelado. Algunas correcciones a posteriori le pueden costar horas de trabajo al final, cuando puede ser cuestión de minutos al principio.
+
+=== Qué puede causar bordes desnudos ===
+
+Tenga cuidado a la hora de recortar superficies.  Rhino recortará las superficies con curvas teniendo en cuenta el PlanoC activo, y esas curvas no tienen que estar necesariamente en la superficie.  El borde de corte puede que no se encuentre exactamente donde usted cree y es posible que no aparezca en una vista ortográfica.  Si es posible, es mejor recortar las superficies con las otras superficies a las que las está uniendo.  Por otro lado, es posible que esto a veces no funcione y, si no hay otra opción más que recortar con curvas, asegúrese de que las superficies se unan después.
+
+La reconstrucción de superficies puede hacer que los bordes queden demasiado lejos para unirse, así que tenga cuidado.
+
+El acto de unirse a sí mismo puede causar bordes desnudos.  Paradójico pero cierto, en ciertas zonas donde hay uniones de multisuperficies complejas (generalmente realizadas mediante selección por ventana de varias superficies y ejecutando **Unir**), Rhino puede producir ocasionalmente bordes desnudos donde no debería haber.  En este caso, es necesario deshacer la unión y ver qué sucede si intenta unir las superficies una a una en lugar de todas a la vez.  En los casos más complicados, es posible que una o más superficies a unir necesiten ser ajustadas.
+
+===El comando UnirBorde===
+
+Este comando permite "forzar" que los bordes que están demasiado lejos se unan con normalidad.  Este comando debe utilizarse con moderación.  No hace que el modelo sea más preciso, no corrige la geometría, simplemente permite a Rhino anular las tolerancias absolutas en ese punto y crear un borde "promedio" en algún punto entre los dos bordes reales.  De este modo, los comandos de mallado pueden resolver el problema para crear un objeto de malla "hermético" y mejorar el archivo .stl.  Sin embargo, si se exporta con formato de superficie o sólido para ingeniería, puede que no funcione, de modo que **UnirBorde** es la mejor alternativa en estos casos.
+
+===El comando ReconstruirBordes===
+Este comando restablecerá los bordes de las superficies a como estaban antes de unirse (más o menos).  Esto puede ser importante, ya que cuando los bordes se desalinean con el comando **UnirBorde** o similar, se pueden restaurar.
+
+===El temido borde desnudo===
+Si le aparecen bordes desnudos, es un problema.  Por lo general, los bordes desnudos aparecen en pares.  A menudo se pueden unir los pares con el comando **UnirBorde** (aunque las uniones estén fuera de la tolerancia, la costura será cerrada).  Pero si solo tiene un borde desnudo, no se podrá unir a nada.  En este caso, deberá desunir todos los bordes alrededor del área problemática y ejecutar el comando **ReconstruirBordes** para ver qué está mal alineado y corregirlo.  Es posible que tenga que aplicar el zoom para poder verlo mejor.
+
+===Asegúrese de que sea válido===
+Asegúrese de tener un objeto **válido**.  Cuando se empieza con la edición de bordes, es posible que objeto se convierta en no válido (aunque sea cerrado.)  Esto puede causar problemas con el mallado y con el modelado más adelante.  Mi sugerencia es para activar la opción **ComprobarNuevosObjetos** en Rhino y ver qué pasa.  De este modo, si crea un objeto no válido con la edición, podrá saberlo de inmediato.
+
+<color darkslateblue>--Mitch</color>
+
+=== Trabajar con la malla en lugar de los bordes de superficie ===
+A menudo es posible y mucho más rápido cerrar un objeto de malla utilizando las herramientas de reparación de la malla del menú Malla (V4) o el menú Bonus (V3) que eliminar los bordes desnudos de un objeto de superficie. Si el objetivo es el prototipado rápido a través de un archivo STL o SLC, intente crear un objeto de malla (comando Malla, consulte también [[rhino:meshfaq|MeshFAQ]]) en Rhino y utilizar los comandos ** IgualarBordeDeMalla**, **RellenarAgujerosDeMalla** y otras herramientas de reparación de mallas para sellar la malla antes de exportar a STL. Consulte la Ayuda de estos comandos para obtener más información sobre qué hacen y cómo utilizar las opciones. **MostrarBordes** le indicará si la malla es cerrada al igual que con las superficies.
