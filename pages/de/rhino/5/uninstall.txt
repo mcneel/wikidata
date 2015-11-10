@@ -1,9 +1,10 @@
 ====== Manuelles Deinstallieren von Rhino 5.0 ======
+\\
 ====Problem:====
 Während des Deinstallierens von Rhino erhalten Sie eine Fehlermeldung, dass eine Deinstallation nicht möglich sei.
 
 ====Gültig für:====
-Rhino 5.0
+Rhino 5
 
 ====Ursache:====
 Der Windows-Installer-Speicher kann eine zum Deinstallieren benötigte Datei nicht finden.
@@ -14,26 +15,26 @@ Manuelles Deinstallieren von Rhino und der Windows-Installer-Registrierung für 
   - Gehen Sie zum Windows-Startmenü.
   - Wählen Sie die Systemsteuerung.
   - Wählen Sie "Programme hinzufügen/entfernen".
-  - Suchen Sie alle Einträge zu Rhinoceros 5.0 und wählen Sie "deinstallieren".
+  - Suchen Sie alle Einträge zu Rhinoceros 5 und wählen Sie "deinstallieren"
 
 
 **Anmerkung:** Sie sollten das folgende Verfahren nur vornehmen, wenn die Deinstallation im Abschnitt der Programme und Eigenschaften in der Systemsteuerung nicht funktioniert.
 
   
-===Stoppen des McNeel-Update-Services:===
+===Anhalten des McNeel-Update-Services===
   - Wählen Sie im Menü **Start** die **Systemsteuerung** und anschließend **Verwaltung**.
   - Doppelklicken Sie im Bereich Verwaltung auf **Dienste**.
-  - Suchen Sie unter den Diensten das **McNeel Update (32-bit)** (Auf 64-Bit-Computern sind abhängig von Ihrer Version von Rhino entweder nur das **McNeel Update (64-bit)** oder beide Dienste installiert).
+  - Suchen Sie unter den Diensten den Eintrag **McNeel Update (32-bit)** (Auf 64-Bit-Computern sind abhängig von Ihrer Version von Rhino entweder nur das **McNeel Update (64-bit)** oder beide Dienste installiert).
   - Klicken Sie mit der rechten Maustaste auf **McNeel Update (32-bit)** und wählen Sie anschließend **Stop**.
   - Auf einem 64-Bit-System stoppen Sie außerdem den Dienst **McNeel Update (64-bit)**.
   
 ===Löschen des Rhino-Installationsordners:===
-  - Wechseln Sie ins Verzeichnis C:\Programme\ und löschen Sie den Ordner Rhinoceros 5.0.
-  - Wechseln Sie ins Verzeichnis C:\Programme (x86)\ und löschen Sie den Ordner Rhinoceros 5.0.
+  - Wechseln Sie ins Verzeichnis C:\Programme\ und löschen Sie den Ordner Rhinoceros 5.
+  - Wechseln Sie ins Verzeichnis C:\Programme (x86)\ und löschen Sie den Ordner Rhinoceros 5.
   - Löschen Sie außerdem den Ordner **Rhinoceros 5.0 WIP**, wenn Sie ihn in keinem der obigen Verzeichnisse finden.
-  - Bitte beachten sie, dass Sie möglicherweise die Datei "RhinoShExt.dll" nicht löschen können. Dies ist kein Problem - lassen Sie diese Datei im Systemordner und löschen Sie alles andere.
+  - Es kann sein, dass Sie die Datei "RhinoShExt.dll" nicht löschen können. Das macht nichts. Lassen Sie diese eine Datei im Systemordner und löschen Sie alles andere.
   
-===Löschen der Registrierungsschlüssel:===
+===**Löschen der Registrierungsschlüssel**===
   - Öffnen Sie den **Registrierungseditor:**
     - //Unter Windows XP:// Klicken Sie im **Startmenü** auf **Ausführen**, geben Sie **regedit** ein und bestätigen Sie mit **Enter**.
     - //Unter Windows Vista und Windows 7:// Klicken Sie auf **Start**, geben Sie im Suchfeld **regedit** ein und bestätigen Sie mit **Enter**.
@@ -43,14 +44,18 @@ Manuelles Deinstallieren von Rhino und der Windows-Installer-Registrierung für 
   - Löschen Sie den Schlüssel **5.0**.
 
 
-===Führen Sie das Microsoft-Tool Fix-it aus===
+====Führen Sie das Microsoft-Tool Fix-it aus====
+Wenn die Deinstallation von **Rhino 5** oder **Rhino 5 64-Bit** stehen bleibt und das Programm //nicht deinstalliert// wird, versuchen Sie es mit folgendem Microsoft-Tool:
   - Gehen Sie auf http://support.microsoft.com/mats/program_install_and_uninstall
   - Klicken Sie auf "Jetzt ausführen".
+Mögliche Fehlermeldungen, die Ihnen angezeigt werden:
+"Die Funktion, die Sie verwenden möchten, befindet sich auf einer Netzressource, die nicht zur Verfügung steht."
 
+ {{:rhino:5:network_resourse_unavailable.jpg?400|}}
+{{:rhino:5:network_resourse_unavailable2.jpg?700|}}
 
-===NICHT EMPFOHLEN: Bereinigung des Windows-Installer-Speichers:===
-<color red>**ACHTUNG:**</color> Das folgende Vorgehen kann Ihre Registrierungsdatenbank beschädigen und einen Fehler vom Typ 1402 hervorrufen, wenn Sie das nächste Mal ein Programm installieren möchten. <color red>**Befolgen Sie diese Schritte nur**</color>, wenn das Deinstallieren mit dem oben beschriebenen Vorgehen nicht erfolgreich war.
-
+===Nicht empfehlenswert: Bereinigung des Windows-Installer-Speichers:===
+<color red>**Achtung:**</color> Das folgende Vorgehen kann Ihre Registrierungsdatenbank beschädigen und einen Fehler vom Typ 1402 hervorrufen, wenn Sie das nächste Mal ein Programm installieren möchten. <color red>**Befolgen Sie diese Schritte nur**</color>, wenn das Deinstallieren mit dem oben beschriebenen Vorgehen nicht erfolgreich war.
 
   - Laden Sie das [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]] herunter.
   - Entpacken Sie den Inhalt der heruntergeladenen Datei WindowsInstallerCleanupUtility.zip in einen Ordner (z.B.: "Windows Installer Clean Up") auf Ihrem Desktop.
@@ -58,4 +63,7 @@ Manuelles Deinstallieren von Rhino und der Windows-Installer-Registrierung für 
   - Gehen Sie zu **(All Users) Rhinoceros 5.0 WIP** (oder **All Users Rhino 5.0 WIP x64** auf einem 64-Bit-System).
   - Klicken Sie auf **Entfernen**.
 
-Wenn Sie diese Schritte befolgt haben und einen Fehler des Typs 1402 erhalten, können Ihnen [[http://wiki.mcneel.com/de/rhino/installproblems#schluessel_konnte_nicht_geoeffnet_werdenunbekannt_komponenten_fehler_1402|diese Anweisungen]] bei der Behebung des Fehlers helfen.
+Wenn Sie diese Schritte befolgt haben und einen Fehler des Typs 1402 erhalten, können Ihnen [[http://wiki.mcneel.com/de/rhino/error1402|diese Anweisungen]] bei der Behebung des Fehlers helfen.
+
+{{tag>rhino5installation_de}}
+  
