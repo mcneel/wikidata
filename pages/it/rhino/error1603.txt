@@ -1,0 +1,57 @@
+====== Errore di installazione 1603 (Rhino 5 per Windows) ======
+> **Sommario:** //Come risolvere l'errore di installazione 1603.//
+> **Altra pagina di aiuto per l'installazione:** //[[installproblems|Risoluzione dei problemi relativi all'installazione di Rhino 5]]//
+
+=====Problema=====
+Gli errori 1603 possono essere causati da numerosi problemi. Seguite tutti i passi sottostanti.
+
+=====Risposta=====
+**Passo 1: Eseguite gli aggiornamenti di Windows**
+  - Individuate ed eseguite il [[http://windowsupdate.microsoft.com/|servizio Windows Update]].
+  - Se ci sono degli aggiornamenti importanti da installare, cliccate su "Update Now" per installarli.  Questo processo può richiedere molto tempo.
+  - Se, quando cercate di eseguire il programma di installazione di Windows update vi appare un errore, leggete questo articolo [[http://support.microsoft.com/kb/906602|Risoluzione dei problemi comuni di installazione di Windows Update]].
+  - Se riuscite a risolvere il problema di Windows update e completate l'esecuzione del [[http://windowsupdate.microsoft.com/|servizio Windows Update]], **passate al passo 2**.
+\\
+**Passo 2: Installate .NET 4.0 Framework**
+  - Aprite **Windows Explorer** ed accedete ai contenuti del DVD di installazione di Rhino.
+  - Aprite la cartella **Installers\Prerequisites**.
+  - Eseguite il file [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]].
+  - Se il programma di installazione Microsoft .NET **mostra un errore**: 
+    - Scrivetevi l'errore 
+    - **Passate al passo 2**
+  - Solo Windows XP a 64 bit:
+    - Scaricate ed installate [[http://www.microsoft.com/en-us/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]]
+  - **Passate al passo 3**.
+\\
+**Passo 3: Installate Rhino**
+  - Aprite **Windows Explorer**.
+  - Scaricate il programma di installazione di Rhino 5 più recente da qui: [[http://www.rhino3d.com/download/rhino/5/latest?PageSpeed=noscript|Download completo di Rhino 5]]
+  - Fate doppio clic su **Setup.exe** per avviare il processo di installazione di Rhino 5.
+  - Se il programma di installazione di Rhino 5 non riesce, salvate una copia del file di registro sul desktop.
+  - **Passate al passo 4**.
+\\
+**Passo 4: Installazione manuale**
+  - Se il passo 3 non riesce, occorrerà installare le varie parti di Rhino manualmente.
+  - Usando il download di Rhino 5 descritto nel passo 3, seguite le seguenti istruzioni per [[http://wiki.mcneel.com/it/rhino/rhino5/manual_extract_from_file|decomprimere un Rhino 5 EXE dopo averlo scaricato ed installarlo manualmente.]]
+  - Solo per i //sistemi a 64 bit//: fate doppio clic su **rhino5setup_en-us_x64.msi** e completate l'installazione
+  - Per tutti i sistemi: 
+      - fate doppio clic su **rhino5setup_en-us_x86.msi** e completate l'installazione
+      - fate doppio clic su **LanguagePack_en-us.msi** (e qualsiasi altra lingua che desiderate installare)
+      -  fate doppio clic su **HelpMedia.msi**
+  - Se riscontrate degli errori durante l'installazione:
+    - Prendete nota di tutti i tipi di errore e dei messaggi di errore visualizzati
+    - Mandate un'e-mail, specificando su quale passo di questo articolo vi trovate e gli eventuali errori, a tech.eu@mcneel.com
+    - Date un'occhiata a questa [[https://wiki.mcneel.com/it/rhino/error1603installfails|pagina per ulteriori opzioni.]]
+  - Se richiesto, riavviate Windows.
+  - **Avviate Rhino 5**.
+  - Nella linea di comando di Rhino 5, digitate  **ResetBarreStrumenti ** e premete Invio.
+  - **Chiudete Rhino 5**.
+  - **Avviate Rhino 5**.
+  - **Installazione completata!**
+\\
+**Continua a non funzionare?**
+  - È frustrante e ne siamo spiacenti!
+  - Inviate per e-mail tutti i file di registro a partire dal passo 3 a tech.eu@mcneel.com
+
+
+{{tag>rhino5installationerror_en}}
