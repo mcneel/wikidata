@@ -20,10 +20,10 @@ Is there a difference?
 =====Answer=====
 Yes, there is a big difference. If //blnResult// is True or False, then both statements do what you would expect -- the same thing. But, the first statement is asking "Is blnResult equal to True?" whereas the second question is asking "Is blnResult not equal to False?" 
 
-=====More Information=====
+=====More information=====
 In a strictly Boolean world, those are equivalent statements. But the VBScript type system is richer than just Booleans.
 
-For example, what if //blnResult// is the string "True"? The string "True" is not equal to the Boolean True, so the first statement is false. But the string is also not equal to False, so the second statement is true, and therefore the statements have different semantics.
+For example, what if //blnResult// is the string //True//? The string //True// is not equal to the Boolean True, so the first statement is false. But the string is also not equal to False, so the second statement is true, and therefore the statements have different semantics.
 
 The same goes for numbers. When converted to a number, True converts to -1 (for reasons which will become clear in a moment) and False converts to 0. Therefore, if //blnResult// is 1, again the first statement is false because 1 <> -1, and the second statement is true because 1 <> 0.
 
@@ -48,8 +48,8 @@ If Blah And Foo Then
 </code>
 
 to be false, if //blnResult// is 1 and //blnAnswer// is 2, for example.
-=====Best Practices=====
-Conditional statements should always take Booleans. Or, in other words, use Booleans as Booleans, use nothing else as Booleans.
+=====Best practices=====
+Conditional statements should always take Booleans. Or, in other words, use Booleans as Booleans. Use nothing else as Booleans.
 
 Suppose you've got a method that returns a number and you want to do something if it doesn't return zero. Don't do this, even though it does exactly what you want:
 
@@ -75,6 +75,6 @@ If //blnResult// can only contain True or False, then you can just say
 If Blah Then
 </code>
 
-Use the same practice with logical operators. Do not mix-n-match - either every argument should explicitly be a number, and you're doing bitwise comparisons, or every argument is a Boolean. Mixing the two makes the code harder to read and more bug-prone.
+Use the same practice with logical operators. Do not mix-n-match. Either every argument should explicitly be a number, and you're doing bitwise comparisons, or every argument is a Boolean. Mixing the two makes the code harder to read and more bug-prone.
 
 {{tag>Developer RhinoScript}}
