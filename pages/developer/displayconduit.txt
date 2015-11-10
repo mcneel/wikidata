@@ -1,6 +1,6 @@
 ====== Display Conduit Introduction for .NET ======
 > **Summary:** //A how-to introduction to writing display conduits//
-> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:displayconduit|here]]//.
+> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example is adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:displayconduit|here]]//.
 
 Rhino 4 lets you define your own display conduits, which provide access to many levels of the display pipeline. In contrast, in Rhino 3 it was only possible to implement a DrawCallBack which allowed you to draw geometry in the back, middle, or foreground. DrawCallBacks did not expose any methods to adjust the clipping of the viewports, the lighting setup, or a lot of other properties that would be useful. However, they were straightforward to implement. DisplayConduits are a bit trickier, hence this Wiki page.
 
@@ -49,7 +49,7 @@ In the above case, the conduit implemented two channels, SC_CALCBOUNDINGBOX and 
      End Function
    End Class
 </code>
-As you can see we have to supply the channels we're going to use in the constructor. This means we cannot change which channels we want to tinker with at runtime. By default, conduits are not enabled, you have to specifically do that. But it can be done easily by setting the second constructor argument to True. Once our conduit is constructed and enabled, the ExecConduit() function will be called whenever the Rhino pipeline has reached a channel we're interested in. In our case, this function will always be called once with the current_channel flag set to SC_CALCBOUNDINGBOX and then once with the flag set to SC_POSTDRAWOBJECTS. Thus, inside the ExecConduit() function we have to evaluate which channel we're in and then take appropriate action:
+As you can see we have to supply the channels we're going to use in the constructor. This means we cannot change which channels we want to tinker with at runtime. By default, conduits are not enabled. You have to specifically do that. But it can be done easily by setting the second constructor argument to True. Once our conduit is constructed and enabled, the ExecConduit() function will be called whenever the Rhino pipeline has reached a channel we're interested in. In our case, this function will always be called once with the current_channel flag set to SC_CALCBOUNDINGBOX and then once with the flag set to SC_POSTDRAWOBJECTS. Thus, inside the ExecConduit() function we have to evaluate which channel we're in and then take appropriate action:
 <code vb>
    Public Overrides Function ExecConduit(ByRef dp As RMA.Rhino.MRhinoDisplayPipeline, _
                                          ByVal current_channel As UInteger, _
@@ -110,7 +110,7 @@ This piece of code draws a colored, c-plane axis system on top of all objects. B
 
 {{:legacy:en:ConduitCplaneAxis.jpg}}
 
-Another thing to realize is that there can be many other active conduits present as well and there's no way of telling which one will be called first. Do not write code that might screw up other people's conduits.
+There can be many other active conduits present as well and there's no way of telling which one will be called first. Do not write code that might screw up other people's conduits.
 
 {{:legacy:en:PipeLineImageC.jpg}}
 
