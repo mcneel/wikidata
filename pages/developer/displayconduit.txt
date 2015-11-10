@@ -1,10 +1,10 @@
 ====== Display Conduit Introduction for .NET ======
 > **Summary:** //A How-To introduction to writing display conduits//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:displayconduit|here]]//
+> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:displayconduit|here]]//.
 
-Rhino4 allows you to define your own display conduits, which provide access to many levels of the display pipeline. In contrast, in Rhino3 it was only possible to implement a DrawCallBack which allowed you to draw geometry in back, middle or foreground. DrawCallBacks did not expose any methods to adjust the clipping of the viewports, the lighting setup and a lot of other properties that would be useful. However, they were straightforward to implement. DisplayConduits are a bit trickier, hence this Wiki page.
+Rhino 4 lets you define your own display conduits, which provide access to many levels of the display pipeline. In contrast, in Rhino 3 it was only possible to implement a DrawCallBack which allowed you to draw geometry in the back, middle, or foreground. DrawCallBacks did not expose any methods to adjust the clipping of the viewports, the lighting setup, or a lot of other properties that would be useful. However, they were straightforward to implement. DisplayConduits are a bit trickier, hence this Wiki page.
 
-The DisplayPipeline in Rhino4 is a big and complicated class and we do not recommend you try and derive your own pipeline, instead, we've exposed something called a "conduit" for easy access. The pipeline itself is structured like this (except in reality there are many more channels):
+The DisplayPipeline in Rhino 4 is a big and complicated class and we do not recommend you derive your own pipeline. Instead, we've exposed something called a //conduit// for easy access. The pipeline itself is structured like this (except in reality there are many more channels):
 
 {{:legacy:en:PipeLineImageA.jpg}}
 
@@ -12,27 +12,27 @@ At one end is the Rhino model, a collection of 3D geometry and data. At the othe
 
 {{:legacy:en:PipeLineImageB.jpg}}
 
-Note that the pipeline itself is not bound to the channels, it just executes its code and every once and again it calls the conduits who perceive this as a new channel execution. This means that you cannot disable certain portions of the pipeline (or portions of other conduits) from within your conduit. The pipeline has to go through these motions to generate an image:
+Note that the pipeline itself is not bound to the channels. It just executes its code and occasionally it calls the conduits, who perceive this as a new channel execution. This means that you cannot disable certain portions of the pipeline (or portions of other conduits) from within your conduit. The pipeline has to go through these motions to generate an image:
 
-  - Set up the drawing buffer so we have something to draw on (SC_INITFRAMEBUFFER)
-  - Load projection {camera; target; lens length; etc.} and calculate world-to-screen transformations (SC_SETUPFRUSTUM)
-  - Create a list of all objects to draw (SC_OBJECTCULLING)
-  - Determine the extent of the entire scene (SC_CALCBOUNDINGBOX)
-  - Calculate the depth of the z-buffer based on the boundingbox (SC_CALCCLIPPINGPLANES)
-  - Create a lighting environment to be used in Shaded modes (SC_SETUPLIGHTING)
-  - Draw the background of the scene. This includes the viewport color, BackgroundBitmaps and grids (SC_DRAWBACKGROUND)
+  - Set up the drawing buffer so we have something to draw on (SC_INITFRAMEBUFFER).
+  - Load projection {camera; target; lens length; etc.} and calculate world-to-screen transformations (SC_SETUPFRUSTUM).
+  - Create a list of all objects to draw (SC_OBJECTCULLING).
+  - Determine the extent of the entire scene (SC_CALCBOUNDINGBOX).
+  - Calculate the depth of the z-buffer based on the boundingbox (SC_CALCCLIPPINGPLANES).
+  - Create a lighting environment to be used in Shaded modes (SC_SETUPLIGHTING).
+  - Draw the background of the scene. This includes the viewport color, BackgroundBitmaps and grids (SC_DRAWBACKGROUND).
   - Draw the stuff that has to be drawn before any objects are drawn (SC_PREDRAWOBJECTS)
-  - Prepare for the drawing of an object, i.e. set up the display attributes for it (SC_PREOBJECTDRAW)
-  - Draw all the objects (SC_DRAWOBJECT  (this channel is called once for every object))
-  - Recover from drawing the object (SC_POSTOBJECTDRAW)
-  - Draw stuff on top of all the objects, like selection wireframes etc. (SC_POSTDRAWOBJECTS)
-  - Draw the foreground, like the little axis-system in the lower left corner of viewports (SC_DRAWFOREGROUND)
-  - Honestly, I have no idea what Overlay is for (SC_DRAWOVERLAY)
-  - Perform pixel operations on the framebuffer (such as contrast and brightness adjustments) (SC_POSTPROCESSFRAMEBUFFER)
+  - Prepare for the drawing of an object, i.e. set up the display attributes for it (SC_PREOBJECTDRAW).
+  - Draw all the objects (SC_DRAWOBJECT  (this channel is called once for every object)).
+  - Recover from drawing the object (SC_POSTOBJECTDRAW).
+  - Draw stuff on top of all the objects, like selection wireframes etc. (SC_POSTDRAWOBJECTS).
+  - Draw the foreground, like the little axis-system in the lower left corner of viewports (SC_DRAWFOREGROUND).
+  - Honestly, I have no idea what Overlay is for (SC_DRAWOVERLAY).
+  - Perform pixel operations on the framebuffer (such as contrast and brightness adjustments) (SC_POSTPROCESSFRAMEBUFFER).
 
-You can implement all of these channels and tinker with variables and drawing methods.
+You can implement all these channels and tinker with variables and drawing methods.
 
-In the above case, the conduit implemented two channels; SC_CALCBOUNDINGBOX and SC_POSTDRAWOBJECTS (the "SC" stands for **S**upport **C**hannel). In VB.NET this conduit would look like:
+In the above case, the conduit implemented two channels, SC_CALCBOUNDINGBOX and SC_POSTDRAWOBJECTS (//SC// stands for **S**upport **C**hannel). In VB.NET this conduit would look like:
 <code vb>
    Public Class MyConduit
      Inherits MRhinoDisplayConduit
@@ -65,9 +65,9 @@ As you can see we have to supply the channels we're going to use in the construc
      Return True
    End Function
 </code>
-Note that you have to return True in order to keep the pipeline alive. Only return False in an emergency. The code above simply draws a single point at the world origin. Since a point is 3D geometry, it is subject to z-depth clipping. This means that if the point resides outside the z-buffer region, it will not be visible (it will get "clipped"). By default, the clipping planes are set up to encompass the boundingbox of the entire Rhino model. If you're drawing stuff which is potentially outside this box, you should override SC_CALCBOUNDINGBOX to make sure your objects are not clipped.
+Note that you have to return True in order to keep the pipeline alive. Only return False in an emergency. The code above simply draws a single point at the world origin. Since a point is 3D geometry, it is subject to z-depth clipping. This means that if the point resides outside the z-buffer region, it will not be visible. (It will get //clipped//.) By default, the clipping planes are set up to encompass the boundingbox of the entire Rhino model. If you're drawing stuff which is potentially outside this box, you should override SC_CALCBOUNDINGBOX to make sure your objects are not clipped.
 
-Let's take a look at a more complex drawing routine:
+Let's look at a more complex drawing routine:
 <code vb>
    Public Overrides Function ExecConduit(ByRef dp As RMA.Rhino.MRhinoDisplayPipeline, _
                                          ByVal current_channel As UInteger, _
@@ -106,7 +106,7 @@ Let's take a look at a more complex drawing routine:
      Return True
    End Function
 </code>
-This piece of code draws a coloured, c-plane axis system ON TOP of all objects. Because I disable DepthWriting and Testing prior to drawing my points and arrows, my objects are not obscured by the existing geometry (which was drawn in a channel previous to SC_POSTDRAWOBJECTS:
+This piece of code draws a colored, c-plane axis system on top of all objects. Because I disable DepthWriting and Testing prior to drawing my points and arrows, my objects are not obscured by the existing geometry (which was drawn in a channel previous to SC_POSTDRAWOBJECTS):
 
 {{:legacy:en:ConduitCplaneAxis.jpg}}
 
