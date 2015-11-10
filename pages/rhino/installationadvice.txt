@@ -3,64 +3,67 @@
 [[InstallingRhino|Deploying Rhino - Technique for silent/scripted installs, details of folders and registry, etc.]]
 ====Installing Rhino 5====
 
-<color darkslategray>**//Question://** //Why do I have two Desktop Shortcuts for Rhino V5?//</color>\\
-//**Answer:**// Rhino 5 automatically installs both 32- and 64-bit versions and there is one shortcut for each.  [[Why2Shortcuts|See this page for more explanations on why this is done.]]
+<color darkslategray>**//Question://** //Why do I have two Desktop Shortcuts for Rhino 5?//</color>\\
+//**Answer:**// Rhino 5 automatically installs both 32- and 64-bit versions. There is one shortcut for each.  [[Why2Shortcuts|See this page for more explanations on why.]]
 
 \\
 <color darkslategray>**//Question://** //Why is the V5 installer refusing my old V3 or V2 key code?//</color>\\ 
-//**Answer:**// You have a very old (SR0) install disc. There is a bug in the installer.  The best thing is to download and run the latest installer package from [[http://www.rhino3d.com/download/rhino/5/latest|here]].
+//**Answer:**// You have an old (SR0) install disc. There is a bug in the installer.  The best thing is to download and run the latest installer package from [[http://www.rhino3d.com/download/rhino/5/latest|here]].
 
-If that is not possible, turn on your keyboard CAPS lock when entering your old V3 or V2 key code and it will work.
+If that is not possible, turn on your keyboard caps lock when entering your old V3 or V2 key code and it will work.
 
 \\
 <color darkslategray>**//Question://** //Can I install or uninstall Rhino 5 and keep my Rhino 4 install intact?//</color>\\ 
 //**Answer:**// Yes, <color darkslateblue>**//but with one important condition//**</color>. Read on.\\ 
 
-Rhino 5 is a completely separate installation from V4. However, it uses the same license manager as V4.  <color darkslateblue>//Problems can arise if you decide to uninstall Rhino 5. The V4 license manager gets uninstalled in the process, and your V4 installation will stop working.//</color>  
+Rhino 5 is a completely separate installation from V4, but it uses the same license manager as V4.  <color darkslateblue>//Problems can arise if you decide to uninstall Rhino 5. The V4 license manager gets uninstalled in the process, and your V4 installation will stop working.//</color>  
 
-To prevent this from happening, if you decide to uninstall V5 , first **copy** the files McNeelLM.exe and RhinoLM.exe to a safe location, then uninstall Rhino 5, and then copy them back to the original location.
+If you decide to uninstall Rhino 5, to keep V4 working:
+  * **Copy** the files McNeelLM.exe and RhinoLM.exe to a safe location.
+  * Uninstall Rhino 5.
+  * Then copy the files back to the original location.
 
 In Windows Vista or 7 the license manager is located at:\\ 
 C:\Program Files (x86)\Common Files\McNeel Shared\License Manager (64-bit)\\ 
 or\\ 
 C:\Program Files\Common Files\McNeel Shared\License Manager (32-bit)\\ 
 
-//*You also want to be very careful with plug-ins, toolbars, etc. that might be shared between V4 and V5 - either consciously or inadvertently.  This has been known to cause problems.//
+//*Be careful with plug-ins, toolbars, etc. that might be shared between V4 and V5, either consciously or inadvertently.  This has caused problems.//
 
 \\
 <color darkslategray>**//Question://** //Can I have both the 32- and 64-bit versions of Rhino 5 installed on the same computer?//</color>\\ 
-//**Answer:**// Yes, no problem, except for the license manager issue as above.\\
+//**Answer:**// Yes, no problem, except for the license manager issue above.\\
 
 \\
 <color darkslategray>**//Question://** //When I try to open a file, I get an error message about something being unreadable.//</color>\\
 //**Answer:**// Here's how the system works. There are two parts:
   - **Autosave.** If you have Autosave turned on in Rhino, then temporary files are written to the folder specified in Options, and a flag is set that Rhino is running. When Rhino closes normally, it deletes this Autosave file and Rhino clears the flag. If Rhino crashes, the flag is not cleared and the Autosave file still exists when Rhino starts the next time. In that event, you are warned that Rhino did not close properly and you have one chance to save your work from the AutoSave file. If you say no, you lose the file.
-  - **Backup.** As of V4 SR7, we added an automatic backup feature. If the feature has not been disabled, when you open an existing file the changes in this new editing session are saved to a new copy of the file and the existing file you opened has //.bak// concatenated to its name and the file is left in the same folder.
+  - **Backup.** In V4 SR7, we added an automatic backup feature. Unless the feature is disabled, when you open an existing file the changes in this new editing session are saved to a new copy of the file and the existing file you opened has //.bak// concatenated to its name. The file is left in the same folder.
          - Rhino 5 now makes //*.3dmbak// files and has a file type listing to open them.
-         - For Rhino 4, use your file Explorer in a List or Detailed view, with Windows Folder Options set to show the file extensions for known file types, and rename the file from //<filename>.3dm.bak// to //<newfilename>.3dm.// Then you can open it like any other Rhino 3dm file.
+         - For Rhino 4, use your file Explorer in a List or Detailed view, with Windows Folder Options set to show the file extensions for known file types. Rename the file from //<filename>.3dm.bak// to //<newfilename>.3dm.// Then you can open it like any other Rhino 3dm file.
 
 \\
 <color darkslategray>**//Question://** //When I installed Rhino, I checked the option to use the Zoo, but I don't use the Zoo.//</color>\\
 //**Answer:**// On Windows Vista or Windows 7, delete all the files in:
 //C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses.//
 
-On Windows XP delete all the files in: //C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses//
+On Windows XP delete all the files in: //C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses//.
 
-  - **Restart** Rhino.
-  - **Enter your key** when asked.
-**Note:** On some systems, instead of the //"\All Users\"// folder, the path may be your //"\Domain\"// log-in name.
+**Restart** Rhino. **Enter your key** when asked.
+
+**Note:** On some systems, instead of the //\All Users\// folder, the path may be your //\Domain\// log-in name.
 
 \\
-<color darkslategray>**//Question://** //I tried to uninstall Rhino 4.0, but an error occurred and Rhino could not be removed.//</color>\\
+<color darkslategray>**//Question://** //I tried to uninstall Rhino 4.0, but an error occurred and I could not remove Rhino.//</color>\\
 //**Answer:**// [[rhino/uninstalling|Manually remove Rhino 4.0.]]
 
 \\
-<color darkslategray>**//Question://** //I tried to uninstall Rhino 5, but an error occurred and Rhino could not be removed.//</color>\\
+<color darkslategray>**//Question://** //I tried to uninstall Rhino 5, but an error occurred and and I could not remove Rhino.//</color>\\
 //**Answer:**// [[rhino/5/uninstall|Manually remove Rhino 5.]]
 
 \\
-<color darkslategray>**//Question://** //What previous version info do I need to install my Rhino 5 Upgrade?//</color>\\
-//**Answer:**// The Rhino 5 Upgrade installer will install if one of the following is true:
+<color darkslategray>**//Question://** //What previous version info do I need to install my Rhino 5 upgrade?//</color>\\
+//**Answer:**// The Rhino 5 upgrade installer will install if one of the following is true:
 
   * Rhino 4.0 is installed 
   * Rhino 3.0 is installed 
@@ -72,27 +75,27 @@ On Windows XP delete all the files in: //C:\Documents and Settings\All Users\App
 There is no need to install the previous version. Just have the key codes ready.
 
 \\
-<color darkslategray> **//Question://** //I've got a new computer and I want to install Rhino version **X** SR **Y**.  I have always purchased the upgrade versions of Rhino.  Do I have to install all the previous versions and successive service releases?? //</color>\\
-**//Answer://**  No.  Simply install the last upgrade version you have downloaded or from the DVD (download is recommended).  During the install, you will be asked to type in a license key of a previous version to validate that you have it, but it is not necessary to actually **install** the previous versions.  If you have installed from a DVD, use Help > Check for updates to see if you have the latest Service Release, if not, download and install that. It is not necessary to install any previous Service Releases.
+<color darkslategray> **//Question://** //I've got a new computer and I want to install Rhino version **X** SR **Y**.  I have always purchased the upgrade versions of Rhino.  Do I have to install all the previous versions and successive Service Releases?? //</color>\\
+**//Answer://**  No.  Simply install the last upgrade version you have downloaded or from the DVD (download is recommended).  The installation asks for your previous version's license key to validate that you have it, but it is not necessary to actually **install** the previous versions.  If you have installed from a DVD, use Help > Check for updates to see if you have the latest Service Release, if not, download and install that. It is not necessary to install any previous Service Releases.
 
 \\
 <color darkslategray> **//Question://** //What are Service Releases?//</color>\\
-**//Answer://**  These installers are downloadable and will only install if you have a version of the product already installed.  Service Releases are identified two ways: the SR number, like SR3 or SR4b; and the date, which is coded into the name of the download file like 20050729, meaning July 29, 2005.
+**//Answer://**  These installers are downloadable and will only install if you have a version of the product already installed.  Service Releases are identified two ways: the SR number, like SR3 or SR4b, and the date, which is coded into the name of the download file like 20050729, meaning July 29, 2005.
 
 \\
 <color darkslategray> **//Question://** //How do I tell what version is installed?//</color>\\
 **//Answer://**  
-Once you have the software installed, you can see the date and the SR number by viewing the //about// information, which appears on the splash screen when you start Rhino, or can be viewed by doing Rhino > Help > About [[rhino:rhinoceros|Rhinoceros]].
+Once you have the software installed, you can see the date and the SR number by viewing the //about// information, which appears on the splash screen when you start Rhino. Or you can view this by doing Rhino > Help > About [[rhino:rhinoceros|Rhinoceros]].
 
 For Flamingo, do the FlamingoAbout command. For Bongo, do the BongoAbout command.
 
 \\
-<color darkslategray> **//Question://** //Can I delete older versions in "Add or Remove Programs" without causing problems?//</color>\\
-**//Answer://** The //Add or Remove Programs// entry in the Control Panel in Windows is reporting all Service Releases as an installed program, each using approx. 250MB of disk space. This is somewhat misleading. Windows reports the total as though all installed files are added on to the existing installation even though many, if not all, files are actually overwritten on install. Do **not** use the //Add or Remove Programs// to remove older Service Releases of Rhino 4.0.
+<color darkslategray> **//Question://** //Can I delete older versions in //Add or Remove Programs// without causing problems?//</color>\\
+**//Answer://** The //Add or Remove Programs// entry in the Control Panel in Windows reports all Service Releases as an installed program, each using approximately 250MB of disk space. This is somewhat misleading. Windows reports the total as though all installed files are added on to the existing installation even though many, if not all, files are actually overwritten on installation. Do **not** use the //Add or Remove Programs// to remove older Service Releases of Rhino 4.0.
 
 \\
 <color darkslategray> **//Question://** //How do I transfer personalized settings from one Rhino installation to another?//</color>\\
-**//Answer://** See this[[SettingsTransfer| page with some advice on copying/transferring customized settings]].
+**//Answer://** See this[[SettingsTransfer| page for advice on copying or transferring customized settings]].
 
 
 {{tag>rhino5installation_en}}
