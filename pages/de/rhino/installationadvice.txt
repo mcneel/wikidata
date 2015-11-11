@@ -1,16 +1,16 @@
 ====== Häufig gestellte Fragen zu Installation oder Aktualisierungen von Rhino ======
-=====Systemverwalter:=====
+====Administratoren:====
 [[InstallingRhino|Einsatz von Rhino - Methoden für stille/skriptbare Installationen, Details von Ordnern und Register, etc.]]
-=====Installation von Rhino 5=====
+====Installation von Rhino 5====
 
 <color darkslategray>**//Frage://** //Wieso habe ich zwei Desktop-Kürzel für Rhino 5?//</color>\\
 **Antwort:** Rhino 5 installiert automatisch die 32-Bit und 64-Bit Versionen und es ist ein Shortcut für jede Version vorhanden. [[rhino:Why2Shortcuts|Werfen Sie einen Blick auf die folgende Seite für weitere Erklärungen darüber, wieso dies so ist.]]
 
 <color darkslategray>**//Frage://** //Wieso akzeptiert der Rhino 5 Installer meinen alten V3 oder V2 CD-Code nicht?//</color>\\ 
-**Antwort:**Der SR0 Installer ist fehlerhaft, es gibt aber eine einfache Methode, dies zu umgehen.\\
-Aktivieren Sie die Feststelltaste auf Ihrer Tastatur, wenn Sie Ihren alten V3 oder V2 CD-Code eingeben, dann sollte es funktionieren.\\
-Das Problem ist, dass der Installer keine Zeichen in Kleinbuchstaben akzeptiert und ändert die Anzeige, wenn Sie diese eingeben. Wenn Sie sicher stellen, dass die Buchstaben in Ihrem CD-Code in Großbuchstaben eingegeben werden, funktioniert der SR0 Installer.
-Bitte entschuldigen Sie die Unannehmlichkeiten. 
+**Antwort: **Sie haben eine sehr alte Installations-DVD (SR0), die einen Bug im Installationsprogramm aufweist.  Am besten laden Sie sich das neueste Installationsprogramm [[http://www.rhino3d.com/download/rhino/5/latest|hier]] herunter und probieren es mit diesem.
+
+Wenn dies nicht möglich ist: \\
+Aktivieren Sie die Feststelltaste auf Ihrer Tastatur, wenn Sie Ihren alten V3 oder V2 CD-Code eingeben, dann sollte es funktionieren.
 
 <color darkslategray>**//Frage://** //"Kann ich Rhino 5 installieren oder deinstallieren und dabei eine intakte Rhino 4 Installation behalten?"//</color>\\ 
 **Antwort:** Ja, <color darkslateblue>**//aber unter einer Bedingung//**</color> - lesen Sie weiter\\ 
@@ -28,75 +28,66 @@ C:\Program Files\Common Files\McNeel Shared\License Manager (32 bit)\\
 
 <color darkslategray>**//Frage://** //"Kann ich sowohl die Version 32-Bit wie auch die Version 64-Bit von Rhino 5 auf dem gleichen Computer installiert haben?"//</color>\\ 
 **Antwort:** Ja, kein Problem, außer dem oben genannten Problem mit dem Lizenzmanager.\\
-\\ 
- 
-=====Rhino 4.0 von Hand entfernen=====
-<color darkslategray>**//Frage://** Ich habe versucht, Rhino 4.0 zu deinstallieren, aber es trat ein Fehler auf und Rhino konnte nicht entfernt werden.</color>\\
-**//Antwort://** [[uninstalling|Entfernen Sie Rhino 4.0 von Hand.]]
 
-=====Rhino 5 von Hand entfernen=====
-<color darkslategray>**//Frage://** Ich habe versucht, Rhino 5 zu deinstallieren, aber es trat ein Fehler auf und Rhino konnte nicht entfernt werden.</color>\\
-**//Antwort://** [[rhino/5/uninstall|Entfernen Sie Rhino 5 von Hand.]]
+<color darkslategray>**//Frage://** //"Wenn ich versuche, eine Datei zu öffnen, erhalte ich eine Fehlermeldung, dass etwas unleserlich ist."//</color>\\
+**Antwort:** Es gibt zwei Teile:
+  - **Automatische Speicherung.** Wenn Sie die automatische Speicherung in Rhino aktiviert haben, werden temporäre Dateien in den unter den Optionen definierten Ordner gespeichert und eine Markierung zeigt an, dass Rhino läuft. Wenn Rhino auf normalem Weg geschlossen wird, wird diese automatisch gespeicherte Datei gelöscht und Rhino löscht auch diese Markierung. Wenn Rhino abstürzt, wird diese Markierung nicht gelöscht und die automatisch gespeicherte Datei ist immer noch vorhanden, wenn Rhino das nächste Mal startet. In diesem Fall werden Sie gewarnt, dass Rhino nicht richtig geschlossen wurde und Sie haben eine Chance, Ihre Arbeit aus der automatisch gespeicherten Datei zu bergen. Wenn Sie mit Nein antworten, verlieren Sie diese Datei.
+  - **Backup.** - Ab Version 4 SR7 haben wir eine automatische Backup-Funktion hinzugefügt. Wenn diese Eigenschaft nicht deaktiviert wurde und Sie eine vorhandene Datei öffnen, werden die Änderungen in dieser neuen Bearbeitungssitzung in eine neue Kopie dieser Datei gespeichert und die vorhandene Datei wird mit einem//.bak// hinter dem Namen im gleichen Ordner gespeichert.
+         - Version 5 erzeugt nun //.3dmbak//-Dateien und verfügt über eine Dateitypenliste, um diese zu öffnen.
+         - Für Rhino 4 verwenden Sie Ihren Datei-Explorer mit Anzeige der Dateinamenerweiterung für bekannte Dateitypen und ändern Sie den Dateinamen von //<dateiname>.3dm.bak// in //<dateiname>.3dm// um. Dann können Sie die Datei wie jede andere Rhino-3DM-Datei auch öffnen.
 
-=====Installation von aktualisierten Rhino-Versionen=====
+<color darkslategray>**//Frage://** //Bei der Installation von Rhino habe ich aus Versehen die Option zur Verwendung des Zoos ausgewählt, obwohl ich diesen eigentlich gar nicht nutzen möchte.//</color>\\
+**Antwort:** Unter Windows Vista oder Windows 7 löschen Sie alle Dateien im Ordner:
+//C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses.//
+Unter Windows XP löschen Sie alle Dateien im Ordner: //C:\Dokumente und Einstellungen\Alle Benutzer\Anwendungsdaten\McNeel\Rhinoceros\5.0\License Manager\Licenses//
 
-<color darkslategray>**//Frage://** //"Welche Versionsinformation benötige ich, damit meine Rhino 5 Aktualisierung installiert wird?"//</color>\\
-**//Antwort://** Der Rhino 5 Aktualisierungsinstaller wird installiert, wenn eine der folgenden Optionen gegeben ist.\\ 
-Es wird der Reihenfolge nach überprüft:\\
+  - Starten Sie Rhino neu.
+  - Geben Sie Ihren Lizenzschlüssel erneut ein.
+**Hinweis:** Auf einigen Systemen liegt das entsprechende Verzeichnis statt unter //"\Alle Benutzer\"// im Unterverzeichnis von //"\Domäne\"// samt Log-in-Name.
+\\
 
-Rhino 4.0 ist installiert
+====Rhino 4.0 manuell entfernen====
 
-Rhino 3.0 ist installiert
+<color darkslategray>**//Frage://** //Ich habe versucht, Rhino 4.0 zu deinstallieren, aber es trat ein Fehler auf und Rhino konnte nicht entfernt werden.//</color>\\
+**Antwort:** [[uninstalling|Deinstallieren Sie Rhino 4 manuell]].
 
-Rhino 2.0 ist installiert
+====Rhino 5.0 manuell entfernen====
+<color darkslategray>**//Frage://** //Ich habe versucht, Rhino 5.0 zu deinstallieren, aber es trat ein Fehler auf und Rhino konnte nicht entfernt werden.//</color>\\
+**Antwort:** [[de/rhino/5/uninstall|Deinstallieren Sie Rhino 5 manuell]].
 
-Der Rhino 4.0 CD-Code wurde während der Installation eingegeben
+====Installation von aktualisierten Rhino-Versionen====
 
-Der Rhino 3.0 CD-Code wurde während der Installation eingegeben
+<color darkslategray>**//Frage://** //"Welche Versionsinformation benötige ich, um ein Upgrade auf Rhino 5 zu installieren?"//</color>\\
+**Antwort:** Das Upgrade auf Rhino 5 wird ausgeführt, wenn eine der folgenden Optionen gegeben ist:
 
-Der Rhino 2.0 CD-Code wurde während der Installation eingegeben
+  * Rhino 4.0 ist installiert 
+  * Rhino 3.0 ist installiert 
+  * ob Rhino 2.0 installiert ist 
+  * Der Rhino 4.0 CD-Code wurde während der Installation eingegeben 
+  * Der Rhino 3.0 CD-Code wurde während der Installation eingegeben 
+  * Der Rhino 2.0 CD-Code wurde während der Installation eingegeben
 
+Es ist nicht nötig, eine Vorgängerversion zu installieren. Sie benötigen lediglich den Lizenzschlüssel.
 
-=====Übertragung von personalisierten Einstellungen von einer Rhino-Installation auf eine andere=====
-[[SettingsTransfer|Seite mit Anleitungen zum Kopieren/Übertragen von personalisierten Einstellungen]]
+====Installation von Rhino mit den neuesten Service Releases auf einem neuen Computer====
 
+<color darkslategray> **//Frage://** //Ich habe einen neuen Computer und möchte Rhino Version **X** SR **Y** installieren.  Ich habe immer Aktualisierungen von Rhino gekauft.  Muss ich ALLE vorherigen Versionen und sukzessive auch alle Service Releases installieren?? //</color>
 
-=====Installation von Rhino mit den neusten Service Releases auf einem neuen Computer=====
+**//Antwort://**  Nein.  Verwenden Sie einfach den aktuellen Installer von unserer Website oder installieren Sie von Ihrer DVD (Download wird empfohlen).  Während der Installation werden Sie aufgefordert, den Lizenzschlüssel einer Vorgängerversion einzugeben, aber es ist nicht nötig, diese Version auch tatsächlich zu **INSTALLIEREN**. Wenn Sie von DVD installiert haben, gehen Sie anschließend auf //Hilfe > Nach Updates suchen// und installieren Sie gegebenenfalls das neueste Service Release. Es ist ebenfalls nicht nötig, vorherige Service Releases zu installieren.
 
-**//Frage://** //Ich habe einen neuen Computer und möchte Rhino Version **X** SR **Y** installieren.  Ich habe immer Aktualisierungen von Rhino gekauft.  Muss ich ALLE vorherigen Versionen und folgende Service Packs installieren??//
+====Was sind Service Releases?====
+Diese Installer können heruntergeladen werden und werden nur installiert, wenn bereits eine Version des Produkts installiert ist.  Service Releases werden auf zwei Arten identifiziert: erstens mit der SR-Nummer (wie z.B. SR3 oder SR4b) und zweitens mit dem Datum, das im Namen der Download-Datei steht (wie z.B. 20050729, was dem 29. Juli 2005 entspricht).
 
-**//Antwort://**  Installieren Sie einfach die letzte Aktualisierung, die Sie auf CD haben.  Während der Installation werden Sie danach gefragt, die CD einer vorherigen Version einzulegen, um sie zu bestätigen. Es ist jedoch nicht nötig, vorherige Versionen tatsächlich zu '''INSTALLIEREN'''.  Wenn Sie die neuste Version von der CD installiert haben, fahren Sie mit der Installation der neusten Service Release weiter - es ist nicht nötig, vorherige Versionen zu installieren.
-
-=====Was sind Service Releases?=====
-Diese Installer können runtergeladen werden und werden nur installiert, wenn bereits eine Version des Produkts installiert ist.  Service Releases werden auf zwei Arten identifiziert: die SR Zahl, wie SR3 oder SR4b; und das Datum, welches im Namen der Download-Datei steht, z.B. 20050729, was 29. Juli 2005 bedeutet.
-
-=====Wie weiß ich, welche Version installiert ist?=====
-Wenn die Software installiert ist, können Sie Datum und SR-Nummer sehen, indem Sie auf "Info" gehen, diese Info erscheint im Splash-Screen, wenn Sie Rhino starten, oder kann über das Rhino-Menü Hilfe > Info visualisiert werden [[rhino:rhinoceros|Rhinoceros]].
+====Woher weiß ich, welche Version installiert ist?====
+Wenn die Software installiert ist, können Sie Datum und SR-Nummer einsehen, indem Sie diese vom Splash-Screen beim Start von Rhino ablesen. Sie können sich den Splash-Screen auch über den Menüeintrag Hilfe > Info anzeigen lassen und so überprüfen, welche Version von [[rhino:rhinoceros|Rhinoceros]] Sie besitzen.
 
 Für Flamingo verwenden Sie den Befehl FlamingoInfo. Für Bongo verwenden Sie den Befehl BongoInfo.
 
-=====Wo bekomme ich diese Service Releases?=====
-Am schnellsten erhalten Sie die SR, wenn Sie die Option Aktualisierungen suchen verwenden.  Gehen Sie in das Rhino Menü Hilfe und wählen Sie die Option Aktualisierungen suchen aus.  Wenn Sie mit dem Internet verbunden sind, werden Ihnen die Web Server von McNeel die richtige Service Release anbieten, wenn eine neue Version vorhanden ist.  Für Flamingo gehen Sie in das Menü Raytracing oder Photometrisch und wählen Sie die Option Aktualisierungen suchen.  Für Bongo gehen Sie in das Bongo Menü und wählen Sie die Option Aktualisierungen suchen.
+====Kann ich ältere Versionen problemlos unter "Programme hinzufügen oder entfernen" löschen?====
+Die Option "Programme hinzufügen und entfernen" in der Windows-Systemsteuerung vermerkt alle Service Releases als eigenständige installierte Programme, wobei jedes ungefähr 250 MB Festplattenkapazität beansprucht. Dies ist jedoch irreführend. Windows informiert über das Total, als würden alle installierten Dateien zur bestehenden Installation hinzugefügt werden, obwohl viele oder sogar alle Dateien beim Installieren überschrieben werden. Verwenden Sie **nicht** die Option "Programme hinzufügen oder entfernen", um ältere Rhino 4.0 Service Releases zu entfernen.
 
-=====Kann ich ältere Versionen problemlos unter "Programme hinzufügen oder entfernen" löschen?=====
-"Programme hinzufügen und entfernen" in der Windows Systemsteuerung meldet alle Service Releases als ein installiertes Programm, wobei jedes ungefähr 250MB Festplattenkapazität verwendet. Das ist manchmal irreführend. Windows informiert über das Total, als würden alle installierten Dateien zur bestehenden Installation hinzugefügt werden, obwohl viele oder sogar alle Dateien beim Installieren überschrieben werden. Verwenden Sie **nicht** die Option "Programme hinzufügen oder entfernen", um ältere Rhino 4.0 Service Releases zu entfernen.
+====Übertragung von persönlichen Einstellungen von einer Rhino-Installation auf eine andere====
+[[SettingsTransfer|Seite mit Anleitungen zum Kopieren/Übertragen von personalisierten Einstellungen]]
 
-=====Ich erhalte eine Fehlermeldung und die Installation wird nie fertiggestellt=====
-Werfen Sie einen Blick auf die folgende Seite [[debuginstaller|DebugInstaller]] für Anleitungen zur Erzeugung einer Logdatei des Fehlers und um technischen Support zu erhalten. 
 
-===== Fehler 1327. Ungültiges Laufwerk: =====
-**//Frage://** //Ich erhalten den "Fehler 1327. Ungültiges Laufwerk (E:, F:, etc)" bei der Installation//
-
-**//Ursache://** //Die Einstellungen in Ihrem Benutzerkonto sind so definiert, dass eines oder mehrere nicht vorhandene Laufwerke für spezielle Ordner verwendet werden sollen, wie "Meine Dateien"//
-
-**//Lösung://**
-  - Klicken Sie im Startmenü auf Ausführen.
-  - Geben Sie RegEdit ein und klicken Sie auf Ausführen
-  - Durchsuchen Sie den Ordner HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell 
-  - Suchen Sie Verzeichnisse, die den Buchstaben des Laufwerks enthalten, der im Fehler des Installers vorkommt. Wechseln Sie den Pfad dieser Verzeichnisse auf ein gültiges Laufwerk und einen gültigen Ordner.
-  - Durchsuchen Sie den Ordner HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell 
-  - Suchen Sie Verzeichnisse, die den Buchstaben des Laufwerks enthalten, der im Fehler vorkommt 
-
-**Anmerkung:** Diese Methode oder Aufgabe enthält Schritte, anhand derer Sie das Verzeichnis ändern können. Es können aber schwerwiegende Probleme auftreten, sollte das Verzeichnis nicht richtig geändert werden. Deshalb befolgen Sie die Anleitungen sorgfältig. Zur Sicherheit machen Sie Sicherungskopien des Verzeichnisses, bevor Sie es ändern. Dann können Sie das Verzeichnis wiederherstellen, wenn ein Problem auftritt. Für weitere Informationen über Sicherung und Wiederherstellung des Verzeichnisses klicken Sie auf den folgenden Artikel von Microsoft: 
-
-[[http://support.microsoft.com/kb/322756|How to back up and restore the registry in Windows ]]
+{{tag>rhino5installation_de}}
