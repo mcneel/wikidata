@@ -1,0 +1,36 @@
+====== Installationsfehler 1402 (Schlüssel konnte nicht geöffnet werden: UNBEKANNT\Komponenten)======
+======Rhino 5 für Windows======
+> **Zusammenfassung:** //Behebung der Installationsfehler 1402 oder 1406 (Schlüssel konnte nicht geöffnet werden: UNBEKANNT\Komponenten).//
+> ** Weitere Infos zu Installationsproblemen:** //[[installproblems|Problembehandlung bei der Installation von Rhino 5]]//
+
+=====Problem=====
+Ich erhalte die Fehlermeldung "Schlüssel konnte nicht geöffnet werden: UNBEKANNT\Komponenten\(Nummern und Ziffern). Fehler 1402. Stellen Sie sicher, dass Sie auf diesen Schlüssel zugreifen können oder setzen Sie sich mit Ihrem Support in Verbindung."
+
+=====Ursache====
+Der Registrierungsschlüssel HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<Ziffern>\Components hat falsche Berechtigungen.
+
+=====Antwort=====
+**//Lösung 1://**
+Geben Sie im Suchfeld des Windows-Startmenüs **cmd** ein. Klicken Sie mit der rechten Maustaste auf **cmd.exe** und wählen Sie **Als Administrator ausführen**. Kopieren Sie nun den folgenden Befehl, fügen Sie ihn in die Konsole ein und bestätigen Sie mit **Enter**. Nun sollte es möglich sein, Rhino zu installieren.
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//Lösung 2://**
+>//**Achtung:** Die folgende Prozedur beinhaltet Änderungen in der Windows-Registrierung. Fehlerhaftes Bearbeiten der Registrierung kann Ihren Computer beschädigen und dazu führen, dass dieser nicht mehr hochfährt. Wenn Sie die folgenden Schritte daher lieber nicht selber durchführen möchten, kontaktieren Sie bitte den technischen Support von McNeel.//
+
+  - Laden Sie das Programm [[http://technet.microsoft.com/de-de/sysinternals/bb897553|PsExec]] von Microsoft TechNet herunter und entpacken Sie es auf Ihrem Desktop.
+  - Öffnen Sie die Windows-Eingabeaufforderung.
+  - Wechseln Sie in Ihr Desktopverzeichnis
+  - Geben Sie in der Eingabeaufforderung **psexec -i -d -s c:\windows\regedit.exe** ein. Auf diese Weise starten Sie den Windows-Registrierungseditor mit den Zugriffsrechten eines Systemkontos, welches noch weitergehende Berechtigungen als ein Administratorenkonto hat.
+  - Wechseln Sie zu HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - Klicken Sie mit der rechten Maustaste auf das Vezeichnis **UserData** und wählen Sie **Berechtigungen...**
+  - Klicken Sie im Berechtigungsfenster für UserData auf **Erweitert**.
+  - Stellen Sie sicher, dass die Berechtigung der Gruppe **Administratoren** auf **Vollzugriff** eingestellt ist und **Benutzer** nur **Lesezugriff** haben. Es gibt in diesem Dialog noch weitere Berechtigungseinstellungen, aber die der Administratoren und Benutzer sind die wichtigsten.
+  - Aktivieren Sie das Kontrollkästchen **Alle Berechtigungen für untergeordnete Objekte durch vererbbare Berechtigungen von diesem Objekt ersetzen**.
+  - Klicken Sie zweimal auf **OK**, um die Änderungen zu bestätigen.
+  - Installieren Sie Rhino erneut.
+
+
+{{tag>rhino5installationerror_de}}
