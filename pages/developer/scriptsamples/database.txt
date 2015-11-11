@@ -2,37 +2,34 @@
 > **Developer:** //[[developer:rhinoscript|RhinoScript]]//
 > **Summary:** //Demonstrates how to access databases from VBScript using RhinoScript.//
 
-=====Introduction=====
 Probably the most popular use for VBScript is connecting to databases. It's incredibly useful and surprisingly easy to do.
 
-The first thing you need is the database, of course. A variety of programs can be used to create it, but probably the most popular is Microsoft Access. You can also use FoxPro or create it directly in an SQL Server using whichever utilities are supplied with the server.
+The first thing you need is the database, of course. A variety of programs can be used to create it, but probably the most popular is Microsoft Access. You can also use FoxPro or create it directly in an SQL Server using the utilities supplied with the server.
 
 In this example, we will connect to a simple Microsoft Access database. You can download the database used in this demonstration here:
 
 http://en.wiki.mcneel.com/content/upload/files/test_access_mdb.zip
 
-Most VBScript developers use Microsoft's ADO (ActiveX database objects) to get data from database. ADODB is comprised of 3 main objects: Connection, RecordSet, and Command. We will demonstrate the first two objects.
+Most VBScript developers use Microsoft's ADO (ActiveX database objects) to get data from database. ADODB is comprised of three main objects: Connection, RecordSet, and Command. We will demonstrate the first two objects.
 
-=====Connecting to a Database=====
-The Datasource is essentially a connection from the server or workstation to a database, which can either be on a dedicated machine running SQL server or a database file sitting somewhere on the web server.
+=====Connecting to a database=====
+The datasource is essentially a connection from the server or workstation to a database, which can either be on a dedicated machine running a SQL server or a database file sitting somewhere on the web server.
 
-To specify what database you would like to use, you need to add a DSN. That is short for Data Source Name. Data Source Name provides connectivity to a database through an ODBC driver. The DSN contains database name, directory, database driver, UserID, password, and other information. Once you create a DSN for a particular database, you can use the DSN in an application to call information from the database.
+To specify what database you would like to use, you need to add a Data Source Name (DSN). DSN provides connectivity to a database through an ODBC driver. The DSN contains the database name, directory, database driver, UserID, password, and other information. Once you create a DSN for a particular database, you can use the DSN in an application to call information from the database.
 
-There are essentially two types of Datasources (DSN's):
+There are essentially two types of datasources:
 
-  - System DSN - A datasource created on the web server by the administrator of the server. The most popular type of DSN and generally a lot more reliable.
-  - File DSN - Essentially a connection that your script makes itself each time access to the database is required, specifying the path to and name of the database. The database must reside on the server in a directory that your script can access for this to work.
+  - System DSN - A datasource created on the web server by the server administrator. The most popular type of DSN. Generally the most reliable of the two.
+  - File DSN - A connection that your script makes each time access to the database is required, specifying the path to and name of the database. For this to work the database must reside on the server in a directory that your script can access.
 
-The code below is designed around a System DSN named "test" that points to the above database. You can create System DSNs using the Data Sources (OBDC) applet found in Control Panel. In Windows, the shortcut to the ODBC control panel can be found in the following location.
-
-Start > Control Panels > Administrative Tools > Data Sources (ODBC)
+The code below is designed around a System DSN named //test// that points to the above database. You can create System DSNs using the Data Sources (OBDC) applet found in Control Panel. In Windows, the shortcut to the ODBC control panel can be found in the following location: Start > Control Panels > Administrative Tools > Data Sources (ODBC).
 
 =====Working with Recordsets=====
-In order to read information from a Datasource, you need to open a 'Recordset' - a set of database records based on some type of criteria, either all of the records in a table or those matching some condition or set of conditions.
+To read information from a Datasource, you need to open a Recordset, a set of database records based on some type of criteria, either all the records in a table or those matching some condition or set of conditions.
 
 =====Example=====
 
-The following example [[developer:rhinoscript|RhinoScript]] code demonstrates how to connect to a system DSN named "test" and read point coordinate records from a table named "points."
+The following example RhinoScript code demonstrates how to connect to a system DSN named //test// and read point coordinate records from a table named //points//.
 
 
 <code vb>
