@@ -1,0 +1,25 @@
+====== Installationsfehler 1921 (Rhino 5 für Windows) ======
+> **Zusammenfassung:** //Behebung des Installationsfehlers 1921.//
+> ** Weitere Infos zu Installationsproblemen:** //[[installproblems|Problembehandlung bei der Installation von Rhino 5]]//
+
+=====Problem=====
+Die Protokolldatei zeigt den "Fehler 1921.  (1)Anhalten von Dienst 'McNeel Update Service 5.0' (McNeelUpdate) nicht möglich. Stellen Sie sicher, dass Sie über ausreichende Rechte zum Anhalten der Systemdienste verfügen."
+
+=====Antwort=====
+**//Lösung 1://**
+  * **Starten Sie Windows neu und führen Sie den Installer erneut aus.** Der Update Service startet, wenn Rhino ausgeführt wird, so dass er nach einem Neustart nicht läuft.
+\\ 
+**//Lösung 2://**
+  * **Manuelles Anhalten des Services**
+    - Führen Sie Services.msc aus. 
+    - Suchen Sie "McNeel Update Service 5.0"
+    - Klicken Sie mit der rechten Maustaste darauf und wählen Sie "Eigenschaften"
+    - Ändern Sie den Startmodus von "Automatisch" auf "Deaktiviert"
+    - Schließen Sie Dienste
+    - Starten Sie Windows neu
+    - Installieren Sie Rhino
+    - Führen Sie Services.msc erneut aus
+    - Ändern Sie den Startmodus von "McNeel Update Service 5.0" wieder auf "Automatisch".
+
+
+{{tag>rhino5installationerror_de}}
