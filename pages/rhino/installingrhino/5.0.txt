@@ -1,6 +1,6 @@
 
 ====== Automating Installation of Rhino 5 ======
-=====Installing Rhinoceros=====
+=====Installing Rhino=====
 
   * [[rhino:debuginstaller|Diagnosing errors during Rhino 5 installation]]
   * [[rhino:installrhi|Installing RHI Files for All Users]]
@@ -9,10 +9,10 @@
 
 These instructions are useful for System Administrators who want to deploy Rhino 5 throughout an organization using Active Directory or SMS.
 
-These techniques will also work for automated installation by running the MSI from a folder that contains a customized Setup.ini. This does not require Active Directory, SMS, or other deployment tools.
+These techniques also work for automated installation by running the MSI from a folder that contains a customized Setup.ini. This does not require Active Directory, SMS, or other deployment tools.
 
 ====Prerequisites====
-Rhino 5 requires the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]] be installed on the target system before installation. Download a fresh [[http://www.rhino3d.com/download|full installer]] from the Rhino Download page. Follow these instructions to  [[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|uncompress the downloaded Rhino 5 EXE into a folder.]] Optionally, you can download the .NET installer from [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft]].
+Rhino 5 requires the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]] be installed on the target system before installation. Download a fresh [[http://www.rhino3d.com/download|complete install]] from the Rhino Downloads page. Follow these instructions to  [[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|uncompress the downloaded Rhino 5 EXE into a folder.]] Optionally, you can download the .NET installer from [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft]].
 
 ====Deployment preparation====
 Edit the **Setup.ini** file and place it next to the MSI file you are installing. 
@@ -22,7 +22,7 @@ Edit the **Setup.ini** file and place it next to the MSI file you are installing
 ====Deployment configuration====
   - Open **Active Directory Users & Computers**.
   - Right click the Group or Organizational Unit that contains the users or computers to receive Rhino 5, then click **Properties**.
-  - In the Group Policy tab, add a new Group Policy Object named **Install Rhino 5.0**.
+  - In the Group Policy tab, add a new Group Policy Object named **Install Rhino 5**.
   - Select the **Install Rhino 5.0** Group Policy Object, then click **Edit.**
   - Determine whether you will be installing per-computer or per-user. (Read up on Group Policy to determine which works best for your organization.)
   - Under User Configuration or Computer Configuration (depending on what you chose in the last step), expand **Software Settings**, then right click **Software installation**, then click **New -> Package**.
@@ -47,23 +47,23 @@ msiexec.exe /i"D:\Installers\setup_x64_en-us.msi" INSTALLDIR="C:\Program Files\R
  
 </code>
      
-**Silent installation:** To install without any user interface, msiexec supports several options. See [[http://technet.microsoft.com/en-us/library/cc759262(v=ws.10).aspx|Msiexec Command-Line Options]] documentation at Microsoft for details on the /q switch.
+**Silent installation:** To install without any user interface, msiexec supports several options. See [[http://technet.microsoft.com/en-us/library/cc759262(v=ws.10).aspx|Msiexec command-line options]] documentation at Microsoft for details on the /q switch.
 
 **Note:** 32- and 64-bit Rhino should be installed in separate directories.
-For an explanation of these parameters, and the other possible ones, see **[[rhino:automatedinstalls|Editing Rhino4Setup.ini]]**.
+For an explanation of these parameters, and the other possible ones, see [[rhino:automatedinstalls|Editing Rhino4Setup.ini]].
 
 =====Rhino 5 install with script and INI file=====
 Edit the **Setup.ini** in the Installers folder of your installation DVD. If you are installing from a downloaded file, follow these instructions to  [[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|uncompress the downloaded Rhino 5 EXE into a folder.]] Remove comments (#) from the parameters that you want to set for the installation process.
 
-**Note:** The installer ignores all characters following a # sign in a line, even if the # character appears in the middle of a line. For more configuration details, see **[[rhino:installingrhio:5.0:setupini|Editing Setup.ini]]**.
+**Note:** The installer ignores all characters following a # sign in a line, even if the # character appears in the middle of a line. For more configuration details, see [[rhino:installingrhio:5.0:setupini|Editing Setup.ini]].
 
 You must reconfigure the setup.ini file with different paths for installing 32- and 64-bit Rhino. Installing them both into the same folder will cause problems!
 
 Launch the MSI file and it will automatically find the INI file in the same folder, read the parameters from it, and run the installer silently.
 
-**Example batch file:**\\
+**Example batch file**\\
 
-This will install both 32 and 64-bit Rhino 5 with US English language and Help file support assuming you copied the Installers folder from the Rhino 5 DVD into C:\Temp\Installers folder, edited the **setup.ini** file as needed, and made a batch file with the following details:
+This will install both 32- and 64-bit Rhino 5 with US English language and Help file support assuming you copied the Installers folder from the Rhino 5 DVD into C:\Temp\Installers folder, edited the **setup.ini** file as needed, and made a batch file with the following details:
 <code>
 
 msiexec /i C:\Temp\Installers\rhino5setup_en-us_x64.msi /qb
@@ -74,7 +74,7 @@ msiexec /i C:\Temp\Installers\HelpMedia.msi /qb
 </code>
 
 =====Incomplete Rhino 5 install without the language pack=====
-Are you missing templates, toolbars, or plug-ins? This is a symptom that the language pack was not installed. This can be an incomplete or //botched// install if you are installing from the downloaded installer or an error in the install script if you are installing from an MSI script.
+Are you missing templates, toolbars, or plug-ins? This is a symptom that the language pack was not installed. This can be an incomplete or //botched// installation if you are installing from the downloaded installer or an error in the install script if you are installing from an MSI script.
 
 If you install Rhino with the MSI install script above, but forget the language pack line, you will need to manually run the MSI for the language pack on your systems.
 
