@@ -1,0 +1,19 @@
+====== Installationsfehler 1406 (Wert kann nicht in den Registrierungsschlüssel geschrieben werden...) ======
+> **Zusammenfassung:** //Behebung des Installationsfehlers 1406 (Wert kann nicht in den Registrierungsschlüssel geschrieben werden...).//
+> ** Weitere Infos zu Installationsproblemen:** //[[installproblems|Problembehandlung bei der Installation von Rhino 5]]//
+
+=====Problem=====
+Ich erhalte eine Nachricht mit dem "Fehler 1406. Wert kann nicht in den Registrierungsschlüssel \Software\Classes\CLSID\{(Zahlen und Nummern)}\LocalServer32 geschrieben werden. Stellen Sie sicher, dass Sie auf diesen Schlüssel zugreifen können oder setzen Sie sich mit Ihrem Support in Verbindung. (1406)"
+
+=====Ursache====
+HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{Zahlen und Nummern} ist nicht vorhanden und das Schreiben des Registrierungsschlüssels wird durch ein Antivirenprogramm verhindert.
+
+=====Antwort=====
+Deaktivieren Sie Ihr Antivirenprogramm und installieren Sie Rhino 5 erneut.\\ \\
+Die Einstellungen einiger Antivirenprogramme sind ziemlich kompliziert. Wenn Sie nicht wissen, wie Sie Ihr Antivirenprogramm vollständig deaktivieren, können Sie es vor der Installation von Rhino 5 vorübergehend entfernen. Installieren Sie das Programm nach der erfolgreichen Installation von Rhino 5 erneut.
+
+=====Hinweis=====
+Dieses Problem tritt nur auf, wenn auf Ihrem Windows noch nie Rhino 5 installiert wurde. Diese Registrierungsschlüssel sind nicht vorhanden und der Antivirenschutz verhindert, dass sie vom Rhino-5-Installer angelegt werden.\\ \\
+Wenn Rhino 5 in diesem Windows bereits einmal installiert wurde, sind die Registrierungsschlüssel auch dann vorhanden, wenn Rhino inzwischen deinstalliert wurde. Der Rhino-Installer versucht daher nicht, die Schlüssel erneut zu schreiben und es kommt so auch zu keinem Problem mit einem Antivirenprogramm.
+
+{{tag>rhino5installationerror_de}}
