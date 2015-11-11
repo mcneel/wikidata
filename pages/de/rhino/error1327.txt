@@ -1,0 +1,23 @@
+====== Installationsfehler 1327 - Ungültiges Laufwerk (Rhino 5 für Windows) ======
+> **Zusammenfassung:** //Behebung des Installationsfehlers 1327 - Ungültiges Laufwerk.//
+> ** Weitere Infos zu Installationsproblemen:** //[[installproblems|Problembehandlung bei der Installation von Rhino 5]]//
+
+=====Problem=====
+Ich erhalte bei der Installation den "Fehler 1327. Ungültiges Laufwerk (E:, F: etc)".
+
+=====Ursache====
+Die Einstellungen in Ihrem Benutzerkonto sind so definiert, dass ein oder mehrere nicht vorhandene Laufwerke für spezielle Ordner wie "Meine Dateien" verwendet werden sollen.
+
+**Hinweis:** Diese Methode oder Aufgabe enthält Schritte, anhand derer Sie das Verzeichnis ändern können. Es können aber schwerwiegende Probleme auftreten, sollte das Verzeichnis nicht richtig geändert werden. Deshalb befolgen Sie die Anleitungen sorgfältig. Zur Sicherheit machen Sie Sicherungskopien des Verzeichnisses, bevor Sie es ändern. Dann können Sie das Verzeichnis wiederherstellen, wenn ein Problem auftritt. Für weitere Informationen über Sicherung und Wiederherstellung des Verzeichnisses klicken Sie auf den folgenden Artikel von Microsoft:
+[[http://support.microsoft.com/kb/322756|Sichern und Wiederherstellen der Registrierung in Windows XP]]
+
+=====Antwort=====
+  - Klicken Sie im Startmenü auf Ausführen.
+  - Geben Sie RegEdit ein und klicken Sie auf Ausführen.
+  - Durchsuchen Sie den Ordner HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell.
+  - Suchen Sie Verzeichnisse, die den Buchstaben des Laufwerks enthalten, der im Fehler des Installers vorkommt. Wechseln Sie den Pfad dieser Verzeichnisse auf ein gültiges Laufwerk und einen gültigen Ordner.
+  - Durchsuchen Sie den Ordner HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell.
+  - Suchen Sie Verzeichnisse, die den Buchstaben des Laufwerks enthalten, der im Fehler des Installers vorkommt. Wechseln Sie den Pfad dieser Verzeichnisse auf ein gültiges Laufwerk und einen gültigen Ordner. 
+
+
+{{tag>rhino5installationerror_de}}
