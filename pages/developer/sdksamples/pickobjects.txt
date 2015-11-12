@@ -1,13 +1,13 @@
 ====== Picking Objects without CRhinoGetObject ======
 > **Summary:** //Demonstrates an alternate technique to picking objects without using CRhinoGetObject.//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  A similar example adapted for the new RhinoCommon SDK is available [[developer:rhinocommonsamples:pickobject|here]]//
+> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  A similar example adapted for the new RhinoCommon SDK is available [[developer:rhinocommonsamples:pickobject|here]]//.
 =====Question=====
-If I already have a 3-D point, is there way to pick all of the objects that are underneath it?
+If I already have a 3-D point, is there a way to pick all the objects that are underneath it?
 
 =====Answer=====
-You can use **CRhinoPickContext** to build your own object picker. For more details on **CRhinoPickContext**, see **rhinoSdkPick.h**. With the **CRhinoPickContext** class, you can define the rules for picking. For example, you can specify a picking style (point, window, crossing). You can also specify a filter so you only pick the types of objects you want. The most important part is to define a pick chord, which starts on near clipping plane and ends on far clipping plane.
+You can use **CRhinoPickContext** to build your own object picker. For more details on **CRhinoPickContext**, see **rhinoSdkPick.h**. With the **CRhinoPickContext** class, you can define the rules for picking. For example, you can specify a picking style (point, window, crossing). You can also specify a filter so you only pick the types of objects you want. The most important part is to define a pick chord, which starts on **near clipping plane** and ends on **far clipping plane**.
 
-After you have created an CRhinoPickContext object and filled out is parameters, you then call **CRhinoDoc::PickObjects**. This function goes through list of eligible objects and intersects them with the pick frustum. If they hit the frustum in an acceptable manner, the object is added to a pick list passed in by the caller.
+After you have created the CRhinoPickContext object and filled out its parameters, call **CRhinoDoc::PickObjects**. This function goes through the list of eligible objects and intersects them with the pick frustum. If they hit the frustum in an acceptable manner, the object is added to a pick list passed in by the caller.
 
 Here is a simple example of a function that might work for you:
 
@@ -85,7 +85,7 @@ public int MyObjectPicker(MRhinoDoc doc, MRhinoView view, System.Drawing.Point p
 }
 
 </code>
-And, here is a sample of its usage:
+And, here is a sample of its use:
 
 ===== C++ =====
 <code c++>
