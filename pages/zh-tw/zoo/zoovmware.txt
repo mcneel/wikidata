@@ -1,0 +1,25 @@
+====== VMWare下的Zoo======
+> **產品：**//[[zoo:home|Zoo ]]//
+> **摘要:** //討論Zoo以及在OS X的VMWare下執行它。//
+
+=====問題=====
+如同在您[[:zoo:zooosx|網站]]所描述的，我們在VMWare Fusion Pro、Mac OS X伺服器上的Windows安裝了Zoo。 不知什麼原因，就是不能夠正常執行。 關於Rhino我們已經試過自動檢測或是指定伺服器IP位址。 Rhino只是回報//發生未知異常，請聯絡您的系統管理員以取得支援。//
+
+=====解答=====
+請記住您不只是在執行Windows，您正在執行Windows作為在OS X底下的虛擬機器。 所以在配置額外網絡方面需要下點功夫。
+
+如果您對VMWare並不熟悉，以下資訊很值得參考：[[http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1022264|了解VMWare Fusion的網路類型]]
+
+在網路上搜尋"Run Web Server on VMWare Fusion"就可以找到許多有用的資訊。請注意Zoo就像使用Web 伺服器那樣使用TCP Port 80。
+
+取決於您目前Mac伺服器正在做什麼以及正支援多少VMWare的其他會話(session)。配置可以是非常簡單或是稍微再多一點細節。
+
+例：如果您的Mac伺服器並不乘載任何網路服務，並只執行單一VMWare會話(session)，那麼只要設置會話的網路介面卡至"Bridged"模式就可以。這是讓Zoo於VMWare內正常運作最簡單的方法。 
+
+如果需要為NAT配置網路介面卡，那麼您需要將VMWare設為端口轉發。
+
+[[http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2006955|利用NAT模式網路在虛擬機器上配置網路伺服器。]]
+
+\\
+
+{{tag>Zoo}}
