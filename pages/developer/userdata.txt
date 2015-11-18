@@ -1,15 +1,13 @@
-====== Info: Rhino plug-in user data ======
+====== Info: Rhino Plug-in User Data ======
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Discusses document and object user data.//
-
-=====Overview=====
 
 
 There are two basic ways plug-ins can store information in Rhino .3dm files, **document user data** and **object user data**.
 
-For example, a rendering plug-in might save a scene descriptions as **document user data** and use **object user data** to attach rendering material information to individual surfaces.
+For example, a rendering plug-in might save a scene description as **document user data** and use **object user data** to attach rendering material information to individual surfaces.
 
-=====Document User Data=====
+=====Document user data=====
 
 
 To save document user data your plug-in must override three CRhinoPlugIn base class functions:
@@ -20,22 +18,22 @@ CRhinoPlugIn::WriteDocument
 CRhinoPlugIn::ReadDocument
 </code>   
 
-When Rhino writes a .3dm file, it goes through all the plug-ins that are currently loaded.  First Rhino calls CallWriteDocument() to see if the plug-in wants to save document user data.  If CallWriteDocument() returns true, Rhino saves information that identifies the plug-in and then calls WriteDocument() when it is time for the plug-in to save its "document" user data.
+When Rhino writes a .3dm file, it goes through all the plug-ins that are currently loaded.  First Rhino calls CallWriteDocument() to see if the plug-in wants to save document user data.  If CallWriteDocument() returns true, Rhino saves information that identifies the plug-in and then calls WriteDocument() when it is time for the plug-in to save its document user data.
 
-When Rhino reads a .3dm file and it encounters document user data, it uses the plug-in identification information to load the plug-in and then calls the plug-in's ReadDocument() to read the plug-in's "document" user data.
+When Rhino reads a .3dm file and it encounters document user data, it uses the plug-in identification information to load the plug-in and then calls the plug-in's ReadDocument() to read the plug-in's document user data.
 
-A Sample of this is provided at **[[developer:sdksamples:documentdata|SdkDocumentData]]**.
+A sample of this is provided at **[[developer:sdksamples:documentdata|SdkDocumentData]]**.
 
 
-=====Object User Data=====
+=====Object user data=====
 
-Object user data can be attached to things like layers, materials, geometry objects, and object attributes.  In fact object user data can be attached to any class derived from ON_Object.  This user data is stored in a linked list on ON_Object and can be copied, transformed and saved along with the parent object.  For example, you could attach object user data to a mesh.  When the mesh is copied the object user data would be copied and attached to the copy.  When the mesh is transformed, the transformation would be recored by the object user data.  When the mesh is saved in a .3dm file, the object user data will be saved too.
+Object user data can be attached to things like layers, materials, geometry objects, and object attributes.  In fact object user data can be attached to any class derived from ON_Object.  This user data is stored in a linked list on ON_Object and can be copied, transformed, and saved along with the parent object.  For example, you could attach object user data to a mesh.  When the mesh is copied the object user data is copied and attached to the copy.  When the mesh is transformed, the transformation is recorded by the object user data.  When the mesh is saved in a .3dm file, the object user data is saved too.
 
-All object user data is saved in a class you write that is derived from the class ON_UserData.  The first example, CMyUserData1, shows how to make a simple piece of user data that is not save in .3dm files.  The second example, CMyUserData2, shows how to make a piece of user data that is saved in .3dm files.
+All object user data is saved in a class you write that is derived from the class ON_UserData.  The first example, CMyUserData1, shows how to make a simple piece of user data that is not saved in .3dm files.  The second example, CMyUserData2, shows how to make a piece of user data that is saved in .3dm files.
 
 =====Examples=====
 
-**[[http://wiki.mcneel.com/_media/legacy/en/MyUserDataExample.zip|The source code for the next two the examples can be downloaded here.]]**
+You can download the [[http://wiki.mcneel.com/_media/legacy/en/MyUserDataExample.zip|source code for the next two examples]] here.
 
 ===Example: CMyUserData1===
 
@@ -61,7 +59,7 @@ public:
 };
 </code>
 
-The CMyUserData1 class must always be on the heap ( constructed by calling the C++ new operator ).  The class's constuctor must initialize two ON_UserData fields, m_userdata_uuid, m_application_uuid.  In addition, if you want the object user data to be copied whenever its parent object is copied, you have to set m_userdata_copycount to one.
+The CMyUserData1 class must always be on the heap (constructed by calling the C++ new operator).  The class's constuctor must initialize two ON_UserData fields, m_userdata_uuid, m_application_uuid.  In addition, if you want the object user data copied whenever its parent object is copied, you have to set m_userdata_copycount to one.
 
 <code c++>
 ON_UUID CMyUserData1::Id()
@@ -125,7 +123,7 @@ else
 
 Make sure you completely understand the CMyUserData1 example before studying this example.
 
-In order to have your user data saved in files, you have to add several IO related functions and add full [[developer:opennurbs:home|opennurbs]] object support to your class.
+To have your user data saved in files, you have to add several IO related functions and add full [[developer:opennurbs:home|opennurbs]] object support to your class.
 
 <code c++>
 class CMyUserData2 : public ON_UserData
@@ -157,7 +155,7 @@ public:
 };
 </code>
 
-Again, the CMyUserData2 class must always be on the heap ( constructed by calling the C++ new operator ).  In order to support file IO, the definition of CMyUserData2 must contain the ON_OBJECT_DECLARE macro.
+Again, the CMyUserData2 class must always be on the heap (constructed by calling the C++ new operator). To support file IO, the definition of CMyUserData2 must contain the ON_OBJECT_DECLARE macro.
 
 The cpp file where the class is implemented must contain the ON_OBJECT_IMPLEMENT macro shown below.
 
@@ -165,7 +163,7 @@ The cpp file where the class is implemented must contain the ON_OBJECT_IMPLEMENT
 ON_OBJECT_IMPLEMENT(CMyUserData2,ON_UserData,"0D8FA7AB-F8A4-...");
 </code>
 
-The construction code for CMyUserData2 looks like.
+The construction code for CMyUserData2 looks like:
 
 <code c++>
 ON_UUID CMyUserData2::Id()
@@ -265,7 +263,7 @@ BOOL CMyUserData2::Read(ON_BinaryArchive& binary_archive)
 }
 </code>
 
-=====Attaching Object User Data to CRhinoObjects=====
+=====Attaching object user data to CRhinoObjects=====
 
 The Rhino geometry table is where the bulk of the Rhino model is stored.  This is where the points, curves, meshes, surface, polysurfaces, annotation, render lights, and so on are stored.  Each member of the geometry table is derived from the CRhinoObject class.  There are three places you can attach object user data to a CRhinoObject: the CRhinoObject geometry class, the CRhinoObject attributes class, and the CRhinoObject itself.  Object user data attached to the geometry and attributes class persists through copys, transformations, and file IO.  Object user data attached directly on the CRhinoObject class is never saved in .3dm file.
 
