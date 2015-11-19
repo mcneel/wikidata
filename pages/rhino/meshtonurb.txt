@@ -37,7 +37,7 @@ MeshToNurb will convert a (faceted) mesh structure to a (faceted) NURBS structur
 
 **Mesh Triangles.** Triangles are by definition planar.  MeshToNurb will convert mesh triangles into either trimmed planar NURBS surfaces, or untrimmed planar NURBS surfaces with a singularity (one edge collapsed to a point), depending on whether you have set the command line option //TrimTriangularFaces// to //Yes// or //No//.  That option is only available if you do not preselect the meshes before starting the command. The trimmed NURBS surface will be a degree 1 x 1 surface as with the quads, just with one half trimmed off to form a triangle.
 
-Based on the above, the resulting polysurface from MeshToNurb will have **//exactly//** the same edges as the original mesh model and be composed entirely of degree 1 x 1 (bilinear) NURBS surfaces.  Triangle surfaces will be planar and trimmed, quad surfaces will be untrimmed and either planar or not.
+Based on the above, the resulting polysurface from MeshToNurb will have **//exactly//** the same edges as the original mesh model and be composed entirely of degree 1 x 1 (bilinear) NURBS surfaces.  Triangle surfaces will be planar and trimmed or not according to the option chosen; quad surfaces will be untrimmed and either planar or not according to the planarity of their 4 corner points.
 
 **Important note:** MeshToNurb will not subdivide the quad areas into triangles to create planar surfaces.
 
