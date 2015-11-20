@@ -2,44 +2,42 @@
 > **Products:** //Rhino 4.0 with some Nvidia and ATI cards, usually older ones. The same card may react differently on different computers.//
 > **Problem:** //Cursor slow or "jumpy" - does not keep up with mouse movement. Described as being "stuck in the mud."//
 
-======Solution======
-====1. Get the latest driver from Video Card Manufacturer.====
-If it is nVidia, pick [[http://www.nvidia.com/content/drivers/drivers.asp|here]]
+=====Solution=====
+===1. Get the latest driver from the video card manufacturer.===
+If it is NVIDIA, pick [[http://www.nvidia.com/content/drivers/drivers.asp|here]].
 
-If it is ATI, pick [[http://ati.de/support/driver.html|here]]
+If it is ATI, pick [[http://ati.de/support/driver.html|here]].
 
-====2. Set OpenGL Pipeline to Windows====
+===2. Set OpenGL Pipeline to Windows===
 Tools->Options->Appearance->Advanced Display->Wireframe->Other Settings.
 
 In the dialog on the right, under Pipeline Controls, set the list control to Windows, not [[rhino:opengl|OpenGL]].
 
-Changing wireframe implementation to Windows does usually help in wireframe mode when a computer is has this display problem (especially for older computers with underpowered video cards.)
+Changing wireframe implementation to Windows does usually help in wireframe mode when a computer has this display problem (especially for older computers with underpowered video cards.)
 
 {{:legacy:en:advanced-other2.jpg}}
 
-====3. Do Not Use OpenGL for Drawing Feedback====
+===3. Do not use OpenGL for drawing feedback.===
 Tools->Options->Appearance->[[rhino:opengl|OpenGL]].
 
-In the dialog on the right, check "Use accelerated hardware modes."
-
-and check "Do not use [[rhino:opengl|OpenGL]] for drawing feedback items."
+In the dialog on the right, check **Use accelerated hardware modes** and **Do not use OpenGL for drawing feedback items**.
 
 This can cause some minor side effects in some cases like things not being redrawn instantly.
 
 {{:legacy:en:opengl-setting2.jpg}}
 
-====4. Turn Off Vertical Sync in the nVidia Driver.====
-We did it by right clicking on the Windows desktop, pick Properties.
+===4. Turn Off Vertical Sync in the NVIDIA driver.===
+We did it by right-clicking on the Windows desktop, pick Properties.
 
 From Properties go to the Setting tab, and pick the Advanced button.
 
-On Advanced, you will see a tab for the nVidia GeForce control.
+On Advanced, you will see a tab for the NVIDIA GeForce control.
 
-We found it under "3D Controls." There was a list of settings. Towards the bottom you will find "vertical sync. In the list control set it to "force off".
+We found it under **3D Controls**. There was a list of settings. Towards the bottom you will find **vertical sync**. In the list control set it to **force off**.
 
-> **Note:** //This is nVidia's driver so the location of this option may change. Please direct any question about locating Vertical Sync to nVidia.//
+> **Note:** //This is NVIDIA's driver so the location of this option may change. Please direct any question about locating Vertical Sync to NVIDIA.//
 
-> **Comments:** //Item #2 - changing wireframe implementation to Windows does usually help in wireframe mode when a computer is exhibiting the above display problem (the cursor feels and moves like it's stuck in mud) especially for older computers with underpowered video cards.  BUT, it does nothing for you when you are in shaded modes, as you are 100% in [[rhino:opengl|OpenGL]] there, including curve display (unless you are using DirectX).  Item #3 is important.  It can cause some minor side effects in some cases like things not being redrawn instantly (i.e. a blank space when a floating toolbar is closed).  [Mitch 17.05.07]//
+> **Comments:** //Item #2 - Changing wireframe implementation to Windows does usually help in wireframe mode when a computer is exhibiting the above display problem (the cursor feels and moves like it's stuck in mud), especially for older computers with underpowered video cards.  BUT, it does nothing for you when you are in shaded modes, as you are 100% in [[rhino:opengl|OpenGL]] there, including curve display (unless you are using DirectX).  Item #3 is important.  It can cause some minor side effects in some cases like things not being redrawn instantly (i.e. a blank space when a floating toolbar is closed).  [Mitch 17.05.07]//
 
 
 
