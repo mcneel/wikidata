@@ -1,6 +1,6 @@
 ====== Type Casting SDK Objects ======
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
-> **Summary:** //Discusses type casting Rhino SDK objects.//
+> **Summary:** //Discusses type casting Rhino SDK objects//
 
 ===== Question =====
 Given a Rhino object, how can I convert it to another Rhino object? For example, if I have a **CRhinoObject** pointer, how can I convert it to a **CRhinoCurveObject** pointer? Or, how can I get the curve geometry?
@@ -8,7 +8,7 @@ Given a Rhino object, how can I convert it to another Rhino object? For example,
 ===== Answer =====
 All Rhino SDK classes derived from **ON_Object** provide conversions between pointers to related classes using a static **ON_Object::Cast** function.
 
-If you have a pointer to some base class, that inherits from **ON_Object**, and you want to convert it to a pointer of a derived class, than simply call the derived class' **Cast** function. 
+If you have a pointer to some base class that inherits from **ON_Object**, and you want to convert it to a pointer of a derived class, than simply call the derived class **Cast** function. 
 
 For example:
 
@@ -17,7 +17,7 @@ const CBase* a = ...;
 const CDerived* b = CDerived::Cast( a );
 </code>
 
-===== More Information =====
+===== More information =====
 For more information on Rhino objects, see the following:
 
 http://wiki.mcneel.com/developer/sdksamples/rhinoobject
