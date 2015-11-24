@@ -1,14 +1,14 @@
 ====== Add a Custom Menu to Rhino's Menu ======
 ====== C++ ======
-> **Summary:** //Demonstrates how to add a custom menu to Rhino's menu using the Rhino SDK.//
+> **Summary:** //Demonstrates how to add a custom menu to Rhino's menu using the Rhino SDK//
 
 =====Question=====
-I am trying to add a submenu into Rhino's "File" menu. I have been fiddling around with the Insert­Plug­In­Menu­To­Rhino­Menu() and ­Insert­Plug­In­Item­To­Rhino­Menu() functions but I do not seem to be getting anywhere. Insert­Plug­In­Menu­To­Rhino­Menu() adds a menu into the Rhino's main menu bar, whereas the ­Insert­Plug­In­Item­To­RhinoMenu() adds a menu item anywhere in the Rhino menu. I believe I want a little of both.
+I am trying to add a submenu to Rhino's **File** menu. I have been fiddling around with the Insert­Plug­In­Menu­To­Rhino­Menu() and ­Insert­Plug­In­Item­To­Rhino­Menu() functions but I do not seem to be getting anywhere. Insert­Plug­In­Menu­To­Rhino­Menu() adds a menu into the Rhino's main menu bar. Insert­Plug­In­Item­To­RhinoMenu() adds a menu item anywhere in the Rhino menu. I believe I want a little of both.
 
 =====Answer=====
-In order to insert a menu item, or a submenu, into Rhino's menu, you need to do the following:
+To insert a menu item, or a submenu, into Rhino's menu, do the following:
 
-  - Use CRhinoApp::FindMenuItem to search through Rhino's menu structure for an existing menu item where you want to insert your menu item.
+  - Use CRhinoApp::FindMenuItem to search through Rhino's menu structure for an existing menu item that's where you want to insert your menu item.
   - Use CRhinoPlugIn::InsertPlugInItemToRhinoMenu to insert your menu into Rhino's menu.
 
 =====Example=====
