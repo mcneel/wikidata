@@ -11,7 +11,7 @@
 
 ===== Data matching=====
 
-Data matching is a problem without a clean solution. It occurs when a component has access to different sized inputs. Imagine a component which creates line segments between points. It will have two input parameters which both supply point coordinates (Stream A and Stream B). It is irrelevant where these parameters collect their data from. A component cannot //see// beyond its in- and output parameters:
+Data matching is a problem without a clean solution. It occurs when a component has access to different sized inputs. Imagine a component which creates line segments between points. It will have two input parameters which both supply point coordinates (Stream A and Stream B). It is irrelevant where these parameters collect their data from. A component cannot //see// beyond its input and output parameters:
 
 \\
 
@@ -46,7 +46,7 @@ Finally, the //Cross Reference// method makes all possible connections:
 \\
 \\
 
-This is potentially dangerous since the amount of output can be humongous. The problem becomes more intricate as more input parameters are involved and when the volatile data inheritance starts to multiply data, but the logic remains the same.
+This is potentially dangerous since the output amount can be humongous. The problem becomes more intricate with more input parameters and when the volatile data inheritance starts to multiply data, but the logic remains the same.
 
 Imagine we have a point component which inherits its x, y, and z values from remote parameters which contain the following data:
 
@@ -83,7 +83,7 @@ The //Longest List// algorithm will create ten points, recycling the highest pos
 \\
 \\
 
-//Cross Reference// will connect all values in X with all values in Y and Z, thus resulting in 10×5×2 = a hundred points:
+//Cross Reference// will connect all values in X with all values in Y and Z, resulting in 10×5×2 = a hundred points:
 
 \\
 
