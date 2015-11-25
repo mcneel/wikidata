@@ -2,30 +2,32 @@
 
 The latest openNURBS C++ toolkit and example files can be downloaded from [[ http://www.rhino3d.com/opennurbs|http://www.rhino3d.com/opennurbs]].  
 
-A .NET version of the openNURBS 11-July-2013 toolkit will be published in the next 30 days.
-===== What's New =====
 
-==== Extrusion Object Render Mesh Support ====
+===== What's new =====
 
-[[http://www.rhino3d.com/download/rhino/5.0/latest|Rhino 5 SR6]] saves extrusion object render meshes in .3dm files.  The 11-July-2013 opennurbs toolkit will read and write these meshes.  For developers using openNURBS to read and display .3dm files in viewer applications, this means you handle extrusion objects (ON_Extrusion) the same way you handle polysurface objects (ON_Brep).
+==== Extrusion object render mesh support ====
 
-Earlier versions of Rhino simply calculated extrusion object render meshes as needed, did not save them in .3dm files and opennurbs toolkit users had to write their own extrusion object meshing code.
-==== Strings and Unicode ====
+[[http://www.rhino3d.com/download/rhino/5.0/latest|Rhino 5 SR6]] saves extrusion object render meshes in .3dm files.  The 11-July-2013 openNURBS toolkit reads and writes these meshes.  If you are a developer using openNURBS to read and display .3dm files in viewer applications, handle extrusion objects (ON_Extrusion) the same way you handle polysurface objects (ON_Brep).
 
-  * Fixes and enhancements for parsing and converting strings in [[http://en.wikipedia.org/wiki/UTF-8|UTF-8]], [[http://en.wikipedia.org/wiki/UTF-16|UTF-16]] and [[http://en.wikipedia.org/wiki/UTF-32|UTF-32]] formats.
+Earlier versions of Rhino simply calculated extrusion object render meshes as needed. They did not save them in .3dm files. OpenNURBS toolkit users had to write their own extrusion object meshing code.
+
+==== Strings and unicode ====
+
+  * Fixes and enhancements for parsing and converting strings in [[http://en.wikipedia.org/wiki/UTF-8|UTF-8]], [[http://en.wikipedia.org/wiki/UTF-16|UTF-16]], and [[http://en.wikipedia.org/wiki/UTF-32|UTF-32]] formats.
   * All openNURBS code treats char strings as UTF-8 encoded unicode strings. 
-  * All openNURBS code treats wchar_t strings as UTF-X encoded in native CPU byte order, where X = 8*sizeof(wchar_t). (UTF-16 on Microsoft Windows 2000 or later, UTF-32 on Apple OSX).
-  * If you encounter [[http://en.wikipedia.org/wiki/Mojibake|mojibake]] when working with strings in opennurbs, make sure you are using them as UTF-X encoded unicode strings.
-==== More Example Files ====
-Files containing extrusion objects with render meshes were added to the collection of .3dm example files.  The collection of .3dm example files can be downloaded from [[http://www.rhino3d.com/download/opennurbs/5.0/opennurbs5samples|http://www.rhino3d.com/download/opennurbs/5.0/opennurbs5samples]].
+  * All openNURBS code treats wchar_t strings as UTF-X encoded in native CPU byte order, where X = 8*sizeof(wchar_t). (UTF-16 on Microsoft Windows 2000 or later, UTF-32 on Apple OS X).
+  * If you encounter [[http://en.wikipedia.org/wiki/Mojibake|mojibake]] when working with strings in openNURBS, make sure you are using them as UTF-X encoded unicode strings.
 
-==== Many Bug Fixes ====
+==== More example files ====
+Files containing extrusion objects with render meshes were added to the collection of .3dm example files.  Download the collection of .3dm example files from [[http://www.rhino3d.com/download/opennurbs/5.0/opennurbs5samples|http://www.rhino3d.com/download/opennurbs/5.0/opennurbs5samples]].
+
+
 
 ===== Why was the 11-July-2013 release published in October 2013? =====
 
-We delayed the public distribution of the 11-July-2013 openNURBS toolkit was delayed until Rhino 5 SR6 was released in October of 2013.  Rhino 5 SR6 is the first version of Rhino to save extrusion object render meshes.  We felt publishing an openNURBS toolkit with the ability to read information that the shipping version of Rhino 5 could not create or use would have been more frustrating and confusing than helpful.
+We delayed the public distribution of the 11-July-2013 openNURBS toolkit until we released Rhino 5 SR6 in October of 2013.  Rhino 5 SR6 is the first version of Rhino to save extrusion object render meshes.  We felt that publishing an openNURBS toolkit with the ability to read information that the shipping version of Rhino 5 could not create or use would be more frustrating and confusing than helpful.
 
-===== More Information =====
+===== More information =====
 
   * [[http://opennurbs.org|http://opennurbs.org]]
   * [[http://discourse.mcneel.com/category/opennurbs|OpenNURBS Technical Support Forum]]
