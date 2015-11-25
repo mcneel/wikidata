@@ -1,8 +1,7 @@
 ====== Zoo Installation and Configuration ======
 > **Product:** //[[zoo4:home|Zoo 4.0]]//
-> **Summary:** //Tips for installing the Zoo Workgroup License Manager.//
+> **Summary:** //Tips for installing the Zoo Workgroup License Manager//
 
-=====Overview=====
 The Zoo lets you share Rhino, Flamingo, Penguin, and Bongo licenses (CD-Keys) among users on the same network workgroup. Zoo 4.0 is designed to work with Rhino 4.0 CD-Keys as well as CD-Keys from earlier versions of Rhino, Flamingo, Bongo and [[penguin:home|Penguin]].
 
 =====Topologies=====
@@ -14,7 +13,7 @@ The Zoo and all Rhino client computers are inside the same network subnet, virtu
 
 **2. Routed Network**
 
-The Zoo is on the other side of a router from Rhino client computers, and Rhino client computers can be in different network segments, behind different routers, and on different virtual LANs. In order for Rhino to find the Zoo, additional network or client computer configuration is required. See [[#Configuring Zoo to work on Routed Networks]] below for more details.
+The Zoo is on the other side of a router from Rhino client computers, and Rhino client computers can be in different network segments, behind different routers, and on different virtual LANs. For Rhino to find the Zoo, additional network or client computer configuration is required. See [[#Configuring Zoo to work on Routed Networks]] below for more details.
 
 {{:legacy:en:ZooConfigDns.png}}
 =====Installation=====
@@ -29,28 +28,28 @@ The Zoo is on the other side of a router from Rhino client computers, and Rhino 
   - Start the Zoo service.
 
 
-=====Configuring Zoo to work on Routed Networks=====
+=====Configuring Zoo to work on routed networks=====
 By default, Rhino looks for the Zoo by broadcasting a message on your network. This works great inside one VLan or subnet, so long as all the computers are on the same side of the router. But if you have multiple VLans, you'll need additional configuration for this to work.
 
-**Routed Network Configuration Options**
+**Routed network configuration options**
 
 Select only one of the following configuration options:
 
-    - **DNS:** Set up a DNS txt record on your DNS servers. This allows Rhino to find the Zoo without any additional configuration on the client.
+    - **DNS:** Set up a DNS txt record on your DNS servers, so that Rhino can find the Zoo without any additional configuration on the client.
     - **Registry Keys:** Create a registry key on each client machine. If you do not have DNS, or you do not have the ability to change DNS, this is your option.
 
 **To set up DNS:**
 
-    - Determine the name of the domain to which each client belongs. Right-click My Computer, then click Properties. The Domain name is listed in the Computer Name tab of the System Properties dialog box.
-    - On the primary DNS server for your domain, create a new TXT record with the format **Zoo4=<hostname>** where <hostname> is the [[rhino:netbios|NetBIOS]] host name. For example if the Fully Qualified host name is "ZooServer.bcn.es.mycorp.com", and the domain is "bcn.es.mycorp.com", then the [[rhino:netbios|NetBIOS]] host name is **ZooServer**.
+    - Determine the name of the domain to which each client belongs. Right-click **My Computer**, then click **Properties**. The Domain name is listed in the Computer Name tab of the System Properties dialog box.
+    - On the primary DNS server for your domain, create a new TXT record with the format **Zoo4=<hostname>** where <hostname> is the [[rhino:netbios|NetBIOS]] host name. For example if the Fully Qualified host name is "ZooServer.bcn.es.mycorp.com", and the domain is "bcn.es.mycorp.com", then the NetBIOS host name is **ZooServer**.
     - Test the DNS configuration from the client using **ZooDnsResolver** tool included in the **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zoo Bonus Tools.]]**
 
 **To set up Registry Keys on each computer:**
 
     - On each computer that runs Rhino 4.0, create the following registry key if it does not already exist: **HKEY_LOCAL_MACHINE\Software\McNeel\RhinoLM**
     - In the **RhinoLM** key, create a new **String Value** named **zoo4**.
-    - Set the data for the **zoo4** value to the NetBIOS host name for the Zoo server.  For example if the Fully Qualified host name is "ZooServer.bcn.es.mycorp.com", and the domain is "bcn.es.mycorp.com", then the [[rhino:netbios|NetBIOS]] host name is **ZooServer**.
-    - For assistance in creating this Registry Key, use the "SetZooServer" tool included in the **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zoo Bonus Tools.]]**
+    - Set the data for the **zoo4** value to the NetBIOS host name for the Zoo server.  For example if the Fully Qualified host name is "ZooServer.bcn.es.mycorp.com", and the domain is "bcn.es.mycorp.com", then the NetBIOS host name is **ZooServer**.
+    - For assistance in creating this Registry Key, use the //SetZooServer// tool included in the **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zoo Bonus Tools.]]**
 
 <code>
 Note to users of x64-based versions of Windows
@@ -73,7 +72,7 @@ HKEY_LOCAL_MACHINE\Software\WOW6432node\McNeel\RhinoLM
   * The Zoo was not designed to work across a WAN. With that said, some people have been able to tweak their network settings and get it to work. However we have not tested or certified that configuration in house.
     * Here are the basic requirements:
       * Make sure all machines are a member of the same Windows Domain.
-      * <color red>Not recommended:</color> On all firewalls, open UDP Ports 137 and 138, as well as TCP Port 139. <color red>Note that this is a major security vulnerability.</color> We do not recommend opening these ports to general internet access. Search the internet for "[[rhino:netbios|NetBIOS]] security vulnerabilities" to learn more.
-  * We recommend a VPN that will assigns a unique IP to each machine.
+      * <color red>Not recommended:</color> On all firewalls, open UDP Ports 137 and 138, as well as TCP Port 139. <color red>Note that this is a major security vulnerability.</color> We do not recommend opening these ports to general internet access. Search the internet for "NetBIOS security vulnerabilities" to learn more.
+  * We recommend a VPN that assigns a unique IP to each machine.
     * The Zoo may not be compatible with Network Address Translation (NAT). We haven't done an exhaustive test to determine whether it works or not.
-  * Make sure only one Zoo is running on the domain. Most Zoo problems occur because there is another test Zoo (sometime on the same machine that is trying to run Rhino) causing problems with Mailsot collisions
+  * Make sure only one Zoo is running on the domain. Most Zoo problems occur because there is another test Zoo (sometime on the same machine that is trying to run Rhino) causing problems with Mailsot collisions.
