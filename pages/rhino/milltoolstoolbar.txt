@@ -1,32 +1,32 @@
 ====== A workspace (set of toolbars) for importing some common milling cutters and toolholders into Rhino as geometry ======
 
-=====Description=====
-As a person who works in prototyping, I prepare parts for CAM programming in Rhino, and then either export them to another CAM softare, or program them directly in Rhino with **[[rhino:rhinocam|RhinoCAM]] Pro**.  In either case, when setting up tools, it is very useful to be able to put a "real" tool and toolholder into the model (as geometry, not just simulation) and move it around to see how much tool extension you need to clear certain features without having collisions.  Up until now, I just quickly modeled the tool each time, but I always thought it would be useful to be able to just pick it from a pre-set library.
 
-So, having a bit of time and an intern to help, I finally decided to do it.  Many thanks to Yannick Paré for having done much of the hard work in modeling the tools, getting all the buttons designed and the shortucts in place.  This is, as always, a work in progress, and reflects only the tools and toolholders I commonly use and worry about for interferences.  Of course, they are all METRIC...  If you need English tools, you can use this as a model and make your own workspace...
+As a person who works in prototyping, I prepare parts for CAM programming in Rhino. I then either export them to another CAM software, or program them directly in Rhino with **[[rhino:rhinocam|RhinoCAM]] Pro**.  In either case, when setting up tools, it is useful to be able to put a //real// tool and toolholder into the model (as geometry, not just simulation). You can move it around to see how much tool extension you need to clear certain features without having collisions.  Until now, I just quickly modeled the tool each time, but I always thought it would be useful to be able to just pick it from a preset library.
 
-**[[http://wiki.mcneel.com/_media/legacy/en/MillToolLibrary.zip|Download Mill Tool Library Here (~0.5Mb)]]**
+So, having a bit of time and an intern to help, I finally decided to do it.  Many thanks to Yannick Paré for having done much of the hard work in modeling the tools, getting all the buttons designed and the shortcuts in place.  This is, as always, a work in progress, and reflects only the tools and toolholders I commonly use and worry about for interferences.  Of course, they are all //metric//...  If you need English tools, you can use this as a model and make your own workspace...
 
-=====How to install:=====
+**[[http://wiki.mcneel.com/_media/legacy/en/MillToolLibrary.zip|Download Mill Tool Library Here (~0.5 MB)]]**
+
+=====How to install=====
 Download the .zip file.  Unzip.  You will find two things - a **.tb workspace file** and a **ToolLib** folder with Rhino files.
 
 Copy the .tb file to where you have the rest of Rhino workspaces. Place the ToolLib folder somewhere logical where you can find it easily.
 
-Open Rhino and first, go to Options, Files.  In the File Search Paths section, hit the New (leftmost) button.  Hit the (... Browse) button and navigate to the ToolLib folder and hit OK.  This tells Rhino it should search for files in this location.  This avoids having to specify exactly where the tool model files are in each toolbar button.
+Open Rhino and first, go to Options, Files.  In the File Search Paths section, click the New (leftmost) button.  Click the (... Browse) button and navigate to the ToolLib folder and click OK.  This tells Rhino it should search for files in this location.  This avoids having to specify exactly where the tool model files are in each toolbar button.
 
-Now, go to Tools>Toolbar Layout and browse to the **ToolLibraryEN.tb** and hit Open.  Check the **PopupMillTools** toolbar and OK.  You should have one button on your screen.  Place it anywhere you want.  Install is complete.
+Now, go to Tools>Toolbar Layout and browse to the **ToolLibraryEN.tb** and click Open.  Check the **PopupMillTools** toolbar and OK.  You should have one button on your screen.  Place it anywhere you want.  Install is complete.
 
-=====How to use:=====
-All other bars are controlled from the **PopupMillTools** button. That will pop up a bar of 5 buttons, with Flat, Ball, Toroid (Bull), Odd sizes, amd Toolholders.  Each one of those buttons in turn will popup a large bar full of individual milling cutters.  Clicking on one will prompt you for the insertion point in the file.  Either type coordinates or click and it's there.  After you've inserted the tool, you can insert the toolholder.  There is a point grouped with each tool to facilitate getting the toolholder centered on the tool.  At that point you can move the assembly around and adjust the height of the toolholder relative to the tool.  The tools are inserted relative to the active CPlane, so be careful what view is active. The tools and toolholder arrive on the same layer, called **MillTools**.
+=====How to use=====
+All other bars are controlled from the **PopupMillTools** button. That will pop up a bar of five buttons, with Flat, Ball, Toroid (Bull), Odd sizes, amd Toolholders.  Each one of those buttons in turn pop up a large bar full of individual milling cutters.  Clicking on one will prompt you for the insertion point in the file.  Either type coordinates or click and it's there.  After you've inserted the tool, you can insert the toolholder.  There is a point grouped with each tool to help getting the toolholder centered on the tool.  At that point you can move the assembly around and adjust the height of the toolholder relative to the tool.  The tools are inserted relative to the active CPlane, so be careful what view is active. The tools and toolholder arrive on the same layer, called **MillTools**.
 
 //If you don't want cascading popup toolbars, open the other toolbars in the workspace and re-arrange the tools to suit your needs.//
 
-=====How it works:=====
-I'm mainly using the Insert function with scaling.  Most of the standard tools are made by scaling one of three basic sized files in each category (could have been just one, but would have made the big tools VERY long).  There are quite a number of other individual tool files with shapes that don't lend themselves to scaling. The tools are in general "overlong" anyway, we're concerned about the length at the bottom, not the top, and I do have some pretty long tools.
+=====How it works=====
+I mainly use the Insert function with scaling.  Most of the standard tools are made by scaling one of three basic sized files in each category (could have been just one, but would have made the big tools VERY long).  There are many other individual tool files with shapes that don't lend themselves to scaling. The tools are in general //overlong//. Anyway, we're concerned about the length at the bottom, not the top, and I do have some pretty long tools.
 
-Yes, I know, this is a great application for scripting, it should be possible to automatically construct tools from a database, even the [[rhino:rhinocam|RhinoCAM]] tool library file, which is nothing more than a .csv file.  Unfortunately I don't have the programming skills to do this, so I did it the "Neanderthal" way instead...
+Yes, I know, this is a great application for scripting. It should be possible to automatically construct tools from a database, even the [[rhino:rhinocam|RhinoCAM]] tool library file, which is nothing more than a .csv file.  Unfortunately I don't have the programming skills to do this, so I did it the Neanderthal way instead...
 
-Hopefully the library will grow over time and allow you to have a basis to create your own tools as you need.  Be happy to have any comments or suggestions, can't guarantee that I can do requests, though...  No guarantees on any of this, if you do find a glaring error, please let me know.  Enjoy.  <color darkslateblue>**//--Mitch**</color>//
+Hopefully the library will grow over time and will give you a base to create your own tools as you need.  I'm happy to have any comments or suggestions. Can't guarantee that I can do requests, though...  No guarantees on any of this. If you do find a glaring error, please let me know.  Enjoy.  **//--Mitch//**
 
 
 
