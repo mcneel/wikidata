@@ -1,6 +1,6 @@
 ====== Rounding Numbers ======
 > **Developer:** //[[developer:rhinoscript|RhinoScript]]//
-> **Summary:** //Discusses number rounding in RhinoScript.//
+> **Summary:** //Discusses number rounding in RhinoScript//
 
 You need to round when you want to convert a number of greater precision into a number of lesser precision. The most common case is when you need to convert a floating-point number into an integer.
 
@@ -19,9 +19,9 @@ The **Int** function rounds down to the highest integer less than the value. Bot
  Rhino.Print Int(-3.5) ' -4
 </code>
 
-The **Fix** function is an example of symmetric rounding because it affects the magnitude (absolute value) of positive and negative numbers in the same way. The **Int** function is an example of asymmetric rounding because it affects the magnitude of positive and negative numbers differently.
+The **Fix** function is an example of symmetrical rounding because it affects the magnitude (absolute value) of positive and negative numbers in the same way. The **Int** function is an example of asymmetrical rounding because it affects the magnitude of positive and negative numbers differently.
 
-RhinoScript has a **Floor** function that truncates positive values, but does not work with negative numbers.
+RhinoScript has a **Floor** function that truncates positive values, but it does not work with negative numbers.
 
 <code vb>
  Rhino.Print Rhino.Floor( 3.5) '  3
@@ -56,21 +56,21 @@ VBScript does not have a corresponding round-up function. However, for negative 
 =====Arithmetic rounding=====
 When you always round one direction, the resulting number is not necessarily the closest to the original number. For example, if you round 1.9 down to 1, the difference is a lot larger than if you round it up to 2. It is easy to see that numbers from 1.6 to 2.4 should be rounded to 2.
 
-But, what about 1.5, which is equidistant between 1 and 2? By convention, the half-way number is rounded up.
+But what about 1.5, which is equidistant between 1 and 2? By convention, the half-way number is rounded up.
 
-You can implement rounding half-way numbers in a symmetric fashion, such that -.5 is rounded down to -1, or in an asymmetric fashion, where -.5 is rounded up to 0.
+You can implement rounding half-way numbers in a symmetrical fashion, where -.5 is rounded down to -1, or in an asymmetrical fashion, where -.5 is rounded up to 0.
 
 VBScript does not have any functions that do arithmetic rounding.
 
 =====Banker's rounding=====
 When you add rounded values together, always rounding .5 in the same direction results in a bias that grows the more numbers you add together. One way to minimize the bias is with banker's rounding.
 
-Banker's rounding rounds .5 up sometimes and down sometimes. The convention is to round to the nearest even number, so that both 1.5 and 2.5 round to 2, and 3.5 and 4.5 both round to 4. Banker's rounding is symmetric.
+Banker's rounding sometimes rounds .5 up and sometimes rounds .5 down. The convention is to round to the nearest even number, so that both 1.5 and 2.5 round to 2, and 3.5 and 4.5 both round to 4. Banker's rounding is symmetrical.
 
 In VBScript, the following numeric functions perform banker's rounding: **CByte**, **CInt**, **CLng**, **CCur**, and **Round**.
 
 =====Random rounding=====
-Even banker's rounding can bias totals. You can take an extra step to remove bias by rounding .5 up or down in a truly random fashion. This way, even if the data is deliberately biased, bias might be minimized. However, using random rounding with randomly distributed data might result in a larger bias than banker's rounding. Random rounding could result in two different totals on the same data.
+Even banker's rounding can bias totals. You can take an extra step to remove bias by rounding .5 up or down in a truly random fashion. This way, even if the data is deliberately biased, bias might be minimized. Still, using random rounding with randomly distributed data might result in a larger bias than banker's rounding. Random rounding could result in two different totals on the same data.
 
 VBScript does not have any functions that do random rounding.
 
@@ -80,11 +80,11 @@ Alternate rounding is rounding between .5 up and .5 down on successive calls.
 VBScript does not have any functions that do alternate rounding.
 
 =====Sample user-defined rounding functions=====
-The code that follows provides sample implementations for each of the rounding types described.
+The following code provides sample implementations for each of the rounding types.
 
-All these functions take two arguments: the number to be rounded and a factor. If the factor is 1, then the functions return an integer created by one of the above methods. If the factor is something other than 1, the number is scaled by the factor to create different rounding effects. For example AsymArith(2.55, 10) produces 2.6, that is, it rounds to 1/factor = 1/10 = 0.1.
+All these functions take two arguments: the number to be rounded and a factor. If the factor is 1, then the functions return an integer created by one of the above methods. If the factor is something other than 1, the number is scaled by the factor to create different rounding effects. For example AsymArith (2.55, 10) produces 2.6. That is, it rounds to 1/factor = 1/10 = 0.1.
 
-Note, a factor of 0 generates a run-time error: 1/factor = 1/0.
+**Note:** A factor of 0 generates a run-time error, 1/factor = 1/0.
 
 <code vb>
  ' Asymmetrically rounds numbers down - similar to Int().
@@ -175,7 +175,7 @@ Note, a factor of 0 generates a run-time error: 1/factor = 1/0.
  End Function
 
 </code>
-Note, many of these sample functions require the following utility function.
+**Note:** Many of these sample functions require the following utility function.
 
 <code vb>
  ' VBScript equivalent to VB's Immediate If function.
@@ -208,13 +208,13 @@ As taught in school, rounding is usually arithmetic rounding using positive numb
 
 For example, both 2.5 and 2.51 round up to 3, while both 2.4 and 2.49 round down to 2.
 
-When you use banker's rounding (or other methods that round .5 either up or down) or when you round negative numbers using asymmetric arithmetic rounding, dropping precision can lead to incorrect results where you might not round to the nearest number.
+When you use banker's rounding (or other methods that round .5 either up or down) or when you round negative numbers using asymmetrical arithmetic rounding, dropping precision can lead to incorrect results where you might not round to the nearest number.
 
 For example, with banker's rounding, 2.5 rounds down to 2 and 2.51 rounds up to 3.
 
-With asymmetric arithmetic rounding, -2.5 rounds up to -2 while -2.51 rounds down to -3.
+With asymmetrical arithmetic rounding, -2.5 rounds up to -2 while -2.51 rounds down to -3.
 
-The user-defined functions presented in this article take the number's full precision into account when performing rounding.
+The user-defined functions in this article take the number's full precision into account when performing rounding.
 
 
 
