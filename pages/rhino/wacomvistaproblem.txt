@@ -1,31 +1,32 @@
 ======Wacom and Vista Problems=====
+\\
 =====Problem=====
-There are issues with Rhino version 4 on Windows Vista (including Vista Home, Vista Premium, and Vista Ultimate) and the Wacom tablet driver.
+There are issues with Rhino version 4 on the Wacom tablet driver and Windows Vista (including Vista Home, Vista Premium, and Vista Ultimate).
 
-  * When the tablet driver is not installed on a Vista box with the standard system mouse, you can left click and hold on a tool button to bring up the extended tools or go up to the pull down menus to get cascading text menus.
-  * After the tablet driver is installed, left clicking and holding will no longer brings up the extended tools or menus. But the tablet tip will work if you touch the tool box with the tip of the pen and hold.
+  * When the tablet driver is not installed on a Vista box with the standard system mouse, you can left-click and hold on a tool button to bring up the extended tools or go up to the pull down menus to get cascading text menus.
+  * After the tablet driver is installed, left-clicking and holding no longer brings up the extended tools or menus. But the tablet tip works if you touch the tool box with the tip of the pen and hold.
 
-=====Work arounds=====
-There are two work arounds that allow the flyout toolbars and menus in Rhino to view normally.
+=====Workarounds=====
+There are two workarounds that allow the flyout toolbars and menus in Rhino to view normally.
 
-  * Change the sideswitch on the Wacom tablet pen to **disable** all will work well, except you loose functionality of the sideswitch.
+  * Change the side switch on the Wacom tablet pen to **disable all** will work well, except you loose functionality of the side switch.
 
-OR
+**or**
 
   * Turn Off the Windows Feature **Tablet PC Optional Components**.
-    * 1. Close Rhino and go to Control Panel/Program Features.
-    * 2. On the left margins, pick the option **Turn Windows Features On**.
-    * 3. In the Windows Features dialog, look at the setting **Tablet PC Optional Components**. It is on by default. Uncheck it to turn it off.
-    * 4. Close Dialog. Restart Rhino.
+    * Close Rhino and go to Control Panel/Program Features.
+    * On the left margins, pick the option **Turn Windows Features On**.
+    * In the Windows Features dialog, look at the setting **Tablet PC Optional Components**. It is on by default. Uncheck it to turn it off.
+    * Close Dialog. Restart Rhino.
 {{:legacy:en:Tablet.jpg}}
 
-According to Microsoft, Tablet PC control adds or removes accessories such as Tablet PC Input Panel, Windows Journal, and the Snipping Tool. Enabling this feature also installs software that enables handwriting recognition. Though this feature is not necessary to install unless you have a Tablet PC, if you don't install it you will not have access to the Snipping Tool, which is a handy application. The Snipping Tool lets you draw a selection of your screen that you would like to take a snippet, or screenshot.
+According to Microsoft, Tablet PC control adds or removes accessories such as Tablet PC Input Panel, Windows Journal, and the Snipping Tool. Enabling this feature also installs software that enables handwriting recognition. This feature is not necessary to install unless you have a Tablet PC. But, if you don't install it you will not have access to the Snipping Tool, a handy application. The Snipping Tool lets you select a section of your screen that you would like to take a snippet, or screenshot.
 
 
 =====DigitalPersona application causes Rhino crash on start=====
-HP's notebooks may use a fingerprint scanning product developed by DigitalPersona. Their scanning product causes the same button tooltip problem on flyout toolbars on Rhino 4.0 that is normally caused by Vista/Windows 7's Tablet PC components when a tablet is installed. If turning off Tablet PC components doesn't solve the problem, check if the computer has a fingerprint scanner or related applications, especially the ones that come from DigitalPersona.
+HP's notebooks may use a fingerprint scanning product developed by DigitalPersona. Their scanning product causes the same button tooltip problem on flyout toolbars on Rhino 4.0 that is normally caused by Vista/Windows 7's Tablet PC components when a tablet is installed. If turning off Tablet PC components doesn't solve the problem, check the computer for a fingerprint scanner or any related applications, especially the ones that come from DigitalPersona.
 
-A case we got from a user on 21-Jan-2011 was a //HP TouchSmart tm2-2012tx//. It has //HP SimplePass Identity Protection// installed that installs applications from DigitalPersona. The application that causes the problem is **C:\Program Files (x86)\DigitalPersona\Bin\DPAgent.exe**. To solve the problem, turn the **DpAgent.exe *32** off from Windows Task Manager and rename it with a different name to prevent it from running automatically when Windows starts.
+A case we have from a user on 21-Jan-2011 was a //HP TouchSmart tm2-2012tx//. It has //HP SimplePass Identity Protection// installed that installs applications from DigitalPersona. The application that causes the problem is **C:\Program Files (x86)\DigitalPersona\Bin\DPAgent.exe**. To solve the problem, turn the **DpAgent.exe *32** off from the Windows Task Manager. Rename it with a different name to prevent it from running automatically when Windows starts.
 
 {{:rhino:digitalpersona.png|}}
 
@@ -39,7 +40,7 @@ Some have seen this problem of linked toolbars not flying out without a Wacom ta
 This problem was partially fixed with V4 SR4.  A problem remains with displaying Tooltips in cascaded (flyout) toolbars.  We continue to recommend turning off the **Tablet PC Optional Components**. -JB
 
 =====Update 15-Jan-2008=====
-A fix to this problem will be available in Rhino 4 Service Release 3 (sr3) which is currently under development. We will first post the beta to the Rhino Support Newsgroup for testing by the user base. Watch the Rhino Support Newsgroup for this announcement. When SR3 is finalized, it will be available for download off the Rhino web site's download page. -JB
+A fix to this problem will be available in Rhino 4 Service Release 3 (SR3) which is currently under development. We will first post the beta to the Rhino Support Newsgroup for testing by the user base. Watch the Rhino Support Newsgroup for this announcement. When SR3 is finalized, it will be available for download off the Rhino web site's download page. -JB
 
 
 
