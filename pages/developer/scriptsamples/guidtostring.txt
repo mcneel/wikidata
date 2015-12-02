@@ -1,6 +1,6 @@
 ====== Converting GUIDs to Strings ======
 > **Developer:** //[[developer:rhinoscript|RhinoScript]]//
-> **Summary:** //Demonstrates how convert an array of bytes containing a GUID to a string.//
+> **Summary:** //Demonstrates how convert an array of bytes containing a GUID to a string//
 
 =====Question=====
 I've written a [[developer:rhinoscript|RhinoScript]] function which calls a method on a COM object that returns an array of bytes containing a GUID. Is there any way that I can turn this into a string?
@@ -10,7 +10,7 @@ Yes, this is possible, but it takes a little work. The logical format of a GUID 
 
    DWORD-WORD-WORD-BYTE BYTE-BYTE BYTE BYTE BYTE BYTE BYTE
 
-Where a WORD consists of two bytes and a DWORD consistes of four bytes. They are stored in memory in order from the least to the most significant, or "little endian", on Intel-based systems. So, you need to make sure you decode the array in the correct order
+...where a WORD consists of two bytes and a DWORD consists of four bytes. In memory they are stored in memory in the order of least to the most significant on Intel-based systems. So, you need to make sure you decode the array in the correct order.
 
 The following example [[developer:rhinoscript|RhinoScript]] code demonstrates how to convert an array of bytes containing a GUID to a string.
 
