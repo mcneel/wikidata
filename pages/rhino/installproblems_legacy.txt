@@ -1,88 +1,78 @@
 ======Troubleshooting Installer Issues for Rhino 3 and Rhino 4 ======
 > A newer version of this article is available for [[http://wiki.mcneel.com/rhino/installproblems|Rhino 5]].
-
-  * [[#Rhino 3 Problem with toolbar locations not sticking and docking correctly|Rhino 3 Problem with toolbar locations not sticking and docking correctly]]
-  * [[#Rhino 3 Problems with OpenGL performance and display|Rhino 3 Problems with OpenGL performance and display]]
-  * [[#Rhino 3 Help's Index Tab is blank|Rhino 3 Help's Index Tab is blank]]
-  * [[#Rhino 4 starts up with no plug-ins loaded|Rhino 4 Starts up with no plug-ins loaded]]
-  * [[#Rhino 4 Install Determining Disk Space Requirements Never Completes|Rhino 4 Install Determining Disk Space Requirements Never Completes]]
   
 
 =====Rhino 4 starts up with no plug-ins loaded=====
-**PROBLEM:**
+**Problem:**
 
-Missing toolbars and no plug-ins loaded on Vista
+Missing toolbars and no plug-ins loaded on Vista.
 
-A small number of users have reported that installing Rhino V4 (SR2 and newer) on Vista has resulted in no plug-ins and no toolbars loaded unless logged in and running as the Administrator.  This has been more common on Vista Home Premium systems, but has been reported on all flavors of Vista.  Most users do not report this problem and we have not been able to duplicate the problem here in the Rhino Development Team.
+A small number of people have reported that installing Rhino V4 (SR2 and newer) on Vista results in no plug-ins and no toolbars loaded unless they are logged in and running as the Administrator.  This has been more common on Vista Home Premium systems, but has been reported on all flavors of Vista.  Most people do not report this problem and we have not been able to duplicate the problem here in the Rhino Development Team.
 
-**SOLUTION:**
+**Solution:**
 
-Users have reported that if they turn off User Account Control (Control Panel - User Accounts), and temporarily disable any antivirus and system protection software before running the Rhino installation again, solves the problem.  After reinstalling and running Rhino once, you should restart your antivirus and system protection tools.  You can turn UAC back on if you want to as well.
+Users report that if they turn off User Account Control (Control Panel - User Accounts), and temporarily disable any antivirus and system protection software before running the Rhino installation again, they solve the problem.  After reinstalling and running Rhino once, you should restart your antivirus and system protection tools.  Also, you can turn UAC back on if you want.
 
 Added 5 Mar 2009 - John Brock
 
 =====Rhino 3 Problem with toolbar layouts not sticking and docking correctly=====
 
-  - Close Rhino 3.0
+  - Close Rhino 3.0.
   - Run this utility: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip while Rhino is closed.
-  - Restart Rhino
-  - The utility can delete the following key in the registry to make Rhino "forget" some settings that make the toolbars not dock correctly.
-  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
+  - Restart Rhino.
+  - The utility can delete the following key in the registry to make Rhino "forget" some settings that make the toolbars not dock correctly:  //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Control bar manager//
 
 =====Rhino 3 Problems with OpenGL performance and display=====
 
-//- to be used after upgrading cards and drivers//
+//To be used after upgrading cards and drivers.//
 
-  - Close Rhino 3.0
+  - Close Rhino 3.0.
   - Run this utility: http://en.wiki.mcneel.com/content/upload/files/Rhino3_Registry_Repair.zip while Rhino is closed.
-  - Restart Rhino
-  - The utility can delete the following key in the registry to make Rhino "forget" old [[rhino:opengl|OpenGL]] display settings
-  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Options\OpenGL//
+  - Restart Rhino.
+  - The utility can delete the following key in the registry to make Rhino "forget" old [[rhino:opengl|OpenGL]] display settings: //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\3.0\Scheme: Default\Options\OpenGL//
 
-=====Rhino 4 Install Determining Disk Space Requirements Never Completes=====
-**PROBLEM:**
+=====Rhino 4 Installer Determining Disk Space Requirements never completes=====
+**Problem:**
 
 When installing Rhino 4.0, a message appears that says "please wait while the installer finishes determining your disk space requirements". This dialog box never disappears.
 
-**CAUSE:**
+**Cause:**
 
 The Windows Installer engine tries to determine if there is enough disk space on all your drives to install Rhino. For some reason, this process takes a very long time, or never completes. The real cause is buried somewhere in Microsoft's Windows Installer engine.
 
-**SOLUTION:** ////
+**Solution:** ////
 
 Run the installer from the command prompt:
   -Please download [[http://www.rhino3d.com/download/rhino/4.0/release|Rhino 4.0 Service Release 9]]. Releases older than SR1 do not deploy properly using Active Directory or SMS.
   -Extract the downloaded file into folders by [[http://wiki.mcneel.com/rhino/rhino4/manual_extract_from_file|uncompressing the EXE into folders.]]
-  - Run this on the commandline: msiexec /i Rhino4_Setup.msi /qr
+  - Run this on the command line: msiexec /i Rhino4_Setup.msi /qr
 
-=====Rhino 3 Help's Index Tab is blank=====
+=====Rhino 3 Help's Index tab is blank=====
 
-**PROBLEM:**
+**Problem:**
 
-The Index tab of the Rhino Help or BonusToolsHelp window is blank
+The Index tab of the Rhino Help or BonusToolsHelp window is blank for low-privilege user logins in Windows 2000.
 
-for low-privilege user logins in Windows 2000.
-
-**SOLUTION:**
+**Solution:**
 
 This is a permissions problem that interacts with a bug in Windows 2000. Here's how to fix it without changing the permissions on Program Files folders.
-  * Just have an administrator delete the file Rhino.GID in the ...Program Files\Rhino\English\Help folder, and while you are at it, delete the RhinoBonusTools.GID
-  * Then have the administrator log out (don't run the Help yet, or it will recreate the GID file for the administrator).
+  * Have an administrator delete the file Rhino.GID in the ...Program Files\Rhino\English\Help folder. While you are at it, delete the RhinoBonusTools.GID.
+  * Then have the administrator log out. (Don't run the Help yet, or it will recreate the GID file for the administrator.)
   * Have the low-privilege user log in. The Index tab should now populate (and a GID file is created somewhere in the user's personal files area.)
-  * This trick is not needed on Windows XP, Microsoft fixed the bug.
-  * Another way it can be fixed on Windows 2000 is to add the permission "Write" for Users on the ...Rhino\English\Help folder
+  * This trick is not needed on Windows XP. Microsoft fixed the bug.
+  * Another way it can be fixed on Windows 2000 is to add the permission "Write" for Users on the ...Rhino\English\Help folder.
 
-=====Remove Rhino 4 Manually=====
+=====Remove Rhino 4 manually=====
 **//Question://** I tried to uninstall Rhino 4.0, but an error occurred and Rhino could not be removed.
 
 **//Answer://** [[rhino/uninstalling|Manually remove Rhino 4.0.]]
 
 
-=====Installing Rhino 4 As An Upgrade=====
+=====Installing Rhino 4 as an upgrade=====
 
-**//Question://** //"What do I need to do to get my Rhino 4.0 Upgrade to install?"//
+**//Question://** What do I need to do to get my Rhino 4.0 upgrade to install?
 
-**//Answer://** The Rhino 4.0 Upgrade installer will install if one of the following is true. It is checked in order:
+**//Answer://** The Rhino 4.0 upgrade installer will install if one of the following is true. It is checked in order:
 
   * Rhino 3.0 is installed  
   * Rhino 2.0 is installed 
@@ -96,9 +86,9 @@ This is a permissions problem that interacts with a bug in Windows 2000. Here's 
 **[[SettingsTransfer|Transferring personalized settings from one Rhino 4 install to another]]**
 
 
-=====Rhino 4 Uninstall Fails=====
-**PROBLEM:**
+=====Rhino 4 uninstall fails=====
+**Problem:**
 This can be caused by a corrupt installer cache on your computer.
 
-**SOLUTION:**
-Follow the instructions in the article [[rhino:uninstalling|Manually Uninstalling Rhino 4.0]]
+**Solution:**
+Follow the instructions in the article [[rhino:uninstalling|Manually uninstalling Rhino 4.0]].
