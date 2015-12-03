@@ -1,4 +1,4 @@
-======  Writing code that will work with 32 and 64 bit compilers ======
+======  Writing code that will work with 32- and 64-bit compilers ======
 
 =====strlen, etc.:=====
 The return type of string length functions like strlen and wcslen is a size_t.  Since we will never have null terminated strings with more than 2,147,483,647 characters, simply use a cast like so:
@@ -6,7 +6,7 @@ The return type of string length functions like strlen and wcslen is a size_t.  
    int length = (int)wcslen(str);  (int) cast for 64 bit compilers
 
 =====fread and fwrite:=====
-The return type of fread and fwrite is a size_t.  Design your calls to fread and fwrite so that the "count" argument is never > 2,147,483,648 and use an int cast on the return type like so:
+The return type of fread and fwrite is a size_t.  Design your calls to fread and fwrite so that the //count// argument is never > 2,147,483,648 and use an int cast on the return type like so:
 
    int count = ...;  some number <= 2,147,483,648
    if ( count != (int)fread( buffer, size, count, fp ) )
@@ -22,7 +22,7 @@ The return type of fread and fwrite is a size_t.  Design your calls to fread and
      handle file writing error
    }
 
-If you are compeled to write 9,223,372,036,854,775,808 bytes in a single call to fwrite, you can do so with
+If you are compeled to write 9,223,372,036,854,775,808 bytes in a single call to fwrite, you can do so with:
 
    size_t size = 9223372036854775808;
    void* buffer = ...;
@@ -33,7 +33,7 @@ If you are compeled to write 9,223,372,036,854,775,808 bytes in a single call to
      printf("You're a looser\n");
    }
 
-=====Sort Functions that Compare pointers=====
+=====Sort functions that compare pointers=====
 Use INT_PTR to store the difference between two pointers.
 
     Sort functions have to return 32 bit ints
@@ -46,7 +46,7 @@ Use INT_PTR to store the difference between two pointers.
    }
 
 =====size_t:=====
-The type size_t is 64 bits on a 64 bit compiler.  See the strlen and fread sections for examples on dealing with this.
+The type size_t is 64 bits on a 64-bit compiler.  See the strlen and fread sections for examples on dealing with this.
 
 =====Formatted printing (printf, RhinoApp().Print(), ON_wString::Format, etc.)=====
 You really need to pay attention to the size of your integer arguments to formatted printing strings.
@@ -61,7 +61,7 @@ You really need to pay attention to the size of your integer arguments to format
                     i,sz,ptr,ip,h,i64);
 
 =====Windows SendMessage:=====
-If you cast the WPARAM and LPARAM arguments as (WPARAM) and (LPARAM), and put the return value in an LRESULT, everything works perfectly for both the 32 and 64 bit compilers.  Since the value of smresult can be an int, pointer, handle, whatever, cast smresult as shown below
+If you cast the WPARAM and LPARAM arguments as (WPARAM) and (LPARAM), and put the return value in an LRESULT, everything works perfectly for both the 32- and 64-bit compilers.  Since the value of smresult can be an int, pointer, handle, whatever, cast smresult as shown below.
 
    LRESULT smresult = SendMessage((UNIT)id, (WPARAM)&gt, (LPARAM)sText);
    int rc = (int)smresult ;  In this case, I the rest of the code want
@@ -69,24 +69,24 @@ If you cast the WPARAM and LPARAM arguments as (WPARAM) and (LPARAM), and put th
    char** ptr = (char**)smresult;
 
 =====Windows SetWindowLong and GetWindowLong=====
-Replace every single instance of windows calls that pass pointers as mystery meat with the new "Ptr" versions.
+Replace every single instance of windows calls that pass pointers as mystery meat with the new //Ptr// versions.
 
       BAD                GOOD
     SetWindowLong -> SetWindowLongPtr
     GetWindowLong -> GetWindowLongPtr
 
-If you do this, then your code will work perfectly and compile cleanly on both 32 and 64 bit platforms.
+If you do this, then your code will work perfectly and compile cleanly on both 32- and 64-bit platforms.
 
-The "Ptr" part of the function names is misleading' the "Ptr" versions work when the return value or last argument has any type.
+The //Ptr// part of the function names is misleading. The //Ptr// versions work when the return value or last argument has any type.
 
 
-====BAD====
+====Bad====
 
    SetWindowLong( *pDockFrame, GWL_USERDATA, (LONG)this);
    WNDPROC wp = (WNDPROC)::GetWindowLong( *pDockFrame, GWL_WNDPROC);
    DWORD dwStyle = ::GetWindowLong( pMsg->hwnd, GWL_STYLE)
 
-====GOOD====
+====Good====
 
    SetWindowLongPtr( hwnd, id, (LONG_PTR)this);
    WNDPROC wp = (WNDPROC)::GetWindowLongPtr( *pDockFrame, GWL_WNDPROC);
