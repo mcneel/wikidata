@@ -1,11 +1,11 @@
-====== How to extend RhinoScript with a .NET plug-in ======
+====== How to Extend RhinoScript with a .NET Plug-in ======
 
-> **Summary:** //Rhino 4.0 plug-ins can now add new scripting methods to [[developer:rhinoscript|RhinoScript]].//
+> **Summary:** //Rhino 4.0 plug-ins can now add new scripting methods to [[developer:rhinoscript|RhinoScript]]//
 
 Rhino 4.0 plug-ins can extend the [[developer:rhinoscript|RhinoScript]] with new objects and methods to permit users to create elaborate scripts for plug-ins. The Rhino plug-in class has a virtual function named **GetPlugInObjectInterface** which plug-ins can override and return a COM enabled class. In .NET creating a COM enabled class is as easy as adding a **ComVisible** attribute to a class.
 
 ===== VB.NET =====
-By adding the ComVisible attribute to a class, all of the public functions inside of the class are accessible to COM (ie RhinoScript)
+By adding the ComVisible attribute to a class, all the public functions inside of the class are accessible to COM (ie RhinoScript).
 <code vb>
    <System.Runtime.InteropServices.ComVisible(True)> _
 Public Class MyScriptClass
@@ -19,17 +19,18 @@ Public Class MyScriptClass
   End Sub
 End Class
 </code>
-2. Override GetPlugInObjectInterface and return the com class
+
+Override GetPlugInObjectInterface and return the com class.
 <code vb>
 'inside of your MRhinoPlugIn derived class
 Public Overrides Function GetPlugInObjectInterface(ByRef iid As System.Guid) As Object
   Return New MyScriptClass()
 End Function
 </code>
-Read below on how to use your class in [[developer:rhinoscript|RhinoScript]]
+Read below on how to use your class in [[developer:rhinoscript|RhinoScript]].
 
 ===== C# =====
-By adding the ComVisible attribute to a class, all of the public functions inside of the class are accessible to COM (ie RhinoScript)
+By adding the ComVisible attribute to a class, all the public functions inside of the class are accessible to COM (i.e. RhinoScript).
 
 <code c#>
 [System.Runtime.InteropServices.ComVisible(true)]
@@ -47,7 +48,7 @@ public class MyScriptClass
   }
 }
 </code>
-2. Override GetPlugInObjectInterface and return the com class
+Override GetPlugInObjectInterface and return the com class.
 
 <code c#>
 public override object GetPlugInObjectInterface(ref System.Guid iid)
@@ -59,7 +60,7 @@ public override object GetPlugInObjectInterface(ref System.Guid iid)
 
 Inside of a [[developer:rhinoscript|RhinoScript]] routine get a hold of your plug-in's script class and have fun!
 
-The following is some sample [[developer:rhinoscript|RhinoScript]]. **Assuming that your plug-in is named WikiSamples**
+The following is some sample [[developer:rhinoscript|RhinoScript]]. **It assumes that your plug-in is named WikiSamples.**
 
 <code vb>
 Dim customobj
