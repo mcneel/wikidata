@@ -1,6 +1,6 @@
 ======Superfluous Knots======
 > **Developer:** //[[developer:opennurbs:home|openNURBS]]//
-> **Summary:** //Discusses superfluous knots and the openNURBS toolkit.//
+> **Summary:** //Discusses superfluous knots and the openNURBS toolkit//
 
 =====Question=====
 How is the representation of knot vector in openNURBS different from that in OpenGL's NURBS renderer? In openNURBS, the formula is:
@@ -9,7 +9,7 @@ How is the representation of knot vector in openNURBS different from that in Ope
 m = n + p - 2
 </code>
 
-where m is the number of knots in the knot vector; n is the number of control points; p is the order of the curve.
+...where m is the number of knots in the knot vector; n is the number of control points; p is the order of the curve.
 
 While in OpenGL, the formula is:
 
@@ -28,7 +28,7 @@ If you grab a pencil and paper and work through the details you will understand 
 
 One reason some mathematical texts on NURBS, like Carl DeBoor's b-splines, have the extra knots is that it makes proving the theorems easier. This is because the recursive b-spline basis function definition DeBoor uses is well defined for degree zero b-splines. DeBoor's use of the recursive definition of the basis functions is elegant. Having the extra knot values along helps make them elegant.
 
-There isn't a good reason for modern computer code or text books focused solely on computer aided NURBS applications to drag this kind of theoretical baggage along. Having modern code drag these knot values around is akin to having Excel store prime factors of integer cell entries and requiring Excel add-in developers to compute the factorization.  Prime factorization is fundamental to understanding how integers work and it is interesting to some people, but it is not required if you are only trying to add/subtract/multiply integers in spreadsheet cells.
+There isn't a good reason for modern computer code or text books that focus solely on computer aided NURBS applications to drag this kind of theoretical baggage along. Having modern code drag these knot values around is akin to having Excel store prime factors of integer cell entries and requiring Excel add-in developers to compute the factorization.  Prime factorization is fundamental to understanding how integers work and it is interesting to some people, but it is not required if you are only trying to add/subtract/multiply integers in spreadsheet cells.
 
 Why the creators of the OpenGL specification, IGES NURBS specification, and STEP NURBS specification decided to store two useless values in their knot vectors is a mystery to us.
 
