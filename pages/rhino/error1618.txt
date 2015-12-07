@@ -10,9 +10,18 @@ The meaning of an exit value of 1618 of msiexec is ERROR_INSTALL_ALREADY_RUNNING
 This happens if an installation started while another one was already running. There cannot be two instances of msiexec running at the same time.
 
 ====Solution====
-
+===Step 1===
   * Wait for the first installation to end, then start the second one. 
   * If you cannot locate the currently running installer, rebooting the machine may help.
+
+===Step 2===
+If you can not locate an installer that is running it may be a Windows update or video or other driver update (like a Bootcamp driver, for example).
+In this case, proceeded with the Manual Install as detailed on the [[http://wiki.mcneel.com/rhino/error1603|1603 Error]] in **Step #4**. **Step #1** Windows Updates is also important to have complete and completed without errors.
+
+//Why can a manual install help?//
+The manual install recognizes installer that is already running and cancels them for you with your permission, so the Rhino installer can be run. 
+
+
 \\
 ====Other potential solutions====
   * If you need to automate this in a wrapper, you can check if there’s an installation in progress and wait for it to end. Check for msiexec /i or msiexec /x or msiexec /<something> using pv.
