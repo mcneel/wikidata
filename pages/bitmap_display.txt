@@ -2,62 +2,66 @@
 
 Rhino 5 supports the attachment of image files in the [[http://docs.mcneel.com/rhino/5/help/en-us/commands/backgroundbitmap.htm#Place|BackgroundBitmap]] and [[http://docs.mcneel.com/rhino/5/help/en-us/commands/pictureframe.htm|PictureFrame]] commands.
 \\
+
 **Rhino works best with image files that are "power of 2" in size.** 
 \\
+
 //This is because Rhino displays image files as textures - always.//
-===== Images Stored As Textures =====
-In order to display a file as a texture, Rhino uses OpenGL to "texture map" a polygon or polygon mesh. This is important information for many reasons:
+===== Images stored as textures =====
+To display a file as a texture, Rhino uses OpenGL to //texture map// a polygon or polygon mesh. This is important information for many reasons:
 
   - OpenGL stores textures in GPU memory.
-  - Because of #1, OpenGL implementations have certain hardware requirements (limitations) on how big a "texture" can physically be.
-  - Because of #2, there is no "standard maximum" size a texture is defined to be, and it's based on your video card and drivers.
-  - Because of #3, Rhino can't just use any file at any resolution and "assume" it's going to work
-  - Because of #4, If and when Rhino encounters an image file that does not meet a user's video hardware capabilities, it must resize the image to a size that can be used by the user's hardware.
+  - Because of #1, OpenGL implementations have hardware requirements (limitations) on how big a texture can physically be.
+  - Because of #2, there is no //standard maximum// defined size for a texture. It's based on your video card and drivers.
+  - Because of #3, Rhino can't just use any file at any resolution and assume it's going to work.
+  - Because of #4, if Rhino encounters an image file that does not meet your video hardware capabilities, it must resize the image to a size that can be used by your hardware.
 
-**//It is not a "requirement" for Rhino 5 that a image files be exactly sized to a power of 2.//**
+**//It is not a requirement for Rhino 5 that image files be exactly sized to a power of 2.//**
 \\
-However, the internal representation in Rhino (and thus for OpenGL) __is__ a power of 2. 
+
+But, the internal representation in Rhino (and thus for OpenGL) __is__ a power of 2. 
 In other words, you can throw any file or texture at Rhino 5 and it will make sure it works on most video hardware.
 
-===== Adjusting for the Power of 2 =====
+===== Adjusting for the power of 2 =====
 So how does it make it work if the image is not a power of 2?
 
-//**If Rhino needs to resize an image, then it will resize it to the "next highest" power of 2 that is greater than the current dimensions but less than or equal to the maximum dimensions supported by the current hardware.**//
+//**If Rhino needs to resize an image, it will resize it to the next highest power of 2 that is greater than the current dimensions but less than or equal to the maximum dimensions supported by the current hardware.**//
 
-Here is a few examples to illustrate this.
+Here are a few examples to illustrate this.
 //Assume the current hardware's texture size limitation is 8192 x 8192.//
 If Rhino sees a file with dimensions:
 
-  * 256 x 256 - Rhino will do nothing, perfect powers of 2
-  * 1024 x 1024  - Rhino will do nothing, perfect powers of 2
-  * 1024 x 256 - Again, Rhino will do nothing, perfect powers of 2
-  * 127 x 127 - Rhino will resize the image to 128 x 128, next highest value that is a power of 2 and greater than the current dimensions
-  * 129 x 129 - Rhino will resize the image to 256 x 256, again, the next highest value that is a power of 2 and greater than the current dimensions, 
+  * 256 x 256 - Rhino will do nothing, perfect powers of 2.
+  * 1024 x 1024  - Rhino will do nothing, perfect powers of 2.
+  * 1024 x 256 - Again, Rhino will do nothing, perfect powers of 2.
+  * 127 x 127 - Rhino will resize the image to 128 x 128, next highest value that is a power of 2 and greater than the current dimensions.
+  * 129 x 129 - Rhino will resize the image to 256 x 256, again, the next highest value that is a power of 2 and greater than the current dimensions.
 
-Rhino will never "downsize" an image because that's a "lossy" operation, so it will always increase dimensions never decrease them, except in following case(s):
-  * 9000 x 6000 - Rhino will resize (downsize) the image to 8192 x 8192. 9000 exceeds the 8192 maximum limitation, an 6000 isn't a power of 2, and the next available power of 2 is 8192.
+Rhino will never //downsize// an image because that's a //lossy// operation. So it will always increase dimensions and never decrease them, except in the following cases:
+  * 9000 x 6000 - Rhino will resize (downsize) the image to 8192 x 8192. 9000 exceeds the 8192 maximum limitation and 6000 isn't a power of 2. The next available power of 2 is 8192.
   * 9000 x 9000 - Rhino will resize (downsize) the image to 8192 x 8192. Both dimensions exceed hardware limitations and are adjusted to the maximum limits.
 
 ===== Pixelization =====
-When Rhino does resize the image, it does not use any kind of sampling or bi-linear filtering, it is a //straight linear stretch or shrink//. 
-So if the difference between original dimensions and adjusted dimensions is greater, the worse the results will look.
+When Rhino does resize the image, it does not use any kind of sampling or bi-linear filtering. It is a //straight linear stretch or shrink//. 
+So, if the difference between original dimensions and adjusted dimensions is greater, the results look worse.
 \\
 \\
 Take the 129 x 129 example above. Rhino basically has to double the size of the image resulting in every pixel now being a 2 x 2 block in the final result.
 \\
 \\
-**This is the major cause of "pixelization" in the display of the attached image.** 
+**This is the major cause of pixelization in the display of the attached image.** 
 \\
 \\
-However, the results can even look worse if it tried resizing to 128 x 128. You can get "banding" to occur in many cases because entire rows or columns of pixels have been removed. 
+But, the results can even look worse if it tried resizing to 128 x 128. Banding can often occur because entire rows or columns of pixels have been removed. 
 \\
+
 //Rhino will not downsize anything unless it absolutely has to due to hardware limitations.//
 
-===== Basic Recommendation: =====
+===== Basic recommendation=====
 
-//**Always keep images as close to values that are just less than powers of 2 as possible. And if you can, try to make them powers of 2**//
+//**Always keep images as close to values that are just less than powers of 2 as possible. And if you can, try to make them powers of 2**.//
 
-Given today's video hardware, the 2 limits we see most of are 4096 x 4096  and 8192 x 8192. So if you're generating large textures, those are the dimensions to which you should limit your image generator. 
+Given today's video hardware, the two limits we see most of are 4096 x 4096  and 8192 x 8192. So if you're generating large textures, those are the dimensions to which you should limit your image generator. 
 \\
 \\
 //Making them any larger is a waste of time, space, and will cause Rhino to throw out a lot of good pixel information.//
