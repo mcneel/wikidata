@@ -1,7 +1,7 @@
 ====== Grasshopper Data Persistent Data Management ======
 
 | {{:legacy:en:ExplicitHistoryBanner.png}} |  //**Grasshopper Wiki Pages**// |
-|  [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
+|  [[http://www.mcneel.com|Robert McNeel & Associates]] |
 
 ----
 
@@ -9,17 +9,17 @@
 
 \\
 
-===== Types of Data=====
+===== Types of data=====
 
-Parameters are only used to store information, but most parameters can store two different kinds; [[labs:explicithistory:volatiledatainheritance|Volatile]] and Persistent data. Volatile data is inherited from one or more source parameters and is destroyed (i.e. recollected) whenever a new solution starts. Persistent data is data which has been specifically set by the user. Whenever a parameter is hooked up to a source object the persistent data is ignored, but not destroyed.
-
-\\
-
-//(The exception here are output parameters which can neither store permanent records nor define a set of sources. Output parameters are fully under the control of the component that owns them.)//
+Parameters are only used to store information, but most parameters can store two different kinds: [[labs:explicithistory:volatiledatainheritance|Volatile]] and Persistent data. Volatile data is inherited from one or more source parameters and is destroyed (i.e. recollected) whenever a new solution starts. Persistent data is data which has been specifically set by the user. When a parameter is hooked up to a source object the persistent data is ignored, but not destroyed.
 
 \\
 
-Persistent data is accessed through the menu, and depending on the kind of parameter has a different manager. Vector parameters for example allow you to set both single and multiple vectors through the menu.
+//(The exception is output parameters which can neither store permanent records nor define a set of sources. Output parameters are fully under the control of the component that owns them.)//
+
+\\
+
+Persistent data is accessed through the menu and, depending on the kind of parameter, has a different manager. Vector parameters, for example, let you set both single and multiple vectors through the menu.
 
 \\
 
@@ -31,7 +31,7 @@ But, let's back up a few steps and see how a default Vector parameter behaves. O
 
 \\
 
-The parameter is orange, indicating it generated a warning. It's nothing serious, the warning is simply there to inform you that the parameter is empty (it contains no persistent records and it failed to collect volatile data) and thus has no effect on the outcome of a history solution. The context menu of the Parameter offers 2 ways of setting persistent data: single and multiple:
+The parameter is orange, indicating it generated a warning. It's nothing serious. The warning is simply there to inform you that the parameter is empty (it contains no persistent records and it failed to collect volatile data) and thus has no effect on the outcome of a history solution. The context menu of the parameter offers two ways of setting persistent data: single and multiple.
 
 \\
 
@@ -39,7 +39,7 @@ The parameter is orange, indicating it generated a warning. It's nothing serious
 
 \\
 
-Once you click on either of these menu items, the Explicit History window will disappear and you will be asked to pick a vector in one of the Rhino viewports:
+Once you click on either of these menu items, the Explicit History window disappears and you are asked to pick a vector in one of the Rhino viewports:
 
 \\
 
@@ -55,6 +55,6 @@ Once you have defined all the vectors you want, you can press Enter and they wil
 
 \\
 
-At this point you can use this parameter to 'seed' as many objects as you like with identical vectors.
+At this point you can use this parameter to seed as many objects as you like with identical vectors.
 
 
