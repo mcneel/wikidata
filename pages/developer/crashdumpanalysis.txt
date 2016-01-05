@@ -13,7 +13,7 @@ In a crash dump, no heap is available and only a limited amount of stack is avai
 
 Keep in mind you are debugging optimized code. Some values of local variables (like loop counters and frequently used doubles) are kept in CPU registers and cannot be viewed in a watch window.
 
-If you read a RhinoCrashDump.dmp file in Notepad.exe and search for "RHINOCRASHINFO" you will find a block of text that looks like the following:
+If you read a RhinoCrashDump.dmp file in Notepad.exe and search for "RHINOCRASHINFO" you will find a block of text like the following:
 
    <RHINOCRASHINFO>
      <BUILD VERSION="YYYY-MM-DD" DATE="mmm dd yyyy" TIME="hh:mm"ss" />
@@ -23,7 +23,7 @@ If you read a RhinoCrashDump.dmp file in Notepad.exe and search for "RHINOCRASHI
 
 If the crash happens in a command that is in a plug-in, the name of the plug-in's .RHP file is in <EXECUTABLE FILENAME> and the id is in <EXECUTABLE UUID>.
 
-<BUILD DATE> and <BUILD TIME> are the date and time the .cpp file that contains the crash dump exception handing code was compiled.
+<BUILD DATE> and <BUILD TIME> are the date and time the .cpp file that contains the crash dump exception handling code was compiled.
 
 =====Analyzing a crash=====
 
@@ -35,7 +35,7 @@ Open the RhinoCrashDump.dmp" file in Notepad.exe and search for RHINOCRASHINFO. 
    2007-10-17 - Rhino 4.0 SR2
    2007-07-03 - Rhino 4.0 SR1
 
-====Step 2. Get the build of Rhino that has crashed====
+====Step 2. Get the build of Rhino that crashed====
 To analyze the crash dump file, you need the build of Rhino on your system that produced the crash dump. If you do not have the same build, download it from the Rhino web site.
 
 ====Step 3. Copy files====
@@ -43,7 +43,7 @@ After you determine the version of the crashed Rhino, copy the RhinoCrashDump.dm
 
    C:\Program Files\Rhinoceros 4.0\System
 
-Over the life of your plug-in, you are likely to see many crashes. So do yourself a big favor and rename the RhinoCrashDump.dmp file something descriptive.
+Over your plug-in's life, you are likely to see many crashes. So do yourself a big favor and rename the RhinoCrashDump.dmp file something descriptive.
 
 Also, copy your plug-in's release .RHP and .PDB files into the same folder. 
 
@@ -65,7 +65,7 @@ You must have symbol information when you debug applications with various Micros
 
 The Microsoft Symbol Server is built by using the SymSrv technology (SymSrv.dll) provided with the Debugging Tools for Windows package. SymSrv builds a local symbol cache for fast, automatic symbol resolution.
 
-You can use the symbol server to allow Visual Studio to automatically download the proper Microsoft symbols for debugging your Visual Studio project. To allow Visual Studio to use the Microsoft Symbol Server, select **Tools->Options** and fill in the information as listed below.
+You can use the symbol server to allow Visual Studio to automatically download the proper Microsoft symbols for debugging your Visual Studio project. To allow Visual Studio to use the Microsoft Symbol Server, select **Tools->Options** and fill in the information listed below.
 
 {{:legacy:en:symsvr.png}}
 
