@@ -7,10 +7,10 @@ The openNURBS Toolkit consists of C++ source code for a library that will read a
 
 
 =====Audience=====
-The openNURBS Toolkit is intended for C++ and .NET programmers. The toolkit includes complete source code to create a library that will read and write 3dm files.  In addition, source code for several example programs is included.
+The openNURBS Toolkit is intended for C++ and .NET programmers. The toolkit includes complete source code to create a library that will read and write 3DM files.  The toolkit also includes source code for several example programs.
 
 =====Overview=====
-Currently, the openNURBS Toolkit will read and write all information in Rhino version 2, 3, 4 and 5 files and read Rhino version 1 files.
+Currently, the openNURBS Toolkit reads and writes all information in Rhino version 2, 3, 4 and 5 files and read Rhino version 1 files.
 
 Also, the openNURBS Toolkit provides [[rhino:nurbs|NURBs]] evaluation tools and elementary geometric and 3-D view manipulation tools.
 
@@ -29,25 +29,25 @@ The openNURBS C++ source code is clean and simple.  You
 should be able to use any good C++ compiler that has 32-bit
 integers, 32-bit or 64-bit pointers, and wchar_t support.
 
-If you are using a good quality C++ compiler and run into some toolkit code that causes problems, please let us know and we'll attempt to change the code to accommodate the compiler.
+If you are using a good quality C++ compiler and run into some toolkit code that causes problems, please let us know. We'll attempt to change the code to accommodate the compiler.
 =====Getting started=====
-If your goal is to read and write 3dm files, then you may find that the class ONX_Model::Read() and ONX_Model::Write() an easy way to attain your goal. See example_read.cpp and example_write.cpp for more details.
+If your goal is to read and write 3DM files, then you may find that the class ONX_Model::Read() and ONX_Model::Write() an easy route. See example_read.cpp and example_write.cpp for more details.
 
-  - Compile the openNURBS Toolkit library. In order to compile the example programs you must link with the openNURBS Toolkit library.  Compile the library as described in the first paragraph of the Instructions section.
-  - Study example_read\example_read.cpp. All of the openNURBS geometry classes are derived from the ON_Geometry class.  If you need generic attribute information, there is probably a ON_Geometry member function that will answer your query.  See the Dump() function in example_read.cpp for code that demonstrates how to use the Cast() function to get at the actual class definitions.
+  - Compile the openNURBS Toolkit library. To compile the example programs you must link with the openNURBS Toolkit library.  Compile the library as described in the first paragraph of the Instructions section.
+  - Study example_read\example_read.cpp. All the openNURBS geometry classes are derived from the ON_Geometry class.  If you need generic attribute information, there is probably an ON_Geometry member function that will answer your query.  See the Dump() function in example_read.cpp for code that demonstrates how to use the Cast() function to get at the actual class definitions.
   - Study example_write\example_write.cpp. If you want to write points, meshes, NURBs curves, NURBs surfaces, or trimmed NURBs surfaces, you should be able to cut and paste most of what you need from the functions in example_write.cpp.  If you want to write trimmed surfaces or b-reps, then please study example_brep.cpp.
-  - Study example_brep\example_brep.cpp. If you want to write solid models or more general b-reps, then you should first work through example_write.cpp and then work through example_brep.cpp.
-  - The comments in the openNURBS Toolkit header files are intended to be the primary source of documentation.  I suggest that you use a development environment that has high quality tags capabilities and a good class browser.
+  - Study example_brep\example_brep.cpp. If you want to write solid models or more general b-reps, then first work through example_write.cpp and then work through example_brep.cpp.
+  - The comments in the openNURBS Toolkit header files are the primary source of documentation.  I suggest that you use a development environment that has high quality tags capabilities and a good class browser.
   - In the code you write include only opennurbs.h.  The opennurbs.h header file includes the necessary openNURBS toolkit header files in the appropriate order.
   - Other
-    * OpenNURBS uses UTF-16 to store text information in 3dm files and provides tools for converting UTF-16 strings to and from UTF-8, UTF-32 and wchar_t strings. The ON_wString class has wchar_t characters.
+    * OpenNURBS uses UTF-16 to store text information in 3DM files and provides tools for converting UTF-16 strings to and from UTF-8, UTF-32 and wchar_t strings. The ON_wString class has wchar_t characters.
     * All memory allocations and frees are done through onmalloc(), onfree(), and onrealloc().  The source code that ships with openNURBS simply has onmalloc() call malloc() and onfree() call free().
-    * If you want to use Open GL to render openNURBS geometry, then you may want to include opennurbs_gl.h after opennurbs.h and add opennurbs_gl.cpp to your openNURBS Toolkit library. See example_gl.cpp for more details.
-    * The openNURBS Toolkit is works correctly on both big and little endian CPUs.  (Generally, Intel CPUs use little endian byte order and MIPS, Motorola, and Sparc CPUs use big endian byte order.)
+    * If you want to use Open GL to render openNURBS geometry, you may want to include opennurbs_gl.h after opennurbs.h and add opennurbs_gl.cpp to your openNURBS Toolkit library. See example_gl.cpp for more details.
+    * The openNURBS Toolkit works correctly on both big and little endian CPUs.  (Generally, Intel CPUs use little endian byte order and MIPS, Motorola, and Sparc CPUs use big endian byte order.)
 
 =====Support=====
 
-If you have a question concerning the openNURBS Toolkit that is not answered here or covered in the examples, then please post your question on the support forum at http://discourse.mcneel.com/category/opennurbs
+If you have a question on the openNURBS Toolkit that is not answered here or covered in the examples, then please post your question on the support forum at http://discourse.mcneel.com/category/opennurbs.
 
 
 =====Examples=====
@@ -65,18 +65,18 @@ If you have a question concerning the openNURBS Toolkit that is not answered her
     * Create a program by compiling example_userdata.cpp and linking with the openNURBS library. The code in example_userdata demonstrates how to create and manage arbitrary user defined information in .3DM files.
 
 
-===The Open GL example:===
+===The Open GL example===
 
-Past versions of openNURBS have included a crude version of an Open GL example.  The code for this example is still included in the current version, but we no longer provide support for using OpenGL with openNURBS.  Nothing has changed in openNURBS to with respect to using OpenGL. We simply do not have the resources to provide quality OpenGL support on the wide variety of platforms where openNURBS is used.
+Past versions of openNURBS have included a crude version of an Open GL example.  The code for this example is still included in the current version, but we no longer provide support for using OpenGL with openNURBS.  Nothing has changed in openNURBS with respect to using OpenGL. We simply do not have the resources to provide quality OpenGL support on the wide variety of platforms where openNURBS is used.
 
 
-=====3dm file versions=====
+=====3DM file versions=====
 
-  - **Version 1 3dm files.** The openNURBS toolkit will read version 1 files. Rhino 1 and other applications using the old Rhino I/O toolkit create version 1 files.
-  - **Version 2 3dm files.** The openNURBS toolkit will read and write version 2 files. Rhino 2 and applications using an openNURBS toolkit released on or after December 2000 create version 2 files.  (Rhino 1 and the old Rhino I/O toolkit will not read version 2 files.)
-  - **Version 3 3dm files.** The openNURBS toolkit will read and write version 3 files. Rhino 3 and applications using an openNURBS toolkit released on or after October 2002 create version 3 files.  (Rhino 1 and Rhino 2 will not read version 2 files.)
-  - **Version 4 3dm files.** The openNURBS toolkit will read and write version 4 files. Rhino 4 and applications using an openNURBS toolkit released on or after September 2006 create version 4 files.  (Rhino 1, Rhino 2, and Rhino 3 will not read version 4 files.)
-  - **Version 5 3dm files.** The openNURBS toolkit will read and write version 5 files. Rhino 5 and applications using an openNURBS toolkit released on or after September 2009 create version 5 files.  (Rhino 1, Rhino 2, Rhino 3 and Rhino 4 will not read version 5 files.)
+  - **Version 1 3DM files.** The openNURBS toolkit will read version 1 files. Rhino 1 and other applications using the old Rhino I/O toolkit create version 1 files.
+  - **Version 2 3DM files.** The openNURBS toolkit will read and write version 2 files. Rhino 2 and applications using an openNURBS toolkit released on or after December 2000 create version 2 files.  (Rhino 1 and the old Rhino I/O toolkit will not read version 2 files.)
+  - **Version 3 3DM files.** The openNURBS toolkit will read and write version 3 files. Rhino 3 and applications using an openNURBS toolkit released on or after October 2002 create version 3 files.  (Rhino 1 and Rhino 2 will not read version 2 files.)
+  - **Version 4 3DM files.** The openNURBS toolkit will read and write version 4 files. Rhino 4 and applications using an openNURBS toolkit released on or after September 2006 create version 4 files.  (Rhino 1, Rhino 2, and Rhino 3 will not read version 4 files.)
+  - **Version 5 3DM files.** The openNURBS toolkit will read and write version 5 files. Rhino 5 and applications using an openNURBS toolkit released on or after September 2009 create version 5 files.  (Rhino 1, Rhino 2, Rhino 3 and Rhino 4 will not read version 5 files.)
 
 
 =====Common questions=====
@@ -103,7 +103,7 @@ in opennurbs_gl.cpp demonstrates how to go through an ON_Mesh and render all the
 
 ===Orientation of ON_Brep faces===
 
-The "UV" orientation of surfaces in a Brep is arbitrary.  If the
+The UV orientation of surfaces in a Brep is arbitrary.  If the
 
    BOOL ON_BrepFace::m_bRev
 
@@ -113,7 +113,7 @@ If your application cannot handle ON_BrepFaces that have a TRUE m_bRev flag, the
 
 ===Trimming loop order and nesting===
 
-The ON_BrepLoop::m_type member records the type of boundary (inner, outer, etc.).  A ON_BrepFace has exactly one outer loop and it is the first loop referenced in the ON_BrepFace::m_li[] array.  The inner loops all define "holes" in the ON_BrepFace.  All of the inner holes lie inside of the outer loop.  A ON_BrepFace is always path connected. In particular, inner loops are not "nested".
+The ON_BrepLoop::m_type member records the type of boundary (inner, outer, etc.).  A ON_BrepFace has exactly one outer loop and it is the first loop referenced in the ON_BrepFace::m_li[] array.  The inner loops all define "holes" in the ON_BrepFace.  All the inner holes lie inside of the outer loop.  A ON_BrepFace is always path connected. In particular, inner loops are not "nested".
 
 ===Surfaces in Rhino are read as ON_Breps===
 
@@ -138,4 +138,3 @@ Robert McNeel & Associates. They feel that the 3-D market is stifled because of 
 
 
 For details about Rhino, please visit the Rhino web site at [[http://www.rhino3d.com|http://www.rhino3d.com]].
-
