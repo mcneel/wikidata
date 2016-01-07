@@ -1,8 +1,8 @@
-====== Pro/E file exchange ======
+====== Pro/E File Exchange ======
 
-> **Note:** //These notes were created some time ago and were in the Rhino Help. However, it seems that this information should be reviewed and updated by people who know about this subject, So I'm moving it here. ~mb//
+> **Note:** //These notes were created some time ago and were in the Rhino Help. It seems that this information should be reviewed and updated by people who know about this subject, so I'm moving it here. ~mb//
 
-=====Tips from an expert user:=====
+=====Tips from an expert user=====
 
 Below are a few tips from a Rhino user that should help working with IGES files and Pro/E 21.
 
@@ -10,21 +10,21 @@ Pro/E 20-21 have problems shading free-form surfaces. Set the resolution to 10 i
 
 Use Rhino for the surfacing tool and Pro/E for the detailing tool. Do not do in Rhino what you want as a parametric feature in the model. All internals, such as fillets and drafts, should be saved for Pro/E. The more trims you have, the worse the odds are for a successful solid import in Pro/E. Model with tight tolerance in Rhino and make sure the start part in Pro/E has a lower tolerance than the export. Make sure you have enough information in the file to do a translation. Large spaced isoparametric curves and objects such as capped ends will fail as a solid import. Therefore, you should rebuild surfaces or up the degree to add more control points that clamp things together. If exporting via IGES, keep away from weights on control points in Rhino.
 
-When modeling in Rhino, make sure all surfaces overlap so you can do a un-trim if IGES splits open on import. There are times you may need to go back to Rhino and do a un-trim, re-export to Pro/E and do a native Pro/E trim because the surfaces will not zip gaps. This will bypass the tolerance issue if your overlapping surface distance is enough. This also means do not use the ShrinkTrimmedSrf command in Rhino if it will prevent a un-trim without a overlapping edge.
+When modeling in Rhino, make sure all surfaces overlap so you can do an un-trim if IGES splits open on import. There are times you may need to go back to Rhino and do a un-trim, re-export to Pro/E, and do a native Pro/E trim because the surfaces will not zip gaps. This will bypass the tolerance issue if your overlapping surface distance is enough. This also means do not use the ShrinkTrimmedSrf command in Rhino if it will prevent a un-trim without a overlapping edge.
 
-Open surfaces can be made into a solid in Pro/E providing the open edge is buried in solid material in Pro/E. Surface replace is another good tool to use, and better yet is a single surface import of exploded parts from Rhino because each surface is a feature, then, and can be replaced with insert mode in Pro/E and managed as a feature.
+Open surfaces can be made into a solid in Pro/E providing the open edge is buried in solid material in Pro/E. Surface replace is another good tool to use, and better yet, is a single surface import of exploded parts from Rhino because each surface is a feature,  and can be replaced with insert mode in Pro/E and managed as a feature.
 
-The curves used with NetworkSrf in Rhino can be exported to Pro/E and used with the surfacing module using Surface\Advanced\Boundary with similar results. If the curves are planar, they can be used and made parametric with use-edge and un-aligned then re-dimensioned and adjusted, so all features are native to Pro/E but developed in Rhino.
+The curves used with NetworkSrf in Rhino can be exported to Pro/E and used with the surfacing module using Surface\Advanced\Boundary with similar results. If the curves are planar, they can be used and made parametric with use-edge and un-aligned then redimensioned and adjusted, so all features are native to Pro/E but developed in Rhino.
 
-Do not forget that Pro/E can use a IGES as a cutter, a surface, and a solid. Quilts can grow in Pro/E with multiple inputs from Rhino. Make sure all surfaces pass draft check for molding parts before export and before any work starts in Pro/E.
+Do not forget that Pro/E can use an IGES as a cutter, a surface, and a solid. Quilts can grow in Pro/E with multiple inputs from Rhino. Make sure all surfaces pass draft check for molding parts before export and before any work starts in Pro/E.
 
-If you go round trip from Rhino to Pro then back to Pro, you will not get back what you sent, Pro/E with split and rebuild the surfaces on import unless you split them first where you want them. Finding culprit surfaces is always a learning curve for every design.
+If you go round trip from Rhino to Pro then back to Pro, you will not get back what you sent. Pro/E will split and rebuild the surfaces on import unless you first split them where you want them. Finding culprit surfaces is always a learning curve for every design.
 
-Assembly files are not supported
+Assembly files are not supported.
 
 The Pro/E .asm file is a pointer file telling Pro/E how to assemble the parts. There is no geometry information in it. It keeps track of exploded dimensions and layer colors for the assembly. It is a parent file to the assembly and is sent out as IGES when you send out all parts but has no information Rhino can use since Rhino does not support assemblies.
 
-To get an assembly into Rhino you can set up a layer/level mapping file or load one IGES file at a time and put them on layers as you go. Make sure you send the IGES parts out from the default coordinate or top level coordinate in the 'assembly' so the parts come in based on the assembly coordinates and not the part coordinates.
+To get an assembly into Rhino you can set up a layer/level mapping file or load one IGES file at a time and put them on layers as you go. Make sure you send the IGES parts out from the default coordinate or top level coordinate in the //assembly// so the parts come in based on the assembly coordinates and not the part coordinates.
 
 Read the Help file topic about the SetIgesLayerLevelMap command if you want to go.
 
