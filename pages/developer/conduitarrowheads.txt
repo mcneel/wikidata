@@ -6,20 +6,18 @@
 ===== Question =====
 We are trying to get our heads around drawing arrowheads through conduits in the Rhino .NET SDK. We create an instance of the **CRhinoArrowhead** class and set 2-D information (point and direction) and then need to set a parent (any 
 type of **CRhinoAnnotationObject**). As **CRhinoAnnotationObject** is a virtual 
-class, the best version for our purposes seems to be the //leader// class. However (not surprisingly), the arrowhead behaves like a leader, sitting in world space, and is not aligned or scaled to the viewport's construction as desired. Is there any other way to draw an arrowhead that does not involve using the **CRhinoArrowhead** class?
+class, for our purposes the best version seems to be the //leader// class. But (not surprisingly) the arrowhead behaves like a leader, sitting in world space, and is not aligned or scaled to the viewport's construction as we desire. Is there any other way to draw an arrowhead that does not involve using the **CRhinoArrowhead** class?
 
 ===== Answer =====
-Trying to draw arrowheads in a conduit by using an **CRhinoArrowhead** object might appear to be the correct approach. But this object is fairly specialized and designed to be used in conjunction with other annotation objects. Thus, this might not work well for you in this case.
+Drawing arrowheads in a conduit by using an **CRhinoArrowhead** object might appear to be the correct approach, but this object is fairly specialized and designed to be used in conjunction with other annotation objects. So in this case, this might not work well for you.
 
-If you add your lines to the document, you can set the objects' decorations. Then Rhino would draw the arrowheads for you. Here is an example:
+If you add your lines to the document, you can set the objects' decorations. Then Rhino would draw the arrowheads for you. Here is an example: **[[http://wiki.mcneel.com/developer/sdksamples/objectdecoration|Adding Arrowheads to Curves]]**.
 
-**[[http://wiki.mcneel.com/developer/sdksamples/objectdecoration|Adding Arrowheads to Curves]]**
+But adding temporary geometry to the document just for display purposes is awkward and frowned upon.
 
-But, adding temporary geometry to the document just for display purposes is awkward and frowned upon.
+You might be better off just drawing your own arrowheads. It's really not that hard. Draw arrowheads by calling the display pipeline's **DrawPolygon()** member with the fill parameter set to true. The trick is defining the polygon you want to draw.
 
-With all this said, you might be better off just drawing your own arrowheads. It's really not that hard. Draw arrowheads by calling the display pipeline's **DrawPolygon()** member with the fill parameter set to true. The trick is defining the polygon you want to draw.
-
-Below is some sample code that draws a 2-D arrowhead at the end of a line somewhat like a leader object. Perhaps this will give you some of how to implement arrowhead drawing in your project.
+Below is some sample code that draws a 2-D arrowhead at the end of a line similar to a leader object. Perhaps this will give you an idea how to implement arrowhead drawing in your project.
 
 ==== C++ ====
 <code c++>
