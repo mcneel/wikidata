@@ -1,0 +1,15 @@
+======Toolbars and text too small on High Resolution Monitor======
+> **Summary:** //The 64-bit Rhino 5 user interface was not designed for the new High Resolution displays. These are the details needed to make Windows automatic display scaling work correctly to fix the issue.//
+
+
+=====What needs to be done?=====
+  - Add a System Registry key
+  - Copy a file into the Rhino System folder
+
+
+=====What are the details?=====
+  - Run **REGEDIT** to Enable Windows to use external manifests by creating a registry key **DWORD**: **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide\PreferExternalManifest\**
+    - Set the **value** to 1
+   - **Download** this file: {{:rhino:5:video:highres:rhinomanifest.zip|RhinoManifest.zip}}
+    - **Unzip** the file and place it in: **C:\Program Files\Rhinoceros 5 (64-bit)\System\**
+  - Start Rhino
