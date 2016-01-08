@@ -4,7 +4,7 @@
 
 The Zoo uses a simple, protocol-independent messaging technology called **Mailslots** to communicate with Rhino. Microsoft networks use mailslots messages in a variety of areas, including domain logon service. Mailslot messaging works on all modern Microsoft operating systems. Mailslot messaging works on both Workgroup networks and on Domain networks.
 
-In terms of configuring the Zoo, there really is nothing to do. As long as all machines involved belong to the same Windows Domain or Workgroup and are installed on the same subnet, then the Zoo should be able to allocate licenses upon request. Keep a couple of things in mind when working with the Zoo:
+For configuring the Zoo, there really is nothing to do. As long as all machines involved belong to the same Windows Domain or Workgroup and are installed on the same subnet, then the Zoo should be able to allocate licenses upon request. Keep a couple of things in mind when working with the Zoo:
 
   * Make sure you are running the latest version of the Zoo.
   * Make sure you are logged in as the Administrator or as a member of the Administrators group when running the Zoo console application.
@@ -47,7 +47,7 @@ To test name resolution using **nbtstat**:
 If **nbtstat** fails to return information for either the Zoo or the Client, then the Zoo will not work with this network configuration. It is beyond the scope of this document and the scope of McNeel Support to help you ensure that your network supports proper [[rhino:netbios|NetBIOS]] name resolution.
 
 ==== Ensure connectivity works between Zoo and Client ====
-The **net view** command displays a list of domains, computers, or resources that are being shared by the specified computer. Used without parameters, **net view** displays a list of computers in your current domain.
+The **net view** command displays a list of domains, computers, or resources shared by the specified computer. Used without parameters, **net view** displays a list of computers in your current domain.
 
 To test connectivity by using the **net view** command:
 
@@ -59,7 +59,7 @@ To test connectivity by using the **net view** command:
 The **net view** command lists the file and print shares by establishing a temporary connection.
 
   * If there are no file or print shares on the specified computer, the **net view** command displays a "There are no entries in the list" message.
-  * If the **net view** command fails with a //System error 53 has occurred// message, verify that the specified computer name is correct, that the computer is operational, and that all of the gateways (routers) between this computer and the computer are operational.
+  * If the **net view** command fails with a //System error 53 has occurred// message, verify that the specified computer name is correct, that the computer is operational, and that all the gateways (routers) between this computer and the computer are operational.
   * If the **net view** command fails with a //System error 5 has occurred. Access is denied.// message, verify that you are logged on using an account that has permission to view the shares on the remote computer.
 
 To further troubleshoot this connectivity problem, do the following:
