@@ -16,7 +16,7 @@ For configuring the Zoo, there really is nothing to do. As long as all machines 
   * The Zoo will not work with Rhino 2.0 or 3.0 Educational or Educational Lab licenses (CD-Keys).
   * The Zoo will not work with Rhino 2.0 or 3.0 running on Asian versions of Windows.
   * Not all products are capable of acquiring licenses across a routed network. See the [[zoo:products|Zoo Product Compatibility]] page for a list of what works and what does not.
-  * You should be logged in as the Administrator or as a member of the Administrator's group when running the Zoo console application.
+  * Log in as the Administrator or as a member of the Administrator's group when running the Zoo console application.
 
 ===== Networking notes =====
   * All systems must belong to the same **Windows Domain or Workgroup**.
@@ -28,7 +28,7 @@ For configuring the Zoo, there really is nothing to do. As long as all machines 
   * Note, these are ports that Windows uses for [[rhino:netbios|NetBIOS]] communications. If you are using the built-in **Windows Firewall**, enable **File and Printer Sharing** as an allowed exception.
 \\
 {{:legacy:en:zoo_windows_firewall.png}}
-  * If you have not configured your Rhino systems for either DNS or Registry Key lookup, then all Rhino workstations and the system running the Zoo must be installed on the same network subnet. This is because both Rhino and the Zoo will broadcast messages. Broadcast mailslot messages will not cross network routers and some switches. Wireless routers will also not forward broadcast messages.
+  * If you have not configured your Rhino systems for either DNS or Registry Key lookup, then all Rhino workstations and the system running the Zoo must be installed on the same network subnet. This is because both Rhino and the Zoo will broadcast messages. Broadcast mailslot messages will not cross network routers and some switches. Also, wireless routers will not forward broadcast messages.
 
 
 
@@ -44,7 +44,7 @@ To test name resolution using **nbtstat**:
   - Type **nbtstat -a <ZooServerName>**.
   - One of the network adapters should resolve the Zoo computer name.
 
-If **nbtstat** fails to return information for either the Zoo or the Client, then the Zoo will not work with this network configuration. It is beyond the scope of this document and the scope of McNeel Support to help you ensure that your network supports proper [[rhino:netbios|NetBIOS]] name resolution.
+If **nbtstat** fails to return information for either the Zoo or the Client, then the Zoo will not work with this network configuration. It is beyond the scope of this document and McNeel Support to help you ensure that your network supports proper [[rhino:netbios|NetBIOS]] name resolution.
 
 ==== Ensure connectivity works between Zoo and Client ====
 The **net view** command displays a list of domains, computers, or resources shared by the specified computer. Used without parameters, **net view** displays a list of computers in your current domain.
@@ -58,9 +58,9 @@ To test connectivity by using the **net view** command:
 
 The **net view** command lists the file and print shares by establishing a temporary connection.
 
-  * If there are no file or print shares on the specified computer, the **net view** command displays a "There are no entries in the list" message.
+  * If there are no file or print shares on the specified computer, the **net view** command displays a //There are no entries in the list// message.
   * If the **net view** command fails with a //System error 53 has occurred// message, verify that the specified computer name is correct, that the computer is operational, and that all the gateways (routers) between this computer and the computer are operational.
-  * If the **net view** command fails with a //System error 5 has occurred. Access is denied.// message, verify that you are logged on using an account that has permission to view the shares on the remote computer.
+  * If the **net view** command fails with a //System error 5 has occurred. Access is denied.// message, verify that you are logged in with an account that has permission to view the shares on the remote computer.
 
 To further troubleshoot this connectivity problem, do the following:
 
