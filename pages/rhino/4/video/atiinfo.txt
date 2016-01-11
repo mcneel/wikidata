@@ -1,44 +1,44 @@
-====== ATI display card delay issues Rhino V4 (obsolete)======
+====== ATI Display Card Delay Issues Rhino V4 (obsolete)======
 
-This page addresses specific symptoms in Rhino Version 4 with ATI Raden Video cards.  If you do not have these exact symptoms, but are experience video problems, please go to our **[[rhino:5:video:troubleshooting|Video Troubleshooting Section]]** for current solutions.
+This page addresses specific symptoms in Rhino Version 4 with ATI Raden Video cards.  If you do not have these exact symptoms, but are experiencing video problems, please go to our **[[rhino:5:video:troubleshooting|video troubleshooting section]]** for current solutions.
 
-===== Delay Issues with Ati Radeon display adapters =====
+===== Delay issues with ATI Radeon display adapters =====
 
-Ati drivers newer than version 8.4 installed on systems with Radeon model cards cause display delays in Rhino's viewports.
+ATI drivers newer than version 8.4 installed on systems with Radeon model cards cause display delays in Rhino's viewports.
 
 Symptoms include delays of 1-2 seconds when:
-  * <color red>Panning</color>
-  * <color red>Zooming</color>
-  * <color red>Rotating</color>
+  * Panning
+  * Zooming
+  * Rotating
 
-We have contacted ATi about this issue. ATi states that the Radeon line of cards is NOT intended for CAD applications like Rhino, only the FireGL line is. The Radeon is intended for gaming, therefore reporting CAD-related problems against gaming cards is pointless.
+We have contacted ATI about this issue. ATI states that the Radeon line of cards is **not** intended for CAD applications like Rhino, only the FireGL line is. The Radeon is intended for gaming, so reporting CAD-related problems is pointless.
 
-Jeff LaSor, the Rhino display developer, has written a plug-in to address this problem. The plugin replaces Rhino's existing display engine with one that handles problems associated with the ATi HD series cards.
+Jeff LaSor, the Rhino display developer, has written a plug-in to address this problem. The plug-in replaces Rhino's existing display engine with one that handles problems associated with the ATI HD series cards.
 
-Download this plugin: http://en.wiki.mcneel.com/content/upload/files/RhinoDisplayEngine_OGLx.zip
+Download this plug-in: http://en.wiki.mcneel.com/content/upload/files/RhinoDisplayEngine_OGLx.zip
 
-UnZIP the file and either drag-n-drop it onto a Rhino viewport or use the PluginManager command to load it. Just to be safe, close and restart Rhino.
+Unzip the file and either drag-n-drop it onto a Rhino viewport or use the PluginManager command to load it. Just to be safe, close and restart Rhino.
 
 This work-around has been tested on HD series cards, but does not appear to be needed for FireGL cards. It will not effect other graphics cards. 
 
-Also, this plug-in will not fix performance problems with wireless docking stations. If your monitor is hooked up wirlessly to your computer, please try a physical connection to the monitor to increase perfromance.
+Also, this plug-in will not fix performance problems with wireless docking stations. If your monitor is hooked up wirelessly to your computer, please try a physical connection to the monitor to increase performance.
 
-You might experience some situations or problems we haven't anticipated, so please report any problems you encounter while using this plug-in to the Rhino [[news://news.rhino3d.com/rhino|newsgroup.]] or [[tech@mcneel.com|tech@mcneel.com.]]
+You might experience some situations or problems we haven't anticipated, so please report any problems you encounter while using this plug-in to the Rhino [[news://news.rhino3d.com/rhino|newsgroup]] or [[tech@mcneel.com|tech@mcneel.com.]]
 
-> **Detail:** //The problem is that newer ATI drivers choke on a very basic [[rhino:opengl|OpenGL]] call that Rhino uses to capture framebuffer contents used in Rhino's double-buffering and triple-buffering mechanisms. The result was that as you rotated and panned the views, everything worked and performed great, but once you stopped, you would experience a long delay (about two seconds per viewport). This meant that operations that simply needed to refresh the display (e.g., selecting objects) would show long delays. This plugin fixes the problem by rewriting the framebuffer capturing mechanism. -Jeff//
+> **Detail:** //The problem is that newer ATI drivers choke on a basic [[rhino:opengl|OpenGL]] call that Rhino uses to capture framebuffer contents used in Rhino's double-buffering and triple-buffering mechanisms. The result is that as you rotate and pan the views, everything works and performs great, but once you stop, you experience a long delay (about two seconds per viewport). This means that operations that simply need to refresh the display (e.g., selecting objects) show long delays. This plug-in fixes the problem by rewriting the framebuffer capturing mechanism. -Jeff//
 
 > **Note:** //The only way to disable this plug-in is to delete the .rhp file from your system.//
 
-> **Update:** //28-Oct-2008.  This fix also works on Rhino V4 installed on Vista 64-bit.//
+> **Update** //28-Oct-2008:  This fix also works on Rhino V4 installed on Vista 64-bit.//
 
-> **Update:** //24-Mar-2010
-The older ATI drivers were really bad (they're hardware has always been better than NVidia's on paper), but with the latest hardware and drivers coming out of AMD/ATI, the Radeon 4000 & 5000 series as well as the FirePro 8000 series, I can say that Rhino runs very well and they are very impressive. My development box has the FirePro v8750 in it (for over a year now), and it's what I've been using to development most of the newer V5 display features. I've also got Radeon 4870's here that work really well, and in fact, using VBO meshes on the Radeons blows NVidia cards away in many cases.
+> **Update** //24-Mar-2010:
+The older ATI drivers were really bad (their hardware has always been better than NVidia's on paper). But with the latest hardware and drivers coming out of AMD/ATI, the Radeon 4000 & 5000 series, as well as the FirePro 8000 series, Rhino runs very well and they are very impressive. My development box has the FirePro v8750 in it (for over a year now), and it's what I've been using to develop most of the newer V5 display features. I've also got Radeon 4870's here that work really well, and in fact, using VBO meshes on the Radeons blows NVidia cards away in many cases.
 
-So, I'm not sure that the message should really be "NVidia" only. I still believe we need to stay out of the "we recommend brand X" cards. Recommending video hardware is a hit-or-miss situation at best. I've seen the same exact card run differently on two separate machines. In fact, I'm working with someone right now on the NG about a GeForce 8800 GTX not working on Win7 64bit. I'm having no such problems here with any of my 8800's running on Win7 64bit myself. Recommending that an 8800 works on Win7 would not be truthful if we were to recommend it to the guy that's currently having issues with it.
+So, I'm not sure that the message should be "Nvidia only". I still believe we need to stay out of the "we recommend brand X" cards. Recommending video hardware is a hit-or-miss situation at best. I've seen the same card run differently on two separate machines. In fact, I'm working with someone right now on the NG about a GeForce 8800 GTX not working on Win7 64bit. I'm having no problems here with any of my 8800's running on Win7 64bit myself. Recommending that an 8800 works on Win7 would not be truthful if we were to recommend it to the guy that's currently having issues with it.
 
-The best we can do going forward is to just say that we believe that with the latest video hardware and drivers coming out of both AMD and NVidia, that Rhino *should* run just fine. If you're using older hardware then there may be issues with V5's latest features, but that we have certain solutions to help fix some of the problems experienced in V4 running on some ATI cards.
+Going forward, the best we can do is to say that we believe that with the latest video hardware and drivers coming out of both AMD and NVidia, Rhino should run just fine. If you're using older hardware then there may be issues with V5's latest features, but that we have certain solutions to help fix some of the problems experienced in V4 running on some ATI cards.
 
-Saying that going with "NVidia is safer" is not necessarily accurate anymore. The best recommendation you can make in this area is to get a card with as much video memory onboard as possible - 1GB to 2GB. V5 will make use of it, and it can/will improve Rhino's overall performance.
+Saying that going with "NVidia is safer" is not necessarily accurate anymore. The best recommendation in this area is to get a card with as much video memory onboard as possible - 1GB to 2GB. V5 will use it, and it can improve Rhino's overall performance.
 
 -Jeff//
 
