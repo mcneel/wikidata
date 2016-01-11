@@ -1,6 +1,6 @@
 ====== Rhino 4.0 Slow or Stuck Cursor Movement ======
-> **Products:** //Rhino 4.0 with some Nvidia and ATI cards, usually older ones. The same card may react differently on different computers.//
-> **Problem:** //Cursor slow or "jumpy" - does not keep up with mouse movement. Described as being "stuck in the mud."//
+> **Products:** //Rhino 4.0 with some NVIDIA and ATI cards, usually older ones. The same card may react differently on different computers.//
+> **Problem:** //Cursor slow or jumpy - does not keep up with the mouse movement. Described as being "stuck in the mud."//
 
 =====Solution=====
 ===1. Get the latest driver from the video card manufacturer.===
@@ -8,10 +8,10 @@ If it is NVIDIA, pick [[http://www.nvidia.com/content/drivers/drivers.asp|here]]
 
 If it is ATI, pick [[http://ati.de/support/driver.html|here]].
 
-===2. Set OpenGL Pipeline to Windows===
+===2. Set OpenGL Pipeline to Windows.===
 Tools->Options->Appearance->Advanced Display->Wireframe->Other Settings.
 
-In the dialog on the right, under Pipeline Controls, set the list control to Windows, not [[rhino:opengl|OpenGL]].
+In the dialog on the right, under Pipeline controls, set the list control to Windows, not [[rhino:opengl|OpenGL]].
 
 Changing wireframe implementation to Windows does usually help in wireframe mode when a computer has this display problem (especially for older computers with underpowered video cards.)
 
@@ -22,7 +22,7 @@ Tools->Options->Appearance->[[rhino:opengl|OpenGL]].
 
 In the dialog on the right, check **Use accelerated hardware modes** and **Do not use OpenGL for drawing feedback items**.
 
-This can cause some minor side effects in some cases like things not being redrawn instantly.
+In some cases, this causes some minor side effects like things not being redrawn instantly.
 
 {{:legacy:en:opengl-setting2.jpg}}
 
@@ -37,7 +37,7 @@ We found it under **3D Controls**. There was a list of settings. Towards the bot
 
 > **Note:** //This is NVIDIA's driver so the location of this option may change. Please direct any question about locating Vertical Sync to NVIDIA.//
 
-> **Comments:** //Item #2 - Changing wireframe implementation to Windows does usually help in wireframe mode when a computer is exhibiting the above display problem (the cursor feels and moves like it's stuck in mud), especially for older computers with underpowered video cards.  BUT, it does nothing for you when you are in shaded modes, as you are 100% in [[rhino:opengl|OpenGL]] there, including curve display (unless you are using DirectX).  Item #3 is important.  It can cause some minor side effects in some cases like things not being redrawn instantly (i.e. a blank space when a floating toolbar is closed).  [Mitch 17.05.07]//
+> **Comments:** //Item #2 - Changing wireframe implementation to Windows does usually help in wireframe mode when a computer is exhibiting the above display problem (the cursor feels and moves like it's stuck in mud), especially for older computers with underpowered video cards.  But, it does nothing for you when you are in shaded modes, as you are 100% in [[rhino:opengl|OpenGL]] there, including curve display (unless you are using DirectX).  Item #3 is important.  It can cause some minor side effects in some cases like things not being redrawn instantly (i.e. a blank space when a floating toolbar is closed).  [Mitch 17.05.07]//
 
 
 
