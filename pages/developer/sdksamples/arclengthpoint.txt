@@ -6,14 +6,14 @@
 For a given length from the beginning of a curve, how would I get a curve's parameter at this point?
 
 =====Answer=====
-The two function on ON_Curve that are useful for determining the parameter of the point on a curve that is a prescribed arc length distance from the start of a curve are:
+The two functions on ON_Curve that are useful for determining the parameter of the point on a curve that is a prescribed arc length distance from the start of a curve are:
 
   * ON_Curve::GetNormalizedArcLengthPoint
   * ON_Curve::GetNormalizedArcLengthPoints
 
-To use these functions, you need to calculate a normalized arc length parameter. That is, a parameter on the curve where 0.0 = the start of the curve, 0.5 = the midpoint of the curve, and 1.0 = the end of the curve.
+To use these functions, calculate a normalized arc length parameter. That is, a parameter on the curve where 0.0 = the start of the curve, 0.5 = the midpoint of the curve, and 1.0 = the end of the curve.
 
-Note, if you want to determine the parameter of the point on a curve that is a prescribed arc length distance from the end of a curve, just reverse the curve before calling one of the above curve members.
+Note, to determine the parameter of the point on a curve that is a prescribed arc length distance from the end of a curve, just reverse the curve before calling one of the above curve members.
 
 The following code sample demonstrates how to use these functions.
 
