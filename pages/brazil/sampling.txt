@@ -1,23 +1,14 @@
 ======Brazil Rendering System Sampling======
 
-|{{:legacy:en:SplutterFishGlassLogo.png}} {{:legacy:en:RhinoGlassLogo.png}}|//**Brazil r/s for Rhino Wiki pages**// \\ [[http://www.SplutterFish.com|SplutterFish]] / [[http://www.mcneel.com|Robert McNeel & Associates]]|
+|{{:legacy:en:SplutterFishGlassLogo.png}} {{:legacy:en:RhinoGlassLogo.png}}|//**Brazil r/s for Rhino Wiki pages**// \\ [[http://www.mcneel.com|Robert McNeel & Associates]]|
 
-> **Summary:** //This page discusses the topic of Sampling in the Brazil render engine, sampling in general and guidelines for proper setups.//
+> **Summary:** //This page discusses sampling in the Brazil render engine, sampling in general, and guidelines for proper setups.//
 
 \\
-\\
 
-  * [[#What is Sampling?]]
-  * [[#Sampling controls in Brazil]]
-  * [[#Adaptive filters]]
-    * [[#Object Edge]]
-    * [[#Surface Normal]]
-    * [[#Z-Depth]]
-    * [[#Contrast]]
+=====What is sampling?=====
 
-=====What is Sampling?=====
-
-Real life (for "real life" look 50 cm to the right) is continuous. So is a 3D scene. Even a finite surface suspended in space and lit by a spotlight has an infinite number of different colours. In actuality, atoms terminate this regress, but Rhino is not aware of atoms so we cannot count on them in this case. When we're rendering an image, we do not have infinite accuracy since we cannot represent details smaller than one pixel (though it is possible to //suggest// details smaller than one pixel, but that is a story for another day). From this flows the obvious solution to measure the colour at the center of every pixel in the rendering, and then assume that this colour is a fair average of the entire pixel. This is called "sampling"; to create an approximation of a continuous data source by taking measurements at specific intervals:
+Real life is continuous. So is a 3D scene. Even a finite surface suspended in space and lit by a spotlight has an infinite number of different colors. In actuality, atoms terminate this regress, but Rhino is not aware of atoms so we cannot count on them in this case. When we render an image, we do not have infinite accuracy since we cannot represent details smaller than one pixel (though it is possible to //suggest// details smaller than one pixel, but that is a story for another day). The obvious solution is to measure the color at the center of every pixel in the rendering, and then assume that this color is a fair average of the entire pixel. Called //sampling//, this creates an approximation of a continuous data source by taking measurements at specific intervals:
 
 \\
 
@@ -25,7 +16,7 @@ Real life (for "real life" look 50 cm to the right) is continuous. So is a 3D sc
 
 \\
 
-The pink rings represent the 2D projection of our continuous 3D model, and the dots represent the samples. As you will notice the samples are not aligned perfectly in a grid. This is done to avoid unwanted aliasing artifacts of (near) vertical and horizontal lines, which occur quite frequently in CG. Brazil's initial sample distribution is in fact far cleverer than this (these images images show a [[http://en.wikipedia.org/wiki/Stratified_Sampling|jittered-stratified]] grid, whereas Brazil uses a [[http://en.wikipedia.org/wiki/Low-discrepancy_sequence|low-discrepancy]] [[http://en.wikipedia.org/wiki/Quasi-Monte_Carlo_method|Best-Candidate]] sampling, these are just the names of algorithms involved, you do not have to remember them) Let's for the moment assume that every sample is at least //near// the pixel center. Every sample which intersects the rings is made black, others are red. If we now have to reconstruct an image based on these samples, we can hardly do better than:
+The pink rings represent the 2D projection of our continuous 3D model, and the dots represent the samples. Notice the samples are not aligned perfectly in a grid. This is done to avoid unwanted aliasing artifacts of (near) vertical and horizontal lines, which occur quite frequently in CG. Brazil's initial sample distribution is in fact far cleverer than this. (These images images show a [[http://en.wikipedia.org/wiki/Stratified_Sampling|jittered-stratified]] grid, whereas Brazil uses a [[http://en.wikipedia.org/wiki/Low-discrepancy_sequence|low-discrepancy]] [[http://en.wikipedia.org/wiki/Quasi-Monte_Carlo_method|Best-Candidate]] sampling. These are just the names of algorithms involved -- you do not have to remember them. For now assume that every sample is at least //near// the pixel center. Every sample which intersects the rings is made black, others are red. If we now have to reconstruct an image based on these samples, we can hardly do better than:
 
 \\
 
@@ -33,7 +24,7 @@ The pink rings represent the 2D projection of our continuous 3D model, and the d
 
 \\
 
-which isn't a very good approximation; large areas of white have been filled with black and large areas of pink are still visible. One solution would be to shorten the interval of our samples and measuring 4 points where we used to measure only one. This solution is a good one, but unfortunately the number of samples increases with the square of the accuracy gain, meaning that it will take longer and longer (really much, much longer) to compute the whole image as we increase the accuracy. Making a single measurement is a very expensive operation so we want to take as few samples as possible. The solution (//a// solution) is to use an **adaptive sampling algorithm**, which only introduces additional samples when an increase in accuracy is expected to pay off. If Sample A for example intersects our pink rings, but its neighbour B does not, we can safely assume that the rings ends somewhere between A and B. We can then sample a few more times in between to increase our local accuracy:
+which isn't a good approximation. Large areas of white are filled with black and large areas of pink are still visible. One solution is to shorten our sample interval and measuring four points where we used to measure only one. This solution is a good one, but unfortunately the number of samples increases with the square of the accuracy gain. It will take longer and longer (much, much longer) to compute the whole image as we increase the accuracy. Making a single measurement is a very expensive operation so we want to take as few samples as possible. //A// solution is to use an **adaptive sampling algorithm**, which only introduces more samples when increased accuracy is expected to pay off. If Sample A, for example, intersects our pink rings, but its neighbor B does not, we can safely assume that the rings ends somewhere between A and B. We can then sample a few more times between to increase our local accuracy:
 
 \\
 
@@ -41,14 +32,14 @@ which isn't a very good approximation; large areas of white have been filled wit
 
 \\
 
-This already results in a far more accurate approximation of the continuous input, without a doubling of the number of samples. However, the thin lower part of the leftmost ring is still ignored because it happened to fall in between two samples during the coarse pass and thus we had no idea there was something in between. This is a common problem with renderers such as Brazil which use adaptive sampling, and the only way to solve it is to increase the accuracy of the initial pass.
+This already results in a far more accurate approximation of the continuous input, without a doubling of the number of samples. So the thin lower part of the leftmost ring is still ignored because it happened to fall between two samples during the coarse pass and thus we had no idea there was something in between. This is a common problem with renderers such as Brazil which use adaptive sampling. The only way to solve it is to increase the accuracy of the initial pass.
 
 \\
 \\
 
 =====Sampling controls in Brazil=====
 
-Brazil offers several settings to control the sampling behaviour. First of all, you can set the minimum and maximum sampling accuracy of a rendering. These numbers are integers and they indicate the exponent of the number of samples per pixel:
+Brazil offers several settings to control the sampling behavior. First, you can set the rendering's minimum and maximum sampling accuracy. These numbers are integers and they show the exponent of the number of samples per pixel:
 
 \\
 
@@ -65,7 +56,7 @@ Brazil offers several settings to control the sampling behaviour. First of all, 
 \\
 \\
 
-Let's take a closer look at how minimum and maximum resolution cooperate to give high-quality images in a reasonable amount of time. The following images are all renderings from the exact same scene, it's a simple plane with a procedural texture on it, meaning the lines are infinitely accurate (they will never become pixelated). The maximum sampling resolution for each image is +3 (8 samples per pixel); our eyes cannot distinguish an even higher quality, though you can make Brazil sample 256 points per pixel.
+Let's look closer at how minimum and maximum resolution cooperate to give high-quality images in a reasonable amount of time. The following images are all renderings from the same scene. It's a simple plane with a procedural texture on it, meaning the lines are infinitely accurate (they will never become pixelated). The maximum sampling resolution for each image is +3 (8 samples per pixel). Our eyes cannot distinguish a  higher quality, though you can make Brazil sample 256 points per pixel.
 
 \\
 
@@ -76,14 +67,14 @@ Let's take a closer look at how minimum and maximum resolution cooperate to give
 
 \\
 
-Even thought the potential quality of the rendering is very high, there are major sampling artifacts when we begin with a low quality sampling resolution. As the first image shows, Brazil is trashing about like a headless chicken when it is not allowed to perform an accurate enough initial sampling pass. The result is very anti-aliased (because of the +3 maximum sampling) but the super-pixel elements are all messed up. When we start to increase the minimum quality, the [[http://en.wikipedia.org/wiki/Moire|moire patterns]] start to disappear and the image becomes more and more accurate. At {+1, +3} we finally have a completely accurate representation of our texture. {+1, +3} is a relatively high sampling resolution, though you should expect to use similar domains for any production quality rendering. Since the black stripes become very thin in the top half of the rendering (they become thinner than a single pixel), we need multiple samples per pixel for the minimum sampling resolution in order for Brazil to detect them as continuous entities...
+Even though the potential rendering quality is high, there are major sampling artifacts when we begin with a low quality sampling resolution. As the first image shows, Brazil is trashing about like a headless chicken when it is not allowed to perform an accurate enough initial sampling pass. The result is very anti-aliased (because of the +3 maximum sampling) but the super-pixel elements are all messed up. When we start to increase the minimum quality, the [[http://en.wikipedia.org/wiki/Moire|moire patterns]] start to disappear and the image becomes more and more accurate. At {+1, +3} we finally have a completely accurate representation of our texture. {+1, +3} is a relatively high sampling resolution, though you should expect to use similar domains for any production quality rendering. Since the black stripes become very thin in the top half of the rendering (they become thinner than a single pixel), we need multiple samples per pixel for the minimum sampling resolution for Brazil to detect them as continuous entities...
 
 \\
 
 ----
-======Adaptive Filters======
+======Adaptive filters======
 
-Since you can specify two different sampling resolutions in Brazil, you also have to specify when you want to use the more accurate one. By default, Brazil will sample the whole image at the lowest sampling resolution, then refining (adaptive sampling) the sample grid whenever two neighbouring samples meet the specified threshold settings. Let us assume we have a simple scene with two objects, a groundplane and a single lightsource plus skylight. If we set the minimum sampling resolution to -2 (one sample every 4 pixels) and the maximum to 2 (four samples per pixel) we can expect the following results without adaptive sampling:
+Since you can specify two different sampling resolutions in Brazil, you also have to specify when you want to use the more accurate one. By default, Brazil will sample the whole image at the lowest sampling resolution, then refine (adaptive sampling) the sample grid when two neighboring samples meet the specified threshold settings. Assume we have a simple scene with two objects, a groundplane and a single lightsource plus skylight. If we set the minimum sampling resolution to -2 (one sample every 4 pixels) and the maximum to 2 (four samples per pixel) we can expect the following results without adaptive sampling:
 
 \\
 
@@ -92,20 +83,20 @@ Since you can specify two different sampling resolutions in Brazil, you also hav
 
 \\
 
-Now, Brazil has four different settings that allow you to set up adaptive thresholds. I typically use all four of them, but then I'm rarely under an extreme deadline so I can afford to spend a few minutes extra on a rendering. These are:
+Now, Brazil has four different settings that let you set up adaptive thresholds. I typically use all four of them, but then I'm rarely under an extreme deadline so I can afford to spend a few minutes extra on a rendering. These are:
 
 \\
 
-  - [[#Object Edge]]
-  - [[#Normal]]
-  - [[#Z-Depth]]
-  - [[#Contrast]]
+  - Object Edge
+  - Normal
+  - Z-Depth
+  - Contrast
 
 \\
 
 ======Object Edge adaptation======
 
-When sample A intersects our groundplane, and the neighbouring sample B intersects the blue glass, we know that somewhere in between there must be a transition from groundplane to glass. We can use such a threshold to trigger a refinement event:
+When sample A intersects our groundplane, and the neighboring sample B intersects the blue glass, we know that somewhere in between there must be a transition from groundplane to glass. We can use such a threshold to trigger a refinement event:
 
 \\
 
@@ -139,7 +130,7 @@ Yet another geometric property that can be evaluated is the difference in distan
 
 ======Contrast adaptation======
 
-This is the only non-geometric filter available. It relies on the results of the first (coarse) sampling pass and then refines based on relative contrast between adjacent samples. This is probably the most useful filter available in the Brazil sampling engine
+This is the only non-geometric filter available. It relies on the results of the first (coarse) sampling pass and then refines based on relative contrast between adjacent samples. This is probably the most useful filter available in the Brazil sampling engine.
 
 \\
 
@@ -149,13 +140,13 @@ This is the only non-geometric filter available. It relies on the results of the
 \\
 \\
 
-Grand Finale...
+Grand finale...
 
 \\
 \\
 
 | {{:legacy:en:BrazilSampling_AllShow.jpg}} | {{:legacy:en:BrazilSampling_All.jpg}} |
-| If we combine all four filters we get an overlay of refinement grids. The Z-Depth refinement does not contribute greatly in this case and could have been left out. | None of the filters found sufficient difference on the interior of the shadow field. Contrast tagged a few pixels, but not enough to sample the entire gradient at a higher resolution. As a result the resultion of the interior of the shadow is -2 which is coarse enough to see the noise of the skylight. We either have to fine-tune the contrast filter to be more sensitive (picking a contrast threshold colour closer to black) or increase the resolution of the minimum sample density. |
+| If we combine all four filters we get an overlay of refinement grids. The Z-Depth refinement does not contribute greatly in this case and could have been left out. | None of the filters found sufficient difference on the interior of the shadow field. Contrast tagged a few pixels, but not enough to sample the entire gradient at a higher resolution. As a result the resolution of the interior of the shadow is -2 which is coarse enough to see the noise of the skylight. We either have to fine-tune the contrast filter to be more sensitive (picking a contrast threshold color closer to black) or increase the resolution of the minimum sample density. |
 
 
 
