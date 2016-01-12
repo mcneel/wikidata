@@ -2,14 +2,14 @@
 > **Developer:** //[[developer:rhinoscript|RhinoScript]]//
 > **Summary:** //Demonstrates how to load a toolbar when Rhino starts.//
 
-=====Quesion=====
+=====Question=====
 I am in the early stages of creating an installer that will add a small custom toolbar in Rhino. How do I make Rhino autoload a toolbar collection file upon startup? Note, I am not a plug-in developer, so I hope there is a scripting option.
 
 =====Answer=====
 
-Since you do not have a plug-in to control the loading of your toolbar, then you are going to have to add either a startup command or a startup [[developer:rhinoscript|RhinoScript]]. My guess is that it is probably easier to run a [[developer:rhinoscript|RhinoScript]].
+Since you do not have a plug-in to control the loading of your toolbar, then you have to add either a startup command or a startup [[developer:rhinoscript|RhinoScript]]. My guess is that it is easier to run a [[developer:rhinoscript|RhinoScript]].
 
-The following [[developer:rhinoscript|RhinoScript]] file will load a specified toolbar collection and a toolbar. If this script is added to RhinoScript's list of startup scripts, it will load a toolbar collection and toolbar when Rhino starts. To have this script load your toolbar collection and toolbar, you will have to edit the script and replace my strings with yours in the "TODO" portion of the script.
+The following [[developer:rhinoscript|RhinoScript]] file loads a specified toolbar collection and a toolbar. If this script is added to RhinoScript's list of startup scripts, it will load a toolbar collection and toolbar when Rhino starts. To have this script load your toolbar collection and toolbar, you have to edit the script and replace my strings with yours in the //TODO// portion of the script.
 
 <code vb>
  Option Explicit
@@ -50,13 +50,13 @@ The following [[developer:rhinoscript|RhinoScript]] file will load a specified t
 
 </code>
 
-[[developer:rhinoscript|RhinoScript]] stores it's list of startup commands in the following registry key:
+[[developer:rhinoscript|RhinoScript]] stores its list of startup commands in the following registry key:
 
 <code>
 HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\4.0\Scheme: Default\Plug-ins\1c7a3523-9a8f-4cec-a8e0-310f580536a7\Settings\StartupFileList.
 </code>
 
-Each startup file is a REG_SZ key value with the name of "File<num>" and a value which is the full path to the script file. The following is an example of that this might look like if [[developer:rhinoscript|RhinoScript]] was configured to load two files at startup:
+Each startup file is a REG_SZ key value with the name //File<num>// and a value which is the full path to the script file. The following is an example of that this might look like if [[developer:rhinoscript|RhinoScript]] is configured to load two files at startup:
 
 {{:legacy:en:rsloadtoolbar.png}}
 
