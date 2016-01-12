@@ -2,14 +2,15 @@
 ====== C++, .NET ======
 > **Version:** //Rhino 4.0//
 
-=====Also See=====
-[[developer:sdksamples:loft|How To: Loft Surfaces using RhinoSdkLoftSurface]]
+Also see [[developer:sdksamples:loft|How to: Loft Surfaces using RhinoSdkLoftSurface.]]
 
 =====Summary=====
-When trying to loft a surface with starting and/or ending tangency, it is not enough just to set a **CArgsRhinoLoft** object's **m_start_condition** and **m_end_condition** members to **CArgsRhinoLoft::leTangent**. You also need to tell Rhino's lofter what it is that this lofted surface need to be tangent to. You do this by setting the **m_trim** parameter of the starting and ending **CRhinoLoftCurve** objects. This is a constant **ON_BrepTrim** pointer. If you are lofting curves that you have picked using a **CRhinoGetObject** object, you can retrieve this pointer by simply calling **CRhinoObjRef::Trim()**.
+When trying to loft a surface with starting or ending tangency, it is not enough just to set **CArgsRhinoLoft** object's **m_start_condition** and **m_end_condition** members to **CArgsRhinoLoft::leTangent**. You also need to tell Rhino's lofter what it is that this lofted surface need to be tangent to. You do this by setting the **m_trim** parameter of the starting and ending **CRhinoLoftCurve** objects. This is a constant **ON_BrepTrim** pointer. If you are lofting curves that you have picked using a **CRhinoGetObject** object, you can retrieve this pointer by simply calling **CRhinoObjRef::Trim()**.
 
 =====Example=====
-The following sample code demonstrates how to loft surfaces that maintain tangency with adjacent surfaces using the **CArgsRhinoLoft** class and the **RhinoSdkLoftSurface** function. The definitions of these can be found in **rhinoSdkLoft.h**. Note, this example does not perform any curve sorting or direction matching. This is the responsibility of the the SDK developer.
+The following sample code demonstrates how to loft surfaces that maintain tangency with adjacent surfaces using the **CArgsRhinoLoft** class and the **RhinoSdkLoftSurface** function. The definitions of these are in **rhinoSdkLoft.h**. 
+
+**Note:** This example does not perform any curve sorting or direction matching. This is the responsibility of the SDK developer.
 
 
 <code c++>
