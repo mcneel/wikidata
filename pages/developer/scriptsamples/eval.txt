@@ -2,8 +2,7 @@
 > **Developer:** [[developer:rhinoscript|RhinoScript]]
 > **Summary:** //Demonstrates how to make a simple command line calculator using RhinoScript.//
 
-=====Overview=====
-Over the years, we have received a number of requests for a command line calculator. That is, a feature that would allow one to perform mathematical calculations as input to Rhino commands. For example, if you want to create a circle with a radius equal to the square root of 2, you currently have to break out your calculator to determine the radius. Wouldn't it be nice to be able to type something like Sqr(2) on the command line and have Rhino determine the radius for us. Well, we can come close to this functionality with a little creativity and by using [[developer:rhinoscript|RhinoScript]].
+Over the years, we have received many requests for a command line calculator. That is, a feature that would let one perform mathematical calculation as input to Rhino commands. For example, if you want to create a circle with a radius equal to the square root of 2, you currently have to break out your calculator to determine the radius. Wouldn't it be nice to type something like Sqr(2) on the command line and have Rhino determine the radius for us? Well, we can come close to this with a little creativity and by using [[developer:rhinoscript|RhinoScript]].
 
 =====Example=====
 To create a simple command line calculator, create a new toolbar button and add the following blocks of code in either the left mouse button or right mouse button command window:
@@ -45,19 +44,19 @@ To create a simple command line calculator, create a new toolbar button and add 
  )
 </code>   
 
-When you are finished, you should have something that looks like the following:
+When you are finished, you should have something that looks like:
 
 {{:legacy:en:RsEval.jpg}}
 
-=====Usage=====
-As you can see, there are two version of our command line calculator: the left mouse button command displays a window in which you can enter your expression, and the right mouse button command allows you to enter an expression on the command line.
+=====Use=====
+As you can see, there are two versions of our command line calculator: The left mouse button command displays a window in which you can enter your expression. The right mouse button command lets you enter an expression on the command line.
 
-To test our command line calculator, run the Circle command, pick a enter point and then activate one of our scripts by picking either the left or right mouse button version. When prompted for "Expression to evaluate", enter "Sqr(2)" and either press "Ok" or "Enter". As you can see, we now have a circle with a radius of Sqr(2), or 1.41421.
+To test our command line calculator, run the Circle command, pick an enter point, and then activate one of our scripts by picking either the left or right mouse button version. When prompted for **Expression to evaluate**, enter **Sqr(2)** and either press **OK** or **Enter**. As you can see, we now have a circle with a radius of Sqr(2), or 1.41421.
 
-Because our command line calulator using RhinoScript to evaluate the expression, we can use all of the mathematical operators supported RhinoScript. Check the RhinoScript] help file to see what is available.
+Because our command line calulator uses RhinoScript to evaluate the expression, we can use all the mathematical operators supported in RhinoScript. Check the RhinoScript] help file to see what is available.
 
 =====Limitations=====
-When using the right mouse button version of the command line calculator, make sure not to separate variables and operators with spaces as this will make Rhino's string parser think that you are finished typing.
+When using the right mouse button version of the command line calculator, do not separate variables and operators with spaces as this makes Rhino's string parser think that you are finished typing.
 
 \\
 
