@@ -1,8 +1,12 @@
-====== How To: Add a Brep Box Rhino ======
+====== How to: Add a Brep Box Rhino ======
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates how to add a Brep Box from a Rhino C++ plug-in.//
 
-The [[developer:opennurbs:home|opennurbs]] ON_BrepBox() will return an ON_Brep definition of a box. Note, ON_BrepBox() allocates memory for the ON_Brep, so the developer is reponsible for deleting the object when finished. In this example, we are adding the brep to Rhino, so Rhino will be responsible for deleting it.
+The [[developer:opennurbs:home|openNURBS]] ON_BrepBox() returns an ON_Brep definition of a box. 
+
+**Note:** ON_BrepBox() allocates memory for the ON_Brep, so the developer is reponsible for deleting the object when finished. 
+
+In this example, we are adding the brep to Rhino, so Rhino will be responsible for deleting it.
 
 ===== C++ =====
 <code c++>
@@ -44,6 +48,6 @@ CRhinoCommand::result CCommandTestSdk::RunCommand(const CRhinoCommandContext& co
 
 </code>
 
-Note, if we had called CRhinoDoc::AddBrepObject() instead of CRhinoDoc::AddObject(), we would be responsible for deleting the brep (pBrep) because CRhinoDoc::AddBrepObject() makes a copy of the input brep.
+**Note:** If we called CRhinoDoc::AddBrepObject() instead of CRhinoDoc::AddObject(), we would be responsible for deleting the brep (pBrep) because CRhinoDoc::AddBrepObject() makes a copy of the input brep.
 
 {{tag>Developer cplusplus}}
