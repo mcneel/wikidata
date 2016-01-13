@@ -1,20 +1,19 @@
 ====== Digitally Signing Plug-ins ======
 > **Developer:** //[[developer:zoo|Zoo 5.0]]//
-> **Summary:** //Discusses how to digitally sign Zoo 5.0 and Rhino 5.0 plug-ins.//
+> **Summary:** //Discusses how to digitally sign Zoo 5.0 and Rhino 5 plug-ins.//
 
-===== Overview =====
-To add plug-ins to Zoo 5.0, and to call the license functions from within your Rhino 5.0 plug-in, you must digitally sign your plug-ins using a certificate that is signed by the Robert McNeel & Associates Code Signing Authority.
+To add plug-ins to Zoo 5.0, and to call the license functions from within your Rhino 5 plug-in, you must digitally sign your plug-ins using a certificate signed by the Robert McNeel & Associates Code Signing Authority.
 
-===== Generate a Private Key and Certificate Signing Request =====
+=====Generate a private key and certificate signing request =====
   * Download and install **[[http://www.openssl.org/related/binaries.html|OpenSSL]]**.
-  * Save the contents of **{{:developer:digital-signatures:mcneelcodesigning.zip|McNeelCodeSigning.zip}}** into a folder where you have write permissions - generally your plug-in project folder-.
+  * Save the contents of **{{:developer:digital-signatures:mcneelcodesigning.zip|McNeelCodeSigning.zip}}** into a folder where you have write permissions. This is generally in your plug-in project folder.
   * Start a Windows Command Prompt.
   * Add the OpenSSL installation folder to your Windows path.
 <code>
 set path=C:\OpenSSL-Win32\bin;%path%
 </code>
   * From the command prompt, run **CreateRequest.bat <filename>**, where filename is the name (without an extension) that will be used to save your private key (.KEY), certificate signing request (.CSR), and final signed digital certificate (.CRT).
-  * You will be prompted to answer some questions; be sure to answer them correctly.
+  * You will be prompted to answer some questions. Be sure to answer them correctly.
 <code>
 C:\Dev\Zoo> CreateRequest.bat TestZooPluginKey
 Loading 'screen' into random state - done
@@ -44,12 +43,12 @@ Saved private key: 'TestZooPluginKey.key'
 Saved CSR: 'TestZooPluginKey.csr'
 </code>
 
-===== Requesting a Signed Digital Certificate =====
-  - E-mail the certificate signing request (.CSR) created above to [[brian@mcneel.com|Brian Gillespie]], along with a request for a certificate.
+===== Requesting a signed digital certificate =====
+  - Email the certificate signing request (.CSR) created above to [[brian@mcneel.com|Brian Gillespie]], along with a request for a certificate.
   - We will process your request and, if it is approved, will send you a signed digital certificate (.CRT).
 
-===== Creating a Personal Information Exchange =====
-In order to digitally sign your Zoo 5.0 or Rhino 5.0 plug-in, you will need to convert the signed digital certificate (.CRT), emailed to your upon approval, into a personal information exchange (.PFX) file.
+===== Creating a personal information exchange =====
+To digitally sign your Zoo 5.0 or Rhino 5 plug-in, convert the signed digital certificate (.CRT), emailed to you upon approval, into a personal information exchange (.PFX) file.
   * Copy the signed digital certificate (.CRT) you receive into the same folder as your private key (.KEY) and certificate signing request (.CSR).
   * Start a Windows Command Prompt.
   * Add the OpenSSL installation folder to your Windows path.
@@ -65,8 +64,8 @@ Verifying - Enter Export Password: <PRESS ENTER>
 Created 'TestZooPluginKey.pfx'. Use this to sign your executable code.
 </code>
 
-===== Sign your Plug-ins =====
-  * Now that you have a personal information exchange (.PFX), you can use it to sign Zoo 5.0 and Rhino 5.0 plug-ins.
+===== Sign your plug-ins =====
+  * Now that you have a personal information exchange (.PFX), you can use it to sign Zoo 5.0 and Rhino 5 plug-ins.
   * Open a Visual Studio Command Prompt.
   * Use **Signtool.exe**, with the following syntax, to digitally sign your plug-ins.
 <code>
