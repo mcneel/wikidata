@@ -1,13 +1,13 @@
-====== How To: Select Objects ======
+====== How to: Select Objects ======
 ====== C++, .NET ======
 > **Summary:** //How to interactively select objects from a Rhino plug-in.//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  An example that shows different ways to select objects (points in this case) in new RhinoCommon SDK is available [[developer:rhinocommonsamples:pickpoint|here]]//
-=====Introduction=====
-The Rhino SDK provides the class CRhinoGetObject (MRhinoGetObject in Rhino.NET), that will allow you to interactively select objects on the screen. This is a large class with a number of options. It is recommended that you read through the header file, rhinoSdkGetObject.h, before using.
+> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  An example that shows different ways to select objects (points in this case) in new RhinoCommon SDK is available [[developer:rhinocommonsamples:pickpoint|here.]]//
 
-To use the CRhinoGetObject class, simply put one on the stack and call it's GetObjects() member. It is possible to derive custom classes from CRhinoGetObject . But, the class is powerful enough that deriving new class from it is usually unnecessary.
+The Rhino SDK provides the class CRhinoGetObject (MRhinoGetObject in Rhino.NET), that will let you interactively select objects on the screen. This is a large class with many options. We recommend that you read through the header file, rhinoSdkGetObject.h, before using.
 
-If an instance of CRhinoGetObject was successful in selecting one or more objects, then use it's Object() member to retrieve information about the object that was selected. The Object() member returns a CRhinoObjRef class which has a number of member functions to help you quickly get to the information you are looking for.
+To use the CRhinoGetObject class, put one on the stack and call its GetObjects() member. It is possible to derive custom classes from CRhinoGetObject. But, the class is powerful enough that deriving new classes from it is usually unnecessary.
+
+If an instance of CRhinoGetObject was successful in selecting one or more objects, then use its Object() member to retrieve information about the selected object. The Object() member returns a CRhinoObjRef class which has several member functions to help you quickly get to the information you are looking for.
 
 =====Example 1 - Select a single object=====
 **C++**
