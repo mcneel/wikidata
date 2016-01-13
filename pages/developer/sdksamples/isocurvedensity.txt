@@ -1,12 +1,14 @@
 ====== Adjusting Surface Isocurve Density ======
 
-> **Summary:** //Demonstrates how to modify the isocurve density of a surface.//
+> **Summary:** //Demonstrates how to modify the isocurve density of a surface//
 
 =====Question=====
-I am create a new surface from a selected curve, but it always a single isocurve acrossing the surface. I have to adjust isocurve density after the fact from Rhino's **Properties** window. Can I do this automatically from my plug-in?
+I am creating a new surface from a selected curve, but it always a single isocurve crossing the surface. I have to adjust isocurve density after the fact from Rhino's **Properties** window. Can I do this automatically from my plug-in?
 
 =====Answer=====
-The isocurve density for surface object is stored on the object's attributes. For C++ plug-ins, this would be the **CRhinoObjectAttributes** and **ON_3dmObjectAttributes** classes. For .NET plug-ins, this would be the **MRhinoObjectAttributes** and **On3dmObjectAttributes** classes. Just set the **m_wire_density property**. Note, setting this property to zero (0) will disable the display of isocurves for that object.
+The isocurve density for surface object is stored on the object's attributes. For C++ plug-ins, this is the **CRhinoObjectAttributes** and **ON_3dmObjectAttributes** classes. For .NET plug-ins, this is the **MRhinoObjectAttributes** and **On3dmObjectAttributes** classes. Just set the **m_wire_density property**. 
+
+**Note:** Setting this property to zero (0) will disable the display of isocurves for that object.
 
 ===== C++ =====
 <code c++>
