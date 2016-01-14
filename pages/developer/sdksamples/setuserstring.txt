@@ -2,27 +2,25 @@
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates attaching custom user data to any object using the Rhino C++ SDK.//
 
-=====Overview=====
+User Data is a powerful SDK feature that allows third party developers to attach custom data of any kind to any object derived from ON_Object. To take advantage of User Data, you need to implement your own user data object by deriving a class from ON_UserData and overriding the required virtual functions.
 
-User Data is a power SDK feature that allows 3rd party developers to attach custom data of any kind to any object derived from ON_Object. In order to take advantage of User Data, you are required to implement your own user data object by deriving a class from ON_UserData and overriding the required virtual functions.
+In Rhino 4.0, the SDK adds a new standardized approach for adding User Data to objects called **user strings**. The Rhino 4.0 SDK lets you quickly attach User Data in the form of a key-value string pair to any object derived from ON_Object. This feature is exposed to the SDK as new member functions on ON_Object:
 
-In Rhino 4.0, the SDK adds a new standardized approach for adding User Data to objects called **User Strings**. The Rhino 4.0 SDK allows you to quickly attaches User Data in the form of a key-value string pair to any object derived from ON_Object. This feature is exposed to the SDK as new member functions on ON_Object:
-
-  * ON_Object::SetUserString - attachs a user string to an object. This information will persist through copy construction, operator=, and file IO.
+  * ON_Object::SetUserString - attaches a user string to an object. This information will persist through copy construction, operator=, and file IO.
   * ON_Object::GetUserString - gets a user string from an object.
   * ON_Object::GetUserStringKeys - retrieves a list of all user string keys on an object.
   * ON_Object::GetUserStrings - retrieves a list of all user strings on an object.
 
-There are a number of advantages to User Strings:
+There are several advantages to user strings:
 
-  - The mechanism is very simple - you do not have to derive any new classes.
-  - Rhino is responsible for all of the file IO.
-  - User Strings can hold text of any length and format, including XML.
-  - Since the mechanism is standard, user strings can shared between Rhino and other plug-ins. For example, you can use Rhino's **GetUserText** and **SetUserText** commands to get and set user strings. [[developer:rhinoscript|RhinoScript]] also provides methods that allow you do the same.
+  - The mechanism is simple. You do not have to derive any new classes.
+  - Rhino is responsible for all the file IO.
+  - User strings can hold text of any length and format, including XML.
+  - Since the mechanism is standard, you can share user strings between Rhino and other plug-ins. For example, you can use Rhino's **GetUserText** and **SetUserText** commands to get and set user strings. [[developer:rhinoscript|RhinoScript]] also provides methods to do the same.
 
 =====Example=====
 
-The following example demonstrates how to add User Strings to a selected object.
+The following example demonstrates how to add user strings to a selected object.
 
 =====C++=====
 <code c++>
