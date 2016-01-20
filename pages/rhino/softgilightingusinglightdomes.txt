@@ -1,57 +1,41 @@
-====== This page explains how to get soft GI lighting using lightdomes in Flamingo : ======
+====== How to Get Soft GI Lighting Using Lightdomes in Flamingo======
 Check out the formatting tips on the right for help formatting and making links.
 
-Use the template below:
+
+**Rendering with lightdomes**
+
+
+There has been a lot asked and shown on the Flamingo Newsgroup about lightdomes.  Personally I wouldn't be without them (until someone adds GI to Flamingo).  Needless to say I've learned a lot about using these things over the last few years. So here are a few snippets to help folks along (previously unreleased material follows..)  I will come back and add and amend as and when I have time.
+
+**Soft GI lighting using lightdomes**
+
+First, all comments below relate to lightdomes using point lights.
+
+One of the big problems with lightdomes is shadow artifacts.  One way to solve this problem is to use a larger number of lights, but anyone who has tried this approach knows that its impact on render times can be extreme. And even then it doesn't completely solve the problem.
+
+
+For me a more successful route is to use **Source Radius**.  To access this you need to have soft shadows turned on and may need V1.1 SR4 or V2.
+
+**How to do it**
+
+Insert a lightdome by whichever means you usually do it -- David Rutten's scripts and UVe are good ways.  Start with something small so that you can see the effect easily -- I suggest 20-40 lights.  Once inserted look at the dome in plan view and roughly measure the greatest distance between two adjacent lights.
+
+Select the lightdome and go to **Properties** Under **Source Radius** enter the value you have just measured.  This will effectively make every point light a sphere the size you have entered. The effect of this is all the lights overlap to form one //big// light, rather than 20-40 separate lights doing their own thing.
+
+You can leave your samples pretty low (5 works fine, though you could try it lower..). They jitter at about 20.
+
+
+Although you can still see some artifacts their effect is greatly reduced.
+
+Don't expect it to work in miraculously quick times - it won't. Lightdomes never do, but it will be quicker than trying to render with a lightdome with 200 lights in it.
 
 
 ----
 
-**Soft GI Lighting using lightdomes**
+**Addendum**
+
+Use this technique with very few point lights to achieve more even lighting.  Try playing around with source radius and see what difference it can make.
 
 
-
-----
-
-**Rendering with Lightdomes :**
-
-
-there has been a lot of stuff asked and shown on the Flamingo NG regarding lightdomes.  Personally I wouldn't be without them (until someone adds GI to flamingo that is... ).  Needless to say I've learnt a lot about using these things over the last few years so hear are a few snippets to help folk along (previously unreleased material follows..)  I will come back and add and amend as and when I have time.
-
-**Soft GI Lighting using Lightdomes :**
-
-First off I all comments below relate to lightdomes using point lights.
-
-One of the big problems with lightdomes is shadow artifacts.  One way of solving this problem is to use a larger number of lights but anyone who has tried this approach will know that its impact on render times can be extreme and even then it doesn't completely solve the problem.
-
-
-The image above shows the typical artifact problem (please excuse the standard of the image - not got a lot of time to spend on this just now!!  :'(  )
-
-For me a more successful route has been to make use of 'Source Radius'.  To get access to this you will need to have soft shadows turned on and may possibly need V1.1 SR4 or V2.
-
-**How to do it :**
-
-Insert a lightdome by whichever means you usually do it - David Ruttens scripts and UVe are good ways.  Start with something small so that you can see the effect easily - I would suggest 20-40 lights.  Once inserted look at the dome in plan view and very roughly measure the what appears to be the greatest distance between two adjacent lights.
-
-Select the lightdome and go to 'Properties' - under source radius enter the value you have just measures.  What this will do is effectively make every point light a sphere the size you have entered - the effect of this is all the lights overlap to form one 'big' light - rather than 20-40 separate lights doing their own thing.
-
-You can leave your samples pretty low (5 works fine you could try it lower though..) and jitter at about 20.
-
-
-Although in the image above you can still see some artifacts their effect is greatly reduced.
-
-Don't expect it to work in miraculously quick times - it won't - lightdomes never do but it will be quicker than trying to render with a lightdome with 200 lights in it.
-
-
-----
-
-**Addendum :**
-
-This technique can be used with very few point lights to achieve more even lighting.  try playing around with source radius' and see what difference it can make.
-
-
-----
-**Want to know more?**
-
-Just click [[rhino:otherlightingissueswithlightdomes|here]]
 
 
