@@ -1,8 +1,7 @@
 ======Error Handling in RhinoScript======
 > **Developer:** //[[developer:rhinoscript|RhinoScript]]//
-> **Summary:** //Describes the error handling semantics of VBScript.//
+> **Summary:** //Describes the error handling semantics of VBScript//
 
-=====Overview=====
 There are two statements that affect error handling in VBScript:
 
 <code vb>
@@ -12,7 +11,7 @@ There are two statements that affect error handling in VBScript:
 
 The meaning of the first statement is this: if you get an error, ignore it and resume execution on the next statement. As we'll see, there are some subtleties.
 
-The second statement simply turns off "Resume Next" mode if it is on. The odd syntax is because Visual Basic has an error handling mode which VBScript does not -- VB can branch to a labeled or numbered statement.
+The second statement simply turns off "Resume Next" mode if it is on. The odd syntax is because Visual Basic has an error handling mode which VBScript does not. VB can branch to a labeled or numbered statement.
 
 =====Discussion=====
 The subtlety in the "Resume Next" mode is best illustrated with an example.
@@ -44,7 +43,7 @@ This prints out:
    Blah1 End
    Global code end
 
-When the error ocurred, Blah1 had already turned "Resume Next" mode on. The next statement after the error raise is Print "Blah2 End" but that statement was never executed. This is because the error mode is on a per-procedure basis, not a global basis.
+When the error occurred, Blah1 had already turned "Resume Next" mode on. The next statement is Print "Blah2 End" but that statement was never executed. This is because the error mode is on a per-procedure basis, not a global basis.
 
 Also, remember that the "Next" in "Resume Next" mode is the next statement. Consider these two scripts:
 
@@ -61,7 +60,7 @@ Also, remember that the "Next" in "Resume Next" mode is the next statement. Cons
 
 They do not have the same semantics. If Foo.Bar raises an error, then the first script passes Empty to Blah. The second one never calls Blah at all if an error is raised, because it resumes to the next statement.
 
-You can get into similar trouble with other constructs. For example, these do have the same semantics:
+You can get into similar trouble with other constructs. For example, these have the same semantics:
 
 <code vb>
  On Error Resume Next
