@@ -3,7 +3,7 @@
 > **Summary:** //Discusses different techniques of loading and running script and their efficiencies.//
 
 ===== Question =====
-When running a script from a toolbar button, is it better to use the **LoadScript** command or **RunScript** command? Which is better for Rhino, resource wise?
+When running a script from a toolbar button, is it better to use the **LoadScript** command or the **RunScript** command? Which is better for Rhino, resource wise?
 
 ===== Answer =====
 The **LoadScript** command:
@@ -14,13 +14,13 @@ The **LoadScript** command:
 The **RunScript** command:
   - Runs the script, skipping steps 1. and 2. listed above.
 
-==== More Information ====
-Using **LoadScript** to load the same script file over and over and over again is somewhat inefficient and certainly unnecessary, as you are simply replacing the same script, over and over again, that is already resident in the script engine. The only time you need reload a script is if the script has changed, or if the script engine was reset.
+==== More information ====
+Using **LoadScript** to load the same script file over and over and over again is somewhat inefficient and certainly unnecessary, as you are simply replacing the same script, over and over again, that is already resident in the script engine. The only time you need to reload a script is if the script has changed, or if the script engine was reset.
 
-One technique you can use to be more efficient, when loading scripts, is to have them load at startup. You can specify the scripts to load at startup by selecting **Tool -> Options -> RhinoScript**. Then, you can just use the **RunScript** to execute your pre-loaded scripts.
+One technique you can use to be more efficient, when loading scripts, is to have them load at startup. You can specify the scripts to load at startup by selecting **Tool -> Options -> RhinoScript**. Then, you can just use the **RunScript** to execute your preloaded scripts.
 
-Another technique you can use it to load your scripts on demand. For 
-example, say you have a //Hello.rvb// script file with a single function defined 
+Another technique you can use is to load your scripts on demand. For 
+example, a //Hello.rvb// script file with a single function defined 
 as such:
 
 <code vb>
@@ -40,9 +40,9 @@ End If
 Call Hello
 </code>
 
-The code above checks for the existance of a user-defined procedure (e.g. subroutine or function) named "Hello". If the procedure is not found, then script file, were the procedure is stored, is loaded by running the **LoadScript** command. Finally, the specified procedure is called.
+The code above checks for the existance of a user-defined procedure (e.g. subroutine or function) named //Hello//. If the procedure is not found, then the script file where the procedure is stored is loaded by running the **LoadScript** command. Finally, the specified procedure is called.
 
-To ensure this technique works, make sure to included the path to //Hello.rvb// is included in Rhino's file search path by selecting **Tools -> Options -> Files**.
+To ensure this technique works, make sure to include the path to //Hello.rvb// in Rhino's file search path by selecting **Tools -> Options -> Files**.
 
 \\
 
