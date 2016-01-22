@@ -1,14 +1,13 @@
-====== How To: Dynamically Draw Geometry when Picking Points ======
+====== How to: Dynamically Draw Geometry When Picking Points ======
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates how to derive a new class from CRhinoGetPoint to dynamically draw geometry during a point picking operation.//
+> **Note:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:getpointdynamicdraw|here.]]//
 
-> **Note:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:getpointdynamicdraw|here]]//
-
-When using Rhino, you have probably noticed that many of the object creation commands, such as Line and Circle, and transformation commands, such as Move and Copy, dynamically draw objects as they are being created or transformed. This operation is performed by deriving a new class from Rhino's point pick class, **CRhinoGetPoint**, and overriding two member functions: **OnMouseMove()** and **DynamicDraw()**.
+When using Rhino, you have probably noticed that many of the object creation commands, such as **Line** and **Circle**, and transformation commands, such as **Move** and **Copy**, dynamically draw objects as they are created or transformed. This operation is performed by deriving a new class from Rhino's point pick class, **CRhinoGetPoint**, and overriding two member functions: **OnMouseMove()** and **DynamicDraw()**.
 
 OnMouseMove() is called every time the mouse moves. This is a great place to perform calculations, such as transformations.
 
-DynamicDraw() is called as the mouse moves, as well. Every time the mouse moves, DynamicDraw() will be called once per viewport. Note, Rhino calls DynamicDraw() happen the call to OnMouseMove().
+DynamicDraw() is called as the mouse moves, as well. Every time the mouse moves, DynamicDraw() will be called once per viewport. 
 
 The following example demonstrates how to derive a new class from CRhinoGetPoint and override OnMouseMove() and DynamicDraw() to dynamically draw geometry. In this example, we are going to dynamically draw a circle while the user is specifying its radius.
 
