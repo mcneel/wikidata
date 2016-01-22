@@ -1,11 +1,11 @@
 ====== Changing Display Precision ======
 > **Summary:** //Demonstrates how to change the unit's display precision of the current document using the Rhino SDK.//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:displayprecision|here]]//
+> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:displayprecision|here.]]//
 =====Question=====
-How can I modify a document's display precision, the "display precision" option found in the Units page in the Options dialog, using the Rhino SDK?
+How can I modify a document's display precision, the //display precision// option found in the Units page in the Options dialog, using the Rhino SDK?
 
 =====Answer=====
-A document's display precision, the number of decimal places used for the distance display, is maintained on an ON_3dmUnitsAndTolerances object, which in turn is stored on a CRhinoDocProperties object which is a memmber of the current CRhinoDoc object. To modify this variable, you will need to:
+A document's display precision, the number of decimal places used for the distance display, is maintained on an ON_3dmUnitsAndTolerances object, which in turn is stored on a CRhinoDocProperties object which is a member of the current CRhinoDoc object. To change this variable, you need to:
 
   - Make a copy of the document's ON_3dmUnitsAndTolerances object.
   - Modify the object's m_distance_display_precision member variable.
