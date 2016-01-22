@@ -1,23 +1,23 @@
-===== Crash when browsing for a DWG file =====
+====== Crash When Browsing for a DWG File ======
 
 Rhino 4.0 and 32-bit Rhino 5 crash while trying to browse for a .dwg file from the Open, Insert, Import, Save, SaveAs, or Export commands.
 
-=====Cause:=====
+=====Cause=====
 
 Your computer has
-  * 64-bit Windows Vista or 64-bit Windows 7 
-  * AutoCAD 2005, 2006 or 2007 (AutoCAD prior to 2008 does not detect the mode of the OS and installs as a 32 bit applicaiton.)
+  * 64-bit Windows Vista or 64-bit Windows 7. 
+  * AutoCAD 2005, 2006 or 2007. (AutoCAD prior to 2008 does not detect the mode of the OS and installs as a 32 bit application.)
 
 AutoCAD 2005, 2006 or 2007 installs a shell extension called **AcSignIcon.dll**. This shell extension loads into Rhino's File Open dialog box. This shell extension often causes Rhino to crash while browsing for **.dwg** files.
 
-=====Solution:=====
+=====Solution=====
 
 Disable the AcSignIcon.dll Shell Extension:
 
-  - Download {{:rhino:disableacsignicon.zip|DisableAcSignIcon.zip}}
-  - Extract DisableAcSignIcon.reg
+  - Download {{:rhino:disableacsignicon.zip|DisableAcSignIcon.zip}}.
+  - Extract DisableAcSignIcon.reg.
   - Double-click DisableAcSignIcon.reg, and follow all the prompts to allow the .reg file to modify the settings on your computer.
 
-=====Other References:=====
+=====Other references:=====
 
-[[rhino:acercomputerfileopensavedialogcrash|Click here for information about other shell extensions that crash file open dialogs.]]
+[[rhino:acercomputerfileopensavedialogcrash|Information about other shell extensions that crash file open dialogs.]]
