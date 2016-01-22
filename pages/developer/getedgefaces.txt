@@ -1,11 +1,11 @@
 ====== Getting Brep Faces from Edges ======
 > **Developer:** //[[developer:dotnetplugins|.NET]]//
 > **Summary:** //Demonstrates how to obtain the face of a Brep given an edge.//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:getedgefaces|here]]//
+> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:getedgefaces|here.]]//
 ===== Question =====
-I would to know how can I retrieve the corresponding face(s) of a Brep edge -
-I've mentioned face with (s) because any "non-naked" edge will have normally
-have two faces "joined" at the edge.
+How can I retrieve the corresponding face(s) of a Brep edge?
+I've mentioned face with (s) because any //non-naked// edge will have normally
+have two faces //joined"//at the edge.
 
 ===== Answer =====
 A Brep edge curve (IOnBrepEdge) knows of the trim curves (IOnBrepTrim) attached to it. And, a Brep trim curve know of it's owning Brep face (IOnBrepFace). Knowing this, we can loop through all of the trim curves, of an edge curve, and get the faces.
