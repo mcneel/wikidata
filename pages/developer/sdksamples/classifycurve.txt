@@ -1,15 +1,15 @@
 ====== Identifying Curve Shapes ======
 > **Developer:** //[[developer:dotnetplugins|.NET]]//
 > **Summary:** //Demonstrates how to identify curve shapes.//
-> **WARNING:** //This page may be out-of-date.  RhinoCommon samples coming soon.//
+> **Warning:** //This page may be out-of-date.  RhinoCommon samples coming soon.//
 
 ===== Question =====
-As part of a plug-in that I'm writing, it would be fantastic if it were possible to identify shapes that planar curves might be identified as (within tolerance). I have not found anything like this in the libraries available for .NET. Any assistance that you could provide would be appreciated
+As part of a plug-in that I'm writing, it would be fantastic if it were possible to identify shapes that planar curves might be identified as (within tolerance). I have not found anything like this in the libraries available for .NET. 
 
 ===== Answer =====
-Rhino support a number of basic curve types, including lines (OnLineCurve), polylines (OnPolylineCurve), arcs and circles (OnCrvCurve), [[rhino:nurbs|NURBs]] curves (OnNurbsCurve), and more. You can verify if a geometric object is one of these curves types simply by trying to cast that geometry as one of these types. The problem gets a little more complicated because it is possible for [[rhino:nurbs|NURBs]] curves to look like basic curve types. So, if you are trying to identify curve by their shape and not just their object type. But, the .NET SDK provides enough methods to even help with this task.
+Rhino supports several basic curve types, including lines (OnLineCurve), polylines (OnPolylineCurve), arcs and circles (OnCrvCurve), [[rhino:nurbs|NURBs]] curves (OnNurbsCurve), and more. You can verify if a geometric object is one of these curve types by trying to cast that geometry as one of these types. 
 
-The following example command demonstrates how to classify a selected curve. You can also **[[http://wiki.mcneel.com/_media/legacy/en/ClassifyCurveCommand.zip|download this sample here.]]**
+The following example command demonstrates how to classify a selected curve. You can also **[[http://wiki.mcneel.com/_media/legacy/en/ClassifyCurveCommand.zip|download this sample.]]**
 
 ===== C# =====
 <code c#>
