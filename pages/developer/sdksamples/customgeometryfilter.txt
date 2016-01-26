@@ -1,13 +1,13 @@
-====== How To: Create a Custom CRhinoGetObject Class ======
+====== How to: Create a Custom CRhinoGetObject Class ======
 ====== C++, .NET ======
 > **Summary:** //Demonstrates how to derive a class from CRhinoGetObject to handle special case object picking.//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:customgeometryfilter|here]]//
+> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:customgeometryfilter|here]].//
 
-The CRhinoGetObject class that is used for interactively picking one or more objects is a large, full-featured class (see rhinoSdkGetObject.h for details). But, on occasion, the class does not offer enough options. For example, CRhinoGetObject is capable of picking curve objects. But, it is not capable of picking polyline curve objects that are closed. When the required object filtering exceeds the capabilities of the base class, it's time to derive your own.
+The CRhinoGetObject class used for interactively picking one or more objects is a large, full-featured class (see rhinoSdkGetObject.h for details). But, on occasion, the class does not offer enough options. For example, CRhinoGetObject is capable of picking curve objects. But, it is not capable of picking closed polyline curve objects. When the required object filtering exceeds the capabilities of the base class, it's time to derive your own.
 
 CRhinoGetObject has a virtual function named CustomGeometryFilter() that is called after all obvious geometry filter checks have been performed. Thus, if you derive a new class from CRhinoGetObject and override this virtual member, you can filter for most any geometric object or property.
 
-The following example code demonstrates deriving from CRhinoGetObject. In this example, we want to allow the user to only select closed polylines.
+The following example code demonstrates deriving from CRhinoGetObject. In this example, we want to let the user only select closed polylines.
 
 ===== C++ =====
 <code c++>
