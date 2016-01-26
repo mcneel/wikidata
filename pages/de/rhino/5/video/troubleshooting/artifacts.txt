@@ -1,0 +1,41 @@
+===== Behandlung von Anzeigefehlern =====
+
+==== Artefakte/Fehlerhafte Anzeige ====
+
+
+
+Versuchen Sie es als erstes mit einem **[[de:rhino:5:video:troubleshooting:intel|Update Ihres Grafikkarten-Treibers]]**.
+
+
+====Problem: Flackern====
+{{:rhino:5:video:troubleshooting:farfromorigin.png?200| Anzeige mit Artefakten}}  {{:rhino:5:video:troubleshooting:farfromorigin2.png?200| Saubere Anzeige}}
+
+Wenn Objekte beim Bewegen der Ansicht flackernd und unbeständig erscheinen oder sehr ungenaue Renderpolygonnetze aufweisen, kann es daran liegen, dass die Objekte sehr weit vom Weltursprung entfernt sind.
+
+**Bestimmung der Entfernung eines Objekts vom Ursprung**
+  - Führen Sie den Befehl **PunktAuswerten** aus.
+  - **Fangen** Sie einen Punkt auf einem Objekt. 
+Wenn der Befehl sehr große Koordinaten zurückgibt (z.B. größer als 1 Million), kann der Anzeigefehler eventuell behoben werden, indem die Objekte näher an den Weltursprung verschoben werden. 
+
+**Verschieben der Objekte in Richtung Ursprung**
+
+  - **Wählen** Sie die zu verschiebenden Objekte aus.
+  - Führen Sie den Befehl **Verschieben** aus.
+  - Fangen Sie bei Anzeige der Eingabeaufforderung **Startpunkt** einen Punkt auf einem der Objekte. 
+  - Geben Sie als **Neuen Standort** den Wert **W0,0,0** (Weltursprung) ein. 
+  - Unter Umständen müssen Sie auf den Objekten den Befehl **SchattierenAktualisieren** ausführen, um neue und präzisere Renderpolygonnetze zu erzeugen.
+
+Wenn das Verschieben der Objekte nicht infrage kommt, finden Sie hier eine weitere Möglichkeit: //[[rhino:farfromorigin|Weit vom Ursprung entfernte Objekte]]//.
+
+==== Problem: Fehlerhaftes Gitternetz in schattierten Ansichten====
+
+{{:rhino:5:video:troubleshooting:testzbiasfactor1.png?200|Gitter scheint durch sichtbare Flächen}}   {{:rhino:5:video:troubleshooting:testzbiasfactor12png.png?200|Korrekte Anzeige der Gitternetzansicht}}
+ 
+
+Die Anzeige von Flächengittern (Isokurven und Kanten) ist zur Kamera hin verschoben, so dass sie in schattierten Ansichten vor den zugehörigen Flächen angezeigt werden. Wenn Flächengitter durch schattierte Flächen scheinen, versuchen Sie die Neigung mit dem Befehl **testZBiasFactor** anzupassen. In der Regel reichen ein oder zwei Anwendungen der Befehlszeilenoption **Less**, um die Anzeige zu verbessern.
+
+
+\\ 
+
+>**Hinweis**: Diese Wiki-Seite ist Teil einer Serie zur Problembehandlung. 
+[[http://wiki.mcneel.com/de/rhino/5/video/troubleshooting|Beginnen Sie am Ausgangspunkt]].
