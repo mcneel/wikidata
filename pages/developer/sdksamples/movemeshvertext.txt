@@ -3,18 +3,18 @@
 > **Summary:** //Demonstrates how to move mesh vertices using the Rhino SDK.//
 
 =====Question=====
-How can I modify a particular point, or vertex, of CRhinoMeshObject object?
+How can I change a particular point, or vertex, of CRhinoMeshObject object?
 
 =====Answer=====
-A CRhinoMeshObject's geometric data member is an **ON_Mesh** object. For information on the ON_Mesh class, the the SDK's opennurbs_mesh.h header file.
+A CRhinoMeshObject's geometric data member is an **ON_Mesh** object. For information on the ON_Mesh class, go to the SDK's opennurbs_mesh.h header file.
 
-Mesh vertices are stored on an **ON_Mesh** in an **m_V** data member, which is simply an array of points. So, if you want to modify the vertices of a mesh, you need to modify the data in this array.
+Mesh vertices are stored on an **ON_Mesh** in an **m_V** data member, which is simply an array of points. So, if you want to change the vertices of a mesh, you need to change the data in this array.
 
-I should also add that in order to modify anything in Rhino, you might:
+Also, to change anything in Rhino, you might:
 
   - Get the object.
   - Make a copy of the object.
-  - Modify this copied object.
+  - Change this copied object.
   - Call one of the **CRhinoDoc::ReplaceObject** overrides to update the object.
 
 The following sample demonstrates how you might do this from a command.
