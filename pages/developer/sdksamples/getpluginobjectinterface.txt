@@ -1,25 +1,23 @@
-======Adding RhinoScript support to Rhino Plug-ins======
+======Adding RhinoScript Support to Rhino Plug-ins======
 ====== C++ ======
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Demonstrates how to add [[developer:rhinoscript|RhinoScript]] support to C++ plug-ins.//
 
-=====Note for .NET developers=====
-The .NET equivalent to this article can be found at [[developer:sdksamples:extendrhinoscript|SdkExtendRhinoScript]].
+**Note for .NET developers:** The .NET equivalent to this article can be found at [[developer:sdksamples:extendrhinoscript|SdkExtendRhinoScript]].
 
-=====Overview=====
-With the Rhino 4.0 SDK, it is now possible to write plug-ins that extend the [[developer:rhinoscript|RhinoScript]] scripting tool. In order to do this, a plug-in must do the following:
+With the Rhino 4.0 SDK, it is now possible to write plug-ins that extend the RhinoScript scripting tool. To do this, a plug-in must do the following:
 
   - Create a COM object that implements the IDispatch interface.
   - Override the CRhinoPlugIn::GetPlugInObjectInterface() to give plug-ins, such as RhinoScript, access to this object.
 
 =====Example=====
-In the following example, we will create a new plug-in named TestScript that support [[developer:rhinoscript|RhinoScript]] scripting. If you are familar with creating C++ projects that support COM automation and you just want to review the sample plug-in source code, then you can **[[http://wiki.mcneel.com/_media/legacy/en/TestScript.zip|download it here.]]**
+In the following example, we create a new plug-in named TestScript that supports RhinoScript scripting. If you are familiar with creating C++ projects that support COM automation and you just want to review the sample plug-in source code, then you can **[[http://wiki.mcneel.com/_media/legacy/en/TestScript.zip|download it here.]]**
 
-Also, the purpose of this example is not to teach COM Automation or to explain how the .IDL file work or what Variants are. There is plenty of information in MSDN and on the Internet that explain these areas.
+Also, this example is not intended to teach COM Automation or to explain how the .IDL file work or what Variants are. There is plenty of information in MSDN and on the Internet that explain these areas.
 
-**Step 1: Create a plug-in that support Automation**
+**Step 1: Create a plug-in that supports Automation**
 
-Launch Visual C++ 2005 and create a new Rhino Plug-in project named TestScript. On the Plug-in Settings page of the Rhino Plug-in Appwizard dialog box, make sure to check the Automation check box. One the Appwizard has completed creating the skeleton project, build the project.
+Launch Visual C++ 2005 and create a new Rhino Plug-in project named TestScript. On the Plug-in Settings page of the Rhino Plug-in Appwizard dialog box, make sure to check the Automation check box. Once the Appwizard has completed creating the skeleton project, build the project.
 
 {{:legacy:en:testscript1.jpg}}
 
@@ -31,7 +29,7 @@ Create a new MFC class by running the MFC Class Wizard. Name the class CTestScri
 
 **Step 3: Add methods to your object**
 
-An object is not useful unless you expose methods or properties. In this example, we will create a new method that allows the scripter to add point objects to Rhino. Within Class View, select your new object's interface and add a new method using the Add Method Wizard. Give the new method the name of AddPoint. It should have a single VARIANT* argument and return a VARIANT.
+An object is not useful unless you expose methods or properties. In this example, we create a new method that lets the scripter add point objects to Rhino. Within Class View, select your new object's interface and add a new method using the Add Method Wizard. Give the new method the name AddPoint. It should have a single VARIANT* argument and return a VARIANT.
 
 {{:legacy:en:testscript3.jpg}}
 {{:legacy:en:testscript4.jpg}}
@@ -73,9 +71,9 @@ VARIANT CTestScriptObject::AddPoint(VARIANT* vaPoint)
 }
 </code>
 
-In the above code, the VARIANT* argument is converted to an ON_3dPoint using the VariantToPoint() function. One of the biggest challenges to creating [[developer:rhinoscript|RhinoScript]] accessable objects is converting the COM Variant data type to an [[developer:opennurbs:home|opennurbs]] data type and back. Fortunately, I have done all of the work for you. The sample project mention above includes a number of utility function to help you convert Variant data type to a number of [[developer:opennurbs:home|opennurbs]] data types. There are also a number of function to do just the opposite. Just look for the VariantUtilities.h/cpp files.
+In the above code, the VARIANT* argument is converted to an ON_3dPoint using the VariantToPoint() function. One of the biggest challenges to creating RhinoScript accessible objects is converting the COM Variant data type to an [[developer:opennurbs:home|openNURBS]] data type and back. Fortunately, I have done the work for you. The sample project above includes several utility functions to help you convert Variant data type to openNURBS data types. There are also functions to do just the opposite. Just look for the VariantUtilities.h/cpp files.
 
-Once the Variant has been converted to an ON_3dPoint, the code simply adds the point to Rhino. But, just like RhinoScript's AddPoint method, this method also returns the object's unique identifer.
+Once the Variant is converted to an ON_3dPoint, the code adds the point to Rhino. But, just like RhinoScript's AddPoint method, this method also returns the object's unique identifier.
 
 **Step 4: Allow access to your object**
 
@@ -124,13 +122,13 @@ LPUNKNOWN CTestScriptPlugIn::GetPlugInObjectInterface( const ON_UUID& iid )
 }
 </code>
 
-Note, [[developer:rhinoscript|RhinoScript]] will only request an IDispatch object from your plug-in. Also because our object is a data member of our plug-in object, we must increment our object's reference counter. Otherwise, when VBScript" releases our object, which will decrement the reference counter, our object will be destroyed. This will cause your plug-in to crash.
+Note, RhinoScript will only request an IDispatch object from your plug-in. Also, because our object is a data member of our plug-in object, we must increment our object's reference counter. Otherwise, when VBScript" releases our object, which will decrement the reference counter, our object will be destroyed. This will cause your plug-in to crash.
 
 **Step 5: Implement your methods**
 
-Once you have implemented your methods, you can begin to test them. Launch Rhino and use the PlugInManager command to install your new plug-in. Then, use RhinoScript's EditScript dialog to test the methods in your plug-in's object.
+Once you have implemented your methods, you can test them. Launch Rhino and use the PlugInManager command to install your new plug-in. Then, use RhinoScript's EditScript dialog to test the methods in your plug-in's object.
 
-The following code demonstrates how to get our plug-ins scriptable object and run the AddPoint method.
+The following code demonstrates how to get our plug-in's scriptable object and run the AddPoint method.
 
 {{:legacy:en:testscript5.jpg}}
 
