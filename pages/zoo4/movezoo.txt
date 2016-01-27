@@ -2,24 +2,23 @@
 > **Product:** //[[zoo4:home|Zoo 4.0]]//
 > **Summary:** //Discusses the steps to moving the Zoo server software from one server to another.//
 
-=====More Information=====
-Moving the Zoo license manager software from one server to another is really no different that installing the Zoo software from scratch.
+Moving the Zoo license manager software from one server to another is really no different than installing the Zoo software from scratch.
 
-Note, there is no way to "move" or "copy" McNeel product CD-Keys from one Zoo server to another. Product CD-Keys must be added to the new Zoo server just add you did with your original Zoo server.
+**Note:** There is no way to //move// or //copy// McNeel product CD-Keys from one Zoo server to another. Add product CD-Keys to the new Zoo server just as you did with your original Zoo server.
 
 =====Steps=====
-  * If the new Zoo server installation will be on the same subnet as the existing Zoo server, than make sure the existing Zoo server is configured to **Allow multiple Zoo servers to run on this network**.
+  * If the new Zoo server installation will be on the same subnet as the existing Zoo server, then make sure the existing Zoo server is configured to **Allow multiple Zoo servers to run on this network**.
 {{:zoo:allowmultizoo.png|}}
   * Download the latest and greatest version of the Zoo from **[[http://download.rhino3d.com/zoo/4.0/release/download|here]]**.
   * Install the Zoo server software on your new server.
-  * Note, if this Zoo server installation is on the same subnet as the existing Zoo server, than make sure the check the **Allow Multiple Zoo Instances on Network** check box during the installation.
+  * **Note:** If this Zoo server installation is on the same subnet as the existing Zoo server, then be sure to check the **Allow Multiple Zoo Instances on Network** check box during the installation.
 {{:zoo:multizoo.jpg|}}
-  * When the installation has finished, start the Zoo console by double-clicking on the shortcut. Note, if the version of Windows supports User Account Control, you will need to **[[http://wiki.mcneel.com/zoo/runasadmin|run the shortcut as the administrator]]**.
+  * When the installation has finished, start the Zoo console by double-clicking on the shortcut. **Note:** If the version of Windows supports User Account Control, you need to **[[http://wiki.mcneel.com/zoo/runasadmin|run the shortcut as the administrator]]**.
   * Stop the Zoo service and add your McNeel product CD-Keys.
-  * **Tip**: Put all your CD-Keys into a text file, with one key per line. Then, use the **Import** option to import all of your CD-Keys at once.
+  * **Tip**: Put all your CD-Keys into a text file, with one key per line. Then, use the **Import** option to import all your CD-Keys at once.
   * When you have finished adding your CD-Keys, start the Zoo service.
-  * If all of your Rhino clients are on the same subnet as the new Zoo server, and your clients are going to "find" the new Zoo server using Broadcast lookup, then the only thing left to do is to stop the old Zoo service.
-  * If you have Rhino clients that the Zoo server using either Registry Key lookup or DNS lookup, then you will need to update client Registries or DNS servers, respectively. Instructions for doing this are included in the Zoo help file. Also, the **SetZooServer** utility, including with the **{{:zoo:zoobonustools.zip|Zoo Bonus Tools}}** can also help with property setting the Registry if you are using this form of lookup.
+  * If all your Rhino clients are on the same subnet as the new Zoo server, and your clients are going to //find// the new Zoo server using Broadcast lookup, then the only thing left to do is to stop the old Zoo service.
+  * If you have Rhino clients that are using either Registry Key lookup or DNS lookup, then you need to update client Registries or DNS servers, respectively. Instructions are in the Zoo help file. Also, the **SetZooServer** utility included with the **{{:zoo:zoobonustools.zip|Zoo Bonus Tools}}** can help with property setting the Registry, if you are using this form of lookup.
 
 \\
 
