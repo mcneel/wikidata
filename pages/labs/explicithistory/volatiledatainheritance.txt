@@ -1,7 +1,7 @@
 ====== Grasshopper Volatile Data Inheritance ======
 
 | {{:legacy:en:ExplicitHistoryBanner.png}} |  //**Grasshopper Wiki Pages**// |
-|  [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
+|  [[http://www.mcneel.com|Robert McNeel & Associates]] |
 
 ----
 
@@ -9,20 +9,19 @@
 
 \\
 
-===== Data Inheritance=====
+===== Data inheritance=====
 
-Data is stored in parameters (either in Volatile or [[labs:explicithistory:persistentdatarecordmanagement|Persistent]] form) and used in components. When data is not stored in the permanent record set of a parameter, it must be inherited from elsewhere. Every parameter (except output parameters) defines where it gets its data from and most parameters are not very particular. You can plug a double parameter into an integer source and it will take care of the conversion. The plugin defines many conversion schemes but if there is no translation procedure defined, the parameter on the receiving end will generate a conversion error. For example, if you supply a Surface when a Point is needed, the Point parameter will generate an error message (accessible through the [[#menu]]  of the parameter in question) and turn red. If the parameter belongs to a component, this state of red-ness will propagate up the hierarchy and the component will become red too, even though it may not contain errors of itself.
+Data is stored in parameters (either in Volatile or [[labs:explicithistory:persistentdatarecordmanagement|Persistent]] form) and used in components. When data is not stored in the permanent record set of a parameter, it must be inherited from elsewhere. Every parameter (except output parameters) defines where it gets its data from and most parameters are not very particular. You can plug a double parameter into an integer source and it will take care of the conversion. The plug-in defines many conversion schemes but if there is no translation procedure defined, the parameter on the receiving end will generate a conversion error. For example, if you supply a Surface when a Point is needed, the Point parameter will generate an error message (accessible through the menu  of the parameter in question) and turn red. If the parameter belongs to a component, this state of redness will propagate up the hierarchy and the component will become red too, even though it may not contain errors itself.
 
-\\
 
-See [[labs:explicithistory:objectsexplained|History Definition Objects Explained]] for further information on warnings and errors.
+See [[labs:explicit history:objectsexplained|Grasshopper Objects Explained]] for more information on warnings and errors.
 
 \\
 \\
 
 ===== Connection management=====
 
-Since Parameters are in charge of their own data sources, you can get access to these settings through the parameter in question. Let's assume we have a small definition containing three components and two parameters:
+Since parameters are in charge of their own data sources, you can get access to these settings through the parameter in question. Let's assume we have a small definition containing three components and two parameters:
 
 
 |  {{:legacy:en:ExpHis_Wires_01.png}}  |
@@ -30,7 +29,7 @@ Since Parameters are in charge of their own data sources, you can get access to 
 ----
 \\
 
-At this stage, all the objects are unconnected and we need to start hooking them up. It doesn't matter in what order we do this, but lets go from left to right. If you start dragging near the little circle of a parameter (what us hip people call a "grip") a connecting wire will be attached to the mouse:
+At this stage, all the objects are unconnected and we need to start hooking them up. It doesn't matter in what order we do this, but lets go from left to right. If you start dragging near the little circle of a parameter (what us hip people call a //grip//) a connecting wire attaches to the mouse:
 
 
 |  {{:legacy:en:ExpHis_Wires_02.png}}  |
@@ -38,7 +37,7 @@ At this stage, all the objects are unconnected and we need to start hooking them
 ----
 \\
 
-Once the mouse (with the Left Button still firmly pressed) hovers over a potential target Parameter, the wire will attach and become solid. This is not a permanent connection until you release the mouse button:
+Once the mouse (with the Left Button still firmly pressed) hovers over a potential target parameter, the wire will attach and become solid. This is not a permanent connection until you release the mouse button:
 
 
 |  {{:legacy:en:ExpHis_Wires_03.png}}  |
@@ -46,7 +45,7 @@ Once the mouse (with the Left Button still firmly pressed) hovers over a potenti
 ----
 \\
 
-We can do the same for the "Y" parameter of the PtGrid component and the "A" and "B" parameters of the Line component: Click+Drag+Release...
+We can do the same for the //Y// parameter of the PtGrid component and the //A// and //B// parameters of the Line component: Click+Drag+Release...
 
 
 |  {{:legacy:en:ExpHis_Wires_04.png}}  |
@@ -65,7 +64,7 @@ We can do the same for the "Y" parameter of the PtGrid component and the "A" and
 ----
 \\
 
-Note that we can make connections both ways. But be careful, by default a new connection will erase existing connections. Since we assumed that you will most often only use single connections, you have to do something special in order to define multiple sources. If you press Shift while dragging connection wires, the mouse pointer will change to indicate addition behaviour:
+Note that we can make connections both ways. But be careful, by default a new connection will erase existing connections. Since we assumed that you will most often only use single connections, you have to do something special to define multiple sources. If you press Shift while dragging connection wires, the mouse pointer will change to indicate additional behavior:
 
 \\
 
@@ -77,9 +76,9 @@ Note that we can make connections both ways. But be careful, by default a new co
 ----
 \\
 
-If the "ADD" cursor is active when you release the mouse button over a source parameter, that parameter will be added to the source list. If you specify a source parameter which is already defined as a source, nothing will happen. You cannot inherit from the same source more than once.
+If the **ADD** cursor is active when you release the mouse button over a source parameter, that parameter is added to the source list. If you specify a source parameter which is already defined as a source, nothing will happen. You cannot inherit from the same source more than once.
 
-By the same token, if you hold down Control the "REM" cursor iwill become visible, and the targeted source will be removed from the source list. If the target isn't referenced, nothing will happen.
+By the same token, if you hold down **Control REM** cursor it will become visible, and the targeted source is removed from the source list. If the target isn't referenced, nothing will happen.
 
 \\
 
@@ -95,4 +94,3 @@ You can also disconnect (but not connect) sources through the parameter menu:
 
 
 |  {{:legacy:en:ExpHis_DefaultUI_MenuDisconnect.png}}  |
-
