@@ -1,0 +1,61 @@
+====== Rhino 5 - Blöcke und Einsetzen ======
+
+Rhino 5 unterstützt verschachtelte und verknüpfte Blockdefinitionen.  
+
+===== Erstellen einer verknüpften Blockdefinition =====
+
+
+Führen Sie den Befehl **Einsetzen** aus.  Dadurch wird der Einsetzdialog geöffnet.
+
+{{:rhino:linedblockinstrustions_insertdialog.jpg|}}
+
+  - Wählen Sie im Abschnitt **Einsetzen als** die Option **Blockinstanzen**.
+  - Wählen Sie eine Datei, die Sie als verknüpfte Blockdefinition einsetzen möchten
+  - Klicken Sie auf OK
+
+Daraufhin wird das Dialogfenster **Optionen beim Einsetzen einer Datei** geöffnet.
+
+{{:rhino:linedblockinstrustions_insertfileoptions.jpg|}}
+
+  - Wählen Sie als Blockdefinitionstyp die Option **Verknüpfen** aus.
+  - Wählen Sie den gewünschten Ebenenstil aus.  Weitere Informationen über die Ebenenstile //Aktiv// und //Referenz// finden Sie auf der Seite zu [[rhinov5status_layernames#examplelinked_block_layer_names|verknüpften Blockebenennamen.]]
+  - Klicken Sie auf OK
+
+Nach Beendigung dieses Dialogs können Sie die Position des Blocks mit der Maus oder durch Eingabe der Koordinaten festlegen.
+
+===== Verschachtelte und verknüpfte Blöcke =====
+
+Manchmal kann es sinnvoll sein, ein komplexes Projekt in seine Komponenten zu unterteilen und diese als Blöcke zu referenzieren.  Im ZIP-Archiv {{:rhino:superblockv5.zip|}} finden Sie die folgenden Modelle:
+
+  * V5\
+    * projectV5.3dm
+    * BuildingV5\
+      * buildingV5.3dm
+        * PartsV5\
+          * awnings-roundV5.3dm
+          * awnings-straightV5.3dm
+          * guidelinesV5.3dm
+          * level1V5.3dm
+          * level2V5.3dm
+          * roofV5.3dm
+    * SiteV5\
+      * siteV5.3dm
+
+Öffnen Sie die Datei //...\V5\projectV5.3dm//. Das Modell //projectV5.3dm// hat zwei verknüpfte Blöcke, von denen einer das Gebäude und der andere der Standort ist.   
+
+Durch Ausführen des Befehls **BlockManager** werden Ihnen die Blöcke //Building// und //Site// angezeigt.  Außerdem werden 5 verschachtelte Blöcke angezeigt.  
+
+{{:rhino:linedblockinstrustions_blockman1.jpg|}}
+
+Um die verschachtelten Blöcke anzuzeigen, wählen Sie die Option //5 Referenzblockdefinitionen anzeigen//.
+
+
+{{:rhino:linedblockinstrustions_blockman2.jpg|}}
+
+Das Modell buildingV5.3dm hat fünf verknüpfte Blöcke: //awnings-round, level1, level2, roof// und //guidelines//.
+
+===== Bearbeitung verknüpfter Blöcke =====
+
+Mit dem **Blockmanager** können die Eigenschaften von "verschachtelten" verknüpften Blöcken angezeigt und bearbeitet werden.  **Beachten Sie bitte, dass alle Änderungen an den "verschachtelten" verknüpften Blöcken temporär sind und nicht gespeichert werden.** Wenn Sie einen verknüpften Block dauerhaft ändern möchten, bearbeiten Sie das Modell, das diesem Block enthält.
+
+Wenn Sie beispielsweise ausprobieren möchten, wie Ihr Gebäude mit anderen Markisen aussehen würde, wählen Sie den Block //buildingV5.3dm > awnings-...//, klicken Sie auf **Eigenschaften** und wählen Sie //awnings-straightV5.3dm// statt //awnings-roundV5.3dm//. Wenn Sie die Markisen jedoch dauerhaft von rund auf gerade ändern möchten, öffnen Sie das Modell buildingV5.3dm und ändern Sie den Markisenblock in diesem Modell.
