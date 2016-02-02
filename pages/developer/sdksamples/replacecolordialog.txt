@@ -1,11 +1,14 @@
-====== How To: Replace Rhino's Color Picking Dialog ======
+====== How to: Replace Rhino's Color Picking Dialog ======
 ====== C++, .NET ======
+
 > **Version:** //Rhino 4//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:replacecolordialog|here]]//
+> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:replacecolordialog|here.]]//
 
-To replace Rhino's color picking dialog, derive a new class from CRhinoReplaceColorDialog and override the ColorDialog() virtual function. Note, if more that one CRhinoReplaceColorDialog-derived classes exist, then the last CRhinoReplaceColorDialog-derived object created will be displayed.
+To replace Rhino's color picking dialog, derive a new class from CRhinoReplaceColorDialog and override the ColorDialog() virtual function. 
 
-The following sample code demonstrates how to replace Rhino's color picking dialog. In this example, we will simply replace it with the Windows standard color picking dialog.
+**Note:** If more that one CRhinoReplaceColorDialog-derived classes exist, then the last CRhinoReplaceColorDialog-derived object created will be displayed.
+
+The following sample code demonstrates how to replace Rhino's color picking dialog. In this example, we replace it with the Windows standard color picking dialog.
 
 ===== C++ =====
 <code c++>
@@ -28,7 +31,7 @@ public:
 };
 
 </code>
-Now, create a new Rhino command and add a pointer to the above class as a public data member. Do not forget to initialize it's value to NULL in the command classes constructor. For example:
+Now, create a new Rhino command and add a pointer to the above class as a public data member. Remember to initialize its value to NULL in the command classes constructor. For example:
 
 
 <code c++>
@@ -61,7 +64,7 @@ CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& cont
 }
 
 </code>
-For more information on the new CRhinoReplaceColorDialog class, see it's declaration in rhinoSdkUtilities.h.
+For more information on the new CRhinoReplaceColorDialog class, see its declaration in rhinoSdkUtilities.h.
 
 ===== VB.NET =====
 <code vb>
