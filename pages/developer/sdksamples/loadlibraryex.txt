@@ -1,10 +1,11 @@
-====== Info: Plug-in Loading ======
+======Plug-in Loading ======
+
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
 > **Summary:** //Discusses how Rhino loads plug-ins.//
 
 ===== C++ =====
 
-Rhino plug-ins are loaded twice. The first time as follows:
+Rhino plug-ins are loaded twice. The first time is as follows:
 
 <code c++>
 hModule = ::LoadLibraryEx( 
@@ -14,7 +15,7 @@ hModule = ::LoadLibraryEx(
     );
 </code>
 
-Note, by using the **DONT_RESOLVE_DLL_REFERENCES** flag, the system does not call the plug-in's **DllMain** for process and thread initialization and termination. Also, the system does not load additional executable modules that are referenced by the specified module. This allows Rhino to quickly verify the Rhino SDK version and that the proper plug-in exports are available. 
+Note, by using the **DONT_RESOLVE_DLL_REFERENCES** flag, the system does not call the plug-in's **DllMain** for process and thread initialization and termination. Also, the system does not load additional executable modules that are referenced by the specified module. This lets Rhino quickly verify the Rhino SDK version and that the proper plug-in exports are available. 
 
 And, the **LOAD_WITH_ALTERED_SEARCH_PATH** flag is used so **LoadLibraryEx** looks for dependent DLLs in the directory specified by //lpFileName//, not by **Rhino4.exe**.
 
@@ -41,7 +42,7 @@ Rhino loads .NET plug-ins, which are regular .NET assemblies, using the Reflecti
 
 Rhino plug-ins are loaded twice. The first time using ReflectionOnlyLoadFrom to determine the version of Rhino_DotNet the plug-in was compiled against. If the version is more recent than what is installed on the user's computer, Rhino will notify the user that a more recent build of Rhino is required to run the plug-in.
 
-The second time Rhino uses Reflection::Assembly::LoadFrom to load the plug-in. Once the plug-in is loaded, Rhino iterates through all of the public classes and creates instances of every command and plugin subclass.
+The second time Rhino uses Reflection::Assembly::LoadFrom to load the plug-in. Once the plug-in is loaded, Rhino iterates through all of the public classes and creates instances of every command and plug-in subclass.
 
 \\
 
