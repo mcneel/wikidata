@@ -1,52 +1,32 @@
 ====== Softimage File Exchange ======
 
-> **Note:** //These notes were created some time ago and were in the Rhino Help. However, it seems that this information should be reviewed and updated by people who know about this subject, So I'm moving it here. ~mb//
+> **Note:** //These notes were created some time ago and were in the Rhino Help. But it seems that people who know about this subject should review and update this information, so I'm moving it here. ~mb//
 
-There are three options for getting [[rhino:nurbs|NURBs]] models from Rhino into Softimage. All three have their own problems and benefits.
+There are two options for getting [[rhino:nurbs|NURBS]] models from Rhino into Softimage. Both have their own problems and benefits.
 
 
 Softimage can also import 3DS, DXF, and OBJ file formats created in Rhino.
 
 =====Use Softimage's file utility:=====
-  - From the File menu, click Export Selected or Save As.
-  - In the dialog box, in the Save as type box, select IGES.
-  - Type a filename and click Save.
-  - In the IGES Export dialog box, from the IGES Type box, select Softimage.
+  - From the File menu, click **Export Selected** or **Save As**.
+  - In the dialog box, in the Save As Type box, select **IGES**.
+  - Type a filename and click **Save**.
+  - In the IGES Export dialog box, from the IGES Type box, select **Softimage**.
   - Run iges2soft.exe with the following command line switches:
    iges2soft -f -L -S3 -s3 -T5 -t3 -v3 -R [RSRC_DIR] MyIgesFile.igs MyDSCFile.dsc
    [RSRC_DIR] = Softimage resource directory (often c\soft3d_3.7\3d\bin\rsrc)
 iges2soft.txt contains command line option information.
 
-=====Use Polytrans file exchange utility:=====
+=====Use Polytrans file exchange utility=====
 
 Polytrans by Okino can read IGES files and write Softimage files. Check out their web site for more information: www.okino.com.
 
-=====Use Phoenix Tools plug-in:=====
-
-Advice from an expert Rhino user:
-
-Download the free Phoenix Tools Iges Import plug-in for Softimage from:
-
-Main page: http://www.phoenixtools.com
-
-Plug-in download link page: http://www.phoenixtools.com/products/GreenCD/freeplugs.html
-
-The actual download page with plug-ins for Alpha, SGI and x86 (Intel), for SI versions 3.7sp1 and 3.8: ftp:ftp.phoenixtools.com/pub/download/Free_Plug-ins/
-
-The best way to get objects correctly trimmed objects from Rhino into Softimage is:
-
-  - Export the model to the Softimage IGES flavor.
-  - From the File menu click Export Selected.
-  - In the Save dialog box, in the Save as type box, select IGES.
-  - In the IGES Export Options dialog box, select Softimage.
-
-If it is a very large model, it is best to export your objects separately. Exporting objects separately makes it easier to sort in schematic view when you recombine the scene elements later. Exporting as separate objects makes the conversion process less complicated on import into Softimage, as each imported section is brought in under a parent null.
 
 =====Open Softimage=====
 
   - Import the file: Tools > Import > Objects > PT_IgesImport.
-  - Select the database from where you want to save the imported IGES file upon conversion to Softimage format.(It is a good idea to create a new Softimage directory specifically for the task of IGES importing.)
-  - Accept Phoenix Tools Iges Import default settings. The model will be translated and then appear in Softimage.
+  - Select the database from where you want to save the imported IGES file upon conversion to Softimage format. (It is a good idea to create a new Softimage directory specifically for the task of IGES importing.)
+  - Accept Phoenix Tools IGES Import default settings. The model will be translated and then appear in Softimage.
   - Select all models [spacebar+a] and rotate -90 in the X axis: Model > Effect > Freeze > Rotation.
   - Save scene/model to await merging into desired Softimage scene.
 
