@@ -1,9 +1,10 @@
 ====== Splitting a Curve into Multiple Curve Segments ======
 ====== C++ ======
-> **Summary:** //Demonstrates how to split a curve into multiple curve segments using the Rhino SDK.//
+
+> **Summary:** //Demonstrates how to split a curve into multiple curve segments using the Rhino SDK//
 
 =====Question=====
-I know that I can use ON_Curve::Split to split a curve into two pieces. But, how to split a curve into multiple curve segments based on an array of curve parameters?
+I know that I can use ON_Curve::Split to split a curve into two pieces. But, how do I split a curve into multiple curve segments based on an array of curve parameters?
 
 =====Answer=====
 The solution is to call ON_TrimCurve repeatedly using the source curve as input. ON_TrimCurve will create new curves based on a specified interval of a source curve.
