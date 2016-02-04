@@ -1,18 +1,20 @@
 ====== Creating a Leader ======
 ====== C++, .NET ======
+
 > **Version:** //Rhino 4//
 > **Summary:** //Demonstrates how to an annotation leader using the Rhino 4 SDK.//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:leader|here]]//
+> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:leader|here]].//
+
 =====Question=====
 What is the best approach to create a leader line?  I have tried a couple of different approaches, but with no success.
 
 =====Answer=====
 Leaders in Rhino 4.0 are defined by the ON_Leader2 class. To construct a leader, you must provide:
 
-  - A plane, or an ON_Plane object, which defines the plane in which the leader will be located.
-  - Two or more 2-D points that line in the plane that you specified above.
+  - A plane, or an ON_Plane object, which defines the plane in which the leader is located.
+  - Two or more 2-D points that line in the plane that you specify.
 
-In the following example code, we will construct a simple leader object. The leader will reside in the world x-y plane and will have four points.
+In the following example code, we construct a simple leader object. The leader will reside in the world x-y plane and will have four points.
 
 ===== C++ =====
 <code c++>
