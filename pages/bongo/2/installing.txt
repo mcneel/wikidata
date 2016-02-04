@@ -4,30 +4,28 @@
 ===== General =====
 
 
--->Reporting Install Problems#
+-->Reporting install problems#
 If the Bongo installer fails to install, please contact McNeel Support and provide them with the following information: 
   - If an error message appears, write exactly what it said or send a screenshot of the error message. 
-  - What Operative System you are running on the machine you're trying to install Bongo on.
-  - What version of Rhino 5 you have installed. You get the information by typing in About on the command line.
+  - The Operating System you are running on the machine you're trying to install Bongo on.
+  - What version of Rhino 5 you have installed. You get this information by typing **About** on the command line.
 
 Send an email with the information above to [[tech@mcneel.com]]
 
-===== Error Messages =====
+===== Error messages =====
 
 -->Error 1327 - Invalid Drive:#
-**//Question://** //I get "Error 1327. Invalid Drive (E:, F:, etc)" when installing//
+**//Question://** //I get "Error 1327. Invalid Drive (E:, F:, etc)" when installing.//
 
-**//Cause://** //Your user account has settings indicating that one or more non-existent drives should be used for special folders such as "My Documents"//
+**//Cause://** //Your user account has settings indicating that one or more non-existent drives should be used for special folders such as "My Documents".//
 
 **//Solution://**
-  - From the Start menu, click Run.
-  - Type RegEdit, then click Run
-  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  - From the Start menu, click **Run**.
+  - Type RegEdit, then click **Run**.
+  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders.
   - Look for directories listed that contain the drive letter mentioned in the error from the installer. Change them to point to a valid drive and folder.
-  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
-  - Look for directories listed that contain the drive letter mentioned in the error from 
-
-**Note:** This method, or task contains steps that tell you how to modify the registry. However, serious problems might occur if you modify the registry incorrectly. Therefore, make sure that you follow these steps carefully. For added protection, back up the registry before you modify it. Then, you can restore the registry if a problem occurs. For more information about how to back up and restore the registry, click the following article number to view the article in the Microsoft Knowledge Base:
+\\
+**Note:** This method contains steps that tell you how to modify the registry. However, serious problems might occur if you modify the registry incorrectly. Make sure that you follow these steps carefully. For added protection, back up the registry before you change it. Then, you can restore the registry if a problem occurs. For more information about how to back up and restore the registry, view the following article in the Microsoft Knowledge Base:
 [[http://support.microsoft.com/kb/322756|How to back up and restore the registry in Windows ]]
 
 <--
@@ -38,24 +36,24 @@ Send an email with the information above to [[tech@mcneel.com]]
 **//Cause://** One or more registry keys in the HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components key has incorrect permissions.
 
 **//Solution 1://**
-On the Windows Start menu, enter "CMD" to the search box. Right-click on the "cmd.exe" and select "Run as administrator". Copy the following line and paste it into the cmd window, press Enter. Then Rhino will be able to install.
+On the Windows Start menu, enter **CMD** in the search box. Right-click **cmd.exe** and select **Run as administrator**. Copy the following line and paste it into the cmd window. Press **Enter**. Then Rhino will be able to install.
 
 <code>
 secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 </code>
 
 **//Solution 2://**
-//WARNING: The following procedure involves editing the Windows Registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
+//**Warning** -  The following procedure involves editing the Windows Registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
   - Download [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] from Microsoft TechNet, and extract the contents to your desktop.
-  - Open a Windows command shell
+  - Open a Windows command shell.
   - Change directories to your desktop.
-  - In the command shell, enter: **psexec -i -d -s c:\windows\regedit.exe** This causes Windows to run the registry editor with the permissions of the System account - an account even more powerful than Administrator.
-  - Browse to HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - In the command shell, enter: **psexec -i -d -s c:\windows\regedit.exe**. This causes Windows to run the registry editor with the permissions of the System account -- an account even more powerful than Administrator.
+  - Browse to HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\.
   - Right-click the **UserData** folder, then click **Permissions...**
-  - In the Permissions for UserData dialog box, click **Advanced**
-  - Ensure that "Administrators" has "Full Control" Permissions in this folder, and that "Users" has "Read" Permissions. There will be other user permissions, too - but Administrators and Users are what matter most.
-  - Select the **Replace all child object permissions with inheritable permissions from this object**
-  - Click **OK** twice to apply permissions
+  - In the Permissions for UserData dialog box, click **Advanced**.
+  - Ensure that //Administrators// has //Full Control// Permissions in this folder, and that //Users// has //Read// Permissions. There will be other user permissions, too, but Administrators and Users are what matter most.
+  - Select the **Replace all child object permissions with inheritable permissions from this object**.
+  - Click **OK** twice to apply permissions.
   - Install Rhino again.
 
 <--
@@ -65,50 +63,50 @@ A wide variety of problems can cause 1603 errors. Please follow all of the steps
 \\
 \\
 **Step 1: Install .NET 4.0 Framework**
-  - Open **Windows Explorer** and browse to the Rhino Installer DVD
+  - Open **Windows Explorer** and browse to the Rhino Installer DVD.
   - Open the **Installers\Prerequisites** folder.
   - Run the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]].
   - If the Microsoft .NET installer **shows an error**: 
-    - write down the error 
+    - Write down the error. 
     - **Proceed to Step 2**.
-  - 64-bit Windows XP Only:
-    - Download and install [[http://www.microsoft.com/en-us/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]]
+  - 64-bit Windows XP only:
+    - Download and install [[http://www.microsoft.com/en-us/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]].
   - **Skip to Step 3**.
 \\
 **Step 2: Perform Windows Updates**
-  - Run the [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows Update service]]
+  - Run the [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows Update service]].
   - If there are any important updates to install, click on **Update Now** to install the updates.  This process can take a long time.
   - If there is an error when trying to run Windows update installer, please read [[http://support.microsoft.com/kb/906602|Troubleshooting common Windows Update Issues]]
   - If you resolve the Windows update problem and finish running [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows Update service]], then **return to Step 1**.
 \\
 **Step 3: Install Rhino**
-  - Open **Windows Explorer**
-  - Browse to the Rhino 5 DVD
+  - Open **Windows Explorer**.
+  - Browse to the Rhino 5 DVD.
   - Double-click **Setup.exe** to start the Rhino 5 installation process.
   - If the Rhino 5 installer fails, save a copy of the log file to your desktop.
-  - **Proceed to Step 4**
+  - **Proceed to Step 4**.
 \\
-**Step 4: Manual Installation**
-  - Open **Windows Explorer**
-  - Browse to the **Installers** folder of the Rhino 5 DVD
-  - For //64-bit systems only//: double-click **rhino5setup_en-us_x64.msi** and complete the installation
+**Step 4: Manual installation**
+  - Open **Windows Explorer**.
+  - Browse to the **Installers** folder of the Rhino 5 DVD.
+  - For //64-bit systems only//: double-click **rhino5setup_en-us_x64.msi** and complete the installation.
   - For all systems: 
-      - double-click **rhino5setup_en-us_x86.msi** and complete the installation
-      - double-click **LanguagePack_en-us.msi** (and any other languages you wish to install)
-      - double-click **HelpMedia.msi**
+      - Double-click **rhino5setup_en-us_x86.msi** and complete the installation
+      - Double-click **LanguagePack_en-us.msi** (and any other languages you wish to install)
+      - Double-click **HelpMedia.msi**
   - If you experience errors during installation:
     - Write down any error numbers and messages you see
     - Email the step you are on in this article and any errors to tech@mcneel.com
   - Restart Windows if prompted.
-  - **Start Rhino 5**
+  - **Start Rhino 5**.
   - In the Rhino 5 command line, type **ToolbarReset** then press Enter.
-  - **Close Rhino 5**
-  - **Start Rhino 5**
+  - **Close Rhino 5**.
+  - **Start Rhino 5**.
   - **Installation is complete!**
 \\
 **Still not working?**
-  - That's frustrating - we're sorry!
-  - Please email any log files from Step 3 to tech@mcneel.com
+
+That's frustrating. We're sorry! Please email any log files from Step 3 to tech@mcneel.com.
 
 <--
 
@@ -118,25 +116,31 @@ A wide variety of problems can cause 1603 errors. Please follow all of the steps
 **//Cause://** //This is a bug in the Microsoft C++ 2005 Redistributable Package//
 
 **//Solution 1://**
-  * **Disable the antivirus program on the system.** A user reported disabling AVG made Rhino installation work.
+
+**Disable the antivirus program on the system.** A user reported disabling AVG made Rhino installation work.
+
+
 **//Solution 2://**
-  * **Try to install several times.** A user reported Rhino installation succeeded when the third time he tried to install Rhino. He didn't do anything to the system.
+
+**Try to install several times.** A user reported Rhino installation succeeded when the third time he tried to install Rhino. He didn't do anything to the system.
+
+
 **//Solution 3://**
-  - On Windows Vista or Windows 7, From the Start menu, type Features.
+  - On Windows Vista or Windows 7, From the Start menu, type **Features**.
   - Click **Turn Windows Features On or Off**
-  - In the Windows Features dialog box, select the check box labeled **Windows Communication Foundation HTTP Activation**:
+  - In the Windows Features dialog box, select the check box labeled **Windows Communication Foundation HTTP Activation**.
   - {{:rhino:rhino_1935_windows_features.png|}}
-  - Click OK
+  - Click **OK**.
 
-If you are unable to enable this feature, or if the Windows Features dialog box appears and is empty, then your installation of Windows is corrupt and needs to be repaired. Please contact Microsoft Support for more assistance.
+If you can't enable this feature, or if the Windows Features dialog box appears and is empty, then your installation of Windows is corrupt and needs repaired. Please contact Microsoft Support for more help.
 
-**//More Details://**
-People who get this error while installing Rhino are also unable to install the [[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 Redistributable Package directly]] from Microsoft. Therefore, this is a problem with Windows and the Microsoft Redistributable Package, not with Rhino's installer.
+**//More details://**
+People who get this error while installing Rhino are also unable to install the [[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 Redistributable Package directly]] from Microsoft. This is a problem with Windows and the Microsoft Redistributable Package, not with Rhino's installer.
 
 <--
 
 -->Error 2502#
-**//Question://** When Rhino 5 prompts there's a new update ready to install, choose to install the update and get "Error 2502".
+**//Question://** When Rhino 5 prompts that there's a new update ready to install, I choose to install the update and get "Error 2502".
 
 **{{http://wiki.mcneel.com/_media/rhino/k01373.png?400}}**
 
@@ -144,7 +148,7 @@ People who get this error while installing Rhino are also unable to install the 
 
 **//Solution://**
   - Right-click on Rhino 5 shortcut icon.
-  - Select "Run as Administrator".
+  - Select **Run as Administrator**.
   - Rhino 5's start plane prompts there's a new update ready to install.
   - Choose to install the update.
 
@@ -157,7 +161,7 @@ People who get this error while installing Rhino are also unable to install the 
 **//Cause://** There is a problem with the Rhino license manager.
 
 **//Solution://**
-Please have a look at the following page:
+Please look at the following page:
 http://wiki.mcneel.com/rhino/licensemanagererrors
 
 It should help you resolve the problem.
