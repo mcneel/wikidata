@@ -1,16 +1,16 @@
-====== Setup a Cage Edit ======
+====== Set Up a Cage Edit ======
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
-> **Summary:** //Demonstrates how to setup a cage editing scenario.//
+> **Summary:** //Demonstrates how to set up a cage editing scenario.//
 
 ===== Question =====
-I have two objects: a surface and a line curve. I would like to programatically setup cage editing, with the surface as the captive object and the line curve as the control object. How can I do this? 
+I have two objects: a surface and a line curve. I would like to programatically set up cage editing, with the surface as the captive object and the line curve as the control object. How can I do this? 
 
 ===== Answer =====
-To allow the line curve to control the surface, you will need to create a **CRhinoMorphControl** object. A **CRhinoMorphControl** object has a **ON_MorphControl** object, as its data member, which contains the definition of the controlling object (in this case, line).
+To allow the line curve to control the surface, create a **CRhinoMorphControl** object. A **CRhinoMorphControl** object has an **ON_MorphControl** object as its data member, which contains the definition of the controlling object (in this case, line).
 
-Once you have properly defined the **ON_MorphControl** object and created the runtime **CRhinoMorphControl** object, you can use the **RhinoCaptureObject** SDK function to setup the "capture".
+Once you have properly defined the **ON_MorphControl** object and created the runtime **CRhinoMorphControl** object, you can use the **RhinoCaptureObject** SDK function to set up the //capture//.
 
-The following example code demonstrates how you might write a command that allows a surface to be controlled by a line.
+The following example code demonstrates how you might write a command that lets a surface be controlled by a line.
 
 ==== C++ ====
 <code c++>
