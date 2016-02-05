@@ -1,9 +1,7 @@
-====== Does Rhino run on Vista? ======
+====== Does Rhino Run on Vista? ======
 > **Summary:** //Rhino 4.0 with Service Release 2 (or newer) runs fine on all flavors of MS Vista, but there are serious issues for Rhino 3.0. Please add reports on your experience.//
 
-> **Note:** //Since Microsoft issued Service Pack 1 for Vista, it has proven to be much more stable and reliable.  We recommend all users keep their operating systems up to date with all of the "critical updates" issued by Microsoft.  The Windows Update Tool, found in the Tools pull-down menu of MS Internet Explorer, is an easy tool to use and makes keeping your system up to date relatively painless. Added 5 March 2009 - John Brock//
-
-=====Overview=====
+>**Note:** //Since Microsoft issued Service Pack 1 for Vista, it has been much more stable and reliable.  We recommend all Vista users keep their operating systems up to date with all the "critical updates" issued by Microsoft.  The Windows Update Tool, found in the Tools pull-down menu of MS Internet Explorer, is an easy tool to use and makes keeping your system up to date relatively painless. Added 5 March 2009 - John Brock//
 
 Rhino 3.0 and 4.0 run on Windows Vista, but the 3-D display performance (OpenGL) can be much worse than on Windows XP or 2000 using the same hardware. [[http://www.tomshardware.com/2007/01/29/xp-vs-vista/page6.html|Independent benchmarks]] show discouraging results for other CAD applications that use [[rhino:opengl|OpenGL]].
 
@@ -13,21 +11,21 @@ Vista also has new security features that may cause a few extra security message
 
 **Rhino V4 starts with no plug-ins loaded**
 
-A small number of users have reported that installing Rhino V4 (SR2 and newer) on Vista has resulted in no plug-ins and occasionally no toolbars loaded unless logged in and running as the local Administrator.  This has been more common on Vista Home Premium systems, but has been reported on all flavors of Vista.  Most users do not report this problem and we have not been able to duplicate the problem here in the Rhino Development Team.
+A few users reported that installing Rhino V4 (SR2 and newer) on Vista has resulted in no plug-ins and occasionally no toolbars loaded unless logged in and running as the local Administrator.  This has been more common on Vista Home Premium systems, but has been reported on all flavors of Vista.  Most users do not report this problem and we have not been able to duplicate the problem here in the Rhino Development Team.
 
 **Solution**
 
-Users have reported that if they turn off User Account Control (Control Panel - User Accounts), and temporarily disable any antivirus and system protection software before running the Rhino installation again, solves the problem.  After reinstalling and running Rhino once, you should restart your antivirus and system protection tools.  You can turn UAC back on if you want to as well.
+Users report that turning off User Account Control (Control Panel - User Accounts), and temporarily disabling any antivirus and system protection software before running the Rhino installation again, solves the problem.  After reinstalling and running Rhino once, you should restart your antivirus and system protection tools.  You can turn UAC back on if you want to.
 
 Added 5 March 2009 - John Brock
 
-=====Video and Accelerated 3-D Display=====
+=====Video and accelerated 3-D display=====
 
 Both Rhino 3.0 and 4.0 use [[rhino:opengl|OpenGL]] for accelerated 3-D display. [[rhino:opengl|OpenGL]] can use a graphics accelerator card to enhance 3-D display performance.
 
 **Non-accelerated OpenGL**
 
-Non-accelerated OpenGL, sometimes called [[rhino:opengl|OpenGL]] Software Emulation or Standard OpenGL, is supported on Windows Vista. Rhino runs with Non-accelerated OpenGL, but because it is not accelerated, it can be quite slow - especially with large models.
+Windows Vista supports non-accelerated OpenGL, sometimes called OpenGL Software Emulation or Standard OpenGL. Rhino runs with non-accelerated OpenGL, but because it is not accelerated, it can be quite slow -- especially with large models.
 
 Windows Vista does not support accelerated [[rhino:opengl|OpenGL]] directly, and some video card manufacturers do not have drivers available for their cards. We do not know if drivers that support efficient accelerated [[rhino:opengl|OpenGL]] will ever be available for these cards.
 
@@ -39,19 +37,11 @@ You may have an [[rhino:opengl|OpenGL]] card that provides excellent 3-D acceler
 
 If you are looking to buy a new computer with Vista pre-loaded, be sure to check if an [[rhino:opengl|OpenGL]] driver is available for the video card you select. If it is not, Rhino's display will likely be very slow.
 
-**Graphics Drivers for Vista**
+**Graphics drivers for Vista**
 
-[[http://www.nvidia.com/content/drivers/drivers.asp|nVidia]] and [[http://ati.amd.com/support/driver.html|ATI]] are releasing updated drivers on a regular basis to fix Vista display issues with their hardware. Check their websites to make sure that their Vista drivers work with your hardware.
+[[http://www.nvidia.com/content/drivers/drivers.asp|NVIDIA]] and ATI release updated drivers on a regular basis to fix Vista display issues with their hardware. Check their websites to make sure that their Vista drivers work with your hardware.
 
-<color blue>Rhino 4 Fix</color>: The first service release of Rhino 4 will contain several display fixes that will allow Rhino to properly use accelerated graphics on Vista. In the mean time you can try one of the following two options:
-
-  * Option 1: Right-click on the rhino4.exe application file and go into the "Compatibility" section. Check 'Disable desktop composition'. That will force Vista into a XP-Like desktop (turning off Aero Glass).
-  * Option 2: Use the [[labs:directx|DirectX display plug-in]] that is available through Rhino Labs [[labs:rhinohomelabs|RhinoHomeLabs]]
-
-=====Security=====
-
-  * The number of pop-up security alerts and other security impediments are going to be discouraging for many Vista users. Rhino may display a couple of security warnings at startup, but will otherwise run normally.
-  * <color blue>Rhino 4 Fix</color>: The pop-up security alert that users see when starting Rhino is caused by the chack for updates mechanism that is run on start-up. In the initial release of Rhino 4, there is a hidden command called TestDisableCheckForUpdates that you can run to stop the annoying securtiy alerts from popping up. If you run this command a second time, the check for updates mechanism will be reenabled. This issue will be resolved in the first service release of Rhino. If you disable the automatic check for updates mechanism, you should run the Check for Updates command found under the help menu on a regular basis.
+<color blue>Rhino 4 Fix</color>: The first service release of Rhino 4 contains several display fixes that let Rhino properly use accelerated graphics on Vista. 
 
 =====Memory=====
 
@@ -67,46 +57,39 @@ There are several problems in Rhino 3.0 when running on Vista that will not be f
 
 The problems are:
 
-  * [[rhino:opengl|OpenGL]] display may be slower on Vista than on XP, and there maybe considerable display problems - viewports may go black, or get garbage drawn in them.
+  * [[rhino:opengl|OpenGL]] display may be slower on Vista than on XP. And there maybe considerable display problems - viewports may go black, or get garbage drawn in them.
   * Several dialog boxes appear at startup telling you that Rhino cannot write to the registry.
   * Vista does not ship with WinHelp (WinHlp32.exe). Rhino 3.0's help file is a WinHelp file, so you will not be able to see it on Vista unless you download the following update from Microsoft. **[[http://www.microsoft.com:80/downloads/details.aspx?familyid=6ebcfad9-d3f5-4365-8070-334cd175d4bb&displaylang=en|//Download WinHelp for Vista...//]]**
 
 Advice on running V3.0 under Vista from McNeel's Jeff LaSor:
 
-You can try configuring Rhino to run in certain compatibility modes in
-
-Vista...Try the following:
-
-1) Right-click on the Rhino icon on your desktop and select "Properties"
-
-2) Click on the "Compatibility" tab.
-
-3) CHECK the option "Run this program in compatibility mode for:" and then
-
-select "Windows XP (Service Pack 2)"
-
-4) Further down on the dialog CHECK these 2 options:
+You can try configuring Rhino to run in certain compatibility modes in Vista...Try the following:
+  - Right-click on the Rhino icon on your desktop and select **Properties**.
+  - Click on the **Compatibility** tab.
+  - Check the option **Run this program in compatibility mode for:** and then select **Windows XP (Service Pack 2)**.
+  - Further down on the dialog check these two options:
 
    [X] Disable visual themes
    [X] Disable desktop composition
 
-> **Note:** //Disabling visual themes will hide the red X closer button on floating toolbars.//
+**Note:** //Disabling visual themes will hide the red X closer button on floating toolbars.//
 
-That should hopefully help get V3 running a little better...but note: This
+That should hopefully help get V3 running a little better...but note: This will also cause all of Vista's Ultimate **effects** to be temporarily disabled (ex. see through windows, etc..) while V3 is running.
 
-will also cause all of Vista's Ultimate "effects" to be temporarily disabled
+=====Customer experiences=====
 
-(ex. see through windows, etc..) while V3 is running.
+When I try to install Rhinoceros 3.0 on Vista, it says that it is already running and to close it before resuming setup, although it's not even installed and no other instances of Rhinoceros is running. What's up?
 
-=====Customer Experiences=====
+Added 2/27/2007 Good morning Pascal.  I emailed you last week concerning ATI display cards/Rhino/Vista compatibility.  You had directed me to a driver update with ATI that supported [[rhino:opengl|OpenGL]] with Vista.  I thought I'd give you a heads-up for your info and other inquiries that its performance is mediocre at best.  I've spent a good deal of time adjusting settings but the fact still remains that in zooming in and out of elevation or top viewports, there is a marked hesitation in rendering of anything more than wireframe display.  Also in window selecting in any parallel viewport are artifacts and //noise// created until selection is made.  Lastly, and easily the biggest problem lay in the fact that in any parallel viewport, when drawing with any line tool, a blacked-out box surrounds the activated line while drawing until it is entered.  So it is very difficult to trace anything or use anything in the viewport as a reference to draw the line.  It is definitely faster in that enabling the [[rhino:opengl|OpenGL]] of the graphics driver, the faster acceleration options are provided but this does not justify the poor real-time display.  Again, thanks for the help and hopefully Rhino/ATI/Windows can resolve this.  - David Bier, Imaging Specialist 
 
-When i try to install [[rhino:rhinoceros|RhinoCeros]] 3.0 on vista, its says that it is already running and to close it before resuming setup, although its not even installed and no other instances of [[rhino:rhinoceros|RhinoCeros]] is running?
+<color red>This is primarily due to how Vista treats mixing of display technologies on a single window which was allowed in the past. Applying either of the fixes mentioned in the display section above should help with this situation - Steve Baer</color>
 
-  * Added 2/27/2007 Good morning Pascal.  I had emailed you last week concerning ATI display cards/Rhino/Vista compatibility.  You had directed me to a driver update with ATI that supported [[rhino:opengl|OpenGL]] with Vista.  I thought I'd give you a head's-up for your info and other inquiries that its performance is mediocre at best.  I've spent a good deal of time adjusting settings but the fact still remains that in zooming in and out of elevation or top viewports, there is a marked hesitation in rendering of anything more than wireframe display.  Also in window selecting in any parallel viewport are artifacts and "noise" created until selection is made.  Lastly, and easily the biggest problem lay in the fact that in any parallel viewport, when drawing with any line tool, a blacked-out box surrounds the activated line while drawing until it is entered.  Thereby making it very difficult to trace anything or using anything in the viewport as a reference to draw the line.  It is definitely faster being that in enabling the [[rhino:opengl|OpenGL]] of the graphics driver, the faster acceleration options are provided but this does not justify the poor real-time display.  Again, thanks for the help and hopefully Rhino/ATI/Windows can resolve this.  - David Bier - Imaging specialist <color red>This is primarily due to how Vista treats mixing of display technologies on a single window which was allowed in the past. Applying either of the fixes mentioned in the display section above should help with this situation - Steve Baer</color>
-  * Added 7/26/2007 Hi... My wife is an educator in the field of jewelry design and she uses Rhino. We want to get a new PC that will run Rhino 4. Most new PCs are only available with Vista. If we get a new PC with a graphics card from, say, Nvidia that does come with a hardware [[rhino:opengl|OpenGL]] driver, can we expect to have as good an experience as with Windows XP? Or would you suggest sticking with a box that we still can get with XP? (Incidentally, I develop molecular modeling software and this issue is of course of interest to us as well. Right now, we don't support Vista, but that's because our customers have been slow to adopt it. But it appears that we will have to find our way in this Brave New World as well.) Thanks, -Peter Shenkin.
-  * Added 7/26/2007: Installed V4 SR1 on my Vista notebook, but the toolbar pop-up sub-commands are still inaccessible. The sub-command frame pops up, but it's empty/invisible. Other than that, I haven't yet noticed any serious [[rhino:opengl|OpenGL]] problems, despite my older model nVidia graphics card ([[rhino:slowcursor|GeForce]] Go 6150, a notebook-oriented IGP). I've also had problems trying to install the Rhino plug-in for DirectX9--after installing all the recommended software, I still get a "missing DLL's"/dependencies error. For those considering a new machine with Vista, (I certainly wouldn't "upgrade" an old machine), I'm experiencing software usability problems in various programs.
-Is that on a new machine that come with Vista or on an old machine that used to run something else? -P.Shenkin
+Added 7/26/2007 Hi... My wife is an educator in the field of jewelry design and she uses Rhino. We want to get a new PC that will run Rhino 4. Most new PCs are only available with Vista. If we get a new PC with a graphics card from, say, NVIDIA that does come with a hardware [[rhino:opengl|OpenGL]] driver, can we expect to have as good an experience as with Windows XP? Or do you suggest sticking with a box that we still can get with XP? (Incidentally, I develop molecular modeling software and this issue is of interest to us as well. Right now, we don't support Vista, but that's because our customers have been slow to adopt it. But it appears that we will have to find our way in this Brave New World as well.) Thanks, - Peter Shenkin
 
-My only Vista experience is on a new machine built (supposedly) for Vista. Also, I'm not sure my problems are all OpenGL-related: Graphics performance hasn't really been an issue so far--most problems I've encountered are in the UI elements, like toolbars. As of 06/19/2008, still can't find a mode that shows tooltips on hover. (Just a blank box.) --M.K.Mori
+Added 7/26/2007: Installed V4 SR1 on my Vista notebook, but the toolbar pop-up sub-commands are still inaccessible. The sub-command frame pops up, but it's empty/invisible. Other than that, I haven't yet noticed any serious [[rhino:opengl|OpenGL]] problems, despite my older model NVIDIA graphics card ([[rhino:slowcursor|GeForce]] Go 6150, a notebook-oriented IGP). I've also had problems trying to install the Rhino plug-in for DirectX9. After installing all the recommended software, I still get a "missing DLL's"/dependencies error. For those considering a new machine with Vista, (I certainly wouldn't //upgrade// an old machine), I'm experiencing software usability problems in various programs.
+
+Is that on a new machine that come with Vista or on an old machine that used to run something else? - P. Shenkin
+
+My only Vista experience is on a new machine built (supposedly) for Vista. Also, I'm not sure my problems are all OpenGL-related: Graphics performance hasn't really been an issue so far. Most problems I've encountered are in the UI elements, like toolbars. As of 06/19/2008, still can't find a mode that shows tooltips on hover. (Just a blank box.) - M.K. Mori
 
 
