@@ -1,31 +1,30 @@
 ======Zoo - Diagnostics Utility for a Windows Rhino Client======
 > **Product:** //[[zoo:home|Zoo]]//
-> **Summary:** //Discusses the Zoo Diagnostics utility for Rhino 5 for Windows.//
+> **Summary:** //Discusses the Zoo Diagnostics utility for Rhino 5 for Windows//
 
 [[zoo:zoo5diagnostics|{{:zoo:zoodiagnostics.png|Zoo Diagnostics}}]]
 
-=====Overview=====
 The Zoo Diagnostics utility runs on a **Rhino 5 for Windows** workstation. The utility provides these useful tools:
-  - Provides several useful network diagnostics to assist you in troubleshooting connectivity issues between Rhino workstations and [[zoo:determinezoohost|Zoo servers]].
-  - Lets you view and modify the name of the Zoo server used by Rhino workstations. The Zoo server name is stored in the Windows Registry.
+  - Provides several useful network diagnostics to troubleshoot connectivity issues between Rhino workstations and [[zoo:determinezoohost|Zoo servers]].
+  - Lets you view and change the name of the Zoo server used by Rhino workstations. The Zoo server name is stored in the Windows Registry.
 
 [[zoo:zoo5diagnostics|{{:zoo:zoo_diagnostics.png|Zoo Diagnostics}}]]
 
 =====Diagnostics=====
 The Zoo Diagnostics utility provides these useful network tests:
 
-1. **[[http://support.microsoft.com/kb/814155|Ping]]:** The Ping (PING) diagnostics utility is the primary TCP/IP tool used to troubleshoot connectivity, reachability, and name resolution. Ping verifies IP-level connectivity to another TCP/IP computer by sending Internet Control Message Protocol (ICMP) Echo Request messages. The receipt of corresponding Echo Reply messages are displayed, along with round-trip times.
+1. **[[http://support.microsoft.com/kb/814155|Ping]]:** The ping diagnostics utility is the primary TCP/IP tool used to troubleshoot connectivity, reachability, and name resolution. Ping verifies IP-level connectivity to another TCP/IP computer by sending Internet Control Message Protocol (ICMP) Echo Request messages. Receipts of corresponding Echo Reply messages are displayed, along with round-trip times.
 
->**Note:** By default ICMP echo requests used for ping command are blocked in Windows firewall default settings. To enable ICMP echo on Windows, go to Control Panel -> Windows Firewall -> Advanced settings -> Inbound Rules and enable File and Printer Sharing (Echo Request - ICMPv4-In) in the security profile that is active.
+>**Note:** The Windows firewall default settings block the ICMP echo requests used for ping command. To enable ICMP echo on Windows, go to Control Panel -> Windows Firewall -> Advanced settings -> Inbound Rules and enable File and Printer Sharing (Echo Request - ICMPv4-In) in the active security profile.
 
 
-2. **[[http://support.microsoft.com/kb/200525|NSlookup]]:** The DNS Lookup diagnostic utility displays information that you can use to diagnose Domain Name System (DNS) infrastructure.
+2. **[[http://support.microsoft.com/kb/200525|Nslookup]]:** The DNS Lookup diagnostic utility displays information that you can use to diagnose Domain Name System (DNS) infrastructure.
 
 3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]:** The Trace Route (TRACERT) diagnostic utility determines the route taken to a destination by sending Internet Control Message Protocol (ICMP) echo packets with varying IP Time-To-Live (TTL) values to the destination. Each router along the path is required to decrement the TTL on a packet by at least 1 before forwarding it, so the TTL is effectively a hop count. When the TTL on a packet reaches 0, the router should send an ICMP Time Exceeded message back to the source computer.
 
 4. **Zoo Port Check:** The Zoo Port Check test verifies that a Zoo 5 service is listening on TCP Port 80 on a server or workstation.
 
-//If this test fails, then then make sure the Zoo server service is running. You can do this by using either ZooAdmin.exe or the Services applet in Control Panel. Also, make sure __[[zoo:window7firewall|TCP Port 80 is open on any firewall software]],__ for both incoming and outgoing traffic, running on the Zoo system.//
+//If this test fails, then make sure the Zoo server service is running. You can do this by using either ZooAdmin.exe or the Services applet in Control Panel. Also, make sure __[[zoo:window7firewall|TCP Port 80 is open on any firewall software]],__ for both incoming and outgoing traffic, running on the Zoo system.//
 
 5. **Zoo Connectivity:** The Zoo Connectivity test verifies that the Zoo 5 service is running on a server or workstation. 
 
@@ -34,4 +33,4 @@ The Zoo Diagnostics utility provides these useful network tests:
 =====Download=====
 * Requires the [[http://www.microsoft.com/en-us/download/details.aspx?id=17851|Microsoft .NET Framework 4]].
 
-{{:zoo:zoodiagnostics.zip|Download Zoo Diagnostics}}
+{{:zoo:zoodiagnostics.zip|Download Zoo Diagnostics.}}
