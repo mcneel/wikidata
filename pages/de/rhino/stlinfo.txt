@@ -1,0 +1,99 @@
+====== Informationen zur Erstellung und Verwendung von STL-Dateien für Rapid-Prototyping-Anwendungen ======
+
+  * [[http://wiki.daap.uc.edu/groups/infocenter/wiki/354c5/|STL-Dateivorbereitung für den 3D-Druck]] - Bei Verwendung eines Flächenmodellierungsprogramms können nur Flächen in 3D gedruckt werden, die ein geschlossenes Objekt bilden. Dieses Tutorial hilft Ihnen bei der Vorbereitung Ihrer STL-Dateien für den 3D-Druck, indem geschlossene Flächenmodelle in Volumenkörper umgewandelt werden.
+  * [[http://download.mcneel.com/download.asp?id=STLRepair|Repair STL files]] - Tutorial von McNeel zur Reparatur von STL-Dateien.
+
+
+
+
+
+=====Was ist eine STL-Datei?=====
+
+STL oder Standard Template Library, ist ein standardisiertes Computer-Austauschformat, das ein 3D-Modell enthält.  Flächen eines Objekts werden in einer solchen Datei in Form eines oder mehrerer Polygonnetze dargestellt.  Die Polygonnetze einer STL-Datei bestehen vollständig aus Dreiecksfacetten.
+
+Der Name STL stammt von der Dateierweiterung (.stl) her, da diese Dateien ursprünglich für ein Rapid-Prototyping-Verfahren namens Stereolithographie gedacht waren.  Das Dateiformat hat sich zu einem weltweit gültigen Standard für den Austausch von 3D-Polygonnetzobjekten zwischen Programmen entwickelt und STL-Dateien werden nun für praktisch alle Rapid-Prototyping-Prozesse sowie einige maschinelle 3D-Bearbeitungsmethoden verwendet.  Nahezu alle 3D-Programme können ins STL-Format exportieren und die meisten können dieses auch importieren.
+
+=====Polygonnetzmodelle und Genauigkeit=====
+
+Polygonnetzrepräsentationen von Objekten sind facettiert und nicht vollständig glatt, bestehen aber aus so vielen kleinen Facetten, dass damit bei entsprechender Feinheit zu einem gewissen Grad glatte Flächen erzeugt werden können.  Dies ist ähnlich wie bei einem scheinbar nahtlos glatten 2D-Bild, das tatsächlich aber aus zahllosen kleinen Pixeln besteht.
+
+Wenn die einzelnen Facetten eines Polygonnetzmodells zu grob sind oder der Winkel zwischen ihnen zu groß ist, erscheint das Modell rau und unpräzise.  Die Entsprechung hierzu in der 2D-Welt ist ein Bild mit einer zu geringen Auflösung, das ebenfalls körnig erscheint. 
+
+Wenn die individuellen Facetten eines Polygonnetzmodells zu fein sind, ist die erhaltene Fläche in der Regel sehr gut, wobei das Modell schwerfällig und die Datei groß wird. Dies kann bei der Empfänger-Software sowie bei der visuellen Darstellung auf dem Bildschirm zu Problemen führen.  Das Ziel ist die Erstellung eines STL-Modells mit ausreichender Genauigkeit und Auflösung für den Zielprozess, ohne dabei jedoch zu weit zu gehen und ein zu feines Modell zu erhalten. Die adäquate Auflösung hängt von dem konkreten Prozess ab, für den die STL-Datei erstellt wird.
+
+Polygonnetzgenauigkeit kann man sich als die größte erlaubte Differenz zwischen der facettierten Polygonnetzdarstellung der Flächen und den glatten Flächen selbst vorstellen.  Bei Objekten, die aus planen Flächen bestehen, ist dies kein Problem. Die Facetten entsprechen hier exakt den Flächen.  Bei gekrümmten Flächen liegen die Polygonnetzdreiecke nicht notwendigerweise vollständig auf der Fläche. Daher wird der Annäherungsgrad wichtig.
+
+Der Prototypisierungsprozess zur Erzeugung des Endobjekts bestimmt dabei das optimale Niveau an Präzision und Toleranz für das Modell.  Ungenauere Prozesse wie FDM können Modelle mit geringerer Präzision verwenden als maschinelle Bearbeitungsprozesse, die teilweise sehr detaillierte Verfahren sind.  Als Faustregel kann gelten, dass die Präzision des Modells ein Zehntel der maximalen Präzision des Prozesses betragen sollte.  Im Fall von FDM, wobei eine Detailgenauigkeit von etwa 0,1 mm erreicht werden kann, ist eine STL-Datei mit einer Toleranz von 0,01 ein guter Wert.  Für das Zerspanen hingegen, wo durchaus Detailgenauigkeiten von 0,01 mm und feiner erreicht werden können, ist eine STL-Präzision von 0,001 nötig.
+
+Ein STL-Polygonnetz ist das einfachste Polygonnetzformat und besteht komplett aus Dreiecksfacetten.  Jede Facette ist notwendigerweise plan.  Rapid-Prototyping-Prozesse benötigen vollständig geschlossene Objekte. Das Polygonnetz umschließt ein Volumen vollständig und ohne Löcher, Lücken oder Überschneidungen.  Dies wird auch als //wasserdichter// Volumenkörper bezeichnet.  Einige Prozesse verlangen, dass in der Datei nur ein Objekt (Volumenkörper) vorhanden ist.
+
+In der Praxis ist ein wenig Toleranz erlaubt.  Kleinere Fehler oder Lücken können von der Herstellungssoftware toleriert oder schnell repariert werden.  Jeder Prozess und jede Software arbeitet anders. Einige sind fehlertoleranter als andere.  Es ist daher im Allgemeinen ratsam, ein hundertprozentig geschlossenes Modell anzustreben. Abhängig vom konkreten Herstellungsprozess kann eine Reparatur sehr zeitaufwändig (sprich: teuer) sein.
+
+=====Erzeugung von STL-Dateien aus Rhino-Modellen=====
+
+Rhino-Modelle bestehen aus mathematisch definierten, glatten Kurven und Flächen, den sogenannten [[de:rhino:nurbs|NURBS]] (Non-Uniform Rational Basis Splines).  Diese Flächenmodelle müssen in eine Annäherung aus Dreieckspolygonnetzen übersetzt werden, um in einer STL-Datei exportiert werden zu können. Die Präzision dieser Übersetzung wird von den Rhino-Einstellungen für benutzerdefinierte Polygonnetze bestimmt.  Der wichtigste Wert ist der maximale Abstand einer Kante zu einer Fläche, wodurch bestimmt wird, wie nahe an der Fläche das Polygonnetz gezeichnet wird (und wie glatt und präzise sie ist).
+
+Für das Rapid Prototyping ist es sehr wichtig, dass es sich beim Rhino-Flächenmodell um ein geschlossenes Volumen (geschlossene gültige Fläche oder Flächenverband) handelt.  Aber selbst dann kann es bei der Übersetzung des Objekts in ein Polygonnetz unter Umständen zu kleinen Öffnungen oder Lücken kommen.  Diese sind in der Regel unbedeutend und können oftmals einfach direkt in Rhino repariert werden.   Es ist daher ratsam, die STL-Datei noch einmal in Rhino zu importieren und auf offene Kanten zu untersuchen.  Wenn keine gefunden werden, sind Sie an dieser Stelle fertig.
+
+Wenn ein paar offene Kanten vorhanden sind, können Sie diese mit den Polygonnetzwerkzeugen in der Regel einfach reparieren.  Verwenden Sie dazu Befehle wie PolygonnetzkantenAnpassen, PolygonnetzscheitelpunkteAusrichten oder PolygonnetzNormalenVereinheitlichen.  Bei Bedarf können auch einzelne Polygonnetzseiten erstellt oder gelöscht werden.  Nach der Reparatur können Sie das Polygonnetz erneut als STL-Datei exportieren.    Die benutzerdefinierten Einstellungen für Polygonnetz- und STL-Export sind dieselben.  Weitere Informationen finden Sie auf der Übersichtsseite für [[http://wiki.mcneel.com/de/rhino/meshfaq|Polygonnetzeinstellungen]].
+
+=====Einstellungen für den Export des Polygonnetzes=====
+
+Es wird empfohlen, benutzerdefinierte Einstellungen für die Erzeugung eines Polygonnetzmodells oder den STL-Export zu verwenden.  Jeder konkrete Prozess benötigt eigene Einstellungen. Die Einstellungen unten werden von Anwendern für verschiedene RP-Prozesse verwendet:
+
+ 
+
+Stereolithographie
+
+SLS
+
+FDM (Stratasys)
+
+Polyjet-Drucker
+
+Z-Corp-Maschine
+
+[[rhino:solidscape|Solidscape]]-Drucker
+
+Invision
+
+Etc.
+
+
+Für FDM konnten mit den folgenden Einstellungen gute Ergebnisse erzielt werden:
+
+Max. Winkel: 30
+
+Max. Abstand Kante zu Fläche: 0,01
+
+Min. Quadrate des anfänglichen Gitters: 16
+
+Alle anderen: 0
+
+**Verfeinern** aktiviert
+
+Alle anderen deaktiviert
+
+
+//_////_////_////_////_////_////_////_////_////_////_////_////_////_////_////_//__
+
+
+Für Schmuck (Ringe) zum Druck mit einem [[rhino:solidscape|Solidscape]]-Drucker können die folgenden Einstellungen verwendet werden: Die Einheit ist Millimeter. (Verwenden Sie diese Einstellungen nicht für große Modelle):
+
+Min. Kantenlänge: 0,02
+
+Max. Kantenlänge: 0,3 bis 0,6 (0,3 dauert länger, aber es lohnt sich)
+
+Max. Abstand Kante zu Fläche: 0,001 bis 0,005 (0,001 dauert länger, aber es lohnt sich ebenfalls)
+
+Alle weiteren Einstellungen: 0
+
+**Verfeinern** aktiviert
+
+Alle anderen deaktiviert
+
+
+
+
+
+//_////_////_////_////_////_////_////_////_////_////_////_////_////_////_////_//_
