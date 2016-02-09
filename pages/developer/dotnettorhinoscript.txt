@@ -1,15 +1,15 @@
-====== Passing data from a .NET plug-in to RhinoScript ======
+====== Passing Data from a .NET Plug-in to RhinoScript ======
 > **Version:** //Rhino 4.0//
 
-See Also: [[developer:sdksamples:extendrhinoscript|How to extend RhinoScript with a .NET plug-in]]
+See also [[developer:sdksamples:extendrhinoscript|How to extend RhinoScript with a .NET plug-in.]]
 
-=====Question=====
-I am trying to use the plug-in object's **GetPlugInObjectInterface** facility to return information from my .NET plug-in to be used in [[developer:rhinoscript|RhinoScript]]. I can successfully define a class with the **ComVisible** attribute and return an object of that classes type to [[developer:rhinoscript|RhinoScript]] to be used in a sample script. However, I can not seem to find a way to return a collection or array of objects of that type and use it in the script. Any help here would be appreciated.
+=====Problem=====
+I am trying to use the plug-in object's **GetPlugInObjectInterface** facility to return information from my .NET plug-in to be used in [[developer:rhinoscript|RhinoScript]]. I can successfully define a class with the **ComVisible** attribute and return an object of that class type to RhinoScript used in a sample script. Yet, I can not find a way to return a collection or array of objects of that type and use it in the script. 
 
-=====Answer=====
-A quick review: Rhino 4.0 plug-ins can extend the [[developer:rhinoscript|RhinoScript]] with new objects and methods. This is done by declaring .NET classes with the **ComVisible(true)** parameter, and by overriding the plug-in object's **GetPlugInObjectInterface** to return these classes when requested by [[developer:rhinoscript|RhinoScript]].
+=====Solution=====
+A quick review: Rhino 4.0 plug-ins can extend the [[developer:rhinoscript|RhinoScript]] with new objects and methods. Do this by declaring .NET classes with the **ComVisible(true)** parameter, and by overriding the plug-in object's **GetPlugInObjectInterface** to return these classes when requested by RhinoScript.
 
-The following sample code will demonstrate how to return different data types from .NET to RhinoScript, including objects and arrays of objects. The code samples are written in C#, but could very easily be written in VB.NET.
+The following sample code demonstrates how to return different data types from .NET to RhinoScript, including objects and arrays of objects. The code samples are written in C#, but could easily be written in VB.NET.
 
 Also, the code samples assume the following COM visible class has been declared:
 <code c#>
@@ -27,7 +27,7 @@ public override object GetPlugInObjectInterface(ref System.Guid iid)
   return new TestRhinoScriptObject();
 }
 </code>
-====Returning Simple Data Types====
+====Returning simple data types====
 
 Simple data types, such as integers, doubles, and strings are easily marshalled between .NET and [[developer:rhinoscript|RhinoScript]] because their values can be easily converted to the **Object** .NET data type.
 
@@ -50,14 +50,13 @@ public string GetString()
 }
 </code>
 
-====Returning Arrays====
+====Returning arrays====
 In RhinoScript, 3-D points are represented as  zero-based, one-dimensional arrays that contain three numbers. And, arrays of 3-D points are zero-based, one-dimensional arrays of 3-D points.
 
-Array are a little more difficult to deal with, but not impossible. The .NET array classes have a **ToArray** member that will copy the elements of the array to a new **Object** array. A .NET **Object** array will marshall to COM as a **SafeArray**.
+Arrays are a little more difficult to deal with, but not impossible. The .NET array classes have a **ToArray** member that will copy the elements of the array to a new **Object** array. A .NET **Object** array will marshall to COM as a **SafeArray**.
 
 To return a 3-D point or an array of 3-D points from our TestRhinoScriptObject object, we could add the following public members:
 
-For example:
 <code c#>
      public object GetPoint()
      {
@@ -101,7 +100,7 @@ For example:
        return pts.ToArray();
      }
 </code>
-====Returning Arrays of Objects====
+====Returning arrays of objects====
 
 Now, lets define another COM visible class in our .NET plug-in:
 <code c#>
@@ -143,7 +142,7 @@ public object GetTestSimpleClasses()
   return objs.ToArray();
 }
 </code>
-====Using .NET Objects from RhinoScript====
+====Using .NET objects from RhinoScript====
 The following sample [[developer:rhinoscript|RhinoScript]] code demonstrates how to get the above objects and print their return values to Rhino's command history window.
 
 
