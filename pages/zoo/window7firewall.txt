@@ -1,16 +1,15 @@
 ======Open TCP Port 80 in Windows Firewall======
 > **Product:** //[[zoo:home|Zoo]]//
-> **Summary:** //Demonstrates how to open TCP Port 80 in the Windows firewall.//
+> **Summary:** //Demonstrates how to open TCP Port 80 in the Windows firewall//
 
-===== Overview =====
 Zoo communicates with Rhino clients via TCP Port 80 (HTTP).
 
-After installing the Zoo, you will need to ensure that TCP Port 80 is open, for //both incoming and outgoing// communications, in the firewall software running on the Zoo server system.
+After installing the Zoo, you need to ensure that TCP Port 80 is open, for //both incoming and outgoing// communications, in the firewall software running on the Zoo server system.
 
-Note, TCP Port 80 is open for outgoing communications, by default, in most firewall software. Thus, you should not have to open any ports in the firewall software running on Rhino workstations. 
+**Note:** TCP Port 80 is open for outgoing communications by default in most firewall software. So you should not have to open any ports in the firewall software running on Rhino workstations. 
 
 ===== Steps=====
-The following instructions are for opening TCP Port 80 in the Window Firewall - the firewall software included with Windows. If you are using an alternate firewall, please consult their documentation.
+The following instructions are for opening TCP Port 80 in the Window Firewall -- the firewall software included with Windows. If you are using an alternate firewall, please consult their documentation.
 
 > <color red>**Important: It is not adequate to open the port's inbound and outbound traffic for just the program or the service. You must create __Port__ rules as directed below in Step 6, or it will __not__ work**. </color>
 1. From the Windows Start menu, open **Control Panel**.
@@ -31,11 +30,11 @@ The following instructions are for opening TCP Port 80 in the Window Firewall - 
 
 {{:zoo:open-port-windows-7-firewall-4.png?640}}
 
-6. Select **Port** in the New Inbound Rule Wizard and then click **Next**. //Note, do not create a **Program** rule - you must create a **Port** rule.//
+6. Select **Port** in the New Inbound Rule Wizard and then click **Next**. //Note, do not create a **Program** rule -- you must create a **Port** rule.//
 
 {{:zoo:open-port-windows-7-firewall-5.png?640}}
 
-7. Select which protocol this rule will apply to **TCP**, select **Specific** local ports, type port number **80**, and then click **Next**.
+7. Select which protocol this rule will apply to **TCP**, select **Specific local ports**, type port number **80**, and then click **Next**.
 
 {{:zoo:open-port-windows-7-firewall-6.png?640}}
 
