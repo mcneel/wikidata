@@ -1,49 +1,47 @@
-[[accurender:nxt:documentation|Online rendering home]]
-====== Working with HDRIs ======
+====== Working with HDRis ======
 
-High dynamic range images (HDRIs) are 2D image files which contain a much broader range of values than what is normally found in a standard image file, such as a .jpg or .png.  When these images are produced using a spherical projection, they can be used to light models.  If the values contained in the HDR are accurate, then the lighting will be accurate.  (See below for more information on units.)
+High dynamic range images (HDRis) are 2-D image files which contain a much broader range of values than normally found in a standard image file such as a .jpg or .png.  When these images are produced using a spherical projection, they can be used to light models.  If the values contained in the HDR are accurate, then the lighting will be accurate.  (See below for more information on units.)
 
-HDRIs can be used in nXt in many different ways.  Two common uses for HDRI lighting are architectural (lighting a building exterior) and studio (lighting a product using HDRI for ambient):
+HDRis can be used in nXt in many different ways.  Two common uses for HDRi lighting are architectural (lighting a building exterior) and studio (lighting a product using HDRi for ambient):
 
-=== Using an HDRI to Light an Architectural Exterior ===
+=== Using an HDRi to light an architectural exterior ===
 
-  - On the Lighting Tab, select the Exterior Preset.
-  - Check Show Advanced Tab.
+  - On the Lighting Tab, select the **Exterior Preset**.
+  - Check **Show Advanced Tab**.
   - On the Advanced Tab, turn the Sun Off.
-  - On the Advanced Tab, change the Sky from Auto to HDRI
-  - At this point you can choose a specific HDRI using the Sky Tab.  
+  - On the Advanced Tab, change the Sky from Auto to HDRi
+  - At this point you can choose a specific HDRi using the Sky Tab.  
 
-This procedure uses the HDRI as a visible background to your rendering.  This may require a high-resolution HDRI to avoid pixellation artifacts.
+This procedure uses the HDRi as a visible background to your rendering.  This may require a high-resolution HDRi to avoid pixellation artifacts.
 
-=== Using an HDRI to Simulate Studio Lighting ===
+=== Using an HDRi to simulate studio lighting ===
 
-  - On the Lighting Tab, select the Studio Preset.
-  - Choose a specific HDRI using the Sky Tab.
+  - On the Lighting Tab, select the **Studio Preset**.
+  - Choose a specific HDRi using the Sky Tab.
 
-This option uses a black background instead of visualizing the HDRI directly. It also reduces the intensity of the HDRI by a factor of 20X to simulate indoor lighting conditions. 
+This option uses a black background instead of visualizing the HDRi directly. It also reduces the intensity of the HDRi by a factor of 20X to simulate indoor lighting conditions. 
 =====  ======
 
-**Additional Notes**
+**Additional notes**
 
 
-  * nXt assumes that HDRIs contain radiance values expressed in units of watts.  All of the HDRIs available via our website are built this way unless otherwise noted.  However, this is often not the case with HDRIs from other sources.  The units in many HDRIs are not calibrated to real-world units of any sort.  The intensity of these HDRIs may need to be adjusted in order to achieve proper illumination levels. See the section on calibration below.
-  * There are many different ways to use HDRIs in nXt.  In addition to the Sky, a different HDRI can be used for each of the three background channels:  Visible, Reflected, and Refracted Background.  Use the Backgrounds Tab, Channel control to individually control each channel.
+  * nXt assumes that HDRis contain radiance values expressed in units of watts.  All the HDRis available via our website are built this way unless otherwise noted.  This is often not the case with HDRis from other sources.  The units in many HDRis are not calibrated to real-world units of any sort.  The intensity of these HDRis may need to be adjusted to achieve proper illumination levels. See the section on calibration below.
+  * There are many different ways to use HDRis in nXt.  Besides the Sky, a different HDRi can be used for each of the three background channels:  Visible, Reflected, and Refracted Background.  Use the Backgrounds Tab, Channel control to individually control each channel.
 
 
-=== Calibrating an HDRI sky ===
+=== Calibrating an HDRi sky ===
 
-  - Create a new model in AutoCAD and load nXt
-  - Select the Exterior lighting preset
-  - On the Advanced Tab, change the Sky to HDRI
-  - On the Sky Tab select your HDRI
-  - Start WalkAbout
-  - Change the projection to Panorama
-  - Press render and stop the rendering after one or two passes.  What you now have is a rendering of your entire HDRI.
+  - Create a new model in AutoCAD and load nXt.
+  - Select the Exterior lighting preset.
+  - On the Advanced Tab, change the Sky to HDRi.
+  - On the Sky Tab select your HDRi.
+  - Start WalkAbout.
+  - Change the projection to Panorama.
+  - Press **render** and stop the rendering after one or two passes.  What you now have is a rendering of your entire HDRi.
   - Move the cursor over the image while observing the Value of each pixel on the status line. The units are cd/m^2. You can zoom in on the image if required to examine smaller sections in more detail. Here are some guidelines to help you determine if the map needs scaling:
   * The average value for a clear sky is approximately 8000 cd/m^2
   * The average value for an overcast sky is approximately 2000 cd/m^2
   * The area around the sun can be quite bright.  Values of 100000 cd/m^2 or more are not unreasonable.  The solar disk itself can be much brighter than this.
-  * For night scenes, light sources themselves are bright.  Values of 3000 to 5000 cd/m^2 are not uncommon for streetlamps.  The luminance of the moon is 2500 cd/m^2.  Other objects should be quite dark.  Value < 1 cd/m^2 are common for objects lit only by environmental light.
+  * For night scenes, light sources themselves are bright.  Values of 3000 to 5000 cd/m^2 are not uncommon for streetlamps.  The luminance of the moon is 2500 cd/m^2.  Other objects should be quite dark.  Values < 1 cd/m^2 are common for objects lit only by environmental light.
 
-If you decide that your HDRI would benefit from scaling, use the Intensity setting on the Sky tab to enter your scale factor.  Repeat the rendering above to validate your new setting.  Alternatively, you can use [[accurender:nxt:documentation:beyond:multi-channel|Lighting Channels]] to adjust the lighting more interactively.
-
+If you decide that your HDRi would benefit from scaling, use the Intensity setting on the Sky tab to enter your scale factor.  Repeat the rendering above to validate your new setting.  Or, you can use [[accurender:nxt:documentation:beyond:multi-channel|Lighting Channels]] to adjust the lighting more interactively.
