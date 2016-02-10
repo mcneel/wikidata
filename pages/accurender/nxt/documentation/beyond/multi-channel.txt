@@ -1,19 +1,17 @@
-[[accurender:nxt:documentation|Online help home]]
-
 ====== Multi-Channel Rendering ======
 
-This powerful feature allows you to adjust many aspects of the lighting in your rendered image in real-time, after the rendering has been produced.  This is accomplished by allowing you to create up to 8 lighting "channels" in the image.  Each light source in the drawing, including the sun and sky, can be assigned to a channel.  Once this image is rendered and saved, each channel can be individually scaled in the [[accurender:nxt:documentation:beyond:imageeditor|nXt Image Editor]].  For example, using this capability, you can produce day and night interiors with a single rendering.  The following five steps are necessary to produce and manipulate a multi-channel image:
+This powerful feature lets you adjust many aspects of the lighting in your rendered image in real-time, after the rendering is produced.  To do this you create up to eight lighting //channels// in the image.  Each light source in the drawing, including the sun and sky, can be assigned to a channel.  Once you save and render this image, each channel can be individually scaled in the [[accurender:nxt:documentation:beyond:imageeditor|nXt Image Editor]].  For example, using this capability, you can produce day and night interiors with a single rendering.  The following five steps are necessary to produce and manipulate a multi-channel image:
 
-  - You must tell nXt how many channels you want.  Go to Lighting->Advanced->Channels and set the number desired from 1 to 8.  Each additional channel you add requires an additional 12 bytes per pixel internally.  This is a lot of memory, particularly for high resolution renderings.  It may not be possible to complete your rendering on a 32 bit system.
-  - You must turn on all of the participating lights.  Lights which are off will not contribute to the image and will not be scalable.  Because you are rendering with more lights, it may take a little longer.  For example, to create an interior image which contains both natural and artificial lights:
-    * Select the Interior Daylight preset.
-    * Select Lighting->Advanced->Lights->On
+  - You must tell nXt how many channels you want.  Go to Lighting->Advanced->Channels and set the number desired from 1 to 8.  Each extra channel you add requires an additional 12 bytes per pixel internally.  This is a lot of memory, particularly for high resolution renderings.  It may not be possible to complete your rendering on a 32-bit system.
+  - You must turn on all the participating lights.  Lights which are off will not contribute to the image and will not be scalable.  Because you are rendering with more lights, it may take a little longer.  For example, to create an interior image which contains both natural and artificial lights:
+    * Select the **Interior Daylight** preset.
+    * Select **Lighting->Advanced->Lights->On**
   - You must tell each light source which channel it belongs to.  By default, Sun and Sky are set to channel 0, artificial lights to channel 1.  There are controls for each light source, including sun and sky.  Valid channels are 0-7.
   - You must save the rendering to an .nXtImage format.  No other formats will preserve this channel information. These files can be quite large, depending on resolution and number of channels.
-  - Once the image is loaded into the [[accurender:nxt:documentation:beyond:imageeditor|nXt Image Editor]] you can manipulate the channels using the controls on the Channel tab of the editor. 
+  - Once the image is loaded into the nXt Image Editor you can manipulate the channels using the controls on the Channel tab of the editor. 
 
-=== Additional Notes ===
+=== Additional notes ===
 
-  * As you adjust the channels, the tone-operator will compensate. All of the tone mapping controls and rules still apply.  For example, if you're trying to do a night and day exterior using the same rendering, you will almost certainly need to adjust the tone-op brightness down for the night time scene.
+  * As you adjust the channels, the tone-operator will compensate. All the tone mapping controls and rules still apply.  For example, if you're doing a night and day exterior using the same rendering, you need to adjust the tone-op brightness down for the night time scene.
 
  
