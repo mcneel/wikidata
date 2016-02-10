@@ -1,0 +1,120 @@
+====== Dokumenteigenschaften Anzeigepolygonnetz ======
+
+===Polygonnetz===
+
+Verwaltet die Polygonnetzeinstellungen für das aktuelle Modell.
+
+Wenn Sie eine NURBS-Fläche schattieren oder rendern, muss Rhino die Fläche in ein Polygonnetz umwandeln, damit die schattierte Fläche auf dem Bildschirm angezeigt werden kann. Die detaillierten Rendernetzoptionen steuern die Art, wie die Flächen in Polygonnetze umgewandelt werden.
+
+===Qualitätseinstellungen des Rendernetzes===
+
+In den Standardeinstellungen haben Sie folgende Optionen:
+
+**Gezackt & schneller**
+
+  * Verwendet ein Polygonnetz mit niedrigerer Dichte, um Objekte schnell mit einer Qualitätseinbuße zu schattieren.
+
+**Glatt & langsamer**
+
+  * Verwendet ein Polygonnetz mit höherer Dichte, um Objekte genauer mit einer Schnelligkeitseinbuße zu schattieren.
+
+**Vorschau**
+
+  * Das Netz wird als Vorschau in den Ansichtsfenstern gezeichnet und das Dialogfenster bleibt für weitere Anpassungen auf dem Bildschirm. 
+
+**Benutzerdefiniert**
+
+  * Zeigt einfache Polygonnetzsteuerungen an.
+
+===Dichte===
+  * Der Schieberegler kontrolliert ungefähr die Dichte und Anzahl von Polygonen im Netz, wobei Sie weniger Polygone erhalten (gröberes Netz), je weiter Sie den Schieber nach rechts ziehen, während die Anzahl auf der linken Seite zunimmt (feineres Netz).
+
+===Genaue Einstellungen===
+Durch Klick auf die Schaltfläche **Genaue Einstellungen** werden weitere Einstellungen zur Feineinstellung des Polygonnetzes angezeigt.  Im folgenden werden diese Feineinstellungen beschrieben.
+
+
+> //**Funktionsweise eines Polygonnetzes:**  Das Polygonnetz wird in drei Schritten anhand detaillierter Kriterien erzeugt: anfängliches Quadrat (berechnet, um ungefähr die Kriterien zu erfüllen), Verfeinerung (Unterdivision, um Kriterien zu erfüllen) und Anpassung der Trimmbegrenzungen. Flächen werden in zwei Phasen vermascht. Zuerst wird ein normales Polygonnetz erzeugt, dann wird dieses Netz verfeinert, indem es in kleinere Teile geteilt wird. Die Einstellungen unter Maximales Seitenverhältnis, Maximale Kantenlänge und Minimale Quadrate des anfänglichen Gitters steuern die Erzeugung des anfänglichen Polygonnetzes. Die Einstellungen unter Dichte (nur Rhino 4), Maximaler Winkel, Maximale Kantenlänge, Minimale Kantenlänge und Maximaler Abstand Kante zu Fläche bestimmen, welche anfänglichen Polygone in kleinere Quadrate unterteilt werden.//
+
+==Maximaler Winkel==
+
+Definiert den maximal erlaubten Winkel zwischen den Normalen der Eingabefläche an angrenzenden Polygonnetzscheitelpunkten. Wenn der Winkel zwischen den Flächennormalen größer als diese Einstellung ist, wird das Polygonnetz weiter verfeinert (es werden mehr Scheitelpunkte eingefügt) und dichter gemacht. Zwei Scheitelpunkte liegen angrenzend zueinander, wenn es sich um gegenüber liegende Endpunkte einer einer einzelnen Seitenkante handelt.
+
+Die Einstellung des max. Winkels beeinflusst die Polygonnetzerzeugung von Objekten der gleichen Form auf die gleiche Weise, egal wie groß die Objekte sind. Neigt dazu, die Polygonnetze in Bereichen mit hoher Krümmung dichter und in flacheren Bereichen weniger dicht zu machen
+
+> **Experiment:** //Erstellen Sie ein Modell mit einer Kugel, einem Ring und einem Zylinder. Skalieren Sie diese Objekte, um eine kleine, mittelgroße und große Version daraus zu machen. Variieren Sie nun den maximalen Winkel und beobachten Sie die Resultate.//
+
+==Maximales Seitenverhältnis==
+
+Flächen werden anfänglich mit einem regelmäßigen Polygonnetz aus viereckigen Polygonen tesselliert, danach wird dieses Polygonnetz verfeinert. Das anfängliche Polygonnetz aus Vierecken wird erzeugt, so dass im Durchschnitt das maximale Seitenverhältnis der Quadrate kleiner oder gleich der Option Maximales Seitenverhältnis ist.
+
+Kleinere Werte bedeuten eine langsamere Polygonnetzerzeugung und eine höhere Polygonzahl mit mehr gleichseitigen und schön geformten Polygonen. Das ist ungefähr das maximale Seitenverhältnis der Quadrate in den minimalen Quadraten des anfänglichen Gitters. Beim Einstellen des maximalen Seitenverhältnisses auf Null wird die Option ausgeschaltet. Null bedeutet keine Limite.
+
+Der Standardwert für diese Option ist Null und das empfohlene Intervall, wenn nicht Null, geht von 1 bis 100.
+Diese Einstellung ist skalaunabhängig.
+
+Bei der Schattierung von langen, dünnen Objekten verwenden Sie 0.0 für diesen Wert. Das erlaubt unendliche Verhältnisse. Steuert die Glattheit des Polygonnetzes mit anderen Parametern.
+
+==Minimale Kantenlänge==
+
+Wenn eine Kante kürzer als die Minimale Kantenlänge ist, geschieht keine weitere Unterteilung der Polygonnetzseiten. Es handelt sich auch um die minimale Kantenlänge der Quadrate in den minimalen Quadraten des anfänglichen Gitters.
+
+Der Standardwert für diese Option ist 0.0001 Einheiten und das verwendbare Intervall hängt von der Größe des Modells ab. Größere Werte ergeben eine schnellere Polygonnetzerzeugung, ungenauere Polygonnetze und eine niedrigere Polygonzahl. Bei Einstellung dieses Werts auf Null wird die Option der minimalen Kantenlänge ausgeschaltet.
+
+Diese Option ist skalaabhängig. Der Wert befindet sich immer im aktuellen Einheitssystem.
+
+
+==Maximale Kantenlänge==
+
+Polygone werden weiter unterteilt, bis alle Polygonkanten kleiner als dieser Wert sind. Es handelt sich auch um die maximale Kantenlänge der Quadrate in den minimalen Quadraten des anfänglichen Gitters.
+
+Kleinere Werte ergeben eine langsamere Polygonnetzerzeugung und eine höhere Polygonzahl mit mehr gleichgroßen Polygonen. Bei Einstellung dieses Werts auf Null wird die Option ausgeschaltet.
+
+Der Standardwert ist Null und das verwendbare Intervall hängt von der Größe des Modells ab. Diese Option ist skalaabhängig.
+
+==Maximaler Abstand Kante zu Fläche==
+
+Polygone werden verfeinert, bis der Abstand vom Mittelpunkt einer Polygonkante zur NURBS-Fläche kleiner als dieser Wert ist. Es handelt sich auch um den maximalen Abstand von den Mittelpunkten der Polygonkanten zur NURBS-Fläche in den minimalen Quadraten des anfänglichen Gitters.
+
+Kleinere Werte ergeben eine langsamere Polygonnetzerzeugung, genauere Polygonnetze und eine höhere Polygonzahl. Bei Einstellung dieses Werts auf Null wird die Option ausgeschaltet.
+
+Der Standardwert ist Null und das verwendbare Intervall hängt von der Größe des Modells ab.
+
+Als allgemeine Einstellung für Polygonnetztoleranz verwenden.
+
+==Minimale Quadrate des anfänglichen Gitters==
+
+Das anfängliche Polygonnetz ist ein Netz aus vierseitigen Polygonen, das Rhino in der ersten Phase der Polygonnetzerzeugung auf jeder NURBS-Fläche erzeugt. Wenn das anfängliche Polygonnetz erzeugt wurde, werden die Trimmkurven ignoriert. Nach Erzeugung des anfänglichen Polygonnetzes erstellt Rhino alle Trimmkanten, verbindet das anfängliche Gitter mit den Trimmkanten und verfeinert dann das Polygonnetz, wenn die Option Polygonnetz verfeinern ausgewählt ist.
+Die Anzahl Quadrate pro Fläche im anfänglichen Polygonnetz. Rhino verwendet mindestens so viele Polygone für jede Fläche.
+
+Größere Werte ergeben eine langsamere Polygonnetzerzeugung, genauere Polygonnetze und eine höhere Polygonzahl mit mehr gleichmäßig verteilten Polygonen. Bei Einstellung dieses Werts auf Null wird die Option ausgeschaltet.
+
+Der Standardwert beträgt 0. Das empfohlene Intervall geht von 0 bis 10000. Diese Option ist Skala-unabhängig.
+
+Verwenden, um sicherzustellen, dass Flächen mit feinen Details mit einer genügend hohen Polygonzahl vermascht werden.
+
+==Polygonnetz verfeinern (Kontrollkästchen)==
+
+Nach der anfänglichen Polygonnetzerzeugung verfeinert ein rekursiver Prozess das Netz, bis es den Kriterien entspricht, die durch die Optionen Maximaler Winkel, Minimale Kantenlänge, Maximale Kantenlänge und Maximaler Abstand Kante zu Fläche definiert sind.
+
+Das Polygonnetz wird verfeinert, bis der Winkel zwischen Flächennormalen entlang einer Polygonkante kleiner als dieser Wert ist. Der Standardwert beträgt 20 Grad und das empfohlene Intervall geht von 5 auf 90 Grad. Bei Einstellung des maximalen Winkels auf Null wird die Option ausgeschaltet. Es ist skalaunabhängig.
+
+Keine Verfeinerung ergibt eine schnellere Polygonnetzerzeugung, ungenauere Polygonnetze und eine niedrigere Polygonzahl. Eine Nicht-Markierung dieses Kontrollkästchens ergibt auch ungetrimmte einzelne Flächen; Flächenbereiche außerhalb von Trimmkanten und verbundene Kanten werden mit gleichgroßen Quadraten vermascht.
+
+==Gezackte Nähte (Kontrollkästchen)==
+
+Alle Flächen werden unabhängig voneinander vermascht und Rhino "näht" keine Kanten von verbundenen Flächenkanten zusammen. Polygonnetze für jede Fläche in einem Flächenverband bilden nicht unbedingt ein hermetisches Polygonnetz. Wenn Gezackte Nähte nicht markiert ist, werden hermetische Polygonnetze erzeugt.
+
+Die Option Gezackte Nähte ergibt eine schnellere Polygonnetzerzeugung, niedrigere Polygonzahl und Spalten zwischen verbundenen Flächen im gerenderten Bild. Rhino unterstützt keine hermetischen Polygonnetze aus viereckigen Polygonen, außer Sie vermaschen eine einzelne ungetrimmte Fläche. In diesem Fall, löschen Sie Polygonnetz verfeinern und verwenden Sie Gezackte Nähte, um Polygonnetze aus viereckigen Polygonen zu generieren.
+
+
+==Einfache Ebenen (Kontrollkästchen)==
+
+Die Polygone aller planaren Flächen werden berechnet, indem die Polygone der Flächenkanten berechnet werden und die durch die Kanten begrenzte Fläche mit Dreiecken gefüllt wird.
+
+Ergibt eine langsamere Polygonnetzerzeugung und minimale Polygonzahl auf planaren Flächen, vor allem für komplex getrimmte Flächen.
+Wenn Einfache Ebenen ausgewählt ist, werden die Einstellungen, außer Gezackte Nähte, für planare Flächen ignoriert und die planare Fläche wird mit so wenigen Polygonen wie möglich vermascht.
+
+> **Hinweis:** //Die mit dem Befehl Polygonnetz erzeugten Polygonnetze sind sichtbar und bearbeitbar und von den  [[http://wiki.mcneel.com/rhino/nurbs|NURBS]]-Objekten, aus denen sie erzeugt wurden, trennbar. Die durch Rendern und SchattiertesAnsichtsfenster erzeugten Polygonnetze auf [[http://wiki.mcneel.com/rhino/nurbs|NURBS]]-Flächen und Flächenverbänden sind nicht sichtbar, nicht bearbeitbar und können nicht vom [[http://wiki.mcneel.com/rhino/nurbs|NURBS]]-Objekt getrennt werden, außer sie werden mit dem Befehl **SchattierenAktualisieren** zerstört. Die Rendernetze werden durch andere Einstellungen gesteuert, die sich im Dialogfenster der Dokumenteigenschaften, Seite Rendern, befinden.//
+
+
+
