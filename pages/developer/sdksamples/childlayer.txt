@@ -1,14 +1,14 @@
 ====== Creating Sublayers ======
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
-> **Summary:** //Demonstrates how to create sublayers of a parent layer.//
+> **Summary:** //Demonstrates how to create sublayers of a parent layer//
 
 =====Question=====
-How can one create a "sublayer" given a parent layer?
+How can one create a //sublayer// given a parent layer?
 
 =====Answer=====
-All layers have a layer id field, or **ON_Layer::m_layer_id**, that uniquely identifies that layer. Also, layers maintain a parent id field, or **ON_Layer::m_parent_layer_id**, that identifies the layer's parent. If a layer's parent id is a null UUID, then the layer does not have a parent and, thus, is considered a root layer.
+All layers have a layer ID field, or **ON_Layer::m_layer_id**, that uniquely identifies that layer. Also, layers maintain a parent ID field, or **ON_Layer::m_parent_layer_id**, that identifies the layer's parent. If a layer's parent ID is a null UUID, then the layer does not have a parent and, thus, a root layer.
 
-The following example demonstrates how to add a parent layer then then add a child layer to that parent.
+The following example demonstrates how to add a parent layer then add a child layer to that parent.
 
 <code c++>
 CRhinoCommand::result CCommandTest::RunCommand( const CRhinoCommandContext& context )
