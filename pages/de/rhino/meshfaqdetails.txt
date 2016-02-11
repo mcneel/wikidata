@@ -1,0 +1,153 @@
+======Polygonnetzeinstellungen in Rhino - Detaillierte Informationen======
+//Das Mysterium der Polygonnetzeinstellungen in Rhino --  Lösungen für gängige Probleme beim Vermaschen.//
+
+> <color slategray> Hinweis: Auf dieser Seite finden Sie detaillierte Informationen zur Funktionsweise der Vermaschung in Rhino. Es handelt sich dabei um eine Zusammenstellung von Tatsachen und Erfahrungswerten, die aus den Support-Foren, von McNeel-Entwicklern und professionellen Anwendern stammen.  Das letzte Update dieser Seite für Rhino 5 ist vom 16.01.2013 </color>
+
+> //**Weitere Informationen finden Sie in James Carruthers' exzellenter [[http://www.hydraulicdesign.net/meshes.htm|Erklärung zu Problemen mit Anzeigepolygonnetzen]]**//
+
+
+=====Warum bin ich hier?=====
+
+**//So gut wie alle Anwender//**, die jemals Rhino verwendet haben, sind früher oder später auf irgendein mysteriöses Anzeigeproblem gestoßen.  Dinge wie:
+
+  * eine //seltsam facettierte Ausgabe// einer eigentlich schönen, glatten und gekrümmten Fläche
+  * eine Anzeige, die sich bei einem großen Modell //nur noch im Schneckentempo// aktualisiert
+  * mysteriöse //"Geisterflächen"//, die an unerwarteten Orten auftauchen
+  * unsichtbare Flächen oder Objekte
+
+All diese Probleme sind in der Regel auf ein Problem mit der Vermaschung des Modells oder Ihren Polygonnetzeinstellungen im Allgemeinen zurückzuführen...\\  
+
+//Polygonnetze?//  //Ich habe überhaupt keine Polygonnetze verwendet, sondern alles mit NURBS-Flächen modelliert.//  
+
+Nun, auch wenn dies nicht bewusst geschehen ist, haben Sie eben doch einige Polygonnetze erzeugt...  
+
+=====Wozu benötigen wir überhaupt Polygonnetze?=====
+Obwohl es sich bei Rhino um einen [[de:rhino:nurbs|NURBS]]-Flächenmodellierer handelt, werden für die Anzeige Polygonnetze aus diesen Flächen erzeugt. Was Sie also auf Ihrem Bildschirm im schattierten Anzeigemodus sehen, ist in Wirklichkeit ein spezielles, unsichtbares Polygonnetz (das "Rendernetz"), das über die eigentliche [[de:rhino:nurbs|NURBS]]-Fläche gespannt wird.
+
+Wieso? Zum schnellen Schattieren und Rendern.  Aber während ein Polygonnetz bei der Geschwindigkeit und Anpassung der Schattierung klare Vorteile aufweist, gibt es auch einen Nachteil. Ein Rendernetz ist immer nur eine Annäherung an die Fläche, so dass es praktisch immer Lücken zwischen dem facettierten Rendernetz und der tatsächlichen, glatten Fläche gibt.
+
+In Rhino wird dieselbe Vermaschungstechnik zur Erzeugung von Analysenetzen für Funktionen wie Entformungswinkel- und Krümmungsanalyse oder Umgebungstextur usw. sowie für den Befehl **Polygonnetz** (Werkzeuge > Polygonnetze > Aus [[de:rhino:nurbs|NURBS]]-Objekt) verwendet, mit dem ein "echtes" Polygonnetz aus dem [[de:rhino:nurbs|NURBS]]-Objekt erzeugt wird.
+
+Beim Export in bestimmte auf Polygonnetzen basierenden Formaten wie STL werden ebenfalls Polygonnetzobjekte in der exportierten Datei erzeugt.  Obwohl diese in der Ausgangsdatei nicht bearbeitet werden können, gibt es dieselbe Gruppe an Einstellungen für die Polygonnetzdichte, mit der die Erzeugung gesteuert wird.
+
+Funktionen wie **Polygonnetz** und **Exportieren** (.stl), die echte und bearbeitbare Polygonnetze erzeugen, sind sehr wichtig für viele nachgeordnete Programme, die auf Polygonnetzobjekte angewiesen sind.
+
+Alle Polygonnetztypen können gleichzeitig in einer Datei vorhanden sein, beeinflussen sich nicht untereinander und können jeweils eigene Einstellungen haben. Obwohl die unterschiedlichen Polygonnetze mit derselben Technik erstellt werden, gibt es einige wichtige Unterschiede.
+
+=====Die verschiedenen Polygonnetztypen=====
+
+  * **Renderpolygonnetze** werden über [[de:rhino:nurbs|NURBS]]-Flächen und -Flächenverbänden zu Darstellungszwecken in der schattierten oder gerenderten Ansicht erstellt.  Sie können nicht direkt vom Anwender bearbeitet werden. Sie sind fest an das [[de:rhino:nurbs|NURBS]]-Objekt gebunden, auf dem sie erstellt wurden. Sie können durch Verwendung des Befehls **DarstellungspolygonnetzeLöschen** gelöscht und durch den Befehl **SchattierenAktualisieren** oder das Ändern der Einstellungen (Datei > Eigenschaften > Polygonnetz) wiederhergestellt werden. Seit Rhino 4 kann das Rendernetz über den Befehl **RenderNetzExtrahieren** in ein echtes, bearbeitbares Polygonnetzobjekt überführt werden.
+
+
+  * **Analysenetze** ähneln den Renderpolygonnetzen darin, dass sie nicht bearbeitet oder vom entsprechenden [[de:rhino:nurbs|NURBS]]-Objekt gelöst werden können.  Sie verfügen allerdings über andere Steuerungen und existieren unabhängig von den Renderpolygonnetzen.  Um sie vorübergehend anzuzeigen, klicken Sie auf die Schaltfläche **Polygonnetz anpassen** oder **Vorschau** im Einstellungsdialog eines Analysebefehls.  Seit Rhino 5 können diese Netze wie im Fall des Renderpolygonnetzes mit dem Befehl **AnalyseNetzExtrahieren** in ein echtes Polygonnetzobjekt überführt werden.
+
+
+  * Polygonnetze, die mit dem Befehl **Polygonnetz** erzeugt wurden, sind sichtbar, können bearbeitet werden und sind unabhängig von den [[de:rhino:nurbs|NURBS]]-Objekten, aus denen sie erzeugt wurden.  Es handelt sich dabei um eigenständige Objekte, die mit den verschiedenen Rhino-Befehlen zur Polygonnetzbearbeitung bearbeitet und in Formate wie STL, DXF, 3DS und OBJ exportiert werden können.
+
+
+  * Polygonnetze, die beim **Speichern** oder **Exportieren** (z.B. nach STL) erzeugt wurden, haben dieselben Einstellungsdialoge ("Detaillierte Steuerelemente") wie die anderen Typen.  Sie können ebenfalls vorübergehend über die Vorschau im Einstellungsdialog angezeigt werden, wobei sie jedoch nicht in der Originaldatei gespeichert, sondern nur exportiert werden.
+
+> <color slategray>//**Willem:**  "Beim Vermaschen eines Objekts für den Export erzeuge ich immer zuerst ein Polygonnetz und sehe es mir im Flachschattierungsmodus (Befehl **FlachSchattieren**) an, bevor ich es in das gewünscht Format exportiere. Der Flachschattierungsmodus schattiert das aktuelle Ansichtsfenster ohne Glättung, so dass die einzelnen Rendernetzseiten sichtbar sind."// </color>
+
+
+=====Polygonnetzeinstellungen=====
+<color darkslateblue>**//Wozu benötigen wir überhaupt Polygonnetzeinstellungen?  Ist Rhino nicht schlau genug, alle Einstellungen selbst und ohne mein Zutun vorzunehmen?//**</color>
+
+<color darkslategray>**//Das ist eine gute Frage!//**</color> --- und eine heiß diskutierte.  Wir können hier nicht in die Tiefen dieser Debatte hinabsteigen, aber wenn Sie eine optimale Vermaschung möchten, müssen Sie diese Einstellungen verstehen und verändern können.  Daher auch diese lange und verwinkelte Seite voller Informationen und Ratschläge.  Aber keine Panik!
+
+<color darkslateblue>**//OK, warum setze ich dann nicht einfach alles auf den feinsten Detailgrad und die höchste Auflösung? Löst das nicht mein Problem ganz einfach?//**</color>
+
+<color darkslategray>**//Leider nicht//**</color> --- es kann sogar zu einer Verschlechterung führen.  Polygonnetze sind ein wenig wie Pixelbilder - je mehr Pixel //(bzw. Polygonnetzseiten)// vorhanden sind, desto feiner ist die Auflösung des Bilds //(bzw. des Modells)//, desto mehr Daten werden allerdings auch benötigt, um das Bild //(bzw. Modell)// darzustellen.  An einem bestimmten Punkt wird dieser Datensatz riesig und da die Daten ja auch dynamisch sein sollen //(Sie möchten Ihr schattiertes Modell ja auch drehen und anschauen, oder?)//, reicht die Kapazität Ihres Computers irgendwann nicht mehr aus, dies in Echtzeit zu bewältigen.
+
+Die Vermaschung ist daher ein Balanceakt.  Das Ziel ist die Einstellung der adäquaten Auflösung für Ihr Modell unter Verwendung so //weniger// Polygonnetzseiten wie möglich.  Dazu ist ein gewisses Verständnis der Vermaschungstechnik in Rhino nötig.  //Deswegen sind Sie ja auch hier.// :-)
+
+====Die Steuerung====
+Die Steuerelemente für die verschiedenen Polygonnetztypen sind identisch.  Die Steuerelemente für das Rendernetz (Anzeigenetz) sind Teil der Eigenschaften der 3DM-Datei (**Eigenschaften> Polygonnetz**).  Diese sind standardmäßig für das ganze Modell festgelegt, können ab Rhino 4 aber auch objektweise eingestellt werden.  Rhino bietet die beiden //Standardeinstellungen// **//Gezackt & schneller//** und **//Glatt und langsamer//** sowie die Option **//Benutzerdefiniert//**, mit der Sie eine weitergehende Kontrolle erhalten.  
+
+Beim Erzeugen eines Polygonnetzes aus einem NURBS-Objekt oder dem Exportieren in ein Format wie STL, DXF, 3DS oder OBJ können Sie mit einem einfachen Schieberegler zwischen grob und fein einstellen: **weniger Polygone <==> mehr Polygone**.
+
+Alternativ dazu gibt es detailliertere Steuerelemente, mit denen dem Anwender weitere Einstellungen zur Verfügung stehen.  Diese sind für alle Polygonnetztypen identisch und werden unten beschrieben.
+
+====Standardeinstellungen====
+  * **Gezackt & schneller** ist der Standard für Renderpolygonnetze. Gut geeignet für die schnelle Visualisierung - weniger gut geeignet für alles andere.
+
+  * **Glatt & langsamer** bietet //theoretisch// eine bessere Auflösung, dauert dafür aber länger. In der Praxis können aber selbst trotz der längeren Bearbeitungsdauer sichtbare Lücken auftreten, wo keine sein sollten. Verwenden Sie daher besser die benutzerdefinierten Einstellungen.
+
+  * **Benutzerdefiniert** erlaubt dem Anwender die maximale Flexibilität in der Anpassung der Polygonnetzeinstellungen nach den individuellen Bedürfnisse, wobei diese Option aber auch schwerer zu verstehen und einzustellen ist. 
+
+  * Die standardmäßige "einfache" Slider-Einstellung für Analysenetze sowie die Befehle **Polygonnetz** und **Exportieren** ist ein durchschnittliches "//irgendwo in der Mitte//"...
+
+  * Die Standardeinstellung für den speziellen STL-Exportdialog ist normalerweise die zuletzt verwendete Einstellung für //"maximaler Abstand von Kante zu Fläche"// im Dialog für benutzerdefinierte Einstellungen oder die absolute Toleranz in Datei > Eigenschaften > Einheiten, wenn kein Abstand eingestellt wurde.
+
+====Benutzerdefinierte Einstellungen====
+<color darkslateblue>//**Wenn Sie wirkliche Kontrolle über die Polygonnetzerzeugung haben möchten, sind Sie hier genau richtig!**//</color>
+
+Es gibt insgesamt //sieben// numerische Einstellungen und //drei// Kontrollkästchen.  Sie alle beziehen sich auf unterschiedliche Methoden zur Polygonnetzkontrolle und manche von ihnen können kombiniert werden.  Das Zusammenspiel und die kombinierten Effekte dieser Einstellungen sind sehr komplex.  Ihre individuellen Funktionsweisen sind in der Hilfe allerdings sehr gut beschrieben und wenn Sie diese Info sorgfältig lesen, können Sie sich ein gutes Bild davon machen, wozu jede Einstellung dient.
+
+**[[de:rhino:meshsettings|Eine Kopie der Hilfeseite zum Thema Polygonnetz finden Sie hier.]]**
+
+==Einige Richtlinien==
+Unten finden Sie einen Ausgangspunkt für benutzerdefinierte Einstellungen. Probieren Sie sie mit Ihren Modellen aus.\\ //Wenn eine Einstellung auf 0 oder 0.0 gesetzt ist, ist die deaktiviert (wird nicht berücksichtigt).//
+
+|**Dichte** //(seit Rhino 4)//|  <color slategray>**0.0**</color>|
+|**Maximaler Winkel**|  <color slategray>**35**</color>|
+|**Maximales Seitenverhältnis**|  <color slategray>**0.0**</color>|
+|**Maximale Kantenlänge**|  <color slategray>**0.0**</color>|
+|**Maximaler Abstand Kante zu Fläche**  |  **%%**%%**|
+|**Minimale Quadrate des anfänglichen Gitters**|  <color slategray>**16**</color>|
+
+> <color slategray>Seit Rhino 4 können sie mit der Dichteeinstellung herumexperimentieren.  Diese ist skalierungsunabhängig.  Unten finden Sie eine detailliertere Erklärung.  In Rhino 3 gibt es keine Dichteeinstellung, sodass Sie einen für die //Skalierung adäquaten Wert// für den maximalen Abstand von der Kante zur Fläche eingeben müssen.  Probieren Sie bei Modellen mit Millimetern einen Wert zwischen 0,01 und 0,1</color>
+
+  * Polygonnetz verfeinern **aktiviert**
+  * Gezackte Nähte **//deaktiviert//**
+  * Einfache Ebenen **//deaktiviert//**
+
+  * Mit dem //maximalen Abstand von der Kante zur Fläche// zwingen Sie Rhino zur Erstellung eines Polygonnetzes, das nicht weiter entfernt ist von der Fläche als der angegebene Wert in aktuellen Dateieinheiten.  Dies erlaubt Rhino, in Bereichen mit geringeren Details weniger Polygone und in Bereichen mit höheren Details mehr Polygone zu verwenden, wodurch das Polygonnetz effizienter wird.
+  * Mit der Einstellung der //minimalen Quadrate des anfänglichen Gitters// stellen Sie sicher, dass die flacheren Bereiche genügend Polygone erhalten, um glatt auszusehen.
+
+> <color darkslategray>//**Pascal:** Ich verwende für den "Maximalwinkel" lieber eine größere Zahl als diesen auf Null zu setzen (deaktivieren). Ein guter Wert ist z.B. 35-45 Grad. Auf diese Weise werden kleinere Details, die unter die maximale Abstandszahl fallen, ein wenig unterteilt. In einigen Fällen kommen Sie so mit einem etwas größeren Maximalabstand davon, da für die kleinsten Objekte ein größerer Winkel verwendet wird. Wenn eine zu große Diskrepanz zwischen einem Objekt und den globalen Polygonnetzeinstellungen besteht, kann es sich lohnen, für diese Objekte den Befehl **Polygonnetz** zu verwenden. Stellen Sie das Polygonnetz so lose oder fein ein, wie es für das Objekt nötig ist, rendern Sie dann nur das Polygonnetz und verbergen oder löschen Sie die NURBS-Fläche. Sehr kleine Details können zum Beispiel sehr lose vermascht werden, ohne dass darunter die Qualität des Bilds leidet.//</color>
+
+> <color darkslategray>//**Mitch:** Ich verwende manchmal einen Wert von 6,0 als "Maximales Seitenverhältnis", um Rhino davon abzuhalten, lange und dünne Objekte mit langen und schmalen Dreiecken zu vermaschen und dafür eher kürzere, kleinere Dreiecke zu verwenden.  Dies hat jedoch den Nachteil, dass damit die Dateigröße ansteigt und die Vermaschung länger dauern kann.//</color>
+
+> <color darkslategray>//**Ricardo:** Ich mache Rapid Prototyping im Schmuckbereich. Meine Standardeinstellungen sind 0,001 als maximaler Abstand und 12 Grad als Maximalwinkel. Größere Winkel können dazu führen, dass die Dreieckskanten auf dem Endprodukt sichtbar sind. Bei sehr komplexen Modellen können die Polygonnetze so bis zu 30 MB groß sein. Als Einheit verwende ich Millimeter//</color>
+
+> <color darkslategray>//**Olivier:** Ich arbeite mit Spannstrukturen, bei denen große Membranen und Stahlstrukturen verbunden werden. Die Membranen müssen dabei sehr präzise vermascht werden, was wiederum zu sehe großen Polygonnetzen bei Stahlrohren und Anschlussstücken führt. Um sowohl mit sehr großen als auch sehr kleinen Krümmungen zurecht zu kommen, stelle ich immer eine Mindestkantenlänge ein, um die Anzahl an Polygonen bei kleinen, kurvigen Details zu beschränken. //</color>
+
+**Die wichtigste Einstellung ist der //maximale Abstand der Kante zur Fläche//**. Dieser Wert ist abhängig von der Skalierung (Größe).
+
+<color darkslateblue>//**Was ist ein der Skalierung angemessener Wert?**//</color>
+
+Dies hängt in erster Linie davon ab, wozu Sie Ihre Polygonnetzeinstellungen verwenden.  Wenn Sie Ihr Modell nur auf dem Bildschirm visualisieren möchten, können Sie hier einen etwas größeren Wert eingeben, da weniger Polygone eine schnellere Polygonnetzerzeugung und eine bessere Performance beim Drehen, Zoomen etc. bedeuten.
+
+  * Für Objekte von der Größe eines Computers ist eine Einstellung von 0,01 mm angemessen. Für Uhren und Schmuck ist ein kleinerer Wert zu empfehlen, etwa 0,002 mm. Für sehr große Objekte wie Gebäude kann durchaus 1 mm oder größer verwendet werden.
+
+  * Wenn Sie Ihr Objekt für die weitere Bearbeitung exportieren oder sehr detailreiche Renderbilder erstellen möchten, sollten Sie die Einstellungen je nach dem konkreten Verwendungszweck etwas straffer setzen.  Für eine Stereolithographie sind beispielsweise 0,01 mm ausreichend, während für ein gutes Werkstück eine Einstellung von 0,001 mm - 0,002 mm angemessener ist.
+
+Auf den ersten Blick mag dies alles sehr kompliziert erscheinen, aber mit der Zeit werden Sie für sich einige Standardeinstellungen herausfinden, die für die meisten Zwecke geeignet sind.  Diese Einstellungen können auch in ein Makro oder Skript programmiert werden, um die Polygonnetzerzeugung Ihrer Objekte schnell durchführen zu können.
+
+<color darkslategray>Weitere Informationen zur **//Dichteeinstellung//**: \\ //Mit der Dichte wird ab Rhino 4 gesteuert, wie weit sich die Polygonkanten von der Originalfläche entfernt befinden. Gültige Werte reichen von 0 (aus oder ignoriert) bis 1 (maximale Dichte). Größere Werte erzeugen ein Polygonnetz mit mehr Polygonen. Bei ausschließlicher Verwendung der Dichte (alle anderen Einstellungen auf 0), entstehen in der Regel ziemlich ausgeglichene Polygonnetze. Die Dichte steht nicht direkt mit der Einheit oder der Skalierung in Beziehung.//\\ 
+\\ 
+//Der Dichtewert wird von Rhino für eine objektweise Berechnung verwendet, deren Ergebnis dem maximalen Abstand einer Kante zur Fläche ähnelt, eine Zahl also, die bestimmt, wie weit der Mittelpunkt einer Polygonnetzkante von der Ausgangsfläche entfernt sein darf. Diese Berechnung hängt unter anderem von der Größe des Objekts ab. Das Ergebnis wird umso kleiner, je mehr sich die Dichte dem Wert 1 nähert. Dem Anwender bleibt der konkrete Ergebniswert jedoch verborgen und dieser ist auch für jedes Objekt anders. Wenn an einer anderen Stelle im Dialog ein expliziter Wert für den maximalen Abstand der Kanten zur Fläche (also größer als 0) eingestellt ist, wird bei der Vermaschung im Zweifelsfall der kleinere der beiden Werte verwendet.//</color>
+
+=====Bekannte Probleme und Schwachstellen bei der Vermaschung =====
+
+Es kann vorkommen, dass Sie auch bei Befolgen der obigen Richtlinien keine idealen Ergebnisse erzielen.  Vielleicht haben Sie mit Geisterflächen, unebener Schattierung oder Dreiecksfacetten zu kämpfen, die im leeren Raum auftauchen.  Manche dieser Probleme entstehen durch das konkrete Vorgehen von Rhino bei der Vermaschung einer bestimmten Art von geometrischer Struktur.  In einigen Fällen kann die einzige Lösung in einer Remodellierung der kritischen Teile liegen.
+
+====Darauf sollten Sie achten:====
+//Obwohl diese Bedingungen nicht notwendigerweise Probleme bei der Polygonnetzerzeugung verursachen, sollten Sie Ihr Modell doch immer auf Probleme hin untersuchen, wenn Sie sich nicht sicher sind.//
+
+  * <color darkslateblue>**Fehlerhafte Objekte.**</color> Diese führen zwar nicht immer zu Problemen, da sie aber relativ leicht auszumachen sind, sind sie ein guter Ausgangspunkt.  Wenn Sie eines finden, versuchen Sie, es zu verbergen. Wenn ihr Problem damit verschwindet, reicht es vielleicht, das fehlerhafte Objekt zu reparieren.
+
+  * <color darkslateblue>**Lange, schlanke Flächen.**</color> Diese verursachen bei der Vermaschung regelmäßig Probleme.  Je länger und dünner, desto schwieriger die Vermaschung und desto länger dauert sie.  Ein typisches Beispiel hierfür sind lange, kontinuierliche und kleine Verrundungen an den Kanten eines Modells.  Wenn die Vermaschung ewig dauert und die Geometrie eigentlich nicht so komplex ist, ist womöglich eine kleine Splitterfläche irgendwo im Modell dafür verantwortlich, dass die Vermaschung hängen geblieben ist.
+
+  * <color darkslateblue>**Extrudierte oder rotierte verbundene Tangentenlinien und Bögen.**</color>  Beispiel - Extrusion eines abgerundeten Rechtecks.  Dadurch wird eine einzelne Fläche mit G1-Bereichen erstellt, die bei der Polygonnetzerzeugung Probleme hervorrufen kann.  Lösung: **Zerlegen** Sie die Kurven vor dem Extrudieren oder nutzen Sie an den G1-Stellen **Teilen > Isokurven**, um statt einer einzelnen Fläche eine Struktur mit getrennten verbundenen Tangentenflächen zu erstellen. Im Fall eines extrudierten abgerundeten Rechtecks erhalten Sie so acht verbundene Flächen statt einer einzelnen.
+
+  * <color darkslateblue>**Flächen mit Knicken.**</color>  Dies wird normalerweise dadurch verursacht, dass **FaltenTeilung** (nativ in Rhino 5 oder als Add-on für Rhino 4) auf "Nein" gesetzt ist oder die Option **FlächenVereinigen Glätten=Nein** auf Flächen angewandt wird, die nicht wenigstens tangential zueinander sind.  Auch in diesem Fall ist es besser, mehrere verbundene Flächen statt einer einzelnen zu haben.  Verwenden Sie **Bearbeitungswerkzeuge für Flächen > Fläche entlang Falten unterteilen** oder **Teilen > Isokurven** an den geknickten Stellen, um diese Art von Flächen in mehrere Teile zu unterteilen.
+
+  * <color darkslateblue>**Dreieckige Flächen mit Öffnungen**</color>  //Dies ist ein bekannter Bug in Rhino 4.//  Die Verwendung der Option **Einfache Ebenen**führt zu Problemen bei dreieckigen Flächen mit Öffnungen in der Mitte oder planaren Flächen mit einer dreieckigen Öffnung in der Mitte.  Die Öffnung wird im schattierten Modus nicht angezeigt, obwohl sie vorhanden ist.  Deaktivieren Sie zur Behebung dieses Problems die Option **Einfache Ebenen verwenden** im erweiterten Polygonnetzdialog.  Bei Verwendung von **Gezackt und schneller** ist standardmäßig auch die Option **Einfache Ebenen** aktiviert und kann nicht deaktiviert werden, so dass Sie den benutzerdefinierten Modus verwenden müssen.
+
+=====Diagnose (aus der Rhino-Hilfe)=====
+**[[http://docs.mcneel.com/rhino/mac/help/de-de/index.htm#commands/check.htm|Weitere Informationen zum Thema Diagnose finden Sie hier]]**
+
+----
+
