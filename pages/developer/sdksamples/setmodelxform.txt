@@ -1,12 +1,12 @@
 ====== Showing Objects Transforming Dynamically ======
 > **Developer:** //[[developer:cplusplusplugins|C++]]//
-> **Summary:** //Demonstrates how to dynamically draw transforming objects.//
+> **Summary:** //Demonstrates how to dynamically draw transforming objects//
 
-The **CRhinoViewport** class has two member functions, **GetModelXform()** and **SetModelXform()**, that either retrieve or modify the model transformation matrix that is applied to objects before they are drawn. The model transformation matrix is intended to be used for dynamic drawing of objects. Note, the default model transformation matrix is the identity.
+The **CRhinoViewport** class has two member functions, **GetModelXform()** and **SetModelXform()**, that either retrieve or change the model transformation matrix that is applied to objects before they are drawn. The model transformation matrix is intended for dynamic drawing of objects. Note, the default model transformation matrix is the identity.
 
-Some of the Rhino command that use this technique to dynamically draw transforming objects include the Move, Copy, Scale, and Rotate commands. These commands derive new **CRhinoGetPoint** classes and override the virtual **DynamicDraw()** member function to draw objects dynamically as the mouse moves during a point picking operation.
+Some of the Rhino commands that use this technique to dynamically draw transforming objects are Move, Copy, Scale, and Rotate. These commands derive new **CRhinoGetPoint** classes and override the virtual **DynamicDraw()** member function to draw objects dynamically as the mouse moves during a point picking operation.
 
-The following is an example **CRhinoGetPoint**-derived class that demonstrates how to dynamically draw transforming objects during a point picking operation. In this example, the transformation is a simple translation, like used in the Move command.
+Following is an example **CRhinoGetPoint**-derived class that demonstrates how to dynamically draw transforming objects during a point picking operation. In this example, the transformation is a simple translation, like used in the Move command.
 
 First, the class declaration.
 
