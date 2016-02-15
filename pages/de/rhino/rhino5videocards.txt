@@ -1,24 +1,100 @@
 ====== Grafikkartenempfehlungen für Rhino 5======
+> Update vom 13. März 2015 
+> **Haben Sie Probleme mit der Anzeige?** Versuchen Sie diese [[de:rhino:5:video:troubleshooting|Anleitung zur Behebung von Anzeigefehlern]].
 
-**Hinweis: Der folgende Text beinhaltet keine konkreten Produktempfehlungen oder -vergleiche.**\\
-Weitere Infos finden Sie auch auf diesen Seiten:
-  * [[http://wiki.mcneel.com/rhino/troubleshootingdisplayproblems|Reviews von Grafikkarten]]
-  * [[http://wiki.mcneel.com/rhino/hardwarebaseline|Hardware Guidelines for Rhinoceros 5]]
-===== Allgemeine Grafikanforderungen =====
-Rhino hat eine Reihe von Mindestanforderungen an die Hardware und obwohl einige Konfigurationen besser funktionieren als andere, glauben wir, dass Rhino flexibel genug ist, um auf nahezu jedem Computer zu laufen, den man heutzutage kaufen kann. Einige der neuesten Anzeigeoptionen von Rhino funktionieren möglicherweise schlecht oder gar nicht auf einfacheren Computern oder solchen mit **schlechteren Grafikkarten wie denen von Intel (alle Modelle)**. Diese Funktionen sind jedoch in der Regel nicht notwendig für die Erstellung eines Rhino-Projekts, sodass Sie das Programm für Ihre Arbeit mit diesen Einschränkungen immer noch gut nutzen können. Leider sind die 13"-MacBook-Computer von Apple (inkl. des **13"-Retina**) mit dieser problematischen Intel-HD-Grafikkarte ausgestattet und sollten daher nach Möglichkeit nicht verwendet werden.\\
-Diese Warnung ist auch für die **Surface- und Surface-Pro-Tablet/Laptops von Microsoft** gültig, da auch hier der eingebettete Intel-Grafikchip verbaut ist.\\
 
-Rhino macht regen Gebrauch vom **OpenGL-Grafiksystem** unter Windows. Die meisten Grafikkarten auf dem Markt nutzen die DirectX-Technologie und sind für Computerspiele optimiert. Viele davon unterstützen stellenweise OpenGL mit jedoch unterschiedlichem Erfolg. Die besten Grafikkarten für Rhino sind solche, die auf den Arbeitseinsatz ausgerichtet sind und hohen Wert auf robusten OpenGL-Support legen. Allerdings ist auch eine gute Grafikkarte ein Problem, wenn sie mit den falschen Treibern läuft. **Halten Sie Ihre Anzeigetreiber daher stets auf dem neuesten Stand!**\\
+McNeel **empfiehlt keine konkrete Hardware**, noch führen wir selbst Vergleiche durch.
+Dies überlassen wir unseren Anwendern:
+  * [[http://discourse.mcneel.com/t/holomark-2-released/8040|Benchmarks zur Systemkonfiguration]]
+  * [[http://discourse.mcneel.com/c/rhino-for-windows/hardware-recommendations|Hardware-Empfehlungen von Anwendern]]
 
-<color red> **Achtung:**</color> Nicht alle Treiber erstellen einen Windows-Systemwiederherstellungspunkt, bevor sie mit der Installation beginnen. Für den Fall, dass die neuen Treiber Ihre Windows-Konfiguration durcheinander bringen, ist es immer ein guter Rat, einen **Systemwiederherstellungspunkt** zu erstellen, bevor man ein Update einer kritischen Windows-Systemkomponente durchführt.
+Andere Artikel zu Hardware:
+
+  * [[http://wiki.mcneel.com/de/rhino/hardwarebaseline|Hardware-Richtlinien für Rhino]]
+  * [[http://wiki.mcneel.com/de/rhino/videocards|Vor- und Nachteile konkreter Grafikkarten]]
+
+-----
+===== Allgemeine OpenGL-Anforderungen=====
+
+Rhino verwendet **OpenGL** zur Anzeige der Modelle im Ansichtsfenster. Die besten OpenGL-Grafikkarten für Rhino sind solche, die für den professionellen Betrieb ausgelegt sind. Wir empfehlen Karten mit so viel Grafikspeicher wie möglich. Anbieter von OpenGL-Grafikkarten veröffentlichen regelmäßig neue Treiber. Diese neuen Treiber beheben bekannte Probleme und führen manchmal zu neuen. Wir empfehlen, **Ihre Treiber stets auf dem neuesten Stand zu halten.**
 
   * Rhino 4 benötigt OpenGL 1.1
   * Rhino 5 benötigt OpenGL 2.0 und Shader 1.2
 
-Notizen von Gesprächen mit Jeff Lasor, Rhino-/OpenGL-Programmierer
+Wenn Sie zwei Grafikkarten haben, lesen Sie sich folgenden [[http://wiki.mcneel.com/rhino/twodisplayadapters|Artikel über die Verwendung von Rhino mit zwei Grafikkarten]] durch.
 
-===== Leistungs-Benchmarks =====
-Programmierer von Treibern verbringen Monate damit, ihrem Code den letzten Schliff zu verpassen, um so gewisse Benchmarks zu erhalten und bessere Resultate zu erzielen. Ein Benchmark an sich nützt dabei aber eher wenig. Er ist nur der Beweis dafür, dass dieser spezielle Benchmark auf einem speziellen Grafikprozessor besser oder schlechter lief.
+
+-----
+===== Update der Grafikkartentreiber =====
+<color red> **Achtung:**</color> Wir empfehlen die Erstellung eines Systemwiederherstellungspunkt, bevor Sie mit der Installation beginnen. 
+
+  * [[http://wiki.mcneel.com/de/rhino/nvidiainfo|nVIDIA Quadro]] (verwenden Sie die Treiberversion 340.66 oder neuer)
+  * [[http://www.nvidia.de/Download/index.aspx?lang=de|Andere NVIDIA-Karten]]
+  * [[http://support.amd.com/de-de/download|AMD- und ATI-Karten]] 
+
+Verlassen Sie sich besser nicht auf die automatischen Windows-Updates. Laden Sie sich den Treiber lieber direkt über die Homepage des Herstellers herunter.
+
+-----
+===== Herstellerinformationen=====
+==== Intel-Grafikkarten====
+Rhino 5 SR11 funktioniert mit Grafikkarten des Chipsatzes **Intel HD3000 und neuer**. Bekannte Produkte mit diesen neueren Chipsätzen sind die 13"-MacBooks von Apple oder die Surface-Pro-Tablets von Microsoft. Dabei handelt es sich nicht um Hochleistungskarten. 
+
+==== Intel-Grafikkarten mit einem älteren Chipsatz als HD3000 ====
+Intel-Grafikarten mit einem älteren Chipsatz als HD3000 werden **nicht empfohlen**.
+
+Rhino verwendet bei diesen Karten Software-Emulation und funktioniert bei aktivierter Hardwarebeschleunigung unter Umständen nicht richtig.
+
+Ausführung von Rhino mit aktivierter Hardwarebeschleunigung:
+
+   - Gehen Sie im Rhino-Menü auf **Werkzeuge** und anschließend auf **Optionen**.
+   - Wählen Sie im Dialogfeld **Optionen** den Reiter **OpenGL**.
+
+{{:rhino:rhino_opengl_options.png?400|}}
+
+Wenn Sie merken, dass sich die Leistung von Rhino nach der Aktivierung verbessert hat, sollten Sie die neuen Einstellungen beibehalten.
+Viele der Feature von Rhino 5 wie die schattierte oder gerenderte Anzeige sowie der Analysemodus nutzen OpenGL.
+Die Leistung dieser neuen Features wird nicht allzu großartig sein, aber es ist unter bestimmten Umständen wichtiger, dass sie überhaupt funktionieren.
+
+==== nVIDIA-Quadro-Karten ====
+
+Dies sind High-End-CAD-Grafikkarten.\\
+Stellen Sie sicher, dass Sie die Treiberversion **340.66** oder neuer verwenden.\\
+[[http://wiki.mcneel.com/de/rhino/nvidiainfo|Weitere Informationen]].
+
+
+
+==== Nvidia GeForce ====
+
+Die Nvidia-GeForce-Produktlinien GT und GTX funktionieren gut mit Rhino.
+
+GT 200er und 300/s scheinen recht schnell zu sein. Die GeForce-Grafikkarten, die auf Nvidia FERMI basieren (z.B. die Serien der GeForce FX 400 und 500) funktionieren ebenfalls, zeigen aber nicht den Leistungszuwachs, den wir von den teureren Karten erwarten würden. Teilweise waren sie sogar langsamer als die der 200er- und 300er-Serie.
+
+
+==== ATI/AMD ====
+**AMD-Radeon-Grafikkarten werden NICHT empfohlen**
+\\
+AMD-Radeon-HD-Karten sind problematisch für Rhino 5. Sie sind nur für DirectX gedacht. Grafikkartentreiber von AMD für die Radeon-Karten nach Dezember 2013 können seltsame Artefakte im schattierten Anzeigemodus hervorrufen, wenn Antialiasing aktiviert ist.\\
+**Hinweis:** Seit November 2015 scheint AMD alle älteren Treiber von seiner Homepage verbannt zu haben.\\
+\\
+Wenn Sie eine Radeon besitzen, verwenden Sie nach Möglichkeit einen älteren Treiber und deaktivieren Sie das Antialiasing.\\
+\\
+
+**Die Grafikkarten der Serien FirePro v7900 und v5900 werden empfohlen**
+\\
+FirePro-Karten sind sehr schnell, wobei ihr Antialiasing nicht so gut wie das der Nvidia ist.
+
+
+==== FireGL 5800/7800/8800 ====
+Diese Grafikkarten sind sehr gut. Die 5800er ist eher im Low-End-Bereich der 
+FirePros anzusiedeln, ist aber dennoch eine sehr gute Karte. Die 7800er ist die mittlere der FirePros und die 
+8800er das High-End-Modell. 
+
+==== Crossfire ====
+Die Benutzung von zwei Karten sollte grundsätzlich eine Besserung bringen, auch wenn ich nicht sicher bin, ob man den Unterschied in Rhino so sehr merkt.  Die Crossfire-Technologie zeigt ihre wahre Stärke besonders in Situationen, in denen die Grafikkarte maximal beansprucht wird. Dies können beispielsweise hochauflösende Grafiken oder Spiele mit sehr hohen Bildraten sein.   Rhino arbeitet allerdings etwas anders. Die meiste Zeit (etwa 95 %) befindet sich die Rhino-Anzeige im Leerlauf und macht gar nichts.
+
+-----
+===== Ein Hinweis zu Leistungs-Benchmarks =====
+Programmierer von Treibern verbringen Monate damit, ihrem Code den letzten Schliff zu verpassen, um so gewisse Benchmarks zu erfüllen und darin besser abzuschneiden. Ein Benchmark an sich sagt aber gar nichts aus. Er ist nur der Beweis dafür, dass dieser spezielle Benchmark auf einem speziellen Grafikprozessor besser oder schlechter lief.
 
 Benchmarks zeigen nicht, wie der Grafikprozessor unter Realbedingungen läuft und welche Leistung er dabei erbringt. 
 Wenn also EIN Spiel auf einer bestimmten Grafikkarte besser läuft, heißt das noch lange nicht, dass alle Spiele nun auf dieser Karte besser laufen. 
@@ -29,82 +105,3 @@ Und was ist mit all den anderen Benchmarks, bei denen die Karte versagt hat oder
 Benchmarks sind Marketinginstrumente, die dazu benutzt werden, ein Produkt so zu positionieren, dass es besser dasteht als die Konkurrenz. Als Maßstab für die Anwendung und Leistung unter Realbedingungen sind sie eher ungeeignet. 
 
 **Für wertvolle Informationen in dieser Hinsicht sollten Sie sich in Nutzerforen umsehen und auf die Erfahrung und das Feedback anderer Nutzer vertrauen.** Sie können Ihre Fragen beispielsweise direkt im [[http://discourse.mcneel.com/|Rhino-Userforum]] stellen.
- 
-===== Intel-Grafikkarten und Rhino 5 =====
-**Diese Karten sind nicht empfehlenswert und sollten für die Arbeit mit Rhino nicht benutzt werden.**
-
-Wenn Sie bereits eine solche Grafikkarte besitzen und dies die einzige Karte Ihres Computers ist (also z.B. kein Hybrid), dann sollten Sie die Hardwarebeschleunigung aktivieren und ausprobieren, ob die Maßnahme Verbesserungen bringt. Rhino 5 hat diese Einstellung möglicherweise während der Installation deaktiviert.
-
-{{:rhino:rhino_opengl_options.png?400|}}
-
-//Die OpenGL-Einstellungen in den Rhino-Optionen.//
-
-Wenn Sie merken, dass sich die Leistung von Rhino nach der Aktivierung verbessert hat, sollten Sie die neuen Einstellungen beibehalten.
-Viele der Feature von Rhino 5 wie die schattierte oder gerenderte Anzeige sowie der Analysemodus nutzen OpenGL.
-Die Leistung dieser neuen Features wird nicht allzu großartig sein, aber es ist unter bestimmten Umständen wichtiger, dass sie überhaupt funktionieren.
-
-===== Nvidia-Quadro-Karten =====
-
-Dies sind High-End-Grafikkarten, die für Ingenieure absolut geeignet sind. Erst kürzlich kam ein Treiberupdate heraus, das die Performance noch einmal verbessert. **Wir empfehlen die Quadro-Karten**.\\
-Weitere Infos finden Sie hier:
-http://wiki.mcneel.com/de/rhino/nvidiainfo
-
-
-
-===== Nvidia GeForce =====
-
-**Die Nvidia-Geforce-Produktlinien GT und GTX funktionieren gut mit Rhino**.
-
-Die 200er und die 300er basieren auf einem etwas älteren Chipsatz, der sehr schnell ist.  Die neuen GeForce-Grafikkarten, die auf Nvidia FERMI basieren (z.B. die Serien der GeForce FX 400 und 500) funktionieren ebenfalls, zeigen aber nicht den Leistungszuwachs, den wir von den teureren Karten erwarten würden. Teilweise waren sie sogar langsamer als die der 200er- und 300er-Serie.
-
-
-===== ATI Video =====
-Die neuen Serien der AMD/ATI 4000/5000/6000 Radeon HD haben gezeigt, dass Sie für Rhino 5 sehr geeignet sind. Meiden Sie aber die älteren Versionen. Diese waren nur für DirectX gedacht. Allerdings haben wir öfters festgestellt, dass die mit den Karten ausgelieferten Treiber ziemlich veraltet sind. Wir empfehlen, sich von der Homepage von ATI/AMD die neuesten Treiber herunterzuladen. Sehr gute Grafikkarten sind auch die der Serien FirePro v7900 und v5900.
-http://wiki.mcneel.com/de/rhino/videocards
-
-
-//Hinweis: Mehrere fortgeschrittene Benutzer haben im Rhino-Diskussionsforum von Problemen mit der FirePro v7900 im Bereich Antialiasing berichtet. Konsultieren Sie also das Forum, bevor Sie Geld in eine dieser Karten investieren.//
-
-
-14. Nov. 2012: Ein Benutzer schreibt uns, dass er mit der Treiberversion 8.982 seiner FirePro 8800 Probleme mit weit vom Ursprung entfernten schattierten Oberflächen habe, während das Problem mit der älteren Treiberversion 8.911 nicht auftrete.
-
-===== FireGL 5800/7800/8800 =====
-Diese Grafikkarten sind sehr gut. Ein Die 5800 ist eher im Low-End-Bereich der 
-FirePros anzusiedeln, ist aber dennoch eine sehr gute Karte. Ich habe eine hier, habe sie aber noch keinem 
-gründlichen Test unterzogen. Die 7800 ist die mittlere der FirePros und die 
-8800 das High-End-Modell (das ich hier habe und nutze). Da ich keine 
-7800 besitze, kann ich nur annehmen, dass sie gut ist, aber bis jetzt 
-gibt es keinen Grund, vom Gegenteil auszugehen. 
-
-===== Neue Treiber=====
-Wenn Sie eine nVidia Quadro 3800 verwenden, stellen Sie sicher, dass die Treiber auf dem neuesten Stand sind.
-
-Die neuesten Nvidia-Treiber finden Sie [[http://www.nvidia.de/Download/index.aspx?lang=de
-|hier.]]
-
-Anmerkung: **NVIDIA-Quadro-Anwender** finden weitere Infos auf dieser Seite: http://wiki.mcneel.com/de/rhino/nvidiainfo
-
-Die neuesten AMD/ATI-Treiber gibt es [[http://support.amd.com/de/Pages/AMDSupportHub.aspx
-|hier.]] 
-
-Verlassen Sie sich dabei besser nicht auf die automatischen Updates der Windows-Anzeigeeigenschaften. Laden Sie sich stattdessen den aktuellen Treiber direkt von der Website des Herstellers. Normalerweise handelt es sich dabei um eine EXE-Datei, die Sie nach dem Download ausführen. 
-
-Zum leichteren Wiederfinden speichern Sie die Datei am besten auf dem Desktop ab und löschen Sie sie nach der Installation wieder.
-
-<color red> **Achtung:**</color> Nicht alle Treiber erstellen einen Windows-Systemwiederherstellungspunkt, bevor sie mit der Installation beginnen. Für den Fall, dass die neuen Treiber Ihre Windows-Konfiguration durcheinander bringen, ist es immer ein guter Rat, einen **Systemwiederherstellungspunkt** zu erstellen, bevor man ein Update einer kritischen Windows-Systemkomponente durchführt.
-===== Crossfire =====
-Die Benutzung von zwei Karten sollte grundsätzlich eine Besserung bringen, auch wenn ich nicht sicher bin, ob man den Unterschied in Rhino so sehr merkt.  Die Crossfire-Technologie zeigt ihre wahre Stärke besonders in Situationen, in denen die Grafikkarte maximal beansprucht wird. Dies können beispielsweise hochauflösende Grafiken oder Spiele mit sehr hohen Bildraten sein.   Rhino arbeitet allerdings etwas anders. Die meiste Zeit (etwa 95 %) befindet sich die Rhino-Anzeige im Leerlauf und macht gar nichts.
-
-===== Grafikspeicher===== 
-Wir empfehlen dennoch, so viel Grafikspeicher wie möglich zu verwenden, weil dies Rhino 5 entgegen kommt. Wenn Sie also die Wahl zwischen einer Karte mit 1 GB und einer mit 2 GB haben, nehmen Sie besser die mit 2 GB.
-===== Zwei Grafikkarten ===== 
-Weitere Informationen zur Verwendung von zwei Grafikkarten finden Sie unter
-http://wiki.mcneel.com/rhino/twodisplayadapters
-
-===== Das Neueste und Beste =====  
-Vielleicht ist es auch interessant, zu erfahren, welche Art von Karte die Benutzer von Rhino 5 verwenden. Im Discourse-Forum können Sie sich mit anderen Rhino-Anwendern austauschen (auf folgender Seite verlinkt):
-http://www.rhino3d.com/support.htm
-
-===== Das Wesentliche =====  
-Eine wesentliche Zusammenfassung zu speziellen Grafikkarten (sowohl guten als auch schlechten) finden Sie hier:
-http://wiki.mcneel.com/de/rhino/videocards
