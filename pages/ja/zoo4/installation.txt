@@ -1,0 +1,78 @@
+====== Zooのインストールと設定 ======
+> **製品:** //[[ja:zoo4:home|Zoo 4.0]]//
+> **要約:** //Zooワークグループライセンスマネージャーのインストールのヒント//
+
+Zooは同じ・ワークグループのユーザー間でRhino、Flamingo、Penguin、Bongoのライセンス(CD-Key)をを共有できるようにするものです。Zoo 4.0はRhino 4.0のCD-Keysの他、前のバージョンからのRhino、Flamingo、Bongo、[[penguin:home|Penguin]]のCD-Keysとも動作するように設計されています。
+
+=====トポロジー=====
+**1. 小規模なネットワーク**
+
+ZooとRhinoのクライアントコンピューターは全て同じネットワークサブネット、仮想LANの中、同じファイアウォールの内側にあります。ネットワーク設定を何も追加しなくても、Zooは全てのRhinoクライアントコンピューターで動作します。
+
+{{:ja:zoo:zooconfigbroadcast_j_small.png|}}
+
+**2. ルーティングネットワーク**
+
+ZooとRhinoのクライアントコンピューターがルーターの反対側にあり、Rhinoのクライアントコンピューターが異なるネットワークセグメント内、異なるルーターの背後、異なるバーチャルLAN上にあることが考えられます。この場合、 RhinoがZooを検出できるようにするために、ネットワークまたはクライアントコンピューター設定を追加で行う必要があります。詳細については、このページの下の方にある[[#ルーターを使用したネットワークで動作するようにZooを設定する]]をご覧ください。
+
+{{:ja:zoo:zooconfigdns_j_small.png|}}
+=====インストール=====
+
+  * 以前のバージョンのZooを既に実行しているシステムにインストールする場合は、Zoo 4.0 をインストールする前にそのZooを停止する必要があります。
+  * Zoo 4.0のインストーラーがシステムに以前のバージョンがインストールされていることを検出した場合、デフォルトではZoo 4.0が以前のリリースと同じフォルダにインストールされます。
+  * Zoo 4.0を以前のリリースと同じフォルダにインストールする場合、インストーラーは以前のリリースのZoo（Zoo.exe）とそのライセンスファイル（Zoo.key）両方のバックアップコピーを作成します。また初めてZoo 4.0を実行する際には、以前のライセンスを自動的にインポートします。
+
+=====設定=====
+  - Zoo 4.0 を起動します。
+  - Rhino、Penguin、Bongo、Brazil、Flamingoを含め、使用する全てのCD-KeyをZoo 4.0 に追加します。
+  - Zooサービスを開始します。
+
+
+=====ルーターを使用したネットワークで動作するようにZooを設定する=====
+デフォルトで、Rhinoはご利用のネットワークでメッセージをブロードキャストすることによってZooを探します。これは1つのVLanやサブネット内では（すべてのコンピューターがルーターの同じ側にある限り）問題がなく作動しますが、複数のVLanがある場合、追加設定を行う必要があります。
+
+**ルーターを使用したネットワークの設定オプション**
+
+以下の設定オプションから1つのみを選択します:
+
+    - **DNS:** DNS txtレコードをDNSサーバーに設定すると、Rhinoはクライアントへの追加設定なしにZooを検出することができます。
+    - **レジストリキー:** それぞれのクライアントマシンにレジストリキーを作成します。DNSがない、あるいはDNSの変更ができない場合はこのオプションをお選びください。
+
+**DNSを設定するには**
+
+    - それぞれのクライアントが属するドメイン名を決定します。**マイコンピューター**を右クリックし、**プロパティ**をクリックします。ドメイン名は、システムのプロパティダイアログボックスのコンピューター名に表示されます。
+    - ドメインのプライマリDNSサーバーに、**Zoo4=<ホスト名>**（<ホスト名>は[[ja:rhino:netbios|NetBIOS]]ホスト名）の形式で新しいTXTレコードを作製します。例えば、完全修飾ホスト名が「ZooServer.bcn.es.mycorp.com」でドメインが「bcn.es.mycorp.com」である場合、[[ja:rhino:netbios|NetBIOS]]ホスト名は**ZooServer**です。
+    - **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zooボーナスツール]]**に含まれる**ZooDnsResolver**を使ってクライアントからDNS設定をテストします。
+
+**それぞれのコンピューターにレジストリキーを設定するには**
+
+    - 既存のレジストリキーがない場合、Rhino 4.0を実行するそれぞれのコンピューターに次のレジストリキーを作成します: **HKEY_LOCAL_MACHINE\Software\McNeel\RhinoLM**
+    - **RhinoLM**キーに**zoo4**という名前の新規**文字列値**を作成します。
+    - **zoo4**値のデータをZooサーバーのNetBIOSホスト名に設定します。例えば、完全修飾ホスト名が「ZooServer.bcn.es.mycorp.com」でドメインが「bcn.es.mycorp.com」である場合、NetBIOSホスト名は**ZooServer**です。
+    - **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Zooボーナスツール]]**に含まれる //SetZooServer// ツールがこのレジストリキーの作成を補助します。どうぞご利用ください。
+
+<code>
+注意事項: Windowsのx64ベースのバージョンをお使いの方へ
+Windowsのx64ベースのバージョンで動作するパソコンは32ビット/64ビット両方のプログラムを扱うため、異なるレジストリのレイアウトを使います。
+
+• Native mode 64-bit programs run in Native mode and access keys and values that are stored in the following registry sub key: 
+
+HKEY_LOCAL_MACHINE\Software 
+
+• 32-bit programs run in WOW64 mode and access keys and values that are stored in the following registry sub key: 
+
+HKEY_LOCAL_MACHINE\Software\WOW6432node 
+
+Rhino 4.0 is a 32-bit application. Thus, if Rhino 4.0 is running on an x64-based version of Windows, you will want to add the Zoo Registry Key Lookup entry in this location:
+
+HKEY_LOCAL_MACHINE\Software\WOW6432node\McNeel\RhinoLM 
+</code>
+
+=====その他の詳細=====
+  * ZooはWANで稼動するように設計されていませんでしたが、ネットワーク設定に手を加えて使えるようにしている方はいらっしゃいます。それでも弊社でそのような設定のテストや認定は行っておりません。
+    * 基本条件は以下の通りです:
+      * すべてのマシンが同じWindowsドメインのメンバーであることをお確かめください。
+      * <color red>推奨しないこと:</color> 全てのファイアウォールでUDPポート137と138、TCPポート139を開くこと。<color red>これは深刻なセキュリティ上の弱点であることにご注意ください。</color>これらのポートを一般のインターネットアクセスに開くことは推奨しません。インターネットで「NetBIOS　セキュリティ脆弱性」などをキーワードに検索すると、詳細な情報を見つけていただくことができます。
+  * それぞれのマシンに固有のIPを割り当てるVPNを推奨します。
+    * Zooはネットワークアドレス変換（NAT）と互換性がない可能性があります。弊社で互換性を裏付ける完全なテストは行っておりません。
+  * ドメインで実行されているZooが1つだけであることをお確かめください。Zooの問題のほとんどは他にテストZooがあり（Rhinoを実行しようとしている同じマシン上である場合があります）、メールスロットの衝突の問題によって発生しています。
