@@ -1,0 +1,50 @@
+======ラピッドプロトタイピング情報======
+> //このページはRPテクノロジーをカバーしています。このプロセスでのRhinoの利用については、[[http://wiki.mcneel.com/ja/3dprinting|Rhinoを使った3D印刷に向けた準備]]で最善の情報をご覧いただけます。//
+
+===== What is rapid prototyping?=====
+The term rapid prototyping (RP) covers a variety of processes aimed at quickly creating physical parts from 3D computer models using computer controlled machines. Virtually all RP processes are additive. The part is built up by adding, depositing, or solidifying material.  This is the opposite strategy of a subtractive process such as machining. Machining creates objects by removing unwanted material from a large block in the form of chips.  All current RP processes build up the object in a series of horizontal layers of varying thickness.
+
+The word rapid in RP is a relative term, as most of these processes are actually relatively slow.  Rapid actually refers to the reduced time from design to final part due to the elimination of extensive amounts of handwork (and setup/computer programming in the case of CNC machined parts) involved in making prototypes, as well as the ability to quickly iterate a design through various stages. This results in drastically shorter times to production.
+
+
+**[[http://en.wikipedia.org/wiki/Rapid_prototyping|A good synopsis of rapid prototyping technology can be found here.]]**
+
+===== General info on working with Rhino (and other programs) to create RP parts=====
+
+For pretty much all Rapid Prototyping processes, one needs to start with a closed, valid polysurface or //solid//.
+
+**[[rhino:faqclosedsolids|Information on producing valid closed solids in Rhino]].**
+
+From that closed solid, a mesh representation of the model needs to be created and exported in the form of an .stl file.
+
+**[[rhino:stlinfo|Information on STL files.]]**
+
+**[[rhino:meshfaq|Information on meshing objects in Rhino.]]**
+
+=====Information and comments on individual processes=====
+
+
+**Stereolithography**
+
+**[[rhino:slsinfo|SLS (Selective Laser Sintering)]]**
+
+**[[rhino:fuseddepositionmodeling|FDM (Fused Deposition Modeling - Stratasys)]]**
+
+**Polymer ink printer (Objet)**
+
+**Z-Corp**
+
+**[[rhino:solidscape|Solidscape and other wax printers]]**
+
+**LOM (Laminated Object Manufacturing)**
+
+
+----
+
+===== Some excerpts and comments from a newsgroup discussion=====
+
+  * <color darkblue>JB: If any seam or edge is not closed, it will not STL print, period, since the surfaces have no thickness. The only way to get a solid is to have a completely closed surface or polysurface. Then it will hold water and will print. It prints the volume enclosed and represented by the mesh, not the surfaces themselves.</color>
+  * <color green>Jim: Actually, in practice that may be a stated requirement for the sake of simplifying the requirements, but in theory all that most 3D printing systems really need is to be able to resolve the object into 2D closed shapes. What these systems do is build the object in layers. They deposit in one way or another a thin layer of material inside the closed shape of each layer. As an example, that means an orthogonal box only really needs the side surfaces to define it. The top and bottom surfaces are not used to generate the needed 2D profiles to produce the part. Also, simply having a closed object is often not enough to produce the part. There are usually other limitations that have to be considered. Some systems can only build an object if each succeeding layer can be fit inside the preceding layer. In other words, each layer laid down needs something underneath it to support it. There are ways that various processes can get around this, but there still may be limitations on shape so that the object can support it self in a stable way and doesn't fall over while its being built. [2005-12-02]</color>
+  * <color darkslateblue>Jeffrey: Basically, there are two different approaches to supporting surfaces such as overhangs or such as you posted. [[rhino:solidscape|Solidscape]] (inkjet type of 3D wax printing) uses a soluble support medium that essentially is printed as the negative space in and just around the solid. The print is then placed in an ultrasonic tank in a medium that dissolves the supporting material. Other processes use support structures that have a very small connection point and must be physically removed by 'snapping' them off and smoothing out the resulting rough spot by sanding and filling in a divit if necessary. This kind of support structure can look somewhat like a tressel or other delicate design that uses a minimum of support material, thus saving build time and material cost. By the way, to print a true hollow, you'll most likely want to print it in two sections that can be assembled later. As Jim mentioned, without knowing what real world manufacturing process you have in mind, we can't be much help. [2005-12-03]</color>
+  * <color mediumvioletred> Mitch:  On FDM machines, the machine slicing software also creates the supports for overhanging parts.  With the more advanced machines, supports can also be created manually.  Any overhanging wall of greater than a 45 degree angle to the horizontal is self supporting and needs no support structure.  With the current ABS and ABS/PC materials, a water soluble support material is used.  As far as the necessity of 100% closed objects are concerned, the slicing software will attempt to close open slice curves and the advanced versions allow the user to edit and close them manually. [2006-17-02]</color>
+
