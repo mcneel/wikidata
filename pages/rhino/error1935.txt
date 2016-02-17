@@ -1,4 +1,4 @@
-====== Install Error 1935. An error occurred during the installation of assembly “Microsoft.VC80.CRT, …” ======
+====== Install Error Error 1935: Assembly component Microsoft.VC80.CRT ======
 > **Summary:** //How to fix the installation Error 1935.//
 > **Related installation help:** //[[installproblems|Troubleshooting Rhino 5 Installation]]//
 
@@ -6,26 +6,18 @@
 I get "Error 1935. An error occurred during the installation of assembly "Microsoft.VC80.CRT, ..."
 
 =====Cause====
-This is a bug in the Microsoft C++ 2005 Redistributable Package.
+The Microsoft C++ 2005 Redistributable Package has never been installed or failed in an earlier attempt. This is a problem with Windows and the Microsoft Redistributable Package, not with Rhino's installer. However the Rhino is unable to successfully finish. Sometime is it only the 64 bit that will not complete the install.
+
 
 =====Answer=====
-**//Solution 1://**
-  * **Update Windows.** Several users have reported that running Windows Update fixed the problem.
-**//Solution 2://**
-  * **Disable the antivirus program on the system.** A user reported disabling AVG made Rhino installation work.
-**//Solution 3://**
-  * **Try to install several times.** A user reported that the Rhino installation succeeded the third time he tried to install Rhino. He didn't do anything to the system.
-**//Solution 4://**
-  - On Windows Vista or Windows 7, from the Start menu, type Features.
-  - Click **Turn Windows Features On or Off**
-  - In the Windows Features dialog box, select the check box labeled **Windows Communication Foundation HTTP Activation**:
-  - {{:rhino:rhino_1935_windows_features.png|}}
-  - Click OK.
+You will need to install the redistribute the **[[http://www.microsoft.com/download/en/details.aspx?id=26347|Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package MFC Security Update]]**. Note, the version of these assemblies are **8.0.50727.5592** or **8.0.50727.6195**.
 
-If you are unable to enable this feature, or if the Windows Features dialog box appears and is empty, then your installation of Windows is corrupt and needs to be repaired. Please contact Microsoft Support for more assistance.
-
-**//More details://**
-People who get this error while installing Rhino are also unable to install the [[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 Redistributable Package directly]] from Microsoft. Therefore, this is a problem with Windows and the Microsoft Redistributable Package, not with Rhino's installer.
+  - **[[http://www.microsoft.com/download/en/details.aspx?id=26347|Go to the Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package MFC Security Update page]]**
+  - Click the Download button. {{:rhino:c_2005redistributables01.jpg?500|}}
+  - Download the vcredistx86.exe for 32 bit OS only.
+  - Download the vcredistx86.exe and vcredistx64.exe for 64 bit OS. {{:rhino:c_2005redistributables02.jpg?500|}}
+  - Go to download location and install the redistributable(s). 
+  - Upon successful install, re-install Rhino. 
 
 
 {{tag>rhinoinstallationerror}}
