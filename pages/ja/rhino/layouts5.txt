@@ -5,50 +5,50 @@
 レイアウトはモデルを配置、表示し、注釈を付けるために使われ、以下の作業を行えるようデザインされています:
 {{ :rhino:anno_layout_tutorial1.png?300|}}
 
-      * Arrange views of the model, called details, at different scales and orientations.
-      * Add annotations like title blocks and general notes to the layout.
-      * Assign scales to the details and plot the layout 1=1.
-      * Create text, dimensions in the details or on the layout.
-      * Use Annotation Scaling for text, dimensions, and hatch.
-      * Control layer visibility and color per detail.
-      * Plot one, some or all the layouts to a plotter, printer or PDF.
+      * 異なるスケールと向きでモデルのビューを配置します（詳細）。
+      * タイトルブロック、その他の注釈といった注釈をレイアウトに追加します。
+      * 詳細にスケールを割り当て、レイアウトを1=1で示します。
+      * 詳細内またはレイアウト上にテキスト、寸法を作成します。
+      *テキスト、寸法、ハッチングに注釈のスケーリングを使用します。
+      * レイヤ表示状態や詳細ごとの色をコントロールします。
+      * 1つ、一部、または全てのレイアウトを、プロッター、プリンター、またはPDFに表示します。
 
-==== Background ====
+==== 背景 ====
 
-Before Layouts in Rhino 3, arranging multiple views of the model on a title block was done outside of Rhino with other CAD software. Rhino 4 added the Layout space, and Rhino 5 improves it in the following ways:
+Rhino 3 のレイアウトまで、タイトルブロックでモデルの複数のビューを配置するのは他のCADソフトを使ってRhino以外で行っていました。Rhino 4 にはレイアウト空間が追加され、Rhino 5 では以下の方法で機能を向上させています:
 
-**New commands**
-  * Draw Order controls the order the Detail Views are drawn in a Layout. 
-  * DisableClippingPlane - Turns off selected clipping planes in the active viewport. Also available in Properties -> Clipping Plane pane.
-  * ImportLayout - Imports layout pages from another Rhino file.
-  * Multipage Layout Print - Any or all the layouts can be printed at once.
-  * ShowLayersInDetail - Shows layers in detail views.
-  * HideLayersInDetail - Hides the selected layers in detail views.
-  * ShowSelectedInDetail - Works just like the ShowSelected command except it only works on objects that were previously hidden with the HideInDetail command.
-**Enhancements**
-  * HideInDetail - New options added to include/exclude the active and inactive details.
-  * Text and Dimension style scaling - Text and dimension can be now scaled differently in layout viewports and model viewports. This makes it easier to have text and dimension appear at the same height in different viewports when they are at different scales in a layout.
-  * Hybrid printing - When possible, both raster and vector printing are used to make higher quality prints.
+**新しいコマンド**
+  * 表示順序（描画順序）でレイアウトに描かれた詳細ビューの順序をコントロールします。
+  * DisableClippingPlane - アクティブビューポートで選択されたクリッピング平面をオフにします。プロパティ -> クリッピングするビューでもこの機能を使うことができます。
+  * ImportLayout - 別のRhinoファイルからレイアウトのページをインポートします。
+  * 複数のレイアウトを印刷 - 任意または全てのレイアウトを一度に印刷することができます。
+  * ShowLayersInDetail - 詳細ビューのレイヤを表示します。
+  * HideLayersInDetail - 詳細ビューのレイヤを非表示にします。
+  * ShowSelectedInDetail - ShowSelectedコマンドと同じように動作しますが、HideInDetailコマンドで非表示にしたオブジェクトのみに働きます。
+**機能向上**
+  * HideInDetail - アクティブ、非アクティブの詳細を含めるかどうか選択できる、新しいオプションを追加しました。
+  * テキストと寸法のスタイルをスケーリング - テキストと寸法を、レイアウトビューポートとモデルビューポートで別々にスケーリングできるようになりました。レイアウトによってスケールが異なる場合でも、異なるビューポートのテキストと寸法の高さが揃えやすくなっています。
+  * ハイブリッド印刷 - 可能な場合、レーザー/ベクター印刷の両方を使った、よりハイクオリティな印刷に仕上げることができます。
 
-==== Support files ====
-Here are the files required for both the PDF tutorials and the video tutorial below.[[http://s3.amazonaws.com/mcneel/rhino/5.0/training_docs/Layouts 5/RH5-TM-LAYOUTS-EN-20140408-ALL.zip| Models, additional files, and PDF for Layout Tutorial (ZIP)]] 6.8 MB 
+==== サポートファイル====
+PDFチュートリアル、ビデオチュートリアルのどちらにも必要なファイルは以下の通りです。[[http://s3.amazonaws.com/mcneel/rhino/5.0/training_docs/Layouts 5/RH5-TM-LAYOUTS-EN-20140408-ALL.zip|Layout Tutorial のためのモデル、その他のファイルおよびPDF（ZIP）]] 6.8 MB 
 
 
-===== Layout tutorial for Rhino 5 (PDF)=====
+===== Layout Tutorial for Rhino 5（PDF）=====
 
-This tutorial steps you through the setup of a model to plot from a Sheet Layout viewport. You can download these files and work along with the tutorial.
+Sheet Layout ビューポートから表示させるモデルの設定を紹介するチュートリアルです。これらのファイルはダウンロードすることができ、チュートリアルに沿って取り組むことができます。
 
-In this tutorial, we:
-  - Use the Layout feature to create a plot sheet with details and title block. 
-  - Set the scale to the details and add text and dimensions that are sized correctly to the detail. Use layer visibility per detail and set layer color per detail.
-  - Annotate the plot sheet with title block, notes, and other objects that are not directly related to the model. 
-  - Assign print width, print color to objects, and enable the Print Preview mode. 
-  - Plot the layout 1:1 or full size to a PDF. 
+チュートリアルの内容:
+  - レイアウト機能を使って詳細とタイトルブロックを含むプロットシートを作成します。
+  - 詳細のスケールを設定し、その詳細に正しく合わせたテキストと寸法を追加。詳細ごとのレイヤの表示状態を使い、それぞれにレイヤの色を設定します。
+  - タイトルブロック、注記、その他モデルに直接関係しているわけではないオブジェクトを含め、プロットシートに注釈を付けます。 
+  - 印刷幅、オブジェクトの印刷色を割り当て、印刷プレビューモードを使えるようにします。
+  - レイアウトを 1:1 またはフルサイズでPDFに表示させます。 
 
-[[http://s3.amazonaws.com/mcneel/rhino/5.0/training_docs/Layouts 5/RH5-TM-LAYOUTS-EN-20140408.pdf|Layout Tutorial PDF only]] 6 MB.
+[[http://s3.amazonaws.com/mcneel/rhino/5.0/training_docs/Layouts 5/RH5-TM-LAYOUTS-EN-20140408.pdf|Layout Tutorial PDF（英語）はわずか]] 6 MBです。
 
 {{ :rhino:layout_final.jpg?nolink&400|}}
-Contents
+内容
   * Using Layout in Rhinoceros 5
   * Introduction to Layout
   * Setting Up the Model
@@ -64,14 +64,14 @@ Contents
   * Print Color Plot
   * Display Color Plot
 
-===== Video tutorials=====
+===== ビデオチュートリアル=====
 
-====Full video====
+====フルバージョン====
 |**Introduction to Layouts - Full Video**||
 |{{vimeo>90471956?320x180}}| [[mary@mcneel.com|Mary Fugier]] shows you how to use Layouts in Rhino 5. Learn how to arrange views of both 2-D and 3-D models on the title block at different scales and prepare the layout for printing. Also see how to add annotations to the layout, like text, dimensions and plot to a PDF. To watch full screen, click here: [[https://vimeo.com/90471956|Introduction to Layouts]] |
 
-====Course segments====
-Watch these segments instead of the full video or watch the [[http://vimeo.com/channels/715875|Vimeo Channel on Layouts.]]
+====コース分割バージョン====
+フルバージョンの代わりにこちらの分割ビデオをご覧いただくか、[[http://vimeo.com/channels/715875|VimeoのLayoutsチャンネル]]をご覧いただくこともできます。
 
   - [[http://vimeo.com/channels/715875/90913061|Basic Layout Intro]] - (11:00)
   - [[http://vimeo.com/channels/715875/90913063|Getting Rhino Setup for Accessing Layout Commands]] - (7:06)
@@ -97,8 +97,8 @@ Watch these segments instead of the full video or watch the [[http://vimeo.com/c
   - [[http://vimeo.com/channels/715875/90917074|Configuring A Layout for a 3D Ring Metric Model]] - (3:22)
   - [[http://vimeo.com/channels/715875/90917075|Rhino Users Work with Layouts]] - (7:06)
 
-Other layout links:
-[[http://wiki.mcneel.com/rhino/align_details5|Aligning Details on a Layout]]
+レイアウトに関するその他のリンク:
+[[http://wiki.mcneel.com/ja/rhino/align_details5|レイアウトの詳細を整列]]
 
 
 > **Author:** //Mary Ann Fugier email: <mary@mcneel.com>//
