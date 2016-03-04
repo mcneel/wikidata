@@ -1,14 +1,20 @@
-====== How to fix the Rhino V4 osnap tooltip cursor problems ======
+======Fixing Rhino V4 Osnap Tooltip Cursor Problems======
+
+>How to fix the Rhino V4 osnap tooltip cursor problems
 
 This article addresses older Rhino Version 4 trouble.  
 
-**<color red>Symptom -</color>**  when Object Snaps (Osnaps) are on and you hover near a snap point, the display should indicate which snap is active (with a word like End or Cen in a little box near the cursor).  In certain installations, this tooltip is distorted or unreadable. Typically people report seeing a square box with a fuzzy or garbled display of pixels inside.
+**Symptom**  
 
-**<color darkgreen>Fix -</color>**  Right click on the desktop, choose Properties, go to the Settings tab, click the Advanced button, go to the Troubleshoot tab and move the little slider one or two clicks to the left.  The problem should go away.
+When Object Snaps (Osnaps) are on and you hover near a snap point, the display should show which snap is active (with a word like End or Cen in a little box near the cursor).  In certain installations, this tooltip is distorted or unreadable. Typically people report seeing a square box with a fuzzy or garbled display of pixels inside.
 
-This has to do with the graphics card, drivers used, and your [[rhino:opengl|OpenGL]] settings.  It generally only happens when using hardware accelerated OpenGL, and is most often reported in conjunction with ATI graphics cards and drivers.  Moving the slider to the left one or two clicks removes the mouse cursor acceleration (without affecting the rest of the hardware acceleration), which seems to fix the problem in most cases.
+**Fix**  
 
-> **Note:** //There may be some cases where the above method does not work or will not be possible, see the bottom of the page for another way to fix this (Rhino 4 only)//
+Right-click on the desktop, choose **Properties**, go to the **Settings** tab, click the **Advanced** button, go to the **Troubleshoot** tab and move the little slider one or two clicks to the left.  The problem should go away.
+
+This has to do with the graphics card, drivers used, and your [[rhino:opengl|OpenGL]] settings.  It generally only happens when using hardware accelerated OpenGL, and is most often reported in conjunction with ATI graphics cards and drivers.  Moving the slider to the left one or two clicks removes the mouse cursor acceleration (without affecting the rest of the hardware acceleration). In most cases, this seems to fix the problem.
+
+**Note:** //There may be some cases where the above method does not work or will not be possible. See the bottom of the page for another way to fix this (Rhino 4 only).//
 
 <color White>-</color>
 
@@ -20,26 +26,23 @@ This has to do with the graphics card, drivers used, and your [[rhino:opengl|Ope
 <color White>-</color>
 
 {{:legacy:en:VideoAccel2.jpg}}
-//Moving the slider to the left one or two clicks//
 
-//removes the mouse cursor acceleration,//
-
-//but not the rest of the hardware acceleration.//
+Moving the slider to the left one or two clicks removes the mouse cursor acceleration, but not the rest of the hardware acceleration.
 
 ----
 
 ====What to do if the above isn't possible or doesn't work====
 
-In some cases, you are not allowed to change the slider indicated above - it will be grayed out - for example a low-level user on a network might not have privileges to change display settings.
+In some cases, you are not allowed to change the slider indicated above. It will be grayed out. For example, a low-level user on a network might not have privileges to change display settings.
 
-If this is the case, you should try the following:
+If this is the case, try the following:
 
-Go into **Rhino Options > Modeling Aids**.  In the Dynamic Object Snap section, check **"None"**
+Go into //Rhino Options > Modeling Aids//.  In the Dynamic Object Snap section, check **None**.
 
-Before exiting Options, go to the Cursor ToolTips section (a sub-category of the modeling aids section) and check the top box **"Enable cursor tooltips"**
+Before exiting **Options**, go to the **Cursor ToolTips** section (a sub-category of the modeling aids section) and check the top box **Enable cursor tooltips**.
 
-Afterwards, check **"Osnap"**, then OK to exit Options.
+Afterwards, check **Osnap**, then **OK** to exit **Options**.
 
-Hopefully you should now have a working osnap onscreen display.  The cursor tooltips use a different display method, and are not affected by the same [[rhino:opengl|OpenGL]] problems as outlined in the first section.  If there are still problems, report these to the Rhino newsgroup or tech support.
+You should now have a working osnap onscreen display.  The cursor tooltips use a different display method, and are not affected by the same [[rhino:opengl|OpenGL]] problems outlined in the first section.  If there are still problems, report these to the Rhino newsgroup or tech support.
 
 
