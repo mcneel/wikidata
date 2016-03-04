@@ -1,48 +1,49 @@
-====== Why Rhino files seem to be larger than expected ======
+======Large Rhino Files=====
 
+>Why Rhino files seem to be larger than expected 
 
-The following is a newsgroup message from Dr. Dale Lear, Chief Scientist, posted 21 December 2007, explaining why Rhino files seem to be larger than expected, and why this larger size is a really good thing.
+Following is a newsgroup message from Dr. Dale Lear, Chief Scientist, posted 21 December 2007. He explains why Rhino files seem to be larger than expected and why this larger size is a really good thing.
 
-======Why are Rhino files so large?======
+=====Why are Rhino files so large?=====
 
 There is a persistent question on this newsgroup about why Rhino 3dm files are so big.
 
 There is a simple answer.  We designed Rhino's file format based on the assumption that the information in the files is valuable and storage space is inexpensive.
 
 
-=====RHINO FILE DESIGN:=====
+====Rhino file design====
 
 Around half the bytes in the Rhino file are devoted to storing information that makes robust recovery possible.
 
 Every single item (layer, point, curve, material, ...) in a Rhino file is isolated in a "chunk" with its own CRC (cyclic redundancy check).
 
-When a Rhino file suffers minor damage (random bad bytes from a failing disk, removable media left too close to powerful magnetic fields, USB memory sticks dropped in the toilet), Rhino can still read the file and Rhino even tells you that it detected corrupt items in the file so you know the file has been damaged.
+When a Rhino file suffers minor damage (random bad bytes from a failing disk, removable media left too close to powerful magnetic fields, USB memory sticks dropped in the toilet), Rhino can still read the file. Rhino even tells you that it detected corrupt items in the file so you know the file is damaged.
 
-Let' say the file is really trashed by a seriously failing disk.  Take a file with 50,000 objects in it, remove the first 20% of the file, and then randomly change another 5% of the values in the remainder of the file.  The Rhino "Rescue3dmFile" command can dig through this shredded trash pile and still recover most of the geometry in what is left.  (Try this experiment with your brand "X" cad files and you'll get nada.  Then contact brand "X" customer support and ask what they can do to help recover the file's contents - you'll get nada and probably be charged for the support call.)
-
-
-=====RHINO V5 IMPROVEMENTS:=====
-
-In general, V5 creates files that are 5% to 20% smaller than V4 files and are even more resistant to failing storage media.  In addition, the [[accurender:dwg|dwg]] importer has been improved so that it translates objects in the [[accurender:dwg|dwg]] file into the most efficient (speed and size) Rhino object.
+Say the file is really trashed by a seriously failing disk.  Take a file with 50,000 objects in it, remove the first 20% of the file, and then randomly change another 5% of the values in the remainder of the file.  The Rhino **Rescue3dmFile** command can dig through this shredded trash pile and still recover most of the geometry in what is left.  (Try this experiment with your brand X CAD files and you'll get nada.  Then contact brand X customer support and ask what they can do to help recover the file's contents. You'll get nada and probably be charged for the support call.)
 
 
-=====COST OF STORAGE MEDIA:=====
+====Rhino 5 improvements====
 
-Rhino 3dm files are stored on delicate media that fail and inconvenient times.  A  250GB (giga byte) disk costs around 100USD.  That's about 0.0004 dollars/MB (mega byte).  A 50MB Rhino file is using about 2 cents worth of storage space.
-
-
-I'll let you calculate how much money the information in your 3dm files is worth and how much you are willing to pay to protect your investment. Please let us know if less than 1 cent of storage space per Rhino file is an excessive amount of money to spend to provide robust protection of your information.
+In general, V5 creates files that are 5% to 20% smaller than V4 files and are even more resistant to failing storage media.  Also, the [[accurender:dwg|dwg]] importer has been improved so that it translates objects in the [[accurender:dwg|dwg]] file into the most efficient (speed and size) Rhino object.
 
 
-=====EVEN MORE FOR YOUR MONEY:=====
+====Cost of storage media====
 
-Think about your software investment long term.  The value is in the information, not the product.  Your 15 year old version of Rhino 1.0 is now a worthless floppy disks in a landfill.  However, the files you created 15 years ago with Rhino 1.0 may still be extremely valuable. We give away, for free-no-strings-what-so-ever-attached, robust, portable, C++ source code for reading every version of Rhino file ever created and writing version 2,3, and 4 Rhino files.
+Rhino 3dm files are stored on delicate media that fail at inconvenient times.  A  250GB (giga byte) disk costs around 100USD.  That's about 0.0004 dollars/MB (mega byte).  A 50MB Rhino file is using about 2 cents worth of storage space.
 
-Anybody in the world can go to http://www.[[developer:opennurbs|opennurbs]].org/ and get this source code.  We provide free support to developers, including our competitors, who incorporate this source code into their products.  We release a new [[developer:opennurbs|opennurbs]] toolkit BEFORE we ship the initial releases of new versions of Rhino so anybody who wants to can read the latest and greatest Rhino files. In short, this means any application written by competent programmers can read and write Rhino 3dm files created by any version of Rhino we have shipped or are currently shipping.
+
+I'll let you calculate how much money the information in your 3dm files is worth and how much you are willing to pay to protect your investment. Is less than 1 cent of storage space per Rhino file an excessive amount of money to spend to provide robust protection of your information?
+
+
+====Even more for your money====
+
+Think about your software investment long term.  The value is in the information, not the product.  Your 15 year old version of Rhino 1.0 is now worthless floppy disks in a landfill.  But, the files you created 15 years ago with Rhino 1.0 may still be extremely valuable. We give away, for free no-strings-whatsoever-attached, robust, portable, C++ source code for reading every version of Rhino file ever created and writing version 2,3, and 4 Rhino files.
+
+Anybody in the world can go to http://www.opennurb.org/ and get this source code.  We provide free support to developers, including our competitors, who incorporate this source code into their products.  We release a new [[developer:opennurbs|openNURBS]] toolkit __before__ we ship the initial releases of new versions of Rhino so anybody who wants to can read the latest and greatest Rhino files. In short, this means any application written by competent programmers can read and write Rhino 3dm files created by any version of Rhino we have shipped or are currently shipping.
 
 Contrast this approach with the one used by software companies that vigorously protect their proprietary and legally encumbered file formats to hold your data hostage so you are forced to buy their product and upgrades to use your data.
 
-Well, that's enough ranting for this year.  Hope you had a good one,
+Well, that's enough ranting for this year.  Hope you had a good one.
 
 
 
