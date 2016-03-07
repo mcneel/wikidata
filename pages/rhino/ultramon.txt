@@ -1,24 +1,26 @@
-====== UltraMon utility blocks Rhino tooltips ======
+====== UltraMon Utility Blocks Rhino Tooltips ======
 
 > **Summary:** //The [[http://www.realtimesoft.com/ultramon/|UltraMon]] utility by Realtime Soft, adds buttons that make managing applications on multiple monitor systems more efficient.  Unfortunately, the default settings interfere with Rhino so Tooltips in cascaded toolbars do not display.//
 
-Don Lewis, a regular contributor to the Rhino newsgroup, has been frustrated by a problem we have not been able to fix in Rhino.  Earlier today, he determined the cause of the problem and a work-around for it.  He and others have been using a multiple screen management tool called [[http://www.realtimesoft.com/ultramon/|UltraMon]] that adds buttons to the screen to efficiently manage applications on multiple monitor systems.
+Don Lewis, a regular contributor to the Rhino newsgroup, was frustrated by a problem we have not been able to fix in Rhino.  He determined the cause of the problem and a work-around for it.  
+
+He and others have been using a multiple screen management tool called [[http://www.realtimesoft.com/ultramon/|UltraMon]] that adds buttons to the screen to efficiently manage applications on multiple monitor systems.
 
 ===If you use UltraMon, to make the Rhino tooltips appear, make the following changes:===
-  * UltraMon - Options - Buttons and Menu Commands:
-    * Uncheck - <color blue>Add Move Window button</color>, and
-    * Uncheck - <color blue>Add Maximize to Desktop Button</color>
+  * //UltraMon - Options - Buttons and Menu Commands//
+    * Uncheck **Add Move Window** button 
+    * Uncheck **Add Maximize to Desktop** button
 
-> **Detail:** //I spoke with John Morse, the Rhino user interface developer, and he says that Rhino toolbars are "child windows".  When the mouse pointer hovers over an individual tool button, a timer is started.  If the cursor does not move off the icon for the duration of the tooltip delay timer, then another child window is created and the tooltip information is displayed in this new, small, child window.  It appears that UltraMon is also reading the mouse over event, but is not passing through the event information, so Rhino's tooltip delay timer never starts, so the tooltip is never displayed.  It appears that disabling these two UltraMon controls makes it so the Rhino tooltip delay timer process works as it was intended.//
+**Detail:** //I spoke with John Morse, the Rhino user interface developer, and he says that Rhino toolbars are "child windows".  When the mouse pointer hovers over an individual tool button, a timer starts.  If the cursor does not move off the icon for the duration of the tooltip delay timer, then another child window is created and the tooltip information displays in this new, small, child window.  It appears that UltraMon is also reading the mouse over event, but is not passing through the event information, so Rhino's tooltip delay timer never starts, and the tooltip is never displayed.  It appears that disabling these two UltraMon controls makes the Rhino tooltip delay timer process works as it was intended.//
 
-This work around was confirmed by users running [[http://www.rhino3d.com/|Rhinoceros Version 4 SR4b]] on both Vista 64 and 32-bit multiple monitor systems.
+Users running Rhinoceros Version 4 SR4b on both Vista 64- and 32-bit multiple monitor systems confirmed this work around.
 
 Thanks Don!
 
-> **Created:** //23 October 2008 - John Brock//
+//-John Brock, 23 October 2008//
 
 
-This problem has apparently been fixed in the latest beta release of Ultramon Version 3.0.4 Beta.
+The latest beta release of Ultramon Version 3.0.4 Beta apparently fixed this.
 
-> **Edited:** //20 January 2009 - Don Lewis//
+//- Don Lewis, 20 January 2009//
 
