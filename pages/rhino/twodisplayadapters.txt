@@ -3,25 +3,25 @@
 
 >This is from an internal email message clarifying the use of two display adapters in a single computer.  -JB
 
-Rhino does not support multiple (different) video cards, and relies on the operating system (OS) to manage them. (It has to, since different drivers are most likely involved.) That said, Rhino will initialize based on the primary video source, and in this case, my guess is that it will be the monitor Rhino starts up on. However, if there are two completely different video cards, it means that two completely different drivers are used. What Rhino initialized itself to probably will not work or be compatible with the //other// video card and driver (unless everything is done in software such as Microsoft Software Emulation). Read below.
+Rhino does not support multiple (different) video cards, and relies on the operating system (OS) to manage them. (It has to, since different drivers are most likely involved.) That said, Rhino will initialize based on the primary video source, and in this case, my guess is that it will be the monitor Rhino starts up on. But if there are two completely different video cards, two completely different drivers are used. What Rhino initialized itself to probably will not work or be compatible with the //other// video card and driver (unless everything is done in software such as Microsoft Software Emulation). Read below.
 
 =====Misleading information?=====
-I realize this can be misleading since Windows seems to be able to manage between the two. Yet, you won't see an application running that spans both monitors -- You would have a single application running on two completely different video cards, which is an impossible thing to do. 
+I realize this can be misleading since Windows seems to be able to manage between the two. Yet, you won't see an application running that spans both monitors. You would have a single application running on two completely different video cards, which is an impossible thing to do. 
 
-For example: Suppose the second video card was an ATI card. You couldn't have half of the Perspective view rendered by Nvidia and the other half rendered by ATI...Get the picture? This can work only when the OS manages between the two, and the only way it can do that is by enforcing a 100% pure software solution (i.e. no hardware accelerated support). This means that the user has most likely configured the system so that the Windows desktop extends across the multiple monitors -- at which point, Windows probably disables **all** hardware accelerated capabilities.
+For example: Suppose the second video card was an ATI card. You couldn't have half of the Perspective view rendered by NVIDIA and the other half rendered by ATI ... Get the picture? This can work only when the OS manages between the two, and the only way it can do that is by enforcing a 100% pure software solution (i.e. no hardware accelerated support). This means that the user has most likely configured the system so that the Windows desktop extends across the multiple monitors -- at which point, Windows probably disables **all** hardware accelerated capabilities.
 
 =====To span or not to span=====
-My guess is that both cards can be in the system, but I think it needs the //Primary// display configured to use the FX3500 and then only run (or start) Rhino on that monitor or card. Moving or launching Rhino on the other monitor will most likely have undetermined results. The system should probably be configured so that you're not allowed to //span// or //extend// across the monitors. If you do, most likely all hardware acceleration capabilities will be disabled.
+My guess is that both cards can be in the system, but I think it needs the //Primary// display configured to use the FX3500 and then only run (or start) Rhino on that monitor or card. Moving or launching Rhino on the other monitor will most likely have undetermined results. The system should probably be configured so that you cannot //span// or //extend// across the monitors. If you do, most likely all hardware acceleration capabilities will be disabled.
 
-=====Nvidia SLI and ATI CrossFire=====
-I'd also like to point out that this is not, and has nothing to do with Nvidia's SLI capabilities. SLI (and ATI's Crossfire) technology is where multiple video cards can be used together simultaneously and in parallel to generate the final result in a cooperative fashion. However, the video cards **must** be exactly the same cards, they **must** support SLI, they **must** be physically connected together using the SLI bridge adpater, and they **must** be running on a motherboard that supports SLI/Crossfire. If all these conditions are met, the drivers will allow you to enable SLI support, and Rhino will work just fine across multiple video cards. 
+=====NVIDIA SLI and ATI CrossFire=====
+
+This is not, and has nothing to do with NVIDIA's SLI capabilities. SLI (and ATI's Crossfire) technology is where multiple video cards can be used together simultaneously and in parallel to generate the final result in a cooperative fashion. But, the video cards **must** be exactly the same cards, they **must** support SLI, they **must** be physically connected together using the SLI bridge adpater, and they **must** be running on a motherboard that supports SLI/Crossfire. If all these conditions are met, the drivers will let you enable SLI support, and Rhino will work just fine across multiple video cards. 
 
 =====More isn't always better=====
-An old ATI card can work better, because it is a standalone, operating in full accelerated mode. //More// video cards does not equate to //faster// or //more// capabilities. 
+An old ATI card can work better, because it is a stand-alone, operating in full accelerated mode. //More// video cards does not equate to //faster// or //more// capabilities. 
 
 =====Making the most of your hardware=====
-One solution is configuring the system to use both video cards, but in a standalone fashion, and not allow //Extending the desktop//. That way Windows will enable hardware acceleration. But, moving windows (viewports) across the different monitors is still not something I recommend. At most, place toolbars on one monitor, but do all modelling and //viewing// on a single monitor (most likely the primary monitor).
+One solution is configuring the system to use both video cards, but in a stand-alone fashion, and not allow //Extending the desktop//. That way Windows will enable hardware acceleration. But, moving windows (viewports) across the different monitors is still not something I recommend. At most, place toolbars on one monitor, but do all modeling and //viewing// on a single monitor (most likely the primary monitor).
 
 Thanks,
-
-  * Jeff
+Jeff
