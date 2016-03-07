@@ -2,32 +2,31 @@
 
 > **Summary:** To run Rhino on the Mac, get the [[http://mac.rhino3d.com|Work-in-Progress version of Rhino 5 for Mac]], or run Windows on your Mac.
 
-=====Information from users that have been using Rhino on their Intel Macs with Windows=====
-
-Updated 30 June 2010
+=====Information from users using Rhino on their Intel Macs with Windows=====
 
 ==New Parallels V5 not good==
 The new //accelerated graphics// support in Parallels Desktop 5 is proving to be quite poor for some OpenGL based applications like Rhino. They list support for OpenGL 2.1 but many users are reporting Rhino crashes.
 
 ==Working around the Parallels V5 problem==
-I have Parallels Desktop 5 and VMWare Fusion 3.1 on my MacBook Pro (4GB RAM, dual core, Nvidia GeForce 8600M GT). I also have a Bootcamp partition with Windows XP Pro on it. To get Parallels to play nice with Rhino, you have to turn off the accelerated hardware control in Rhino. It's under **Tools - Options - Appearance - OpenGL**. It's the top option. Then at least Rhino is usable and the display driver quits crashing. Eventually they will probably fix the problem but I'm not going to pay them for the option to report a problem with their own application.
+I have Parallels Desktop 5 and VMWare Fusion 3.1 on my MacBook Pro (4GB RAM, dual core, NVIDIA GeForce 8600M GT). I also have a Bootcamp partition with Windows XP Pro on it. To get Parallels to play nice with Rhino, turn off the accelerated hardware control in Rhino. It's under //Tools - Options - Appearance - OpenGL//. It's the top option. Then at least Rhino is usable and the display driver quits crashing. Eventually they will probably fix the problem but I'm not going to pay them for the option to report a problem with their own application.
 
 ==VMWare Fusion 3.1 is better==
-The latest update for VMWare Fusion (3.1) also adds accelerated graphics support. This update includes OpenGL 2.1 support that seems to work well with Rhino. It makes modest improvements in Rhino display performance. For example, if you are in a shaded display (or a false color analysis mode like EMap), and you rotate your view, fewer objects drop out of the display than did before. It is a modest but apparent improvement.
+The update for VMWare Fusion (3.1) also adds accelerated graphics support. This update includes OpenGL 2.1 support that seems to work well with Rhino. It makes modest improvements in Rhino display performance. For example, if you are in a shaded display (or a false color analysis mode like EMap), and you rotate your view, fewer objects drop out of the display than did before. It is a modest but apparent improvement.
 
->**Settings:** If you are running a wheel mouse, in VMWare Fusion Preferences, on the Keyboard & Mouse pane, clear the checks from both the Secondary Button and Button 3 shortcut options. This will give you right-mouse clicking like you expect in Windows. Also, on the General pane (still in Fusion Preferences), change the Gaming option to: **Always optimize mouse for games**. This will correct the wild tumbling when your mouse pointer moves outside of a viewport in which you are rotating the view.
+>**Settings:** If you are running a wheel mouse, in VMWare Fusion Preferences, on the Keyboard & Mouse pane, clear the checks from both the Secondary Button and Button 3 shortcut options. This will give you right-mouse clicking like you expect in Windows. Also, on the General pane (still in Fusion Preferences), change the Gaming option to **Always optimize mouse for games**. This will correct the wild tumbling when your mouse pointer moves outside of a viewport in which you are rotating the view.
 
 ==The best solution==
-That said, neither can hold a candle to the performance of rebooting to the Bootcamp partition and running Windows directly. Then you have access to all your RAM, all your processor cores, and access to the accelerated hardware provided by your graphics chip. On my MacBook Pro, Rhino performance is an order of magnitude better. Bootcamp is by far the best. VMWare Fusion is a distant second. Parallels Desktop is staggering a few steps behind Fusion and bringing up the rear.
 
--John Brock
+Still, neither can hold a candle to the performance of rebooting to the Bootcamp partition and running Windows directly. Then you have access to all your RAM, all your processor cores, and access to the accelerated hardware provided by your graphics chip. On my MacBook Pro, Rhino performance is an order of magnitude better. Bootcamp is by far the best. VMWare Fusion is a distant second. Parallels Desktop is staggering a few steps behind Fusion and bringing up the rear.
+
+//-John Brock 30 June 2010//
 ----
 
-//MacBook Pro with ATI X1600 graphics under Bootcamp -- Added 5 May 2010//
+**MacBook Pro with ATI X1600 graphics under Bootcamp**
 
-I'm afraid the outlook is grim in this situation. The X1600 is probably one of the worst supported cards for OpenGL on Windows, and it's not all that great hardware either, which is probably why Apple ditched them almost immediately for NVidia in their MacBooks. But that's not really the problem here. Read on.
+I'm afraid the outlook is grim in this situation. The X1600 is probably one of the worst supported cards for OpenGL on Windows, and it's not all that great hardware either, which is probably why Apple ditched them almost immediately for NVIDIA in their MacBooks. But that's not the problem here. Read on.
 
-I have first hand experience with this, for I have the **exact** MacBook Pro of which you speak.  The issue isn't that Rhino is not seeing the ATI card, it's that the Bootcamp drivers do not support or provide an ICD in their drivers. In other words, there is no hardware acceleration available in the drivers provided by Bootcamp. And for most people running Windows on these systems, there is little hope....except....
+I have first hand experience with this.  The issue isn't that Rhino is not seeing the ATI card, it's that the Bootcamp drivers do not support or provide an ICD in their drivers. In other words, there is no hardware acceleration available in the drivers provided by Bootcamp. And for most people running Windows on these systems, there is little hope....except....
 
 There is a process by which you can get modded desktop drivers to install using a utility called //MobilityDotNet//. It basically works like this:
 
@@ -35,100 +34,88 @@ There is a process by which you can get modded desktop drivers to install using 
   - Start the driver installation process.
   - Just after the drivers files have unpacked and have been copied to a destination folder but **before** they actually start to install (i.e. There's a pause in the installation where an ATI dialog is asking what you'd like to do), you run the MobilityDotNet utility.
   - The latter step will modify the appropriate files so that the drivers will recognize that specific MBP as a //valid// piece of supported hardware. You can now continue with the ATI driver installation. 
-  - Reboot is required, after which, you should have the drivers installed with the ICD.
+  - Reboot is required, after which you should have the drivers installed with the ICD.
 
-...Now, this is what I've been doing for the past 2+ years for my MBP. However, every new release of the desktop drivers seem to fixes something, but breaks something else. The only driver version I have found to work reliably is 8.7...however that was for XP and Vista... I've recently put Win7 on my MBP and the 9.3 drivers seem to be working...but again, I had to go through the same steps above.
+This is what I've been doing for the past 2+ years for my MBP. But every new release of the desktop drivers seem to fixes something, but breaks something else. The only driver version I have found to work reliably is 8.7...however that was for XP and Vista... I've recently put Win7 on my MBP and the 9.3 drivers seem to be working...but again, I had to go through the same steps above.
 
 So, any time you see the situation where checking and unchecking Rhino's **Use hardware accelerated modes** does nothing (i.e. You always see Microsoft Generic), it usually means one of two things:
 
-  - There is no ICD installed.
+  - Usually, there is no ICD installed.
   - The user has dialed down the hardware acceleration setting inside Windows' display settings Troubleshooting section.
 
-Usually it's the first one.
-
-Sorry, but there's just no other answer or solution for this situation... I do know that iRhino works pretty well, but that's obviously because the OS has native support for the hardware, and the entire OSX is based on OpenGL and depends on acceleration...so it had better work...and it does.
+Sorry, but there's just no other answer or solution for this situation... I do know that iRhino works pretty well, but that's obviously because the OS has native support for the hardware, and the entire OS X is based on OpenGL and depends on acceleration...so it had better work...and it does.
 
 I wish I had better news.
 
--Jeff
+//-Jeff 5 May 2010//
 ----
 
-//Parallels Team://
+**Parallels Team**
 
 We successfully installed [[rhino:rhinoceros|Rhino]] 4.0 on [[http://www.parallels.com/en/products/desktop/|Parallels Desktop 3.0.]] Our Mac Mini with Parallels 3D acceleration ran Rhino's samples smoothly. We rendered the //Human Head 2// sample model by Maxwell without any problem, so we think Parallels Desktop is a good way for using [[rhino:rhinoceros|Rhino on Mac]] before a stable version of Rhino is released for this platform. All are welcome to use it!
 
-//Update: 20 Apr 2010//
+**Update** 
 
 I have received two reports of users with Rhino V4 crash problems and Penguin with shadows turned on in Parallels V5. Both sounded like display driver related symptoms to me.
 
-I installed Parallels V5 on my MacBook Pro. I had Parallels V4 before. I didn't have any problems with the install. The V5 installer complained that I needed to allocate more memory for accelerated graphics so I did. I added a new 32-bit Win7 installation and ran all the Windows Critical Updates. Then I installed Rhino V4 SR6 from CD and ran it without errors. I downloaded and installed the SR8 update and that went smoothly too. Next I installed Penguin 2, ran it's SR2 update, and set up a simple rendering with shadows turned on. That worked fine too. 
+I installed Parallels V5 on my MacBook Pro. I had Parallels V4 before. I didn't have any problems with the install. The V5 installer complained that I needed to allocate more memory for accelerated graphics so I did. I added a new 32-bit Win7 installation and ran all the Windows Critical Updates. Then I installed Rhino V4 SR6 from the CD and ran it without errors. I downloaded and installed the SR8 update and that went smoothly too. Next I installed Penguin 2, ran it's SR2 update, and set up a simple rendering with shadows turned on. That worked fine too. 
 
 The bad news is I could not duplicate the user crashes. The good news is Parallels V5 seems to work just fine.
 
-//-John Brock//
+//-John Brock 20 Apr 2010//
 
 ----
 
-Michael Meyer from flexiCAD.com wrote:
+Hi, I have set up Apple's Mac Mini with Bootcamp and Rhino. You can find the complete story (sorry, only in German) on our following web page: http://www.flexicad.com/service/fachartikel/artikel.php?id=66
 
-Hi, I have set up Apple's Mac Mini with Bootcamp and Rhino. You can find the complete story (sorry, only in German) on our following webpage:
+And some pictures about it: http://www.flexiCAD.com/bild.php?id=6203
 
-http://www.flexicad.com/service/fachartikel/artikel.php?id=66
-
-And some pictures about it:
-
-http://www.flexiCAD.com/bild.php?id=6203
-
+//-Michael Meyer from flexiCAD.com//
 
 ----
-[[http://www.parallels.com/en/products/desktop|Parallels Desktop for Mac]]
-
-//David Twelves wrote://
+**[[http://www.parallels.com/en/products/desktop|Parallels Desktop for Mac]]**
 
 Hi, I just wanted to let you guys know that Rhino works on OS X under **Parallels Desktop for Mac**.  Here is a link to the software: http://www.parallels.com/en/products/desktop
 
-My machine is a Mac Mini with a 2GHz **Intel Core Duo** processor, 2 gigs of ram, and a 100gb 7200rpm hard drive.  I configured my virtual Windows system with a single-core 2GHz processor (software limitation, only one core can be used), 1 gig of ram, and a 40 gig hard drive.  Rhino runs very nicely.  There is some lag in the interface because the video card is entirely emulated, but overall it is working fine.
+My machine is a Mac Mini with a 2GHz **Intel Core Duo** processor, 2 gigs of RAM, and a 100 GB 7200 RPM hard drive.  I configured my virtual Windows system with a single-core 2GHz processor (software limitation, only one core can be used), 1 gig of RAM, and a 40 gig hard drive.  Rhino runs very nicely.  There is some lag in the interface because the video card is entirely emulated, but overall it is working fine.
 
 I have parallels 3.0, on a MacBook core 2Duo 2.0  and works fine.. but I can´t see what I am drawing.. just what I drew.. the rest works fine..
 
-> **Note:** //The reports above came from users running Parallels 2.0.  One user now reports that Rhino 4 crashes a lot when using Parallels 3.0, so Parallels may no longer be a good option for running Windows Rhino 4 on OS X.//
+**Note:** //The reports above came from users running Parallels 2.0.  One user now reports that Rhino 4 crashes a lot when using Parallels 3.0, so Parallels may no longer be a good option for running Windows Rhino 4 on OS X.//
 
+//-David Twelves//
 
 ----
-[[http://www.vmware.com/download/fusion/|VMware Fusion for Mac Intel]]
+**[[http://www.vmware.com/download/fusion/|VMware Fusion for Mac Intel]]**
 
 V1.0 now working perfectly for Rhino 4 with Win XP and much better than Parallels!
 
-If you want a virtual machine in OS X for Rhino, this is the one.
+If you want a virtual machine in OS X for Rhino, this is the one: http://www.vmware.com/download/fusion/
 
-http://www.vmware.com/download/fusion/
-
-XAHO uses MacBook Pro - ATI X1600 - 2Gb ram - OS X - Win XP Pro
-
-<color blue>Added - 1/12/2009 John Brock, <jb@mcneel.com></color>
+XAHO uses MacBook Pro - ATI X1600 - 2Gb ram - OS X - Win XP Pro.
 
 I am running VMware Fusion 2.0.1 on my MacBook Pro.  It is running Rhino V4 and in-house builds of V5 very well.  It does not support hardware accelerated OpenGL, but the performance is surprisingly good.  To get the normal 3-button mouse to work correctly (for elevator mode, etc.), in **Fusion Preferences - Keyboard & Mouse**, turn off the Secondary Button and Button 3 controls.  They are on by default.
 
-I also have a Bootcamp partition with Win XP Pro installed. I use this when I need the best performance.  Another tool that has been very handy is Winclone.  It can backup the Bootcamp NTFS partition.  It has tools for changing the size of the Mac and Bootcamp partitions.
+I also have a Bootcamp partition with Win XP Pro installed. I use this when I need the best performance.  Another tool that has been handy is Winclone.  It can backup the Bootcamp NTFS partition.  It has tools for changing the size of the Mac and Bootcamp partitions.
 
+//-John Brock 12 January 2009, <jb@mcneel.com>//
 
 ----
-[[http://www.codeweavers.com/products/cxmac/|CrossOver]]
+**[[http://www.codeweavers.com/products/cxmac/|CrossOver]]**
 
-Some Windows applications run well in [[http://www.codeweavers.com/products/cxmac/|CrossOver]] from [[http://www.codeweavers.com|Codeweavers]], which doesn't require a copy of Windows.  CrossOver is based on [[http://en.wikipedia.org/wiki/Wine_(software|Wine]]), the Windows emulator for Unix.
+Some Windows applications run well in [[http://www.codeweavers.com/products/cxmac/|CrossOver]] from [[http://www.codeweavers.com|CodWeavers]], which doesn't require a copy of Windows.  CrossOver is based on [[http://en.wikipedia.org/wiki/Wine_(software|Wine]], the Windows emulator for Unix.
 
-[[http://www.codeweavers.com/compatibility/browse/name?app_id=344|Test results for Rhino 2.0]]
+[[http://www.codeweavers.com/compatibility/browse/name?app_id=344|Test results for Rhino 2.0.]]
 
 Rhino 3.0 is listed, but as untested.
 
-Rhino 4.0 is not listed in their [[http://www.codeweavers.com/compatibility/search|compatibility database]] .
+Rhino 4.0 is not listed in their [[http://www.codeweavers.com/compatibility/search|compatibility database.]]
 
 ----
-//Heath Satow wrote://
 
 Got the Mac Pro with two dual-core Xeons running at 2.66ghz, 2gb memory today.
 
-Running Bootcamp was easy.  Have hit a couple little odd quirks that I hope to get straightened out over time, but nothing to kill the deal yet. (Update: All the minor quirks have been easily ironed out except getting the internal Bluetooth to work all the time, though Apple seems to be aware of this and is working on it.  At this point, the machine is even less quirky than my WinXP laptop that was built to run Windows.)
+Running Bootcamp was easy.  Have hit a couple little odd quirks that I hope to get straightened out over time, but nothing to kill the deal yet. (Update: All the minor quirks have been easily ironed out except getting the internal Bluetooth to work all the time. Apple seems to be aware of this and is working on it.  At this point, the machine is even less quirky than my WinXP laptop that was built to run Windows.)
 
 Rhino is running fine (running in XP Pro on the Mac).  There was a Flamingo render speed test a while back, with a test file posted.  On my 3ghz (Windows) laptop, the file took 43 seconds.  I saw a few posts from really screaming machines that ran the render as low as 11 seconds.
 
@@ -136,10 +123,9 @@ This machine (Mac Pro) just ran that render in 7 seconds.  Thought it was a fluk
 
 I must say that I am quite pleased.
 
--     --Heath Satow, http://www.publicsculpture.com
+//-Heath Satow, http://www.publicsculpture.com //
 
 ----
-//Dennis Peterson wrote://
 
 I was trying to see if I could run Rhino 3.0 on my MacBook Pro laptop in a Windows XP virtual machine. It installs and runs fine.
 
@@ -149,10 +135,12 @@ Even without a multi-button mouse I was able to create and modify 3-D models eas
 
 Thank you and thank Mr. Brock for his help in evaluating this tool.
 
+//-Dennis Peterson//
+
 ----
 //The excerpt below does not consider Rhino, but does have some interesting observations about performance.  It is from the article //"Weighing a Switch to a Mac"// by Thomas J. Fitzgerald in the //New York Times// August 10, 2006://
 
-"Two methods for running Windows on the new Macs have moved to the forefront, and both run considerably faster than Virtual PC, the leading option under the old Mac [[rhino:architecture|Architecture]].
+"Two methods for running Windows on the new Macs have moved to the forefront, and both run considerably faster than Virtual PC, the leading option under the old Mac Architecture.
 
 The first, a new program called **Parallels Desktop** for Mac ($80; www.parallels.com), enables you to run Windows and Mac OS X Tiger simultaneously.
 
@@ -172,19 +160,19 @@ A drawback of Boot Camp, though, is that you must shut down one operating system
 
 But when Windows is run on Intel-based Macs, for example through Boot Camp or Parallels, it is vulnerable to the same virus and spyware threats that can affect conventional Windows-based PC's."
 
-one tip to get the num lock to work you must use the key combination "shift clear" if you dont have a num lock button on yor mac keyboard
+//One tip to get the num lock to work you must use the key combination **shift clear** if you don't have a num lock button on your Mac keyboard.//
 
 ----
 
-With the new version of parallels you have the coherence mode (both OSX and Windows on the screen at once). Have a look:
+With the new version of Parallels you have the coherence mode (both OS X and Windows on the screen at once). Have a look:
 
 http://www.edgargonzalez.com/2006/12/12/mac-windows-autocad-rhino3d/
 
-See the [[http://www.aecbytes.com:80/tipsandtricks/2007/issue22-WinonMac.html|extensive review]] of the new Parallels in AECBytes by Scott Onstott.
+See the [[http://www.aecbytes.com:80/tipsandtricks/2007/issue22-WinonMac.html|extensive review]] of the new Parallels in AECbytes by Scott Onstott.
 
 
 ----
-Hi, I am running Rhino 3.0 with Windows XP home, through Bootcamp on my MacBrook Pro.  I cannot delete anything using the keyboard, only by selecting the object and going through the edit menu to delete.  If anyone has encountered any keyboard issues similar to this and has feedback that would be a huge help.  Thank you.
+Hi, I am running Rhino 3.0 with Windows XP home, through Bootcamp on my MacBrook Pro.  I cannot delete anything using the keyboard, only by selecting the object and going through the edit menu to delete.  If anyone has encountered any keyboard issues like this and has feedback that would be a huge help.  Thank you.
 
 <KhamiltonG@gmail.com>
 
@@ -197,19 +185,20 @@ The delete button is hidden on the MacBook Pro. The button that has **delete** w
 
 ----
 
-**Right-mouse click on Mac laptops running Parallels** - by MP
-
-**and enabling Shift Key Ortho toggle in Parallels**
+**Right-mouse click on Mac laptops running Parallels and enabling Shift Key Ortho toggle in Parallels**
 
 Mac laptops do not have a right-mouse button.  Rhino loves the right-mouse button.  Do yourself a big favor and get a wireless two- or three-button mouse if you are using Rhino on a Mac laptop.
 
-If you are using Parallels, it has a preference setting that helps users emulate a right mouse click.  If you hold down the Control key and click the (only) mouse button, Parallels will translate that into a right-mouse click.  But this interferes with Rhino's Control-click to deselect objects.
+If you are using Parallels, it has a preference setting that helps users emulate a right-mouse click.  If you hold down the Control key and click the (only) mouse button, Parallels will translate that into a right-mouse click.  But this interferes with Rhino's Control-click to deselect objects.
 
 You can turn off this translation in Parallels to get Control-click back.  Open up the Parallels Preferences and select the Keyboard tab.  In the **Right Mouse Click:** setting, select both **Ctrl** and **Command**, and click **OK**.  This makes an emulated right-click difficult to perform and essentially disables Parallels' emulated right-click behavior.  Now you can Control-click and even Shift-Control-click in Rhino without problems.  If you turn off the emulated right-click behavior, you better have a mouse with a real right-mouse button!
 
+//-MP//
+
 ----
 
-======Rhino 4.0 will not start on Bootcamp and Windows XP======
+**Rhino 4.0 will not start on Bootcamp and Windows XP**
+
 This is the symptom of the user running Rhino 4 on an IMac with BootCamp drivers that are too new.
 
-> **Note:** //20" iMac mid-2007 will not run Rhino with the Bootcamp display driver installed (ATI driver v. 8.390.0.0) and drivers in link above will not install on the newest iMacs. Workaround is to disable the ATI driver. The system will revert to a built-in VGA driver. It's a poor display performance but Rhino runs.//
+**Note:** //20" iMac mid-2007 will not run Rhino with the Bootcamp display driver installed (ATI driver v. 8.390.0.0) and drivers in the link above will not install on the newest iMacs. Workaround is to disable the ATI driver. The system will revert to a built-in VGA driver. It's a poor display performance but Rhino runs.//
