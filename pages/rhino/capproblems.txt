@@ -1,31 +1,35 @@
-====== Problems capping objects ======
-//Explanation of common capping failures and suggestions for fixing them//
+====== Problems Capping Objects ======
 
->  **An often asked question** on the Rhino newsgroup is //"why didn't my solid extrusion get closed?"// or //"why can't I cap this object?"// In the case of the **Extrude** command, Rhino currently doesn't give any error messages or explanations of why the command didn't work as expected, it just fails silently leaving the inexperienced user to wonder what they did wrong...  In the case of the **Cap** command, you get a message "unable to cap that object", which isn't very helpful to diagnose the problem.  Hopefully the explanations and procedures on this page will help...
+>//Explanation of common capping failures and suggestions for fixing them//
+
+**A common question** on the Rhino newsgroup is //"Why didn't my solid extrusion get closed?"// or //"Why can't I cap this object?"// In the case of the **Extrude** command, Rhino currently doesn't give any error messages or explanations of why the command didn't work as expected. It just fails silently, leaving the inexperienced user to wonder what they did wrong...  In the case of the **Cap** command, you get a message **unable to cap that object**, which isn't very helpful to diagnose the problem.  Hopefully the explanations and procedures on this page will help...
 
 =====Extrusions that won't cap...=====
 
 ====Check for bad objects first====
-All of the following is based on having valid objects.  So, before you start, use **SelBadObjects** and make sure your objects are good (they shouldn't select).  If there are bad objects, you need to fix them first.  [[rhino:badobjects|For more info on dealing with bad objects, see here]]
 
-====OK, my objects are good, so what's wrong then?====
-Rhino needs to have a closed, planar curve to create a cap surface.  If an extrusion of a //theoretically// closed planar curve doesn't "cap", even though you chose **Extrude** from the solid menu or clicked on cap=yes in the command line, there are one of two things wrong...
+The following is based on having valid objects.  So, before you start, use **SelBadObjects** and make sure your objects are good (they shouldn't select).  If there are bad objects, you need to fix them first.  [[rhino:badobjects|For more info on dealing with bad objects, see here.]]
+
+====OK, my objects are good. What's wrong then?====
+
+Rhino needs to have a closed, planar curve to create a cap surface.  If an extrusion of a //theoretically// closed planar curve doesn't cap, even though you chose **Extrude** from the solid menu or clicked **cap=yes** in the command line, there are one of two things wrong...
 
 **//Either://**
 
 1) the curve being used isn't closed, or\\ 
 2) it isn't really planar.
 
-====Not Closed====
-If there is no closed loop, Rhino cannot create a complete trim curve to create the cap surfaces.  The object will extrude, but since the Rhino can't find a complete closed curve to trim the cap surface, it won't be created, and you will be left with an open extrusion.  In Rhino 4, there is no error message given in this case...
+====Not closed====
+
+If there is no closed loop, Rhino cannot create a complete trim curve to create the cap surfaces.  The object will extrude, but since the Rhino can't find a complete closed curve to trim the cap surface, it won't be created, and you will be left with an open extrusion.  In Rhino 4, there is no error message given in this case.
 
 <color darkslateblue>**//How to find out if your curve is open?  Several ways://**</color>
 
   * Use the command **SelOpenCrv** and see if it selects.
   * Use the command **SelClosedCrv** and see if it doesn't select.
-  * Select the curve and look in **Properties>Details** (or use the command **What**) - it should tell you if it's closed.
+  * Select the curve and look in **Properties>Details** (or use the command **What**). It should tell you if it's closed.
 
-There are many methods to use to close an open curve, depending on what the problem is...
+There are many methods to close an open curve, depending on what the problem is...
 
 <color darkslateblue>**//First, you need to find the open spot://**</color>
 
@@ -33,34 +37,36 @@ The commands **CrvStart** or **CrvEnd** will place a point at the start or end o
 
 You may then turn on points and try moving one endpoint on top of the other with point snap or otherwise edit the object to close it.
 
-====Not Planar====
-If you determine the curve IS really closed (it didn't select with **SelOpenCrv**, or did select with **SelClosedCrv**, or **Properties** states it's closed), and it still won't cap, then it is virtually certain it isn't planar. It only needs to be microscopically "off" to make this command fail.
+====Not planar====
 
-<color darkslateblue>**//How to fix this case://**</color>
+If you determine the curve __is__ really closed (it didn't select with **SelOpenCrv**, or did select with **SelClosedCrv**, or **Properties** states it's closed), and it still won't cap, then it is virtually certain it isn't planar. It only needs to be microscopically off to make this command fail.
+
+<color darkslateblue>**//How to fix this case//**</color>
 
 You can use Project to **CPlane** or **SetPts** and set the curve to all the same level.  If after that your extrusion caps, that was your problem.
 
-====Important note:====
+====Important note====
 Sometimes curves can be both **open //and// non planar**...  :-)\\ So you may need to fix both problems!\\ 
 \\ 
 
 ----
 
 
-=====Existing objects that won't Cap=====
-A parallel to the above case of an extrusion not capping is that of an existing open polysurface that you think should cap but doesn't...
+=====Existing objects that won't cap=====
 
-In that case, the **//OPENING//** to be capped should be considered in the same way as the curve that you wanted to extrude in the first example - that is to say, the loop that defines it is either **//OPEN//** or //**NOT PLANAR**.//
+A parallel to an extrusion not capping is an existing open polysurface that you think should cap but doesn't.
 
-It may be open if the polysurface isn't fully joined - you can turn on naked edges to see if there are other naked edges besides the open edges to be capped.
+In that case, the **//opening//** to be capped should be considered in the same way as the curve that you wanted to extrude in the first example. That is, the loop that defines it is either **//open//** or //**not planar**.//
 
-Or, the opening you **//THINK//** is planar actually isn't...
+It may be open if the polysurface isn't fully joined. You can turn on naked edges to see if there are other naked edges besides the open edges to be capped.
+
+Or, the opening you **//think//** is planar actually isn't.
 
 Both of these cases will require a little more extensive repairs than a simple curve.
 
-  * In the first case, you will need to fix the surfaces so that they join up without any naked edges - except for the opening(s) you want to cap.
+  * In the first case, you need to fix the surfaces so that they join up without any naked edges, except for the opening(s) you want to cap.
 
-  * In the second, you will need to find where the loop is not planar and fix the offending surfaces so they do form a planar loop when joined...
+  * In the second, you need to find where the loop is not planar and fix the offending surfaces so they do form a planar loop when joined.
 
 //Hope this small explanation makes someone's life a bit easier...//
 
