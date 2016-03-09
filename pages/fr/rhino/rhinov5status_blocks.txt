@@ -1,0 +1,61 @@
+====== Statut de Rhino 5.0 - Blocs et insertions ======
+
+Rhino 5.0 prend en charge les définitions de bloc liées imbriquées. 
+
+===== Créer une définition de bloc liée =====
+
+
+Lancez la commande "Insérer".  La boîte de dialogue Insérer s'ouvrira. 
+
+{{:rhino:linedblockinstrustions_insertdialog.jpg|}}
+
+  - Dans la case "Type d'insertion" sélectionnez l'option "Occurrences de bloc".
+  - Utilisez le bouton Parcourir pour choisir le modèle que vous voulez utiliser en tant que définition de bloc liée. 
+  - Cliquez sur le bouton Accepter. 
+
+Lorsque vous cliquez sur le bouton Accepter dans la boîte de dialogue "Insérer", la boîte de dialogue "Options d'insertion de fichier" apparaît. 
+
+{{:rhino:linedblockinstrustions_insertfileoptions.jpg|}}
+
+  - Dans la case "Type de définition de bloc", sélectionnez l'option "Lier". 
+  - Dans la case "Style de calque·, sélectionnez un style.  Pour plus d'informations sur les styles de calque "actif" et "référence", consultez [[:en:rhino:rhinov5status_layernames#examplelinked_block_layer_names|noms des claques de bloc liés.]]
+  - Cliquez sur le bouton Accepter.
+
+Après avoir cliqué sur le bouton Accepter dans la boîte de dialogue "Options d'insertion de fichier", vous pouvez utiliser la souris pour placer le bloc ou taper les coordonnées du point d'insertion. 
+
+===== Blocs liés imbriqués =====
+
+Il est parfois utile de séparer un modèle complexe en plusieurs composant et référencer les composants sous forme de blocs. Le fichier zip {{:rhino:superblockv5.zip|}} contient ces modèles :
+
+  * V5\
+    * projectV5.3dm
+    * BuildingV5\
+      * buildingV5.3dm
+        * PartsV5\
+          * awnings-roundV5.3dm
+          * awnings-straightV5.3dm
+          * guidelinesV5.3dm
+          * level1V5.3dm
+          * level2V5.3dm
+          * roofV5.3dm
+    * SiteV5\
+      * siteV5.3dm
+
+Ouvrez le fichier "...\V5\projectV5.3dm". Le modèle projectV5.3dm possède deux blocs liés, l'un pour le bâtiment et l'autre pour le site. 
+
+Si vous lancez la commande "GestionnaireBlocs", vous verrez les blocs "building" et "site". Vous verrez également 5 "blocs imbriqués". 
+
+{{:rhino:linedblockinstrustions_blockman1.jpg|}}
+
+Pour voir à quoi correspondent ces blocs imbriqués, cliquez dans la case "Afficher 5 définitions de bloc de référence imbriquées". 
+
+
+{{:rhino:linedblockinstrustions_blockman2.jpg|}}
+
+Vous pouvez voir que le modèle buildingV5.3dm possède cinq blocs liés, awnings-round, level1, level2, roof et guidelines.
+
+===== Édition de blocs liés imbriqués =====
+
+Rhino vous permet d'utiliser le "GestionnaireBlocs" pour regarder et modifier les propriétés des blocs liés "imbriqués".  **N'oubliez surtout pas que toute modification réalisée sur les paramètres du bloc lié "imbriqué" sont temporaires et ne sont jamais enregistrés.** Afin de modifier de façon permanente les paramètres d'un bloc lié, modifiez le modèle contenant le bloc lié.
+
+Par exemple, vous pouvez faire des essais avec différents styles en sélectionnant le bloc "buildingV5.3dm : awnings-...", en cliquant sur le bouton "Propriétés" et en utilisant le fichier awnings-straightV5.3dm à la place de awnings-roundV5.3dm. Si vous voulez modifier définitivement les auvents, vous devez ouvrir le modèle buildingV5.3dm et modifier le bloc "awnings" de ce modèle. 
