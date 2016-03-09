@@ -1,11 +1,11 @@
 ====== Rhino Mesh Settings ======
 >//A brief overview of Rhino's custom meshing settings and how they work//
 
-<color slategray> **Note:** For the sake of clarity, I have condensed the original page to a quick overview of the custom mesh settings.  For people who want to know more, the detailed explanations are still available, [[rhino:meshfaqdetails|they can now be found on this page]].  --Mitch 16.01.2013 </color>
+//<color slategray> **Note:** For the sake of clarity, I have condensed the original page to a quick overview of the custom mesh settings.  For people who want to know more, the detailed explanations are still available, [[rhino:meshfaqdetails|see this page]].  --Mitch 16.01.2013 </color>//
 
 
 ====Accessing the mesh settings====
-The controls for the Render Mesh (display mesh) settings are part of the .3dm file's properties. In Rhino for Windows they can be reached via //File > Properties > Mesh// or //Tools > Options > Mesh//. In Rhino for Mac they can be accessed via **File > Settings > Mesh**
+The controls for the Render Mesh (display mesh) settings are part of the .3dm file's properties. In Rhino for Windows they area at //File > Properties > Mesh// or //Tools > Options > Mesh//. In Rhino for Mac they are at //File > Settings > Mesh//.
 
 They are generally set globally for the whole model, but from V4 on, including Rhino for Mac, you can also override them on a per-object basis via the Properties panel.  
 
@@ -14,29 +14,30 @@ Rhino offers you two //standard// settings, **//Jagged and Faster//** and **//Sm
 ====The standard settings====
   * **Jagged and Faster** is the default for render meshes --- fine for general visualization purposes.
 
-  * **Smooth and Slower** offers better resolution at the expense of longer meshing times. //(In V4, the smooth and slower setting did not work that well, in V5 it works better!)//
+  * **Smooth and Slower** offers better resolution at the expense of longer meshing times. //(In V4, the smooth and slower setting did not work that well. In V5 it works better!)//
 
-  * **Custom** gives the user the maximum flexibility in tailoring the mesh settings to their needs, at the expense of being a bit more complex to understand and set up. 
+  * **Custom** gives the user the greatest flexibility in tailoring the mesh settings to their needs, at the expense of being a bit more complex to understand and set up. 
 
-//**[[http://www.hydraulicdesign.net/meshes.htm|See also James Carruthers' excellent explanation of polygon meshes used for display]]**//
+//**[[http://www.hydraulicdesign.net/meshes.htm|See also James Carruthers' excellent explanation of polygon meshes used for display.]]**//
 
 
 ----
 
 ====The Custom Settings====
+
 <color darkslateblue>//**If you really want to control your meshing process, here is where you need to start!**//</color>
 
-When you check **Custom** in V5 (Mac or Win) you are first presented with a simple slider controlling the **//Density//** setting.  Moving it to the left will result in a fewer polygons and a coarser mesh, to the right in more polygons and a finer mesh. 
+When you check **Custom** in Rhino 5 (Mac or Win) you are first presented with a simple slider controlling the **//Density//** setting.  Moving it to the left will result in fewer polygons and a coarser mesh, to the right in more polygons and a finer mesh. 
 
-If you then push the **Detailed Controls** button in Windows Rhino, or the little **down arrow** in Mac Rhino, it will reveal all the other "granular" controls that will allow you to completely control the process.  //In V4, the granular controls are presented directly; the //Density// setting is not available as a slider//.
+If you then push the **Detailed Controls** button in Windows Rhino, or the little **down arrow** in Mac Rhino, it reveals all the other granular controls that will allow you to completely control the process.  //In V4, the granular controls are presented directly; the //Density// setting is not available as a slider//.
 
 There are //seven// numerical settings and //three// check boxes.  Each one has a different method of mesh control and some of them can work together.  The interactions and combined effects of these settings are complex to understand.  Individually they are well described in the Help however, and reading this info carefully will give you a good idea of what each one does.  
 
-[[rhino:meshsettings|A copy of the Rhino Mesh Help page can also be found here.]]
+[[rhino:meshsettings|The Rhino Mesh Help page is here.]]
 
-[[rhino:meshfaqdetails|Please read the companion page to this one for detailed meshing info]]
+[[rhino:meshfaqdetails|Please read the companion page to this one for detailed meshing info.]]
 
-**Below is a basic start point for custom settings**, you will need to do some experimentation with them on your models. //If a setting is 0 or 0.0, it is turned off (not taken into a account).//
+**Below is a basic start point for custom settings**. You will need to do some experimentation with them on your models. //If a setting is 0 or 0.0, it is turned off (not taken into a account).//
 
 |**Density**|  <color slategray>**0.0**</color>|
 |**Maximum angle**|  <color orangered>**35**</color>|
@@ -52,21 +53,22 @@ Simple planes **//unchecked//**\\
 
   * The //maximum angle// method forces more triangles in sharply curved areas. This way small features that fall below the max distance number will be subdivided a little. You may be able to get away with a little bigger max distance number letting the angle setting take over for the smallest objects/features.
 
-  * The //maximum distance edge to surface// method forces Rhino to create a mesh that is no further away from the surface than the specified value, which is in current file units.  It allows Rhino to put fewer polygons in lower detail areas and more polygons in higher detail areas, resulting in a more efficient mesh.
+  * The //maximum distance edge to surface// method forces Rhino to create a mesh that is no further away from the surface than the specified value, which is in current file units.  It lets Rhino put fewer polygons in lower detail areas and more polygons in higher detail areas, resulting in a more efficient mesh.
+
   * The //minimum initial grid quads// setting makes sure the flatter areas have enough polygons to look smooth.
 
 
-**The most important setting here is //max distance edge to surface//**. This value is in file units and is scale (size) dependent - that means you will need to adjust it for the size and level of detail of the objects you model.
+**The most important setting here is //max distance edge to surface//**. This value is in file units and is scale (size) dependent. That means you need to adjust it for the size and level of detail of the objects you model.
 
 The setting will depend on what you're going to be using your mesh setting for.  For general display purposes your value can be a bit bigger (coarser), as you're only visualizing the model on your screen, and less polygons mean faster meshing times and quicker display reaction when tumbling, zooming, etc. On the other hand, if you need to have more accurate meshing on very fine details for a hi-resolution render (or for manufacturing, perhaps), the value will need to be smaller (finer).
 
-  * If you are doing toaster oven sized objects, 0.01mm (.0005 in.) generally works out pretty well. 
+  * If you are doing toaster oven sized objects, 0.01mm (.0005 in.) generally works out well. 
 
   * For small highly detailed objects such as watches and jewelry, try something less, maybe .002mm (.00001 in). 
 
   * For big objects like buildings, it can be much larger, maybe 0.1 to 1mm (.005 to .05 in) or more.
 
-  * If you're going to be exporting your object for later processes, or are going to be doing very detailed renderings, you may need to tighten up the settings a bit, depending on where it's going and how precise the process is.  For a stereolithography part, .01mm should still be fine for example, but for a good machined part, .001mm-.002mm is probably more appropriate.
+  * If you're going to be exporting your object for later processes, or are going to be doing very detailed renderings, you may need to tighten up the settings a bit, depending on where it's going and how precise the process is.  For example, for a stereolithography part, .01mm should still be fine, but for a good machined part, .001mm-.002mm is probably more appropriate.
 
 It may seem a bit complicated at first, but after a bit of practice, you will find a few standard settings that work for you in most situations.  These settings can even then be programmed into a macro or script to quickly launch the meshing of your objects with the desired characteristics.
 
@@ -75,20 +77,20 @@ It may seem a bit complicated at first, but after a bit of practice, you will fi
 
 =====Other meshing problems and possible solutions=====
 
-Sometimes, you may find that even with the settings guidelines above, you are still not getting good results.  The meshing in Rhino V5 was completely re-written and in most cases produces much better results than earlier versions; but it may not handle all cases perfectly. Meshing is being continually improved. If you find meshing problems you can't resolve, please report them on the [[http://discourse.mcneel.com/category/rhino-for-windows|Rhino support forum]] or send them to [[tech@mcneel.com|McNeel tech support]].
+Sometimes, you may find that even with the settings guidelines above, you are still not getting good results.  The meshing in Rhino 5 was completely rewritten and in most cases produces much better results than earlier versions, but it may not handle all cases perfectly. Meshing is being continually improved. If you find meshing problems you can't resolve, please report them on the [[http://discourse.mcneel.com/category/rhino-for-windows|Rhino support forum]] or send them to [[tech@mcneel.com|McNeel tech support]].
 
-Some problems may be caused by the mesher's reaction to models that have hidden geometric flaws.  If this is the case, only way to correct them may be to do some reconstruction on the model.  The flaws are often located close to where the visible mesh errors show up.
+The mesher's reaction to models that have hidden geometric flaws may cause some problems.  The only way to correct them may be to do some reconstruction on the model.  The flaws are often located close to where the visible mesh errors show up.
 
-====Things to watch out for:====
-//While these conditions don't always cause problems meshing, they have been known to do so in the past, so it's worthwhile checking if you are having difficulties.//
+====Things to watch out for====
+//These conditions don't always cause problems meshing, but they have been known to do so in the past, so it's worth checking if you are having difficulties.//
 
   * <color darkslateblue>**Bad objects.**</color>  While they don't always result in mesh problems, these are easy enough to track down, so it's a good place to start.  If you find one, try hiding it. If your problem disappears, then perhaps all you need to do is fix the object (make it valid) and you'll be good to go.
 
   * <color darkslateblue>**Long, skinny surfaces.**</color>  Difficult cases for the mesh engine in V4, this has been vastly improved in V5 and no longer pose a problem.
 
-  * <color darkslateblue>**Joined tangent lines and arcs that have been extruded or revolved.**</color>  Example - extruding a rounded rectangle.  This forms a single surface with internal G1 areas, which the mesher struggles with.  Solution: **Explode** the curves before extruding, or use **Split  > Isocurves** at the G1 spots to create a structure with separate joined tangent surfaces instead of one single one.  In the case of the extruded rounded rectangle, you will have eight joined surfaces, not one.  In V5, you can use the **Extrude** command option **//SplitAtTangents=Yes//** to automatically split the resulting extrusion.  To fix already existing cases, select the object and run the command **DivideAlongCreases > SplitAtTangents=Yes**.
+  * <color darkslateblue>**Joined tangent lines and arcs that have been extruded or revolved.**</color>  Example: Extruding a rounded rectangle.  This forms a single surface with internal G1 areas, which the mesher struggles with.  Solution: **Explode** the curves before extruding, or use **Split  > Isocurves** at the G1 spots to create a structure with separate joined tangent surfaces instead of one single one.  In the case of the extruded rounded rectangle, you will have eight joined surfaces, not one.  In V5, you can use the **Extrude** command option **//SplitAtTangents=Yes//** to automatically split the resulting extrusion.  To fix existing cases, select the object and run the command **DivideAlongCreases > SplitAtTangents=Yes**.
 
   * <color darkslateblue>**Kinked surfaces.**</color>  Usually caused by having **CreaseSplitting** (native in V5 or V4 add-on) set to No, or using **MergeSrf Smooth=No** on surfaces that are not at least tangent to each other.  In this case, again, it is better to have multiple joined surfaces instead of one kinked one.  Use **Surface edit tools > Divide surface along creases** or **Split  > Isocurves** at the kinked spots to split these types of surfaces up into separate parts.
 
-  * <color darkslateblue>**Triangular surfaces with holes**</color>  //This is a known bug in Rhino V4.//  The hole would be present in wireframe mode, but invisible in shaded mode. A "Custom" mode was required to render these surfaces correctly.  //This has been fixed in V5!//
+  * <color darkslateblue>**Triangular surfaces with holes.**</color>  //This is a known bug in Rhino V4.//  The hole was present in wireframe mode, but invisible in shaded mode. A Custom mode was required to render these surfaces correctly.  //This has been fixed in V5!//
 
