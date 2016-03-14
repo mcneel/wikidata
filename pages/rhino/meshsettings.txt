@@ -10,11 +10,11 @@ Whenever you shade or render a NURBS surface, Rhino has to convert the surface i
 
 On the default screen one is given the choice of:
 
-**Jagged and faster**
+**Jagged & faster**
 
   * Uses a lower density mesh to shade objects more quickly with some loss of quality.
 
-**Smooth and slower**
+**Smooth & slower**
 
   * Uses a higher density mesh to shade objects more accurately with some loss of speed.
 
@@ -29,23 +29,23 @@ On the default screen one is given the choice of:
 ===Density===
   * The slider roughly controls the density and number of mesh polygons. To the right is fewer/coarser. To the left is more/finer.
 
-===Detailed Controls===
-Pushing the **Detailed Controls** button makes more settings visible for mesh fine-tuning.  The following is a description of how these detailed settings work.
+===Detailed controls===
+The **Detailed Controls** button shows more settings for mesh fine-tuning.  The following is a description of how these detailed settings work.
 
 
 > //**How meshes are created - **The mesh is created in three steps based on the detailed criteria: initial quads (estimated to roughly meet the criteria), refinement (subdivision to meet the criteria), and adjustment for trim boundaries. Surfaces are meshed in a two step process. First a regular quad mesh is created and then that mesh is refined by splitting some quads into four smaller quads. The Maximum aspect ratio, Maximum edge length, and Minimum initial grid quads settings control the generation of the initial mesh. The Density (Rhino 4 only), Maximum angle, Maximum edge length, Minimum edge length, and Maximum distance, edge to surface settings determine which initial quads get split up into smaller quadrangles.//
 
 ==Maximum angle==
 
-Sets the maximum allowable angle between input surface normals at neighboring mesh vertices. If the angle between surface normals is greater than this setting, the mesh is further refined (more vertices are inserted) and the mesh is made denser. Two vertices are neighbors if they are at the opposite ends of a single facet edge.
+Sets the maximum allowed angle between input surface normals at neighboring mesh vertices. If the angle between surface normals is greater than this setting, the mesh is further refined (more vertices are inserted) and the mesh is made denser. Two vertices are neighbors if they are at the opposite ends of a single facet edge.
 
-The Maximum angle setting influences the meshing of objects of the same shape in the same way regardless of the size of the objects. It tends to make meshes denser in areas of high curvature and less dense in flatter areas.
+The Maximum angle setting influences the meshing of same shape objects in the same way regardless of their size. It tends to make meshes denser in areas of high curvature and less dense in flatter areas.
 
 > **Experiment:** //Make a model with a sphere, torus, and cylinder. Then scale these objects to make a small, medium, and large-sized version. Now vary Maximum angle and notice the results.//
 
 ==Maximum aspect ratio==
 
-Surfaces are initially tessellated with a regular quadrangle mesh and then that mesh is refined. The initial quad mesh is constructed so that on average, the maximum aspect ratio of the quads is less than or equal to Maximum aspect ratio.
+Surfaces are initially tessellated with a regular quadrangle mesh and then that mesh is refined. The initial quad mesh is constructed so that, on average, the maximum aspect ratio of the quads is less than or equal to Maximum aspect ratio.
 
 Smaller values result in slower meshing and a higher polygon count with more equilateral and nicely shaped polygons. This is approximately the maximum aspect ratio of the quads in the Minimum initial grid quads. Setting Maximum aspect ratio to zero turns off the option. Zero means no limit.
 
@@ -56,9 +56,9 @@ When shading long, skinny objects, use 0.0 for the value. This allows infinite r
 
 ==Minimum edge length==
 
-If any edge is shorter than the Minimum edge length, no further division of the mesh faces occurs. This is also, approximately, the minimum edge length of the quads in the Minimum initial grid quads.
+If an edge is shorter than the Minimum edge length, the mesh face is not divided further. This is also, approximately, the minimum edge length of the quads in the Minimum initial grid quads.
 
-The default value for this option is 0.0001 units and the usable range depends on the size of the model. Bigger values result in faster meshing, less accurate meshes and a lower polygon count. Setting this value to zero turns off the minimum edge length option.
+The default value for this option is 0.0001 units and the usable range depends on the model size. Bigger values result in faster meshing, less accurate meshes, and a lower polygon count. Setting this value to zero turns off the minimum edge length option.
 
 This option is scale dependent. The value is always in the current unit system.
 
@@ -83,22 +83,20 @@ Use as a general polygon mesh tolerance setting.
 
 ==Minimum initial grid quads==
 
-Initial mesh grid is a quad mesh Rhino creates on each NURBS surface in the first stage of meshing. When the initial mesh grid is made, trim curves are ignored. After the initial grid is made, Rhino meshes all trim edges, connects the initial grid to the trim edges and then refines the mesh if the Refine mesh option is selected.
-The number of quadrangles per surface in the initial mesh grid. In practice, Rhino will use at least this many polygons on each surface.
+This is the first stage of meshing. Rhino splits the surface into the number of rectangles you input. From this point, Rhino can either refine the mesh by checking the other parameters. If necessary, it splits the rectangles.
 
-Bigger values result in slower meshing, more accurate meshes and a higher polygon count with more evenly distributed polygons. Setting this value to zero turns off the option.
+Rhino uses at least as many polygons as you designated and maybe more.
 
-The default value is 0. The suggested range is from 0 to 10000. This option is scale independent.
+Bigger values result in more evenly distributed polygons, but slower meshing. The suggested range is from 0 to 10000. To turn off, set the value to zero. 
 
-Use to make sure that surfaces with very subtle details are meshed with a high enough polygon count.
 
 ==Refine mesh (checkbox)==
 
 After its initial meshing, Rhino uses a recursive process to refine the mesh until it meets the criteria defined by Maximum angle, Minimum edge length, Maximum edge length, and Maximum distance, edge to surface options.
 
-The mesh is refined until the angle between surface normals along a polygon edge is smaller than this value. The default is 20 degrees and the suggested range is from 5 to 90 degrees. Setting Maximum angle to 0 turns off the option. Scale independent.
+The mesh is refined until the angle between surface normals along a polygon edge is smaller than this value. The default is 20 degrees and the suggested range is from 5 to 90 degrees. Setting Maximum angle to 0 turns off the option.  It is scale independent.
 
-No refinement results in faster meshing, less accurate meshes, and lower polygon count. Clearing this checkbox also means untrimmed individual surfaces and surface areas away from trim edges and joined edges are meshed with evenly sized quadrangles.
+No refinement results in faster meshing, less accurate meshes, and lower polygon count. If you clear this checkbox, untrimmed individual surfaces and surface areas away from trim edges and joined edges are meshed with evenly sized quadrangles.
 
 ==Jagged seams (checkbox)==
 
@@ -111,11 +109,11 @@ Checking Jagged Seams causes faster meshing, a lower polygon count and cracks be
 
 All planar surfaces are meshed by meshing the surface edges and then filling the area bounded by the edges with triangles.
 
-Causes a slower meshing and a minimum polygon count on planar surface, especially for complex trimmed surfaces.
+Simple planes causes a slower meshing and a minimum polygon count on planar surface, especially for complex trimmed surfaces.
+
 If Simple planes is selected, the settings, except Jagged seams, are ignored for planar surfaces and the planar surface is meshed with as few polygons as possible.
 
 > **Note:** //The meshes created by the Mesh command are visible and editable, and separate from the [[rhino:nurbs|NURBS]] objects they were created from. The meshes created by Rendered Viewport and Shaded Viewport on NURBS surfaces and polysurfaces are invisible, not editable, and cannot be separated from the NURBS object, except to destroy them with the **RefreshShade** command. Render meshes are controlled by a different set of meshing settings, which are on the Document Properties dialog box Render page.//
-
 
 
 
