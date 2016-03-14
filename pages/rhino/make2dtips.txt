@@ -1,21 +1,19 @@
-====== How to get Make2D to perform better ======
- 
-(this page is a work in progress)
+====== How to Get Make2D to Perform Better ======
 
-**Make2D** is one of Rhino's weaker spots, but it is still an essential function for many people.  Following are some bits of advice distilled from various discussions among the "Pros" on the Rhino newsgroup.
+**Make2D** is one of Rhino's weaker spots, but it is still an essential function for many people.  Following are some bits of advice distilled from various discussions among the //Pros// on the Rhino newsgroup.
 
-  * **Make2D** doesn't work with objects behind the camera - so make sure there are none selected for your scene. For views where the camera is inside the model, you may actually need to draw a plane that represents the camera location, split the model there and delete/hide everything behind the camera. 
+  * **Make2D** doesn't work with objects behind the camera -- so make sure there are none selected for your scene. For views where the camera is inside the model, you may need to draw a plane that represents the camera location, split the model there, and delete/hide everything behind the camera. 
   * **Hide** all objects that are already completely hidden behind others in the scene.  One easy way to do this is to use **SelVisible** on your scene, then **Invert** the selection.  Everything that selects can be hidden.
-  * **Hide** (or simplify) objects with a lot of detail that will be tiny in the Make2D (for example screw threads, etc.).  No need to calculate all those intersections and projections for something that will end up only being a few pixels in the final drawing.
-  * **Join** all **surfaces** into polysurfaces insofar as possible - everywhere surface edges are concurrent, Rhino has to calculate two edges instead of one and see if there are overlaps.
-  * **Hide** all **curves** if possible - they take longer to calculate.  This is especially true with curves that are concurrent with surface edges.  These are redundant anyway, so hide or delete them.
+  * **Hide** (or simplify) objects with a lot of detail that will be tiny in the Make2D (for example screw threads).  No need to calculate all those intersections and projections for something that will end up only being a few pixels in the final drawing.
+  * **Join** all **surfaces** into polysurfaces as much as possible. Everywhere surface edges are concurrent, Rhino has to calculate two edges instead of one. See if there are overlaps.
+  * **Hide** all **curves** if possible. They take longer to calculate.  This is especially true with curves that are concurrent with surface edges.  These are redundant anyway, so hide or delete them.
   * Check for bad objects (**SelBadObjects**) and fix if necessary!
-  * If possible try to ensure that the geometry included in the Make2D stays inside (does not touch) the view border at all (this might be impossible for interiors).
-  * Lowering the **absolute unit tolerance** by an order of magnitude (for example from .001 to .01) helps tremendously. Just remember that your resulting Make2D drawing will not be any more accurate than that. Also don't forget to set it back to the original tolerance later.  For a discussion of what tolerances do in Rhino see [[rhino:faqtolerances|FAQ Tolerances]].
+  * If possible, ensure that the geometry included in the Make2D stays inside (does not touch) the view border at all. (This might be impossible for interiors.)
+  * Lowering the **absolute unit tolerance** by an order of magnitude (for example from .001 to .01) helps tremendously. Just remember that your resulting Make2D drawing will not be any more accurate than that. Also don't forget to set it back to the original tolerance later.  For a discussion of what tolerances do in Rhino see [[rhino:faqtolerances|Understanding Tolerances]].
 
 And...  **your system also makes a difference**.
 
   * A 64-bit system with as much RAM as you can manage and a multi-core processor will allow you to do a Make2D working in the background.  In any case, for a large Make2D I would export the scene to a new file specific for the Make2D and do all the operations suggested on this page in the new file.
 
-Compiled by mitch 8.02.09
-I will try to do some nicer formatting later...
+Compiled by Mitch 8.02.09
+
