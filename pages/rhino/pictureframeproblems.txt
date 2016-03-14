@@ -1,13 +1,13 @@
-====== PictureFame Problems ======
+====== PictureFrame Problems ======
 
 
-**Problem:** 
+====Problem====
 
 In Rhino, the PictureFrame image does not display. It shows up white or blank without the image or texture displaying.
 
 {{:rhino:blank.png|}}
  
-**Solution**
+====Solution====
 
 **1. Update video drivers.**
 
@@ -16,24 +16,25 @@ Confirm that your Windows display drivers are the latest available from your vid
 **2. Confirm that the hardware acceleration is on.**
 
 The Windows acceleration slider should be set to the right or at least most of the way to the right. 
-This is under Display Properties Settings -> Advanced -> Trouble Shooting tab.
+This is under //Display Properties Settings -> Advanced -> Trouble Shooting// tab.
 
 {{:rhino:slider.png|}}
 
 **3. Confirm Accelerated Hardware Mode is on in Rhino.**
 
-In Rhino 5, this setting will be in Options>Rhino Options>View>OpenGL. If you are using Rhino 4, go to Options> Appearance>OpenGL, from the right pane, confirm that the "Use accelerated hardware mode" is checked. 
+In Rhino 5, this setting will be in //Options>Rhino Options>View>OpenGL//. If you are using Rhino 4, go to //Options> Appearance>OpenGL//. From the right pane, confirm that the **Use accelerated hardware modes** is checked. 
+
 Also confirm that the manufacturer's display driver is being used, not the Windows basic GDI.   
 
 {{:rhino:options_opengl.png|}}
 
 **4. Return Render Advanced Display Modes to Default Settings.**
 
-There is a recent trend to modify this Render display set. Changing options in the Render display mode, can leave the PictureFrame command not working properly. When in doubt, "restore defaults" to return the Render display mode to default values.
+There is a recent trend to modify this Render display set. Changing options in the Render display mode can leave the PictureFrame command not working properly. When in doubt, "restore defaults" to return the Render display mode to default values.
 
 {{:rhino:render_display.png|}}
 
-Specifically, setting "Color and Materials Usage" to "Single Color for all objects" will leave the PictureFrame previewing blank on the Rhino screen.
+Specifically, setting **Color & Materials usage** to **Single Color for all objects** will leave the PictureFrame previewing blank on the Rhino screen.
 
 {{:rhino:render_display_not.png|}}
 
