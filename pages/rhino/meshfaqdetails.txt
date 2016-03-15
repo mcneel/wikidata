@@ -23,17 +23,17 @@ All these can usually be traced back to some problem with the meshing of the mod
 Well, you may not know it, but you created some meshes without realizing it ...  //read on//.
 
 =====Why do we need meshes anyway?=====
-Although Rhino is a [[rhino:nurbs|NURBS]] surface modeler, it uses polygon meshes created from those surfaces for visualization purposes. So what you see on the screen when the model is shaded is in reality a special, invisible polygon mesh (the "render mesh") that is attached to the actual [[rhino:nurbs|NURBS]] surface.
+Although Rhino is a [[rhino:nurbs|NURBS]] surface modeler, it uses polygon meshes created from those surfaces for visualization purposes. So what you see on the screen when the model is shaded is in reality a special, invisible polygon mesh (the "render mesh") that is attached to the actual NURBS surface.
 
-Why? For quick shading and rendering.  But while a mesh has the advantages of shading speed and adjustability, there is a disadvantage. The render mesh is always an approximation of the surface, so there are almost always gaps between the faceted render mesh and the actual smooth surface.
+Why? For quick shading and rendering.  While a mesh has the advantages of shading speed and adjustability, there is a disadvantage. The render mesh is always an approximation of the surface, so there are almost always gaps between the faceted render mesh and the actual smooth surface.
 
-The same meshing engine in Rhino is used in the creation of analysis meshes for the functions like Draft Analysis and Curvature Analysis, EMap, etc., and by the **Mesh** command (Tools > Polygon Mesh > From NURBS Object), which creates a "real" mesh object directly from a NURBS object.
+The same meshing engine in Rhino is used in the creation of analysis meshes for the functions like Draft Analysis and Curvature Analysis, EMap, etc., and by the **Mesh** command (//Tools > Polygon Mesh > From NURBS Object//), which creates a real mesh object directly from a NURBS object.
 
 Exporting from Rhino with certain polygon-based formats (such as .stl) will also create mesh objects (in the exported file).  Although you can't edit these in the original Rhino file, you do have the same group of mesh density settings to control how they are created.
 
 The functions that create real, editable meshes like **Mesh** and **Export** (.stl) are very important in many applications, as other downstream programs or processes often need polygon mesh objects to work with.
 
-All of the types of mesh objects can exist simultaneously in one file, they do not affect one another and each can have its own settings. Although all the meshes are created with the same engine, there are a couple of important differences between them.
+All of the types of mesh objects can exist simultaneously in one file. They do not affect one another and each can have its own settings. Although all the meshes are created with the same engine, there are a couple of important differences between them.
 
 =====The different mesh types=====
 
@@ -43,10 +43,10 @@ All of the types of mesh objects can exist simultaneously in one file, they do n
   * **Analysis meshes** are similar to the render meshes in that they are not normally editable or separable from their NURBS object.  They simply have another set of controls and exist separately from the render meshes.  You //can// see them temporarily, however, when you use the "adjust mesh" button or the "preview" button in the settings panel on the dialog boxes for the Analysis commands.  In Rhino 5, like with render meshes above,you can transform an analysis mesh into a real mesh object with the command **ExtractAnalysisMesh**.
 
 
-  * **Meshes created by the MESH command** are visible and editable, and are separate from the NURBS objects they were created from.  They are objects in their own right, and can be seen and edited with the various Rhino commands that apply to meshes (see Bonus > Mesh), and can be exported to in the polygon mesh formats like STL, DXF, 3DS, and OBJ.
+  * **Meshes created by the Mesh command** are visible and editable, and are separate from the NURBS objects they were created from.  They are objects in their own right, and can be seen and edited with the various Rhino commands that apply to meshes (see //Bonus > Mesh//), and can be exported to in the polygon mesh formats like STL, DXF, 3DS, and OBJ.
 
 
-  * **Meshes created during SAVE and EXPORT** (such as .stl) have the same mesh settings dialogs ("Detailed Controls") as the other types.  You can also see them temporarily when you use the preview button in the settings panel, but they are not stored in the original file (only exported).
+  * **Meshes created during Save and Export** (such as .stl) have the same mesh settings dialogs ("Detailed Controls") as the other types.  You can also see them temporarily when you use the preview button in the settings panel, but they are not stored in the original file (only exported).
 
 > <color slategray>//**Willem:**  When meshing an object for export I always first create a mesh and look at it in the viewport Flat Shade mode (**FlatShade** command) before exporting it to the desired format. The Flat Shade mode "Shades the current viewport with no smoothing so the individual (render)mesh faces are visible".// </color>
 
@@ -63,26 +63,26 @@ All of the types of mesh objects can exist simultaneously in one file, they do n
 So meshing is a balancing act.  The idea is to use the //least// number of mesh faces you need to have adequate resolution for your job - and no more.  To do that in Rhino requires some understanding of how the meshing system works.  //That's why you're here.// :-)
 
 ====The Controls====
-The controls for different mesh types are virtually identical.  The controls for the Render Mesh (display mesh) settings are part of the .3DM file's properties (**Properties > Mesh**).  They are set globally for the whole model, but as of V4 you can also override them on a per-object basis.  Rhino offers you two //standard// settings, **//Jagged and Faster//** and **//Smooth and Slower//**, as well as **//Custom//**, which lets you access the detailed controls.  
+The controls for different mesh types are virtually identical.  The controls for the Render Mesh (display mesh) settings are part of the .3DM file's properties (//Properties > Mesh//).  They are set globally for the whole model, but as of V4 you can also override them on a per-object basis.  Rhino offers you two standard settings, **//Jagged & Faster//** and **//Smooth & Slower//**, as well as **//Custom//**, which lets you access the detailed controls.  
 
 When creating a mesh from a NURBS object, or exporting to a mesh format like STL, DXF, 3DS, and OBJ you can choose to use the simple controls, which are just a coarse <==> fine slider: **fewer <==> more polygons**.
 
-Alternatively, there are the detailed controls which expose more of the settings to the user.  They are virtually are identical for all the mesh types, and are described in detail below.
+Alternatively, there are the detailed controls which expose more of the settings.  They are virtually identical for all the mesh types, and are described in detail below.
 
 ====The default settings====
-  * **Jagged and Faster** is the default for render meshes --- fine for quick visualization, but not very good for anything else.
+  * **Jagged & Faster** is the default for render meshes --- fine for quick visualization, but not very good for anything else.
 
-  * **Smooth and Slower** //theoretically// offers better resolution at the expense of longer meshing times. In practice, even though it does take longer, frankly, it may still leave visible gaps where you don't want them, so you are advised to try the custom settings instead.
+  * **Smooth & Slower** //theoretically// offers better resolution at the expense of longer meshing times. In practice, even though it does take longer, frankly, it may still leave visible gaps where you don't want them, so you are advised to try the custom settings instead.
 
-  * **Custom** allows the user the maximum flexibility in tailoring the mesh settings to their needs, at the expense of being a bit complex to understand and set up. 
+  * **Custom** offers the maximum flexibility in tailoring the mesh settings, at the expense of being a bit complex to understand and set up. 
 
-  * The default "simple" slider settings for analysis meshes as well as Mesh and Export is an average //"somewhere in the middle"//...
+  * The default simple slider settings for analysis meshes as well as Mesh and Export is an average //"somewhere in the middle"//...
 
-  * The default setting for the special STL Export dialog is generally the last used //max dist edge to srf// setting in the custom dialog (see further on) or the value of Absolute Tolerance in //File > Properties > Units// if none was set.
+  * The default setting for the special STL Export dialog is generally the last used //max dist edge to srf// setting in the custom dialog or the value of Absolute Tolerance in //File > Properties > Units// if none was set.
 
-====The Custom Settings====
+====The Custom settings====
 
-<color darkslateblue>//**If you really want to control your meshing process, here is where you need to start!**//</color>
+**If you really want to control your meshing process, here is where you need to start!**
 
 There are //seven// numerical settings and //three// check boxes.  Each one has a different method of mesh control and some of them can work together.  The interactions and combined effects of these settings are complex to understand.  Individually they are well described in the Help, and reading this info carefully will give you a good idea of what each one does.
 
@@ -90,7 +90,9 @@ There are //seven// numerical settings and //three// check boxes.  Each one has 
 
 **Some quick guidelines**
 
-Below is a basic start point for custom settings, experiment with them on your models.\\ //If a setting is 0 or 0.0, it is turned off (not taken into a account).//
+Below is a basic start point for custom settings. Experiment with them on your models.\\ 
+
+//If a setting is 0 or 0.0, it is turned off (not taken into a account).//
 
 |**Density** //(new in Rhino 4)//|  <color slategray>**0.0**</color>|
 |**Maximum angle**|  <color slategray>**35**</color>|
@@ -105,8 +107,8 @@ Below is a basic start point for custom settings, experiment with them on your m
   * Jagged seams **//unchecked//**
   * Simple planes **//unchecked//**
 
-  * The //maximum distance edge to surface// method forces Rhino to create a mesh that is no further away from the surface than the specified value, which is in current file units.  It allows Rhino to put fewer polygons in lower detail areas and more polygons in higher detail areas, resulting in a more efficient mesh.
-  * The //minimum initial grid quads// setting makes sure the flatter areas have enough polygons to look smooth.
+  * The **Maximum distance edge to surface** method forces Rhino to create a mesh that is no further away from the surface than the specified value, which is in current file units.  It lets Rhino put fewer polygons in lower detail areas and more polygons in higher detail areas. The result is a more efficient mesh.
+  * The **Minimum initial grid quads** setting makes sure the flatter areas have enough polygons to look smooth.
 
 > <color darkslategray>//**Pascal:** I prefer to set some largish number in "Maximum angle" rather than zero (disabled), maybe 35-45 degrees. This way features that fall below the max distance number will be subdivided a little. You can get away with a little bigger max distance number in some cases if you let a large angle setting take over for the smallest objects. When there is too great a discrepancy between an object and the global mesh settings, it often pays to use the Mesh command on those objects. Set the mesh to be as loose or as fine as needed for that object, then render the mesh object only, hide or delete the %%NURBS%% surface. Very small repeated details can be meshed very very loosely for instance, without impacting the quality of the image.//</color>
 
@@ -128,9 +130,7 @@ First, it depends on what you're going to be using your mesh setting for.  For g
 
 It may seem very complicated at first, but after a bit of practice, you will find a few standard settings that work for you in most situations.  These settings can even then be programmed into a macro or script to quickly launch the meshing of your objects with the desired characteristics.
 
-<color darkslategray>Details of the **//Density//** setting: \\ 
-
-//The Density setting in V4 uses a formula to control how close the polygon edges are to the original surface.  The valid range is from zero (off, or ignored) to 1, maximum density. Larger values result in a mesh with a higher polygon count. Used by itself (all other settings 0) it seems to create well balanced meshes. Density is not directly related to units or scale.//\\ 
+<color darkslategray>Details of the **//Density//** setting: //The Density setting in V4 uses a formula to control how close the polygon edges are to the original surface.  The valid range is from zero (off, or ignored) to 1, maximum density. Larger values result in a mesh with a higher polygon count. Used by itself (all other settings 0) it seems to create well balanced meshes. Density is not directly related to units or scale.// 
 \\ 
 //The Density number feeds Rhino something to use in its own internal calculation, per object, which in turn spits out a number that is like the "maximum distance edge to surface" setting that is, a number in current model units that tells the mesher how far to allow the mid-point of any mesh edge to stray from the original surface. The calculation is based on the size of the object among other things. This number will be smaller as the Density setting gets closer to one. The user will never actually see this final number and it is different for each object being meshed. If there is also an explicit non-zero "Maximum distance edge to surface" number set elsewhere in the dialog, then the mesher will use whichever number is smaller for its eventual max distance setting for each object.//</color>
 
@@ -149,11 +149,11 @@ Sometimes, you may find that even with the settings guidelines above, you are st
 
   * <color darkslateblue>**Kinked surfaces.**</color>  Usually caused by having **CreaseSplitting** (V5 or V4 add-on) set to No, or using **MergeSrf Smooth=No** on surfaces that are not at least tangent to each other.  In this case, again, it is better to have multiple joined surfaces instead of one kinked one.  Use **Surface edit tools > Divide surface along creases** or **Split  > Isocurves** at the kinked spots to split these types of surfaces up into separate parts.
 
-  * <color darkslateblue>**Triangular surfaces with holes**</color>  //This is a known Rhino bug in V4.//  The **Use simple planes** setting (outlined above) messes up with either a triangular planar surface with a hole in the middle, or a planar surface with a triangular hole in the middle.  The symptom is that the hole is not displayed in shaded mode, even though it is there.  The remedy is to uncheck **Use simple planes** in the detailed mesh dialog.  If you are using **Jagged and Faster**, **Simple planes** is checked by default and can't be unchecked, so you will have to switch to a **Custom** mode.
+  * <color darkslateblue>**Triangular surfaces with holes**</color>  //This is a known Rhino bug in V4.//  The **Use simple planes** setting (outlined above) messes up with either a triangular planar surface with a hole in the middle, or a planar surface with a triangular hole in the middle.  The symptom is that the hole is not displayed in shaded mode, even though it is there.  The remedy is to uncheck **Use simple planes** in the detailed mesh dialog.  If you are using **Jagged & Faster**, **Simple planes** is checked by default and can't be unchecked, so you will have to switch to a **Custom** mode.
 
 =====Diagnostics (From the Rhino Help file)=====
 
-**[[rhino:meshdiagnostics|The Diagnostics explanation is a bit difficult to find in the Help. For your convenience it is provided here.]]**
+**[[rhino:meshdiagnostics|The Diagnostics explanation is a bit difficult to find in Help. For your convenience it is provided here.]]**
 
 ----
 
