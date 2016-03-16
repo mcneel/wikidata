@@ -1,23 +1,25 @@
 ====== Zoo Returning Expired Licenses ======
 > **Product:** //[[zoo4:home|Zoo 4.0]]//
-> **Summary:** //Solving the "This license of Rhino is expired" problem.//
+> **Summary:** //Solving the "This license of Rhino is expired" problem//
 
 =====Question=====
-We are having difficulties getting Rhino 4.0 working in network-node mode on our Windows 7 64-bit workstations.  We have one workstation that is working and that had SR8, the others that are not working are SR9.
 
-What happens is when starting Rhino 4.0 the client receives a message stating that **This license of Rhino is expired**, and offers the choice to "Upgrade this license", "Enter a new key", or "Close Rhino". 
+We are having difficulties getting Rhino 4.0 working in network-node mode on our Windows 7 64-bit workstations.  We have one workstation that is working and that had SR8. The others that are not working are SR9.
 
-Please provide any suggestions on how to resolve this issue. 
+When starting Rhino 4.0 the client receives a message stating that **This license of Rhino is expired**, and offers the choice to **Upgrade this license**, **Enter a new key**, or **Close Rhino**. 
+
+How do we resolve this issue? 
 
 =====Answer=====
-This error message is incorrect; the licenses are not expired. Instead, the problem is that the license file in **C:\Program Files\Rhinoceros 4.0\System\Rhino.key** is not writable by Rhino.
+
+This error message is incorrect: The licenses are not expired. Instead, the problem is that the license file in //C:\Program Files\Rhinoceros 4.0\System\Rhino.key// is not writable by Rhino.
 
 The fix is easy. 
-  - Right-mouse click on the Rhino Desktop icon and select 'Run as Administrator'. This will start Rhino with elevated rights so the Rhino.Key file can be created or modified. You will see the same message again. 
-  - Click 'Enter a new key', and OK. Enter your key code. The data will be saved and Rhino will start. 
-  - Then you can start Rhino normally. Rhino V5 will not have this problem since it is designed for Win7 and the complications of UAC. 
+  - Right-mouse click on the Rhino Desktop icon and select **Run as Administrator**. This will start Rhino with elevated rights so the Rhino.Key file can be created or changed. You will see the same message again. 
+  - Click **Enter a new key**, and **OK**. Enter your key code. The data will be saved and Rhino will start. 
+  - Then you can start Rhino normally.  
   - Rhino should start successfully as a standard user from then on.
 
-\\
+Rhino 5 does not have this problem since it is designed for Win7 and the complications of UAC.\\
 
 {{tag>Zoo4}}
