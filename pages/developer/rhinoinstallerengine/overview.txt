@@ -1,9 +1,9 @@
 ====== The Rhino Installer Engine ======
 
-The Rhino Installer Engine simplifies distribution, installation, and updating of plug-ins for Rhino 4.0 and 5.0 on both 32- and 64- bit platforms.
+The Rhino Installer Engine simplifies distribution, installation, and updating of plugins for Rhino 4.0 and 5.0 on both 32- and 64-bit platforms.
 
 =====How it works=====
-A Rhino Installer Package is a zip file with an .RHI extension. The RHI file can contain directory structures, and can include more than one version of a plug-in. 
+A Rhino Installer Package is a zip file with an .RHI extension. The RHI file can contain directory structures, and can include more than one version of a plugin. 
 
 There are no file structure or naming requirements.
 
@@ -20,21 +20,21 @@ works just as well as
   myPlugIn_rhino5_x64.rhp
 </code>
 
-The Rhino Installer Engine examines each plug-in and extracts the plug-in GUID, Title, Version, and appropriate SDK version numbers. It also examines each Rhino installed on the computer.
+The Rhino Installer Engine examines each plugin and extracts the plugin GUID, Title, Version, and appropriate SDK version numbers. It also examines each Rhino installed on the computer.
 
-The Rhino Installer Engine supports installing AnyCPU plug-ins written in .NET and will register them with both 32- and 64-bit Rhino 5.
+The Rhino Installer Engine supports installing AnyCPU plugins written in .NET and will register them with both 32- and 64-bit Rhino 5.
 
-Next, each plug-in is compared to each installed version of Rhino. The newest compatible plug-in is registered with the corresponding version of Rhino.
+Next, each plugin is compared to each installed version of Rhino. The newest compatible plugin is registered with the corresponding version of Rhino.
 
 =====How-to articles=====
-  * [[developer/rhinoinstallerengine/cpp|Making your C++ plug-in compatible with the Rhino Installer Engine]]
-  * [[developer/rhinoinstallerengine/dotnet|Making your C# plug-in compatible with the Rhino Installer Engine]]
+  * [[developer/rhinoinstallerengine/cpp|Making your C++ plugin compatible with the Rhino Installer Engine]]
+  * [[developer/rhinoinstallerengine/dotnet|Making your C# plugin compatible with the Rhino Installer Engine]]
   * [[developer/rhinoinstallerengine/authoring|RHI file authoring guidelines]]
 
 =====Limitations=====
-  * The Rhino Installer Engine will copy files from the RHI archive, and will register the plug-ins it finds. No other execution is done.
+  * The Rhino Installer Engine will copy files from the RHI archive, and will register the plugins it finds. No other execution is done.
   * Currently, it is not possible to digitally sign RHI files. This means it is also not possible to verify the source of RHI files.
-  * The Rhino Installer Engine is currently **available with Rhino 5.0**. It will install plug-ins for Rhino 4.0, but there isn't a separate redistributable for the Rhino Installer Engine for Rhino 4.0.
+  * The Rhino Installer Engine is currently available with Rhino 5. It will install plugins for Rhino 4.0, but there isn't a separate redistributable for the Rhino Installer Engine for Rhino 4.0.
 
 ===== Related articles=====
 {{topic>rhinoinstallerengine mcneelupdate}}
