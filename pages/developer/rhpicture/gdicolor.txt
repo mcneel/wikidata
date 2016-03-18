@@ -1,23 +1,19 @@
-====== RhPicture Plugin Geometry Colour information ======
+====== RhPicture Plug-in Geometry Color Information ======
 
-> **Summary:** //A description of colour definition in the [[developer:rhinoscriptimageextension|RhPicture]] plugin.//
+> **Summary:** //A description of color definition in the [[developer:rhinoscriptimageextension|RhPicture]] plug-in//
 
 \\
 
 ===== VB.NET =====
-<code vb>
 
-</code>
-Colours in [[developer:rhinoscript|RhinoScript]] and VBScript are 24 bit-per-pixel RGB colours, meaning every channel can have a value between 0 and 255. Objects, layers and materials in Rhino do not support transparancy or HDR (floating point colours). This system allows for a total set of 16,777,216 unique colours (256 × 256 × 256 or 256³) that all fall within a clearly delineated range which only covers a small part of what the human eye can actually perceive:
+Colors in [[developer:rhinoscript|RhinoScript]] and VBScript are 24 bit-per-pixel RGB colors, meaning every channel can have a value between 0 and 255. Objects, layers, and materials in Rhino do not support transparancy or HDR (floating point colors). This system allows for a total set of 16,777,216 unique colors (256 × 256 × 256 or 256³) that all fall within a clearly delineated range which only covers a small part of what the human eye can actually perceive:
 
 \\
 
 | {{:legacy:en:RhPicture_RGBColourDomain.png}} |
-|    The CIExy1931 domain of possible colours (Source: Wikipedia)    |
+|    The CIExy1931 domain of possible colors (Source: Wikipedia)    |
 
-\\
-
-This diagram shows the limitations of the 24-bbp-RGB system. A more useful graphical representation of colour is the RGB-space diagram, that treats the individial channels (red, green and blue) as spatial coordinates (x, y and z) where the colour-space origin is located at the far corner of the cube. When all three coordinates are zero the resulting colour is black. When they are at their maximum, the result is white. The maximum value along each axis represents a primary colour (either red, green or blue) and the maximum value along two axes represent a secondary colour (either cyan, yellow or magenta):
+This diagram shows the limitations of the 24-bbp-RGB system. A more useful graphic representation of color is the RGB-space diagram, that treats the individual channels (red, green, and blue) as spatial coordinates (x, y and z). The color-space origin is located at the far corner of the cube. When all three coordinates are zero the resulting color is black. When they are at their maximum, the result is white. The maximum value along each axis represents a primary color (either red, green, or blue) and the maximum value along two axes represent a secondary color (either cyan, yellow or magenta):
 
 \\
 
@@ -25,7 +21,7 @@ This diagram shows the limitations of the 24-bbp-RGB system. A more useful graph
 
 \\
 
-VBScript colours are defined in a very compact way that allows us to easily store them, but it makes accessing the individual channels rather cumbersome. The individual values of the RGB channels of a VBScript colour are all mashed together in one big number, where each group of digits (in binary of course) refers to a primary channel. The result is a humanly unreadable colour definition which has to be put through nasty looking functions in order to extract the red, green and blue base values:
+VBScript colors are defined in a very compact way that lets us easily store them, but it makes accessing the individual channels rather cumbersome. The individual values of the RGB channels of a VBScript color are all mashed together in one big number, where each group of digits (in binary of course) refers to a primary channel. The result is a humanly unreadable color definition which has to be put through nasty looking functions to extract the red, green, and blue base values:
 
 \\
 
@@ -41,11 +37,9 @@ VBScript colours are defined in a very compact way that allows us to easily stor
       ExtractBlueChannel = col \ (256 ^ 2) And 255
   End Function
 
-\\
 
-Constructing VBScript colours is much easier, because of the RGB function:
+Constructing VBScript colors is much easier, because of the RGB function:
 
-\\
 
   Dim red   : red   = Rhino.GetInteger("Red channel value",   128, 0, 255)
   Dim green : green = Rhino.GetInteger("Green channel value", 128, 0, 255)
@@ -56,19 +50,18 @@ Constructing VBScript colours is much easier, because of the RGB function:
 
 \\
 
-GDI+ images support many different colour formats, including paletted ones, greyscale formats and high-bit formats that store as much as 48 bits per pixel. The [[developer:rhinoscriptimageextension|RhPicture]] plugin uses only one of these possible formats which is very similar to VBScript colours, with one exception: transparancy. Whenever a colour is required in an RhPicture procedure you have a choice of format:
+GDI+ images support many different color formats, including paletted ones, greyscale formats and high-bit formats that store as much as 48 bits per pixel. The [[developer:rhinoscriptimageextension|RhPicture]] plug-in uses only one of these possible formats which is very similar to VBScript colors, with one exception: transparency. Whenever a color is required in an RhPicture procedure you have a choice of format:
 
-\\
 
-| RhPicture colour types |
-|{W10!} Type |{W10!} Format | Description |
+| RhPicture color types |
+| Type | Format | Description |
 | VBScript | Integer | Similar to the colour format in VBScript. Can be constructed using the RGB() function. |
-| RGB | Integer() | An array of three integers, one for each colour channel. The values do not have to be limited to the 0~255 range but they will be clipped when they exceed this domain. |
+| RGB | Integer() | An array of three integers, one for each color channel. The values do not have to be limited to the 0~255 range but they will be clipped when they exceed this domain. |
 | RGBA | Integer() | An array of four integers, one for a each colour channel and an alpha value (the fourth element, zero being completely transparant and 255 being completely opaque). The values do not have to be limited to the 0~255 range but they will be clipped when they exceed this domain. |
 
 \\
 
-Thus, there are 5 ways of using the RhPicture.FillCircle() method:
+Thus, there are five ways to use the RhPicture.FillCircle() method:
 
   1. RhPicture.FillCircle(Array(50,50), 35, vbRed)
   2. RhPicture.FillCircle(Array(50,50), 35, RGB(255, 0, 0))
@@ -78,18 +71,14 @@ Thus, there are 5 ways of using the RhPicture.FillCircle() method:
 
 \\
 
-1. Using a VBScript colour constant (other constants are vbBlack, vbWhite, vbBlue, vbGreen, vbCyan, vbMagenta and vbYellow).
-
-2. Using a VBScript colour integer (obtained in this case throug the RGB() function).
-
-3. Using an array of three values (red, green and blue).
-
-4. Using an array of four values (red, green, blue and alpha).
-
-5. Using a [[developer:rhpicture:gdibrush|GDI Brush Object]] .
+  - Use a VBScript color constant (other constants are vbBlack, vbWhite, vbBlue, vbGreen, vbCyan, vbMagenta and vbYellow).
+  - Use a VBScript color integer (obtained in this case throug the RGB() function).
+  - Use an array of three values (red, green and blue).
+  - Use an array of four values (red, green, blue and alpha).
+  - Use a [[developer:rhpicture:gdibrush|GDI Brush Object]].
 
 \\
 
-The first three methods all have exactly the same result. The fourth method draws a 50% transparant circle and the fifth method uses a [[developer:rhpicture:gdibrush|Brush]] definition which could be a solid colour, a gradient, a texture or a hatch pattern.
+The first three methods all have exactly the same result. The fourth method draws a 50% transparant circle and the fifth method uses a [[developer:rhpicture:gdibrush|Brush]] definition which could be a solid color, a gradient, a texture, or a hatch pattern.
 
 
