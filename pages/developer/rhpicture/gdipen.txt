@@ -1,16 +1,16 @@
-====== RhPicture Plugin GDI Pen object ======
+====== RhPicture Plug-in GDI Pen )bject ======
 
-> **Summary:** //A description of the GDI Pen object as exposed through the [[developer:rhinoscriptimageextension|RhPicture]] plugin//
+> **Summary:** //A description of the GDI Pen object as exposed through the [[developer:rhinoscriptimageextension|RhPicture]] plug-in//
 
 \\
 
 =====GDI+ Pen objects=====
 
-GDI+ Pen objects are used to draw lines and they can simulate a wide range of behaviours, some of which are also available through the [[developer:rhinoscriptimageextension|RhPicture]] Plugin. Properties which are available in RhPicture Pen objects:
+GDI+ Pen objects are used to draw lines. They can simulate a wide range of behaviors, some of which are also available through the [[developer:rhinoscriptimageextension|RhPicture]] plug-in. 
 
-\\
+Properties available in RhPicture Pen objects:
 
-  * Colour
+  * Color
   * Width
   * Cap style
   * Join style
@@ -20,9 +20,7 @@ GDI+ Pen objects are used to draw lines and they can simulate a wide range of be
 
 \\
 
-Properties not availble in RhPicture Pen objects:
-
-\\
+Properties not available in RhPicture Pen objects:
 
   * Custom Caps
   * Brush Fills
@@ -34,7 +32,7 @@ Properties not availble in RhPicture Pen objects:
 
 \\
 
-Most of these properties are self-evident and need little elaboration. However, the lack of predefined enumerations in VBScript requires us to specify these as integers, which is not self-documenting. Note that you do not need Pen objects to draw lines in the [[developer:rhinoscriptimageextension|RhPicture]] plugin. Every method that takes a Pen object is overloaded and can be called with a colour and optional width parameter. This should be sufficient in most cases and makes for much simpler code:
+Most of these properties are self-evident and need little elaboration. However, the lack of predefined enumerations in VBScript requires us to specify these as integers, which is not self-documenting. Note that you do not need Pen objects to draw lines in the RhPicture plug-in. Every method that takes a Pen object is overloaded and can be called with a color and optional width parameter. This should be sufficient in most cases and makes a much simpler code:
 
   Dim RhPicture : Set RhPicture = Rhin.GetPluginObject("RhPicture")
   Call RhPicture.CreateImage(50, 50, vbWhite)
@@ -74,8 +72,6 @@ Note that you can store any number of Pen objects in your script and you can reu
 \\
 
 =====Enumerations explained:=====
-
-\\
 
 | Cap Enumeration flags for PEN constuctors |
 | Flat | Round | Square | Triangle | Arrow Anchor | Round Anchor | Square Anchor| Diamond Anchor |
