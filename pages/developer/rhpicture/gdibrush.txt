@@ -1,31 +1,23 @@
-====== RhPicture Plugin GDI Brush objects ======
+====== RhPicture Plug-in GDI Brush Objects ======
 
-> **Summary:** //A description of the GDI Brush objects as exposed through the [[developer:rhinoscriptimageextension|RhPicture]] plugin//
+> **Summary:** //A description of the GDI Brush objects as exposed through the [[developer:rhinoscriptimageextension|RhPicture]] plug-in//
 
 \\
 
 =====GDI+ Brush objects=====
 
-GDI+ Brush objects are used to draw contents (fills) of geometry. There are a number of distinct Brush types available in GDI+, some of which are exposed in the [[developer:rhinoscriptimageextension|RhPicture]] plugin:
-
-\\
+GDI+ Brush objects are used to draw contents (fills) of geometry. There are several distinct Brush types available in GDI+, some of which are exposed in the [[developer:rhinoscriptimageextension|RhPicture]] plug-in:
 
   * Solid
   * Hatch
   * Texture
   * Linear Gradient
 
-\\
-
-Brush types not available in the RhPicture plugin:
-
-\\
+Brush types not available in the RhPicture plug-in:
 
   * Path Gradient
 
-\\
-
-Note that you do not need a Brush object to draw fills in the RhPicture plugin. Every method that takes a Brush object is overloaded and can be called with a colour instead, in which case you get a simple solid fill:
+Note that you do not need a Brush object to draw fills in the RhPicture plug-in. Every method that takes a Brush object is overloaded and can be called with a color instead, in which case you get a simple solid fill:
 
   Dim RhPicture : Set RhPicture = Rhin.GetPluginObject("RhPicture")
   Call RhPicture.CreateImage(80, 50, vbWhite)
@@ -55,15 +47,13 @@ Note that you can store any number of Brush objects in your script and you can r
 | WrapMode  | Integer  | The wrapping style enumeration controlling how the texture is tiled. See table below for valid values. |
 | From      | GDIPoint | A 2D coordinate that defines the start of the gradient. |
 | To        | GDIPoint | A 2D coordinate that defines the end of the gradient. |
-| Color1    | GDIColor | The colour at the start of the gradient. |
-| Color2    | GDIColor | The colour at the end of the gradient. |
+| Color1    | GDIColor | The color at the start of the gradient. |
+| Color2    | GDIColor | The color at the end of the gradient. |
 
 \\
 \\
 
 =====Enumerations explained:=====
-
-\\
 
 | HatchBrush style enumeration constants. GDI+ defines 53 different hatch styles. The zip-file contains all of these. |
 | [[http://wiki.mcneel.com/_media/legacy/en/HatchBrushTags.zip|HatchBrush Constants]] |
@@ -90,7 +80,7 @@ Note that you can store any number of Brush objects in your script and you can r
 
 =====Linear Gradients explained:=====
 
-Be careful when using Linear Gradient brushes. The coordinates that define the start and end points of the gradient may be subject to noise. Since gradients are stacked rather than mirrored it is possible you get bleeding colours if you've defined your gradient to fit exactly within your drawing region. It is usually best to make the gradient extend one pixel in each direction:
+Be careful when using Linear Gradient brushes. The coordinates that define the start and end points of the gradient may be subject to noise. Since gradients are stacked rather than mirrored it is possible you get bleeding colors if you've defined your gradient to fit exactly within your drawing region. It is usually best to make the gradient extend one pixel in each direction:
 
 {{:legacy:en:RhPicture_GradientCoordinates.png}}
 
