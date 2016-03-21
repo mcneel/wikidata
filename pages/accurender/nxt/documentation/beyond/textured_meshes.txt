@@ -1,18 +1,16 @@
-[[accurender:nxt:documentation|Online help home]]
+====== Importing textured mesh objects ======
 
-====== Importing Textured Mesh Objects ======
+nXt for AutoCAD lets you import meshes with texture coordinates welded to the vertices.  These types of meshes are commonly used for entourage objects, such as 3D people or plants.  Many different software packages can create these meshes, and many ready-made objects are available online.  Current file support includes .obj and .3ds.  //This feature is not available in AutoCAD 2007.//
 
-nXt for AutoCAD allows you to import meshes with texture coordinates welded to the vertices.  These types of meshes are commonly used for "entourage" objects, such as 3D people or plants.  Many different software packages can create these meshes, and many ready-made objects are available online.  Current file support includes .obj and .3ds.  //This feature is not available in AutoCAD 2007.//
-
-**To Import a Textured Mesh Object:**
+**To import a textured mesh object**
 
   - Make sure your mesh file, its material library (if .obj), and any texture files are located in the same folder.  
-  - From the Widgets menu, select Textured Mesh Objects->Add...
+  - From the Widgets menu, select //Textured Mesh Objects->Add...//
   - When prompted, pick a location for the objects.
 
 Your object, its materials, and its textures will all be imported.
 
-**Additional Notes:**
+**Notes**
 
   * AutoCAD may have trouble dealing with large meshes.  It is strongly suggested that you set _SELECTIONPREVIEW to 0 when dealing with these, since the selection preview mechanism does not work well with large meshes.
   * Most mesh objects can be exploded once into individual meshes.
@@ -21,16 +19,16 @@ Your object, its materials, and its textures will all be imported.
   * A single grip and object snap point is provided.  Osnap responds to "insert" or "nearest".
 
 
-===== Converting Textured Mesh Objects to AutoCAD Meshes =====
+===== Converting textured mesh objects to AutoCAD meshes =====
 
-Textured mesh objects are stored as nXt custom obejcts.  They can be moved, scaled, copied, deleted-- but they cannot be otherwise edited and different materials cannot be assigned to different meshes. Using the procedure below, you can convert this custom nXt object to one or more native AutoCAD "polyface" meshes.  If you do this, you will lose the vertex texture coordinate information.  This is generally not advised for objects with complex texture mapping such as people or plants.  However, it may be advantageous to do this for other models, such as furniture.  Once converted, you can use native AutoCAD editing tools, materials and mapping assignments, etc..  
+Textured mesh objects are stored as nXt custom objects.  They can be moved, scaled, copied, deleted, but they cannot be otherwise edited. Different materials cannot be assigned to different meshes. Using the procedure below, you can convert this custom nXt object to one or more native AutoCAD polyface meshes.  If you do this, you will lose the vertex texture coordinate information.  This is generally not advised for objects with complex texture mapping such as people or plants.  Yet, it may be helpful for other models, such as furniture.  Once converted, you can use native AutoCAD editing tools, materials and mapping assignments, etc..  
 
-**To Convert a Textured Mesh Object:**
+**To convert a textured mesh object**
 
-  - From the Widgets menu, select Textured Mesh Objects->Convert to AutoCAD Mesh <
-  -  Select the custom objects you would like to convert
+  - From the Widgets menu, select //Textured Mesh Objects->Convert to AutoCAD Mesh <//
+  -  Select the custom objects you would like to convert.
 
-**Additional Notes:**
+**Notes**
 
-  * Meshes in AutoCAD are limited to 65,535 vertices.  Any mesh which exceeds that limitation will not survive the conversion process.  This is not a problem with the 3ds format, which shares the same limitation, but may be a problem for obj meshes.
+  * Meshes in AutoCAD are limited to 65,535 vertices.  Any mesh which exceeds that limitation will not survive the conversion process.  This is not a problem with the 3ds format, which shares the same limitation, but it may be a problem for obj meshes.
  
