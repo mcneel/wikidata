@@ -1,13 +1,13 @@
 ====== Monkey (Script Editor) for Rhino 4 ======
 > **Summary:** //The Advanced [[developer:rhinoscript|RhinoScript]] editor//
 
-**Note:**This plug-in is included in the [[http://download.rhino3d.com/rhino/5.0/wip/|Rhino 5 WIP]]. Command name is **EditScript**. 
+**Note:** This plug-in is included in the [[http://download.rhino3d.com/rhino/5.0/wip/|Rhino 5 WIP]]. Command name is **EditScript**. 
 
 =====What is Monkey?=====
 
-Monkey is a script editor in Rhino 4 which can be used to edit, run, debug, and compile scripts. It contains all the standard programmer editor features such as Find/Replace (with regular expressions), multi-document interface, code trees, and integrated helpfiles. Monkey also comes with a separate application called the //Monkey Script Compiler//. This stand-alone exe turns .rvb scripts into .rhp plug-ins. More information on the script compiler can be found [[developer:monkeyscriptcompiler|here]].
+Monkey is a script editor in Rhino 4 which can be used to edit, run, debug, and compile scripts. It contains all the standard programmer editor features such as Find/Replace (with regular expressions), multi-document interface, code trees, and integrated helpfiles. Monkey also comes with a separate application called the //Monkey Script Compiler//. This stand-alone exe turns .rvb scripts into .rhp plug-ins. More information on the script compiler is [[developer:monkeyscriptcompiler|here]].
 
-This wiki page focuses on the Monkey plug-in features. Monkey is a DotNET plug-in, meaning you need the Microsoft DotNET Framework 2.0 installed on your machine. Note that many computers already are DotNET compliant, so you only need to download and install this if Monkey doesn't run. (You'll get an error message telling you when this happens.)
+This wiki page focuses on the Monkey plug-in features. Monkey is a DotNET plug-in, so you need the Microsoft DotNET Framework 2.0 installed on your machine. Note that many computers already are DotNET compliant, so you only need to download and install this if Monkey doesn't run. (You'll get an error message telling you when this happens.)
 
 If you are a plug-in developer and have extended [[developer:rhinoscript|RhinoScript]] to use your plug-in methods, then you can access your methods from Monkey.  Click [[developer:monkeyscripting|here]] for details.
 
@@ -37,7 +37,7 @@ The Script Compiler is a stand-alone program (not a Rhino plug-in), that lets yo
 
 =====The Script Editor=====
 
-The Monkey script editor is a Rhino plug-in, not a stand-alone application, meaning it can only be run inside of Rhino 4. You can either run the _Monkey command or open the editor via the Monkey menu. After a short delay the Monkey Editor will be displayed.  (Yes, yes, we know. We're working hard to get it to load faster.) Since the editor is likely to be displayed as a large window, we've made it nondockable. By default, the window is linked to Rhino, meaning that if you minimize Rhino, Monkey will also disappear. It is possible to unlink Rhino and Monkey, but we'll get to that in the menu section.
+The Monkey script editor is a Rhino plug-in, not a stand-alone application, meaning it can only be run inside of Rhino 4. You can either run the _Monkey command or open the editor via the Monkey menu. After a short delay the Monkey Editor will display.  (Yes, we know. We're working hard to get it to load faster.) Since the editor is likely to be displayed as a large window, we've made it nondockable. By default, the window links to Rhino, meaning that if you minimize Rhino, Monkey will also disappear. It is possible to unlink Rhino and Monkey, but we'll get to that in the menu section.
 
 
 The following sections deal with all the user interface elements of the Monkey window.
@@ -51,16 +51,16 @@ The following sections deal with all the user interface elements of the Monkey w
 | {{:legacy:en:MonkeyEditor_Editor.png}} |
 
 
-The most important item on the Monkey Editor is the Code Editor. It is here that you make your scripts. As you can see, the editor is much more than a simple text editor (a la notepad). It performs automatic syntax parsing, meaning you get properly colored keywords, collapsible code groups which encapsulate Sub() and Function() blocks, automatic indenting, autocompletion, and error highlighting.
+The most important item on the Monkey Editor is the Code Editor. It is here that you make your scripts. As you can see, the editor is much more than a simple text editor (a la notepad). It performs automatic syntax parsing. You get properly colored keywords, collapsible code groups which encapsulate Sub() and Function() blocks, automatic indenting, autocompletion, and error highlighting.
 
 
-Autocompletion and parameter tips are generally grouped under the catch-phrase [[http://en.wikipedia.org/wiki/Intellisense|IntelliSense]]. Since [[developer:rhinoscript|RhinoScript]] is not a strongly typed language, it is difficult to provide a fully functional IntelliSense system, which is why IntelliSense in Monkey is limited to RhinoScript methods and Script Scope procedures. We may expand this functionality later on to include vbScript specific procedures and classes. An example of IntelliSense in action is below:
+Autocompletion and parameter tips are generally grouped under the catch-phrase [[http://en.wikipedia.org/wiki/Intellisense|IntelliSense]]. Since [[developer:rhinoscript|RhinoScript]] is not a strongly typed language, it is difficult to provide a fully functional IntelliSense system, which is why IntelliSense in Monkey is limited to RhinoScript methods and Script Scope procedures. We may expand this functionality later to include vbScript specific procedures and classes. An example of IntelliSense in action is below:
 
 
 | {{:legacy:en:Monkey_IntellisenseAnimation.gif}} |
 
 
-Note that the autocompletion list pops up as soon as //Rhino// is typed anywhere. The list updates as you type to reflect the best possible match with your current text. In this case, we want to use the Rhino.GetObject() method but we have to type at least //geto// to get it (Rhino.GetAngle() comes earlier in the alphabet and is the initial provided solution). Once the Rhino.GetObject() method is highlighted in the pop up list, we can press **Enter** and the complete method name is inserted into the script. Once the method name is in place, we have to supply the arguments. IntelliSense displays a tooltip showing us the required arguments and which one we are currently setting.
+Note that the autocompletion list pops up as soon as //Rhino// is typed anywhere. The list updates as you type to reflect the best possible match with your current text. In this case, we want to use the Rhino.GetObject() method but we have to type at least //geto// to get it. (Rhino.GetAngle() comes earlier in the alphabet and is the initial provided solution.) Once the Rhino.GetObject() method is highlighted in the pop up list, we can press **Enter** and the complete method name is inserted into the script. Once the method name is in place, we have to supply the arguments. IntelliSense displays a tooltip showing us the required arguments and which one we are currently setting.
 
 
 Above the code editor is the document tab. Monkey is multi-document capable and you can switch between documents by clicking on the appropriate tab. You can also quickly add existing files by dragging them onto the file tab. If there are too many files in the tab to show on a single screen, you can scroll the bar left and right by click+dragging the ◄ ► icon. Also, if you press the right mouse button on the tab, you'll get a menu with all loaded files so you can quickly locate the correct one.
@@ -95,26 +95,26 @@ The toolbar exposes some standard functionality which can also be found in the m
 
 
 | Button name                     | Shortcut       | Description |
-|  ● New Script                 |  Ctrl+N       |  Create a new script file with a custom header. |
-|  ● Open Script                |  Ctrl+O       |  Open an existing file. |
-|  ● Save Script                |  Ctrl+S       |  Save the currently active script. |
-|  ● Save All Scripts           |                   |  Save all changes to all loaded scripts. |
-|  ● Save Script As             |  Ctrl+Shift+S |  Save the active script under another name. |
-|  ● Run Script                 |  F5           |  Run the active script. |
-|  ● Debug Script               |  Ctrl+F5      |  Run the active script with breakpoints enabled. |
-|  ● Toggle Breakpoint          |  F9           |  Toggle breakpoint flag on the active line in the active script. |
-|  |  ○ Clear All Breakpoints      |  Ctrl+Shift+F9|  Remove all breakpoints from the active script. |
-|  |  ○ Clear Inactive Breakpoints |                   |  Remove all deactivated breakpoints from the active script. |
-|  |  ○ Clear Invalid Breakpoints  |                   |  Remove all invalid breakpoints from the active script. |
-|  |  ○ Deactivate All Breakpoints |  Shift+F9     |  Deactivate all active breakpoints. |
-|  |  ○ Reactivate All Breakpoints |  Ctrl+F9      |  Reactivate all deactivated breakpoints. |
-|  ● Find                       |  Ctrl+F       |  Search the active script for a specific string. |
-|  |  ○ Find Next                  |  F3           |  Find the next occurance of the selected text in the active script. |
-|  |  ○ Find Previous              |  Shift+F3     |  Find the previous occurance of the selected text in the active script. |
-|  |  ○ Find In Files              |  Ctrl+Shift+F |  Search all loaded scripts for a specific string. |
-|  ● Replace                    |  Ctrl+R       |  Replace one string with another in the active script. |
-|  ● Go To Line                 |  Ctrl+G       |  Display the Go To Line dialog for the active script. |
-|  ● Google Groups              |                   |  Perform a Google search for the specified keywords. |
+|New Script                 |Ctrl+N       |Create a new script file with a custom header. |
+|Open Script                |Ctrl+O       |Open an existing file. |
+|Save Script                |Ctrl+S       |Save the currently active script. |
+|Save All Scripts           |                   |Save all changes to all loaded scripts. |
+|Save Script As             |Ctrl+Shift+S |Save the active script under another name. |
+|Run Script                 |F5           |Run the active script. |
+|Debug Script               |Ctrl+F5      |Run the active script with breakpoints enabled. |
+|Toggle Breakpoint          |F9           |Toggle breakpoint flag on the active line in the active script. |
+|  |● Clear All Breakpoints      |Ctrl+Shift+F9|Remove all breakpoints from the active script. |
+|  |● Clear Inactive Breakpoints |                   |Remove all deactivated breakpoints from the active script. |
+|  |● Clear Invalid Breakpoints  |                   |Remove all invalid breakpoints from the active script. |
+|  |● Deactivate All Breakpoints |Shift+F9     |Deactivate all active breakpoints. |
+|  |● Reactivate All Breakpoints |Ctrl+F9      |Reactivate all deactivated breakpoints. |
+|Find                       |Ctrl+F       |Search the active script for a specific string. |
+|  |● Find Next                  |F3           |Find the next occurance of the selected text in the active script. |
+|  |● Find Previous              |Shift+F3     |Find the previous occurance of the selected text in the active script. |
+|  |● Find In Files              |Ctrl+Shift+F |Search all loaded scripts for a specific string. |
+|Replace                    |Ctrl+R       |Replace one string with another in the active script. |
+|Go To Line                 |Ctrl+G       |Display the Go To Line dialog for the active script. |
+|Google Groups              |                   |Perform a Google search for the specified keywords. |
 
 \\
 
