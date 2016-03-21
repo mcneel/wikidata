@@ -1,0 +1,45 @@
+====== How to install Flamingo nXt 5 in a Lab ======
+
+> **Summary:** //Flamingo's RHI installer is quick and easy.  But it is not clear how to easily install it on multiple computers in a lab.//
+
+
+=====Installing Flamingo for Rhino 5=====
+**//Problem://** The Flamingo nXt 5 uses the RHI Rhino's plugin installer engine (RHI).  This makes most installation very quick an easy.  But RHI installers can be more of a challenge on larger lab installations.
+
+**//Answer://** 
+
+
+There are three step process.  Details for each step following below:
+
+  - Make sure Rhino 5.6 or newer has been deployed on your network using the Zoo.
+  - Install the Flamingo RHI installer on each machine.
+  - Copy the Flamingo Zoo License file into the Rhino license folder on each machine.
+
+Once the user startups Rhino, Flamingo will load and complete the installation, that is automatic and needs no assistance.
+
+
+==== Installing Flamingo silently for all users ====
+
+The RHI installer can be individually installed on each machine, or through a command:
+
+    
+<code>"C:\Program Files\Rhinoceros 5 (64-bit)\System\x64\rhiexec.exe" "C:\Full\Path\To\Flamingo5_Release_xxxxxxxx_xxxx.rhi" /admin /silent</code>
+
+
+The /admin option installs for all users on the computer.
+The /silent option will install without showing user int
+The "xxxxxxxxx_xxxx" written in the above code, is the date and time of the file.  This will vary depending on the file you download.
+
+==== Copying a Zoo license file for Flamingo onto the client ====
+
+  - Download the [[http://d22oc15na41ks6.cloudfront.net/flamingo/nxt/5.0/license/fd53f8c4-546d-47d1-8820-e66c97645a97.lic|Flamingo License file (fd53f8c4-546d-47d1-8820-e66c97645a97.lic)]]
+  - Navigate to the the following folder:
+
+  C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses
+
+> **Note:** //By default, Microsoft has hidden the ProgramData folder. You can either use **Folder Options** to allow display of hidden files and folders, or you can type **%ProgramData%** in the address bar in Windows Explorer to navigate to it.//
+
+After these steps, Flamingo will be ready to
+
+
+ 
