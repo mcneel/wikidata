@@ -1,77 +1,66 @@
-====== Grasshopper Main Page 1 ======
+====== Grasshopper Main Page======
 
 | {{:legacy:en:ExplicitHistoryBanner.png}} |  //**Grasshopper Wiki Pages**// |
 |  //[[http://www.mcneel.com|Robert McNeel & Associates]]// |
 
 ----
 
-> **Summary:** //Main wiki page for the Grasshopper plug-in.//
+> **Summary:** //Main wiki page for the Grasshopper plug-in//
 
-\\
-
-<color Green>**Grasshopper now has its own site - www.grasshopper3d.com\\ 
-Go there for downloads, more info, the Grasshopper forum, etc.**</color>
+**Grasshopper now has its own site - www.grasshopper3d.com\\ 
+Go there for downloads, more info, the Grasshopper forum, etc.**
 
 [[http://www.grasshopper3d.com/|Main Page]]\\ 
 [[http://www.grasshopper3d.com/page/download-1|Download Page]]\\ 
 [[http://www.grasshopper3d.com/forum|Grasshopper Forum]]
 
-<color yellowgreen>**It is //highly recommended// that you have the latest service release (SR) of Rhino installed in order to run Grasshopper**.</color>
+**It is //highly recommended// that you have the latest service release (SR) of Rhino installed to run Grasshopper**.
 
 \\
 
-===== Installation instructions:=====
+===== Installation instructions=====
 
 
-<color green> **The Grasshopper plug-in cannot be loaded over a network. Be sure to put it on a local disk!**</color>
+**The Grasshopper plug-in cannot be loaded over a network. Be sure to put it on a local disk!**
 
 
-The current versions of Grasshopper are self-installing .exe's.\\ 
-Just download the executable from the [[http://www.grasshopper3d.com/|Grasshopper site]] and run it to install.  //Rhino should be closed when installing.//\\ 
-It will install itself automatically in a //Grasshopper// folder inside the //...Rhino X.x > Plug-ins// folder.
+The current versions of Grasshopper are self-installing .exe's. Just download the executable from the [[http://www.grasshopper3d.com/|Grasshopper site]] and run it to install.  //Rhino should be closed when installing.// It will install itself automatically in a //Grasshopper// folder inside the //...Rhino X.x > Plug-ins// folder.
 
 Grasshopper will automatically install in the current Rhino version, (usually V4) but you can load it from another version (like V5) by following the manual plug-in install procedure from within that version and pointing the installer at the existing installation.
 
-Once installed, the command <color green>**Grasshopper**</color> will load the plug-in.
+Once installed, the command **Grasshopper** will load the plug-in.
 
-Grasshopper is bit-independent, meaning it can be run in either 32 or 64-bit versions of Rhino.
+Grasshopper is bit-independent, meaning it can be run in either 32- or 64-bit versions of Rhino.
 
-\\
+===== Grasshopper pages=====
 
-====== Grasshopper pages:======
-
-  - [[labs:explicithistory:interfaceexplained|Grasshopper Interface explained]]
-  - [[labs:explicithistory:objectsexplained|Grasshopper Objects explained]]
-  - [[labs:explicithistory:persistentdatarecordmanagement|Grasshopper Persistent Data management]]
-  - [[labs:explicithistory:volatiledatainheritance|Grasshopper Volatile Data management]]
-  - [[labs:explicithistory:datastreammatchingalgorithms|Grasshopper Data Matching explained]]
-  - [[labs:explicithistory:examples|Grasshopper tutorials]]
-  - [[labs:grasshopperworkshop|Grasshopper Workshop Agenda and Exercises]]
-  - [[labs:grasshoppergallery|Grasshopper Scripting Gallery (wiki)]]
-  - [[http://www.grasshopper3d.com/photo|Grasshopper Gallery (Grasshopper Site)]]
-
-\\
-
-----
-\\
+  * [[labs:explicithistory:interfaceexplained|Grasshopper Interface explained]]
+  * [[labs:explicithistory:objectsexplained|Grasshopper Objects explained]]
+  * [[labs:explicithistory:persistentdatarecordmanagement|Grasshopper Persistent Data management]]
+  * [[labs:explicithistory:volatiledatainheritance|Grasshopper Volatile Data management]]
+  * [[labs:explicithistory:datastreammatchingalgorithms|Grasshopper Data Matching explained]]
+  * [[labs:explicithistory:examples|Grasshopper tutorials]]
+  * [[labs:grasshopperworkshop|Grasshopper Workshop Agenda and Exercises]]
+  * [[labs:grasshoppergallery|Grasshopper Scripting Gallery (wiki)]]
+  * [[http://www.grasshopper3d.com/photo|Grasshopper Gallery (Grasshopper Site)]]  
 
 
 | {{:legacy:en:GH_SquareBanner.jpg}} |
 
-====== Why Grasshopper?======
+===== Why Grasshopper?=====
 
-Rhino 4 came with a basic history feature built-in, which is a non-intrusive layer around the workflow that allows for automatic updates of certain modeling steps. The current implementation of History in Rhino 4 is implicit, that is, it is recorded as you go. This means there is no additional overhead required at model-time. This is exactly the sort of thing we like to see in Rhino: more features, no additional limitations. However, implicit history cannot do some things which are possible with explicitly defined history.
+Rhino 4 came with a basic history feature built-in, which is a non-intrusive layer around the workflow that allows automatic updates of certain modeling steps. The current implementation of history in Rhino 4 is implicit, that is, it is recorded as you go. This means there is no extra overhead required at model-time. This is exactly the sort of thing we like to see in Rhino: more features, no additional limitations. Still, implicit history cannot do some things which are possible with explicitly defined history.
 
-First of all, the history tree is hidden from the user. The behavior of the different history stages cannot be adjusted. For example, there is only one chance to set the properties of a history based Loft. Once the surface exists, the only way to change the Loft settings is to recreate the surface. This will break all downstream history records and is thus potentially an extremely expensive limitation. It is also impossible to add or replace curves from a history Loft.
+First, the history tree is hidden from the user. The behavior of the different history stages cannot be adjusted. For example, there is only one chance to set the properties of a history based Loft. Once the surface exists, the only way to change the Loft settings is to recreate the surface. This breaks all downstream history records and is thus potentially an extremely expensive limitation. It is also impossible to add or replace curves from a history Loft.
 
-Grasshopper tackles these issues by allowing the user to construct their own //history tree// or better //definition// of the procedure used to construct objects.  This definition is constructed in a unique visual and interactive way, making it easy to learn and fun even for people with no previous programming experience.
+Grasshopper tackles these issues by letting the user construct their own history tree or better //definition// of the procedure used to construct objects.  This definition is constructed in a unique visual and interactive way, making it easy to learn and fun even for people with no previous programming experience.
 
 There are limitations that come with the process. It is no longer possible to record the history tree transparently; it has to be specifically constructed by the user. It is impossible to use available Rhino commands since they do not expose the options and settings they need to run.
 
 
-However, the advantages speak for themselves:
+But, the advantages speak for themselves:
 
-  - The tree is exposed, and can thus in whole or in part be reused throughout different models.
+  - The tree is exposed, thus can in whole or in part be reused throughout different models.
   - The components on the tree are exposed, so can be replaced or adjusted.
   - The operations are not tied to geometry in the model. It is possible to make a tree which only deals with mathematics.
   - Mathematical and logical relationships can be constructed.
