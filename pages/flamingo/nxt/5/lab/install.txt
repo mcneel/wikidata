@@ -7,13 +7,14 @@
 **//Problem://** The Flamingo nXt 5 uses the RHI Rhino's plugin installer engine (RHI).  This makes most installation very quick an easy.  But RHI installers can be more of a challenge on larger lab installations.
 
 **//Answer://** 
-
+Copying files in the correct locations through a default machine image, batch files ro other deployments methods can finish Flamingo installations remotely.
 
 There are three step process.  Details for each step following below:
 
   - Make sure Rhino 5.6 or newer has been deployed on your network using the Zoo.
   - Install the Flamingo RHI installer on each machine.
   - Copy the Flamingo Zoo License file into the Rhino license folder on each machine.
+  - Install the thumbnail shell extension to allow material previewing.
 
 Once the user startups Rhino, Flamingo will load and complete the installation, that is automatic and needs no assistance.
 
@@ -39,7 +40,17 @@ The "xxxxxxxxx_xxxx" written in the above code, is the date and time of the file
 
 > **Note:** //By default, Microsoft has hidden the ProgramData folder. You can either use **Folder Options** to allow display of hidden files and folders, or you can type **%ProgramData%** in the address bar in Windows Explorer to navigate to it.//
 
-After these steps, Flamingo will be ready to
+==== Install the correct Flamingo Shell Extension on the client machine ====
+
+Download and install the proper shell extension installer based on the operating system running on the client:
+
+  - [[http://s3.amazonaws.com/files.na.mcneel.com/flamingo/nxt/5.0/shell_extensions/ArMatThumb64.exe|Flamingo Shell Extension Installer for 64-bit Windows]]
+  - [[http://s3.amazonaws.com/files.na.mcneel.com/flamingo/nxt/5.0/shell_extensions/ArMatThumb.exe|Flamingo Shell Extension Installer for 32-bit Windows]]
+
+
+After these steps, Flamingo will be ready to use on the client computers. There will still be some user profile specific configuration at the first startup of Flamingo, but that will be automatic.
+
+If you have any questions please contact: scottd@mcneel.com
 
 
  
