@@ -1,14 +1,17 @@
-====== How to use RhinoScript from a Rhino.NET plug-in ======
+====== How to Use RhinoScript from a Rhino.NET Plug-in ======
+
 > **Version:** //Rhino 4//
-To use [[developer:rhinoscript|RhinoScript]] from a Rhino.NET plug-in, we have to take several steps:
+To use [[developer:rhinoscript|RhinoScript]] from a Rhino.NET plug-in, take several steps:
 
 =====Create COM interop wrapper for RhinoScript=====
 
-The plug-in must create a COM interop wrapper for [[developer:rhinoscript|RhinoScript]] so all the COM methods can become available to .NET. This is easier to do than it sounds. With your plug-in project open inside Visual Studio, go to the //Project// menu and select //Add Reference...//. In the references dialog, select the COM tab and pick //[[developer:rhinoscript|RhinoScript]] 4.0 Type Library//. If you don't see this item in the COM tab, select the Browse tab and pick RhinoScript.tlb located in the Rhino 4 plug-in directory. Once you've selected OK, Visual Studio will automatically create an interop DLL for you and place it in your project's bin directory. The interop file will be named Interop.RhinoScript4.DLL.
+The plug-in must create a COM interop wrapper for RhinoScript so that all the COM methods can become available to .NET. This is easier to do than it sounds. 
+
+With your plug-in project open inside Visual Studio, go to the Project menu and select **Add Reference...**. In the references dialog, select the COM tab and pick **RhinoScript]] 4.0 Type Library**. If you don't see this item in the COM tab, select the Browse tab and pick RhinoScript.tlb located in the Rhino 4 plug-in directory. Once you've selected **OK**, Visual Studio will automatically create an interop DLL for you and place it in your project's bin directory. The interop file will be named Interop.RhinoScript4.DLL.
 
 =====Using the RhinoScript Interface=====
 
-The MRhinoApp class has a function called GetRhinoScriptInterface that a plug-in can use to get at the [[developer:rhinoscript|RhinoScript]] interface. Once you have the [[developer:rhinoscript|RhinoScript]] interface, you should be able to call any function that is defined by RhinoScript.
+The MRhinoApp class has a function called GetRhinoScriptInterface that a plug-in can use to get at the RhinoScript interface. Once you have the RhinoScript interface, you should be able to call any function that is defined by RhinoScript.
 
 ===== VB.NET =====
 <code vb>
