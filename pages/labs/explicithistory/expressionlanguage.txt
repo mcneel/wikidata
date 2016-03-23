@@ -1,7 +1,6 @@
 ====== Explicit History Expressions ======
 
 | {{:legacy:en:ExplicitHistoryBanner.png}} |  //**Explicit History Plugin Wiki Pages**// |
-|  [[http://www.mcneel.com|//Robert McNeel & Associates//]] |
 
 ----
 
@@ -11,13 +10,13 @@
 
 ===== Expressions=====
 
-The Explicit History plugin features its own brand of expression syntax, since the available scripting languages rarely support vector and point operators. The syntax of the Explicit History Expression language is similar to VBScript, but it has a number of additions.
+The Explicit History plug-in features its own brand of expression syntax, since the available scripting languages rarely support vector and point operators. The syntax of the Explicit History Expression language is similar to VBScript, but with several additions.
 
-First of all, expression parsing is important when defining logical relationships between parameters, and the language outlined on this page is used both in the math components that deal with scriptable expressions and in some parameter types directly. All numeric and vectorial parameters expose a simple, one-line expression for post-processing any data that comes in.
+First, expression parsing is important when defining logical relationships between parameters, and the language outlined on this page is used both in the math components that deal with scriptable expressions and in some parameter types directly. All numeric and vectorial parameters expose a simple, one-line expression for post-processing any data that comes in.
 
 \\
 
-For example, lets have a look at the Line SDL (Start; Direction; Length) component which takes a point, a vector and a double. All of these parameter types support "inline" expressions, but we'll start with the simplest one; the Double parameter that indicates the length of the line segment. If you browse through the context menu of the "L" parameter you'll find the "Expression F(x)" item at the bottom. This menu item expands to give you two alternate interfaces to the expression script:
+For example, let's look at the Line SDL (Start, Direction, Length) component which takes a point, a vector, and a double. All these parameter types support inline expressions, but we'll start with the simplest one: the Double parameter that indicates the length of the line segment. If you browse through the context menu of the **L** parameter you'll find the **Expression F(x)** item at the bottom. This menu item expands to give you two alternate interfaces to the expression script:
 
 \\
 
@@ -25,7 +24,7 @@ For example, lets have a look at the Line SDL (Start; Direction; Length) compone
 
 \\
 
-you can either quickly type in an expression in the menu textbox, or you can open the Expression Editor. If you are familiar with the syntax you can use the shortcut way of using the menu, but in the beginning it's better to use the editor since it informs you about errors in the syntax:
+You can either quickly type in an expression in the menu textbox, or you can open the Expression Editor. If you are familiar with the syntax you can use the shortcut way of using the menu, but in the beginning it's better to use the editor since it informs you about errors in the syntax:
 
 \\
 
@@ -33,18 +32,14 @@ you can either quickly type in an expression in the menu textbox, or you can ope
 
 \\
 
-The editor displays a list of all the variables you are allowed to use (only "x" in this case) and all the operators that are available (the buttons along the top).
+The editor displays a list of all the variables you can use (only "x" in this case) and all the operators that are available (the buttons along the top).
 
-If you change the expression, there will be a red error message on the dialog box informing you what kind of syntax error was made, and there is also a Preview button for testing your new expression.
+If you change the expression, a red error message on the dialog box inform you what kind of syntax error was made. There is also a Preview button for testing your new expression.
 
 \\
 
 The language comes with a bunch of predefined mathematical functions similar but more extensive than VBScript.
 
-If you want to know more about the Expression language, you can run the hidden _TestExplicitHistoryExpressionParser command which features more information about syntax, available functions and vector notation.
+If you want to know more about the Expression language, you can run the hidden _TestExplicitHistoryExpressionParser command which features more information about syntax, available functions, and vector notation.
 
-[Todo, make function list]
-[Todo, explain operators]
-[Todo, explain constants]
-[Todo, explain vector syntax]
 
