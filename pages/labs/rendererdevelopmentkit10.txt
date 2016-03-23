@@ -6,9 +6,9 @@
 
 Current Version: 4.1d (released 18th October 2010)
 
-**Please note that all features of the Rhino 4.0 SDK are included in Rhino 5 by default.  You do *not* need to download and install either the plug-in or the SDK for Rhino 5.**
+**Please note that all features of the Rhino 4.0 SDK are included in Rhino 5 by default.  You do __not__ need to download and install either the plug-in or the SDK for Rhino 5.**
 
-======Features======
+=====Features=====
 
 {{:legacy:en:headline2_rdk.png}}
 
@@ -24,31 +24,31 @@ Current Version: 4.1d (released 18th October 2010)
   * **Decal support** similar to Flamingo 2.0.
   * 360 degree environment preview in the viewport.
 
+**Note:** //The RDK feature set underpins the [[http://brazil.mcneel.com|Brazil for Rhino]] product, and all of the above features are supported in that product.  However, all of these features are available to third party developers to integrate their products into Rhino.//
+
 \\
 
-> **Note:** //The RDK feature set underpins the [[http://brazil.mcneel.com|Brazil for Rhino]] product, and all of the above features are supported in that product.  However, all of these features are available to third party developers to integrate their products into Rhino.//
-
-======Downloads======
-=====For end users=====
+=====Downloads=====
+====For end users====
 
 **[[http://download.mcneel.com/rdk/1.0/redirect/rdk_plugin.asp|RDK plug-in installer]]** //Last update: October 18th, 2010//
-| {{:legacy:en:plugin_icon.png}}| The current RDK plug-in installer is complete with online help - accessed directly from the new tools. Look for the new toolbar and additions to the Render menu.|
+| {{:legacy:en:plugin_icon.png}}| The current RDK plug-in installer is complete with online help accessed directly from the new tools. Look for the new toolbar and additions to the Render menu.|
 
 \\
 
-=====For RhinoScript developers=====
+====For RhinoScript developers====
 
 **[[developer:rdkrhinoscripting|RDK scripting support]]** //Last update: 5th March 2009//
 |{{:legacy:en:rhinoscript.png}}| A wiki that documents the RDK's scripting interface.|
 
 \\
 
-=====For render plug-in software developers.=====
+====For render plug-in software developers====
 
 **[[http://wiki.mcneel.com/_media/legacy/en/Rhino_RDK_documentation.pdf|RDK SDK Guide]]** //Last update: January 26th, 2009//
 | {{:legacy:en:rdk_guide.png}}| A getting started guide to working with the RDK SDK in your rendering application.|
 
-> **Note:** //A complete version of this text is part of the SDK download below.//
+**Note:** //A complete version of this text is part of the SDK download below.//
 
 \\
 
@@ -57,17 +57,15 @@ Current Version: 4.1d (released 18th October 2010)
 
 \\
 
-> **Note:** //When developing your RDK-aware render plug-in, you will need the SDK installed on your workstation.  The RDK installs into the same folder as the Rhino 4.0 SDK and requires the Rhino SDK to be installed first.//
+**Note:** //When developing your RDK-aware render plug-in, you need the SDK installed on your workstation.  The RDK installs into the same folder as the Rhino 4.0 SDK and requires the Rhino SDK to be installed first.//
 
-> **Note:** //When distributing your plug-in, you will need to include the RDK installer as part of your own plug-in installer.  To do this, simply install the RDK plug-in installer into the temp folder, and run it using the /silent command line option.//
+**Note:** //When distributing your plug-in, you need to include the RDK installer as part of your own plug-in installer.  To do this, simply install the RDK plug-in installer into the temp folder, and run it using the /silent command line option.//
 
-> **Note:** //The SDK installer includes a demonstration project called //Marmalade which you will find in the **C:\Program Files\Rhino 4.0 SDK\Marmalade** folder.//  //This plug-in shows how to set up your paths for header and lib files, and demonstrates many common RDK tasks such as creating custom materials and using the frame buffer.
+**Note:** //The SDK installer includes a demonstration project called Marmalade which you will find in the **C:\Program Files\Rhino 4.0 SDK\Marmalade** folder.  This plug-in shows how to set up your paths for header and lib files, and demonstrates many common RDK tasks such as creating custom materials and using the frame buffer.//
 
 \\
-\\
 
-======Material, Environment and Texture editors======
-\\
+=====Material, environment and texture editors=====
 
 {{:legacy:en:material_editor.png}}
 
@@ -79,36 +77,32 @@ Lists of materials, environments, and textures are stored in the Rhino document.
 
 A large button to the left of the editor controls the visibility of the editor side panel which displays a list of common tasks along with the structure of the currently selected material, environment, or texture.
 
-The size of the preview thumbnails area can be adjusted by dragging the handle just below its lowest edge.
+Adjust the size of the preview thumbnails area by dragging the handle just below their lowest edge.
 
-Contents display an interface below the preview thumbnails in an area reserved for collapsible UI panels. An addition to the basic UI panels, several additional collapsible panels are provided by Rhino within the same area as the content UI. These include the Texture Summary panel, the Notes panel, the Local Mapping panel, Graph panel and the Adjustment panel. These are described later in the content UI section.
+Contents display an interface below the preview thumbnails in an area reserved for collapsible UI panels. As an addition to the basic UI panels, Rhino provides several more collapsible panels within the same area as the content UI. These include the Texture Summary panel, the Notes panel, the Local Mapping panel, Graph panel, and the Adjustment panel. Descriptions are in the content UI section.
 
-The editor window can be minimized to the caption bar and restored by double clicking on the caption bar.
+You can minimize the editor window to the caption bar and restore it by double-clicking on the caption bar.
 
 Each material, environment or texture can have child nodes. The children can be of any content type, but specific child slots will only support specific types. The most common child type is a texture. For example, the Texture child for a Basic Material will only support textures, as will the Background image slot on a Basic Environment.
 
 \\
-\\
 
-======Render Window======
-\\
+=====Render window=====
 
 {{:legacy:en:render_window.png}}
 
-The standard render window provides a number of features to renderers, including built in support for scripting, cloning, saving to High-Dynamic-Range formats, post effects, zooming and channel display.
+The standard render window provides several features to renderers, including built in support for scripting, cloning, saving to High-Dynamic-Range formats, post effects, zooming and channel display.
 
 Many renderers call the render window the frame buffer. The terms are nearly interchangeable.
 
 
 \\
-\\
 
-======HDR and EXR support======
-\\
+=====HDR and EXR support=====
 
 {{:legacy:en:hdr.png}}
 
-An HDR image which provides automatic conversion to a bitmap for non-HDR capable renderers. This allows the Rhino renderer and viewport display to show HDR environments while providing HDR tools to third-party renderer engines.
+An HDR image which provides automatic conversion to a bitmap for non-HDR capable renderers. This lets the Rhino renderer and viewport display show HDR environments while providing HDR tools to third-party renderer engines.
 
 The HDR texture also provides projection conversion features. Most HDRi files come as Light Probe projection. The Basic Environment requires Spherical (Equirectangular) projection for spherical environments, so the HDR texture defaults to this conversion. However, several other types are supported.
 
@@ -116,34 +110,28 @@ The LDR exposure determines the brightness of the image when converted to a bitm
 
 HDR multiplier is a simple linear multiplier on all values in the image. This can be used to brighten or dim the image in an HDR capable renderer.
 
-The Save As button can be used to convert the image to a bitmap file. The LDR exposure value is used convert the image during this process.
+The **Save As** button can be used to convert the image to a bitmap file. The LDR exposure value is used to convert the image during this process.
 
-Azimuth and Altitude values modify the way the image is rotated in space during the projection conversion.
+Azimuth and Altitude values change the way the image is rotated in space during the projection conversion.
 
 
 \\
-\\
 
-======Sunlight======
-\\
+=====Sunlight=====
 
 {{:legacy:en:sun_docker.png}}
 
-Sun tools, including a docking panel to control the document sun, a sunlight preview within the Rendered viewport, a Sunlight command and a number of other scripting and developer tools make sun angle calculations easier.
-
-
+Sun tools, including a docking panel to control the document sun, a sunlight preview within the Rendered viewport, a Sunlight command, and a several other scripting and developer tools make sun angle calculations easier.
 
 \\
-\\
 
-======Decals======
-\\
+=====Decals=====
 
 {{:legacy:en:decals_panel.png}}
 
 Decals are non-repeating textures that are applied to the surface of an object with a given projection. They are an easy-to-use way of attaching single images or similar textures to objects without going through the complexity of the texture mapping process.
 
-Decals are textures that are placed directly on a specified area of one or more objects. Use decals to modify a limited part of an object's color.
+Decals are textures that are placed directly on a specified area of one or more objects. Use decals to change a limited part of an object's color.
 
 Decals consist of a single instance of a texture, rather than being tiled as they are when used in a material.
 
