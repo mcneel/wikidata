@@ -1,8 +1,8 @@
 ====== Path Tracer ======
 
-nXt provides an alternative rendering algorithm known as Path Tracer.  The Path Tracer can provide a better quality finished product for many models (with a simpler setup), but at the expense of a more complex and time-consuming calculation.  The Path Tracer begins by displaying a grainy or noisy image which gradually refines and becomes smooth.  This process is known as convergence.  Some scenes converge very quickly. Others take many hours.
+nXt provides an alternative rendering algorithm known as Path Tracer.  Path Tracer can provide a better quality finished product for many models (with a simpler setup), but at the expense of a more complex and time-consuming calculation.  Path Tracer begins by displaying a grainy or noisy image which gradually refines and becomes smooth.  This process is known as convergence.  Some scenes converge very quickly. Others take many hours.
 
-To enable the Path Tracer, check the box on the //Lighting->Advanced// tab.
+To enable Path Tracer, check the box on the //Lighting->Advanced// tab.
 
 {{:accurender:nxt:documentation:beyond:path_tracer.jpg|}}
 
@@ -10,7 +10,7 @@ To disable the Path Tracer and return to the Standard method, uncheck the same b
 
 **Notes**
 
-  * In general, images rendered using the Path Tracer take longer to converge than images rendered using the Standard method.  Interior daylight simulations, particularly those scenes where the windows are relatively small, may take much longer.  But the Path Tracer is less sensitive to instancing, plants, and displacement maps.  Models which rely heavily on these features may actually converge faster using the Path Tracer.  
-  * The Standard algorithm produces a very high-quality simulation.  For many models, the difference in quality between the Standard method and the Path Tracer can be subtle, particularly if indirect lighting is enabled.  The difference in quality may not be worth the extra processing time.  
+  * Generally, images rendered using the Path Tracer take longer to converge than images rendered using the Standard method.  Interior daylight simulations, particularly those scenes where the windows are relatively small, may take much longer.  But the Path Tracer is less sensitive to instancing, plants, and displacement maps.  Models which rely heavily on these features may actually converge faster using the Path Tracer.  
+  * The Standard algorithm produces a very high-quality simulation.  For many models, the quality difference between the Standard method and the Path Tracer can be subtle, particularly if indirect lighting is enabled.  The difference in quality may not be worth the extra processing time.  
   * The Path Tracer is almost always easier to configure and set up than the Standard method.  In Path Tracer advanced settings such as reflection shaders, daylight portals, and ambient lighting are not used.
   * Certain advanced effects, such as caustics or blurry transmission, can be calculated with better accuracy using the Path Tracer.
