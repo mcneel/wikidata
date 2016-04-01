@@ -1,4 +1,4 @@
-====== Documentation about the Rhino toolbar images ======
+====== Rhino Toolbar Images ======
 
 
 The toolbars in Rhino underwent a rigorous rewrite between versions 3 and 4. Among other new features, Rhino 4 toolbar buttons support images with alpha channels. Earlier versions of Rhino only contained a one-bit transparency mask (yes-or-no, transparent-or-opaque). 
@@ -49,9 +49,9 @@ I'd love to type a thousands words on the subject right now, but I think I'll ge
 
 \\
 
-The size of the extracted image is 24×24 pixels. Since this information was available when the vector drawing was made, the vector shapes have neatly aligned to a 24×24 grid. Let's take a closer look at column #4.
+The size of the extracted image is 24×24 pixels. Since this information was available when the vector drawing was made, the vector shapes have neatly aligned to a 24×24 grid. Let's look closer at column #4.
 
-The only object which overlaps with this column is the black outline of the box. Eleven pixels in column #4 are not overlapped by any object and are left completely transparent. Nine pixels are completely overlapped by the outline and inherit the color of the outline without modification. None of these pixels contain any anti-aliasing. It is the four pixels at the top and bottom of the outline shape which are interesting right now. They are only **partly** obscured by the outline shape and as a result, the color of these pixels is not 100% black. The amount of transparency in these pixels is directly linked to their amount of overlap. Actually, only the topmost pixel (column:4 row:8) has a notable blending. The overlap in the other three pixels is so //all-or-nothing// that the blending is hardly visible. This is not an accident. Anti-aliasing is all fine and dandy, but it works by averaging pixels. This means that an anti-aliased line is always more fuzzy than an aliased (or //pixelated//) line. Anti-aliasing is a bit like a jack-hammer in this respect. It's a useful tool but you don't necessarily want to use it to change a light bulb. If you do, you'll end up with the following:
+The only object which overlaps this column is the black outline of the box. Eleven pixels in column #4 are not overlapped by any object and are left completely transparent. Nine pixels are completely overlapped by the outline and inherit the color of the outline without modification. None of these pixels contain any anti-aliasing. It is the four pixels at the top and bottom of the outline shape which are interesting right now. They are only **partly** obscured by the outline shape and as a result, the color of these pixels is not 100% black. The amount of transparency in these pixels is directly linked to their amount of overlap. Actually, only the top pixel (column:4 row:8) has a notable blending. The overlap in the other three pixels is so //all-or-nothing// that the blending is hardly visible. This is not an accident. Anti-aliasing is all fine and dandy, but it works by averaging pixels. This means that an anti-aliased line is always more fuzzy than an aliased (or //pixelated//) line. Anti-aliasing is a bit like a jack-hammer in this respect. It's a useful tool but you don't necessarily want to use it to change a light bulb. If you do, you'll end up with the following:
 
 \\
 
@@ -61,7 +61,11 @@ The only object which overlaps with this column is the black outline of the box.
 
 \\
 
-The lesson so far: Do not use anti-aliasing if you can get away without it. Always draw (near) vertical and horizontal lines without anti-aliasing. Tilted and curved lines do not rely on accurate alignment and so they //can// be drawn with anti-aliasing. If you use anti-aliasing, try to align the shapes to the pixel-grid.
+The lessons so far: 
+  * Do not use anti-aliasing if you can get away without it. 
+  * Always draw (near) vertical and horizontal lines without anti-aliasing. 
+  * Tilted and curved lines do not rely on accurate alignment and so they //can// be drawn with anti-aliasing. 
+  * If you use anti-aliasing, try to align the shapes to the pixel-grid.
 
 \\
 
@@ -89,14 +93,15 @@ To change an existing icon into something a little different (for example, you'v
 
 | Example: | {{:legacy:en:ToolbarExample.png}} |
 
+\\
 
 **//Changing the icon image//**
 
 This is the simplest method of changing icons. You do not need any software besides Rhino. It is ideal for adding pixelated geometry such as texts, arrows, or simple lines (0°, 45° or 90°).
 
-**Note:** If you have access to a good pixel-editor you could technically use a whole range of tools and filters (blurring, hue changes, contrast adjustments to name a few) on the small icon images. You'll have to extract the icon from the button onto the hard-drive and edit it separately though. Rhino only provides the most basic drawing tools.
+**Note:** If you have access to a good pixel editor you could technically use a whole range of tools and filters (blurring, hue changes, contrast adjustments, to name a few) on the small icon images. You'll have to extract the icon from the button onto the hard-drive and edit it separately though. Rhino only provides the most basic drawing tools.
 
-First, copy the button you want to change to a new location and then open the button editor using Shift+RMB. Let's assume for the time being, that we've written a new command alias to create a box by picking a base edge and a point on the opposite edge. To create a new button for this, we need to copy the regular box button and change the way it works. Open the button editor by Shift+RMB and you'll see the following dialog:
+First, copy the button you want to change to a new location and then open the button editor using Shift+RMB. Let's assume that we've written a new command alias to create a box by picking a base edge and a point on the opposite edge. To create a new button for this, we need to copy the regular box button and change the way it works. Open the button editor by Shift+RMB and you'll see the following dialog:
 
 
 | {{:legacy:en:RhButtonEditor.png}} |
@@ -123,6 +128,7 @@ Other examples of pixelated geometry are arrows and texts. You can easily add th
 | {{:legacy:en:PixelRules.png}} |
 |//Every red square is synonymous with a single pixel.//|
 
+\\
 
 **//Changing the base image//**
 
@@ -189,10 +195,12 @@ The Pixelgrid layer contains a red grid which corresponds with the pixels of a 2
 
 \\
 
-Once you are happy with the new image, you have to create an icon file that Rhino understands. Depending on which application you are using, you can use one of the following methods:
+Once you are happy with the new image, create an icon file that Rhino understands. Depending on which application you are using, you can use one of the following methods:
 
         * Save the icon directly
         * Create a base image
+
+\\
 
 
 **//Save the icon directly//**
@@ -200,12 +208,12 @@ Once you are happy with the new image, you have to create an icon file that Rhin
 If your vector illustration program delivers good anti-aliasing on a small scale, you can simply save the vector objects directly to a 24×24 *.png file:
 
 | {{:legacy:en:XARA_ExportToSize.png}} |
-| In Xara, this method works well, especially with properly aligned vectors. Xara's internal renderer automatically snaps certain objects to the pixelgrid, so crispness is easy to attain. The leftmost pane shows the image as it will be saved. The icon itself is only 17 pixels wide and 22 pixels high, but it needs to be positioned in the center of the square icon area. Hence the need for a background rectangle.|
+| In Xara, this method works well, especially with properly aligned vectors. Xara's internal renderer automatically snaps certain objects to the pixelgrid, so crispness is easy to attain. The left pane shows the image as it will be saved. The icon itself is only 17 pixels wide and 22 pixels high, but it needs to be positioned in the center of the square icon area. Hence the need for a background rectangle.|
 
 
 **//Creating a base image//**
 
-If saving images at small sizes does not give you satisfactory results, you can take the long way round and create a base image. You'll have to downsample it separately in a pixel-editor as we discussed in the previous paragraph. This image should be large enough to fit a whole number of times around the icon. I recommend using nice round (from a computer point of view) numbers such as 16, 24 or 32. Starting from an icon size of 24, a few multiplication factors with resulting base dimensions and downsampling factors (//the number of base pixels that will go into creating a single icon pixel//) are:
+If saving images at small sizes does not give you satisfactory results, you can take the long way round and create a base image. You'll have to downsample it separately in a pixel editor, as we discussed in the previous paragraph. This image should be large enough to fit a whole number of times around the icon. I recommend using nice round (from a computer point of view) numbers such as 16, 24 or 32. Starting from an icon size of 24, a few multiplication factors with resulting base dimensions and downsampling factors (//the number of base pixels that will go into creating a single icon pixel//) are:
 
 
 | Factor | Dimensions | Downsampling |
@@ -265,17 +273,14 @@ When creating your own icons, you should stick to the Rhino native style. There 
 
 [[http://files.mcneel.com/wiki/Rh4Icons_24_BaseImages.zip|Download base images (768×768 pixels) for the 24×24 icons]] (11.2 MB)
 
-----
 [[http://wiki.mcneel.com/_media/legacy/en/Rh4Icons_24_IconImages.zip|Download icon images (*.png format) for the 24×24 icons]] (630 KB)
 
 [[http://wiki.mcneel.com/_media/legacy/en/Rh4Icons_32_IconImages.zip|Download icon images (*.png format) for the 32×32 icons]] (780 KB)
 
-----
 [[http://wiki.mcneel.com/_media/legacy/en/Rh4Icons_24_Original.zip|Download original vector images (*.xar format) for the 24×24 icons]] (510 KB)
 
 [[http://wiki.mcneel.com/_media/legacy/en/Rh4Icons_32_Original.zip|Download original vector images (*.xar format) for the 32×32 icons]] (721 KB)
 
-----
 **Note!** Exporting vector images from Xara to Illustrator is not a one-to-one translation. Many advanced features (gradient progressions, blending modes) are missing in the Illustrator files.
 
 [[http://wiki.mcneel.com/_media/legacy/en/Rh4Icons_24_Exported.zip|Download exported vector images (*.ai format) for the 24×24 icons]] (470 kb)
