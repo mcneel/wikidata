@@ -1,7 +1,29 @@
-====== Rétablir les préférences de Rhino ======
-Suivez cette procédure pour supprimer toutes les modifications réalisées sur les préférences de Rhino et rétablir les valeurs par défaut. 
+====== Rhino pour Mac - Préférences ======
+Voici quelques procédures pour manipuler toutes vos préférences de Rhino pour Mac. 
+
+==== Enregistrer une copie de vos préférences actuelles ====
+  - **Fermez** entièrement Rhino.
+  - Dans le **Finder**, maintenez la touche **Option** et sélectionnez **Bibliothèque** dans le menu **Aller**.
+  - Ouvrez le dossier **Preferences**.
+  - Trouvez le fichier **com.mcneel.rhinoceros.plist**.  Sélectionnez **Dupliquer** dans le menu contextuel du bouton de droite pour créer une copie. La copie sera nommée **com.mcneel.rhinoceros - copie.plist**.
+
+==== Réinitialiser les préférences de Rhino ====
+Suivez cette procédure pour supprimer toutes les préférences de Rhino et redéfinir les valeurs originales. 
 
   - **Fermez** Rhino.
-  - Dans le **Finder**, maintenez la touche **Option** et sélectionnez **Bibliothèque** dans le menu **Aller** menu. \\ Le dossier Bibliothèque s'ouvre.
-  - Dans le dossier **Bibliothèque**,  sélectionnez le dossier **Préférences**. 
-  - Trouvez le fichier **com.mcneel.rhinoceros.plist** et déplacez-le dans la **Corbeille**.  \\ Vous pouvez également déplacer le fichier sur votre bureau si vous voulez restaurer ces préférences dans le future.
+  - Lancez l'application **Terminal** que vous trouverez dans le dossier **Applications** > **Utilitaires**. \\ Une fenêtre apparaît avec une invite de commande. 
+  - Tapez **defaults delete com.mcneel.rhinoceros** et appuyez sur Entrée. 
+  - Fermez l'application Terminal.
+
+==== Restaurer les préférences de Rhino enregistrées ====
+Suivez cette procédure pour remplacer toutes les Préférences de Rhino actuelles par une copie enregistrée précédemment. 
+
+  - **Fermez** Rhino.
+  - Dans le Finder, maintenez la touche **Option** et sélectionnez **Bibliothèque** dans le menu Aller.
+  - Ouvrez le dossier **Préférences**.
+  - Trouvez le fichier **com.mcneel.rhinoceros.plist**.  Déplacez-le dans la corbeille.
+  - Renommez votre fichier de préférences enregistré précédemment sous **com.mcneel.rhinoceros.plist**.
+    - Remarque : Si vous avez déplacez le fichier plist que vous avez enregistré dans un autre dossier, vous devez le remettre dans le dossier **preferences**.
+  - Lancez l'application Terminal que vous trouverez dans le dossier Applications > Outils. \\ Une fenêtre apparaît avec une invite de commande.
+  - Tapez **defaults read com.mcneel.rhinoceros** et appuyez sur Entrée.  La fenêtre du Terminal affichera un grand nombre de lignes. 
+  - Fermez l'application Terminal.
