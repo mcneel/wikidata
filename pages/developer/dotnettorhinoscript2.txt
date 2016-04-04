@@ -2,10 +2,10 @@
 > **Version:** //Rhino 4//
 
 =====Question=====
-I have a standalone C# application that automates Rhino by creating a Rhino4.Application object and then obtaining a reference to the [[developer:rhinoscript|RhinoScript]] COM object. I am able to perform simple operations, such as scripting commands via the Command method and adding lines via the AddLine method. But I am unable to use any [[developer:rhinoscript|RhinoScript]] method where I need to pass in an array of 3-D points, which in [[developer:rhinoscript|RhinoScript]] are really arrays of arrays of doubles. Is there a way to call RhinoScript's AddMesh method from C#?
+I have a standalone C# application that automates Rhino by creating a Rhino4.Application object and then obtaining a reference to the [[developer:rhinoscript|RhinoScript]] COM object. I can perform simple operations, such as scripting commands via the Command method and adding lines via the AddLine method. But I am unable to use any RhinoScript method where I need to pass in an array of 3D points, which in RhinoScript are really arrays of arrays of doubles. Is there a way to call RhinoScript's AddMesh method from C#?
 
 =====Answer=====
-Simple data types, such as integers and doubles are easly marshalled between .NET and COM because their values can be easily converted to the Object .NET data type. Array are a little more difficult to deal with, but not impossible. The .NET array classes have a ToArray member that will copy the elements of the array to a new Object array. A .NET Object array will marshall to COM as a SafeArray.
+Simple data types, such as integers and doubles are easily marshalled between .NET and COM because their values can be easily converted to the Object .NET data type. Array are a little more difficult to deal with, but not impossible. The .NET array classes have a ToArray member that will copy the elements of the array to a new Object array. A .NET Object array will marshall to COM as a SafeArray.
 
 The following example demonstrates how to call RhinoScript's AddMesh method from a standalone application:
 
