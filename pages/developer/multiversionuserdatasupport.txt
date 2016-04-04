@@ -1,24 +1,25 @@
-====== Info: Rhino 4.0 saving plug-in user data in V3 files. ======
+====== Rhino 4.0: Saving Plug-in User Data in V3 Files ======
 ====== C++ ======
+
 > **Version:** //Rhino 4//
 
-The SaveAs feature in Rhino 4.0 can be used to write files Rhino 3.0 can use.  By default, no plug-in user data will be saved when a user saves a V3 file from Rhino 4.0.  If you feel it is necessary, and you are willing to do some extra coding and lots of detailed testing, it is possible to round-trip plug-in user data between Rhino 3.0 and Rhino 4.0.
+The SaveAs feature in Rhino 4.0 can be used to write files that Rhino 3.0 can use.  By default, no plug-in user data will be saved when you save a V3 file from Rhino 4.0.  If you feel it is necessary, and you are willing to do some extra coding and lots of detailed testing, it is possible to round-trip plug-in user data between Rhino 3.0 and Rhino 4.0.
 
-There are several approaches that can be used and the one you choose depends on what you want to accomplish.
+There are several approaches available. The one you choose depends on what you want to accomplish.
 
-===== There is not a V3 version of the plug-in.  You want your V4 plug-in to be able to round-trip information through V3 files.=====
+**There is not a V3 version of the plug-in.  You want your V4 plug-in to be able to round-trip information through V3 files.**
 
   * In your V4 plug-in, override CRhinoPlugIn::SaveAsV3() and return true.  This insures your V4 plug-in will save its information in V3 files.  Since the plug-in id and any object user data ids will not be recognized by V3, V3 will simply let the "alien" information persist unchanged.
 
-===== There is a V3 version of the plug-in.  You want your V4 plug-in to be able to be able to round-trip information through V3 files.  You do not want the V3 and V4 plug-ins to exchange information.=====
+**There is a V3 version of the plug-in.  You want your V4 plug-in to be able to round-trip information through V3 files.  You do not want the V3 and V4 plug-ins to exchange information.**
 
   * In your V4 plug-in, override CRhinoPlugIn::SaveAsV3() and return true.  This insures your V4 plug-in will save its information in V3 files.
-  * Make certain your V4 plug-in id not equal to your V3 plug-in id.  This insures the plug-ins will not attempt to read/write each other's document user data.
-  * Make certain there are no shared ids in ON_OBJECT_IMPLEMENT() macros or in m_userdata_id fields in your V3 in your In your V4 plug-ins.  This insures the plug-ins will not attempt to read/write each other's object user data.
+  * Make certain your V4 plug-in id is not equal to your V3 plug-in id.  This insures the plug-ins will not attempt to read/write each other's document user data.
+  * Make certain there are no shared ids in the ON_OBJECT_IMPLEMENT() macros or in the m_userdata_id fields in your V3 or V4 plug-ins.  This insures the plug-ins will not attempt to read/write each other's object user data.
 
-===== There are V3 and V4 versions of your plug-in.  You want the V3 and V4 plug-ins to share information.=====
+**There are V3 and V4 versions of your plug-in.  You want the V3 and V4 plug-ins to share information.**
 
-This level of support requires expert programming, through testing, and thoughtful file IO code design.  In particular, if you have changed the information your plug-in saves and you did not carefully plan for this situation when you wrote your V3 plug-in's IO code, then it is likely you cannot provide this level of file support for your users.  In order to properly test your code, you must be able to run your V3 and V4 plug-ins in a debugger.
+This level of support requires expert programming, through testing, and thoughtful file IO code design.  In particular, if you have changed the information your plug-in saves and you did not carefully plan for this situation when you wrote your V3 plug-in's IO code, then it is likely you cannot provide this level of file support for your users.  To properly test your code, you must be able to run your V3 and V4 plug-ins in a debugger.
 
 
   * In your V4 plug-in, override CRhinoPlugIn::SaveAsV3() and return true.  This insures your V4 plug-in will save its information in V3 files.
