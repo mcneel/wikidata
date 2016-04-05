@@ -2,7 +2,6 @@
 
 =====So, you are new to DotNET?=====
 
-\\
 
 So, you're probably pretty excited and scared right now? You have no idea where to start? You're likely to make some major mistakes in the first few hours which will prove to be frustrating? You'd like some basic advice? Let's get started...
 
@@ -14,12 +13,12 @@ People who start writing DotNET plug-ins for Rhino basically fall into three gro
   * DotNET programmers who are sick and tired of writing everything from scratch
 
 
-Unfortunately, none of these three groups has a smooth transitional period. It's difficult for C++ programmers because the DotNET paradigm differs in key areas from unmanaged code (no pointers, no references, no memory management). It's difficult for RhinoScripters because they suddenly have to deal with [[http://en.wikipedia.org/wiki/Object-oriented_programming|object-oriented programming (OOP)]]. And it's difficult for dyed-in-the-wool DotNETters because the Rhino SDK doesn't work much like the DotNET platform namespaces and classes.
+Unfortunately, none of these groups has a smooth transitional period. It's difficult for C++ programmers because the DotNET paradigm differs in key areas from unmanaged code (no pointers, no references, no memory management). It's difficult for RhinoScripters because they suddenly have to deal with [[http://en.wikipedia.org/wiki/Object-oriented_programming|object-oriented programming (OOP)]]. And it's difficult for dyed-in-the-wool DotNETters because the Rhino SDK doesn't work much like the DotNET platform namespaces and classes.
 
 \\
 
 | {{:legacy:en:NonObsceneGuyGoingNuts.gif}}  |
-If you're a scripter, you have a lot to learn about classes, types, instances, and encapsulation (among a lot else), and this isn't the place for that. The web is frothing with generic DotNET developer forums and repositories which will get you a long way down the road. If you're already comfortable with object-oriented-programming, this page will teach you some key Rhino SDK concepts that will eliminate some frustration.
+If you're a scripter, you have a lot to learn about classes, types, instances, and encapsulation (among a lot else), and this isn't the place for that. The web is frothing with generic DotNET developer forums and repositories which will get you a long way down the road. If you're already comfortable with object-oriented programming, this page will teach you some key Rhino SDK concepts that will eliminate some frustration.
 
 
 This wiki page explains some of the key concepts of Rhino plug-in development which are not immediately obvious to newcomers.
@@ -32,9 +31,9 @@ This wiki page explains some of the key concepts of Rhino plug-in development wh
 ======Const and non-const instances======
 
 
-Every class in the Rhino SDK comes in two flavors, a const and a non-const one. Const instances all start with "I" (such as IOnPlane, IOnBoundingBox).
+Every class in the Rhino SDK comes in two flavors, a const and a non-const one. 
 
-**IRhinoCurveObject and IRhinoEventWatcher).** You cannot change these instances, and they lack all the functions that would alter the memory state. For example, IOn3dPoint lets you retrieve x, y and z coordinates, but not set them.
+Const instances all start with "I" (such as IOnPlane, IOnBoundingBox, IRhinoCurveObject and IRhinoEventWatcher). You cannot change these instances, and they lack all the functions that alter the memory state. For example, IOn3dPoint lets you retrieve x, y and z coordinates, but not set them.
 
 Non-const objects start with "On" if they are part of openNURBS. They start with "MRhino" if they are part of Rhino (such as OnPlane, OnBoundingBox, MRhinoCurveObject and MRhinoEventWatcher). These instances can be altered without problems.
 
@@ -63,7 +62,7 @@ Since OnCurve is an abstract class, it doesn't have any constructors to begin wi
 \\
 
 | **Gotcha for C++ developers** |
-| You've probably caught on to that having two versions for each class is a way to mimic the 'const' keyword in C++. Rhino is written in C++ and uses constness all over the place. However, the DotNET framework lacks a keyword that operates like const. So we had to use this horrific hack to let DotNET plug-ins to use Rhino's unmanaged C++ kernel. So, On3dPoint in DotNET is the same as ON_3dPoint in C++ and IOn3dPoint is the same as const ON_3dPoint. |
+| You've probably caught on that having two versions for each class is a way to mimic the 'const' keyword in C++. Rhino is written in C++ and uses constness all over the place. However, the DotNET framework lacks a keyword that operates like const. So we had to use this horrific hack to let DotNET plug-ins to use Rhino's unmanaged C++ kernel. So, On3dPoint in DotNET is the same as ON_3dPoint in C++. IOn3dPoint is the same as const ON_3dPoint. |
 
 \\
 
@@ -98,7 +97,7 @@ The same logic applies to surfaces. There is an abstract class called OnSurface,
 
 \\
 
-The SDK helpfile lists the inheritance tree of each type (including all the interfaces it implements). Some functions (such as MRhinoDoc.AddCurveObject()) have overloads for different types of curve classes. Because these functions accept multiple types, you don't have to worry about converting one type into another. Whenever you encounter a function with overloads, always look if there's one that saves you work.
+The SDK helpfile lists the inheritance tree of each type (including all the interfaces it implements). Some functions (such as MRhinoDoc.AddCurveObject()) have overloads for different types of curve classes. Because these functions accept many types, don't worry about converting one type into another. Whenever you encounter a function with overloads, always look if there's one that saves you work.
 
 \\
 \\
