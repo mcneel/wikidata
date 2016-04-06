@@ -30,7 +30,7 @@ Thus, Rhino 4.0 uses the following location on 64-bit versions of Windows:
 HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\4.0
 </code> 
 
-For brevity, this article assumes a 32-bit version of Windows. But the same information applies to 64-bit versions, just with the above path modification.
+This article assumes a 32-bit version of Windows. But the same information applies to 64-bit versions, just with the above path modification.
 
 The data in this value is a 10-character date string (REG_SZ) in the form of YYYY-MM-DD that identifies the build date of Rhino. An example date string is //2011-03-09// which identifies Rhino 4.0 SR9. If the **MostRecent** value does not exist, or if the string value is empty, then Rhino is not installed on the computer, or the installation is damaged.
 
@@ -44,7 +44,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Install
 
 where <date> is the string value identified by the **MostRecent** value.
 
-In this key, you will find the **Edition** key value that will identify the edition, or type, of Rhino: Beta, Release, or Evaluation. If the value of Edition is **Evaluation**, then the Evaluation version of Rhino was either the most recently installed or run edition. Every time Rhino is installed, or run and then closed, the **MostRecent** key value is modified to reflect that Rhino's build date.
+In this key, you will find the **Edition** key value that identifies the edition, or type, of Rhino: Beta, Release, or Evaluation. If the value of Edition is **Evaluation**, then the Evaluation version of Rhino was either the most recently installed or run edition. Every time Rhino is installed, or run and then closed, the **MostRecent** key value is changed to reflect that Rhino's build date.
 
 If the value of Edition is **Release**, then the Commercial version of Rhino was either the most recently installed or most recently run edition. This includes any Rhino installed from a Rhino CD, including Commercial, Educational, and Not-for-Resale versions. Note, these versions only differ in their CD keys.
 
@@ -71,7 +71,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Install
 **Path** - contains the full path to the System folder under the Rhino folder.
 
 =====Registering your plug-in=====
-To register your plug-in with Rhino, you will need to create a new Registry key in the following locations, depending on the Rhino version:
+To register your plug-in with Rhino, you need to create a new Registry key in the following locations, depending on the Rhino version:
 <code>
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Plug-Ins
 </code>
@@ -82,7 +82,7 @@ The name of the Registry key will be your plug-in's GUID, the value returned by 
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Plug-ins\<your_plugin_guid>
 </code>
 
-Under this new Registry key, create two new value names, **Name** and **FileName** that contain strings that identify your plug-in's name and the full path to the .RHP file, respectively. For example, if I had created a new plug-in named **FooBar** that I installed in Rhino's system folder, the Registry would look like the following:
+Under this new Registry key, create two new value names, **Name** and **FileName**, that contain strings that identify your plug-in's name and the full path to the .RHP file, respectively. For example, if I had created a new plug-in named **FooBar** that I installed in Rhino's system folder, the Registry would look like the following:
 
 <code>
 HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\4.0\<date>\Plug-Ins\F3CF4A28-EA9E-4E08-BABA-5FC6645A5D72
@@ -95,14 +95,14 @@ Data:   C:\Program Files\Rhinoceros 4.0\System\FooBar.rhp  (REG_SZ)
 </code>
 
 =====Automatic loading=====
-If the **Name** and **FileName** Registry values and data are present in your plug-in's Registry key, Rhino attempts to load your plug-in the next time it launches. Rhino will briefly display a //Preparing plug-ins for first use// dialog if the plug-in loads correctly.
+If the **Name** and **FileName** Registry values and data are present in your plug-in's Registry key, Rhino attempts to load your plug-in the next time it launches. Rhino will briefly display a **Preparing plug-ins for first use** dialog if the plug-in loads correctly.
 
 When your plug-in loads for the first time, the rest of the normal Registry keys/value pairs in your plug-in's Registry key fill in.
 
 =====Hints=====
 Look in the Registry with **REGEDIT.EXE** and confirm that existing plug-ins follow these conventions.
 
-Use the right-click context menu in **REGEDIT.EXE** to access the //Copy Key Name// and //Rename// functions so you can get accurate copies of names and values in the Registry.
+Use the right-click context menu in **REGEDIT.EXE** to access the **Copy Key Name** and **Rename** functions so you can get accurate copies of names and values in the Registry.
 
 Test your installer to handle all these situations:
 
