@@ -37,7 +37,7 @@ Most of these properties are self-evident and need little elaboration. However, 
   Call RhPicture.CreateImage(50, 50, vbWhite)
   Call RhPicture.DrawLine(Array(10,30), Array(40,10), vbBlack, 5)
 
-If you want to draw lines with dash patterns or special caps, you'll have to use an RhPicture Pen object. You can obtain a Pen object by calling one of the Pen creation methods on "RhPicture":
+If you want to draw lines with dash patterns or special caps, you'll have to use an RhPicture Pen object. You can obtain a Pen object by calling one of the Pen creation methods on RhPicture:
 
   Dim RhPicture : Set RhPicture = Rhin.GetPluginObject("RhPicture")
   Call RhPicture.CreateImage(50, 50, vbWhite)
@@ -70,7 +70,7 @@ Note that you can store any number of Pen objects in your script and you can reu
 \\
 \\
 
-=====Enumerations explained:=====
+=====Enumerations explained=====
 
 | Cap Enumeration flags for PEN constuctors |
 | Flat | Round | Square | Triangle | Arrow Anchor | Round Anchor | Square Anchor| Diamond Anchor |
@@ -93,9 +93,9 @@ Note that you can store any number of Pen objects in your script and you can reu
 
 \\
 
-=====Dash patterns explained:=====
+=====Dash patterns explained=====
 
-In GDI+ (and in fact almost everywhere else as well), dash patterns are defined as a series of gaps and dashes, whose length is relative to the width of the pen. The illustration below shows the Dash coordinate system of a Pen object. The width of this Pen object is 5 pixels and the perpendicular lines are the unit-divisors, each spaced 5 units apart along the spline of the Pen object:
+In GDI+ (and almost everywhere else as well), dash patterns are defined as a series of gaps and dashes, whose length is relative to the width of the pen. The illustration below shows the Dash coordinate system of a Pen object. The width of this Pen object is 5 pixels and the perpendicular lines are the unit-divisors, each spaced 5 units apart along the spline of the Pen object:
 
 {{:legacy:en:RhPicture_PenCoordinateSystem.png}}
 
@@ -121,13 +121,13 @@ There is no limit to the number of Dash-Gap combos we can define, but we must al
 
 \\
 
-| A number of diffent dash patterns. |
+| A few different dash patterns. |
 | {{:legacy:en:DashPattern_1_1.png}} | {{:legacy:en:DashPattern_1_2.png}} | {{:legacy:en:DashPattern_2_1.png}} | {{:legacy:en:DashPattern_1_02.png}} | {{:legacy:en:DashPattern_02_02.png}} | {{:legacy:en:DashPattern_02_02_1_02.png}} |
 | (1.0, 1.0) | (1.0, 2.0) | (2.0, 1.0) | (1.0, 0.2) | (0.2, 0.2) | (0.2, 0.2, 1.0, 0.2) |
 
 \\
 
-=====Compound pens explained:=====
+=====Compound pens explained=====
 
 Compounds can be best explained as perpendicular Dash patterns. Instead of drawing a succession of dashes along the line, a compound Pen object draws a number of parallel strands. Compounds are defined in much the same way as Dash patterns:
 
@@ -142,7 +142,7 @@ Compound arrays are arrays of increasing doubles not smaller than zero and no la
 
 \\
 
-| A number of different compound definitions. |
+| A few different compound definitions. |
 | {{:legacy:en:CompoundPen_0_1.png}} | {{:legacy:en:CompoundPen_0_025_075_1.png}} | {{:legacy:en:CompoundPen_0_045_055_1.png}} | {{:legacy:en:CompoundPen_0_02_04_06_08_1.png}} |
 | (0.0, 1.0) | (0.0, 0.25, 0.75, 1.0) | (0.0, 0.45, 0.55, 1.0) | (0.0, 0.2, 0.4, 0.6, 0.8, 1.0) |
 
