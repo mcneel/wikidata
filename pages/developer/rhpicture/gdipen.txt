@@ -29,9 +29,8 @@ Properties not available in RhPicture Pen objects:
   * Local Transform  Matrix
   * Dash Patterns in conjunction with Compound Pens
 
-\\
 
-Most of these properties are self-evident and need little elaboration. However, the lack of predefined enumerations in VBScript requires us to specify these as integers, which is not self-documenting. Note that you do not need Pen objects to draw lines in the RhPicture plug-in. Every method that takes a Pen object is overloaded and can be called with a color and optional width parameter. This should be sufficient in most cases and makes a much simpler code:
+Most of these properties are self-evident and need little elaboration. However, the lack of predefined enumerations in VBScript requires us to specify these as integers, which is not self-documenting. Note that you do not need Pen objects to draw lines in the RhPicture plug-in. Every method that takes a Pen object is overloaded and can be called with a color and optional width parameter. In most cases this should be sufficient and makes a much simpler code:
 
   Dim RhPicture : Set RhPicture = Rhin.GetPluginObject("RhPicture")
   Call RhPicture.CreateImage(50, 50, vbWhite)
@@ -45,7 +44,7 @@ If you want to draw lines with dash patterns or special caps, you'll have to use
   Dim PenObj : Set PenObj = RhPicture.CreateDashedPen(vbBlack, 5, , , , Array(1.0, 2.0))
   Call RhPicture.DrawLine(Array(10,30), Array(40,10), PenObj)
 
-Note that you can store any number of Pen objects in your script and you can reuse them as often as you like. Pen objects are not bound to the RhPicture instance that created them and you can use them on any RhPicture object. There are two Pen creation methods available, the first one of which is overloaded:
+You can store any number of Pen objects in your script and you can reuse them as often as you like. Pen objects are not bound to the RhPicture instance that created them and you can use them on any RhPicture object. There are two Pen creation methods available, the first one of which is overloaded:
 
   RhPicture.CreatePen(Color As GDIColor) As GDIPen
   RhPicture.CreatePen(Color As GDIColor, Width As Double) As GDIPen
@@ -95,7 +94,7 @@ Note that you can store any number of Pen objects in your script and you can reu
 
 =====Dash patterns explained=====
 
-In GDI+ (and almost everywhere else as well), dash patterns are defined as a series of gaps and dashes, whose length is relative to the width of the pen. The illustration below shows the Dash coordinate system of a Pen object. The width of this Pen object is 5 pixels and the perpendicular lines are the unit-divisors, each spaced 5 units apart along the spline of the Pen object:
+In GDI+ (and almost everywhere else), dash patterns are defined as a series of gaps and dashes, whose length is relative to the width of the pen. The illustration below shows the Dash coordinate system of a Pen object. The width of this Pen object is 5 pixels and the perpendicular lines are the unit-divisors, each spaced 5 units apart along the spline of the Pen object:
 
 {{:legacy:en:RhPicture_PenCoordinateSystem.png}}
 
@@ -129,7 +128,7 @@ There is no limit to the number of Dash-Gap combos we can define, but we must al
 
 =====Compound pens explained=====
 
-Compounds can be best explained as perpendicular Dash patterns. Instead of drawing a succession of dashes along the line, a compound Pen object draws a number of parallel strands. Compounds are defined in much the same way as Dash patterns:
+Compounds are best explained as perpendicular Dash patterns. Instead of drawing a succession of dashes along the line, a compound Pen object draws a number of parallel strands. Compounds are defined in much the same way as Dash patterns:
 
   Dim RhPicture : Set RhPicture = Rhino.CreateObject("RhPicture")
   RhPicture.CreatePen(vbBlack, 5.0, , , Array(0.0, 0.25, 0.75, 1.0))
