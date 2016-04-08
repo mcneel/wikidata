@@ -1,13 +1,12 @@
-====== Work in progress. Feel free to add sections or articles ======
-====== Manual ======
-=====Developer Manual=====
+======Developer Manual======
+
 The topic of a manual or getting started guide for developers has come up time and time again. We may be able to do this by writing small articles on the wiki and eventually compiling these together into a single guide. The following seem like they would be good sections for a guide.
 
 <color blue>The following is a work in progress. Feel free to add sections or articles under existing sections.</color>
 
 **Introduction**
 
-  * [[http://www.rhino3d.com/developer.htm|What are the choices for customizing rhino?]]
+  * [[http://www.rhino3d.com/developer.htm|What are the choices for customizing Rhino?]]
 **Scripting**
 
   * Command Scripting
@@ -17,14 +16,14 @@ The topic of a manual or getting started guide for developers has come up time a
   * [[developer:whatisarhinoplugin|What is a Rhino plug-in?]]
   * [[developer:sdksamples:manualsdkdifferences|Choosing an SDK]]
   * Rhino 3
-    * [[RHINO3CPLUSPLUSPLUGINS|C++ SDK]]
-    * [[RHINO3DOTNETPLUGINS|.NET SDK for VB and C#]]
+    * C++ SDK
+    * .NET SDK for VB and C#
   * Rhino 4
     * [[developer:cplusplusplugins|C++ SDK]]
     * [[developer:dotnetplugins|.NET SDK for VB and C#]]
 **Installation and setup**
 
-  * [[http://files.mcneel.com/wiki/RhinoDotNetSDK.zip|Rhino4.NET Project and Command Wizards]]
+  * Rhino4.NET Project and Command Wizards
   * [[developer:dotnetexpresseditions|Using VB.NET and C# Express editions for Rhino plug-ins]]
   * [[PLUGINAPPWIZARD|Rhino 3 plug-in AppWizard]]
 
@@ -43,9 +42,9 @@ The topic of a manual or getting started guide for developers has come up time a
   * CRhinoDoc
   * CRhinoView and CRhinoViewport
 
-**the objects (CRhinoObject)**
+**The objects (CRhinoObject)**
 
-**user feedback (CRhinoGet)**
+**User feedback (CRhinoGet)**
 
 **GUI Widgets**
 
@@ -55,23 +54,23 @@ The topic of a manual or getting started guide for developers has come up time a
 
 **Application and Document level user data**
 
-**Event Watchers**
+**Event watchers**
 
-**Custom Display**
+**Custom display**
 
 **Object level user data**
 
 **Intersections**
 
-**Installers, licensing, Localization, and Marketing support**
+**Installers, licensing, localization, and marketing support**
 
-**Uncategorized Topics**
+**Uncategorized topics**
 
 > **Question:** //In the Rhino.NET SDK every class has an interface that it derives from that starts with an I. What is the difference?//
 
-The Rhino.NET SDK is written as a wrapper around the standard Rhino "C++" SDK with efforts made to try and keep the .NET classes and functions as close of a match as possible to the wrapped C++ classes. In "C++" there is syntax for something called const (google //C++ const keyword// for more information.) In short const says that you are not able to modify any of the internal contents of a class.
+The Rhino.NET SDK is written as a wrapper around the standard Rhino C++ SDK with efforts made to try and keep the .NET classes and functions as close of a match as possible to the wrapped C++ classes. In C++ there is syntax for something called const (google //C++ const keyword// for more information.) In short const says that you are not able to modify any of the internal contents of a class.
 
-There is no const concept in the .NET framework (at least through version 2.0 .NET - this may change in the future). This is where we used an interface to represent a const "C++ "class. Every I interface in Rhino.NET represents the const version of a "C++" class, you can call functions that do not modify the internal data of the class. The class that is derived from the I interface (begins with M or On) is the non-const class that you can call functions on to modify the internal data.
+There is no const concept in the .NET framework. (At least through version 2.0 .NET. This may change in the future.) This is where we used an interface to represent a const C++ class. Every I interface in Rhino.NET represents the const version of a C++ class, you can call functions that do not change the internal data of the class. The class that is derived from the I interface (begins with M or On) is the non-const class that you can call functions on to modify the internal data.
 
 
 
