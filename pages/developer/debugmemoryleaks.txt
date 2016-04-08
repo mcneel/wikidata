@@ -1,10 +1,11 @@
-====== Info: Finding and fixing memory leaks ======
+====== Info: Finding and Fixing Memory Leaks ======
 ====== C++ ======
-> **Version:** //Rhino 4// and //Rhino 5//
+
+> **Versions:** //Rhino 4// and //Rhino 5//
 
 The Rhino 4.0 and Rhino 5.0 SDKs ship with support for building fully debuggable plug-ins that use the debug MFC and CRT.
 
-======Discovering Memory Leaks Exist======
+=====Discovering memory leaks exist=====
 When you use the debugger to run a debug configuration of a plug-in built with the Rhino SDK, after you exit Rhino the Microsoft debug CRT checks for memory leaks and reports them in the Visual Studio Output window.
 
      Detected memory leaks!
@@ -18,9 +19,9 @@ When you use the debugger to run a debug configuration of a plug-in built with t
 
 You should get in the habit of checking the Output window when working on your plug-in.  If you see a "Detected memory leaks!" section near the end of the Output window, then your program is leaking memory.  Memory leaks are serious bugs that need to be fixed.  The Rhino 4 Debug SDK provides a built in tool for finding the location where the leaked memory was allocated.
 
-======Determining Which Allocator Leaked the Memory======
+=====Determining which allocator leaked the memory=====
 
-In the image above, 3 leaks are listed. There are two lines for each leak.  The first line
+In the image above, three leaks are listed. There are two lines for each leak.  The first line
 
    {.....} ... block at 0x..., ... bytes long.
 
@@ -38,17 +39,17 @@ If the second line looks like
 
     Data: <ONmemory...> ...
 
-the memory was allocated with Rhino's onmalloc, onrealloc, or Rhino's new. ("ONmemory" stands for [[developer:opennurbs:home|opennurbs]] memory allocation.)  The Rhino Debug SDK can tell you the complete callstack at the time the memory was allocated.
+the memory was allocated with Rhino's onmalloc, onrealloc, or Rhino's new. (ONmemory stands for [[developer:opennurbs:home|openNURBS]] memory allocation.)  The Rhino Debug SDK can tell you the complete callstack at the time the memory was allocated.
 
 If the second line starts with "Data:" but doesn't have an "ONmemory" between the angle brackets, then the memory was allocated by directly calling the CRT malloc(), calloc(), realloc(), new or another function.  The Rhino Debug SDK cannot give you any additional information about this leak.
 
 If the second line starts with "a CSomeMFCObject object ...", then the memory was allocated by calling new CSomeMFCObject.  The Rhino Debug SDK cannot give you any additional information about this leak.
 
 
-======Using LookForLeaks to Get Allocation Callstacks======
-The Debug Rhino (rhino_d.exe) that is shipped with the Rhino Debug SDK has a command called LookForLeaks.  The LookForLeaks command turns on code that will print the callstack when the leaked memory was allocated.  The LookForLeaks command asks you to specify the minimum and maximum size of allocations to list.  In the example above there are "ONmemory" leaks of 1258, 1259 and 1260 bytes.  To get more information about these leaks you would run the LookForLeaks command and specify 1258 as the minimum size and 1260 as the maximum size.  When LookForLeaks is running, Rhino runs much slower than it ordinarily does.  Setting the minimum and maximum size close together can significantly speed up program execution.
+=====Using LookForLeaks to get allocation callstacks=====
+The Debug Rhino (rhino_d.exe) that is shipped with the Rhino Debug SDK has a command called LookForLeaks.  The LookForLeaks command turns on code that will print the callstack when the leaked memory was allocated.  The LookForLeaks command asks you to specify the minimum and maximum size of allocations to list.  In the example above there are ONmemory leaks of 1258, 1259, and 1260 bytes.  To get more information about these leaks run the LookForLeaks command and specify 1258 as the minimum size and 1260 as the maximum size.  When LookForLeaks is running, Rhino runs much slower than it ordinarily does.  Setting the minimum and maximum size close together can significantly speed up program execution.
 
-Below is what you see in the Output window if the LookForLeaks command is run right after Rhino starts.  The "LEAK {...}..." sections report the callstack at the time of the allocation.  From this information we can see that the function CCommandTestLeakDetection::RunCommand is leaking memory that is allocated on lines 1295, 1299 and 1303 of a file called cmdleakdetector.cpp.
+Below is what you see in the Output window if the LookForLeaks command is run right after Rhino starts.  The "LEAK {...}..." sections report the callstack at the time of the allocation.  From this information we can see that the function CCommandTestLeakDetection::RunCommand is leaking memory that is allocated on lines 1295, 1299, and 1303 of a file called cmdleakdetector.cpp.
 
      RHINO LEAK DETECTION: Listing memory leaks ...
      LEAK {172869} 0x0BE5BE20, 1258 bytes.
@@ -83,7 +84,7 @@ Below is what you see in the Output window if the LookForLeaks command is run ri
 
 The "Data: <NOT A LEAK  >" leak listed on the last line is memory used by the Rhino leak detector.  The allocation number (the number in wiggly brackets) on the left side of the "NOT A LEAK" line indicates when LookForLeaks was started.    Any leaks with allocation numbers smaller than this number happened before LookForLeaks started.  In the example above, 121901 is the allocation number when LookForLeaks was started.   If you need to track down a leak that is happening before the first command can be run, you can use the /lookforleaks=min,max command line switch.
 
-If you are debugging leaks in code that is in your plug-in, be sure to load your plug-in before running the LookForLeaks command.  You can use the "PlugInManager" command to load your plug-in.
+If you are debugging leaks in code that is in your plug-in, be sure to load your plug-in before running the LookForLeaks command.  You can use the **PlugInManager** command to load your plug-in.
 
 
 
