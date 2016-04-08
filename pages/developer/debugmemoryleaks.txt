@@ -17,7 +17,7 @@ When you use the debugger to run a debug configuration of a plug-in built with t
      {172869} normal block at 0x0..., 1258 bytes long.
       Data: <ONmemory...> ...
 
-You should get in the habit of checking the Output window when working on your plug-in.  If you see a "Detected memory leaks!" section near the end of the Output window, then your program is leaking memory.  Memory leaks are serious bugs that need to be fixed.  The Rhino 4 Debug SDK provides a built in tool for finding the location where the leaked memory was allocated.
+Get in the habit of checking the Output window when working on your plug-in.  If you see a "Detected memory leaks!" section near the end of the Output window, then your program is leaking memory.  Memory leaks are serious bugs that need fixed.  The Rhino 4 Debug SDK provides a built in tool for finding the location where the leaked memory was allocated.
 
 =====Determining which allocator leaked the memory=====
 
@@ -25,7 +25,7 @@ In the image above, three leaks are listed. There are two lines for each leak.  
 
    {.....} ... block at 0x..., ... bytes long.
 
-reports the debug CRT allocation serial number (the number in wiggly brackets), the address of the first byte of leaked memory, and the number of bytes that were leaked.  The allocation serial number and address depend on everything that has happened up to the time the memory was leaked and generally change each time you run your plug-in.
+reports the debug CRT allocation serial number (the number in wiggly brackets), the address of the first byte of leaked memory, and the number of bytes leaked.  The allocation serial number and address depend on everything that happened up to the time the memory was leaked. They generally change each time you run your plug-in.
 
 The second line generally looks like
 
@@ -41,9 +41,9 @@ If the second line looks like
 
 the memory was allocated with Rhino's onmalloc, onrealloc, or Rhino's new. (ONmemory stands for [[developer:opennurbs:home|openNURBS]] memory allocation.)  The Rhino Debug SDK can tell you the complete callstack at the time the memory was allocated.
 
-If the second line starts with "Data:" but doesn't have an "ONmemory" between the angle brackets, then the memory was allocated by directly calling the CRT malloc(), calloc(), realloc(), new or another function.  The Rhino Debug SDK cannot give you any additional information about this leak.
+If the second line starts with "Data:" but doesn't have an "ONmemory" between the angle brackets, then the memory was allocated by directly calling the CRT malloc(), calloc(), realloc(), new or another function.  The Rhino Debug SDK cannot give you any more information about this leak.
 
-If the second line starts with "a CSomeMFCObject object ...", then the memory was allocated by calling new CSomeMFCObject.  The Rhino Debug SDK cannot give you any additional information about this leak.
+If the second line starts with "a CSomeMFCObject object ...", then the memory was allocated by calling new CSomeMFCObject.  The Rhino Debug SDK cannot give you any more information about this leak.
 
 
 =====Using LookForLeaks to get allocation callstacks=====
@@ -82,7 +82,7 @@ Below is what you see in the Output window if the LookForLeaks command is run ri
       Data: <NOT A LEAK      > ...
    Object dump complete.
 
-The "Data: <NOT A LEAK  >" leak listed on the last line is memory used by the Rhino leak detector.  The allocation number (the number in wiggly brackets) on the left side of the "NOT A LEAK" line indicates when LookForLeaks was started.    Any leaks with allocation numbers smaller than this number happened before LookForLeaks started.  In the example above, 121901 is the allocation number when LookForLeaks was started.   If you need to track down a leak that is happening before the first command can be run, you can use the /lookforleaks=min,max command line switch.
+The "Data: <NOT A LEAK  >" leak listed on the last line is memory used by the Rhino leak detector.  The allocation number (the number in wiggly brackets) on the left side of the "NOT A LEAK" line indicates when LookForLeaks started.    Any leaks with allocation numbers smaller than this number happened before LookForLeaks started.  In the example above, 121901 is the allocation number when LookForLeaks started.   If you need to track down a leak that is happening before the first command can run, you can use the /lookforleaks=min,max command line switch.
 
 If you are debugging leaks in code that is in your plug-in, be sure to load your plug-in before running the LookForLeaks command.  You can use the **PlugInManager** command to load your plug-in.
 
