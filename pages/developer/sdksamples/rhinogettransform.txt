@@ -2,11 +2,11 @@
 ====== .NET ======
 > **Version:** //Rhino 4.0//
 > **Summary:** //Demonstrates how to show objects transformating dynamically.//
-> **NOTICE:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:rhinoGettransform|here]]//
-=====Overview=====
-One of the more common questions we receive is how to show dynamic object transformations. This is, how can one write commands, such as Rhino's Move, Copy, Scale, Mirror, etc., that show how an object will be transformed from one location to another. There have been several transformation-specific examples posted on the Rhino developer newsgroup and on the developer wiki. Most of these examples show how to inherit from **MRhinoGetPoint** and override its **OnMouseMove** and **DynamicDraw** members to show objects transformations.
+> **Notice:** //The Rhino.NET SDK is deprecated in Rhino 5.  This example adapted for the new RhinoCommon SDK is [[developer:rhinocommonsamples:rhinoGettransform|here.]]//
 
-In an effort to provide reusable code, we would like to present the following abstract class that you can use in your .NET plug-ins to help you show objects transforming dynamically. The abstract **RhinoGetTransform** class inherits from **MRhinoGetObject** and has a single abstract member function, **CalculateTransform** that you have to implement. The following sample code is in C#, but it should not take much effort to port this to VB.NET. It should also be noted that this class will show grips transforming dynamically, as well as regular Rhino objects, such as curves and surfaces.
+One of the more common questions we receive is how to show dynamic object transformations. This is how can one write commands, such as Rhino's Move, Copy, Scale, Mirror, etc., that show how an object will be transformed from one location to another. There have been several transformation-specific examples posted on the Rhino developer newsgroup and on the developer wiki. Most of these examples show how to inherit from **MRhinoGetPoint** and override its **OnMouseMove** and **DynamicDraw** members to show objects transformations.
+
+In an effort to provide reusable code, following is an abstract class that you can use in your .NET plug-ins to help you show objects transforming dynamically. The abstract **RhinoGetTransform** class inherits from **MRhinoGetObject** and has a single abstract member function, **CalculateTransform** that you have to implement. The following sample code is in C#, but it should not take much effort to port this to VB.NET. It should also be noted that this class will show grips transforming dynamically, as well as regular Rhino objects, such as curves and surfaces.
 
 
 <code c++>
