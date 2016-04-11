@@ -1,12 +1,16 @@
-======  Writing code that will work with 32- and 64-bit compilers ======
+======  Writing Code That Works with 32- and 64-bit Compilers ======
 
-=====strlen, etc.:=====
+\\
+
+=====strlen, etc.=====
 The return type of string length functions like strlen and wcslen is a size_t.  Since we will never have null terminated strings with more than 2,147,483,647 characters, simply use a cast like so:
 
    int length = (int)wcslen(str);  (int) cast for 64 bit compilers
 
-=====fread and fwrite:=====
-The return type of fread and fwrite is a size_t.  Design your calls to fread and fwrite so that the //count// argument is never > 2,147,483,648 and use an int cast on the return type like so:
+\\
+
+=====fread and fwrite=====
+The return type of fread and fwrite is a size_t.  Design your calls to fread and fwrite so that the //count// argument is never > 2,147,483,648 and use an int cast on the return type like:
 
    int count = ...;  some number <= 2,147,483,648
    if ( count != (int)fread( buffer, size, count, fp ) )
@@ -22,7 +26,7 @@ The return type of fread and fwrite is a size_t.  Design your calls to fread and
      handle file writing error
    }
 
-If you are compeled to write 9,223,372,036,854,775,808 bytes in a single call to fwrite, you can do so with:
+If you are compelled to write 9,223,372,036,854,775,808 bytes in a single call to fwrite, you can do so with:
 
    size_t size = 9223372036854775808;
    void* buffer = ...;
@@ -32,6 +36,8 @@ If you are compeled to write 9,223,372,036,854,775,808 bytes in a single call to
       failed to write 9223 terrabytes in a single call to fwrite - duh
      printf("You're a looser\n");
    }
+
+\\
 
 =====Sort functions that compare pointers=====
 Use INT_PTR to store the difference between two pointers.
@@ -45,8 +51,12 @@ Use INT_PTR to store the difference between two pointers.
      return ( (i<0) ? -1 : ( (i>0) ? 1 : 0 );
    }
 
-=====size_t:=====
+\\
+
+=====size_t=====
 The type size_t is 64 bits on a 64-bit compiler.  See the strlen and fread sections for examples on dealing with this.
+
+\\
 
 =====Formatted printing (printf, RhinoApp().Print(), ON_wString::Format, etc.)=====
 You really need to pay attention to the size of your integer arguments to formatted printing strings.
@@ -60,13 +70,17 @@ You really need to pay attention to the size of your integer arguments to format
    RhinoApp().Print("i = %d  sz = %Id ptr = %I08X ip = %Id h = %I64d i64 = %I64d\n",
                     i,sz,ptr,ip,h,i64);
 
-=====Windows SendMessage:=====
+\\
+
+=====Windows SendMessage=====
 If you cast the WPARAM and LPARAM arguments as (WPARAM) and (LPARAM), and put the return value in an LRESULT, everything works perfectly for both the 32- and 64-bit compilers.  Since the value of smresult can be an int, pointer, handle, whatever, cast smresult as shown below.
 
    LRESULT smresult = SendMessage((UNIT)id, (WPARAM)&gt, (LPARAM)sText);
    int rc = (int)smresult ;  In this case, I the rest of the code want
    HWND hwnd = (HWND)smresult;
    char** ptr = (char**)smresult;
+
+\\
 
 =====Windows SetWindowLong and GetWindowLong=====
 Replace every single instance of windows calls that pass pointers as mystery meat with the new //Ptr// versions.
@@ -86,11 +100,14 @@ The //Ptr// part of the function names is misleading. The //Ptr// versions work 
    WNDPROC wp = (WNDPROC)::GetWindowLong( *pDockFrame, GWL_WNDPROC);
    DWORD dwStyle = ::GetWindowLong( pMsg->hwnd, GWL_STYLE)
 
+
 ====Good====
 
    SetWindowLongPtr( hwnd, id, (LONG_PTR)this);
    WNDPROC wp = (WNDPROC)::GetWindowLongPtr( *pDockFrame, GWL_WNDPROC);
    DWORD dwStyle = (DWORD)::GetWindowLongPtr( pMsg->hwnd, GWL_STYLE)
+
+\\
 
 =====Timers=====
 
