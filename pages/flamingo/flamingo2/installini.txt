@@ -1,19 +1,19 @@
 ====== Flamingo 2.0 Automated Installation ======
-> **Summary:** //Three ways to install Flamingo 2.0 without user intervention.//
+> **Summary:** //Three ways to install Flamingo 2.0 without user intervention//
 
-=====Requirements:=====
-To deploy Flamingo 2.0 using any of the methods below use the appropriate .MSI file from the CD. If you are installing from a downloaded file, follow these instructions to  [[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|uncompress the Downloaded Flamingo EXE into a folder.]], open the Flamingo 2.0 installer .EXE file in WinZIP or other compression program, and extract the .MSI file.
+====Requirements====
+To deploy Flamingo 2.0 using any of the methods below use the appropriate .MSI file from the CD. If you are installing from a downloaded file, follow these instructions to  [[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|uncompress the downloaded Flamingo EXE into a folder.]], open the Flamingo 2.0 installer .EXE file in WinZIP or other compression program, and extract the .MSI file.
 
 
-=====Overview=====
+====Overview====
 These instructions are useful for System Administrators who want to deploy Flamingo 2.0 using silent installation with a batch file, silent installation with an INI file, or throughout an organization via Active Directory or SMS.
 
 General documentation of ActiveDirectory/SMS application deployment is beyond the scope of this article, so most deployment-specific instructions have been omitted.
 
-=====Uninstalling Previous Installations of Flamingo 2.0=====
+====Uninstalling previous installations of Flamingo 2.0====
 **Note:** If you try to deploy the MSI when Flamingo 2.0 is already installed on the system, it will fail. This includes previous installations of Evaluation and Beta releases. You must first uninstall the existing release prior to deployment.
 
-======Method 1: Flamingo 2.0 MSI Scripted Installation======
+=====Method 1: Flamingo 2.0 MSI Scripted Installation=====
 
 Make sure Flamingo 2.0 is not installed on the target computer, or execute this line before the install:
 
@@ -27,7 +27,7 @@ If you are installing off the standard Flamingo 2 CD, you can execute a line (or
        RMA_CDKEY=FL20-1234-5678-ABCD-EFGH-IJKL
        INSTALL_EN=1
 
-If you would like to install off a server and have copied the Flamingo Directory onto a network server the commands may look like this
+If you would like to install off a server and have copied the Flamingo Directory onto a network server the commands may look like this:
 
      msiexec.exe
        /i"J:\download\Flamingo2_Setup_English.msi" /qn
@@ -35,14 +35,14 @@ If you would like to install off a server and have copied the Flamingo Directory
        RMA_CDKEY=FL20-AAAA-BBBB-CCCC-DDDD-EEEE
        INSTALL_EN=1
 
-/qn - Tells the installer not to show any dialogs.  An alternate is /qb which will show only a self-closing progress dialog.
+**/qn** - Tells the installer not to show any dialogs.  An alternate is /qb which will show only a self-closing progress dialog.
 FOLDER="C:\Program Files\Flamingo 2"   -  Specify the folder to install into.  Must be surrounded by quotes if the path contains spaces.
 
-RMA_CDKEY=FL20-AAAA-BBBB-CCCC-DDDD-EEEE - provides the CD-Key for the installation. Use this to install as a standalone node. The CD-Key can also be entered with no dashes.
+**RMA_CDKEY=FL20-AAAA-BBBB-CCCC-DDDD-EEEE** - Provides the CD-Key for the installation. Use this to install as a standalone node. The CD-Key can also be entered with no dashes.
 
-INSTALL_EN=1 - Installs support for English. The MSI will control the language for the installer itself.  The Flamingo CD contains many different MSI's, one for each language.  Each MSI can install any number of languages. For instance in the sample below Flamingo will install both English and French.
+**INSTALL_EN=1** - Installs support for English. The MSI will control the language for the installer itself.  The Flamingo CD contains many different MSI's, one for each language.  Each MSI can install any number of languages. For instance in the sample below Flamingo will install both English and French.
 
-=====Optional Parameters:=====
+====Optional parameters====
 WORKGROUP_NODE=1  -  Alternative to the RMA_CDKEY entry, when you want the station to get its Flamingo CDKey from the Zoo license manager (www.rhino3d.com/zoo.htm) each time it starts.
 
 USERNAME="Rodney Dangerfield"
@@ -51,7 +51,7 @@ COMPANYNAME="Universal Pictures"
 
 Other possible parameters are discussed here: **[[flamingo:flamingo2:editingsetupini|Editing Flamingo2Setup.ini]]**
 
-> **Example:** ////
+**Example** ////
 
 To install Flamingo as a standalone node with support for English and French, using CD-Key FL20-1234-5678-ABCD-EFGH-IJKL from the installer file D:\Installer\Flamingo2_Setup_English.msi to the folder C:\Program Files\Flamingo2 use this  (all on one line separated by spaces):
 
@@ -64,9 +64,11 @@ To install Flamingo as a standalone node with support for English and French, us
        INSTALL_EN=1
        INSTALL_FR=1
 
-======Method 2: Flamingo 2.0 MSI Installation with INI File======
+=====Method 2: Flamingo 2.0 MSI Installation with INI File=====
 
-Edit the file **[[http://wiki.mcneel.com/_media/legacy/en/Flamingo2Setup.zip|Flamingo2Setup.ini]]** or use the copy in the Flamingo folder on the Flamingo 2.0 CD.  Uncomment the parameters (see Method 1 above) you want to set for the installation process. Note: All characters on a line in the INI file following a # sign are ignored by the installer, even if the # character appears in the middle of a line. For more configuration details, see **[[flamingo:flamingo2:editingsetupini|Editing Flamingo2Setup.ini]]**
+Edit the file **[[http://wiki.mcneel.com/_media/legacy/en/Flamingo2Setup.zip|Flamingo2Setup.ini]]** or use the copy in the Flamingo folder on the Flamingo 2.0 CD.  Uncomment the parameters (see Method 1 above) you want to set for the installation process. 
+
+**Note:** All characters on a line in the INI file following a # sign are ignored by the installer, even if the # character appears in the middle of a line. For more configuration details, see **[[flamingo:flamingo2:editingsetupini|Editing Flamingo2Setup.ini]]**
 
 Rename the INI file and/or the MSI file so they have the same filename (before the file extension), and put them in the same folder, along with all the .CAB files if you are installing a version that comes on CD.
 
@@ -74,30 +76,30 @@ Launch the MSI file (using the same "msiexec.exe /i" /qn syntax as in Method 1) 
 
 
 
-======Method 3: Flamingo 2.0 MSI Deployment with Active Directory or SMS======
+=====Method 3: Flamingo 2.0 MSI Deployment with Active Directory or SMS=====
 
-=====Deployment Preparation=====
-  - Perform an administrative install of the MSI to your network share. For this example, we'll assume the location **S:\Flamingo 2.0**
+====Deployment preparation====
+  - Perform an administrative install of the MSI to your network share. For this example, we'll assume the location //S:\Flamingo 2.0//.
   - Prepare the INI file as in Method 2.
 
-=====Deployment Configuration=====
-  - Open **Active Directory Users & Computers**
-  - Right-click the Group or Organizational Unit that contains the users or computers that will receive Flamingo 2.0, then click Properties.
-  - In the Group Policy tab, add a new Group Policy Object named **Install Flamingo 2.0**
+====Deployment configuration====
+  - Open **Active Directory Users & Computers**.
+  - Right-click the Group or Organizational Unit that contains the users or computers that will receive Flamingo 2.0, then click **Properties**.
+  - In the Group Policy tab, add a new Group Policy Object named **Install Flamingo 2.0**.
   - Select the **Install Flamingo 2.0** Group Policy Object, then click **Edit...**
   - Determine whether you will be installing per-computer or per-user (read up on Group Policy to determine which works best for your organization).
-  - Under User Configuration or Computer Configuration (depending on how you chose in the last step), expand **Software Settings**, then right click **Software installation**, then click **New -> Package**.
+  - Under User Configuration or Computer Configuration (depending on how you chose in the last step), expand **Software Settings**, then right-click **Software installation**, then click **New -> Package**.
   - Select the .MSI file to install.
-  - In the Deploy Software dialog box, select **Assigned**, then click OK.
+  - In the Deploy Software dialog box, select **Assigned**, then click **OK**.
   - Right-click Flamingo 2.0 in the right pane, then click **Properties**.
   - Select the **Install this application at logon checkbox.** (Or customize the deployment options to fit the needs of your organization).
 
-=====Advanced Customization=====
+====Advanced customization====
 Several settings are configurable from the HKEY_LOCAL_MACHINE registry hive. Such changes must be done separately from the installation process.
 
 All settings are in the keys:
 
-HKEY_LOCAL_MACHINE\Software\McNeel\Flamingo\2.0 and HKEY_LOCAL_MACHINE\Software\McNeel\Flamingo\2.0\Paths
+//HKEY_LOCAL_MACHINE\Software\McNeel\Flamingo\2.0// and //HKEY_LOCAL_MACHINE\Software\McNeel\Flamingo\2.0\Paths//
 
 Other settings are also available. See the registry key listed above for other configurable settings.
 
