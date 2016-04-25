@@ -1,6 +1,6 @@
-====== Rhino 4 Crashing on Acer Computers with Egis PSD securty software ======
+====== Rhino 4 Crashing on Acer Computers with Egis PSD Security Software ======
 
-We have a steady stream of reports of Rhino V4 crashing on Acer computers with eDataSecurity installed and other computers with Egis PSD securty software installed. The crashes happen whenever Rhino V4 attempts to display the file Open/Save dialog.  We have determined that the crash is caused by a conflict between a program that is part of the Acer / Egis eDataSecurity tool and a Microsoft operating system component that Rhino uses.  Acer / Egis is aware of the problem and there may be an eDataSecurity update that fixes the bug, but we cannot verify that this update works with Rhino.  
+We have a steady stream of reports of Rhino V4 crashing on Acer computers with eDataSecurity installed and other computers with Egis PSD security software installed. The crashes happen when Rhino V4 attempts to display the file Open/Save dialog.  We have determined that the crash is caused by a conflict between a program that is part of the Acer / Egis eDataSecurity tool and a Microsoft operating system component that Rhino uses.  Acer / Egis is aware of the problem and there may be an eDataSecurity update that fixes the bug, but we cannot verify that this update works with Rhino.  
 
 
 ===== Currently, there are three ways to fix the problem=====
@@ -18,7 +18,7 @@ We have a steady stream of reports of Rhino V4 crashing on Acer computers with e
   * Use the ShellExView program to disable the shell extension.  The steps below will modify the registry and block the PSDProtect.DLL from being loaded. **Warning:** Some other shell extensions provide important services. Use caution when disabling any other shell extensions.
     - Download the "ShellExView" program.  A very clean and simple installer is located at http://www.nirsoft.net/utils/shexview_setup.exe  Information about this program is available from http://www.nirsoft.net/utils/shexview.html
     - When shexview_setup.exe is downloaded to your computer, double-click on the file name or icon to install ShellExView.
-    - Start ShellExView by clicking on the Windows Start Button and typing "ShellExView" in the Start Search box. {{:legacy:en:ShellExViewStep1.jpg}}
+    - Start ShellExView by clicking on the Windows Start Button and typing **ShellExView** in the Start Search box. {{:legacy:en:ShellExViewStep1.jpg}}
     - The ShellExView program will start and take a few seconds to make a list of all the shell extensions installed on your computer.  When it finishes making the list search for the Acer **DragDropProtect Class** shell extension. {{:legacy:en:ShellExViewStep2.jpg}}
     - Disable this shell extension by first clicking on the **DragDropProtect Class** line, then clicking the red dot at the upper left of ShellExView, and finally answering **Yes** to the "Do you want to disable select items" question. {{:legacy:en:ShellExViewStep3.jpg}}
     - At this point the Acer "DragDropProtect Class" shell extension is disabled and Rhino will work. {{:legacy:en:ShellExViewStep4.jpg}}
@@ -27,5 +27,5 @@ We have a steady stream of reports of Rhino V4 crashing on Acer computers with e
 
 =====Other references:=====
 
-[[rhino:autocad2006crash|Click here for information about other shell extensions that crash file open dialogs.]]
+[[rhino:autocad2006crash|Information about other shell extensions that crash file open dialogs.]]
 
