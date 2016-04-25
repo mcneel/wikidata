@@ -1,45 +1,39 @@
-====== BakeRender plugin page ======
+====== BakeRender Plug-in======
 
-> **Summary:** //a free plugin to bake textures with BakeAIR directly from Rhino 4//
+> **Summary:** //A free plug-in to bake textures with BakeAIR directly from Rhino 4//
 
 
 =====What is BakeRender ?=====
 
-BakeRender is a UserInterface for Rhino3D version 4.0 to automatically create baking ready *.rib (RenderMan Interface Bytestream) files with the help of RhinoAIR and the AIR Rendering engine from Sitexgraphics. Generated rib files are passed to BakeAIR the texture and lightning baker for baking.
+BakeRender is a user interface for Rhino Version 4.0 that automatically creates baking ready *.rib (RenderMan Interface Bytestream) files with the help of RhinoAIR and the AIR Rendering engine from SiTex Graphics. Generated rib files are passed to BakeAIR for texture and lightning baker for baking.
 
-Resulting (baked) textures are assigned to their geometry in Rhino and can be viewed in realtime using the "BakeRender" display mode which is provided with this plugin. Scenes baked with BakeRender can be used for realtime presentations, (faster) re-rendering with AIR and other renderers which support textures assigned through Rhino`s standart material assignment dialogs.
+Resulting (baked) textures are assigned to their geometry in Rhino. They can be viewed in realtime using the BakeRender display mode which is provided with this plug-in. Scenes baked with BakeRender can be used for realtime presentations, (faster) re-rendering with AIR and other renderers which support textures assigned through Rhino's standard material assignment dialogs.
 
-<color green> Any scene (with materials) which can be rendered with AIR from within Rhino 4 and the "RhinoAir" Plugin can be used for baking with this toolset. </color>
+<color green> Any scene (with materials) which can be rendered with AIR from within Rhino 4 and the RhinoAIR plug-in can be used for baking with this toolset. </color>
 
-\\
-
-----
 \\
 
 =====Features=====
-  * easy baking and mapping
-  * bake surfaces, polysurfaces & meshes
-  * multiple object baking
-  * bake individual channels (rgb, diffuse, transparency, shadows, bump....)
-  * automatic map resolution calculation
-  * automatic map naming
-  * automatic map assignment
-  * settings saved per scene
-  * individual settings for baking & rendering
-  * additional commands to handle multiple maps
+  * Easy baking and mapping
+  * Bake surfaces, polysurfaces, and meshes
+  * Multiple object baking
+  * Bake individual channels (rgb, diffuse, transparency, shadows, bump....)
+  * Automatic map resolution calculation
+  * Automatic map naming
+  * Automatic map assignment
+  * Settings saved per scene
+  * Individual settings for baking and rendering
+  * Additional commands to handle multiple maps
 
-\\
-
-----
 \\
 
 =====Requirements=====
 
 To install and use the BakeRender toolset, the following applications are required:
 
-  * Rhinoceros 4.0 Sr4 (does not work with Rhino 5)
+  * Rhinoceros 4.0 SR4 (does not work with Rhino 5)
   * AIR 7
-  * RhinoAIR Plugin V1.04
+  * RhinoAIR plug-in V1.04
   * BakeAIR 7.0
   * Internet Explorer 6 or higher
 
@@ -49,55 +43,44 @@ To install and use the BakeRender toolset, the following applications are requir
 
 //The BakeRender toolset and documentation are protected under International Copyright Laws. Distribution by any means without express written consent of the author is forbidden. This software is provided As Is. The author accepts no liability or responsibility for damages in any form, regardless of cause. By using this software, you agree to the terms stated here and within the accompanying documentation.//
 
-\\
 
 [[http://wiki.mcneel.com/_media/legacy/en/BakeRenderDisplayMode.zip|Download display mode only]] (Required to view the examples below)
-[[http://www.cg3d.de/pub/BakeRender/BakeRenderV2_05032009.rar|Download plugin]] (version 2.03 / documentation & display mode included)
 
-\\
+[[http://www.cg3d.de/pub/BakeRender/BakeRenderV2_05032009.rar|Download plug-in]] (version 2.03 / documentation and display mode included)
 
-----
 \\
 
 =====Installation=====
 
-1. Extract the contents of the "BakeRenderV2.zip" file anywhere. Make shure to **preserve the folder structure**.
+1. Extract the contents of the **BakeRenderV2.zip** file anywhere. Make sure to **preserve the folder structure**.
 
-2. Open Rhino, drag the extracted "BakeRender.rhp" plugin file over the Rhino window to register it.
+2. Open Rhino, drag the extracted BakeRender.rhp plug-in file over the Rhino window to register it.
 
-3. Load the extracted "BakeRenderV2.tb" workspace by choosing:
+3. Load the extracted BakeRenderV2.tb workspace by choosing:
 
 ''Tools / ToolbarLayout / Files / Open
 ''
 
-4. Load the extracted "BakeRender.ini" display mode in Rhino by choosing:
+4. Load the extracted BakeRender.ini display mode in Rhino by choosing:
 
 ''Rhino Options / Appearance / Advanced Settings / Import
 ''
 
-5. Add a new file search path in Rhino which points to your extracted "BakeRender V2" folder by choosing:
+5. Add a new file search path in Rhino which points to your extracted BakeRender V2 folder by choosing:
 
 ''Rhino Options / Files / Search path/ File search paths'' 
 
-\\
+The BakeRender tools are now installed and are ready to use. A help document named **help.htm** is included with the downloadable archive. You can also open the helpfile by right-clicking on the BakeRender button in the toolbar. Or you can access it from the opened user interface by clicking on the help button.
 
-The BakeRender tools have now been installed and are ready to use. A help document named "help.htm" is included with the downloadable archive. You can also open the helpfile by right clicking on the BakeRender button in the toolbar or access it from the opened user interface by clicking on the help button.
+<color green>If you're starting now with the BakeRender toolset, look at the Quickstart section in the helpfile.</color>
 
-\\
-
-<color green>If you`re starting now with the BakeRender toolset, have a look at the "Quickstart" section in the helpfile.</color>
-
-\\
-
-----
 \\
 
 =====Screenshots=====
 
-> **Info:** //Scenes shown below are baked with BakeAir by Sitexgraphics. The Air renderer was used to setup and preview materials and lightning. Note that you need Rhino 4 to preview these examples as Rhino 5 uses a new mesher which does rebuild the render meshes and therefore destroys the texture mapping information//
+> **Info:** //Scenes shown below are baked with BakeAir by SiTex Graphics. The AIR renderer was used to setup and preview materials and lightning. Note that you need Rhino 4 to preview these examples as Rhino 5 uses a new mesher which does rebuild the render meshes and therefore destroys the texture mapping information.//
 
-\\
-Parts of the first BakeRender scene, created in 2005. It used 510 textures (one per surface) which has been reduced to 66 maps (one per object) by using Rhino`s "packed" texture coordinates for Polysurfaces. A default gamma of 1.0 was used for baking to export the final scene into a famous game editor. Most of the materials are free darktree shaders. Click on the image for a larger version.
+Parts of the first BakeRender scene, created in 2005. It used 510 textures (one per surface) reduced to 66 maps (one per object) by using Rhino's packed texture coordinates for Polysurfaces. A default gamma of 1.0 was used for baking to export the final scene into a famous game editor. Most of the materials are free darktree shaders. Click on the image for a larger version.
 
 \\
 [[{{http://www.cg3d.de/pub/BakeRender/Examples/Barrel_Large.png}}|{{:legacy:en:Barrel_Small.jpg}}]]
@@ -123,45 +106,36 @@ Architectural example scene with 300 baked textures. Ambient occlusion and the l
 
 \\
 
-----
-\\
-
 =====Example scenes=====
 
-Scenes shown above can be downloaded with their textures to be viewed inside Rhino 4. To view the examples scenes properly, please download and install the [[http://wiki.mcneel.com/_media/legacy/en/BakeRenderDisplayMode.zip|display mode]] for Rhino 4 first !
+The scenes shown above can be downloaded with their textures to be viewed inside Rhino 4. To view the examples scenes properly, please download and install the [[http://wiki.mcneel.com/_media/legacy/en/BakeRenderDisplayMode.zip|display mode]] for Rhino 4 first!
 
-\\
 [[http://www.cg3d.de/pub/BakeRender/Examples/Barrel.rar|Download]] Barrel example (packed WinRar file, 8.7M) \\
 [[http://www.cg3d.de/pub/BakeRender/Examples/Fanholder.rar|Download]] Fanholder example (packed WinRar file, 3.5M) \\
 [[http://www.cg3d.de/pub/BakeRender/Examples/CornellBox.rar|Download]] Cornell box example (packed WinRar file, 2.7M) \\
 [[http://www.cg3d.de/pub/BakeRender/Examples/Villa.rar|Download]] Villa example (packed WinRar file, 22.1M)
 
-\\
-
-> **Note:** //You cannot view these scenes without installing the "BakeRender" display mode. Rhino 4 is required, do not attempt to view the examples with Rhino 5//
+> **Note:** //You cannot view these scenes without installing the BakeRender display mode. Rhino 4 is required, do not attempt to view the examples with Rhino 5.//
 
 ----
 \\
 
 =====Copyright=====
 
-The BakeRender toolset and documentation is © (Copyright) 2005-2009 Clement Greiner [[http://www.cg3d.de|CG3D]] . All rights reserved.
+The BakeRender toolset and documentation is ©(Copyright) 2005-2009 Clement Greiner [[http://www.cg3d.de|CG3D]]. All rights reserved.
 
-AIR, BakeAIR, the RhinoAir Plugin for Rhinoceros® and the Visual Shading and Lightning Tool Kit software and documentation are Copyright (2000.2008) [[http://www.sitexgraphics.com|SiTexGraphics]] , Inc. All rights reserved.
+AIR, BakeAIR, the RhinoAir plug-in for Rhinoceros® and the Visual Shading and Lightning Tool Kit software and documentation are Copyright (2000.2008) [[http://www.sitexgraphics.com|SiTex Graphics]], Inc. All rights reserved.
 
-Rhinoceros® (Rhino3D) is Copyright 1993-2008 [[http://www.en.na.mcneel.com/|Robert McNeel & Associates]] . All rights reserved.
+Rhinoceros® (Rhino) is Copyright 1993-2008 [[http://www.en.na.mcneel.com/|Robert McNeel & Associates]]. All rights reserved.
 
-The RenderMan® Interface Procedures and RIB Protocoll are Copyright 1988, 1989, [[http://www.pixar.com|Pixar]] . All rights reserved.
+The RenderMan® Interface Procedures and RIB Protocoll are Copyright 1988, 1989, [[http://www.pixar.com|Pixar]]. All rights reserved.
 
 RenderMan® is a registered trademark of Pixar.
 
 \\
 
 ----
-\\
-Go back to my [[http://wiki.mcneel.com/people/clementgreiner|script page]]
-
-[[#Back to top]]
+Go back to my [[http://wiki.mcneel.com/people/clementgreiner|script page]].
 
 
 
