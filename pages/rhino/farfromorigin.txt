@@ -1,8 +1,8 @@
-==== Objects too far from the world origin====
+====== Objects Too Far From the World Origin======
 
-Objects that are extremely far (millions of units) from the world origin suffer from display and precision problems due to the polygon mesh vertex locations being represented by single-precision number. This affects the appearance of shading and rendering and the appearance of polygon mesh objects.
+Objects that are extremely far (millions of units) from the world origin suffer from display and precision problems due to the polygon mesh vertex locations being represented by a single precision number. This affects the appearance of shading and rendering and the appearance of polygon mesh objects.
 
-One solution to this problem is to [[http://wiki.mcneel.com/rhino/5/video/troubleshooting/artifacts|move all of the existing geometry closer]] to the origin and make the model there. However since it may be that the model needs to be placed to correspond to survey data that uses the very large numbers of units, this is not always possible. The following procedure can help fix the problem.
+One solution to this problem is to [[http://wiki.mcneel.com/rhino/5/video/troubleshooting/artifacts|move all the existing geometry closer]] to the origin and make the model there. But, since the model may need to be placed to correspond to survey data that uses the very large numbers of units, this is not always possible. The following procedure can help fix the problem.
 
 
   - Make a copy of the original model. You now have the **//original//** and the **//copy//**.
@@ -11,7 +11,7 @@ One solution to this problem is to [[http://wiki.mcneel.com/rhino/5/video/troubl
   - Use the **Insert** command to insert the **//copy//** as a **Linked and embedded block** into the **//original//** at the distant location with the correct scaling and orientation.
 
  
-This linked block can be updated in the **//original//** when it is modified in the **//copy//**. The **//original//** always has the correct data in the correct location but since it is not the working model, the potential display, mesh and precision problems are not a big deal; the file can be saved as a different file format as needed for a client. The block instance could be exploded before exporting.
+This linked block can be updated in the **//original//** when it is modified in the **//copy//**. The **//original//** always has the correct data in the correct location but since it is not the working model, the potential display, mesh and precision problems are not a big deal. The file can be saved as a different file format as needed for a client. The block instance could be exploded before exporting.
 
 The **//original//** is now just a container file used to perform the scaling/transposing of the model. All the data in the original can be linked to outside sources. This can include the data from the original model if you will be receiving updates throughout the course of the project. You can update this outside data and have everything update in the original without having to go through the scale/translate process each time.
 
