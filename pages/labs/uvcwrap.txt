@@ -1,13 +1,13 @@
-====== UVcWrap Plug-in Page ======
+====== UVcWrap Plug-in======
 
 > **Summary:** //A free Rhino 4 plug-in to model with UV-texture coordinates and control mesh UV-mapping//
 
-**Note:** //This is an experimental plug-in and it only gives you a mesh object as output. If [[developer:rhinoscript|RhinoScript]] someday provides better support to change texture coordinates of the render mesh of a [[rhino:nurbs|NURBs]] object, I will rewrite this tool to support [[rhino:nurbs|NURBs]] objects and meshes as output.//
+**Note:** //This is an experimental plug-in and it only gives you a mesh object as output. If [[developer:rhinoscript|RhinoScript]] someday provides better support to change texture coordinates of the render mesh of a [[rhino:nurbs|NURBS]] object, I will rewrite this tool to support NURBS objects and meshes as output.//
 
-**Note for Rhino 5:** //The plug-in will not work in Rhino 5. Use the built-in _Unwrap and _UVEditor commands to get the same functionality and much more.//
+**Note for Rhino 5:** //The plug-in will not work in Rhino 5. Use the built-in **_Unwrap** and **_UVEditor** commands to get the same functionality and much more.//
 
 =====What is UVcWrap ?=====
-UVcWrap is a set of commands to create an unwrap from a mesh (or render mesh), transform the unwrap, and rewrap it in order to control UV-texture assignment.
+UVcWrap is a set of commands to create an unwrap from a mesh (or render mesh), transform the unwrap, and rewrap it to control UV-texture assignment.
 
 {{http://wiki.mcneel.com/_media/labs/workflow_uvcwrap.png}}
 
@@ -23,8 +23,7 @@ UVcWrap is a set of commands to create an unwrap from a mesh (or render mesh), t
 
 \\
 
-----
-\\
+
 
 =====Requirements=====
 
@@ -34,12 +33,11 @@ The plug-in doesn't require any specific renderer or RDK installation. It should
 
 \\
 
-----
-\\
+
 
 =====Installation=====
 
-Extract the contents of the "UVcWrap.zip" file anywhere. Make sure to **preserve the folder structure and folder name**.
+Extract the contents of the **UVcWrap.zip** file anywhere. Make sure to preserve the folder structure and folder name.
 
 
 1. Copy the plug-in file UVcWrap.rhp to the plug-ins folder \\
@@ -49,7 +47,7 @@ Extract the contents of the "UVcWrap.zip" file anywhere. Make sure to **preserve
 5. Load the toolbar file named //UVcWrap.tb//
 
 
-After installation, start to unwrap a mesh, e.g. a cube, using the UVcWrapCreate command. Or if a [[rhino:nurbs|NURBs]] cube is selected, unwrap the render mesh of this [[rhino:nurbs|NURBs]] object (original [[rhino:nurbs|NURBs]] inputs will be hidden). Here is the list of all currently available commands:
+After installation, start to unwrap a mesh, e.g. a cube, using the UVcWrapCreate command. Or if a [[rhino:nurbs|NURBS]] cube is selected, unwrap the render mesh of this NURBS object (original NURBS inputs will be hidden). Here is the list of all currently available commands:
 
 \\
 
@@ -312,7 +310,7 @@ Transformation commands:
 
 ===== Tips=====
 
-1. Before unwrapping (render) meshes built from [[rhino:nurbs|NURBs]] objects like polysurfaces, **clean them up** before you unwrap the first time. The macro will help you to get a better result from a render mesh of a [[rhino:nurbs|NURBs]] object. It removes flipped UV directions and helps to minimize unused texture space. This is also available as PrePoly button in the UVcWrap toolbar.
+1. Before the first time you unwrap your (render) meshes built from [[rhino:nurbs|NURBS]] objects like polysurfaces, **clean them up**. The macro will help you to get a better result from a render mesh of a NURBS object. It removes flipped UV directions and helps to minimize unused texture space. This is also available as PrePoly button in the UVcWrap toolbar.
 
 ''_Select _Pause \\
 _NoEcho \\
@@ -323,7 +321,7 @@ _RemoveFlippedNormals \\
 _Join \\
 ''
 
-2. If you get flickering (z-fighting) between the unwrapped meshes and the frame plane, enable the option to //draw objects behind all others for locked objects// in Rhino's Advanced Options / Rendered Display.
+2. If you get flickering (z-fighting) between the unwrapped meshes and the frame plane, enable the option to **draw objects behind all others for locked objects** in Rhino's //Advanced Options / Rendered Display//.
 
 3. Create the unwrap in the perspective viewport, draw the frame plane on the CPlane, e.g. from the origin to an even coordinate like 40,40. This way you can use the grid to snap to and make it easier to orient the unwrapped meshes.
 
@@ -333,8 +331,7 @@ _Join \\
 
 \\
 
-----
-\\
+
 
 =====Known issues=====
 
