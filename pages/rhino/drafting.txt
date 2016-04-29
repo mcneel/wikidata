@@ -1,34 +1,36 @@
 ====== Rhino Drafting Tools ======
-> **Summary:** //Notes taken from the newsgroup for what is important to users for drafting tools in Rhino. Feel free to add your own comments, but <color blue>PLEASE PLEASE PLEASE</color> leave your name so we can contact you with questions.//
-=====SketchUp! Layout?=====
+> **Summary:** //Notes taken from the newsgroup for what is important to users for drafting tools in Rhino. Feel free to add your own comments, but <color blue>please please please</color> leave your name so we can contact you with questions.//
 
-Maybe base the entire drafting layout system on Google's SketchUp! Layout system? [[http://[[labs:sketchup|SketchUp]].google.com/]] Quite awesome, but uses polylines or splines opposed to bezier or [[rhino:nurbs|NURBs]]. Would be awesome to see hybrid software such as Rhino/SketchUP!/CorelDRAW/Adobe Illustrator.  All imports and exports could be bezier curves opposed to splines.  Great for machine output which smooth results.  Make it all parametric while your at it!
+=====SketchUp layout?=====
 
-=====Important Items=====
+Maybe base the entire drafting layout system on Google's SketchUp layout system? SketchUp is quite awesome, but uses polylines or splines opposed to bezier or [[rhino:nurbs|NURBS]]. It would be awesome to see a hybrid software such as Rhino/SketchUP!/CorelDRAW/Adobe Illustrator.  All imports and exports could be bezier curves opposed to splines.  Great for machine output which smooth results.  Make it all parametric while your at it!
 
-are line types, line weights, dimensions, tolerances, hatching and fills. (Don Culp)
+=====Important items=====
 
-=====Print Width and Color=====
+Line types, line weights, dimensions, tolerances, hatching, and fills. (Don Culp)
+
+=====Print width and color=====
 
 Wish -- PrintWidths by color (KeithWilkinson, ChrisMoor). This can probably be implemented with a script that rips though geometry and assigns weight based on current color.
 
 =====Dimensions (implemented in V3)=====
 
-2D associativity: dimensions getting scaled together with their respective shapes. Trying to do this right now, by selecting a shape and the dimensioning-line will scale the dimensioning "somehow", but lead to wrong results (HolgerJahns)
-"Continous dimensioning" abiltity to draw (and constrain)all dimension-lines in one axis, without calling the command again and again. (HolgerJahns, DonCulp, DanBayn)
+2D associativity: Dimensions getting scaled together with their respective shapes. Trying to do this right now by selecting a shape and the dimensioning-line will scale the dimensioning somehow, but leads to wrong results. (HolgerJahns)
+
+Continuous dimensioning ability to draw (and constrain) all dimension-lines in one axis, without calling the command again and again. (HolgerJahns, DonCulp, DanBayn)
 Partitioned? (DonCulp)  <color Red> What does that mean?</color>
 
-Ability to assign different pens weights (or colours if that becomes a plot controlled thing..) to the parts of the dimension - for example lighter leader lines etc but still with heavy text (again this might not be a major issue as I think text will always be a standard font... ) (KeithWilkinson)
+Ability to assign different pens weights (or colours if that becomes a plot controlled thing..) to the parts of the dimension - for example lighter leader lines but still with heavy text (again this might not be a major issue as I think text will always be a standard font... ) (KeithWilkinson)
 
-Different arrowhead options - personally I hate arrows.. circles and oblique lines would be good. (KeithWilkinson, HolgerJahns) -
+Different arrowhead options -- personally I hate arrows.. Circles and oblique lines would be good. (KeithWilkinson, HolgerJahns) -
 
 <color Red> There are dots and slashes as well as a few different arrows in V4</color>
 
 It would be slick if the user could specify any block for this, that way if people are not happy with the standard arrows, they can make their own. ([[people:sampage|Sam Page]])
 
-Ability to load / save dim styles (KeithWilkinson)
+Ability to load / save dim styles. (KeithWilkinson)
 
-Text justification, both left / right / center, as well as top / middle / bottom (this comes in handy for text with leaders) ([[people:sampage|Sam Page]])
+Text justification, both left / right / center, as well as top / middle / bottom. (This comes in handy for text with leaders.) ([[people:sampage|Sam Page]])
 
 Ability to set the offset distance of dimension text from the dimension lines globally for a dim style.(<Bruno.Bouckaert@caiway.nl>)
 
@@ -36,109 +38,109 @@ Ability to set the offset distance of dimension text from the dimension lines gl
 
 Dimension Layers:  It would be great to be able to assign layers in Dimension Properties, with separate designations for text and leaders, possibly as a list box of all layers with the top option as "Use Current Layer".   This would allow for different colors and line weights when plotting and allow the user to hide leaders.   Sometimes it is necessary to hide leaders to simplify a drawing, such as for laser projection or small labels, but then have them visible on larger, detailed prints.   [[nsnr8r_temp-rhino@yahoo.com|(David Ray)]]
 
---wish ability to have arrow heads on Radius dimension leaders (JoNas)
---wish Find and replace text (JoNas)
---wish Text Curning (to make text wider or taller than default)
---wish support for SHX fonts, to get thin text or text by line weight (faster performance too)
+Ability to have arrow heads on Radius dimension leaders. (JoNas)
 
-=====Display Order Control=====
+Find and replace text. (JoNas)
 
-It would be nice if I could set a custom order for the different types of display modes under Rhino Options->Appearance->Advanced Settings. Currently it looks like it does the built in modes, then any modes I make myself are added to the end of the list in alphabetical order, but it would nice to be able to move them all around (including the built in modes) with something similar to the move layer up / down button in the layers dialog. That order should in my opinion also be reflected in the View menu as well as the menu that appears when right clicking on a viewport title. (Sam Page on the Rhino NG)
+Text Curning (to make text wider or taller than default).
 
-It would also be good to have an override where you could move objects to top of the display, bottom of the display, above another and below another. This would be viewed that way and printing in that order. [[rhino:autocad|AutoCAD]] calls this [[labs:draworder|DrawOrder]] control. (Mary Fugier)
+Support for SHX fonts, to get thin text or text by line weight (faster performance too).
+
+=====Display order control=====
+
+It would be nice if I could set a custom order for the different types of display modes under //Rhino Options->Appearance->Advanced Settings//. Currently it looks like it does the built in modes, then any modes I make myself are added to the end of the list in alphabetical order, but it would nice to be able to move them all around (including the built in modes) with something similar to the move layer up / down button in the layers dialog. In my opinion, that order should also be reflected in the View menu as well as the menu that appears when right clicking on a viewport title. (Sam Page on the Rhino NG)
+
+It would also be good to have an override where you could move objects to top of the display, bottom of the display, above another and below another. This would be viewed that way and printing in that order. AutoCAD calls this DrawOrder control. (Mary Fugier)
 
 =====Tolerances=====
 
-This is from DonCulp. Not quite sure yet what this means
+This is from DonCulp. Not quite sure yet what this means.
 
 My understanding of this is that you simply set was ranges the dimension is accurate to - for example your dimension might be 100mm but you can accept the length being +/-2mm - so the displayed dimension would be 100 (+/-2). (KeithWilkinson)
 
-Another way to use this would be: (The wiki won't allow me to show this correctly but) 98mm on top of 102mm
+Another way to use this would be: (The wiki won't allow me to show this correctly but) 98mm on top of 102mm. (Don Lewis)
 
-(Don Lewis)
+=====Hatching / fills=====
 
-=====Hatching / Fills=====
+We do not have artistic (gradient) hatches yet.
 
-We do not have "artistic" (gradient) hatches yet
+I imagine once things like gradients and solid fills start appearing, we are going to need a draw order command so stuff doesn't get lost behind a hatch. ([[people:sampage|Sam Page]])
 
-I imagine once things like gradients and solid fills start appearing, we are going to need a draw order command so stuff doesn't get lost behind a hatch - ([[people:sampage|Sam Page]])
+An opacity/transparency atribute for hatches and linetypes. At least for the solid hatch. Lino for Rhino 3.0 had it and worked really nice. (GeorgeDiaz)
 
-An opacity/transparency atribute for hatches and linetypes. At least for the solid hatch. Lino for Rhino 3.0 had it and worked really nice. - (GeorgeDiaz)
+Recognition of hatches with more than 300 lines (stone hatches etc.). (JoNas)
 
---wish recognition of hatches with more than 300 lines (stone hatches ect.) (JoNas)
---wish (Undo) command within hatch to undo last hatch if it is not what you wanted because of un-closed boundary geometry
+(Undo) command within hatch to undo last hatch if it is not what you wanted because of un-closed boundary geometry.
 
-There are unlimited range of hatch patterns, I don't think you could provide them all. Why not make a little window like the design Rhino button to design our own hatch pattern? Of course instead of squares to draw the pixels, I would like to have few options of small, medium and large layout template to design the hatch pattern, also able to rotate the template and the custome hatch pattern, then save it to a custom hatch directory that is in the user my documents. Does what I am saying makes sense? (Ling)
+There is an unlimited range of hatch patterns. I don't think you could provide them all. Why not make a little window like the design Rhino button to design our own hatch pattern? Of course instead of squares to draw the pixels, I would like to have few options of small, medium, and large layout template to design the hatch pattern. Also able to rotate the template and the custom hatch pattern, then save it to a custom hatch directory that is in my user documents. Does what I am saying makes sense? (Ling)
 
 =====Layout=====
 
-To be able to show the same view in different scales and degree of detail on a single sheet. ergo: It should be possible to switch on and of layers in individual layout windows - or to hide and show single objects. Great, if this was also reflected in the layer-manager-options (non/Prinable/,layer on/off in Layout-window...) (HolgerJahns)
+To be able to show the same view in different scales and degree of detail on a single sheet. Ergo: It should be possible to switch on and off layers in individual layout windows -- or to hide and show single objects. Great, if this was also reflected in the layer-manager-options (non/Prinable/,layer on/off in Layout-window...) (HolgerJahns)
 
-In addition to the layer state being able to be on or off in different layout windows, as stated above, it would be fantastic if a user would be able to override linetype and weight per layout window as well. Were this would come in very handy is if you had a plan and a reflected ceiling plan, currently you would have to copy your plan, change all the layers in that copy to turn it into a reflected ceiling, and then if you update your plan, you have to go back in to your reflected ceiling plan and make the changes there. However this example may be totally inapplicable if the McNeel folk are planning to step away from the [[MAKE2D]] route and rather rely on the display engine with the introduction clipping planes to have hidden line views of the model as the drawing, if  this made any sense at all. ([[people:sampage|Sam Page]])
+In addition to the layer state being able to be on or off in different layout windows, as stated above, it would be fantastic if a user is able to override linetype and weight per layout window. This would come in very handy is if you had a plan and a reflected ceiling plan. Currently you have to copy your plan, change all the layers in that copy to turn it into a reflected ceiling, and then if you update your plan, you have to go back in to your reflected ceiling plan and make the changes there. However this example may be totally inapplicable if the McNeel folk are planning to step away from the Make2D route and rather rely on the display engine with the introduction clipping planes to have hidden line views of the model as the drawing -- if  this made any sense at all. ([[people:sampage|Sam Page]])
 
-ablity to snap to geometry inside the layout-window to constrain different views (HolgerJahns)
+Ablity to snap to geometry inside the layout-window to constrain different views. (HolgerJahns)
 
-ablity to create sticky layout configurations inside a Rhino template (with text-blocks, logo, printsize... (HolgerJahns)
+Ablity to create sticky layout configurations inside a Rhino template (with text-blocks, logo, printsize... (HolgerJahns)
 
-ability to scale viewports to an exact scale will be essential though (KeithWilkinson)
+Ability to scale viewports to an exact scale will be essential though. (KeithWilkinson)
 
 =====Printing=====
 
-I think this is already going to be implemented but just to have it here: the ability to tile a drawing over multiple sheets preferably with registration marks. (Nick Scott)
+I think this is already going to be implemented but just to have it here: The ability to tile a drawing over multiple sheets preferably with registration marks. (Nick Scott)
 
-Hidden line perspective print (Tobias)
+Hidden line perspective print. (Tobias)
 
-Print to PDF with Layer Information (KeithWilkinson)
+Print to PDF with Layer Information, if possible including linetypes and line weights. (KeithWilkinson)
 
-  * if possible including linetypes and lineweights --Keith
+
 Save/Load printing options presets. Much like AdvancedDisplay Save Scheme. (AlexMiller)
 
---wish print all pagelayouts of several 3dm files (JoNas)
+Print all pagelayouts of several 3dm files. (JoNas)
 
-=====Blocks with Attributes=====
+=====Blocks with attributes=====
 
 For title block (KeithWilkinson).
 
-abilty to define, what [[rhino:autocad|AutoCAD]] calls "block-attributes" would also be great - to be able to have bills of materials and other editable text-fields on a layout (HolgerJahns)
+Abilty to define what AutoCAD calls "block-attributes" would also be great -- to be able to have bills of materials and other editable text-fields on a layout. (HolgerJahns)
 
 =====Layers=====
 
-Also addition of an [[rhino:autocad|AutoCAD]] colours selection menu for layer colours - this is useful when it comes to sharing [[accurender:ar4:dwg|dwg]] files with other CAD users - colours 1-9 are generally all that is required - use of numbers such as 241 can cause a lot of headaches.(KeithWilkinson)
+Also addition of an AutoCAD colours selection menu for layer colours. This is useful when it comes to sharing dwg files with other CAD users. Colours 1-9 are generally all that is required. Use of numbers such as 241 can cause a lot of headaches. (KeithWilkinson)
 
 =====Export=====
 
-On the subject of exporting as [[accurender:ar4:dwg|dwg]] actually it would be useful if there was a better way of transferring dims styles - right now they go a bit ballistic in [[rhino:autocad|AutoCAD]]... :o) (KeithWilkinson)
+On the subject of exporting, as dwg actually, it would be useful if there was a better way of transferring dims styles. Right now they go a bit ballistic in AutoCAD... :o) (KeithWilkinson)
 
-What about exporting to Adobe Illustrator? This will really get rhino powerful into the common process done in [[rhino:architecture|Architecture]] offices like mine. We have always the prolem of a vectorial output (StefanoConverso)
+What about exporting to Adobe Illustrator? This will really get Rhino powerful into the common process done in architecture offices like mine. We have always the problem of a vectorial output. (StefanoConverso)
 
-=====xrefs=====
+=====Xrefs=====
 
-any plans for an external referencing system in Rhino 4
+Any plans for an external referencing system in Rhino 4? (Julian)
 
-(Julian)
+=====Drawing layout=====
 
-=====Drawing Layout=====
+I was just thinking about Rhino’s Make2D tool and realised that the default standards (USA and Europe) are not the ones we use here. If Rhino can show an extra option that asks “Which Picture? Where?”, it would be better and faster. (Otherwise we have to move and rotate the pictures.)
 
-i was just thinking about Rhino’s make 2D tool and realised that the default standarts (USA and Europe) are not the ones we use here. if Rhino can show an extra option that asks “which Picture? where?” It would be better and faster (otherwise we have to move and rotate the pictures)
-
-I  changed the “2-D Drawing Options” menu in Photoshop. Or you may consider the way how “Solid Works” or “Unigraphics” does it.
+I  changed the 2-D Drawing Options menu in Photoshop. Or you may consider the way SOLIDWORKS or Unigraphics does it.
 
 {{:legacy:en:rhino_2d_drawing.jpg}}
-And thank you very much for your effort to make your users even more comfortable and faster at modelling (Rasim İspirgil)
 
-=====Production friendly Drawing Layout ideas;=====
+Thank you very much for your effort to make your users even more comfortable and faster at modelling. (Rasim İspirgil)
+
+=====Production friendly drawing layout ideas=====
 
 
-With multi sheet drawings, it would be nice to have a ‘common’ layer among page layouts so the ‘common’ portion of the border is inserted once to appear on all pages. Then the sht 1 portion of the title block, notes, revisions, references, etc. for sheet one is inserted on page 1 only. Then the separate pages need a sheet # of # unique to each sheet, but the drawing number, etc. is only entered once on the ‘common’ sheet/layer. This is a huge time saver- is it possible to have maybe a common layer that would appear on all sheets/ page layouts? (Would be maybe HideLayersInPageLayout?)
+With multi-sheet drawings, it would be nice to have a common layer among page layouts so the common portion of the border inserted once appears on all pages. Then the sht 1 portion of the title block, notes, revisions, references, etc. for sheet one is inserted on page 1 only. Then the separate pages need a sheet # of # unique to each sheet, but the drawing number, etc. is only entered once on the common sheet/layer. This is a huge time saver. Is it possible to have a common layer that would appear on all sheets/page layouts? (Would be maybe HideLayersInPageLayout?)
 
-Can text be underlined using Windows font object techniques? Maybe DXF or [[accurender:ar4:dwg|dwg]] coming in could be translated to this, too…..
+Can text be underlined using Windows font object techniques? Maybe DXF or dwg coming in could be translated to this, too…..
 
-A plug-in to export a page layout as a single [[rhino:autocad|AutoCAD]] compatible [[accurender:ar4:dwg|dwg]] or DXF, ‘steam-rolled’ flat would be VERY useful. The next question immediately will be can it be done at model scale if you know the detail view scaling, instead of paper scale? (Choose Detail to base it on maybe) This is possible in other MCAD programs and is very useful for manufacturing, but also for sharing drawing details complete with notes, etc. with [[rhino:autocad|AutoCAD]].
+A plug-in to export a page layout as a single AutoCAD compatible dwg or DXF, steam-rolled flat would be __very__ useful. The next question immediately will be can it be done at model scale if you know the detail view scaling, instead of paper scale? (Choose Detail to base it on maybe.) This is possible in other MCAD programs and is very useful for manufacturing, but also for sharing drawing details complete with notes, etc. with AutoCAD.
 
 A block catalog that allows visualization of the blocks to the side of the page layout would be good. It can be done now using the Rhino thumbnail viewer plug-in for Windows and dragging them to the page layout, but it is inconvenient from a production drawing standpoint.
 
-Can the initial size of the detail views on creation of a page layout be specified somewhere? They start out too big for standard borders to be applied without re-sizing all 4 if you are using multiple detail views. Highly inconvenient from a production standpoint…. (Rick Loheed)
-
+Can the initial size of the detail views on creation of a page layout be specified somewhere? They start out too big for standard borders to be applied without resizing all four if you are using multiple detail views. Highly inconvenient from a production standpoint…. (Rick Loheed)
 
 
 
