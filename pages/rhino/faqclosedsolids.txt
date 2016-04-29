@@ -12,7 +12,7 @@ A solid has **no naked edges**. That's a concise definition. Another way to unde
 
 //<color green>JB says: Use the **ShowEdges** command with the display set to "naked edges" to find the unjoined edges.</color>//
 
-The terminology of "solids" seems to confuse a lot of people and there are often discussions about it, in particular with relation to getting watertight solids for rapid prototyping.  Some people worry that if you slice a solid in Rhino, you do not get surface planes or salami slices, but just an outer boundary curve at each slice.  **This is normal.** The rapid prototyping software/machine fills these slices in for you.  Also remember, that it is not the Rhino [[rhino:nurbs|NURBS]] object that is being sliced by the rapid prototyping process, but a **mesh** in the form of your object, via an STL file.  And guess what?  Meshes are no more solid than Rhino NURBS objects...  When you slice them, you still get just boundary curves.
+The term "solids" seems to confuse a lot of people and there are often discussions about it, in particular with relation to getting watertight solids for rapid prototyping.  Some people worry that if you slice a solid in Rhino, you do not get surface planes or salami slices, but just an outer boundary curve at each slice.  **This is normal.** The rapid prototyping software/machine fills these slices in for you.  Also remember, that it is not the Rhino [[rhino:nurbs|NURBS]] object that is being sliced by the rapid prototyping process, but a **mesh** in the form of your object, via an STL file.  And guess what?  Meshes are no more solid than Rhino NURBS objects...  When you slice them, you still get just boundary curves.
 
 **[[rhino:soliddiscussion|Discussion of the concept of Solids (culled from newsgroup posts).]]**
 
@@ -27,12 +27,12 @@ An understanding of **[[rhino:faqtolerances|absolute tolerance]]** is required s
 Using **snaps** and **object snaps** is extremely helpful, possibly essential to get edges to join up.
 
 =====Info on your object=====
-**Analyzing** a Rhino object is an important part of the process. The quickest way I find to check an object for whether it is a solid (<color darkslateblue>closed polysurface</color>) or not, is to click on the details button in Properties, which I leave open and docked on the right side of the screen, with the Layers panel docked right beneath it.
+**Analyzing** a Rhino object is an important part of the process. I find that the quickest way to check whether an object is a solid (<color darkslateblue>closed polysurface</color>) is to click on the details button in Properties. I leave this open and docked on the right side of the screen, with the Layers panel docked right beneath it.
 
 //<color green>JB says: Or you can use the **What** command if you don't usually have the Properties window open.</color>//
 
 =====Get solid advice=====
-Post the objects you have trouble joining to the Rhino Newsgroup. You will get it if you keep trying. Just look for the naked edges and zoom way in on them. You will see what is not joined. Experience and practice bring understanding. It's very basic stuff. Just keep modeling with an eye to producing solids from the beginning, and not as an afterthought.
+Post the objects you have trouble joining to the Rhino Newsgroup. You will get it if you keep trying. Just look for the naked edges and zoom way in on them. You will see what is not joined. Experience and practice bring understanding. It's basic stuff. Just keep modeling with an eye to producing solids from the beginning, and not as an afterthought.
 
 Once you have a **valid solid**, export it as an STL file. If you use the default 0.01  for the Maximum Distance, Edge to Surface, the stl file will be just fine for any machine currently out there. You can test your STL by reading it back into Rhino and doing ShowEdges with the Naked Edges option.  Creating a valid solid to export from is the tricky part. That's what you need to be working on. There's no mystery here for producing stl files. They are nothing more than a mesh made  up of triangles.
 
@@ -56,21 +56,21 @@ Join parts and check your work as you model.  Use the **ShowEdges**>Naked Edges 
 
 ===Things that may cause naked edges===
 
-Watch out for the way you trim surfaces.  Rhino will trim surfaces with curves according to the active CPlane, and those curves don’t necessarily have to lie on the surface.  The trim edge may then not be exactly where you think it is and this may not show up in an orthographic view.  It’s best to trim surfaces with the other surfaces you're joining them to if it’s possible.  On the other hand, sometimes this may not work, and if you are forced to trim with curves, make sure the surfaces do join up afterward.
+Watch out for the way you trim surfaces.  Rhino will trim surfaces with curves according to the active CPlane, and those curves don’t necessarily have to lie on the surface.  The trim edge may then not be exactly where you think it is and this may not show up in an orthographic view.  It’s best to trim surfaces with the other surfaces you're joining them to if it’s possible.  Sometimes this may not work, and if you are forced to trim with curves, make sure the surfaces do join up afterward.
 
 Rebuilding surfaces. This may cause the edges to change enough to be too far away to join, so be very careful here.
 
-The act of joining itself may cause naked edges.  Paradoxical but true, at certain areas where there are complex multisurface joins (usually done by window selecting many surfaces and running **Join**), Rhino may occasionally produce naked edges where none should be.  In this case, you need to undo your join and go in and see what happens if you try to join one by one instead of all at once.  In stubborn cases, one or more of the surfaces to be joined might need to be adjusted slightly.
+The act of joining itself may cause naked edges.  Paradoxical but true. At certain areas where there are complex multisurface joins (usually done by window selecting many surfaces and running **Join**), Rhino may occasionally produce naked edges where none should be.  In this case, you need to undo your join and go in and see what happens if you try to join one by one instead of all at once.  In stubborn cases, you may need to slightly adjust one or more of the surfaces to be joined.
 
 ===The JoinEdge crutch===
 
-This command allows you to force edges together that are too far apart to be joined normally.  A command to be used sparingly and with discretion.  It does not make your model more accurate, it does not correct your geometry, it simply allows Rhino to override the absolute tolerances at that point and create an average edge somewhere between the two real edges.  In doing so, the meshing commands can bridge the gap to create a watertight mesh object, and your .stl service bureau might be happier.  If it is being exported as a surface or solid format for downstream engineering, however, it may all come apart later, so **JoinEdge** is best avoided in these cases.
+This command allows you to force edges together that are too far apart to join normally.  Use this command sparingly and with discretion.  It does not make your model more accurate and it does not correct your geometry. It simply allows Rhino to override the absolute tolerances at that point and create an average edge somewhere between the two real edges.  In doing so, the meshing commands can bridge the gap to create a watertight mesh object, and your .stl service bureau might be happier.  If it is being exported as a surface or solid format for downstream engineering, however, it may all come apart later, so **JoinEdge** is best avoided in these cases.
 
 ===The RebuildEdges command===
 This command will reset the edges of surfaces to (more or less) the way they were originally before joining.  This may be important, as when edges are forced out of alignment by **JoinEdge** or something similar, they can be restored.
 
 ===The dreaded one naked edge===
-If you get this, you have a problem.  Usually naked edges are in pairs.  You can often join the pairs with **JoinEdge** (even though the joins are thus out of tolerance, the seam will be closed).  But if you have only one naked edge, there is nothing to join to.  In this case, there's a bit of work ahead of you, you will often need to unjoin all the edges around the problem area, **RebuildEdges** on all, and see what's misaligned and correct it.  Often you need to zoom way in to see what's going on.
+If you get this, you have a problem.  Usually naked edges are in pairs.  You can often join the pairs with **JoinEdge** (even though the joins are thus out of tolerance, the seam will be closed).  But if you have only one naked edge, there is nothing to join to.  In this case, there's a bit of work ahead of you. You will often need to unjoin all the edges around the problem area, **RebuildEdges** on all, and see what's misaligned and correct it.  Often you need to zoom way in to see what's going on.
 
 ===Make sure it's valid!===
 Make sure you've got a **valid** object.  When you go in and start editing edges, you can often cause the object to go invalid (even though it’s closed.)  This may cause problems with meshing as well as more modeling down the line.  My suggestion is to turn on **CheckNewObjects** in Rhino and leave it on.  That way, if you do create an invalid object by editing, you'll know it immediately.
