@@ -6,15 +6,15 @@ There are two main styles of laser cutters: Desktop/plotter and CNC/G-Code drive
 
 =====Desktop/plotter laser cutters=====
 
-**Desktop/plotter** type laser cutters are generally more lightweight than their industrial counterparts and intended for cutting non-metal materials in an office, sign, or model shop environment.  They work a lot like computer printers; a printer driver is installed and you can simply print to the machine like you would with a normal paper printer, via the **Print** dialog box.
+**Desktop/plotter** type laser cutters are generally more lightweight than their industrial counterparts and intended for cutting non-metal materials in an office, sign, or model shop environment.  They work a lot like computer printers -- A printer driver is installed and you can simply print to the machine like you would with a normal paper printer, via the **Print** dialog box.
 
 Examples:
 
   * [[http://www.epiloglaser.com/|Epilog]] - [[rhino:epilogrhino|Using Rhino with an Epilog Laser cutter]]
-  * [[http://www.ulsinc.com|Universal]]
+  * [[http://www.ulsinc.com|Universal Laser Systems]]
 
 
-**[[http://wiki.mcneel.com/rhino/mitch_notes_2dcutting|Recommendations on 2D Cutting from Mitch Heynick.]]**
+**[[http://wiki.mcneel.com/rhino/mitch_notes_2dcutting|Recommendations on 2D cutting from Mitch Heynick.]]**
 
 In most cases, if the laser cutting is being done in-house on one of these types of machines, you will not need arc fitting or other geometry conversion. You can use any normal Rhino geometry.
 
@@ -22,26 +22,26 @@ In most cases, if the laser cutting is being done in-house on one of these types
 
 Industrial laser or waterjet cutters normally require a CAM (Computer Aided Manufacturing) software to drive them. Geometry from the design software (Rhino) is transferred to the CAM software, which in turn translates it into a language (G-Code) that the cutting machine can understand. Large industrial laser/waterjet cutter examples include:
 
-  * [[http://www.multicam.com/eng/Products/products.html|MultiCam laser and waterjet cutters]]
+  * [[http://www.multicam.com|MultiCam laser and waterjet cutters]]
   * [[http://www.omax.com|Omax waterjet cutters]]
 
-Working with industrial Laser and waterjet cutters will require exporting a "transfer" file with the 2D geometry to be cut, as these machines do not work like printers and virtually none will accept native Rhino files.  They may also require the geometry from Rhino to be converted to lines and arcs before exporting, depending on the age and sophistication of the machine/software being used. 
+Working with industrial Laser and waterjet cutters will require exporting a transfer file with the 2D geometry to be cut, as these machines do not work like printers and virtually none will accept native Rhino files.  They may also require the geometry from Rhino to be converted to lines and arcs before exporting, depending on the age and sophistication of the machine/software being used. 
 
 The most commonly used export format in industry is an **AutoCAD DXF**. Others include AutoCAD native DWG and Adobe Illustrator (AI, EPS).  PDF files containing vector info are also becoming quite commonly used. All of the above formats except PDF can be natively exported by Rhino. //To export PDF files from Rhino, it is necessary to print to a PDF printer program (many available).//
 
 ====Arcfitting freeform curves====
 
-A great many industrial cutting machines and software **only** understand **//lines//** and **//arcs//**. Thus, in order to cut parts sucessfully, it is necessary to //convert// any free-form [[rhino:nurbs|NURBs]] curves (**splines**) that might be in your file into a series of arcs and lines. By //convert//, we mean that the spline curve is //approximated// by a polyline or polycurve containing only arc and line segments.  The approximation tolerance can be controlled by using the correct settings during the conversion process.  Approximating splines by a series of tangent (or nearly tangent) arcs is generally preferable to just polylines, because they allow for a more accurate cut with a smaller file and less possibility of slowdowns along the curves, especially with older machines.  Consult your service bureau if in doubt.
+A great many industrial cutting machines and software **only** understand **//lines//** and **//arcs//**. Thus, in order to cut parts sucessfully, it is necessary to //convert// any free-form [[rhino:nurbs|NURBS]] curves (**splines**) that might be in your file into a series of arcs and lines. By //convert//, we mean that the spline curve is //approximated// by a polyline or polycurve containing only arc and line segments.  The approximation tolerance can be controlled by using the correct settings during the conversion process.  Approximating splines by a series of tangent (or nearly tangent) arcs is generally preferable to just polylines, because they allow for a more accurate cut with a smaller file and less possibility of slowdowns along the curves, especially with older machines.  Consult your service bureau if in doubt.
 
-You can use the Rhino **Convert** command for this process, commonly called "Arc Fitting". Set options as follows: **Output**=//Arcs//, **SimplifyInput**=//No//, **AngleTolerance**=//0//, and **Tolerance** to reasonable number for your model. Run the **Convert** command on all curves in the file you want to send to the cutter.
+You can use the Rhino **Convert** command for this process, commonly called "Arc Fitting". Set options as follows: **Output**=//Arcs//, **SimplifyInput**=//No//, **AngleTolerance**=//0//, and **Tolerance** to a reasonable number for your model. Run the **Convert** command on all curves in the file you want to send to the cutter.
 
 ====Geometry repair and nesting====
-Overlaps, gaps, and duplicate curves will cause problems in cutting. The **CurveBoolean** command may work to clean some of these up, but may not entirely eliminate overlapping sections, and it will not fix gaps.  For small gaps, the CloseCrv command in Rhino can be a quick fix for open curves that need to be closed (to be used with caution).
+Overlaps, gaps, and duplicate curves will cause problems in cutting. The **CurveBoolean** command may work to clean some of these up, but may not entirely eliminate overlapping sections, and it will not fix gaps.  For small gaps, the **CloseCrv** command in Rhino can be a quick fix for open curves that need to be closed (to be used with caution).
 
-If you need to nest many profiles together onto standard stock sheets, check out [[http://www.cimsystem.it/prodotti/RHINO%20PLUGINS/MOSAIX/|Mosaix]] and [[http://www.rhinonest.com/|RhinoNest]], both of which run inside Rhino. As of 2014, [[http://rhinocam.com/RhinoCAM-NEST.shtml|RhinoCAM]] also has a nesting module.
+If you need to nest many profiles together onto standard stock sheets, check out [[http://www.mosaixsoftware.com|Mosaix]] and [[http://www.rhinonest.com/|RhinoNest]], both of which run inside Rhino. As of 2014, [[http://rhinocam.com/RhinoCAM-NEST.shtml|RhinoCAM]] also has a nesting module.
 
 ====Export settings====
-In Rhino, once the geometry has been correctly prepared, use the **Export** or **SaveAs** command. Select [[rhino:autocad|AutoCAD]] DXF or DWG file format, name the file and click Save. When the schemes selection box comes up, choose the **R12 Natural** scheme and hit OK.
+In Rhino, once the geometry has been correctly prepared, use the **Export** or **SaveAs** command. Select AutoCAD DXF or DWG file format, name the file, and click **Save**. When the schemes selection box comes up, choose the **R12 Natural** scheme and click **OK**.
 
 To check, reopen the file you just exported in Rhino or any other software that reads DXF or DWG. There should be only arcs and lines in the file. This is one good way to get the most consistent results.
 
@@ -51,10 +51,10 @@ If the results are not what you want, [[scottd@mcneel.com|please send a sample]]
 
 
 ----
-=====Laser Cutting of Fabric=====
+=====Laser cutting of fabric=====
 
-> **Comment:** //Laser cutting would work well for [cutting patterns into a **fabric materials** that will be used as a tablecloth]. Check out this site for a better idea of what can be done: http://www.synrad.com/search_apps/materials/Plastics.htm . It's simple enough to do a sample so once you find someone locally take a series of sample materials. Note: Typically this would be done with a low power laser under 100 watts (30 would probably do it). With this sort of power range be sure there is no metallic materials in the material because it won't be able to cut the metal element. One other thing to note: With the right setting you would do better with a polyester type material rather than a cotton as the laser will cut the polyester and seal the edge at the same time. [Ken Miller - 2005-11-10]//
+> **Comment:** //Laser cutting would work well for cutting patterns into a **fabric materials** that will be used as a tablecloth. Check out this site for a better idea of what can be done: http://www.synrad.com/search_apps/materials/Plastics.htm . It's simple enough to do a sample, so once you find someone local take a series of sample materials. Note: Typically this would be done with a low power laser under 100 watts (30 would probably do it). With this sort of power range be sure there is no metallic materials in the material because it won't be able to cut the metal element. One other thing to note: With the right setting you'll do better with a polyester type material rather than a cotton as the laser will cut the polyester and seal the edge at the same time. [Ken Miller - 2005-11-10]//
 
-> **Comment:** //With the new V4 print modes laser cutting directly, Rhino works wonderfully. No converting to line, polyline and arcs . Snappier too.//
+> **Comment:** //With the new V4 print modes laser cutting directly, Rhino works wonderfully. No converting to line, polyline, and arcs . Snappier too.//
 
 > **Comment:** //I think 30 watts is too much. We had prototypes made of .004" PET film done on a 35W CO2 laser and the edges were a bit singed. This is okay for initial prototypes but not for presentation. Even at 10 or 15 watts on a .003" beam, the operator probably still has to be careful with the power settings of the beam and travel speed of the head. [Jensen Didulo - 2005-11-10]//
