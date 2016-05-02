@@ -1,4 +1,4 @@
-====== More info on "Solids" in Rhino ======
+====== More Info on Solids in Rhino ======
 
 **There always seems to be a lot of discussion** about Solids vs Surfaces and there is a great deal of misunderstanding from the user's perspective. As John Brock said, "You need to be careful that you don't get fooled by the fact that you can take solids apart in Rhino."
 
@@ -12,10 +12,11 @@ Rhino creates hybrid models that can include surfaces, polysurfaces, and solids.
 
 Because surfaces have a surface normal (direction determining a front and back face), Rhino understands a volume when a Solid is formed because all the faces are automatically adjusted (if required) to face outwards.
 
-<color steelblue>[Rhino understands that a volume is a "solid" when ALL the edges of ALL the surfaces involved join up without any gaps or holes.  That means there are NO edges in the object that are not joined to another edge (and only one other edge).  The absence of unjoined (or "naked" in Rhino terms) edges tells Rhino that the object is a closed volume (read "Solid") and Rhino flips all the surface normals to the outside.  If you have even one naked edge or hole, Rhino considers the volume "Open" and not "Solid".  --Mitch]</color>
+<color steelblue>[Rhino understands that a volume is a solid when __all__ the edges of __all__ the surfaces involved join up without any gaps or holes.  That means there are __no__ edges in the object that are not joined to another edge (and only one other edge).  The absence of unjoined (or "naked" in Rhino terms) edges tells Rhino that the object is a closed volume (read "Solid") and Rhino flips all the surface normals to the outside.  If you have even one naked edge or hole, Rhino considers the volume Open and not Solid.  --Mitch]</color>
 
-=====Difference between Rhino and a classic "Solid" modeler=====
-Unlike a "solids modeler" such as SolidWorks that works primarily with "solids" entities, Rhino uses a more flexible hybrid approach. But, if you export a solid from either package (say a cube) to STL, VRML etc., the result is the same. A boundary representation of the shell and no material inside the zero thickness skin. The solid, for want of a better word, is defined by the boundary and the surface direction. That is to say that everything inside must be by definition - SOLID.
+=====Difference between Rhino and a classic Solid modeler=====
+
+Unlike a solids modeler such as SolidWorks that works primarily with solids entities, Rhino uses a more flexible hybrid approach. But, if you export a solid from either package (say a cube) to STL, VRML etc., the result is the same. A boundary representation of the shell and no material inside the zero thickness skin. The solid, for want of a better word, is defined by the boundary and the surface direction. That is to say that everything inside must be by definition - __solid__.
 
 The way this works can be illustrated by using the Surface from Planar Curves command.
 
@@ -28,12 +29,13 @@ The way this works can be illustrated by using the Surface from Planar Curves co
 =====Truth in modeling=====
 Many people are disturbed by the fact that if they trim a solid (like the wall of a building) they reveal the inside of the boundary representation (**BRep**) of the solid. This is more to do with the technique used to cut the wall than an issue of "was it actually solid". If you cut a solid using a Boolean operation, using either a surface or a solid as the cutting tool, you will never see inside the BRep. So everything is kept secret.
 
-At a user level, this is what the "solids modelers" like SolidWorks and Solid Edge are doing all the time. They must resolve geometry as a solid. Yes, they are including some basic surface tools but nothing compared to Rhino.
+At a user level, this is what the solids modelers like SOLIDWORKS and Solid Edge are doing all the time. They must resolve geometry as a solid. Yes, they are including some basic surface tools but nothing compared to Rhino.
 
 The power and flexibility afforded to the user by Rhino's hybrid approach is unquestionable in nearly every respect.
 
 =====Conclusion=====
-In conclusion, there are some packages that need to understand in a true sense, the material that is the solid. These include flow analysis packages and applications such as Sensables - Clay Tools for Rhino. These packages (please excuse the poor non-technical description) often use Voxels. The best description I can give for this is to think of them as a mass of tiny cubic bricks stacked together to define the volume. Or a bit like a bean bag chair (remember the 70's). It's a skin full of tiny beads that define the volume, but without the skin. This definition of a solid is useful when you need to have the material flow or when you need to sculpt it interactively.
+
+There are some packages that need to understand in a true sense, the material that is the solid. These include flow analysis packages and applications such as Sensables - Clay Tools for Rhino. These packages (please excuse the poor non-technical description) often use voxels. The best description I can give for this is to think of them as a mass of tiny cubic bricks stacked together to define the volume. Or a bit like a bean bag chair (remember the 70's). It's a skin full of tiny beads that define the volume, but without the skin. This definition of a solid is useful when you need to have the material flow or when you need to sculpt it interactively.
 
 OK. I've had my say.
 
