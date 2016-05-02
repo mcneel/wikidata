@@ -1,26 +1,26 @@
-====== CPlane command ======
+====== CPlane Command ======
 
 > **Note:** //<color maroon>This information is derived from several newsgroup posts from the past. I added it here so it can be further commented on. ~mb</color>//
 
 A CPlane (construction plane) is simply an imaginary plane that you do your drawing on. Since the monitor/screen is two-dimensional, it's easy to tell Rhino the x,y-coordinate of something you're drawing, but the z value is not possible to know so a construction plane is referenced and the z value is on the plane.
 
-In Rhino, each viewport has its own construction plane. X is always horizontal and Y is always vertical. Z is always moving toward you (out of the monitor). Drawing commands usually use the construction plane coordinates when you draw but you can use "world" coordinates instead by using a "w" before specifying the point like (w0,1,2)
+In Rhino, each viewport has its own construction plane. X is always horizontal and Y is always vertical. Z is always moving toward you (out of the monitor). Drawing commands usually use the construction plane coordinates when you draw but you can use world coordinates instead by using a "w" before specifying the point like (w0,1,2)
 
-The "named views set cplanes" option is for those who don't want Rhino to have a different construction plane for each viewport. Most other CAD programs only have one construction plane set for the whole model so that option is for those who are used to that sort of thing. I kinda think having different construction planes for each viewport allows me to never think about construction planes or how to manage them so that's why I choose to not use that option.
+The **named views set cplanes** option is for those who don't want Rhino to have a different construction plane for each viewport. Most other CAD programs only have one construction plane set for the whole model so that option is for those who are used to that sort of thing. I kinda think having different construction planes for each viewport allows me to never think about construction planes or how to manage them so that's why I choose to not use that option.
 
-Brian Perry
+-Brian Perry
 
 
 ----
-As has been already mentioned, A construction plane is simply a set of reference axes (X,Y,Z) which Rhino will follow when creating **certain** types of geometry (more later on that).  All 3D CAD programs have this in one form or another, otherwise it would be very difficult to work.
+As has been already mentioned, A construction plane is simply a set of reference axes (X,Y,Z) which Rhino will follow when creating **certain** types of geometry (more later on that).  All 3D CAD programs have this in one form or another. Otherwise it would be very difficult to work.
 
-Since Rhino allows you to work in multiple viewports (many programs don't), this poses a special set of problems with respect to construction planes and allows some unique opportunities.  McNeel have approached this in their usual thoughtful way, allowing users to set up Rhino to work how they want, and having a set of default methods that is pretty intuitive and transparent to the user. Many people model in Rhino without even thinking about construction planes.
+Since Rhino allows you to work in multiple viewports (many programs don't), this poses a special set of problems with respect to construction planes and allows some unique opportunities.  McNeel have approached this in their usual thoughtful way, letting users set up Rhino to work how they want, and having a set of default methods that is pretty intuitive and transparent to the user. Many people model in Rhino without even thinking about construction planes.
 
-It's a lot simpler, for example, in a program which only has one viewport visible at a time, like my CAM software.  In this situation, there is really only one logical choice - disassociate the viewport and the construction plane and change them independently.  The construction plane remains constant, no matter what view of the model you have.  Some people like to work this way, and with a bit of effort, you can also set Rhino up to work this way, even in multiple viewports.
+It's a lot simpler, for example, in a program which only has one viewport visible at a time, like my CAM software.  In this situation, there is really only one logical choice -- disassociate the viewport and the construction plane and change them independently.  The construction plane remains constant, no matter what view of the model you have.  Some people like to work this way, and with a bit of effort, you can also set Rhino up to work this way, even in multiple viewports.
 
-Personally, I use the Named View sets CPlane option in the 3 ortho viewports as well as using independent construction planes in the Perspective viewport (a lot of people work this way).  I have a set of buttons which allow me to flip the construction plane around easily while working in the maximized perspective viewport, which I do most of the time.  V3 even allows one to easily change construction planes in the middle of many commands.  The grid (don't use it) and the grid axes are your indicators of where the construction plane is currently located.
+Personally, I use the **Named View sets CPlane** option in the 3 ortho viewports as well as using independent construction planes in the Perspective viewport (a lot of people work this way).  I have a set of buttons which allow me to flip the construction plane around easily while working in the maximized perspective viewport, which I do most of the time.  V3 even allows one to easily change construction planes in the middle of many commands.  The grid (don't use it) and the grid axes are your indicators of where the construction plane is currently located.
 
-Note that the Named View sets CPlane option is only activated on initialization and when you reset your viewports (such as doing a 4View twice).  Otherwise, once you change your construction plane in a particular viewport, it remains that way for that viewport (even if you switch to another) until you change it again or close the file.
+Note that the **Named View sets CPlane** option is only activated on initialization and when you reset your viewports (such as doing a 4View twice).  Otherwise, once you change your construction plane in a particular viewport, it remains that way for that viewport (even if you switch to another) until you change it again or close the file.
 
 Now, as to when construction planes come into play...
 
@@ -28,7 +28,7 @@ Planar geometry will by default be created on the active construction plane if y
 
 Other types of 3D geometry also use the construction plane as reference, such as things like a box or a sphere that use XYZ coordinates.  In that case, it's the first two picks that determine the construction plane orientation.
 
-Lastly, there are some types of transformation operations that use the active construction plane as a reference, notably Project and trimming with apparent intersections (including trimming a surface with some types of curves - but watch out for planar curves, they act perpendicular to their principal plane and ignore the construction plane!).  Also, watch out for Silhouette, it uses the **View**, not the construction plane! (I've never quite understood why)
+Lastly, there are some types of transformation operations that use the active construction plane as a reference, notably Project and trimming with apparent intersections (including trimming a surface with some types of curves -- but watch out for planar curves, they act perpendicular to their principal plane and ignore the construction plane!).  Also, watch out for Silhouette, it uses the **View**, not the construction plane! (I've never quite understood why.)
 
 The World coordinate system, which is inherent and can't be altered, is simply based on the absolute 0 (world 0,0,0) of the file and follows the right hand rule.    World Top means that the XY plane is parallel to the Top view, X to the left, Y up, Z coming out of your monitor (so to speak), and the origin at world 0.
 
@@ -42,14 +42,14 @@ There is also now a UPlane command (Universal CPlane), which allows the user to 
 ----
 Some corrections and additions:
 
-First project and trimming are not transformations. Transformations for [[rhino:nurbs|NURBs]] objects are defined such that the result has the same parameter structure (degree, knot vector and control point structure) as the input, only the location of the control points are changed (AFAIK all operations in Rhino transform menu have always conformed to this definition). Projecting a curve to a surface or trimming produces a curve that may be structured very different than the inputs. ProjectToCplane is a transformation. One reason this is worth mentioning is that this property means transformations are much more precise than operations like project or trim.
+First, project and trimming are not transformations. Transformations for [[rhino:nurbs|NURBS]] objects are defined such that the result has the same parameter structure (degree, knot vector and control point structure) as the input, only the location of the control points are changed (AFAIK all operations in Rhino transform menu have always conformed to this definition). Projecting a curve to a surface or trimming produces a curve that may be structured very different than the inputs. ProjectToCplane is a transformation. One reason this is worth mentioning is that this property means transformations are much more precise than operations like project or trim.
 
 The fact that Rhino treats planar geometry as if a construction plane is attached to it is one of the reasons that many people don't ever get involved with working with custom construction plane. For instance, if you revolve a planar curve 45 degrees you can then use commands like extrude and trim using the edge of the surface that is tilted 45 degrees without having to explicitly set the construction plane to that angle. And finally, the reason silhouette works relative to view is also a matter of definition. One would expect that silhouette be dependent on what you see as it is in the real world.
 
 -jim
 
 ----
-Silhouette is the only command that one can really use right now to get a theoretical partline on an irregular shaped object. I think we should have an option for it to act according to the construction plane or perhaps a different command for this purpose.  I would like to be able to get the "Silhouette" (i.e. partline) of an object while working in the Perspective viewport that is relative to the Top, Right or other construction plane currently active in that viewport.  Silhouette doesn't make much sense to me in a Perspective viewport otherwise (much like trimming with relative intersections).
+Silhouette is the only command that one can really use right now to get a theoretical partline on an irregular shaped object. I think we should have an option for it to act according to the construction plane or perhaps a different command for this purpose.  I would like to be able to get the Silhouette (i.e. partline) of an object while working in the Perspective viewport that is relative to the Top, Right or other construction plane currently active in that viewport.  Silhouette doesn't make much sense to me in a Perspective viewport otherwise (much like trimming with relative intersections).
 
 --Mitch
 
