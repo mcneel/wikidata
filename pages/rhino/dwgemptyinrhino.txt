@@ -13,13 +13,13 @@ There are generally two reasons for this:
 
 ====Proxy objects====
 
-Proxy objects are placeholders for custom objects that are created by ObjectARX® applications, such as AutoCAD® Mechanical, Autodesk® Architectural Desktop, and Autodesk® Land Desktop.
+Proxy objects are placeholders for custom objects created by ObjectARX® applications, such as AutoCAD® Mechanical, Autodesk® Architectural Desktop, and Autodesk® Land Desktop.
 
 By default, proxy object messages are displayed when opening a dwg in plain AutoCAD if the application that created the custom objects is not currently running. For example, if a drawing created in Autodesk Mechanical Desktop is opened in plain AutoCAD®, objects that were created as Autodesk Mechanical Desktop objects are displayed as proxy objects.
 
 Here you can perform operations such as moving and copying proxy objects. However, special editing operations unique to the ObjectARX application are not available. For example, you cannot perform parametric modifications to Autodesk Mechanical Desktop objects in any application other than in Autodesk Mechanical Desktop.
 
-This rule applies whenever an ObjectARX application that created the custom objects is not currently running when a drawing is opened. The ObjectARX application may be installed on the workstation, but it may not be running. This is why the Proxy Object warning dialogue box appears when you open an ADT file in regular AutoCAD. The objects must be represented by an approximation of what they really are. Looking at an approximation is one thing but attempting to work with it is another and this is where the real problems begin.
+This rule applies whenever an ObjectARX application that created the custom objects is not running when a drawing is opened. The ObjectARX application may be installed on the workstation, but it may not be running. This is why the Proxy Object warning dialogue box appears when you open an ADT file in regular AutoCAD. The objects must be represented by an approximation of what they really are. Looking at an approximation is one thing but attempting to work with it is another and this is where the real problems begin.
 
 ===Solution===
 Since Rhino does not have the ability to run the ARX application that created these custom objects, these proxy objects are ignored and the "object ignored" warning appears on the Rhino command line.
