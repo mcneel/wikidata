@@ -1,14 +1,14 @@
 ======Diagnosing Bad Geometry======
 
-This information is buried in deep Rhino F1 help. Here it is brought up to the light.
+>This information is buried in deep Rhino F1 help. Here it is brought up to the light.
 
-Sometimes a model can become damaged. These damaged areas can cause problems.
+Sometimes a model can become damaged and the damaged areas can cause problems.
 
-It is possible to build bad models using Rhino tools. For instance, if you trim a surface with a self-intersecting curve, Rhino will let you do it, but the result will be a poorly defined model that will cause problems later.
+It is possible to build bad models using Rhino tools. For instance, if you trim a surface with a self-intersecting curve, Rhino will let you do it, but the result will be a poorly defined model that causes problems later.
 
 Another problem is having a tiny, trimming edge that then gets joined to a larger trim curve on an adjacent surface. If Rhino matches the large edges, sometimes the tiny trim curve edge can get compressed even further so that it is really just a point. That compressed edge no longer has a meaningful orientation and causes problems.
 
-There are modeling techniques you can use to increase the overall robustness of your models.
+There are modeling techniques you can use to increase the robustness of your models.
 
 Drawing tiny little lines to connect pieces of a trim curve instead of moving the two endpoints of the curves together generally messes up joining other edges together and tends to cause problems.
 
@@ -18,11 +18,11 @@ Trimming edges that are very small or curved back on themselves are the biggest 
 
 There are Rhino tools you can use to examine your model for these defects.
 
-The first one to try is the **Check** command. If your model doesn't pass **Check**, then it will list some specific problems. You can use the list to indicate that you might need to tune up the model. If a model passes **Check**, it doesn't automatically mean that it is 100% properly structured, though. Some bad model parts, like having surfaces that fold back on themselves or self-intersect, are very time consuming and difficult to automatically detect, and **Check** doesn't check for those things. But it can check the general overall structure of the object.
+The first one to try is the **Check** command. If your model doesn't pass **Check**, then it will list some specific problems. The list shows where you might tune up the model. If a model passes **Check**, it doesn't automatically mean that it is 100% properly structured, though. Some bad model parts, like having surfaces that fold back on themselves or self-intersect, are very time consuming and difficult to automatically detect. **Check** doesn't check for those things, but it can check the general overall structure of the object.
 
-The workaround is to **Explode**, **Untrim**, **Trim** again, and **Join**. If there are lots of tiny edges, then you may have to use the **SplitEdge** command to split all edges so they have a compatible structure, and then use **JoinEdge** to manually mate the proper pairs.
+The workaround is to **Explode**, **Untrim**, **Trim** again, and **Join**. If there are lots of tiny edges, then you may need to use the **SplitEdge** command to split all edges so they have a compatible structure, and then use **JoinEdge** to manually mate the proper pairs.
 
-When there are long things and tiny things adjacent to each other, the **Join** command can get confused. When that happens, the low level manual **JoinEdge** can work as a replacement.
+When there are long things and tiny things next to each other, the **Join** command can get confused. When that happens, the low level manual **JoinEdge** can work as a replacement.
 
 These tools are on the **Analyze** menu under **Edge Tools**. You may need to use several of these tools to fix difficult broken models as well.
 
