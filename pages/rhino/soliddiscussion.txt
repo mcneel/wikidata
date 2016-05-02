@@ -16,7 +16,7 @@ Because surfaces have a surface normal (direction determining a front and back f
 
 =====Difference between Rhino and a classic Solid modeler=====
 
-Unlike a solids modeler such as SolidWorks that works primarily with solids entities, Rhino uses a more flexible hybrid approach. But, if you export a solid from either package (say a cube) to STL, VRML etc., the result is the same. A boundary representation of the shell and no material inside the zero thickness skin. The solid, for want of a better word, is defined by the boundary and the surface direction. That is to say that everything inside must be by definition - __solid__.
+Unlike a solids modeler such as SOLIDWORKS that works primarily with solids entities, Rhino uses a more flexible hybrid approach. But, if you export a solid from either package (say a cube) to STL, VRML etc., the result is the same. A boundary representation of the shell and no material inside the zero thickness skin. The solid, for want of a better word, is defined by the boundary and the surface direction. That is to say that everything inside must be by definition - __solid__.
 
 The way this works can be illustrated by using the Surface from Planar Curves command.
 
@@ -24,7 +24,7 @@ The way this works can be illustrated by using the Surface from Planar Curves co
   * Using the Surface from Planar Curves command, insert a surface using the square as the boundary. This is the slice through the cube that is understood by the software as being a solid.
   * Delete the surface and draw another square inside the first one. This represents a hollow cube (one with a wall section).
   * Using the Surface from Planar Curves command, insert a surface using both squares as the boundaries. This is the slice through the cube with a wall section that is understood by the software as being a solid.
-  * The important thing to notice is that the software understands the multiple boundaries and can resolve what is the "meat" in the solid. Or in this example a slice through it.
+  * The important thing to notice is that the software understands the multiple boundaries and can resolve what is the "meat" in the solid. Or, in this example a slice through it.
 
 =====Truth in modeling=====
 Many people are disturbed by the fact that if they trim a solid (like the wall of a building) they reveal the inside of the boundary representation (**BRep**) of the solid. This is more to do with the technique used to cut the wall than an issue of "was it actually solid". If you cut a solid using a Boolean operation, using either a surface or a solid as the cutting tool, you will never see inside the BRep. So everything is kept secret.
