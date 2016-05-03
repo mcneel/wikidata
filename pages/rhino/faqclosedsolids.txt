@@ -8,13 +8,13 @@ The Rhino object must be a **closed solid** before a valid STL file can be gener
 
 //<color darkslateblue>Mitch says: The official terminology for a closed solid in Rhino is a **closed polysurface**.</color>//
 
-A solid has **no naked edges**. That's a concise definition. Another way to understand a solid is to see it as a balloon. If there is even a pin prick size hole, it will deflate. Thus it is not air/watertight, not volumetric. A solid is a volume. A solid **is** its outer surfaces, once they are completely joined.
+A solid has **no naked edges**. That's a concise definition. Another way to understand a solid is to see it as a balloon. If there is even a pin prick size hole, it will deflate. Thus it is not air/watertight, not volumetric. A solid is a volume. A solid __is__ its outer surfaces, once they are completely joined.
 
 //<color green>JB says: Use the **ShowEdges** command with the display set to "naked edges" to find the unjoined edges.</color>//
 
 The term "solids" seems to confuse a lot of people and there are often discussions about it, in particular with relation to getting watertight solids for rapid prototyping.  Some people worry that if you slice a solid in Rhino, you do not get surface planes or salami slices, but just an outer boundary curve at each slice.  **This is normal.** The rapid prototyping software/machine fills these slices in for you.  Also remember, that it is not the Rhino [[rhino:nurbs|NURBS]] object that is being sliced by the rapid prototyping process, but a **mesh** in the form of your object, via an STL file.  And guess what?  Meshes are no more solid than Rhino NURBS objects...  When you slice them, you still get just boundary curves.
 
-**[[rhino:soliddiscussion|Discussion of the concept of Solids (culled from newsgroup posts).]]**
+**[[rhino:soliddiscussion|Discussion of the concept of solids (culled from newsgroup posts).]]**
 
 =====Tolerances play a role in creating closed volumes=====
 An understanding of **[[rhino:faqtolerances|absolute tolerance]]** is required so that valid solids are generated. A good rule to follow is change the absolute tolerance from the default value of .01 to .0001 or .001. I start out all my jewelry size projects at .0001, then I have room to loosen the tolerance if necessary.
