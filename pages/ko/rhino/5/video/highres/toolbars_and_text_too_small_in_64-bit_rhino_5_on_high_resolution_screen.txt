@@ -1,0 +1,17 @@
+======고해상도 모니터에서 도구모음과 텍스트가 지나치게 작게 표시되는 문제======
+
+> **요약:** //64비트 Rhino 5 사용자 인터페이스는 새로운 울트라HD(UHD) 또는 고해상도 디스플레이용으로 디자인되지 않았습니다. Windows 자동 표시 설정이 올바르게 실행되려면 일부 설정을 변경해야 합니다.//
+
+
+=====어떤 작업이 필요합니까?=====
+  * System Registry key (로컬 관리자 권한이 필요합니다) 를 추가합니다.
+  * 파일을 Rhino System 폴더에 복사합니다.
+
+
+=====작업 상세 안내=====
+  - 이 파일을 다운로드하세요: {{:rhino:5:video:highres:RhinoHiRes.zip|}}
+  - RhinoHiRes.zip 파일을 사용자의 바탕화면에 압축 해제합니다. 다음과 같은 두 파일이 만들어집니다: Rhino.exe.manifest 파일과 RhinoHiRes.reg 파일
+  - **RhinoHiRes.reg** 파일을 오른쪽 클릭하고, 새 키를 레지스트리에 추가하기 위해 **병합**을 선택합니다. 몇 가지 질문이 화면에 표시될 것입니다. 안내: REG 파일은 다음 키를 만듭니다: ''[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide]
+"PreferExternalManifest"=dword:00000001''
+  - **Rhino.exe.manifest** 를 다음 위치에 복사합니다: ''C:\Program Files\Rhinoceros 5 (64-bit)\System\''
+  - Rhino를 시작합니다.
