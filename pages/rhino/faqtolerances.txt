@@ -23,13 +23,13 @@ In Rhino's terms, the absolute tolerance setting dictates the greatest permissib
 
 > **Note:** //In joining operations, 2X the absolute tolerance is allowed, so be careful.//
 
-**<color royalblue>What is an "approximate" operation?</color>**
+**<color royalblue>What is an approximate operation?</color>**
 
-Some objects are possible to define mathematically perfect to the limits of what your computer's floating point math is able to calculate - Generally, you don't need to worry about extremely tiny tolerances. Yet, some commands rely on approximations to **//<color darkslateblue>fit or match</color>//** curves or surfaces to other curves or surfaces. The more exact solution you need, the more time it takes to calculate, even to the point of locking up your computer. The absolute tolerance tells Rhino at what point you think it's "good enough" and to stop trying to calculate a closer solution.
+Some objects are possible to define mathematically perfect to the limits of what your computer's floating point math is able to calculate. Generally, you don't need to worry about extremely tiny tolerances. Yet, some commands rely on approximations to **//<color darkslateblue>fit or match</color>//** curves or surfaces to other curves or surfaces. The more exact solution you need, the more time it takes to calculate, even to the point of locking up your computer. The absolute tolerance tells Rhino at what point you think it's good enough and to stop trying to calculate a closer solution.
 
 Another downside of specifying a higher than needed absolute tolerance is that Rhino will then generate things like sections or intersections with many, many control points. Control points which are heavier (bigger data size), noisier (not as smooth), and harder to edit.
 
-**<color royalblue>Which operations are "approximate"?</color>**
+**<color royalblue>Which operations are approximate?</color>**
 
 Any command necessary to find the intersection between curves and surfaces is an example. Specific commands include (but are not limited to): Trim, Split, Intersect, Contour, Section, Offset (curves and surfaces) Project, Sweep 1 and 2 Rails, all of the Boolean operations, FilletSrf, FilletEdge.
 
@@ -40,17 +40,17 @@ The advantage of a looser (larger) tolerance is that computing time and data siz
 
 For example, the //Intersect// command creates a curve at the intersection of two surfaces. The curve is guaranteed to lie, within the //**<color darkslateblue>absolute tolerance</color>**//, on each of the two surfaces.
 
-Try the Intersect command and save the resulting curve off to one side. Then add a zero to the tolerance setting and run Intersect again. Now turn on the control points for both curves. The second curve will have more control points, will be "heavier," and will stay closer to the two surfaces. Is one curve better than the other? It depends on your needs. If your manufacturing process can't benefit from the more closely fitting part, then the first "lighter" curve is better since it results in a smaller file, faster calculations, and better parameterized surfaces.
+Try the Intersect command and save the resulting curve off to one side. Then add a zero to the tolerance setting and run Intersect again. Now turn on the control points for both curves. The second curve will have more control points, will be heavier, and will stay closer to the two surfaces. Is one curve better than the other? It depends on your needs. If your manufacturing process can't benefit from the more closely fitting part, then the first lighter curve is better since it results in a smaller file, faster calculations, and better parameterized surfaces.
 
-Different objects and scales may require widely differing tolerances.  For example, if you are designing the general form for a car body (which might have important details in the 1.0 mm range) a file tolerance of 0.1 mm might be good enough.  However, for smaller details on that same car, even 0.01 mm may not be enough, and the inner workings of the motor will certainly need a file tolerance of 0.001 or even 0.0001 in the case of bearing surfaces.
+Different objects and scales may require widely differing tolerances.  For example, if you are designing the general form for a car body (which might have important details in the 1.0 mm range) a file tolerance of 0.1 mm might be good enough.  But for smaller details on that same car, even 0.01 mm may not be enough, and the inner workings of the motor will certainly need a file tolerance of 0.001 or even 0.0001 in the case of bearing surfaces.
 
-Another Rule of Thumb: Use a tolerance setting equal to or one order of magnitude tighter than (1/10 of) the best tolerance you can hold through your manufacturing process -- or one order of magnitude tighter than your smallest modeled detail, whichever is smaller.
+Another rule of thumb: Use a tolerance setting equal to or one order of magnitude tighter than (1/10 of) the best tolerance you can hold through your manufacturing process -- or one order of magnitude tighter than your smallest modeled detail, whichever is smaller.
 
 **<color royalblue>Overriding or making custom tolerances</color>**
 
 Some commands may let you individually specify the tolerance for that particular operation  as in NetworkSrf or MatchSrf. You will have a dialog box with tolerance options you can set within the command, overriding the general tolerance. Using the Refit option also allows you to specify your own tolerance within certain commands.
 
-And lastly, there are commands like JoinEdge that let you exceed the absolute tolerances locally if you think it might be useful. This is to be used with caution!! You are deliberately saying its OK to be inaccurate here!
+And last, there are commands like JoinEdge that let you exceed the absolute tolerances locally if you think it might be useful. This is to be used with caution!! You are deliberately saying it's OK to be inaccurate here!
 
 =====3:  Angular and relative tolerances in Rhino=====
 
@@ -60,7 +60,7 @@ There are two other tolerance settings in Rhino: angular and relative. The relat
 
 An important thing to note here is that tolerances should be set at the beginning of the modeling process, for, although you can change the tolerances while you work, objects which were previously modeled with lower tolerances will not be fixed if you raise them. A good practice is to continuously check your work by joining up elements as you create them. If they join, you're within your tolerance limits. If they don't, you need to go back and find out why not and correct the situation immediately. This avoids ending up with a finished model with problem areas or inaccuracies which may be hard to fix at that late stage without completely rebuilding certain sections.
 
-Operations that involve the intersecting function, such as Intersect, Split or the Boolean operations, can also be quite sensitive to tolerance settings. Often, if the absolute tolerance is set too low, complete intersections may not be found. Splitting or Boolean operations may fail as a result. (Note that tolerances are not the only reason for these operations to fail, however.) Too tight a tolerance setting may also be harmful. In addition to creating overly long calculation times, Rhino may even crash. In general you should keep the absolute tolerance setting in the range of 0.01 to 0.0001. And never set it below 1.0e-5. If you need a tighter tolerance, use smaller units instead.
+Operations that involve the intersecting function, such as Intersect, Split or the Boolean operations, can also be quite sensitive to tolerance settings. Often, if the absolute tolerance is set too low, complete intersections may not be found. Splitting or Boolean operations may fail as a result. (Note that tolerances are not the only reason for these operations to fail.) Too tight a tolerance setting may also be harmful. In addition to creating overly long calculation times, Rhino may even crash. In general you should keep the absolute tolerance setting in the range of 0.01 to 0.0001. And never set it below 1.0e-5. If you need a tighter tolerance, use smaller units instead.
 
 
 =====5:  Exporting to other (downstream) programs=====
