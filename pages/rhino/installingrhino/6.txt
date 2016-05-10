@@ -1,0 +1,43 @@
+===== Automating installation of Rhino WIP =====
+
+Rhino WIP installs from a single executable.
+
+setup.exe [Action] [Option] [Parameters]
+
+====Command line options:====
+^Action ^Description  ^
+|**-package** | (default) install |
+|**-uninstall** | uninstall |
+|**-repair** | repair (or install if not installed) |
+|**-layout** | create a local image of the bootstrapper for offline install |
+
+^Option ^Description  ^
+|**-quiet**| perform action without any user interface. |
+| |if a reboot is required, system will restart without prompting |
+|**-passive** | perform action with progress bar interface | 
+|**-norestart** | suppress any restarts |
+|**-promptrestart** | (default) prompt if a restart is required |
+|**-log** | log to a specific file (default is controlled by bundle developer) |
+
+
+^Parameters ^Description  ^
+|//All parameters are optional//|
+|**LICENSE_METHOD**| One of: STANDALONE, ZOO |
+|**LICENSE_KEY** | The license key to install (**required if** LICENSE_METHOD=STANDALONE) |
+|**LICENSE_VALIDATION_CODE**| Validation code for your Rhino license |
+|**ZOO_SERVER** | IP or FQDN of Zoo server to query |
+|**INSTALLDIR** | Full path to folder where Rhino will be installed |
+|**CUSTOMER_NAME** | Customer name to show in splash screen |
+|**COMPANY_NAME** | Company name to show in splash screen |
+|**SEND_STATISTICS** | 1 = send anonymous statistics about install and Rhino usage to McNeel (default) |
+|                    | 0 = do not send |
+|**ENABLE_AUTOMATIC_UPDATES** | 1 = allow Rhino to check for and download updates (default) |
+|                             | 0 = do not allow automatic updates |
+|**INSTALL_EN**| 1 = Install English Language Support |
+|              | 0 = Do not install English |
+
+
+====Examples====
+<code>
+setup.exe -package -passive LICENSE_METHOD=ZOO ZOO_SERVER=10.0.0.1 INSTALL_FR=1 INSTALL_DE=1
+</code>
