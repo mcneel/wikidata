@@ -1,23 +1,24 @@
-====== Using Schemes to start Rhino with different sets of options on the same computer ======
+====== Using Schemes to Start Rhino======
 
-Rhino "Schemes" are basically just different sets of personalized options that can be called from a specific desktop shortcut.  Everything in the Options section of Rhino can be stored in a scheme (with the exception of display modes). In this way, Rhino can be started with different combinations of workspaces, languages, colors, etc. depending on the need or the user, just by starting Rhino from the appropriate desktop shortcut. The schemes exist independently of each other, and can be modified as desired.
+>Using Schemes to start Rhino with different sets of options on the same computer 
 
-By default, one scheme is always created (Default), and any modifications will automatically get saved to that.  To have more than one scheme, the user must specifically create new ones - this page explains how to do that.
+Basically, Rhino Schemes are just different sets of personalized options that can be called from a specific desktop shortcut.  Everything in the Options section of Rhino can be stored in a scheme (with the exception of display modes). In this way, Rhino can be started with different combinations of workspaces, languages, colors, etc., just by starting Rhino from the appropriate desktop shortcut. The schemes exist independently of each other, and can be modified.
 
-A newly created scheme will always start with the default set of options (like Rhino was freshly installed).  If you want to duplicate an existing modified scheme, there isn't yet a direct, one-button way to do that.  For this reason, this page also outlines several methods to duplicate existing schemes.
+By default, one scheme is always created (Default), and any modifications will automatically get saved to that.  To have more than one scheme, you must specifically create new ones. This page explains how to do that.
+
+A newly created scheme will always start with the default set of options (as if Rhino was freshly installed).  If you want to duplicate an existing modified scheme, there isn't yet a direct, one-button way to do that.  For this reason, this page also outlines several methods to duplicate existing schemes.
 
 ===== How to create a new scheme and desktop shortcut=====
 //(for Rhino 3, 4 and 5)//
 
-1. Create a new shortcut on your desktop which will point to your new Rhino scheme.  The easiest way to do this is to copy an existing Rhino shortcut. Hold the Control key down while dragging the default Rhino icon to a new location on the Desktop, or right click and copy it.
+1. Create a new shortcut on your desktop which points to your new Rhino scheme.  The easiest way to do this is to copy an existing Rhino shortcut. Hold the Control key down while dragging the default Rhino icon to a new location on the Desktop, or right-click and copy it.
 
-2. Right click on the copied icon. From the menu, click Properties.
+2. Right-click on the copied icon. From the menu, click **Properties**.
 
-3. On the General Tab, edit the name: \\
--- Rename it to something that will identify the scheme with which you are starting Rhino.
+3. On the General Tab, edit the name: Rename it to something that will identify the scheme with which you are starting Rhino.
 
-4. On the Shortcut tab, edit the Target path - add a switch for the new scheme: \\
-//(path example below for Windows Vista/7/8, Rhino 5 64 bit, others are similar)//
+4. On the Shortcut tab, edit the Target path. Add a switch for the new scheme: \\
+//(The example path below is for Windows Vista/7/8, Rhino 5 64 bit. Others are similar.)//
 
 **"C:\Program Files\Rhinoceros 5 (64-bit)\System\Rhino.exe" /<color darkslateblue>Scheme=MyNewScheme</color>**
 
@@ -26,54 +27,53 @@ A newly created scheme will always start with the default set of options (like R
 {{rhino:rhinoscheme.png}}
 
 
-5. The new scheme should start from this shortcut with a new set of default Rhino settings that you can change without affecting the original Rhino scheme.  Modify options that what you want while in this instance of Rhino, and these changes will be saved under the new scheme automatically.
+5. The new scheme should start from this shortcut with a new set of default Rhino settings that you can change without affecting the original Rhino scheme.  Change the options to what you want while in this instance of Rhino. These changes are automatically saved under the new scheme.
 
-> **Notes:** ////
+**Notes:** ////
 
-  * **A template** is a 3DM file that can include any information that is stored in a Rhino 3DM file: document properties such as units, grid settings, tolerances, etc. as well as viewport layouts, layers, and even geometry. So you can create templates with pre-set units, layouts, title blocks, geometry, etc. - anything that normally can be saved in a 3dm file.
+  * **A template** is a 3DM file that can include any information stored in a Rhino 3DM file: document properties such as units, grid settings, tolerances, etc. as well as viewport layouts, layers, and even geometry. So you can create templates with preset units, layouts, title blocks, geometry, etc. -- anything that normally can be saved in a 3dm file.
   * **A scheme** is a new location in the registry where an additional set of Rhino Options can be stored. These are the Rhino settings that you configure in the Options command.
-  * **A scheme can include a template specification** - i.e. any scheme can open with a specific template. After starting Rhino with your newly created scheme, use the New command and browse to the file you want to be your starting template for that scheme. In the lower left corner of the dialog, check "use this file when Rhino starts." You can create a custom template by saving a drawing with the SaveAsTemplate command or using Save As Template from the file menu.
+  * **A scheme can include a template specification**, i.e. any scheme can open with a specific template. After starting Rhino with your newly created scheme, use the **New** command and browse to the file you want to be your starting template for that scheme. In the lower left corner of the dialog, check **use this file when Rhino starts**. You can create a custom template by saving a drawing with the **SaveAsTemplate** command or using Save As Template from the file menu.
 
 ===== How to (more or less) duplicate a scheme without editing the registry=====
-//This requires you have Rhino V4, or V3 with Bonus Tools installed//
+//This requires you have Rhino V4, or V3 with Bonus Tools installed.//
 
-  * While in the instance of Rhino whose scheme you want to duplicate://(make sure only this instance is running!)//
-  * Go to **//Tools > Export Options//** (V4) or **//Bonus > Tools > Export Options//** (V3)
-  * In V3, Hit the "Select All" button.  In V4 all options are always exported.
-  * At the top, hit the "..." (Browse) button and browse to an easily found location, give the file a name, then hit OK.
+While in the instance of Rhino whose scheme you want to duplicate:// (Make sure only this instance is running!)//
+  * Go to //Tools > Export Options// (V4) or //Bonus > Tools > Export Options// (V3).
+  * In V3, pick the **Select All** button.  In V4 all options are always exported.
+  * At the top, pick the "..." (Browse) button and browse to an easily found location, give the file a name, then pick **OK**.
   * This file will be a .ini file with all your options.
   * Close Rhino, then create a new shortcut on your desktop by copying the original Rhino shortcut.
-  * Right click on the copy, choose properties, and change the Target to: **...Rhino4.exe" /<color darkslateblue>Scheme=MyNewScheme</color>** //(or ...Rhino3.exe...)//
-  * It's a good idea to rename the shortcut so that you know which scheme it will start.
-  * Start Rhino from this shortcut.  Inside Rhino go to **//Tools > Import Options//** (V4) or **//Bonus > Tools > Import Options//** (V3)
-  * Browse to your newly created .ini file, make sure all the options are selected (in V4 use the **Select All** button) and hit OK.
-  * You will still have to open your custom toolbar layout/workspace if you have one as this is not covered by this procedure.
-  * To do this, go to Tools > Toolbar layout, Close the current workspace, navigate to your custom workspace and Open.
-  * Custom display modes in V4 are neither covered by Schemes nor by Export Options, so you will have to export and re-load those independently
-  * Modify whatever else you want while in this instance of Rhino, these changes will be saved under the new scheme automatically.  The changes only affect the new scheme, not any others.
+  * Right-click on the copy, choose properties, and change the Target to: **...Rhino4.exe" /<color darkslateblue>Scheme=MyNewScheme</color>** //(or ...Rhino3.exe...)//.
+  * It's a good idea to rename the shortcut so that you know which scheme will start.
+  * Start Rhino from this shortcut.  Inside Rhino go to //Tools > Import Options// (V4) or //Bonus > Tools > Import Options// (V3).
+  * Browse to your newly created .ini file, make sure all the options are selected (in V4 use the **Select All** button) and click **OK**. You will still have to open your custom toolbar layout/workspace if you have one as this is not covered by this procedure.
+  * To do this, go to Tools > Toolbar layout. Close the current workspace, navigate to your custom workspace, and Open.
+  * Custom display modes in V4 are neither covered by Schemes nor by Export Options, so you will have to export and reload those independently
+  * Change whatever else you want while in this instance of Rhino. These changes will be saved under the new scheme automatically.  The changes only affect the new scheme, not any others.
 
 ===== How to duplicate a scheme by editing the registry=====
 
 **Note: //<color red>Be extremely careful when registry editing! If you use the above method, this is usually not necessary.</color>//**
 
-        * From the Windows Start button, choose **Run**, then type **Regedit**, OK.
-        * Navigate to HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\4.0 (or 3.0)
-  * You will see all your schemes listed there.  Right click on the scheme key you want to copy, and choose **Export**.
+        * From the Windows Start button, choose **Run**, then type **Regedit**, **OK**.
+        * Navigate to //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\4.0// (or 3.0).
+  * You will see all your schemes listed there.  Right-click on the scheme key you want to copy, and choose **Export**.
   * Place the file where you can find it again, like on the desktop.  The file has a **.reg** extension.  The actual file name is not important.
-  * Right click on the .reg file and choose **Open With...** and select **Notepad**.
-  * Inside you will see many instances of your original scheme name, let's say it's //Scheme: MyCurrentScheme//
-  * Using the Replace function in Notepad, replace the phrase //"Scheme: MyCurrentScheme"// with //"Scheme: MyNewScheme"// (no quotes)
-  * Make sure you replace **ALL** instances!
+  * Right-click on the .reg file and choose **Open With...** and select **Notepad**.
+  * Inside you will see many instances of your original scheme name, let's say it's //Scheme: MyCurrentScheme//.
+  * Using the Replace function in Notepad, replace the phrase //Scheme: MyCurrentScheme// with //Scheme: MyNewScheme//,
+  * Make sure you replace __all__ instances!
   * When that is done, save the .reg file and close Notepad.
-  * Right click on the .reg file and choose Merge.  When you hit OK, your data will be merged into the registry in the correct place.
-  * All you have to do now is create a shortcut on your desktop to your new Rhino scheme.  The easiest way to do this is to copy an existing shortcut and then right click on the copy, choose properties, and change the Target to: **...Rhino4.exe" /<color darkslateblue>Scheme=MyNewScheme</color>** //(or ...Rhino3.exe...)//
+  * Right-click on the .reg file and choose **Merge**.  When you click **OK**, your data is merged into the registry in the correct place.
+  * All you have to do now is create a shortcut on your desktop to your new Rhino scheme.  The easiest way to do this is to copy an existing shortcut and then right-click on the copy, choose properties, and change the Target to: **...Rhino4.exe" /<color darkslateblue>Scheme=MyNewScheme</color>** //(or ...Rhino3.exe...)//
   * It's a good idea to rename the shortcut so that you know which scheme it will start.
   * The new scheme should start from this shortcut with all of the previous settings of //MyCurrentScheme//.
-  * Modify what you want while in this instance of Rhino// (make sure only this instance is running!)//, these changes will be saved under the new scheme automatically.
+  * Change what you want while in this instance of Rhino// (make sure only this instance is running!)//, these changes will be saved under the new scheme automatically.
 
 > **Note:** //It is not currently possible to control the loading or unloading of plug-ins with Schemes.  Plug-ins are either loaded or unloaded for all schemes at the same time.//
 
-> **IMPORTANT:** //If different schemes share the same workspace (.tb) file a change made to the toolbar layout by one instance will affect all others that use it!  The toolbar layout in the .tb file is independent of schemes - the scheme only knows which .tb to open, not its structure.  If you have multiple instances of Rhino running, the last instance to close will overwrite the .tb file, so when making  toolbar changes, it is advisable to have only one instance of Rhino open at a time.  If multiple users are using personalized workspaces, it is best to have separate workspaces with separate names and have each one open with the corresponding scheme.//
+> **Important:** //If different schemes share the same workspace (.tb) file a change made to the toolbar layout by one instance will affect all others that use it!  The toolbar layout in the .tb file is independent of schemes -- the scheme only knows which .tb to open, not its structure.  If you have multiple instances of Rhino running, the last instance to close will overwrite the .tb file. So when making  toolbar changes, it is advisable to have only one instance of Rhino open at a time.  If multiple users are using personalized workspaces, it is best to have separate workspaces with separate names and have each one open with the corresponding scheme.//
 
 
  
