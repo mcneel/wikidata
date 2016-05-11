@@ -1,23 +1,22 @@
-
+======How to use PictureFrames as a Background Reference Image======
 
 **PictureFrames** can be used to make a more flexible and powerful version of Rhino's [[rhino:backgroundbitmap|BackgroundBitmap]].  Images are attached as texture maps to planes in 3D space and displayed in rendered mode. The texture map shows up, rather than being placed in the background of the viewport, independent of geometry.
 
 Some advantages to using PictureFrames:
 
-  * An unlimited number of images can be placed in the scene. These can be viewed in any and all viewports.
-  * Images can be scaled and rotated as needed, unlike [[rhino:backgroundbitmap|BackgroundBitmap]] which align only with the cplane X and Y.
+  * An unlimited number of images can be placed in the scene. View these in any and all viewports.
+  * Images can be scaled and rotated as needed, unlike BackgroundBitmap which aligns only with the cplane X and Y.
   * Images can be dimmed and made more or less transparent.
 A possible disadvantage is that there is no guarantee that the image will always be behind everything in space. PictureFrames are just objects in 3D space.
 
-----
 
-====== To use PictureFrames as a background reference image======
+===== To use PictureFrames as a background reference image=====
 
-Start the **PictureFrame** command (Surface toolbar>Planes flyout>PictureFrame, or type PictureFrame and <Enter>.) You will see the File Open dialog as Rhino sends you off to locate the image you wish to use. Once the image is selected, you will be prompted to place the plane as in the Plane 3Point command, with a Vertical option. Note that the plane can be any size but is constrained to being of the same aspect ratio as the image. The first point picked for the plane corresponds to the lower left corner of the image, the second to the lower right, and the third pick places the top edge.
+Start the **PictureFrame** command (Surface toolbar>Planes flyout>PictureFrame, or type PictureFrame and Enter.) You will see the File Open dialog as Rhino sends you off to locate the image you wish to use. Once you select the image, you are prompted to place the plane as in the Plane 3Point command, with a Vertical option. Note that the plane can be any size but is constrained to being of the same aspect ratio as the image. The first point picked for the plane corresponds to the lower left corner of the image, the second to the lower right, and the third pick places the top edge.
 
 The plane is automatically assigned the image as a texture map, the image being mapped to the surface UV. You can see this texture assignment in the plane's object Properties >Material page. The plane has a Basic material assigned and the image is in the texture channel.
 
-Since this is a material channel, it is only displayed in the viewport when in Rendered viewport mode or, in V4, some other display mode that shows material (Options>Appearance>Advanced Settings. The setting to show object materials is on the top level page of the mode under Shading settings> Color and material usage.) The rendered mode is set this way by default, but it is possible to make new modes that have this set as well. These modes must be set in the viewports or use the **SetObjectDisplayMode** command to set per object display modes. This second method may be more useful since it allows the plane to be displayed with the image no matter how the viewport display is set. Note that the object display mode is set in the current viewport when the command is run, you must use the command again see textures in any other viewport.
+Since this is a material channel, it is only displayed in the viewport when in Rendered viewport mode or, in V4, some other display mode that shows material (Options>Appearance>Advanced Settings. The setting to show object materials is on the top level page of the mode under Shading settings> Color and material usage.) The rendered mode is set this way by default, but it is possible to make new modes that have this set as well. These modes must be set in the viewports or use the **SetObjectDisplayMode** command to set per object display modes. This second method may be more useful since it allows the plane to be displayed with the image no matter how the viewport display is set. Note that the object display mode is set in the current viewport when the command is run. You must use the command again to see textures in any other viewport.
 
 <color white>.</color>
 
@@ -27,16 +26,17 @@ Since this is a material channel, it is only displayed in the viewport when in R
 
 <color white>.</color>
 
-Once set up, the planes can be adjusted like any other object in Rhino with transform commands to align and rotate them as needed. The Orient command can be used to scale and align points on the image to known dimensions and locations. Image intensity can be adjusted in the Properties> Material page- transparency and image intensity would be the most useful to adjust. These can be adjusted to preset levels using the Material Texture and Material Transparency toolbars.
+Once set up, the planes can be adjusted like any other object in Rhino with transform commands to align and rotate them as needed. The Orient command can be used to scale and align points on the image to known dimensions and locations. Adjust image intensity in the //Properties> Material// page. Transparency and image intensity would be the most useful to adjust. These can be adjusted to preset levels using the Material Texture and Material Transparency toolbars.
 
 <color white>.</color>
 
 {{:legacy:en:Material_Presets.png}}
+
 //Material preset toolbars.//
 
 <color white>.</color>
 
-It may be useful to place picture frames on separate layers so they can be selected, locked or hidden easily. It may also be useful to set up a special display mode in v4 with settings that are tweaked more than you would typically want them to be in a standard render mode. For example, turning off backfaces allows images to be placed on all sides of an object without obscuring the view.
+It may be useful to place picture frames on separate layers so they can be selected, locked, or hidden easily. It may also be useful to set up a special display mode in v4 with settings that are tweaked more than you would typically want them to be in a standard render mode. For example, turning off backfaces allows images to be placed on all sides of an object without obscuring the view.
 
 Below is a command macro that can be added to a button or command alias to automate the process of applying the image and display modes to the planes in V4. Substitute any number between 0 and 100 for the 90 in the example to change the transparency of the planes.
 
