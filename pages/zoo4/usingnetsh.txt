@@ -1,25 +1,25 @@
-======Using NETSH to open TCP and UDP ports======
+======Using NETSH to Open TCP and UDP Ports======
+
 > **Product:** //[[zoo4:home|Zoo 4.0]]//
 > **Summary:** //Using NETSH to open Zoo 4.0 required TCP and UDP ports.//
 
-=====Overview=====
-**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]** is a Windows command-line scripting utility that allows you to, either locally or remotely, display or modify the network configuration of a computer that is currently running.
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|Netsh]]** is a Windows command-line scripting utility that allows you to, either locally or remotely, display or change the network configuration of a computer that is currently running.
 
-**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]** also provides a scripting feature that allows you to run a group of commands in batch mode against a specified computer.
+**Netsh** also provides a scripting feature that lets you run a group of commands in batch mode against a specified computer.
 
-**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]** can be used, instead of the Firewall applet in Control Panel, to automate the opening of required TCP/IP ports.
+**Netsh** can be used, instead of the Firewall applet in Control Panel, to automate the opening of required TCP/IP ports.
 
-=====More Information=====
+=====More information=====
 Zoo 4.0 uses NetBIOS Mailslots for communications. NetBIOS Mailslots use the following TCP/IP ports:
   * UDP Ports 137 and 138
   * TCP Port 139
 
 These ports need to be open on both the client Rhino workstation and the Zoo 4.0 server.
 
-It is possible to open these ports on the Window Firewall using **[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|NETSH]]**. The syntax is different depending on whether or not you are using Windows XP or Windows Server 2008, Windows Vista or greater.
+It is possible to open these ports on the Window Firewall using **Netsh**. The syntax is different depending on whether or not you are using Windows XP or Windows Server 2008, Windows Vista or greater.
 
 ====Windows XP====
-**Important** If you are a member of the Administrators group, run the commands from a command prompt. To start a command prompt, find the icon or Start menu entry that you use to start a command prompt session.
+**Important:** If you are a member of the Administrators group, run the commands from a command prompt. To start a command prompt, find the icon or Start menu entry that you use to start a command prompt session.
 
 <code>
 rem Open UDP Ports 137 and 138 and TCP Port 139
@@ -31,7 +31,7 @@ netsh firewall add portopening TCP 139 "NetBIOS TCP Port 139"
 
 ====Windows Server 2008, Windows Vista or greater====
 
-**Important** If you are a member of the Administrators group, and User Account Control is enabled on your computer, run the commands from a command prompt with elevated permissions. To start a command prompt with elevated permissions, find the icon or Start menu entry that you use to start a command prompt session, right-click it, and then click **Run as administrator**.
+**Important:** If you are a member of the Administrators group, and User Account Control is enabled on your computer, run the commands from a command prompt with elevated permissions. To start a command prompt with elevated permissions, find the icon or Start menu entry that you use to start a command prompt session, right-click it, and then click **Run as administrator**.
 
 <code>
 rem Open UDP Port 137 inbound and outbound
@@ -48,7 +48,7 @@ netsh advfirewall firewall add rule name="NetBIOS TCP Port 139" dir=out action=a
 </code>
 
 =====Reference=====
-[[http://support.microsoft.com/kb/947709|How to use the "netsh advfirewall firewall" context instead of the "netsh firewall" context to control Windows Firewall behavior in Windows Server 2008 and in Windows Vista]]
+[[http://support.microsoft.com/kb/947709|How to use the "netsh advfirewall firewall" context instead of the "netsh firewall" context to control Windows Firewall behavior in Windows Server 2008 and in Windows Vista.]]
 
 \\
 
