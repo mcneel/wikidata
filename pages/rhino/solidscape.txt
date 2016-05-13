@@ -9,8 +9,8 @@
 In Rhino 4 we added new technology to prepare files for the Solidscape printers and their software ModelWorks.  This new technology has many benefits over the traditional STL file transfer methods:
 
   - Files can be made of multiple solid bodies that intersect.  There is no need to Boolean all the parts together into one. <color blue>(Really, it's true!)</color>  Multiple overlapping solids will build together into one.
-  - Slices can be made through a [[rhino:nurbs|NURBs]] model, increasing accuracy of the build.
-  - If the NURBs objects are closed with no naked edges, the result is closed.  There were situations in Rhino 3 where this was not true.
+  - Slices can be made through a [[rhino:nurbs|NURBS]] model, increasing accuracy of the build.
+  - If the NURBS objects are closed with no naked edges, the result is closed.  There were situations in Rhino 3 where this was not true.
   - In some cases, small gaps in the model will be closed.
   - Better determination of support vs build material.
   - Slices can also be made through the Mesh objects, using less memory and allowing you to //fix// STL files from other systems.
@@ -21,7 +21,7 @@ One of the major differences with the new process is that you do not have to Boo
 
 {{:legacy:en:ringsample.jpg}} {{:legacy:en:solidscapclose.jpg}}
 
-For ring example above, the ring, prongs, sprue and collets are modeled as separate solids.  During the ModelWorks command, these objects will become one solid as long as they physically overlap. This lets you export a much greater range of models and keep the models in a configuration that is easier to edit.
+For the ring example above, the ring, prongs, sprue and collets are modeled as separate solids.  During the ModelWorks command, these objects will become one solid as long as they physically overlap. This lets you export a much greater range of models and keep the models in a configuration that is easier to edit.
 
 **Note:** We require that each object be a solid and water tight.  In this case each prong is its own solid. The ring needs to be a solid and the collets are solids.
 
@@ -31,8 +31,8 @@ You can check for Naked Edges to see if all objects are solid.
 
 There are two ways to get models to the Solidscape machine.
 
-  * If you have a computer with Rhino, directly hooked up the Solidscape machine, you can go to File Pulldown > Print 3D > //ModelWorks//.  This will take you through the steps of creating a SLC file and sending it to ModelWorks. Not only will it send the model directly to ModelWorks, it will save out the SLC that you used in case you would like to go back to it at a later date.
-  * If you need to send a file to another computer in the office to print, or a Service bureau, create a SLC file using the //ModelWorks// command in Rhino or send them the Rhino model.
+  * If you have a computer with Rhino, directly hooked up the Solidscape machine, you can go to File Pulldown > Print 3D > ModelWorks.  This will take you through the steps of creating an SLC file and sending it to ModelWorks. Not only will it send the model directly to ModelWorks, it will save out the SLC that you used, in case you would like to go back to it at a later date.
+  * If you need to send a file to another computer in the office to print, or to a Service bureau, create a SLC file using the //ModelWorks// command in Rhino. Or send them the Rhino model.
 
 =====Steps for using the ModelWorks command in Rhino=====
 
@@ -45,9 +45,9 @@ In the **Slice file** edit box, enter the name of the SLC file you want to save.
 
 The **Slice thickness** drop down lets you set your build thickness.
 
-**Use meshes to generate slices** will create a mesh from the NURBs models first and then slice through the mesh instead of the NURBs model.  This can be an advantage in that slicing through the mesh is faster, uses less memory, and can help if there are problem slices in the file. The disadvantage to mesh slicing is that NURBs slicing can be more accurate.
+**Use meshes to generate slices** will create a mesh from the NURBS models first and then slice through the mesh instead of the NURBS model.  This can be an advantage in that slicing through the mesh is faster, uses less memory, and can help if there are problem slices in the file. The disadvantage to mesh slicing is that NURBS slicing can be more accurate.
 
-The **Mesh resolution** value represents the furthest distance the mesh will be from the original NURBs surface.  The smaller this number the more accurate the mesh, but the more memory it will take.
+The **Mesh resolution** value represents the furthest distance the mesh will be from the original NURBS surface.  The smaller this number the more accurate the mesh, but the more memory it will take.
 
 The **Open directly in ModelWorks** check box will be active if Modelworks is loaded on your machine.  This will open the model automatically in ModelWorks after exporting the SLC file.
 
