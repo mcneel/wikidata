@@ -1,37 +1,44 @@
-====== Formats, methods and plug-ins for file exchange to and from Rhino ======
 
-===== File exchange to and from Rhino=====
-(alphabetical order)
+
+====== File Exchange to and from Rhino======
+
+>Formats, methods and plug-ins for file exchange to and from Rhino 
+
+**Note:** These are in alphabetical order.
 
 =====Information about file types=====
-  * 3ds
+**3ds**
     * Why do objects render black when I import the 3ds file?
     * This has nothing to do with the normals, and everything to do with the vertex order used to construct each polygon...Rhino uses a counter-clockwise (CCW) order to determine how to draw individual polygons. Yet, in this case, it appears these polygons are all over the map. Unifying the normals doesn't necessarily change (or correct) the order problem. A common fix for this (and it is common for .3ds files) is to export the bad objects as RAW triangles, then import them back in, and then run UnifyMeshNormals. That should clear everything up. -- Rhino Development team
-  * DXF/DWG
+**DXF/DWG**
     * Make sure you have the hotfixes applied to RH3.0 in order to use the lastest improvements in DXF/DWG I/O!
-    * DWG and DXF files use a right-handed, Z-up coordinate system and thus, by default, they open in Rhino's top viewport.
-  * IGES -> [[rhino:troubleshootingiges|White Paper: Iges]]
-  * Max
+    * DWG and DXF files use a right-handed, Z-up coordinate system and so, by default, they open in Rhino's top viewport.
+**IGES**
+  * [[rhino:troubleshootingiges|White Paper: IGES]]
+
+**Max**
     * As far as we can tell, nothing short of 3DS Max itself will read/write Max files. Some info about this from Okino: To read/write .max files we must run PolyTrans directly inside 3DS Max itself. This is because we need to have 3DS Max evaluate its //stack// of plug-in modules that operate on the base mesh. The evaluated output mesh is then sent to PolyTrans. Vice versa, we need to gain access to the core of 3DS MAX to import data from PolyTrans and save it to the 3DS Max internal database.
     * Rhino3DMaxTools - script-based tools for data exchange between Rhino and 3DMax. This version supports camera export from Rhino to Max and import still and animated cameras to Rhino.
-  * OBJ
-  * STEP
+**OBJ**
+**STEP**
+
+\\
 
 =====File format translators=====
 
-  * **Concepts Unlimited**
+**Concepts Unlimited**
 
-> **Comment:** //I agree with Dan here. Even if your supplier agrees to export as step/iges I find those too unreliable unless you have a way to compare and determine that the imported is the same stuff that they exported. I've tried Datakit and it worked flawlessly. Another option to try is buy a seat of Concepts Unlimited. It has a direct Catia import and it's a lot cheaper that the Datakit plug-in, I think. The part that I'm not sure of is how well the integrity of your data will be maintained in this r way trip. I would demo it first of course. [Gustavo - 2005-11-29]//
-> **Comment:** //<color darkslateblue>My experience with Concepts Unlimited is that the export functions are poor, so you might be pretty disappointed here. [Mitch - 2005-11-30]</color>//
+  * **Comment:** //I agree with Dan here. Even if your supplier agrees to export as STEP/IGES I find those too unreliable unless you have a way to compare and determine that the imported is the same stuff that they exported. I've tried Datakit and it worked flawlessly. Another option to try is buy a seat of Concepts Unlimited. It has a direct Catia import and it's a lot cheaper that the Datakit plug-in, I think. The part that I'm not sure of is how well the integrity of your data will be maintained in this r way trip. I would demo it first of course. [Gustavo - 2005-11-29]//
+  * **Comment:** //<color darkslateblue>My experience with Concepts Unlimited is that the export functions are poor, so you might be pretty disappointed here. [Mitch - 2005-11-30]</color>//
 
-  * **Datakit**
+**Datakit**
 
-> **Comment:** //Take a look at the translators from Datakit. They work very well. If this is a recurring situation, I suggest spending the money. If it's a one time deal, go for the 7-day evaluation. [Dan Bayn - 2005-11-28]//
+  * **Comment:** //Take a look at the translators from Datakit. They work very well. If this is a recurring situation, I suggest spending the money. If it's a one time deal, go for the 7-day evaluation. [Dan Bayn - 2005-11-28]//
 
-  * **Okino Polytrans**
-  * **PS-Exchange from Delcam**
+**Okino Polytrans**
+**PS-Exchange from Delcam**
 
-> **Comment:** //You import just about any file (I've not tried any Catia files, but they do show up on the file types) to your machine. To export it back out to something you can use, it is a one time cost of about $50. [Jack - 2005-11-29]//
-> **Comment:** //It's already possible to read/write .3dm files directly from Delcam software, but only if you have the PS-Exchange module installed. [G.C. Webster - 2005-11-30]//
+  * **Comment:** //You import just about any file to your machine. (I've not tried any Catia files, but they do show up on the file types.)  To export it back out to something you can use, it is a one time cost of about $50. [Jack - 2005-11-29]//
+  * **Comment:** //It's already possible to read/write .3dm files directly from Delcam software, but only if you have the PS-Exchange module installed. [G.C. Webster - 2005-11-30]//
 
 
