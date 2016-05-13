@@ -1,8 +1,10 @@
-======What am I seeing when I assign a lens to a viewport?======
+======Lens Questions======
 
-When you assign a lens to a Rhino viewport using ViewportProperties, the resulting image you will see is what that lens would look like on a standard SLR 36mm x 24mm film gate camera. If the viewport is not in a standard 1.5:1 aspect ratio, the minimum dimension will always be 24mm; the major dimension can be calculated by multiplying the minimum by the aspect ratio.
+=====What am I seeing when I assign a lens to a viewport?=====
 
-======Why do different sized cameras result in different angles of view with the same size lens?======
+When you assign a lens to a Rhino viewport using ViewportProperties, the resulting image you see is what that lens looks like on a standard SLR 36mm x 24mm film gate camera. If the viewport is not in a standard 1.5:1 aspect ratio, the minimum dimension is always 24mm. Calculate the major dimension by multiplying the minimum by the aspect ratio.
+
+=====Why do different sized cameras result in different angles of view with the same size lens?=====
 
 Lens length is the distance from the focal node to the film plane. So with a 50mm lens, the focal node of the lens is, you guessed it, 50mm from the film plane. So with our standard Rhino viewport (and a SLR camera) the resulting view angle in plan view would be 39.6 degrees:
 
@@ -14,9 +16,9 @@ Now, if we pop that same 50mm lens onto a motion picture camera, the film plane 
 
 So although you are keeping the same lens length, by changing your film size, you change your field of view.
 
-======So how do I get the view angle I want when using a "non-standard" camera?======
+=====So how do I get the view angle I want when using a "non-standard" camera?=====
 
-There now exists a script to do the heavy lifting for you: http://en.wiki.mcneel.com/content/upload/files/Cam_Lens_090120.zip
+There is now a script to do the heavy lifting for you: http://en.wiki.mcneel.com/content/upload/files/Cam_Lens_090120.zip
 
 For the nitty gritty of what the script is doing, read below:
 
@@ -24,8 +26,8 @@ The first thing you need to do is to figure out the aspect ratio of your viewpor
 
 Now that you know your aspect ratio, you can figure out the film size that Rhino is showing you. Using our 1:1.67 aspect ratio, we know that the minimum aspect dimension in a Rhino viewport is always going to be 24mm, so the film size Rhino is showing me in a 1:1.67 viewport is 24mm by (24 * 1.67), or 24mm x 40mm.
 
-So if you were trying to see what your view angle would be with a camera with a 3" x 5" film size (76mm x 127mm), you need to figure out what your crop multiplier is, the difference between Rhino's film plane size and the film plane size that you want. The film size I want is 127mm, Rhino is showing me 40mm. 40mm/127mm = 0.315 This is your crop multiplier. So if you wanted to see what a 150mm lens on a 3" x 5" camera would look like in Rhino, you would have to specify a 47.25mm lens in Rhino's ViewportProperties.
+So if you were trying to see what your view angle would be with a camera with a 3" x 5" film size (76mm x 127mm), you need to figure out what your crop multiplier is, the difference between Rhino's film plane size and the film plane size that you want. The film size I want is 127mm. Rhino is showing me 40mm. 40mm/127mm = 0.315. This is your crop multiplier. So if you wanted to see what a 150mm lens on a 3" x 5" camera looks like in Rhino, you have to specify a 47.25mm lens in Rhino's ViewportProperties.
 
-Another example - You want to know what a 21mm lens looks like on a Super35 camera in 2.40:1 aspect.
+Another example: You want to know what a 21mm lens looks like on a Super35 camera in 2.40:1 aspect.
 
-Call ViewportProperties, make your viewport 720 x 300 (2.4:1). Again, we know that the minimum Rhino aspect film size will be 24mm. So with my minimum dimension at 24mm, my maximum = 2.4 ** 24mm = 57.6mm. To get your crop angle, it's (what Rhino gives you)/(what you want) Super35 film width is 24mm, so 57.6mm/24mm = 2.4. So now I know my crop multiplier, so if I want to see what a 21mm looks like, I would have to put a (21mm ** 2.4) = 50.4mm lens.
+Call ViewportProperties, make your viewport 720 x 300 (2.4:1). Again, we know that the minimum Rhino aspect film size will be 24mm. So with my minimum dimension at 24mm, my maximum = 2.4 * 24mm = 57.6mm. To get your crop angle, it's (what Rhino gives you)/(what you want) Super35 film width is 24mm, so 57.6mm/24mm = 2.4. So now I know my crop multiplier, so if I want to see what a 21mm looks like, I have to put in a (21mm * 2.4) = 50.4mm lens.
