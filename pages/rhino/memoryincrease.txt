@@ -1,14 +1,14 @@
-====== More memory for Rhino 4 - from 2GB to 3GB ======
+====== More Memory for Rhino 4 - from 2GB to 3GB ======
 
 > **Summary:** //The newest Rhino 4 is "Large Address Aware". By making a small change in the **C:\BOOT.INI** file or in the **BCD store**, you can increase the memory available to Rhino from 2GB to 3GB.//
 
-> **Warning:** //<color darkred>**Numerous technical support documents from Microsoft warn that the changes described below are  ill-advised for most situations. Make these changes with extreme caution and be prepared to reverse them in the event of problems. Use this information at your own risk.</color>**//
+**Warning:** //Many technical support documents from Microsoft warn that the changes described below are  ill-advised for most situations. Make these changes with extreme caution and be prepared to reverse them in the event of problems. Use this information at your own risk.//
 
-> **Update:** //<color blue>4 Nov 07 - Recently, a Rhino user running dual screens on an ATI fireGL 5200 w/256, reported scrambled display problems.  After trying many other things, he eventually determined that switching back from 3GB to 2GB resolved the problem.  - JB</color>//
+**Update:** //4 Nov 2007 - Recently, a Rhino user running dual screens on an ATI fireGL 5200 w/256, reported scrambled display problems.  After trying many other things, he eventually determined that switching back from 3GB to 2GB resolved the problem.  - JB//
 
-Update_2: 4 Dec 07 - After setting the /3GB switch on my own WinXP Pro system, I began having problems getting MSIE7 to exit reliably.  I ran this way for several months and recently removed the /3GB switch from the Boot.ini file.  My problems with MSIE7 have gone away. - JB
+**Update 2:** 4 Dec 2007 - After setting the /3GB switch on my own WinXP Pro system, I began having problems getting MSIE7 to exit reliably.  I ran this way for several months and recently removed the /3GB switch from the Boot.ini file.  My problems with MSIE7 have gone away. - JB
 
-======Detail======
+=====Detail=====
 Add the /3GB parameter in your **C:\Boot.ini** file at end of this line and reboot:
 
 **In Windows 2000 Pro**
@@ -19,7 +19,7 @@ multi(0)disk(0)rdisk(0)partition(2)\WINNT="Windows XP Professional" <color red>*
 
 multi(0)disk(0)rdisk(0)partition(2)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn <color red>**/3GB**</color>
 
-> **Note:** //It should pointed out to avoid further confusion that by default, the Windows File Explorer does not display "Hidden system files" like C:\BOOT.INI.  You will need to adjust your folder options to find the file, then change it's properties to remove the "read only" attribute before adding the "/3GB" switch to the start options.  After making the change, you should make C:\BOOT.INI a read-only file again, then reboot the system to make the change take effect.//
+**Note:** //To avoid further confusion that by default, the Windows File Explorer does not display "Hidden system files" like C:\BOOT.INI.  You need to adjust your folder options to find the file, then change its properties to remove the "read only" attribute before adding the "/3GB" switch to the start options.  After making the change, you should make C:\BOOT.INI a read-only file again, then reboot the system to make the change take effect.//
 
 **In Windows Vista**
 
@@ -29,10 +29,10 @@ BCDEDIT /export "C:\BCD Backup" - Makes a backup of your original settings
 
 BCDEDIT /set increaseuserva <color red>3072</color> - Changes the memory setting
 
-> **Note:** //In Windows Vista the BCDEDIT utility is used to first export and then modify the BCD store.//
+**Note:** //In Windows Vista the BCDEDIT utility is used to first export and then modify the BCD store.//
 BCDEDIT is a command line utility and is run from a CMD Window.
 
-======Background======
+=====Background=====
 
 Operating systems based on Microsoft® Windows NT® technologies have always provided applications with a flat 32-bit virtual address space that describes 4 gigabytes (GB) of virtual memory.
 
@@ -45,7 +45,7 @@ The virtual address space of processes and applications is still limited to 2 GB
 The /3GB switch allocates 3 GB of virtual address space to an application that uses IMAGE_FILE_LARGE_ADDRESS_AWARE in the process header. This switch allows applications to address 1 GB of additional virtual address space above 2 GB.
 
 
-======If you experience video driver problems when using the /3GB switch (WinNT/WinXP):======
+=====If you experience video driver problems when using the /3GB switch (WinNT/WinXP)=====
 
 If after adding the /3GB switch to boot.ini, you find upon rebooting that your video driver is not working properly (you're stuck with the VgaSave fall-back driver), adding the **/USERVA** switch as well may be the fix, for example:
 
@@ -53,7 +53,7 @@ If after adding the /3GB switch to boot.ini, you find upon rebooting that your v
 
 You can find more information on this switch at: http://support.microsoft.com/default.aspx?scid=kb;en-us;319043
 
-Also, when modifying boot.ini, it is prudent to do so by including your changes as a second copy of the OS, so that if your changes are unsuccessful, you can simply choose your original configuration on bootup. Here's an example Windows XP Pro boot.ini which might be useful while testing the /3GB & /USERVA switches:
+Also, when modifying boot.ini, we advise you to include your changes as a second copy of the OS, so that if your changes are unsuccessful you can simply choose your original configuration on bootup. Here's an example Windows XP Pro boot.ini which might be useful while testing the /3GB & /USERVA switches:
 
 
 [boot loader]
@@ -66,13 +66,13 @@ multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" 
 
 multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional with /3GB" /fastdetect /NoExecute=OptIn /3GB /USERVA=2800
 
-======If you experience problems when using the "increaseuserva" in Vista:======
+=====If you experience problems when using the "increaseuserva" in Vista=====
 
 If after changing the memory setting using BCDEDIT, you can restore your original setting provided you made a backup.
 
 BCDEDIT /import "C:\BCD Backup" - Imports original settings provided you made a backup
 
-Additional information on BCDEDIT can be found here:
+More information on BCDEDIT:
 
 http://technet2.microsoft.com/WindowsVista/en/library/85cd5efe-c349-427c-b035-c2719d4af7781033.mspx?mfr=true
 
