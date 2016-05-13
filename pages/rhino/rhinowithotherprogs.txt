@@ -1,26 +1,19 @@
+======Another Application for Rhino======
 
+====Laser projection====
 
-LASER PROJECTION
+In aerospace composites manufacturing, it is increasingly common to use a CAD model of a part to define ply-definition data for both a laser projection system and a ply cutting machine. The projection dataset is 3D, whereas the cutting machine data is 2D. Yet they can both be derived from the same model.
 
-In Aerospace composites mfg, it is becoming increasingly common to use a CAD model of a part to define ply-definition data for both a laser projection system and a ply cutting machine. The projection dataset is 3D, where-as the cutting machine data is 2D, yet they can both be derived from the same model.
+**Rough overview: Making a ply file for a projector**
 
-Rough Overview: Making a Ply File for a Projector:
+  - Obtain a 3D model of the ply, in the same coordinate system as the layup tool into which it will be projected.
+  - Create a boundary for that ply, in the form of a single polyline.
+  - Create a series of points spaced around the perimeter of that polyline, which will be projected by the laser. Note that these typically have to be created in the sequence (either all cw or ccw) that they will be projected. The spacing can vary, but 3" is typical. Always include a point in any corners that exist.
+  - Export the point data to a text file. 
+  - At this point the instructions will vary somewhat depending upon the particular system you're using. In general: Create a "generic" ply file using the proprietary system's instructions, then copy/paste the Point file's data into the appropriate section.
+  - For multi-head projection systems, you must append each line of point data with a Surface Vector. This is used to determine which of the heads is "most-normal" (closed to 90 deg) to the projection surface with the particular data point being projected.... This is absolutely crucial information... The vector itself can be arbitrarily derived, so long as its use properly selects the correct projector... It's a trial and error process... If you have a stable head setup, but varying tools, it can be as simple as coming up with a permanent vector associated with each head, which will basically say "always use head #1 to project plys on this half of my mold, and head#2 for that half", etc.
 
-1) Obtain a 3D model of the Ply, in the same coordinate system as the layup tool into which it will be projected;
-
-2) Create a boundary for that ply, in the form of a single polyline;
-
-3) Create a series of points spaced around the perimeter of that polyline, which will be projected by the laser. Note that these typically have to be created in the sequence (either all cw or ccw) that they will be projected. The spacing can vary, but 3" is typical. Always include a point in any corners that exist;
-
-4) Export the point data to a text file;
-
-At this point the instructions will vary somewhat depending upon the particular system you're using. In general:
-
-5) Create a "generic" ply file using the proprietary system's instructions, then copy/paste the Point file's data into the appropriate section;
-
-6) For multi-head projection systems, must append each line of point data with a Surface Vector, which is used to determine which of the heads is "most-normal" (closed to 90 deg) to the projeciton surface with the particular data point being projected.... This is absolutely cruitial information... The vector itself can be arbitrarily derived, so long as it's usage properly selects the correct projector... It's a trial and error process... If you have a stable head setup, but varying tools, it can be as simple as coming up with a permenant vector assosiated with each head, which will basically say "always use head #1 to project plys on this half of my mold, and head#2 for that half", etc.
-
-> **Comment:** //It's also possible to use a digitizing arm (PCMM) to create the point data set. Some collection software (ex: Suprastuff for Romer Arm)  enable collection of a point and a normal vector. Using this method, one could reverse-engineer a physical ply layup templete, and then use that data to program its replacement in the for of a laser projector.//
+> **Comment:** //It's also possible to use a digitizing arm (PCMM) to create the point data set. Some collection software (ex: Suprastuff for Romer Arm)  enable collection of a point and a normal vector. Using this method, one could reverse-engineer a physical ply layup template, and then use that data to program its replacement for a laser projector.//
 
 Alex Bereczky
 
