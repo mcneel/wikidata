@@ -1,0 +1,32 @@
+====== Weitere Infos über Volumenkörper in Rhino ======
+
+**Es gibt immer großen Diskussionsbedarf** und zahlreiche Missverständnisse bezüglich Volumenkörpern und Flächen. Im Folgenden wird der Versuch unternommen, etwas Licht ins Dunkel zu bringen.
+
+=====Rhino-Flächen=====
+In Rhino werden Hybrid-Modelle erzeugt, die aus Flächen, Flächenverbänden und Volumenkörpern bestehen können.
+  * Flächen sind individuelle 2D- oder 3D-Körper ohne Stärke.
+  * Flächenverbände sind zusammengesetzte Flächen ohne Stärke, die 2D- oder 3D-Körper ohne Stärke ergeben.
+  * Volumenkörper sind einzelne Flächen oder Flächenverbände, die einen geschlossenen 3D-Körper ergeben.
+
+
+
+Rhino erkennt ein Volumen als Volumenkörper, wenn *alle* Kanten **aller* beteiligten Flächen ohne Lücken oder Öffnungen verbunden sind.  Das heißt, dass im Objekt *keine* Kanten vorhanden sind, die nicht mit einer anderen Kante (und *nur einer* anderen Kante) verbunden sind.  Die Abwesenheit von ungebundenen (oder "offenen") Kanten teilt Rhino mit, dass es sich um ein geschlossenes Volumen (einen "Volumenkörper") handelt, worauf alle Flächennormalen nach außen gekehrt werden.  Wenn ein Objekt nur über eine offene Kante oder Öffnung verfügt, handelt es sich um ein offenes Volumen und keinen Volumenkörper.  
+
+=====Unterschiede zwischen Rhino und einem klassischen Volumenkörper-Modellierer=====
+
+Im Gegensatz zu Solidworks, das hauptsächlich mit Volumenkörpereinheiten arbeitet, verfolgt Rhino einen flexibleren Hybridansatz. Allerdings ist das Ergebnis beim Export eines Volumenkörpers (z.B. eines Würfels) nach STL, VRML etc. in beiden Fällen dasselbe: ein Begrenzungsflächenmodell der Schale ohne Material und Dicke. Der Volumenkörper ist durch seine Begrenzung und die Flächenrichtung bestimmt. Definitionsgemäß ist das dadurch umgebene Volumen massiv.
+
+Die Funktionsweise kann durch Verwendung des Befehls *Fläche aus planaren Kurven* veranschaulicht werden.
+
+  * Zeichnen Sie ein Rechteck. Dies soll die äußere Würfelform ohne Dicke darstellen, die man bei einem Querschnitt durch einen Würfel erhalten würde.
+  * Setzen Sie mithilfe des Befehls *Fläche aus planaren Kurven* eine Fläche ein, deren Begrenzung das Rechteck ist. Dies würde nun einer massiven Scheibe entsprechen, die man beim Querschnitt durch einen Volumenkörper erhält.
+  * Löschen Sie die Fläche und zeichnen Sie ein neues Rechteck innerhalb des ersten Rechtecks. Dies stellt einen Hohlwürfel mit einem Wanddurchmesser dar.
+  * Setzen Sie mithilfe des Befehls *Fläche aus planaren Kurven* eine Fläche ein, deren Begrenzung die beiden Rechtecke sind. Dies entspricht einer Scheibe eines Volumenkörper-Würfels mit einem Wanddurchmesser.
+  * Wichtig ist hierbei, das die Software die verschiedenen Begrenzungen versteht und erkennt, wo sich die "Substanz" des Volumenkörpers befindet. Oder, in diesem Beispiel, einer Scheibe durch denselben.
+
+=====Aspekte der Modellierung=====
+Viele Anwender irritiert die Tatsache, dass beim Trimmen eines Volumenkörpers (z.B. der Wand eines Gebäudes) das Innere des Begrenzungsflächenmodells (**BRep**) des Volumenkörpers angezeigt wird. Dies hat mehr mit der verwendeten Technik zum Schnitt durch die Wand zu tun, als mit der Frage, ob es sich tatsächlich um einen Volumenkörper handelte. Beim Schnitt eines Volumenkörpers mithilfe einer booleschen Operation und unter Zuhilfenahme einer Fläche oder eines Volumenkörper als Schnittwerkzeug wird das Innere des Begrenzungsflächenmodells niemals angezeigt. 
+
+Aus Anwenderperspektive ist dies genau das, was Volumenkörpermodellierer wie Solidworks und Solid Edge tun. Geometrie muss als Volumenkörper aufgelöst werden. Es sind zwar einige grundlegende Flächenwerkzeuge vorhanden, die sich aber nicht mit denjenigen Rhinos vergleichen lassen.
+
+Die dem Anwender gebotene Leistung und Flexibilität durch Rhinos hybriden Ansatz ist in nahezu jeder Hinsicht unzweifelhaft.
