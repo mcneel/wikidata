@@ -1,0 +1,80 @@
+====== Résolution de problèmes avec le Zoo ======
+> **Produit :** //[[fr:zoo4:home|Zoo 4.0]]//
+> **Résumé : **//Petits conseils pour résoudre des problèmes d'utilisation du Zoo, un gestionnaire de licences pour groupes de travail.//
+
+Le Zoo utilise une technologie simple de messages sans protocoles, appelée **Mailslots** pour communiquer avec Rhino. Les réseaux Microsoft utilisent des messages mailslots pour beaucoup de choses, y compris le service d'ouverture d'une session de domaine. La messagerie Mailslot fonctionne sur tous les systèmes d'exploitation modernes de Microsoft ainsi que sur les réseaux de groupes de travail et sur les réseaux de domaines.
+
+Pour la configuration de Zoo, il n'y a rien à faire. Si tous les ordinateurs impliqués appartiennent au même domaine ou groupe de travail de Windows et s'ils sont installés sur le même sous-réseau, le Zoo devrait pouvoir attribuer des licences sur demande. Quelques trucs à ne pas oublier lorsqu'on travaille avec le Zoo :
+
+  * Vérifiez que vous utilisez bien la dernière version du Zoo.
+  * Vérifiez que vous avez ouvert une session en tant qu'administrateur ou en tant que membre du groupe des administrateurs lorsque vous lancez l'application de la console du Zoo.
+  * Vérifiez que vous utilisez bien la dernière version révisée de Rhino et des autres modules pris en charge par Zoo, tels que Brazil, Bongo, Flamingo et [[penguin:home|Penguin]].
+
+===== Remarques sur le logiciel =====
+  * Le Zoo fonctionne sur Windows 2000, Windows XP, Windows Vista, Windows 7 et Windows Server 2000, 2003 et 2008.
+  * Le Zoo a besoin du [[http://www.microsoft.com/downloads/details.aspx?familyid=200b2fd9-ae1a-4a14-984d-389c36f85647&displaylang=en|Package redistribuable Microsoft Visual C++ 2005 SP1 (x86)]] sur le système où il est installé.
+  * Le Zoo ne fonctionne pas avec les codes CD des licences éducation ou lab de Rhino 2.0 ou 3.0.
+  * Le Zoo ne fonctionne pas avec Rhino 2.0 ou 3.0 ouvert sur une version asiatique de Windows.
+  * Certains produits ne peuvent pas acquérir des licences dans un réseau avec routeurs. Consultez la page de [[fr:zoo:products|Compatibilité des produits avec le Zoo]] pour voir la liste des produits pris en charge.
+  * Ouvrez une session en tant qu'administrateur ou en tant que membre du groupe des administrateurs lorsque vous lancez l'application de la console du Zoo.
+
+===== Remarques sur le réseau =====
+  * Tous les systèmes doivent appartenir au même domaine ou au même **groupe de travail de Windows**.
+  * Vérifiez que l'option **Client pour les réseaux Microsoft** est installée et activée pour la connexion réseau que vous utilisez. Sinon, vous obtiendrez les erreurs //Échec d'écriture sur le mailslot client// dans le fichier journal du Zoo.
+  * Si vous utilisez TCP/IP, vérifiez de bien **Activer [[rhino:netbios|NetBIOS]] avec TCP/IP** dans les paramètres TCP/IP avancés. Sinon, vous obtiendrez les erreurs //Échec d'écriture sur le mailslot client// dans le fichier journal du Zoo.
+  * Si l'ordinateur où Rhino ou le Zoo est installé utilise un pare-feu, assurez-vous que les ports suivants sont ouverts :
+    * **Ports UDP 137 et 138**
+    * **Port TCP 139**
+  * Attention, ces ports sont utilisés par Windows pour les communications [[rhino:netbios|NetBIOS]]. Si vous utilisez le **pare-feu de Windows**, activez le **Partage de fichiers et d'imprimante** comme exception permise.
+\\
+{{:legacy:en:zoo_windows_firewall.png}}
+  * Si vous n'avez pas configuré vos systèmes utilisant Rhino pour une recherche de clé dans le registre ou par DNS, toutes les stations de travail avec Rhino ainsi que le système où est installé le Zoo doivent se trouver sur le même sous-réseau. En effet, Rhino et le Zoo diffuseront tous deux des messages. La diffusion de messages de mailslots ne peut pas traverser les routeurs et certains commutateurs. Les routeurs sans fil ne transmettront pas non plus les messages de diffusion.
+
+
+
+==== Vérifier que la résolution de nom fonctionne entre le Zoo et le client ====
+Le **nbtstat** est conçu pour aider à identifier et réparer les problèmes de résolution de nom du [[rhino:netbios|NetBIOS]]. Lorsqu'un réseau fonctionne normalement, le protocole [[rhino:netbios|NetBIOS]] sur TCP/IP résout les noms [[rhino:netbios|NetBIOS]] en adresses IP.  Cette opération se produit suivant plusieurs options pour la résolution du nom [[rhino:netbios|NetBIOS]], y compris la recherche locale du cache, la requête du serveur WINS, la diffusion, la recherche LMHOSTS, la recherche Hosts et la requête de serveur DNS. 
+
+Pour tester la résolution de nom avec **nbtstat** :
+
+  - Sur le serveur Zoo, ouvrez l'Invite de commande.
+  - Tapez **nbtstat -a <ClientComputerName>**.
+  - Un des adaptateurs réseau devrait résoudre le nom de l'ordinateur client.
+  - Sur l'ordinateur client, ouvrez l'Invite de commande.
+  - Tapez **nbtstat -a <ZooServerName>**.
+  - Un des adaptateurs réseau devrait résoudre le nom de l'ordinateur avec le Zoo.
+
+Si *nbtstat* ne renvoie pas d'information pour le Zoo ou le client, le Zoo ne fonctionnera pas avec cette configuration réseau. Ce document et l'équipe d'assistance de McNeel ne sont pas en mesure de vous aider à vous assurer que votre réseau prend en charge la résolution de nom [[rhino:netbios|NetBIOS]].
+
+==== Vérifier que la connectivité fonctionne entre le Zoo et le client ====
+La commande **net view** affiche une liste de domaines, d'ordinateurs ou de ressources qui sont partagés par l'ordinateur indiqué. S'il est utilisé sans paramètres, **net view** affiche une liste d'ordinateurs dans votre domaine actuel.
+
+Pour tester la connectivité en utilisant la commande **net view** :
+
+  - Sur le serveur Zoo, ouvrez l'Invite de commande.
+  - Tapez **net view \\<ClientComputerName>**.
+  - Sur l'ordinateur client, ouvrez l'Invite de commande.
+  - Tapez **net view \\<ZooServerName>**.
+
+La commande **net view** affiche les fichiers et les imprimantes partagés en établissant une connexion temporaire.
+
+  * Si aucun fichier ou imprimante n'est partagé sur l'ordinateur indiqué, la commande **net view** affiche un message //La liste ne contient aucun entrée//.
+  * Si la commande **net view** échoue avec un message //L'erreur système 53 s'est produite//, vérifiez que le nom  l'ordinateur indiqué est correct, que l'ordinateur fonctionne et que toutes les passerelles (routeurs) entre cet ordinateur et l'autre sont opérationnelles.
+  * Si la commande **net view** échoue avec un message //L'erreur système 5 s'est produite. L'accès est refusé.//, vérifiez que l'utilisateur de la session ouverte possède les droits nécessaires pour voir les partages sur l'autre ordinateur.
+
+Afin de poursuivre avec la résolution de problème au niveau de la connectivité, procédez ainsi :
+
+  * Utilisez la commande **net view** et l'adresse IP de l'ordinateur comme suit : **net view \\<IPAddress>**.
+  * Si la commande **net view** fonctionne, le nom de l'ordinateur indiqué est alors résolu avec la mauvaise adresse IP.
+  * Si la commande **net view** échoue avec un message //L'erreur système 53 s'est produite//, le service de partage des fichiers et imprimantes pour les réseaux Microsoft ne fonctionne peut être pas sur l'ordinateur distant.
+
+===== Remarques sur le Zoo =====
+  * Le Zoo peut tenir un fichier journal (Zoo.log) des conversations avec les clients de Rhino. Le fichier journal peut être utile pour diagnostiquer certains problèmes de communication. Si vous ne voyez pas de fichier journal dans le même dossier que Zoo.exe, vous pouvez activer le journal en sélectionnant **Tools > Options** dans l'application du Zoo. Vérifiez le fichier journal en utilisant Notepad pour voir si les messages de Rhino arrivent au Zoo et si le Zoo répond à ces messages
+
+===== Outils extra pour le Zoo =====
+Si vous utilisez le Zoo sur des réseaux avec routeur et si Rhino est incapable de trouver le Zoo, le système de recherche du Zoo, par clé de registre ou DNS, n'est peut-être pas configuré correctement. Vous devriez regarder si un des outils extra pour le Zoo peut vous aider à résoudre le problème. Les outils extra pour le Zoo comprennent les éléments suivants :
+
+  - **SetZooServer.exe** - Aide à configurer les stations de travail pour la recherche de clé de registre.
+  - **ZooDnsResolver.exe** - Aide à tester la fonction de recherche DNS.
+
+**{{:zoo:zoobonustools_20010621.zip|Outils extra pour le Zoo}}**
