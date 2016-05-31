@@ -1,0 +1,78 @@
+====== Installation et configuration du Zoo ======
+> **Produit :** //[[fr:zoo4:home|Zoo 4.0]]//
+> **Résumé :** //Conseils pour l'installation du gestionnaire de licences de groupe travail, Zoo//
+
+Le Zoo permet de partager des licences de Rhino, Flamingo, Penguin et Bongo (Codes CD) avec les utilisateurs du même groupe de travail. Zoo 4.0 est conçu pour fonctionner avec les codes CD de Rhino 4.0 ainsi qu'avec les codes CD des versions précédentes de Rhino, Flamingo, Bongo et [[penguin:home|Penguin]].
+
+=====Topologies=====
+**1. Petit réseau**
+
+Le Zoo et tous les ordinateurs clients avec Rhino sont sur le même sous-réseau, LAN virtuel et derrière le même pare-feu. Le Zoo travaille avec tous les ordinateurs client sans aucune configuration supplémentaire du réseau.
+
+{{:legacy:en:ZooConfigBroadcast.png}}
+
+**2. Réseau routé**
+
+Le Zoo se trouve de l'autre côté d'un routeur par rapport aux ordinateurs clients avec Rhino. Ces derniers peuvent se trouver sur différents segments du réseau, derrière d'autres routeurs et sur différents réseaux locaux virtuels. Une configuration du réseau ou de l'ordinateur client est alors nécessaire pour que Rhino trouve le Zoo. Voir la section [[#Configurer le Zoo pour qu'il fonctionne sur les réseaux routés]] pour plus d'informations.
+
+{{:legacy:en:ZooConfigDns.png}}
+=====Installation =====
+
+  * Si vous réalisez l'installation sur un système qui utilise déjà une version précédente du Zoo, vous devrez arrêter le Zoo avant d'installer la version 4.0.
+  * Si le programme d'installation du Zoo 4.0 détecte qu'une version précédente du Zoo est installée sur le système, il s'installera par défaut dans le même dossier que la version précédente.
+  * Si vous installez Zoo 4.0 dans le même dossier qu'une version précédente, les fichiers Zoo.exe et Zoo.key de cette version précédente seront sauvegardés sous un autre nom. Zoo 4.0, lors de son premier démarrage, importera automatiquement les anciennes licences.
+
+=====Configuration=====
+  - Lancez Zoo 4.0
+  - Ajoutez vos codes CD dans le Zoo 4.0, y compris les codes de Rhino, Penguin, Bongo, Brazil ou Flamingo que vous voulez utiliser.
+  - Lancez le Zoo.
+
+
+=====Configurer le Zoo pour qu'il fonctionne sur les réseaux routés=====
+Par défaut, Rhino recherche le Zoo en envoyant un message sur votre réseau. Cette méthode fonctionne très bien à l'intérieur d'un réseau local virtuel ou d'un sous-réseau, tant que tous les ordinateurs se trouvent du même côté du routeur. En revanche, si vous possédez plusieurs réseaux locaux virtuels, vous devrez changer la configuration pour que cette méthode fonctionne.
+
+**Options de configuration des réseaux routés**
+
+Choisissez une seule option parmi les configurations suivantes :
+
+    - **DNS:** Configurez un enregistrement DNS sur vos serveurs DNS afin que Rhino puisse trouver le Zoo sans autre configuration sur le client. 
+    - **Clés de registre :** Créez une clé de registre sur chaque machine client. Si vous n'avez pas de DNS, ou si vous ne pouvez pas changer le DNS, cette option est pour vous.
+
+**Pour définir un DNS:**
+
+    - Déterminez le nom du domaine auquel chaque client appartient. Cliquez avec le bouton de droite sur **Poste de travail**, puis sélectionnez **Propriétés**. Le nom de domaine est indiqué dans la section Nom de l'ordinateur de la boîte de dialogue Propriétés du système.
+    - Sur le serveur DNS principal de votre domaine, créez un nouvel enregistrement TXT en utilisant le format **Zoo4=<nomhôte>** où <nomhôte> est le nom de l'hôte [[rhino:netbios|NetBIOS]]. Par exemple, si le nom de l'hôte complet est **ZooServer.bcn.es.entreprise.com** et si le domaine est **bcn.es.entreprise.com**, le nom de l'hôte NetBIOS est alors **ZooServer**.
+    - Testez la configuration DNS à partir de l'ordinateur client en utilisant l'outil **ZooDnsResolver** qui fait partie des **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Outils extra pour le Zoo.]]**
+
+**Pour définir des clés de registre sur chaque ordinateur:**
+
+    - Sur chaque ordinateur utilisant Rhino 4.0, créez la clé de registre suivante si elle n'existe pas : **HKEY_LOCAL_MACHINE\Software\McNeel\RhinoLM**
+    - Dans la clé **RhinoLM**, créez une nouvelle **valeur de chaîne** nommée **zoo4**.
+    - Utilisez le nom de l'hôte NetBIOS pour le serveur Zoo comme donnée de la valeur **zoo4**.  Par exemple, si le nom de l'hôte complet est **ZooServer.bcn.es.entreprise.com** et si le domaine est **bcn.es.entreprise.com**, le nom de l'hôte NetBIOS est alors **ZooServer**.
+    - Pour plus d'aide sur la création de cette clé de registre, utilisez l'outil //SetZooServer// qui fait partie des **[[http://wiki.mcneel.com/_media/legacy/en/ZooBonusTools.zip|Outils extra pour le Zoo.]]**
+
+<code>
+Note aux utilisateurs de versions de Windows en 64 bits
+Les ordinateurs fonctionnant sur une version x64 de Windows utilisent un registre avec une disposition différente pour pouvoir gérer les programmes 32 bits et 64 bits. 
+
+Les programmes natifs 64 bits fonctionnent en mode natif et accèdent aux clés et aux valeurs enregistrées dans la sous-clé de registre suivante : 
+
+HKEY_LOCAL_MACHINE\Software 
+
+Les programmes 32 bits fonctionnent en mode WOW64 et accèdent aux clés et aux valeurs enregistrées dans la sous-clé de registre suivante : 
+
+HKEY_LOCAL_MACHINE\Software\WOW6432node 
+
+Rhino 4.0 est une application 32-bit. Ainsi, si Rhino 4.0 est ouvert sur une version x64 de Windows, vous devrez ajouter ici la clé de recherche du Zoo dans le registre :
+
+HKEY_LOCAL_MACHINE\Software\WOW6432node\McNeel\RhinoLM 
+</code>
+
+=====Divers=====
+  * Le Zoo n'est pas conçu pour fonctionner sur un WAN ou réseau étendu. Cependant, certains utilisateurs ont réussi à modifier les paramètres de leur réseau pour que cela marche. Nous n'avons pas testé cette configuration et nous ne la certifions pas. 
+    * Voici les modifications réalisées :
+      * Assurez vous que tous les ordinateurs sont membre du même domaine Windows.
+      * <color red>Non recommandé :</color> Sur tous les pare-feux, ouvrez les ports UDP 137 et 138, ainsi que le port TCP 139. <color red>Attention, cette opération engendre une importante vulnérabilité de la sécurité.</color> Nous ne recommandons pas d'ouvrir ces ports pour un accès général à Internet. Recherchez "Vulnérabilité de NetBIOS" pour en savoir plus. 
+  * Nous recommandons qu'un VPN assigne une IP unique à chaque machine.
+    * Le Zoo peut ne pas prendre en charge la traduction d'adresses réseau (NAT). Nous n'avons pas réalisé de tests exhaustifs. 
+  * Vérifiez qu'un seul Zoo est exécuté sur le domaine. La plupart des problèmes avec le Zoo se produisent car un autre Zoo test (parfois sur le même ordinateur que essaie d'exécuter Rhino) est lancé, donnant des problèmes de collisions Mailsot. 
