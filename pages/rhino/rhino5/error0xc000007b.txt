@@ -1,25 +1,36 @@
 ====== Rhino 5: Error 0xc000007b ======
-**Problem:**\\ Rhino 5 64-bit cannot run because of **Error 0xc000007b**.
+
+\\
+
+**Problem**
+
+Rhino 5 64-bit cannot run because of **Error 0xc000007b**.
 {{http://wiki.mcneel.com/_media/rhino/5/0xc000007b.png?450}}
 
-**Cause:**\\ Windows calls a 32-bit DLL under **C:\Windows\System32** when Rhino 5 64-bit runs.\\ <color #999999>32-bit DLLs should not exist in the System32 folder on 64-bit Windows systems. It may be mistakenly installed by a 32-bit program's installer.</color>
+**Cause**
+
+Windows calls a 32-bit DLL under //C:\Windows\System32// when Rhino 5 64-bit runs.
+
+<color #999999>32-bit DLLs should not exist in the System32 folder on 64-bit Windows systems. It may be mistakenly installed by a 32-bit program's installer.</color>
 
 
-**Solution:**
-  - Download **Dependency Walker for x64** from http://www.dependencywalker.com
+**Solution**
+  - Download Dependency Walker for x64 from http://www.dependencywalker.com
   - Extract the files in the zip file you've downloaded to a folder.
   - Run **depends.exe**.
   - Open Rhino 5 64-bit's shortcut icon on your desktop.\\ <color #999999>C:\Program Files\Rhinoceros 5 (64-bit)\System\Rhino.exe is opened.</color>
   - Click the header of the **CPU** column to sort the DLLs with their CPU type.\\ {{http://wiki.mcneel.com/_media/rhino/5/k01376b.png?600}}
-  - Find the <color red>**x86**</color> DLLs.\\ **Note:** <color red>**msvcr100.dll**</color> and <color red>**vcomp100.dll**</color> have been reported that caused Error 0xc000007b. It may happen with a different DLL on your computer.
+  - Find the x86 DLLs.\\ **Note:** **msvcr100.dll** and **vcomp100.dll** have been reported to cause Error 0xc000007b. It may happen with a different DLL on your computer.
   - Press **F9** or select **Full Paths** from the **View** menu. 
-  - Find the paths of the **x86** DLLs.
-  - Delete the x86 DLLs under **C:\Windows\System32**.\\ <color #999999>There's most likely only one x86 DLL found under C:\Windows\System32. Don't delete the x86 DLLs outside of C:\Windows\System32.</color>
-  - Install [[http://www.microsoft.com/en-us/download/details.aspx?id=13523|Microsoft Visual C++ 2010 SP1 Redistributable Package (x64)]]
+  - Find the paths of the x86 DLLs.
+  - Delete the x86 DLLs under //C:\Windows\System32//.\\ <color #999999>There's most likely only one x86 DLL found under C:\Windows\System32. Don't delete the x86 DLLs outside of C:\Windows\System32.</color>
+  - Install [[http://www.microsoft.com/en-us/download/details.aspx?id=13523|Microsoft Visual C++ 2010 SP1 Redistributable Package (x64)]].
   - Run Rhino 5 64-bit.
 
 
-**Need assistance?**\\ You can save a *.dwi file from Dependency Walker and send it to McNeel Support Team (support@mcneel.com) with a comment "**Error 0xc000007b to Kelvin Cheng**".
+**Need assistance?**
+
+You can save a *.dwi file from Dependency Walker and send it to McNeel Support Team (support@mcneel.com) with a comment "**Error 0xc000007b to Kelvin Cheng**".
 {{tag>rhino5 rhino5installationerror_en}}
 \\  
 \\ 
