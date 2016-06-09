@@ -1,67 +1,69 @@
-====== Manually Uninstalling Rhino 5.0 ======
+====== Manually Uninstalling Rhino 5 ======
 \\
-====Problem:====
-During the removal of Rhino, you get an error message like "Can't Uninstall - Feature is unavailable (path)"
+=====Problem=====
+During the removal of Rhino, you get an error message like "Can't Uninstall - Feature is unavailable (path)".
 
-====Applies to:====
-Rhino 5
+This applies to Rhino 5.
 
-====Cause:====
+=====Cause=====
 The Windows Installer cache cannot find a file required for uninstall.
 
-====Resolution:====
+=====Solution=====
+
 Manually remove Rhino and the Windows Installer registration for the product.
 
-===Try standard Program Uninstall==
+===Try standard program uninstall==
   - Go to Windows Start menu
-  - Select Control Panel
-  - Select Add/Remove programs
-  - Find any Rhinoceros 5 entries and select uninstall
+  - Select **Control Panel**
+  - Select **Add/Remove programs**
+  - Find any Rhinoceros 5 entries and select **uninstall**
 
 
-**Note:** You should only do the following procedures if uninstall fails from the Programs and Features section of Control Panel.
+**Note:** You should only do the following procedures if uninstall fails from the Programs and Features section of the Control Panel.
 
   
 ===Stop the McNeel Update Service===
   - From the **Start** menu, click **Control Panel**, then click **Administrative Tools**.
   - In Administrative Tools, double-click **Services**.
-  - In the Services dialog, scroll down to **McNeel Update (32-bit)** (On 64-bit computers, you may have McNeel Update (64-bit) instead, or both, depending on which versions of Rhino 5 you have installed).
+  - In the Services dialog, scroll down to **McNeel Update (32-bit)**. (On 64-bit computers, you may have McNeel Update (64-bit) instead, or both, depending on which versions of Rhino 5 you have installed.)
   - Right-click **McNeel Update (32-bit)**, then click **Stop**.
   - On 64-bit Windows, also stop the **McNeel Update (64-bit)** service.
   
-===Delete the Rhino install folder:===
-  - Browse to C:\Program Files\ folder and delete the Rhinoceros 5 directory.
-  - Browse the C:\Program Files (x86)\ folder and delete the Rhinoceros 5 directory.
-  - Delete **Rhinoceros 5.0 WIP** folder also if you find it in either of the above directories.
-  - Note that you might not be able to delete "RhinoShExt.dll". That's ok. Leave the system folder with that one file and delete everything else.
+===Delete the Rhino install folder===
+  - Browse the //C:\Program Files\// folder and delete the Rhinoceros 5 directory.
+  - Browse the //C:\Program Files (x86)\// folder and delete the Rhinoceros 5 directory.
+  - If you find the **Rhinoceros 5.0 WIP** folder in either of the above directories, delete it. 
+  - Note that you might not be able to delete **RhinoShExt.dll**. That's ok. Leave the system folder with that one file and delete everything else.
   
-===**Delete Registry Keys**===
+===Delete Registry keys===
   - Open the **Registry Editor:**
-    - //On Windows XP:// From the **Start menu**, click **Run**, then **type RegEdit and press Enter**.
-    - //On Windows Vista and Windows 7:// Click the **Start** button, then **type RegEdit and press Enter**.
-  - Browse to **HKEY_LOCAL_MACHINE**\Software\McNeel\Rhinoceros
-  - Delete the **5.0** Key
-  - Browse to **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros
-  - Delete the **5.0** Key
+    - On Windows XP: From the **Start menu**, click **Run**, then type **RegEdit** and press **Enter**.
+    - On Windows Vista and Windows 7: Click the **Start** button, then type **RegEdit** and press **Enter**.
+  - Browse to //HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros//.
+  - Delete the 5.0 key.
+  - Browse to //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros//.
+  - Delete the 5.0 key.
+
+\\
 
 
 ====Run Microsoft's Uninstall Fix====
-If **Rhino 5** or **Rhino 5 64 bit** lingers and will not //uninstall//, try the following Microsoft fix.
+If Rhino 5 or Rhino 5 64-bit lingers and will not uninstall, try the following Microsoft fix.
   - Visit http://support.microsoft.com/mats/program_install_and_uninstall
-  - Click Run Now
+  - Click **Run Now**
 Possible error message that you might see:
-"The feature you are trying to use is on a network resource that is unavailable"
+"The feature you are trying to use is on a network resource that is unavailable."
 
  {{:rhino:5:network_resourse_unavailable.jpg?400|}}
 {{:rhino:5:network_resourse_unavailable2.jpg?700|}}
 
-===Not recommended: Cleaning up the Windows Installer Cache:===
+===Not recommended: Cleaning up the Windows Installer Cache===
 <color red>**Warning:**</color> The following procedure may result in registry corruption and a 1402 error next time you install software. <color red>**Only follow these steps**</color> if the above procedure did not allow you to uninstall Rhino.
 
   - Download the [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility.]]
-  - Unzip the contents of WindowsInstallerCleanupUtility.zip to a "Windows Installer Clean Up" folder on your desktop.
-  - Run **msicuu.exe**
-  - Scroll down to **(All Users) Rhinoceros 5.0 WIP** (or All Users Rhino 5.0 WIP x64) on 64-bit systems.
+  - Unzip the contents of WindowsInstallerCleanupUtility.zip to a Windows Installer Clean Up folder on your desktop.
+  - Run **msicuu.exe**.
+  - Scroll down to (All Users) Rhinoceros 5.0 WIP (or All Users Rhino 5.0 WIP x64) on 64-bit systems.
   - Click **Remove**.
 
 If you followed these steps and then got a 1402 error, [[http://wiki.mcneel.com/rhino/error1402|these instructions may resolve the 1402 error]].
