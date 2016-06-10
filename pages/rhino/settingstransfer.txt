@@ -1,36 +1,42 @@
-====== How to transfer all your personalized settings from one installation to another ======
+======Transferring Personalized Settings======
+
+>How to transfer all your personalized settings from one installation to another 
 
 =====Where are my settings stored?=====
 
-**Most of Rhino's settings** are not stored in external files, but in the registry.  Because there is not one single file that contains all options and personalizations, you will have to do a bit of work to transfer all of your custom settings.  There do exist some shortcuts:
+**Most of Rhino's settings** are not stored in external files, but in the registry.  Because there is not one single file that contains all options and personalizations, you have to do a bit of work to transfer your custom settings.  Some shortcuts do exist:
 
-The easiest way to transfer the bulk of your settings is to use the Rhino command **OptionsExport** (V5), which creates a single file with //MOST// of the user customizations. Importing this file into another installation via the command **OptionsImport** (V5) will transfer the settings to the new install.  You have a choice of which settings you would like to import, it is not necessary to import them all.  
+The easiest way to transfer the bulk of your settings is to use the Rhino command **OptionsExport** (V5), which creates a single file with __most__ of the customizations. Importing this file into another installation via the command **OptionsImport** (V5) will transfer the settings to the new install.  You have a choice of which settings you would like to import. It is not necessary to import them all.  
 
-In V4, these two commands were named //ExportOptions// and //ImportOptions//, but were renamed in V5 to avoid confusion with other file import/export settings. //Display modes// are not included in the ExportOptions in V4, you need to export them separately!  You do this from Options > Appearance > Advanced Settings.  In V5, they are included, but you can only import then all at once.  If you want to just transfer individual display modes, use the Export/Import buttons in Options>View>Display Modes instead.
+In V4, these two commands were named **ExportOptions** and **ImportOptions**, but were renamed in V5 to avoid confusion with other file import/export settings. //Display modes// are not included in the ExportOptions in V4. You need to export them separately!  You do this from //Options > Appearance > Advanced Settings//.  
 
-//The workspace file// (.tb for V4, .rui for V5) contains all the toolbar info, one can copy this between installations as well.  Unfortunately, this file does not contain the on-screen locations for the toolbars, only the toolbars themselves and whether they are open or not.  As you can also customize menus in V5, the .rui file file also contains menu information.
+They are included in V5, but you can only import then all at once.  If you want to just transfer individual display modes, use the Export/Import buttons in Options>View>Display Modes instead.
+
+The workspace file (.tb for V4, .rui for V5) contains all the toolbar info. You can copy this between installations as well.  Unfortunately, this file does not contain the on-screen locations for the toolbars, only the toolbars themselves and whether they are open or not.  As you can also customize menus in V5, the .rui file file also contains menu information.
 
 Other things that might have been modified could be your template files, display modes, installed plug-ins, etc.
 
 ====Where do I find my toolbar files?====
 
-**For V5**, your toolbar file is located here:\\
-<color darkslateblue>C:\Users\(username)\AppData\Roaming\McNeel\Rhinoceros\5.0\UI</color>\\
-This is a hidden folder in most Windows installs, the easiest way to get there is to type %appdata% in the search box.
+For V5, your toolbar file is located here:\\
+<color darkslateblue>//C:\Users\(username)\AppData\Roaming\McNeel\Rhinoceros\5.0\UI</color>\\//
+This is a hidden folder in most Windows installs. The easiest way to get there is to type %appdata% in the search box.
 
-**For V4**, your toolbar file is located here in Vista, Win 7 or 8:\\
-<color darkslateblue>C:\ProgramData\McNeel\Rhinoceros\4.0</color>\\
-This is also a hidden folder, type %programdata% in the search box as above.
+\\
+
+For V4, your toolbar file is located here in Vista, Win 7 or 8:\\
+<color darkslateblue>//C:\ProgramData\McNeel\Rhinoceros\4.0//</color>\\
+This is also a hidden folder. Type %programdata% in the search box as above. 
 
 In XP, it should be here:\\
-<color darkslateblue>C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\4.0 or 5.0</color>
+<color darkslateblue>//C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\4.0 or 5.0//</color>
 
 
 =====Umm, that sounds complicated, how do I make sure I get everything?=====
 
 A general transfer procedure might look like this:
 
-====In the old install:====
+**In the old install:**
 
 **OptionsExport** (V5) or **ExportOptions** (V4) - creates an .ini file
 
@@ -39,13 +45,13 @@ A general transfer procedure might look like this:
   * Make copies of any other external files used, including: non-standard plug-ins, e-maps, scripts, etc.
   * V4 - Export any custom display modes (if you created any) - creates one .ini file per display mode
 
-====In the new install:====
+**In the new install:**
 
 **OptionsImport** (V5) or **ImportOptions** (V4) and import the .ini file created above
 
-  * Copy your workspace, template, emaps, scripts, plug-ins files to appropriate locations
-  * Go to Tools>Toolbar Layout and load your custom workspace
-  * Drag n' drop your extra plug-ins into the Rhino window to install (some need an external installer, use that if necessary)
+  * Copy your workspace, template, emaps, scripts, plug-ins files to appropriate locations.
+  * Go to //Tools>Toolbar Layout// and load your custom workspace.
+  * Drag n' drop your extra plug-ins into the Rhino window to install. (Some need an external installer. Use that if necessary.)
   * Set Rhino up to open with your custom template.
   * In the Files section of Options, set file paths to scripts, templates, etc. if they are non-standard.
-  * V4 - Go to Options > Appearance > Advanced Settings and import any custom display modes created, one by one
+  * V4 - Go to //Options > Appearance > Advanced Settings// and import any custom display modes created, one by one.
