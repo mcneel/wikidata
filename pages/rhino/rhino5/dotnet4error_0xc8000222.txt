@@ -1,11 +1,13 @@
 ====== .NET Framework 4 installer error (HRESULT: 0xc8000222) ======
-> **Summary:** //.NET Framework 4 failed to install because of error code HRESULT: 0xc8000222//
-> **Related installation help:** //[[/rhino/installproblems|Troubleshooting Rhino 5 Installation]]//
+> **Summary:** .NET Framework 4 failed to install because of error code HRESULT: 0xc8000222.
+> **Related installation help:** //[[rhino/installproblems|Troubleshooting Rhino 5 Installation]]//
 
 **Cause:**\\ Some files corrupted in the **Software Distribution folder**.
 
 **Solution:**
+  - Download [[http://files.na.mcneel.com/misc/Fix_0xc8000222.zip|Fix_0xc8000222.zip]].
+  - Extract the **Fix_0xc8000222.bat** in the zip file to a folder.
+  - Right-click on the Fix_0xc8000222.bat and select **Run as Administrator**.\\ \\ What this batch file does:\\ 1) Disables **Windows Update Service**. \\ 2) Deletes the **C:\Windows\SoftwareDistribution** folder which was locked by Windows Update service.\\ 3) Restarts **Windows Update Service**.
 
-Here is the Video Guide: {{youtube>NVxhZUBgGHc?medium}}
 
 {{tag>rhino5installationerror_en}}
