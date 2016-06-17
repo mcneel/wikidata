@@ -68,19 +68,19 @@ Quando un oggetto è chiuso in Rhino, il programma orienta la direzione di tutte
 Prova 2: Disegnate un cubo. Esplodete in superfici separate. Usando **Dir**, invertite alcune delle superfici verso l'interno. Selezionatele tutte insieme ed usate **Join** per riunrle in una polisuperficie, verificando che succede alla direzione.
 
 =====L'influenza della direzione delle superfici sulle operazioni Booleane=====
-OK, Adesso avete compreso il significato di normali e direzione. Perché questo è così importante nelle operazioni Booleane? Quando diciamo a Rhino di fare una Booleana, il programma controlla la direzione delle normali, per determinare quale parte tenere e quale scartare. In sostanza Unione , Differenza ed Intersezione Booleana sono un'unica operazione, la differenza consiste nelle parti che vengono tenute alla fine. Così ad esempio l'Unione Booleana scarta le parti che si sovrappongono ed il resto viene unito. Con Intersezione Booleana succede esattamente l'opposto.
+OK, adesso avete compreso il significato di normali e direzione. Perché questo è così importante nelle operazioni Booleane? Quando diciamo a Rhino di fare una Booleana, il programma controlla la direzione delle normali, per determinare quale parte tenere e quale scartare. In sostanza Unione, Differenza ed Intersezione Booleana sono un'unica operazione, la differenza consiste nelle parti che vengono tenute alla fine. Così ad esempio l'Unione Booleana scarta le parti che si sovrappongono ed il resto viene unito. Con Intersezione Booleana succede esattamente l'opposto.
 
-Le Booleane con i "solidi"(polisuperfici chiuse) sono prevedibili, perché tutte le normali puntano sempre verso l'esterno. Con le polisuperfici aperte invece il risultato potrebbe sembrare casuale, dal momento che non è immediatamente apparente il davanti ed il dietro di ciascun oggetto, senza utilizzare il comando **Dir**.
+Le Booleane con i "solidi" (polisuperfici chiuse) sono prevedibili, perché tutte le normali puntano sempre verso l'esterno. Con le polisuperfici aperte invece il risultato potrebbe sembrare casuale, dal momento che non è immediatamente apparente il davanti ed il dietro di ciascun oggetto, senza utilizzare il comando **Dir**.
 
 > **Nota:** //Se state effettuando operazioni Booleane su solidi e succede qualcosa di imprevisto, come la sparizione di una parte che dovrebbe essere mantenuta, probabilmente una o più parti non sono chiuse e la loro direzione punta verso l'interno. Usate **Dir** per verificarlo.//
 
-> **Suggerimento:** //un modo per sapere sempre in quale direzione punta la superficie è quello di settare il display per mostrare le facce posteriori in un colore diverso da quelle frontali. Usate il comando **VisualizzazioneAvanzata**  > **Colora facce posteriori**.  Naturalmente questo funziona solo in modalita Ombreggiata o O.semitrasparente, mentre non vedrete niente in Wireframe o Rendering.//
+> **Suggerimento:** //un modo per sapere sempre in quale direzione punta la superficie è quello di settare il display per mostrare le facce posteriori in un colore diverso da quelle frontali. Usate il comando **VisualizzazioneAvanzata**  > **Colora facce posteriori**. Naturalmente questo funziona solo in modalità Ombreggiata o Semitrasparente, mentre non vedrete niente in Wireframe o Rendering.//
 
-Immaginiamo la più semplice operazione Booleana "aperta".  Disponete di un "solido" interamnte intersecato da una superficie singola. Potete facilmente crere questa situazione usando **PianoDiTaglio** in una direzione qualsiasi.
+Immaginiamo la più semplice operazione Booleana "aperta". Disponete di un "solido" interamnte intersecato da una superficie singola. Potete facilmente creare questa situazione usando **PianoDiTaglio** in una direzione qualsiasi.
 
-Provate ora **DifferenzaBooleana** (BD).  Selezionate il solido come primo set ed il piano di taglio come secondo set. Uno o l'altro lato del solido verrà scartato ed il foro chiuso con il piano, ma quale dei 2?
+Provate ora **DifferenzaBooleana** (BD). Selezionate il solido come primo set ed il piano di taglio come secondo set. Uno o l'altro lato del solido verrà scartato ed il foro chiuso con il piano, ma quale dei 2?
 
-Non potete prevederlo, se non eseguendo **Dir** sul piano di taglio. Controllate la direzione della superfcie, effettuate la diffrenza Booleana. Annullate, invertite la direzione con**Dir** e riprovate. La direzione della superficie determina quale parte viene matenuta.
+Non potete prevederlo, se non eseguendo **Dir** sul piano di taglio. Controllate la direzione della superfcie, effettuate la differenza Booleana. Annullate, invertite la direzione con **Dir** e riprovate. La direzione della superficie determina quale parte viene mantenuta.
 
 In generale, se volete che la BD tra una (poli)superficie aperta ed un solido avvenga come se si trattasse di 2 solidi, le normali dell'oggetto aperto devono essere rivolte in direzione del solido, come appunto se anche l'oggetto aperto fosse un solido.
 
