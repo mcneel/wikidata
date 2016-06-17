@@ -49,9 +49,9 @@ Come accennato prima, si possono effettuare operazioni Booleane anche su oggetti
 
 =====Direzione della superficie=====
 
-Innanzitutto è necessario capire bene il concetto di normali e direzione della superficie. Ogni superficie ha un verso, vale a dire un "davanti" ed un " dietro".Questa proprietà in Rhino si chiama "direzione" e la si può verificare con il comando **Dir**.  Provate ad usare **Dir** su diverse superfici e vedete che succede.Le frecce direzionali puntano verso l'esterno di ciascuna superficie e mostrano anche la normale locale, vale a dire sono a 90° rispetto alla superficie a livello locale.
+Innanzitutto è necessario capire bene il concetto di normali e direzione della superficie. Ogni superficie ha un verso, vale a dire un "davanti" ed un "dietro". Questa proprietà in Rhino si chiama "direzione" e la si può verificare con il comando **Dir**. Provate ad usare **Dir** su diverse superfici e vedete che succede. Le frecce direzionali puntano verso l'esterno di ciascuna superficie e mostrano anche la normale locale, vale a dire sono a 90° rispetto alla superficie a livello locale.
 
-Su ciascuna superficie, potete invertire la direzione (es.:rivoltare il verso della superficie). Per farlo, all'interno del comando **Dir**, digitate F  sulla riga di comando e premete Invio, oppure clickate sulla superficie una volta. Vedrete che le frecce si spostano sull'altro lato.
+Su ciascuna superficie, potete invertire la direzione (es.:rivoltare il verso della superficie). Per farlo, all'interno del comando **Dir**, digitate F sulla riga di comando e premete Invio, oppure cliccate sulla superficie una volta. Vedrete che le frecce si spostano sull'altro lato.
 
 Potete anche fare la stessa cosa al di fuori del comando **Dir**, digitando **Flip** sulla riga di comando ed Invio (ma in questo caso le frecce direzionali non sono visibili).
 
@@ -63,9 +63,9 @@ Quando le superfici vengono unite, Rhino tenta di "uniformare" le normali della 
 
 > **Prova:** //Disegnate un quadrangolo. Estrudetelo a formare le pareti verticali di una scatola. Esplodete in 4 superfici separate. Usando **Dir**, invertite la direzione di 2 delle superfici. Selezionatele tutte ed unite a formare di nuovo la polisuperficie. Ora controllate con **Dir** e vedete che è successo alla direzione delle superfici.//
 
-Quando un oggetto è chiuso in Rhino, il programma orienta la direzione di tutte le superfici verso l'esterno,assumendo che l'interno, trattandosi di un oggetto chiuso (solido), non sia più d'interesse. Polisuperfici chiuse non possono avere le normali verso l'interno. Provate ad invertirle con **Flip**: se vi riesce, significa che la polisuperficie non è chiusa o siete incappati in una baco (molto infrequente) di Rhino.
+Quando un oggetto è chiuso in Rhino, il programma orienta la direzione di tutte le superfici verso l'esterno, assumendo che l'interno, trattandosi di un oggetto chiuso (solido), non sia più d'interesse. Polisuperfici chiuse non possono avere le normali verso l'interno. Provate ad invertirle con **Flip**: se vi riesce, significa che la polisuperficie non è chiusa o siete incappati in una bug (molto infrequente) di Rhino.
 
-Prova 2: Disegnate un cubo. Esplodete in superfici separate. Usando **Dir**, invertite alcune delle superfic verso l'interno. Selezionatele tutte insieme ed usate **Join** per riunrle in una polisuperficie, verificando che succede alla direzione.
+Prova 2: Disegnate un cubo. Esplodete in superfici separate. Usando **Dir**, invertite alcune delle superfici verso l'interno. Selezionatele tutte insieme ed usate **Join** per riunrle in una polisuperficie, verificando che succede alla direzione.
 
 =====L'influenza della direzione delle superfici sulle operazioni Booleane=====
 OK, Adesso avete compreso il significato di normali e direzione. Perché questo è così importante nelle operazioni Booleane? Quando diciamo a Rhino di fare una Booleana, il programma controlla la direzione delle normali, per determinare quale parte tenere e quale scartare. In sostanza Unione , Differenza ed Intersezione Booleana sono un'unica operazione, la differenza consiste nelle parti che vengono tenute alla fine. Così ad esempio l'Unione Booleana scarta le parti che si sovrappongono ed il resto viene unito. Con Intersezione Booleana succede esattamente l'opposto.
