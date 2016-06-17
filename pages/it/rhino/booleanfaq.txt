@@ -20,7 +20,7 @@ Per il momento ipotizziamo che tutti gli oggetti siano chiusi.
 Allora, dopo aver preso visione di quanto sopra, se la Booleana fallisce, la prima cosa da controllare è l’intersezione tra gli oggetti. Selezionate gli oggetti ed eseguite il comando Intersezione. Controllate le curve di intersezione sullo schermo. Sembrano corrette? ci sono su di esse interruzioni visibili o parti strane? Se sì, dovete scoprire perché. Se la Booleana fallisce anche se la curva sembra corretta, attivate le Proprietà/Dettagli della curva selezionata o digitate **Cosa** sulla riga di comando. La finestra d'informazione che si apre vi dovrebbe dire tutto quello di cui avete bisogno: la curva è aperta? Quella sarà la zona da controllare. Ci sono più curve? Dovete appurare perché ci sono interruzioni o sovrapposizioni sull'intersezione.
 
 =====Problemi di intersezione, soluzioni e limiti=====
-Quale può essere la causa delle discontinuità o altri problemi sull'intersezione? Ne esistono numerose. Alcune sono dovute ad errori o mancata precisione nella modellazione, alcuni altri a limiti di Rhino. Guardiamo innanzi tutto gli errori più frequenti:
+Quale può essere la causa delle discontinuità o altri problemi sull'intersezione? Ne esistono numerose. Alcune sono dovute ad errori o mancata precisione nella modellazione, alcuni altri a limiti di Rhino. Guardiamo innanzitutto gli errori più frequenti:
 
 Se ritenete che l'intersezione debba essere chiusa, mentre non lo è, digitate **InizioCrv**, che creerà un punto all'inizio della curva. Generalmente tale punto corrisponde ad uno dei lati dell'interruzione. Zoomate su di esso e verificate se l'interruzione risulta visibile. Perchè si è creata una discontinuità in quel punto? Beh, forse credete che i vostri oggetti siano chiusi, mentre non lo sono. L'intersezione potrebbe attraversare una fessura tra 2 superfici e conseguentemente la curva sarebbe interrotta. Se avete unito forzatamente le superfici che formano gli oggetti con il comando **UnisciBordo**, può succedere, anche se gli oggetti vi vengono segnalati come chiusi. L'altra cosa da controllare sono le impostazioni di Tolleranza (Vedere l'articolo Tolleranze in questa sezione). Se esse sono troppo rigide, ciò potrebbe impedire all'algoritmo di intersezione di trovare una curva continua, anche se tutto il resto è a posto. Provate ad allentare la tolleranza fino a quando non ottenete un'intersezione completa: a quel punto l'operazione Booleana dovrebbe funzionare.
 
@@ -30,17 +30,17 @@ Se non riuscite a produrre automaticamente un'intersezione chiusa anche dopo che
 
 <color brown>Cuciture coincidenti</color> – tutti gli oggetti contengono cuciture, a volte quando le cuciture su 2 oggetti coincidono, Rhino ha problemi a trovare l'intersezione. La soluzione: spostare la cucitura o uno degli oggetti di quel pochino sufficiente a fargliela trovare (senza rendere il modello troppo impreciso), oppure farla a mano.
 
-<color brown>Facce coplanari</color> – Se 2 facce degli oggetti sono sullo stesso piano, Rhino non riesce a produrre un'intersezione: Questo capita assai spesso, tentate di evitare di costruire il modello in questo modo, se potete.  Soluzione – come prima, potete spostare un pochino uno degli oggetti, oppure, se questo non è possibile fate l'operazione a mano.
+<color brown>Facce coplanari</color> – Se 2 facce degli oggetti sono sullo stesso piano, Rhino non riesce a produrre un'intersezione: questo capita assai spesso, tentate di evitare di costruire il modello in questo modo, se potete.  Soluzione – come prima, potete spostare un pochino uno degli oggetti, oppure, se questo non è possibile fate l'operazione a mano.
 
 <color brown>Superfici quasi tangenti</color> – come l'intersezione di 2 tubi dello stesso diametro ad una certa angolazione. L'intersezione fallisce spesso nella posizione in cui le superfici sono tangenti. Attualmente non esiste una soluzione semplice per questo problema, al di là dei suggerimenti di cui sopra.
 
 
-<color brown>Animazione: Quando le Booleane falliscono, provate ad editare le superfici.Vedere il filmato:**[[http://wiki.mcneel.com/_media/legacy/en/boolean_problem-1.swf|How to Manually Edit Surfaces with Coplanar Faces and Nearly Tagent Surfaces]]**</color>
+<color brown>Animazione: Quando le Booleane falliscono, provate ad editare le superfici. Vedere il filmato:**[[http://wiki.mcneel.com/_media/legacy/en/boolean_problem-1.swf|How to Manually Edit Surfaces with Coplanar Faces and Nearly Tagent Surfaces]]**</color>
 
 
 <color brown>Oggetti non validi</color> – Se uno degli oggetti sui quali state operando non è valido, le operazioni Booleane falliscono di frequente. Per controllare, usate il comando **SelOggettiImperfetti**. Se uno di essi viene evidenziato, dovrete sistemarlo prima di poter procedere. Si raccomanda inoltre di tenere attivato il controllo automatico, in modo che vi venga notificato immediatamente se viene creato o importato un oggetto non valido. Per farlo, digitate **VerificaOggettiNuovi**, per attivarlo, o disattivarlo se attivo.
 
-<color brown>Polisuperfici Non-Manifold</color> – Benchè Rhino non segnali questi oggetti come invalidi (dovrebbe), essi possono provocare il fallimento delle Booleane. Rhino //non dovrebbe// per niente creare questo tipo di strutture, ma qualche volta lo fa. L'unico modo di scoprirli è controllare le proprietà dell'oggetto.
+<color brown>Polisuperfici non-Manifold</color> – Benchè Rhino non segnali questi oggetti come invalidi (dovrebbe), essi possono provocare il fallimento delle Booleane. Rhino //non dovrebbe// per niente creare questo tipo di strutture, ma qualche volta lo fa. L'unico modo di scoprirli è controllare le proprietà dell'oggetto.
 
 
 ======Operazioni Booleane su oggetti aperti======
