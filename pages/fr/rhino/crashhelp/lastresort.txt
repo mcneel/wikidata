@@ -1,0 +1,44 @@
+====== Diagnostic des erreurs de démarrage de Rhino 5 ======
+
+>Si Rhino ne démarre pas sur votre ordinateur, voici quelques astuces pour comprendre ce qui se passe et réparer le problème.
+
+
+=== Rhino ne démarre pas lorsque je double clique sur un fichier ou lorsque je dépose un fichier ===
+  * Double cliquez sur un **raccourci** de Rhino sur votre bureau ou cliquez sur un élément de Rhino dans le menu de **démarrage**.
+
+  * Si Rhino démarre :
+    * Ouvrez le fichier à partir du menu **Fichier** > **Ouvrir** ou du bouton **Ouvrir** de la barre d'outils. Si le fichier ne s'ouvre pas, le problème vient probablement de celui-ci. Essayez la commande **ContrôlerFichier3dm** sur le fichier. 
+
+
+=== Rhino ne démarre pas à partir du raccourci sur le bureau ni du raccourci dans le menu Démarrer===
+  * Démarrez en mode sans échec.
+    * Le mode sans échec démarre Rhino sans utiliser les graphiques accélérés ni charger de module.
+    * Dans le **Menu Démarrer de Windows**, cliquez sur **Rhinoceros 5.0 in Safe Mode** or **Rhinoceros 5.0 (64-bit) en mode sans échec**.
+      *Répondez **Oui** au chargement des Barres d'outils et **Non** au chargement du RDK.
+
+  * Si Rhino démarre en mode sans échec, il existe probablement un problème avec un pilote vidéo ou un module.
+    * Dans le menu de Rhino : //Outils - Options - Vue - OpenGL//, désactivez la case en haut intitulée **Utiliser les modes d'accélération matérielle**. 
+    * Fermez Rhino et démarrez normalement (sans utiliser le mode sans échec). 
+
+    * Si Rhino démarre lorsque les modes d'accélération matérielle sont désactivés, le problème vient probablement de votre pilote de carte vidéo. 
+      * Téléchargez et installez un pilote actuel pour votre carte vidéo. Nous vous conseillons d'actualiser votre pilote à partir du site du fabricant plutôt qu'à partir d'un site externe.
+        * NVIDIA :  http://www.nvidia.com/Download/index.aspx
+        * Intel :   http://downloadcenter.intel.com/Default.aspx
+        * ATI/AMD : http://support.amd.com/us/gpudownload/Pages/index.aspx
+        * Apple :   http://support.apple.com/downloads/#bootcamp
+        * Autres sites adaptés à votre matériel vidéo.
+        * Note : Si vous travaillez sur un ordinateur portable, vous devrez probablement mettre à jour votre pilote à partir du site du fabricant de votre ordinateur.
+      * Redémarrez Rhino normalement (sans utiliser le mode sans échec).
+
+    * Si Rhino plante toujours après avoir désactivé l'accélération matérielle, le problème peut venir d'un module.
+      * Redémarrez en mode sans échec, et cochez la case **Utiliser les modes d'accélération matérielle**. 
+      * Dans le menu //Outils - Options - Modules//, désactivez la case **Activé** pour tous les modules qui n'étaient pas livrés avec Rhino et cochez la case **Demander de charger les modules désactivés** en bas.
+      * Fermez Rhino et démarrez normalement (sans utiliser le mode sans échec). 
+        * Répondez **Non** au chargement de tous les modules que vous avez désactivés.
+
+      * Si Rhino démarre avec certains modules désactivés, le problème vient de l'un de ces modules. 
+        * Redémarrez Rhino normalement et répondez **Oui** au chargement **d'un module à la fois** et **Non** aux autres jusqu'à ce que vous déterminiez lequel pose problème.
+        * Lorsque vous avez déterminé quel module pose problème, revenez à //Outils - Options - Modules// et cochez la case **Activé** de tous les modules qui ne posent pas problème.
+
+      * Si Rhino plante en mode sans échec ou si vous n'arrivez pas à résoudre le problème avec ces méthodes, contactez-nous sur http://www.rhino3d.com/support pour obtenir de l'aide.
+----
