@@ -1,31 +1,29 @@
-====== 설치 오류 1935 (Windows용 Rhino 5) ======
-> **요약:** //설치 중 발생하는 1935 오류를 해결하는 방법입니다.//
+====== 1935 설치 오류:======
+======어셈블리 구성 요소 Microsoft.VC80.CRT ======
+
+> **요약:** //1935 설치 오류를 해결하는 방법입니다.//
 > **설치와 관련된 도움말:** //[[http://wiki.mcneel.com/ko/rhino/installproblems|Rhino 5 설치 문제 해결 안내]]//
 
 =====문제=====
-"오류 1935. 어셈블리 구성 요소 Microsoft.VC80.CRT, ... 을(를) 설치하는 동안 오류가 발생했습니다." 라는 오류가 표시됩니다.
+설치 중 "오류 1935. 어셈블리 구성 요소 Microsoft.VC80.CRT 을(를) 설치하는 동안 오류가 발생했습니다..."
 
 =====원인====
-이것은 Microsoft C++ 2005 Redistributable Package의 오류입니다.
+Microsoft C++ 2005 재배포 가능 패키지가 설치된 적이 없거나, 설치에 실패했기 때문입니다. 이것은 Windows와 Microsoft 재배포 가능 패키지 관련 문제이며, Rhino 설치 관리자 문제가 아닙니다. 하지만, 그로 인해 Rhino 설치 관리자가 설치에 실패하기도 합니다. 경우에 따라 64 비트 버전 Rhino만 올바르게 설치되지 않기도 합니다.
+
 
 =====답변=====
-**//해결책 1://**
-  * **Windows 업데이트** 일부 사용자가 Windows 업데이트를 설치하여 이 문제를 해결했습니다.
-**//해결책 2://**
-  * **시스템에서 백신 프로그램을 사용 안 함으로 설정합니다.** 한 사용자가 AVG를 사용 안 함으로 설정하니 Rhino를 설치할 수 있었다고 알려 주셨습니다.
-**//해결책 3://**
-  * **여러 번 설치 시도.** 한 사용자가 Rhino 설치를 세 번째 시도했을 때 성공했다고 알려주셨습니다. 그 사용자의 경우, 시스템 설정은 전혀 변경하지 않았습니다.
-**//해결책 4://**
-  - Windows Vista 또는 Windows 7의 시작 메뉴에 **기능**을 입력합니다.
-  - **Windows 기능 사용 / 사용 안 함** 을 클릭합니다.
-  - Windows 기능 대화상자에서 **Windows 커뮤니케이션 파운데이션 HTTP 활성** 항목을 선택합니다:
-  - {{:rhino:rhino_1935_windows_features.png|}}
-  - 확인을 클릭합니다.
+Microsoft C++ 2005 재배포 가능 패키지 **[[https://www.microsoft.com/ko-kr/download/details.aspx?id=26347|Microsoft Visual C++ 2005 Service Pack 1 재배포 가능 패키지 MFC 보안 업데이트]]** 를 직접 설치합니다. 이 어셈블리 버전은 **8.0.50727.5592** 또는 **8.0.50727.6195** 입니다.
 
-이 기능을 활성화할 수 없거나, Windows 기능 대화상자가 공백인 상태로 표시되면 귀하의 Windows 설치가 손상되어 복구되어야 함을 뜻합니다. 도움이 필요하시면 Microsoft 지원에 문의하시기 바랍니다.
+  - **[[https://www.microsoft.com/ko-kr/download/details.aspx?id=26347|Microsoft Visual C++ 2005 Service Pack 1 재배포 가능 패키지 MFC 보안 업데이트 페이지로 가기]]**
+  - **다운로드** 단추를 클릭합니다. {{:rhino:c_2005redistributables01.jpg?500|}}
+  - 32 비트 OS 전용은 vcredistx86.exe 를 다운로드합니다.
+  - 64 비트 OS의 경우, vcredistx86.exe 와 vcredistx64.exe 를 다운로드합니다. {{:rhino:c_2005redistributables02.jpg?500|}}
+  - 파일을 다운로드한 위치로 가서 재배포 가능 패키지(들)을 설치합니다. 
+  - 성공적으로 설치를 완료한 후, Rhino를 다시 설치합니다. 
 
-**//자세히://**
-Rhino를 설치하는 중에 이 오류가 발생하는 사용자들의 경우, Microsoft의 [[http://www.microsoft.com/downloads/en/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 Redistributable Package directly]] 도 설치하시 못 하십니다. 따라서, 이 사항은 Windows와 Microsoft Redistributable Package 관련 문제이며, Rhino의 설치 파일의 문제가 아닙니다. 
+**안내:** 이 방법으로 문제가 해결되지 않는다면 다음 방법을 실행해 보세요: \\
+http://wiki.mcneel.com/ko/rhino/error1935_0x800736b3
 
-{{tag>rhinoinstallationerror}}
+
+{{tag>rhinoinstallationerror_ko}}
 {{tag>rhino5installationerror_ko}}
