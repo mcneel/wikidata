@@ -1,0 +1,44 @@
+====== Diagnóstico de errores al iniciar Rhino ======
+
+>Si Rhino no se inicia en su equipo o se bloquea al iniciarse, aquí encontrará información para detectar el problema y solucionarlo.
+
+
+=== Rhino no se inicia al hacer doble clic o arrastrar y colocar un archivo ===
+  * Haga doble clic en el **acceso directo** del escritorio o en un elemento de Rhino en el menú de **Inicio**.
+
+  * Si Rhino se inicia:
+    * Abra el archivo desde el menú **Archivo** > **Abrir** o mediante el botón **Abrir** de la barra de herramientas. Si el archivo no se abre, el problema probablemente sea del archivo. Ejecute el comando **ExaminarArchivo3dm** en el archivo.
+
+
+=== Rhino no se inicia desde el escritorio o desde el acceso directo del menú Inicio ===
+  * Inicie Rhino en modo seguro.
+    * El modo seguro inicia Rhino sin utilizar gráficos acelerados y sin cargar plug-ins.
+    * En el **menú Inicio de Windows**, haga clic en el elemento **Rhinoceros 5.0 en modo seguro** o **Rhinoceros 5.0 (64-bit) en modo seguro**.
+      * Responda **Sí** para cargar las Barras de herramientas y **No** para cargar el RDK.
+
+  * Si **Rhino se inicia en modo seguro**, puede ser un problema con el controlador de vídeo o un plug-in.
+    * En el menú de Rhino: //Herramientas - Opciones - Vista - OpenGL//, desactive la casilla de la parte superior **Usar modos acelerados de hardware**. 
+    * Cierre Rhino e inícielo normalmente (sin el modo seguro). 
+
+    * Si Rhino se inicia con la aceleración de hardware desactivada, el problema puede ser el controlador de la tarjeta de vídeo. 
+      * Descargue e instale un controlador actualizado para la tarjeta de vídeo. Es mejor obtener el controlador del fabricante del hardware y no de un sitio de terceros.
+        * NVIDIA:  http://www.nvidia.com/Download/index.aspx
+        * Intel:   http://downloadcenter.intel.com/Default.aspx
+        * ATI/AMD: http://support.amd.com/us/gpudownload/Pages/index.aspx
+        * Apple:   http://support.apple.com/downloads/#bootcamp
+        * Otros sitios adecuados para su hardware de vídeo.
+        * Nota: Si trabaja desde un portátil, probablemente tenga que actualizar el controlador desde el sitio del fabricante del portátil.
+      * Reinicie Rhino normalmente (sin el modo seguro).
+
+    * Si Rhino se sigue bloqueando después de desactivar la aceleración de hardware, el problema puede ser un plug-in.
+      * Reinicie en modo seguro y active la casilla **Usar modos acelerados**. 
+      * En el menú de Rhino //Herramientas - Opciones - Plug-ins//, desactive la casilla **Activado** de todos los plug-ins que no venían con Rhino y active la casilla **Solicitar cargar plug-ins desactivados** en la parte inferior.
+      * Cierre Rhino e inícielo normalmente (sin el modo seguro). 
+        * Responda **No** para cargar todos los plug-ins desactivados.
+
+      * Si Rhino se inicia al desactivar algunos plug-ins, el problema es uno de plug-ins desactivados. 
+        * Reinicie Rhino normalmente y responda **Sí** para cargar **un plug-in cada vez** y **No** al resto hasta determinar cuál es el plug-in que está causando el problema.
+        * Cuando se haya determinado el plug-in que causa el problema, vaya a //Herramientas - Opciones - Plug-ins// y marque la casilla **Activado** de todos los plug-ins que no causen un problema.
+
+      * Si Rhino se bloquea en modo seguro o no puede resolver el problema con estos métodos, póngase en contacto con nosotros a través de http://www.rhino3d.com/support.
+----
