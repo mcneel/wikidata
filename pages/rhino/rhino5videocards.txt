@@ -55,6 +55,35 @@ If after testing, your Rhino performance is better than when it is unchecked (So
 Many Rhino 5 features use OpenGL like shaded or rendered display mode and analysis modes.
 The performance will not be great using those new features but they may work ok, which might be more desirable than not working at all.
 
+==== ATI/AMD ====
+
+**AMD Radeon graphics cards are NOT recommended.**
+
+AMD Radeon HD cards are problematic for Rhino 5. They were intended for DirectX graphics only. Video drivers from AMD for the Radeon cards after December 2013 cause strange artifacts in shaded display modes when anti-aliasing is enabled.\\
+
+**Note:** As of late June 2016, AMD added two applications to their driver bundle called **Raptr** and **PlaysTV**. They are automatically installed with driver updates. An included dll causes Rhino V5 to randomly crash after a few minutes. The fix is to uninstall these two applications using the Control Panel tools. This will also remove the dll file causing the crash.
+
+**Note:** As of November 2015, AMD seems to have removed the older drivers from their web site.\\
+\\
+If you have a Radeon, use the older drivers if possible and turn off anti-aliasing.\\
+\\
+
+**FirePro v7900 and v5900 cards ARE recommended.**
+\\
+The FirePros are very fast, but their anti-aliasing is not as good as NVIDIA.
+
+**Note:** As of late June 2016, AMD added two applications to their driver bundle called **Raptr** and **PlaysTV**. They are automatically installed with driver updates. An included dll causes Rhino V5 to randomly crash after a few minutes. The fix is to uninstall these two applications using the Control Panel tools. This will also remove the dll file causing the crash.
+
+==== FireGL 5800/7800/8800 ====
+Both of these cards are nice. The 5800 is on a bit of the low-end for
+FirePros, but it's still a good card. The 7800 is their mid-range FirePro, with the
+8800 being their high-end. 
+
+==== Crossfire ====
+Running in Crossfire should only make things better...although I'm not sure if we will see the difference in Rhino.  Crossfire only really reveals itself when things are really pushing the card, like high resolution packed graphics and games requiring high frame rates.   Rhino just doesn't work that way most of time (like 95%). Rhino's display just sits idle, doing nothing.
+
+-----
+
 ==== NVIDIA Quadro cards ====
 
 These are high-end cards for CAD.\\
@@ -70,31 +99,6 @@ The NVIDIA GeForce line of GT and GTX line of video cards work well with Rhino.
 The GT 200s and 300s seem quite fast.  NVIDIA FERMI-based GeForce cards (i.e. GeForce FX 400 and 500 series) do work, but are not showing the performance increase we expect from the more expensive cards. In fact, in some cases they have been slower then the 200 or 300 series cards.
 
 
-==== ATI/AMD ====
-
-**AMD Radeon graphics cards are NOT recommended.**
-
-AMD Radeon HD cards are problematic for Rhino 5. They were intended for DirectX graphics only. Video drivers from AMD for the Radeon cards after December 2013 cause strange artifacts in shaded display modes when anti-aliasing is enabled.\\
-
-**Note:** As of November 2015, AMD seems to have removed the older drivers from their web site.\\
-\\
-If you have a Radeon, use the older drivers if possible and turn off anti-aliasing.\\
-\\
-
-**FirePro v7900 and v5900 cards ARE recommended.**
-\\
-The FirePros are very fast, but their anti-aliasing is not as good as NVIDIA.
-
-
-==== FireGL 5800/7800/8800 ====
-Both of these cards are nice. The 5800 is on a bit of the low-end for
-FirePros, but it's still a good card. The 7800 is their mid-range FirePro, with the
-8800 being their high-end. 
-
-==== Crossfire ====
-Running in Crossfire should only make things better...although I'm not sure if we will see the difference in Rhino.  Crossfire only really reveals itself when things are really pushing the card, like high resolution packed graphics and games requiring high frame rates.   Rhino just doesn't work that way most of time (like 95%). Rhino's display just sits idle, doing nothing.
-
------
 ===== About performance benchmarks =====
 Driver writers spend months fine tuning their code to get certain benchmarks to yield better results. A given benchmark doesn’t prove anything. All it proves is that that specific benchmark ran better or worse on a specific GPU.
 
