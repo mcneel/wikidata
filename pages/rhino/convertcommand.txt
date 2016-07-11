@@ -1,7 +1,7 @@
-====== Convert command crashing ======
+====== Convert Command Crashing ======
 
 
-> **Question:** //I used Convert to create some toolpaths. I sent the file to the NC where it crashed the other computer. On close inspection it turns out there are gaps between some of the arcs. The gaps a very small and I don't know where they came from. Any idea why?//
+**Question:** //I used Convert to create some toolpaths. I sent the file to the NC where it crashed the other computer. On close inspection it turns out there are gaps between some of the arcs. The gaps a very small and I don't know where they came from. Any idea why?//
 
-> **Answer:** //The gap is only 1e-9 units, so this may be unavoidable numerical error caused by generating arcs using start-end-direction method. The arcs are stored internally as a plane, a radius, and an angle, so there's no guarantee arcs created with start-end-direction method actually start and end exactly at those points. The further away from the origin the curve is, the bigger the error. In general it may be better to first split the curve manually into straight-ish and curvy segments. Convert is not very smart, meaning almost straight and straight areas connected to more curvy areas tend to wiggle. Another possibility is to set the angle tolerance to 0, which turns off the tangency checking. [Mikko Oksanen - 2005-11-28]//
+**Answer:** //The gap is only 1e-9 units, so this may be an unavoidable numerical error caused by generating arcs using the start-end-direction method. The arcs are stored internally as a plane, a radius, and an angle, so there's no guarantee arcs created with the start-end-direction method actually start and end exactly at those points. The further away from the origin the curve is, the bigger the error. In general it may be better to first split the curve manually into straightish and curvy segments. Convert is not very smart, meaning almost straight and straight areas connected to more curvy areas tend to wiggle. Another possibility is to set the angle tolerance to 0, which turns off the tangency checking. [Mikko Oksanen - 2005-11-28]//
 
