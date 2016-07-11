@@ -1,10 +1,11 @@
-====== Rhino 5.0 Status - Lightweight Extrusion Objects for developers ======
+====== Rhino 5.0 Status:======
+======Lightweight Extrusion Objects for Developers ======
 
-Plugins written using C++ SDK, .NET SDK or Rhino common might fail to select the new lightweight extrusion objects depending on the programming style.  This is why it is very important for plugin developers (of Rhino 5.0) to test their product with lightweight extrusions and fix any bugs or crashes.
+Plug-ins written using C++ SDK, .NET SDK or Rhino common might fail to select the new lightweight extrusion objects depending on the programming style.  This is why it is very important for plug-in developers (of Rhino 5.0) to test their product with lightweight extrusions and fix any bugs or crashes.
 
 ===== Overview =====
 
-In general, the CRhinoObjRef (object reference) that you get from CRhinoGetObject (selecting a polysurface, faces or edges) is a special object reference especially when you select lightweight extrusion object.  The reference holds a pointer to the extrusion object and also a proxy brep of that object.  Consider the following sample to select a face:
+In general, the CRhinoObjRef (object reference) that you get from CRhinoGetObject (selecting a polysurface, faces or edges) is a special object reference, especially when you select lightweight extrusion object.  The reference holds a pointer to the extrusion object and also a proxy brep of that object.  Consider the following sample to select a face:
 
     CRhinoGetObject go;
     go.SetGeometryFilter( ON:surface_object );
@@ -18,13 +19,13 @@ Now suppose you picked a box face where the box was actually a lightweight extru
     const ON_BrepFace* original_face = original_objref.Face();
     int face_component_index = original_objref.m_component_index
 
-<color blue>**Note** that "original_obj" is not a "CRhinoBrepObject" and cannot be casted as one.</color>  In this case, it is actually a "CRhinoExtrusionObject".  This one special object reference from the getter "original_objref" has a proxy ON_Brep and therefore the brep and brep_face are both valid as long as the original_objref DOES NOT GO OUT OF SCOPE.  A case that result is deleting the proxy brep and the pointer will be invalid causing crashes and other failures.
-<color blue>**To be safe,** you need to always keep the getter in scope or keep a copy of the object reference.</color>
+<color blue>**Note** that "original_obj" is not a "CRhinoBrepObject" and cannot be casted as one.</color>  In this case, it is actually a "CRhinoExtrusionObject".  This one special object reference from the getter "original_objref" has a proxy ON_Brep and therefore the brep and brep_face are both valid as long as the original_objref __does not go out of scope__. 
+<color blue>**To be safe,** always keep the getter in scope or keep a copy of the object reference.</color>
 
-**Help:** Please post questions to [[news://news.mcneel.com/rhino.plug-ins
+For help, please post questions to [[news://news.mcneel.com/rhino.plug-ins
 |Rhino developer newsgroup]].  Please don't hesitate to ask. 
 
-Following are examples where the code will fail when selecting extrusion objects and suggested solutions. If there are other cases that are failing and you need help with, 
+Following are examples where the code will fail when selecting extrusion objects and suggested solutions. 
 
 ===== Casting CRhinoObject as CRhinoBrepObject =====
 
@@ -40,7 +41,7 @@ Consider the following example to select a polysurface:
     if( 0 == obj )
       return CRhinoCommand::failure;
 
-<color red>**Problem:** casting will be a problem if you select extrusion object. The following line with cause error:</color>
+**Problem:** Casting will be a problem if you select extrusion object:
 
     const CRhinoBrepObject* brep_obj = CRhinoBrepObject ::Cast(obj);
     //
@@ -50,7 +51,7 @@ Consider the following example to select a polysurface:
       return CRhinoCommand::failure;
     const ON_Brep* org_brep = brep_obj->Brep();
 
-<color blue>**Solution:** to make your code work with extrusion objects, get your brep directly from the object reference:</color>
+**Solution:** To make your code work with extrusion objects, get your brep directly from the object reference:
 
     const ON_Brep* input_brep = go.Object(0).Brep();
 
@@ -161,7 +162,7 @@ MyMainCommand() - the main caller function illustrating where things might go wr
     int edge_index = -1;
     CRhinoCommand::result rc = CRhinoCommand::failure;
 
-<color red>**Problem case # 1:** when call a selection function that returns a pointer to input object and edge index:</color>
+<color red>**Problem case # 1:** When call a selection function that returns a pointer to input object and edge index.</color>
     rc = MyGetEdge1(obj, edge_index);
     if( rc != CRhinoCommand::success )
       return rc;
@@ -181,7 +182,7 @@ MyMainCommand() - the main caller function illustrating where things might go wr
       return CRhinoCommand::failure;
 
 
-<color red>**Problem case # 2** when call a selection function that returns a pointer to input brep and edge index:</color>
+<color red>**Problem case # 2:** When call a selection function that returns a pointer to input brep and edge index</color>
     rc = MyGetEdge2(brep, edge_index);
     if( rc != CRhinoCommand::success )
       return rc;
@@ -196,7 +197,7 @@ MyMainCommand() - the main caller function illustrating where things might go wr
       return CRhinoCommand::failure;
 
 
-<color red>**Problem case # 3:** - when call a selection function that returns a pointer to input edge:</color>
+<color red>**Problem case # 3:** When call a selection function that returns a pointer to input edge.</color>
     rc = MyGetEdge3( edge );
     if( rc != CRhinoCommand::success )
       return rc;
@@ -211,7 +212,7 @@ MyMainCommand() - the main caller function illustrating where things might go wr
       return CRhinoCommand::failure;
 
 
-<color red>**Problem case # 4** - when the getter is inside a block or a loop:</color>
+<color red>**Problem case # 4:** When the getter is inside a block or a loop.</color>
     {
       CRhinoGetObject go; //the getter will be destoyed once exiting the block
       go.SetGeometryFilter( CRhinoGetObject::curve_object );
@@ -230,7 +231,7 @@ MyMainCommand() - the main caller function illustrating where things might go wr
     edge_index = edge->m_edge_index;
 
 
-<color red>**Problem case # 5** - Using Object GUID and ComponentIndex to reference objects and sub-objects:</color>
+<color red>**Problem case # 5:** Using Object GUID and ComponentIndex to reference objects and sub-objects.</color>
     ON_UUID uuid = ON_nil_uuid;
     ON_COMPONENT_INDEX component_index;
     rc = MyGetEdgeGUID(uuid, component_index);
@@ -253,7 +254,7 @@ MyMainCommand() - the main caller function illustrating where things might go wr
   }
 
 
-<color blue>**Solution:** you need to either instantiate and pass the getter by refrence from the main function; or, you can also return a copy of the object reference, as follows:</color>
+<color blue>**Solution:** You need to either instantiate and pass the getter by reference from the main function; or, you can also return a copy of the object reference, as follows.</color>
 
   CRhinoCommand::result MyGetFace_work( CRhinoObjRef& obj_ref)
   {
@@ -329,7 +330,7 @@ Special class to use for picking the Face
                  ) const
   {
 
-<color red>**Problem:** the following will fail with extrusion objects because the passed object is of type CRhinoExtrusionObject:</color>
+<color red>**Problem:** The following will fail with extrusion objects because the passed object is of type CRhinoExtrusionObject.</color>
     const CRhinoBrepObject* brep_object = CRhinoBrepObject::Cast(object);
     if ( 0 == brep_object )
       return false;
@@ -340,7 +341,7 @@ Special class to use for picking the Face
     if ( 0 == Face )
       return false;
 
-<color blue>**Solution:** the following will work with extrusion objects. Just remember to cast the geometry rather than the object:</color>
+<color blue>**Solution:** The following will work with extrusion objects. Just remember to cast the geometry rather than the object.</color>
 
     //first, make sure that the component index belongs to a brep
     //
