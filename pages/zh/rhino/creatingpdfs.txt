@@ -1,0 +1,55 @@
+====== 在Rhino建立PDF档 ======
+> **摘要：** //Rhino 4 & 5现在有更先进的PDF支援。以下解释如何建立及控制PDF的汇出。//
+
+
+==== 概要 ====
+
+有两种独立的PDF式样，传统为2D PDF格式。 Adobe现在加入了3D格式的PDF档。
+
+\\
+
+| 2D PDF是一般正常的页面配置格式，利用PDF 纪录Rhino打印输出来建立PDF档案。在Rhino 4，您可以控制PDF档中的页面配置、线条粗细型态。 Rhino 并不支援建立2D PDF图层。|    | 3D PDF 是Adobe新推出的格式，允许PDF模型旋转，改变了3D物件显示的方式。能够将3D模型、材料及纹理信息一同建立在PDF档案里。 以下为3D PDF详情。|
+|{{:legacy:en:BOTTLE_2D.jpg}}|   |{{:legacy:en:hydropdf.jpg}}|
+
+
+=====目前可用的2D 绘图PDF Writers =====
+
+建立2D PDF绘图需要PDF列表驱动程序。有些需要付费，有些免费。 以下为可用驱动程序清单：
+
+  * [[http://www.adobe.com/products/acrobat/|Adobe Acrobat Professional]]
+  * [[http://www.cutepdf.com/|CutePDF]]
+  * [[http://www.pdf995.com/|PDF995]]
+  * [[http://www.primopdf.com/|PrimoPDF]]
+
+想要打印2D PDF时，您需要确定要矢量PDF档或是点阵PDF档。矢量档的好处在于打印较大尺寸时，也有清晰的线条。 点阵式PDF则处理Rhino的影像及阴影，不过只有预设PDF的清晰度。 以下为2D PDF打印详情。
+
+\\
+
+|{{:legacy:en:bottle_vector.jpg}}|{{:legacy:en:bottle_raster.jpg}}|
+|矢量式线条|点阵式输出|
+
+\\
+
+一旦安装了以上驱动程序之一，建立PDF档步骤如下：
+
+  - 在Rhino开启想要转换的绘图。
+  - 执行 Print指令。
+  - 选择您的打印目的地。
+  - 选择页面大小。
+  - 不要选择打印至档案，会造成错误档案格式。
+  - 选择打印方式，矢量或点阵。如果矢量形式印出来是整片灰，表示打印的项目不适合用矢量方式，比如着色模式。
+
+> **注意：** //大部分的PDF转换器允许使用者设定档案的分辨率 (DPI)。这个设定对矢量或点阵打印都会造成影响。在点阵模式中可以控制整体分辨率，在矢量模式则是可以控制档案打印时的准确度。//
+
+===== 目前可用的3D 绘图PDF Writers =====
+
+
+> **备注：**//Acrobat Professional目前并不支援3D PDF。您必须安装Acrobat DC以支援3D模型。 Acrobat DC内含Acrobat DC 驱动程序。//
+  * [[http://www.adobe.com/products/acrobat3d/|Adobe Acrobat 3D]]
+
+目前Acrobat DC只支援Rhino 3的档案格式。如试图读取Rhino 4 的档案，Acrobat将回报档案中没有可显示的几何。您可以将Rhino 4档案存回Rhino 3的格式再由Acrobat读取。
+
+> **更新：**// 根据Acrobat DC的版本，您可能可以用Windows"打印荧幕"功能，直接将Rhino 4的模型带进Acrobat DC。 贴图的分配将保持不变。//
+
+  * [[http://www.simlab-soft.com/3d-plugins/3D-PDF-from-rhino-main.aspx/|SimLab 3D PDF exporter for Rhino]] - 支援Rhino 4 & 5, 32 及 64位元版本。提供15次试用版本。
+  * [[http://www.datakit.com/en/conversion-plug-ins/rhino-25.html|Datakit]] - 支援Rhino 4 & 5, 32 及 64位元版本。提供15次试用版本。
