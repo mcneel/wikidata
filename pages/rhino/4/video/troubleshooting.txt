@@ -5,52 +5,52 @@ This page is for the older Rhino version 4.  For troubleshooting the current Rhi
   * [[http://wiki.mcneel.com/rhino/hardwarebaseline|Hardware Guidelines for Rhino 5]]
 
 
-** Rhino relies heavily on [[rhino:opengl|OpenGL]] for many of the V4 enhanced display features.  Some graphics cards perform much better than others.  This document describes the Rhino display controls, outline a troubleshooting process for solving display related problems, and help you get the best display performance possible. **
+** Rhino relies heavily on [[rhino:opengl|OpenGL]] for many of the V4 enhanced display features.  Some graphics cards perform much better than others.  This document describes the Rhino display controls, outlines a troubleshooting process for solving display related problems, and helps you get the best display performance possible. **
 
-My hope is after reading this, we can build a list of case studies that describes the symptom, and tracks the ultimate resolution for that specific problem.  These case studies will be posted in the table below, so you can find a problem and see how it was fixed for that specific situation.  -John Brock
+My hope is after reading this, we can build a list of case studies that describe the symptom, and tracks the ultimate resolution for that specific problem.  These case studies will be posted in the table below, so you can find a problem and see how it was fixed for that specific situation.  -John Brock
 
 
 |**Problem description** |**System & Hardware** |**Solution** |**Notes**|
 |**V4 SR2 crashes when copying from one session and pasting into a second Rhino session.** |Win XP Pro SR2, NVIDIA Quadro FX 2500 |Turn off using "Region Buffers" | |
-|Suddenly, Rhino 4 is behaving strange. It becomes **very slow on selection** where there are multiple surfaces or curves or on multiple selection. Performing commands is also very slow. It takes some seconds before an active cursor appears after selecting command and placing it over selected surface or curve.  When I have only Top, Front or Right view on, it behaves  almost as smooth, but not as smooth as before troubles occurred. Multiple selection and starting and executing commands is still a bit slowed down. When I have also Perspective on the screen, next to other three or only one of other three views, the operation is very slow. But working in Perspective view only is even slower. It takes up to 10 seconds to make simple multiple selection or start a command and execute it.|Win XP Pro SR2, ATI Saphire X1950 Pro |Select **Do not use OpenGL for Drawing Feedback Items**| |
+|Suddenly, Rhino 4 is behaving strange. It becomes **very slow on selection** where there are multiple surfaces or curves or on multiple selection. Performing commands is also slow. It takes several seconds before an active cursor appears after selecting command and placing it over selected surface or curve.  When I have only Top, Front or Right view on, it behaves  almost as smooth, but not as smooth as before the troubles occurred. Multiple selection and starting and executing commands is still a bit slowed down. When I also have Perspective on the screen, next to any or all the other three views, the operation is very slow. But working in Perspective view only is even slower. It takes up to 10 seconds to make simple multiple selection or start a command and execute it.|Win XP Pro SR2, ATI Saphire X1950 Pro |Select **Do not use OpenGL for Drawing Feedback Items**| |
 |When picking using Osnaps, the viewport **image shifts sideways** a little bit.  It seems like it is picking a slightly different point than I want. |Win XP Pro SR2, NVIDIA Quadro 4 NVS with 64mb VRAM, running dual screens at 1280x1024 and 1680x1050. |Select **Do not use OpenGL for Drawing Feedback Items**. |This fixed the shifting problem but reduced display performance a little.  The real problem is running two screens with not nearly enough VRAM.|
 |**Rhino stalls as I am trying to swipe a selection window to select objects.**  I click and drag a window over objects to select them. The dotted line for the window shows, but when I let go of the LMB to accept the selection, the program freezes for a second before the yellow highlighted objects appear. |AMD Athlon 64 X2 Dual Core Processor 4600, 4 GB of RAM, NVIDIA Quadro FX 3400 |Turn off using "Region Buffers" | Fine tune performance with [[rhino:testviewupdate|TestViewUpdate]] |
 
 ====Message from Jeff====
 > **Note:** //Jeff is the talented developer most involved with the Rhino display.//
 
-The basic problem is that the control settings are not designed to solve problems for a specific card. They're designed to solve specific display problems given specific symptoms.  Also, they're not designed to work in combination with each other (i.e. There aren't two or more settings that solve a specific problem). So, what fixes a problem for one user may not work for another, even if they have the same video card.
+The basic problem is that the control settings are not designed to solve problems for a specific card. They're designed to solve specific display problems given specific symptoms.  Also, they're not designed to work in combination with each other (i.e. there aren't two or more settings that solve a specific problem). So, what fixes a problem for one user may not work for another, even if they have the same video card.
 
-Having said that, get ready for some long winded descriptions about what each setting is designed for:
+Having said that, get ready for some long winded descriptions about what each setting is designed for.
 
 
 =====Use accelerated hardware modes=====
 Control location: //Tools - Options - Appearance - OpenGL//
 
-This one is pretty obvious, but I'm afraid it's probably the most misused and misunderstood option. Basically, it toggles on/off the usage of hardware accelerated graphics modes. To be more specific: It toggles between using the hardware maker's ICD (Installable Client Driver) or using Microsoft's Generic Software Emulation driver.
+This one is pretty obvious, but I'm afraid it's probably the most misused and misunderstood option. Basically, it toggles on/off the usage of hardware accelerated graphics modes. To be more specific, it toggles between using the hardware maker's ICD (Installable Client Driver) or using Microsoft's Generic Software Emulation driver.
 
-Using the ICD usually results in much better graphics performance and more features and capabilities. But it can also result in quite the opposite, and in some cases crashes, mainly because these ICDs are written by the hardware makers, and some of them just don't get things right.   Also, there are major inconsistencies between the different hardware makers. Using Microsoft's Generic Software Emulation driver gives you two important things ICDs do not:
+Using the ICD usually results in much better graphics performance and more features and capabilities. But it can also result in quite the opposite, and in some cases crashes, mainly because these ICDs are written by the hardware makers. Some of them just don't get things right.   Also, there are major inconsistencies between the different hardware makers. Using Microsoft's Generic Software Emulation driver gives you two important things ICDs do not:
 
   * A stable, unchanging, well tested implementation of [[rhino:opengl|OpenGL]] 1.1 functionality that's been around for over a decade, maybe two.
   * A consistent OpenGL implementation that exists on all Windows platforms (i.e. it's the same thing, and yields the same exact results on every machine).
 
-But it's all done in software, which means it's usually pretty slow. And it doesn't support features found in later versions of OpenGL (1.2 - 2.0), some of which Rhino V4 uses (multi-texturing and blending of textures), and there will be quite a bit more used in V5 and beyond. <color red>Which is why I hate recommending this as a solution!</color>
+But it's all done in software, which means it's usually pretty slow. And it doesn't support features found in later versions of OpenGL (1.2 - 2.0), some of which Rhino V4 uses (multi-texturing and blending of textures). There will be quite a bit more used in V5 and beyond, <color red>which is why I hate recommending this as a solution!</color>
 
-Turning off hardware acceleration should be a last resort (in most cases). Most likely turning off hardware acceleration will solve all the problems, but it will also kill some nice features in Rhino. And it will really kill performance. If the user has a really nice graphics card (like a GeForce 7600 xxx or higher, or a Quadro FX 4600), then this option is ridiculous (IMO).  Why? Because they're now getting the same functionality and performance they would get with a $10.00 cheapo card found in someone's junk drawer! Not only should this be unacceptable, but it also makes Rhino look really bad.
+Turning off hardware acceleration should be a last resort (in most cases). Most likely turning off hardware acceleration will solve all the problems, but it will also kill some nice features in Rhino. And it will really kill performance. If you have a really nice graphics card (like a GeForce 7600 xxx or higher, or a Quadro FX 4600), then this option is ridiculous (IMO).  Why? Because you are now getting the same functionality and performance they would get with a $10.00 cheapo card found in someone's junk drawer! Not only should this be unacceptable, but it also makes Rhino look really bad.
 
 If you find yourself reaching for this option, stop, and look elsewhere first.
 
-  * The only exception would be if Rhino is crashing immediately upon startup. If that is the case, you should have the user start Rhino in Safe Mode, disable hardware acceleration, and then restart Rhino.  You're not done yet, and that shouldn't be the end of it. What you should then do is start looking at some of the other options, and then re-enable hardware acceleration to see if Rhino still crashes.
+  * The only exception would be if Rhino is crashing immediately upon startup. If that is the case, you should start Rhino in Safe Mode, disable hardware acceleration, and then restart Rhino.  You're not done yet, and that shouldn't be the end of it. What you should then do is start looking at some of the other options, and then re-enable hardware acceleration to see if Rhino still crashes.
   * If Rhino is still crashing, then you need to start considering driver updates and specific video card make and models. **Please collect this information and add it to this Wiki.**
 
 The only time I have actually had to disable hardware acceleration is:
 
   * Using Trident hardware found in some Toshiba Tablet PCs.
-  * Using Intel 8xxxx onboard video chips. Note: The later Intel 950+ GL cards are actually pretty good, and support accelerated modes quite well, which brings me to an interesting situation. V4 disables hardware acceleration on initial startup for **all** Intel based chips. This means if a user has a 950 GL or higher, they're still using Microsoft Generic driver.  But, enabling hardware acceleration for these chips will most likely help users, and in some cases solve problems (like slowness and updates), which is probably the opposite of what is currently being recommended or suggested.
+  * Using Intel 8xxxx onboard video chips. Note: The later Intel 950+ GL cards are actually pretty good, and support accelerated modes quite well, which is an interesting situation. V4 disables hardware acceleration on initial startup for **all** Intel based chips. This means if a user has a 950 GL or higher, they're still using Microsoft Generic driver.  But, enabling hardware acceleration for these chips will most likely help, and in some cases solve problems like slowness and updates.
   * Crashes caused by ATI x300 cards when logged into Windows XP as a "Basic" user.
   * Certain display characteristics are garbled or corrupted (blotchy polygons, bad/incorrect looking transparency, etc.), in other words, a really bad ICD implementation.
 
-I can't think of any other situation or card where I've had to disable hardware acceleration to get things to work. If you have disabled this option, and don't meet the criteria above, then you probably did the wrong thing, or it might have been the right thing based your configuration (i.e. something I haven't seen before or can't replicate here), in which case you should also start considering driver updates and specific card make and model (again, please collect this information). If you have completely exhausted all other options (without completely eliminating OpenGL altogether (ie. Windows Wireframe)), then it's probably OK to go ahead and turn off hardware acceleration.
+I can't think of any other situation or card where I've had to disable hardware acceleration to get things to work. If you have disabled this option, and don't meet the criteria above, then you probably did the wrong thing. Or it might have been the right thing based your configuration (i.e. something I haven't seen before or can't replicate here), in which case you should also start considering driver updates and specific card make and model (again, please collect this information). If you have completely exhausted all other options (without completely eliminating OpenGL altogether (ie. Windows Wireframe)), then it's probably OK to go ahead and turn off hardware acceleration.
 
 If you do, then I want to know about it.
 
@@ -62,34 +62,34 @@ Control location: //Tools - Options - Appearance - OpenGL//
 
 This one is really old, and I haven't really had to ever use it.  It basically says: "Use the environment mapping mechanism that's inside the driver".
 
-  * Turning this OFF, means "Have Rhino use it's own emap mechanism". You should really only turn this one OFF if you can't get EMaps to work or look right. Then again, I've never seen this problem for the past 4+ years. This one I believe originated from some NT or Win98 configs, neither of which are supported anymore. This one may be a candidate for removal in V5.
+  * Turning this OFF, means "Have Rhino use its own emap mechanism". You should really only turn this one OFF if you can't get EMaps to work or look right. Then again, I've never seen this problem for the past 4+ years. This one I believe originated from some NT or Win98 configs, neither of which are supported anymore. This one may be a candidate for removal in V5.
 
 =====Redraw scene when viewports are exposed=====
 Control location: //Tools - Options - Appearance - OpenGL//
 
-When you do something that changes Rhino's display, a message is sent to update all the viewports.  Some display drivers will update the current viewport and leave the other viewports unchanged.  This setting forces all viewports to be refreshed.  It can slow you down so it should only be used for this specific display problem.
+When you do something that changes Rhino's display, a message is sent to update all the viewports.  Some display drivers will update the current viewport and leave the other viewports unchanged.  This setting forces all viewports to refresh.  It can slow you down so you should only use this for a specific display problem.
 
 =====Do not use OpenGL for drawing feedback=====
 Control location: //- Options - Appearance - OpenGL//
 
-This one is kind of hard to interpret and explain. Before V4, all feedback display was drawn using Windows GDI. This caused problems related to flickering and wire alignment because GDI draws directly to the glass, and there is no way to get GDI to draw to OpenGL's backbuffer. So, the solution in V4 was to come up with as many drawing interfaces as possible in the engine definition so that all feedback could be drawn using the current underlying display engine. So, if OpenGL is being used, then OpenGL draws the feedback, if Windows GDI is being used, then GDI draws the feedback, if DirectX is being used, then DirectX draws the feedback, and so on. For the most part, and for most cards this all works pretty well. However, keep in mind that all feedback is drawn in every single view simultaneously. If you have four views, then all four views need to draw and update. If you have six views, then all six views need to draw and update as fast as they can. So, this option was invented for one reason, and that was speed, or lack of speed, when drawing feedback.
+This one is hard to interpret and explain. Before V4, all feedback display was drawn using Windows GDI. This caused problems related to flickering and wire alignment because GDI draws directly to the glass. There is no way to get GDI to draw to OpenGL's backbuffer. So, the solution in V4 was to come up with as many drawing interfaces as possible in the engine definition so that all feedback could be drawn using the current underlying display engine. So, if OpenGL is being used, then OpenGL draws the feedback. If Windows GDI is being used, then GDI draws the feedback. If DirectX is being used, then DirectX draws the feedback, and so on. For most cards this all works pretty well. But, keep in mind that all feedback is drawn in every single view simultaneously. If you have four views, then all four views need to draw and update. If you have six views, then all six views need to draw and update as fast as they can. So, this option was invented for one reason, and that was speed, or lack of speed, when drawing feedback.
 
-Now let's suppose all views are using OpenGL (which is the default today).  That means there's an incredible amount of blitting, drawing, and backbuffer swapping going on (not too mention context switches) to update all views. Most mid-range cards or higher seem to be able to handle this, but for those cards or drivers that can't, you end up with lag or slowness when drawing, dragging.  Basically any feedback eventually causes jerky feedback to a point where accurate placement or drawing becomes difficult. So, what this option does is it disables the use of the underlying engine (i.e. OpenGL) and forces the Windows GDI engine to draw all feedback. The result is that you're now functioning like Rhino V3, but slightly better. No flickering due to triple buffering mechanisms.
+Now let's suppose all views are using OpenGL (which is the default today).  That means an incredible amount of blitting, drawing, and backbuffer swapping is going on (not too mention context switches) to update all views. Most mid-range cards or higher seem to be able to handle this, but for those cards or drivers that can't, you end up with lag or slowness when drawing or dragging.  Basically feedback causes jerky feedback to a point where eventually accurate placement or drawing becomes difficult. So, what this option does is it disables the use of the underlying engine (i.e. OpenGL) and forces the Windows GDI engine to draw all feedback. The result is that you're now functioning like Rhino V3, but slightly better. No flickering due to triple buffering mechanisms.
 
 You might ask: Why not just always use this?
 
   * Because many of today's cards and drivers have no problem keeping up with Rhino's demands. In fact, in most cases, using the OpenGL engine to draw feedback is much faster than GDI, especially when running on a 24" monitor at 1920x1200 resolution (where each viewport averages 900x600), which is larger than V3's default startup size of 800x600. OpenGL and the video hardware is simply much better at handling this stuff than Windows is.
 
-What we find is that some video cards/drivers also have problems (really implementation inconsistencies) supporting Rhino's feedback and triple buffering mechanism. Sometimes the feedback doesn't look right, or doesn't show up at all. Thus, enabling this option also solves those problems, but it wasn't really designed for that.
+We find that some video cards/drivers also have problems (implementation inconsistencies) supporting Rhino's feedback and triple buffering mechanism. Sometimes the feedback doesn't look right, or doesn't show up at all. Thus, enabling this option also solves those problems, but it wasn't really designed for that.
 
-Use this option only if you are experiencing feedback problems, and nothing else. It won't solve general display problems, it won't fix crashes (unless the crash happens during a display-feedback operation). Again, it might fix something that I haven't seen or thought of.
+Use this option only if you are experiencing feedback problems, and nothing else. It won't solve general display problems and it won't fix crashes (unless the crash happens during a display-feedback operation). Again, it might fix something that I haven't seen or thought of.
 
 If you use this setting, then you should also be aware of the limitations it creates.
 
-  * Before V4, there was no command that attempted to draw Shaded feedback items. With the introduction of V4 and its conduits, this all changed, and several commands today use shaded b-reps and meshes to represent their feedback (some even use transparency).
-  * If you turn this option ON, then all these commands' feedback will come out looking like a solid blob. Why? Because GDI is being used, and GDI can not render shaded polygons, only unlit, solid color polygons.
+  * Before V4, there was no command that attempted to draw Shaded feedback items. With the introduction of V4 and its conduits, this all changed. Several commands today use shaded Breps and meshes to represent their feedback (some even use transparency).
+  * If you turn this option ON, then all these commands' feedback will come out looking like a solid blob. Why? Because GDI is used, and GDI can not render shaded polygons, only unlit, solid color polygons.
 
-> **Important:** //If you do end up disabling the hardware acceleration option, you also have to be aware that now all feedback operations will be done using the Microsoft Generic Software Emulation driver. So if feedback was slow before, then it will be really slow now. You're just going to have to weigh the benefits. My recommendation is that if you do disable hardware acceleration, then you should probably also enable (CHECK) this option, but certainly not vice versa.//
+> **Important:** //If you do end up disabling the hardware acceleration option, be aware that all feedback operations will now be done using the Microsoft Generic Software Emulation driver. So if feedback was slow before, then it will be really slow now. You're just going to have to weigh the benefits. My recommendation is that if you do disable hardware acceleration, then you should probably also enable (CHECK) this option, but certainly not vice versa.//
 
 I've used this option for the following:
 
@@ -98,28 +98,28 @@ I've used this option for the following:
   * Some laptop models with poor throughput and fill-rates, which is really the bottom line here. You might have a really good video card running on a laptop that is poorly designed in the graphics pipeline, and thus has really bad throughput yielding bad fill-rates. Which means updating multiple OpenGL viewports in Rhino simultaneously will probably be a poor performer as well.
   * Users who run in really high resolutions or use more than the typical 4-6 view layouts.
 
-You're just going to have figure this one out as you go. Hopefully now you understand what it is doing, and why and when it should be used.
+You're just going to have to figure this one out as you go. Hopefully now you understand what it is doing, and why and when it should be used.
 
 
 =====Use region buffers when available=====
 Control location: //Tools - Options - Appearance - OpenGL//
 
-This option will be disabled in Rhino V4 SR3 and completely removed from V5. If you're running SR2, the first thing I suggest is to turn this option OFF immediately. I would also shut down Rhino and restart before continuing. In fact, you might even reboot, because once the damage is done, getting back to a normal state might need a reboot.  Keep in mind, this option is only available when region buffers are detected. Most of the NVIDIA cards support them, I think only the FireGL line of ATI cards supports them, and believe it or not, the Intel 9xx series supports them too. If the option is there and enabled, turn it OFF!
+This option is disabled in Rhino V4 SR3 and completely removed from V5. If you're running SR2, the first thing I suggest is to turn this option OFF immediately. I would also shut down Rhino and restart before continuing. In fact, you might even reboot, because once the damage is done, getting back to a normal state might need a reboot.  Keep in mind, this option is only available when region buffers are detected. Most of the NVIDIA cards support them. I think only the FireGL line of ATI cards supports them. And, believe it or not, the Intel 9xx series supports them too. If the option is there and enabled, turn it OFF!
 
-Region Buffers are used for only one thing, updating the screen/window with the contents of the rendered framebuffer.  Garbage on the screen, parts of the screen not updating, or cursor trails during feedback operations, are all indicative of region buffer problems.
+Region Buffers are used for only one thing, updating the screen/window with the contents of the rendered framebuffer.  Garbage on the screen, parts of the screen not updating, or cursor trails during feedback operations, all indicate region buffer problems.
 
 
 =====Switch Wireframe engine from OpenGL to Windows=====
 Control location: Tools - Options - Appearance - Advanced Settings - Wireframe - Other Settings
 
-> **Note:** //Before I explain reasons for doing this I'd like to point out that this option **only** affects **pure** Wireframe display modes, meaning, as soon as you do something to an object or view that requires any kind of shading (Analysis modes, SetObjectDisplayMode=SomeShadedMode, etc.), then this change will be useless and have zero impact on your experience.//
+> **Note:** //Before I explain reasons for doing this I'd like to point out that this option **only** affects **pure** Wireframe display modes, meaning, as soon as you do something to an object or view that requires any kind of shading (Analysis modes, SetObjectDisplayMode=SomeShadedMode, etc.), this change will be useless and have zero impact on your experience.//
 
-The default configuration for Rhino is to now have all four views startup using OpenGL. Once we did this, one of the first things I started hearing from users was complaints about slowdowns, intermittent responses, and in some cases crashes. I eventually realized that it was due to this default change. We had users who had 32mb and 64mb video cards, where V4 ran just fine, but once we made this change, it didn't. The reason: creating multiple rendering contexts for each viewport was exhausting most, if not all of the video memory, was dependent on resolutions, and amount of available contiguous video memory. Thus, having them change the Wireframe engine to be Windows, reduced the amount of allocated video memory, and they were back to where they were before.
+The default configuration for Rhino is to now have all four views startup using OpenGL. Once we did this, the first things I started hearing from users was complaints about slowdowns, intermittent responses, and in some cases crashes. I eventually realized that it was due to this default change. We had users who had 32-MB and 64-MB video cards, where V4 ran just fine, but once we made this change, it didn't. The reason: creating multiple rendering contexts for each viewport was exhausting most, if not all, the video memory, was dependent on resolutions and the amount of available contiguous video memory. Thus, having them change the Wireframe engine to be Windows reduced the amount of allocated video memory. And they were back to where they were before.
 
 The only real reasons I can think of for even suggesting this option are:
 
         * OpenGL just flat out doesn't work at all.
-        * The user's video memory amount:usage ratio is non-optimal. I can't give you a fixed MB amount here because users with large amounts of video memory can still experience problems because they run at extremely high resolutions, and use 2-4 monitors.
+        * The user's video memory amount:usage ratio is non-optimal. I can't give you a fixed MB amount because users with large amounts of video memory can still experience problems because they run at extremely high resolutions, and use two to four monitors.
 
 > **Note:** //Every extra monitor doubles the amount of video memory use. Again, this is just something you're going to have weigh on a per user basis.//
 
@@ -134,11 +134,11 @@ Jeff
 
 Hi Jeff and fellow users,
 
-I have noticed a serious slow down between v3 and v4 and not just between shading and rendering but something as simple as layer display (for example if you have more than 30 layer names it's really slow to select or turn on or off a layer).
+I have noticed a serious slow down between v3 and v4 and not just between shading and rendering but something as simple as layer display. For example, if you have more than 30 layer names it's really slow to select or turn on or off a layer.
 
-I have two machines I use at work both Dell Intel workstations; one with dual dual core  xeon chips, the other with dual quad core chips. Both have 512mb Quadro  fx 4500 card and 4gigs of RAM.
+I have two machines I use at work, both Dell Intel workstations: one with dual dual core  xeon chips, the other with dual quad core chips. Both have 512mb Quadro  fx 4500 card and 4gigs of RAM.
 
-Both machines become painfully slow with any file over 10mb in size. I can take the same file export to 3D Max when I set the display to open GL. It's slow as well (relatively the same as Rhino). When I set the display to Direct-X, no problem. It moves along just fine with no display lag. This leaves me wondering about Open GL.  I have a dual AMD x2 at home and it acts the same in Rhino and 3D Max in regards to open GL and Direct-X. In all scenarios I'm using one monitor. I think this is a real problem and not just trouble shooting.
+Both machines become painfully slow with any file over 10mb in size. I can take the same file export to 3D Max when I set the display to open GL. It's slow as well (relatively the same as Rhino). When I set the display to Direct-X, no problem. It moves along just fine with no display lag. This leaves me wondering about Open GL.  I have a dual AMD x2 at home and it acts the same in Rhino and 3D Max in regards to open GL and Direct-X. In all scenarios I'm using one monitor. I think this is a real problem and not just troubleshooting.
 
 Thanks, 
 Will
@@ -151,9 +151,9 @@ I just got my new PC fully configured (Intel Motherboard D5400XS, with 1 x Quad 
 
 It all works great. My issue is this:
 
-When I move around in my large model (of a building) the Perspective window which I have set with to render removes/clear-out/disapears some of the surfaces for a split second and then displays it all fine when I stop moving.
+When I move around in my large building model, the Perspective window which I have set to render removes/clear-out/disapears some of the surfaces for a split second and then displays it all fine when I stop moving.
 
-I need this not to happen because I record my movements around the model, or later with a path animation with Camtasia software, so I can create a small movie simulating a person walking around the building, inside and out again.
+I don't want this to happen because I record my movements around the model, or later with a path animation with Camtasia software, so I can create a small movie simulating a person walking around the building, inside and out again.
 
 I was able to do this before with the older version of Rhino and a slower PC with a slower card NVIDIA Quadro FX 3500.
 
