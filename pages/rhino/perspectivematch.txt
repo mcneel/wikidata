@@ -1,36 +1,31 @@
 
-=====Rhino Perspective Match to Image PMatch=====
+======Rhino Perspective Match to Image PMatch======
 
-**Context**
 
 You have a perspective picture of something and an accurate 3D model. You want to set the projection in a Rhino perspective viewport so that the model lies on top of the picture.  You might want to do this to validate that your model really is as accurate as you think it is. You may need to add more elements to the model to reconstruct a crash or construction scene (for the accident reconstruction  bowling pin). Or you have modified your model, changed the viewport settings, or want the same rendering projection used to create a previous image ...
 
---
 
 **Step 1:** Open the file with the model in it and put add perspective picture as a wallpaper image in one of the viewports.
 
 **Step 2:** Click in the viewport with the wallpaper image (to make it the active viewport), and run the PerspectiveMatch command.
 
-**Step 3:** Carefully pick a point on the wallpaper image, then **carefully** pick the corresponding 3D point on the model. Keep picking pairs of image/3D points until you have at least 6 pairs.
+**Step 3:** Carefully pick a point on the wallpaper image, then carefully pick the corresponding 3D point on the model. Keep picking pairs of image/3D points until you have at least 6 pairs.
 
 **Step 4:** Press enter.
 
---
+\\
 
-**Tips and tricks**
+====Tips and tricks====
 
-  * Pick **carefully**. Accurate picking is rewarded with accurate results. Sloppy picking gives you garbage.
+  * Pick **carefully**. Accurate picking gives accurate results. Sloppy picking gives you garbage.
   * Make the image view large. This aids in accurate image point picking.
   * If possible, pick point pairs where an end or point snap can be used to select the 3D point. This aids in accurate 3D point picking.
-  * Pick points that are spread out in all dimensions. In the attached example, you get nice results if you pick the "corner" points. You get less accurate results if you concentrate your picking to smaller sub-regions.
+  * Pick points that are spread out in all dimensions. You get nice results if you pick the corner points. You get less accurate results if you concentrate your picking to smaller sub-regions.
 
---
+====Restriction====
 
-**Restriction**
-
-1) The image must be a true perspective image. Photos taken with lenses that are designed to remove perspective distortion will not work.
-
-2) The center of the image must be on the camera's viewing axis. In particular, an image or photo that has had non-symmetric cropping will not work because the center of the resulting image is not the same as the center of the original image.
+  - The image must be a true perspective image. Photos taken with lenses that are designed to remove perspective distortion will not work.
+  - The center of the image must be on the camera's viewing axis. In particular, an image or photo that has had non-symmetric cropping will not work because the center of the resulting image is not the same as the center of the original image.
 
 -- Dale Lear
 
