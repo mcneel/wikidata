@@ -1,0 +1,111 @@
+====== Video Card Recommendations for Rhino 5======
+
+//Updated 13 March 2015//
+
+**Experiencing display problems?** Use the [[rhino:5:video:troubleshooting| video troubleshooter]].
+
+McNeel **does not endorse** specific hardware, nor do we make comparisons.
+Our users often discuss video cards and drivers:
+  * [[http://discourse.mcneel.com/t/holomark-2-released/8040|System configuration benchmarks]]
+
+Other hardware articles:
+
+  * [[http://wiki.mcneel.com/rhino/hardwarebaseline|Rhino system requirements]]
+  * [[http://wiki.mcneel.com/rhino/videocards|The good and bad of specific video cards]]
+
+-----
+===== General OpenGL requirements =====
+
+Rhino uses **OpenGL** to display your model in the viewports. The best OpenGL cards for Rhino are designed for workstation graphics. We recommend cards with as much video memory as possible. OpenGL card manufacturers regularly publish new drivers. These new drivers always fix known problems, and sometimes introduce new ones. We recommend you keep your display driver up to date.
+
+  * Rhino 4 requires OpenGL version 1.1
+  * Rhino 5 requires OpenGL version 2.0 and Shader version 1.2
+
+If you have two video cards, please read about [[http://wiki.mcneel.com/rhino/twodisplayadapters|using Rhino with two video cards]].
+
+
+-----
+===== Updating video drivers =====
+<color red> **Warning:**</color> We recommend you create a system restore point before updating your drivers.
+
+  * [[http://wiki.mcneel.com/rhino/nvidiainfo|NVIDIA Quadro]] (make sure you have driver version 340.66 or newer)
+  * [[http://www.nvidia.com/Download/index.aspx?lang=en-us|Other NVIDIA cards]]
+  * [[http://support.amd.com/us/Pages/AMDSupportHub.aspx|AMD and ATI cards]] 
+
+Do not rely on automatic updates from Windows. Download directly from the manufacturer's web site.
+
+-----
+===== Manufacturer information =====
+==== Intel graphics cards ====
+Rhino 5 SR11 runs on Intel HD3000 and newer chipsets. Common hardware that includes these newer chipsets are 13" Apple MacBooks and Microsoft Surface Pro tablets. These are not high performance cards. 
+
+==== Pre-HD3000 Intel graphics cards ====
+<color red> **Pre-HD3000 Intel graphics chips are not recommended**</color>
+
+Rhino runs using software emulation on these cards and may not work properly if you enable hardware acceleration.
+
+To run Rhino with hardware acceleration:
+
+   - In Rhino, Select the **Tools** menu, then click **Options**.
+   - In the Options dialog box, select the **OpenGL** tab.
+
+{{:rhino:rhino_opengl_options.png?400|}}
+
+If after testing, your Rhino performance is better than when it is unchecked (Software Emulation mode), keep it checked.
+Many Rhino 5 features use OpenGL like shaded or rendered display mode and analysis modes.
+The performance will not be great using those new features but they may work ok, which might be more desirable than not working at all.
+
+==== ATI/AMD ====
+
+**<color red> AMD Radeon graphics cards are NOT recommended </color>**
+
+AMD Radeon HD cards are problematic for Rhino 5. They were intended for DirectX graphics only. Video drivers from AMD for the Radeon cards after December 2013 cause strange artifacts in shaded display modes when anti-aliasing is enabled.\\
+
+**<color red> Note: </color>** As of late June 2016, AMD added two applications to their Radeon driver bundle called **Raptr** and **PlaysTV**. They are automatically installed with driver updates. An included dll causes Rhino V5 to randomly crash after a few minutes. The fix is to uninstall these two applications using the Control Panel tools. This will also remove the dll file causing the crash.
+
+**Note:** As of November 2015, AMD has removed the older drivers from their web site.\\
+If you have a Radeon, use the older drivers if possible and turn off anti-aliasing.\\
+\\
+
+**FirePro v7900 and v5900 cards ARE recommended.**
+\\
+The FirePros are very fast, but their anti-aliasing is not as good as NVIDIA.
+
+<color red> **Note:**</color> As of late June 2016, AMD added two applications to their FirePro driver bundle called **Raptr** and **PlaysTV**. They are automatically installed with driver updates. An included dll causes Rhino V5 to randomly crash after a few minutes. The fix is to uninstall these two applications using the Control Panel tools. This will also remove the dll file causing the crash.
+
+==== FireGL 5800/7800/8800 ====
+Both of these cards are nice. The 5800 is on a bit of the low-end for
+FirePros, but it's still a good card. The 7800 is their mid-range FirePro, with the
+8800 being their high-end. 
+
+==== Crossfire ====
+Running in Crossfire should only make things better...although I'm not sure if we will see the difference in Rhino.  Crossfire only really reveals itself when things are really pushing the card, like high resolution packed graphics and games requiring high frame rates.   Rhino just doesn't work that way most of time (like 95%). Rhino's display just sits idle, doing nothing.
+
+-----
+
+==== NVIDIA Quadro cards ====
+
+These are high-end cards for CAD.\\
+Be sure you are running driver version **340.66** or newer.\\
+[[http://wiki.mcneel.com/rhino/nvidiainfo|More important information]].
+
+
+
+==== NVIDIA GeForce ====
+
+The NVIDIA GeForce line of GT and GTX line of video cards work well with Rhino.
+
+The GT 200s and 300s seem quite fast.  NVIDIA FERMI-based GeForce cards (i.e. GeForce FX 400 and 500 series) do work, but are not showing the performance increase we expect from the more expensive cards. In fact, in some cases they have been slower then the 200 or 300 series cards.
+
+
+===== About performance benchmarks =====
+Driver writers spend months fine tuning their code to get certain benchmarks to yield better results. A given benchmark doesn’t prove anything. All it proves is that that specific benchmark ran better or worse on a specific GPU.
+
+Benchmarks do not show real world use or performance of the GPU. 
+In other words, if one game runs better at some point on a card/GPU, that doesn’t mean that __all__ games will now run better on that card. 
+
+It’s more likely that the benchmarks are mentioned or available only when they test better. What about all the other benchmarks where the card failed or was significantly less?
+
+Benchmarks are marketing tools. They are used to position a specific product so that it looks better than competitive products and are not a good measure of real world use or performance. 
+
+**To get this kind of information, you need to take part in the user forums and get real user feedback and experience.** Consider posting a question to the [[http://discourse.mcneel.com/|Rhino User Forum]].
