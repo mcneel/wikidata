@@ -1,4 +1,4 @@
-=====Resolución de problemas con instaladores RHI=====
+======Solución de problemas con instaladores RHI======
 
 Los archivos **RHI** son Paquetes de **I**nstalación de **RH**ino.\\
 Están diseñados para simplificar la instalación de los plug-ins de Rhino.
@@ -8,16 +8,17 @@ Están diseñados para simplificar la instalación de los plug-ins de Rhino.
 **Causa:** Windows no tiene las asociaciones de archivos correctamente definidas para los archivos RHI.
 \\
 **Solución:**
-  - En el Panel de control, abra Programas y características
-  - Haga clic con el botón derecho en Rhinoceros 5 y, a continuación, haga clic en Reparar
-  - Haga clic con el botón derecho en Rhinoceros 5 64 bits y, a continuación, haga clic en Reparar
+  - En el Panel de control, abra **Programas y características**.
+  - Haga clic con el botón derecho en **Rhinoceros 5** y, a continuación, haga clic en **Reparar**.
+  - Haga clic con el botón derecho en **Rhinoceros 5 64 bits** y, a continuación, haga clic en **Reparar**.
   - Haga doble clic en el instalador RHI para realizar la instalación.
 \\
-Si no funciona, siga las instrucciones para **Asociar manualmente archivos RHI** más abajo.
+Si no funciona, siga las instrucciones para **Asociar manualmente archivos RHI** a continuación.
 <--
 
 -->Paquete no compatible#
 Hay algunos motivos por los que puede ocurrir. El más probable es el primero:
+  - **Rhino V5 antiguo:** intentar instalar Grasshopper en Rhino V5 SR0 puede generar este error. Actualice Rhino V5 a la service release actual para corregir este problema.
   - **Descarga dañada :** un archivo dañado RHI no se puede instalar. Suele ser el resultado de una descarga incompleta. Elimine el archivo RHI, borre los archivos temporales del navegador web y vuelva a descargar.
   - **RHI mal programado:** es posible que el desarrollado no haya creado bien el archivo RHI. Revise las instrucciones para [[developer/rhinoinstallerengine/authoring|crear archivos RHI]].
 \\
@@ -26,32 +27,35 @@ Hay algunos motivos por los que puede ocurrir. El más probable es el primero:
 -->Error al abrir archivo de Rhinoceros 5.0#
 **Causa:** Rhino 5 se asoció incorrectamente con archivos RHI.
 \\
-**Solución:** Siga las instrucciones para **Asociar manualmente archivos RHI** más abajo.
+**Solución:** Siga las instrucciones para **Asociar manualmente archivos RHI** a continuación.
 <--
 
 -->Asociar manualmente archivos RHI#
--->En Windows de 64 bits#
-  - Haga clic con el botón derecho en el archivo RHI y seleccione **Abrir con...**
-  - En el cuadro de diálogo Abrir con, seleccione la casilla **Usar siempre el programa seleccionado para abrir este tipo de archivos**.
+-->Activado 64-bit Ventanas#
+  - Haga clic con el botón derecho en el archivo RHI y seleccione *Abrir con...**
+  - En el cuadro de diálogo Abrir con, seleccione la casilla **Utilizar siempre el programa seleccionado para abrir este tipo de archivos**.
   - En el cuadro de diálogo Abrir con, seleccione **Examinar...**
-  - Vaya a **C:\Program Files\Rhinoceros 5 (64-bit)\System\x64** y seleccione **rhiexec.exe** (si instaló Rhino en otra ubicación, vaya a esa ubicación)
-  - Haga clic en **Abrir**
-  - Haga clic en **Aceptar**
+  - Vaya a //C:\Program Files\Rhinoceros 5 (64-bit)\System\x64// y seleccione **rhiexec.exe** (si instaló Rhino en otra ubicación, vaya a esa ubicación).
+  - Haga clic en **Abrir**.
+  - Haga clic en **Aceptar**.
 
 <--
 
 -->En Windows de 32 bits#
-  - Haga clic con el botón derecho en el archivo RHI y seleccione **Abrir con...**
-  - En el cuadro de diálogo Abrir con, seleccione la casilla **Usar siempre el programa seleccionado para abrir este tipo de archivos**.
+  - Haga clic con el botón derecho en el archivo RHI y seleccione *Abrir con...**
+  - En el cuadro de diálogo Abrir con, seleccione la casilla **Utilizar siempre el programa seleccionado para abrir este tipo de archivos**.
   - En el cuadro de diálogo Abrir con, seleccione **Examinar...**
-  - Vaya a **C:\Program Files\Rhinoceros 5\System\x86** y seleccione **rhiexec.exe** (si instaló Rhino en otra ubicación, vaya a esa ubicación)
-  - Haga clic en **Abrir**
-  - Haga clic en **Aceptar**
+  - Vaya a  //C:\Program Files\Rhinoceros 5\System\x86// y seleccione **rhiexec.exe** (si instaló Rhino en otra ubicación, vaya a esa ubicación).
+  - Haga clic en **Abrir**.
+  - Haga clic en **Aceptar**.
 
 <--
 <--
 
 ==== Implementación de archivos RHI ====
--->Implementación para todos los usuarios de un equipo#
-Consulte [[/es/rhino/installrhi|Instalación de archivos RHI para todos los usuarios]] para obtener más información.
+-->Implementación para todos usuarios del equipo#
+Consulte [[/rhino/installrhi|Instalación de archivos RHI para todos los usuarios]] para obtener más información.
 <--
+
+==== Problemas de desinstalación ====
+Consulte [[/rhino/5/rhi/uninstall|Desinstalar plug-ins RHI de Rhino 5]] para obtener instrucciones sobre cómo desinstalar plug-ins instalados por RHI.
