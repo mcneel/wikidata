@@ -2,8 +2,48 @@
 
 > **Summary:** //This page is set up to share common questions and answers about Flamingo nXt installation. Please add questions (and answers if you have them) that you think would be useful for others. This is a wiki page.  See [[http://wiki.mcneel.com/aboutwiki|What is a Wiki]] for information on adding content.//
 
+=====Installer Error: Windows cannot open the file=====
+**Cause:** Windows doesn't have the file associations set correctly for Rhino RHI files.
 
-=====Installing Flamingo for Rhino 5=====
+**Solution:**
+
+  - In Control Panel, open **Programs and Features**.
+  - Right-click **Rhinoceros 5**, then click **Repair**.
+  - Right-click **Rhinoceros 5 64-bit**, then click **Repair**.
+  - Double-click your RHI installer to install.
+
+If this doesn't work, please follow the instructions for **Manually associating RHI files**.
+
+=====Installer RHI not compatible with Rhino=====
+There are a few possible reasons this error can occur. The most likely are first:
+  - **Old Rhino V5:** attempting to install Flamingo into Rhino V5 SR0 can generate this error. Update your Rhino 
+
+V5 to the current service release to fix this problem.
+  - **Corrupt Download:** a corrupt RHI file that cannot be installed. This often is the result of an incomplete download. Please delete the RHI file, clear your web browser's temporary files, and download again.
+
+=====Rhinoceros 5.0 file open error=====
+**Cause:** Somehow, Rhino 5 was incorrectly associated with RHI files.
+
+**Solution:** Follow the instructions for **Manually associating RHI files** below.
+
+**On 64-bit Windows**
+  - Right-click a Rhino Installer Package (RHI) file, then click **Open with...**
+  - In the Open with dialog box, select the **Always use the selected program to open this kind of file** checkbox.
+  - In the Open with dialog box, click **Browse...**
+  - Browse to //C:\Program Files\Rhinoceros 5 (64-bit)\System\x64// then select **rhiexec.exe** (If you installed Rhino in a different location, browse to that location).
+  - Click **Open**.
+  - Click **OK**.
+
+**On 32-bit Windows**
+  - Right-click a Rhino Installer Package (RHI) file, then click **Open with...**
+  - In the Open with dialog box, select the **Always use the selected program to open this kind of file** checkbox.
+  - In the Open with dialog box, click **Browse...**
+  - Browse to //C:\Program Files\Rhinoceros 5\System\x86// then select **rhiexec.exe** (If you installed Rhino in a different location, browse to that location).
+  - Click **Open**.
+  - Click **OK**.
+
+
+=====Installing Flamingo NXT from a CD=====
 **//Problem://** You run the installer and get an error that Rhino 4 SR9 or Rhino 5 must be installed. Except .... Rhino 5 is already installed.
 
 {{ :flamingo:nxt:nxtnoinstall.jpg?nolink&380 |}}
