@@ -1,0 +1,56 @@
+====== 학교 교실 또는 실습실(Lab)에 Flamingo nXt 5를 설치하는 방법 ======
+
+> **요약:** //Flamingo의 RHI 설치 관리자를 사용하여 쉽고 빠르게 설치합니다. 교실 또는 실습실에 있는 여러 대의 컴퓨터에서 설치하는 방법을 설명합니다.//
+
+
+===== Rhino 5용 Flamingo 설치 =====
+**//문제//** 
+
+Flamingo nXt 5는 Rhino의 플러그인 설치 관리자 엔진 (RHI)를 사용합니다. 대부분의 경우, 쉽고 빠르게 설치를 완료할 수 있으나, 교실이나 실습실에 여러 대의 컴퓨터가 있는 경우에는 그렇지 않습니다.
+
+**//답변//**
+ 
+기본 컴퓨터 이미지, 배치 파일, 그 밖의 다른 배포 방식을 통해 올바른 위치에 파일을 복사하여 Flamingo 설치를 원격으로 마칠 수 있습니다.
+
+다음의 간단한 4단계를 거쳐 설치를 완료합니다:
+
+  - [[http://wiki.mcneel.com/ko/zoo/home|Zoo]]를 사용하여 네트워크에 반드시 [[http://www.rhino3d.com/download/rhino/5.0/sr|Rhino 5 서비스 릴리스 13]] 또는 그 이후 버전을 배포하세요.
+  - 각 컴퓨터에 Flamingo RHI 설치 관리자를 설치합니다.
+  - 각 컴퓨터에서 Flamingo Zoo 라이선스 파일을 Rhino license 폴더에 복사합니다.
+  - 재질 미리보기를 허용하기 위해 썸네일 셸 확장을 설치합니다. 
+
+사용자가 Rhino를 일단 시작하면 Flamingo가 로드되고 별다른 도움 없이 자동으로 설치가 완료됩니다.
+
+==== 모든 사용자를 위해 Flamingo 자동 설치 (silent install) ====
+
+RHI 설치 관리자는 각 컴퓨터에 개별적으로 또는 명령을 실행하여 설치가 가능합니다:
+
+    
+<code>"C:\Program Files\Rhinoceros 5 (64-bit)\System\x64\rhiexec.exe" "C:\Full\Path\To\Flamingo5_Release_xxxxxxxx_xxxx.rhi" /admin /silent</code>
+
+
+/admin 옵션은 해당 컴퓨터의 모든 사용자를 위해 설치합니다. /silent 옵션은 사용자 입력을 표시하지 않고 설치합니다. 위 코드에 적힌 "xxxxxxxxx_xxxx" 부분은 해당 파일의 날짜와 시간입니다. 사용자가 다운로드한 파일에 따라 이 부분이 달라집니다.
+==== Flamingo의 Zoo 라이선스 파일을 클라이언트에 복사하기 ====
+
+  - [[http://d22oc15na41ks6.cloudfront.net/flamingo/nxt/5.0/license/fd53f8c4-546d-47d1-8820-e66c97645a97.lic|Flamingo 라이선스 파일 (fd53f8c4-546d-47d1-8820-e66c97645a97.lic)]] 을 다운로드합니다.
+  - 다음 폴더를 찾습니다:
+
+  C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses
+
+> **안내:** //기본적으로 Microsoft에서는 ProgramData 폴더를 숨겨둡니다. **폴더 옵션**을 사용하여 숨겨진 파일과 폴더의 표시를 허용하거나, Windows 탐색기의 주소창에 **%ProgramData%**를 입력하여 해당 폴더로 바로 갈 수 있습니다.//
+
+==== 클라이언트 컴퓨터에 올바른 Flamingo 셸 확장 설치 ====
+
+클라이언트 컴퓨터의 운영 체제(OS)에 적합한 셸 확장 설치 관리자를 다운로드하여 설치합니다.
+
+  - [[http://s3.amazonaws.com/files.na.mcneel.com/flamingo/nxt/5.0/shell_extensions/ArMatThumb64.exe|64 비트 Windows용 Flamingo 셸 확장 설치 관리자]]
+  - [[http://s3.amazonaws.com/files.na.mcneel.com/flamingo/nxt/5.0/shell_extensions/ArMatThumb.exe|32비트 Windows용 Flamingo 셸 확장 설치 관리자]]
+
+//C:\Program Files\Common Files\McNeel\Rhinoceros\5.0\Plug-ins\Flamingo nXt 5.0// (fd53f8c4-546d-47d1-8820-e66c97645a97) 폴더에 Shell Extension 폴더를 만들고 설치 관리자를 Shell Extension 폴더에 복사한 후 실행합니다.
+
+위의 과정을 실행한 후에는 클라이언트 컴퓨터에서 Flamingo를 사용하실 준비가 완료됩니다. Flamingo를 처음 시작할 때 몇 가지 사용자 프로파일을 설정해야 하지만 해당 과정을 자동으로 실행됩니다.
+
+질문이 있으시면 [[scottd@mcneel.com|Scott Davidson]] 에게 문의 바랍니다.
+
+
+ 
