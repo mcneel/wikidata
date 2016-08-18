@@ -2,39 +2,41 @@
 Apple has added a radically different method for managing your models in OS X, and this has been integrated into Rhino for Mac.  Apple describes autosaving and Versions [[http://support.apple.com/kb/HT4753|here]] and [[http://www.apple.com/macosx/whats-new/features.html#versions|here]]. Another introduction can be found [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|here]].
 
 This article discusses details not mentioned in these articles that are important to Rhino for Mac users.  Also, you should read [[http://wiki.mcneel.com/rhino/mac/lionsaving|Everything you learned about saving files is wrong]].
- 
--->When does Rhino for Mac autosave a model?#
+
+===== When does Rhino for Mac autosave a model? =====
 
 A model is saved when you **close** a model window, when you **quit** Rhino, when you **switch** to another application, and //every once in a while//. Apple says the //every once in a while// saves happen about every five minutes when Rhino is idle. This time interval is not configurable.
 
-<--
-
--->If Rhino is constantly saving my model, am I going to be constantly interrupted by the autosaves?#
+===== If Rhino is constantly saving my model, am I going to be constantly interrupted by the autosaves? =====
 
 The periodic autosaves run in the background. You will never know when a background autosave is happening because it never blocks Rhino from working. If you start changing your model when Rhino attempts an autosave, Rhino silently abandons the autosave and will attempt it again later.
 
-<--
 
--->Is this going to fill up my disk?#
+===== Is this going to fill up my disk? =====
 
-Auto Save does save frequently, but archives only a few versions of your model.  Auto Save archives a model about once an hour for a day, then once a day for a week, and then once a week for some number of weeks.
+Autosave does save frequently, but archives only a few versions of your model.  Auto Save archives a model about once an hour for a day, then once a day for a week, and then once a week for some number of weeks.
 
-<--
+To figure out where most of your disk usage is allocated on your Mac, we recommend [[https://daisydiskapp.com/|DaisyDisk]].
 
--->Can Rhino for Mac browse previous versions of my Rhino models?#
+
+===== Can Rhino for Mac browse previous versions of my Rhino models? =====
 
 Yes, the Versions browser is part of Rhino for Mac.
 
-<--
 
--->What can I do in the Versions browser?#
+===== What can I do in the Versions browser? =====
 
 In the Versions browser, the window on the left is your current model. All the windows on the right are previous versions of your model. These windows are actual Rhino windows and can be manipulated like any Rhino model. You can rotate views, bring up the Layers panel to show and hide layers. You can even copy objects from a past model to paste into your current model. You cannot //change// past versions.
 
-<--
-
--->Can I delete old versions of the file?#
+===== Can I delete old versions of the file? =====
 
 Yes, you can delete the older versions of the file.  To do this, launch Rhino for Mac and open the file in question.  Navigate to the //File// > //Revert To// > //Browse All Versions...//  When the Version explorer appears, move the mouse pointer to upper border of your screen and the Rhinoceros menu bar will appear.  Under //File// > //Revert To// you can delete a single old version or - if you hold down the //option/alt// key - you can delete all previous versions.  This will not delete the open 3dm file, but only the previous versions of it.
 
-<--
+===== Is it possible to disable the Versions feature in Rhino for Mac? =====
+
+Yes, BUT it is **HIGHLY RECOMMENDED** that you **DO NOT DO THIS**.  Rhino for Mac is designed to work with Versions and Autosaving; performance and stability may be impacted if you disable this.  Additionally, you will lose the ability to add tags, rename or move the file from the window title, etc.  If, for some reason, you need to disable it, you will need to launch //Terminal.app// and run the following command:
+    defaults write com.mcneel.rhinoceros ApplePersistence -bool no    
+This will disable autosaving and versions and bring back the Save As in the File menu (instead of Duplicate).
+
+To change back to default behavior, enter the Terminal command again but replace 'no' with 'yes':
+    defaults write com.mcneel.rhinoceros ApplePersistence -bool yes
