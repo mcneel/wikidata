@@ -1,18 +1,21 @@
 ====== Flamingo Performance Tips ======
 
-====FLAMINGO PERFORMANCE TIPS====
 > **Summary:** //Tips and Techniques for Flamingo 1.1 or 2.0 to speed up rendering and get the quality you need.//
 
-======PROCESSOR======
-The speed of the main processor in your computer is the main factor in Flamingo performance. A dual-processor or dual-core computer (when correctly enabled in Windows NT, Windows 2000, Windows XP or Vista) will speed up rendering, probably by 85%, compared to a single processor.  Quad-core processors will approach 4 times the performance of single processors of the same speed.  Currently, Flamingo does not improve performance with more than 4 processors.
+=====Processor=====
 
-======POWER SUPPLY UNIT======
+The speed of the main processor in your computer is the main factor in Flamingo performance. A dual-processor or dual-core computer (when correctly enabled in Windows NT, Windows 2000, Windows XP or Vista) will speed up rendering, probably by 85%, compared to a single processor.  Quad-core processors will approach four times the performance of single processors of the same speed.  Currently, Flamingo does not improve performance with more than four processors.
+
+=====Power supply unit=====
+
 Make sure you have a good PSU, especially in the case of multiple processors/cores.  Being one of the most completely multi-threaded applications available today, Flamingo will instantly push all available logical processors to 100% CPU usage.
 
-======GRAPHICS CARDS======
+=====Graphics cards=====
+
 Graphics cards don't speed up Flamingo rendering.  The graphics/video is used only to display the progress of the rendering calculations, and does not slow them down.
 
-======RAM MEMORY======
+=====RAM Memory=====
+
 Rendering with inadequate RAM memory is a major reason for slow Flamingo performance.
 
 To recognize a shortage in RAM, watch disk accesses, or use Task Manager, as below.
@@ -21,93 +24,99 @@ Watch your disk drive light while the image is painting on the screen. You shoul
 
 If the rendering process is causing significant amount of disk accesses (paging, swapping) Flamingo will be slowed down, and more RAM would speed up rendering.
 
-For more precision about RAM on NT, Win2000, XP, or Vista run Task Manager, and on the Performance tab, note the PhysicalMemory/Total (your amount of RAM). Then look down in the lower left corner at Commit Charge (means total memory space currently used by Windows for everything, including Rhino/Flamingo).
+For more precision about RAM on NT, Win2000, XP, or Vista, run Task Manager, and on the Performance tab, note the PhysicalMemory/Total (your amount of RAM). Then look down in the lower left corner at Commit Charge (means total memory space currently used by Windows for everything, including Rhino/Flamingo).
 
-If during a rendering CommitCharge/Total is way above PhysicalMemory/Total (say 50% higher, or double), it means that Rhino and Flamingo are demanding more virtual memory space than your RAM. So that Windows is having to swap parts of your program and data to disk. The rendering will complete eventually, but disk drive access is said to be 1000x slower than RAM access, so this paging/swapping drastically slows the rendering process.
+If during a rendering CommitCharge/Total is way above PhysicalMemory/Total (say 50% higher, or double), it means that Rhino and Flamingo are demanding more virtual memory space than your RAM. Windows is having to swap parts of your program and data to disk. The rendering will complete eventually, but disk drive access is said to be 1000x slower than RAM access, so this paging/swapping drastically slows the rendering process.
 
-For these 32-bit Windows versions, more than 2GB of RAM memory probably isn't cost-effective.  To utilize more RAM, we have to wait for a version of Rhino that will run natively in an x64 Edition of Windows.
+For these 32-bit Windows versions, more than 2GB of RAM memory probably isn't cost-effective.  To use more RAM, we have to wait for a version of Rhino that will run natively in an x64 Edition of Windows.
 
-======OUT OF MEMORY ERRORS======
-Because of Windows (32-bit) limit of 2GB of memory space per process, Windows can't allocate more than 2GB of Virtual Memory to the Rhino/Flamingo process.  So RAM beyond 2GB is probably not cost-effective.  And if your model is meshed too finely (see meshing below) or is just too big, and you try to Render it, eventually you will get an out-of-memory message and Rhino will crash (close).  If you watch the memory usage in Task Manager you can see the CommitCharge approach 2GB before the crash.
+=====Out of memory errors=====
 
-For more precision on this, use TaskManager  > Processes then pick SelectColumns from the View pulldown menu, and select VirtualMemorySize.  Watch that column for the process Rhino3.exe or Rhino4.exe, in 32-bit Windows that will be limited to 2GB (2,000,000K).
+Because of the Windows (32-bit) 2GB limit of memory space per process, Windows can't allocate more than 2GB of Virtual Memory to the Rhino/Flamingo process.  So RAM beyond 2GB is probably not cost-effective.  And if your model is meshed too finely (see meshing below) or is just too big, and you try to Render it, eventually you will get an out-of-memory message and Rhino will crash.  If you watch the memory use in Task Manager you can see the CommitCharge approach 2GB before the crash.
 
-======VIRTUAL MEMORY======
-You should allocate more than 2GB of disk space to Windows Virtual Memory.  To check on this do Control Panel > System > Advanced and look for Performance and Virtual Memory. If you have plenty of disk space, allocate 4GB (4000MB).  Virtual memory is disk space used to extend RAM (swap file or page file) when Windows needs more space than you have RAM ("Physical memory").
+For more precision on this, use //TaskManager  > Processes// then pick **SelectColumns** from the View pulldown menu, and select **VirtualMemorySize**.  Watch that column for the process Rhino3.exe or Rhino4.exe. In 32-bit Windows that will be limited to 2GB (2,000,000K).
 
-======PREPARING THE MODEL IN RHINO:======
-To save rendering time, or to avoid out-of-memory problems:
+=====Virtual memory=====
 
-Run SelBadObjects on your model, and replace any bad objects. Bad objects usually cause big delays in the render meshing process, and make bad render meshes.  See [[rhino:badobjects|BadObjects]]
+You should allocate more than 2GB of disk space to Windows Virtual Memory.  To check on this go to //Control Panel > System > Advanced// and look for Performance and Virtual Memory. If you have plenty of disk space, allocate 4GB (4000MB).  Virtual memory is disk space used to extend RAM (swap file or page file) when Windows needs more space than you have RAM ("Physical memory").
+
+=====Preparing the model in Rhino=====
+
+To save rendering time or to avoid out-of-memory problems:
+
+Run **SelBadObjects** on your model, and replace any bad objects. Bad objects usually cause big delays in the render meshing process, and make bad render meshes.  See [[rhino:badobjects|BadObjects.]]
 
 Minimize the number of mesh polygons that Flamingo must handle by the methods below:
 
 Hide or turn off the layers of any objects in your model that don't contribute to the rendering, particularly things that are far away, behind other surfaces, or inside solids.
 
-Having geometry outside the view of the camera can slow Flamingo down, for example ground planes made as surfaces or polygons which are much bigger than the scene being rendered. Keep such geometry as small in extents as is possible for the rendered scene. In the case of ground planes, use the Flamingo Environmemt's automatic infinite ground plane which is not geometry and does not slow down the rendering process.
+Having geometry outside the camera view can slow Flamingo down, for example ground planes made as surfaces or polygons which are much bigger than the scene being rendered. Keep such geometry as small in extents as is possible for the rendered scene. In the case of ground planes, use the Flamingo Environmemt's automatic infinite ground plane which is not geometry and does not slow down the rendering process.
 
-======MESHING TECHNIQUE======
-Set Rhino > File > Properties > Mesh to Jagged&Faster, so that the render meshes that Flamingo inherits are not so large. If this makes some round objects have polygonal silhouettes, adjust the meshes globally (see [[rhino:meshfaq|MeshFAQ]] ) or ask for custom meshing on specific objects (see Custom Meshing below)
+=====Meshing techniqueE=====
 
-An alternative that we recommend is to use the Custom setting at Rhino > File > Properties > Mesh, and setting all the numeric parameters to zero except for "Maximum distance edge to surface". Set it to a reasonable value for the size of your model and how closely your rendering camera will look at the objects. For a small jewelry item in millimeters this distance could be 0.1 or even smaller.  For a ship modeled in inches, this distance could be large, like 1.0.  In a shaded viewport, check whether objects with rounded profiles are too coarsely faceted, and adjust the "Maximum distance" setting up or down.
+Set //Rhino > File > Properties > Mesh// to **Jagged&Faster**, so that the render meshes that Flamingo inherits are not so large. If this makes some round objects have polygonal silhouettes, adjust the meshes globally (see [[rhino:meshfaq|MeshFAQ]]) or ask for custom meshing on specific objects (see Custom Meshing below).
 
-======CUSTOM MESHING======
-If a specific rounded object appears faceted in profile/silhouette, you can use a custom mesh for that object (for example, the objects that are close to the camera may need more detailed meshes). In Rhino 3.0, use Rhino's Mesh command (Rhino > Tools > Polygon Mesh > From [[rhino:nurbs|NURBs]] object) to create a denser mesh object for that [[rhino:nurbs|NURBs]] object, and Hide the [[rhino:nurbs|NURBs]] object (surface, solid), and render again. In Rhino 4.0, select the object, run Rhino > Edit > ObjectProperties > Object > RenderMeshSettings > CustomMesh > Adjust.  Rhino will remember that that object should have a custom render mesh.
+An alternative that we recommend is to use the Custom setting at //Rhino > File > Properties > Mesh//, and setting all the numeric parameters to zero except for **Maximum distance edge to surface**. Set it to a reasonable value for the size of your model and how closely your rendering camera will look at the objects. For a small jewelry item in millimeters this distance could be 0.1 or even smaller.  For a ship modeled in inches, this distance could be large, like 1.0.  In a shaded viewport, check whether objects with rounded profiles are too coarsely faceted, and adjust the **Maximum distance** setting up or down.
 
-If cracks appear between adjacent surfaces, join them into the surfaces into a polysurface; the render mesh will be re-calculated to fill across the joined boundary.
+=====Custom meshing=====
+
+If a specific rounded object appears faceted in profile/silhouette, you can use a custom mesh for that object (for example, the objects that are close to the camera may need more detailed meshes). In Rhino 3.0, use Rhino's **Mesh** command (Rhino > Tools > Polygon Mesh > From NURBs object) to create a denser mesh object for that [[rhino:nurbs|NURBS]] object, and Hide the NURBS object (surface, solid), and render again. In Rhino 4.0, select the object, run //Rhino > Edit > ObjectProperties > Object > RenderMeshSettings > CustomMesh > Adjust//.  Rhino will remember that that object should have a custom render mesh.
+
+If cracks appear between adjacent surfaces, join them into the surfaces into a polysurface. The render mesh will be recalculated to fill across the joined boundary.
 
 ===Important===
 See also [[rhino:meshfaq|MeshFAQ]] for lots of very good info about meshing.
 
-======RENDER MESH ONLY======
-Use the MESH command to mesh the model and then HIDE the [[rhino:nurbs|NURBs]] polysurface. Render the mesh only. This is really good solution when you have tried everything else and the rendering fails.
+=====Render mesh only=====
 
-======FLAMINGO SETTINGS FOR SPEED======
-Leave Rhino > Raytrace > Properties > Flamingo > AntiAliasing at High/4X or lower, unless you demonstrate that you need to devote more rendering time to this.  See the Help file.
+Use the **MESH** command to mesh the model and then **HIDE** the NURBS polysurface. Render the mesh only. This is really good solution when you have tried everything else and the rendering fails.
 
-There may be some special situations where increasing AntiAliasing is required, but usually it is more economical of rendering time to increase resolution ( Rhino > File > Properties > Flamingo > Resolution ) of the rendered image instead, to get the same clarity in the final print.
+=====Flamingo settings for speed=====
+
+Leave //Rhino > Raytrace > Properties > Flamingo > AntiAliasing// at High/4X or lower, unless you demonstrate that you need to devote more rendering time to this.  See the Help file.
+
+There may be some special situations where increasing AntiAliasing is required, but usually it is more economical of rendering time to increase resolution (//Rhino > File > Properties > Flamingo > Resolution//) of the rendered image instead, to get the same clarity in the final print.
 
 If you are using soft shadows on any lights, turn this setting off for test renderings. Keep the number of lights using soft shadows as small as you can. Setting the sample number high on soft-shadowed lights is much more expensive in terms of rendering speed than setting the jitter number high. Use the minimum number of samples that makes an acceptable rendering.
 
-======QUICK TEST RENDERING======
-In Rhino > File > Properties > Flamingo > Resolution choose "Viewport", or "Custom" with a small resolution like 300x200 when you are assigning materials, adjusting your views, doing test renderings, etc.
+=====Quick test rendering=====
+In //Rhino > File > Properties > Flamingo > Resolution// choose **Viewport**, or **Custom** with a small resolution like 300x200 when you are assigning materials, adjusting your views, doing test renderings, etc.
 
-To save time during test rendering, use the RenderWindow or RenderPreviewWindow" command to render small portions of your image quickly.
+To save time during test rendering, use the **RenderWindow** or **RenderPreviewWindow** command to render small portions of your image quickly.
 
-Also use RenderPreview command to make a trial full-resolution rendering on your screen that shows the colors, light and shadows, just one level of reflection, etc. but doesn't do the final AntiAliasing pass, which is time-consuming. RenderPreviewWindow and RenderPreviewInWindow are also useful for testing.
+Also use **RenderPreview** command to make a trial full-resolution rendering on your screen that shows the colors, light and shadows, just one level of reflection, etc. but doesn't do the final AntiAliasing pass, which is time-consuming. **RenderPreviewWindow** and **RenderPreviewInWindow** are also useful for testing.
 
-======TRANSPARENCY AND REFLECTIONS======
-Making objects transparent and reflective greatly increases the rendering time. You can experiment with reducing the number of bounces at Rhino > File > Properties > Flamingo > Bounces.  The defaults are 3, they can be set to 0 as an experiment to see if those effects are causing excessive rendering time. If Bounces are too low, you will see black areas in your transparent or reflective objects.
+=====Transparency and reflections=====
+Making objects transparent and reflective greatly increases the rendering time. You can experiment with reducing the number of bounces at //Rhino > File > Properties > Flamingo > Bounces//.  The defaults are 3. They can be set to 0 as an experiment to see if those effects are causing excessive rendering time. If Bounces are too low, you will see black areas in your transparent or reflective objects.
 
 Turn off anything outside your view that you don't need to affect your rendering, Flamingo takes them into account in reflections if they are turned on in Rhino.  Either turn off layers, or select objects and use the Hide command.
 
-======PIXEL SIZE OF RENDERING======
-Choose a Custom resolution (pixel size) such as 1024x768 or higher in Rhino > File > Properties > Flamingo > Resolution when rendering to save to an image file for printing your final output.
+=====Pixel size of rendering=====
+Choose a Custom resolution (pixel size) such as 1024x768 or higher in //Rhino > File > Properties > Flamingo > Resolution// when rendering to save to an image file for printing your final output.
 
 We recommend that you multiply your desired paper printing size in inches by 85 to get the horizontal and vertical resolution (pixel size) for your image. In many printing situations, pixels-per-paper-inch higher than that level do not significantly improve the result, and so cause unneeded processing time.  It depends on the type of paper used, the capabilities of the printer, and how the image is going to be viewed.
 
-Increase your final-rendering resolution above our suggested 85 pixels-per-inch-of-printout, only if you find that your printed output is not clear enough. Doubling the resolution (number of pixels horizontally and vertically) quadruples the rendering time because it quadruples the number of pixels to calculate.
+Increase your final-rendering resolution above our suggested 85 pixels-per-inch-of-printout only if you find that your printed output is not clear enough. Doubling the resolution (number of pixels horizontally and vertically) quadruples the rendering time because it quadruples the number of pixels to calculate.
 
-======PRINTING YOUR RENDERING======
+=====Printing your rendering=====
 For control of your printing, open your rendered image in a program like PhotoShop (Adobe) or PaintShopPro (JASC).
 
-Be mindful that some image printing programs tend to default to printing your image only at 72 dpi scale, but you should modify the printing scale to your needs, without changing the XY (pixel) resolution of the image.
+Note that some image printing programs tend to default to printing your image only at 72 dpi scale, but you should change the printing scale to your needs, without changing the XY (pixel) resolution of the image.
 
-Adobe PhotoShop is tricky to print with, it is locked in on the concept of DPI.  You never want to "rescan" or change the resolution (X and Y dot counts) of your image, but you do want to print it the size you want.  So you may want to use PhotoShop to change the DPI value stored in the image file from 72 to something higher, up to about 150, or even 300 for very dense photo quality printing.  Flamingo 1.1 sets all its images to 72dpi.  Flamingo 2.0 you can set the DPI directly at Rhino > File > Properties > Flamingo > Resolution > PrintedImageSize
+Adobe PhotoShop is tricky to print with. It is locked in on the concept of DPI.  You never want to rescan or change the resolution (X and Y dot counts) of your image, but you do want to print it the size you want.  So you may want to use PhotoShop to change the DPI value stored in the image file from 72 to something higher, up to about 150, or even 300 for very dense photo quality printing.  Flamingo 1.1 sets all its images to 72dpi.  Flamingo 2.0 you can set the DPI directly at //Rhino > File > Properties > Flamingo > Resolution > PrintedImageSize//.
 
-Some users may complain that the DPI setting in an image file from Flamingo 1.1 is 72DPI. DPI merely is a suggestion on how big to print the image. Unfortunately we use "resolution" to mean the number of pixels in x and y directions (which you should not change once you have created the rendered image), and PaintShopPro uses "resolution" for what we call DPI.  Your instructions to the user should be to not change the pixel size, but rather  to print the image at the scale and size they want it (it will stretch to any size in printing).
+Some may complain that the DPI setting in an image file from Flamingo 1.1 is 72DPI. DPI merely is a suggestion on how big to print the image. Unfortunately we use resolution to mean the number of pixels in x and y directions (which you should not change once you have created the rendered image), and PaintShopPro uses resolution for what we call DPI.  Your instructions to the user should be to not change the pixel size, but rather  to print the image at the scale and size they want it (it will stretch to any size in printing).
 
-======PIXEL SIZE FOR EFFICIENCY======
-Experiment to find the minimum pixels-per-inch-of-paper that you need to get adequate printed images. Anything higher is wasted time in rendering.  As implied above, excessive resolution and excessive settings on the Rhino > File > Properties > Flamingo dialog are the commonest reasons for long rendering times.
+=====Pixel size for efficiency=====
+Experiment to find the minimum pixels-per-inch-of-paper that you need to get adequate printed images. Anything higher is wasted time in rendering.  As implied above, excessive resolution and excessive settings on the //Rhino > File > Properties > Flamingo// dialog are the commonest reasons for long rendering times.
 
-======MORE HELP======
-If all this doesn't help, we'll need to work on this more: tell us the size of the model and all your settings in File/Properties/Flamingo and File/Properties/Mesh.  If possible send us the .3DM file itself by doing the FlamingoTransport command and then zipping up the whole contents of the folder that command creates, and attaching it to your email.
+=====More help=====
+If all this doesn't help, we'll need to work on this more: tell us the size of the model and all your settings in //File/Properties/Flamingo and File/Properties/Mesh//.  If possible send us the .3DM file itself by doing the **FlamingoTransport** command and then zipping up the whole contents of the folder that command creates, and attaching it to your email.
 
 [[tech@mcneel.com|Technical Support Email]] tech@mcneel.com
 
 
 ----
-
 
 
 
