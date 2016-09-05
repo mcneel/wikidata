@@ -1,0 +1,11 @@
+======Toolbars and Text Suddenly Shrink After Opening or Saving a File======
+
+> **Summary:** //On some systems, using the Windows file dialog to open or import a file or image file (PictureFrame command) or any operation that uses the file dialog can cause Rhino's interface to suddenly shrink and become unusable//
+
+=====What needs to be done?=====
+  * The default file dialog needs to be disabled in Rhino.
+=====What are the details?=====
+  -Close all Rhinos
+  -Start Rhino and before doing anything else, type the following command in its entirety (it will not auto-complete) followed by <Enter> : **testToggleFileDialog**
+  -Now continue working in Rhino, using the file dialog as before - if Rhino's interface continues to behave, place the same command in Rhino's start up commands so that is always runs as Rhino starts up. (**Options** > **General** page > "Run these commands every time Rhino starts")
+  -Close and restart Rhino normally - it should behave from now on.
