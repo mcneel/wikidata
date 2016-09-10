@@ -1,0 +1,49 @@
+======Wacom 和 Vista 的問題=====
+\\
+====== 問題 ======
+Wacom平板驅動程式的Rhino 4版、Windows Vista的Rhino (包括Vista Home、Vista Premium、Vista Ultimate)，都發現有些問題。
+
+  *平板驅動程式未安裝在有標準系統滑鼠的Vista系統時，可以按一下左鍵並按住工具鈕，彈出擴展工具。或是點選下拉式功能表。
+  * 平板驅動程式安裝之後，按左鍵可提出擴展工具或功能表，但如果用筆尖觸控並按住，也能夠找到並使用工具箱。
+
+=====變通方法=====
+有兩種方法可以查看Rhino允許彈出工具列和功能表。
+
+  *將Wacom 平板觸控筆側開關改成**disable all(禁用所有)**。
+
+**或是**
+
+  *關閉Windows功能**平板PC可選元件**。
+    *關閉Rhino並開啟控制面板/程式功能。
+    *在左邊邊距，選擇**Turn Windows Features On (打開Windows功能)**。
+    * 在Windows功能對話框中查看**平板PC選項元件**。在預設情況下是啟動的，取消選取來關掉它。
+    * 關閉對話，重新啟動Rhino。
+{{:legacy:en:Tablet.jpg}}
+
+微軟表示，Tablet PC控制可以添加或移除Tablet PC輸入面板、 Windows Journal，以及截圖工具。 啟用這些功能同時也安裝手寫辨識軟體。這個功能並非必要安裝除非您有一個平板PC，但如果不裝的話，就無法使用截圖工具。截圖工具可以讓您針對螢幕上的片段、區塊、圖像進行截取。
+
+
+=====造成Rhino當機或重啟的數位DigitalPersona指紋讀取程式=====
+HP筆電可能會使用DigitalPersona的指紋辨識產品，他們的掃描產品會碰到Rhino 4.0彈出工具列提示框的問題，通常是安裝Vista/Windows 7平板PC元件所導致。如果關閉Tablet PC元件無法解決，請在電腦上找到指紋掃描器或其他相關應用程式，特別是DigitalPersona所出的軟體。
+
+2011-1-21日有一個//HP TouchSmart tm2-2012tx//的案例，這台電腦已安裝//HP SimplePass Identity Protection// 它會安裝DigitalPersona的應用程式。 造成問題的程式在**C:\Program Files (x86)\DigitalPersona\Bin\DPAgent.exe**。要解決此問題，請將Windows工作管理員內的**DpAgent.exe *32** 關閉，更改其名稱以防Windows開啟時自動啟動。
+
+{{:rhino:digitalpersona.png|}}
+
+
+-Kelvin
+
+=====2010 / 01 / 12 更新=====
+有些使用者經歷過沒有Wacom平板就無法使用彈出工具列的問題，也有人表示如果無線Logitech滑鼠用的是Microsoft滑鼠驅動程式，工具列也無法彈出。 配對的滑鼠及驅動程式應該就可以修正這個問題。 - JB
+
+=====2008 / 09 / 19 更新=====
+這個問題有部分能夠用V4 SR4解決。在彈出工具列顯示Tooltips還是有問題，我們還是建議關閉**平板PC選項元件(Tablet PC Optional Components)** - JB
+
+=====2008 / 01 / 15 更新=====
+Rhino 4 SR3有辦法可以修復這個問題， 但這版本目前還在研發中。 我們會先把beta版發布在Rhino支援的新聞群組，由使用者進行測試。 當SR3最後敲定後，就可以公布在Rhino網站供下載。 - JB
+
+
+
+
+
+
