@@ -44,5 +44,42 @@ Open “**ghowl_tutorial_topo**” and reference the image as a surface and the 
 
 {{ :rhino:reference.png?nolink&200 |}}
 
+Now the component for getting the elevation connects to google API and it has limitation on how  many times you use it per day and how big the image is and how long the component is used.  The way around it is to disable it after getting the information needed.  So go ahead and enable  the two disabled components and replace the panel at the end. 
+
+{{ :rhino:enable_componants.png?nolink&200 |}}
+
+Once that is done and you can see a list of points in the panel >> right click on it and **stream the content** to a location >> let’s say desktop >> name it “mylocation.txt” >> 
+
+Now go to the desktop  and rename it again “mylocation1.txt” Now go back to grasshopper and  disable both components again. 
+
+**FYI:** if you do not rename the stream, once you disable the components  the saved file will be deleted.  Streaming the content is saving the coordinates of the elevation from google’s API to a text  document. This is done to save the information somewhere other than in grasshopper so that  you do not exceed your limits with Google Earth, because if you do, google will not allow you to  get any information from its API for the next 24 hours.
+
+{{ :rhino:stream.png?nolink&200 |}}
+
+Now drag the “.txt” file you just created to the grasshopper canvas. A file component will show  up.. then hook it to the points component to view the points on your topography.
+
+{{ :rhino:drag.png?nolink&200 |}}
+
+On Rhino Viewport the topography with contour lines is created.
+
+{{ :rhino:mesh.png?nolink&200 |}}
+
+Bake your mesh and contour lines on separate layers and go to Rhino.
+
+
+**Applying google earth image on the mesh and rendering with Flamingo nxt 5.0:**
+
+{{ :rhino:baked_geometry.png?nolink&200 |}}
+
+Hide the contours and make sure your current render is Flamingo nxt 5.0.
+
+{{ :rhino:render.png?nolink&200 |}}
+
+Open Flamingo’s control panel.
+{{ :rhino:control.png?nolink&200 |}}
+
+
+
+
 
 
