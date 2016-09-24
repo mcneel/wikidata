@@ -21,13 +21,15 @@ On the top toolbar, go to **tools** >> **Option** and change these settings:
 **Show Lat/Log:​ Decimal Degrees**  
 **Units of measurement:**​ Based on preference “**Meters, Kilometers**” are used for this tutorial.
 
-{{ :rhino:googleearth_options.png?nolink&200 |}}
+{{ :rhino:googleearth_options.png?nolink&300 |}}
+
+
 
 Again on the toolbar, go to **View** >> make sure “**Scale Legend**” is turned **ON**:
-{{ :rhino:legand.png?nolink&200 |}}
+{{ :rhino:legand.png?nolink&300 |}}
 
 Add a point, name it and write down its latitude and longitude:  This is done to reference the point in grasshopper with the world’s coordinates. Make sure you type the Longitude first. 
-{{ :rhino:point.png?nolink&200 |}}
+{{ :rhino:point.png?nolink&300 |}}
 
 save the image. Make sure the legend is shown on the bottom. 
 
@@ -39,16 +41,16 @@ Type **Scale2D** and rescale the image based on the legand
 
 Then add a **point** where the referenced google earth point is.
 
-{{ :rhino:scale.png?nolink&200 |}}
+{{ :rhino:scale.png?nolink&300 |}}
 
 z
 Open “**ghowl_tutorial_topo**” and reference the image as a surface and the point as a point  in grasshopper. Under the point enter the longitude and latitude respectively :  {long,Lat,0} 
 
-{{ :rhino:reference.png?nolink&200 |}}
+{{ :rhino:reference.png?nolink&300 |}}
 
 Now the component for getting the elevation connects to google API and it has limitation on how  many times you use it per day and how big the image is and how long the component is used.  The way around it is to disable it after getting the information needed.  So go ahead and enable  the two disabled components and replace the panel at the end. 
 
-{{ :rhino:enable_componants.png?nolink&200 |}}
+{{ :rhino:enable_componants.png?nolink&300 |}}
 
 Once that is done and you can see a list of points in the panel >> right click on it and **stream the content** to a location >> let’s say desktop >> name it “mylocation.txt” >> 
 
@@ -56,51 +58,54 @@ Now go to the desktop  and rename it again “mylocation1.txt” Now go back to 
 
 **FYI:** if you do not rename the stream, once you disable the components  the saved file will be deleted.  Streaming the content is saving the coordinates of the elevation from google’s API to a text  document. This is done to save the information somewhere other than in grasshopper so that  you do not exceed your limits with Google Earth, because if you do, google will not allow you to  get any information from its API for the next 24 hours.
 
-{{ :rhino:stream.png?nolink&200 |}}
+{{ :rhino:stream.png?nolink&300 |}}
 
 Now drag the “.txt” file you just created to the grasshopper canvas. A file component will show  up.. then hook it to the points component to view the points on your topography.
 
-{{ :rhino:drag.png?nolink&200 |}}
+{{ :rhino:drag.png?nolink&300 |}}
 
 On Rhino Viewport the topography with contour lines is created.
 
-{{ :rhino:mesh.png?nolink&200 |}}
+{{ :rhino:mesh.png?nolink&300 |}}
 
 Bake your mesh and contour lines on separate layers and go to Rhino.
 
 
-**Applying google earth image on the mesh and rendering with Flamingo nxt 5.0:**
+==== Applying google earth image on the mesh and rendering with Flamingo nxt 5.0: ====
 
-{{ :rhino:baked_geometry.png?nolink&200 |}}
+
+
+
+{{ :rhino:baked_geometry.png?nolink&300 |}}
 
 Hide the contours and make sure your current render is Flamingo nxt 5.0.
 
-{{ :rhino:render.png?nolink&200 |}}
+{{ :rhino:render.png?nolink&300 |}}
 
 Open Flamingo’s control panel.
-{{ :rhino:control.png?nolink&200 |}}
+{{ :rhino:control.png?nolink&300 |}}
 
 Add a new Textured material.
-{{ :rhino:flamingo_texture.png?nolink&200 |}}
+{{ :rhino:flamingo_texture.png?nolink&300 |}}
 
 
 Browse to find the google earth screen capture, and open it.
 
-{{ :rhino:browse.png?nolink&200 |}}
+{{ :rhino:browse.png?nolink&300 |}}
 
 
 Drag and drop the material to the mesh.
 
-{{ :rhino:material.png?nolink&200 |}}
+{{ :rhino:material.png?nolink&300 |}}
 
 
 Now apply planar mapping to the mesh from the top view. Make sure that vertex Osnap in activated to properly align the mapping. Use UV mapping when prompt on the command line.
 
-{{ :rhino:mapping.png?nolink&200 |}}
+{{ :rhino:mapping.png?nolink&300 |}}
 
 Now Render.
-{{ :rhino:render2.png?nolink&200 |}}
+{{ :rhino:render2.png?nolink&300 |}}
 
-{{ :rhino:render3.jpg?nolink&200 |}}
+{{ :rhino:render3.jpg?nolink&300 |}}
 
 
