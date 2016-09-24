@@ -1,0 +1,48 @@
+**GHowl Tutorial** 
+
+GHowl is a grasshopper plug­in created by ​Luis Fraguada​ to extend the functionality of   Grasshopper when it comes to accessing external data sources and applications.  It allows grasshopper users to import/export information from Grasshopper to Excel sheets,  Google Earth, Query online Databases and it also has the ability to  connect to processing, and  Interact with Grasshopper from smartphones.      
+
+**__Getting Started:__**
+
+**1.** Install ghowl from:  http://www.food4rhino.com/project/ghowl?ufh   
+
+**2.** Install Dependencies from:  Exercise files>> Dependencies>> OpenXMLSDKv2    
+
+The dependencies must be installed for the spreadsheets to work, otherwise it is not necessary  for working with google earth.      
+
+​**Getting terrains from Google Earth to Grasshopper: **   
+
+In Google Earth, enter the desired location.  Make sure the North is pointing upwards and the scale of the legend is not more than 500 meters because of Google Earth API’s limitation. This is  discussed later in this tutorial.  
+
+On the top toolbar, go to **tools** >> **Option** and change these settings: 
+
+**Show Lat/Log:​ Decimal Degrees**  
+**Units of measurement:**​ Based on preference “**Meters, Kilometers**” are used for this tutorial.
+
+{{ :rhino:googleearth_options.png?nolink&200 |}}
+
+Again on the toolbar, go to **View** >> make sure “**Scale Legend**” is turned **ON**:
+{{ :rhino:legand.png?nolink&200 |}}
+
+Add a point, name it and write down its latitude and longitude:  This is done to reference the point in grasshopper with the world’s coordinates. Make sure you type the Longitude first. 
+{{ :rhino:point.png?nolink&200 |}}
+
+save the image. Make sure the legend is shown on the bottom. 
+
+
+Open Rhino “Make sure the you use the same units as Google Earth”.
+Type in “**Picture frame**” and bring your Google Earth image in 
+Type **Scale2D** and rescale the image based on the legand
+
+
+Then add a **point** where the referenced google earth point is.
+
+{{ :rhino:scale.png?nolink&200 |}}
+
+
+Open “**ghowl_tutorial_topo**” and reference the image as a surface and the point as a point  in grasshopper. Under the point enter the longitude and latitude respectively :  {long,Lat,0} 
+
+{{ :rhino:reference.png?nolink&200 |}}
+
+
+
