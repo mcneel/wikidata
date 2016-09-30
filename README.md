@@ -97,4 +97,9 @@ sudo /etc/init.d/lighttpd force-reload
 
 - If you're happy with the results, change the Elastic IP associated with the Wiki to point at the server instance you just launched. The elastic IP exists in the VPC->Elastic IP control panel.
 
-
+- To add superusers to the system
+```
+ssh into the server
+sudo nano /var/www/dokuwiki/conf/local.protected.php
+add to $conf['superuser'] line
+```
