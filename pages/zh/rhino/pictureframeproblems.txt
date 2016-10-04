@@ -1,0 +1,39 @@
+**图框平面(PictureFrame)问题** 
+
+在Rhino里，图框平面(PictureFrame)的影像没有显示。或是显示白色或空白，没有文字也没有影像。
+
+{{:rhino:blank.png|}}
+ 
+**解决方法**
+
+**1.更新显示卡的驱动程序**
+
+确认你的Windows显示驱动程序是显示卡厂商所提供的最新版。
+
+**2.确认硬件加速是打开的**
+
+Windows加速滑杆应该被设定在最右边，或至少大部分设到右边。 (PS.一般在XP中才能修改此选项，Win 7/8若安装符合WDDM标准的显示卡，则无法变更硬件加速设定值)
+此功能在显示-内容设定-进阶-疑难解决标签 (Display->Properties->Settings->Advanced->Trouble Shooting tab)
+
+{{:rhino:slider.png|}}
+
+**3.确认Rhino的硬件加速模式开启中**
+
+在Rhino 5版，此功能会在选项>视图>OpenGL (Option>Rhino Options>View>OpenGL)如果你使用的是Rhino 4版，请到选项>外观（Appearance）>OpenGL，从右侧视窗中确认 "使用硬件加速模式" 是勾选的。 
+同时也请确认使用的是供应商的显示卡，不是 Windows的基本GDI卡。   
+
+{{:zh:rhino:01.jpg|}}
+
+**4.从渲染进阶显示模式回到预设模式**
+
+最近的趋势是修改这个渲染显示。改变渲染显现模式的选项，会导致图框平面(PictureFrame)指令无法正常工作。如果有任何问题，用"还原预设值"来将渲染显示模式设回预设模式。
+
+{{:zh:rhino:02.jpg|}}
+
+特别说明，将＂Color and Materials Usage" 设定为"Single Color for all objects" 时，会让图框平面(PictureFrame)的预览模式在Rhino视窗下看起来是空白的。
+
+{{:zh:rhino:03.jpg|}}
+
+5. 检查图档
+
+有时可能是使用到有问题的图档，请试着使用档案尺寸较小的图档看看是否可行。我们曾有遇过大尺寸的图档或是不是标准RGB颜色设定的图档，例如JPGc或是TIFF格式被设定为CMYK颜色。
