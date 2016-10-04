@@ -1,0 +1,83 @@
+====== 使用图块 ======
+Rhino 4与5的图块基本上是一样的。但Rhino 5提供额外功能跟指令，可以在[[http://www.rhino3d.com/new/large|这里]]找到。
+ 
+> **摘要:** //图块提供一个档案中管理重复物件的方法。//
+
+=====使用图块的优点包括:=====
+
+  * 如果是更改定义图块几何的图块引例，您可以更改任何数量的物件复本。
+  * 物件可以从外部档进行更新。
+  *  重复单一定义引例并不会将档案大小增加太多，因为只有一个实际定义保存在档案里。 所有引例都引用一个原始定义。 Rhino有一些簿记即显示的技巧，在其他位置和方向做显示。
+
+=====图块如何运作:=====
+当您在Rhino从目前档案中从几何以[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/block.htm|Block]] 指令建立图块，Rhino会将以选的几何换至为图块//引例//。 它将会在档案中储存图块定义 (您选取用来定义图块的几何)。您可以用[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/insert.htm|Insert]]指令来插入任意数量的引例。
+已存在的图块定义可以从下拉清单中的[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/insert.htm|Insert]]来插入对话。
+
+如果您插入另一个3dm档案为图块引例，类似的事情将发生。 图块定义会被当前档案储存。 您在荧幕上看到的是几何的//引例//。 不同在于如果定义追溯至外部档，是可以被更新，就像外部档有改变时，引例也跟着改变。 这可以通过[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/blockmanager.htm|BlockManager]]做到。
+
+在这两种情况下，要让图块定义存在档案中并不需要放置任何实际的引例到档案里。这就是为什么有时候删除图层会发生问题。 如果某图块定义用到了图层，您没有办法删除它。 当一个图块的所有引例被删除时，就会出现这个状况。请用 [[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/purge.htm|Purge]]指令来删除所有未使用的图块定义。
+
+要针对档案中某一图块更新所有图块引例，您需要重新定义图块。 
+[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/explode.htm|炸开]]图块引例。
+  - 对物件进行更改。
+  - 利用[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/block.htm|Block]] 指令重新阻止使用相同名称的物件。 \\ 您将看到一个警告对话方块，以确认对定义的更改。 
+  -  或是您可以利用不同一组物件来重新定义图块。
+
+
+==== 范例尝试 ====
+  - **//做一个立方体//**并利用 [[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/block.htm|Block]] 指令来定义图块。 
+  - 将它命名为**Box1**。 \\ 将插入点放在框中的一角。 \\ 之后，这已经不是一个立方体，看起来象是，但如果将其选取并查看[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/properties.htm|属性(Properties)]] > 详情，您就会看到图块引例。 
+  - [[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/explode.htm|炸开]]图块。 
+  - 再次检查[[http://docs.mcneel.com/rhino/5/help/en-us/index.htm#commands/properties.htm|属性(Properties)]]。 \\ 已经变回立方体，而不是那个命名为**Box1**的图块。 
+  - 删除立方体。 
+  - 现在请利用 [[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/insert.htm|Insert]] 指令。 
+  -  在下拉清单里的[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/insert.htm|插入(Insert)]] 对话找到 **Box 1**. \\ 这就是当初建立图块时做的图块定义。  
+  - 将其作为图块引例并[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/insert.htm|插入(Insert)]] ，然后复制引例。 
+
+**//在Rhino 4中重新定义图块://** 
+  - 选择**Box1**其中一个引例。
+  - 将其[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/explode.htm|炸开]]还原为一个普通的立方体。 
+  - [[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/explode.htm|修剪(Fillet)]]立方体的边缘。 
+  - 现在请利用 [[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/block.htm|Block]]指令。
+  - 选取修剪过的立方体并选择一个插入点。 
+  - 选择**Box1**为新图块的名字。 \\ Box1的所有引例现在都成为修剪过的立方体。\\ 它们有可能移动了如果您在新定义上选择的插入点跟原始的不一样。
+
+**//在Rhino 5中重新定义图块://** \\ 
+在Rhino 5 您可以使用[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/blockedit.htm|BlockEdit]]指令。 
+  - 在图块引例上双点击以启动BoxEdit。 
+  - [[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/blockedit.htm|BlockEdit]]对话框将会出现。 
+  - 添加和删除物件，并重设插入点。 
+  - 您现在可以在图块中直接做几何编辑。 
+  - 关闭 [[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/blockedit.htm|BlockEdit]] 以储存此模型中图块引例的所有更改及更新。 
+  - 选取"x"或ESC来取消重新定义。
+
+  - **//建立球体。//** 
+  - 建立**[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/block.htm|图块]]** 并选取一个插入点。 
+  - 将立方体命名为**Box1**. \\ 修剪过的立方体现在都是球体了。
+ 
+=====外部图块引用=====
+外部档案的图块定义可以经由编辑及储存外部档来更新，接着在[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/blockmanager.htm|BlockManager]] 更新定义。 定义用的是绝对路径，所以您无法移动图块定义中使用的外部档案并且更新。 但目前定义并不在意源文件是否移动了，目前定义就是在目前的档案里。
+
+
+==== 范例尝试 ====
+  - **做一个立方体**，然后储存档案。 
+  - 开一个新档，命名为**[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/insert.htm|Insert]]**。 \\ 利用 **档案(File)** 来找到立方体的档案。 
+  - 将其作为一个图块引例的插入。 
+  - 将此图块做几个副本 - 尝试一下缩放、旋转。
+  - 在Rhino的另一个引例中，开启立方体的档案并修改边缘。 
+  - 建立球体。 
+  - 储存档案。 
+  - 回到有插入图块的档案，并启动[[http://docs.mcneel.com/rhino/5/help/zh-cn/index.htm#commands/blockmanager.htm|BlockManager]] 指令。 \\ 您会看到有插入立方体档案的引用。 
+  - 在清单中选取并按一下**更新**。这个档案里的引例现在应该都是修剪过的立方体与一个球体
+  
+** 有关图层的注解：** 
+  * 在所有情况下，图块定义中物件的图层在引例中。 
+  * 关闭任何部分图块引例使用的图层，将会关闭Rhino视窗中那个部分的图块引例。 
+  * 关闭插入引例的图层将会导致关闭整个图块，不管其他图层是不是仍被这个图块使用中。
+
+======进阶技巧======
+
+**[[developer:scriptsamples/superexplodeblock|SuperExplodeBlock 脚本]]**\\ 
+(现在已经是 V4[[zh-cn:labs:rhinolabstools|Rhino Labs 工具]]，并且是V5中的指令)
+
+**[[developer:scriptsamples/countblocks|计算图块脚本]]**
