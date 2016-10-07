@@ -35,6 +35,8 @@ A great many industrial cutting machines and software **only** understand **//li
 
 You can use the Rhino **Convert** command for this process, commonly called "Arc Fitting". Set options to: **Output**=//Arcs//, **SimplifyInput**=//No//, **AngleTolerance**=//0//, and **Tolerance** to a reasonable number for your model. Run the **Convert** command on all curves in the file you want to send to the cutter.
 
+//**Note:**// Before running **Convert**, explode any joined polyline curves into basic curves with the **Explode** command . 
+
 ====Geometry repair and nesting====
 
 Overlaps, gaps, and duplicate curves cause problems in cutting. The **CurveBoolean** command may work to clean some of these up, but may not entirely eliminate overlapping sections, and it will not fix gaps.  For small gaps, the **CloseCrv** command in Rhino can be a quick fix for open curves that need to be closed. (Use this with caution.)
