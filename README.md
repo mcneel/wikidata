@@ -68,6 +68,17 @@ sudo cp /var/www/dokuwiki/wikidata/conf/dokuwiki/conf/* /var/www/dokuwiki/conf/
 sudo cp -R /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/plugins/* /var/www/dokuwiki/lib/plugins/
 sudo cp -R /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/tpl/* /var/www/dokuwiki/lib/tpl/
 ```
+- Update Diffie-Helman Epehemeral Parameters
+From https://raymii.org/s/tutorials/Strong_SSL_Security_On_lighttpd.html
+```
+cd /etc/ssl/certs
+openssl dhparam -out dhparam.pem 4096
+```
+Add it you your lighttpd config:
+```
+ssl.dh-file = "/etc/ssl/certs/dhparam.pem" 
+ssl.ec-curve = "secp384r1"
+```
 - Set up user accounts. Our user account list is in a separate private SVN repo since we don't want the email addresses in it to be public http://subversion.mcneel.com/www/wiki/ **Paste** the contents of this list into the nano editor and save
 ```bash
 sudo touch /var/www/dokuwiki/conf/users.auth.php
