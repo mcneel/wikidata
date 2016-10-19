@@ -70,9 +70,10 @@ sudo cp -R /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/tpl/* /var/www/dokuwiki/
 ```
 - Update Diffie-Helman Epehemeral Parameters
 From https://raymii.org/s/tutorials/Strong_SSL_Security_On_lighttpd.html
+and http://security.stackexchange.com/questions/95178/diffie-hellman-parameters-still-calculating-after-24-hours
 ```
 cd /etc/ssl/certs
-openssl dhparam -out dhparam.pem 4096
+openssl dhparam -dsparam -out dhparam.pem 4096
 ```
 Add it you your lighttpd config:
 ```
