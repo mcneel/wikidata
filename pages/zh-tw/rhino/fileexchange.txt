@@ -3,33 +3,32 @@
 ====== Rhino的檔案交換======
 (按字母順序)
 
-=====1. 關於檔案形式的資訊=====
-  *3DS
+=====關於檔案形式的資訊=====
+**3ds**
     *匯入3DS檔案時，為何彩現物件為黑色?
     *這跟法線無關，但跟用於構造每個多邊形的頂點順序有關。 Rhino利用逆時針的順序來判斷如何繪製單獨的多邊形。 然而在此情況下，檔案有許多多邊形。統一法線不一定會改變或解決順序的問題，一個最常用的修改方式(通常對於3ds檔最好用)，就是匯出壞掉物件為RAW格式三角形，再將它們重新匯入，並執行UnifyMeshNormals，應該就會能改善。 --Rhino研發團隊
-  * DXF/DWG
+**DXF/DWG**
     *請確認您有RH3.0修補應用程式，能夠於DXF/DWG I/O檔案使用最新更新。
     *dwg與DXF檔使用的是慣用右手，Z軸朝上的座標系統，因此在預設的情況下，會在Rhino的俯視視圖區開啟。
-  * IGES -> [[rhino:troubleshootingiges|Iges白皮書]]
-  *MAX
+**IGES** -> [[rhino:troubleshootingiges|Iges白皮書]]
+**MAX**
     * 據我們所知，3DS MAX本身就可以讀/寫MAX檔。Okino表示：為了要讀寫.max檔，我們必須在3DS MAX內直接執行PolyTrans。這是因為我們需要3DS MAX去評估在其基礎網格上執行的許多外掛程式模組。評估結果輸出的網格就會被送至PolyTrans。反之亦然，要從PolyTrans導入資料並存呈3DS MAX內部資料庫則一定要有進入3DS MAX的核心的途徑。
     * Rhino3DMaxTools - Rhino與3DMAX之間的轉換腳本工具。這個版本支援相機從Rhino輸出至MAX，並且也輸入靜態畫面與動畫到Rhino。
-  * OBJ
-  * STEP
+**OBJ**
+**STEP**
 
-=====2. 檔案格式轉換外掛=====
+======檔案格式轉換外掛======
 
-  * **Concepts Unlimited**
+**Concepts Unlimited**
 
 >**評論：**--//我同意Dan的說法。即使供應商同意以 step/iges輸出，但仍舊不太可靠，除非您有辦法比較輸入跟輸出的是同樣的東西。我嘗試過Datakit，運作得很完美。另一個選擇是買Concepts Unlimited。這個方法有直接的Catia 輸入而且我想好像比Datakit外掛還要便宜很多。 我比較不確定的是這種方式不知能是否能夠維持資料的完整性，換作是我，當然會先做測試。[Gustavo - 2005-11-29]//
 > **評論:** //<color darkslateblue>關於 Concepts Unlimited 我的經驗是輸出功能很差。 所以使用者有可能要失望了。[Mitch - 2005-11-30]</color>//
 
-  * **Datakit**
+**Datakit**
 
 > **評論:** //參考一下Datakit的轉換器，很好用。 如果您常常需要轉換，我建議就把錢花下去吧。 假使您只需要用到這樣的功能一次，那麼下載7天試用版就好了。[Dan Bayn - 2005-11-28]//
 
-  * **Okino Polytrans**
-  * **Delcam的PS-Exchange**
+**Delcam 的 Okino Polytrans PS-Exchange**
 
 > **評論:** //匯入任何檔案(我尚未嘗試Catia 檔，但電腦有顯示)。要匯入您可以使用的檔案，可以使用他們單次服務，每次50美元。 [Jack - 2005-11-29]//
 > **評論:** //目前已經可以直接從Delcam軟體直接讀/寫.3dm檔，但您必須已經安裝PS-Exchange模組。[G.C. Webster - 2005-11-30]//
