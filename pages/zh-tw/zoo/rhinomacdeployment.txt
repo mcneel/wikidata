@@ -1,0 +1,37 @@
+======Rhino for Mac 管理與分配======
+>**產品：**//[[zoo:home|Zoo ]]//
+>**摘要：**//討論如何佈署Rhino for Mac配置以使用Zoo。//
+
+=====問題=====
+最近我們買了Rhino for Mac教育授權版，有什麼方法可以幫助我們配置，並在大學裡幾台電腦上使用Zoo的授權伺服器呢?
+
+我們用[[http://www.jamfsoftware.com/products/casper-suite/|Casper]]還有其他管理系統建構套裝軟體，並將應用程式推送至客戶的系統。通常這裡面包括了授權設置資訊還有分配的應用程式。
+
+=====答案=====
+以下為一些有用的資訊。
+
+1) 當您第一次執行Rhino for Mac，就會建立以下資料夾：
+
+  /Library/Application Support/McNeel/Rhinoceros/License Manager
+  /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
+
+重要提示：每一個資料夾都是用**chmod**以及**+rwx**建立所以任何使用者都可以寫入資訊。
+
+2) **Rhinoceros/License Manager/Licenses**資料夾包括Rhino的授權檔案，在Rhino for Mac裡被命名為**781b000c-8d0b-4ed3-8ead-213bdb848f39.lic**。 
+
+在單機授權的情況下，這個資料夾是加密並無法讀取，在系統裡是獨特的。
+
+在網路群組授權的情況下，此檔案為明碼形式，可讀取，可移動於系統之間。
+
+3) 網路群組授權時網路群組授權時，你也可以在**Rhinoceros/License Manager**資料夾找到**LicensesZooClient.settings**。這個檔案也是明碼形式、可讀取，可移動於系統之間。裡面包含已輸入Rhino的Zoo伺服器名稱。
+
+如果您的佈署系統執行步驟1、2、3，除了將Rhino應用程式集推入每個系統的應用程式資料夾外，應該也能夠將Rhino for Mac佈署在您所有的系統裡。
+
+=====更多詳情=====
+
+[[http://wiki.mcneel.com/zh-tw/zoo/findzooservermac|Rhino for Mac如何尋找Zoo伺服器主機？]]
+
+
+\\
+
+{{tag>Zoo}}
