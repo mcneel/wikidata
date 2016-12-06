@@ -1,62 +1,69 @@
-====== Rhino 5 수동으로 설치 제거 ======
+====== Rhino 5 직접 설치 제거하기 ======
 \\
-====문제:====
-Rhino를 제거하는 동안 "Can't Uninstall - Feature is unavailable (path)"와 같은 오류 메시지가 표시됩니다.
+=====문제=====
+Rhino를 제거하는 동안 "Can't Uninstall - Feature is unavailable (path)" 와 같은 오류 메시지가 표시됩니다.
 
-====적용되는 버전:====
-Rhino 5
+이 안내는 Rhino 5 용입니다.
 
-====원인:====
+=====원인=====
 Windows Installer 캐시가 설치 제거에 필요한 파일을 찾지 못합니다.
-====해결책:====
+
+=====해결책=====
+
 Rhino와 Windows Installer 등록을 수동으로 제거합니다.
 
-===표준 프로그램 설치 제거 사용===
+===표준 프로그램 설치 제거 사용==
   - Windows 시작 메뉴로 갑니다.
-  - 제어판을 선택합니다.
-  - 프로그램 추가/제어 (XP), 프로그램 및 기능(Windows 7)를 선택합니다.
-  - Rhinoceros 5 를 선택하고 제거를 선택합니다.
+  - **제어판**을 선택합니다.
+  - **프로그램 제거**를 선택합니다.
+  - Rhinoceros 5 를 선택하고 **제거**를 선택합니다.
 
 
 **안내:** 제어판의 프로그램 및 기능에서 프로그램을 제거하는 방법이 실패했을 경우에만 다음 방법을 사용하셔야 합니다 .
 
   
-===McNeelUpdate 서비스 중지:===
+===McNeel Update Service 중지===
   - **시작** 메뉴에서 **제어판**을 클릭하고 **관리 도구**를 클릭합니다.
   - 관리 도구에서 **서비스**를 두 번 클릭합니다.
   - 서비스 대화상자에서 **McNeel Update (32-bit)** (64 비트 컴퓨터의 경우, 설치된 Rhino 5 버전에 따라 McNeel Update (64-bit)가 있거나 또는 둘 다 있을 수 있습니다).
   - **McNeel Update (32-bit)**를 오른쪽 클릭하고 **중지**를 클릭합니다.
   - 64 비트 Windows에서도 **McNeel Update (64-bit)** 서비스를 중지합니다.
   
-===Rhino 설치 폴더 삭제:===
-  - C:\Program Files\ 폴더를 찾아 Rhinoceros 5 디렉터리를 삭제합니다.
-  - C:\Program Files (x86)\ 폴더를 찾아 Rhinoceros 5 디렉터리를 삭제합니다.
-  - 상기 디렉터리에 **Rhinoceros 5.0 WIP** 폴더가 있으면 이 폴더도 삭제합니다.
-  - "RhinoShExt.dll" 파일을 삭제하지 못할 수도 있으나 괜찮습니다. 해당 파일이 있는 시스템 폴더는 그대로 두고 나머지 모든 파일을 삭제합니다.
+===Rhino 설치 폴더 삭제===
+  - //C:\Program Files\// 폴더를 찾아 Rhinoceros 5 디렉터리를 삭제합니다.
+  - //C:\Program Files (x86)\// 폴더를 찾아 Rhinoceros 5 디렉터리를 삭제합니다.
+  - 위의 디렉터리에 **Rhinoceros 5.0 WIP** 폴더가 있다면 이를 삭제합니다. 
+  - **RhinoShExt.dll** 파일을 삭제하지 못할 수도 있으나 괜찮습니다. 시스템 폴더는 그대로 두고 나머지 모든 파일을 삭제합니다.
   
-===레지스트리 키 삭제:===
+===레지스트리 키 삭제===
   - **레지스트리 편집기를 엽니다:**
-    - //Windows XP:// **시작 메뉴**에서 **실행**을 클릭한 후, **RegEdit을 입력하고 Enter를 누릅니다**.
-    - //Windows Vista와 Windows 7:// **시작** 단추를 클릭하고 **RegEdit를 입력한 후 Enter 키를 누릅니다**.
-  - **HKEY_LOCAL_MACHINE**\Software\McNeel\Rhinoceros 를 찾습니다.
-  - **5.0** 키를 삭제합니다.
-  - **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros 를 찾습니다.
-  - **5.0** 키를 삭제합니다.
+    - Windows XP: **시작 메뉴**에서 **실행**을 클릭한 후, **RegEdit**을 입력하고 **Enter**를 누릅니다.
+    - Windows Vista와 Windows 7: **시작** 단추를 클릭하고 **RegEdit**를 입력하고 **Enter** 키를 누릅니다.
+  - //HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros// 를 찾습니다.
+  - 5.0 키를 삭제합니다.
+  - //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros// 를 찾습니다.
+  - 5.0 키를 삭제합니다.
+
+\\
 
 
-===Microsoft의 Fix it 실행===
-  - http://support.microsoft.com/mats/windows_file_and_folder_diag/ko 를 방문합니다.
-  - **지금 실행**을 클릭합니다.
+====Microsoft Uninstall Fix 실행====
+Rhino 5 또는 Rhino 5 64-bit가 잔존하여 설치 제거되지 않을 경우, 다음 Microsoft fix 를 실행해 보세요.
+  - https://support.microsoft.com/ko-kr/help/17588/fix-problems-that-block-programs-from-being-installed-or-removed 를 방문합니다.
+  - 문제 해결사를 다운로드하고 실행합니다.
+다음과 같은 오류 메시지가 표시될 수 있습니다:
+"사용하려는 기능이 현재 연결되어 있지 않은 네트워크 리소스에 있습니다."
 
+ {{:rhino:5:network_resourse_unavailable.jpg?400|}}
+{{:rhino:5:network_resourse_unavailable2.jpg?700|}}
 
-===권장하지 않습니다: Windows Installer 캐시 정리:===
-<color red>**경고:**</color> 다음 절차는 레지스트리 손상과, 다음에 소프트웨어를 설치할 때 1402 오류의 원인이 될 수 있습니다. 위에 안내해 드린 방법으로도 Rhino를 <color red>**설치 제거할 수 없는 경우에만, 다음 방법대로 실행하시기 바랍니다**</color>.
-
+===권장하지 않습니다: Windows Installer 캐시 정리===
+<color red>**경고:**</color> 다음 절차는 레지스트리 손상과, 다음에 소프트웨어를 설치 할 때 1402 오류의 원인이 될 수 있습니다. 위에 안내한 방법으로도 Rhino를 <color red>**설치 제거할 수 없는 경우에만**</color> 다음 방법을 사용하시기 바랍니다.
 
   - [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]] 를 다운로드합니다.
   - WindowsInstallerCleanupUtility.zip 파일을 바탕 화면의 "Windows Installer Clean Up" 폴더에 압축 해제합니다.
   - **msicuu.exe**를 실행합니다.
-  - **(All Users) Rhinoceros 5.0 WIP** (또는 All Users Rhino 5.0 WIP x64) 으로 스크롤다운합니다.
+  - 64 비트 컴퓨터에서는 (All Users) Rhinoceros 5.0 WIP (또는 All Users Rhino 5.0 WIP x64) 으로 스크롤 다운합니다.
   - **Remove**를 클릭합니다.
 
 위의 과정대로 실행하였고 1402 오류가 발생한 경우,  [[http://wiki.mcneel.com/ko/rhino/error1402|1402 오류를 해결하는 항목을 참조]]하세요.
