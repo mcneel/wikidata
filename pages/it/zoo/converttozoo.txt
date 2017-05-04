@@ -1,0 +1,43 @@
+======Convertire un Rhino standalone in modo che possa usare lo Zoo======
+
+> **Product:** //[[zoo:home|Zoo]]//
+> **Summary:** //Discusses how to convert a Rhino for Windows installation from a standalone license to use the licenses in the Zoo.//
+
+=====Question=====
+We have recently installed the **Zoo** and added our licenses to it. How do I **convert** our existing standalone Rhino workstations to use the licenses in the Zoo?
+
+
+=====Answer=====
+To convert a Rhino installation from standalone licensing to use the Zoo, follow these steps:
+
+====Windows 7 or Windows 8====
+
+1. Login to the workstation as the Administrator or as a user with administrative rights.
+
+2. Run Windows Explorer.
+
+3. Navigate to the the following folder:
+  C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses
+
+> **Note:** //By default, Microsoft has hidden the ProgramData folder. You can either use **Folder Options** to allow display of hidden files and folders, or you can type **%ProgramData%** in the address bar in Windows Explorer to navigate to it.//
+
+4. Delete the following file (if found):
+  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
+  
+5. Navigate to the the following folder:
+  C:\Users\<user_name>\AppData\Roaming\McNeel\Rhinoceros\5.0\License Manager\Licenses
+
+> **Note:** //By default, Microsoft has hidden your AppData folder. You can either use **Folder Options** to allow display of hidden files and folders, or you can type **%AppData%** in the address bar in Windows Explorer to navigate to it.//
+
+6. Delete the following file (if found):
+  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
+
+7. Right-click in the Rhino shortcut and pick **Run as Administrator**.
+
+8. Click on the option to use the Zoo and follow the instructions
+
+> **Note:** //Use the Zoo Diagnostic Utility to troubleshoot communication issues between the Zoo server and the Rhino Workstation.//
+
+\\
+
+{{tag>Zoo}}
