@@ -3,10 +3,10 @@
 > **Sommario:** //Lo Zoo richiede l'accesso alla porta TCP 80. Ciò non è possibile nei sistemi con servizi Web in esecuzione.//
 
 ===== Problema =====
-Quando riavvio il server, il servizio dello Zoo 5 non si avvia. Se verifico il registro eventi di Windows (Pannello di controllo -> Strumenti di amministrazione -> Registro eventi), vedo che il servizio dello Zoo 5 ha registrato un errore:
+Quando riavvio il server, il servizio dello Zoo non si avvia. Se verifico il registro eventi di Windows (Pannello di controllo -> Strumenti di amministrazione -> Registro eventi), vedo che il servizio dello Zoo ha registrato un errore:
 
 <code>
-The Zoo 5.0 service on the Local Computer started and then stopped.
+The Zoo service on the Local Computer started and then stopped.
 Some services stop automatically if they are not in use by another
 service or program.
 </code>
@@ -22,13 +22,13 @@ process ID, then look in Task Manager to find the name of that process.
   - Eseguire **NETSTAT -ano** dalla riga di comando ed annotare il numero PID della porta aperta che si vuole liberare.
   - Da un gestore dei processi (task manager), si può vedere a che processo corrisponde il PID e quale programma sta usando quella porta.
 
-Il motivo di questo errore è che un'altra applicazione sta già usando la porta 80. Una porta può essere utilizzata solo da un'applicazione alla volta, per cui lo Zoo non riesce a collegarsi alla porta 80. Altre applicazioni comuni che causano il problema:
+Il motivo di questo errore è che un'altra applicazione sta già usando la porta 80. Una porta può essere utilizzata solo da un'applicazione alla volta, per cui lo Zoo non riesce a collegarsi alla porta TCP 80. Applicazioni comuni che causano il problema:
 
   * [[http://www.iis.net/|Internet Information Services (IIS) per i servizi di Windows®]]
   * [[http://httpd.apache.org/|Apache HTTP Server]]
   * [[http://www.java.com|Java]]
   * [[zoo:zooskype|Skype]]
-===== Soluzione=====
+===== Soluzioni =====
   - Spostare lo Zoo su una macchina che non stia eseguendo servizi Web.  Può essere un print server, un'altra stazione di lavoro lasciata accesa oppure un altro server virtuale.
   - Configurare i servizi Web in modo che usino porte diverse. Sia Apache che IIS si possono configurare affinché usino porte diverse.
 
