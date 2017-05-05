@@ -1,0 +1,38 @@
+======Zoo - Utilità di diagnostica per un client con Rhino per Windows======
+> **Prodotto:** //[[it:zoo:home|Zoo]]//
+> **Sommario:** //Presentazione dell'utilità di diagnostica "Zoo Diagnostics" per Rhino 5 per Windows//
+
+[[zoo:zoo5diagnostics|{{:zoo:zoodiagnostics.png|Zoo Diagnostics}}]]
+
+L'utilità di diagnostica "Zoo Diagnostics" viene eseguita su workstation con **Rhino 5 o 6 per Windows**. Questa utilità:
+  - Fornisce una serie di utili strumenti di diagnostica di rete che facilitano la risoluzione di problemi di connettività tra le workstation con Rhino ed i [[it:zoo:determinezoohost|server dello Zoo]].
+  - Consente di visualizzare e modificare il nome del server dello Zoo usato dalle workstation con Rhino. Il nome del server dello Zoo è archiviato nel registro di sistema di Windows.
+
+[[zoo:zoo5diagnostics|{{:zoo:zoo_diagnostics.png|Zoo Diagnostics}}]]
+
+=====Diagnostica=====
+L'utilità di diagnostica "Zoo Diagnostics" fornisce i seguenti test di rete:
+
+1. **[[http://support.microsoft.com/kb/814155|Ping]]:** L'utilità di diagnostica ping è il principale strumento di diagnostica TCP/IP usato per risolvere problemi di connettività, raggiungibilità e risoluzione dei nomi. Ping verifica la connettività di livello IP ad un altro computer della rete TCP/IP inviando messaggi di richiesta Echo ICMP (Internet Control Message Protocol). I relativi messaggi di risposta Echo ricevuti vengono visualizzati, insieme al ciclo di andata e ritorno.
+
+>**Nota:** Le impostazioni predefinite di Windows Firewall bloccano le richieste Echo ICMP usate per il comando ping. Per attivare l'echo ICMP in Windows, andare a Pannello di controllo -> Windows Firewall -> Impostazioni avanzate -> Regole connessioni ed attivare "Condivisione file e stampanti (richiesta echo - ICMPv4-In)" nel profilo di protezione attivo.
+
+
+2. **[[http://support.microsoft.com/kb/200525|Nslookup]]:** L'utility di diagnostica DNS Lookup mostra informazioni che possono essere usate per diagnosticare l'infrastruttura DNS (sistema dei nomi a dominio).
+
+3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]:** L'utility di diagnostica Trace Route (TRACERT) determina il percorso che conduce ad una destinazione inviando pacchetti echo ICMP (Internet Control Message Protocol), con valori TTL (Time-To-Live) IP variabili, a tale destinazione. Ciascun router del percorso è necessario per diminuire il TTL del pacchetto almeno di 1 prima di inoltrare il pacchetto, per cui il TTL è effettivamente un contatore di hop. Quando il TTL di un pacchetto raggiunge lo zero (0), il router invia di nuovo un messaggio ICMP "Tempo scaduto" al computer di origine. 
+
+4. **Zoo Port Check:** Il test "Zoo Port Check" verifica che un servizio di Zoo 5 o 6 sia in ascolto sulla porta TCP 80 su un server o una workstation.
+
+//Se questo test ha esito negativo, assicurarsi che il servizio server Zoo sia in esecuzione. Lo si può fare usando ZooAdmin.exe oppure l'applicazione Servizi nel Pannello di controllo. Assicurarsi anche che __[[it:zoo:window7firewall|la porta TCP 80 sia aperta su tutti i firewall]]__ , sia per il traffico in entrata che per quello in uscita, in esecuzione nel sistema in cui è installato lo Zoo.//
+
+5. **Zoo Connectivity:** Il test "Zoo Connectivity" verifica che il servizio Zoo 5 o 6 sia in esecuzione su un server o una workstation. 
+
+//Se questo test ha esito negativo e tutti gli altri test riescono, assicurarsi che il servizio server Zoo sia in esecuzione. Lo si può fare usando ZooAdmin.exe oppure l'applicazione Servizi nel Pannello di controllo. Assicurarsi anche che __[[it:zoo:window7firewall|la porta TCP 80 sia aperta su tutti i firewall]]__ , sia per il traffico in entrata che per quello in uscita, in esecuzione nel sistema in cui è installato lo Zoo.//
+
+//Questo test può anche fallire se il sistema è configurato per accedere ad Internet utilizzando un [[https://en.wikipedia.org/wiki/Proxy_server|server proxy]]. In questo caso, il test non raggiunge mai il server dello Zoo. Se si sta usando un server proxy, assicurarsi di consentire l'accesso agli indirizzi locali. Si veda __[[zoo:zooproxyserver|Usare lo Zoo con un server proxy]]__ per maggiori dettagli.//
+
+=====Download=====
+* Richiede [[http://www.microsoft.com/en-us/download/details.aspx?id=17851|Microsoft .NET Framework 4]].
+
+{{:zoo:zoodiagnostics.zip|Scaricare Zoo Diagnostics.}}
