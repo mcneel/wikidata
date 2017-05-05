@@ -1,16 +1,18 @@
-======Aprire la porta TCP 80 nel firewall di Windows 7======
-> **Prodotto:** //[[zoo:zoo5|Zoo 5]]//
-> **Sommario:** //Come aprire la porta TCP 80 nel firewall di Windows 7.//
+======Aprire la porta TCP 80 nel firewall di Windows======
+> **Prodotto:** //[[it:zoo:home|Zoo]]//
+> **Sommario:** //Come aprire la porta TCP 80 nel firewall di Windows//
 
-È necessario che la porta 80 sia aperta per tutte le comunicazioni in entrata ed in uscita del firewall. Non basta aprire la porta 80 solo sull'applicazione dello Zoo. Se non seguite la seguente procedura nel firewall del vostro server dello Zoo, i client di Rhino non riusciranno a comunicare con lo Zoo.
+Lo Zoo comunica con i client di Rhino tramite la porta TCP 80 (HTTP).
 
-===== IMPORTANTE =====
-Non è accettabile aprire il traffico in entrata ed in uscita della porta solo per il //programma// o il //servizio//.
-È necessario impostare le regole per la //**porta**// come spiegato qui sotto nel passo 6, altrimenti //**non**// funzionerà. 
+Una volta installato lo Zoo, dovete assicurarvi che la porta TCP 80 sia aperta, //sia per le comunicazioni in entrata che per quelle in uscita//, nel software del firewall in esecuzione sul sistema del server dello Zoo.
 
-==== Passi====
+**Nota:** Nella maggior parte dei software per firewall, la porta TCP 80 è aperta di default per le comunicazioni in uscita. Non dovrebbe quindi essere necessario aprire nessuna porta nel software del firewall in esecuzione sulle workstation con Rhino. 
 
-1. Aprite il **Pannello di controllo** dal menu Start.
+===== Passi=====
+Le seguenti istruzioni si riferiscono all'apertura della porta TCP 80 nel firewall di Windows, il software del firewall incluso con Windows. Se state usando un altro firewall, consultate la relativa documentazione.
+
+> <color red>**Importante: Non è sufficiente aprire il traffico in entrata ed in uscita della porta solo per il programma o il servizio. È necessario creare delle regole per la __porta__ come spiegato qui sotto nel passo 6, altrimenti __non__ funzionerà**. </color>
+1. Dal menu Start di Windows, aprite il **Pannello di controllo**.
 
 2. Selezionate **Windows Firewall**.
 
@@ -28,7 +30,9 @@ Non è accettabile aprire il traffico in entrata ed in uscita della porta solo p
 
 {{:zoo:open-port-windows-7-firewall-4.png?640}}
 
-6. Nella procedura guidata per la nuova regola in ingresso, selezionate **Porta** e quindi cliccate su **Avanti**. //N.b.: non create una regola **Programma**, dovete creare una regola **Porta**.//
+6. Nella procedura guidata per la nuova regola in ingresso, selezionate **Porta** e quindi cliccate su **Avanti**. 
+
+//**Nota:** non create una regola **Programma**, dovete creare una regola **Porta**.//
 
 {{:zoo:open-port-windows-7-firewall-5.png?640}}
 
@@ -52,4 +56,4 @@ La porta TCP 80 ora è aperta e pronta per l'uso.
 
 \\
 
-{{tag>Zoo5}}
+{{tag>Zoo}}
