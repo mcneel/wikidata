@@ -1,39 +1,38 @@
 ======Ouvrir le Port TCP 80 sur le pare-feu de Windows======
-> **Produit:** //[[fr:zoo:zoo5|Zoo 5]]//
-> **Résumé:** //Explique comment ouvrir le port TCP 80 sur le pare-feu de Windows.//
+> **Produit :** //[[fr:zoo:home|Zoo]]//
+> **Résumé:** //Explique comment ouvrir le port TCP 80 sur le pare-feu de Windows//
 
-===== Présentation =====
-Zoo 5 communique avec les clients Rhino 5 par le Port TCP 80 (HTTP).
+Zoo communique avec les clients Rhino par le Port TCP 80 (HTTP).
 
-Après avoir installé Zoo 5, vous devrez vérifier que le port TCP 80 est ouvert dans les deux sens de communication, //entrant et sortant//, dans le logiciel de pare-feu du système où se trouve le serveur Zoo. 
+Après avoir installé Zoo, vous devrez vérifier que le port TCP 80 est ouvert dans les deux sens de communication, //entrant et sortant//, dans le logiciel de pare-feu du système où se trouve le serveur Zoo.
 
-Remarque, le port TCP 80 est ouvert par défaut pour les communications sortantes sur la plupart des pare-feu. Vous ne devriez donc pas avoir besoin d'ouvrir de ports sur le pare-feu des ordinateurs où est installé Rhino. 
+**Remarque :** Le port TCP 80 est ouvert par défaut pour les communications sortantes sur la plupart des pare-feu. Vous ne devriez donc pas avoir besoin d'ouvrir de ports sur le pare-feu des ordinateurs où est installé Rhino. 
 
 ===== Étapes=====
-Les instructions suivantes concernent l'ouverture du port TCP 80 sur le pare-feu de Windows - le logiciel inclus avec Windows. Si vous utilisez un autre pare-feu, consultez sa documentation. 
+Les instructions suivantes concernent l'ouverture du port TCP 80 sur le pare-feu de Windows - le logiciel inclus avec Windows. Si vous utilisez un autre pare-feu, consultez sa documentation.
 
-> Important : Il ne suffit pas d'ouvrir le trafic entrant et sortant du port pour le //programme// ou le //service//. Vous devez définir les règles du //**Port**// comme indiqué ci-dessous dans l'étape 6, ou le Zoo ne fonctionnera //**pas**//. 
-
-1. Ouvrez le **Panneau de configuration** à partir du menu Démarrer. 
+> <color red>**Important : Il ne suffit pas d'ouvrir le trafic entrant et sortant du port pour le programme ou le service. Vous devez définir les règles du __Port__ comme indiqué ci-dessous dans l'étape 6, ou le Zoo ne fonctionnera __pas__**. </color>
+1. Dans le menu Démarrer de Windows, ouvre le **Panneau de configuration**.
 
 2. Sélectionnez **Pare-feu Windows**.
 
 {{:fr:zoo:open-port-windows-7-firewall-1-fr.png?640}}
 
-
 3. Sélectionnez **Paramètres avancés** dans la colonne gauche du Pare-feu Windows.
 
 {{:fr:zoo:open-port-windows-7-firewall-2-fr.png?640}}
 
-4. Sélectionnez **Règles de trafic entrant** dans la colonne gauche, sous Pare-feu Windows avec fonctions avancées de sécurité. 
+4. Sélectionnez **Règles de trafic entrant** dans la colonne gauche, sous Pare-feu Windows avec fonctions avancées de sécurité.
 
 {{:fr:zoo:open-port-windows-7-firewall-3-fr.png?640}}
 
-5. Sélectionnez **Nouvelle règle** dans la colonne droite. 
+5. Sélectionnez **Nouvelle règle** dans la colonne droite.
 
 {{:fr:zoo:open-port-windows-7-firewall-4-fr.png?640}}
 
-6. Cochez **Port** dans l'Assistant Nouvelle règle de trafic entrant puis cliquez sur **Suivant**. //Attention, ne créez pas une règle de **Programme** - vous devez créer une règle de **Port**.//
+6. Cochez **Port** dans l'Assistant Nouvelle règle de trafic entrant puis cliquez sur **Suivant**. 
+
+//**Attention :** Ne créez pas une règle de **Programme** - vous devez créer une règle de **Port**.//
 
 {{:fr:zoo:open-port-windows-7-firewall-5-fr.png?640}}
 
@@ -45,16 +44,16 @@ Les instructions suivantes concernent l'ouverture du port TCP 80 sur le pare-feu
 
 {{:fr:zoo:open-port-windows-7-firewall-7-fr.png?640}}
 
-9. Choisissez les réseaux sous lesquels cette règle sera appliquée (cochez toutes les cases pour que le port soit toujours ouvert) puis cliquez sur **Suivant**. 
+9. Choisissez les réseaux sous lesquels cette règle sera appliquée (cochez toutes les cases pour que le port soit toujours ouvert) puis cliquez sur **Suivant**.
 
 {{:fr:zoo:open-port-windows-7-firewall-8-fr.png?640}}
 
-10. Donnez un nom à cette règle et cliquez sur **Terminer** pour ajouter la nouvelle règle. 
+10. Donnez un nom à cette règle et cliquez sur **Terminer** pour ajouter la nouvelle règle.
 
 {{:fr:zoo:open-port-windows-7-firewall-9-fr.png?640}}
 
-Le port TCP 80 est maintenant ouvert et prêt à être utilisé. 
+Le port TCP 80 est maintenant ouvert et prêt à être utilisé.
 
 \\
 
-{{tag>Zoo5}}
+{{tag>Zoo}}
