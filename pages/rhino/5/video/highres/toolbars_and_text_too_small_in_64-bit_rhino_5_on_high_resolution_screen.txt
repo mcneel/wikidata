@@ -1,12 +1,17 @@
 ======Rhino V5 for Windows Toolbars and Text Too Small on High Resolution Monitors======
 
-
-> **Summary:** //The 64-bit Rhino 5 user interface was not designed for the new Ultra High Definition, High DPI, or High Resolution displays. These are the details needed to make Windows automatic display scaling work correctly to fix the issue.//
+> **Summary:** //The 64-bit Rhino 5 user interface was not designed for the new Ultra High Definition, High DPI, or High Resolution displays. These are the details needed to make Windows automatic display scaling work correctly to fix the issue.  Additionally, with the release of Windows 10 Creator's Edition, several commands quit displaying their contents including the **Layer panel**.//
 
 
 
 =====What needs to be done?=====
   * Install Rhino V5 for Windows Service Release 14
+
+
+===What are the details?===
+  * New command **SetDpiAwareness** added to enable/disable DPI scaling. By default SetDpiAwareness is **enabled**.
+  * No special Windows Shortcut compatibility mode settings are needed. Leave them at default settings.
+  * Test
 
 > **Note:** //All of the following can be avoided by using SR14.//
 ====Rhino V5 SR13 and earlier====
@@ -15,7 +20,7 @@
   * Copy a file into the Rhino System folder
 
 
-====What are the details?====
+===What are the details?===
   - Download this file: {{:rhino:5:video:highres:RhinoHiRes.zip|}}
   - Unzip RhinoHiRes.zip onto your Desktop. It will create two files: Rhino.exe.manifest and RhinoHiRes.reg
   - Right-mouse click on **RhinoHiRes.reg** and choose **Merge** to add the new key to your registry. You will be asked a couple questions. Note: The REG file creates the following key: ''[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide]
