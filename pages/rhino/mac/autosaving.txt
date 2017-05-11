@@ -16,7 +16,7 @@ The periodic autosaves run in the background. You will never know when a backgro
 
 Autosave does save frequently, but archives only a few versions of your model.  Auto Save archives a model about once an hour for a day, then once a day for a week, and then once a week for some number of weeks.
 
-If you are using Time Machine to make automatic backups of your computer files, then the previous versions of your 3DM files are included in the Time Machine backups and do not take any additional space on your computer disk.  If you are not making regular backups, we strongly recommend that you start performing backups with Time Machine.
+If you are using Time Machine to make automatic backups of your computer files, then all the previous versions of your 3DM files are included in the Time Machine backups and do not take any additional space on your local computer disk.  If you are not making regular backups, we strongly recommend that you start performing backups with Time Machine.
 
 To figure out where most of your disk usage is allocated on your Mac, we recommend [[https://daisydiskapp.com/|DaisyDisk]].  We recommend installing the non-Mac App Store version, and [[https://daisydiskapp.com/manual/2/en/Topics/AdminScan.html|scanning as administrator]] so that you can [[https://daisydiskapp.com/manual/2/en/Topics/HiddenSpace.html|see hidden disk space]].
 
@@ -33,6 +33,21 @@ In the Versions browser, the window on the left is your current model. All the w
 ===== Can I delete old versions of the file? =====
 
 Yes, you can delete the older versions of the file.  To do this, launch Rhino for Mac and open the file in question.  Navigate to the //File// > //Revert To// > //Browse All Versions...//  When the Version explorer appears, move the mouse pointer to upper border of your screen and the Rhinoceros menu bar will appear.  Under //File// > //Revert To// you can delete a single old version or - if you hold down the //option/alt// key - you can delete all previous versions.  This will not delete the open 3dm file, but only the previous versions of it.  If the menu choice "Delete This Version" or "Delete All Versions" is greyed out, the Versions file or files in question are not on your local disk.  They are part of your regular Time Machine backup and cannot be deleted.
+
+===== Auto Save with network file servers =====
+
+If your network file server is a macOS file server, then all the features of Auto Save and Versions work the same as if the 3DM model was stored on your local disk. Your model is saved frequently to the network server and previous versions are archived hourly.
+
+If your network file server is a MSWindows or MSWindows-compatible file server, you still have //almost all// of the Auto Save and Versions features.  Your model is saved frequently to the network server and hourly previous versions of your model are archived for as long as you keep the model open in Rhino.  We believe that, for MSWindows file servers, these previous versions are kept temporarily on your local disk.  You can use File > Revert To > Browse All Versions to browse through past versions of your recent work.
+
+When you close your model that is stored on a MSWindows file server, your previous versions that have been temporarily saved will be deleted.  Rhino will warn you by showing the following dialog:
+
+{{:rhino:mac:permanent_version_storage.png?500|/Users/macrhino/Desktop/Screenshots/permanent version storage.png}}
+
+Your file will be saved normally, however you will not have access to previous versions once the file is closed.
+
+=== "This document could not be autosaved" ===
+
 
 ===== Is it possible to disable the Versions feature in Rhino for Mac? =====
 
