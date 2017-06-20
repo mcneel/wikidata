@@ -4,33 +4,53 @@
 > **Additionally:** //With the release of Windows 10 Creator's Edition, several commands quit displaying their contents including the **Layer panel**.//
 
 ====What needs to be done?====
-  * Install Rhino V5 for Windows [[http://www.rhino3d.com/download/rhino/5.0/sr|Service Release 14]]
+  - Install Rhino V5 for Windows [[http://www.rhino3d.com/download/rhino/5.0/sr|Service Release 14]]
+  - Make Windows version specific changes as needed.
 
+==Windows version specific details==
+-->Windows 10 Creator's Edition (1703)#
 
-====What are the details?====
-  * New command **SetDpiAwareness** added to enable/disable DPI scaling. By default SetDpiAwareness is **enabled**.
-  * No special Windows Shortcut compatibility mode settings are needed. Use default settings.
-  * Use Windows recommended display resolution and text scaling settings.
-  * The testToggleFileDialog command is no longer needed to stop UI shrinking after using a Windows File dialog on Windows 10. However, you may still need it on earlier versions of Windows.
+**What are the details?**
+  * "Fuzzy" display after update?
+    * Rhino 64-bit desktop shortcut right-click > Properties > Compatibility > **Uncheck** "Override high DPI scaling behavior..."
+    * {{:rhino:5:video:highres:1703.png?300|}}
+  * If desired, use the new **SetDpiAwareness** command to revert to the previous SR13 display behavior.
+<--
+<--
 
+-->Windows 10 Pro (1607)#
 
---> Rhino V5 SR13 and earlier#
+**What are the details?**
+  * "Fuzzy" display after update?
+    * Rhino 64-bit desktop shortcut right-click > Properties > Compatibility > **Check** "Disable display scaling on high DPI settings"
+    * {{:rhino:5:video:highres:1607.png?300|}}
+  * If desired, use the new **SetDpiAwareness** command to revert to the previous SR13 display behavior.
+<--
+<--
 
-> **Note:** //All of the following can be avoided by using SR14.//
+-->Windows 8.1#
+**What are the details?**
+  * "Fuzzy" display after update?
+    * Rhino 64-bit desktop shortcut right-click > Properties > Compatibility > **Check** "Disable display scaling on high DPI settings"
+    * {{:rhino:5:video:highres:win8.png?300|}}
+  * If desired, use the new **SetDpiAwareness** command to revert to the previous SR13 display behavior
+<--
+<--
+
+-->Windows 7#
 
 **What are the details?**
   * Add a System Registry key (Requires local Administrator rights)
   * Copy a file into the Rhino System folder
-
-
-  - Download this file: {{:rhino:5:video:highres:RhinoHiRes.zip|}}
-  - Unzip RhinoHiRes.zip onto your Desktop. It will create two files: Rhino.exe.manifest and RhinoHiRes.reg
-  - Right-mouse click on **RhinoHiRes.reg** and choose **Merge** to add the new key to your registry. You will be asked a couple questions. Note: The REG file creates the following key: ''[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide]
+-
+  - Download this file: {{:rhino:5:video:highres:rhinov5_sr14_hires.zip|}}
+  - Unzip RhinoV5_SR14_HiRes.zip onto your Desktop. It will create two files: Rhino.exe.manifest and RhinoHiRes.reg
+  - Right-mouse click on **RhinoHiRes.reg** and choose **Merge** to add the new key to your registry. Answer Yes to the User Account Control questions. Note: The REG file creates the following key: ''[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide]
 "PreferExternalManifest"=dword:00000001''
   - Copy **Rhino.exe.manifest** to: ''C:\Program Files\Rhinoceros 5 (64-bit)\System\''
   - Start Rhino.
+<--
+<--
 
 **Is the Rhino UI suddenly shrinking after using a file dialog?**
  [[rhino:5:video:highres:toolbars_and_text_sudenly_shrink|Please see this page.]]
-
-<--
