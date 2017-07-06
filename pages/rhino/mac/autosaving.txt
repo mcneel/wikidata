@@ -3,10 +3,13 @@ Apple has added a radically different method for managing your models in macOS, 
 
 This article discusses details not mentioned in these articles that are important to Rhino for Mac users.  Also, you should read [[http://wiki.mcneel.com/rhino/mac/lionsaving|Everything you learned about saving files is wrong]].
 
-===== When does Rhino for Mac autosave a model? =====
+===== When does Rhino for Mac Auto Save a model? =====
 
 A model is saved when you **close** a model window, when you **quit** Rhino, when you **switch** to another application, and //every once in a while//. Apple says the //every once in a while// saves happen about every five minutes when Rhino is idle. This time interval is not configurable.
 
+Rhino for Mac will Auto Save while you are moving the mouse without actually manipulating the model. You have to continually manipulate the model viewports for five solid minutes before Auto Save will interrupt you. 
+
+You may try this experiment yourself.  Make sure you can see the model's preview in a Finder window while working in Rhino for Mac.  Modify the model, then see if you can prevent an Auto Save from happening.  When you see the Finder preview change, an Auto Save has occurred.
 ===== If Rhino is constantly saving my model, am I going to be constantly interrupted by the autosaves? =====
 
 The periodic autosaves run in the background. You will never know when a background autosave is happening because it never blocks Rhino from working. If you start changing your model when Rhino attempts an autosave, Rhino silently abandons the autosave and will attempt it again later.
