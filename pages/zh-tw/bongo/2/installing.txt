@@ -1,41 +1,41 @@
-====== Troubleshooting Bongo Installation ======
-> This article is for Bongo 1.0 and Bongo 2.0. 
+====== Bongo安裝疑難排解 ======
+> 此文章針對Bongo 1.0及Bongo 2.0所撰寫。
 
-===== General =====
+===== 一般問題 =====
 
 
--->Reporting install problems#
-If the Bongo installer fails to install, please contact McNeel Support and provide them with the following information: 
-  - If an error message appears, write exactly what it said or send a screenshot of the error message. 
-  - The Operating System you are running on the machine you're trying to install Bongo on.
-  - What version of Rhino 5 you have installed. You get this information by typing **About** on the command line.
+-->回報安裝問題#
+如果Bongo安裝程式安裝失敗，請聯絡McNeel支援，並提供以下資訊： 
+  - 如果出現錯誤訊息，請紀錄完整訊息內容，或是螢幕截圖之後寄給我們。 
+  - 您安裝Bongo的電腦使用的是哪一個作業系統?
+  - 電腦上安裝的Rhino 5 是哪一個版本? 在指令列鍵入**About**就可得知。
 
-Send an email with the information above to [[tech@mcneel.com]]
+收集以上資訊並寄至[[tech@mcneel.com]]
 
-===== Error messages =====
+===== 錯誤訊息 =====
 
--->Error 1327 - Invalid Drive:#
-**//Question://** //I get "Error 1327. Invalid Drive (E:, F:, etc)" when installing.//
+-->錯誤1327 -無效磁碟機:#
+**//問題://** //安裝時得到"錯誤1327 無效磁碟機(E:、F:....等)"//
 
-**//Cause://** //Your user account has settings indicating that one or more non-existent drives should be used for special folders such as "My Documents".//
+**//原因://** //您的使用者帳號已設置成一或多個不存在的磁碟機該用於特殊資料夾，如"我的文件"//
 
-**//Solution://**
-  - From the Start menu, click **Run**.
-  - Type RegEdit, then click **Run**.
-  - Browse to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders.
-  - Look for directories listed that contain the drive letter mentioned in the error from the installer. Change them to point to a valid drive and folder.
+**//處理方式://**
+  - 從開始功能表，選擇**執行**。
+  - 鍵入RegEdit，然後選擇**執行**。
+  - 瀏覽至HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders.
+  - 從安裝程式查找列出的目錄，其中包括錯誤訊息中提到的磁碟機，並更改它們指向一個有效磁碟機與資料夾。
 \\
-**Note:** This method contains steps that tell you how to modify the registry. However, serious problems might occur if you modify the registry incorrectly. Make sure that you follow these steps carefully. For added protection, back up the registry before you change it. Then, you can restore the registry if a problem occurs. For more information about how to back up and restore the registry, view the following article in the Microsoft Knowledge Base:
-[[http://support.microsoft.com/kb/322756|How to back up and restore the registry in Windows ]]
+**備註:** 此方法或任務包含如何修改註冊表的步驟。然而如果錯誤的修改註冊表可能會出現嚴重問題。 請小心執行這些步驟。為加強保護，修改之前先做好登錄的備份，並在出現問題時還原登錄。有關如何備份及還原登錄，請至Microsoft知識庫查看相關文章：
+[[http://support.microsoft.com/kb/322756|如何在 Windows 中備份及還原登錄]]
 
 <--
 
--->Error 1402 or 1406 (Could not open key: UNKNOWN\Components)#
-** //Question://** // A message "Could not open key: UNKNOWN\Components\(lots of letters and numbers). Error 1402. Verify that you have sufficient access to that key, or contact your support personnel."//
+-->錯誤 1402 or 1406 (無法開啟鍵: UNKNOWN\Components)#
+** //問題://** // 一則訊息顯示 "無法開啟鍵: UNKNOWN\Components\(很多字母跟數字) 錯誤 1402。 確認你有足夠權限存取該登錄機碼，或聯絡你的技術支援人員。"//
 
-**//Cause://** One or more registry keys in the HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components key has incorrect permissions.
+**//原因://** HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components 內有一個或多個登錄機碼無正確授權。
 
-**//Solution 1://**
+**//處理方式 1://**
 On the Windows Start menu, enter **CMD** in the search box. Right-click **cmd.exe** and select **Run as administrator**. Copy the following line and paste it into the cmd window. Press **Enter**. Then Rhino will be able to install.
 
 <code>
