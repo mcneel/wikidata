@@ -1,0 +1,79 @@
+======更多暫存記憶體Rhino 4 - 從2GB到3GB======
+
+>**摘要：**最新Rhino 4是"大型地址應用"。只要在**C:BOOT.INI**檔案或**BCD存儲區**中做一個小更改，就可以將Rhino可用暫存記憶體從2GB增加到3GB。
+
+**警告：**//Microsoft的許多技術支援檔案警告以下所形容的變更，在大多數情況下不建議這麼做。 因此變更時必須非常小心，並準備在發生問題時修改扭轉這些變化。使用此份資訊，風險自負。//
+
+**更新：**//2007年11月4日 - 最近一位使用ATI FireGL 5200/256雙螢幕的Rhino用戶通報了顯示問題。 在嘗試許多其他分法之後，最終確定是將暫存記憶體3GB切換回2GB解決了這個問題。 - JB//
+
+**更新 2 ：**//2007年12月4日 - 在自己的WinXP Pro系統上設定了/3GB開關後，MSIE7確實退出的問題就出現了。 我以這種方式使用了幾個月，最近把/3GB開關從Boot.ini檔移除。結果MISE7的問題確定已經消失。 - JB//
+
+=====細節=====
+在本行末尾將/3GB加入**C:\Boot.ini**檔，然後重新啟動：
+
+**在 Windows 2000 Pro**
+
+multi(0)disk(0)rdisk(0)partition(2)\WINNT="Windows XP Professional" <color red>**/3GB**</color>
+
+**在 Windows XP Pro**
+
+multi(0)disk(0)rdisk(0)partition(2)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn <color red>**/3GB**</color>
+
+**注意:**//為了避免進一步的混淆，在預設情況下，Windows檔案管理員並不顯示"隱藏系統資料夾" 如C:BOOT.INI。 您需要調整資料夾選項來找到檔案，改變其屬性來移除"唯讀"，才將"/3GB"開關加入開啟選項。進行更改後，將C:\BOOT.INI再次改回"唯讀"，並重新啟動系統以使更改生效。//
+
+**Windows Vista系統**
+
+C:\Boot.ini已經被替換為引導配置數據存儲。
+
+BCDEDIT /export "C:\BCD Backup" - 備份您的原始設定。
+
+BCDEDIT /set increaseuserva <color red>3072</color> - 更改暫存記憶體設定。
+
+**注意:** //在Windows Vista中，BCDEDIT程式先是用來匯出，然後才修改BCD存儲。//
+BCDEDIT是指令行實用程式，並從CMD視窗執行。
+
+=====背景=====
+
+Microsoft® Windows NT®的作業系統，一直為應用程式提供平面32位元虛擬地址空間，有4G的暫存記憶體。
+
+地址空間通常會被拆開 - 以便應用程式直接使用存取的2GB地址空間，另外的2GB只能由Windows執行軟體存取。
+
+為響應客戶的要求，Microsoft Windows XP 專業版為應用程式提供3GB的平面虛擬地址空間，內核與執行元件僅使用1GB。
+
+除非在Boot.ini文件中使用/3GB，否則進程和應用程式的虛擬地址空間仍限制在2GB。
+
+/3GB開關分派3GB虛擬空間，給在處理數據包內使用IMAGE_FILE_LARGE_ADDRESS_AWARE的應用程式。這個開關允許應用程式處理2GB以上虛擬地址空間時，還能處理額外的1GB。
+
+
+===== 如果使用/3GB開關時遇到顯示卡驅動問題 (WinNT/WinXP)=====
+
+將/3GB開關加到boot.ini之後，重新啟動，您會發現視頻驅動程式無法正常執行(卡在VgaSave備用驅動程式)，加入**/USERVA**開關可以修復這個錯誤，舉例如下：
+
+<color red>**/3GB /USERVA=2800**</color>
+
+有關此開關的更多訊息，請至：http://support.microsoft.com/default.aspx?scid=kb;en-us;319043
+
+此外，當修改boot.ini的時候，我們建議您將所做的更改作為作業系統的第二副本，如果當下更改不成功，還可以在啟動時選擇原始設定。 這裡有一個Windows XP Pro boot.ini的範例，可能在測試/3GB 和 / USERVA開關時派上用場：
+
+
+[boot loader]
+timeout=30
+
+default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
+
+[operating systems]
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn
+
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional with /3GB" /fastdetect /NoExecute=OptIn /3GB /USERVA=2800
+
+=====如果在Vista系統內使用"increaseuserva"時遇到問題=====
+
+使用BCDEDIT改變記憶設定後，您可以利用備份恢復原始設定。
+
+BCDEDIT/import "C:\BCD Backup" - 匯入備份的原始設定。
+
+更多關於BCDEDIT的資訊：
+
+http://technet2.microsoft.com/WindowsVista/en/library/85cd5efe-c349-427c-b035-c2719d4af7781033.mspx?mfr=true
+
+http://msdn2.microsoft.com/en-us/library/aa906217.aspx
