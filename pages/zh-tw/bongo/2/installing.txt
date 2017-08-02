@@ -36,44 +36,46 @@
 **//原因://** HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components 內有一個或多個登錄機碼無正確授權。
 
 **//處理方式 1://**
-On the Windows Start menu, enter **CMD** in the search box. Right-click **cmd.exe** and select **Run as administrator**. Copy the following line and paste it into the cmd window. Press **Enter**. Then Rhino will be able to install.
+從Windows的開始功能表上的搜尋框中輸**CM**。在cmd.exe上按右鍵之後選擇"以系統管理員身分執行"。
+複製以下資訊並貼至cmd視窗，按enter，Rhino將能夠安裝。
 
 <code>
 secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 </code>
 
-**//Solution 2://**
-//**Warning** -  The following procedure involves editing the Windows Registry. Incorrect editing of the registry can damage your computer and cause it to not start. If you are not comfortable performing the following steps, please contact McNeel Support.//
-  - Download [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] from Microsoft TechNet, and extract the contents to your desktop.
-  - Open a Windows command shell.
-  - Change directories to your desktop.
-  - In the command shell, enter: **psexec -i -d -s c:\windows\regedit.exe**. This causes Windows to run the registry editor with the permissions of the System account -- an account even more powerful than Administrator.
-  - Browse to HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\.
-  - Right-click the **UserData** folder, then click **Permissions...**
-  - In the Permissions for UserData dialog box, click **Advanced**.
-  - Ensure that //Administrators// has //Full Control// Permissions in this folder, and that //Users// has //Read// Permissions. There will be other user permissions, too, but Administrators and Users are what matter most.
-  - Select the **Replace all child object permissions with inheritable permissions from this object**.
-  - Click **OK** twice to apply permissions.
-  - Install Rhino again.
+**//處理方式 2：//**
+//**警告** - 以下過程涉及編輯Windows登錄檔，不正確編輯登錄檔可能損害您的電腦，而且無法啟動。如果您因擔心而不想執行以下步驟，那麼請聯絡McNeel 技術支援。//
+  - 從Microsoft TechNet下載[[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]]並將內容解壓縮至桌面。
+  - 開啟Windows指令。
+  - 將目錄更改至您的桌面。
+  - 在指令殼層程式，輸入：  **psexec -i -d -s c:\windows\regedit.exe**會依據系統帳號許可執行登錄編輯器 - 比系統管理員更強大的帳號。
+  - 瀏覽至 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\.
+  - 在**UserData**資料夾上按右鍵，接著按**Permissions...**
+  - 在**Permissions for Classes**對話框中，按**Advanced**。
+  確報管理員對此資料夾有完全控制的許可，而且使用者也讀過了解許可。
+  - 也會有其他的使用者許可，不過管理員與使用者是最重要的。
+  - 按兩次以應用許可。
+  - 重新安裝Rhino。
 
 <--
 
 -->Error 1603#
-A wide variety of problems can cause 1603 errors. Please follow all of the steps below.
+各種各樣的問題都會導致錯誤1603。請遵循以下步驟。
 \\
 \\
-**Step 1: Install .NET 4.0 Framework**
-  - Open **Windows Explorer** and browse to the Rhino Installer DVD.
-  - Open the **Installers\Prerequisites** folder.
-  - Run the [[http://www.microsoft.com/en-us/download/details.aspx?id=17718|dotNetFx40_Full_x86_x64.exe]].
-  - If the Microsoft .NET installer **shows an error**: 
-    - Write down the error. 
-    - **Proceed to Step 2**.
-  - 64-bit Windows XP only:
-    - Download and install [[http://www.microsoft.com/en-us/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]].
-  - **Skip to Step 3**.
+**步驟1: 安裝.NET 4.0 Framework**
+  - 開啟**檔案總管**並瀏覽至Rhino安裝光碟。
+  - 開啟**Installers\Prerequisites**資料夾。
+  - 執行[[http://www.microsoft.com/zh-tw/download/details.aspx?id=17718|Microsoft .NET Framework 4 (獨立安裝程式)]]。
+  - 如果Microsoft .NET安裝程式**顯示一個錯誤**: 
+    - 請記下錯誤。 
+    - **繼續執行步驟2**。
+  - 僅限於664-bit Windows XP:
+    - 限於64位元Windows XP：
+    - 下載並安裝[[http://www.microsoft.com/zh-tw/download/details.aspx?id=8483|Windows Installer 4.5 Redistributable]].
+  - **跳至步驟3**。
 \\
-**Step 2: Perform Windows Updates**
+**步驟2：執行Windows更新**
   - Run the [[http://windows.microsoft.com/en-US/windows/help/windows-update|Windows Update service]].
   - If there are any important updates to install, click on **Update Now** to install the updates.  This process can take a long time.
   - If there is an error when trying to run Windows update installer, please read [[http://support.microsoft.com/kb/906602|Troubleshooting common Windows Update Issues]]
