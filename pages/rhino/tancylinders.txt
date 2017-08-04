@@ -1,35 +1,64 @@
 ====== Tangent cylinders ======
-> **Summary:** //One of the rules when filleting is the radius used can not run off the edge of the surface it is following.  In the case of tangent cylinders, one surface edge is going to taper down to a zero width at the tangent point.  This tutorial show how to build the fillet surfaces manually.//
+> **Summary:** //**FilletEdge** cannot resolve the intersection of the fillets at the point where the two cylinders meet at a tangent, it leaves a gap. A clean way out of this situation, with a solution that uses all rolling-ball filleting is to back up and use **FilletSrf** rather than **FilletEdge**, and do all the trimming "by hand" once the fillet surfaces are created//
 
 \\
 
-| {{:legacy:en:TanCylindersStart.png}} | Original tangent cylinders. |
+{{:rhino:originaltancyls.png?200|}}  Original tangent cylinders. 
 
 \\
 
-| {{:legacy:en:TanCylinders1.png}} | Filletedge - Take what Rhino gives you as a starting point. You can also FilletSrf. |
+First, build all the fillet surfaces. 
 
 \\
 
-| {{:legacy:en:TanCylinders2.png}} | Extend the upper cylinder down a little (white surface). FilletSrf between this and the lower fillet surface. The result is the red surface. Use Extend=No. |
+ {{:rhino:initialfillets_far.png?200|}} **FilletSrf** - fillet between the cylinder and the top plane of the lower cylinder. Set Extend=Yes and Trim=No. 
+
+
+\\
+{{:rhino:initialfillets.png?200|}} Notice the fillets leave a gap. 
+
+\\
+{{:rhino:untrimborder.png?200|}} **UntrimBorder** the fillets.
 
 \\
 
-| {{:legacy:en:TanCylinders3.png}} | Note the red fillets peter out just before they hit the tangent point. |
+{{:rhino:fillettofillet.png?200|}} Now, ExtendSrf the upper edge of the lower cylinder a bit as in the image. Create a fillet surface between the upper fillet and the lower cylinder - (this is the transition surface that is not made by **FilletEdge**) **UntrimBorder** this surface as well.
+\\
+{{:rhino:setpt_setup.png?200|}}If you look closely at the ends if the fillet created in the previous step, you'll see that it peters out just barely short of the actual tangent point - this needs to be fixed or there will likely be a naked edge at this location when it's all done and joined up. To fix this, since it is so close to the correct point, turn on control points for the fillet surface and window select just the points at the very tip. Use SetPt to snap these to the seam point on the upper fillet.
+\\
+
+{{:rhino:setpt_done.png?200|}} Snap to the top of the upper fillet.
 
 \\
 
-| {{:legacy:en:TanCylinders4.png}} | Turn on points and SetPt the last points in the fillets to the midpoint between them along the edge of the lower blue fillet. Zoom in close to the tips of the arrows at step 3 to see the result. |
+Now it is a matter of trimming all of these surfaces to one another. 
 
 \\
 
-| {{:legacy:en:TanCylinders5.png}} | Trim using the edges of the fillets and join up. |
+{{:rhino:osnapmid.png?200|}} Split the tapered fillet surface using Split > Isocurve and snapping to the Int of the fillet edges where they come together on the top plane. Delete the end that does not taper.
 
 \\
 
-| {{:legacy:en:TanCylindersEnd.png}} | Delete any unjoinable stray bits of fillets left after trimming. |
+{{:rhino:edges_selected_1.png?300|}} Mirror this surface to the other side (Center osnap on the lower cylinder edge works well to set up a mirror axis in this case, then use Ortho (Shift key) to force the axis as needed to get the surface mirrored to the other side) Using Sub-object selection (Ctrl-Shift click) to select the edges of the tapered fillet, **Trim** the lower of the first two fillets
 
 \\
+
+{{:rhino:edges_selected_2.png?200|}} Use sub-object selection to select the upper edges of the tapered fillet and use these to trim away the upper fillet where it sticks out into the air.
+
+\\
+
+{{:rhino:fillettrim1.png?200|}}The result should look like this.
+
+\\
+
+{{:rhino:alltrimmedup_far.png?200|}} use the other surface edges to trim all the surfaces to each other, inluding that top plane on the lower cylinder.
+
+\\
+
+{{:rhino:done.png?300|}} Join all the surfaces and Cap if needed - it should close up.
+
+\\
+
 
 
 
