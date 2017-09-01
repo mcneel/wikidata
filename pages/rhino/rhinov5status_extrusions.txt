@@ -1,4 +1,4 @@
-====== Rhino 5.0 Status - Lightweight Extrusion Objects ======
+====== Lightweight Extrusion Objects ======
 
 In many large models, most of the geometry consists of objects that can be represented as an extrusion of a planar curve.
 
@@ -7,23 +7,17 @@ In many large models, most of the geometry consists of objects that can be repre
 ===== What =====
 
 
-Rhino 5.0 has a new lightweight extrusion object that uses less memory, meshes faster, and saves smaller than the traditional polysurface used in Rhino 4.0.  In Rhino 5.0 WIPs released on or after October 4, 2010, commands like Box and Cylinder create lightweight extrusion objects.  Other commands like Pipe and ExtrudeCrv make lightweight extrusion objects when possible and make traditional polysurface objects when the resulting geometry is too wiggly to be handled by a lightweight extrusion object.
+Rhino 5.0 has a new lightweight extrusion object that uses less memory, meshes faster, and saves smaller than the traditional polysurface used in Rhino 4.0.  Commands like Box and Cylinder create lightweight extrusion objects.  Other commands like Pipe and ExtrudeCrv make lightweight extrusion objects when possible and make traditional polysurface objects when the resulting geometry is too wiggly to be handled by a lightweight extrusion object.
 
 ===== Why =====
 
-Customers were creating architectural models with tens of thousands of objects that were simple extrusions. When traditional polysurfaces were used to represent the objects, the models were sluggish and used lots of memory resources. When these models use the light-weight extrusions, the models were responsive and there was plenty of memory available.
+Customers were creating architectural models with tens of thousands of objects that were simple extrusions. When traditional polysurfaces were used to represent the objects, the models were sluggish and used lots of memory resources. When these models use the lightweight extrusions, the models were responsive and there was plenty of memory available.
 
 ===== How =====
 
 The new **UseExtrusions** command can be used to control the use of lightweight extrusion objects. If you want commands like **Box**, **Cylinder**, **Pipe** and **ExtrudeCrv** to make lightweight extrusion objects, then run UseExtrusions and select the "Extrusions" option.  If you want these commands to make traditional polysurfaces, then select the "Polysurface" option.
 
-===== WIP big picture testing questions =====
-
-  * We do not know if the final version of V5 will use extrusions by default. The reasons they are turned on by default for the WIP is so we can learn from our customers how well they work.
-  * We need to know what commands and plug-ins work well with extrusions and what commands and plug-ins need to be improved to work with extrusions. Ideally, if a Rhino command works on a polysurface object, then the command should also work on an extrusion object.
-===== WIP details =====
-
-  * **New commands:**
+===== New commands =====
     * **UseExtrusions**: This command lets you control the use of extrusion objects.  When extrusion use is turned on, Rhino commands that create simple solids and surfaces will use extrusion objects when possible. When extrusion use is turned off, Rhino will use traditional surface and polysurface objects.  Turning off extrusion use does not change existing extrusion objects.
     * **SelExtrusions**: This command will select extrusion objects.  It will not select polysurface or surface objects.  You can use this command if you really want to see what objects are extrusions.
     * **ConvertExtrusion**: This command will convert extrusions to traditional polysurface or surface objects. You can choose to either replace the existing extrusions or add the converted objects.
@@ -38,10 +32,3 @@ The new **UseExtrusions** command can be used to control the use of lightweight 
     * **Mesh**: If you mesh an extrusion object, the walls are always meshed with quads running the length of the extrusion. The caps are generally meshed with triangles.
     * **SaveAs V4**: Extrusion objects are converted to polysurfaces when saving as V4 files.
     * **Dir**: Extrusion objects work like polysurfaces and surfaces.
-
-
-Back to [[rhinov5status|Rhino 5.0 Status]]
-
-===== Are you a developer? =====
-
-Go to [[rhinov5status_extrusion_for_developers|Extrusion for Developers]] to see more details about how lightweight extrusion objects might affect your code.
