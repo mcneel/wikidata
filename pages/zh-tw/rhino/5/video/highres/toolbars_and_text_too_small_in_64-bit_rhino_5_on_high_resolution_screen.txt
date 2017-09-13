@@ -34,3 +34,21 @@
   * 如果需要時，,使用新的**SetDpiAwareness**指令恢復到之前SR13版本的顯示設定。
 <--
 <--
+
+-->Windows 7#
+
+**處理方式如下:**
+  * 增加一個系統註冊表項(需要有系統管理員權限)
+  * 複製一個檔案到Rhino系統資料匣
+-
+  - 下載此檔案: {{:rhino:5:video:highres:rhinov5_sr14_hires.zip|}}
+  - 將RhinoV5_SR14_HiRes.zip檔案解除壓縮至桌面。你會看到有兩個檔案: Rhino.exe.manifest 及 RhinoHiRes.reg
+  - 在**RhinoHiRes.reg**檔案上按右鍵並選擇**開啟** 將這個新的登錄項目新增到系統註冊表項。系統帳戶安全性詢問請選擇是來繼續安裝。 備註:這個登陸項目檔案新增下列資料: ''[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide]
+"PreferExternalManifest"=dword:00000001''
+  - 複製 **Rhino.exe.manifest** 到: ''C:\Program Files\Rhinoceros 5 (64-bit)\System\''
+  - 重新開啟Rhino
+<--
+<--
+
+**Rhino介面在使用檔案對話框之後突然會縮小? **
+ [[zh-tw:rhino:5:video:highres:toolbars_and_text_sudenly_shrink|請參照此頁說明]]
