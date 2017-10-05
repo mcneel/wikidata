@@ -5,11 +5,13 @@
 
 ===What causes "file bloat"?===
 
-Many things can dramatically add to file size:
+Several things can dramatically add to file size:
 
   * **Display meshes** - Rhino uses special meshes to display surface objects on the screen. Very fine display mesh settings can cause large file sizes without you realizing it. You see the display as normal, but you are not necessarily aware of how many polygons the display mesh has.
 
-  * **Textures** - High resolution bitmap textures (usually used as render materials) that are stored in the file can dramatically increase file size.
+  * **Textures/Bitmap images** - High resolution bitmap textures stored in the file - used as render materials or for picture (frame) objects you created - can dramatically increase file size.
+
+  * **Materials** - it is possible to have a large collection of materials which can take up a significant amount of file space.  Sometimes materials get needlessly duplicated, multiplying this effect.
 
   * **Plug-ins** can also create their own data and store it in the file; this data can be quite massive as well.
 
@@ -17,17 +19,21 @@ Many things can dramatically add to file size:
 
 ===How can I see where the problem is?===
 
-Well, having read the above, you might already have some "usual suspects" in mind.  If so, you may be able to skip this section and go to the "possible remedy" section below.
+Having read the above, you might already have some "usual suspects" in mind.  If so, you may be able to skip this section and go to the "possible remedy" section below.
 
-However, if you are stumped, or just want to see all of what your file contains in extreme geeky detail, you can use the **Audit3dmFile** command inside of Rhino.  You can run this on the Rhino file you currently have open or even some other 3dm file on your computer.  A text window will open with a lot of info.  At the top will be info about your Rhino and what plug-ins are loaded.  Below that comes the interesting part, the various tables where information is stored.  
+However, if you are stumped, or just want to see all of what your file contains in extreme geeky detail, you can use the **Audit3dmFile** command inside of Rhino.  You can run this on the Rhino file you currently have open or even some other 3dm file on your computer.  A text window will open with a lot of info.  The top section will be some info about your Rhino installation and what plug-ins are loaded.  Below that comes the interesting part - the various "tables" where information is stored in the Rhino file being analyzed.  
 
   * First is the **"Bitmap Table"**.  It will tell you how many bitmaps are in the file, and most importantly the total size.  If you see some very large numbers in there (they are in bytes, so be careful) that might explain part of your file size.
 
-  * Next is the **"Material Table"**, which you should also check for size.  
+  * Next is the **"Material Table"**, which you should also check for size.
 
-  * Further down is the **"Object Table"**, which will give you a summary of how much storage space your actual geometry is taking up.
+  * Further down is the **"Object Table"**, which will give you a summary of how much storage space your actual geometry is taking up.  In V5, you will only see the total size of all the objects; in V6 and later, it will show size details per-object as well.  //Note that the object size includes the attached render meshes, which might be useful if that is what is contributing to the file size problem.//
 
-  * Lastly, at the bottom is the **"Model User Data Table"**, whicj enumerates all the plug-ins that are storing data.  If any of those are very large, that is another suspect to consider.
+  * Lastly, at the bottom is the **"Model User Data Table"**, which enumerates all the plug-ins that are loaded and any data they are storing.  If any of those are very large, that is another suspect to consider.
+
+===OK, I see some possible suspects, how do I proceed now?===
+
+  * **Display meshes**: If you suspect your display mesh settings are causing an inflated file size, there are several things to try.  You can try using the command **_SaveSmall**, which will save the file without the render meshes. Check the freshly saved file size, if it has dramatically decreased, that was at least part of your problem.  If you want to preserve the original, you can also use **_SaveAs** with a different name and check the box "Save small" in the dialog.
 
 
 
