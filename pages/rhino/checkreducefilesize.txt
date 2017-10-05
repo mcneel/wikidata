@@ -1,9 +1,9 @@
-=====How did my file size get so huge?=====
+====== How did my file size get so huge? ======
 
 
 > Periodically there is a post on the Rhino forum by a user that has seen their relatively simple file grow to a huge size and they don't understand why or how to reduce the size back to "normal".  This article will attempt to explain what has happened and why; as well as offer some possible fixes.
 
-====What causes "file bloat"?====
+===What causes "file bloat"?===
 
 Several things can dramatically add to file size:
 
@@ -17,7 +17,9 @@ Several things can dramatically add to file size:
 
   * **Big data** - finally, Rhino files can simply contain **massive amounts of geometry** in the form of curves, surfaces or meshes.  Large file sizes in this case are to be expected...
 
-====How can I see where the problem is?====
+----
+
+===How can I see where the problem is?===
 
 Having read the above, you might already have some "usual suspects" in mind.  If so, you may be able to skip this section and go to the "possible remedy" section below.
 
@@ -31,7 +33,9 @@ However, if you are stumped, or just want to see all of what your file contains 
 
   * Lastly, at the bottom is the **"Model User Data Table"**, which enumerates all the plug-ins that are loaded and any data they are storing.  If any of those are very large, that is another suspect to consider.
 
-====OK, I see some possible suspects, how do I proceed now?====
+----
+
+===OK, I see some possible suspects, how do I proceed now?===
 
   * **Display meshes**: If you suspect your display mesh settings are causing an inflated file size, there are several things to try.  You can try using the command **_SaveSmall**, which will save the file without the render meshes. Check the freshly saved file size, if it has dramatically decreased, that was at least part of your problem.  If you want to preserve the original, you can also use **_SaveAs** with a different name and check the box "Save small" in the dialog.
 
@@ -39,8 +43,11 @@ However, if you are stumped, or just want to see all of what your file contains 
 
   * **Plug-in data**: Data created by Rhino plug-ins stays in the file //even if the Rhino instance opening the file doesn't have the appropriate plug-in(s) installed// - you can't access it, but it's still there and doesn't get purged when re-saving the file.  That's actually a good thing.\\ \\ However, perhaps you got a file back from your render person with all their custom materials in it, or from your modelmaker with all their CAM toolpaths in it; you don't want any of that stuff anymore anyway and would like to reduce the file size if possible.\\ \\ The way to do that is to use **_-SaveAs** (with the dash!); on the command line you will see an entry **_SavePlugInData**.  Set that to **_No** and save.  //**Warning:** this will nuke all data from all plug-ins (currently) so make sure you are really not going to need this stuff again!//  Good idea to make a copy just in case.\\ \\ **Using the above procedure** to remove plug-in data can also solve some of the problems with data from some "unknown source" that is "stuck" in the file that you haven't been able to remove any other way.
 
-====What other possibilities are there?====
+----
 
+===What other possibilities are there?===
+
+  * //(a few more things to come...)//
 
 ==(work in progress, to be continued...)==
 
