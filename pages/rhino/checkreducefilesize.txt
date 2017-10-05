@@ -13,7 +13,7 @@ Several things can dramatically add to file size:
 
   * **Materials** - it is possible to have a large collection of materials which can take up a significant amount of file space.  Sometimes materials get needlessly duplicated, multiplying this effect.
 
-  * **Plug-ins** can also create their own data and store it in the file; this data can be quite massive as well.
+  * **Plug-ins** - Rhino plug-ins can add all kinds of additional functions to Rhino from advanced rendering to branch-specific design tools to CAM.  Plug-ins are allowed to store their own data in the Rhino file, and it can be quite copious depending on the nature of the plug-in and how it was used.
 
   * **Big data** - finally, Rhino files can simply contain **massive amounts of geometry** in the form of curves, surfaces or meshes.  Large file sizes in this case are to be expected...
 
@@ -37,7 +37,10 @@ However, if you are stumped, or just want to see all of what your file contains 
 
   * **Materials/Bitmaps (images)**: If the bitmap and/or materials table contain large entries, you could first try the **_Purge** command with **_Materials=_Yes**.  That should purge any unused materials, see if that helps.  If not, see the next section...
 
-  * **Plug-in data**:
+  * **Plug-in data**: Data created by Rhino plug-ins stays in the file //even if the Rhino instance opening the file doesn't have the appropriate plug-in(s) installed// - you can't access it, but it's still there and doesn't get purged when re-saving the file.  That's actually a good thing.\\ \\ However, perhaps you got a file back from your render person with all their custom materials in it, or from your modelmaker with all their CAM toolpaths in it; you don't want any of that stuff anymore anyway and would like to reduce the file size if possible.\\ \\ The way to do that is to use **_-SaveAs** (with the dash!); on the command line you will see an entry **_SavePlugInData**.  Set that to **_No** and save.  //**Warning:** this will nuke all data from all plug-ins (currently) so make sure you are really not going to need this stuff again!//  Good idea to make a copy just in case.\\ \\ **Using the above procedure** to remove plug-in data can also solve some of the problems with data from some "unknown source" that is "stuck" in the file that you haven't been able to remove any other way.
+
+====What other possibilities are there?====
+
 
 ==(work in progress, to be continued...)==
 
