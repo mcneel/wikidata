@@ -1,0 +1,53 @@
+====== Software and Plugins Used For Daylight Analysis ======
+
+== Source: Doaa Alsharif Master Thesis : ==
+ 
+{{:rhino:architecture:doaa_finalpaper.pdf|Parametric Exploration of Shading Screens:
+Daylight, Sun Penetration, and view Factor}}
+
+
+There are varieties of tools and simulation programs with different modeling capabilities.
+Crawley at al. published a study that compared capabilities of twenty different building
+performance simulation programs some of them are still used nowadays (BLAST, BSim, DeSTm
+DOE-2.1E, Ecotect, Ener-Win, Energy Express, Energy-10, EnergyPlus, eQuest, ESP-r, IDA ICE, IES
+VE, HAP, HEED, PowerDomus, Sunrel, TAS, TRACE, TRYNSYS) (2006). These tools are used with
+varying degrees in architectural practices. There are two main simulation engines, namely DOE2
+and Energy+. Figure 27, 28 shows a brief history of the development of the simulation engines,
+and the software that utilizes these engines particularly among architects. 
+
+{{ :rhino:architecture:history.jpg?600 |}}
+
+//History of used building performance simulation programs//
+
+
+The image below provides an overview of applicable simulation programs for the design
+of sustainable, high-performance building facades. Since there is not a single simulation
+program that can address all aspects and design questions that are posed during the design
+of high performance facades, typically several different programs must be used to investigate
+properties and behavior of facade systems. The figure shows which applications are suitable for
+these types of performance simulations, and their applicability for specific design aspects.
+
+{{ :rhino:architecture:history2.png?600 |}}
+//Building performance simulation software programs and their applicability for facade
+design.//
+
+
+
+
+----
+
+
+[[http://www.grasshopper3d.com/group/ladybug/forum/topics/ladybug-and-honeybee-and-archsim-difference|Here is another comparison by Chris Machey on Grasshopper Forum.]]
+
+__Chris Machey states:__
+
+A point of clarification: 
+
+Archsim and Honeybee are both interfaces for EnergyPlus and so it is possible to make a comparison but Ladybug is a set of components for analyzing and visualizing weather data so it cannot be easily compared to Archsim. My account of the differences between Honeybee and Archsim will be far from complete but here are the key ones that I am aware of:
+  - This difference is a bit of a superficial one but points to a deeper thinking about how the software should be used.  Honeybee has many more components than Archsim, which means that Honeybee has a steeper learning curve than Archsim and will take longer to master.  Along with this, you may also encounter a general mentality in the Honeybee community that "you should not be running a certain type of simulation unless you know how it works" whereas I know that Archsim is a bit more amenable to making things fast and easy to set up even when you are not sure what is going on under the hood.  However, as a result of the large number of components in Honeybee, it is more open-ended, customizable, and includes more freedom in terms of cases that you can run and the parameters of the energy simulation that you can change than Archsim. You will also notice that, while there is a general ethos in the Honeybee community that you should not be running certain simulations unless you know what you are doing, we try to provide you with many resources to educate yourself if you are motivated. For example, we have long component descriptions that we assemble into documentation books like this (https://www.gitbook.com/book/mostapharoudsari/honeybee-primer/details), hours of video tutorial playlist like this one (https://www.youtube.com/playlist?list=PLruLh1AdY-SgW4uDtNSMLeiUmA8Y...), and many GH example files on a github-based file sharing system (https://hydrashare.github.io/hydra/index.html).  Not to mention a community of people who would respond to discussions like this one.
+  - Archsim as a standalone application will soon be no more and will be instead distributed with the DIVA daylight analysis tool (http://diva4rhino.com/).  While I am unclear on the exact trajectory of DIVA, it currently has a price tag attached to it and so I would assume that the future of Archsim will also carry this price tag.  On the other hand, Honeybee and any derivative software will forever be free and open source under the GPL licence (https://github.com/mostaphaRoudsari/Honeybee/blob/master/License_Ho...).
+  - This third point is a bit of a reiteration of the last one but Honeybee is open source, meaning that, if you need a feature of EnergyPlus that is not yet implemented on either interface, you can usually add it in yourself with a few lines of python code in Honeybee.  This type of workflow is not possible with Archsim since it is closed source and requires you to use EnergyPlus's text editor interface after Archsim has exported an IDF in order to implement any additional EnerygPlus features.
+  - The libraries and templates for Honeybee come from OpenStudio - the open source interface for EnergyPlus (https://www.openstudio.net/), which is supported by the US Department of Energy (just like EnergyPlus).  Since Honeybee is open source, it is able to make use of the large database of building type schedules/loads and constructions that have been assembled by the OpenStudio team over the last several years as well as OpenStudio's SDK.  I can also say that almost all of the development efforts of the Honeybee team are now focused now on integrating efforts with OpenStudio, including an exporter from Honeybee to OpenStudio that should be fully functional for the next stable release.  I am not certain of the current extent of Archsim's libraries but, last I had checked, the creator was pulling them from his own experience and, as such, only had a few libraries to choose from.  For all of my knowledge, through, this may be changing with the integration of Archsim with DIVA.
+
+
+ 
