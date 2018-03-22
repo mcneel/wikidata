@@ -1,31 +1,30 @@
-====== Error 1935 当安装"Microsoft. VC80.CRT,..."时发生的错误 ======
-> **摘要：**//如何修复错误代码1935的错误。//
->**相关安装说明：**//[[installproblems|安装Rhino 5疑难排解]]//
+
+====== 安装错误1935 或VC80 ======
+====== 程序集组件 Microsoft.VC80.CRT======
+
+> **摘要：**//如何修复安装错误 1935 //
+>**相关安装说明：**//[[installproblems|安装Rhino 5疑难解答]]//
 
 ====== 问题 ======
-我收到错误1935，安装组件"Microsoft.VC80.CRT时发生错误, ..."
+收到"错误1935，安装程序集"Microsoft.VC80.CRT时发生错误, ..."
+{{:rhino:error_image.png?400|}}
 
-======原因======
-这是Microsoft C++ 2005 Redistributable Package中的错误。
+=====原因=====
+微软C++2005可转发套件从未安装，或是在尝试安装时失败。这是Windows与微软可转发套件的问题，与Rhino安装程序无关。 然而Rhino安装程序无法成功完成，有时只是Rhino 64位版本无法完全安装。
+
 
 =====答案=====
-**解决方案 1：**
-  * ** 更新Windows** 一些使用者回报在更新Windows之后就可以解决此问题。
-**解决方案 2：**
-  * ** 停用系统上的防毒软件。** 一位使用者表示停用AVG，Rhino安装就可以成功。
-**解决方案 3：**
-  * ** 尝试多安装几次**  一位使用者表示他尝试第三次之后就安装完成了，他没有对系统做任何更改。
-**解决方案 4：**
-  - 在Windows Vista或Windows 7，从开始功能表，键入功能(Features)。
-  - 按一下**开启或关闭Windows功能**
-  - 在Windows功能对话方块中，选择标有**Windows Communication Foundation HTTP 启用**的核取方块。
-  - {{:rhino:rhino_1935_windows_features.png|}}
-  - 按OK
+手动安装Microsoft C++ 2005可转发套件**[[http://www.microsoft.com/download/zh-tw/details.aspx?id=26347|Microsoft Visual C++ 2005 Service Pack 1 可转发套件MFC安全性更新]]**.。注： 这些程序集的版本为 **8.0.50727.5592** 或 **8.0.50727.6195**。
 
-如果您无法启用此功能，或是Windows功能对话框是空的，那么此Windows安装已经损坏需要修理。 请联络Microsoft技术支援。
+  - **[[http://www.microsoft.com/download/zh-tw/details.aspx?id=26347|至Microsoft Visual C++ 2005 Service Pack 1 可转发套件 MFC 安全性更新页面]]**
+  - 按**下载**按钮。 {{:zh-tw:rhino:mfc.png?500|}}
+  - 只下载32位操作系统的vcredistx86.exe。
+  - 下载vcredistx86.exe 和64位操作系统的vcredistx64.exe。{{:zh-tw:rhino:rhino5:vcredistx86_tw.png?500|}}
+  - 到下载位置并安装可转发套件。 
+  - 成功安装后，再次安装Rhino。 
 
-**//更多详情：//**
-在安装Rhino时碰到此错误的使用者，也无法直接从Microsoft安装[[http://www.microsoft.com/downloads/zh-cn/details.aspx?FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee&displaylang=en|Microsoft C++ 2005 可转发套件 (Redistributable Package)]]。因此问题与Windows及可转发套件有关，而非Rhino安装程序。
+** 请注意：**如果此解决方案无效，请尝试：\\
+http://wiki.mcneel.com/zh-tw/rhino/error1935_0x800736b3
 
-
+{{tag>rhinoinstallationerror}}
 {{tag>rhino5installationerror_zh}}
