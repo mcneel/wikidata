@@ -1,0 +1,30 @@
+======Monitoring Licenses Remotely======
+> **Product:** //[[zoo:home|Zoo]]//
+> **Summary:** //Discusses how to configure the Zoo on system with multiple IP addresses.//
+
+=====Question=====
+Is it possible for the Zoo to use a port other than TCP Port 80?
+
+=====Answer=====
+No, it is not possible for the Zoo to listen for connections on any other TCP or UDP port.
+
+That said, new with Zoo 6 is the ability to bind the Zoo service to a specific IP address. 
+
+{{:zoo:zoo_ip.png}Zoo Options}}
+
+
+This field allows you to set the web server so that it only listens for connections from a particular network interface.  For instance, if you have two network cards in your computer then you could access the server from either interface.  With this option you can select from the drop-down menu the IP address of the corresponding network card so that HomeSeer can only be accessed through that address.
+
+Thus, if you’ve configured your server for multiple IP addresses, it is now possible to run the Zoo on one IP address and another service, such as IIS, on another.
+
+  http://<zoo_server_host_name>/status
+
+into your favorite web browser. For example, if your Zoo server's host name is //zooserver.mycorp.com//, then you'd enter:
+
+  http://zooserver.mycorp.com/status
+  
+To determine the version of the Zoo you are running, launch the **Zoo Administrator** (ZooAdmin.exe) and select **Help -> About**.
+
+\\
+
+{{tag>Zoo}}
