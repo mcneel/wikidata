@@ -1,27 +1,47 @@
 ====== Previews of Rhino files missing in Windows Explorer ======
 > **Summary:** //How to make sure the Rhino thumbnail viewer is registered in Windows//
 
-If you do not see preview thumbnails of Rhino .3dm files in Windows Explorer, it may be that the the shell extension, provided with Rhino, is not correctly registered with Windows. 
+If you do not see preview thumbnails of Rhino .3dm files in Windows Explorer, it may be that the the Shell Extension, provided with Rhino, is not correctly registered with Windows. 
 
-To register the shell extension, you'll need to have Administrator privileges in Windows. You can, from an 'elevated' command prompt (Run as Administrator), paste the following 
+To register the Rhino Shell Extension, you will need to open a Command Prompt as an Administrator.
 
-===Open the Command Prompt as Administrator in Windows 8 or 10===
+====Windows 8 or 10====
 
-Both Windows 8 and 10 offer a Power Users menu that you can access by pressing **Windows+X** or just right-clicking the Start button. On the Power Users menu, choose “Command Prompt (Admin).”
+To open a Command Prompt as Administrator on Windows 8 or 10:
 
-{{:rhino:windows_x.png|Power Users menu}}]]
+  - Access by Power menu by pressing **Windows+X**
+  - From the menu, select **Command Prompt (Admin)**
+
+{{:rhino:window_x.png|Power Users menu}}
+
+When you launch the Command Prompt with Admin privileges, you’ll likely see a **User Account Control** window asking for permission to continue. Go ahead and click **Yes**.
+
+====Windows 7====
+
+To open a Command Prompt as Administrator on Windows 7:
+
+  - Click Start
+  - In the search field, enter **CMD**.
+  - In the results list, you will see **CMD**.
+  - Right-click on **CMD** and from the context menu, select **Run as Administrator**.
+
+{{:rhino:window_7.png|Command Prompt}}
+
+When you launch the Command Prompt with Admin privileges, you’ll likely see a **User Account Control** window asking for permission to continue. Go ahead and click **Yes**.
+
+====Register the Rhino Thumbnail Shell Extension====
+
+==Rhino 6 for Windows==
+
+If you have Rhino 6 for Windows installed, then run the following command from the Command Prompt window you just opened:
+
+  C:\> regsvr32 "C:\Program Files\Rhino 6\System\RhinoHandlers.dll"
+
+==Rhino 5 for Windows==
+
+If you have Rhino 5 for Windows (and you do not have Rhino 6 for Windows installed), then run the following command from the Command Prompt window you just opened:
+
+  C:\> regsvr32 "C:\Program Files\Rhinoceros 5 (64-bit)\System\RhinoHandlers.dll"
 
 
-When you launch the Command Prompt with admin privileges, you’ll likely see a “User Account Control” window asking for permission to continue. Go ahead and click “Yes.”
-
-**regsvr32 "C:\Program Files\Rhinoceros 5 (64-bit)\System\RhinoHandlers.dll"**
-
-or
-
-**regsvr32 "C:\Program Files\Rhino 6\System\RhinoHandlers.dll"**
-
-and hit Enter. 
-
-
-
-<color White>   Thumbnails Missing </color>
+<color White>Thumbnails Missing</color>
