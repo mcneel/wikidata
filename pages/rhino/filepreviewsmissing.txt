@@ -3,9 +3,32 @@
 
 If you do not see preview thumbnails of Rhino .3dm files in Windows Explorer, it may be that the thumbnail viewer, provided with Rhino, is not correctly registered with Windows. 
 
+=====1. Verify thumbnails are not disabled=====
+  - Open **Explorer**.
+  - Click **View**
+  - Click **Options** and then **Change folder and search options**.
+  - Verify **Always show icons, never thumbnails** is NOT checked.
+{{:rhino:folder_options.png|Folder Options}}
+
+If you do not see preview thumbnails of Rhino .3dm files, proceed to step 2.
+
+=====2. Repair your Rhino installation=====
+
+  - Open **Control Panel**.
+  - Click **Programs and Features**
+  - For **Rhino 6**:.
+    - Select **Rhino 6** and click **Change**
+    - In the installation dialog box, click **Repair**.
+  - For **Rhino 5**:
+    - Select **Rhino 6** and click **Repair**.
+
+If you do not see preview thumbnails of Rhino .3dm files, proceed to step 3.
+
+=====3. Register the Rhino thumbnail viewer=====
+
 To register the Rhino thumbnail viewer, you will need to open a Command Prompt as an Administrator.
 
-====Windows 8 or 10====
+===Windows 8 or 10===
 
 To open a Command Prompt as Administrator on Windows 8 or 10:
 
@@ -16,7 +39,7 @@ To open a Command Prompt as Administrator on Windows 8 or 10:
 
 When you launch the Command Prompt with Admin privileges, you’ll likely see a **User Account Control** window asking for permission to continue. Go ahead and click **Yes**.
 
-====Windows 7====
+===Windows 7===
 
 To open a Command Prompt as Administrator on Windows 7:
 
@@ -31,21 +54,25 @@ When you launch the Command Prompt with Admin privileges, you’ll likely see a 
 
 ====Register the Rhino Thumbnail Viewer====
 
-==Rhino 6 for Windows==
+===Rhino 6 for Windows===
 
 If you have Rhino 6 for Windows installed, then run the following command from the Command Prompt window you just opened:
 
   regsvr32 "C:\Program Files\Rhino 6\System\RhinoHandlers.dll"
 
-==Rhino 5 for Windows==
+===Rhino 5 for Windows===
 
 If you have Rhino 5 for Windows (and you don't have Rhino 6 for Windows installed), then run the following command from the Command Prompt window you just opened:
 
   regsvr32 "C:\Program Files\Rhinoceros 5 (64-bit)\System\RhinoHandlers.dll"
 
-==== Note: ====
-If you are running an older Windows, like Windows 7, you may need to run Windows **DiskCleanUp** utility. Only check "Thumbnails" to be deleted. Let it delete the Thumbnail cache. Then when you browse a folder, it will regenerate the image.
-Some report that uninstalling a Rhino version, causes this issue. 
-Running **Repair** on the Rhino are using should also work here, as well.
+If you do not see preview thumbnails of Rhino .3dm files, proceed to step 4.
 
-<color White>Thumbnails Missing</color>
+=====Delete the thumbnail cache===== 
+If you are running an older Windows, like Windows 7, you may need to run Windows **Disk Cleanup** utility. 
+
+  - Run **Disk Cleanup**.
+  - Click **Thumbnails**.
+  - Click **OK**.
+
+{{:rhino:disk_cleanup.png|Disk Cleanup}}
