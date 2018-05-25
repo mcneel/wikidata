@@ -1,0 +1,44 @@
+======Windows 10 Version 1803 Upgrade Issue======
+
+> **Product:** //[[zoo:home|Zoo]]//
+> **Summary:** //Discusses the Windows 10 version 1803 upgrade and it's impact on the Zoo//
+
+=====Issue=====
+There have been reports that after installing Microsoft's Spring Creators Update for Windows 10, version 1803, Rhino is no longer able to obtain licenses from a Zoo server.
+
+=====More Information=====
+You may have had issues with the detection of PCs and devices in the local area network. While there are plenty of possible explanations for PCs not showing up anymore when you try to access them, chance is high that a change in the Spring Creators Update version of Windows 10 is responsible for the issue.
+
+Microsoft removed the Homegroup functionality from Windows 10 version 1803; the issue, however, may affect non-Homegroup PCs and PCs that used the Homegroup functionality that Windows provided.
+
+Usually, you should be able to access devices in the network through their IP address or name, but this may not work properly anymore in Windows 10 version 1803.
+
+=====Possible Solution=====
+
+You need to check and change the status of a networking related service in the new version of Windows 10. **Function Discovery Resource Publication** is a networking service that ensures that devices are discovered in a local computer network.
+
+{{zoo:windows-10-network-discovery-issue.png?640}}
+
+<code>
+Publishes this computer and resources attached to this computer so they
+can be discovered over the network. If this service is stopped, network
+resources will no longer be published and they will not be discovered by
+other computers on the network.
+</code>
+
+The service is set to manual both in Windows 10 version 1709 and Windows 10 version 1803, but it may not be started by the system anymore in Windows 10 version 1803. What you may want to do therefore is to change the startup type of the service to automatic.
+
+{{zoo:function-discovery-resource-publication.png}}
+
+Here is what you need to do to correct the issue (or at least try it to see if it resolves the network discovery issue on your network):
+
+  - Tap on the **Windows-key** to open the Start Menu, or click on the **Start Menu** icon.
+  - Type **services.msc** and double-click on the result. This opens the Services Manager on the computer.
+  - Locate the service **Function Discovery Resource Publication**. Its status should be blank which means that is not running.
+  - Double-click on the service to open its properties.
+  - Click in the **Startup type** menu and switch startup to **Automatic**.
+  - Restart the PC after you have clicked on the **OK** button to apply the changes.
+
+\\
+
+{{tag>Zoo}}
