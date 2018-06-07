@@ -4,11 +4,11 @@
 
 Las operaciones booleanas pueden ser un gran ahorro de tiempo en la creación de objetos en Rhino.  Pero, para el principiante, a menudo fallan misteriosamente y es difícil entender por qué.  Esperamos que esta explicación de preguntas frecuentes aclare un poco más el tema.  Si no desea leer toda información completa, también puede consultar el artículo [[rhino:jbbooleanfix|Solución de problemas con operaciones booleanas]] de John Brock.
 
-** //Para entender por qué fallan las booleanas, primero debe entender cómo funcionan.//** No son una herramienta mágica para unir objetos.  Simplemente son operaciones semiautomáticas que combinan varios comandos manuales en un solo proceso.  Las operaciones booleanas básicamente hacen cuatro cosas:  
-* ** Intersecar** dos o más objetos 
- * **Partirlos** en las intersecciones encontradas
- * **Eliminar** (descartar) las partes no deseadas 
- * **Unirlo** todo de nuevo 
+**//Para entender por qué fallan las booleanas, primero debe entender cómo funcionan.//** No son una herramienta mágica para unir objetos.  Simplemente son operaciones semiautomáticas que combinan varios comandos manuales en un solo proceso. Las operaciones booleanas básicamente hacen cuatro cosas:  
+  * **Intersecar** dos o más objetos 
+  * **Partirlos** en las intersecciones encontradas
+  * **Eliminar** (descartar) las partes no deseadas 
+  * **Unirlo** todo de nuevo 
 Todo lo que puede hacer con operaciones booleanas también se puede hacer manualmente utilizando los cuatro comandos anteriores.  Usar una operación booleana es un modo de acelerar el procedimiento, cuando funciona...
 
 Entonces, lo primero que debe tener en cuenta es que es necesario un entendimiento **//sólido//** de cómo funcionan los componentes de las operaciones booleanas.  Cuando estas fallan, puede obtener los mismos resultados con estos comandos: **Intersecar**, **Partir**, **Eliminar** y **Unir**.  Intente deshacer una operación booleana correcta y vuelva a hacerla manualmente usando esos comandos.  Puede estar tranquilo con el hecho de que con este procedimiento siempre obtendrá el resultado que quiera, incluso si sus operaciones booleanas fallan.
@@ -25,7 +25,7 @@ Entonces, teniendo en cuenta lo anterior, si su operación booleana falla, lo pr
 =====Problemas de intersección, soluciones y limitaciones=====
 ¿Qué causa espacios o problemas en la intersección?  Hay muchas posibilidades.  Algunas se deben a errores de modelado o imprecisiones. Otras se deben a las limitaciones de Rhino.  Primero veamos los errores comunes:
 
-Si cree que su intersección debe ser cerrada pero no lo es, seleccione la curva y ejecute el comando **InicioCrv**, que coloca un punto al inicio de la curva.  Normalmente se corresponderá con un lado del espacio.  Utilice el **Zoom** para acercarse y ver el espacio en la pantalla.  ¿Por qué hay un espacio ahí?  Tal vez crea que sus objetos son cerrados, pero en realidad no lo son.  La intersección puede cruzar un espacio entre las superficies, causando una curva abierta.  Si ha forzado la unión de su objeto con el comando **UnirBorde**, eso también puede ocurrir, aunque el objeto sea cerrado.  Otra cosa que hay que comprobar son las tolerancias de modelado[[rhino:faqtolerances|vea Comprender las tolerancias]]). El hecho de que sean demasiado elevadas puede evitar que la función de intersección encuentre una intersección completa, aunque todo lo demás esté bien.  Intente ajustar sus tolerancias y ejecutar la operación booleana nuevamente.  Una vez que obtenga una intersección completa cerrada, la operación debería funcionar.
+Si cree que su intersección debe ser cerrada pero no lo es, seleccione la curva y ejecute el comando **InicioCrv**, que coloca un punto al inicio de la curva.  Normalmente se corresponderá con un lado del espacio.  Utilice el **Zoom** para acercarse y ver el espacio en la pantalla.  ¿Por qué hay un espacio ahí?  Tal vez crea que sus objetos son cerrados, pero en realidad no lo son.  La intersección puede cruzar un espacio entre las superficies, causando una curva abierta.  Si ha forzado la unión de su objeto con el comando **UnirBorde**, eso también puede ocurrir, aunque el objeto sea cerrado.  Otra cosa que hay que comprobar son las tolerancias de modelado ([[rhino:faqtolerances|vea Comprender las tolerancias]]). El hecho de que sean demasiado elevadas puede evitar que la función de intersección encuentre una intersección completa, aunque todo lo demás esté bien.  Intente ajustar sus tolerancias y ejecutar la operación booleana nuevamente.  Una vez que obtenga una intersección completa cerrada, la operación debería funcionar.
 
 Si no puede lograr que Rhino genere automáticamente una curva de intersección cerrada, incluso después de haber arreglado su objeto lo mejor posible, puede que tenga que volver al modo manual.  Obtenga la mejor curva de intersección que pueda e intente editarla hasta que tenga un objeto cerrado.  Es posible que necesite agregar o cambiar un segmento, editar algunos puntos, eliminar segmentos superpuestos o similar.  Una vez que tenga esta curva, puede intentar recortar sus objetos individualmente.  Debe descomponer las polisuperficies para recortar con la curva de intersección.  Recorte las partes que no quiera y únalo todo de nuevo.
 
@@ -51,7 +51,7 @@ Ilustraciones animadas que muestran la creación y edición manual de superficie
 
 Este es un ejemplo de un sólido que no se puede construir con primitivas de sólido y se requieren técnicas de edición de superficies.
 
- * El problema principal es la condición de las superficies laterales que son coincidentes y no comparten un volumen con la pieza sólida principal. Cuando las operaciones booleanas fallan, confíe en las técnicas de edición de superficies descritas en los pasos del documento del enlace.
+  * El problema principal es la condición de las superficies laterales que son coincidentes y no comparten un volumen con la pieza sólida principal. Cuando las operaciones booleanas fallan, confíe en las técnicas de edición de superficies descritas en los pasos del documento del enlace.
   * Descargue el [[http://wiki.mcneel.com/_media/legacy/en/part1-r3.3dm|modelo.]]
 {{:legacy:en:t.JPG}}
 
