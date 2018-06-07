@@ -1,98 +1,105 @@
-====== Booleans FAQ ======
-> **Summary:** //An attempt to unlock the mysteries of Boolean Operations.  How and why they work, why they fail, how to fix problems and make them work more consistently, understanding how they work on open objects.//
+====== Preguntas más frecuentes sobre Booleanas ======
 
-======Introduction======
-Boolean operations can be great time saving procedures for constructing objects in Rhino.  But, for the beginner, they seem to often mysteriously fail, and it is difficult to understand why.  Hopefully this FAQ explanation will help clarify things a bit.  If you don't want to wade through all the following info, you can also try John Brock's short [[rhino:jbbooleanfix|How I fix Boolean Problems]]
+> **Resumen:** //Entender los misterios de las operaciones booleanas: cómo funcionan, por qué fallan, cómo solucionar problemas y hacer que funcionen de manera más coherente, cómo funcionan en objetos abiertos.//
 
-**//To understand why Booleans fail, first you must understand how they work.//**  They are not some sort of magic tool for putting objects together.  They are simply semi-automatic operations that combine several “manual” commands into one process.  The Boolean operations basically do 4 things:  **Intersect** two or more objects, **Split** them at the intersection(s) found, **Delete** (discard) the parts not wanted, and **Join** everything back together.  Everything you can do with Boolean operations you can also do by “manually” successively using the above four commands.  Using a Boolean operation only speeds things up by making it one procedure – when it works...
+Las operaciones booleanas pueden ser un gran ahorro de tiempo en la creación de objetos en Rhino.  Pero, para el principiante, a menudo fallan misteriosamente y es difícil entender por qué.  Esperamos que esta explicación de preguntas frecuentes aclare un poco más el tema.  Si no desea leer toda información completa, también puede consultar el artículo [[rhino:jbbooleanfix|Solución de problemas con operaciones booleanas]] de John Brock.
 
-So, the first thing to keep in mind here is that a **//solid//** understanding of how the “component” operations of Booleans work is necessary.  When all else fails, you can get the job done with these commands – **Intersect**, **Split**, **Join** and **Delete**.  Try undoing a successful Boolean operation and re-doing it manually using those commands.  Get comfortable with the fact that this procedure will always get you where you want to go even if your Boolean attempts fail.
+** //Para entender por qué fallan las booleanas, primero debe entender cómo funcionan.//** No son una herramienta mágica para unir objetos.  Simplemente son operaciones semiautomáticas que combinan varios comandos manuales en un solo proceso.  Las operaciones booleanas básicamente hacen cuatro cosas:  
+* ** Intersecar** dos o más objetos 
+ * **Partirlos** en las intersecciones encontradas
+ * **Eliminar** (descartar) las partes no deseadas 
+ * **Unirlo** todo de nuevo 
+Todo lo que puede hacer con operaciones booleanas también se puede hacer manualmente utilizando los cuatro comandos anteriores.  Usar una operación booleana es un modo de acelerar el procedimiento, cuando funciona...
 
-=====Boolean operation failed...=====
-OK, why do Booleans fail?  First and foremost, it is the intersection operation that will determine the success or failure of a Boolean operation.  If a correct intersection can be found, the rest is easy. However if Rhino has problems finding the intersection, the Boolean operation is guaranteed to fail.  So the whole key is to help Rhino find a good and complete intersection.  You can do this by setting up your model and file correctly, and also by understanding some of Rhino’s quirks and limitations.
+Entonces, lo primero que debe tener en cuenta es que es necesario un entendimiento **//sólido//** de cómo funcionan los componentes de las operaciones booleanas.  Cuando estas fallan, puede obtener los mismos resultados con estos comandos: **Intersecar**, **Partir**, **Eliminar** y **Unir**.  Intente deshacer una operación booleana correcta y vuelva a hacerla manualmente usando esos comandos.  Puede estar tranquilo con el hecho de que con este procedimiento siempre obtendrá el resultado que quiera, incluso si sus operaciones booleanas fallan.
 
-Intersecting 2 closed (“solid”) objects should produce at least one completely closed intersection curve (i.e. a loop). It’s possible there may be more than one loop if the object intersect in multiple spots – no problem if they’re all closed.  If even one is open, however, the Boolean operation will fail.  This is because the intersection curve does not completely cut through the objects, and Rhino doesn’t know how to finish the cut, so it stops and gives you an error message.
+=====Error en operación booleana...=====
+¿Por qué las operaciones booleanas fallan?  En primer lugar, la operación de intersección es la que determinará el éxito o el fracaso de una operación booleana.  Si se encuentra una intersección correcta, el resto es fácil. Pero si Rhino tiene problemas para encontrar la intersección, la operación booleana fallará.  La clave es ayudar a Rhino a encontrar una intersección buena y completa.  Para hacerlo, configure su modelo y archivo correctamente, y tenga en cuenta algunas de las peculiaridades y limitaciones de Rhino.
 
-> **Note:** //Doing Boolean operations on open objects is also possible, but a bit more complicated, so we’ll assume at first that all objects are closed.  Open objects will be covered later.//
+La intersección de dos objetos cerrados (sólidos) debe producir al menos una curva de intersección completamente cerrada (es decir, un bucle). Es posible que haya más de un bucle si el objeto se cruza en varios puntos; no hay problema si todos son cerrados.  Sin embargo, si uno es abierto, la operación booleana fallará.  El motivo es que la curva de intersección no corta completamente los objetos. Rhino no sabe cómo terminar el corte, por lo que se detiene y muestra un mensaje de error.
 
-So, having taken the above into account, if your Boolean operation fails, the first thing you should do is check the intersection of the objects.  Select your objects and call Intersect. First, look at the intersection curve(s)on the screen.  Does it look correct?  Are there any visible gaps or extra segments or other things that “look strange”?  If so, you need to find out why.  If the intersection looks OK, but the Boolean is still failing, while the intersection curve is still selected, go into **Properties > Details** or just use the command **What**.  The resulting info box should tell you all you need to know about the curve.  Does it say the curve is open?  That will be your problem  area then.  More than one curve?  You need to find out why there are either gaps or overlaps in your intersection.
+> **Nota:** //También es posible realizar operaciones booleanas en objetos abiertos, pero es un poco más complicado, por lo que daremos por supuesto que todos los objetos son cerrados.  Los objetos abiertos se tratarán posteriormente.//
 
-=====Intersection problems, solutions and limitations=====
-What can cause gaps or problems in your intersection?  There are many possibilities.  Some are due to modeling errors or inaccuracies, some are due to Rhino’s limitations.  Let’s look at the common errors first:
+Entonces, teniendo en cuenta lo anterior, si su operación booleana falla, lo primero que debe hacer es verificar la intersección de los objetos.  Seleccione los objetos y ejecute el comando Intersecar. Primero, observe cada curva de intersección en la pantalla.  ¿Se ven bien?  ¿Hay espacios visibles, segmentos sobrantes u otras cosas extrañas?  Si es así, averigüe por qué.  Si la intersección se ve bien, pero la operación booleana sigue fallando mientras la curva de intersección todavía está seleccionada, vaya a //Propiedades > Detalles// o utilice el comando **Info**.  El cuadro de información resultante le mostrará todo lo que necesita saber sobre la curva.  ¿Dice que la curva es abierta?  Entonces ahí está el problema.  ¿Hay más de una curva?  Necesita averiguar por qué hay espacios o superposiciones en la intersección.
 
-If you think your intersection should be closed, but it’s not, select the curve, and call **CrvStart**, which will place a point at the start of the curve.  Normally this will correspond with one side of the gap.  **Zoom** in closely and see if you can see the gap on the screen.  Why is there a gap there?  Well, maybe you think that your objects are closed, but they’re really not.  The intersection may cross a gap between surfaces, and that will cause an open curve.  If you have forced together your object using **JoinEdge**, that may also happen, even though the object says closed.  The other thing to check is your modeling tolerances ([[rhino:faqtolerances|see Tolerances FAQ]]), if they are too large, this may prevent the intersector function from finding a complete intersection, even though all else is well.  Try tightening your tolerances and running the Boolean again.  Once you get a full closed intersection, your operation //should// work…
+=====Problemas de intersección, soluciones y limitaciones=====
+¿Qué causa espacios o problemas en la intersección?  Hay muchas posibilidades.  Algunas se deben a errores de modelado o imprecisiones. Otras se deben a las limitaciones de Rhino.  Primero veamos los errores comunes:
 
-If you can’t get Rhino to automatically produce a closed intersection curve even after you have fixed your object the best you can, it may be time to go back to “manual”.  Get the best intersection curve you can and try editing it until you have a closed object.  You may need to add or modify a segment, do some point editing, take out overlapping segments, or something like that.  Once you have this curve, you can try trimming your objects individually.  You will need to explode your polysurfaces to trim with the intersection curve.  Trim out the parts you don’t want and join all back up.
+Si cree que su intersección debe ser cerrada pero no lo es, seleccione la curva y ejecute el comando **InicioCrv**, que coloca un punto al inicio de la curva.  Normalmente se corresponderá con un lado del espacio.  Utilice el **Zoom** para acercarse y ver el espacio en la pantalla.  ¿Por qué hay un espacio ahí?  Tal vez crea que sus objetos son cerrados, pero en realidad no lo son.  La intersección puede cruzar un espacio entre las superficies, causando una curva abierta.  Si ha forzado la unión de su objeto con el comando **UnirBorde**, eso también puede ocurrir, aunque el objeto sea cerrado.  Otra cosa que hay que comprobar son las tolerancias de modelado[[rhino:faqtolerances|vea Comprender las tolerancias]]). El hecho de que sean demasiado elevadas puede evitar que la función de intersección encuentre una intersección completa, aunque todo lo demás esté bien.  Intente ajustar sus tolerancias y ejecutar la operación booleana nuevamente.  Una vez que obtenga una intersección completa cerrada, la operación debería funcionar.
 
-//<color blue>Known Rhino limitations:</color>//
+Si no puede lograr que Rhino genere automáticamente una curva de intersección cerrada, incluso después de haber arreglado su objeto lo mejor posible, puede que tenga que volver al modo manual.  Obtenga la mejor curva de intersección que pueda e intente editarla hasta que tenga un objeto cerrado.  Es posible que necesite agregar o cambiar un segmento, editar algunos puntos, eliminar segmentos superpuestos o similar.  Una vez que tenga esta curva, puede intentar recortar sus objetos individualmente.  Debe descomponer las polisuperficies para recortar con la curva de intersección.  Recorte las partes que no quiera y únalo todo de nuevo.
 
-<color brown>Coincident seams</color> – all objects have seams, sometimes when the seams on two objects are at exactly the same place, Rhino will have trouble with the intersection.  Solution – either try to move the seam, or try moving one object just a tiny, tiny bit (if you can without making your model inaccurate).  Or try to do the operation “manually”.
+====Limitaciones conocidas de Rhino====
 
-<color brown>Coplanar faces</color> – if two faces of an object are on the same plane, Rhino may not be able to calculate the intersection. This is a fairly  common occurrence, try to avoid building your model this way if you can.  Solution – as above, you may move the object slightly if possible, if not, you may have to do this operation “manually”.
+**Costuras coincidentes**: todos los objetos tienen costuras. A veces, cuando las costuras de dos objetos están exactamente en el mismo lugar, Rhino tiene problemas con la intersección.  Solución: intente mover solo un poquito la costura o un objeto (si es posible, sin quitarle precisión al modelo).  O bien, intente hacer la operación manualmente.
 
-<color brown>Nearly tangent surfaces</color> – like the intersection of two equal diameter pipes at an angle.  The intersection often fails at the point where the surfaces are tangent.  There is no easy fix currently for this problem.
+** Caras coplanares**: si dos caras de un objeto están en el mismo plano, es posible que Rhino no pueda calcular la intersección. Este problema es bastante frecuente. Si puede, evite crear su modelo de este modo.  Solución: como se indica más arriba, mueva el objeto ligeramente si es posible. De lo contrario, puede que tenga que hacer esta operación manualmente.
 
-<color brown>Invalid objects</color> – If one of the objects you're trying to work with is invalid, Boolean operations will often fail.  Check for invalid objects by using the command **SelBadObjects**.  If one highlights, you will need to fix it first before proceeding.  It is also recommended that you turn on automatic object checking, if invalid objects are created in the course of your work (or imported), Rhino will tell you immediately.  To do this, simply type **CheckNewObjects**.  This is a toggle, running the command again turns it off.
+**Superficies casi tangentes**: como la intersección de dos tubos de igual diámetro en un ángulo.  La intersección a menudo falla en el punto donde las superficies son tangentes.  Actualmente, este problema no tiene una solución fácil.
 
-<color brown>Non-Manifold Polysurfaces</color> – Although Rhino doesn't currently flag these objects as bad, they can cause failure.  Rhino //shouldn't// create these types of structures, but under certain conditions it does, especially with V4.  The only way to find them currently is to check the properties of the object.
+**Objetos no válidos**: si uno de los objetos con los que intenta trabajar no es válido, las operaciones booleanas fallarán a menudo.  Compruebe si hay objetos no válidos con el comando **SelObjetosErróneos**.  Si se indica que hay alguno, debe arreglarlo primero antes de continuar.  También es recomendable activar la comprobación automática de objetos. Si se crean (o importan) objetos no válidos en el transcurso de su trabajo, Rhino le informará de inmediato.  Para hacerlo, simplemente escriba **ComprobarNuevosObjetos**.  Este comando es un conmutador, si vuelve a ejecutarlo se desactiva la función.
 
-===== "Manual" construction and editing is sometimes needed=====
+**Polisuperficies no múltiples**: aunque Rhino actualmente no marca estos objetos como erróneos, pueden causar errores.  Rhino //no debería// crear estos tipos de estructuras, pero en algunas condiciones sí lo hace, especialmente con la V4.  La única forma de encontrarlos es verificar las propiedades del objeto.
 
-<color brown>Animated illustrations showing manual surface construction and editing when Boolean operations fail.</color>
+=====A veces es necesario crear y editar manualmente=====
 
-**[[http://wiki.mcneel.com/_media/legacy/en/boolean_problem-1.swf|How to Manually Edit Surfaces with Coplanar Faces and Nearly Tagent Surfaces]]**
+Ilustraciones animadas que muestran la creación y edición manual de superficies cuando las operaciones booleanas fallan:
+
+**[[http://wiki.mcneel.com/_media/legacy/en/boolean_problem-1.swf|How to Manually Edit Surfaces with Coplanar Faces and Nearly Tangent Surfaces]]**
 
 **[[http://wiki.mcneel.com/_media/legacy/en/Solids_that_Dont_boolean_2a.pdf|How to Manually Edit Surfaces with Coplanar Faces II]]**
 
-This is an example of a solid that can not be constructed with solid primitives and surface editing techniques are required.
+Este es un ejemplo de un sólido que no se puede construir con primitivas de sólido y se requieren técnicas de edición de superficies.
 
-  * The main problem is the condition of the side surfaces that are coincidental and do not shared a volume with the main solid piece. When Booleans fail, rely on using surface editing techniques as described in the steps in the linked document.
-  * Download the [[http://wiki.mcneel.com/_media/legacy/en/part1-r3.3dm|model]]
+ * El problema principal es la condición de las superficies laterales que son coincidentes y no comparten un volumen con la pieza sólida principal. Cuando las operaciones booleanas fallan, confíe en las técnicas de edición de superficies descritas en los pasos del documento del enlace.
+  * Descargue el [[http://wiki.mcneel.com/_media/legacy/en/part1-r3.3dm|modelo.]]
 {{:legacy:en:t.JPG}}
 
 ----
-======Boolean operations on open objects======
+=====Operaciones booleanas en objetos abiertos=====
 
-As mentioned above, Boolean operations can also be performed on open objects.  The principle is the same, but since the objects are not closed, we have a couple of extra things to do and understand.  Rhino V4 provides a tool that makes the following procedure much easier if you have only two objects, see the command: [[rhino:boolean2objects|Boolean2Objects]]
+Como hemos mencionado anteriormente, las operaciones booleanas también se pueden realizar en objetos abiertos.  El principio es el mismo, pero como los objetos no son cerrados, es necesario hacer y entender un par de cosas más.  Rhino V4 y las versiones posteriores proporcionan una herramienta que facilita mucho el siguiente procedimiento si solo tiene dos objetos. Vea el comando: [[rhino:boolean2objects|Booleana2Objetos]]
 
-=====Surface Direction=====
+==== Dirección de la superficie ====
 
-First, it is necessary to understand the concept of surface normals and direction.  Every surface object has a "sided-ness", that is to say a "front side" and a "backside".  This is called the "direction" in Rhino and can be shown with the **Dir** command.  Try using **Dir** on several different surfaces and see what happens.  The direction arrows point to the "outside" of the surface, and they also show the local "normal" direction, that is to say they are at 90º to the surface locally.
+En primer lugar, es necesario entender el concepto de dirección y normales de superficie.  Cada objeto de superficie tiene una "lateralidad", es decir, un lado frontal y un lado posterior.  En Rhino se denomina "dirección" y se puede mostrar con el comando **Dir**.  Ejecute el comando **Dir** en varias superficies y vea qué sucede.  Las flechas de dirección apuntan hacia el exterior de la superficie y también muestran la dirección normal local, es decir, están a 90º de la superficie localmente.
 
-For each surface, you can flip the direction of the normals (i.e. invert the sided-ness of the surface.  To do this, while you're in the **Dir** command, you either type "F" and enter, or just click once on the surface.  You will see the direction arrows flip sides.  You can also do this outside the Dir command by using the command Flip (you will not see any arrows, though).
+Es posible invertir la dirección de las normales de cada superficie (es decir, invertir la lateralidad de la superficie).  Para hacerlo, mientras esté en el comando **Dir**, escriba **F** y haga clic en Intro o simplemente haga clic una vez en la superficie.  Verá que las flechas de dirección cambian de lado.  También puede hacerlo sin estar en el comando **Dir**, simplemente utilizando el comando **Invertir** (aunque no verá ninguna flecha).
 
 {{:legacy:en:Directions.gif}}
 
-> **Note:** //Curves in Rhino also have a direction which can be shown by the **Dir** command.  In this case, **Flip** exchanges the start and end points and reverses the curve direction.//
+> **Nota:** //Las curvas en Rhino también tienen una dirección que se puede mostrar con el comando **Dir**.  En este caso, **Invertir** intercambia los puntos inicial y final e invierte la dirección de la curva.//
 
-When surfaces are joined, Rhino tries to "uniformize" the surface normals of the object, that is to say, it tries to keep all adjacent surfaces having the same front/back orientation.  Thus when you have an open set of joined surfaces (an open polysurface), it will still have one uniform front/back and not be a patchwork quilt of surfaces facing in different directions.
+Cuando las superficies se unen, Rhino intenta estandarizar las normales de superficie del objeto. Es decir, intenta mantener todas las superficies adyacentes con la misma orientación frontal/posterior.  Por lo tanto, cuando tiene un conjunto abierto de superficies unidas (una polisuperficie abierta), seguirá teniendo una parte frontal/posterior uniforme y no será un conjunto de retazos de superficies orientadas en diferentes direcciones.
 
-> **Experiment:** //Make a square.  Extrude it into a 4 sided open box. Explode it into separate surfaces.  Using **Dir**, flip  two of the surfaces' directions to the inside.  Now window select them all and use **Join** to make them into a 4 sided polysurface again  and use **Dir** again to see what happened to the surface directions.//
+> **Experimento 1:** // Dibuje un cuadrado.  Extrúyalo para crear una caja abierta de 4 lados. Descompóngalo en superficies separadas.  Utilice el comando **Dir** para invertir las dos de las direcciones de las superficies hacia el interior.  Ahora selecciónelas todas por ventana y utilice el comando **Unir** para volver a convertirlas en una polisuperficie de 4 lados. Luego utilice de nuevo el comando **Dir** para ver las direcciones de superficie.//
 
-When an object is closed in Rhino, the  program automatically flips all the surfaces to the outside.  It assumes we don't care about the inside anymore, because the object is closed (solid).  Closed polysurfaces cannot have their normals facing inside (try to see if you can with **Dir**).  If you do manage to flip the normals of a closed polysurface to the inside, either - it isn't really closed, or, you have discovered a (very rare) bug.
+Cuando un objeto en Rhino es cerrado, el programa inverte automáticamente todas las superficies hacia el exterior.  Asume que el interior no nos importa, porque el objeto es cerrado (sólido).  Las polisuperficies cerradas no pueden tener las normales orientadas hacia el interior.  Si logra invertir las normales de una polisuperficie cerrada hacia el interior, o bien la polisuperficie no es realmente cerrada, o bien se trata de un error del programa (muy raro).
 
-> **Experiment2:** //Make  a cube.  Explode it into separate surfaces.  Using **Dir**, flip a few of the surfaces' directions to the inside.  Now window select them all and use **Join** to make them into a polysurface again,  and see what happens to the surface directions.//
+> ** Experimento 2: ** //Dibuje un cubo.  Descompóngalo en superficies separadas.  Utilice el comando **Dir** para invertir las algunas de las direcciones de las superficies hacia el interior. Ahora selecciónelas todas por ventana y utilice el comando **Unir** para volver a convertirlas en una polisuperficie y ver qué pasa con las direcciones de superficie.//
 
-=====How surface direction affects Boolean Operations=====
+====Cómo afecta la dirección de las superficies a las operaciones booleanas====
 
-OK, now you understand about surface normals and direction.  Why is this important in Boolean operations, anyway?  When Rhino is instructed to perform a Boolean operation, it looks at the surface normals to determine which parts to keep and which parts to throw away.  Essentially, Boolean Union, Difference and Intersection are all the same operation, just different parts of the objects are kept at the end.  With Boolean Union, for example, the parts that overlap are thrown away and the rest joined together.  With Intersect, it is exactly the opposite.
+Ahora ya comprende mejor el funcionamiento de las normales y la dirección de las superficies.  ¿Por qué es importante en las operaciones booleanas?  Cuando se le indica a Rhino que realice una operación booleana, observa las normales de la superficie para determinar qué partes conservar y qué partes desechar.  Esencialmente, la unión, la diferencia y la intersección booleanas son la misma operación. Solo que se conservan diferentes partes de los objetos.  Con la unión booleana, por ejemplo, las partes que se superponen se descartan y el resto se unen.  Con la intersección, pasa exactamente lo opuesto.
 
-Booleans with "solids" (closed polysurfaces) are predictable, because all surface normals always point to the outside.  With open polysurfaces, however, the results can seem unpredictable, as we don't immediately know which is the front or back of each object without using the command **Dir**.
+Las operaciones booleanas con sólidos (polisuperficies cerradas) son predecibles porque todas las normales de superficie siempre apuntan al exterior.  Pero con las polisuperficies abiertas los resultados son impredecibles, ya que no sabemos cuál es la parte frontal y la parte posterior de cada objeto sin usar el comando **Dir**.
 
-> **Note:** //If you are doing Boolean operations on closed polysurfaces and they don't react the way you think they should (i.e. the wrong parts disappear), probably one or more of your objects aren't really closed and have the normals pointing inward.  Use **Dir** to see.//
+> **Nota:** //Si está realizando operaciones booleanas en polisuperficies cerradas y no reaccionan como cree que deberían (es decir, las partes incorrectas desaparecen), probablemente uno o más de los objetos no sean realmente cerrados y tengan las normales apuntando hacia adentro.  Utilice el comando **Dir** para comprobarlo.//
 
-> **Tip:** //One way to always be able to know which way surfaces are facing is to set up your display to show backfaces in a different color from front faces.   In **V3**, use the command **AdvancedDisplay**  > **Color Backfaces** to set this up.  In **V4**, it's **Options>Appearance>Advanced Settings>Shaded>Backface Settings**, set "single color for all backfaces", and choose a color.  Note, this only works if you are working in //Shaded// Viewport mode, in //Wireframe//, //Ghosted// or //Rendered// you will not see this.//
+> **Consejo:** //Una forma de saber siempre hacia dónde están orientadas las superficies es configurar la pantalla para que muestre las caras posteriores y las frontales en diferentes colores.   En la **V3**, utilice el comando ** Visualización avanzada > Color de caras posteriores** para configurar esta opción.  En la **V4**, vaya a **Opciones > Apariencia > Configuración avanzada > Sombreado > Configuración de cara posterior**. En **V5**, vaya a ** Opciones > Vista > Modos de visualización > Sombreado > Configuración de cara posterior**. Luego elija **Definir un color para todas las caras posteriores** y seleccione un color.  Tenga en cuenta que esta opción solo funciona si trabaja en modo sombreado. En modo alámbrico, semitransparente o renderizado no se puede ver.//
 
-Let's imagine the simplest "open" Boolean operation.  You have one "solid" closed polysurface that is fully intersected by a single surface.  You can easily create this by making any kind of solid object, then using the **CutPlane** command and drawing a cut line through your object in any direction you desire.
+Imaginemos la operación booleana abierta más simple.  Tiene una polisuperficie sólida y cerrada que se cruza totalmente con una superficie.  Puede hacerlo fácilmente creando cualquier tipo de objeto sólido, y luego usando el comando **PlanoDeCorte** y dibujando una línea de corte a través del objeto en cualquier dirección.
 
-Now, try **BooleanDifference** (BD).  Select the solid as the first set and the cut plane as the second.  One side or the other of the solid will be "cut off" and the hole filled by the plane.  But which side???
+Ahora, pruebe el comando **DiferenciaBooleana**.  Seleccione el sólido como primer conjunto y el plano de corte como segundo.  Un lado u otro del sólido se cortará y el agujero quedará ocupado por el plano.  ¿Pero qué lado?
 
-You can't know unless you call **Dir** on the surface.  Look at the direction of the surface normal.  Then do your difference.  Undo, flip the direction of the surface using **Dir** , then try the difference again.  The direction of the surface normal of the plane will determine which piece gets left.
+No se puede saber a menos que ejecute el comando **Dir** en la superficie.  Mire la dirección de la normal de la superficie.  Entonces ejecute la diferencia.  Deshaga, invierta la dirección de la superficie con el comando **Dir** y, a continuación, ejecute de nuevo la diferencia.  La dirección de la normal de superficie del plano determina qué parte queda.
 
-In general, if you want to BD between an open (poly)surface and a solid to work as if it was two solids, the surface normals of the open object should point //towards// the solid object - just as if it were also a solid.
+En general, si desea que la diferencia booleana entre una superficie abierta (poli) y un sólido funcione como si fueran dos sólidos, las normales de superficie del objeto abierto deben apuntar hacia el objeto sólido, como si también fuera un sólido.
 
 {{:legacy:en:BooleanDiff1.gif}}
 
 {{:legacy:en:BooleanDiff2.gif}}
 
-In V4, [[rhino:boolean2objects|Boolean2Objects]] allows you to cycle through all the possibilities of the different Boolean operations and see the result on-screen, you can then chose the result you want.  This only works currently with just two objects.
+Desde Rhino V4 en adelante, [[rhino: boolean2objects|Booleana2Objetos]] permite probar todas las posibilidades de las diferentes operaciones booleanas y ver el resultado en pantalla. Y después puede elegir el resultado que desee.  Actualmente, esta opción solo funciona con dos objetos.
+
+
