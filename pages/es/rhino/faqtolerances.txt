@@ -1,49 +1,72 @@
-====== FAQ sobre tolerancias ======
-> **Resumen:** //Qué significan las tolerancias en Rhino y cómo trabajar con ellas//
+======Comprender las tolerancias======
+> **Producto:** //[[rhino:home|Rhino]]//
+> **Resumen:** //Qué significan las tolerancias en Rhino y cómo trabajar con ellas.//
 
-======Tolerancias, tolerancias, tolerancias...======
+=====Tolerancias, tolerancias, tolerancias...=====
+<color darkslateblue>**//¿Qué significan todos esos números?  ¿Cómo tengo que configurarlos en Rhino?//**</color>
 
-¿Qué significan todos esos números?  ¿Cómo tengo que configurarlos en Rhino?
+El tema de las tolerancias de archivo aparece con frecuencia en las preguntas de nuevos usuarios.  Muchos programas de modelado no le permiten definir las tolerancias, ya están predefinidas, tanto si le gusta como si no.  Rhino ofrece la ventaja de permitir definir sus propias tolerancias según sus necesidades, pero es necesario tener experiencia y conocimientos para definirlas correctamente.
 
-El tema de las tolerancias de archivo aparece con frecuencia en las preguntas de nuevos usuarios.  Muchos programas de modelado no permiten definir las tolerancias, ya vienen determinadas.  Rhino ofrece la ventaja de permitir definir sus propias tolerancias según sus necesidades, pero es necesario tener experiencia y conocimientos para definirlas correctamente.
+{{vimeo>85108857?640x360}}Vídeo sobre tolerancia y precisión en Rhino.
+
 
 =====1: Comprender las tolerancias=====
 
-La tolerancia es simplemente una manera de indicar cuánta precisión se necesita o, al contrario, qué margen de error está dispuesto a aceptar en su proyecto.  Nada es 100% preciso o perfecto. Los diferentes proyectos y tamaños de objetos tendrán diferentes necesidades de precisión.
+**//<color darkslateblue>La tolerancia</color>//** es simplemente una manera de indicar cuánta precisión se necesita o, al contrario, qué margen de error está dispuesto a aceptar en su proyecto. Nada es 100% preciso o perfecto. Los diferentes proyectos y tamaños de objetos tendrán diferentes necesidades de precisión. No construiría un edificio con el mismo nivel de precisión de micras que un reloj suizo, y al revés también sería ridículo (es decir, imposible).
 
-Los métodos de ingeniería para especificar tolerancias son muy precisos y complejos, no entraremos en esos detalles aquí.  La información de sirve simplemente como guía para configurar sus proyectos para el modelado con Rhino. De manera predeterminada, la tolerancia absoluta en Rhino está establecida en .01 unidades (independientemente de las unidades que esté utilizando, pulgadas, mm, metros, etc.). Pero, ¿qué significa "tolerancia absoluta" realmente?
+Los métodos de ingeniería para especificar tolerancias son muy precisos y complejos, no entraremos en esos detalles aquí. La información de sirve simplemente como guía para configurar sus proyectos para el modelado con Rhino. Según la plantilla que elija, la tolerancia absoluta en Rhino está establecida en 0.01 o 0.001 unidades (independientemente de las unidades que esté utilizando, pulgadas, mm, metros, etc.). También puede crear sus propias plantillas con otras tolerancias.  Pero, ¿qué significa **//<color darkslateblue>tolerancia absoluta</color>//** realmente?
+
 
 =====2: Configuración de tolerancia absoluta en Rhino=====
 
-En términos de Rhino, la tolerancia absoluta es la distancia máxima permitida a la que pueden estar dos objetos o elementos y ser considerados suficientemente cerca para "tocarse" (y por lo tanto poder ser unidos). En muchas operaciones, se permite el doble de tolerancia absoluta, pero vaya con cuidado.
+En términos de Rhino, la opción de tolerancia absoluta dicta la distancia máxima permitida a la que pueden estar dos objetos o elementos y ser considerados //suficientemente cerca//. //Suficientemente cerca// significa que dos superficies o curvas se pueden unir o que una operación **//<color darkslateblue>aproximada</color>//** como un barrido generará una superficie cuyos bordes siguen los carriles dentro de la tolerancia absoluta especificada.
 
-> **Ejemplo:** //Utilice la tolerancia predeterminada de .01 unidades. Dibuje una línea que empiece en 0,0,0 para un longitud de +10 a lo largo del eje X. Dibuje una segunda línea que empiece en 0,0,0 y vaya +10 unidades a lo largo del eje Y.  Ejecute el comando Unir, seleccione primero una línea y luego la otra. Deberían unirse, puesto que los puntos finales son perfectamente coincidentes. Ahora, con Deshacer y Mover, mueva la línea del eje Y .02 unidades a la izquierda (dirección -X). Intente Unir de nuevo, debería funcionar.  Los puntos finales ya no son coincidentes, pero están con el doble de tolerancia absoluta uno del otro.  Ahora deshaga la unión y mueva la línea del eje Y otras 0.01 unidades a la izquierda y vuelva a intentar la unión. Debería aparecer un mensaje indicando que los extremos de línea están demasiado lejos para unirse.  Se ha superado la tolerancia absoluta.//
+> **Nota:** //En operaciones de unión, se permite la doble de tolerancia absoluta, pero vaya con cuidado.//
 
-Esto también significa que los extremos de línea podrían haber estado alejados .02 unidades y ser considerados "suficientemente cerca", lo que podría causar problemas si necesita objetos más precisos.
+**<color>¿Qué es una operación aproximada?</color>**
 
-Además de unir objetos existentes, muchas operaciones en Rhino tienen en cuenta la tolerancia absoluta para crear los objetos.  Algunos objetos se pueden definir matemáticamente a la perfección con tolerancias muy pequeñas.  Sin embargo, algunos comandos dependen de aproximaciones para ajustar o igualar curvas o superficies a otras curvas o superficies. Cuanto más exacta tenga que ser la solución, más tiempo tardará en calcularse y es posible que se bloquee el ordenador.  La tolerancia absoluta indica a Rhino qué punto es "suficientemente bueno" y deja de intentar calcular una solución más cercana.
+Algunos objetos se pueden definir matemáticamente a la perfección con tolerancias muy pequeñas que su equipo sea capaz de procesar. Normalmente, no tiene que preocuparse por las tolerancias extremadamente pequeñas. Sin embargo, algunos comandos se basan en aproximaciones para **//<color darkslateblue>ajustar o igualar</color>//**  curvas o superficies con otras curvas o superficies. Cuanto más exacta sea la solución que necesite, más tiempo llevará el cálculo, e incluso se podría bloquear el equipo. La tolerancia absoluta indica a Rhino qué punto es "suficientemente bueno" y deja de intentar calcular una solución más cercana.
 
-La ventaja de una tolerancia inferior es que se reduce el tiempo de cálculo, pero se pierde precisión en el modelo.  Por eso se necesita experiencia para definir las tolerancias.  Diferentes objetos y escalas pueden necesitar diferentes tolerancias. Una buena normal general es definir la tolerancia a 1/10 el tamaño del detalle más pequeño.  Para trabajos de mucha precisión, quizás 1/100 es mejor.   Para ejemplo, para diseñar la forma general de la carrocería de un coche, que puede tener detalles importantes en el rango de 1mm, una tolerancia de archivo de 0.1mm puede ser suficiente y .01 debería funcionar bien.  Sin embargo, para detalles más pequeños del mismo coche, puede que no sea suficiente, los detalles interiores del motor seguramente necesitarán una tolerancia de archivo de .001 o incluso .0001.
+Otro inconveniente de especificar una tolerancia absoluta más alta de lo necesario es que Rhino generará secciones o intersecciones con muchos puntos de control. Puntos de control que son más pesados ​​(tamaño de datos más grande), más ruidosos (no tan suaves) y más difíciles de editar.
 
-Algunas de las operaciones que usan el valor de tolerancia absoluta para ayudar a calcular son Barrido, Transición, EmpalmarSup, EmpalmarBorde, etc.
+**<color royalblue>¿Qué operaciones son aproximadas?</color>**
 
-Es posible que otros comandos permitan especificar la tolerancia de esa operación en particular, tendrá que tener un cuadro de diálogo con opciones de tolerancia que pueda definir en el comando y que reemplacen a la tolerancia general.  Usar la opción Reajustar también permite especificar la propia tolerancia en determinados comandos.  Y finalmente, hay comandos como UnirBorde que permiten superar las tolerancias absolutas localmente si cree que le va a ser útil.
-
-> **Nota:** ////
-
-=====3:  Tolerancias angulares y relativas en Rhino=====
-
-Hay dos ajustes más de tolerancia en Rhino:  angular y relativa. La tolerancia relativa se usa en muy pocos comandos y se puede dejar sola.   La tolerancia angular es importante porque le dice a Rhino en qué punto quiere que dos curvas o superficies se consideren "Tangentes".  El valor predeterminado de 3 permite es más bien grande.  Las superficies que están 3 grados fuera de la tangencia muestran un pliegue o una línea visible.  Un valor de .1 grado o menos es mejor.
+Cualquier comando necesario para hallar la intersección entre curvas y superficies es un ejemplo. Algunos comandos específicos son: Recortar, Partir, Intersecar, Contorno, Sección, Desfasar (curvas y superficies), Proyectar, Barrido de 1 y 2 carriles, todas las operaciones booleanas, EmpalmarSup y EmpalmarBorde.
 
 
-=====4:  Cómo afectan las tolerancias al proyecto y al flujo de trabajo=====
+**<color royalblue>Entonces, ¿por qué no modelar solo con tolerancias mayores?</color>**
 
-Una cosa importante a tener en cuenta es que las tolerancias deben establecerse al principio del proceso de modelado, porque si se cambian las tolerancias mientras trabaja, los objetos que se modelaron previamente con tolerancias inferiores no se ajustarán.  Una buena práctica es comprobar continuamente su trabajo uniendo elementos a medida que los crea; si se unen, está dentro de los límites de tolerancia, si no, necesita retroceder y encontrar por qué ha sucedido y corregir la situación.  Esto evitará acabar con un modelo terminado que tiene áreas problemáticas o imprecisiones que pueden ser difíciles de reparar en esa última fase sin tener que reconstruir completamente determinadas secciones, lo que implicará una mayor pérdida de tiempo.
+La ventaja de una tolerancia mayor es que se reduce el tiempo de cálculo y el tamaño de datos, pero se pierde precisión en el modelo. Esta es la razón por la que es necesario tener experiencia para definir las tolerancias. 
 
-Las operaciones que incorporan la función de intersección, como Intersección, Partir o las operaciones booleanas también pueden ser bastante sensibles a los ajustes de tolerancia.  A menudo, si la tolerancia absoluta es demasiado baja, puede que no se encuentren intersecciones completas y la partición o las operaciones booleanas pueden fallar. Este problema es bastante frecuente.     Por otro lado, establecer las tolerancias demasiado altas (pequeñas) puede alargar demasiado los tiempos de cálculo.
+Por ejemplo, el comando //Intersecar// crea una curva en la intersección de dos superficies. Así se garantiza que la curva se encuentra dentro de la //**<color darkslateblue>tolerancia absoluta</color>**// en cada una de las dos superficies.
 
-=====5:  Exportación a otros programas ("downstream"):=====
+Pruebe el comando Intersecar y guarde la curva resultante en un lado. Luego agregue un cero a la configuración de tolerancia y ejecute Intersecar nuevamente. Ahora active los puntos de control de ambas curvas. La segunda curva tendrá más puntos de control, será más pesada y estará más cerca de las dos superficies. ¿Una curva es mejor que la otra? Depende de sus necesidades. Si su proceso de fabricación no se beneficia de tener piezas más ajustadas, entonces la primera curva más ligera es mejor, ya que el resultado es un archivo más pequeño, cálculos más rápidos y mejores superficies parametrizadas.
 
-Si los objetos se exportan a otra aplicación (como software CAM o un modelador de sólidos), es muy importante tener en cuenta la precisión que requieren esos programas para que las importaciones se realicen correctamente.  La experiencia es la única guía en este caso.  Si tiene alguna duda, pregunte en el grupo de discusión de Rhino, donde seguramente habrá alguien con experiencia y podrá ofrecerle su ayuda.  En general, las aplicaciones MCAD necesitan objetos de mayor precisión, de modo que si este es su objetivo, erre en el lado más preciso si es posible.  Todo el proceso de modelado desde el inicio hasta el final debe realizarse con este nivel de precisión para que la exportación se realice correctamente.
+Diferentes objetos y escalas pueden necesitar diferentes tolerancias.   Por ejemplo, para diseñar la forma general de la carrocería de un coche, que puede tener detalles importantes en el rango de 1.0mm, una tolerancia de archivo de 0.1mm puede ser suficiente y .01 debería funcionar bien.  Sin embargo, para detalles más pequeños del mismo coche, incluso 0.01 puede que no sea suficiente, los detalles interiores del motor seguramente necesitarán una tolerancia de archivo de 0.001 o incluso 0.0001.
+
+Otro procedimiento es que su tolerancia tenga un orden de magnitud más ajustado que (1/10 de) la mejor tolerancia que se puede lograr a través del proceso de facturación, o un orden de magnitud inferior al detalle modelado más pequeño.
+
+**<color royalblue>Sobrescribir o crear tolerancias personalizadas</color>**
+
+Algunos comandos permiten especificar individualmente la tolerancia para esa operación en particular, como SupDeRed o IgualarSup. Tendrá un cuadro de diálogo con opciones de tolerancia que pueda definir en el comando y que reemplacen a la tolerancia general. Usar la opción Reajustar también permite especificar la propia tolerancia en determinados comandos.
+
+Y finalmente, hay comandos como UnirBorde que permiten superar las tolerancias absolutas localmente si cree que le va a ser útil. Utilice esta opción con precaución. Está indicando que está bien no tener precisión.
+
+=====3: Tolerancias angulares y relativas en Rhino=====
+
+Hay dos ajustes más de tolerancia en Rhino: angular y relativa. La tolerancia relativa se usa en muy pocos comandos y se puede dejar sola. La tolerancia angular es importante porque le dice a Rhino en qué punto quiere que dos curvas o superficies se consideren tangentes. El valor predeterminado de 1 grado es más bien grande para el modelado preciso. Las superficies que están 1 grado fuera de la tangencia muestran un pliegue o una línea visible. Un valor de 0.1 grado o menos es mejor.
+
+=====4: Cómo afectan las tolerancias al proyecto y al flujo de trabajo=====
+
+Una cosa importante a tener en cuenta es que las tolerancias deben establecerse al principio del proceso de modelado, porque si se cambian las tolerancias mientras trabaja, los objetos que se modelaron previamente con tolerancias inferiores no se ajustarán. Una buena práctica es verificar continuamente su trabajo uniendo elementos a medida que se van creando. Si se unen, está dentro de sus límites de tolerancia. Si no se unen, tiene que averiguar por qué se produjo el problema y corregirlo. Esto evitará acabar con un modelo terminado que tiene áreas problemáticas o imprecisiones que pueden ser difíciles de reparar en esa última fase sin tener que reconstruir completamente determinadas secciones, lo que implicará una mayor pérdida de tiempo.
+
+Las operaciones que incorporan la función de intersección, como Intersecar, Partir o las operaciones booleanas también pueden ser bastante sensibles a los ajustes de tolerancia. A menudo, si la tolerancia absoluta es demasiado baja, puede que no se encuentren intersecciones completas y la partición o las operaciones booleanas pueden fallar. (Tenga en cuenta que las tolerancias no son la única razón por la que estas operaciones fallan). Una configuración de tolerancia muy ajustada también puede ser perjudicial. Además de generar tiempos de cálculo muy largos, Rhino también puede bloquearse. En general, debe mantener la configuración de tolerancia absoluta en el rango de 0.01 a 0.0001. Y nunca configurarlo por debajo de 1.0e-5. Si necesita una tolerancia más ajustada, utilice unidades más pequeñas.
 
 
+=====5: Exportación a otros programas=====
+
+Si los objetos se van a exportar a otra aplicación (como software CAM o un modelador de sólidos), es muy importante tener en cuenta la precisión que requieren esos programas para que las importaciones se realicen correctamente. La experiencia es la única guía en este caso. En caso de duda, pregunte en el foro de soporte de Rhino. Alguien que haya tenido la misma experiencia podrá ayudarle. En general, las aplicaciones MCAD necesitan objetos de mayor precisión, de modo que si este es su objetivo, erre en el lado más preciso si es posible. Todo el proceso de modelado desde el inicio hasta el final debe realizarse con este nivel de precisión para que la exportación se realice correctamente.
+
+\\
+
+{{tag>Rhino}}
