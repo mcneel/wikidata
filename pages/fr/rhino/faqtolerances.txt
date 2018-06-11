@@ -1,76 +1,72 @@
-** [[rhino:faq|FAQ]] Tolérances **
+======Comprendre les tolérances======
+> **Produit :** //[[rhino:home|Rhino]]//
+> **Résumé :** //Que signifient les tolérances dans Rhino et comment travailler avec elles.//
 
-> **Sommaire:** //Que signifient les tolérances dans Rhino et comment travailler avec elles//
+=====Tolérances, tolérances, tolérances...?=====
+<color darkslateblue>**//Que signifient tous ces chiffres ?  Comment dois-je les définir dans Rhino ?//**</color>
 
-======Tolérances, tolérances, tolérances...?======
+Le sujet des tolérances du fichier revient souvent parmi les questions des nouveaux utilisateurs.  De nombreux logiciels de modélisation ne vous permettent pas de définir vos tolérances. Elles sont déterminées par défaut, sans vous demander votre avis.  Rhino vous offre la possibilité de définir vos propres tolérances en fonction de vos besoins, mais cela demande un peu d'expérience et de compréhension pour les définir correctement.
 
-Que signifient tous ces chiffres ? Comment dois-je les définir dans Rhino ?
-
-Le sujet des tolérances du fichier revient souvent parmi les questions des nouveaux utilisateurs. De nombreux programmes de modélisation ne vous permettent pas de définir vos tolérances, elles sont déterminées par défaut, sans vous demander votre avis. Rhino vous offre la possibilité de définir vos propres tolérances en fonction de vos besoins, mais cela demande un peu d'expérience et de compréhension pour les définir correctement.
-
-=====1: Comprendre les tolérances=====
-
-La tolérance est simplement une façon d'indiquer la quantité de précision dont vous avez besoin ou inversement, la quantité d'erreur que vous acceptez dans votre projet. Rien n'est 100% précis ou parfait. La précision sera très variée en fonction des projets et de la taille des objets. Vous ne construirez pas un bâtiment avec le même niveau de précision qu'une montre suisse et l'inverse serait aussi ridicule (ce serait même impossible).
-
-Les méthodes pour spécifier les tolérances sont très précises et exigeantes, nous ne rentrerons pas dans ce type de détail ici. Les informations données ici visent simplement à vous aider à définir vos projets pour les modéliser dans Rhino. Par défaut, Rhino définit actuellement les tolérances absolues sur 0.01 unité (quelles que soient les unités utilisées, pouces, mm, mètres, etc.). Mais que signifie vraiment "tolérance absolue" ?
-
-=====2: Les paramètres de tolérance absolue dans Rhino.=====
-
-En termes de Rhino, la tolérance absolue est la distance maximum permise entre deux objets ou deux éléments pour qu'ils soient toujours considérés assez proches pour se "toucher" (donc pouvant être joints). En fait, dans de nombreuses opérations, c'est la tolérance absolue x2 qui est permise, alors faites attention.
-
-//<color blue>Marc dit : Ce serait bien de connaître les commandes dont les résultats sont des approximations</color>//
-
-//<color red>JB dit : Toutes les commandes recherchant l'intersection entre des courbes et/ou des surfaces sont des bons exemples. Ces commandes sont entre autres : **Limiter, Diviser, Intersection, **CourbesNiveau**, Section, Projeter**, les **Balayages sur rail**, toutes les opérations **Booléennes**, etc.</color>//
+{{vimeo>85108857?640x360}}Une vidéo sur la tolérance et la précision dans Rhino. 
 
 
-> **Exemple:** //Utilisez les tolérances par défaut de 0.01 unité. Dessinez une ligne commençant au point 0,0,0 et d'une longueur de +10 le long de l'axe des X. Dessinez une deuxième ligne commençant au point 0,0,0 et de +10 unités le long de l'axe des Y. Lancez la commande Joindre, sélectionnez une ligne puis l'autre - elles devraient être jointes puisque les extrémités coïncident parfaitement. Maintenant, annulez la jonction et utilisez Déplacer pour déplacer la ligne de l'axe des Y de 0.02 unités vers la gauche (direction X négative). Essayez à nouveau de Joindre, cela devrait toujours fonctionner. Les extrémités ne coïncident plus mais elles se trouvent toujours juste à 2x votre tolérance absolue l'une de l'autre. Maintenant annulez la jonction et déplacez la ligne de l'axe des Y sur 0.01 unité vers la gauche, réessayez de Joindre. Vous devriez voir un message indiquant que les extrémités sont trop éloignées pour être jointes. Vous venez de dépasser votre tolérance absolue !//
+=====1 : Comprendre les tolérances=====
 
-Ceci signifie aussi que les extrémités de votre ligne auraient pu être à 0,02 unités l'une de l'autre tout en étant considérées comme "assez proches", ce qui peut poser des problèmes para la suite si vous avez besoin d'objets plus précis que cela.
+**//<color darkslateblue>La tolérance</color>//** est simplement une façon d'indiquer la quantité de précision dont vous avez besoin ou inversement, la quantité d'erreur que vous acceptez dans votre projet. Rien n'est 100% précis ou parfait. La précision sera très variée en fonction des projets et de la taille des objets. Vous ne construirez pas un bâtiment avec le même niveau de précision qu'une montre suisse et l'inverse serait aussi ridicule (ce serait même impossible).
 
-En dehors de la jonction d'objets, beaucoup d'opérations dans Rhino regardent les tolérances absolues pour créer les objets. Certains objets peuvent être définis parfaitement jusqu'aux limites de ce que les mathématiques flottantes de votre ordinateur (voir ComputerMath) peuvent calculer - des tolérances extrêmement petites dont vous n'avez normalement pas à vous préoccuper. Cependant, certaines commandes reposent sur des approximations pour adapter ou ajuster les courbes ou les surfaces à d'autres courbes ou d'autres surfaces. Plus la solution dont vous avez besoin doit être exacte, plus le calcul sera long, ce qui peut aller jusqu'à bloquer l'ordinateur. La tolérance absolue indique à Rhino à quel moment vous pensez que le résultat est "assez bon" et permet d'arrêter le calcul.
-
-L'avantage d'une tolérance plus faible (valeur plus élevée) est la réduction du temps de calcul mais aux dépens de la précision de votre modèle. C'est exactement pour ça que vous devez avoir un peu d'expérience pour définir vos tolérances, vous devez trouver un bon compromis. Des échelles et des objets différents peuvent demander des tolérances très différentes. Un bon point de repère est de définir votre tolérance à 1/10e de la taille du plus petit détail. Pour des modèles de très haute précision, 1/100 sera peut-être mieux. Ainsi, par exemple, lorsque vous concevez la forme générale d'une carrosserie de voiture, qui pourrait avoir des détails important de l'ordre du millimètre, une tolérance de 0,1 mm sera sûrement suffisante et 0,01 devrait convenir parfaitement. Cependant, pour de plus petits détails, sur cette même voiture, celle tolérance ne sera peut-être pas suffisante, les finitions intérieures du moteur devront probablement avoir une tolérance de 0,001, voir même de 0,0001 dans le cas des surfaces des paliers.
-
-//<color blue>Marc dit : Parfois, avec un modèle très petit ou reposant beaucoup sur des limites complexes ou d'autres fonctions dépendant de la tolérance, il est intéressant d'essayer d'utiliser une échelle 10 voir même 100 fois plus grande. La tolérance reste à un niveau assez lâche et les calculs sont rapides mais elle reste bien plus petite que le plus petit détail du modèle. Cette astuce est souvent suggérée par Pascal sur le forum.</color>//
-
-//<color red>JB dit : Cette règle convenait mieux dans la version 2 que dans les versions 3 et 4. Mais c'est toujours une bonne technique. Vous pouvez normalement obtenir le même résultat en ajustant temporairement la tolérance absolue. Utilisez la technique qui vous paraît la mieux.</color>//
-
-Certaines opérations qui utilisent la tolérance absolue générale pour leurs calculs : Balayage, SurfaceParSections, CongéSurf, CongéBord, etc.
-
-//<color green>Gordon Adams dit : La commande Intersection crée une courbe à l'intersection de deux surfaces. La courbe repose exactement sur les surfaces, dans les limites de la tolérance absolue.</color>//
-
-//<color red>JB dit : Essayez la commande **Intersection** et mettez la courbe de côté. Ajoutez maintenant un zéro au paramètre de la tolérance et lancez **Intersection** à nouveau. Activez ensuite les points de contrôle sur les deux courbes. La deuxième courbe aura plus de points de contrôle ; elle sera plus //lourde// et restera plus proche des deux surfaces. Une des courbes est-elle //meilleure// que l'autre ? Cela dépend de vos besoins. Si votre processus de fabrication ne peut pas tirer profit d'une pièce plus précise, la première courbe, plus //légère// est alors meilleure car elle donne un plus petit fichier, des calculs plus rapides et des surfaces mieux paramétrisées.</color>//
-
-D'autres commandes peuvent vous permettre de définir une tolérance spécifique pour cette opération en particulier - comme SurfaceRéseau ou 'AdapterSurf - vous aurez alors une boîte de dialogue avec des options de tolérance que vous pouvez définir pour cette commande et ignorer alors la tolérance générale. L'option Réajuster vous permet aussi de spécifier votre propre tolérance avec certaines commandes. Enfin, certaines commandes telles que JoindreBord vous laissent dépasser les tolérances absolues localement si vous pensez que cela peut être utile - à utiliser avec précaution !! - vous acceptez délibérément que ce point ne soit pas précis !
-
-> **Remarque:** //<color red>En règle générale, utilisez une tolérance égale à ou un ordre de grandeur plus petite que la meilleure tolérance que vous pouvez atteindre avec votre processus de fabrication ou un ordre de grandeur plus petite que votre détail le plus petit du modèle, suivant laquelle des deux valeurs est la plus petite.</color>//
-
-=====3: Tolérances angulaires et relatives dans Rhino=====
-
-Il existe deux autres paramètres de tolérance dans Rhino : angulaire et relative. La tolérance relative est utilisée pour très peu de commandes et peut généralement être oubliée.
-
- <color blue>//Marc dit : Ce serait intéressant ici aussi de connaître les commandes concernées//</color>
-
-La tolérance angulaire est importante dans le sens où elle indique à Rhino à quel moment vous voulez que deux courbes ou deux surfaces soient considérées "Tangentes". La valeur par défaut, 3 degrés, est assez élevée. Les surfaces qui sont 3 degrés en dehors de la tangence présentent un pli ou une ligne visible. Je trouve que 0.1 degré (voir même plus petit) fonctionne mieux.
-
-<color red>//JB dit : Dans la pratique, je trouve que j'ai moins de problèmes lorsque j'envoie des modèles vers d'autres applications de modélisation telles que Unigraphics, ProEngineer, SDRC Ideas, SolidWorks, Solid Edge, Inventor, etc. si j'utilise une tolérance angulaire de 0.5 - 1º. Je n'ai pas encore trouvé de cas particulier où la modification de la tolérance absolue a fait une différence.//</color>
-
-=====4: Comment les tolérances affectent votre projet et votre travail=====
-
-Il est important de noter ici que que les tolérances doivent être définies au début du processus de modélisation. Même si vous pouvez changer les tolérances pendant que vous travaillez, les objets que vous avez modélisés avant ne seront pas modifiés. Vous devriez vérifier souvent votre travail en joignant les éléments au fur et à mesure de leur création. S'ils se joignent correctement, vous êtes dans les limites de la tolérances, sinon vous devez revenir en arrière et trouver le problème afin de le corriger. Cette technique permet d'éviter d'avoir un modèle terminé avec des problèmes ou des imprécisions très difficiles à corriger à ce niveau sans tout reconstruire certaines parties, ce qui signifie une grande perte de temps.
-
-Les opérations qui impliquent la fonction d'intersection telles que les commandes Intersection, Diviser ou les opérations booléennes peuvent aussi être assez sensibles aux paramètres de tolérance. Souvent, si la tolérance absolue est trop petite, des intersections entières ne peuvent pas être trouvées, les divisions et les opérations booléennes ne fonctionnent alors pas correctement. Ce problème arrive souvent. (attention, les tolérances ne sont pas la seule raison pour laquelle ces opérations échouent, cependant).
-
-D'autre part, des tolérances bien trop élevées (très petites valeurs) peuvent donner des temps de calculs trop longs.
-
-=====5: Exporter vers d'autres programmes (“en aval”) :=====
-
-Si les objets doivent être exportés dans une autre application en aval (logiciel de FAO ou modeleur de solides), il est très important de prendre en compte la précision dont ont besoin ces programmes pour que les importations fonctionnent correctement. L'expérience est le seul guide ici. En cas de doute, demandez sur le forum de Rhino, vous trouverez sûrement quelqu'un qui a de l'expérience dans ce domaine et qui peut vous aider. En général, les applications de FAO semblent apprécier les objets de haute précision, si c'est donc là votre but, pêchez du côté de la précision si possible ! Tout votre processus de modélisation, du début à la fin doit être fait à ce niveau de précision si vous voulez que l'exportation se fasse correctement.
-
-<color blue>//Marc dit : Dans les programmes de FAO que j'ai regardés, le paramètre de tolérance ne peut pas être modifié par l'utilisateur. Tout doit se trouver dans leur espace de modélisation, parfois une sphère d'un kilomètre, la tolérance est dont très élevée. Si vous voulez vous amuser, modélisez quelques trucs dans un modeleur mécanique. Transférez le fichier sous le format STEP dans Rhino et utilisez la fonction d'écart de courbe (commande **ÉcartCourbe**) pour vérifier les bords. Vous serez probablement surpris par la tolérance réelle.//</color>
+Les méthodes pour définir les tolérances en ingénierie sont très précises et exigeantes. Nous ne rentrerons pas dans ce type de détail ici. Nous visons simplement à vous aider à définir vos projets pour les modéliser dans Rhino. Suivant le fichier modèle que vous choisissez, Rhino définit actuellement les tolérances absolues sur 0,01 ou 0,001 unité (quelles que soient les unités utilisées, pouces, mm, mètres, etc.). Vous pouvez également créer vos propres fichiers modèle avec d'autres tolérances.  Mais que signifie vraiment **//<color darkslateblue>tolérance absolue</color>//** ?
 
 
+=====2 : Les paramètres de tolérance absolue dans Rhino=====
+
+Dans le langage de Rhino, le paramètre de tolérance absolue indique la distance maximum permise entre deux objets ou deux éléments pour qu'ils soient toujours considérés //assez proches//.  //Assez proche// signifie que deux surfaces ou courbes peuvent être jointes ou qu'une opération **//<color darkslateblue>approximative</color>//** comme un balayage générera une surface dont les bords suivent les rails dans les limites de la tolérance absolue indiquée.
+
+> **Remarque :** //Pour les opérations de jonction c'est la tolérance absolue x2 qui est permise, alors faites attention.//
+
+**<color royalblue>Qu'est-ce qu'une opération approximative ?</color>**
+
+Certains objets peuvent être définis parfaitement au niveau mathématique dans les limites des possibilités de calcul en virgule flottante de votre ordinateur. En règle générale, vous n'avez normalement pas à vous préoccuper des tolérances extrêmement petites. Cependant, certaines commandes reposent sur des approximations pour **//<color darkslateblue>adapter ou ajuster</color>//** des courbes ou de surfaces à d'autres courbes ou surfaces. Plus vous avez besoin d'une solution exacte, plus le temps de calcul sera long, pouvant même faire planter votre ordinateur. La tolérance absolue indique à Rhino à quel moment vous pensez que le résultat est assez bon et permet d'arrêter le calcul.
+
+Si la tolérance absolue est plus élevée que nécessaire, Rhino générera des sections ou des intersections avec de nombreux points de contrôle. Des points de contrôle plus lourds (taille de données plus importante), plus encombrants (pas lisses) et plus difficiles à modifier. 
+
+**<color royalblue>Quelles sont les opérations approximatives ?</color>**
+
+Toutes les commandes devant trouver l'intersection entre des courbes et des surfaces par exemple. Ces commandes sont entre autres : Limiter, Diviser, Intersection, CourbesNiveau, Section, Décaler (courbes et surfaces), Projeter, Balayage 1 et 2 rails, toutes les opérations booléennes, CongéSurf, CongéBord. 
 
 
--- [[info@swissrhino.com|Mitch Heynick (e-mail Mitch Heynick)]] 27.05.05
+**<color royalblue>Alors, pourquoi ne pas modéliser simplement avec des tolérances plus lâches ?</color>**
 
+L'avantage d'une tolérance plus lâche (valeur plus élevée) est la réduction du temps de calcul et de la taille des données mais aux dépens de la précision de votre modèle. C'est pourquoi vous devez avoir un peu d'expérience pour définir vos tolérances. Il est toujours nécessaire de trouver le bon compromis. 
+
+Par exemple, la commande //Intersection// crée une courbe à l'intersection de deux surfaces. La courbe repose obligatoire sur les surfaces, dans les limites de la //**<color darkslateblue>tolérance absolue</color>**//.
+
+Essayez la commande Intersection et mettez la courbe de côté. Ajoutez maintenant un zéro au paramètre de la tolérance et lancez Intersection à nouveau. Activez ensuite les points de contrôle sur les deux courbes. La deuxième courbe aura plus de points de contrôle ; elle sera plus lourde et restera plus proche des deux surfaces. Une des courbes est-elle meilleure que l'autre ? Cela dépend de vos besoins. Si votre processus de fabrication ne peut pas tirer profit d'une pièce plus précise, la première courbe, plus légère est alors meilleure car elle donne un plus petit fichier, des calculs plus rapides et des surfaces mieux paramétrisées.
+
+Des échelles et des objets différents peuvent demander des tolérances très différentes.  Par exemple, si vous concevez la forme générale d'une carrosserie de voiture, qui pourrait avoir des détails importants de l'ordre du millimètre, une tolérance de 0,1 mm sera sûrement suffisante. Cependant, pour de plus petits détails sur cette voiture, même une tolérance de 0,001 mm ne serait peut-être pas suffisante et les finitions intérieures du moteur devront probablement avoir besoin d'une tolérance de 0,001, voire même de 0,0001 dans le cas des surfaces des paliers.
+
+Une autre règle générale à suivre : Utilisez une tolérance égale à ou un ordre de grandeur plus petite que (1/10 de) la meilleure tolérance que vous pouvez atteindre avec votre processus de fabrication ou un ordre de grandeur plus petite que votre détail le plus petit du modèle, suivant laquelle des deux valeurs est la plus petite.
+
+**<color royalblue>Remplacer ou créer des tolérances personnalisées</color>**
+
+D'autres commandes peuvent vous permettre de définir une tolérance spécifique pour cette opération en particulier, comme SurfaceRéseau ou AdapterSurf. Vous disposerez alors d'une boîte de dialogue avec des options de tolérance que vous pouvez définir pour cette commande et ignorer alors la tolérance générale. L'option Réajuster vous permet aussi de spécifier votre propre tolérance avec certaines commandes.
+
+Enfin, certaines commandes telles que JoindreBord vous laissent dépasser les tolérances absolues localement si vous pensez que cela peut être utile. Utilisez cette option avec précaution !! Vous acceptez délibérément que ce point ne soit pas précis !
+
+=====3 :  Tolérances angulaires et relatives dans Rhino=====
+
+Il existe deux autres paramètres de tolérance dans Rhino : angulaire et relative. La tolérance relative est utilisée pour quelques commandes et peut généralement être oubliée. La tolérance angulaire est importante dans le sens où elle indique à Rhino à quel moment vous voulez que deux courbes ou deux surfaces soient considérées Tangentes. La valeur par défaut, 1 degré, est assez élevée pour une modélisation fine. Les surfaces sur lesquelles il manque 1 degré pour qu'elles soient tangentes peuvent toujours présenter un pli ou une ligne visible. Je trouve que 0,1 degré (voire plus petit) fonctionne mieux.
+
+=====4 :  Comment les tolérances affectent votre projet et votre travail=====
+
+Il est important de noter ici que les tolérances doivent être définies au début du processus de modélisation. En effet, même si vous pouvez changer les tolérances pendant que vous travaillez, les objets que vous avez modélisés avant ne seront pas modifiés. Nous conseillons de prendre l'habitude de vérifier continuellement votre travail en joignant les éléments au fur et à mesure de leur création. Si la jonction se fait correctement, vous êtes dans les limites de votre tolérance. Sinon, vous devez revenir en arrière, trouver pourquoi les éléments ne se joignent pas et corriger le problème. Cette technique permet d'éviter d'avoir un modèle terminé avec des problèmes ou des imprécisions très difficiles à corriger à ce niveau sans tout reconstruire certaines parties. 
+
+Les opérations qui impliquent la fonction d'intersection telles que les commandes Intersection, Diviser ou les opérations booléennes peuvent aussi être assez sensibles aux paramètres de tolérance. Souvent, si la tolérance absolue est trop petite, des intersections entières peuvent ne pas être trouvées. Il est alors possible que les divisions et les opérations booléennes ne fonctionnent pas correctement. (Attention, les tolérances ne sont pas la seule raison pour laquelle ces opérations échouent). Un paramètre de tolérance trop serré peut également représenter un problème. Outre conduire à des temps de calcul excessivement longs, cela peut même faire planter Rhino. En général, la tolérance absolue devrait se trouver entre 0,01 et 0,0001. Et elle ne devrait jamais être inférieure à 1.0e-5. Si vous avez besoin de tolérances plus petites, utilisez des unités plus petites.
+
+
+=====5 :  Exporter vers d'autres programmes (en aval)=====
+
+Si les objets doivent être exportés dans une autre application en aval (logiciel de FAO ou modeleur de solides), il est très important de prendre en compte la précision dont ont besoin ces programmes pour que les importations fonctionnent correctement. L'expérience est le seul guide ici. Si vous avez des doutes, posez des questions sur le forum de discussion de Rhino. Un utilisateur ayant de l'expérience dans ce domaine peut vous donner des conseils. En général, les applications de FAO semblent apprécier les objets de haute précision, si c'est donc là votre but, pêchez du côté de la précision si possible ! Tout votre processus de modélisation, du début à la fin doit être fait à ce niveau de précision si vous voulez que l'exportation se fasse correctement.
+
+\\
+
+{{tag>Rhino}}
