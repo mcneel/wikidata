@@ -1,70 +1,71 @@
 ======Toleranzen======
-> **Produkt:** //[[rhino:home|Rhino]]//
+> **Produkt:** //[[de:rhino:home|Rhino]]//
 > **Zusammenfassung:** //Ein Überblick über Toleranzen in Rhino und wie man am Besten mit ihnen arbeitet.//
 
 =====Toleranzen, Toleranzen, Toleranzen ...?=====
-
 <color darkslateblue>**//Was bedeuten all diese Zahlen?  Wie soll ich sie in Rhino einstellen?//**</color>
 
-Das Thema "Dateitoleranzen" wird immer wieder von neuen Benutzern angesprochen.  Viele Modellierprogramme erlauben nicht, dass Sie Ihre eigenen Toleranzen definieren, sondern bestimmen diese für Sie - ob Sie wollen oder nicht.  Mit Rhino haben Sie den Vorteil, dass Sie Ihre eigenen Toleranzen Ihren Bedürfnissen entsprechend definieren können. Man muss aber über etwas Erfahrung und Wissen verfügen, um sie richtig einstellen zu können.
+Das Thema "Dateitoleranzen" wird immer wieder von neuen Benutzern angesprochen.  Bei vielen Modellierungsprogrammen können Sie Ihre Toleranzen nicht selbst definieren. Sie werden für Sie definiert, ob Sie wollen oder nicht.  Mit Rhino haben Sie den Vorteil, dass Sie Ihre eigenen Toleranzen Ihren Bedürfnissen entsprechend definieren können. Man muss aber über etwas Erfahrung und Wissen verfügen, um sie richtig einstellen zu können.
+
+{{vimeo>85108857?640x360}}Video über Toleranz und Präzision in Rhino.
 
 
 =====1: Was sind Toleranzen?=====
 
-**//<color darkslateblue>Toleranzen</color>//** geben die gewünschte Präzision bzw. den Spielraum für Fehler wieder, den Sie in Ihrem Projekt akzeptieren können. Nichts ist 100% genau oder perfekt. Verschiedene Projekte und Objektgrößen haben unterschiedliche Genauigkeitsbedürfnisse. Sie möchten wahrscheinlich nicht versuchen, ein Gebäude mit dem gleichen Präzisionsniveau wie eine Schweizer Uhr zu erzeugen, und umgekehrt würde es ebenso wenig Sinn ergeben (wenn nicht unmöglich sein).
+**//<color darkslateblue>Toleranzen</color>//** geben die gewünschte Präzision bzw. den Spielraum für Fehler wieder, den Sie in Ihrem Projekt akzeptieren können. Nichts ist 100% genau oder perfekt. Verschiedene Projekte und Objektgrößen haben unterschiedliche Genauigkeitsbedürfnisse. Sie würden wahrscheinlich kein Gebäude mit dem gleichen Präzisionsniveau wie eine Schweizer Uhr erzeugen, und umgekehrt würde es ebenso wenig Sinn ergeben (d.h. es wäre unmöglich).
 
-Die technischen Methoden zur Bestimmung von Toleranzen sind sehr spezifisch und komplex und werden hier nicht im Detail behandelt. Vielmehr sollen Informationen bereitgestellt werden, die als Leitfaden zur Einstellung Ihrer Modellierungsprojekte in Rhino dienen können. Abhängig von der verwendeten Vorlagen stellt Rhino die absoluten Toleranzen standardmäßig auf 0,01 oder 0,001 Einheiten ein (unabhängig von der tatsächlich verwendeten Einheit wie Zoll, mm, Meter, etc.). Sie können auch eigene Vorlagen mit anderen Toleranzen erstellen.  Aber was bedeutet denn nun **//<color darkslateblue>absolute Toleranz</color>//** eigentlich?
+Die technischen Methoden zur Bestimmung von Toleranzen sind spezifisch und komplex. Dies werden wir hier nicht im Detail behandeln. Wir möchten lediglich einen Leitfaden zur Einstellung Ihrer Modellierungsprojekte in Rhino bereitstellen. Abhängig von der verwendeten Vorlagen stellt Rhino die absoluten Toleranzen standardmäßig auf 0,01 oder 0,001 Einheiten ein (unabhängig von der tatsächlich verwendeten Einheit wie Zoll, mm, Meter, etc.). Sie können auch eigene Vorlagen mit anderen Toleranzen erstellen.  Aber was bedeutet denn nun **//<color darkslateblue>absolute Toleranz</color>//** eigentlich?
 
 
 =====2: Absolute Toleranzeinstellungen in Rhino=====
 
-Im Rhino-Kontext bestimmt die Einstellung der absoluten Toleranz den maximal zulässigen Abstand, den zwei Objekte oder Elemente haben können, während sie für einen bestimmten Zweck immer noch //nahe genug// beieinander liegen.  //Nahe genug// bedeutet, dass zwei Oberflächen oder Kurven noch verbunden werden können oder dass eine **//<color darkslateblue>Näherungsoperation</color>//** wie das Aufziehen eine Oberfläche erzeugt, deren Kanten den Leitkurven innerhalb der absolut bestimmten Toleranz folgen.
+Im Rhino-Kontext bestimmt die Einstellung der absoluten Toleranz den höchstzulässigen Abstand, den zwei Objekte oder Elemente haben können, während sie immer noch //nahe genug// beieinander liegen.  //Nahe genug// bedeutet, dass zwei Oberflächen oder Kurven verbunden werden können oder dass eine **//<color darkslateblue>Näherungsoperation</color>//** wie das Aufziehen eine Oberfläche erzeugt, deren Kanten den Leitkurven innerhalb der bestimmten absoluten Toleranz folgen.
 
 > **Anmerkung:** //Bei Verbindungen gilt die doppelte absolute Toleranz, weswegen man immer behutsam vorgehen sollte.//
 
-**<color royalblue>Was ist eine "Näherungsoperation"?</color>**
+**<color royalblue>Was ist eine Näherungsoperation?</color>**
 
-Manche Objekte können mathematisch so genau definiert werden, wie es die Fließkommagenauigkeit Ihres Computers zulässt - die extrem winzigen Toleranzen hierbei können vernachlässigt werden. Manche Befehle beruhen jedoch auf einer näherungsweisen Berechnung, damit Kurven oder Oberflächen mit anderen Kurven oder Oberflächen **//<color darkslateblue>übereinstimmen oder zusammenpassen</color>//**. Je exakter Ihre Lösung sein soll, desto länger dauert die Berechnung - dabei kann sich der PC sogar ganz aufhängen. Die absolute Toleranz teilt Rhino mit, wann die Berechnung "gut genug" ist und abgeschlossen werden kann.
+Manche Objekte können mathematisch so genau definiert werden, wie es die Fließkommagenauigkeit Ihres Computers zulässt. Extrem winzige Toleranzen können im Allgemeinen vernachlässigt werden. Manche Befehle beruhen jedoch auf einer näherungsweisen Berechnung, damit Kurven oder Oberflächen mit anderen Kurven oder Oberflächen **//<color darkslateblue>übereinstimmen oder zusammenpassen</color>//**. Je exakter Ihre Lösung sein soll, desto länger dauert die Berechnung, bis hin zu einer vollständigen Systemblockierung Ihres PCs. Die absolute Toleranz teilt Rhino mit, wann die Berechnung gut genug ist und abgeschlossen werden kann.
 
-Ein weiterer Nachteil zu strikter absoluter Toleranzen ist, dass Rhino in diesem Fall Schnittmengen und -linien mit viel zu vielen Kontrollpunkten bildet, die größer (Datenmenge), verrauschter (nicht so sanft) und schwerer zu bearbeiten sind.
+Ein weiterer Nachteil zu strikter absoluter Toleranzen ist, dass Rhino in diesem Fall Schnittmengen und -linien mit viel zu vielen Kontrollpunkten bildet. Diese Kontrollpunkte sind größer (Datenmenge), verrauschter (nicht so sanft) und schwerer zu bearbeiten.
 
-**<color royalblue>Welches sind die "Näherungsoperationen"?</color>**
+**<color royalblue>Welche sind die Näherungsoperationen?</color>**
 
-Alle Befehle, die den Schnitt zwischen Kurven und/oder Flächen finden, fallen darunter. Einige Befehle wären: Trimmen, Teilen, Schnitt, Kontur, Schnittkurve, Parallelfläche und -kurve, Projizieren, Aufziehen von einer und 2 Leitkurven, alle booleschen Operationen, FlächenVerrunden, KanteVerrunden etc.
+Alle Befehle, die den Schnitt zwischen Kurven und Flächen finden, fallen darunter. Einige (wenn auch nicht alle) Befehle wären: Trimmen, Teilen, Schnitt, Kontur, Schnittkurve, Parallelfläche und -kurve, Projizieren, Aufziehen von einer und 2 Leitkurven, alle booleschen Operationen, FlächenVerrunden, KanteVerrunden.
 
 
 **<color royalblue>Warum also nicht einfach mit losen Toleranzen modellieren?</color>**
 
-Der Vorteil von loseren (größeren) Toleranzen ist die Ersparnis an Zeit und Datenmenge, während hingegen die Genauigkeit des Modells leidet. Und genau deswegen benötigt es auch einige Erfahrung zur Einstellung der Toleranzen, da immer ein guter Kompromiss gefunden werden muss.
+Der Vorteil von loseren (größeren) Toleranzen ist die Ersparnis an Zeit und Datenmenge, was andererseits zu Lasten der Modellgenauigkeit geht. Genau aus diesem Grund benötigen Sie etwas Erfahrung, um Ihre Toleranzen zu definieren. Geeignete Kompromisse müssen in jedem Fall gefunden werden.
 
 Der Befehl //Schnitt// erstellt beispielsweise eine Kurve an der Schnittstelle zweier Oberflächen. Die entstehende Kurve muss nun innerhalb der //**<color darkslateblue>absoluten Toleranz</color>**// auf beiden Oberflächen liegen.
 
-Versuchen Sie einmal, den Befehl "Schnitt" zu verwenden und speichern Sie die resultierende Kurve auf eine Seite ab. Dann fügen Sie der absoluten Toleranz eine Null hinzu und führen den Befehl erneut aus. Aktivieren Sie anschließend die Kontrollpunkte für beide Kurven. Die zweite Kontrollkurve wird mehr Kontrollpunkte haben, "schwerer" sein und sich näher an den beiden Oberflächen befinden. Ist nun eine Kurve "besser" als die andere? Dies kommt auf Ihre Ziele an. Wenn die näher beieinander stehenden Teile in Ihrem Herstellungsprozess keinen Vorteil ergeben, ist die erste, "leichtere" Kurve die bessere, da das Ergebnis eine kleinere Datei, schnellere Berechnungen und besser parametrisierte Oberflächen sind .
+Versuchen Sie einmal, den Befehl "Schnitt" zu verwenden und speichern Sie die resultierende Kurve auf eine Seite ab. Dann fügen Sie der absoluten Toleranz eine Null hinzu und führen den Befehl erneut aus. Aktivieren Sie anschließend die Kontrollpunkte für beide Kurven. Die zweite Kontrollkurve wird mehr Kontrollpunkte haben, "schwerer" sein und sich näher an den beiden Oberflächen befinden. Ist nun eine Kurve "besser" als die andere? Dies kommt auf Ihre Ziele an. Wenn die näher beieinander stehenden Teile in Ihrem Herstellungsprozess keinen Vorteil ergeben, ist die erste, "leichtere" Kurve die bessere, da das Ergebnis in einer kleineren Datei, schnelleren Berechnungen und besser parametrisierten Oberflächen besteht.
 
-Daher benötigen unterschiedliche Objekte und Maßstäbe komplett unterschiedliche Toleranzen.  Bei der Konstruktion der allgemeinen Form einer Autokarrosserie beispielsweise (bei der es wichtige Details in der Größenordnung von 1 mm geben mag), kann eine Dateitoleranz von 0,1 mm ausreichend sein  Für kleinere Teile desselben Autos können aber vielleicht selbst 0,01 mm nicht ausreichen und der Motorinnenraum benötigt vermutlich eine Dateitoleranz von 0.001 oder sogar 0.0001 mm im Fall der Auflageflächen.
+Daher benötigen unterschiedliche Objekte und Maßstäbe komplett unterschiedliche Toleranzen.  Wenn Sie beispielsweise die allgemeine Form einer Autokarrosserie entwerfen (bei der es wichtige Details in der Größenordnung von 1 mm geben mag), kann eine Dateitoleranz von 0,1 mm ausreichend sein.  Für kleinere Teile desselben Autos könnten aber auch 0,01 mm nicht ausreichen und der Motorinnenraum benötigt vermutlich eine Dateitoleranz von 0.001 oder sogar 0.0001 mm im Fall der Auflageflächen.
 
-Eine Faustregel besagt, die Toleranz der Genauigkeit Ihres Herstellungsprozesses anzupassen oder eine Größenordnung kleiner (1/10) einzustellen bzw. eine Größenordnung kleiner als das kleinste herstellbare Detail Ihres Prozesses zu nehmen - je nachdem, was kleiner ist.
+Eine weitere Faustregel: Stellen Sie die Toleranz der Genauigkeit eine Größenordnung (1/10) kleiner ein als die beste durch Ihren Fertigungsprozess zu erreichende Toleranz, bzw. eine Größenordnung kleiner als das kleinste herstellbare Detail Ihres Prozesses, um welches Teil es sich dabei auch immer handeln mag.
 
 **<color royalblue>Benutzerdefinierte Toleranzen und Überschreiben</color>**
 
-Bei manchen Befehlen wie NetzwerkFläche oder FlächeAnpassen kann die Toleranz für die betreffende Operation in einem Dialogfenster individuell angepasst werden, wobei die Standardtoleranz überschrieben wird. Mit der Option Neuanpassen können Sie ebenfalls eine eigene Toleranz für bestimmte Befehle eingeben.
+Mit einigen Befehlen, wie NetzwerkFläche oder FlächeAnpassen, kann die Toleranz für die betreffende Operation individuell angepasst werden. Sie verfügen über ein Dialogfenster mit innerhalb des Befehls einzustellenden Toleranzoptionen, wobei die Standardtoleranz überschrieben wird. Mit der Option Neuanpassen können Sie ebenfalls eine eigene Toleranz für bestimmte Befehle eingeben.
 
-Schließlich gibt es Befehle wir KantenVerbinden, bei denen die absolute Toleranz lokal überschritten werden kann, wenn Sie der Meinung sind, dass dies im speziellen Fall hilfreich ist. Verwenden Sie dies aber mit Vorsicht, da Sie hier wissentlich ungenau arbeiten.
+Schließlich gibt es Befehle wie KantenVerbinden, bei denen die absolute Toleranz lokal überschritten werden kann, wenn Sie der Meinung sind dass dies im speziellen Fall hilfreich ist. Verwenden Sie diese mit Vorsicht!! Sie erteilen hier vorsätzlich Ihr Einverständnis mit einer Ungenauigkeit!
 
 =====3:  Winkeltoleranzen und relative Toleranzen in Rhino=====
 
-In Rhino gibt es zwei weitere Toleranzeinstellungen: Winkel und Relativ. Die relative Toleranz kann mit einigen wenigen Befehlen verwendet und im Allgemeinen in Ruhe gelassen werden. Die Winkeltoleranz ist wichtig, da Rhino daraus ableitet, in welchem Punkt zwei Punkte oder Flächen als "tangential" eingeordnet werden. Die Standardeinstellung von 1 Grad ist für feines Modellieren eher zu grob. Flächen, die 1 Grad außerhalb der Tangentialität liegen, können noch immer eine sichtbare Linie oder Falte aufweisen. Eine Einstellung von 0,1 Grad oder feiner erscheint mir sinnvoller.
+In Rhino gibt es zwei weitere Toleranzeinstellungen: Winkel und Relativ. Die relative Toleranz kann mit einigen Befehlen verwendet werden und ist darüberhinaus kaum von Bedeutung. Die Winkeltoleranz ist wichtig, da Rhino daraus ableitet, in welchem Punkt zwei Punkte oder Flächen als tangential eingeordnet werden. Die Standardeinstellung von 1 Grad ist für feines Modellieren eher zu grob. Flächen, die 1 Grad außerhalb der Tangentialität liegen, können noch immer eine sichtbare Linie oder Falte aufweisen. Eine Einstellung von 0,1 Grad oder feiner erscheint mir sinnvoller.
 
 =====4:  Einfluss der Toleranzen auf das Projekt und den Workflow=====
 
-In erster Linie ist es wichtig, die Toleranzen zu Beginn des Modellierungsprozesses festzulegen, da sie zwar im Nachhinein geändert werden können, ein mit einer gröberen Toleranz modelliertes Modell aber nicht durch eine feinere Einstellung derselben repariert wird. Es ist ratsam, Ihre Arbeit kontinuierlich zu überprüfen, indem Sie Elemente während der Erstellung verbinden. Wenn sie sich verbinden lassen, liegen sie innerhalb der Toleranzen, während im gegenteiligen Fall irgendein Fehler vorliegt, den Sie dementsprechend finden und korrigieren sollten. Dadurch verhindern Sie, dass das fertige Modell Problembereiche oder Inkohärenzen aufweist, die in einem späteren Abschnitt sehr schwer und zeitaufwändig zu reparieren sind, wobei ganze Bereiche komplett neu aufgebaut werden müssen.
+In erster Linie ist es wichtig, die Toleranzen zu Beginn des Modellierungsprozesses festzulegen, da sie zwar im Nachhinein geändert werden können, ein zuvor mit einer gröberen Toleranz modelliertes Modell aber nicht durch eine feinere Einstellung derselben repariert wird. Empfehlenswert ist eine beständige Überprüfung Ihrer Arbeit, indem Sie Elemente während ihrer Erstellung verbinden. Wenn sie sich verbinden lassen, liegen Sie innerhalb der Toleranzen. Wenn nicht, müssen Sie herausfinden warum und das Problem umgehend beheben. Dadurch verhindern Sie, dass das fertige Modell Problembereiche oder Ungenauigkeiten aufweist die in einem späteren Abschnitt womöglich schwer und zeitaufwändig zu reparieren sind, einschließlich des kompletten Neuaufbaus bestimmter Bereiche.
 
-Befehle wie Schnittmenge, Teilen oder Boolesche Operationen, die Schnittbefehle beinhalten, sind bei den Toleranzeinstellungen ebenfalls zu berücksichtigen. Oftmals kommt es vor, dass die Absolute Toleranz zu niedrig angesetzt ist und deswegen vollständige Schnitte nicht gefunden werden oder Boolesche Operationen aus diesem Grund nicht funktionieren (Toleranzen sind jedoch nicht der einzige Grund, aus dem diese Operationen scheitern können).  Zu enge Toleranzeinstellungen können ebenfalls Probleme bereiten. Dadurch dauern die Berechnungen nicht nur übermäßig lange, sonder Rhino kann im schlimmsten Fall sogar abstürzen. Generell sollten Sie die absolute Toleranz im Bereich zwischen 0,001 und 0,0001 und in keinem Fall unter 1.0*e^-5 einstellen. Wenn Sie eine niedrigere Toleranz benötigen, sollten Sie stattdessen kleinere Einheiten verwenden.
+Befehle wie Schnittmenge, Teilen oder Boolesche Operationen, die Schnittbefehle beinhalten, sind bei den Toleranzeinstellungen ebenfalls zu berücksichtigen. Oft kommt es vor, dass die Absolute Toleranz zu niedrig angesetzt ist und deswegen vollständige Schnitte nicht gefunden werden. Teilen oder Boolesche Operationen können aus diesem Grund fehlschlagen. (Toleranzen sind jedoch nicht der einzige Grund, warum diese Operationen scheitern können.) Zu enge Toleranzeinstellungen können ebenfalls Probleme bereiten. Dadurch dauern die Berechnungen nicht nur übermäßig lange, sondern es kann auch zu einem Programmabsturz von Rhino kommen. Generell sollten Sie die absolute Toleranz im Bereich zwischen 0,01 und 0,0001 einstellen. Stellen Sie sie niemals unter 1.0e-5 ein. Wenn Sie eine niedrigere Toleranz benötigen, sollten Sie stattdessen kleinere Einheiten verwenden.
 
 
-=====5:  Export in andere (nachgeordnete) Programme:=====
+=====5:  Export in andere (nachgeordnete) Programme=====
 
-Wenn Objekte in eine Folgeanwendung (z.B. CAM-Software oder Solid-Modeler) exportiert werden sollen, muss auf die Präzision geachtet werden, die diese Programme für den Import benötigen. Hier hilft nur die Erfahrung weiter. Bei Unklarheiten fragen Sie in der Rhino-Support-Newsgroup nach, in der Sie immer jemanden finden, der die nötige Erfahrung hat und Ihnen weiterhelfen kann. Allgemein legen MCAD-Anwendungen Wert auf präzisere Objekte. Ihr gesamter Modellierungsprozess sollte von Anfang bis Ende auf demselben Präzisionsniveau stattfinden, damit Sie erfolgreich exportieren können.
+Wenn Sie Objekte in eine Folgeanwendung (z.B. CAM-Software oder Solid-Modeler) exportieren möchten, muss auf die Präzision geachtet werden, die diese Programme für den erfolgreichen Import benötigen. Hierfür ist Erfahrung unverzichtbar. Im Zweifelsfall fragen Sie in der Rhino-Support-Newsgroup nach. Jemand der damit Erfahrung hat wird Ihnen sicher weiterhelfen können. Allgemein legen MCAD-Anwendungen Wert auf präzisere Objekte. Ihr gesamter Modellierungsprozess sollte von Anfang bis Ende auf demselben Präzisionsniveau stattfinden, damit Sie erfolgreich exportieren können.
 
 \\
 
