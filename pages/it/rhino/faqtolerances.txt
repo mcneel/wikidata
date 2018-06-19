@@ -1,66 +1,72 @@
-> **Sommario:** //Cosa significa tolleranze in Rhino e come impostarle correttamente//
+======Capire le tolleranze======
+> **Prodotto:** //[[rhino:home|Rhino]]//
+> **Sommario** - //Significato delle tolleranze in Rhino e come utilizzarle al meglio.//
 
-======Tolleranze, tolleranze, tolleranze…?======
-=====Che significano tutti questi numeri? Come li utilizzo in Rhino?=====
+=====Tolleranze, tolleranze, tolleranze...=====
+<color darkslateblue>**//Cosa significano tutti questi numeri?  Come dovrei impostarli?//**</color>
 
-Il soggetto della tolleranza di lavoro salta fuori spesso nelle domande dei nuovi utenti. Molti programmi di modellazione non consentono di impostare la tolleranza, ma ne fissano una standard, non modificabile, che vi piaccia o meno. Rhino vi dà il vantaggio di scegliere la tolleranza più adeguata alle vostre necessità, ma la corretta impostazione richiede un minimo di competenza e di esperienza.
+Le tolleranze dei file è un argomento che emerge spesso dai dubbi dei nuovi utenti.  Molti programmi  di modellazione non consentono di impostare le tolleranze. Queste vengono impostate se l'utente le richiede.  Rhino offre  agli utenti la possibilità di impostare le tolleranze in base alle proprie esigenze, ma occorre un po' di esperienza e sapere come impostarle correttamente.
 
-assoluta di 0.01 unità di misura (siano esse mm, m o km). Che significa dunque “tolleranza assoluta”?
-
-=====2.  Tolleranza assoluta in Rhino=====
-Per Rhino, la tolleranza assoluta è la massima distanza che 2 oggetti o elementi possono avere, per poter essere ancora considerati contigui e perciò congiungibili. Per la precisione, molte operazioni producono tolleranza doppia (2 volte quella impostata), per cui fate attenzione.
-
-//<color blue>Marc dice: sarebbe opportuno conoscere i comandi che producono risultati approssimati</color>//
-
-//<color red>JB risponde: tutti i comandi che fanno uso di intersezioni tra curve e/o superfici sono buoni esempi. Comandi specifici in questo senso sono: Tronca, Suddividi, Intersezione, Sezioni multiple, Sezione, Proiezione, Sweeps, tutte le operazioni Booleane ed altri ancora.</color>//
-
-> **Esempio:** //usare la tolleranza di default di 0.01 unità. Tracciare un segmento con inizio all’origine e lunghezza 10 lungo l’asse X. Tracciare un secondo segmento con inizio all’origine e lunghezza 10 lungo l’asse Y. Con lo strumento Unisci,  si ottiene una polilinea senza soluzione di continuità, dal momento che i punti iniziali sono coincidenti. Annullate l’operazione ed usando Muovi, spostate il secondo segmento di 0.02 unità verso sinistra (-X). Provate di nuovo Unisci: dovrebbe funzionare ancora, nonostante i punti iniziali non siano più coincidenti, perché tuttora entro 2x della tolleranza impostata. Annullate di nuovo Unisci, muovete ancora il segmento di 0.01 unità nella stessa direzione e riprovate Unisci. Otterrete un avviso che i 2 elementi sono troppo lontani per essere uniti. Avete superato di un pelo la tolleranza assoluta impostata! Implicitamente ciò significa che i segmenti possono essere spostati fino a 0.02 unità (2x) ed essere considerati uniti, anche se questo potrebbe comportare problemi nelle fasi successive della modellazione, qualora vi servano particolari con maggior precisione.//
-
-Oltre che per unire oggetti esistenti, molte operazioni in Rhino tengono conto della tolleranza assoluta anche per crearne di nuovi. Alcuni oggetti sono definibili matematicamente con la perfezione calcolabile dalla vostra macchina (oltre 16 decimali, con differenze talmente piccole da essere trascurabili). Tuttavia alcuni comandi si basano su approssimazioni per adattare curve o superfici ad altre: una precisione hardware in queste operazioni significherebbe maggior tempo di calcolo, anche fino al blocco del sistema per esaurimento delle risorse. La tolleranza assoluta dice al sistema quando voi ritenete che il risultato sia “sufficientemente preciso” da essere accettabile.
-
-Il vantaggio di una tolleranza maggiore è una sostanziale riduzione dei tempi di calcolo, ovviamente a spese della precisione del risultato. Questa è dunque la ragione per cui serve un minimo di esperienza per impostare la tolleranza: è necessario trovare un buon compromesso tra velocità di esecuzione e precisione. Progetti con oggetti di dimensioni molto diverse posso richiedere tolleranze diversificate, dove la sola tolleranza assoluta può essere limitante. Come impostazione di primo acchito si può usare una tolleranza assoluta pari ad 1/10 del particolare più piccolo da modellare, ma per un lavoro accurato serve spingersi ad 1/100 o oltre. Ad esempio per la modellazione della carrozzeria di un’automobile una tolleranza di 0.1 mm può essere sufficiente, mentre alcuni particolari del motore possono richiedere tolleranze 100 volte inferiori.
-
-//<color blue>Marc osserva: A volte, con modelli ottenuti con sequenze di operazioni che dipendono dalla tolleranza, può valere la pena scalare ogni cosa di 10-100 volte. In questo modo la tolleranza rimane ad un livello tale da rendere veloci le operazioni, ma comunque molto più stretta del più piccolo particolare del modello. Questo trucco è stato suggerito spesso da Pascal sul NG.</color>//
-
-//<color red>JB risponde: Questo era valido più per la V2 di quanto non lo sia con la V3 e la V4. Gli stessi effetti si possono avere modificando temporaneamente la tolleranza, allo scopo di rendere possibile o solo più veloce una particolare operazione. Usate la tecnica che per voi ha più senso.</color>//
-
-Alcune delle operazioni che utilizzano per il calcolo la tolleranza assoluta sono Sweep, Loft, Raccorda superfici, Raccorda bordi, ecc.
-
-//<color green>Gordon Adams dice: Il comando Intersezione crea una curva all’intersezione tra 2 superfici, che viene garantita in ogni sua parte entro la tolleranza assoluta da entrambe.</color>//
-
-> **Esempio:** JB: //Provate il comando Intersezione e salvate la curva creata da un lato. Restringete ora la tolleranza di un valore 10 e riprovate il comando Intersezione. Attivate i punti di controllo di entrambe le curve e noterete che la seconda ne ha di più, risulta più complessa e vicina alle superfici. Quale sia la migliore, dipende dalle vostre necessità. Se il vostro processo di fabbricazione non trae alcun vantaggio dalla maggior precisione della seconda curva, la prima risulta essere la migliore perché più “leggera” da manipolare, con tempi di calcolo inferiori, migliore qualità delle superfici e dimensioni di file più contenute.//
-
-Altri comandi consentono di definire una tolleranza specifica per la singola operazione all’interno di una finestra di dialogo: questo valore ha la precedenza sull’impostazione generale nell’ambito dell’operazione stessa (superfici da Rete di curve o Combina superfici sono esempi). In alcuni comandi esiste anche l’opzione Rigenera entro, che permette di specificare un valore di tolleranza specifico.
-
-Infine esistono comandi, come Unisci bordo, nei quali vi è consentito eccedere a livello di dettaglio la tolleranza impostata, forzando l’unione apparente dei bordi: state consapevolmente dicendo al sistema di considerarli uniti nonostante non siano entro la tolleranza. Questo può comportare problemi a valle.
-
-> **Nota:** //Come indicazione di massima, usate impostazioni di tolleranza da uguali a dieci volte più strette del meglio che potete mantenere per l’intero processo di modellazione, oppure dieci volte più strette del particolare più piccolo da modellare, scegliendo tra le due l’alternativa più conservativa.//
-
-=====3.  Tolleranze angolari e relative in Rhino=====
-In Rhino esistono altri due tipi di tolleranza: angolare e relativa. La tolleranza relativa viene usata in un numero esiguo di comandi e può in genere essere lasciata com’è. Armido non è molto d’accordo, perché 1% sembra molto alto, anche se essa non interviene quasi mai. <color blue>Mark dice: anche qui sarebbe utile sapere quali comandi ne fanno uso.</color>
-
-La tolleranza angolare è importante perché indica al sistema a quale punto volete che due curve o superfici siano considerate “Tangenti”. Il valore di default di 3°è eccessivo. Superfici fuori tangenza di 3° mostrano uno spigolo ben visibile. Trovo che un valore di 0.1° o inferiore sia molto più appropriato.
-
-//<color red>JB afferma: Nella pratica corrente, ho scoperto di avere meno problemi nello scambio con altri applicativi CAD come Unigraphics, Proengineer, SDRC Ideas, Solidworks, Solidedge, Inventor, ecc., quando utilizzo tolleranza angolare di 0.5-1°. Non ho mai trovato un caso in cui abbia fatto differenza la tolleranza relativa.</color>//
-
-=====4.  Come le impostazioni di tolleranza possono condizionare il tuo lavoro=====
-Una premessa  importante: le tolleranze vanno fissate all’inizio del progetto, anche se vi è consentito cambiarle secondo la necessità. Oggetti modellati a tolleranze più larghe non diventano più precisi, restringendole. Una buona abitudine consiste nel controllare sistematicamente che gli oggetti che andate creando sia unibili senza problemi al resto, in modo da essere certi che state lavorando entro tolleranza. Se ci sono problemi, siete così in grado di individuarli subito, anziché quando ormai risulta difficile, anche al punto da costringervi a rifare tutto da capo.
-
-Operazioni che coinvolgono l’intersezione sono molto sensibili alle impostazioni di tolleranza. Spesso se la tolleranza assoluta è impostata troppo larga, si possono produrre curve di intersezione incomplete, con il conseguente fallimento delle operazioni coinvolte. Questo si verifica assai spesso, anche se la tolleranza non ne è l’unica causa.
-
-D’altro canto, un’impostazione di tolleranza troppo stretta si traduce in tempi di calcolo eccessivi.
+{{vimeo>85108857?640x360}}Video su tolleranza e precisione in Rhino.
 
 
-=====5.  Esportazione verso applicativi a valle=====
-Quando il progetto deve essere esportato verso altri applicativi come CAM o altri modellatori, è molto importante tener conto della precisione richiesta per una corretta importazione. L’unica guida in questo campo è l’esperienza.
+=====1: Capire le tolleranze=====
 
-Se avete dei dubbi, chiedete sul NG: ci sarà senz’altro qualcuno che ha fatto in passato la stessa cosa e vi potrà dare delle dritte.
+**//<color darkslateblue>Tolleranza</color>//** è un modo di definire la precisione necessaria o, al contrario, il margine di errore accettabile per il progetto. Niente è completamente preciso o perfetto. I vari progetti e le dimensioni degli oggetti possono richiedere livelli di precisione ampiamente diversi. Ad esempio, un edificio non viene costruito con la stessa precisione micrometrica di un orologio svizzero e anche il contrario sarebbe ridicolo (se non impossibile).
 
-In generale, gli applicativi CAD per uso professionale in meccanica richiedono un grado di precisione maggiore rispetto a quelli di pura presentazione. E’ quindi necessario completare l’intero progetto ad una tolleranza più stretta di quella richiesta, per avere la garanzia di un’esportazione senza problemi.
-
-
-<color blue>Marc osserva: nei programmi MCAD che ho controllato, le impostazioni di tolleranza sono fisse ed inaccessibili all’utente. Tutti gli oggetti devono rientrare all’interno del loro volume di modellazione, a volte una sfera di 1km, di conseguenza la tolleranza è molto alta (?).</color>
-
--- [[rhino@millwork.ch|Mitch Heynick (e-mail Mitch Heynick)]]  27.05.05
+I metodi di ingegneria per la specificazione delle tolleranze sono precisi e complessi. In questo articolo non approfondiremo questo argomento. Forniamo semplicemente una guida per configurare la modellazione di progetti in Rhino. A seconda del modello attualmente scelto, Rhino imposta le tolleranze assolute su 0,01 o 0,001 unità, indipendentemente dalle unità utilizzate (pollici, millimetri, metri, ecc.). È possibile inoltre creare modelli personalizzati con altre tolleranze.  Ma, cosa **//<color darkslateblue>absolute tolerance</color>//** significa?
 
 
+=====2: Impostazioni delle tolleranze assolute in Rhino=====
+
+Nel linguaggio di Rhino, l'impostazione di tolleranza assoluta stabilisce la distanza massima consentita che separa due oggetti o elementi e per cui vengono considerati //sufficientemente vicini//.  //Sufficientemente vicini// significa che due superfici o curve hanno la capacità di essere unite o che un'operazione **//<color darkslateblue>approssimata</color>//** come sweep potra creare una superfici i cui bordi seguono i binari all'interno della tolleranza assoluta specifica.
+
+> **Nota:** //nelle operazioni di giunzione, è consentita la tolleranza assoluta 2X, per cui occorre procedere con attenzione.//
+
+**<color royalblue>Che cos'è un'operazione approssimata?</color>**
+
+Alcuni oggetti possono essere definiti come matematicamente perfetti entro i limiti di possibilità di calcolo in virgola mobile del computer. Generalmente, le tolleranze estramamente piccole non sono preoccupanti. Tuttavia, alcuni comandi si basano su approssimazioni per **//<color darkslateblue>adattare o far coincidere</color>//**  curve o superfici con altre curve o superfici. Tanto più esatta è la soluzione richiesta, quanto più tempo sarà necessario per il calcolo che potrebbe provocare un blocco del computer. La tolleranza assoluta indica a Rhino il punto sufficientemente idoneo e quando interrompere i tentativi di calcolo di una soluzione più vicina.
+
+Un altro inconveniente di specificare una tolleranza assoluta più elevata di quella necessaria è che Rhino creerà ad esempio sezioni e intersezioni con numerosi punti di controllo; punti di controllo di dimensioni più grandi, con più rumore o difficili da modificare.
+
+**<color royalblue>Quali operazioni sono approssimate?</color>**
+
+Qualsiasi comando necessario per trovare l'intersezione tra curve e superfici può essere un esempio. Alcuni comandi specifici sono: Tronca, Suddividi, Intersezione, Contorno, Sezione, Offset (curve e superfici), Proietta, Sweep a 1 e 2 binari, tutte le operazioni booleane, RaccordaSrf, RaccordaBordi.
+
+
+**<color royalblue>Perché non modellare quindi solo con tolleranze più ampie?</color>**
+
+Il vantaggio di una tolleranza più ampia (più grande) risiede nella possibilità di ridurre il tempo di calcolo e le dimensioni dei dati, ma a discapito della precisione del modello. Per questo motivo è necessario avere dimestichezza nel definire le tolleranze. It is always necessary to find a good compromise.
+
+Ad esempio, il comando //Intersezione// crea una curva in corrispondenza dell'intersezione di due superfici. In questo modo, viene garantito che la curva si trovi all'interno della //**<color darkslateblue>tolleranza assoluta</color>**// su ciascuna delle due superfici.
+
+Prova ad eseguire il comando Intersezione e salva la curva risultante su un lato. Aggiungi quindi uno zero all'impostazione di tolleranza ed esegui nuovamente il comando Intersezione. Attiva i punti di controllo per entrambe le curve. La seconda curva presenterà più punti di controllo, maggiori dimensioni e sarà più vicina alle due superfici. Una curva è meglio di un'altra? Dipende dalle necessità. Se il processo di fabbricazione non richiede pezzi più vicini, allora è meglio che la prima curva sia più leggera; il risultato sarà un file di piccole dimensioni, calcoli più veloci e migliori superfici parametrizzate.
+
+Diversi oggetti e scale possono richiedere tolleranze ampiamente diverse.  Ad esempio, se stai progettando la sagoma generale di un'automobile (che potrebbe presentare dettagli importanti nel nell'intervallo 1,0 mm), una tolleranza file di 0,1 mm potrebbe essere abbastanza buona.  Tuttavia, per dettagli più piccoli sulla stessa automobile, neanche 0,01 mm potrebbe essere sufficiente; i dettagli interni del motore sicuramente richiederanno una tolleranza file di 0,001 o addirittura di 0,0001 nel caso delle superfici d'appoggio.
+
+Un'altra regola generale da seguire è utilizzare una tolleranza uguale o un ordine di grandezza più piccolo (1/10 di) della migliore tolleranza possibile durante il processo di fabbricazione oppure un ordine di grandezza più piccolo del dettaglio minimo del modello.
+
+**<color royalblue>Sovrascrivere o creare tolleranza personalizzate</color>**
+
+Alcuni comandi consentono di specificare singolarmente la tolleranza per una particolare operazione come nei comandi SrfReteCrv o CombinaSrf. Visualizzerai una finestra di dialogo con le opzioni di tolleranza che puoi impostare all'interno del comando, sovrascrivendo la tolleranza generale. L'opzione Rigenera consente inoltre di specificare la propria tolleranza in determinati comandi.
+
+E infine, esistono comandi come UnisciBordi che consentono di superare le tolleranze assolute localmente se ritenute utili. Questi devono essere utilizzati con cautela. In questo caso la precisione non è una prerogativa.
+
+=====3:  Tolleranze angolari e relative in Rhino=====
+
+Esistono altre due impostazioni di tolleranza in Rhino: angolare e relativa. La tolleranza relativa viene utilizzata da alcuni comandi e generalmente può essere lasciata da sola. La tolleranza angolare è importante poiché indica a Rhino in quale punto inserire due curve o superfici da considerare tangenti. L'impostazione predefinita di 1 grado è piuttosto grande per la modellazione fine. Le superfici fuori dalla tangenza di 1 grado possono comunque mostrare una piega o linea visibili. L'impostazione di 0,1 grado o inferiore è migliore.
+
+=====4:  Come le tolleranze possono influenzare il progetto e il flusso di lavoro=====
+
+Un aspetto importante da tenere in considerazione è che le tolleranze devono essere impostate all'inizio del processo di modellazione; se queste vengono modificate durante il lavoro, gli oggetti precedentemente modellati con tolleranze inferiori non verranno regolate. È buona prassi controllare continuamente il lavoro unendo gli elementi mentre vengono creati. Se vengono uniti, la tolleranza è impostata entro i limiti. Diversamente, occorre tornare indietro per capire in che punto si verifica l'errore e correggerlo immediatamente. Questo eviterà di creare un modello finale con aree problematiche o imprecisioni difficili da correggere nella fase successiva senza ricostruire completamente determinate sezioni.
+
+Le operazioni che comprendono funzioni di intersezione, come Intersezione, Suddividi o le operazioni booleane, possono essere influenzate dalle impostazioni di tolleranza. Spesso, se la tolleranza assoluta è troppo bassa, non è possibile trovare intersezioni complete. In più, ne risulta che le suddivisioni o le operazioni booleane possono non funzionare (anche se le tolleranze non sono l'unico fattore coinvolto). Anche una tolleranza troppo stretta può essere pericolosa. Oltre a creare tempi di calcolo troppo lunghi, Rhino potrebbe bloccarsi. In generale, occorre mantenere l'impostazione di tolleranza assoluta nell'intervallo compreso tra 0,01 e 0,0001. Non impostarla mai al di sotto di 1,0e-5. Se è necessaria una tolleranza più stretta, è possibile utilizzare piuttosto unità più piccole.
+
+
+=====5:  Esportazione ad altri programmi (downstream)=====
+
+Per esportare gli oggetti in un'altra applicazione downstream (come un software CAM o un modellatore di solidi), è importante tenere in considerazione la precisione richiesta da tali programmi affinché i processi di importazione vadano a buon fine. In questo caso, l'esperienza è l'unica guida. In caso di dubbi, è possibile rivolgersi al newsgroup di supporto di Rhino. Altri utenti che hanno effettuato tale processo possono essere d'aiuto. In generale, le applicazioni di CAD meccanico richiedono oggetti di maggiore precisione, quindi se questo è l'obiettivo, è meglio che gli errori si verifichino sul lato più preciso, se possibile. L'intero processo di modellazione, dall'inizio alla fine, deve essere portato avanti con questo livello di precisione affinché l'esportazione vada a buon fine.
+
+\\
+
+{{tag>Rhino}}
