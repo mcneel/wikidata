@@ -65,11 +65,11 @@ conda install scipy
   - It looks like the new pip major version (>=10.0.0) finally removed the "pip.main" functionality that many are using but that was not officially supported... In turns this breaks the installation script. For now, you should be able to move one step further by downgrading pip to 9.0.3: <code python> 
 python -m pip install pip==9.0.3
 </code>
-  - Install gh-python-remote in Annconda: <code python>
+  - Install gh-python-remote in Annconda - The first line installs gh-python-remote in the current Python interpreter. The second tries to find your Rhinoceros IronPython installation, and install gh-python-remote there. The extra options are necessary to be able to get the pre-release version of rpyc. <code python>
 pip install gh-python-remote --upgrade --process-dependency-links --no-binary=:all:
 python -m ghpythonremote._configure_ironpython_installation
 </code>
 
-The first line installs gh-python-remote in the current Python interpreter. The second tries to find your Rhinoceros IronPython installation, and install gh-python-remote there. The extra options are necessary to be able to get the pre-release version of rpyc.
+
 
 
