@@ -43,11 +43,38 @@ Setting this up takes many steps:
 
 ==== Install Grasshopper for Rhino 5 ====
 
-Make sure the Rhino 5 is SR9.  Check Help pulldown > About Rhinoceros > Lower right.
+  - Make sure the [[https://www.rhino3d.com/download/rhino/5.0/sr|Rhino 5 is SR9]].  Check Help pulldown > About Rhinoceros > Lower right.
+  - [[http://download.rhino3d.com/Grasshopper/1.0/wip/rc/download/|Install Grasshopper]] or make sure the current Grasshopper is Build 0.9.0076 by opening Grasshopper > Help pulldown > About Grasshoppper.
 
 ==== Update the Rhino 5 Python ====
 
-Rhino uses IronPython 2.7.5. Rhino 5 requires this version of IronPython
+Rhino uses IronPython 2.7.5. Rhino 5 requires this version of IronPython, but needs for this project needs a 'release' version of Python.
+
+  - To check the current version of Python that Rhino is using.  On the rhino command line type "EditPythonScript". 
+  - Within the Python editor run the following code:<code python>
+import sys
+print sys.version_info
+</code>
+  - The display will report something like this:<code python>
+sys.version_info(2, 7, 0, 'beta', 0)
+</code>
+  - If the version is does not list 'final' or is not 2.7.5, then [[https://www.python.org/download/releases/2.7.5/|install a release version of Python 2.7.5]]. Take note of the path that python is installed.
+  - After installing Python, Open Rhino and run the EditPythonScript again.
+  - In the script editor go to the Tools pulldown > Options... > File Tab.
+  - Add these 3 paths to the Module Search Paths:<code python>
+%installed path%\IronPython275
+%installed path%\IronPython275\Lib
+%installed path%\IronPython275\DLLs
+</code>
+  - Restart Rhino
+  - To check the current version of Python that Rhino is using.  On the rhino command line type "EditPythonScript". 
+  - Within the Python editor run the following code:<code python>
+import sys
+print sys.version_info
+</code>
+  - Now the script should display the full release version information:<code python>
+sys.version_info(major=2, minor=7, micro=5, releaselevel='beta', serial=0)
+</code>
 
 
 ==== Setup an AnaConda virtual environment running Python 2.7.5 ====
