@@ -1,17 +1,17 @@
-** Installare [[penguin:home|Penguin 2.0]] **
-> **Sommario:** //Come installare [[penguin:home|Penguin]] tramite script.//
+======Installare Penguin 2.0======
 
-=====Informazioni generali=====
+> **Sommario:** //Come installare [[penguin:home|Penguin]] tramite script//
+
 
 Lo scripting per l'installazione di [[penguin:home|Penguin]] è simile a quello di Rhino e Flamingo.
 
-Il formato della riga di comando per eseguire il programma di installazione da un file batch (*.bat) è:
+Il formato della linea di comando per eseguire il programma di installazione da un file batch (*.bat) è:
 
    msiexec /i <percorso del file di installazione .msi> /qn <license-options>
 
 I parametri license-options sono:
 
-  * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** Si usi il codice CD-Key a 20 caratteri di Penguin, senza i caratteri “PE20”. Questo parametro è obbligatorio, a meno che non si installi Penguin come nodo di gruppo.
+  * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** Utilizzare il codice CD-Key a 20 caratteri di Penguin, senza i caratteri //PE20//. Questo parametro è obbligatorio, a meno che Penguin non venga installato come nodo di gruppo.
   * **ZOO_NETWORK="network"** "network" significa che si desidera che [[penguin:home|Penguin]] ottenga la licenza dal server dello Zoo. Questo parametro non è obbligatorio.
   
 =====Esempi=====
@@ -21,6 +21,7 @@ I parametri license-options sono:
    "msiexec /i Penguin20_Release_SR4_x86.msi /qn ZOO_NETWORK="network""
 
 =====Note=====
-  * **IMPORTANTE:** è necessario eseguire la riga di comando con privilegi di amministratore.
-  * Se si ha bisogno di un file di registro, si può aggiungere il testo "/L*v "Setup.log"" nella parte superiore della riga di comando.
+  * **Importante:** è necessario eseguire la linea di comando con privilegi di amministratore.
+  * Se occorre un file di registro, è possibile aggiungere il testo "/L*v "Setup.log"" nella parte superiore della linea di comando.
+  * La versione SR5 non consente di specificare il tipo di licenza durante l'installazione. Occorre specificarla durante la prima esecuzione.
 
