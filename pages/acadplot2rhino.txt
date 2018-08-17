@@ -10,11 +10,18 @@ If the objects or layers ACI 1 is red, then it is plotted with the pen weight th
 You can have a library of many CTB files, that configure the plotting of red differently. For example ACi 1 or Red my plot with a pen weight of .5mm and color of red in one CTB, and pen weight of .25 and color of gray in another. The CTB that is assigned at plot time will determine this.
 
 ===== Rhino Print Settings =====
+{{ ::rhino_layers.png?300|}}
 When you are working in Rhino, you may want to assign these setting to your Rhino model. However, Rhino can not open the CTB file. In Rhino, print color and print width are assigned to the layer or the object. 
 So in order to use these AutoCAD settings, you will need to assign the color and print width to the layer.
 
 {{ ::csv_in_excel.png?400|}}
-This script will take use the settings from a CSV file as input for a script that will set the print width of layer, based on the color that is assigned to that layer. This is close as we can get the the CTB file in Rhino.
+This script will take use the settings from a CSV file as input for a script. The script will set the print width of layer, based on the color that is assigned to that layer. The script will convert the ACI to RGB value and process the layer table, setting all layers that have the RGB color to the RGB color and print width in your CSV table. This is close as we can getting the CTB file into Rhino.
 
-Here is how it works. The settings in the AutoCAD CTB file will need to be transferred into a CSV file. At the time this script was written there was not CTB to Txt conversion that was available.
-Download the ZIP. Edit the CSV in Excel or text editor. 
+==== Here is how it works. ==== 
+//This script requires Rhinoceros 5 or 6 for Windows.//
+  - Download the ZIP. Unzip into a folder on your Desktop.
+  - Edit the CSV in Excel or text editor.  The settings in the AutoCAD CTB file will need to be transferred into a CSV file. At the time this script was written there was not CTB to Txt conversion that was available.
+  - Drag and drop for RVB on to your Rhinoceros for Windows application.
+  - Type **SetAcadPrintInfo**.
+  - You will need to run this script any time you add a new layer. Run script in future sessions by typing **SetAcadPrintInfo**. 
+
