@@ -1,27 +1,27 @@
-** Installing [[penguin:home|Penguin 2.0]] **
-> **Summary:** //How to script the installation of [[penguin:home|Penguin]].//
+======Installation de Penguin 2.0======
 
-=====Overview=====
+> **Résumé :** //Comment scripter l'installation de [[penguin:home|Penguin]]//
 
-[[penguin:home|Penguin]] installation scripting is similar to Rhino and Flamingo.
 
-The format of the command line you would usually execute from a batch file (*.bat) is:
+L'installation de [[penguin:home|Penguin]] avec des scripts est similaire à celle de Rhino et Flamingo.
 
-   msiexec /i <path to installer .msi> /qn <license-options>
+Format de la ligne de commande que vous exécutez normalement à partir d'un fichier batch (*.bat) :
 
-The license-options parameters are:
+   msiexec /i <chemin vers le fichier d'installation.msi> /qn <options-de-licence>
 
-  * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** Use the 20-character Penguin CD-Key, without the “PE20” characters. This parameter is mandatory unless you install Penguin as a workgroup node.
-  * **ZOO_NETWORK="network"** "network" means you want [[penguin:home|Penguin]] to get its license from the Zoo server. This parameter is not mandatory.
+Paramètres des options de licence :
+
+  * **LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX"** Utilisez la clé de licence de Penguin composée de 20 caractères, sans la partie //PE20//. Ce paramètre est obligatoire sauf si vous installez Penguin en tant que nœud de groupe de travail.
+  * **ZOO_NETWORK="network"** "network" indique que vous voulez que [[penguin:home|Penguin]] obtienne sa licence à partir du serveur Zoo. Ce paramètre n'est pas obligatoire.
   
-=====Examples=====
+=====Exemples=====
 
    "msiexec /i Penguin20_Release_SR4_x64.msi /qn LICENSE_PRODUCTKEY="PE20-XXXX-XXXX-XXXX-XXXX-XXXX""
 
    "msiexec /i Penguin20_Release_SR4_x86.msi /qn ZOO_NETWORK="network""
 
-=====Notes=====
-  * **IMPORTANT:** you must run command line with administrator privileges.
-  * If you need a log file, you can add "/L*v "Setup.log"" text piece to the command line.
-
+=====Remarques=====
+  * **Important:** Vous devez lancer la fenêtre de commande avec des droits d'administrateur. 
+  * Si vous avez besoin d'un fichier journal, vous pouvez ajouter le texte **/L*v "Setup.log** dans la ligne de commande. 
+  * La version SR5 ne permet pas d'indiquer le type de licence pendant l'installation. Vous devez l'indiquer lors du premier lancement. 
 
