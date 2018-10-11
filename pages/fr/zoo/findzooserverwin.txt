@@ -3,19 +3,44 @@
 > **Produit :** //[[fr:zoo:home|Zoo]]//
 > **Résumé:** //Une brève explication pour savoir comment Rhino pour Windows trouve un serveur de gestionnaire de licences Zoo.//
 
-=====Comment Rhino pour Windows trouve un serveur Zoo ?=====
+=====Présentation=====
 
-Lorsque Rhino doit extraire une licence sur un serveur de Zoo, il détermine le nom du serveur de Zoo en regardant dans les destinations suivantes, dans cet ordre :
+Lorsque Rhino doit extraire une licence sur un serveur de Zoo, il détermine le nom du serveur de Zoo en regardant dans les destinations suivantes, **dans cet ordre**:
   - La racine de l'utilisateur actuel du registre de Windows. Il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo.
   - La racine de l'Ordinateur local du registre de Windows. Il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo.
   - Envoie une requête à votre serveur DNS (système de nom de domaine) pour demander le nom du serveur de Zoo par défaut.
   
+=====Rhino 6 pour Windows=====
 
-=====Plus d'informations=====
+===Recherche dans le registre - Utilisateur actuel===
 
-====Recherche dans le registre - Utilisateur actuel ====
+Lorsque Rhino cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_CURRENT_USER du registre de Windows, il regarde dans ces destinations :
 
-Lorsque vous cherchez le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_CURRENT_USER du registre de Windows, Rhino 32 bits et 64 bits chercheront dans ces destinations :
+<code>
+Racine :  HKEY_CURRENT_USER
+Clé:   Software\McNeel\Rhinoceros\6.0\License Manager
+Nom:  Serveur
+Type:  REG_SZ
+Valeur : <nom d'hôte ou adresse IP>
+</code>
+
+===Recherche dans le registre - Ordinateur local===
+
+Lorsque Rhino cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_LOCAL_MACHINE du registre de Windows, il regarde dans ces destinations :
+
+<code>
+Racine :  HKEY_LOCAL_MACHINE
+Clé:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager
+Nom:  Serveur
+Type:  REG_SZ
+Valeur : <nom d'hôte ou adresse IP>
+</code>
+
+=====Rhino 5 pour Windows=====
+
+===Recherche dans le registre - Utilisateur actuel===
+
+Lorsque Rhino 32 bits et 64 bits cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_CURRENT_USER du registre de Windows, il regarde dans ces destinations :
 
 <code>
 Racine :  HKEY_CURRENT_USER
@@ -25,7 +50,7 @@ Type:  REG_SZ
 Valeur : <nom d'hôte ou adresse IP>
 </code>
 
-====Recherche dans le registre - Ordinateur local ====
+===Recherche dans le registre - Ordinateur local===
 Si vous utilisez une version 32 bits de Windows, lorsque vous cherchez le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_LOCAL_MACHINE du registre de Windows, Rhino 32 bits cherchera dans ces destinations :
 
 <code>
@@ -46,7 +71,7 @@ Type:  REG_SZ
 Valeur : <nom d'hôte ou adresse IP>
 </code>
 
-====Utiliser le DNS====
+=====Utiliser le DNS=====
 Si Rhino ne peut pas déterminer le nom du serveur Zoo en cherchant dans le registre de Windows, il enverra une requête à votre serveur DNS concernant le serveur du Zoo par défaut, qui possède le nom d'hôte suivant :
 
 <code>
