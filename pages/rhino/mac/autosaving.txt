@@ -61,3 +61,8 @@ This will disable autosaving and versions and bring back the Save As in the File
 
 To change back to default behavior, enter the Terminal command again but replace 'no' with 'yes':
     defaults write com.mcneel.rhinoceros ApplePersistence -bool yes
+    
+To check to see what that current setting is, use:
+    defaults read com.mcneel.rhinoceros ApplePersistence
+    
+If it returns a 0 (or a pair not found error), it is disabled.  If it returns a 1, it is on.
