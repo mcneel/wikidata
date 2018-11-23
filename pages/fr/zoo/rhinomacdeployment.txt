@@ -1,0 +1,37 @@
+======Distribution gérée de Rhino pour Mac======
+> **Produit :** //[[fr:zoo:home|Zoo]]//
+> **Résumé :** //Comment déployer Rhino pour Mac en utilisant le Zoo//
+
+=====Question=====
+Nous venons d'acheter une licence Lab éducation de Rhino pour Mac. Quelles stratégies peuvent nous aider à le déployer sur plusieurs ordinateurs en utilisant le serveur de licences Zoo dans notre université ?
+
+Nous utilisons [[http://www.jamfsoftware.com/products/casper-suite/|Casper]] ainsi que d'autres systèmes de gestion pour compiler des paquetages et distribuer des applications sur des systèmes clients. Cette méthode implique normalement l'intégration des informations sur la configuration de la licence dans l'application de distribution. 
+
+=====Réponse=====
+Voici quelques informations utiles :
+
+1) Lorsque vous lancez Rhino pour Mac la première fois, les dossiers suivants sont créés :
+
+  /Library/Application Support/McNeel/Rhinoceros/License Manager
+  /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
+
+Important : Chacun de ces dossiers est **chmod** avec  **+rwx** afin que tous les utilisateurs puissent écrire des informations dedans. 
+
+2) Le dossier //Rhinoceros/License Manager/Licenses// contient le fichier de licence de Rhino, qui se nomme **781b000c-8d0b-4ed3-8ead-213bdb848f39.lic**. 
+
+Pour les licences autonomes, ce fichier est crypté, non lisible et unique par système. 
+
+Pour les licences réseau, en revanche, ce fichier est en texte clair, lisible et peut être déplacé d'un système vers un autre. 
+
+3) Pour les systèmes dotés d'une licence réseau, vous trouverez également un fichier LicensesZooClient.settings dans le dossier //Rhinoceros/License Manager//. Ce fichier est également en texte clair, lisible et peut être déplacé d'un système vers un autre. Il contient le nom du serveur Zoo tel qu'il a été indiqué dans Rhino. 
+
+Si votre système de déploiement réalise les étapes 1, 2 et 3 en plus de distribuer le paquetage de Rhino dans le dossier Application de chaque système, vous devriez pouvoir déployer Rhino pour Mac sur tous vos systèmes.  
+
+=====Plus d'informations=====
+
+[[http://wiki.mcneel.com/zoo/findzooservermac|Comment Rhino pour Mac trouve-t-il le serveur Zoo ?]]
+
+
+\\
+
+{{tag>Zoo}}
