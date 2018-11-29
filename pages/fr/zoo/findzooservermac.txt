@@ -1,0 +1,43 @@
+======Comment Rhino pour Mac trouve-t-il le serveur Zoo ?======
+
+> **Produit :** //[[fr:zoo:home|Zoo]]//
+> **Résumé :** //Une brève explication pour savoir comment Rhino pour Mac trouve un serveur de gestionnaire de licences Zoo//
+
+Lorsque Rhino doit extraire une licence sur un serveur de Zoo, il détermine le nom du serveur de Zoo en regardant dans les destinations suivantes, dans cet ordre :
+  - Le fichier Settings dans le dossier Application Support. Il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo.
+  - Envoie une requête à votre serveur DNS (système de nom de domaine) pour demander le nom du serveur de Zoo par défaut.
+
+=====Plus d'informations=====
+
+====Fichier de paramètres====
+
+Lorsqu'il est exécuté en tant que noeud de réseau, Rhino détermine le nom du serveur de Zoo en regardant dans le fichier  **LicenseZooClient.Settings** dans ce dossier :
+
+<code>
+/Library/Application Support/McNeel/Rhinoceros/License Manager
+</code>
+
+Le contenu de ce fichier est similaire à : 
+
+<code>
+<?xml version="1.0" encoding="utf-8"?>
+<!--Zoo client settings file written by Rhino-->
+<ZooClient>
+  <Software_McNeel_Rhinoceros_5.0_License_Manager Server="host name or IP address"/>
+</ZooClient>
+</code>
+
+====Utiliser le DNS====
+Si Rhino ne peut pas déterminer le nom du serveur Zoo en cherchant dans le fichier Settings, il enverra une requête à votre serveur DNS concernant le serveur du Zoo par défaut, qui possède le nom d'hôte suivant :
+
+<code>
+__mcneel.__zoo5
+</code>
+
+Par exemple, si le domaine de votre entreprise est //entrep.com//, vous pouvez ajouter un alias DNS de //<nowiki>__mcneel.__zoo5.entrep.com"</nowiki>// qui indique votre serveur de Zoo.
+
+{{:zoo:dnsalias.png}}
+
+\\
+
+{{tag>Zoo}}
