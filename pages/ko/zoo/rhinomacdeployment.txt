@@ -1,0 +1,37 @@
+======Mac용 Rhino 관리된 배포======
+> **제품:** //[[ko:zoo:home|Zoo]]//
+> **요약:** //Mac용 Rhino가 Zoo를 사용하도록 설치 배포하는 방법에 대한 안내입니다//
+
+=====질문=====
+Mac용 Rhino 교육 실습실용 라이선스를 최근 구매하였습니다. 학교 안의 여러 컴퓨터에서 Zoo 라이선스 서버를 사용하도록 Rhino를 설치하려면 어떻게 설정해야 합니까?
+
+저희 학교에서는 [[http://www.jamfsoftware.com/products/casper-suite/|Casper]]와 다른 관리 시스템을 사용하여 패키지를 빌드하고 응용 프로그램을 클라이언트 시스템에 푸시합니다. 대개의 경우, 라이선스 구성 정보와 배포 응용 프로그램을 번들링하는 작업이 포함됩니다.
+
+=====답변=====
+다음 정보를 참조 바랍니다. 
+
+1) 처음으로 Mac용 Rhino를 실행하면 다음 폴더들이 만들어집니다. 
+
+  /Library/Application Support/McNeel/Rhinoceros/License Manager
+  /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
+
+중요: 각각의 다음 폴더는 **chmod** **+rwx** 이므로 누구나 정보를 작성할 수 있습니다.
+
+2) //Rhinoceros/License Manager/Licenses// 폴더에는 Rhino의 라이선스 파일이 있습니다. Mac용 Rhino의 라이선스 파일 이름은 **781b000c-8d0b-4ed3-8ead-213bdb848f39.lic** 입니다. 
+
+독립실행형 라이선스의 경우, 이 파일은 암호화되어 읽을 수 없으며, 각 시스템별로 고유합니다. 
+
+네트워크 라이선스는 이 파일이 읽을 수 있는 텍스트이며, 한 시스템에서 다른 시스템으로 이동할 수 있습니다.
+
+3) 네트워크 라이선스를 가진 시스템에서는 //Rhinoceros/License Manager// 폴더에서 LicensesZooClient.settings 파일이 있습니다. 이 파일 또한 읽을 수 있는 텍스트이며, 한 시스템에서 다른 시스템으로 이동할 수 있습니다. 이 파일에는 Rhino에 입력된 Zoo 서버의 이름이 있습니다.
+
+배포 시스템에서 1, 2, 3 과정을 실행하면, Rhino 응용 프로그램 번들을 각 시스템의 응용 프로그램(Applications) 폴더에 푸시하는 것 외에 모든 시스템에 Mac용 Rhino를 배포할 수 있습니다. 
+
+=====추가 정보=====
+
+[[http://wiki.mcneel.com/ko/zoo/findzooservermac|Mac용 Rhino에서 Zoo 서버를 찾는 방법]]
+
+
+\\
+
+{{tag>Zoo_Ko}}
