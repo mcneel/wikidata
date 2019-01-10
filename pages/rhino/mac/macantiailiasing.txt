@@ -1,0 +1,24 @@
+====== Antialiasing settings in Mac Rhino ======
+
+Rhino places limits on the highest anti-aliasing setting. These rules were determined from the volume of crashes in the Apple OpenGL drivers or reports of display corruption. Here are the current rules:
+
+==You are limited to a maximum of 4X antialiasing if any of the following are true:==
+
+  * you have a retina laptop
+  * you have more than one display
+  * your GPU has less than 1024 MB
+
+==You are limited to a maximum of 2X antialiasing if any of the following are true:==
+
+  *you have a retina laptop and an external display
+  *your GPU has less than 1024 MB and more than one display
+  *your GPU has less than 512 MB
+
+==Anti-aliasing is disabled entirely if:==
+
+  *you have a retina laptop and two external displays
+  *you have a retina laptop set to higher than normal resolution
+  *your GPU has less than 512 MB and more than one display
+  *you have an Intel GPU and it is not a HD 4000 or later
+
+Again, these are performance and stability restrictions based on past performance, and can change at any time.
