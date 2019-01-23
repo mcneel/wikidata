@@ -4,17 +4,29 @@
 
 =====Where are my settings stored?=====
 
-**Most of Rhino's settings** are not stored in external files, but in the registry.  Because there is not one single file that contains all options and personalizations, you have to do a bit of work to transfer your custom settings.  Some shortcuts do exist:
+**In Rhino V5 and earlier** most of Rhino's settings were not stored in external files, but in the registry. **In Rhino V6**, much of this info has been moved out of the registry into one or more .xml "settings" files. However, in both cases, as there is not one single file that contains all options and personalizations, it's not a one-click operation to transfer your custom settings from one install to another.  Some shortcuts do exist:
 
-The easiest way to transfer the bulk of your settings is to use the Rhino command **OptionsExport** (V5), which creates a single file with __most__ of the customizations. Importing this file into another installation via the command **OptionsImport** (V5) will transfer the settings to the new install.  You have a choice of which settings you would like to import. It is not necessary to import them all.  
+The easiest way to transfer the bulk of your settings is to use the Rhino command **OptionsExport** (V5 and later), which creates a single file with __most__ of the customizations. Importing this file into another installation via the command **OptionsImport** (V5 and later) will transfer the settings to the new install.  You have a choice of which settings you would like to import. It is not necessary to import them all.  
 
-In V4, these two commands were named **ExportOptions** and **ImportOptions**, but were renamed in V5 to avoid confusion with other file import/export settings. //Display modes// are not included in the ExportOptions in V4. You need to export them separately!  You do this from //Options > Appearance > Advanced Settings//.  
+> Note: In Rhino V4, the two commands above were named **ExportOptions** and **ImportOptions**.  They were renamed in V5 to avoid confusion with other file import/export settings. //Display modes// are not included in the ExportOptions in V4, you need to export them separately.  You do this from //Options > Appearance > Advanced Settings//.  
 
-They are included in V5, but you can only import then all at once.  If you want to just transfer individual display modes, use the Export/Import buttons in Options>View>Display Modes instead.
+**Display modes are included in OptionsExport and OptionsImport from V5 on**, but you can only import all of them at once (or none).  If you want to just transfer individual display modes, use the Export/Import buttons in Options>View>Display Modes instead.
 
-The workspace file (.tb for V4, .rui for V5) contains all the toolbar info. You can copy this between installations as well.  Unfortunately, this file does not contain the on-screen locations for the toolbars, only the toolbars themselves and whether they are open or not.  As you can also customize menus in V5, the .rui file file also contains menu information.
+**Separate from the other options, workspace files contain most of the info for toolbars/buttons** such as which buttons are in which toolbar, command macros for each button and button images. Workspace files have the extensions .tb for V4, .rui for V5 and later. You can copy this file between installations as well.  As of V5, the default location for these files is in a hidden folder:
 
-Other things that might have been modified could be your template files, display modes, installed plug-ins, etc.
+**C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\<version number>\UI**
+
+//(<username> represents your Windows account username, <version number> is 5.0, 6.0 etc.)//
+
+> Note: You can access this quickly by hitting the Windows Start button and typing **%appdata%** and Enter which gets you to "Roaming", then navigating to the appropriate folder.
+
+The workspace file does not contain the on-screen locations for the toolbars however, only the toolbars themselves and whether they are open or not. In V5, location info is still stored in the registry; in V6 it has been moved out to an .xml settings file which resides here:
+
+**C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\6.0\settings**
+
+The .xml file containing the options mentioned at the beginning is in this same folder. 
+
+Finally, there are some other things that might have been personalized/modified.  Among them could be your template files, installed plug-ins, etc.  Template files are just .3dm files so they can be copied over without a problem; plug-ins probably need to be re-installed; beware of compatibility issues if you are upgrading to anew version of Rhino.
 
 ====Where do I find my toolbar files?====
 
