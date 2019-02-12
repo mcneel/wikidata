@@ -1,6 +1,64 @@
 ====== Bongo 2.0 Development ======
 ===== 2019-02-12 Service Release 8 - Release Candidate 1 =====
 ==== Bug fixes:====
+__Next bugs occurred in both Rhino 5 and Rhino 6:__
+
+- A keyframe moved by using the context menu commands “Copy/Move Keyframe” to a tick greater than the last visible tick landed at the end of the visible timeline.
+
+-          It now does  shift beyond the last visible tick to the desired spot.
+
+-          The pivot path curve of an animated object didn’t follow the object when it was Rhino-relocated until some Bongo command was executed.
+
+-          Now the pivot path curve is updated instantly.
+
+-          The pivot path curve lacked the final section when the last keyframe coincides with the stop animation limit of the timeline.
+
+-          It is now fully drawn.
+
+-          Renaming an object in the Keyframe Editor and in Curve Editor was not operating.
+
+-          Both the context menu command as well as long-click the name-field are active now.
+
+-          In a model with at least 2 IK chains ending by a constraint “Keep pivot location the same", when the “engine” of one chain was animated by using Rhino’s Move command the constraint of the other IK-chain(s) became dislocated.
+
+-          This is fixed, all constraints remain stable now.
+
+-          When a Formula is formed in the Expressions field of the Keyframe Editor, by starting with # and the selection of an object’s Name out of the drop-down-list, the name vanishes once the Property is selected. Hence forming a formula was only possible by literary fully typing.
+
+-          Now the list-selection of name and property is restored.
+
+-          Error message when UI fails to load is fixed.
+
+-          A memory leak occurring by Morphing is fixed.
+
+ 
+
+__Following malfunctions arose by the transition of Rhino 5 to Rhino 6 and are fixed:__
+
+-          The Parent-Child link was displayed by a continuous line instead of dotted.
+
+-          The transparency of the background set in a Viewport’s display options didn’t came through in in the images produced.
+
+-          The Pivot-path lacked the last tick (when the final keyframe coincides with the stop animation limit of the timeline).
+
+-          The icons on the Timeline appeared ‘too’ small.
+
+-          A keyframe moved by using the context menu commands “Copy/Move Keyframe” didn’t shift beyond the visible ticks.
+
+-          The pivot of a selected object did not highlight fully - only the arrow points highlighted.
+
+-          Although the state was properly altered, the ‘enable/disable IK’ button on the timeline missed the ‘enabled’ state icon. The ‘disabled’ state was shown in any case.
+
+-          In the IK ‘Pivot Constraints’ section of Bongo’s Object Properties the ‘Select object’ button icon was missing.
+
+-          When an object was newly animated the Tweening section in the Keyframe Editor remained inactive (grayed-out).
+
+-          The Keyframe dialog window brought up wrong mouse cursor image in the Tree view when right-clicked.
+
+-          Non-English versions of Bongo stopped rendering an animation when a viewport display was chosen as rendering target.
+
+-          Zoo registration is was unavailable when the installer was ran through the command line.
+
 
 ===== 2018-02-09 Service Release 7b - Public Release =====
 Download Service Release 7b from here: [[http://www.rhino3d.com/download/bongo/2/release]] 
