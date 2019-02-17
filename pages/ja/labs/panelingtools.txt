@@ -1,0 +1,65 @@
+====== Rhino 5 用プラグイン PanelingTools ======
+
+> **要約:** //[[rhino:nurbs|NURBS]] サーフェスやポリサーフェスをパネリングするRhino用プラグインで、ワークインプログレス（WIP）です//。
+
+\\
+{{:legacy:en:panelingtoolsimage.PNG?600}}
+\\
+
+=====背景=====
+PanelingTools（PT）プラグインは2Dおよび3Dのセルパターンを生成し、それを長方形グリッド全体に配置するのに役立ちます。
+
+パネリングコンセプトの直感的なデザインの他、複雑なジオメトリの解析やファブリケーションに適した形状への有理化をサポートします。Rhino 5 と密接に統合され、建築士や建設関係のデザイナー向けに幅広く利用されています。
+
+=====ダウンロード=====
+
+===Rhino 6 for Windows 64ビットの場合（2018年12月）===
+  * **[[https://www.rhino3d.com/download/panelingtools/6/wip/rc| PanelingTools for Rhino 6]]** をダウンロードし、ダブルクリックしてインストールします。Rhinoで新しいセッションを開くとインストールされたバージョンがロードされますので、ドラッグアンドドロップやPluginManagerを使う等の手間は必要ありません。ツールバーもインストールされますが、最初に使う時は Tools/Toolbar Layout を使ってロードする必要があります。
+  * Rhino 6 SR11 (6.11) またはそれ以降で動作します。 [[https://www.rhino3d.com/download| ダウンロードはこちら...]]
+
+===Rhino 5 SR12 for Windows 64ビットの場合（2016年10月）===
+  * **[[https://www.rhino3d.com/download/panelingtools/1/wip| PanelingTools for Rhino 5 Win 64]]** をダウンロードし、ダブルクリックしてインストールします。Rhinoで新しいセッションを開くとインストールされたバージョンがロードされますので、ドラッグアンドドロップやPluginManagerを使う等の手間は不要です。ツールバーもインストールされますが、最初に使う時は Tools/Toolbar Layout を使ってロードする必要があります。
+  * Rhino 5 の最新サービスリリースで動作します。[[http://www.rhino3d.com/download/rhino/5.0/sr|ダウンロードはこちら...]]
+
+===Grasshopperの場合===
+  * プラグイン、PanelingToolsはGrasshopperを拡張し、インストールはインストーラーで行います。追加インストールの必要はなく、GrasshopperにPanelingToolsタブが表示されているはずです。[[http://www.grasshopper3d.com/group/panelingtools|ディスカッションや例が見つかるPT-GHグループへのリンクはこちら...]] 
+
+===Rhino for Mac WIP の場合===
+
+  * プラグイン、PanelingToolsは公開済みの Rhino 5 for Mac には含まれて__いません__が、**[[http://www.rhino3d.com/go/download/rhino-for-mac/wip/latest|Rhino for Mac WIP]]** の一部としてご利用可能です。Rhino for Mac のライセンスをお持ちでPanelingToolsをご利用になりたい方は、Rhino for Mac WIP をダウンロードすることでインストールしていただけます。Rhino for Mac WIP はワークインプログレスですのでご注意ください。最新の機能と開発が盛り込まれていますが、不安定だったりバグが発生する可能性もあります。機能を追加したりバグを修正しながら、新しいWIPを頻繁に公開しています。WIPにPanelingToolsのメニューはなく、コマンドは全てコマンドラインを通してお使いいただけます。**pt**と入力すると、オートコンプリートにPanelingToolsのコマンドが全て表示されます。
+  * Macでの PanelingTools for Grasshopper インストールについては [[http://www.grasshopper3d.com/group/panelingtools/forum/topics/pt-gh-for-the-rhinowip-for-the-mac|手順がこちらに投稿されています...]]
+
+===インストールでエラーが発生した場合===
+[[http://files.mcneel.com/rhino/6.0/RhiFix.exe|RhiFix.exe]] をダウンロードし、実行してみてください。もしRhiFixが動作しない場合は、以下の情報を support@mcneel.com までメールでご送信ください:
+
+  * エラーのスクリーンショット
+  * Repair Utilityログ（RECOMMENDED ACTION の下の全テキスト）
+  * RHIインストーラーのログ。V5、V6、V7それぞれの場所は以下の通りです:
+    * Rhino 5: `%appdata%\mcneel\rhinoceros\5.0\logs`
+    * Rhino 6: `%appdata%\mcneel\rhinoceros\6.0\logs`
+    * Rhino 7: `%appdata%\mcneel\rhinoceros\7.0\logs`
+=====オンラインクラス（オンデマンド）====
+開発者の総合的な無料オンラインクラス（10時間以内）をご利用いただけます。**[[https://vimeo.com/album/3163942| 詳細はこちら...]]**
+=====ドキュメンテーション=====
+ドキュメンテーションと例のリンクは以下の通りです:
+
+  *[[http://wiki.mcneel.com/_media/labs/panelingtools.pdf|PanelingTools Manual]] : コマンドやオプションの詳細な説明
+  * [[http://wiki.mcneel.com/_media/labs/panelingtools4grasshopperprimer.pdf|PanelingTools for Grasshopper Manual]] : PT-GH コンポーネントの説明とチュートリアルが含まれています
+  * [[labs:panelingscripting|Paneling Scripting]] page has a listing of paneling methods for RhinoScript.
+  * [[labs:panelingexamples|Paneling Tutorials]] ページ : ビデオチュートリアルへのリンクをご案内しています
+  * [[labs:ptshortclips|Paneling Short Clips]] ページ : PanelingToolsの主要機能をカバーするショートビデオのチュートリアルをご案内しています
+  * [[labs:panelinggallery|Paneling Gallery]] ページ : ユーザーの皆さんのPanelToolsプロジェクトをご紹介しています
+  * {{:labs:singlestrokefont.zip|一筆書き（1ストローク）フォント}}（オプション）: ボーナス機能として、Windowsフォントディレクトリに追加していただけます。例えば Windows 7 の場合、RhSS.ttf ファイルを //コントロール パネル>デスクトップのカスタマイズ>フォント// にドラッグすると、Rhinoからこのフォントにアクセスできるようになります。このタイプのフォントは主にレーザーカットのタグパーツに使われます。
+\\
+
+=====ビデオ=====
+  * [[http://vimeopro.com/rhino/panelingtools-webinar-course/video/118506271|PanelingTools Webinar Course - 2014年12月]]: PanelingToolsの仕組みや、デザインプロセスへの最適な統合方法を紹介してるウェビナーコース
+  * [[http://wiki.mcneel.com/ja/rhino/archive_panelingtools|Paneling Tools Webinar - 2011年2月11日]]: PanelingToolsウェビナーのダウンロード
+  * [[http://vimeo.com/album/79634|Paneling Tools Webinar on Vimeo]]: PanelingToolsウェビナーをVimeoでご覧いただけます
+
+=====フィードバック=====
+ご意見や皆さんがPanelingToolsをどう使われているか等、今後の開発に役立つフィードバックをお寄せください。
+
+質問を投稿したり、ご自身のプロジェクトを共有していただけるフォーラム、[[https://discourse.mcneel.com/c/plug-ins/panelingtools|PanelingTools Forum]] がございますので、どうぞ**ご参加**ください。
+
+お問い合わせ、フィードバックをメールでお寄せいただく場合は、どうぞ //[[rajaa@mcneel.com|開発者宛にご連絡ください]]//。
