@@ -1,0 +1,87 @@
+======Windows용 Rhino에서 Zoo 서버를 찾는 방법======
+
+> **제품:** //[[ko:zoo:home|Zoo]]//
+> **요약:** //Windows용 Rhino에서 Zoo 라이선스 관리자 서버를 찾는 방법에 대한 안내입니다.//
+
+=====개요=====
+
+Rhino가 Zoo 서버에서 라이선스를 필요로 할 때, 다음 위치를 **이 순서대로** 찾아 Zoo 서버의 이름을 확인합니다:
+  - Windows 레지스트리의 Current User 하이브. Zoo 서버의 호스트 이름 또는 IP 주소를 찾습니다. 
+  - Windows 레지스트리의 Local Machine 하이브. Zoo 서버의 호스트 이름 또는 IP 주소를 찾습니다. 
+  - Domain Name System (DNS) 서버에 기본 Zoo 서버 이름을 쿼리합니다. 
+ 
+=====Windows용 Rhino 6=====
+
+===레지스트리 조회 - Current user===
+
+Windows 레지스트리 ''HKEY_CURRENT_USER'' 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때, Rhino는 이 위치를 찾습니다:
+
+<code>
+Hive:  HKEY_CURRENT_USER
+Key:   Software\McNeel\Rhinoceros\6.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <host name or IP address>
+</code>
+
+===레지스트리 조회 - Local machine===
+
+Windows 레지스트리 ''HKEY_LOCAL_MACHINE'' 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때, Rhino는 이 위치를 찾습니다:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <host name or IP address>
+</code>
+
+=====Windows용 Rhino 5=====
+
+===레지스트리 조회 - Current user===
+
+Windows 레지스트리 "HKEY_CURRENT_USER" 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때, Rhino 32 비트와 Rhino 64 비트 모두 다음 위치를 찾습니다:
+
+<code>
+Hive:  HKEY_CURRENT_USER
+Key:   Software\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <host name or IP address>
+</code>
+
+===레지스트리 조회 - Local machine===
+Windows 32 비트 버전을 사용 중이라면, Windows 레지스트리 "HKEY_LOCAL_MACHINE" 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때  Rhino 32 비트가 다음 위치를 찾습니다:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   Software\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <host name or IP address>
+</code>
+
+Windows 64 비트 버전을 사용 중이라면, Windows 레지스트리 "HKEY_LOCAL_MACHINE" 에서 Zoo 서버의 호스트 이름 또는 IP 주소를 찾을 때, Rhino 32, 64 비트 모두 다음 위치를 찾습니다:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <host name or IP address>
+</code>
+
+=====DNS 사용=====
+Windows 레지스트리 조회를 통해 Rhino가 Zoo 서버의 이름을 확인하지 못하면, Rhino는 다음 호스트 이름으로 기본 Zoo 서버를 DNS 서버에 쿼리합니다:
+
+<code>
+__mcneel.__zoo5
+</code>
+
+예를 들어, 회사의 도메인이 //mcneel.com//이면, Zoo 서버에 위치를 알려주기 위해 DNS 앨리어스인 //<nowiki>__mcneel.__zoo5.mcneel.com</nowiki>// 을 추가할 수 있습니다. 
+
+{{:zoo:dnsalias.png}}
+
+\\
+
+{{tag>Zoo_Ko}}
