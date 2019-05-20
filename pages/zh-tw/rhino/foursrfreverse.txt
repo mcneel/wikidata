@@ -1,0 +1,28 @@
+====== Mitch第一個圓角挑戰 ======
+
+> **摘要:** //這是Mitch Heynick寄來的一個例子。 Mitch說：所有垂直邊緣和基座都用半徑10來導圓角。 以5來導圓頂部附近的水平內角。//
+**注意:** 如果所有邊緣一次導圓角，那麼V5 建立圓角邊緣(FilletEdge)就可以正確執行。
+====== Mitch第一個圓角挑戰 ======
+\\
+
+| {{:legacy:en:Mitch1_01.jpg}} | 原始多面體。|
+
+\\
+
+| {{:legacy:en:Mitch1_02.jpg}} | 用抽離曲面(ExtractSrf)和組合(Join) 來分隔頂部與底部。 再用建立圓角邊緣(FilletEdge R=10)，將所有需要被導圓角的邊緣進行導圓角，然後炸開(Explode)。|
+
+\\
+
+| {{:legacy:en:Mitch1_03.jpg}}  | 用建立圓角的曲面(FilletSrf R=5, 延伸Extend=是， 修剪Trim=是) 將頂部和底部垂直側的曲面導圓角。(黑色部分)。|
+
+\\
+
+| {{:legacy:en:Mitch1_04.jpg}}  | 用建立圓角曲面(FilletSrf  R=10)將前一步驟中製作出的5mm曲面導圓角。|
+
+\\
+
+| {{:legacy:en:Mitch1_05.jpg}}  | 取消修剪(Untrim)垂直圓角曲面，以上一步驟中製作的小圓角曲面邊緣來進行修剪。|
+
+\\
+
+| {{:legacy:en:Mitch1_06.jpg}}  | 在每個角上重複此步驟，然後組合至密合實體。|
