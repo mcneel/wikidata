@@ -1,45 +1,47 @@
 =====RHI 安装问题疑难排解=====
-==== 概叙 ====
--->关于 RHI 文件#
-RHI 文件 (**RH**ino **I**nstaller Packages) 是 Rhino 专属的套件安装程序，目的是简化 Rhino 插件的安装程序制作与安装作业。
-<--
+
+**RHI** (**RH**ino **I**nstaller Packages) 文件是 Rhino 专属的套件安装程序。\\
+目的是简化 Rhino 插件的安装程序制作与安装作业。
+
 ==== 安装问题 ====
 -->Windows 无法开启 RHI 文件#
 **原因：**Windows 对开启 RHI 文件类型的程序关联不正确。
 \\
-**处理：**
-  - 请至 Windows 的控制面板 > 程序 > 卸载程序。
-  - 在 **Rhinoceros 5** 上按鼠标右键，选择**修复**。
-  - 在 **Rhinoceros 5 (64-bit)** 上按鼠标右键，选择**修复**。
-  - 双击 RHI 文件进行安装。
+**解决方式:**
+  - 下载并执行[[http://files.mcneel.com/rhino/6.0/RhiFix.exe|RhiFix.exe]]
+
 \\
-如果还是无法作用，请依照下方的**手动关联 RHI 文件类型**的说明操作。
+如果RhiFix.exe无法解决问题，请将建议操作(RECOMMENDED ACTION)以下的所有文字email至 support@mcneel.com
+
+
+<--
+
+-->套件安装程序有问题#
+以下是造成套件安装程序发生错误的常见原因：
+  - **不正确文件连结Incorrect File Associations:**    
+    - 下载并执行 [[http://files.mcneel.com/rhino/6.0/RhiFix.exe|RhiFix.exe]]
+    - 如果RhiFix.exe无法解决问题，请将建议操作(RECOMMENDED ACTION)以下的所有文字email至 support@mcneel.com
+  - **旧版的 Rhino 5：** 将 Grasshopper 安装至 Rhino 5 SR0 可能会发生错误，请先装 Rhino 5 升级至最新的修正版。
+  - **下载的文件不完整：**损坏的 RHI 文件无法安装，RHI 文件损坏通常是因为下载过程发生问题，请将下载的 RHI 文件删除，清除网页浏览器的暂存档后再重新下载一次。
+  - **RHI 文件设定不正确：**如果您是开发人员，有可能未正确设定 RHI 文件，请参考[[developer/rhinoinstallerengine/authoring|建立 RHI 文件]]的说明。
+\\
 <--
 
 -->Rhinoceros 5.0 文件开启错误#
 **原因：** Rhino 5 未与 RHI 文件类型正确关联。
 \\
-**处理：**请依照下方的**手动关联 RHI 文件类型**的说明操作。
+**解决方式:**
+  - 下载并执行[[http://files.mcneel.com/rhino/6.0/RhiFix.exe|RhiFix.exe]]
+
+\\
+如果RhiFix.exe无法解决问题，请将建议操作(RECOMMENDED ACTION)以下的所有文字email至 support@mcneel.com
 <--
 
--->手动关联 RHI 文件类型#
--->64 位 Windows #
-  - 在Rhino 套件安装程序 (RHI) 文件上按鼠标右键，选择**开启文件**，再选择**选择预设程序**。
-  - 在**开启文件**对话框勾选**永远用选取的程序来开启这种文件**。
-  - 按**浏览...**。
-  - 浏览至 **C:\Program Files\Rhinoceros 5 (64-bit)\System\x64**，选取 **rhiexec.exe**。\\ (如果您将 Rhino 安装在其它位置，请浏览至该资料夹。)
-  - 按**开启旧档**。
-  - 按**确定**。
 
-<--
 
--->32 位Windows #
-  - 在Rhino 套件安装程序 (RHI) 文件上按鼠标右键，选择**开启文件**，再选择**选择预设程序**。
-  - 在**开启文件**对话框勾选**永远用选取的程序来开启这种文件**。
-  - 按**浏览...**。
-  - 浏览至 **C:\Program Files\Rhinoceros 5\System\x86**，选取 **rhiexec.exe**。\\ (如果您将 Rhino 安装在其它位置，请浏览至该资料夹。)
-  - 按**开启旧档**。
-  - 按**确定**。
-
+==== 部署 RHI 文件 ====
+-->安装给一部计算机上的所有使用者#
+详情请参考：[[/zh/rhino/installrhi|将 RHI 文件安装给所有使用者]]。
 <--
-<--
+==== 移除安装问题 ====
+请见[[zh/rhino/5/rhi/uninstall|如何移除RHI插件程序]]页面了解如何移除RHI插件程序的方式。
