@@ -1,23 +1,31 @@
-====== Using Numpy SciPy and other Cpython libraries in GHPython ======
+====== Using Numpy SciPy and other CPython libraries in GHPython ======
 
-There are ways to use Numpy and Scipy within the GHPyton component in Grasshopper.
+There are three ways to use Numpy and Scipy within the GHPyton component in Grasshopper: GH Python Remote, COMPAS, and GHCPython.
+
+This guide only details usage of the first one, GH Python Remote.
+
+The main reasons behind this choice against the other two are:
+  - GHCPython development has been abandoned after its initial alpha release in November 2017.
+  - COMPAS is a much larger framework that is not focused on the task at hand, and the method it uses to connect to CPython is more relevant for a single long-running function than for repeated calls to a python package.
 
 
-**[[https://www.food4rhino.com/app/gh-python-remote|Cpython Remote for Grasshopper]]**
+**[[https://www.food4rhino.com/app/gh-python-remote|GH Python Remote]]**
 
-GH Python Remote is a special component that lets you use regular Python code directly in the GHPython component, like importing Numpy, Scipy, matlplotib et al.  It is developed by Pierre Cuvilliers at MIT. See below for more instructions on installation and setup for Rhino 5.
+GH Python Remote is a special component that lets you use regular Python code directly in the GHPython component, like importing Numpy, Scipy, matlplotib et al.  It is developed by Pierre Cuvilliers at MIT.
+
 
 **[[https://compas-dev.github.io/|COMPAS]]**
 
+COMPAS is an open-source, Python-based computational framework for collaboration and research in architecture, engineering and digital fabrication. It is developed by the Block Research Group (https://block.arch.ethz.ch) of ETH Zurich (http://www.ethz.ch).
 
-COMPAS is an open-source, Python-based computational framework for collaboration and research in architecture, 
-engineering and digital fabrication. It is developed by the Block Research Group (https://block.arch.ethz.ch) of 
-ETH Zurich (http://www.ethz.ch).
+[[https://compas-dev.github.io/main/tutorials/rpc.html|Instructions to connect from Grasshopper to CPython]]
+
+[[https://compas-dev.github.io/main/examples/rhino/mesh-smoothing-on-surface.html|Instructions to control Rhino from CPython]]
 
 
-**[[https://www.food4rhino.com/app/ghcpython|CPython for Grasshopper]]**
+**[[https://www.food4rhino.com/app/ghcpython|GHCPython]]**
 
-Cpython plugin for Grasshopper
+CPython plugin for Grasshopper
 Aug 1st, 2017
 [[https://github.com/MahmoudAbdelRahman/GH_CPython|GHCPython Github]]
 
@@ -25,98 +33,72 @@ Aug 1st, 2017
 
 -----
 
-===== CPython Remote =====
+===== GH Python Remote =====
 
-GH Python Remote is a special component that lets you use regular Python 2.7.5 code directly in the Rhino 5 GHPython component, like importing Numpy, Scipy, matlplotib et al.
+Official installation instructions are available on the [[https://github.com/Digital-Structures/ghpythonremote/blob/master/README.rst|plug-in's homepage]]. This guide is an attempt to make these more accessible for beginner Python users.
 
-Rhino 5 will run IronPython.  The Anaconda install can run any CPython 2.
+GH Python Remote is a special component that lets you import and use any Python 2 package, like Numpy, or Scipy, directly in the Grasshopper Python component.
 
-Setting this up takes many steps:
+Rhino runs IronPython, which is limited in the plugins it can import. GH Python Remote will connect it to a CPython interpreter outside Rhino to overcome this limitation. This guide details how to install and use it in Rhino.
 
-  -  Install Grasshopper for Rhino 5
-  -  Setup an AnaConda virtual environment running Python 2.7.5, Nunpy, SciPy etc....
-  -  Install GHPython for Grasshopper
-  -  Update the Rhino Python engine used by Grasshopper to the release 2.7.5
-  -  Install GHPython Remote in Grasshopper
-  -  Run the GhPython Remote sample
+Setting this up takes several steps:
 
+  -  (Rhino 5 only) Install Grasshopper and GHPython for Grasshopper
+  -  Setup an Anaconda virtual environment running Python 2.7, and the packages you want to use
+  -  Install GH Python Remote in Grasshopper
+  -  Run the GH Python Remote sample
 
-==== Install Grasshopper for Rhino 5 ====
+=== (Rhino 5 only) Install Grasshopper and GHPython ===
 
-  - Make sure the **[[https://www.rhino3d.com/download/rhino/5.0/sr|Rhino 5 is SR9]]**.  Check Help pulldown > About Rhinoceros > Lower right.
+  - Make sure the **[[https://www.rhino3d.com/download/rhino/5.0/sr|Rhino 5 is SR9 or above]]**.  Check Help pulldown > About Rhinoceros > Lower right.
   - [[http://download.rhino3d.com/Grasshopper/1.0/wip/rc/download/|Install Grasshopper]] or make sure the current Grasshopper is **Build 0.9.0076** by opening Grasshopper > Help pulldown > About Grasshoppper.
-  - [[https://www.food4rhino.com/app/ghpython|Download and install GHPython version 0.6.0.3]]. The install can be completed by dragging and dropping the GHA file onto the Grasshopper Canvas.
-  - Download [[https://github.com/Digital-Structures/ghpythonremote/releases/latest|GHPython Remote Release]]
- and extract the folder into the documents folderin windows.
+  - [[https://www.food4rhino.com/app/ghpython|Download and install GHPython version 0.6.0.3]]. The install needs to be completed by dragging and dropping the GHA file onto the Grasshopper Canvas, then dropping the Python component on the canvas.
 
-==== Update the Rhino 5 IronPython version====
+=== Setup an Anaconda virtual environment running CPython 2.7 ===
 
-Rhino uses IronPython 2.7.5. Rhino 5 requires this version of IronPython, but needs for this project needs a 'release' version of Python.
-
-  - To check the current version of Python that Rhino is using.  On the rhino command line type "EditPythonScript". 
-  - Within the Python editor run the following code:<code python>
-import sys
-print sys.version_info
-</code>
-  - The display will report something like this:<code python>
-sys.version_info(2, 7, 0, 'beta', 0)
-</code>
-  - If the version is does not list 'final' or is not 2.7.5, then [[https://www.python.org/download/releases/2.7.5/|install a release version of Python 2.7.5]]. //Take note of the path that python is installed//.
-  - After installing Python, Open Rhino and run the EditPythonScript again.
-  - In the script editor go to the Tools pulldown > Options... > File Tab.
-  - Add these 3 paths to the Module Search Paths:<code python>
-%installed path%\IronPython275
-%installed path%\IronPython275\Lib
-%installed path%\IronPython275\DLLs
-</code>
-  - Restart Rhino
-  - To check the current version of Python that Rhino is using.  On the rhino command line type "EditPythonScript". 
-  - Within the Python editor run the following code:<code python>
-import sys
-print sys.version_info
-</code>
-  - Now the script should display the full release version information:<code>
-sys.version_info(major=2, minor=7, micro=5, releaselevel='final', serial=0)
-</code>
-
-
-==== Setup an AnaConda virtual environment running CPython 2.7.5 ====
-
-1) Install Anconda Virtual Environment:
+1) Install Anaconda python distribution:
 
   - Install [[https://www.anaconda.com/download/|Anaconda 2 for Windows running Python 2.7]]
-  - Do not worry about checking the Options about setting the Path or the default Python interpreter to Anadconda
+  - Check the option about adding Anaconda to your Windows path.
 
 2) Setup a new Anaconda Environment
+
   - Once installed, start up the Anaconda Prompt App. I find it best to set "Run as Administrator"
-  - Setup a new Rhinoremote environment by using the command <code python>
+  - Setup a new environment named rhinoremote by using the command <code python>
 conda create -n rhinoremote python=2.7
 </code>
   - Activate the new environment: <code python>
 conda activate rhinoremote
 </code>
-  - Install Numpy, Scipy. Use this to install any other CPython libraries in the Rhinoremote envoronment: <code python>
+  - Install Numpy, Scipy. Use this to install any other CPython libraries in the rhinoremote environment: <code python>
 conda install numpy
 conda install scipy
-</code>
-  - It looks like the new pip major version (>=10.0.0) finally removed the "pip.main" functionality that many are using but that was not officially supported... In turns this breaks the installation script. For now, you should be able to move one step further by downgrading pip to 9.0.3: <code python> 
-python -m pip install pip==9.0.3
-</code>
-  - Install gh-python-remote in Anaconda - The first line installs gh-python-remote in the current Python interpreter. The second tries to find your Rhinoceros IronPython installation, and install gh-python-remote there. The extra options are necessary to be able to get the pre-release version of rpyc. <code>
-pip install gh-python-remote --upgrade --process-dependency-links --no-binary=:all:
-python -m ghpythonremote._configure_ironpython_installation
 </code>
   - Record the location of the rhinoremote environment by using the conda command:<code>
 conda env list
 </code>
-It should show something like "C:\Users\steve\AppData\Local\conda\conda\envs\rhinoremote"
+It should show something like "C:\Users\steve\AppData\Local\Continuum\anaconda3\envs\rhinoremote".
 
+=== Install GH Python Remote ===
 
-==== Using GH Python Remote ====
+Still in the Anaconda prompt with the rhinoremote environment activated, run:
 
-
-  - Start the Annaconda Console Application.
-  - Activate the rhinoremote environment:<code python>
-conda activate rhinoremote
+<code>
+pip install gh-python-remote --upgrade --no-binary=:all:
+python -m ghpythonremote._configure_ironpython_installation
 </code>
-  - Start Rhino and Grasshopper.  Open the Documents/ghpythonremote-1.1.X\ghpythonremote\examples\GH_python_remote.ghx
+
+The first line installs gh-python-remote in the current Python interpreter. The second tries to find your Rhinoceros IronPython installation, and install gh-python-remote there.
+
+=== Using GH Python Remote ===
+
+  - Download [[https://github.com/Digital-Structures/ghpythonremote/releases/latest|GHPython Remote Release]] and extract the folder into the documents folder in windows.
+  - Start Rhino and Grasshopper.
+  - In Grasshopper, open the sample in "Documents\ghpythonremote-1.1.X\ghpythonremote\examples\GH_python_remote.ghx"
+  - If needed (because you did not use the same environment name, or because you did not select to add conda to your Windows Path during Anaconda's installation), change the "location" input to the path you noted in the Anaconda installation step.
+  - Change the "run" input to True.
+  - Now drop a normal Python component on the canvas. You will be able to use numpy in it with the following code:
+<code python>
+import scriptcontext
+np = scriptcontext.sticky['numpy']
+</code>
