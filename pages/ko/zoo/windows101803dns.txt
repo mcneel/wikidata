@@ -1,0 +1,28 @@
+======Windows 10 버전 1803 이름 확인 문제======
+
+> **제품:** //[[ko:zoo:home|Zoo]]//
+> **요약:** //Windows 10 버전 1803 업데이트와 그로 인한 Zoo 관련 문제에 대해 이야기합니다//
+
+=====문제=====
+Microsoft의 Windows 10용 Spring Creators Update, 버전 1803을 설치한 후부터 Rhino가 Zoo 서버에서 라이선스를 가져오지 못합니다. 
+
+또한, **[[ko:zoo:diagnostics|Zoo - Windows용 진단 유틸리티]]**에서 하나 이상의 테스트가 실행되지 않습니다.\\
+
+=====추가 정보=====
+
+도메인 이름 시스템(DNS)에서 이름의 대/소문자를 구분하지 않지만, **[[https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/ping|Ping]]** 등의 진단 도구에서 대/소문자 구분과 관련된 문제가 발견되고 있습니다. 
+
+예:
+
+{{zoo:win10ping.jpg?640}}
+
+
+=====가능한 해결책=====
+
+현재 여전히 변경 사항을 파악 중이지만, Windows 10 버전 1803에서 한 가지 해결 방법은 Zoo 서버 호스트 이름을 지정할 때 다른 대문자 또는 소문자를 사용하는 것입니다. 예를 들어, 위의 경우에서는 Zoo 서버 호스트 이름을 소문자로 지정합니다. 
+
+Windows 10 1803 에서 추가적인 서비스를 시작해야 할 가능성도 있습니다. 관련 상세 정보를 참조하세요: [[ko:zoo:windows101803#possible_solution|Windows 10 버전 1803 업데이트 문제]]
+
+\\
+
+{{tag>Zoo_Ko}}
