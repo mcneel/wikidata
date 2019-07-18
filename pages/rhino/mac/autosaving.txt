@@ -1,28 +1,43 @@
 ====== Auto Save and Versions in macOS ======
 Apple has added a radically different method for managing your models in macOS, and this has been integrated into Rhino for Mac.  Apple describes autosaving and Versions [[http://support.apple.com/kb/HT4753|here]] and [[http://www.apple.com/macosx/whats-new/features.html#versions|here]]. Another introduction can be found [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|here]].
 
-This article discusses details not mentioned in these articles that are important to Rhino for Mac users.  Also, you should read [[http://wiki.mcneel.com/rhino/mac/lionsaving|Everything you learned about saving files is wrong]].
+This article discusses details not mentioned in these articles that are important to Rhino for Mac users.
+
+===== Auto Save is different from autosaving ===== 
+
+Conventually, the term autosaving means //writing a single backup copy of your file somewhere else that you or the program can find later//.  You were responsible for saving your file regularly, but Rhino and other programs created a backup file just in case you forgot to save your file.
+
+In macOS, Apple unfortunately uses almost the same term, //Auto Save//, to describe something entirely different.  In macOS, Auto Save means //saving your file automatically// -- as in, overwriting your file automatically.  As in, there is no secret backup somewhere else. Your original file is getting frequently overwritten.  MacOS does keep a copy of your original file in case you want to revert all your changes when you close your model.
 
 ===== When does Rhino for Mac Auto Save a model? =====
 
-A model is saved when you **close** a model window, when you **quit** Rhino, when you **switch** to another application, and //every once in a while//. Apple says the //every once in a while// saves happen about every five minutes when Rhino is idle. This time interval is not configurable.
+A model will be Auto Saved when you //switch// to another application and //every once in a while//. Apple says the //every once in a while// saves happen about every five minutes when Rhino is idle. This time interval is not configurable.
 
-Rhino for Mac will Auto Save while you are moving the mouse without actually manipulating the model. You have to continually manipulate the model viewports for five solid minutes before Auto Save will interrupt you. 
+Rhino for Mac will not Auto Save your model while you are running a command or otherwise actively changing the model.  Each copy written to disk is an accurate and consistent copy of your model at the time it is written. 
 
-You may try this experiment yourself.  Make sure you can see the model's preview in a Finder window while working in Rhino for Mac.  Modify the model, then see if you can prevent an Auto Save from happening.  When you see the Finder preview change, an Auto Save has occurred.
+You may try this experiment yourself.  Make sure you can see the model's preview in a Finder window while working in Rhino for Mac.  Modify the model, then wait for about 30 seconds.  When you see the Finder preview change, an Auto Save has occurred.
+
+===== Reverting to the original contents =====
+
+Any changes you make to a model are Auto Saved, but you may not want to keep any of the changes you make.  When you close a model you have modified, Rhino will ask if you want to save your changes.  If you respond by clicking the Revert Changes button, your original unmodified model will be restored.
+
 ===== If Rhino is constantly saving my model, am I going to be constantly interrupted by the Auto Saves? =====
 
-The periodic Auto Save run in the background. You will never know when a background Auto Save is happening because it never blocks Rhino from working. If you start changing your model when Rhino attempts an Auto Save, Rhino silently abandons the Auto Save and will attempt it again later.
-
+The periodic Auto Saves run in the background. You will never know when a background Auto Save is happening because it never blocks Rhino from working. If you start changing your model when Rhino attempts an Auto Save, Rhino silently abandons the Auto Save and will attempt it again later.
 
 ===== Is this going to fill up my disk? =====
 
-Auto Save does save frequently, but archives only a few versions of your model.  Auto Save archives a model about once an hour for a day, then once a day for a week, and then once a week for some number of weeks.
+Auto Save does save frequently, but archives only a few versions of your model.  Auto Save archives your model about once an hour for a day, then once a day for a week, and then once a week for some number of weeks.  Appple calls these Versions and you can browse them with the Versions browser (see below).
 
 If you are using Time Machine to make automatic backups of your computer files, then all the previous versions of your 3DM files are included in the Time Machine backups and do not take any additional space on your local computer disk.  If you are not making regular backups, we strongly recommend that you start performing backups with Time Machine.
 
-To figure out where most of your disk usage is allocated on your Mac, we recommend [[https://daisydiskapp.com/|DaisyDisk]].  We recommend installing the non-Mac App Store version, and [[https://daisydiskapp.com/manual/2/en/Topics/AdminScan.html|scanning as administrator]] so that you can [[https://daisydiskapp.com/manual/2/en/Topics/HiddenSpace.html|see hidden disk space]].
+===== Persistent interim versions =====
 
+As you work on a model, there are natural break points or phases in your work. These are good places to use File > Save (Command-S) to take a snapshot of your work so far.  Remember that the system will make regular snapshots of your model about once an hour, so you will have many recovery points if you ever need to go back and retrieve previous work.  Each separate version that you save with File > Save is retained by the Versions system.  Creating a new version does not overwrite previous versions but instead adds to your collection of versions.
+
+Every time you select File > Save, you add another Version to your file.  Pressing Command-S a lot means you create a //lot// of versions of your file. You probably do not need or want all those distinct backups in the future.  You should instead stop typing Command-S all the time if you just want to save your model.  This is no longer necessary.  The system is already saving your model for you.
+
+To figure out where most of your disk usage is allocated on your Mac, we recommend [[https://daisydiskapp.com/|DaisyDisk]].  We recommend installing the non-Mac App Store version, and [[https://daisydiskapp.com/manual/2/en/Topics/AdminScan.html|scanning as administrator]] so that you can [[https://daisydiskapp.com/manual/2/en/Topics/HiddenSpace.html|see hidden disk space]].
 
 ===== Can Rhino for Mac browse previous versions of my Rhino models? =====
 
