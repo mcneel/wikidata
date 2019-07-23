@@ -1,83 +1,83 @@
 ====== macOSのオートセーブとバージョン ======
-Apple has added a radically different method for managing your models in macOS, and this has been integrated into Rhino for Mac.  Apple describes autosaving and Versions [[http://support.apple.com/kb/HT4753|here]]. Another introduction can be found [[https://www.lifewire.com/use-auto-save-and-versions-in-os-x-2260850/|here]].
+AppleがモデルをmacOSで管理する根本的に異なる方法を追加したため、Rhino for Mac にそれを統合しました。オートセーブとバージョンに関するAppleの説明は[[http://support.apple.com/kb/HT4753|こちら]]でご覧いただくことができ、また[[https://www.engadget.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|こちら]]（英文）でもその機能について紹介されています。
 
-This article discusses details not mentioned in these articles that are important to Rhino for Mac users.
+このページでは Rhino for Mac ユーザーにとって大切な、上記の記事には書かれていない詳細について説明しています。
 
-===== Auto Save is different from autosaving ===== 
+===== オートセーブは自動保存とは異なります ===== 
 
-Conventually, the term autosaving means //writing a single backup copy of your file somewhere else that you or the program can find later//.  You were responsible for saving your file regularly, but Rhino and other programs created a backup file just in case you forgot to save your file.
+自動保存は //ユーザーまたはプログラムが後で見つけられる別の場所に単一のバックアップコピーを書き込む// という意味で、ユーザー自身に定期的なファイル保存の責任がありましたが、Rhinoや他のプログラムは保存し忘れた場合に備えてバックアップを作成していました。 
 
-In macOS, Apple unfortunately uses almost the same term, //Auto Save//, to describe something entirely different.  In macOS, Auto Save means //saving your file automatically// -- as in, overwriting your file automatically.  As in, there is no secret backup somewhere else. Your original file is getting frequently overwritten.  MacOS does keep a copy of your original file in case you want to revert all your changes when you close your model.
+macOSでAppleは、ほぼ同じ言葉である //オートセーブ// を使って全く異なるものを表現しています。macOSのオートセーブは //自動的にファイルを保存する// という意味で、ファイルを自動的に上書きするものです。他の場所に隠れたバックアップがあるわけではなく、元のファイルが頻繁に上書きされます。モデルを閉じる際に変更を全て取り消したい場合に備え、MacOSは元のファイルのコピーを保持します。
 
-===== When does Rhino for Mac Auto Save a model? =====
+===== Rhino for Mac はモデルをいつオートセーブするのでしょう? =====
 
-A model will be Auto Saved when you //switch// to another application and //every once in a while//. Apple says the //every once in a while// saves happen about every five minutes when Rhino is idle. This time interval is not configurable.
+モデルは//時々//、また他のアプリケーションに//切り替え//た時にオートセーブされます。Appleは//時々//保存することを、Rhinoがアイドリング状態の時およそ5分毎に行われるとしています。この間隔は個別設定ができません。
 
-Rhino for Mac will not Auto Save your model while you are running a command or otherwise actively changing the model.  Each copy written to disk is an accurate and consistent copy of your model at the time it is written. 
+Rhino for Mac はコマンド実行中、またはモデルを活動的に変更している間はオートセーブを行いません。ディスクに書き込まれたコピーは、書き込まれた時点のモデルと一致した正確なコピーです。 
 
-You may try this experiment yourself.  Make sure you can see the model's preview in a Finder window while working in Rhino for Mac.  Modify the model, then wait for about 30 seconds.  When you see the Finder preview change, an Auto Save has occurred.
+これはご自身でお試しいただけます。Rhino for Mac での作業中はモデルのプレビューがFinderウィンドウでご覧いただける状態であることをお確かめください。モデルを編集し、30秒ほど待ってみます。Finderのプレビューが変わった時、オートセーブが実行されています。
 
-===== Reverting to the original contents =====
+===== 元のコンテンツに戻す =====
 
-Any changes you make to a model are Auto Saved, but you may not want to keep any of the changes you make.  When you close a model you have modified, Rhino will ask if you want to save your changes.  If you respond by clicking the Revert Changes button, your original unmodified model will be restored.
+モデルに加えられたあらゆる変更がオートセーブされますが、その変更を一切残したくないこともあるでしょう。変更を加えたモデルを閉じる際、Rhinoはその変更を保存したいかどうか確認しますので、「変更を元に戻す」ボタンをクリックすれば変更されていない元のモデルが復元されます。
 
-===== If Rhino is constantly saving my model, am I going to be constantly interrupted by the Auto Saves? =====
+===== Rhinoが何度もモデルを保存するのであれば、オートセーブで何度も作業を中断させられるのでしょうか? =====
 
-The periodic Auto Saves run in the background. You will never know when a background Auto Save is happening because it never blocks Rhino from working. If you start changing your model when Rhino attempts an Auto Save, Rhino silently abandons the Auto Save and will attempt it again later.
+定期的なオートセーブはバックグラウンドで実行されます。Rhinoの動作をブロックすることは一切ないため、バックグラウンドのオートセーブがいつ起こっているのか気付くこともないでしょう。Rhinoがオートセーブしようとしている時にモデルの変更を始めた場合、Rhinoは何も表示しないままオートセーブを破棄し、後で再度オートセーブを試みます。
 
-===== Is this going to fill up my disk? =====
+===== それでディスクがいっぱいになってしまうことはありますか? =====
 
-Auto Save does save frequently, but archives only a few versions of your model.  Auto Save archives your model about once an hour for a day, then once a day for a week, and then once a week for some number of weeks.  Appple calls these Versions and you can browse them with the Versions browser (see below).
+オートセーブは頻繁に保存を行いますが、モデルのバージョンは少ししかアーカイブされません。アーカイブするのは1日のうちでだいたい1時間に1回程度、1週間で1日1回程度、数週間で週に1回程度です。Apppleはそれらのバージョンを呼び出し、ユーザーはそのバージョンのブラウザで表示することができます（下をご覧ください）。 
 
-If you are using Time Machine to make automatic backups of your computer files, then all the previous versions of your 3DM files are included in the Time Machine backups and do not take any additional space on your local computer disk.  If you are not making regular backups, we strongly recommend that you start performing backups with Time Machine.
+Time Machine でお使いのコンピューターのファイルを自動的にバックアップしている場合は3DMファイルの過去のバージョンが全て Time Machineのバックアップに含まれ、お使いのローカルディスクで追加領域を占めることはありません。定期的なバックアップを取っていらっしゃらない場合は、Time Machine を使ってバックアップを始められることを強くお勧めします。
 
-===== Persistent interim versions =====
+===== 継続的な暫定バージョン =====
 
-As you work on a model, there are natural break points or phases in your work. These are good places to use File > Save (Command-S) to take a snapshot of your work so far.  Remember that the system will make regular snapshots of your model about once an hour, so you will have many recovery points if you ever need to go back and retrieve previous work.  Each separate version that you save with File > Save is retained by the Versions system.  Creating a new version does not overwrite previous versions but instead adds to your collection of versions.
+モデルに取り組んでいると自然な区切りや段階があり、ファイル > 保存（Command-S）を使ってそれまでのスナップショットを作成する良いタイミングです。システムが約1時間毎にモデルのスナップショットを作成するため、以前の作業に戻る必要があれば復元できるポイントがいくつもあることを覚えておきましょう。ファイル > 保存 で保存したそれぞれの独立したバージョンは、バージョンシステムによって保持されます。新しいバージョンの作成は以前のバージョンを上書きするものではありませんが、代わりに保存するバージョンを追加します。
 
-Every time you select File > Save, you add another Version to your file.  Pressing Command-S a lot means you create a //lot// of versions of your file. You probably do not need or want all those distinct backups in the future.  You should instead stop typing Command-S all the time if you just want to save your model.  This is no longer necessary.  The system is already saving your model for you.
+ファイル > 保存 を選ぶと毎回ファイルに新しいバージョンを追加することになり、Command-S を何度も押すことはファイルに//多くの//バージョンを作成することを意味します。将来的にはおそらく、違うバックアップの全てを残したい、または必要とすることはないでしょう。モデルを保存したいからと毎回 Command-S を使うことはやめましょう。もう必要ありません。既にあなたのため、システムがモデルを保存しています。
 
-To figure out where most of your disk usage is allocated on your Mac, we recommend [[https://daisydiskapp.com/|DaisyDisk]].  We recommend installing the non-Mac App Store version, and [[https://daisydiskapp.com/manual/2/en/Topics/AdminScan.html|scanning as administrator]] so that you can [[https://daisydiskapp.com/manual/2/en/Topics/HiddenSpace.html|see hidden disk space]].
+お使いのMacでディスクの使用状況を把握するには [[https://daisydiskapp.com/|DaisyDisk]] の Mac App Store バージョンではない方のインストールがお勧めで、[[https://daisydiskapp.com/manual/2/en/Topics/HiddenSpace.html|隠しディスク領域を表示]]できるよう[[https://daisydiskapp.com/manual/2/en/Topics/AdminScan.html|管理者としてスキャン]]するようにしましょう。
 
-===== Can Rhino for Mac browse previous versions of my Rhino models? =====
+===== Rhino for Mac はRhinoモデルの過去のバージョンをブラウズできますか? =====
 
-Yes, the Versions browser is part of Rhino for Mac.  Navigate to //File// > //Revert To// > //Browse All Versions...//  If there are Autosaved versions of your model, the Version browser will appear.
+はい。バージョンブラウザは Rhino for Mac の一部です。//ファイル// > //バージョンを戻す// > //すべてのバージョンをブラウズ...// にナビゲートすると、自動保存されたバージョンのモデルがあればそのバージョンのブラウザが表示されます。
 
 
-===== What can I do in the Versions browser? =====
+===== バージョンブラウザでは何ができますか? =====
 
-In the Versions browser, the window on the left is your current model. All the windows on the right are previous versions of your model. These windows are actual Rhino windows and can be manipulated like any Rhino model. You can rotate views, bring up the Layers panel to show and hide layers. You can even copy objects from a past model to paste into your current model. You cannot //change// past versions.
+バージョンブラウザの左のウィンドウが現在のモデルです。右にあるウィンドウは全て過去のモデルで、実際のRhinoのウィンドウであり、他のRhinoモデルのような操作が可能です。ビューを回転させたり、レイヤパネルを出してレイヤを表示/非表示にすることもできます。過去のモデルからオブジェクトをコピーして現在のモデルに貼り付けることもできますが、過去のバージョンを//変更//することはできません。
 
-===== Can I delete old versions of the file? =====
+===== ファイルの古いバージョンを削除することはできますか? =====
 
-Yes, you can delete the older versions of the file.  To do this, launch Rhino for Mac and open the file in question.  Navigate to the //File// > //Revert To// > //Browse All Versions...//  When the Version explorer appears, move the mouse pointer to upper border of your screen and the Rhinoceros menu bar will appear.  Under //File// > //Revert To// you can delete a single old version or - if you hold down the //option/alt// key - you can delete all previous versions.  This will not delete the open 3dm file, but only the previous versions of it.  If the menu choice "Delete This Version" or "Delete All Versions" is greyed out, the Versions file or files in question are not on your local disk.  They are part of your regular Time Machine backup and cannot be deleted.
+はい。ファイルの古いバージョンは削除することができます。Rhino for Mac を起動して問題のファイルを開いてください。//ファイル// > //バージョンを戻す// > //すべてのバージョンをブラウズ...// にナビゲートし、該当バージョンのエクスプローラーが表示されたらマウスポインターをスクリーンの上枠に移動させてください。Rhinocerosのメニューバーが表示されます。//ファイル// > //バージョンを戻す// の下で古いバージョンを1つ削除するか、//option/alt//キーを押せば過去のバージョン全てを削除することができます。この操作で開いている3dmファイルは削除されず、過去のバージョンのみが削除されます。メニューの選択で"このバージョンを削除"または"すべてのバージョンを削除"がグレーになっている場合、該当バージョンのファイルまたは問題のファイルがローカルディスクにありません。定期的な Time Machine バックアップの一部ですので削除はできません。
 
-===== Auto Save and Versions with network file servers =====
+===== ネットワークファイルサーバーを使ったオートセーブとバージョン =====
 
-Rhino's Auto Save feature works well with slow network file servers.  When Rhino starts an Auto Save, a copy of your 3DM model is quickly saved in memory, and then written to the network server in the background.  You are not forced to wait until the Auto Save completes writing to the server.  Rhino writes the 3DM model to a temporary location on the server and, once that completes successfully, instantly swaps the new Auto Save copy for the current file.
+Rhinoのオートセーブ機能は低速のネットワークファイルサーバーでもうまく動作します。Rhinoがオートセーブを開始すると3DMモデルのコピーが素早くメモリーに保存され、その後バックグラウンドでネットワークサーバーに書き込まれます。オートセーブがサーバーへの書き込みを完了するまで待たされることはありません。Rhinoは3DMモデルをサーバーの一時的な場所に書き込み、無事に完了すると即座に新しいオートセーブコピーと現在のファイルを交換します。
 
-Rhino's Versions feature depends on capabilities available only on your local macOS disk.  However, when your model is on a network file server, you still have //almost all// of the Versions features.  Your model is saved frequently to the network server and hourly previous versions of your model are archived for as long as you keep the model open in Rhino.  We believe that, for network file servers, these previous versions are kept temporarily on your local disk.  You can use File > Revert To > Browse All Versions to browse through past versions of your recent work.
+Rhinoのバージョン機能はお使いのmacOSのローカルディスクのみによって決まりますが、モデルがネットワークファイルサーバーにある場合はまだバージョン機能の//ほぼ全て//がある状態です。モデルはネットワークサーバーへ頻繁に保存され、Rhinoでそのモデルを開いている限り過去のバージョンは1時間毎にアーカイブされます。ネットワークファイルサーバーでは一時的に過去のバージョンがローカルディスクへ保存されていると思います。ファイル > バージョンを戻す > すべてのバージョンをブラウズ で最近作業した過去のバージョンを表示させることができます。
 
-When you close your model that is stored on a network file server, your previous versions that have been temporarily saved on your local disk will be deleted.  Rhino will warn you by showing the following dialog:
+ネットワークファイルサーバーに保存されたモデルを閉じると、ローカルディスクに一時保存された過去のバージョンは削除されます。Rhinoは以下のダイアログを表示して警告します:
 
 {{:rhino:mac:permanent_version_storage.png?500|/Users/macrhino/Desktop/Screenshots/permanent version storage.png}}
 
-Your file will be saved normally, however you will not have access to previous versions once the file is closed.
+ファイルは普通に保存されますが、一度ファイルが閉じられると過去のバージョンへはアクセスできなくなります。（※変更前のファイルを残したい時は Revert/元に戻す をクリックします）
 
-=== "This document could not be Auto Saved" ===
+=== 書類のオートセーブができませんでした ===
 
-Rhino users using network file servers might see the message "This document could not be Auto Saved" in a popup window.  This indicates that your connection to the network file server has been interrupted and Rhino cannot write to the network file server. Once your network connection is restored, Rhino will be able to Auto Save your model again.
+ネットワークファイルサーバーをお使いのRhinoユーザーでしたら、ポップアップウィンドウで "This document could not be Auto Saved"（書類のオートセーブ/自動保存ができませんでした）という表示を見たことがあるかもしれません。これはネットワークファイルサーバーへの接続が中断され、Rhinoがそのサーバーへ書き込むことができなかったことを示しています。ネットワーク接続が復元されるとRhinoはモデルを再度オートセーブできるようになります。
 
-===== Is it possible to disable the Versions feature in Rhino for Mac? =====
+===== Rhino for Mac でバージョン機能を無効にすることはできますか? =====
 
-Yes, BUT it is **HIGHLY RECOMMENDED** that you **DO NOT DO THIS**.  Rhino for Mac is designed to work with Versions and Autosaving; performance and stability may be impacted if you disable this.  Additionally, you will lose the ability to add tags, rename or move the file from the window title, etc.  If, for some reason, you need to disable it, you will need to launch //Terminal.app// and run the following command:
+はい。ですが**無効にしないこと**を**強くお勧めします**。Rhino for Mac はバージョンとオートセーブを使って動作するようデザインされており、無効にすることでパフォーマンスや安定性に影響する可能性があります。さらにタグの追加、名前の変更、あるいはウィンドウのタイトルからファイルを移動する等の機能が使えなくなるでしょう。何らかの理由で無効にする必要がある場合は//ターミナル//を起動し、次のコマンドを実行する必要があります:
     defaults write com.mcneel.rhinoceros ApplePersistence -bool no    
-This will disable autosaving and versions and bring back the Save As in the File menu (instead of Duplicate).
+これでオートセーブとバージョンを無効にし、ファイルメニューに（複製 の代わりに）名前を付けて保存 を表示してくれます。
 
-To change back to default behavior, enter the Terminal command again but replace 'no' with 'yes':
+デフォルトに戻す場合はターミナルのコマンドを再度入力し、'no' を 'yes' に置き換えます:
     defaults write com.mcneel.rhinoceros ApplePersistence -bool yes    
-To check to see what that current setting is, use:
+現在の設定を確認するには、こちらのコマンドをお使いください:
     defaults read com.mcneel.rhinoceros ApplePersistence    
-If it returns a 0 (or a pair not found error), it is disabled.  If it returns a 1, it is on.
+0（または pair not found エラー）が返される場合は無効、1が返される場合は有効です。
 
-**NOTE**: The above steps do not work on macOS Mojave 10.14.  We do not currently know of a viable workaround.
+**メモ**: 以上のステップは macOS Mojave 10.14 ではお役に立ちません。申し訳ありませんが、現時点では代わりになる実現可能な方法は把握できておりません。
