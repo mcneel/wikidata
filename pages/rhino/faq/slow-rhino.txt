@@ -1,27 +1,26 @@
-===== Problem:  =====
-==== Rhinoceros is slow on a workstation with multiple monitors plugged into a USB hub. ====
+===== Rhinoceros is Slow On a Workstation with Multiple Monitors Plugged into a USB Hub =====
 Back to [[https://wiki.mcneel.com/rhino/faq#display_problems|FAQ]]
 
 ===== Background =====
 It is easy to want to blame the slow display issue on the USB display link.
-Having the USB hub is simply the vehicle that brought the user to the problem.
+But the USB hub is simply the vehicle that brought the user to the problem.
 
 ===== Analysis =====
-Often this problem is related to a the "NahimicOSD.dll", which is kind of On Screen Display service installed by an audio driver.
+Often this problem is related to the "NahimicOSD.dll", which is an On Screen Display service installed by an audio driver.
 
-It's quite buggy, and if you do a google search on it you will find that all kinds of users, using all kinds of different software, are experiencing issues. 
+It's quite buggy, and if you do a Google search on it you will find that all kinds of users, using all kinds of different software, are experiencing issues. 
 
-This particular issue is that the DLL doesn't handle multiple displays very well (if at all), and it is our guess that it tries to enumerate all of the display devices, but does so poorly and/or incorrectly.
+This particular issue is that the DLL doesn't handle multiple displays very well (if at all), and we believe that it tries to itemize all the display devices, but does so poorly and incorrectly.
 This results in an infinite loop inside its code. Setting up a system with the USB hub and multiple monitors simply reveals the problem.
 
 ===== The Solution on Discourse =====
-You will find details of the solution [[https://discourse.mcneel.com/t/rhino-freezes-on-secondary-monitor-problem-with-the-nihimic-audio-driver-on-the-motherboard/82258/37?u=jeff|here]]
+[[https://discourse.mcneel.com/t/rhino-freezes-on-secondary-monitor-problem-with-the-nihimic-audio-driver-on-the-motherboard/82258/37?u=jeff|Details of the solution.]]
 
-This specific link is to the portion of the thread that has the solution.
-The user must deactivate the Nahimic service. It's not needed, and it provides no value to the user... Since it's an audio DLL and service, it means that any process that uses the audio device (or portions of it), will get the Nahimic DLL injected into its process space...and there's nothing that process can do about it... Once inside the process space, it basically locks up that process due to reasons I mentioned above.
+This specific link is to the part of the thread that has the solution.
+The user must deactivate the Nahimic service. It's not needed, and it provides no value. Since it's an audio DLL and service, it means that any process that uses the audio device (or portions of it), will get the Nahimic DLL injected into its process space. And there's nothing that process can do about it. Once inside the process space, it basically locks up that process.
 
 ===== In Summary =====
-This information is relevant when you hear "My Rhino is freezing" and multiple monitors are envolved... chances are good, it's that dang Nahimic DLL.
+This information is relevant when you hear "My Rhino is freezing" and multiple monitors are involved. Chances are good, it's that dang Nahimic DLL.
 
 //Jeff Lasor,
 Lead Graphics Developer,
