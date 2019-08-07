@@ -1,11 +1,26 @@
-====== 將 RHI 檔案安裝給所有使用者 ======
-Rhino 5.6 可以選擇將 RHI 檔案安裝給一部電腦上目前登入的使用者或所有使用者，RHI 檔案也可以使用不彈出對話框的"安靜模式"自動安裝。
+====== 為所有使用者安裝 RHI 檔案 ======
+Rhino 5.6允許您選擇為一個用戶，或電腦上的所有用戶安裝。 此外RHI檔案的佈署可以用編寫腳本的方式靜默進行。
 
-===== 部署 RHI 檔案 =====
+=====為Rhino 6佈署RHI檔案=====
+  - 安裝Rhino 6
+  - 執行指令：
+
+<code>"C:\Program Files\McNeel\Rhino Installer Engine\x64\rhiexec.exe" "C:\Full\Path\To\Installer.rhi" /admin /silent</code>
+
+**/admin** 為電腦上所有的使用者進行安裝。 **注意** 您必須從更高層命令提示或帳號中執行此指令 - 如果該帳戶沒有修改系統範圍資源的權限，admin選項將無提示失效。
+
+**/silent** 安裝時不顯示使用者介面
+
+=====為Rhino 5佈署RHI檔案=====
   - 請確定電腦目前安裝的是 Rhino 5 SR6 或之後的版本。
-  - 請將下列指令，全部貼成一行執行： 
+  - 欲執行的指令，在一行內：
+    
 <code>"C:\Program Files\Rhinoceros 5 (64-bit)\System\x64\rhiexec.exe" "C:\Full\Path\To\Installer.rhi" /admin /silent</code>
 
-/admin - 將外掛程式安裝給電腦上的所有使用者。\\ /silent - 安裝時不顯示對話框。
+
+**/admin** 為電腦上所有的使用者進行安裝。 **注意** 您必須從更高層提示或帳號中執行此指令 - 如果該帳戶沒有修改系統範圍資源的權限，admin選項將無提示失效。
+
+**/silent** 安裝時不顯示使用者介面
+
 =====疑難排解=====
-安裝 RHI 檔案時發生問題嗎?\\ 請參考：[[/zh-tw/rhino/5/rhi-problems|RHI 安裝問題疑難排解]]
+安裝RHI檔時遇到問題嗎? 請閱讀[[zh-tw/rhino/5/rhi-problems|RHI安裝程式疑難排解]] 文章。
