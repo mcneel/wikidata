@@ -1,17 +1,34 @@
-====== This page explains how to set up and run macros and scripts in Rhino ======
+=====How to integrate macros and scripts into your workspace=====
 
-=====Creating  button or alias for your macro or script=====
-The simplest way to save and run your macro is from a toolbar button or alias.  If you don’t know how to make a new toolbar button or alias, look in the Help file. There’s a good explanation.  Once you have your new button (or have chosen to edit an existing one), open the editor by shift-right clicking on the button.  For an alias, you will do the same thing, but instead of creating a new button, go into Options > Aliases and use the New button to create a new alias.
+Macros and scripts can be run in several ways inside Rhino.  The best way to integrate them into your workflow will depend on your preferred way of working as well as which platform you are on - the Rhino for Windows and Rhino for Mac environments are somewhat different.
 
-=====Use the macro editor to work out new macros=====
-The MacroEditor command opens a text editing window in which you can type macros and try them out without the need to edit a button every time. The run button on the lower edge of the  editor runs the macro. If there is selected text, it runs the selected text. When it all runs to your satisfaction, copy and paste the macro to a toolbar button.
+====Macros===
+//We'll cover installing macros first, as they're somewhat simpler to get up and running.//
 
-{{:legacy:en:MacroEditor.gif}}
+===Using the macro editor to work out new macros===
+The **MacroEditor** command opens a text editing window in which you can type macros and try them out without the need to edit a button every time. The arrow button runs the macro. If there is anything selected in the editor, it runs the just the selected part, otherwise it runs the whole macro. When the macro runs to your satisfaction, copy and paste the macro to a toolbar button or alias.  A detailed tutorial on macro development can be found [[rhino:basicmacros|here]].
 
-=====Paste your macro or script into the button or alias=====
-Now, there are two ways to approach associating the macro or script to your button or alias.  First and simplest is to just copy/paste the whole thing into the left or right button box (or in the alias box).  The advantage of the button method is that it is portable. That is, if you copy or export the button to another installation the macro goes with it.  Once the test is pasted in, click //OK// to exit the button editor, and you’re ready to go!
+===Create an alias or toolbar button to run your macro===
+The easiest way to save and run a macro is either with an alias or a new toolbar button.  
 
-The paste-in-button (or alias) method is fine for macros of Rhino commands and shorter, smaller scripts, but it gets a bit unwieldy to edit if there is a great deal of text.  For larger scripts, some people like to place them externally in a folder with a link so that Rhino can find them. Both toolbar buttons and aliases can link to external scripts. One advantage of this system is that all scripts are located in one spot so you can easily find and update them. The problem here is that if you copy your button or workspace for use somewhere else, you have to remember to bring the script with it.
+**Alias creation** is essentially the same on either Mac or Windows:
+
+  * In Rhino, go to Options>Aliases (Windows) or Preferences>Aliases (Mac)
+  * In Windows, click the "New" button.  On Mac, click the "+" sign in the lower left corner.
+  * In the left column, type the alias you want to use.  Aliases cannot contain spaces or special characters.
+  * In the right column next to your new alias name, type pr paste in your macro
+  * In Windows click OK to save the alias. (Mac saves the alias as soon as you're done typing)
+  * Done. Now, when you type your alias at the command line, your macro will run.
+
+**Toolbar button creation and editing** is relatively simple in Windows Rhino. \\ It is somewhat more complicated in Mac Rhino.
+
+  * For Windows Rhino, there are good explanations in the [[http://docs.mcneel.com/rhino/6/help/en-us/index.htm|Help]] file under the topics \\ "Customize toolbars" and "Button Editor".
+  * For Mac Rhino, have a look at [[rhino:mac:customizingtheleftsidebarpalette|this Wiki page]] on how to customize your tool palettes.
+
+Once you have created your new button, in the editor window, type or paste in your macro, save and close.
+
+
+
 
 =====Linking to external scripts=====
 To set up an external scripts folder:  Find a logical place to create your folder.   //Take care in choosing this folder. Make sure that the user has permissions to access it. // Open the Options dialog, and navigate to the Files tab.  In the //file search paths// box, click the new button and then the little … button and browse to the location of the scripts folder. Then click //OK//.  Exit the options dialog.  Rhino will now go looking for scripts in this folder. 
@@ -38,4 +55,5 @@ Don't forget the dash in front of the command, otherwise it will stop and prompt
 ===Button editor showing pasted in complete RhinoScript===
 {{:legacy:en:EditToolbarButton2.gif}}
 
+Editing in progress 28.08.19 - msh
 
