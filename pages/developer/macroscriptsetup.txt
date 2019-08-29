@@ -29,10 +29,34 @@ Once you have created your new button, in the editor window, type or paste in yo
 ----
 
 
-=====Linking to external scripts=====
-To set up an external scripts folder:  Find a logical place to create your folder.   //Take care in choosing this folder. Make sure that the user has permissions to access it. // Open the Options dialog, and navigate to the Files tab.  In the //file search paths// box, click the new button and then the little … button and browse to the location of the scripts folder. Then click //OK//.  Exit the options dialog.  Rhino will now go looking for scripts in this folder. 
+=====Organizing and running scripts=====
+Scripts are actually small computer programs that can access Rhino core functions and thus allow you to do a much wider array of operations than macros.  While creating scripts does require some knowledge of programming and  Rhino, running them does not - you can find many already out there on the 'net and the Rhino forum.  
 
-Currently Python does not read this section, so if you use Python scripts you will also need to do a similar operation inside the Python script editor: Open the editor with **EditPythonScript** and go to Tools>Options and enter the path to your folder in //Module Search Paths//.
+===Storing your scripts in a specific location===
+
+Rhinoscripts or Python scripts //can// be directly pasted into custom toolbar buttons (see below), but this does not work with aliases. A good way to work around this is to place scripts externally in a folder with a link so that Rhino can find them when the command is run. Both toolbar buttons and aliases can link to external scripts. One advantage of this system is that all your scripts can be located in one spot so you can easily find and update them. 
+
+>//Rhino for Windows and Mac both provide default locations for storing scripts. The folders are hidden from the user by design, so here is how to locate them://
+
+**On the Windows platform**, the default scripts folder path is in the hidden **AppData** folder.  The full path to it is: \\ 
+  C:\Users\<yourusername>\AppData\Roaming\McNeel\Rhinoceros\6.0\scripts
+You can get to it by clicking the Windows "Start" button and typing **%appdata%**.  This will open the \AppData\Roaming folder, you can navigate along the above path from there.  To be able to access it quickly again, make a shortcut to the folder on your desktop.  You can store both Rhinoscript format scripts (.rvb) as well as Python format scripts (.py).
+
+**On the Mac platform**, the default scripts folder path is located in the **~Library** folder, also hidden.  The full path is \\ 
+  ~/Library/Application Support/McNeel/Rhinoceros/Scripts
+You can navigate to the ~Library folder by holding down the Alt key and pulling down the "Go" menu in the Finder, then navigating along the path above.  //Note: you can only run Python scripts on Mac (.py extension), Rhinoscripts (.rvb) will not run.//
+
+===Helping Rhino find the scripts===
+**On Mac**, this is easy - the work has already been done for you - Mac Rhino already knows where the scripts folder is, so scripts located in that folder can be run very simply.
+
+**On Windows**, it's a little more complicated, there is a bit of work to be done upfront - fortunately you only need to do this once.  In order for Rhino to find your scripts, you need to first manually set a file path to the folder. In addition, the paths for Rhinoscript (.rvb) and Python(.py) scripts are set separately in two different places.
+
+**For Rhinoscript**, go to Options>Files>Search paths, and paste in the full path to the scripts folder and OK. \\ 
+**For Python scripts**, first open the script editor using the **EditPythonScript** command, then go to Tools>Options and enter the path to the scripts folder in //Module Search Paths//.
+
+---- 
+
+
 
 To link your button or alias to an external script:  The syntax used will depend on the type of script.  If it is a simple text file with normal Rhino commands (like a long macro), you will need to use the command **ReadCommandFile** **//Filename.txt//**  Substitute the name of your text file for //Filename.txt//.  Paste that string into the left or right button box and you’re good to go.  To run a [[developer:rhinoscript|RhinoScript]] .rvb file use the command **LoadScript** **//Filename.rvb//** instead.  In general, that’s all you need to do, but some scripts are written to run immediately on load. Others are not, so some script tweaking may be necessary.
 
