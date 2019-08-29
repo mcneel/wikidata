@@ -1,8 +1,9 @@
-=====Integrating macros and scripts into your workspace=====
+======Integrating macros and scripts into your workspace======
 
-Macros and scripts can be run in several ways inside Rhino.  The best way to integrate them into your workflow will depend on your preferred way of working as well as which platform you are on - the Rhino for Windows and Rhino for Mac environments are somewhat different.
-----
-> We'll cover installing **Macros** first, as they're somewhat simpler to get up and running.
+>//Macros and scripts can be run in several ways inside Rhino.  The best way to integrate them into your workflow will depend on your preferred way of working as well as which platform you are on - the Rhino for Windows and Rhino for Mac environments are somewhat different.//
+
+=====Macros=====
+>//We'll cover installing Macros first, as they're somewhat simpler to get up and running.//
 
 ===Using the macro editor to work out new macros===
 The **MacroEditor** command opens a text editing window in which you can type macros and try them out without the need to edit a button every time. The arrow button runs the macro. If there is anything selected in the editor, it runs the just the selected part, otherwise it runs the whole macro. When the macro runs to your satisfaction, copy and paste the macro to a toolbar button or alias.  A detailed tutorial on macro development can be found [[rhino:basicmacros|here]].
@@ -29,10 +30,12 @@ Once you have created your new button, in the editor window, type or paste in yo
 ----
 
 
-=====Organizing and running scripts=====
+=====Scripts=====
 Scripts are actually small computer programs that can access Rhino core functions and thus allow you to do a much wider array of operations than macros.  While creating scripts does require some knowledge of programming and  Rhino, running them does not - you can find many already out there on the 'net and the Rhino forum.
 
 >//For one-time or occasional use, you can simply save a script somewhere on your computer and then call it from inside Rhino using the **RunPythonScript** command (.py Python scripts, both platforms) or the **Runscript** command (.rvb Rhinoscripts, Windows only) and then browsing to the script file and Open.  However, if you are going to use the script more often,  you will be better off setting it up to run with a button or alias, see below.//
+
+====Organizing your script collection====
 
 ===Storing your scripts in a specific location===
 
@@ -48,7 +51,7 @@ You can get to it by clicking the Windows "Start" button and typing **%appdata%*
   ~/Library/Application Support/McNeel/Rhinoceros/Scripts
 You can navigate to the ~Library folder by holding down the Alt key and pulling down the "Go" menu in the Finder, then navigating along the path above.  //Note: you can only run Python scripts on Mac (.py extension), Rhinoscripts (.rvb) will not run.//
 
-===Helping Rhino find the scripts===
+===Helping Rhino find your stored scripts===
 **On Mac**, this is easy - the work has already been done for you - Mac Rhino already knows where the scripts folder is, so scripts located in that folder can be run very simply.
 
 **On Windows**, it's a little more complicated, there is a bit of work to be done upfront - fortunately you only need to do this once.  In order for Rhino to find your scripts, you need to first manually set a file path to the folder. In addition, the paths for Rhinoscript (.rvb) and Python(.py) scripts are set separately in two different places.
@@ -56,13 +59,14 @@ You can navigate to the ~Library folder by holding down the Alt key and pulling 
 **For Rhinoscript**, go to Options>Files>Search paths, and paste in the full path to the scripts folder and OK. \\ 
 **For Python scripts**, first open the script editor using the **EditPythonScript** command, then go to Tools>Options and enter the path to the scripts folder in //Module Search Paths//.
 
->//Note that no matter where scripts are stored on your computer, they can always be run if you provide the **full path** to the script in your alias or button.  The above procedure simply allows you to call scripts **without** having to specify the full path. Plus, you will always know where to find them!//
+>//Note that no matter where scripts are stored on your computer, they can always be run if you provide the **full path** to the script in your alias or button.  The above procedure simply allows you to call scripts **without** having to specify the full path. Plus, you will always know where to find them!// \\
 
+\\ 
 
 ====Running scripts from aliases or toolbar buttons====
 
 **For aliases**, create them as described above in the first section...  \\ 
-Either simply with the filename if you have set a search path:
+Simply with the filename if you have set a search path - or you are on Mac and the scripts are in the default scripts folder:
 
 {{:developer:aliasscriptlink.png?400|}}
 
@@ -71,6 +75,9 @@ Or with the full path if you haven't:
 {{:developer:aliasscriptfullpathlink.png?450|}}
 
 //(shown above: Windows)//
+
+>//**Do not forget to enclose the file name/path in quotes!** \\ 
+If there are spaces in it and no quotes, the script will not be found!//
 
 **For toolbar buttons** if you have created them: \\ 
 Open the button editor and use the same text as you would with aliases:
@@ -89,5 +96,5 @@ followed by a space and an open parentheses.  Paste the whole script in after th
 
 
 
-Editing in progress 29.08.19 - msh
+Last edit 29.08.19 - msh
 
