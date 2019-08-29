@@ -59,28 +59,35 @@ You can navigate to the ~Library folder by holding down the Alt key and pulling 
 >//Note that no matter where scripts are stored on your computer, they can always be run if you provide the **full path** to the script in your alias or button.  The above procedure simply allows you to call scripts **without** having to specify the full path. Plus, you will always know where to find them!//
 
 
-=====Separator=====
+====Running scripts from aliases or toolbar buttons====
 
-To link your button or alias to an external script:  The syntax used will depend on the type of script.  If it is a simple text file with normal Rhino commands (like a long macro), you will need to use the command **ReadCommandFile** **//Filename.txt//**  Substitute the name of your text file for //Filename.txt//.  Paste that string into the left or right button box and you’re good to go.  To run a [[developer:rhinoscript|RhinoScript]] .rvb file use the command **LoadScript** **//Filename.rvb//** instead.  In general, that’s all you need to do, but some scripts are written to run immediately on load. Others are not, so some script tweaking may be necessary.
+**For aliases**, create them as described above...  \\ 
+Either simply with the filename if you have set a search path:
 
-===Button editor showing links to external script (Windows)===
+{{:developer:aliasscriptlink.png?400|}}
+
+Or with the full path if you haven't:
+
+{{:developer:aliasscriptfullpathlink.png?450|}}
+
+//(shown above: Windows)//
+
+**For toolbar buttons** if you have created them: \\ 
+Open the button editor and use the same text as you would with aliases
 
 {{:developer:link-pathtoscript.png?500|}}
 
-You can also paste an entire [[developer:rhinoscript|RhinoScript]] into a button. For that, start with the command **-_RunScript** (not **-_LoadScript**) followed by a space and an open parentheses.  At the end of the script you need a close parentheses. For [[developer:python|python scripts]], you want to use **-_RunPythonScript** instead of just **-_RunScript**.
+You can also paste an entire script into a button. For that, start with the command \\ 
+**! -_RunScript** (for .rvb) or **! _-RunPythonScript** (for .py) \\ 
+followed by a space and an open parentheses.  Paste the whole script in after that line. At the end of the script add a close parentheses.
 
-Don't forget the dash in front of the command, otherwise it will stop and prompt you for what script you want to run.  The underbar insures that the _-Runscript command will run in languages other than English, but it will not insure the actual script will do the same. It has to be written correctly as well.
-<code>
-  ! _NoEcho -_Runscript (
+{{:developer:scriptinbuttoneditor.png?500|}} \\ 
+//(shown above: Windows)//
 
-  Paste in
-  your entire
-  script here
+>//**Don't forget the dash in front of the command**, otherwise it will stop and prompt you for what script you want to run.  The underbar insures that the _-Runscript/_-RunPythonScript command will run in languages other than English, but it will not insure the actual script will do the same. It has to be written correctly as well.  The _NoEcho in front of the command keeps the command line/history from printing the entire script as it runs.//
 
-  )
-</code>
-===Button editor showing pasted in complete RhinoScript===
-{{:legacy:en:EditToolbarButton2.gif}}
 
-Editing in progress 28.08.19 - msh
+
+
+Editing in progress 29.08.19 - msh
 
