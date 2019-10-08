@@ -18,11 +18,11 @@ Rhinoを始めて使う方達からよく寄せられる質問のひとつに「
 
 =====2: Rhinoの絶対許容差設定=====
 
-Rhinoの用語では、絶対許容差設定は2つのオブジェクトまたは要素が「//十分に近い//」と見なすことができる最大の許容距離を決定します。 「//十分に近い//」とは、2つのサーフェスまたは曲線が結合可能であること、またはスイープなどの**//<color darkslateblue>近似</color>//**の操作が指定された絶対許容範囲内でエッジをレールに沿わせてサーフェスを生成できることを意味します。 
+Rhinoの用語では、絶対許容差設定は2つのオブジェクトまたは要素が「//十分に近い//」と見なすことができる最大の許容距離を決定します。 「//十分に近い//」とは、2つのサーフェスまたは曲線が結合可能であること、またはスイープなどの**//<color darkslateblue>近似</color>//**の演算（操作）が指定された絶対許容範囲内でエッジをレールに沿わせてサーフェスを生成できることを意味します。 
 
 > **注記:** //結合操作では、2倍の絶対許容差が許可されます。注意してください。//
 
-**<color royalblue>近似の操作とは</color>**
+**<color royalblue>近似の演算（操作）とは</color>**
 
 オブジェクトによっては、コンピューターの浮動小数点演算が計算できる限界まで、数学的に完全に定義できるものがあります。
 一般的には、極端に小さな許容誤差を気にする必要はありません。ただし、コマンドの中には近似により、曲線やサーフェスを他の曲線やサーフェスに**//<color darkslateblue>フィットまたは一致</color>//**させるものがあり、この場合、より正確な解が必要なほど、（時にはコンピュータがロックアップ（フリーズ）してしまうほど）より長い時間が計算にかかります。絶対許容差の設定は、十分な解が得られた、計算をやめてほしい時点をRhinoに伝えます。
@@ -30,7 +30,7 @@ Rhinoの用語では、絶対許容差設定は2つのオブジェクトまた�
 必要な絶対許容差よりも高い絶対許容差を指定する場合のもう1つの欠点は、Rhinoが非常に多くの制御点（重い（データのサイズが大きい）、ノイズが多い（滑らかでない）、編集が難しい）を持つ領域や交差などを生成することです。
 
 
-**<color royalblue>Which operations are approximate?</color>**
+**<color royalblue>どの演算（操作）が近似なのか</color>**
 
 Any command necessary to find the intersection between curves and surfaces is an example. Specific commands include (but are not limited to): Trim, Split, Intersect, Contour, Section, Offset (curves and surfaces) Project, Sweep 1 and 2 Rails, all the Boolean operations, FilletSrf, FilletEdge.
 
