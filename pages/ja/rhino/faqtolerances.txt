@@ -3,7 +3,7 @@
 > **概要:** //Rhinoでの「許容差」の意味と 使い方//
 
 =====許容差とは?=====
-<color darkslateblue>**//許容差とは何を意味しているのか、Rhinoでどのように設定するのか//**</color>
+<color darkslateblue>**//許容差とは何を意味しているのか、Rhinoでどのように設定するのですか？//**</color>
 
 Rhinoを始めて使う方達からよく寄せられる質問のひとつに「許容差」があります。多くのモデリングプログラムでは、許容値は設定できません。好むと好まざるとに関わらず、許容差は予め決まっています。Rhinoには、ニーズに応じて独自の許容値を設定できるという利点があります。しかし、それらを正しく設定するには多少の経験と理解が必要です。
 
@@ -22,7 +22,7 @@ Rhinoの用語では、絶対許容差設定は2つのオブジェクトまた�
 
 > **注記:** //結合操作では、2倍の絶対許容差が許可されます。注意してください。//
 
-**<color royalblue>近似の操作とは</color>**
+**<color royalblue>近似の操作とは何でしょうか？</color>**
 
 オブジェクトによっては、コンピューターの浮動小数点演算が計算できる限界まで、数学的に完全に定義できるものがあります。
 一般的には、極端に小さな許容誤差を気にする必要はありません。ただし、コマンドの中には近似により、曲線やサーフェスを他の曲線やサーフェスに**//<color darkslateblue>フィットまたは一致</color>//**させるものがあり、この場合、より正確な解が必要なほど、（時にはコンピュータがロックアップ（フリーズ）してしまうほど）より長い時間が計算にかかります。絶対許容差の設定は、十分な解が得られた、計算をやめてほしい時点をRhinoに伝えます。
@@ -30,12 +30,12 @@ Rhinoの用語では、絶対許容差設定は2つのオブジェクトまた�
 必要な絶対許容差よりも高い絶対許容差を指定する場合のもう1つの欠点は、Rhinoが非常に多くの制御点（重い（データのサイズが大きい）、ノイズが多い（滑らかでない）、編集が難しい）を持つ領域や交差などを生成することです。
 
 
-**<color royalblue>どの操作が近似なのか</color>**
+**<color royalblue>近似の操作にはどういったものがありますか？</color>**
 
 曲線やサーフェス間の交差を見つけることが必要なコマンドが一例です。これらのコマンドには次のものが含まれます（ただし、これらに限定されません）: Trim、Split、Intersect、Contour、Section、Offset（曲線およびサーフェス）、Project、Sweep1および2、すべてのブール演算操作コマンド、FilletSrf、FilletEdge
 
 
-**<color royalblue>So, why don't I just model with loose tolerances?</color>**
+**<color royalblue>緩い許容差でモデリングすればいいだけのことではないでしょうか?</color>**
 
 The advantage of a looser (larger) tolerance is that computing time and data size may be reduced, but at the expense of your model's accuracy. This is precisely why you need some experience to set your tolerances. It is always necessary to find a good compromise.
 
