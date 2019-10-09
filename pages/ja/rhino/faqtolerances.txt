@@ -37,9 +37,9 @@ Rhinoの用語では、絶対許容差設定は2つのオブジェクトまた�
 
 **<color royalblue>緩い許容差でモデリングするというのはどうですか?</color>**
 
-緩い（大きい）許容差の利点は、計算時間とデータ量を削減できる可能性があることですが、モデルの精度が犠牲になります。This is precisely why you need some experience to set your tolerances. It is always necessary to find a good compromise.
+緩い（大きい）許容差の利点は、計算時間とデータ量を削減できることですが、モデルの精度が犠牲になります。これが、許容差の設定には程度の経験が必要になる理由です。適切な妥協点を見つけることが常に必要です。
 
-For example, the //Intersect// command creates a curve at the intersection of two surfaces. The curve is guaranteed to lie, within the //**<color darkslateblue>absolute tolerance</color>**//, on each of the two surfaces.
+//Intersect//コマンドを例に取って見ましょう。このコマンドは、2つのサーフェスの交差位置に曲線を作成します。曲線は、2つのそれぞれのサーフェス上で//**<color darkslateblue>絶対許容差</color>**//内にあることが保証されています。
 
 Try the Intersect command and save the resulting curve off to one side. Then add a zero to the tolerance setting and run Intersect again. Now turn on the control points for both curves. The second curve will have more control points, will be heavier, and will stay closer to the two surfaces. Is one curve better than the other? It depends on your needs. If your manufacturing process can't benefit from the more closely fitting part, then the first lighter curve is better since it results in a smaller file, faster calculations, and better parameterized surfaces.
 
