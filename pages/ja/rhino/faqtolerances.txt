@@ -63,7 +63,7 @@ Rhino V6以降では、相対許容値の設定はなくなりました。Rhino 
 
 許容差設定はモデリングプロセスの最初に行うことが重要です。作業中に許容差を変更することはできますが、低い許容差で既にモデリングされたオブジェクトは、許容差を上げても修正されないからです。要素を作成しながら結合して、作業を常にチェックする習慣をつけてください。結合ができる場合、許容差の範囲内です。結合できない場合は、戻って理由を見つけ、すぐに状況を修正する必要があります。これにより、後の段階で特定のセクションを完全に再構築しなければ修正が困難な、問題領域がある、不正確なモデルになってしまうことを回避できます。
 
-Intersect、Split、ブール演算などの交差を見つける操作も、許容値の設定に非常に敏感です。Often, if the absolute tolerance is set too low, complete intersections may not be found. Splitting or Boolean operations may fail as a result. (Note that tolerances are not the only reason for these operations to fail.) Too tight a tolerance setting may also be harmful. Besides creating overly long calculation times, Rhino may even crash. In general you should keep the absolute tolerance setting in the range of 0.01 to 0.0001. And never set it below 1.0e-5. If you need a tighter tolerance, use smaller units instead.
+Intersect、Split、ブール演算などの交差を見つける操作も、許容差の設定に非常に敏感です。絶対許容差の設定が低すぎると、完全な交差点が見つからないことがよくあります。Splitting or Boolean operations may fail as a result. (Note that tolerances are not the only reason for these operations to fail.) Too tight a tolerance setting may also be harmful. Besides creating overly long calculation times, Rhino may even crash. In general you should keep the absolute tolerance setting in the range of 0.01 to 0.0001. And never set it below 1.0e-5. If you need a tighter tolerance, use smaller units instead.
 
 
 =====5:  Exporting to other (downstream) programs=====
