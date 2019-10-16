@@ -1,0 +1,257 @@
+These are the macros and python scripts needed to build a Walkabout toolbar in Rhino for Mac version 6 that matches the Rhino for Windows Walkabout tools.
+
+==== WalkAbout ====
+-
+
+**Walk forward:**
+<code>
+! -_RunPythonScript (
+import rhinoscriptsyntax as rs
+import scriptcontext as sc
+import math
+
+StepSize = 0.02
+
+if sc.sticky.has_key('WALKABOUT_STEPSIZE'):
+    StepSize  = sc.sticky['WALKABOUT_STEPSIZE']    
+C = rs.ViewCamera()
+T = rs.ViewTarget()
+
+
+Cnew = C
+Tnew = T
+
+Dx = T[0] - C[0]
+Dy = T[1] - C[1]
+
+Cnew[0] = Cnew[0] + Dx * StepSize
+Cnew[1] = Cnew[1] + Dy * StepSize
+Tnew[0] = Tnew[0] + Dx * StepSize
+Tnew[1] = Tnew[1] + Dy * StepSize
+
+rs.ViewCameraTarget(rs.CurrentView(), Cnew, Tnew)
+)
+
+</code>
+
+**Walk back:**
+<code>
+! -_RunPythonScript (
+import rhinoscriptsyntax as rs
+import scriptcontext as sc
+import math
+
+StepSize = 0.02
+
+if sc.sticky.has_key('WALKABOUT_STEPSIZE'):
+    StepSize  = sc.sticky['WALKABOUT_STEPSIZE']
+    
+C = rs.ViewCamera()
+T = rs.ViewTarget()
+
+
+Cnew = C
+Tnew = T
+
+Dx = T[0] - C[0]
+Dy = T[1] - C[1]
+
+Cnew[0] = Cnew[0] - Dx * StepSize
+Cnew[1] = Cnew[1] - Dy * StepSize
+Tnew[0] = Tnew[0] - Dx * StepSize
+Tnew[1] = Tnew[1] - Dy * StepSize
+
+rs.ViewCameraTarget(rs.CurrentView(), Cnew, Tnew)
+)
+</code>
+
+**Walk left:**
+<code>
+! -_RunPythonScript (
+import rhinoscriptsyntax as rs
+import scriptcontext as sc
+import math
+
+StepSize = 0.05
+
+if sc.sticky.has_key('WALKABOUT_STEPSIZE'):
+    StepSize  = sc.sticky['WALKABOUT_STEPSIZE']
+    
+C = rs.ViewCamera()
+T = rs.ViewTarget()
+
+Cnew = C
+Tnew = T
+
+Dx = T[0] - C[0]
+Dy = T[1] - C[1]
+
+Cnew[0] = Cnew[0] - Dy * StepSize
+Cnew[1] = Cnew[1] + Dx * StepSize
+Tnew[0] = Tnew[0] - Dy * StepSize
+Tnew[1] = Tnew[1] + Dx * StepSize
+
+rs.ViewCameraTarget(rs.CurrentView(), Cnew, Tnew)
+)
+</code>
+
+**Walk right:**
+<code>
+! -_RunPythonScript (
+import rhinoscriptsyntax as rs
+import scriptcontext as sc
+import math
+
+StepSize = 0.05
+if sc.sticky.has_key('WALKABOUT_STEPSIZE'):
+    StepSize  = sc.sticky['WALKABOUT_STEPSIZE']
+    
+C = rs.ViewCamera()
+T = rs.ViewTarget()
+
+Cnew = C
+Tnew = T
+
+Dx = T[0] - C[0]
+Dy = T[1] - C[1]
+
+Cnew[0] = Cnew[0] + Dy * StepSize
+Cnew[1] = Cnew[1] - Dx * StepSize
+Tnew[0] = Tnew[0] + Dy * StepSize
+Tnew[1] = Tnew[1] - Dx * StepSize
+
+rs.ViewCameraTarget(rs.CurrentView(), Cnew, Tnew)
+)
+
+</code>
+
+**Elevator Up:**
+<code>
+-_RunPythonScript (
+
+import rhinoscriptsyntax as rs
+import scriptcontext as sc
+import math
+
+StepSize = 0.05
+
+if sc.sticky.has_key('WALKABOUT_STEPSIZE'):
+    StepSize  = sc.sticky['WALKABOUT_STEPSIZE']
+    
+C = rs.ViewCamera()
+T = rs.ViewTarget()
+
+Cnew = C
+Tnew = T
+
+Dx = T[0] - C[0]
+Dy = T[1] - C[1]
+
+Dist = math.sqrt(Dx*Dx + Dy*Dy)
+
+Cnew[2] = Cnew[2] - Dist * StepSize
+Tnew[2] = Tnew[2] - Dist * StepSize
+
+rs.ViewCameraTarget (rs.CurrentView(), Cnew, Tnew)
+)
+
+</code>
+
+**Elevator down:**
+<code>
+-_RunPythonScript (
+import rhinoscriptsyntax as rs
+import scriptcontext as sc
+import math
+
+StepSize = 0.05
+if sc.sticky.has_key('WALKABOUT_STEPSIZE'):
+    StepSize  = sc.sticky['WALKABOUT_STEPSIZE']
+    
+C = rs.ViewCamera()
+T = rs.ViewTarget()
+
+Cnew = C
+Tnew = T
+
+Dx = T[0] - C[0]
+Dy = T[1] - C[1]
+
+Dist = math.sqrt(Dx*Dx + Dy*Dy)
+
+Cnew[2] = Cnew[2] + Dist * StepSize
+Tnew[2] = Tnew[2] + Dist * StepSize
+
+rs.ViewCameraTarget (rs.CurrentView(), Cnew, Tnew)
+)
+</code>
+-------------
+
+==== Step size- ====
+ 
+
+**Small steps:**
+<code>
+-_RunPythonScript (
+import scriptcontext as sc
+sc.sticky['WALKABOUT_STEPSIZE'] = .005
+)
+
+
+
+**Medium-small steps:**
+
+-_RunPythonScript (
+import scriptcontext as sc
+sc.sticky['WALKABOUT_STEPSIZE'] = .01
+)
+
+</code>
+
+
+**Medium steps:**
+<code>
+-_RunPythonScript (
+import scriptcontext as sc
+sc.sticky['WALKABOUT_STEPSIZE'] = .05
+)
+
+</code>
+
+
+**Medium-large steps:**
+<code>
+-_RunPythonScript (
+import scriptcontext as sc
+sc.sticky['WALKABOUT_STEPSIZE'] = .1
+)
+
+</code>
+
+**Large steps:**
+<code>
+-_RunPythonScript (
+import scriptcontext as sc
+sc.sticky['WALKABOUT_STEPSIZE'] = .5
+)
+
+</code>
+
+**Custom steps:**
+<code>
+-_RunPythonScript (
+
+import rhinoscriptsyntax as rs
+import scriptcontext as sc
+import math
+
+StepSize = 0.05
+if sc.sticky.has_key('WALKABOUT_STEPSIZE'):
+    StepSize  = sc.sticky['WALKABOUT_STEPSIZE']
+
+NewStepSize = rs.RealBox("New step sizefactor", StepSize)
+if NewStepSize is not None:
+  StepSize = NewStepSize
+  sc.sticky['WALKABOUT_STEPSIZE'] = StepSize
+)
+</code>
