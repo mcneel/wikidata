@@ -2,15 +2,26 @@
 
 >Si Rhino ne démarre pas sur votre ordinateur, voici quelques astuces pour comprendre ce qui se passe et réparer le problème.
 
+====Rhino 6====
 
-=== Rhino ne démarre pas lorsque je double clique sur un fichier ou lorsque je dépose un fichier ===
+  - Ouvrez l'éditeur de registre (dans le menu Démarrer de Windows, tapez **regedit**, et appuyez sur Entrée).
+  - Dans l'éditeur de registre, recherchez la clé de registre HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\Global Options\Debug Logging
+  - Créez la valeur REG_DWORD (32) nommée **Enabled** (si elle n'existe pas encore)
+  - Définissez **Enabled** sur **1**
+  - Créez la valeur REG_DWORD (32) nommée **SaveToFile** (si elle n'existe pas encore)
+  - Définissez **SaveToFile** sur **1**
+  - Lancez **Rhino 6** en utilisant le **raccourci**, et non en cliquant sur un fichier de données. 
+  - Envoyez le fichier **RhinoDebugMessages.txt** qui se trouve dans votre dossier Documents à **tech.eu@mcneel.com**.
+
+--> Rhino 5^
+
+--> Rhino ne démarre pas lorsque je double clique sur un fichier ou lorsque je dépose un fichier
   * Double cliquez sur un **raccourci** de Rhino sur votre bureau ou cliquez sur un élément de Rhino dans le menu de **démarrage**.
-
   * Si Rhino démarre :
-    * Ouvrez le fichier à partir du menu **Fichier** > **Ouvrir** ou du bouton **Ouvrir** de la barre d'outils. Si le fichier ne s'ouvre pas, le problème vient probablement de celui-ci. Essayez la commande **ContrôlerFichier3dm** sur le fichier. 
+    * Ouvrez le fichier à partir du menu **Fichier** > **Ouvrir** ou du bouton **Ouvrir** de la barre d'outils. Si le fichier ne s'ouvre pas, le problème vient probablement de celui-ci. Essayez la commande **ContrôlerFichier3dm** sur le fichier.
 
-
-=== Rhino ne démarre pas à partir du raccourci sur le bureau ni du raccourci dans le menu Démarrer===
+<--
+--> Rhino ne démarre pas à partir du raccourci sur le bureau ni du raccourci dans le menu Démarrer
   * Démarrez en mode sans échec.
     * Le mode sans échec démarre Rhino sans utiliser les graphiques accélérés ni charger de module.
     * Dans le **Menu Démarrer de Windows**, cliquez sur **Rhinoceros 5.0 in Safe Mode** or **Rhinoceros 5.0 (64-bit) en mode sans échec**.
@@ -41,4 +52,6 @@
         * Lorsque vous avez déterminé quel module pose problème, revenez à //Outils - Options - Modules// et cochez la case **Activé** de tous les modules qui ne posent pas problème.
 
       * Si Rhino plante en mode sans échec ou si vous n'arrivez pas à résoudre le problème avec ces méthodes, contactez-nous sur http://www.rhino3d.com/support pour obtenir de l'aide.
-----
+
+<--
+<--
