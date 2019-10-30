@@ -1,5 +1,7 @@
-====== Rhino 5 - Finding Files ======
-Rhino 5 automatically attempts to find files a linked block definition or worksession references if they are not located in the expected location.  The goal is to minimize the number of times you are asked to find files that have been moved.  
+====== Finding Linked Files ======
+===How does Rhino Search for Linked Blocks or Worksession References in Rhinoceros Versions 5 or later.===
+
+Rhinoceros versions 5 or later automatically attempts to find files a linked block definition or worksession references if they are not located in the expected location.  The goal is to minimize the number of times you are asked to find files that have been moved.  
 
 Common cases that the automatic finding attempts to handle include:
   * A colleague sends you a model and a collection of auxiliary files. You put them on your computer in a folder with a different path than your colleague used.
@@ -7,7 +9,7 @@ Common cases that the automatic finding attempts to handle include:
   * You change the way you arrange your models and auxiliary files.
 
 ==== File name terminology ====
-To describe the process Rhino 5 uses to find files, we will use these terms.
+To describe the process Rhinoceros uses to find files, we will use these terms.
   * **Complete file name** The name of the file that contains the storage device, the directories, and the file's name. The terms //full path// and //absolute path// mean the same thing. Here are two examples of complete file names.
     * %%C:\root\alpha\a1\aardvark1.3dm%%
     * %%\\fileserver\root\gamma\g1\goat2.3dm%%
@@ -32,7 +34,7 @@ To describe the process Rhino 5 uses to find files, we will use these terms.
   * **Working directory** The //working directory// is a complete directory name.  When your computer starts a program like Rhino it assigns a working directory. Usually, but not always, this is the directory where Rhino saves a model that has never been saved before or the directory where you last opened a model.  The location of the working directory can change as you read and save files. A detailed understanding of the working directory is not important here.
 
 ==== Searching for files ====
-When Rhino 5 saves the names of models used by worksessions and linked block definitions, it saves both the complete file name and the relative file name, relative to the parent file directory.
+When Rhinoceros saves the names of models used by worksessions and linked block definitions, it saves both the complete file name and the relative file name, relative to the parent file directory.
 When Rhino 5 is looking for a model file used by a worksession or linked instance definition, it searches in the following order:
   - Saved complete file name.
   - Saved relative file name relative to the parent file directory.
@@ -46,7 +48,6 @@ When Rhino 5 is looking for a model file used by a worksession or linked instanc
 
 Back to [[rhinov5status_largemodels|Rhino 5 Large Model Support]]
 
-Back to [[rhinov5status|Rhino 5 Status]]
 {{tag>blocks}}
 {{tag>Paths}}
 {{tag>relative path blocks}}
