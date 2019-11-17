@@ -1,10 +1,13 @@
 ====== Save texture in 3dm ======
 ====How to save textures in 3dm files====
-When saving a new 3dm file, the **Save textures** checkbox is available in the **Save** dialog box.\\ {{:rhino:savetextures.png?400|}}
-  * **Enable** the **Save textures** checkbox to embed textures (images) used by materials, environments, and decals into the 3dm file.
-  * **Disable** this checkbox if you do not want images embedded in a 3dm file.
-  * When Rhino opens a 3dm file that refers to an image in a material, environment, or decal, it searches for these images in these locations:
+When saving a new 3dm file, the **Save textures** checkbox is available in the **Save** dialog box.\\ \\ {{:rhino:savetextures.png?400|}}
+  ***Enable** the **Save textures** checkbox to embed textures (images) used by materials, environments, and decals into the 3dm file.
+  ***Disable** this checkbox if you do not want images embedded in a 3dm file.\\
+====How does Rhino find textures?====
+When Rhino opens a 3dm file that refers to an image in a material, environment, or decal, it searches for these images in these locations:
     * The folder where the 3dm file is stored and its sub-folders.
     * The folders set in Options > Files > Search Paths and their sub-folders.
-Why does the <filename>_embedded_files folder appear?
-When Rhino opens a 3dm file, if the images cannot be found and they were embedded into the 3dm file, they will be extracted into the *_embedded_files folder in the same location as the 3dm file. If the file was saved with the option unchecked, the images will be reported as missing when the file is opened and will offer the user to find the location manually.
+====What is the "<filename>_embedded_files" folder?====
+When Rhino opens a 3dm file,
+  * if the images cannot be found and they were embedded into the 3dm file, they will be extracted into the *_embedded_files folder in the same location as the 3dm file.
+  * If the file was saved with the option unchecked, the images will be reported as missing when the file is opened and will offer the user to find the location manually.
