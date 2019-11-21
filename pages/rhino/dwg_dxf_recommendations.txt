@@ -10,8 +10,8 @@ The text and dimensions are generally incorrect size, either too small or too la
 
 ===== Why Does This Happen =====
 Let's look at why and what we can do to improve the result.
-  * Rhino has a very complete list of unit type that you can use to model.
-  * AutoCAD has units: Architectural, Decimal, Engineering, Fractional and Scientific. Decimal is unitless while the Architectural format assumes inches is the base unit.
+  * Rhino has a very complete list of unit type that you can use to model. {{ :rhino:rhino_units.png?400 |}}
+  * AutoCAD has units: Architectural, Decimal, Engineering, Fractional and Scientific. Decimal is unitless while the Architectural format assumes inches is the base unit. {{ :rhino:autocad_units.png?400 |}}
   * Rhino does not scale at export, regardless of the linear unit. The file exports 1=1 to the DXF/DWG format and all other formats
   * AutoCAD does not scale on import. The geometry is imported at 1=1, full size. 
 
@@ -20,23 +20,40 @@ Therefore a Rhino model in feet, becomes an inch model when imported into AutoCA
 ===== Recommendations =====
 Here are some recommendations for structuring your Rhino model for the best results when you export DWG/DXF for a customer who uses AutoCAD or other clone.
 
-1. You can avoid all of this if you use Inches not Feet as your Rhino linear unit, and there will be no conversion is required. You can still provide you input in feet, just follow all values with the foot mark ', like 10'.
-2. You can convert your model and annotation styles to inches before your Export as DXF/DWG. You will also scale your annotation style values by 12, so the dimension and text look appropriate in the inch model. 
-3. Do not use “Default” as the name of your annotation style in Rhino. Use MyDefault or Defaul12, for example. This will avoid the conflict with the AutoCAD Default dimensions style on import. It will automatically ignore your Default, and reassign your annotation to it’s Default if there is a conflict. You will know this as you dimensions will again, look nothing like they did in Rhino. 
+**1. You can avoid most issues if you use Inches (not Feet) as your Rhino linear unit.** There will be no conversion is required. You can still provide you input in feet, just follow all values with the foot mark ', like **10'**.
+
+**2. You may convert your model and annotation styles to inches in Rhino before your Export as DXF/DWG.** You will also scale your annotation style values by 12, so the dimension and text look appropriate in the inch model. 
+
+** 3. Do not use “Default” as the name of your annotation style in Rhino.** Use MyDefault or Defaul12, for example. This will avoid the conflict with the AutoCAD Default dimensions style on import. It will automatically ignore your Default, and reassign your annotation to it’s Default if there is a conflict. You will know this as you dimensions will again, look nothing like they did in Rhino. 
 
 ===== An Example =====
-Here is an example of how you would export a Rhino Feet model to AutoCAD:
+Here is an example of how you would export a Rhino Feet model to AutoCAD.
+
 1. Our Rhino model in the Feet unit looks good.
+
+{{:rhino:rhino_model.png?400|}}
+{{:rhino:rhino_model_2.png?400|}}
+
 2. Next, we **Export** or **SaveAs** to DWG/DXF and import into AutoCAD.
+{{:rhino:autocad_model_import.png?400|}}
+
 3. When we inspect the model in AutoCAD, the dimensions are smaller than we want. They are in fact "1/12" of what they were in Rhino because AutoCAD assumes this model unit is inches. 
 To convert the geometry back to full scale, scale  the entire model by 12.
-4. After the scale, the geometry and dimensions are correct, but the dimension scale is too small for this model.
+{{:rhino:acad_needs_scale.png?400|}}
 
+4. After the scale, the geometry and dimensions are correct, but the dimension scale is too small for this model.
 All dimension styles that are in use in this model, should also be scaled by 12.
+{{:rhino:acad_dimstyle.png?300|}}
+
 Now we are ready to work on the model in AutoCAD.
 
+{{:rhino:acad_done.png?400|}}
+
+===== Conclusion =====
 If you are willing to use inches in Rhino, the scaling of the model and dimension styles are typically not necessary.
 
 If you have any other recommendations, please add them here. This becomes archived for future searches and we would appreciate any additional input.
+
+If you have any question or problem, please email [[mary@mcneel.com|Mary Ann Fugier, Robert McNeel & Assoc. Technical Support and Training
 
 
