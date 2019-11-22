@@ -42,12 +42,15 @@ Here is an example of how you would export a Rhino Feet model to AutoCAD.
 
 3. When we inspect the model in AutoCAD, the dimensions are smaller than we want. They are in fact "1/12" of what they were in Rhino because AutoCAD assumes this model unit is inches. 
 To convert the geometry back to full scale, scale  the entire model by 12.
-{{:rhino:acad_needs_scale.png?400|}}
 
-4. After the scale, the geometry and dimensions are correct, but the dimension scale is too small for this model.
-All dimension styles that are in use in this model, should also be scaled by 12.
+
+4. After the scale, the geometry and dimensions are correct, but the **dimension scale** or DIMSCALE assigned to the dimstyle is too small for this model.
+{{:rhino:acad_needs_scale.png?400|}}
+All dimension styles that are being used in this model, should also be scaled by 12.
 
 {{:rhino:acad_dimstyle.png?300|}}
+
+5. Rhino combines dimension and text control into one Annotation style. AutoCAD does not. Text and dimension have their own styles in AutOCAD. Therefore some text may also need to be scaled to display correct in AutoCAD. Text style can control the text height, but generally text size is set as an object property and ther for can be updated in the AutoCAD Property panel.
 
 Now we are ready to work on the model in AutoCAD.
 
