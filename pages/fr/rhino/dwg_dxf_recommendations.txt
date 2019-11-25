@@ -1,0 +1,65 @@
+Meilleures pratiques lors de l'exportation de Rhino vers DWG/DXF
+
+> Auteur : //Mary Fugier//
+> Dernière mise à jour : //21 novembre 2019//
+
+===== Problème =====
+Nous entendons parfois que les modèles de Rhino ne s'importent pas dans AutoCAD même s'ils semblent s'importer correctement dans Rhino. Les clients de nos clients se plaignent parfois que l'échelle du fichier DWG/DXF n'est pas correcte ou que les dimensions ne correspondent pas. 
+Dans AutoCAD, l'échelle de la géométrie du modèle et l'affichage des annotations peuvent être incorrects. 
+
+Ces erreurs sont souvent liées aux unités linéaires de Rhino. 
+Lorsque l'unité linéaire de Rhino est en Pieds, la géométrie importée dans AutoCAD est 12 fois plus petite et un facteur de 12 doit être appliqué aux distances indiquées par les commandes de mesure. 
+La taille du texte et des cotes est normalement incorrecte après importation, parfois trop grande parfois trop petite. 
+
+===== Pourquoi cela ? =====
+Regardons pourquoi et ce que nous pouvons faire pour améliorer le résultat. 
+  * Rhino dispose d'une liste exhaustive de types d'unités pouvant être utilisés pour modéliser. {{ :rhino:rhino_units.png?400 |}}
+  * Les unités d'AutoCAD sont : Architecture, Décimal, Ingénierie, Fractionnaire et Scientifique. Décimal ne contient pas d'unité et le format Architecture considère les pouces comme unités de base. {{ :rhino:autocad_units.png?400 |}}
+  * Rhino ne change pas l'échelle lors de l'exportation, quelle que soit l'unité linéaire. Le fichier est exporté à l'échelle 1=1 vers le format DXF/DWG ainsi que tous les autres formats. 
+  * AutoCAD n'applique pas d'échelle lors de l'importation. La géométrie est importée à l'échelle 1=1. 
+
+Ainsi, un modèle en pieds, devient un modèle en pouces lors de l'importation dans AutoCAD. L'échelle de la géométrie dans AutoCAD doit être multipliée par 12 pour qu'elle corresponde à la géométrie dans Rhino. Le même problème se produira quel que soit votre format d'exportation : DXF, DWG, SAT...
+
+===== Recommandations =====
+Vous trouverez ici quelques recommandations pour obtenir les meilleurs résultats possibles lors de l'exportation vers DWG/DXF pour un client qui utilise AutoCAD ou un clone. 
+
+**1. Vous pouvez éviter la plupart des problèmes en utilisant des pouces (et non des pieds) comme unités linéaires.** Aucune conversion n'est nécessaire. Vous pouvez toujours entrer vos données en pieds en ajoutant ', comme par exemple **10'**. 
+
+**2. Vous pouvez convertir votre modèle et vos styles d'annotation en pouces dans Rhino avant d'exporter vers DXF/DWG.** Vous devrez aussi multiplier par 12 les valeurs de votre style d'annotations pour que les cotes et le texte soient correctement affichés dans les modèles en pouces. 
+
+** 3. N'utilisez pas "Default" ni "Défaut" comme nom du style d'annotation dans Rhino.** Utilisez MonStyle ou Défaut12, par exemple. Ceci évitera tout conflit avec le style de cote par défaut d'AutoCAD lors de l'importation. En cas de conflit, AutoCAD ignorera automatiquement votre style Defaut et vos annotations seront assignées au style par défaut. Et dans ce cas, l'apparence de vos cotes ne correspondra plus à celle dans Rhino. 
+
+===== Exemple =====
+Voici un exemple d'exportation de modèle de Rhino en pieds vers AutoCAD. 
+
+1. Notre modèle de Rhino dont les unités sont en pieds est correct. 
+
+{{:rhino:rhino_model.png?400|}}
+{{:rhino:rhino_model_2.png?400|}}
+
+2. Ensuite, nous utilisons la commande **Exporter** ou **EnregistrerSous** avec le format DWG/DXF et nous importons dans AutoCAD. 
+{{:rhino:autocad_model_import.png?400|}}
+
+3. En regardant le modèle dans AutoCAD, les cotes sont plus petites que la normale. Elles sont en effet 1/12 plus petites que dans Rhino car AutoCAD assume que les unités du modèle sont les pouces. 
+Pour convertir la géométrie, appliquez une échelle de 12 à tout le modèle. 
+
+
+4. Après la mise à l'échelle, la géométrie et les cotes sont correctes mais **l'échelle de cotation** ou DIMSCALE assignée au style de cote est trop petite pour ce modèle. 
+{{:rhino:acad_needs_scale.png?400|}}
+
+Tous les styles de cote utilisés dans ce modèle devraient aussi être redimensionnés. 
+
+{{:rhino:acad_dimstyle.png?300|}}
+
+5. Rhino combine les contrôles des cotes et des textes dans un seul style d'annotation, mais pas AutoCAD. Le texte et les cotes ont chacun leur propre style dans AutoCAD. Certains textes devront donc probablement avoir besoin d'être redimensionnés pour s'afficher correctement dans AutoCAD. Le style de texte peut contrôler la hauteur du texte mais normalement la taille du texte est définie comme propriété de l'objet et peut donc être actualisée dans le panneau Propriété d'AutoCAD. 
+
+Nous sommes maintenant prêt à travailler avec le modèle dans AutoCAD. 
+
+{{:rhino:acad_done.png?400|}}
+
+===== Conclusion =====
+Si vous souhaitez utiliser des pouces dans Rhino, il n'est pas nécessaire de changer l'échelle du modèle ni des styles de cote lors de l'importation du fichier DWG/DXF dans AutoCAD. 
+
+
+Si vous avec des questions ou un problème, écrivez à [[tech.eu@mcneel.com|l'équipe d'assistance technique]]. Formation et assistance technique
+
