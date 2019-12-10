@@ -1,0 +1,65 @@
+====== Migliori procedure in Rhino durante l'esportazione di file DWG/DXF ======
+
+> Autore: //Mary Fugier//
+> Ultima revisione: //21 novembre 2019//
+
+===== Problema=====
+In alcuni casi, è stato segnalato che i modelli di Rhino non si importano in AutoCAD o non vengono visualizzati correttamente come in Rhino. A volte, alcuni clienti si lamentano del fatto che ottengono file DWG/DWF che non vengono scalati correttamente o con dimensioni errare.
+In AutoCAD, la scalatura della geometria del modello e le annotazioni potrebbero non essere mostrate in modo corretto. 
+
+I problemi sono generalmente legati all'unità lineare di Rhino. 
+Quando l'unità di lineare di Rhino viene espressa in piedi, la geometria di file importata in AutoCAD è 12 volte più piccola e qualsiasi comando come Distanza è disattivato da un fattore di 12. 
+Il testo e le quote vengono di solito importate e visualizzati in dimensioni errate; appaiono troppo piccoli o troppo grandi.
+
+===== Perché si verifica questo problema? =====
+Vediamo il motivo e cosa possiamo fare per migliorare il risultato.
+  * Rhino presenta un elenco completo delle unità che possono essere utilizzate per la modellazione. {{ :rhino:rhino_units.png?400 |}}
+  * AutoCAD presenta unità architettoniche, decimali, ingegneristiche, frazionarie e scientifiche. Il sistema decimale non presenta unità mente il formato architettonico ammette pollici come unità di base. {{ :rhino:autocad_units.png?400 |}}
+  * Rhino non esegue la scalatura durante l'esportazione indipendentemente dall'unità lineare. Il file viene esportato 1=1 nel formato DXF/DWG e in tutti gli altri formati.
+  * AutoCAD non esegue la scalatura durante l'importazione. La geometria viene importata 1=1 in dimensioni complete. 
+
+Un modello di Rhino in piedi viene convertito quindi in pollici se importato in AutoCAD. Per essere equivalente alla geometria di Rhino, la geometria di AutoCAD deve essere scalata di 12. Il problema persiste indipendentemente dal formato di esportazione: DXF, DWG, SAT, ecc.
+
+===== Consigli =====
+Ecco alcuni consigli per strutturare al meglio il modello di Rhino durante l'esportazione in formato DWG/DXF per un cliente che utilizza AutoCAD o un altro programma CAD.
+
+**1. È possibile evitare la maggior parte dei problemi se vengono utilizzati pollici (non piedi) come unità lineare di rino.** Non è necessaria la conversione. È possibile fornire l'input in piedi aggiungendo semplicemente tutti i valori con il simbolo di piede, come ad esempio **10'**.
+
+**2. È possibile convertire in Rhino il modello e gli stili di annotazione in pollici prima di esportarli in cormato DXF/DWG.** I valori degli stili di annotazioni possono inoltre essere scalati in 12, in modo che le quote e il testo appaiano correttamente nel modello in pollici. 
+
+** 3. Non utilizzare “Default” come nome per lo stile di annotazione in Rhino.** Utilizzare ad esempio MyDefault o Defaul12. In questo modo, non si incorre in conflitti con le quote Default di AutoCAD durante l'importazione. AutoCAD ignorerà automaticamente lo stile Default e riassegnerà l'annotazione al proprio stile Default in caso di conflitto. È evidente che ancora una volta le quote non vengono visualizzate come in Rhino. 
+
+===== Esempio =====
+Ecco un esempio di come esportare in AutoCAD un modello in piedi di Rhino.
+
+1. Il nostro modello di Rhino in piedi viene visualizzato correttamente.
+
+{{:rhino:rhino_model.png?400|}}
+{{:rhino:rhino_model_2.png?400|}}
+
+2. Facciamo clic su **Esporta** o **SalvaConNome** in DWG/DXF e importiamo il modello in AutoCAD.
+{{:rhino:autocad_model_import.png?400|}}
+
+3. Se rivediamo il modello in AutoCAD, le quote sono più piccole di come previsto. Presentano infatti un rapporto di "1/12" rispetto a Rhino perché AutoCAD interpreta le unità del modello coma pollici. 
+Per convertire nuovamente la geometria in scala completa, scalare l'intero modello di 12.
+
+
+4. Dopo la scalatura, la geometria e le quote sono corrette, ma la **scala di quota** o DIMSCALE assegnata allo stile di quota è troppo piccola per questo modello.
+{{:rhino:acad_needs_scale.png?400|}}
+
+Anche tutti gli stili di quota utilizzati in questo modello devono essere scalati in 12.
+
+{{:rhino:acad_dimstyle.png?300|}}
+
+5. Diversamente da AutoCAD, Rhino combina il controllo di quote e testo in uno stile di annotazione. In AutoCAD il testo e la quota presentano stili diversi. Alcuni testi quindi possono essere inoltre scalati per una corretta visualizzazione in AutoCAD. Lo stile di testo può controllare l'altezza, ma generalmente le dimensioni del testo vengono impostate come proprietà dell'oggetto e quindi possono essere aggiornate nel pannello delle proprietà di AutoCAD.
+
+Adesso è possibile lavorare al modello in AutoCAD.
+
+{{:rhino:acad_done.png?400|}}
+
+===== Conclusione =====
+Se gli utenti desiderano utilizzare pollici in Rhino, non occorre scalare il modello e il stili di quota durante l'importazione del modello in formato DWG/DXF in AutoCAD.
+
+
+In caso di dubbi o assistenza, inviare un'e-mail a [[mary@mcneel.com|Mary Ann Fugier]], Robert McNeel & Assoc. Supporto e formazione
+
