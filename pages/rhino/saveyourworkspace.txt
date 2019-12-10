@@ -1,9 +1,21 @@
 ====== The Importance of Saving Your Custom Work Environment ======
 
+> Note: the following does not apply to Rhino for Mac.
 
-If you have changed the default workspace file (**default.rui** for Rhino 5 or later, **default.tb** for Rhino 4) in any significant way, save it under a new name. 
+Under Windows, Rhino's toolbars are stored in a special file generally called a workspace file. The default workspace file is named **default.rui** for Rhino 5 or later, or **default.tb** for Rhino 4 and earlier. 
+//(rui=__R__hino __U__ser __I__nterface ; tb=__T__ool__B__ar)//
 
-When Rhino 4 is uninstalled, the default workspace file is deleted that wipes out __all__ your customization in an instant. Updating Rhino 4 will not overwrite the default workspace file. In Rhino 5 or later, you will not lose the default workspace file when Rhino is uninstalled or updated, but workspace files may get corrupted on rare occasions. Using the command **ToolbarReset** will also replace the existing default file, and any customization made to it will be lost as well.
+Any changes you make to the toolbars - such as adding/changing macros or scripts, adding buttons, etc. are normally only written to the workspace file when Rhino closes. (it is possible to force a save earlier, more on that below).
+
+As you can have multiple instances of Rhino open at the same time, if you are not careful, it is easy to get into a situation where you might lose your customizations.  All it takes is to have two instances of Rhino open, to make changes in one, but close that first.  When the second instance of Rhino without the changes is closed, it will overwrite the first, and any changes will be lost. 
+
+Therefore, if you have changed the default workspace file in any significant way, and you want to keep your changes, //**be sure to save it under a new name!**//  You can do this from Tools>Toolbar layout or Options>Toolbars, there is a SaveAs command under the file menu.  The .rui files in V5 and later are stored in the following folder:
+
+  C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\6.0\UI  
+  
+AppData is a hidden folder, to get there, at the Windows start button, type %appdata% and Enter, you can then navigate from there.
+
+> Note: when Rhino 4 is uninstalled, the default workspace file is deleted which will wipe out __all__ your customization in an instant. Updating Rhino 4 will not overwrite the default workspace file. In Rhino 5 or later, you will not lose the default workspace file when Rhino is uninstalled or updated.  But, workspace files may get corrupted on rare occasions.  Using the command **ToolbarReset** will also replace the existing default file, and any customization made to it will be lost as well.  So it is still important to save under a new name and keep backups.
 
 ===== How to save your customizations=====
 
