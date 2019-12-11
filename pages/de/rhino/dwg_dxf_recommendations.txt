@@ -1,0 +1,67 @@
+====== Die bewährtesten Methoden zur DWG/DXF-Exportation in Rhino ======
+
+> Autor: //Mary Fugier//
+> Letztes Update: //21. Nov. 2019//
+
+===== Problem =====
+Zuweilen hört man, dass Rhino-Modelle nicht in AutoCAD importiert werden und nicht wie in Rhino aussehen. Drittkunden beschweren sich gelegentlich, dass die erhaltene DWG/DWF nicht richtig skaliert wird oder falsche Bemaßungen aufweist.
+In AutoCAD erscheint die Skalierung der Modellgeometrie und Anmerkungsanzeige eventuell falsch. 
+
+Das Problem ist allgemeinen auf die lineare Einheit in Rhino zurückzuführen. 
+Wenn als lineare Rhino-Einheit Fuß verwendet wird, ist die importierte AutoCAD-Geometrie zwölf mal zu klein, und Befehle wie Abstand weichen um das Zwölffache ab. 
+Gewöhnlich werden Text und Bemaßungen entweder zu klein oder zu groß importiert.
+
+===== Ursachen =====
+Weshalb ist das so, und was können wir tun, um bessere Resultate zu erhalten?
+  * Rhino verfügt über eine sehr umfangreiche Liste von Einheiten, die Sie zum Modellieren verwenden können. {{ :rhino:rhino_units.png?400 |}}
+  * AutoCAD verfügt über folgende Kategorien: Architektonische, Dezimal-, Engineering-, Bruch- and Physikalische Einheiten. Dezimal ist einheitenlos, hingegen setzt das Architekturformat Zoll als Grundeinheit voraus. {{ :rhino:autocad_units.png?400 |}}
+  * Rhino skaliert nicht beim Export, ungeachtet der linearen Einheit. Die Datei exportiert 1=1 in das DXF/DWG-Format und alle anderen Formate.
+  * AutoCAD skaliert nicht beim Import. Die Geometrie wird 1=1, also in voller Größe importiert. 
+
+Daher wird aus einem Rhino-Modell in Fuß während des Importierens in AutoCAD ein Zoll-Modell. Die AutoCAD-Geometrie muss um den Faktor 12 skaliert und so an die Geometrie in Rhino angeglichen werden. Dieses Problem tritt unabhängig von Ihrem Exportformat auf: DXF, DWG, SAT...
+
+===== Empfehlungen =====
+Hier finden Sie einige Ratschläge zur bestmöglichen Strukturierung Ihres Rhino-Modells, wenn Sie DWG/DXF für einen Kunden exportieren, der AutoCAD oder einen sonstigen CAD-Klon verwendet.
+
+**1. Die meisten Probleme sind vermeidbar wenn Sie Zoll (statt Fuß) als lineare Rhino-Einheit verwenden.** Eine Konvertierung ist nicht erforderlich. Ihre Eingaben in Fuß können Sie beibehalten, einfach indem Sie allen Werten das Zeichen für Fuß ' anfügen, z.B. **10'**.
+
+**2. Sie können Ihre Modell- und Beschriftungseinheiten in Rhino nach Zoll konvertieren, bevor Sie den DXF/DWG-Export ausführen.** Sie werden auch Ihre Beschriftungsstilwerte um 12 skalieren, damit Bemaßung und Text im Zoll-Modell angemessen aussehen. 
+
+**3. Verwenden Sie nicht “Standard” als Name Ihres Bemaßungsstils in Rhino.** Verwenden Sie stattdessen z.B. MeinStandard oder Standard12. So wird beim Importieren der Konflikt mit dem standardmäßigen AutoCAD-Bemaßungsstil vermieden. Ihr Standard wird dann automatisch ignoriert, und im Falle eines Konflikts wird Ihre Bemaßung ihrem eigenen Standard zugewiesen. Dies werden Sie daran merken, dass Ihre Bemaßungen wiederum ganz anders als in Rhino aussehen. 
+
+===== Als Beispiel =====
+Sehen Sie hier anhand eines Beispiels, wie Sie ein Rhino-Modell in Fuß nach AutoCAD exportieren würden.
+
+1. Unser Rhino-Modell mit Fuß-Einheiten sieht gut aus.
+
+{{:rhino:rhino_model.png?400|}}
+{{:rhino:rhino_model_2.png?400|}}
+
+2. Als nächstes **Exportieren** wir oder gehen auf **Speichern Unter** im DWG/DXF-Format und importieren dann in AutoCAD.
+
+{{:rhino:autocad_model_import.png?400|}}
+
+3. Wenn wir das Modell in AutoCAD überprüfen, sind die Bemaßungen kleiner als von uns gewünscht. Tatsächlich sind sie "1/12" dessen was sie in Rhino waren, weil AutoCAD davon ausgeht, dass das Modell in Zoll bemessen ist. 
+Um die Geometrie zur vollen Größe zurück zu konvertieren, skalieren Sie das gesamte Modell um 12.
+
+
+4. Nach der Skalierung sind Geometrie und Bemaßungen korrekt, aber die dem Bemaßungsstil zugewiesene **Bemaßungsskalierung** oder BEMSKALA ist für dieses Modell zu klein.
+
+{{:rhino:acad_needs_scale.png?400|}}
+
+Alle in diesem Modell verwendeten Bemaßungsstile sollten ebenfalls um 12 skaliert werden.
+
+{{:rhino:acad_dimstyle.png?300|}}
+
+5. Rhino kombiniert die Bemaßungs- und Textsteuerung in einen Beschriftungsstil. AutoCAD tut dies hingegen nicht. Text und Bemaßung haben ihre eigenen Stile in AutoCAD. Daher kann auch für den Text eine Skalierung notwendig sein, damit er in AutoCAD richtig angezeigt wird. Der Textstil kann die Texthöhe steuern, aber im Allgemeinen wird die Textgröße als Objekteigenschaft gesetzt und kann daher im AutoCAD-Eigenschaftenpanel aktualisiert werden.
+
+Jetzt steht das Modell zur Bearbeitung in AutoCAD bereit.
+
+{{:rhino:acad_done.png?400|}}
+
+===== Zusammenfassung =====
+Wenn Sie bereit sind, Zoll in Rhino zu verwenden, sind die Skalierung des Modells und der Bemaßungsstile beim Importieren von DWG/DXF in AutoCAD normalerweise nicht notwendig.
+
+
+Falls Sie Fragen haben oder Hilfe brauchen, schreiben Sie bitte eine E-Mail an [[mary@mcneel.com|Mary Ann Fugier]], Robert McNeel & Assoc. Technischer Support und Schulung
+
