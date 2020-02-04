@@ -1,7 +1,38 @@
-====== Restablecer las preferencias de Rhino ======
+====== Rhino para Mac - Preferencias ======
+A continuación se indican algunos procedimientos para administrar las preferencias de Rhino para Mac.
+
+Rhino para Mac 5.3.2 y versiones posteriores, y todas las compilaciones de Rhino 6 para Mac, tienen tres comandos que sirven para administrar sus preferencias:
+
+  - **ExportarPreferencias**: permite exportar el archivo .plist de preferencias para compartir o como copia de seguridad.
+  - **ImportarPreferencias**: permite importar selectivamente preferencias de un archivo .plist.
+  - **RestablecerPreferencias**: elimina los valores de preferencias modificados en el momento de ejecutar el comando.  Cuando se cierra Rhino, la aplicación guarda sus preferencias en ese punto, incluidas las posiciones de las ventanas, las preferencias de la barra lateral y cualquier otra opción que haya usado/modificado desde que ejecutó RestablecerPreferencias.
+
+Los comandos anteriores son muy recomendables para administrar las preferencias.  Sin embargo, si tiene problemas con las preferencias, puede utilizar los siguientes pasos manuales.
+
+==== Guardar una copia de sus preferencias actuales de Rhino para Mac ====
+  - **Salga** de Rhino completamente.
+  - En el **Finder**, mantega pulsada la tecla **Opción** y seleccione **Biblioteca** en el menú **Ir**.
+  - Abra la carpeta **Preferencias**.
+  - Busque el archivo **com.mcneel.rhinoceros.plist**.  Seleccione **Duplicar** en el menú contextual (clic con el botón derecho) para hacer una copia.  La copia se llamará **com.mcneel.rhinoceros copy.plist**.  (**NOTA**: en Rhino 7 o versiones posteriores, el archivo de preferencias incluye un número de versión, como: com.mcneel.rhinoceros.7.plist)
+
+==== Restablecer las preferencias de Rhino ====
 Siga este procedimiento para borrar todas las preferencias modificadas de Rhino y restablecer los valores originales.
 
   - **Salga** de Rhino.
-  - En el **Finder**, mantega pulsada la tecla **Opción** y seleccione **Biblioteca** en el menú **Ir**. \\ Aparece la carpeta Biblioteca.
-  - En la carpeta **Biblioteca**, seleccione la carpeta **Preferencias**.
-  - Localice el archivo **com.mcneel.rhinoceros.plist** y arrástrelo a la **Papelera**.  \\ También puede arrastrar el archivo al Escritorio por si desea restaurar estas preferencias en el futuro.
+  - Inicie la aplicación **Terminal** que se encuentra en la carpeta **Aplicaciones** > **Utilidades**. \\ Aparece una ventana con un símbolo del sistema.
+  - Escriba **defaults delete com.mcneel.rhinoceros.plist** y pulse Intro. (**NOTA**: en Rhino 7 o versiones posteriores, el archivo de preferencias incluye un número de versión, como: com.mcneel.rhinoceros.7.plist)
+  - Espere hasta que vuelva a aparecer el indicador de Terminal. Esto puede tardar 15-20 segundos.
+  - Salga de la aplicación Terminal.
+
+==== Restaurar preferencias de Rhino guardadas ====
+Siga este procedimiento para reemplazar las preferencias de Rhino actuales con una copia previamente guardada.
+
+  - **Salga** de Rhino.
+  - En el **Finder**, mantega pulsada la tecla **Opción** y seleccione **Biblioteca** en el menú **Ir**.
+  - Abra la carpeta **Preferencias**.
+  - Busque el archivo **com.mcneel.rhinoceros.plist**.  Arrástrelo a la Papelera.  (**NOTA**: en Rhino 7 o versiones posteriores, el archivo de preferencias incluye un número de versión, como: com.mcneel.rhinoceros.7.plist)
+  - Cambie el nombre del archivo de preferencias previamente guardado a **com.mcneel.rhinoceros.plist**.
+   - Nota: si movió el archivo plist guardado a otra carpeta, tiene que volver a arrastrarlo a la carpeta **Preferencias**.
+  - Inicie la aplicación Terminal que se encuentra en la carpeta Aplicaciones > Utilidades. \\ Aparece una ventana con un símbolo del sistema.
+  - Escriba **defaults read com.mcneel.rhinoceros** y pulse Intro.  Aparecerá mucha información en la ventana de Terminal.
+  - Salga de la aplicación Terminal.
