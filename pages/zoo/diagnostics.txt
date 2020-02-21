@@ -27,11 +27,15 @@ The Zoo Diagnostics utility provides these useful network tests:
 
 4. **Zoo Port Check:** The Zoo Port Check test verifies that a Zoo 5 or 6 service is listening on TCP Port 80 on a server or workstation.
 
-//If this test fails, then make sure the Zoo server service is running. You can do this by using either ZooAdmin.exe or the Services applet in Control Panel. Also, make sure __[[zoo:window7firewall|TCP Port 80 is open on any firewall software]],__ for both incoming and outgoing traffic, running on the Zoo system.//
+//If this test fails, then make sure the Zoo server service is running. You can do this by using either ZooAdmin.exe or the Services applet in Control Panel. Also, make sure __[[zoo:window7firewall|TCP Port 80 is open on any firewall software]],__ for both incoming and outgoing traffic, running on the Zoo system.
+
+//
 
 5. **Zoo Connectivity:** The Zoo Connectivity test verifies that the Zoo 5 or 6 service is running on a server or workstation. 
 
 //If this test fails and all other tests succeed, then make sure the Zoo server service is running. You can do this by using either ZooAdmin.exe or the Services applet in Control Panel. Also, make sure __[[zoo:window7firewall|TCP Port 80 is open on any firewall software]],__ for both incoming and outgoing traffic, running on the Zoo system.//
+
+//This test can fail if the client and server are on different subnets. By default, the Zoo installer opens the Windows Firewall to the Zoo service on port 80 for the local subnet only. You will need to change the firewall rule to allow all any other subnets that need access.//
 
 //This test can also fail if your system is configured to access the Internet by using a [[https://en.wikipedia.org/wiki/Proxy_server|Proxy Server]]. In this case, the test never reaches the Zoo server. If you are using a Proxy Server, make sure you allow access to local addresses. See __[[zoo:zooproxyserver|Using Zoo with a Proxy Server]]__ for details.//
 
