@@ -1,0 +1,74 @@
+====== Migration de licences de Rhino 6 du Zoo vers le Cloud Zoo ======
+Si vous souhaitez que vos utilisateurs puissent travailler avec vos licences de Rhino 6 pour Windows et Mac depuis n'importe quel ordinateur dans le monde :
+
+==== Suivez ces instructions : ====
+
+=== A - Rassembler toutes les informations nécessaires ====
+
+  - Ouvrez la console Zoo Admin sur votre serveur Zoo
+  - Trouvez vos numéros de série : Dans la console Zoo Admin, vos numéros de série de Rhino 6 ressemblent à : ''6-1NN-NNN-NNNNN-NNNNN''.
+  - Trouvez vos clés de licence : Recherchez les messages que vous avez reçus lorsque vous avez acheté vos clés de licence de Rhino 6. Ils contiennent les numéros de série de l'étape précédente. Les clés de licence commencent par RH60 (''RH60-NNNN-NNNN-NNNN-NNNN''). **Ne continuez pas tant que vous n'avez pas toutes les clés de licence.**
+  - //Optionnel :// Si vous prévoyez créer une [[https://www.rhino3d.com/6/new/licensing-and-administration#domain-linked-team|équipe liée à un domaine]], vérifiez que vous avez accès au serveur web de votre domaine ou demandez de l'aide à un administrateur ou un technicien ayant accès à ces informations. 
+
+=== B - Créer un compte Rhino (Cloud Zoo) ===
+
+  - Si vous n'avez pas encore de compte, visitez https://accounts.rhino3d.com pour créer un compte qui gérera cette équipe. 
+
+=== C - Créer une équipe du Cloud Zoo ===
+
+  - https://accounts.rhino3d.com/help#create_group
+  - //Optionnel :// Invitez d'autres utilisateurs à être administrateurs de cette équipe : https://accounts.rhino3d.com/help#invite_group_members
+  - //Optionnel :// Créez un lien entre votre équipe et un domaine https://accounts.rhino3d.com/help#link_domain
+
+=== D - Configurer le Zoo et le réseau ===
+//Pour retirer vos clés de licence du Zoo et les ajouter dans le Cloud Zoo sans l'aide de McNeel, vous devrez vérifier que votre version du Zoo est bien à jour et que votre réseau est configuré correctement. Dans le cas contraire, vous pourriez rencontrer des problèmes lors de l'ajout de vos licences sur le Cloud Zoo dans l'étape suivante.//
+
+  - Installez la dernière version du Zoo disponible sur https://www.rhino3d.com/download/zoo/6/latest
+  - Depuis votre Zoo, ouvrez un navigateur Internet et visitez https://api.mcneel.com
+    - Si vous ne pouvez pas voir cette page, travaillez avec votre administrateur réseau afin d'ouvrir l'accès à https://api.mcneel.com
+
+
+=== E - Retirer les licences du Zoo ===
+
+  - Ouvrez la console Zoo Admin
+  - Sélectionnez une ou plusieurs licences de Rhino 6 à retirer
+  - Cliquez sur le bouton Delete dans la barre d'outils
+
+Attention, vous ne pouvez pas supprimer des licences en cours d'utilisation. Vous avez plusieurs options :
+
+  * Contactez tous les utilisateurs et demandez-leur de fermer Rhino. 
+  * Déconnectez le Zoo du réseau et attendez 15 minutes. Toutes les licences seront alors récupérées comme si toutes les sessions de Rhino ouvertes sur le réseau avaient été fermées. 
+
+=== F - Ajouter des licences sur le Cloud Zoo ===
+
+  - Visitez https://www.rhino3d.com/licenses
+  - Cliquez sur le nom de votre équipe 
+  - Cliquez sur Ajouter une licence
+  - Entrez votre clé de licence et cliquez sur Ajouter une licence
+
+=== G - Inviter des utilisateurs à rejoindre l'équipe ===
+
+== G.a. Si vous utilisez des équipes liées à un domaine ==
+
+  - Envoyez un message à vos utilisateurs en leur demandant de créer un compte Rhino sur https://accounts.rhino3d.com
+  - Demandez-leur d'utiliser l'adresse e-mail appartenant à votre domaine
+
+== G.b. Ou, si vous n'utilisez PAS une équipe liée à un domaine ==
+  - Visitez https://accounts.rhino3d.com/?controller=groups
+  - Cliquez sur le nom de votre équipe
+  - Cliquez sur le bouton Action puis sur Inviter des membres
+  - Remplissez le formulaire et cliquez sur Envoyer pour envoyer l'invitation. 
+
+=== H Configurer Rhino pour utiliser le Cloud Zoo ===
+
+Envoyez les instructions suivantes à vos utilisateurs lorsqu'ils ont créé leur compte :
+
+  - Lancez Rhino
+  - Dans le menu Outils, cliquez sur Gestionnaire de licences
+  - Sous la clé de licence de Rhino, cliquez sur Changer de clé de licence
+  - Cliquez sur Connexion
+  - Connectez-vous en utilisant l'adresse e-mail utilisée pour créer le compte Rhino ajouté en tant que membre de l'équipe. 
+
+
+{{tag>CloudZoo}}
+{{tag>Zoo}}
