@@ -1,0 +1,73 @@
+====== 将 Rhino 6 授权从 Zoo 迁移到云 Zoo ======
+为了确保您的用户可以从全球范围内的任何一台计算机上使用 Rhino 6 for Windows 和 Mac 的授权，
+
+==== 请完成以下操作： ====
+
+=== A - 收集必要的信息 ====
+
+  - 在 Zoo 服务器上打开 Zoo 管理控制台
+  - 查找您的序列号：在 Zoo 管理控制台中，您的 Rhino 6 序列号类似以下这种格式：''6-1NN-NNN-NNNNN-NNNNN''。
+  - 查找您的授权码：请搜索购买 Rhino 6 授权码时收到的电子邮件。邮件内容包含上一步提到的序列号。授权码类似下面这种格式 ''RH60-NNNN-NNNN-NNNN-NNNN''。 **在您获得完整的授权码之前不要进行下一步操作。**
+  - //可选项：// 如果您计划创建一个团队 [[https://www.rhino3d.com/6/new/licensing-and-administration#domain-linked-team|domain-linked team]]，请确保您在您所在区域的 Web 服务器上具有访问权限，或者您还可以与 IT 管理员合作。
+
+=== B - 创建一个云 Zoo 账户 ===
+
+  - 如果您还没有云 Zoo 账户，请访问 https://accounts.rhino3d.com 创建一个用来管理团队的账户。
+
+=== C - 创建一个云 Zoo 团队 ===
+
+  - https://accounts.rhino3d.com/help#create_group
+  - //可选项：// 邀请其它用户成为团队的管理员：https://accounts.rhino3d.com/help#invite_group_members
+  - //可选项：// 将域名关联到您的团队：https://accounts.rhino3d.com/help#link_domain
+
+=== D - 配置您的云 Zoo 和网络 ===
+//无需 McNeel 的帮助，您就可以从 Zoo 中删除授权并将其添加到云 Zoo，您只需确保 Zoo 及时更新并且正确配置了网络。否则，在执行下面“将授权添加到云 Zoo 中”的步骤时会出现问题。//
+
+  - 从网站 https://www.rhino3d.com/download/zoo/6/latest 下载安装最新的 Zoo
+  - 在 Zoo 服务器中，打开 web 浏览器并访问 https://api.mcneel.com
+    - 如果无法打开该网页，请与网络管理员联系，使您拥有访问 https://api.mcneel.com 的权限
+
+=== E - 从 Zoo 中移除授权 ===
+
+  - 打开 Zoo 管理控制台
+  - 选择要删除的一个或多个 Rhino 6 的授权
+  - 点击工具栏中的删除按钮
+
+请注意，您不能删除正在使用的授权。如果您还想继续删除，有下面两种选择：
+
+  * 与所有用户联系，并让他们关闭 Rhino。
+  * 断开 Zoo 与网络的连接，然后等待 15 分钟。这样操作就像您局域网上所有的 Rhino 都崩溃了一样，所以联网之后所有的授权就会重新恢复。
+
+=== F - 将授权添加到云 Zoo ===
+
+  - 访问 https://www.rhino3d.com/licenses
+  - 点击您的团队
+  - 点击"添加授权”
+  - 输入您的授权码，然后点击“添加授权"
+
+=== G - 邀请用户加入您的团队 ===
+
+== G.a. 如果您使用的是域名关联的团队 ==
+
+  - 给您的用户发邮件并邀请他们访问 https://accounts.rhino3d.com 并创建一个 Rhino 账户
+  - 要求用户使用属于您的域名的电子邮件地址
+
+== G.b. 或者，如果您不是使用域名关联的团队 ==
+  - 请访问 https://accounts.rhino3d.com/?controller=groups
+  - 点击您的团队
+  - 点击“操作”按钮，然后点击“邀请成员”
+  - 填写表格，然后点击“发送”按钮发送邀请。
+
+=== H - 配置 Rhino 以使用云 Zoo ===
+
+用户创建账户后，向他们发送以下说明：
+
+  - 开启 Rhino
+  - 在工具功能表下，点击授权管理器
+  - 在 Rhino 授权页面下，点击“更改您的授权码”
+  - 点击“登录”
+  - 使用新的团队成员的电子邮件地址进行登录。
+
+
+{{tag>云 Zoo}}
+{{tag>Zoo}}
