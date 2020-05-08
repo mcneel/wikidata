@@ -1,0 +1,82 @@
+====== Zoo 4 疑难排解 ======
+>**产品：**//[[zh:zoo:home|Zoo 4.0]]//
+>**摘要：**//安装Zoo工作组授权管理器的提示。//
+
+====概要====
+Zoo使用简单、独立于协定的讯息传递技术**邮件槽 (Mailslots)**与Rhino沟通。 微软网络使用邮件槽在各种领域，包括网域登录服务，传递讯息。邮件槽讯息服务适用于所有现代微软作业系统。也适用于工作群组网路以及网域网络。
+
+关于配置Zoo，其实没有什么需要做的，只要所有相关计算机属于同一个Windows网域或工作群组，并且安装在相同的子网，那么Zoo应该能够依照需要分配授权。使用Zoo的时候有几点必须注意：
+
+  * 请确认您正在使用最新版本的Zoo。
+  * 请确认您已登录作为管理员或以管理员组的成员身分执行Zoo。
+  * 请确认您有最新服务版本的Rhino以及其他Zoo支援外挂程序，如Brazil、Bongo、Flamingo以及 [[penguin:home|Penguin]]。
+
+===== 备注 =====
+  * Zoo能够在Windows 2000、Windows XP、 Windows Vista、Windows 7及Windows Server 2000、2003及2008系统上执行。
+  * Zoo需要[[http://www.microsoft.com/downloads/details.aspx?familyid=200b2fd9-ae1a-4a14-984d-389c36f85647&displaylang=en|Microsoft C++ 2005 SP1 可转发套件(x86)]] 安装于系统上。
+  * Zoo无法与Rhino 2.0或3.0教育版或教育授权(CD-KEYS)共同执行。
+  * Zoo无法在亚洲版本Windows下的Rhino 2.0或3.0版共同执行。
+  * 不是所有产品都能够经由路由网络获得授权，请参阅[[zoo:products|Zoo 产品兼容性]] ，来决定何者能够搭配Zoo使用。
+  * 您必须以管理员或以管理员组的成员身分登录以执行Zoo。
+
+===== 网络说明 =====
+  * 所有系统必须属于同一个Windows网域或工作群组。
+  * 请确认您正使用的网络连线已安装并启用**Client for Microsoft Networks** ，否则您将把//无法写入用户端邮件槽 (Failed to write to client mailslot)//的错误写入日志档。
+  * 如果您使用TCP/IP，请确认在**进阶TCP/IP选项中**启动[[rhino:netbios|NetBIOS]]。 则您将把//无法写入用户端邮件槽 (Failed to write to client mailslot)//的错误写入日志档。
+  * 如果执行Zoo或Rhino的计算机使用防火墙，请确认以下通讯埠已打开：
+    * **UDP Ports 137 and 138**
+    * **TCP Port 139**
+  * 请注意，这些是Windows用来为[[rhino:netbios|NetBIOS]] 通讯的通讯埠，如果您使用内建的Windows防火墙，请将启用**档案及列表机共享**。
+\\
+{{:legacy:en:zoo_windows_firewall.png}}
+  * 如果您尚未为您的Rhino系统配置DNS或登录码，那么所有Rhino工作站以及执行Zoo的系统必须安装在同一个网络子网。 这是因为Rhino和Zoo都会广播讯息，广播邮件槽讯息不会越过网络路由器和某些交换器，无线路由也不会转发广播讯息。
+
+
+
+==== 确保用户端与Zoo之间的名称分解正常可用====
+**nbtstat**旨在说明并解决 [[rhino:netbios|NetBIOS]] 名称分解的问题。当一个网络正常运作，TCP/IP上的[[rhino:netbios|NetBIOS]]将[[rhino:netbios|NetBIOS]]名称分解为IP地址。这是通过[[rhino:netbios|NetBIOS]]的名称分解，包括本机快取中查找、WINS服务器查询、广播、LMHOST查找、主机查找和DNS服务器查询。
+
+以**nbtstat**测试名称分解：
+
+  - 在Zoo的服务器打开命令提示字符。
+  - 键入**nbtstat - <客户计算机名称>**
+  - 其中一个网络界面卡应该分解客户端计算机名称。
+  - 在客户端计算机上，打开命令提示字符。
+  - 键入**nbtstat - <Zoo服务器名称>**
+  - 其中一个网络界面卡应该分解Zoo服务器名称。
+
+如果**nbtstat**未能将信息送回Zoo或是客户，那么Zoo无法在此网络配置下执行。已经超过本文或是McNeel所能确保您的网络支援 NetBIOS 名称的范围。
+
+==== 确保用户端与Zoo之间的连接正常====
+*net view**指令用来显示网域、计算机或指定计算机共享的资源的清单。不带参数使用的话，*net view**会显示出在目前网域下的计算机清单。
+
+要测试**net view**指令的连线：
+
+  - 在Zoo的服务器打开命令提示字符。
+  - 键入**net view\\<客户计算机名称>**
+  - 在客户端计算机上，打开命令提示字符。
+  - 键入**net view\\<Zoo服务器名称>**
+
+**net view**指令列出目前连线中共享的打印与档案。
+
+  * 如果没有列出指定计算机上任何共享档案或打印，**net view**指令将显示"清单中无任何条目"的讯息。
+  * 如果**net view**指令失败，出现//System error 53 has occorred//，请确认指定的计算机名称正确，而且可以运作，及之间所有闸道(路由器)都可运作。
+  * 如果**net view**指令失败，出现//System error 5 has occurred. Access is denied.//，请确认您登入使用的账户能够查看远端计算机的使用权。
+
+要进一步解决此问题，请执行以下操作。
+
+  * 使用**net view**指令及此计算机的IP位置，如下所示：**net view \\<IPAddress>**。
+  * 如果**net view**指令成功，那么此指定计算机名称已被分解为错误的IP地址。
+  * 如果**net view**指令失败，出现//System error 53 has occurred//，远端计算机可能正在执行Microsoft Networks service共享的打印与档案。
+
+===== Zoo说明 =====
+  * Zoo可以维持一个日志档，**ZOO.LOG**，是与Rhino客户端沟通的日志。本日志能够用来判定某些通讯问题。如果您无法在同一资料夹(ZOO.EXE)看到日志档 ，那么可以经由Zoo的**工具->选项 (Tools->Options)**打开日志纪录。 使用记事本检查日志档，来查看Rhino讯息是否抵达Zoo，或是Zoo是否有回应这些讯息。
+
+===== Zoo 额外的工具=====
+如果您正在使用路由网络上的Zoo，而Rhino无法找到Zoo，那么Zoo的登录授权或DNS可能没有正确配置。 您可以尝试利用Zoo的额外工具协助解决此问题。 Zoo额外工具包括以下程序：
+
+  - **SetZooServer.exe** -协助配置工作站的登录授权查找。
+  - **ZooDnsResolver.exe** -协助测试DNS查找功能。
+
+**{{:zoo:zoobonustools_20010621.zip|Zoo Bonus Tools}}**
+
