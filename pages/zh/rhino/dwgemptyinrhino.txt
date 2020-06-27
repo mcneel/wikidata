@@ -1,0 +1,50 @@
+**为何我的AutoCAD dwg档案格式在Rhino下无法开启?**
+
+======问题:======
+当在Rhiono中开启dwg或DXF档案时，没有办法导入物件到Rhino 3、Rhino 4或Rhino 5。
+
+======为什么:======
+通常有两个原因:
+
+  * dwg里的proxy物件。
+  * 几何图形在图纸配置区绘制。
+
+=====Proxy物件=====
+
+Proxy物件是由ObjectARX® 程序如AutoCAD®、Mechanical、Autodesk®、Architectural Desktop及Autodesk® Land Desktop建立的自订物件置点支架。
+
+原始设定是，如果建立自定物件的程序并没有同时运作，在AutoCAD下开启dwg时会显示proxy物件讯息。
+例如：如果在AutoCAD®下开启Autodesk Mechanical Desktop建立的绘制图，那么这些由 Autodesk Mechanical Desktop绘制的物件就会被显示成proxy物件。
+
+在这里你可以进行移动或复制proxy物件的动作，然而对于ObjectARX而言，此情况下并没有办法进行特殊编辑。
+例如：除了在Autodest Mechanical Desktop之下，你无法对其物件进行任何参数的编辑。
+
+此规则适用于任何以ObjectARX程序绘制的物件，也许计算机上有安装此ObjectARX程序，但并没有同时运作，所以当在AutoCAD下开启ADT档案，这时Proxy物件的提醒对话框就会出现。
+这些物件将会被以一个概略的模样呈现，当然模拟是一回事，当使用者实际上想要进行编辑时，就会出现问题了。
+
+====解决方式:====
+Rhino无法同时运作建立这些自订物件的ARX程序，所以proxy物件将会被忽略，并且显示"object ignored"的提醒对话框。
+
+既然AutoCAD以网格方式储存其3D几何图形，有一个选择可以将这些网格在Rhino下打开。
+
+  * 1. 以建立物件的Desktop程序，如AutoCAD开启dwg。
+  * 2. 炸开自订物件 (墙壁、屋顶、门、窗户等等)，把这些物件炸成网格。
+  * 3. 另外存一个新档名。
+  * 4. 将此档案导入Rhino。
+
+Proxy物件永远需要被炸开。
+
+
+=====图纸绘制空间的几何图形=====
+
+图纸配置几何图形无法导入Rhino 3 或 Rhino 4.
+
+如果在Rhino下开启dwg，但看起来是空的，这些物件有可能在图纸配置区。
+
+====解决方式:====
+  * 1. 在AutoCAD打开绘图。
+  * 2. 将物件移到Model Space，使用者可以利用ExpressToolCHSPACE指令，这个指令可以将这些物件放置到Model Space而且并做适合的尺寸缩放。CHSPACE指令从2007年版的AutoCAD已经包括在程序里。
+
+图纸配置将被导入至Rhino 5。
+
+**[[http://wiki.mcneel.com/zh/rhino/faq|回到常见问题]]**
