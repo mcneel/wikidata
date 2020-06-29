@@ -1,0 +1,49 @@
+====== Reset Rhino to Defaults ======
+By [[mary@mcneel.com|Mary Fugier]]
+
+===== For Rhino 6 and 7 for Windows =====
+  * This is done in 4 step: delete the customized options and window position xmls file.
+  * Disable any plugins.
+  * Close their menus.
+  * Reset the toolbar to default.
+
+
+1. Reset **Rhino Options**: Close Rhino.
+ 
+In **File Explorer**, go to the **C:\Users\<USER>\AppData\Roaming\McNeel\Rhinoceros\6.0\settings** folder where <USER> is the user that is logged in. Hint: in File Explorer input bar type **%appdata%** and navigate to the **Roaming\McNeel\Rhinoceros\6.0\settings** folder.
+
+Move or delete these file {{ ::settings_folder.png?nolink&300|}} 
+<code>
+settings-Scheme__Default.xml 
+window_positions-Scheme__Default.xml
+</code>
+
+Moving into an OLD or SAVE folder will allow you to restore these file later by moving the files back.
+Rhino will recreate these with default settings when they are not found.
+ 
+2. Open Rhino
+
+3. {{ ::undefined:plugins.png?nolink&300|}} 
+**Disable plugins** that do not ship with Rhino: Options -> Plugins -> Filter on Plugins that "do not ship with Rhino". Uncheck them. 
+
+
+
+
+
+
+4. Close and reopen Rhino
+
+
+
+5. {{ ::toolbars.png?nolink&300|}} Close any **Rhino toolbars** that are not the Rhino Defaut. Go to Options -> Toolbars.
+ 
+Highlight a toolbar that was added by a plugin or that is custom. 
+
+
+6. {{ ::toolbars_close.png?nolink&300|}} From File menu, pick **Close Toolbar**. Repeat only leaving default.
+
+
+7. Reset the **Toolbars**: In Rhino, type **ToolBarReset**. (This may be an extra step. Do it until you are sure.)
+ 
+8. Close and Reopen Rhino.
+Rhino should now look clean like ti was when it was first installed.
