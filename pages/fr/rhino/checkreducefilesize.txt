@@ -1,0 +1,62 @@
+====== Pourquoi mon fichier est-il devenu aussi grand ? ======
+
+
+> Nous voyons assez régulièrement des messages sur le forum de Rhino d'utilisateurs ayant vu la taille de leur fichier augmenter de façon exponentielle sans savoir pourquoi ni comment revenir à une taille normale. Cet article est là pour essayer d'expliquer ce qu'il s'est passé et pourquoi ainsi que pour trouver des solutions possibles. 
+
+===Causes possibles ===
+
+Plusieurs éléments peuvent faire augmenter drastiquement la taille d'un fichier :
+
+  * **Maillages d'affichage ** - Rhino utilise des maillages spéciaux pour afficher les objets à l'écran. Des paramètres de maillage d'affichage très fins peuvent augmenter considérablement la taille des fichiers à votre insu. Vous voyez un affichage normal mais vous n'êtes pas toujours conscient du nombre de polygones utilisés par le maillage d'affichage.
+
+  * **Textures/Images bitmap** - Les textures bitmap haute résolution enregistrées dans le fichier (utilisées comme matériaux de rendu ou pour les objets image que vous avez créés) peuvent augmenter drastiquement la taille du fichier. 
+
+  * **Matériaux** - les matériaux, s'ils sont très nombreux, peuvent parfois occuper beaucoup d'espace dans le fichier. Les matériaux sont parfois dupliqués inutilement, ce qui amplifie encore cet effet. 
+
+  * **Modules** - Les modules de Rhino peuvent ajouter différents types d'information ou de fonctions dans Rhino, comme par exemple des outils de rendu avancé ou de conception spécifique. Les modules peuvent enregistrer leurs données dans le fichier Rhino et celles-ci peuvent être parfois très volumineuses suivant la nature du module et comme il a été utilisé. 
+
+  * **Données volumineuses** - enfin, il est possible que les fichiers de Rhino contiennent **une très grande quantité de géométrie** sous forme de courbes, surfaces or maillages.  Il est normal dans ce cas d'avoir des fichiers de grande taille...
+
+----
+
+===Comment déterminer la cause du problème ?===
+
+Après avoir lu les informations qui précèdent vous avez peut-être pu trouver la ou le causes possibles. Si c'est le cas, vous pouvez ignorer cette section et passer à la section "remède possible" ci-dessous. 
+
+Cependant, si vous n'êtes pas sûr ou si vous voulez simplement voir tout ce que contient votre fichier en termes très techniques, vous pouvez utiliser la commande ** ContrôlerFichier3dm**. Vous pouvez contrôler le fichier de Rhino ouvert actuellement ou n'importe quel fichier 3DM de votre ordinateur. Une fenêtre de texte contenant une grande quantité d'informations s'ouvrira. La section supérieure donnera des informations sur votre installation de Rhino et les modules de Rhino chargés. Vous trouverez ensuite les parties qui nous intéressent ici - les différentes tables où les informations sont enregistrées dans le fichier de Rhino analysé. 
+
+  * **Table d'images**.  Cette donnée indique le nombre d'images contenues dans le fichier ainsi que leur taille totale. Si les valeurs de cette section sont élevées (elles sont indiquées en octets), cela peut expliquer en partie la taille de votre fichier
+
+  * **Table de matériaux** : vérifiez également la taille.  
+
+  * Plus loin vous trouverez la **Table d'objets**, qui vous donnera un résumé de la place occupée par votre géométrie. Dans la version 5, vous ne verrez que la taille totale de tous les objets, dans la version 6 et suivantes, vous verrez également les informations sur la taille de chaque objet. //La taille des objets inclut la taille des maillages de rendu, une donnée qui peut contribuer au problème de taille de fichier.//
+
+  * Enfin, tout en bas, vous trouverez la **Table de données de l'utilisateur du modèle**, qui liste tous les modules chargés et toutes les données qu'ils stockent.  Si un des éléments est très volumineux, essayez de creuser de ce côté. 
+
+----
+
+===J'ai trouvé quelques suspects, qu'est-ce que je fais maintenant ?===
+
+  * **Maillages d'affichage** : Si vous soupçonnez que les paramètres du maillage d'affichage font augmenter la taille du fichier, vous pouvez essayer plusieurs choses. Vous pouvez essayer d'utiliser la commande **EnregistrementCompacté** qui enregistrera le fichier sans les maillages de rendu. Vérifiez la taille du fichier que vous venez d'enregistrer, si elle a beaucoup diminué, vous avez déjà mis le doigt sur une partie du problème. Si vous voulez conserver le fichier original, vous pouvez aussi utiliser **EnregistrerSous**, donner un autre nom à votre fichier et cocher la case **Enregistrement compacté** dans la boîte de dialogue. 
+
+  * **Matériaux** : Si la table de matériaux présente des valeurs élevées, vous pouvez déjà utiliser la commande **Purger** avec l'option **Matériaux=Oui**. Cette opération supprimera tous les matériaux non utilisés. Si la taille n'a pas diminué après cela, regardez la section Données des modules. 
+
+  * **Images **: Si la table d'images présente des valeurs élevées, ce peut être une des causes recherchées. Les images de fond, les arrière-plan, les images appliquées comme textures sont toutes enregistrées dans la table d'images. Regardez si des textures inutilisées sont restées dans le fichier et supprimez-les, regardez également tous les éléments de la commande Image dont vous n'avez plus besoin.  Cependant, il arrive parfois que des images restent coincées dans le fichier même lorsque l'objet auquel elles étaient attribuées est supprimé. Dans ce cas, vous devrez essayer de purger la table d'images. Dans Rhino 5, tapez la commande  **TestPurgeBitmapTable**, vous devez la taper entièrement, elle n'apparaîtra pas dans la liste. ATTENTION, cette commande supprimera //TOUTES// les images du document, y compris certaines encore en cours d'utilisation, faites donc très attention. 
+
+  * **Données des modules **: Les données créées par les modules de Rhino restent dans le fichier //même si la session de Rhino dans laquelle le fichier est ouvert ne possède pas ces modules//, vous ne pouvez pas y accéder mais les données restent là, même après l'enregistrement et la fermeture du fichier. Cette particularité est en réalité une bonne chose.\\ \\ Cependant, si vous recevez un fichier d'un utilisateur ayant réalisé un rendu avec des matériaux personnalisés ou ayant créer des trajets d'outils pour la FAO, toutes ces informations ne vous sont plus utiles et vous pourriez vouloir les supprimer pour réduire la taille du fichier.\\ \\ Pour ce faire, utilisez la commande **-EnregistrerSous** (n'oubliez pas le tiret devant) afin de voir l'option **EnregistrerDonnéesModules**.  Définissez cette option sur **Non** et enregistrez. //**Attention :** cette opération fera disparaître toutes les données actuelles de tous les modules, soyez donc sûrs que vous n'aurez plus besoin de ces éléments !// Il est recommandé de faire une copie du fichier avant au cas où.\\ \\ Cette procédure peut également résoudre certains problèmes avec de données provenant de sources inconnues et coincées dans le fichier que vous n'avez pas réussi à supprimer autrement. 
+
+
+  * **Fichier contenant une très grande quantité de géométrie **:  Comme nous l'avons dit avant, il n'y a pas grand chose à faire de ce côté pour réduire la taille du fichier - Rhino a besoin de cet espace pour décrire correctement tous les objets. Si vous devez envoyer le fichier à quelqu'un, comprimez-le dans un zip pour gagner en taille. Si vous n'avez pas encore créé le fichier et que vous prévoyez d'avoir de nombreux objets identiques, l'utilisation de **blocs** peut aider à réduire la taille du fichier. Consultez l'aide de Rhino pour plus d'informations sur les blocs.\\ \\ **Si la taille de la mémoire utilisée par la table d'objets est très grande et que vous pensez vraiment que ce ne devrait pas être le cas, **vous devrez alors rechercher le ou les objets qui entraînent cette augmentation de taille. Regardez tout d'abord s'il n'existe pas d'objets cachés ou sur des calques désactivés. Ensuite, regardez si vous n'avez pas de surface immense (avec des milliers de points de contrôle) qui aurait été limitée en surface plus petite. Vous pourriez penser qu'elles prennent moins de place une fois limitées mais Rhino enregistre la définition originale (non limitée) de la surface, ce qui fait que des surfaces apparemment petites peuvent utiliser beaucoup de mémoire. La commande **RétrécirSurfaceLimitée** supprimera la partie de ces surfaces qui n'est plus nécessaire. 
+
+----
+
+===Quelles autres possibilités s'offrent à vous ?===
+
+D'autres points que vous pouvez essayer :
+
+  * Parfois, ouvrir un nouveau fichier vide, copier et coller la géométrie depuis l'ancien fichier dans le nouveau peut résoudre des problèmes. Mais, parfois, les objets peuvent toujours contenir les images inutiles lorsqu'ils sont copiés, ce qui ne changera rien au problème. 
+
+  * Si la taille est vraiment incontrôlable et que votre fichier en devient inutilisable, vous pouvez essayer d'utiliser la commande **EnregistrerSous** et de cocher l'option **Enregistrer uniquement la géométrie**.  En principe, seuls les objets actuels seront conservés mais attention, cette opération détruit également toute l'organisation du fichier et vos objets n'auront plus de calque, de couleur, de groupe.....  À n'utiliser qu'en tout dernier recours. 
+
+----
+==(n'hésitez pas à laisser vos commentaires...)==
