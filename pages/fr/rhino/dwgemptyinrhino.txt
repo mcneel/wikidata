@@ -1,0 +1,69 @@
+====== Pourquoi mon fichier DWG/DXF ne s'ouvre pas dans Rhino ? ======
+
+\\
+
+=====Problème=====
+Lorsque j'ouvre un fichier DWG ou DXF dans Rhino, aucun objet n'est importé dans Rhino. 
+
+=====Pourquoi ?=====
+En principe générale, deux raisons sont possibles :
+
+  * Le fichier DWG/DXF a été créé par une version d'AutoCAD ou d'un clone plus récent que celle prise en charge par votre version de Rhino
+  * Le fichier DWG contient des objets proxy. 
+  * La géométrie du dessin a été créée dans la zone de l'espace de mise en page.
+
+====Versions DWG/DXF====
+  * Rhinoceros 6 ouvrira des fichiers AutoCAD des versions 2018 et précédentes. 
+  * Rhinoceros 5 ouvrira des fichiers AutoCAD des versions 2013, 2010 et précédentes. 
+  * Rhinoceros 4 ouvrira des fichiers AutoCAD des version 2007 et précédentes
+
+Autodesk ne change pas le format des fichiers à chaque cycle de version. Ils attendent normalement 3 versions voire 5. 
+Format du fichier 
+  * 2018 (pourrait inclure 2019 et 2020)
+  * 2013 (inclut les versions 2014, 2015, 2016, 2017 d'AutoCAD)
+  * 2010 (inclut les versions 2011 et 2012 d'AutoCAD)
+  * 2007 (inclut les versions 2008 et 2009 d'AutoCAD)
+  * 2004 (inclut les versions 2005 et 2006 d'AutoCAD)
+  * 2000 (inclut les versions 2000i, 2002 et 2003 d'AutoCAD)
+  * R12 (inclut R13 et R14)
+
+
+{{:rhino:autocad_version.png?500|}}
+
+
+====Objets Proxy====
+
+Les objets Proxy sont des espaces réservés pour des objets créés par des applications ObjectARX®, telles que AutoCAD® Mechanical, Autodesk® Architectural Desktop et Autodesk® Land Desktop.
+
+Par défaut, des messages sur les objets proxy sont affichés à l'ouverture d'un fichier DWG dans AutoCAD si l'application qui a créé les objets personnalisés n'est pas en cours d'exécution. Par exemple, si un dessin crée dans Autodesk Mechanical Desktop est ouvert dans AutoCAD®, les objets créés en tant qu'objets d'Autodesk Mechanical Desktop sont affichés sous forme d'objets proxy. 
+
+Vous pouvez déplacer et copier des objets proxy. Cependant, il n'est pas possible de réaliser les opérations spéciales d'édition spécifiques à l'application ObjectARX. Par exemple, vous ne pouvez pas réaliser des modifications paramétriques sur des objets de Autodesk Mechanical Desktop dans une application autre que Autodesk Mechanical Desktop. 
+
+Cette règle s'applique chaque fois qu'une application ObjectARX ayant créé les objets personnalisés n¡est pas en cours d'exécution lorsqu'un dessin est ouvert. L'application ObjectARX peut être installée sur le système mais ne pas être ouverte. C'est pour cela que la boîte de dialogue d'avertissement d'objet proxy apparaît lorsque vous ouvrez un fichier ADT dans AutoCAD seul. Les objets doivent être représentés par une approximation de ce qu'ils sont réellement. Voir une approximation est une chose mais essayer de travailler avec en une toute autre et c'est là que les problèmes commencent. 
+
+===Solution===
+Puisque Rhino n'a pas la possibilité de lancer l'application ARX qui a créé ces objets personnalisés, ces objets proxy sont ignorés et l'avertissement "objet ignoré" apparaît dans la ligne de commande de Rhino. 
+
+AutoCAD enregistre sa géométrie 3D sous forme de maillages et il existe une option pour importer ces maillages dans Rhino. 
+
+  - Ouvrez le fichier dwg dans l'application où il a été créé. (Vous pouvez essayer AutoCAD seul si c'est tout ce que vous avez).
+  - **Décomposez** l'objet personnalisé (Mur, Toit, Porte, Fenêtre par exemple) en maillages.
+  - Enregistrez le résultat sous un autre nom. 
+  - Importez ce fichier dans Rhino.
+
+Les objets proxy devront toujours être décomposés. 
+
+
+====Géométrie de l'espace de mise en page====
+
+La géométrie de mise en page ne sera pas importée dans Rhino 3 ni Rhino 4 mais le sera dans Rhino5. 
+
+Si vous ouvrez un fichier DWG dans Rhino et qu'il apparaît vide, il se peut que les objets se trouvent dans l'espace de mise en page. 
+
+===Solution===
+  - Ouvrez le dessin dans AutoCAD.
+  - Déplacez les objets dans l'espace de modélisation. Vous pouvez faire cela avec la commande **CHSPACE de Express Tools**. Cette commande placer les objets dans l'espace de modélisation et les mettra à l'échelle en fonction. La commande CHSPACE est une commande native d'CHSPACE depuis la version 2007. 
+
+Les mises en page sont importées dans Rhino 5. 
+
+**[[http://wiki.mcneel.com/fr/rhino/faq|Revenir à la FAQ]]**
