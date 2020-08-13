@@ -24,11 +24,11 @@ sudo apt-get install php-cgi -y
 - The following steps can be pasted into terminal
 ```bash
 #download latest dokuwiki tarball
-wget http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
+wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
 #unzip tarball
 tar xvfv dokuwiki-stable.tgz
 #move/rename contents to /var/www/dokuwiki
-sudo mv dokuwiki-2014-09-29d/ /var/www/dokuwiki/
+sudo mv dokuwiki-2020-07-29/ /var/www/dokuwiki/
 #change owner to www-data
 sudo chown -R www-data:www-data /var/www/dokuwiki/
 #configure lightttpd for php
