@@ -49,7 +49,7 @@ class syntax_plugin_tag_count extends DokuWiki_Syntax_Plugin {
      * @param Doku_Handler    $handler The handler
      * @return array Data for the renderer
      */
-    function handle($match, $state, $pos, &$handler) {
+    function handle($match, $state, $pos, Doku_Handler $handler) {
 
         $dump = trim(substr($match, 8, -2));     // get given tags
         $dump = explode('&', $dump);             // split to tags and allowed namespaces 
@@ -79,7 +79,7 @@ class syntax_plugin_tag_count extends DokuWiki_Syntax_Plugin {
      * @param array          $data      The data from the handler function
      * @return bool If rendering was successful.
      */
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         if ($data == false) return false;
 
         list($tags, $allowedNamespaces) = $data;
@@ -105,8 +105,8 @@ class syntax_plugin_tag_count extends DokuWiki_Syntax_Plugin {
 
             $renderer->doc .= '<table class="'.$class.'">'.DOKU_LF;
             $renderer->doc .= DOKU_TAB.'<tr>'.DOKU_LF.DOKU_TAB.DOKU_TAB;
-            $renderer->doc .= '<th class="'.$col.'">tag</th>';
-            $renderer->doc .= '<th class="'.$col.'">#</th>';
+            $renderer->doc .= '<th class="'.$col.'">'.$this->getLang('tag').'</th>';
+            $renderer->doc .= '<th class="'.$col.'">'.$this->getLang('count').'</th>';
             $renderer->doc .= DOKU_LF.DOKU_TAB.'</tr>'.DOKU_LF;
 
             if(empty($occurrences)) {

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Esther Brunner <wikidesign@gmail.com>
@@ -24,7 +23,7 @@ class helper_plugin_tag extends DokuWiki_Plugin {
     /**
      * Constructor gets default preferences and language strings
      */
-    function helper_plugin_tag() {
+    function __construct() {
         global $ID;
 
         $this->namespace = $this->getConf('namespace');
@@ -114,7 +113,6 @@ class helper_plugin_tag extends DokuWiki_Plugin {
         foreach ($tags as $tag) {
             $links[] = $this->tagLink($tag);
         }
-
         return implode(','.DOKU_LF.DOKU_TAB, $links);
     }
 
@@ -153,8 +151,14 @@ class helper_plugin_tag extends DokuWiki_Plugin {
             $url   = wl($tag, array('do'=>'showtag', 'tag'=>$svtag));
         }
         if (!$title) $title = $tag_title;
-        $link = '<a href="'.$url.'" class="'.$class.'" title="'.hsc($tag).
-            '" rel="tag">'.hsc($title).'</a>';
+        $link = array(
+            'href' => $url,
+            'class' => $class,
+            'tooltip' => hsc($tag),
+            'title' => hsc($title)
+        );
+        trigger_event('PLUGIN_TAG_LINK', $link);
+        $link = '<a href="'.$link['href'].'" class="'.$link['class'].'" title="'.$link['tooltip'].'" rel="tag">'.$link['title'].'</a>';
         return $link;
     }
 
@@ -338,7 +342,7 @@ class helper_plugin_tag extends DokuWiki_Plugin {
 
         $clean_tags = array();
         foreach ($tags as $i => $tag) {
-            if (($tag{0} == '+') || ($tag{0} == '-'))
+            if (($tag[0] == '+') || ($tag[0] == '-'))
                 $clean_tags[$i] = substr($tag, 1);
             else
                 $clean_tags[$i] = $tag;
@@ -353,9 +357,9 @@ class helper_plugin_tag extends DokuWiki_Plugin {
             $t = $clean_tags[$i];
             if (!is_array($pages[$t])) $pages[$t] = array();
 
-            if ($tag{0} == '+') {       // AND: add only if in both arrays
+            if ($tag[0] == '+') {       // AND: add only if in both arrays
                 $result = array_intersect($result, $pages[$t]);
-            } elseif ($tag{0} == '-') { // NOT: remove array from docs
+            } elseif ($tag[0] == '-') { // NOT: remove array from docs
                 $result = array_diff($result, $pages[$t]);
             } else {                   // OR: add array to docs
                 $result = array_unique(array_merge($result, $pages[$t]));
@@ -504,8 +508,8 @@ class helper_plugin_tag extends DokuWiki_Plugin {
     function _checkPageTags($pagetags, $tags) {
         $result = false;
         foreach($tags as $tag) {
-            if ($tag{0} == "+" and !in_array(substr($tag, 1), $pagetags)) $result = false;
-            if ($tag{0} == "-" and in_array(substr($tag, 1), $pagetags)) $result = false;
+            if ($tag[0] == "+" and !in_array(substr($tag, 1), $pagetags)) $result = false;
+            if ($tag[0] == "-" and in_array(substr($tag, 1), $pagetags)) $result = false;
             if (in_array($tag, $pagetags)) $result = true;
         }
         return $result;

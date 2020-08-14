@@ -9,9 +9,12 @@
 // must be run within Dokuwiki
 if(!defined('DOKU_INC')) die();
 
+/**
+ * Class helper_plugin_translation
+ */
 class helper_plugin_translation extends DokuWiki_Plugin {
-    var $trans = array();
-    var $tns = '';
+    var $translations = array();
+    var $translationNs = '';
     var $defaultlang = '';
     var $LN = array(); // hold native names
     var $opts = array(); // display options
@@ -19,15 +22,12 @@ class helper_plugin_translation extends DokuWiki_Plugin {
     /**
      * Initialize
      */
-    function helper_plugin_translation() {
+    function __construct() {
         global $conf;
         require_once(DOKU_INC . 'inc/pageutils.php');
         require_once(DOKU_INC . 'inc/utf8.php');
 
-        // load wanted translation into array
-        $this->trans = strtolower(str_replace(',', ' ', $this->getConf('translations')));
-        $this->trans = array_unique(array_filter(explode(' ', $this->trans)));
-        sort($this->trans);
+        $this->loadTranslationNamespaces();
 
         // load language names
         $this->LN = confToHash(dirname(__FILE__) . '/lang/langnames.txt');
@@ -39,24 +39,37 @@ class helper_plugin_translation extends DokuWiki_Plugin {
         $this->opts = array_fill_keys($this->opts, true);
 
         // get default translation
-        if(!$conf['lang_before_translation']) {
+        if(empty($conf['lang_before_translation'])) {
             $dfl = $conf['lang'];
         } else {
             $dfl = $conf['lang_before_translation'];
         }
-        if(in_array($dfl, $this->trans)) {
+        if(in_array($dfl, $this->translations)) {
             $this->defaultlang = $dfl;
         } else {
             $this->defaultlang = '';
-            array_unshift($this->trans, '');
+            array_unshift($this->translations, '');
         }
 
-        $this->tns = cleanID($this->getConf('translationns'));
-        if($this->tns) $this->tns .= ':';
+        $this->translationNs = cleanID($this->getConf('translationns'));
+        if($this->translationNs) $this->translationNs .= ':';
+    }
+
+    /**
+     * Parse 'translations'-setting into $this->translations
+     */
+    public function loadTranslationNamespaces() {
+        // load wanted translation into array
+        $this->translations = strtolower(str_replace(',', ' ', $this->getConf('translations')));
+        $this->translations = array_unique(array_filter(explode(' ', $this->translations)));
+        sort($this->translations);
     }
 
     /**
      * Check if the given ID is a translation and return the language code.
+     *
+     * @param string $id
+     * @return string
      */
     function getLangPart($id) {
         list($lng) = $this->getTransParts($id);
@@ -66,9 +79,12 @@ class helper_plugin_translation extends DokuWiki_Plugin {
     /**
      * Check if the given ID is a translation and return the language code and
      * the id part.
+     *
+     * @param string $id
+     * @return array
      */
     function getTransParts($id) {
-        $rx = '/^' . $this->tns . '(' . join('|', $this->trans) . '):(.*)/';
+        $rx = '/^' . $this->translationNs . '(' . join('|', $this->translations) . '):(.*)/';
         if(preg_match($rx, $id, $match)) {
             return array($match[1], $match[2]);
         }
@@ -80,7 +96,12 @@ class helper_plugin_translation extends DokuWiki_Plugin {
      * languages
      */
     function getBrowserLang() {
-        $rx = '/(^|,|:|;|-)(' . join('|', $this->trans) . ')($|,|:|;|-)/i';
+        global $conf;
+        $langs = $this->translations;
+        if (!in_array($conf['lang'], $langs)) {
+            $langs[] = $conf['lang'];
+        }
+        $rx = '/(^|,|:|;|-)(' . join('|', $langs) . ')($|,|:|;|-)/i';
         if(preg_match($rx, $_SERVER['HTTP_ACCEPT_LANGUAGE'], $match)) {
             return strtolower($match[2]);
         }
@@ -90,14 +111,17 @@ class helper_plugin_translation extends DokuWiki_Plugin {
     /**
      * Returns the ID and name to the wanted translation, empty
      * $lng is default lang
+     *
+     * @param string $lng
+     * @param string $idpart
+     * @return array
      */
     function buildTransID($lng, $idpart) {
-        global $conf;
-        if($lng) {
-            $link = ':' . $this->tns . $lng . ':' . $idpart;
+        if($lng && in_array($lng, $this->translations)) {
+            $link = ':' . $this->translationNs . $lng . ':' . $idpart;
             $name = $lng;
         } else {
-            $link = ':' . $this->tns . $idpart;
+            $link = ':' . $this->translationNs . $idpart;
             $name = $this->realLC('');
         }
         return array($link, $name);
@@ -106,6 +130,9 @@ class helper_plugin_translation extends DokuWiki_Plugin {
     /**
      * Returns the real language code, even when an empty one is given
      * (eg. resolves th default language)
+     *
+     * @param string $lc
+     * @return string
      */
     function realLC($lc) {
         global $conf;
@@ -121,16 +148,20 @@ class helper_plugin_translation extends DokuWiki_Plugin {
     /**
      * Check if current ID should be translated and any GUI
      * should be shown
+     *
+     * @param string $id
+     * @param bool   $checkact
+     * @return bool
      */
     function istranslatable($id, $checkact = true) {
         global $ACT;
 
         if($checkact && $ACT != 'show') return false;
-        if($this->tns && strpos($id, $this->tns) !== 0) return false;
+        if($this->translationNs && strpos($id, $this->translationNs) !== 0) return false;
         $skiptrans = trim($this->getConf('skiptrans'));
         if($skiptrans && preg_match('/' . $skiptrans . '/ui', ':' . $id)) return false;
         $meta = p_get_metadata($id);
-        if($meta['plugin']['translation']['notrans']) return false;
+        if(!empty($meta['plugin']['translation']['notrans'])) return false;
 
         return true;
     }
@@ -140,15 +171,13 @@ class helper_plugin_translation extends DokuWiki_Plugin {
      */
     function showAbout() {
         global $ID;
-        global $conf;
-        global $INFO;
 
         $curlc = $this->getLangPart($ID);
 
         $about = $this->getConf('about');
         if($this->getConf('localabout')) {
-            list($lc, $idpart) = $this->getTransParts($about);
-            list($about, $name) = $this->buildTransID($curlc, $idpart);
+            list(/* $lc */, $idpart) = $this->getTransParts($about);
+            list($about, /* $name */) = $this->buildTransID($curlc, $idpart);
             $about = cleanID($about);
         }
 
@@ -170,9 +199,8 @@ class helper_plugin_translation extends DokuWiki_Plugin {
         $result = array();
 
         list($lc, $idpart) = $this->getTransParts($id);
-        $lang = $this->realLC($lc);
 
-        foreach($this->trans as $t) {
+        foreach($this->translations as $t) {
             if($t == $lc) continue; //skip self
             list($link, $name) = $this->buildTransID($t, $idpart);
             if(page_exists($link)) {
@@ -236,7 +264,7 @@ class helper_plugin_translation extends DokuWiki_Plugin {
         }
 
         // insert items
-        foreach($this->trans as $t) {
+        foreach($this->translations as $t) {
             $out .= $this->getTransItem($t, $idpart);
         }
 
@@ -297,15 +325,19 @@ class helper_plugin_translation extends DokuWiki_Plugin {
         // local language name
         $localname = $this->getLocalName($lang);
 
+        $divClass = 'li';
         // current?
         if($ID == $link) {
             $sel = ' selected="selected"';
             $class .= ' cur';
+            $divClass .= ' cur';
         } else {
             $sel = '';
         }
 
         // flag
+        $flag = false;
+        $style = '';
         if(isset($this->opts['flag'])) {
             $flag = DOKU_BASE . 'lib/plugins/translation/flags/' . hsc($lang) . '.gif';
             $style = ' style="background-image: url(\'' . $flag . '\')"';
@@ -331,7 +363,7 @@ class helper_plugin_translation extends DokuWiki_Plugin {
             $out .= $display;
             $out .= '</option>';
         } else {
-            $out .= '<li><div class="li">';
+            $out .= "<li><div class='$divClass'>";
             $out .= '<a href="' . wl($link) . '" class="' . $class . '" title="' . hsc($localname) . '">';
             if($flag) $out .= '<img src="' . $flag . '" alt="' . hsc($lang) . '" height="11" />';
             $out .= $display;
@@ -345,7 +377,7 @@ class helper_plugin_translation extends DokuWiki_Plugin {
     /**
      * Checks if the current page is a translation of a page
      * in the default language. Displays a notice when it is
-     * older than the original page. Tries to lin to a diff
+     * older than the original page. Tries to link to a diff
      * with changes on the original since the translation
      */
     function checkage() {
@@ -356,17 +388,19 @@ class helper_plugin_translation extends DokuWiki_Plugin {
         $lng = $this->getLangPart($ID);
         if($lng == $this->defaultlang) return;
 
-        $rx = '/^' . $this->tns . '((' . join('|', $this->trans) . '):)?/';
+        $rx = '/^' . $this->translationNs . '((' . join('|', $this->translations) . '):)?/';
         $idpart = preg_replace($rx, '', $ID);
 
         // compare modification times
-        list($orig, $name) = $this->buildTransID($this->defaultlang, $idpart);
+        list($orig, /* $name */) = $this->buildTransID($this->defaultlang, $idpart);
         $origfn = wikiFN($orig);
         if($INFO['lastmod'] >= @filemtime($origfn)) return;
 
         // get revision from before translation
         $orev = 0;
-        $revs = getRevisions($orig, 0, 100);
+
+        $changelog = new PageChangelog($orig);
+        $revs = $changelog->getRevisions(0, 100);
         foreach($revs as $rev) {
             if($rev < $INFO['lastmod']) {
                 $orev = $rev;
@@ -380,13 +414,31 @@ class helper_plugin_translation extends DokuWiki_Plugin {
         // build the message and display it
         $orig = cleanID($orig);
         $msg = sprintf($this->getLang('outdated'), wl($orig));
-        if($orev) {
-            $msg .= sprintf(
-                ' ' . $this->getLang('diff'),
-                wl($orig, array('do' => 'diff', 'rev' => $orev))
-            );
+
+        $difflink = $this->getOldDiffLink($orig, $INFO['lastmod']);
+        if ($difflink) {
+            $msg .= sprintf(' ' . $this->getLang('diff'), $difflink);
         }
 
         echo '<div class="notify">' . $msg . '</div>';
+    }
+
+    function getOldDiffLink($id, $lastmod) {
+        // get revision from before translation
+        $orev = false;
+        $changelog = new PageChangelog($id);
+        $revs = $changelog->getRevisions(0, 100);
+        foreach($revs as $rev) {
+            if($rev < $lastmod) {
+                $orev = $rev;
+                break;
+            }
+        }
+        if($orev && !page_exists($id, $orev)) {
+            return false;
+        }
+        $id = cleanID($id);
+        return wl($id, array('do' => 'diff', 'rev' => $orev));
+
     }
 }
