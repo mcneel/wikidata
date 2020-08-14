@@ -16,7 +16,7 @@ class syntax_plugin_vshare extends DokuWiki_Syntax_Plugin {
      * Constructor.
      * Intitalizes the supported video sites
      */
-    function syntax_plugin_vshare(){
+    function __construct(){
         $this->sites =  confToHash(dirname(__FILE__).'/sites.conf');
     }
 
@@ -44,7 +44,7 @@ class syntax_plugin_vshare extends DokuWiki_Syntax_Plugin {
     /**
      * Parse the parameters
      */
-    function handle($match, $state, $pos, &$handler){
+    function handle($match, $state, $pos, Doku_Handler $handler){
         $command = substr($match,2,-2);
 
         // title
@@ -69,13 +69,13 @@ class syntax_plugin_vshare extends DokuWiki_Syntax_Plugin {
             $height = $m[2];
         }elseif(strpos($param,'small') !== false){      // small
             $width  = 255;
-            $height = 210;
+            $height = 143;
         }elseif(strpos($param,'large') !== false){      // large
             $width  = 520;
-            $height = 406;
+            $height = 293;
         }else{                                          // medium
             $width  = 425;
-            $height = 350;
+            $height = 239;
         }
 
         $paramm = array();
@@ -83,6 +83,11 @@ class syntax_plugin_vshare extends DokuWiki_Syntax_Plugin {
         $urlparam = array();
         foreach($paramm as $key => $value) {
             switch($key) {
+                case 'list':
+                    if(preg_match('/^[-\w]+$/',$value)) { 
+                        $urlparam[] = $key . '=' . $value;
+                    }
+                    break;
                 case 'rel':
                 case 'autoplay':
                 case 'ap':
@@ -144,7 +149,7 @@ class syntax_plugin_vshare extends DokuWiki_Syntax_Plugin {
     /**
      * Render the flash player
      */
-    function render($mode, &$R, $data){
+    function render($mode, Doku_Renderer $R, $data){
         if($mode != 'xhtml') return false;
         if(is_null($data)) return false;
 
@@ -172,6 +177,13 @@ class syntax_plugin_vshare extends DokuWiki_Syntax_Plugin {
 
             $R->doc .= '</div>';
         }else{
+            // use redirector for HTTP embeds on SSL sites
+            if(is_ssl() && substr($data['url'], 0, 7) == 'http://') {
+                $data['url'] = DOKU_BASE.'lib/plugins/vshare/redir.php'.
+                               '?url='.rawurlencode($data['url']).
+                               '&hash='.md5(auth_cookiesalt().'vshare'.$data['url']);
+            }
+
             // Normal output
             if($data['type'] == 'flash') {
                 // embed flash

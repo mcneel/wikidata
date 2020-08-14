@@ -25,6 +25,14 @@ var sites = {
     'bliptv':      '(?:blip\\.tv\\/play\\/([a-zA-Z0-9]+\\.(?:html|x))\\?p=1|(http?\\:\\/\\/blip\\.tv\\/(?!play)(?:[a-zA-Z0-9_\\-]+)\\/(?:[a-zA-Z0-9_\\-]+)))',
     'break':       'break\\.com\\/video\\/(?:(?:[a-z]+)\\/)?(?:[a-z\\-]+)-([0-9]+)',
     'viddler':     'viddler\\.com\\/(?:embed|v)\\/([a-z0-9]{8})',
-    'slideshare':  '(?:(?:slideshare\\.net\\/slideshow\\/embed_code\\/|id=)([0-9]+)|(https?\\:\\/\\/www\\.slideshare\\.net\\/(?:[a-zA-Z0-9_\\-]+)\\/(?:[a-zA-Z0-9_\\-]+)))'
+    'msoffice':    '(?:office\\.com.*[&?]videoid=([a-z0-9\\-]+))',
+    'slideshare':  '(?:(?:slideshare\\.net\\/slideshow\\/embed_code\\/|id=)([0-9]+)|(https?\\:\\/\\/www\\.slideshare\\.net\\/(?:[a-zA-Z0-9_\\-]+)\\/(?:[a-zA-Z0-9_\\-]+)))',
+    'archiveorg':  'archive\\.org\\/embed\\/([a-zA-Z0-9_\\-]+)',
+    'niconico':    'nicovideo\\.jp/watch/(sm[0-9]+)',
+    'youku':       'v\\.youku\\.com/v_show/id_([[0-9A-Za-z]]+)\\.html',
+    'tudou':       'tudou\\.com/programs/view/([0-9A-Za-z]+)',
+    'bilibili':    'bilibili\\.com/video/av([0-9])+/',
+    'bitchute':    'bitchute\\.com\\/video\\/([a-zA-Z0-9_\\-]+)',
+    'coub':        'coub\\.com\\/view\\/([a-zA-Z0-9_\\-]+)'
 };
 

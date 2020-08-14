@@ -9,46 +9,47 @@
 // must be run within Dokuwiki
 if(!defined('DOKU_INC')) die();
 
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'action.php');
-
+/**
+ * Class action_plugin_redirect
+ *
+ * Execute redirects
+ */
 class action_plugin_redirect extends DokuWiki_Action_Plugin {
 
     /**
      * register the eventhandlers
+     *
+     * @param Doku_Event_Handler $controller
      */
-    function register(&$controller){
-        $controller->register_hook('DOKUWIKI_STARTED',
-                                   'AFTER',
-                                   $this,
-                                   'handle_start',
-                                   array());
+    public function register(Doku_Event_Handler $controller) {
+        $controller->register_hook(
+            'DOKUWIKI_STARTED',
+            'AFTER',
+            $this,
+            'handle_start',
+            array()
+        );
     }
 
     /**
      * handle event
+     *
+     * @param Doku_Event $event
+     * @param array $param
      */
-    function handle_start(&$event, $param){
+    public function handle_start(Doku_Event $event, $param) {
         global $ID;
         global $ACT;
+        global $INPUT;
 
         if($ACT != 'show') return;
+        if($INPUT->get->str('redirect') == 'no') return;
 
-        $redirects = confToHash(dirname(__FILE__).'/redirect.conf');
-        if($redirects[$ID]){
-            if(preg_match('/^https?:\/\//',$redirects[$ID])){
-                send_redirect($redirects[$ID]);
-            }else{
-                if($this->getConf('showmsg')){
-                    msg(sprintf($this->getLang('redirected'),hsc($ID)));
-                }
-                $link = explode('#', $redirects[$ID], 2);
-                send_redirect(wl($link[0] ,'',true) . '#' . rawurlencode($link[1]));
-            }
-            exit;
-        }
+        /** @var helper_plugin_redirect $hlp */
+        $hlp = plugin_load('helper', 'redirect');
+        $url = $hlp->getRedirectURL($ID);
+        if($url) send_redirect($url);
     }
-
 
 }
 

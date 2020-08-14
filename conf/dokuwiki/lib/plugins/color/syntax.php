@@ -28,7 +28,7 @@ class syntax_plugin_color extends DokuWiki_Syntax_Plugin {
     /**
      * Handle the match
      */
-    function handle($match, $state, $pos, &$handler){
+    function handle($match, $state, $pos, Doku_Handler $handler){
         switch ($state) {
           case DOKU_LEXER_ENTER :
                 list($color, $background) = preg_split("/\//u", substr($match, 6, -1), 2);
@@ -45,7 +45,7 @@ class syntax_plugin_color extends DokuWiki_Syntax_Plugin {
     /**
      * Create output
      */
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         if($mode == 'xhtml'){
             list($state, $match) = $data;
             switch ($state) {
@@ -59,19 +59,53 @@ class syntax_plugin_color extends DokuWiki_Syntax_Plugin {
             }
             return true;
         }
+        if($mode == 'odt'){
+            list($state, $match) = $data;
+            switch ($state) {
+              case DOKU_LEXER_ENTER :      
+                list($color, $background) = $match;
+                if (class_exists('ODTDocument')) {
+                    $renderer->_odtSpanOpenUseCSS (NULL, 'style="'.$color.$background.'"');
+                }
+                break;
+ 
+              case DOKU_LEXER_UNMATCHED :
+                $renderer->cdata($match);
+                break;
+
+              case DOKU_LEXER_EXIT :
+                if (class_exists('ODTDocument')) {
+                    $renderer->_odtSpanClose();
+                }
+                break;
+            }
+            return true;
+        }
+        if($mode == 'metadata'){
+            list($state, $match) = $data;
+            switch ($state) {
+              case DOKU_LEXER_UNMATCHED :
+                if ($renderer->capture) $renderer->cdata($match);
+                break;
+            }
+            return true;
+        }
         return false;
     }
  
     // validate color value $c
-    // this is cut price validation - only to ensure the basic format is correct and there is nothing harmful
-    // three basic formats  "colorname", "#fff[fff]", "rgb(255[%],255[%],255[%])"
+    // this is cut price validation - only to ensure there is nothing harmful
+    // recognize rgb, rgba, hsl, hsla but don't try to valiedate their arguments,
+    // just ensure that no illegal characters are included therein
+    // and that the number of characters is reasonable
+    // leave it to the browsers to ignore a faulty colour specification
     function _isValid($c) {
         $c = trim($c);
  
         $pattern = "/^\s*(
-            ([a-zA-Z]+)|                                #colorname - not verified
-            (\#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}))|        #colorvalue
-            (rgb\(([0-9]{1,3}%?,){2}[0-9]{1,3}%?\))     #rgb triplet
+            ([a-zA-Z]+)|                         #colorname - not verified
+            (\#([0-9a-fA-F]{3,8}))|              #colorvalue including possible alpha
+            ((rgba?|hsla?)\([0-9%., ]{5,40}\))   #rgb[a], hsl[a]
             )\s*$/x";
  
         if (preg_match($pattern, $c)) return trim($c);
