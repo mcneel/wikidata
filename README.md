@@ -64,6 +64,8 @@ sudo -u www-data git config user.name "Steve Baer"
 ```bash
 sudo cp /var/www/dokuwiki/wikidata/conf/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf
 sudo cp /var/www/dokuwiki/wikidata/conf/dokuwiki/conf/* /var/www/dokuwiki/conf/
+sudo cp /var/www/dokuwiki/wikidata/conf/letsencrypt/renew.sh /etc/letsencrypt/renew.sh
+sudo chmod 700 /etc/letsencrypt/renew.sh
 sudo cp -R /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/plugins/* /var/www/dokuwiki/lib/plugins/
 sudo cp -R /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/tpl/* /var/www/dokuwiki/lib/tpl/
 ```
@@ -76,54 +78,31 @@ sudo apt-get update
 sudo apt-get install certbot
 ```
 13. Get SSL cert:
-`sudo certbot certonly --webroot -w /var/www/html -d wiki.mcneel.com -d www.wiki.mcneel.com`
-
-
-
-
-
-
-
-
-
-
-
-
-11. Update Diffie-Helman Epehemeral Parameters
-From https://raymii.org/s/tutorials/Strong_SSL_Security_On_lighttpd.html
-and http://security.stackexchange.com/questions/95178/diffie-hellman-parameters-still-calculating-after-24-hours
+```bash
+sudo certbot certonly --webroot -w /var/www/dokuwiki -d wiki.mcneel.com -d www.wiki.mcneel.com
 ```
-cd /etc/ssl/certs
-openssl dhparam -dsparam -out dhparam.pem 4096
+
+14. Set up SSL renewal:
 ```
-12. Add it you your lighttpd config:
+sudo crontab -e
+add the following line:
+0 0 * * * /etc/letsencrypt/renew.sh
 ```
-ssl.dh-file = "/etc/ssl/certs/dhparam.pem" 
-ssl.ec-curve = "secp384r1"
-```
+
 13. Set up user accounts. Our user account list is in a separate private SVN repo since we don't want the email addresses in it to be public http://subversion.mcneel.com/www/wiki/ **Paste** the contents of this list into the nano editor and save
 ```bash
 sudo touch /var/www/dokuwiki/conf/users.auth.php
 sudo nano /var/www/dokuwiki/conf/users.auth.php
 ```
 
-14. Create an SLL folder and add the McNeel wildcard SSL certificate to it:
-```bash
-sudo mkdir /etc/lighttpd/ssl
-sudo touch /etc/lighttpd/ssl/star.mcneel.com.pem
-sudo chmod 400 /etc/lighttpd/ssl/star.mcneel.com.pem
-sudo nano /etc/lighttpd/ssl/star.mcneel.com.pem
-
-```
-15. Paste the contents of both the public and private SSL keys into star.mcneel.com.pem
 16. Make sure everything in the dokuwiki directory has the proper ownership
 ```bash
 sudo chown -R www-data:www-data /var/www/dokuwiki
 ```
 17. Restart the web Server
 ```bash
-#restart lightttpd
-sudo /etc/init.d/lighttpd force-reload
+#restart lighttpd
+sudo /etc/init.d/lighttpd restart
 ```
 18. Point your browser to the public IP address for this server. If everything works :beer:
 
