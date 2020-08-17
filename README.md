@@ -6,7 +6,7 @@ The McNeel wiki automatically synchronizes with the text files in this git repos
 
 ----
 **To bring up a new wiki server**
-- Launch new Ubuntu instance on EC2. Typical configuration:
+1. Launch new Ubuntu instance on EC2. Typical configuration:
   - Ubuntu Server 18.04 LTS (HVM), SSD Volume Type - 64 bit
   - t2.small
   - auto-assign public IP = Enable
@@ -14,8 +14,8 @@ The McNeel wiki automatically synchronizes with the text files in this git repos
   - 8 Gb storage
   - use PublicHttpServer security group
   - use dokuwikikey as ssh key
-- ssh into the new instance
-- Update and install required modules
+2. ssh into the new instance
+3. Update and install required modules
 ```bash
 sudo apt-get update
 sudo apt-get install lighttpd -y
