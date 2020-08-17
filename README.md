@@ -67,6 +67,28 @@ sudo cp /var/www/dokuwiki/wikidata/conf/dokuwiki/conf/* /var/www/dokuwiki/conf/
 sudo cp -R /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/plugins/* /var/www/dokuwiki/lib/plugins/
 sudo cp -R /var/www/dokuwiki/wikidata/conf/dokuwiki/lib/tpl/* /var/www/dokuwiki/lib/tpl/
 ```
+
+11. Provide a DNS hostname for the server in Route53. Wait your browser resolves the domain name.
+12. Install certbot:
+```bash
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot
+```
+13. Get SSL cert:
+`sudo certbot certonly --webroot -w /var/www/html -d wiki.mcneel.com -d www.wiki.mcneel.com`
+
+
+
+
+
+
+
+
+
+
+
+
 11. Update Diffie-Helman Epehemeral Parameters
 From https://raymii.org/s/tutorials/Strong_SSL_Security_On_lighttpd.html
 and http://security.stackexchange.com/questions/95178/diffie-hellman-parameters-still-calculating-after-24-hours
