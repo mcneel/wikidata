@@ -20,6 +20,7 @@ The McNeel wiki automatically synchronizes with the text files in this git repos
 sudo apt-get update
 sudo apt-get install lighttpd -y
 sudo apt-get install php-cgi -y
+sudo apt-get install php-xml -y
 ```
 4. The following steps can be pasted into terminal
 ```bash
