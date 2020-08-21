@@ -49,6 +49,11 @@ $meta['doorkeeper-key']      = array('string');
 $meta['doorkeeper-secret']   = array('string');
 $meta['doorkeeper-authurl']  = array('string');
 $meta['doorkeeper-tokenurl'] = array('string');
+$meta['rhinoaccounts-key']        = array('string');	
+$meta['rhinoaccounts-secret']     = array('string');	
+$meta['rhinoaccounts-authurl']    = array('string');	
+$meta['rhinoaccounts-tokenurl']   = array('string');	
+$meta['rhinoaccounts-userinfourl'] = array('string');
 $meta['mailRestriction']     = array('string','_pattern' => '!^(@[^,@]+(\.[^,@]+)+(,|$))*$!'); // https://regex101.com/r/mG4aL5/3
 $meta['singleService']       = array('multichoice',
                                      '_choices' => array(
@@ -60,5 +65,6 @@ $meta['singleService']       = array('multichoice',
                                          'Github',
                                          'Yahoo',
                                          'Doorkeeper',
+                                         'RhinoAccounts',
                                          'Keycloak'));
 $meta['register-on-auth']    = array('onoff','_caution' => 'security');

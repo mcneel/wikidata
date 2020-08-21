@@ -227,10 +227,10 @@ class auth_plugin_oauth extends auth_plugin_authplain {
         if($user) {
             $sinfo = $this->getUserData($user);
             // check if the user allowed access via this service
-            if(!in_array($this->cleanGroup($servicename), $sinfo['grps'])) {
-                msg(sprintf($this->getLang('authnotenabled'), $servicename), -1);
-                return false;
-            }
+            //if(!in_array($this->cleanGroup($servicename), $sinfo['grps'])) {
+            //   msg(sprintf($this->getLang('authnotenabled'), $servicename), -1);
+            //    return false;
+            //}
             $uinfo['user'] = $user;
             $uinfo['name'] = $sinfo['name'];
             $uinfo['grps'] = array_merge((array) $uinfo['grps'], $sinfo['grps']);
@@ -294,13 +294,14 @@ class auth_plugin_oauth extends auth_plugin_authplain {
      * @return bool|string
      */
     protected function getUserByEmail($mail) {
-        if($this->users === null){
-            if(is_callable([$this, '_loadUserData'])) {
-                $this->_loadUserData();
-            } else {
-                $this->loadUserData();
-            }
-        }
+        if($this->users === null) $this->_loadUserData();
+        //if($this->users === null){
+        //    if(is_callable([$this, '_loadUserData'])) {
+        //        $this->_loadUserData();
+        //    } else {
+        //        $this->loadUserData();
+        //    }
+        //}
         $mail = strtolower($mail);
 
         foreach($this->users as $user => $uinfo) {
