@@ -1,0 +1,19 @@
+Trouble shooting slow network saves.
+
+We occasionally get reports that saving a Rhino file saving to a network disk is much slower that saving to the computer Rhino is running on. We have been unable to reproduce this problem using our own networks and using various cloud storage services. 
+
+
+This information might help your IT department tune your server settings.
+
+  *  By default, Rhino saves files by sending 64KB chunks of memory to disk. When a file contains large objects (big meshes, big polysurfaces, ...) there is a "seek" operation for each large object. You can use theSetArchiveMemoryBufferSize command to change the default chunk size. As a first attempt, change 64 to 32000 and try saving. If that helps, then it's likely your server has a high overhead per write transaction. If that doesn't help, set the size back to 64.
+  *  Some of our customers have had success disabling VMQ ( https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/14 )
+  *  This Discourse post gives a list of some other things to try: https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/13
+
+
+If none of this helps, please use Discourse or contact technical support and include this information:
+
+  - The information from Rhino main menu > Help > System information.
+  - Network server type and any special network settings you are using.
+  - List any virus checking software used on the local computer and on the server.
+  - Find a file that saves fast to a local disk and saves slow to a network disk. Determine the size of that file and create a Rhino file of the same size containing only lines (use array to make thousands of lines from one). See if the lines file also saves slowly. (Saving the lines file sends thousands of small chunks to the server with very few seek operations. Knowing the results of the lines test lets us either focus on or rule out newtwork seek speed.)
+
