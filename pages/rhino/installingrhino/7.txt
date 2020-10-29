@@ -1,0 +1,65 @@
+===== Automating installation of Rhino 7 =====
+
+Rhino 7 installs from a single executable installer, and can be fully automated.
+
+setup.exe [Action] [Option] [Parameters]
+
+//Note: "setup.exe" shown above is a place holder for the current Rhino installer file,\\ e.g. [rhino_en-us_7.#...exe]//
+
+==== Offline Installation:====
+If you are deploying in an environment where the client computers do not have internet access, [[rhino:installingrhino:6:offline|follow these instructions for installing offline]] before deployment.
+
+====Command line options:====
+^Action ^Description  ^
+|**-package** | (default) install |
+|**-uninstall** | uninstall |
+|**-repair** | repair (or install if not installed) |
+|**-layout** | create a local image of the bootstrapper for offline install |
+
+^Option ^Description  ^
+|**-quiet**| perform action without any user interface. |
+| |if a reboot is required, system will restart without prompting |
+|**-passive** | perform action with progress bar interface | 
+|**-norestart** | suppress any restarts |
+|**-promptrestart** | (default) prompt if a restart is required |
+
+
+^Parameters ^Description  ^
+|//All parameters are optional//|
+|**LICENSE_METHOD**| One of: STANDALONE, ZOO (leave blank for Cloud Zoo)|
+|**LICENSE_KEY** | The license key to install (**required if** LICENSE_METHOD=STANDALONE) |
+|**LICENSE_VALIDATION_CODE**| Validation code for your Rhino license |
+|**ZOO_SERVER** | IP or FQDN of Zoo server to query |
+|**INSTALLDIR** | Full path to folder where Rhino will be installed |
+|**CUSTOMER_NAME** | Customer name to show in splash screen |
+|**COMPANY_NAME** | Company name to show in splash screen |
+|**SEND_STATISTICS** | **1** = send anonymous installation statistics to McNeel (default) |
+|                    | **0** = do not send |
+|**ENABLE_AUTOMATIC_UPDATES** (New in Rhino 6.15) | **1** = allow the installer to check for and download updates. |
+|                             | **0** = do not allow automatic updates and sending usage statistics |
+| 
+|**DISABLE_INTERNET_ACCESS** (new in Rhino 6.15) | **1** = Disable all internet access for the installer, Rhino, and McNeel Updates. This disables all internet access from Rhino, including automatic updates detection and download, sending anonymous usage statistics, online help, splash screen news and tips, downloading of rendering textures, access to the Cloud Zoo, and other features that try to access the internet. |
+|                            | **0** (default) = allow all internet access |
+
+==== Language Options ====
+Set to 1 to install the language, 0 to not install.
+The language of the installer you downloaded will install by default unless set to 0. If you download the **French** installer and run it with only **INSTALL_EN=1**, you will get both English and French.
+^Language Parameters ^Description ^
+|**INSTALL_EN**| English  |
+|**INSTALL_CN**| Simplified Chinese |
+|**INSTALL_CS**| Czech |
+|**INSTALL_DE**| German |
+|**INSTALL_ES**| Spanish |
+|**INSTALL_FR**| French |
+|**INSTALL_IT**| Italian |
+|**INSTALL_JA**| Japanese |
+|**INSTALL_KO**| Korean |
+|**INSTALL_PL**| Polish |
+|**INSTALL_PT**| Portuguese |
+|**INSTALL_RU**| Russian |
+|**INSTALL_TW**| Traditional Chinese |
+
+====Examples====
+<code>
+rhino_en-us_7.#.#####.#####.exe -package -passive LICENSE_METHOD=ZOO ZOO_SERVER=10.0.0.1 INSTALL_FR=1 INSTALL_DE=1
+</code>
