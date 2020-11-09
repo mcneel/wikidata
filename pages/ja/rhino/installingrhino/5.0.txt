@@ -1,34 +1,37 @@
-====== Rhino 5.0のインストールを自動化する ======
-=====Rhinocerosのインストール=====
-  * [[rhino:debuginstaller|Rhino 5.0 Diagnosing Errors During Installation]]
-  * [[rhino:installrhi| Installing RHI Files for All Users （RHIファイルをすべてのユーザー向けにインストール）]]
+====== Rhino 5 のインストールを自動化する ======
+=====Rhinoをインストール=====
 
-======Active DirectoryまたはSMSによるRhino 5.0 MSIの展開======
-=====概要=====
-ここで紹介する手順は、主にActive DirectoryやSMSを使って組織全体でRhino5.0を展開したいシステム管理者向けです。
+  * [[rhino:debuginstaller|Diagnosing errors during Rhino 5 installation]]
+  * [[rhino:installrhi|Installing RHI Files for All Users]]
 
-これらのインストールは、カスタマイズされたSetup.iniを含むフォルダからMSIを実行することで自動展開にも使用できます。これには Active Directoryや SMS、その他の展開ツールは必要としません。
+=====Active DirectoryまたはSMSによるRhino5 MSIの展開=====
 
-=====条件=====
-Rhino 5.0インストールの前に、**Microsoft .NET 4.0 Full Framework**がターゲットシステムにインストールされている必要があります。インストーラーはDVDのInstallers\Prerequisitesフォルダに含まれています。
+Active DirectoryやSMSを使い、組織全体でRhino5を展開したいシステム管理者の方に役立つ手順です。
 
-=====展開の準備=====
-   - **Setup.ini**ファイルを編集し、インストールしようとしているMSIファイルの隣に置きます。**メモ:** # 記号の後の文字は、#記号が行の中にあった場合でもすべてインストーラによって無視されます。
+これらのテクニックは、カスタマイズされた Setup.ini を含むフォルダからMSIを実行することで、自動インストールにも使用できます。Active Directoryや SMS、その他の展開ツールは必要としません。
 
-=====展開の構成=====
+====条件====
+Rhino 5 をインストールする前に、[[http://www.microsoft.com/en-us/download/details.aspx?id=17718|Microsoft .NET Framework 4]] をインストールしておく必要があります。Rhinoのダウンロードページから最新の[[http://www.rhino3d.com/download|完全インストール]]をダウンロードし、こちらのインストラクションに従って[[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|ダウンロードした Rhino 5 EXE をフォルダーに解凍します。]] .NETインストーラーは必要に応じて[[http://www.microsoft.com/ja-jp/download/details.aspx?id=17718|Microsoft]]のウェブサイトからダウンロードしてください。
+
+====展開の準備====
+**Setup.ini**ファイルを編集してインストールするMSIファイルの隣に置きます。 
+
+**メモ:** #記号の後の文字については、#記号が行の中にあった場合でもインストーラーは全て無視します。
+
+====展開の構成====
   - **Active Directoryユーザーとコンピューター**を開きます。
-  - Rhino 5.0を受信するユーザーまたはコンピューターを含むグループまたは組織単位を右クリックし、プロパティをクリックします。
-  - グループポリシータブで、名前を**Install Rhino 5.0**とした新しいグループポリシーオブジェクトを追加します。
-  - **Install Rhino 5.0**グループポリシーオブジェクトを選択し、**編集...**をクリックします。 Group Policy Object, then click **Edit...**
+  - Rhino 5 を受け取るユーザーまたはコンピューターを含むグループまたは組織単位を右クリックし、**プロパティ**をクリックします。
+  - グループポリシータブで、名前を **Install Rhino 5** とした新しいグループポリシーオブジェクトを追加します。
+  - **Instal Rhino 5.0** グループポリシーオブジェクトを選択し、**編集**をクリックします。
   - コンピューターごと、またはユーザーごとの（グループポリシーをよくお調べの上、ご自身の組織に最適な方法を選んで）いずれかを決定します。
   - （上記でどちらを選択したかによって）ユーザーの構成またはコンピューターの構成で**ソフトウェアの設定**を展開し、**ソフトウェアのインストール**を右クリックして**新規作成 -> パッケージ**をクリックします。
-  - **S:\Rhino 5.0\rh50.msi** を選択してインストールします
-  -ソフトウェアの展開ダイアログボックスで**割り当て**を選んでクリックします。
-  - 右側のウィンドウに表示される Rhino 5.0を右クリックし、**プロパティ**をクリックします。
-  - **ログオン時にこのアプリケーションをインストールするチェックボックス**を選択します。（あるいは組織での必要性に合わせて展開オプションをカスタマイズします。）
-  - 6-10のステップを繰り返して**HelpMedia.msi**と**LanguagePack_en-us.msi**（プラス必要に応じてその他の言語パック）を展開します。
+  - **S:\Rhino 5.0\rh50.msi** を選択してインストールします。
+  - ソフトウェアの展開ダイアログボックスで**割り当て**を選び、**OK**をクリックします。
+  - 右側のウィンドウに表示される **Rhino 5.0** を右クリックし、**プロパティ**をクリックします。
+  - **ログオン時にこのアプリケーションをインストールするチェックボックス**を選択します。（必要に応じて展開オプションをカスタマイズしても構いません。）
+  - 6から10の手順を繰り返して HelpMedia.msi、LanguagePack_en-us.msi （プラス必要に応じた他の言語パック）を展開します。
 
-======スクリプトを使用したRhino 5.0のインストール（バッチファイル）======
+=====スクリプトを使った Rhino 5 のインストール（バッチファイル）=====
 英語をサポートするRhino 5 32ビットをスタンドアロンライセンスとして、ライセンスキー "AAAABBBBCCCCDDDDEEEE" を使ってインストールするには以下を実行します:
 
 <code>
@@ -36,7 +39,7 @@ msiexec.exe /i"D:\Installers\setup_x86_en-us.msi" INSTALLDIR="C:\Program Files (
  
 </code>
  
-英語、フランス語、ドイツ語をサポートするRhino 5 64ビットをスタンドアロンライセンスとして、ライセンスキー "AAAABBBBCCCCDDDDEEEE"を使ってインストールするには以下を実行します:
+英語、フランス語、ドイツ語をサポートするRhino 5 64ビットをスタンドアロンライセンスとして、ライセンスキー "AAAABBBBCCCCDDDDEEEE" を使ってインストールするには以下を実行します:
  
 <code>
 msiexec.exe /i"D:\Installers\setup_x64_en-us.msi" INSTALLDIR="C:\Program Files\Rhinoceros 5 (64-bit)" RMA_CDKEY=AAAABBBBCCCCDDDDEEEE INSTALL_EN=1 INSTALL_DE=1 INSTALL_FR=1
@@ -45,19 +48,21 @@ msiexec.exe /i"D:\Installers\setup_x64_en-us.msi" INSTALLDIR="C:\Program Files\R
      
 **サイレントインストール:** ユーザーインターフェイスを使わずにインストールする場合、msiexecは複数のオプションをサポートしています。/qスイッチの詳細についてはMicrosoftのドキュメント、[[http://technet.microsoft.com/ja-jp/library/cc759262(v=ws.10).aspx|Msiexec (コマンド ライン オプション)]]をご覧ください。
 
-**メモ:** 32ビット、64ビットのRhinoは別のディレクトリにインストールする必要があります。
-パラメータの説明とその他考えられることについては**[[ja:rhino:automatedinstalls|Rhino4Setup.iniの編集]]**をご覧ください。
+**メモ** 32ビット、64ビットのRhinoは別のディレクトリにインストールする必要があります。
+パラメーターの説明およびその他の例については、[[jp:rhino:automatedinstalls|Rhino4Setup.ini の編集]] をご覧ください。
 
-======スクリプトおよびINIファイルを使用した Rhino 5.0のインストール======
-- インストールDVDの Installersフォルダにある**Setup.ini**を編集します。インストールプロセスを設定したいパラメータからコメント (#) を削除します。
+=====スクリプトおよびINIファイルを使用した Rhino 5 のインストール=====
+インストールDVDのインストーラーフォルダーにある **Setup.ini** を編集します。ダウンロードしたファイルからインストールしている場合はこちらのインストラクションに従って[[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|ダウンロードした Rhino 5 EXE をフォルダーに解凍します。]] インストールプロセスで設定したいパラメーターからコメント (#) を削除してください。
 
-**メモ:** # 記号の後の文字は、#記号が行の中にあった場合でもすべてインストーラによって無視されます。構成の詳細については**[[rhino:installingrhio:5.0:setupini|Editing Setup.ini]]**をご覧ください。
+**メモ:** 行中の#記号の後にある文字については、#記号が行の途中にあった場合でもインストーラーは全て無視します。設定の詳細については **[[rhino:installingrhio:5.0:setupini|Editing Setup.ini]]** をご覧ください。
 
-- 32ビットと64ビットのRhinoをインストールするには、setup.ini ファイルを異なるパスで再構成する必要があります。同じフォルダに両方インストールすることは問題につながります。
-- MSIファイルを起動すると自動的に同じフォルダにあるINIファイルを見つけてパラメータを読み込み、サイレントにインストーラを実行します。
+Rhinoの32ビット版と64ビット版のインストールは異なるパスで setup.ini ファイルを再構成する必要があります。両方とも同じフォルダーにインストールしてしまうと問題発生につながりますのでご注意ください!
 
-**サンプル・バッチファイル:**\\
-**メモ:** 32ビット、64ビットのV5 Rhinoどちらも英語と英語のヘルプファイルをサポートする形でインストールします。V5 DVDからC:\Temp\InstallersフォルダにInstallersフォルダをコピー、必要に応じて**setup.ini**ファイルを編集し、以下の通りバッチファイルを作成したことを前提にしています。
+以下のバッチファイルを実行することで、インストーラーは同じフォルダーにあるINIファイルを見つけ、そこからパラメーターを読み込み、進行状況を閉める最低限のユーザーインターフェイスでインストールを行います。
+
+**バッチファイルの例**\\
+
+これはインストーラーフォルダーが Rhino 5 DVD から C:\Temp\Installers フォルダーにコピーされ、**setup.ini** ファイルが必要に応じて編集され、以下の内容を含むバッチファイルが作成されたことを前提に、Rhino 5 の32ビット版と64ビット版を英語（US English）で、英語のヘルプファイルをサポートしてインストールします:
 <code>
 
 msiexec /i C:\Temp\Installers\rhino5setup_en-us_x64.msi /qb
@@ -67,17 +72,17 @@ msiexec /i C:\Temp\Installers\HelpMedia.msi /qb
 
 </code>
 
-======言語パックのない不完全なRhino 5.0インストール======
-テンプレート、ツールバー、あるいはプラグインが欠けているとすれば、これは言語パックがインストールされていない場合の症状です。これはダウンロードしたファイルからインストールしている場合は不十分または"うまくいかなかった"インストール、 MSIスクリプトからインストールしている場合はそのインストールスクリプトのエラーが考えられます。
+=====言語パックのない不完全なRhino 5.0インストール=====
+テンプレート、ツールバー、あるいはプラグインが欠けているとすれば、これは言語パックがインストールされていない場合の症状です。これはダウンロードしたファイルからインストールしている場合は不十分または//うまくいかなかった//インストール、 MSIスクリプトからインストールしている場合はそのインストールスクリプトのエラーの可能性があります。
 
 Rhinoを上記のMSIインストールスクリプトでインストールし、言語パックのラインを忘れていた場合、MSIをマニュアルで実行してお使いのシステムに言語パックを入れる必要があります。
 
-言語サポートがインストールされているかどうか確認するには、こちらのLocalization、plug-ins、UIフォルダをご覧ください:
-C:\Users\<login>\AppData\Roaming\McNeel\Rhinoceros\5.0 
+言語サポートがインストールされているかどうか確認するには、こちらのLocalization、plug-ins、UIフォルダーをご覧ください:
+//C:\Users\<login>\AppData\Roaming\McNeel\Rhinoceros\5.0//. 
 
 これらのフォルダが欠けている、あるいは既にRhinoを開いた場合, ツールバー、テンプレート、ヘルプは見つからないでしょう。これを修正するには以下の方法をお試しください:
      - 言語パックのMSIを実行します。
-     - Rhinoを開き、**ToolbarReset**と入力します。
+     - Rhinoを開き、**ToolbarReset**と入力します。 
      - Rhinoを終了し、再度開きます。これはレジストリのスキームを削除し、再度開くことで欠けているコンポーネントをリセットします。
 
 うまくいかない場合:
@@ -87,40 +92,36 @@ C:\Users\<login>\AppData\Roaming\McNeel\Rhinoceros\5.0
   - 右クリックし、**変更**を選択します。
   - 再度Rhinoを開きます。
 
-======言語パックのMSIを検索======
-  - Rhinoの製品CDを見つけます。
-  - Installerフォルダをブラウズします。
+=====言語パックのMSIを検索=====
+  - Rhinoのダウンロードページから最新の[[http://www.rhino3d.com/download|完全インストール]]をダウンロードし、こちらのインストラクションに従って[[http://wiki.mcneel.com/rhino/rhino5/manual_extract_from_file|ダウンロードした Rhino 5 EXE をフォルダーに解凍します。]] 
+  - インストーラーフォルダーをブラウズします。
   - LanguagePack_XX-XX.msi を実行します。
  
-言語パックをインストールした後は:
+言語パックをインストールした後:
   - Rhinoを開きます。
-  - ToolbarReset と入力します。
-  - Rhinoを閉じ、再度開きます。
-これでテンプレートが読み込まれたはずです。
-もし読み込まれていない場合は:
+  - **ToolbarReset**と入力します。
+  - Rhinoを終了し、再度開きます。
+これでテンプレートがロードされているはずです。 
+うまくいかない場合は:
   - コントロールパネルを開きます。
-  - プログラムと機能にアクセスします。
-  - **Rhinoceros 5 Language Pack Installer (fr-FR) **など、Rhino言語パックエントリにスクロールします。
-  -右クリックし、**変更**を選択します。
-  -再度Rhinoを開きます
+  - プログラムと機能へアクセスします。
+  - **Rhinoceros 5 Language Pack Installer (fr-FR)**など、Rhino言語パックエントリにスクロールします。
+  - 右クリックし、**変更**を選択します。
+  - 再度Rhinoを開きます。
 
-======Rhino 5.0のインストール - Zooサーバーの指定======
-インストールの途中でZooサーバーを指定するには、こちらのラインをsetup.ini ファイルに追加するか:
+=====Rhino 5 のインストール &ndash; Zooサーバーの指定=====
+インストールの途中でZooサーバーを指定するには、こちらのラインを setup.ini ファイルに追加するか:
 
 <code>
 ZOO_SERVER=host.domain.com # Fully qualified domain name or IP address
 </code>
 
-あるいは 
-
-コマンドラインにZOO_SERVERプロパティをパスします:	
+あるいはコマンドラインにZOO_SERVERプロパティをパスします:
 <code>
 ZOO_SERVER=host.domain.com
 </code>
 
-あるいは
-
-[[ja:zoo:findzooserver#DNSを使用|DNSエントリを設定します]]
+あるいは[[zoo:findzooserverwin#using_dns|DNSエントリを設定します。]]
 
 \\
 
