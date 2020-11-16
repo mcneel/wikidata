@@ -1,55 +1,47 @@
-====== Manually Uninstalling Rhino 4.0 ======
-
+====== Manually Uninstalling Rhino ======
+//The following process applies to Rhino 4 and later (that includes Rhino 5, 6, 7.//
 \\
 
-====Problem====
+=====Problem=====
 During the startup, install or uninstall of Rhino, you get an error message like this:
 
-**The feature you are trying to use is on a network resource that is unavailable.**
+//The feature you are trying to use is on a network resource that is unavailable.//
+Click OK to try again, or enter an alternate path to a folder containing the installation package '<filename>.MSI' in the box below.
 
-**Click OK to try again, or enter an alternate path to a folder containing the installation package '<filename>.MSI' in the box below.**
-
-
-This applies to Rhino 4, 5, 6, and 7.
-
-====Cause====
+=====Cause=====
 The Windows Installer cache cannot find a file or registry key required for uninstall. This is a common problem caused by the Windows Installer Service. The best solution is to use **Windows Install Clean Up** to thoroughly remove the previous installation. After you clean up the previous install, you will be able to reinstall Rhino and get a valid install.
 
 
-====Resolution====
+=====Resolution - Steps 1, 2 & 3=====
 Manually remove Rhino and the Windows Installer registration for the product.
 
-===Try standard Program Uninstall==
+====1. Try standard Program Uninstall====
   - Go to Windows Start menu.
   - Select **Control Panel**.
   - Select **App and Features** (Add and Remove programs on Windows 8 and earlier.)
-  - Find any Rhinoceros x.0 entries and select uninstall.
-
-
-**Note:** You should only do the following procedures if uninstall fails from the Programs and Features section of Control Panel.
+  - Find the **Rhinoceros x.0** program on the list, pick and select **Uninstall** button.
 
   
-===Delete the Rhino install folder===
+====2. Delete the Rhino install folder==== 
   - Browse to //C:\Program Files\//.
   - Delete **Rhinoceros 4.0** or **Rhinoceros 4.0 Evaluation**.
   
-===Delete Registry Keys:===
-  - Open the **Registry Editor**.
+====3. Delete Registry Keys:====
+  - Go to Windows Search and type **Registry Editor**.
+  - Open the **Registry Editor**. 
   - Browse to //HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros//.
-  - Delete the **4.0** Key.
+  - Delete the **x.0** Key. For example, Rhino 4.0, 5.0 or whatever version of Rhino you are removing.
   - Browse to //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros//.
-  - Delete the **4.0** Key.
+  - Delete the **x.0** Key. For example, Rhino 4.0, 5.0 or whatever version of Rhino you are removing.
 
-
+====Optional====
+You should only do the following procedures if uninstall fails from the **Apps and Features**.
 ===Run Microsoft's Uninstall Fix===
   - Visit http://support.microsoft.com/mats/program_install_and_uninstall
   - Click **Run Now**.
 
-
 ===Cleaning up the Windows Installer Cache===
 <color red>**Warning:**</color> The following procedure may result in registry corruption and a 1402 error next time you install software. <color red>**Only follow these steps**</color> if the above procedure did not allow you to install Rhino.
-
-
   - Download the [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]].
   - Unzip the contents of WindowsInstallerCleanupUtility.zip to a "Windows Installer Clean Up" folder on your desktop.
   - Run **msicuu.exe**.
