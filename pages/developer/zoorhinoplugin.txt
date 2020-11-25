@@ -28,17 +28,17 @@ The following are the general steps required to create a Rhino plugin.
   - Build your plugin.
   - Launch Rhino and use **PlugInManager** to install your plugin (to verify that it was correctly built).
 
-===== Adding Licensing Support to your Plug-in Project =====
-After you have built and tested your basic plug-in, you can add licensing support as follows:
+===== Adding Licensing Support to your Plugin Project =====
+After you have built and tested your basic plugin, you can add licensing support as follows:
   - Add a new .CPP file to your project.
   - In this .CPP file, declare a new class that is derived from **CRhinoLicenseValidator**.
   - Override the **CRhinoLicenseValidator::ProductBuildType** virtual function and return the build type of the license that your product requires.
-  - Override and implement the **CRhinoLicenseValidator::ValidateProductKey** virtual function. Rhino will call into this function whenever it needs your plug-in to validate a license that is entered by a user, returned by the Rhino license manager (standalone node), or returned from a Zoo server (network node). For details, see the example Rhino C++ plug-in listed below.
+  - Override and implement the **CRhinoLicenseValidator::ValidateProductKey** virtual function. Rhino will call into this function whenever it needs your plugin to validate a license that is entered by a user, returned by the Rhino license manager (standalone node), or returned from a Zoo server (network node). For details, see the example Rhino C++ plugin listed below.
   - Create one (and only one) static instance of your object.
-  - In your plug-in's  **CRhinoPlugIn::OnLoadPlugIn ** member, call  **CRhinoPlugIn::GetLicense** to get a license.
-  - Build your plug-in.
-  - [[developer:digital-signatures/create-request|Digitally sign your plug-in.]]
-  - Launch Rhino and test your plug-in. When your plug-in is loaded for the first time, you will be prompted to enter a license.
+  - In your plugin's  **CRhinoPlugIn::OnLoadPlugIn ** member, call  **CRhinoPlugIn::GetLicense** to get a license.
+  - Build your plugin.
+  - [[developer:digital-signatures/create-request|Digitally sign your plugin.]]
+  - Launch Rhino and test your plugin. When you load your plugin for the first time, you will be prompted to enter a license.
 {{:developer:licensenotfound.png|}}
 
 ===== Managing your License =====
