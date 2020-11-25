@@ -25,13 +25,13 @@ The following are the general steps required to create a Rhino plugin.
   - Build your plugin.
   - Launch Rhino and use **PlugInManager** to install your plugin (to verify that it was correctly built).
 
-===== Adding Licensing Support to your Plug-in Project =====
-After you have built and tested your basic plug-in, you can add licensing support as follows:
-  - In your plug-in's **Rhino.PlugIns** inherited class, create a new method with the same signature as the **Rhino.PlugIns.ValidateProductKeyDelegate** delegate. Rhino will call into this function whenever it needs your plug-in to validate a license that is entered by a user, returned by the Rhino license manager (standalone node), or returned from a Zoo server (network node). For details, see the example RhinoCommon plug-ins listed below.
-  - In your plug-in's **OnLoad** member, call **Rhino.PlugIns.GetLicense** and pass it the build type of the license required by your product, and your delegate function.
-  - Build your plug-in.
-  - [[developer:digital-signatures/create-request|Digitally sign your plug-in.]]
-  - Launch Rhino and test your plug-in. When your plug-in is loaded for the first time, you will be prompted to enter a license.
+===== Adding Licensing Support to your Plugin Project =====
+After you have built and tested your basic plugin, you can add licensing support as follows:
+  - In your plugin's **Rhino.Plugins** inherited class, create a new method with the same signature as the **Rhino.Plugins.ValidateProductKeyDelegate** delegate. Rhino will call into this function whenever it needs your plugin to validate a license that is entered by a user, returned by the Rhino license manager (standalone node), or returned from a Zoo server (network node). For details, see the example RhinoCommon plugins listed below.
+  - In your plugin's **OnLoad** member, call **Rhino.Plugins.GetLicense** and pass it the build type of the license required by your product and your delegate function.
+  - Build your plugin.
+  - Digitally sign your plugin.
+  - Launch Rhino and test your plugin. When you load your plugin for the first time, you will be prompted to enter a license.
 {{:developer:licensenotfoundcs.png|}}
 
 ===== Managing your License =====
