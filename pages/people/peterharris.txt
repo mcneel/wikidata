@@ -5,7 +5,7 @@
 
 
 
-====== Peter's Tools 1.98 ======
+====== Peter's Tools 2.0 ======
 > **Summary:** //Miscellaneous scripts compiled into a plug-in, with a toolbar) (developed primarily by Peter Harris). //
 
 //<color red>I'm not supporting Rhino V4 or V5 anymore, though the old plugins for those versions are still linked at the bottom of this page. Also, please remember that these are free tools that you use at your own risk, of course.</color>//
@@ -13,10 +13,10 @@
 
 
 
-=====What's new since Version 1.95=====
+=====What's new since Version 1.98=====
 
 
-  * **This update is primarily to go back to making these scripts into a plugin. They will run faster this way & be simpler to install. I also made the DotWithData tool work with meshes in more cases. Other changes are minor bug fixes.**
+  * **I've added achive tools and improved function of the timer tools significantly. I've also added tools for batch renaming files with user-specified text, and a tool for adding a point at the center of a selected object's bounding box. I've removed all file-utility tools completely because I don't feel confident that they are robust.**
 
 
 
@@ -28,11 +28,37 @@
 
 
 =====Overview=====
-I've created a collection of scripts that I've written (with the help of many people) which I turned into a plugin and a toolbar to go with it.  The download link is at the bottom of the page.  Thanks to all who have helped me on these scripts! Especially Pascal, David, Dale, and Mitch.
+This is a collection of scripts that I've written (with the help of many people) which I turned into a plugin and a toolbar to go with it.  The download link is at the bottom of the page.  Thanks to all who have helped me on these scripts! Especially Pascal, David, Dale, and Mitch.
 
 
 =====Commands=====
 The commands currently available in the PetersTools plug-in are:
+
+\\
+
+**Geometry-creating or editing tools**
+        - **TrimAtLine**  - Prompts you to draw a line to use as a trim line, pick whatever you want to trim, then right-click to delete the line.
+        - **TrimAtZero**  - Same, but starts line at 0,0
+        - **SplitBoth**  - Splits two sets of surfaces with each other.
+        - **SplitWithEdgesAndCurves**  - Script that automates typing in 'crv' after picking the split command.
+        - **JoinCurvesByClosestEnds**  - Joins two curves by closest ends by adding two straight lines.
+        - **QuickCage**  - Click one of 15 numbers (2 through 16) on the command line or type in a number, and the tool creates a bounding-box cage around your object with that many points in each direction.  Great for quick edits.
+        - **SetX**  - Flattens an object in the world X direction.
+        - **SetXTo0**  - Flattens an object in the world  X direction to 0.
+        - **SetY**  - Flattens an object in the world  Y direction.
+        - **SetYTo0**  - Flattens an object in the world  Y direction to 0.
+        - **SetZ**  - Flattens an object in the world  Z direction.
+        - **SetZTo0**  - Flattens an object in the world  Z direction to 0.
+        - **MagicCap**  - Creates a planar surface from any selection of curves and/or surface edges. Here's how it works:
+{{:people:magiccapanimation.gif?590}}
+        - **HideAllUnselectedCurves**  - Hides all unlocked visible unselected curves.
+        - **HideAllUnselectedPoints**  - Hides all unlocked visible unselected points.
+
+\\
+**Timer**
+
+        - **TimerTools**  - Simple tools for keeping track of time spent on a project. Nested options include StartTimer, StopTimer, TimerLog, CalculateTotalHours, and LegacyTimerLog. The TimerLog is a text file of the start and stop times and it is part of your current rhino document. It can be edited manually if you make a mistake by not stopping your timer. LegacyTimerLog is for users who used the old timer that saved data to a text file so that they can still find that old text file (but the new timer won't add to that text file or calculate totals from it. This will go away entirely in the next update.)
+
 
 \\
 **BOM and object properties tools**
@@ -43,57 +69,32 @@ The commands currently available in the PetersTools plug-in are:
         - **DotWithData**  - Adds annotation dots to selected objects with text option of either part names, layer, real materials, weight, object volumes, object surface areas, object notes, volume centroid, area centroid, or bounding box dimensions.
         - **SelUnnamed**  - Selects all unnamed objects.
         - **NameObjects**  - Lets you name a bunch of objects in serial fashion (brings up a box for each selected object one by one.)
+        - **BatchNameModifier**  - Lets you add text to a batch of object names at once, either at the front or end of the name.
+
 \\
+**Archive**  This group of tools manages an archive of bits of geometry you might need later. It does this simply by creating a layer called Archive that stays turned off, and managing adding or retrieving items from that layer. I created this because I use Hide just to hide things for a few moments, and I needed something else for longer-term holding of things I wanted to keep around just in case they are needed later.
 
-**Geometry-creating or editing tools**
-
-        - **MagicCap**  - Creates a planar surface from any selection of curves and/or surface edges. Here's how it works:
-{{:people:magiccapanimation.gif?590}}
-        - **JoinCurvesByClosestEnds**  - Joins two curves by closest ends by adding two straight lines.
-        - **QuickCage**  - Click one of 15 numbers (2 through 16) on the command line or type in a number, and the tool creates a bounding-box cage around your object with that many points in each direction.  Great for quick edits.
-        - **SplitBoth**  - Splits two sets of surfaces with each other.
-        - **SplitWithEdgesAndCurves**  - Script that automates typing in 'crv' after picking the split command.
-        - **TrimAtLine**  - Prompts you to draw a line to use as a trim line, pick whatever you want to trim, then right-click to delete the line.
-        - **TrimAtZero**  - Same, but starts line at 0,0
-        - **SetX**  - Flattens an object in the world X direction.
-        - **SetXTo0**  - Flattens an object in the world  X direction to 0.
-        - **SetY**  - Flattens an object in the world  Y direction.
-        - **SetYTo0**  - Flattens an object in the world  Y direction to 0.
-        - **SetZ**  - Flattens an object in the world  Z direction.
-        - **SetZTo0**  - Flattens an object in the world  Z direction to 0.
-\\
-**File utilities**
-
-        - **BatchSaveSmall**  - Lets you automate saving a folder of Rhino files small (including subfolders, optionally). This command does not work well on Rhino files from older versions if you are running the command from Rhino 6 because it will ask if you really want to save as V6 for each file. I cannot find a way around that warning.
-        - **Open3dmFileInNewWorkspace**  - Opens a Rhino file without closing the currently open Rhino file. 
-        - **OpenSelectedInNewWorkspace**  - Opens the currently selected objects in a new Rhino window. 
-        - **PickScriptFromFolder**  - This script creates a list of the scripts that are on your computer and that are listed in your search paths in the Rhino options. You can click on any script in the list to run it.
-
+        - **Archive**  - Has 3 nested options. ArchiveObjects moves objects to archive layer. ArchiveCopy moves a copy of objects to the archive layer. UnarchiveSelected lets you pick objects from the archive layer to move from that layer to the current layer.
+      
 \\
 **Misc tools**
 
-        - **TimerTools**  - Simple tools for keeping track of time spent on a task. Nested options include StartTimer, StopTimer, SetProjectNumber, and TimerLog. If you StartTimer or StopTimer without a project name, you'll be prompted to add one. The TimerLog is a text file of the start and stop times along with project numbers.
-        - **DetailsTools**  - Tools for modifying all details in a layout at once. Includes ability to change display mode in all, zoom extents in all, make scale match in all, or apply your own macro or command to all details.
-        - **HideAllUnselectedCurves**  - Hides all unlocked visible unselected curves.
-        - **HideAllUnselectedPoints**  - Hides all unlocked visible unselected points.
         - **ZoomToUnlocked**  - Zooms to all unlocked objects ('normal' objects).
         - **ZoomToUnlockedAll**  - Same as zoom to unlocked, but all views.
+        - **DetailsTools**  - Tools for modifying all details in a layout at once. Includes ability to change display mode in all, zoom extents in all, make scale match in all, or apply your own macro or command to all details.
+        - **AddPointAtBBoxCentroid**  - Adds a point at an object's bbox center.
         - **AboutPetersTools**  - Brings up a box showing you what version you are running.
-
 \\
 
-
-
-
-=====Installation in Rhino 5, 6, or 7=====
+=====Installation in Rhino 6 or 7=====
 
   - Download the zip file to either your downloads folder or a user folder (C:\Users\(user-name). Unzip to the same place.
   - Right-click on the PetersTools.rhp file and select **Properties**. On the General tab, see if the file is blocked. (It'll say so near the bottom of the page.) If so, unblock it. This cannot be done unless the file is in your downloads or user folder. (Actually, I've heard that desktop works, too.)
   - It may work to drag & drop both files into the Rhino window. This is the easiest solution. If that doesn't work, try:
-  - Copy the //PetersTools.rhp// file to your //Rhinoceros 5.0 or 6.0 or 7.0 (64-bit)\Plug-ins// folder.
+  - Copy the //PetersTools.rhp// file to your //Rhinoceros 6.0 or 7.0 (64-bit)\Plug-ins// folder.
   - Copy the //PetersTools.rui// file to wherever you like to keep toolbars.
   - Start Rhino.
-  - Run //PluginManager// and press the install button. Browse to your //Rhinoceros 5.0 (64-bit)\Plug-ins// directory and select //PetersTools.rhp//.
+  - Run //PluginManager// and press the install button. Browse to your //Rhinoceros x.0 (64-bit)\Plug-ins// directory and select //PetersTools.rhp//.
   - Load the toolbar that you saved by going to the Tools menu, pick **Toolbar Layout**, then File/Open the toolbar file.
   - If you then try to use the tools and encounter 'unknown command', go to Tools->options->plugins, check to make sure Rhinoscript is Enabled.
 
@@ -106,7 +107,7 @@ The commands currently available in the PetersTools plug-in are:
 
 
 Download link for Rhino 6 and 7 users:
-[[https://www.dropbox.com/s/vseftbfyo2ou9xp/PetersTools1.98.zip?dl=1]]
+[[https://www.dropbox.com/s/vseftbfyo2ou9xp/PetersTools2.0.zip?dl=1]]
 
 
 Download link for Rhino 5 users:
