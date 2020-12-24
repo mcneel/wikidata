@@ -1,0 +1,62 @@
+====== Wie konnte meine Datei so groß werden? ======
+
+
+> Regelmäßig erscheint im Rhino-Forum der Post eines Anwenders, der nicht versteht warum die Größe seiner relativ schlichten Datei so zugenommen hat bzw. wissen möchte, wie er diese wieder auf ein "normales" Maß bringen kann.  Dieser Artikel versucht eine Erklärung zu liefern, was passiert ist und warum; Lösungsvorschläge sind ebenfalls enthalten.
+
+===Was verursacht die "Dateiaufblähung"?===
+
+Verschiedene Faktoren können die Dateigröße drastisch erhöhen:
+
+  * **Anzeigenetze** - Rhino verwendet spezielle Polygonnetze, um Flächenobjekte auf dem Bildschirm anzuzeigen. Sehr subtile Anzeigenetz-Einstellungen können die Dateigröße erhöhen, ohne dass Sie es mitbekommen. Sie sehen die Anzeige ganz normal, womöglich aber ohne zu beachten, wie viele Polygone das Anzeigenetz enthält.
+
+  * **Texturen/Bitmap-Bilder** - In der Datei gespeicherte, hochauflösende Bitmap-Texturen - zur Verwendung als Rendermaterialien oder für von Ihnen erzeugte Bild- (Frame-) Objekte - können die Dateigröße drastisch erhöhen.
+
+  * **Materialien** - eine große Ansammlung von Materialien kann vorhanden sein, die viel Raum in der Datei einnehmen.  Manchmal werden Materialien unnötigerweise dupliziert, was diesen Effekt noch verstärkt.
+
+  * **Plug-ins** - Rhino-Plug-ins können alle möglichen Zusatzfunktionen in das Programm einbringen, von fortgeschrittenem Rendering bis zu branchenspezifischen CAM-Designwerkzeugen.  Plug-ins können ihre eigenen Daten in der Rhino-Datei speichern, und je nach Plug-in und der Art seiner Verwendung kann dies zu einer großen Datenanhäufung führen.
+
+  * **Big Data** - schließlich können in Rhino auch **enorme Mengen an Geometrie** in Form von Kurven, Flächen oder Polygonnetzen enthalten sein.  Mit einer entsprechenden Zunahme der Dateigröße ist zu rechnen...
+
+----
+
+===Wie kann ich die dem Problem auf die Spur kommen?===
+
+Wenn Sie bis hierher gelesen haben, haben Sie vielleicht schon einen Verdacht.  Falls ja, können Sie diesen Abschnitt möglicherweise überspringen und direkt zum Abschnitt über die Lösungsvorschläge gehen.
+
+Wissen Sie dagegen immer noch nicht weiter, oder wenn Sie die Inhalte Ihrer Datei bis ins kleinste Detail sehen möchten, können Sie den Befehl **Prüfung3dmDatei** in Rhino verwenden.  Sie können ihn sowohl in der gerade geöffneten Rhino-Datei wie auch in einer beliebigen anderen 3dm-Datei auf Ihrem Computer ausführen.  Ein Textfeld mit einer großen Menge an Informationen erscheint.  Oben sehen Sie einige Infos über Ihre Rhino-Installation und welche Plug-ins geladen sind.  Gleich darunter befindet sich der interessanteste Teil - die verschiedenen "Tabellen", wo die Informationen der analysierten Rhino-Datei gespeichert sind.  
+
+  * Zuerst kommt die **"Bitmap-Tabelle"**.  Aus ihre geht hervor, wie viele Bitmaps sich in der Datei befinden, und was noch wichtiger ist, ihre Gesamtgröße.  Sollten Sie darin einige sehr große Zahlen sehen (beachten Sie dass sie Bytes repräsentieren) könnte dies die Größe Ihrer Datei zumindest teilweise erklären.
+
+  * Als nächstes kommt die **"Materialtabelle"**, welche Sie ebenfalls auf die Größe überprüfen sollten.
+
+  * Noch weiter unten befindet sich die **"Objekttabelle"**, welche den tatsächlich durch ihre Geometrie beanspruchten Speicherplatz wiedergibt.  In V5 sehen Sie nur die Gesamtgröße aller Objekte; in Version 6 und danach zeigt sie die Größe auch detailliert nach Objekt an.  //Beachten Sie, dass die Objektgröße die angehängten Rendernetze mit einschließt, was nützlich sein kann, im Fall dass dies das Problem der Dateigröße mitverursacht.//
+
+  * Ganz unten befindet sich schließlich die **"Benutzerdatentabelle des Modells"**, worin alle geladenen Plug-ins und sämtliche von ihnen gespeicherte Daten aufgeführt sind.  Sollte eins davon ungewöhnlich groß sein, ist auch dies ein Verdachtsfall.
+
+----
+
+===Wie gehe ich im Fall eines konkreten Verdachts weiter vor?===
+
+  * **Anzeigenetze**: Wenn Sie glauben, dass die Einstellungen Ihrer Anzeigenetze für die übermäßige Dateigröße verantwortlich sind, haben Sie verschiedene Möglichkeiten zur Auswahl.  Sie können es mit dem Befehl **KompaktSpeichern** versuchen, welcher die Datei ohne die Rendernetze speichert. Überprüfen Sie die Größe der neu gespeicherten Datei, und falls sie sich drastisch verkleinert hat, so war dies zumindest Teil Ihres Problems.  Wenn Sie das Original beibehalten möchten, können Sie auch **_SpeichernUnter** mit einem anderen Namen verwenden und im Dialog das Kontrollkästchen "Kompakt speichern" markieren.
+
+  * **Materialien**: Falls die Materialientabelle große Einträge enthält, könnten Sie es zunächst mit dem Befehl **Bereinigen** mit der Option **Materialien=Ja** versuchen.  Damit sollten sämtliche nicht verwendeten Materialien beseitigt werden, möglicherweise hilft dies.  Wenn nicht, gehen Sie zum Abschnitt der Plug-in-Daten weiter unten...
+
+  * **Bitmaps (Bilder)**: Falls die Bitmap-Tabelle große Einträge enthält, eröffnet dies verschiedene Möglichkeiten.  Bild-(Frame-)Dateien, Hintergrund-Bitmaps und als Texturen verwendete Bilder werden alle in der Bitmap-Tabelle gespeichert.  Überprüfen Sie, ob Sie vielleicht nicht verwendete und die Datei belastende Texturen haben; gegebenenfalls löschen Sie sie und entfernen Sie sämtliche Bild-(Frame-)Elemente die Sie nicht mehr benötigen.  Dies führt nicht unbedingt zur Lösung des Problems, da Bitmap-Bilder zuweilen selbst dann in der Datei "hängenbleiben", wenn das sie enthaltende Element wie z.B. ein Bild (Frame) gelöscht wurde.  In diesem Fall hilft womöglich nur eine Radikalkur, indem Sie nämlich die Bitmap-Tabelle bereinigen.  In Rhino 5 gibt es hierfür einen Testbefehl - **TestPurgeBitmapTable** - der sich beim Schreiben nicht vervollständigt, weswegen Sie ihn bis zu Ende tippen müssen.  ACHTUNG, damit entfernen Sie //ALLE// Bitmaps aus dem Dokument, einschließlich derer die Sie vielleicht noch benötigen, gehen Sie mit diesem Befehl also äußerst vorsichtig um...
+
+  * **Plug-in-Daten**: Durch Rhino-Plug-ins erzeugte Daten verbleiben in der Datei //selbst wenn die entsprechenden Plug-ins beim Öffnen der Datei in einer Rhino-Instanz gar nicht installeirt sind// - obwohl Sie also nicht darauf zugreifen können, sind sie immer noch vorhanden und werden auch beim erneuten Speichern der Datei nicht gelöscht.  Tatsächlich ist dies von Vorteil.\\ \\ Wenn Sie eine Datei jedenfalls nach dem Rendern mit allen benutzerdefinierten Materialien zurückerhalten, oder nach der Modellierungsphase mit sämtlichen CAM-Werkzeugpfaden - nichts davon ist für Sie noch von Nutzen, und nach Möglichkeit sollten Sie die Dateigröße verringern.\\ \\ Dies geschieht mittels **-SpeichernUnter** (mit Bindestrich!); in der Befehlszeile wird die Option **PlugInDatenSpeichern** erscheinen.  Stellen Sie sie auf **Nein** und speichern Sie.  //**Warnung:** damit werden alle Daten aus allen (aktuellen) Plug-ins rigoros gelöscht, vergewissern Sie sich also, dass Sie wirklich nichts mehr davon benötigen!// Für alle Fälle vorher eine Kopie zu erstellen, kann nicht schaden.\\ \\ Die beschriebene Prozedur zum Löschen der Plug-in-Daten kann auch einige der Probleme mit in der Datei verbliebenen Daten "unbekannter Herkunft" lösen, die Sie vorher nicht zu löschen imstande waren.
+
+
+  * **Große Mengen an Geometrie in der Datei**:  Vorausgesetzt (siehe weiter oben) dass die Datei bereits erzeugt worden ist, können Sie nicht allzuviel tun um die Dateigröße zu verringern - Rhino benötigt den Speicherplatz für die korrekte Beschreibung aller Objekte.  Wenn Sie die Datei versenden müssen, kann Ihre Größe durch Erstellen einer Zip-Datei erheblich reduziert werden.  Falls Sie die Datei noch nicht erstellt haben und viele identische Objekte darin haben, kann die Dateigröße vielleicht durch Verwendung von **Blöcken** niedrig gehalten werden.  Siehe die Rhino-Hilfe zur Verwendung von Blöcken.\\ \\ **Falls die Speichergröße Ihrer Objekttabelle sehr umfangreich ist, obwohl sie es offensichtlich nicht sein sollte,** dann müssen Sie nach dem Objekt oder den Objekten suchen, die dafür verantwortlich sind.  Überprüfen Sie zunächst, ob irgendetwas verborgen ist oder auf einer deaktivierten Ebene liegt und so das Problem verursacht.  Eine weitere Möglichkeit sind eine oder mehrere große Flächen (mit Tausenden von Kontrollpunkten), heruntergetrimmt auf eine geringe Größe. Wenngleich sie nicht umfangreich aussehen, speichert Rhino die ursprüngliche (ungetrimmte) Definition der Fläche, weswegen eine scheinbar kleine Fläche viel Speicherplatz einnehmen kann.  Der Befehl **TrimmflächeEinschrumpfen** entfernt unnötige Teile dieser Flächen.
+
+----
+
+===Welche Möglichkeiten gibt es noch?===
+
+Wenn alles gescheitert ist, können Sie immer noch ein paar Dinge versuchen...
+
+  * Das Öffnen einer neuen leeren Datei, in welche die aus der alten Datei kopierte Geometrie eingefügt wird, führt manchmal zum Erfolg.  Es kann aber auch vorkommen, dass die übergroßen Bitmaps mit den Objekten mitkopiert werden, und in diesem Fall sind Sie genauso weit wie vorher.
+
+  * Wenn wirklich gar nichts zum Erfolg führen sollte, versuchen Sie es mit **SpeichernUnter** und aktivieren dabei "Nur Geometrie".  Im Prinzip überleben dann nur die tatsächlichen Objekte, aber Vorsicht: dabei wird nämlich auch jede Dateiorganisierung zugrunde gerichtet, die Objekte landen alle auf einer Ebene, ohne Farben, ohne Gruppen, ohne alles...  Dies ist wirklich der letzte Ausweg.
+
+----
+==(Feedback willkommen...)==
