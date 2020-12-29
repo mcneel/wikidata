@@ -1,0 +1,65 @@
+===== Automatisation de l'installation de Rhino 7 pour Windows =====
+
+Rhino 7 s'installe à partir d'un seul exécutable d'installation et peut être entièrement automatisé.
+
+setup.exe [Action] [Option] [Paramètres]
+
+//Note : "setup.exe" indiqué ci-dessus remplace le fichier d'installation de Rhino,\\ par exemple [rhino_fr-fr_7.#...exe]//
+
+==== Installation hors ligne :====
+Afin de réaliser un déploiement dans un environnement où les ordinateurs n'ont pas accès à Internet,  [[rhino:installingrhino:6:offline|suivez ces instructions pour réaliser une installation hors ligne]] avant le déploiement. 
+
+====Options de la ligne de commande :====
+^Action ^Description  ^
+|**-package** | installer (par défaut)|
+|**-uninstall** | désinstaller|
+|**-repair** | réparer (ou installer si l'application n'est pas installée) |
+|**-layout** | créer une image locale du bootstrapeer pour l'installation hors ligne |
+
+^Option-Description  ^
+|**-quiet**| réaliser l'action sans interface utilisateur. |
+| |si un redémarrage est nécessaire, le système sera redémarré sans invite |
+|**-passive** | réalise l'action avec une interface de barre d'avancement | 
+|**-norestart** | supprime tous les redémarrages |
+|**-promptrestart** | affiche une invite si un redémarrage est nécessaire (par défaut) |
+
+
+^Paramètres ^Description  ^
+|//Tous les paramètres ont optionnels//|
+|**LICENSE_METHOD**| Choisir entre : STANDALONE, ZOO (laisser vide pour Cloud Zoo)|
+|**LICENSE_KEY** | La clé de licence à installer (**obligatoire si ** LICENSE_METHOD=STANDALONE) |
+|**LICENSE_VALIDATION_CODE**| Code de validation pour voter licence de Rhino |
+|**ZOO_SERVER** | IP ou FQDN du serveur Zoo à interroger |
+|**INSTALLDIR** | Chemin complet vers le dossier où Rhino sera installé |
+|**CUSTOMER_NAME** | Nom du client à afficher sur l'écran de démarrage |
+|**COMPANY_NAME** | Nom de la société à afficher sur l'écran de démarrage |
+|**SEND_STATISTICS** | **1** = envoyer des statistiques anonymes sur l'installation à McNeel (par défaut) |
+|                    | **0** = ne pas envoyer |
+|**ENABLE_AUTOMATIC_UPDATES** | **1** = permettre au programme d'installation de vérifier et télécharger les mises à jour. |
+|                             | **0** = ne pas autoriser les mises à jour automatiques et l'envoi de statistiques d'utilisation |
+| 
+|**DISABLE_INTERNET_ACCESS** | **1** = Désactiver tous les accès à Internet pour l'installation, Rhino et les mises à jour de McNeel. Cette option désactive tout accès à Internet depuis Rhino, y compris la détection et le téléchargement des mises à jour, l'envoi de statistiques d'utilisation anonymes, l'aide en ligne, les informations et astuces de l'écran de démarrage, le téléchargement de textures de rendu, l'accès au Cloud Zoo et toute autre fonction essayant d'accéder à Internet. |
+|                            | **0** (défaut) = autoriser tous les accès à Internet |
+
+==== Options de langue ====
+Définir sur 1 pour installer la langue, 0 pour ne pas l'installer. 
+La langue du programme d'installation que vous avez téléchargé sera installée par défaut sauf si elle est définie sur 0. Si vous téléchargez le programme d'installation en **Français** et le lancez en indiquant uniquement **INSTALL_EN=1**, Rhino sera installé en anglais et en français. 
+^Paramètres de langue ^Description ^
+|**INSTALL_EN**| Anglais  |
+|**INSTALL_CN**| Chinois simplifié |
+|**INSTALL_CS**| Tchèque |
+|**INSTALL_DE**| Allemand |
+|**INSTALL_ES**| Espagnol |
+|**INSTALL_FR**| Français |
+|**INSTALL_IT**| Italien |
+|**INSTALL_JA**| Japonais |
+|**INSTALL_KO**| Coréen |
+|**INSTALL_PL**| Polonais |
+|**INSTALL_PT**| Portugais |
+|**INSTALL_RU**| Russe |
+|**INSTALL_TW**| Chinois traditionnel |
+
+====Exemples====
+<code>
+rhino_fr-fr_7.#.#####.#####.exe -package -passive LICENSE_METHOD=ZOO ZOO_SERVER=10.0.0.1 INSTALL_FR=1 INSTALL_DE=1
+</code>
