@@ -1,0 +1,32 @@
+====== Comment installer Rhino 3 automatiquement ; détails sur ce qui est installé et où sont installés les différents éléments. ======
+**Remarque:** Cet article ne concerne pas la dernière version de Rhino. D'autres versions de cet article sont disponibles :
+  * [[fr:rhino:installingrhino:5.0|Déploiement de Rhino 5]]
+  * [[fr:rhino:installingrhino:4|Déploiement de Rhino 4]]
+
+=====Installer Rhino =====
+  * [[#Installation automatique de Rhino 3.0|Installation automatique de Rhino 3.0]]
+  * [[#Qu'est-ce qui change quand j'installe Rhino 3.0 à partir du CD :|Informations sur l'installation de Rhino 3.0]]
+
+
+=====Installation automatique (scriptée) de Rhino 3.0=====
+**Voir** les instructions sur http://wiki.mcneel.com/flamingo/scriptinst_v3_fla11 
+
+> Est-il possible d'avoir des fichiers .msi pour les programmes d'installations au lieu de fichiers .exe pour le déploiement avec une stratégie de groupe ?
+> Ce serait très intéressant pour mettre à jour les versions révisées comme[[penguin:home|Penguin]] sur notre réseau.
+
+Nous allons utiliser des programmes d'installation .MSI pour Rhino 4.0 et Flamingo 2.0 mais Rhino 3.0 ne les utilise pas. [Pascal Golay - 2005-11-10]
+
+
+=====Qu'est-ce qui change quand j'installe Rhino 3.0 à partir du CD ?=====
+
+L'utilisateur choisit un dossier de base pour l'installation de Rhino. Les fichiers principaux du programme sont copiés dans le sous dossier //System//, les nombreux modules (fichiers *.rhp et autres) sont copiés dans le sous dossier //Plug-ins// et pour chaque langue installée, un dossier de langue (par exemple //Français//) est créé avec des les sous dossiers //Aide//, //Prise en main//, //Plaquages d'environnement//, //Scripts//, //Modèles d'exemple// et //Didacticiels//.
+
+Les fichiers modèles et les fichiers de barres d'outils sont installés sous **...Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\3.0**. Les fichiers modèles sont différents pour chaque langue et sont placés dans des dossiers différents.  
+
+Les entrées du registre sont enregistrées dans //HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\3.0//.    Sous la clé //3.0// se trouve une sous-clé pour la date de Rhino, telle que //2004-04-21// et elle contient les entrées pour la version de Rhino de cette date.
+
+La clé //Plug-ins// sous la clé de la date contient des sous-clés uniques pour chaque module, par exemple //12D31EFD-D3EE-4BCF-A856-D01320BB19F3//.  Cette clé et les clés et valeurs qu'elle contient indiquent à Rhino de lancer le module au démarrage.
+
+La clé //<locale_ID>// (telle que //1033// pour le français) sous la date contient les chemins pour trouver les ressources (aide, modèles, etc.) pour la langue en question.
+
+Quelques entrées sont créées dans //HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0// avec les options de Rhino. La plupart des options sont définies dans la sous-clé //Scheme: Defaut//.   Pour plus d'informations sur les schémas, consultez l'aide de Rhino. La clé //HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0\Global Options// contient quelques paramètres qui s'appliquent à tous les schémas.
