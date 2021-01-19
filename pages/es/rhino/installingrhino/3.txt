@@ -1,32 +1,32 @@
 ====== How to install Rhino 3 automatically; Details on what gets installed and where. ======
-> **Note:** This article is not for the current version of Rhino. Other versions of this article are available:
->   * [[rhino:installingrhino:5.0|Deploying Rhino 5]]
->   * [[rhino:installingrhino:4|Deploying Rhino 4]]
+**Note:** This article is not for the current version of Rhino. Other versions of this article are available:
+  * [[rhino:installingrhino:5.0|Deploying Rhino 5]]
+  * [[rhino:installingrhino:4|Deploying Rhino 4]]
 
-======Installing Rhinoceros======
+=====Installing Rhino=====
   * [[#Automatic (scripted) installation for Rhino 3.0|Rhino 3.0 Scripted Install]]
   * [[#What gets changed when I install Rhino 3.0 from CD:|Rhino 3.0 Install Details]]
 
 
-======Automatic (scripted) installation for Rhino 3.0======
+=====Automatic (scripted) installation for Rhino 3.0=====
 **See** instructions at http://wiki.mcneel.com/flamingo/scriptinst_v3_fla11 
 
 > Is it possible to get .msi files for the installers rather that .exe for deployment with Group Policy?
-> It would be great to update Service Releases install [[penguin:penguin|Penguin]] etc across our network.
+> It would be great to update Service Releases install such as [[penguin:home|Penguin]] across our network.
 
-We are moving over to .MSI installers for Rhino 4.0 and Flamingo 2.0, but Rhino 3.0 is not using them. [PASCAL GOLAY - 2005-11-10]
+We are moving over to .MSI installers for Rhino 4.0 and Flamingo 2.0, but Rhino 3.0 is not using them. [Pascal Golay - 2005-11-10]
 
 
-======What gets changed when I install Rhino 3.0 from CD:======
+=====What gets changed when I install Rhino 3.0 from CD?=====
 
 The user chooses a base folder for the Rhino install. The main program files go into the //System// subfolder, the many plug-ins (*.rhp and supporting files) go in the //Plug-ins// subfolder, and for each language installed, a language folder (like //English//) is created, with subfolders //Help//, //Getting Started//, //Environment Maps//, //Scripts//, //Sample Models// and //Tutorials//.
 
-Template and toolbar files are installed under ...Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\3.0  The templates are different for each language, in separate folders.
+Template and toolbar files are installed under **...Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\3.0**.  The templates are different for each language, in separate folders.
 
-Registry entries are made in //HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\3.0//    Under the //3.0// key is a subkey for the date of Rhino, like //2004-04-21// where the entries for that date of Rhino are placed.
+Registry entries are made in //HKEY_LOCAL_MACHINE\SOFTWARE\McNeel\Rhinoceros\3.0//.    Under the //3.0// key is a subkey for the date of Rhino, like //2004-04-21// where the entries for that date of Rhino are placed.
 
 The key //Plug-ins// under the date key has subkeys like //12D31EFD-D3EE-4BCF-A856-D01320BB19F3//, which is unique for each plug-in.  This key and the keys and values in it trigger Rhino to load the plug-in when Rhino launches.
 
 The key //<locale_ID>// (like //1033// for English) under the date contains the paths for finding the English language resources like Help.
 
-A few entries are made in //HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0//, and this is where Rhino saves its Options, mostly under the subkey //Scheme: Default//   For more on Schemes see the Help file. The //HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0\Global Options// key has a few settings that apply to all schemes.
+A few entries are made in //HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0//, and this is where Rhino saves its Options, mostly under the subkey //Scheme: Default//.   For more on Schemes see the Help file. The //HKEY_CURRENT_USER\SOFTWARE\McNeel\Rhinoceros\3.0\Global Options// key has a few settings that apply to all schemes.
