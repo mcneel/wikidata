@@ -1,0 +1,50 @@
+======Instalación sin conexión de Rhino 6======
+
+El instalador de Rhino es responsable de asegurarse de que su instalación de Windows tenga todo lo que necesita para ejecutar Rhino. Esto incluye el framework .NET y los paquetes redistribuibles de Microsoft Visual C++ Runtime. Puesto que muchos equipos ya tienen estos paquetes, no se incluyen en el instalador. Se descargan según sea necesario durante la instalación.
+
+Sin embargo, para instalar sin conexión, debe asegurarse de que estos paquetes estén disponibles.
+
+====Descargar paquetes para la instalación sin conexión====
+Desde un equipo con acceso a Internet:
+  - Descargue el [[https://www.rhino3d.com/download/rhino-for-windows/6/latest|último instalador de Rhino]].
+  - Ejecute el instalador en el equipo con acceso a Internet
+  - Haga clic en el **icono de engranaje** junto al botón Instalar ahora. {{ :rhino:installingrhino:6:install_gear_advancedoptions.png?direct&200 |}}
+  - Haga clic en el enlace **Descargar paquetes para instalación sin conexión**. {{ :rhino:installingrhino:6:install_download_packages.png?direct&200 |}}
+  - Rhino ahora descarga los paquetes necesarios a su equipo y muestra un cuadro de diálogo mientras tanto. {{ :rhino:installingrhino:6:install_downloading.png?direct&200 |}}
+  - Cuando se complete la descarga, verá un cuadro de diálogo que dice **Layout Completed Successfully** y que contiene más instrucciones. {{ :rhino:installingrhino:6:install_download_finished.png?direct&200 |}}
+  - Ahora encontrará un archivo **Bootstrapper.exe** y una carpeta **redist** junto al archivo de instalación que acaba de ejecutar.
+
+====Instalación====
+
+  - Copie el archivo **Bootstrapper.exe** a un equipo sin conexión o a una unidad de red.
+  - Copie la carpeta **redist** en la misma ubicación.
+  - En el equipo sin conexión, ejecute el archivo **Bootstrapper.exe**.
+
+**Para la implementación en red**
+  * Siga las [[es:rhino:installingrhino:6|instrucciones de implementación]].
+
+====Validación de una instalación sin conexión====
+Las licencias de Rhino deben validarse antes de que puedan utilizarse. Para equipos sin conexión, puede realizar la validación de licencia sin conexión.
+
+  - Cuando ejecute Rhino, se le notificará que Rhino no se puede conectar al servidor de validación. {{ :zoo:validate01.png?direct&200 |}}
+  - Haga clic en el botón. **"Obtener código de validación manualmente"**.
+  - Aparecerá el siguiente cuadro de diálogo. {{ :zoo:validate02.png?direct&200 |}} 
+  - Escriba la información de **Código de licencia**, **Nombre de dispositivo** e **ID del dispositivo** que se solicita.
+  - Vaya al sistema con acceso a Internet.
+  - En un navegador web, vaya a https://www.rhino3d.com/validate.
+  - Escriba la información de **Dirección de correo electrónico**, **Código de licencia** de Rhino, **Nombre de dispositivo** e **ID del dispositivo** en el formulario. {{ :zoo:validate2.jpg?direct&200 |}}
+  - Para actualizar, introduzca el código de licencia de una versión anterior de Rhino.
+  - El código de validación aparecerá en la pantalla. Imprímalo o guárdelo en un archivo de texto. //Este código debe utilizarse durante las 24 horas después de generarse//.
+  - Vuelva al sistema sin conexión.
+  - Introduzca el código de validación en el asistente de validación y haga clic en Siguiente.
+
+Rhino se validará correctamente sin conexión.
+
+**Nota:** para la implementación en red y para utilizar el Zoo LAN sin conexión, los datos necesarios se presentan al intentar añadir una licencia a ese Zoo. Para obtener instrucciones específicas de Zoo, consulte https://wiki.mcneel.com/es/zoo/rhinovalidateoffline#validating_offline
+====== Archivos de ayuda ======
+
+la Ayuda de Rhino 6 está disponible en línea. Para utilizarla sin conexión:
+
+  - [[https://www.rhino3d.com/download/Rhino/6.0/Rhino6OfflineHelp|Descargue el instalador de la Ayuda]]
+  - Ejecute el instalador y asegúrese de seleccionar **Para todos los usuarios** durante el proceso de instalación.
+  - Más información sobre cómo [[https://wiki.mcneel.com/es/rhino/installrhi|instalar archivos RHI para todos los usuarios]].
