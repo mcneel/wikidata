@@ -1,8 +1,8 @@
-======Validación de licencias de Rhino======
+======Validación de licencias de Rhino: con y sin conexión======
 > **Producto:** //[[zoo:home|Zoo]]//
-> ** Resumen:** //Describe la validación de licencias de Rhino y cómo funciona con el Zoo//
+> ** Resumen:** //Describe la validación de licencias de Rhino y cómo funciona con Zoo LAN//
 
-Rhino 5 introdujo un nuevo sistema de validación de licencias facilita la recuperación de códigos de licencia perdidos o robados. La validación de licencias asocia la licencia con su dirección de correo electrónico (o dominio de correo electrónico en el caso de una licencia Lab) y, en las licencias de actualización, con el código del licencia anterior. 
+Rhino 5, 6 y 7 utiliza un sistema de validación de licencias para facilitar la recuperación de códigos de licencia perdidos o robados. La validación de licencias asocia la licencia con su dirección de correo electrónico (o dominio de correo electrónico en el caso de una licencia Lab), un nombre de dispositivo de Rhino, un ID de dispositivo y, en las licencias de actualización, con el código de licencia anterior. 
 
 Cuando agregue una licencia de Rhino al Zoo, se le solicitará validar la licencia en línea. Las licencias de Rhino deben validarse antes de que puedan utilizarse.
 
@@ -10,23 +10,27 @@ Cuando agregue una licencia de Rhino al Zoo, se le solicitará validar la licenc
 Cuando se actualiza Rhino desde una versión anterior, la validación de licencias asocia la licencia de la versión anterior de Rhino con la licencia a la que se va a actualizar. Una licencia de una versión anterior solo puede utilizarse para actualizar una licencia de Rhino. Por ejemplo, una empresa tiene cuatro licencias de Rhino 4 y quiere actualizar sus licencias a Rhino 5. Cada instalación de actualización debe asociarse a una licencia de Rhino 4 diferente para que la validación funcione.
 
 ===== El proceso de validación =====
-Cuando se agrega un código de licencia válido de Rhino en el Zoo, aparece el asistente para la validación de licencias de Rhino. Siga las instrucciones en pantalla para validar la licencia.
+Cuando se agrega un código de licencia válido de Rhino en el Zoo LAN, aparece el asistente para la validación de licencias de Rhino. Siga las instrucciones en pantalla para validar la licencia.
 
 Si recibe un error durante la validación de licencias, póngase en contacto con el [[http://www.rhino3d.com/support|Soporte técnico de McNeel]] para obtener ayuda. Incluya la descripción del error cuando se ponga en contacto con el soporte técnico.
 
 ===== Validación sin conexión =====
-Si el servidor del Zoo no está conectado a Internet, puede realizar la validación de la licencia sin conexión. El proceso funciona de la siguiente manera:
-
-  - Vaya al sistema con acceso a Internet.
-  - Visite **https://www.rhino3d.com/validate**.
-  - Introduzca su dirección de correo electrónico y el código de licencia de Rhino.
+Si el servidor del Zoo //no// está conectado a Internet, puede realizar la validación de la licencia sin conexión. 
+--**Nota:** //La validación sin conexión requiere que el servidor Zoo que acepte el código de validación sin conexión esté realmente sin conexión a Internet ni acceso a la red. Desconecte el cable de red y desactive las conexiones inalámbricas para usar esta opción.
+//
+Siga estos pasos:
+  - Cuando intente agregar una licencia al Zoo sin conexión, **le aparecerán unas instrucciones** para la validación sin conexión, que incluyen un ID de dispositivo.
+  - Escriba el Código de licencia de Rhino, el Nombre de dispositivo y el ID del dispositivo.
+  - Vaya al sistema con acceso a Internet. 
+  - En un navegador web, vaya a **https://www.rhino3d.com/validate**. 
+  - Introduzca su dirección de correo electrónico y el código de licencia de Rhino. {{:zoo:validate.jpg?400|}}
+  - Para Rhino 6 y 7, introduzca también el **Nombre de dispositivo de Rhino** y el **ID de dispositivo** proporcionado en el paso 3. {{:zoo:validate2.jpg?400|}}
   - Para actualizar, introduzca el código de licencia de una versión anterior de Rhino.
-  - El código de validación aparecerá en la pantalla. Imprímalo o guárdelo en un archivo de texto.
+  - El código de validación aparecerá en la pantalla. Imprímalo o guárdelo en un archivo de texto. //Este código debe utilizarse durante las 24 horas después de generarse.// 
   - Vuelva al sistema del servidor del Zoo.
-  - Ejecute **ZooAdmin**, agregue el código de licencia de Rhino y haga clic en **Aceptar**.
+  - En la consola de Zoo (ejecute ZooAdmin), agregue el código de licencia de Rhino y haga clic en **Aceptar**.
   - Introduzca el código de validación en el asistente de validación y haga clic en **Siguiente**.
-
-Rhino se validará correctamente sin conexión.
+  - Rhino se validará correctamente sin conexión.
 
 \\
 
