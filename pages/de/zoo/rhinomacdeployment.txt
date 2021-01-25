@@ -1,31 +1,61 @@
 ======Verteilte Verwaltung von Lizenzen für Rhino für Mac======
 > **Produkt:** //[[de:zoo:home|Zoo]]//
-> **Zusammenfassung:** //Bereitstellung von Rhino für Mac zur Verwendung mit dem Zoo.//
+> **Zusammenfassung:** //Bereitstellung von Rhino für Mac zur Verwendung mit dem Zoo//
 
 =====Frage=====
-Wir haben eine Lab-Lizenz von Rhino für Mac erworben. Was sind die Strategien zur Bereitstellung auf mehreren Computern unserer Universität unter Verwendung eines Zoo-Lizenzservers?
+Wir haben eine Lab-Lizenz von Rhino für Mac erworben. Welche sind die Strategien zur Bereitstellung auf mehreren Computern unserer Universität unter Verwendung eines Zoo-Lizenzservers?
 
 Wir verwenden [[http://www.jamfsoftware.com/products/casper-suite/|Casper]] und andere Verwaltungssysteme zur Zusammenstellung von Paketen und zur Verteilung von Anwendungen auf unsere Client-Systeme. Dies beinhaltet normalerweise die Bündelung der Lizenzkonfiguration zusammen mit der zu verteilenden Anwendung.
 
 =====Antwort=====
+Hier haben wir einige nützliche Informationen für Sie.
 
+1.) Wenn Sie Rhino für Mac zum ersten Mal ausführen, werden die folgenden Ordner erstellt:
 
-1) Wenn Sie Rhino für Mac zum ersten Mal ausführen, werden die folgenden Ordner erstellt:
+====Rhino 7====
+
+  /Users/Shared/McNeel/Rhinoceros/7.0/License Manager
+  /Users/Shared/McNeel/Rhinoceros/7.0/License Manager/Licenses
+  
+====Rhino 6====
+
+  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager
+  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager/Licenses
+  
+====Rhino 5====
 
   /Library/Application Support/McNeel/Rhinoceros/License Manager
   /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
 
-Wichtig: jeder dieser Ordner hat die **chmod**-Dateirechte **+rwx**, was bedeutet, dass jeder Nutzer Schreibzugriff hat.
+2.) Der Ordner **License Manager/Licenses** enthält Rhinos Lizenzdatei:
 
-2) Im Ordner **Rhinoceros/License Manager/Licenses** befindet sich die Rhino-Lizenzdatei, die unter Rhino für Mac einen Namen wie **781b000c-8d0b-4ed3-8ead-213bdb848f39.lic** trägt. 
+**HINWEIS**: Eine häufig auftretende Verwechselung ist die von ///Library// (die allgemeine Bibliothek) und ///Users/[user_account]/Library// (die Bibliothek des Anwenders).  Vergewissern Sie sich daher, die allgemeine Bibliothek zu konsultieren.
+
+Auch erstellen Rhino 6 und Rhino 7 die Zoo-Lizenzdatei unter **License Manager** in ausdrücklich mit **6** & **7** bezeichneten Unterordnern, während Rhino 5 seine Dateien im Wurzelverzeichnis der Unterordner **Lizenz Manager** und **License** erstellt. Anders ausgedrückt: Rhino 5 erstellt keinen Unterordner **5**.
+====Rhino 7====
+
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
+  
+====Rhino 6====
+
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+====Rhino 5====
+
+  781b000c-8d0b-4ed3-8ead-213bdb848f39.lic
+
 
 Bei Einzelplatzsystemen ist diese Datei verschlüsselt, unlesbar und je Computer eindeutig.
 
-Bei Netzwerklizenzen besteht die Datei aus Klartext, ist lesbar und kann zwischen verschiedenen Computern hin und her kopiert werden.
+Bei Netzwerk- oder Zoo-Lizenzen besteht die Datei aus Klartext, ist lesbar und kann zwischen verschiedenen Computern hin und her kopiert werden.
 
-3) Auf Systemen mit Netzwerklizenzen gibt es außerdem die Datei **LicensesZooClient.settings** im Ordner **Rhinoceros/License Manager**. Diese Datei besteht ebenfalls aus lesbarem Klartext und kann zwischen verschiedenen Computern hin und her kopiert werden. Darin ist der Name des Zoo-Servers enthalten, wie er in Rhino eingegeben wurde.
+3.) Für Systeme mit einer Netzwerklizenz finden Sie noch eine zusätzliche Datei:
 
-Wenn Ihr Bereitstellungssystem zusätzlich zum Kopieren der Anwendung in den Anwendungsordner die Schritte 1, 2 und 3 durchführt, sollten Sie Rhino für Mac auf all Ihren Systemen bereitstellen können.
+  LicensesZooClient.settings 
+
+und zwar im Ordner **License Manager**. Diese Datei besteht ebenfalls aus lesbarem Klartext und kann zwischen verschiedenen Computern hin und her kopiert werden. Darin ist der **Name des Zoo-Servers** enthalten, wie er in Rhino eingegeben wurde.
+
+Wenn Ihr Bereitstellungssystem, abgesehen vom Kopieren der Anwendung in den **Anwendungsordner**, die Schritte 1.), 2.) und 3.) durchführt, sollten Sie Rhino für Mac auf all Ihren Systemen bereitstellen können.
 
 =====Weitere Informationen=====
 
