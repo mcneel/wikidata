@@ -1,35 +1,65 @@
 ======Distribuzione gestita di Rhino per Mac======
-> **Product:** //[[it:zoo:home|Zoo]]//
-> **Summary:** //Discusses how to deploy Rhino for Mac configured to use the Zoo//
+> **Prodotto:** //[[it:zoo:home|Zoo]]//
+> **Riepilogo:** //Come distribuire Rhino per Mac configurato per usare Zoo//
 
-=====Question=====
-We recently purchased a Rhino for Mac Education Lab License. What are some strategies to help deploy it configured to use a Zoo license server on several computers at our university?
+=====Domanda=====
+Abbiamo acquistato di recente una licenza Lab Educational di Rhino per Mac. Quali sono le strategie per distribuire Rhino configurato per usare il server di licenza Zoo su vari computer dell'Università?
 
-We use [[http://www.jamfsoftware.com/products/casper-suite/|Casper]] and other management systems to build packages and push applications out to client systems. This usually includes bundling the license configuration information with the distribution application.
+Utilizziamo [[http://www.jamfsoftware.com/products/casper-suite/|Casper]] e altri sistemi di gestione per creare pacchetti e inviare applicazioni a sistemi client. Questa procedura include di solito la creazione di informazioni per la configurazione delle licenze con un'applicazione di distribuzione.
 
-=====Answer=====
-Here is some helpful information.
+=====Risposta=====
+Ecco alcune informazioni utili.
 
-1) When you run Rhino for Mac for the first time, it creates the following folders:
+1.) Quando utilizzi Rhino per Mac per la prima volta, il programma crea le seguenti cartelle:
+
+====Rhino 7====
+
+  /Users/Shared/McNeel/Rhinoceros/7.0/License Manager
+  /Users/Shared/McNeel/Rhinoceros/7.0/License Manager/Licenses
+  
+====Rhino 6====
+
+  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager
+  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager/Licenses
+  
+====Rhino 5====
 
   /Library/Application Support/McNeel/Rhinoceros/License Manager
   /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
 
-Important: Each of these folders is **chmod** with **+rwx** so anyone can write information to it.
+2.) La cartella **License Manager/Licenses** contiene il file di licenza di Rhino:
 
-2) The //Rhinoceros/License Manager/Licenses// folder contains Rhino's license file, which for Rhino for Mac is named **781b000c-8d0b-4ed3-8ead-213bdb848f39.lic**. 
+**NOTA**: Un comune errore è confondere ///Library// (la libreria generale) e ///Users/[user_account]/Library// (la libreria utente).  Assicurati di consultare la libreria generale.
 
-For standalone licenses, this file is encrypted, unreadable, and unique per system.
+Inoltre, Rhino 6 e Rhino 7 creano file di licenza Zoo in **License Manager**, in sottocartelle **6** e **7**, mentre Rhino 5 crea i file nella cartella root, nelle sottocartelle **License Manager** e **License**. In altre parole, Rhino 5 non crea una sottocartella chiamata **5**.
+====Rhino 7====
 
-For network licenses, though, this file is clear text, readable, and can be moved between one system and another.
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
+  
+====Rhino 6====
 
-3) For systems that have a network license, you will also find a LicensesZooClient.settings file that in the //Rhinoceros/License Manager// folder. This file is also clear text, readable, and can be moved between one system and another. It contains the name of the Zoo server as entered into Rhino.
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+====Rhino 5====
 
-If your deployment system performs steps 1, 2, and 3, besides pushing the Rhino application bundle into each system's Applications folder, you should be able to deploy Rhino for Mac on all your systems.
+  781b000c-8d0b-4ed3-8ead-213bdb848f39.lic
 
-=====More information=====
 
-[[http://wiki.mcneel.com/zoo/findzooservermac|How does Rhino for Mac find a Zoo server?]]
+Per le licenze standalone, questo file è codificato, non leggibile e unico per sistema.
+
+Per reti, Zoo o licenze, questo file è testo non codificato, leggibile e può essere spostato da un sistema all'altro.
+
+3.) Per i sistemi che non dispongono di licenza in rete, troverai un altro file:
+
+  LicensesZooClient.settings 
+
+che si trova nella cartella **License Manager**. Anche questo file contiene testo non codificato, leggibile e può essere spostato da un sistema all'altro. Contiene il **nome del server Zoo** come inserito in Rhino.
+
+Se il sistema di distribuzione esegue i passi 1.), 2.) e 3.), oltre a inviare il pacchetto di Rhino alla cartella **Applications** di ciascun sistema, potresti essere in grado di distribuire Rhino per Mac su tutti i sistemi.
+
+=====Ulteriori informazioni=====
+
+[[http://wiki.mcneel.com/zoo/findzooservermac|Come trova Rhino per Mac un server Zoo?]]
 
 
 \\
