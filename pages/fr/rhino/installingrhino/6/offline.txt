@@ -5,21 +5,44 @@ Le programme d'installation de Rhino est responsable de s'assurer que tout ce qu
 Afin de réaliser une installation hors ligne, vous devez vous assurer que ces packages sont disponibles. 
 
 ====Télécharger les packages pour une installation hors ligne ====
-
+Depuis un ordinateur avec un accès à internet :
   - Télécharger le [[https://www.rhino3d.com/download/rhino-for-windows/6/latest|dernier programme d'installation de Rhino]].
   - Lancez le logiciel d'installation sur un ordinateur ayant un accès à Internet
-  - Cliquez sur **l'icône de l'engrenage** à côté du bouton Installer maintenant. 
-  - Cliquez sur **Télécharger les éléments pour une installation hors ligne**. 
+  - Cliquez sur **l'icône de l'engrenage** à côté du bouton Installer maintenant. {{ :rhino:installingrhino:6:install_gear_advancedoptions.png?direct&200 |}}
+  - Cliquez sur **Télécharger les éléments pour une installation hors ligne**. {{ :rhino:installingrhino:6:install_download_packages.png?direct&200 |}}
+  - Rhino télécharge maintenant les packages nécessaires sur votre ordinateur et afficher une boîte de dialogue montrant l'avancement. {{ :rhino:installingrhino:6:install_downloading.png?direct&200 |}}
+  - Lorsque le téléchargement est terminé, vous verrez une boîte de dialogue indiquant **Layout Completed Successfully** et affichant des instructions. {{ :rhino:installingrhino:6:install_download_finished.png?direct&200 |}}
+  - Vous trouverez maintenant un fichier **Bootstrapper.exe** et un dossier **redist** à côté du fichier d'installation que vous venez d'exécuter. 
 
-Vous verrez un dossier **redist** à côté du fichier d'installation. 
+====Installation ====
 
-====Déploiement====
+  - Copiez le fichier **Bootstrapper.exe** sur un ordinateur n'ayant pas accès à internet ou un lecteur réseau. 
+  - Copiez le dossier **redist** au même endroit.
+  - Sur l'ordinateur déconnecté, exécutez le fichier **Bootstrapper.exe**.
 
-  - Copiez le programme d'installation sur un disque du réseau ou tout autre emplacement pour le déploiement.
-  - Copiez le dossier **redist** au même endroit. 
-  - Suivez les [[fr:rhino:installingrhino:6|instructions de déploiement]], ou lancez le programme d'installation manuellement. 
+**Pour un déploiement en réseau**
+  * Suivez les [[fr:rhino:installingrhino:6|instructions de déploiement]]. 
 
-====Fichiers d'aide====
+====Validation d'une installation hors ligne====
+Les licences de Rhino doivent être validées avant de pouvoir les utiliser. Pour les ordinateurs hors ligne, vous pouvez réaliser la validation de licence hors ligne. 
+
+  - Lorsque vous lancez Rhino, celui-ci vous informe que Rhino ne peut pas se connecter au serveur de validation. {{ :zoo:validate01.png?direct&200 |}}
+  - Cliquez sur le bouton **"Obtenir un code de validation manuellement"**.
+  - La boîte de dialogue suivante s'ouvre. {{ :zoo:validate02.png?direct&200 |}} 
+  - Recopiez les informations indiquées : **Clé de Rhino**, **Nom de l'appareil** et **ID de l'appareil**. 
+  - Passez sur un système avec un accès à Internet.
+  - Dans un navigateur Internet, ouvrez https://www.rhino3d.com/validate.
+  - Entrez votre **adresse e-mail**, votre **clé de licence** de Rhino, le **Nom de l'appareil** et **ID de l'appareil** dans le formulaire. {{ :zoo:validate2.jpg?direct&200 |}}
+  - Si vous réalisez une mise à jour, indiquez également la clé de licence d'une version précédente de Rhino.
+  - Votre code de validation sera affiché. Imprimez-le ou enregistrez-le dans un fichier de texte. //Ce code doit être utilisé dans les 24 heures après sa génération//.
+  - Revenez sur le système sans connexion. 
+  - Entrez le code de validation dans l'assistant de validation puis cliquez sur Suivant.
+
+Rhino sera validé hors ligne.
+
+**Remarque :** Pour un déploiement en réseau ou pour utiliser un LAN Zoo hors ligne, les données nécessaires sont indiquées lorsque vous essayez d'ajouter une licence sur le Zoo. Vous trouverez des instructions spécifiques pour le Zoo sur https://wiki.mcneel.com/fr/zoo/rhinovalidateoffline#validating_offline
+====== Fichiers d'aide ======
+
 Le système d'aide de Rhino est en ligne. Afin de pouvoir l'utiliser hors ligne :
 
   - [[https://www.rhino3d.com/download/Rhino/6.0/Rhino6OfflineHelp|Téléchargez le programme d'installation de l'aide hors ligne]]
