@@ -1,0 +1,50 @@
+======Installazione offline di Rhino 6 ======
+
+Il programma di installazione di Rhino assicura che l'installazione di Windows sia adeguata per l'esecuzione di Rhino. Questo include i pacchetti ridistribuibili .NET framework e Microsoft Visual C++ Runtime. Visto che molti computer hanno già questi pacchetti, non vengono inclusi nel programma di installazione di Rhino. Questi possono essere scaricati durante l'installazione, se necessario.
+
+Tuttavia, per eseguire l'installazione offline, assicurati che questi pacchetti siano disponibili.
+
+====Scaricare i pacchetti per l'installazione offline ====
+Da un computer con accesso a Internet:
+  - Scarica il [[https://www.rhino3d.com/download/rhino-for-windows/6/latest|programma di installazione della versione più recente di Rhino]].
+  - Avvia il programma di installazione sul computer con accesso a Internet
+  - Fai clic sull'**icona a forma di ingranaggio** accanto al pulsante "Installa ora". {{ :rhino:installingrhino:6:install_gear_advancedoptions.png?direct&200 |}}
+  - Fai clic sul link **Scaricare i pacchetti per l'installazione offline**. {{ :rhino:installingrhino:6:install_download_packages.png?direct&200 |}}
+  - Rhino scarica ora i pacchetti necessari sul computer e mostrerà la finestra di dialogo durante la procedura. {{ :rhino:installingrhino:6:install_downloading.png?direct&200 |}}
+  - Al termine del download, verrà mostrata una finestra di dialogo a indicare che la **configurazione è stata completata correttamente** e che occorre seguire altre istruzioni. {{ :rhino:installingrhino:6:install_download_finished.png?direct&200 |}}
+  - Il file **Bootstrapper.exe** e la cartella **redist** si trovano accanto al file del programma di installazione appena eseguito.
+
+====Installazione====
+
+  - Copia il file **Bootstrapper.exe** su un computer offline o un'unità di rete.
+  - Copia la cartella **redist** nella stessa posizione.
+  - Sul computer offline, esegui il file **Bootstrapper.exe**.
+
+**Per la distribuzione in rete**
+  * Segui le [[rhino:installingrhino:6|istruzioni di distribuzione]].
+
+====Convalidare un'installazione offline====
+Le licenze di Rhino vanno convalidate prima di poter essere usate. Per i computer offline, è possibile eseguire la convalida della licenza in modalità offline.
+
+  - All'apertura di Rhino, viene notificato che il programma non può connettersi al server della convalida. {{ :zoo:validate01.png?direct&200 |}}
+  - Fai clic sul pulsante **"Ottieni il codice di convalida manualmente"**.
+  - Apparirà la seguente finestra di dialogo. {{ :zoo:validate02.png?direct&200 |}} 
+  - Annota le informazioni su **codice di licenza**, il **nome dispositivo** e l'**ID dispositivo**.
+  - Usa un sistema con accesso a Internet.
+  - Sul browser web, consulta https://www.rhino3d.com/validate.
+  - Inserisci nel modulo le informazioni relative a **indirizzo e-mail**, **codice di licenza** di Rhino, **nome dispositivo** e **ID dispositivo**. {{ :zoo:validate2.jpg?direct&200 |}}
+  - In caso di aggiornamento, dovrai inserire anche il codice di licenza della versione precedente di Rhino.
+  - Il codice di convalida verrà visualizzato sullo schermo. Stampalo o salvalo su un file di testo. //Questo codice deve essere usato entro 24 ore dalla creazione//.
+  - Torna al sistema offline.
+  - Inserisci il codice di convalida nella procedura guidata per la convalida, quindi fai clic su Avanti.
+
+Rhino verrà correttamente convalidato offline.
+
+**Nota:** per la distribuzione in rete e l'utilizzo di LAN Zoo offline, i dati necessari vengono mostrati quando provi ad aggiungere una licenza a Zoo. Per scrivere le istruzioni precedenti su Zoo, consulta https://wiki.mcneel.com/it/zoo/rhinovalidateoffline.
+====== File della guida in linea ======
+
+La guida in linea di Rhino 6 è online. Per usarla offline:
+
+  - [[https://www.rhino3d.com/download/Rhino/6.0/Rhino6OfflineHelp|Scarica il programma di installazione della guida offline]].
+  - Esegui il programma di installazione, assicurati di selezionare **Per tutti gli utenti** durante il processo di installazione.
+  - Ulteriori informazioni su [[https://wiki.mcneel.com/it/rhino/installrhi|Installazione dei file RHI per tutti gli utenti]].
