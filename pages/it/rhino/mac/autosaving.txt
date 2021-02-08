@@ -1,40 +1,83 @@
-====== Salvataggio automatico e Versioni in OS X 10.7 (Lion) ======
-Apple ha implementato un metodo radicalmente diverso per la gestione dei modelli in OS X 10.7; questo metodo è stato integrato in Rhino per Mac.  Apple descrive "Salvataggio automatico" e "Versioni" [[http://support.apple.com/kb/HT4753|qui]] e [[http://www.apple.com/macosx/whats-new/features.html#versions|qui]]. Troverete anche un'altra introduzione [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|qui]].
+====== Salvataggio automatico e versioni in macOS ======
+Apple ha aggiunto un metodo completamento diverso per la gestione dei modelli in macOS e questo sistema è stato integrato in Rhino per Mac.  Apple descrive il salvataggio automatico e le versioni [[https://support.apple.com/it-it/guide/mac-help/mh40710/mac|qui]]. Un'altra risorsa è disponibile [[https://www.lifewire.com/use-auto-save-and-versions-in-os-x-2260850/|qui]].
 
-In questo articolo vedremo degli aspetti importanti per gli utenti di Rhino per Mac, non menzionati negli articoli citati sopra.  Per concludere, vi consigliamo anche di leggere il seguente articolo:[[http://wiki.mcneel.com/rhino/mac/lionsaving|everything you learned about saving files is wrong]].
+In questo articolo verranno discussi gli aspetti importanti per gli utenti di Rhino per Mac, non menzionati negli articoli citati sopra.
 
--->Che fine ha fatto la domanda "Salvare le modifiche a...?" all'uscita da Rhino?#
+===== Salvataggio automatico vs copia di backup ===== 
 
-Non è più necessaria, dato che il modello aperto viene continuamente salvato su disco. Prima del salvataggio automatico, di fatto esistevano due versioni di un modello: quella in Rhino e quella su disco. Era compito vostro mantenere sincronizzate queste due versioni salvando il modello di frequente. I crash del programma potevano risultare disastrosi. Se vi scordavate di mantenere manualmente sincronizzate queste versioni, potevate perdere un sacco di lavoro. Con il salvataggio automatico di Lion, esiste solo una versione del modello; quella visualizzata sullo schermo è la stessa di quella su disco.
+Concettualmente, il termine salvataggio automatico si riferisce al fatto di //scrivere una sola copia di backup del file in una qualsiasi altra posizione che l'utente o il programma possano individuare in un secondo momento//.  L'utente è responsabile del salvataggio regolare del file, ma Rhino e gli altri programmi creano un file di backup nel caso in cui l'utente se ne dimenticasse.
 
-<--
- 
--->Quando effettua il salvataggio automatico di un modello Rhino per Mac?#
+In macOS, Apple sfortunatamente utilizza quasi lo stesso termine, //Salvataggio automatico//, per descrivere un'operazione completamente diversa.  In macOS, il termine salvataggio automatico si riferisce al fatto di //salvare il file automaticamente// sovrascrivendolo automaticamente.  In questo senso, non esiste un file di backup nascosto. Il file originale viene sovrascritto frequentemente.  macOS non mantiene una copia del file originale nel caso in cui l'utente volesse ripristinare le modifiche quando viene chiuso il modello.
 
-Un modello viene salvato quando **chiudete** una finestra di modellazione, quando **uscite** da Rhino, quando **passate** ad un'altra applicazione e //di tanto in tanto//. Apple dice che i salvataggi //di tanto in tanto// avvengono circa ogni cinque minuti quando Rhino è inattivo. Questo intervallo di tempo non è configurabile.
+===== Quando Rhino per Mac salva automaticamente un modello? =====
 
-<--
+Un modello viene salvato automaticamente //ogni volta// che l'utente //passa// a un'altra applicazione. Apple dice che i salvataggi //di tanto in tanto// avvengono circa ogni cinque minuti quando Rhino è inattivo. Questo intervallo di tempo non è configurabile.
 
--->Se Rhino continua a salvare il mio modello, verrò continuamente interrotto dai salvataggi automatici?#
+Rhino per Mac non salverà automaticamente il modello durante l'esecuzione di un comando o la modifica del modello.  Ciascuna copia scritta sul disco è una copia precisa e coerente del modello ogni volta che viene scritto. 
 
-I salvataggi automatici periodici vengono eseguiti in background. Visto che i salvataggi automatici in background non bloccano mai il funzionamento di Rhino, non ne noterete l'esecuzione. Se modificate il modello mentre Rhino sta eseguendo un salvataggio automatico, il salvataggio automatico viene abbandonato e ritentato più tardi.
+L'utente può verificare questo aspetto autonomamente.  Assicurati di poter vedere l'anteprima del modello sulla finestra nel Finder durante l'utilizzo di Rhino per Mac.  Modifica il modello, quindi attendi 30 secondi.  Se l'anteprima del Finder cambia, allora il modello è stato slavato automaticamente.
 
-<--
+===== Ripristinare il contenuto originale =====
 
--->E l'uso dello spazio su disco?#
+Le modifiche apportate al modello vengono salvate automaticamente, ma potresti voler mantenere qualsiasi modifica effettuata.  Quando chiudi un modello modificato, Rhino ti chiederà se desideri salvare le modifiche.  Se scegli di ripristinare le modifiche, verrà recuperato il modello originale.
 
-Il salvataggio automatico salva solo ciò che è cambiato rispetto alla versione precedente, per cui l'uso dello spazio su disco è ottimizzato. Le versioni più vecchie vengono scartate automaticamente.
+===== Se Rhino continua a salvare il mio modello, verrò continuamente interrotto dai salvataggi automatici? =====
 
-<--
+I salvataggi automatici periodici vengono eseguiti in background. Visto che i salvataggi automatici in background non bloccano mai il funzionamento di Rhino, non ne noterai l'esecuzione. Se inizi a modificare il modello quando Rhino cerca di salvarlo automaticamente, Rhino sospende questa operazione per riprenderla in un secondo momento.
 
--->Rhino per Mac è in grado di sfogliare le versioni precedenti dei miei modelli di Rhino?#
+===== E l'uso dello spazio su disco? =====
 
-Sì, il browser di Versioni è parte di Rhino per Mac in 10.7.
+Il salvataggio automatico si verifica frequentemente, ma archivia solo alcune versioni del modello.  Il salvataggio automatico archivia il modello ogni ora circa, successivamente una volta a settimana e quindi una volta a settimana per un numero determinato di settimane.  Apple si riferisce a questa operazione con il termine versioni che possono essere visualizzate con il browser corrispondente (consulta di seguito).
 
-<--
+Se utilizzi Time Machine per eseguire backup automatici dei file del computer, quindi tutte le versioni precedenti dei file 3DM vengono inclusi nei backup di Time Machine e non occupano ulteriore spazio sul disco locale del computer.  Se non esegui i backup regolarmente, consigliamo di iniziare ad eseguire backup con Time Machine.
 
--->Cosa posso fare nel browser di Versioni?#
+===== Versioni intermedie =====
 
-Nel browser di Versioni, la finestra sulla sinistra rappresenta il modello corrente e tutte le finestre sulla destra rappresentano le versioni precedenti del modello. Queste finestre sono vere e proprie finestre di Rhino e si possono manipolare come qualsiasi altro modello di Rhino. Potete ruotare le viste, richiamare il pannello Livelli per mostrare o nascondere i livelli e persino copiare gli oggetti da un modello precedente per incollarli nel modello  corrente. Non potete però //modificare// le versioni precedenti. [[http://tidbits.com/article/12483 |beware Lion's Versions Bug on Network and Non-HFS+ Volumes]].
+Mentre lavori a un modello, esistono momenti di interruzione o fasi naturali del lavoro. Questo è un buon momento per eseguire File > Salva (Comando-S) per avere un'istantanea del lavoro svolto fino a quel momento.  Ricorda che il sistema eseguirà salvataggi automatici del modello ogni ora circa in modo tale da poter recuperare il lavoro precedente.  Ciascuna versione salvata con File > Salva viene archiviata dal sistema come versione.  La creazione di una nuova versione non implica di sovrascrivere le versioni precedenti, ma aggiunge invece varie versioni.
 
-<--
+Ogni volta che selezioni File > Salva, aggiungi una nuova versione del file.  Premendo Comando-S puoi creare //molte// versioni del file. Probabilmente non ti serviranno o non vorrai tutte queste copie di backup.  Se vuoi semplicemente salvare il modello, non occorre eseguire il salvataggio delle versioni con Comando-S. Il sistema salva già il modello.
+
+Per sapere dove viene allocato la maggior parte dell'utilizzo disco sul tuo Mac, ti consigliamo di usare [[https://daisydiskapp.com/|DaisyDisk]].  Installa la versione che non si trova su Mac App Store ed [[https://daisydiskapp.com/manual/2/en/Topics/AdminScan.html|esegui la scansione come amministratore]], in questo modo puoi [[https://daisydiskapp.com/manual/2/en/Topics/HiddenSpace.html|consultare lo spazio nascosto su disco]].
+
+===== Rhino per Mac può sfogliare versioni precedenti dei modelli di Rhino? =====
+
+Sì, il browser delle versioni è parte di Rhino per Mac.  Naviga in //File// > //Ripristina a// > //Sfoglia tutte le versioni...// Se esistono versioni del modello salvate automaticamente, appariranno nel browser delle versioni.
+
+
+===== Cosa posso fare nel browser delle versioni? =====
+
+Nel browser delle versioni, la finestra a sinistra mostra il modello attuale. Tutte le finestre a sinistra mostrano le versioni precedenti del modello. Queste finestre sono vere e proprie finestre di Rhino e si possono manipolare come qualsiasi altro modello di Rhino. Puoi ruotare le viste, portare in primo piano il pannello dei livello per mostrare o nascondere i livelli. Puoi anche copiare oggetti da un modello precedente per incollarlo sul modello attuale. Non potete però //modificare// le versioni precedenti.
+
+===== Posso eliminare versioni precedenti del file? =====
+
+Sì, puoi eliminare le versioni precedenti del file.  Per farlo, apri Rhino per Mac e apri il file in questione.  Naviga in //File// > //Ripristina a// > //Sfoglia tutte le versioni...//  Quando appare il browser delle versioni, sposta il puntatore del mouse sul bordo superiore dello schermo e apparirà la barra dei menu di Rhinoceros.  In //File// > //Ripristina a// puoi eliminare una sola versione precedente o tutte le versioni precedenti tenendo premuto il tasto //Opzione/Alt//.  Questa operazione non eliminerà il file 3dm, ma solo le versioni precedenti.  Se le opzioni del menu "Elimina questa versione" o "Elimina tutte le versioni" non sono attive, il file delle versioni non si trova sul disco locale.  Questo fa parte del normale backup di Time Machine e non può essere eliminato.
+
+===== Salvataggio automatico e versioni con server file di rete =====
+
+La funzionalità di salvataggio automatico di Rhino funziona bene con i server file di rete lenti.  Quando Rhino avvia il salvataggio automatico, viene salvata velocemente nella memoria una copia del modello 3DM e quindi viene scritta sul server di rete in background.  Per la scrittura sul server, non occorre attendere il completamento del salvataggio automatico.  Rhino scrive il modello 3DM su una posizione temporanea su server e, una volta completata l'operazione, viene eseguita immediatamente la copia del salvataggio automatico del file corrente.
+
+La funzionalità relativa alle versioni di Rhino dipende dalle funzioni disponibili solo sul disco locale di macOS.  Tuttavia, quando il modello si trova su un server file di rete, puoi usare //quasi tutte// le funzionalità delle versioni.  Il modello viene salvato con frequenza sul server di rete e ogni ora le versioni precedenti del modello vengono archiviate finché il modello è aperto in Rhino.  Crediamo che, per i server file di rete, queste versioni previe vengono mantenute temporaneamente sul disco locale.  Seleziona File > Ripristina a > Sfoglia tutte le versioni per consultare tutte le versioni, da quelle precedenti alle più recenti.
+
+Quando chiudi un modello archiviato su un server file di rete, le versioni precedenti salvate temporaneamente sul disco locale verranno eliminate.  Rhino mostrerà la seguente finestra di dialogo:
+
+{{:rhino:mac:permanent_version_storage.png?500|/Users/macrhino/Desktop/Screenshots/permanent version storage.png}}
+
+Il file verrà salvato normalmente e non avrai accesso alle versioni precedenti finché non viene chiuso il file.
+
+=== "Questo documento non può essere salvato automaticamente" ===
+
+Gli utenti di Rhino che utilizzano server file di rete dovrebbero visualizzare il messaggio "Questo documento non può essere salvato automaticamente" su una finestra a comparsa.  Ciò indica che la connessione al server file di rete è stata interrotta e Rhino non può scrivere sul server file di rete. Una volta ripristinata la connessione alla rete, Rhino potrà salvare automaticamente il modello.
+
+===== È possibile disattivare la funzionalità relativa alle versioni in Rhino per Mac? =====
+
+Sì, ma **SI CONSIGLIA** di **NON FARLO**.  Rhino per Mac è stato progettato per essere compatibile con le funzionalità di versioni e salvataggio automatico; la disattivazione di queste funzioni può compromettere le prestazioni e la stabilità del software.  Inoltre, non potrai aggiungere etichette, rinominare o spostare il file dalla finestra, ecc. Se per qualsiasi motivo devi disattivare queste funzioni, ti verrà chiesto di aprire //Terminal.app// per eseguire questo comando:
+    defaults write com.mcneel.rhinoceros ApplePersistence -bool no    
+Questo comando disattiva il salvataggio automatico e le versioni e viene ripristinata l'opzione Salva col nome sul menu File (al posto di Duplica).
+
+Per modificare il comportamento di default, inserisci nuovamente il comando in Terminale e sostituisci "no" con "yes":
+    defaults write com.mcneel.rhinoceros ApplePersistence -bool yes    
+Per controllare qual è l'impostazione attuale, usa questo comando:
+    defaults read com.mcneel.rhinoceros ApplePersistence    
+Se restituisce 0 (o un messaggio di errore), allora la funzione è disattivata.  Se restituisce 1, è attiva.
+
+**NOTA**: I passi indicati in precedenza non funzionano su macOS Mojave 10.14.  Attualmente non conosciamo un metodo alternativo valido.
