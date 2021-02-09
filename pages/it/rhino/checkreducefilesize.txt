@@ -1,0 +1,62 @@
+====== Perché il mio file è diventato così grande? ======
+
+
+> Periodicamente, viene pubblicato sul forum di Rhino un post da parte di un utente che ha visto aumentare le dimensioni di un file relativamente semplice e non sa come riportarlo a dimensioni normali.  Questo articolo cercherà di spiegare cosa è successo e perché, fornendo alcune possibili soluzioni.
+
+===Cosa causa l'aumento delle dimensioni del file?===
+
+Alcuni elementi possono incidere drasticamente sull'aumento delle dimensioni del file:
+
+  * **Mesh di visualizzazione** - Rhino utilizza mesh per visualizzare oggetti superficie sullo schermo. Impostazioni delle mesh di visualizzazione molto raffinate possono causare l'aumento delle dimensioni del file senza che l'utente se ne accorga. La visualizzazione appare normale, ma l'utente non è necessariamente consapevole del numero di poligoni inclusi nella mesh di visualizzazione.
+
+  * **Texture/Immagini bitmap** - Le texture bitmap ad alta risoluzione archiviate in un file, usate come materiali di rendering o per oggetti immagine (fotogrammi) creati dall'utente, possono aumentare drasticamente le dimensioni del file.
+
+  * **Materiali** - è possibile avere un'ampia raccolta di materiali che possono occupare un'importante quantità di spazio nel file.  Alcuni materiali vengono duplicati senza motivo, moltiplicando il loro effetto.
+
+  * **Plug-in** - I plug-in di Rhino possono aggiungere a Rhino tutti i tipi di funzioni, come ad esempio rendering avanzati, strumenti di progettazione specific e strumenti CAM.  Ai plug-in è consentito archiviare i propri dati nel file di Rhino e questi possono essere numerosi in base alla natura del plug-in e a come viene usato.
+
+  * **Dati estesi** - I file di Rhino, infine, possono contenere semplicemente **quantità massive di geometria** sotto forma di curve, superfici o mesh.  In questo caso, non ci si aspetta file di grandi dimensioni...
+
+----
+
+===Come faccio a capire la causa del problema?===
+
+Se hai letto quando indicato sopra, potresti già avere un'idea sul possibile problema.  Se è così, puoi ignorare questo paragrafo e consultare la sezione relativa alla soluzione possibile di seguito.
+
+Tuttavia, in caso di confusione o per vedere semplicemente intero contenuto dei file nel dettaglio, puoi usare il comando **VerificaFile3dm** in Rhino.  Puoi eseguire questo comando sul file di Rhino attualmente aperto o su un altro file 3dm sul computer.  Si aprirà una finestra testuale con numerose informazioni.  Il paragrafo superiore mostrerà informazioni sull'installazione di Rhino e i plug-in installati.  Di seguito, la parte più interessante: le varie "tabelle" in cui vengono archiviate le informazioni sul file di Rhino da analizzare.  
+
+  * La prima è la **"tabella bitmap"**.  Indica quanti bitmap esistono sul file e soprattutto le dimensioni totali.  Se si tratta di numeri grandi (espressi in byte) possono giustificare in parte le dimensioni del file.
+
+  * Anche la **"tabella materiali"** deve essere controllata in termini di dimensioni.
+
+  * Per concludere, la **"tabella oggetti"** fornisce un riepilogo sullo spazio di archiviazione adottato dalla geometria.  In Rhino 5, è possibile visualizzare le dimensioni totali di tutti gli oggetti. In Rhino 6 e versioni successive, vengono mostrate le informazioni sulle dimensioni anche per oggetto.  //Nota: le dimensioni degli oggetti includono le mesh di rendering allegate che possono essere utili se contribuiscono ai problemi di dimensione.//
+
+  * Infine, la **"tabella sui dati utenti del modello"**, che enumera tutti i plug-in caricati e i dati da questi archiviati.  Dati di grandi dimensioni possono contribuire al problema. 
+
+----
+
+===OK, ho qualche sospetto, come procedo?===
+
+  * **Mesh di visualizzazione**: Se hai il sospetto che le impostazioni delle mesh di visualizzazione possano aumentare le dimensioni file, allora puoi provare alcune operazioni.  Puoi provare a usare il comando **_SaveSmall**, che salverà il file senza le mesh di rendering. Controlla le dimensioni del file appena salvato e, se si sono ridotte, vuol dire che ciò causava in parte il problema.  Se desideri conservare l'originale, pupi usare anche il comando **_SaveAs** con un altro nome e selezionare l''opzione "Save small" sulla finestra di dialogo.
+
+  * **Materiali**: Se la tabella dei materiali contiene elementi di grandi dimensioni, potresti provare il comando **_Purge** insieme a **_Materials=_Yes**.  Questa operazione elimina i materiali non usati, quindi potrebbe esserti di aiuto.  Diversamente, consulta i dati dei plug-in come indicato di seguito...
+
+  * **Bitmap (immagini)**: Se la tabella bitmap contiene elementi di grandi dimensioni, la causa del problema potrebbe dipendere da vari aspetti.  I frame immagine, le bitmap di sfondo e le immagini applicate come texture vengono archiviate nella tabella bitmap.  Potresti visualizzare se ci sono texture non usate che bloccano il file ed eliminarle e rimuovere elementi frame che non ti servono più.  Tuttavia, ciò potrebbe non risolvere il problema; a volte le immagini bitmap si bloccano sul file anche quando viene assegnato un oggetto mentre un elemento Picture(frame) viene eliminato.  In tal caso, potresti eliminare la tabella di bitmap.  In Rhino 5, esiste un comando di test per questa operazione, **TestPurgeBitmapTable** (funzione di autocompletamento non disponibile per questo comando).  Tieni presente che questo comando rimuove //TUTTE// le bitmap dal documento, comprese quelle che ti servono ancora, quindi si consiglia di utilizzarlo con attenzione...
+
+  * **Dati dei plug-in**: I dati creati dai plug-in di Rhino rimangono nel file //anche se la sessione di Rhino in cui è aperto il file non presenta tali plug-in//; quindi, non è possibile accedere al file anche se è ancora lì e non è possibile salvarlo nuovamente.  Ciò in realtà è positivo.\\ \\ Tuttavia, se ricevi un file da un utente che ha eseguito un rendering con materiali personalizzati o percorsi utensili CAM, sicuramente non vorrai mantenere tali elementi e vorresti ridurre il più possibile le  dimensioni del file.\\ \\ Per farlo, usa il comando **_-SaveAs** (così come indicato); sulla linea di comando visualizzerai la voce **_SavePlugInData**.  Seleziona **_No** ed esegui il salvataggio.  //**Avviso:** questa operazione eliminerà i dati di tutti i plug-in (attuali), quindi assicurati di non eliminare gli elementi che non ti occorrono.//  Consigliamo di eseguire eventualmente una copia dei dati.\\ \\ La procedura di rimozione dei dati di plug-in può inoltre risolvere alcuni problemi con i dati da fonti sconosciute, che si bloccano nel file e che non possono essere rimossi in alcun modo.
+
+
+  * **Grandi quantità di geometrie nel file**:  Come detto in precedenza, se il file è già stato creato, non esistono molte soluzioni per ridurne le dimensioni. Rhino richiede tale spazio per descrivere correttamente tutti gli oggetti.  Se desideri inviare il file a qualcuno, crea un file zip per ridurre notevolmente le dimensioni dei file di Rhino.  Se non hai ancora creato il file e prevedi di inserire molti oggetti identici, utilizza i **blocchi** per contenere le dimensioni del file.  Consulta la guida in linea di Rhino per ulteriori informazioni sui blocchi.\\ \\ **Se credi che l'oggetto occupi molta memoria quando non dovrebbe, ** dovresti quindi cercare l'oggetto o gli oggetti che causano l'aumento delle dimensioni del file.  Controlla se esistono elementi nascosti o livelli disattivati che possono causare il problema.  Controlla anche se una o più superfici enormi (con centinaia di punti di controllo) sono state tagliate in dimensioni più piccole. Rhino archivia anche la definizione originale della superficie (non tagliata), quindi la superficie apparentemente piccola potrebbe occupare molta memoria.  Il comando **_ShrinkTrimmedSrf** rimuove le parti che non servono di queste superfici.
+
+----
+
+===Quali altre possibilità esistono?===
+
+Se le soluzioni proposte finora non funzionano, prova quanto segue.
+
+  * A volte, il problema si risolve aprendo un file vuoto e copiando/incollando geometria da un file precedente a quello nuovo.  A volte, invece, gli oggetti possono includere le bitmap bloccate anche una volta copiati, quindi ti trovi di nuovo al punto di partenza.
+
+  * Se nessuna alternativa funziona, puoi provare a usare il comando **_SaveAs** e selezionare "Geometry only".  In teoria, solo gli oggetti reali verranno mantenuti, ma l'organizzazione dei file viene del tutto compromessa e gli oggetti verranno mostrati solo su un livello, senza colori, né gruppi. Questo è l'ultima risorsa a cui ricorrere.
+
+----
+==(commenti...)==
