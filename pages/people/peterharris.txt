@@ -25,59 +25,6 @@
 
 
 
-=====Commands=====
-The commands currently available in the PetersTools plug-in are:
-
-\\
-**Geometry-creating or editing tools**
-        - **TrimAtLine**  - Prompts you to draw a line to use as a trim line, pick whatever you want to trim, then right-click to delete the line.
-        - **TrimAtZero**  - Same, but starts line at 0,0
-        - **SplitBoth**  - Splits two sets of surfaces with each other.
-        - **SplitWithEdgesAndCurves**  - Script that automates typing in 'crv' after picking the split command.
-        - **JoinCurvesByClosestEnds**  - Joins two curves by closest ends by adding two straight lines.
-        - **QuickCage**  - Click one of 15 numbers (2 through 16) on the command line or type in a number, and the tool creates a bounding-box cage around your object with that many points in each direction.  Great for quick edits.
-        - **SetX**  - Flattens an object in the world X direction.
-        - **SetXTo0**  - Flattens an object in the world  X direction to 0.
-        - **SetY**  - Flattens an object in the world  Y direction.
-        - **SetYTo0**  - Flattens an object in the world  Y direction to 0.
-        - **SetZ**  - Flattens an object in the world  Z direction.
-        - **SetZTo0**  - Flattens an object in the world  Z direction to 0.
-        - **MagicCap**  - Creates a planar surface from any selection of curves and/or surface edges. Here's how it works:
-{{:people:magiccapanimation.gif?590}}
-        - **HideAllUnselectedCurves**  - Hides all unlocked visible unselected curves.
-        - **HideAllUnselectedPoints**  - Hides all unlocked visible unselected points.
-
-\\
-**Timer**
-
-        - **TimerTools**  - Simple tools for keeping track of time spent on a project. Nested options include StartTimer, StopTimer, TimerLog, CalculateTotalHours, and LegacyTimerLog. The TimerLog is a text file of the start and stop times and it is part of your current rhino document. It can be edited manually if you make a mistake by not stopping your timer. LegacyTimerLog is for users who used the old timer that saved data to a text file so that they can still find that old text file (but the new timer won't add to that text file or calculate totals from it. This will go away entirely in the next update.)
-
-
-\\
-**BOM and object data tools**
-
-        - **BOM**  - Calculates object weights based on density and exports object notes and other attributes to a .csv file or to the clipboard.  (Note:  Objects need to have a //real material// assigned in order to do the weight calculations.  See next tool...) Now includes more options and lets users select which columns to export. Items that can be exported to the bill of materials includes Part Name, Real Material & Weight, Box Size (bounding box), Object Notes, Volume, Surface Area, Layer, Volume Centroid, and Area Centroid. This tool has a lot in common with Rhino's built-in properties export (export -> .csv), except that this includes real material and weight, so if you don't need those properties, try the built-in tool first!
-        - **RealMaterialTools** - Includes options to add a real material to objects (includes a way to create custom materials based on the density, and it comes with some plastics already in there), match real materials, select objects with no real material, or delete real material data from selected objects.
-         - **ObjectNoteTools** - Includes options to add an object note to objects, match object notes, select objects with no object notes, or delete notes from objects. Object notes show up in the BOM or in the DotWithData tool.
-        - **DotWithData**  - Adds annotation dots to selected objects with text option of either part names, layer, real materials, weight, object volumes, object surface areas, object notes, volume centroid, area centroid, or bounding box dimensions.
-        - **SelUnnamed**  - Selects all unnamed objects.
-        - **NameObjects**  - Lets you name a bunch of objects in serial fashion (brings up a box for each selected object one by one.)
-        - **BatchNameModifier**  - Lets you add text to a batch of object names at once, either at the front or end of the name.
-
-\\
-**Archive**  This group of tools manages an archive of bits of geometry you might need later. It does this simply by creating a layer called Archive that stays turned off, and it manages adding or retrieving items from that layer. I created this because I use Hide just to hide things for a few moments, and I needed something else for longer-term holding of things I wanted to keep around just in case they are needed later.
-
-        - **Archive**  - Has 3 nested options. ArchiveObjects moves objects to archive layer. ArchiveCopy moves a copy of objects to the archive layer. UnarchiveSelected lets you pick objects from the archive layer to move from that layer to the current layer.
-      
-\\
-**Misc tools**
-
-        - **ZoomToUnlocked**  - Zooms to all unlocked objects ('normal' objects).
-        - **ZoomToUnlockedAll**  - Same as zoom to unlocked, but all views.
-        - **DetailsTools**  - Tools for modifying all details in a layout at once. Includes ability to change display mode in all, zoom extents in all, or make scale match in all details.
-        - **AddPointAtBBoxCentroid**  - Adds a point at an object's bbox center.
-        - **AboutPetersTools**  - Brings up a box showing you what version you are running.
-\\
 
 =====Installation in Rhino 6 or 7=====
 
