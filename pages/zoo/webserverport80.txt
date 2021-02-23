@@ -19,7 +19,7 @@ Run 'netstat -o -n -a' from a command line to find the conflicting
 process ID, then look in Task Manager to find the name of that process.
 </code>
 
-  - Run **NETSTAT -ano** from the command line and write down the PID number of the open port that you want free.
+  - Run **NETSTAT -o -n -a** from the command line and write down the PID number of the open port that you want free.
   - From a task manager you can see what process is having the PID, and you can tell which program is using that port.
 
 The reason for this error is that another application is already using TCP Port 80. Only one application can listen to a port at a given time, so Zoo fails to bind to TCP Port 80. Common applications which cause this include:
