@@ -5,7 +5,7 @@ We occasionally get reports that saving a Rhino file saving to a network disk is
 
 This information might help your IT department tune your server settings.
 
-  *  Some customers have [found encyption to cause slow network saves|https://docs.microsoft.com/en-us/office/troubleshoot/office-suite-issues/saving-file-to-network-server-slow).
+  *  Some customers have [https://docs.microsoft.com/en-us/office/troubleshoot/office-suite-issues/saving-file-to-network-server-slow|found encyption to cause slow network saves).
   *  Some of our customers have had success disabling VMQ. https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/14 
   *  This Discourse post gives a list of some other things to try. https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/13
   *  By default, Rhino saves files by using fwrite() to send 64KB chunks to disk. When a file contains large objects (big meshes, big polysurfaces, ...) there is a "seek" operation for each large object. You can use the **SetArchiveMemoryBufferSize** command to change the default chunk size and reduce seeks. As a first attempt, change 64 to 32000 and try saving. If that helps, then it's possible that your server has a high overhead per write transaction. If that doesn't help, set the size back to 64.
