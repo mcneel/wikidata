@@ -1,23 +1,28 @@
-====== Windows Security Settings & License Activation ======
+====== Windows Security Settings & License Validation ======
 > **Product:** //[[zoo:home|Zoo]]//
-> **Summary:** //Discusses Windows security settings and how it effects license activation.//
+> **Summary:** //Discusses Windows security settings and how it effects license validation.//
 
-===== Discussion =====
-In case other people run into the same problem, we wanted to give you a heads-up that a recommended Windows Security setting interferes with activating licenses in Zoo. 
+===== Symptoms: ====
+  * The Zoo cannot connect to the McNeel Validation Server at https://api.mcneel.com.
+  * Internet Explorer cannot connect to https://api.mcneel.com from the validation server, though other browsers will succeed.
 
-This particular case involved Windows Server 2012 R2. However, Windows Server 2016 and 2019 should be affected in the same way.
-
-In this case, this Windows Registry value was preventing customers from activating our new Rhino licenses:
+===== Solution: =====
+Enable PKCS Key Exchange Algorithm by setting the **Enabled** value of the following registry key to **0xffffffff**.
 
 <code>
 Hive:  HKEY_LOCAL_MACHINE
 Key:   SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS
 Name:  Enabled
 Type:  REG_DWORD
-Value: 0x0
+Value: 0xffffffff
 </code>
 
-Setting the **Enabled** value to **0xffffffff** (or deleting it) is enough to get things working again.
+===== Discussion: =====
+A recommended Windows Security setting interferes with validating licenses in the LAN Zoo on Windows Server 2012 R2, 2016 and 2019.
+
+If PKCS is disabled, the LAN Zoo cannot connect to the McNeel Validation Server.
+
+Setting the **Enabled** value to **0xffffffff** (or deleting it) is enough to get things working again. The default value for Enabled is 0x0.
 
 \\
 
