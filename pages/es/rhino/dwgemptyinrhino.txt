@@ -1,0 +1,69 @@
+====== ¿Por qué mis archivos DWG/DXF no se abren en Rhino? ======
+
+\\
+
+=====Problema=====
+Al abrir un archivo DWG o DXF en Rhino, no se importan objetos a Rhino.
+
+=====¿Por qué?=====
+Normalmente hay dos razones:
+
+  * Los archivos DWG/DXF se crearon con una nueva versión de AutoCAD que no es compatible con su versión de Rhino
+  * Los objetos proxy del DWG.
+  * La geometría del dibujo se creó en el área del espacio de diseño.
+
+==== Versiones DWG/DXF ====
+  * Rhinoceros 6 abre las versiones de archivo de AutoCAD 2018 o anteriores.
+  * Rhinoceros 5 abre las versiones de archivo de AutoCAD 2013 y 2010 o anteriores.
+  * Rhinoceros 4 abre las versiones de archivo de AutoCAD 2007 o anteriores
+
+Autodesk no cambia el formato de archivo en cada ciclo de lanzamiento. Normalmente esperan 3 versiones, pero recientemente se han lanzado hasta 5 versiones antes de actualizar el formato.
+Formato de archivo 
+  * 2018 (podría incluir 2019 y 2020)
+  * 2013 (incluye versiones de AutoCAD 2014, 2015, 2016, 2017)
+  * 2010 (incluye versiones de AutoCAD 2011 y 2012)
+  * 2007 (incluye versiones de AutoCAD 2008 y 2009)
+  * 2004 (incluye versiones de AutoCAD 2005 y 2006)
+  * 2000 (incluye versiones de AutoCAD 2000i, 2002 y 2003)
+  * R12 (incluye R13 y R14)
+
+
+{{:rhino:autocad_version.png?500|}}
+
+
+====Objetos proxy====
+
+Los objetos proxy son reemplazos de objetos personalizados creados por aplicaciones de ObjectARX®, como AutoCAD® Mechanical, Autodesk® Architectural Desktop y Autodesk® Land Desktop.
+
+De forma predeterminada, los mensajes de objetos proxy se muestran al abrir un archivo DWG en AutoCAD si la aplicación que creó los objetos personalizados no se está ejecutando. Por ejemplo, si un dibujo creado en Autodesk Mechanical Desktop se abre en AutoCAD®, los objetos que se crearon como objetos de Autodesk Mechanical Desktop se muestran como objetos proxy.
+
+Aquí puede realizar operaciones como mover y copiar objetos proxy. Sin embargo, las operaciones de edición especiales exclusivas de la aplicación ObjectARX no están disponibles. Por ejemplo, no puede realizar modificaciones paramétricas en los objetos de Autodesk Mechanical Desktop en ninguna aplicación que no sea Autodesk Mechanical Desktop.
+
+Esta regla se aplica siempre que una aplicación ObjectARX que creó los objetos personalizados no se esté ejecutando cuando se abre un dibujo. La aplicación ObjectARX puede estar instalada en la estación de trabajo, pero es posible que no se esté ejecutando. Esta es la razón por la que aparece el cuadro de diálogo de advertencia Objeto proxy cuando abre un archivo ADT en AutoCAD. Los objetos deben representarse mediante una aproximación de lo que realmente son. Ver una aproximación es una cosa, pero intentar trabajar con ella es otra y aquí es donde empieza los verdaderos problemas.
+
+===Solución===
+Dado que Rhino no tiene la capacidad de ejecutar la aplicación ARX que creó estos objetos personalizados, estos objetos proxy se ignoran y aparece la advertencia "objeto ignorado" en la línea de comandos de Rhino.
+
+Puesto que AutoCAD guarda su geometría 3D en formato de malla, existe una opción para obtener estas mallas en Rhino.
+
+  - Abra el DWG en la aplicación de escritorio que lo creó. (Puede probar AutoCAD si es lo único que tiene).
+  - **Descomponga** el objeto personalizado (muro, cubierta, puerta, ventana, por ejemplo) en mallas.
+  - Guarde el modelo con otro nombre.
+  - Importe este archivo en Rhino.
+
+El objeto proxy siempre tendrá que descomponerse.
+
+
+====Geometría del espacio de diseño====
+
+La geometría de diseño no se importará a Rhino 3 o Rhino 4, pero sí a Rhino 5.
+
+Si abre un archivo DWG en Rhino y aparece vacío, es posible que los objetos estén en el Espacio de diseño.
+
+===Solución===
+  - Abra el dibujo en AutoCAD.
+  - Mueva los objetos al Espacio del modelo.  Puede hacerlo con el comando **ExpressTool CHSPACE**. Este comando enviará los objetos al espacio del modelo y los escalará apropiadamente. El comando CHSPACE se convirtió en nativo de AutoCAD en la versión 2007.
+
+Los diseños se importan a Rhino 5. 
+
+**[[http://wiki.mcneel.com/es/rhino/faq|Volver a las FAQ]]**
