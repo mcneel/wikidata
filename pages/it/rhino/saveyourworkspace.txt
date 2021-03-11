@@ -1,0 +1,38 @@
+====== L'importanza di salvare l'ambiente di lavoro personalizzato ======
+
+> Nota: le seguenti considerazioni non si applicano a Rhino per Mac.
+
+In Windows, le barre degli strumenti di Rhino vengono archiviate su un file speciale relativo allo spazio di lavoro. Di default, il file dello spazio di lavoro viene chiamato **default.rui** per Rhino 5 o successivo oppure **default.tb** per Rhino 4 e versioni precedenti. 
+//(rui=__R__hino __U__ser __I__nterface ; tb=__T__ool__B__ar)//
+
+Qualsiasi modifica apportata alle barre degli strumenti, come ad esempio l'aggiunta o la modifica di macro o script , l'aggiunta di pulsanti, ecc., viene scritta solo sul file dello spazio di lavoro alla chiusura di Rhino. È possibile forzare il salvataggio prima della chiusura del programma (ulteriori informazioni di seguito).
+
+Visto che è possibile avere varie istanze di Rhino aperte contemporaneamente, se non si presta attenzione, è facile perdere le impostazioni personalizzate.  Immaginiamo di avere due istanze di Rhino aperte e di apportare modifiche a un'istanza che poi viene chiusa. Se la seconda istanza di Rhino (che non presenta le stesse impostazioni personalizzate) viene chiusa, questa sovrascriverà le impostazioni della prima istanza e tutte le modifiche andranno perse. 
+
+Tuttavia, se hai apportato importanti modifiche al file dello spazio di lavoro di default e vuoi mantenerle, //**assicurati di salvarle con un nuovo nome!**//  
+
+> Nota: se Rhino 4 è disinstallato, il file dello spazio di lavoro di default è stato eliminato, quindi __tutte__ le impostazioni personalizzate verranno eliminate di conseguenza. In Rhino 5 o successivo, il file dello spazio di lavoro di default non viene eliminato quando Rhino è disinstallato o aggiornato.  Tuttavia, i file dello spazio di lavoro possono //comunque// essere danneggiati in rare occasioni e risultare inservibili.  Il comando **ResetBarreStrumenti** sostituirà il file di default esistente e qualsiasi impostazione personalizzata verrà persa.
+
+===== Come salvare le impostazioni personalizzate=====
+
+Vai in //Strumenti > Layout delle barre degli strumenti// (o //Opzioni > Barre degli strument//), seleziona il file di default nella finestra superiore destra, quindi fai clic su **File > Salva col nome** dal menu e assegna allo spazio di lavoro modificato //**un nuovo nome riconoscibile**//. Puoi ora continuare a usare il file come di solito.
+
+Rhino 5 o successivo, i file .rui vengono archiviati nella seguente cartella:
+
+  C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\7.0 (o 6.0, 5.0)\UI  
+  
+AppData è una cartella nascosta. Per mostrarla, nel pulsante di avvio di Windows, digita %appdata% e premi Invio, potrai navigare da questa posizione.
+
+Apporta sempre le modifiche allo spazio di lavoro personalizzata. Consigliamo di salvare il file in un altra posizione come copia di backup (preferibilmente su un altro computer). Pensa nel tempo necessario per ricreare il file nel caso lo perdessi.
+
+L'installazione di Rhino o l'utilizzo del comando ResetBarreStrumenti non modificherà il file dello spazio di lavoro personalizzato.
+
+==== Importante ====
+
+Assicurati che solo un'istanza di Rhino sia aperta durante la modifica dello spazio di lavoro/barra degli strumenti. Al termine dell'installazione delle barre degli strumenti, assicurati di selezionare **File > Salva** dal Layout delle barre degli strumenti per salvare le modifiche. In alternativa, chiudi Rhino e riaprilo. Rhino salva le modifiche automaticamente alla chiusura. Se ci sono più istanze di Rhino aperte, l'ultima che viene chiusa sovrascriverà quella precedente, quindi le modifiche andranno perse.
+
+====Impostazioni non incluse nei file dello spazio di lavoro in Rhino====
+
+Il file dello spazio di lavoro contiene solo informazioni relative alle barre degli strumenti, non ad altre opzioni di Rhino.  Per una panoramica completa sulla posizione di archiviazione di tutte le opzioni di Rhino e su come copiarle o trasferirle, [[SettingsTransfer|consulta questa pagina]].
+
+Le informazioni indicate in precedenza si applicano a Rhino 7 e versioni precedenti. Alcune potrebbero cambiare per le versioni future.
