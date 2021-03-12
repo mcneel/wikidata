@@ -1,0 +1,38 @@
+====== Wichtig: speichern Sie Ihre personalisierte Arbeitsumgebung ======
+
+> Hinweis: Was folgt, trifft nicht auf Rhino für Mac zu.
+
+In Windows werden die Rhino-Werkzeugleisten in einer besonderen Datei gespeichert, die allgemein als Arbeitsraum-Datei bekannt ist. Die standardmäßige Arbeitsraum-Datei wird **default.rui** für Rhino 5 oder neuer, bzw. **default.tb** für Rhino 4 und älter genannt. 
+//(rui=__R__hino __U__ser __I__nterface ; tb=__T__ool__B__ar)//
+
+Sämtliche an den Werkzeugleisten vorgenommenen Änderungen - wie das Hinzufügen/Ändern von Makros oder Skripts, Hinzufügen von Schaltflächen etc. werden normalerweise nur beim Schließen von Rhino in die Arbeitsraum-Datei geschrieben (eine Speicherung kann auch vorher erzwungen werden, mehr dazu weiter unten).
+
+Da Sie mehrere Rhino-Instanzen gleichzeitig öffnen können, kann schon eine Unaufmerksamkeit zu einer Situation führen, in der Sie Ihre benutzerdefinierten Einstellungen verlieren.  Sie haben zum Beispiel zwei Rhino-Instanzen geöffnet, nehmen in einer davon Änderungen vor und schließen sie daraufhin.  Wenn Sie dann auch die zweite Rhino-Instanz schließen, aber ohne die besagten Änderungen zu übernehmen, wird die erste Instanz überschrieben und alle Änderungen gehen verloren. 
+
+Wenn Sie also die standardmäßige Arbeitsraum-Datei in bedeutender Weise verändert haben und diese Änderungen beibehalten möchten, //**speichern Sie sie unbedingt unter einem neuen Namen!**//  
+
+> Beachten Sie: beim Deinstallieren von Rhino 4 wird die standardmäßige Arbeitsraum-Datei gelöscht - was auch __alle__ Ihre benutzerdefinierten Einstellungen umgehend zunichtemacht. In Rhino 5 oder neuer verlieren Sie die standardmäßige Arbeitsraum-Datei nicht, wenn Rhino deinstalliert oder aktualisiert wird.  In seltenen Fällen können Arbeitsraumdateien jedoch //immer noch// beschädigt und somit unbrauchbar werden.  Durch Anwendung des Befehls **WerkzeugleisteZurücksetzen** wird auch die vorhandene Standarddatei ersetzt, und damit geht jede daran vorgenommene Personalisierung verloren.
+
+===== Anleitung zum Speichern Ihrer benutzerdefinierten Einstellungen=====
+
+Gehen Sie auf //Werkzeuge > Werkzeugleistenkonfiguration// (oder //Optionen > Werkzeugleisten//), heben die Standarddatei rechts oben im Dialogfenster hervor, klicken dann im Menü auf **Datei > Speichern unter** und geben Ihrem geänderten Arbeitsraum //**einen neuen, aussagekräftigen Namen**//. Dann verwenden Sie diese Datei für Ihre Arbeit weiter.
+
+Die .rui-Dateien in Rhino 5 und neuer werden im folgenden Ordner gespeichert:
+
+  C:\Benutzer\<Benutzername>\AppData\Roaming\McNeel\Rhinoceros\\7.0 (oder 6.0, 5.0)\UI  
+  
+AppData ist ein ausgeblendeter Ordner; um ihn zu finden, geben Sie %appdata% in der Schaltfläche "Start" von Windows ein, drücken die Eingabetaste und navigieren von da aus weiter.
+
+Nehmen Sie alle Änderungen immer in Ihrem personalisierten Arbeitsraum vor. Wir empfehlen Ihnen, diese Datei auch an einem anderen Ort zu speichern sowie eine Sicherungskopie zu erstellen (am besten auf einem anderen Computer, wie für alle wichtigen Dokumente). Bedenken Sie, wie viel Zeit Sie damit verlieren würden, die Datei im Falle ihres Verlusts neu erstellen zu müssen.
+
+Weder die Installierung von Rhino-Aktualisierungen noch die Verwendung von WerkzeugleisteZurücksetzen hat Auswirkungen auf Ihre personalisierte Arbeitsraum-Datei.
+
+==== Wichtig ====
+
+Vergewissern Sie sich, dass während der Änderungen an der Werkzeugleiste bzw. im Arbeitsraum nur eine Rhino-Instanz geöffnet ist! Sobald die Installierung Ihrer Werkzeugleisten beendet ist, vergessen Sie nicht, **Datei > Speichern** im Layout-Dialog der Werkzeugleiste auszuführen, um Ihre Änderungen zu speichern! Oder verlassen Sie Rhino und öffnen es erneut. Rhino speichert Änderungen an der Werkzeugleiste automatisch beim Schließen. Wenn Sie mehrere Rhino-Instanzen geöffnet haben, wird immer die zuletzt geschlossene die vorherige überschreiben, was zum Verlust Ihrer Änderungen führen kann.
+
+====Nicht in Rhino-Arbeitsraumdateien enthaltene Einstellungen====
+
+Die Arbeitsraumdatei enthält nur zu Werkzeugleisten gehörige Informationen, nicht zu anderen Rhino-Optionen.  Eine vollständige Übersicht darüber, wo die Rhino-Optionen alle gespeichert werden und wie man sie sichert oder überträgt, [[SettingsTransfer|finden Sie auf dieser Seite]].
+
+Die obenstehende Information bezieht sich auf Rhino 7 und älter. In späteren Versionen können Änderungen auftreten.
