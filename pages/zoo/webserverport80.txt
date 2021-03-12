@@ -1,9 +1,9 @@
-====== Zoo Fails to Start on Web Servers ======
+====== LAN Zoo Fails to Start on Web Servers ======
 > **Product:** //[[zoo:home|Zoo]]//
-> **Summary:** //Zoo requires access to TCP Port 80. This is not possible on systems with Web Services running.//
+> **Summary:** //LAN Zoo requires access to TCP Port 80. This is not possible on systems with Web Services running.//
 
 ===== Issue =====
-When I restart my server, the Zoo service does not start. When I check the Windows Event Log (Control Panel -> Administrative Tools -> Event Log), I can see that the Zoo service logged an error:
+When I restart my server, the LAN Zoo service does not start. When I check the Windows Event Log (Control Panel -> Administrative Tools -> Event Log), I can see that the LAN Zoo service logged an error:
 
 <code>
 The Zoo service on the Local Computer started and then stopped.
@@ -28,8 +28,9 @@ The reason for this error is that another application is already using TCP Port 
   * [[http://httpd.apache.org/|Apache HTTP Server]]
   * [[http://www.java.com|Java]]
   * [[zoo:zooskype|Skype]]
+
 ===== Resolutions =====
-  - Move the Zoo to a machine which is not running Web services.  This can be a print server, another workstation which is left powered on, or an additional virtual server.
+  - Move the LAN Zoo to a machine which is not running Web services.  This can be a print server, another workstation which is left powered on, or an additional virtual server.
   - Configure the web services to use a different port. Both Apache and IIS can be configured to run on a different port.
 
 \\
