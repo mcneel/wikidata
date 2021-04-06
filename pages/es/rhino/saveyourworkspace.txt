@@ -1,0 +1,38 @@
+====== La importancia de guardar su entorno de trabajo personalizado ======
+
+> Nota: la siguiente información no es aplicable a Rhino para Mac.
+
+En Windows, las barras de herramientas de Rhino se almacenan en un archivo especial denominado archivo de espacio de trabajo. El archivo de espacio de trabajo predeterminado se llama **default.rui** en Rhino 5 y versiones posteriores, o ** default.tb ** en Rhino 4 y versiones anteriores. 
+//(rui=__R__hino __U__ser __I__nterface ; tb=__T__ool__B__ar)//
+
+Cualquier cambio que realice en las barras de herramientas, como agregar/cambiar macros o scripts, agregar botones, etc., normalmente solo se guarda en el archivo del espacio de trabajo cuando Rhino se cierra. (Es posible forzar un guardado antes, se detalla cómo más abajo).
+
+Como puede tener varias instancias de Rhino abiertas al mismo tiempo, debe tener cuidado de no perder sus personalizaciones.  Lo que necesita es tener dos instancias de Rhino abiertas para realizar cambios en una, pero cerrarla primero.  Cuando se cierra la segunda instancia de Rhino sin los cambios, se sobrescribirá la primera y se perderán los cambios. 
+
+Por lo tanto, si ha cambiado el archivo del espacio de trabajo predeterminado de forma significativa y desea conservar los cambios, //**asegúrese de guardarlo con un nuevo nombre.**//  
+
+> Nota: si se desinstala Rhino 4, el archivo del espacio de trabajo predeterminado se elimina, lo que eliminará __toda__ su personalización en un instante. En Rhino 5 o versiones posteriores, no perderá el archivo de espacio de trabajo predeterminado cuando Rhino se desinstale o actualice.  Pero los archivos del espacio de trabajo //siempre se pueden dañar// y, por tanto, inutilizarse aunque sea en raras ocasiones.  El uso del comando **RestablecerBarrasDeHerramientas** también reemplazará el archivo predeterminado existente y también se perderá cualquier personalización que se le haya hecho.
+
+===== Cómo guardar sus personalizaciones =====
+
+Vaya a //Herramientas > Diseño de la barra de herramientas// (o bien //Opciones > Barras de herramientas//), seleccione el archivo predeterminado en la ventana superior derecha, luego haga clic en **Archivo > Guardar como** en el menú y cambie el nombre de su espacio de trabajo modificado por //**un nombre nuevo y reconocible**//. Ahora continúe utilizando este archivo para su trabajo.
+
+Los archivos .rui en V5 y versiones posteriores se almacenan en la siguiente carpeta:
+
+  C:\Users\<Nombre de usuario>\AppData\Roaming\McNeel\Rhinoceros\7.0 (or 6.0, 5.0)\UI  
+  
+AppData es una carpeta oculta. Para acceder a ella, en el botón de inicio de Windows, escriba %appdata%, pulse Intro, y luego navegue desde ahí.
+
+Haga siempre todas las modificaciones en su espacio de trabajo personalizado. Le recomendamos que guarde este archivo en otra parte y guarde también una copia de seguridad (preferiblemente en otro ordenador, al igual que todos los documentos importantes). Piense en lo que puede tardar en volver a crearlo si lo pierde.
+
+La instalación de actualizaciones de Rhino o el uso del comando RestablecerBarrasDeHerramientas no afectan a su archivo de espacio de trabajo personalizado.
+
+==== Importante ====
+
+Asegúrese de tener solo una instancia de Rhino abierta al realizar modificaciones en la barra de herramientas o el espacio de trabajo. Cuando termine de realizar los cambios, ejecute **Archivo > Guardar** desde el diálogo de configuración de barra de herramientas para guardar los cambios. O bien, salga de Rhino y vuelva a abrirlo. Rhino guarda automáticamente los cambios de las barras de herramientas al salir. Si tiene abiertas varias instancias de Rhino, la última en cerrarse sobrescribirá la anterior, de manera que puede perder los cambios.
+
+==== Configuración no incluida en los archivos de espacio de trabajo de Rhino ====
+
+El archivo del espacio de trabajo solo contiene información relacionada con las barras de herramientas, no con otras opciones de Rhino.  Para obtener una descripción general completa de dónde se almacenan todas las opciones de Rhino y cómo hacer una copia de seguridad o transferirlas, [[SettingsTransfer|consulte esta página]].
+
+La información anterior se aplica a Rhino 7 y versiones anteriores. Esta información podría cambiar en futuras versiones.
