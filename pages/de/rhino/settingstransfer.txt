@@ -1,59 +1,59 @@
-====== Übertragung der V4-Einstellungen ======
+======Übertragung von persönlichen Einstellungen======
 
-> **Zusammenfassung:** //Wie Sie alle Ihre personalisierten Einstellungen von einer Installation zu einer anderen übertragen//
+>Übertragung aller benutzerdefinierten Einstellungen von einer Installation zu einer anderen 
 
 =====Wo werden meine Einstellungen gespeichert?=====
 
-**Die meisten Rhino Einstellungen** werden nicht in externen Dateien gespeichert sondern in der Registrierung.  Da keine einzige Datei vorhanden ist, die alle Optionen und Personalisierungen enthält, müssen Sie alle personalisierten Einstellungen übertragen.  Es gibt da einige Tastenkürzel:
+**In Rhino 5 und früher** wurden die meisten Rhino Einstellungen nicht in externen Dateien gespeichert, sondern in der Registrierung. **In Rhino 6** wurde ein Großteil dieser Information von der Registrierung in eine oder mehrere .xml-"Einstellungen"-Dateien verschoben. Da es jedoch nicht eine einzige Datei ist, welche alle Optionen und Personalisierungen enthält, geschieht die Übertragung Ihrer benutzerdefinierten Einstellungen von einer Installierung zur anderen in beiden Fällen nicht durch eine Ein-Klick-Operation.  Es gibt einige Tastaturkürzel:
 
-Die einfachste Art, Ihre Einstellungen zu übertragen, wäre den Rhino Befehl **OptionenExportieren** zu verwenden, der eine einzelne Datei mit den //MEISTEN// Benutzerpersonalisierungen erzeugt. Beim Import dieser Datei in eine andere Installation über den Befehl **OptionenImportieren** werden die meisten allgemeinen Einstellungen übertragen.
+Die einfachste Art, Ihre Einstellungen zu übertragen, wäre den Rhino Befehl **OptionenExportieren** (Rhino 5 und neuer) zu verwenden, der eine einzelne Datei mit den __meisten__ Personalisierungen erzeugt. Beim Import dieser Datei in eine andere Installation durch den Befehl **OptionenImportieren** (Rhino 5 und neuer) werden die Einstellungen in die neue Installation übertragen. Sie können dabei auswählen, welche der Einstellungen Sie importieren möchten. Es ist nicht notwendig, alle zu importieren.  
 
-//Anzeigemodi werden nicht in die Exportoptionen// einbezogen, Sie müssen sie separat exportieren!  Hierfür verwenden Sie Optionen > Erscheinung > Weitere Einstellungen.
+> Hinweis: In Rhino 4 hießen die beiden obigen Befehle **OptionenExportieren** and **OptionenImportieren**.  In Rhino 5 wurden sie umbenannt, um Verwechslungen mit anderen Einstellungen für den Dateiimport/-export zu vermeiden. //Anzeigemodi// werden in Rhino 4 nicht in die Exportoptionen mit einbezogen und müssen separat exportiert werden.  Hierfür verwenden Sie //Optionen > Erscheinung > Weitere Einstellungen//.  
 
-//Die Datei für den Arbeitsraum// (.tb) enthält alle Werkzeugleistenpersonalisierungen, man kann sie auch zwischen Installationen kopieren.
+**Von Rhino 5 an sind Anzeigemodi in OptionenExportieren und OptionenImportieren enthalten**, Sie können sie jedoch nur alle auf einmal (oder gar keinen) importieren.  Wenn Sie nur einzelne Anzeigemodi übertragen möchten, können Sie dazu die Schaltflächen Importieren/Exportieren unter Optionen>Ansicht>Anzeigemodi verwenden.
 
-Was vielleicht auch noch geändert wurde sind Ihre Vorlagedateien, Anzeigemodi, installierten Plug-ins, etc.
+**Getrennt von den anderen Optionen, enthalten Arbeitsraumdateien am meisten Informationen für Werkzeugleisten/Schaltflächen**, etwa welche Schaltflächen sich in welcher Werkzeugleiste befinden, Befehlsmakros für jede Schaltfläche und Schaltflächenbilder. Arbeitsraumdateien haben die Erweiterungen .tb für Rhino 4, .rui für Rhino 5 und neuer. Sie können diese Datei ebenso zwischen Installationen hin und her kopieren.  Für Rhino 5 befinden sich diese Dateien standardmäßig in einem ausgeblendeten Ordner:
 
-=====Ähm, das klingt kompliziert, wie übertrage ich das alles?=====
+**C:\Users\<Benutzername>\AppData\Roaming\McNeel\Rhinoceros\<Versionsnummer>\UI**
+
+//(<Benutzername> steht für den Benutzernamen Ihres Windows-Kontos, <Versionsnummer> ist 5.0, 6.0 etc.)//
+
+> Hinweis: Sie haben darauf schnellen Zugriff, indem Sie auf die Windows-Start-Schaltfläche klicken, **%appdata%** eingeben und die Eingabetaste drücken; damit gelangen Sie zu "Roaming", von da aus navigieren Sie zum entsprechenden Ordner.
+
+> Für Installationen von Rhino 5 sind die Werkzeugleisten hier: C:\ProgramData\McNeel\Rhinoceros\4.0 (Windows Vista und neuer) oder hier: C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\4.0 (XP)
+
+
+Die Arbeitsraum-Datei enthält jedoch nicht die Positionen der Werkzeugleisten auf dem Bildschirm, sondern nur die Werkzeugleisten selbst und ob sie geöffnet sind oder nicht. In Rhino 5 wird die Standortinformation noch in der Registrierung gespeichert; in Rhino 6 wurde sie in eine .xml-Einstellungendatei ausgetragen, die sich hier befindet:
+
+**C:\Users\<Benutzername>\AppData\Roaming\McNeel\Rhinoceros\6.0\settings**
+
+Die .xml-Datei mit den zu Beginn genannten Optionen befindet sich im selben Ordner. 
+
+Schließlich gibt es noch einige andere Dinge, die möglicherweise personalisiert/geändert wurden.  Darunter könnten Ihre Vorlagedateien, installierten Plug-ins etc. sein.  Vorlagedateien sind nur .3dm-Dateien, so dass sie problemlos kopiert werden können; Plug-ins müssen wahrscheinlich reinstalliert werden; achten Sie auf Kompatibilitätsprobleme, wenn Sie ein Upgrade auf eine neue Version von Rhino durchführen.
+
+
+
+
+=====Ähm, das klingt etwas kompliziert! Wie übertrage ich das denn alles?=====
 
 Ein allgemeines Übertragungsverfahren könnte wie folgt aussehen:
 
-====In einer alten Installation:====
+**In einer alten Installation:**
 
-**OptionenExportieren** - erzeugt eine .ini-Datei
+**OptionenExportieren** //(auch in Rhino 4)// - erzeugt eine .ini-Datei
 
-Machen Sie eine Kopie Ihrer Arbeitsumgebungsdatei (.tb), wenn Sie sie personalisiert haben.
+  * Machen Sie eine Kopie Ihrer Arbeitsumgebungsdatei (.tb/.rui), wenn Sie sie personalisiert haben 
+  * Machen Sie Kopien von allen personalisierten Vorlagedateien, die Sie erzeugt haben 
+  * Machen Sie Kopien von verwendeten externen Dateien, wie: zusätzlichen Plug-ins, E-Maps, Skripts, etc.
+  * Rhino 4 - -Exportieren Sie alle personalisierten Anzeigemodi (falls vorhanden) - erzeugt eine .ini-Datei pro Anzeigemodus
 
-Machen Sie Kopien von allen personalisierten Vorlagedateien, die Sie erzeugt haben.
+**In der neuen Installation:**
 
-Exportieren Sie alle personalisierten Anzeigemodi - erzeugt eine .ini-Datei pro Anzeigemodus.
+**OptionenImportieren** //(auch für Rhino 4)// und importieren Sie die oben erzeugte .ini-Datei
 
-Machen Sie Kopien von verwendeten externen Dateien, wie:
-
-Nicht-standardmäßigen Plug-ins
-
-E-Maps
-
-Scripts
-
-etc.
-
-====In der neuen Installation:====
-
-**OptionenImportieren** und importieren Sie die mit **OptionenExportieren** erzeugte .ini-Datei.
-
-Kopieren Sie Arbeitsraum, Vorlage, E-Maps, Scripts, Plug-in-Dateien an angemessenen Standorte.
-
-Werkzeuge>Werkzeugleistenkonfiguration und laden Sie Ihren personalisierten Arbeitsraum.
-
-Gehen Sie zu Optionen > Erscheinung > Weitere Einstellungen und importieren Sie alle personalisierten Anzeigemodi einzeln.
-
-Drag und Drop Ihrer zusätzlichen Plug-ins in das Rhino-Fenster, um sie zu installieren (einige benötigen einen externen Installer, verwenden Sie diesen falls nötig).
-
-Definieren Sie Rhino, damit das Programm mit Ihrer personalisierten Vorlage geöffnet wird.
-
-In den Rhino-Optionen, unter Dateien, definieren Sie Dateipfade für Scripts, Vorlagen, etc, wenn diese nicht standardmäßig sind.
-
-
-
-
+  * Kopieren Sie Arbeitsraum, Vorlage, E-Maps, Scripts, Plug-in-Dateien an angemessenen Standorte.
+  * Gehen Sie auf //Werkzeuge>Werkzeugleistenkonfiguration// und laden Sie Ihren personalisierten Arbeitsraum.
+  * Ziehen Sie per Drag & Drop Ihre zusätzlichen Plug-ins in das Rhino-Fenster, um sie zu installieren. (Einige benötigen einen externen Installer. Verwenden Sie diesen, falls nötig.)
+  * Stellen Sie ein, dass Rhino mit Ihrer benutzerdefinierten Vorlage geöffnet wird.
+  * Geben Sie in den Rhino-Optionen die Dateipfade für Scripts, Vorlagen, etc. ein, wenn diese nicht dem Standard entsprechen.
+  * Rhino 4 - Gehen Sie auf //Optionen > Erscheinung > Weitere Einstellungen// und importieren Sie alle personalisierten Anzeigemodi einzeln.
