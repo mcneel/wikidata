@@ -8,9 +8,9 @@
 
 Die einfachste Art, Ihre Einstellungen zu übertragen, wäre den Rhino Befehl **OptionenExportieren** (Rhino 5 und neuer) zu verwenden, der eine einzelne Datei mit den __meisten__ Personalisierungen erzeugt. Beim Import dieser Datei in eine andere Installation durch den Befehl **OptionenImportieren** (Rhino 5 und neuer) werden die Einstellungen in die neue Installation übertragen. Sie können dabei auswählen, welche der Einstellungen Sie importieren möchten. Es ist nicht notwendig, alle zu importieren.  
 
-> Hinweis: In Rhino 4 hießen die beiden obigen Befehle **OptionenExportieren** and **OptionenImportieren**.  In Rhino 5 wurden sie umbenannt, um Verwechslungen mit anderen Einstellungen für den Dateiimport/-export zu vermeiden. //Anzeigemodi// werden in Rhino 4 nicht in die Exportoptionen mit einbezogen und müssen separat exportiert werden.  Hierfür verwenden Sie //Optionen > Erscheinung > Weitere Einstellungen//.  
+> Hinweis: In der englischsprachigen Version von Rhino 4 hießen die beiden obigen Befehle **ExportOptions** und **ImportOptions**.  In Rhino 5 wurden sie umbenannt zu OptionsExport und OptionsImport, um Verwechslungen mit anderen Einstellungen für den Dateiimport/-export zu vermeiden. //Anzeigemodi// werden in Rhino 4 nicht in die Exportoptionen mit einbezogen und müssen separat exportiert werden.  Hierfür verwenden Sie //Optionen > Erscheinung > Weitere Einstellungen//.  
 
-**Von Rhino 5 an sind Anzeigemodi in OptionenExportieren und OptionenImportieren enthalten**, Sie können sie jedoch nur alle auf einmal (oder gar keinen) importieren.  Wenn Sie nur einzelne Anzeigemodi übertragen möchten, können Sie dazu die Schaltflächen Importieren/Exportieren unter Optionen>Ansicht>Anzeigemodi verwenden.
+**Von Rhino 5 an sind Anzeigemodi in OptionenExportieren und OptionenImportieren enthalten**, Sie können jedoch nur alle auf einmal importieren (oder gar keinen).  Wenn Sie nur einzelne Anzeigemodi übertragen möchten, können Sie dazu die Schaltflächen Importieren/Exportieren unter Optionen>Ansicht>Anzeigemodi verwenden.
 
 **Getrennt von den anderen Optionen, enthalten Arbeitsraumdateien am meisten Informationen für Werkzeugleisten/Schaltflächen**, etwa welche Schaltflächen sich in welcher Werkzeugleiste befinden, Befehlsmakros für jede Schaltfläche und Schaltflächenbilder. Arbeitsraumdateien haben die Erweiterungen .tb für Rhino 4, .rui für Rhino 5 und neuer. Sie können diese Datei ebenso zwischen Installationen hin und her kopieren.  Für Rhino 5 befinden sich diese Dateien standardmäßig in einem ausgeblendeten Ordner:
 
@@ -45,14 +45,14 @@ Ein allgemeines Übertragungsverfahren könnte wie folgt aussehen:
   * Machen Sie eine Kopie Ihrer Arbeitsumgebungsdatei (.tb/.rui), wenn Sie sie personalisiert haben 
   * Machen Sie Kopien von allen personalisierten Vorlagedateien, die Sie erzeugt haben 
   * Machen Sie Kopien von verwendeten externen Dateien, wie: zusätzlichen Plug-ins, E-Maps, Skripts, etc.
-  * Rhino 4 - -Exportieren Sie alle personalisierten Anzeigemodi (falls vorhanden) - erzeugt eine .ini-Datei pro Anzeigemodus
+  * Rhino 4 - Exportieren Sie alle personalisierten Anzeigemodi (falls vorhanden) - erzeugt eine .ini-Datei pro Anzeigemodus
 
 **In der neuen Installation:**
 
 **OptionenImportieren** //(auch für Rhino 4)// und importieren Sie die oben erzeugte .ini-Datei
 
   * Kopieren Sie Arbeitsraum, Vorlage, E-Maps, Scripts, Plug-in-Dateien an angemessenen Standorte.
-  * Gehen Sie auf //Werkzeuge>Werkzeugleistenkonfiguration// und laden Sie Ihren personalisierten Arbeitsraum.
+  * Gehen Sie auf //Werkzeuge > Werkzeugleistenkonfiguration// und laden Sie Ihren personalisierten Arbeitsraum.
   * Ziehen Sie per Drag & Drop Ihre zusätzlichen Plug-ins in das Rhino-Fenster, um sie zu installieren. (Einige benötigen einen externen Installer. Verwenden Sie diesen, falls nötig.)
   * Stellen Sie ein, dass Rhino mit Ihrer benutzerdefinierten Vorlage geöffnet wird.
   * Geben Sie in den Rhino-Optionen die Dateipfade für Scripts, Vorlagen, etc. ein, wenn diese nicht dem Standard entsprechen.
