@@ -1,12 +1,13 @@
-
+**Problem:** 
 Some users report the when exporting DXF/DWG for importing into waterjet cutting software, report that the file on opening contains an abundance of open curves, even if all the curves are closed in the Rhino 3DM file, prior to exporting.
 
+**Solution**
 When you export DXF, you are writing to the AutoCAD DXF format.
   * In AutoCAD there are line, arc, circle... close curves are polylines that contain lines and arcs.
   * So, when you say the curves are closed in Rhino, and not in DXF, that is because the DXF scheme that you are using is converting Rhino Curves to lines, and arcs.
   * AutoCAD's closed curve object is Polyline.
   * If you want closed curves in the plasma software, then you may have to export Polylines, and make sure they are not exploded when exported.
-  * 
+
 1. When exporting DXF, we have a scheme in Rhino 6/7 called: **CAM Imperial**.
 2. You can pick the **Edit Scheme** button to edit the scheme.
 {{:rhino:cam_dxf.png?400 |}}
