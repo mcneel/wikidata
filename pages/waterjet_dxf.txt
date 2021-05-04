@@ -1,21 +1,23 @@
-"The people that are going to cut this via water jet are saying that the file contains an abundance of open curves which is odd as all the curves were closed in the 3DM file."
+
+Some users report the when exporting DXF/DWG for importing into waterjet cutting software, report that the file on opening contains an abundance of open curves, even if all the curves are closed in the Rhino 3DM file, prior to exporting.
 
 When you export DXF, you are writing to the AutoCAD DXF format.
-In AutoCAD there are line, arc, circle... close curves are polylines that contain lines and arcs.
-So, when you say the curves are closed in Rhino, and not in DXF, that is because the DXF scheme that you are using is converting Rhino Curves to lines, and arcs.
-AutoCAD's closed curve object is Polyline.
-If you want closed curves in the plasma software, then you may have to export Polylines, and make sure they are not exploded when exported.
-When exporting DXF, we have a scheme in Rhino 7 called: CAM Imperial.
-You can pick Edit Scheme button to edit the scheme.
+  * In AutoCAD there are line, arc, circle... close curves are polylines that contain lines and arcs.
+  * So, when you say the curves are closed in Rhino, and not in DXF, that is because the DXF scheme that you are using is converting Rhino Curves to lines, and arcs.
+  * AutoCAD's closed curve object is Polyline.
+  * If you want closed curves in the plasma software, then you may have to export Polylines, and make sure they are not exploded when exported.
+  * 
+1. When exporting DXF, we have a scheme in Rhino 6/7 called: **CAM Imperial**.
+2. You can pick the **Edit Scheme** button to edit the scheme.
+{{:rhino:cam_dxf.png?400 |}}
 
+3. There are the setting that we have collected over the over the years that most of these cutters want.
+Typically, the preference is to have the "**Explode polycurves**" checked.. But you can try **unchecking it** and see if this is what your vendor prefers.
+{{:rhino:cam_dxf2.png?400 |}}
 
-There are the setting that we have collected over the over the years that most of these cutters want.
-Typically, the preference is to have the "Explode polycurves" checked.. But you can try unchecking it and see if this is what your vendor prefers.
-
-
-I exported your 3DM with these settings. And I opened the DXF in AutoCAD to check.
-The polyline curves do verify as closed in AutoCAD.
-
+4. Export your 3DM with these settings. Open the DXF in AutoCAD to check.
+The polyline curves should verify as closed in AutoCAD.
+{{:rhino:cam_dxf3.png?400 |}}
 
 You should also ask the Rhino experts who also do water jet cutting on the Rhino Support Forum what they recommend.
 You can also search for previous conversations on this topic. For example, see this thread from 2020. There are some really good tips in this thread!
