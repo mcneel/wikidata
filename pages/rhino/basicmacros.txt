@@ -63,6 +63,8 @@ Since there is no further input necessary nor options possible, the macro comple
   ! _Box _Center _Pause r5,5 _Enter
 Now that the macro is running, [[rhino:macroscriptsetup|make a new toolbar button]] and paste the macro in. Give it a recognizable name, like “10x10x10 bottom centered box”.  Note, once the macro is executed, right-clicking repeats the whole sequence of this macro, so you can use it many times in a row without clicking the button every time.
 
+> //Note on the Pause command://   In earlier versions of Rhino, for some command macros it was necessary to use one Pause for each screen pick needed.  This made it difficult to make macros for commands that had an indeterminate number of screen picks.  Much of that has been fixed in the latest version, however there are still exceptions.  For these cases, there is now the Multipause command, which basically allows the user to make as many picks as needed without having to write multiple Pause commands in the macro.
+
 =====OK, let’s get a bit more complicated…=====
 
 Some commands invoke dialog boxes with many options.  Normally, this stops your macro and waits for you to click the desired options, then continue.  Since you want to automate, you can bypass the dialog by putting a –hyphen (also known as a dash) before the command.  Then you can script in all your options and the macro will run to completion without needing your intervention.  Some commands have several levels of sub-options.  If you want to see what’s available, type the command at the command line with the hyphen and look at what’s proposed for options.  Click on the options and see if they have sub-options.
