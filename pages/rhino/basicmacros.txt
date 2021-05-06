@@ -67,13 +67,13 @@ Now that the macro is running, [[rhino:macroscriptsetup|make a new toolbar butto
 
 For example the macro below
 
-  ! _Polyline Pause_SelLast
+  ! _Polyline _Pause _SelLast
 
 will work fine to make the polyline, but it will not be selected at the end.  Why?  Because the single Pause is 'eaten' by the first pick in the polyline, and thus the SelLast command gets executed just after the first pick while we're still making the polyline - and therefore does nothing.  The single pause //does// allow you to finish the polyline with as many points as you want, but there is no longer a SelLast to be run at the end of it - because it ran already and failed.  
 
 However, the following macro
 
-  ! _Polyline Multipause _SelLast
+  ! _Polyline _Multipause _SelLast
   
 works including selecting the polyline at the end because the Multipause includes //all// the picks for the polyline, allowing the SelLast to be executed and work at the end.
 
