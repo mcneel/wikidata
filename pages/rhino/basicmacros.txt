@@ -63,7 +63,19 @@ Since there is no further input necessary nor options possible, the macro comple
   ! _Box _Center _Pause r5,5 _Enter
 Now that the macro is running, [[rhino:macroscriptsetup|make a new toolbar button]] and paste the macro in. Give it a recognizable name, like “10x10x10 bottom centered box”.  Note, once the macro is executed, right-clicking repeats the whole sequence of this macro, so you can use it many times in a row without clicking the button every time.
 
-> //Note on the Pause command://   In earlier versions of Rhino, for some command macros it was necessary to use one Pause for each screen pick needed.  This made it difficult to make macros for commands that had an indeterminate number of screen picks.  Much of that has been fixed in the latest version, however there are still exceptions.  For these cases, there is now the Multipause command, which basically allows the user to make as many picks as needed without having to write multiple Pause commands in the macro.
+> //Note on the Pause command://   In earlier versions of Rhino, for some command macros it was necessary to use one Pause for each screen pick needed.  This made it difficult to make macros for commands that had an indeterminate number of screen picks.  Much of that has been fixed in the latest versions, however there are still some exceptions.  For these cases, there is now the Multipause command (V6 and later), which basically allows the user to make as many picks as needed without having to write multiple Pause commands in the macro.
+
+For example the macro below
+
+  ! _Polyline Pause_SelLast
+
+will work fine to make the polyline, but it will not be selected at the end.  Why?  Because the single Pause is 'eaten' by the first pick in the polyline, and thus the SelLast command gets executed just after the first pick while we're still making the polyline - and therefore does nothing.  The single pause //does// allow you to finish the polyline with as many points as you want, but there is no longer a SelLast to be run at the end of it - because it ran already and failed.  
+
+However, the following macro
+
+  ! _Polyline Multipause_SelLast
+  
+works including selecting the polyline at the end because the Multipause includes //all// the picks for the polyline, allowing the SelLast to be executed and work at the end.
 
 =====OK, let’s get a bit more complicated…=====
 
