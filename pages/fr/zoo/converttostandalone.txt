@@ -1,61 +1,72 @@
 ======Convertir une installation de Rhino qui utilise le Zoo en licence autonome======
-> **Produit :** //[[zoo:home|Zoo]]//
-> **Résumé:** //Explique comment convertir une installation réseau de Rhino pour Windows en noeud autonome.//
+
+> **Produit :** //[[fr:zoo:home|Zoo]]//
+> **Résumé:** //Explique comment convertir une installation réseau de Rhino pour Windows ou Rhino pour Mac en installation directe sur un ordinateur.//
 
 =====Question=====
-J'ai installé par erreur une licence de Rhino en utilisant le Zoo, alors que je voulais l'installer en tant que licence autonome. Lorsque je lance Rhino et que j'ouvre la page **Licences**dans la boîte de dialogue **Options**, le bouton **Convertir** est désactivé. J'ai ouvert une session en tant qu'administrateur et réessayé mais le bouton est toujours désactivé Comment puis-je changer cette installation afin d'avoir un nœud autonome ?
-
+J'ai installé par erreur une licence de Rhino en utilisant le Zoo, alors que je voulais l'installer en tant que licence autonome directement sur un ordinateur. Lorsque je lance Rhino et que j'ouvre la page **Licences**dans la boîte de dialogue **Options**, le bouton **Convertir** est désactivé. J'ai ouvert une session en tant qu'administrateur et réessayé mais le bouton est toujours désactivé Comment puis-je changer cette installation afin de l'utiliser directement sur un ordinateur ?
 
 =====Réponse=====
-Pour convertir une installation réseau de Rhino en installation autonome, suivez ces étapes :
+Pour convertir une installation réseau de Rhino en installation directe sur un ordinateur, suivez ces étapes :
 
-====Windows Vista, Windows 7 ou Windows 8====
+==== Windows ====
 
 1. Ouvrez une session en tant qu'administrateur sur votre ordinateur ou en tant qu'utilisateur ayant des droits d'administration.
 
 2. Ouvrez l'explorateur de Windows.
 
 3. Ouvrez le dossier suivant :
-  C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  C:\ProgramData\McNeel\Rhinoceros\<version>\License Manager\Licenses
 
 > **Remarque:** //Par défaut, le dossier ProgramData est caché par Microsoft. Vous pouvez utiliser les **Options des dossiers** pour autoriser l'affichage des fichiers et dossiers cachés ou taper **%ProgramData%** dans la barre d'adresse de l'explorateur de Windows pour ouvrir ce dossier.//
 
 4. Supprimez le fichier suivant (s'il existe) :
+  // Rhino 7
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
+  
+  // Rhino 6
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+  // Rhino 5
   60515f84-8f7f-41da-801d-1c87e32f88f5.lic
   
 5. Ouvrez le dossier suivant :
-  C:\Utilisateurs\<nom_utilisateur>\AppData\Roaming\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  C:\Utilisateurs\<nom_utilisateur>\AppData\Roaming\McNeel\Rhinoceros\<version>\License Manager\Licenses
 
 > **Remarque:** //Par défaut, le dossier AppDate est caché par Microsoft. Vous pouvez utiliser les **Options des dossiers** pour autoriser l'affichage des fichiers et dossiers cachés ou taper **%AppData%** dans la barre d'adresse de l'explorateur de Windows pour ouvrir ce dossier.//
 
 6. Supprimez le fichier suivant (s'il existe) :
+  // Rhino 7
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
+  
+  // Rhino 6
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+  // Rhino 5
   60515f84-8f7f-41da-801d-1c87e32f88f5.lic
 
 7. Cliquez avec le bouton de droite sur le raccourci de Rhino et sélectionnez **Exécuter en tant qu'administrateur**.
 
 8. Entrez et validez votre clé de licence de Rhino.
 
-====Windows XP====
+====macOS====
 
-1. Ouvrez une session en tant qu'administrateur sur votre ordinateur ou en tant qu'utilisateur ayant des droits d'administration.
+Il existe deux méthodes permettant de modifier des licences de Rhino pour Mac. 
 
-2. Ouvrez l'explorateur de Windows.
+La première, qui est la plus facile, est de lancer Rhino pour Mac, d'ouvrir les //Préférences...// > //Licences// > //Changer de clé de licence//
 
-3. Ouvrez le dossier suivant :
-  C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
+Si cette méthode ne fonctionne pas, vous pouvez supprimer le fichier de licence enregistré sur votre ordinateur afin de redéfinir la licence. Vérifiez que vous disposez de votre code de licence avant de lancer cette procédure :
 
-4. Supprimez le fichier suivant (s'il existe) :
-  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
+1. Fermez Rhino pour Mac et ouvrez l'application Finder. 
 
-5. Ouvrez le dossier suivant :
-  C:\Documents and Settings\<user_name>\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
+2. Ouvrez //Finder// > //Aller// > //Aller au dossier...// et tapez ce chemin :
+  /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
 
-6. Supprimez le fichier suivant (s'il existe) :
-  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
-  
-7. Lancez Rhino en double cliquant sur le raccourci de Rhino.
+3. Supprimez le fichier de licence se trouvant dans le dossier //Licenses//
 
-8. Entrez et validez votre clé de licence de Rhino.
+4. Relancez Rhino pour Mac.
+
+5. Entrez et validez votre clé de licence de Rhino.
 
 \\
 
