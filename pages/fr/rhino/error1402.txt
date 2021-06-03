@@ -1,0 +1,36 @@
+====== Erreur d'installation 1402 (Impossible d'ouvrir la clé : INCONNU\Composants)======
+======Rhino 5 pour Windows======
+> **Résumé :** //Comment corriger l'erreur d'installation 1402 ou 1406 (Impossible d'ouvrir la clé : INCONNU\Composants).//
+> **Autre page d'aide à l'installation :** //[[installproblems|Résolution des problèmes d'installation de Rhino 5]]//
+
+=====Problème=====
+Un message "Impossible d'ouvrir la clé : INCONNU\Composants\(beaucoup de lettres et de chiffres). Erreur 1402. Vérifiez que vous disposez des droits suffisants pour cette clé ou contactez votre service d'assistance."
+
+=====Cause====
+Les autorisations ne sont pas définies correctement pour la clé de registre HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\Components
+
+=====Réponse=====
+**//Solution 1://**
+Dans le menu Démarrer de Windows, tapez **cmd** dans la case de recherche et appuyez sur Entrée. Cliquez avec le bouton de droite sur "Cmd.Exe" et sélectionnez **Exécuter en tant qu'administrateur**. Copiez la ligne suivante et collez-la dans la fenêtre de commande puis appuyez sur **Entrée**. Rhino pourra ensuite être installé.
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//Solution 2 ://**
+>//**Attention :** La procédure suivante implique l'édition du registre de Windows. Une mauvaise manipulation du registre peut endommager votre ordinateur et l'empêcher de redémarrer. Si vous n'êtes pas à l'aise pour réaliser les étapes suivantes, contactez l'équipe d'assistance de McNeel.//
+
+  - Téléchargez [[http://technet.microsoft.com/fr-fr/sysinternals/bb897553|psexec]] sur le site de Microsoft TechNet, et extrayez le contenu sur votre bureau.
+  - Ouvrez une fenêtre de commande de Windows.
+  - Choisissez le dossier de votre bureau comme répertoire de départ.
+  - Dans la fenêtre de commande, tapez **psexec -i -d -s c:\windows\regedit.exe**. De cette façon, Windows lance l'éditeur de registre avec des autorisations du compte Système - un compte encore plus puissant que le compte d'administrateur.
+  - Naviguez jusqu'à HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - Cliquez avec le bouton de droite sur la clé **UserData**, puis cliquez sur **Autorisations...**
+  - Dans la boîte de dialogue Autorisations pour UserData, cliquez sur **Avancé**.
+  - Vérifiez que **Administrateurs** a des autorisations de **Contrôle total** sur ce dossier et que **Utilisateurs** a des autorisations de **Lecture**. D'autres autorisations seront définies, mais Administrateurs et Utilisateurs sont les plus importantes dans notre cas.
+  - Cochez la case **Remplacer toutes les entrées d'autorisation des objets enfants par des entrées d'autorisation pouvant être héritées de cet objet**.
+  - Cliquez deux fois sur **OK** pour appliquer les autorisations.
+  - Installez Rhino à nouveau.
+
+
+{{tag>rhino5installationerror_fr}}
