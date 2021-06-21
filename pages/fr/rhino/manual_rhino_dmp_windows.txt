@@ -1,0 +1,43 @@
+====== Créer manuellement un fichier de vidage (DMP) à partir d'une session de Rhino pour Windows ne répondant pas ======
+Revenir à la [[https://wiki.mcneel.com/fr/rhino/faq#display_problems|FAQ]]
+
+[[https://wiki.mcneel.com/fr/rhino/manual_rhino_dmp_mac|Lien]] vers les instructions pour créer un fichier DMP sur Mac.
+
+===== Problème : ===== 
+Il arrive parfois que Rhino ne réponde plus et soit complètement bloqué. Malgré tous vos efforts, il ne semble y avoir aucun moyen de faire repartir Rhino. 
+
+Rhino a sûrement planté sans se fermer complètement. 
+Il reste juste là à l'écran. 
+
+Dans ces cas là, il est possible de créer manuellement un fichier de vidage de mémoire (fichier **DMP**) depuis Rhino dans l'état où il se trouve. 
+Les développeurs peuvent ensuite utiliser ce fichier pour découvrir où Rhino a planté et pourquoi il s'est figé. 
+
+===== Étapes pour créer un fichier DMP =====
+Les étapes suivantes expliquent comment créer le fichier de vidage (**DMP**) manuellement.
+
+1. Lorsque vous vous rendez compte que Rhino ne répond plus, lancez le **Gestionnaire de tâches** en cliquant avec le bouton droit dans la **barre de tâches** et en sélectionnant **Gestionnaire des tâches** dans le menu déroulant qui apparaît. 
+
+{{ fr:rhino:manual_rhino_dmp_windows1.png?600 |}}
+
+2. Dans la fenêtre du gestionnaire tâches, vérifiez que vous êtes bien sur l'onglet **Processus** et trouvez le 
+processus **Rhino**. Cliquez avec le bouton droit sur le processus **Rhino** et sélectionnez **Créer un fichier de vidage** dans le menu déroulant qui apparaît. 
+
+{{ :fr:rhino:manual_rhino_dmp_windows2.png?600 |}}
+
+**Remarque :** Si vous ne voyez pas la boîte de dialogue présentant les onglets **Processus et Performance**, cliquez sur **Plus de détails** en bas.
+
+{{ :fr:rhino:manual_rhino_dmp_windows3.png?600 |}}
+
+
+3. Windows commencera à créer un fichier de vidage dans le dossier temporaire de votre système.
+
+{{ :fr:rhino:manual_rhino_dmp_windows4.png?600 |}}
+
+4. Lorsque Windows a terminé de créer le fichier de vidage, vous verrez le nom et l'emplacement 
+du fichier.  
+
+{{ :fr:rhino:manual_rhino_dmp_windows5.png?600 |}}
+
+5. Retrouvez le fichier sur votre système dans l'explorateur de fichiers. Comprimez le fichier dans un zip avant de l'envoyer. 
+
+6. Le fichier DMP sera trop volumineux pour le joindre dans un message. Veuillez utiliser notre système d'envoi de fichiers [[https://www.rhino3d.com/upload|ici]]. Indiquez comme adresse de destinataire **tech.eu@mcneel.com**. Donnez le plus d'informations possible sur ce que vous faisiez dans Rhino lorsque le problème est survenu. 
