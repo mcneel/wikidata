@@ -1,110 +1,117 @@
-====== Recommandations de cartes vidéo pour Rhino 5======
+====== Recommandations de cartes vidéo pour Rhino 5 sur Windows======
+Remarque : Ces informations concernent uniquement <color red>**Rhino pour Windows**</color>
 
-**Remarque : Nous ne faisons pas de recommandations ni comparaisons spécifiques.**\\
-Consultez également ces pages :
-  * [[http://wiki.mcneel.com/rhino/troubleshootingdisplayproblems?s[]=video&s[]=cards|Critiques de cartes vidéos]]
-  * [[http://wiki.mcneel.com/fr/rhino/hardwarebaseline|Guide matériel pour Rhinoceros 5]]
-===== Configuration vidéo générale =====
-Rhino présente quelques exigences en matière de matériel et même si certaines configurations peuvent fonctionner mieux que d'autres, nous pensons que Rhino est assez flexible pour fonctionner sur presque tous les ordinateurs que nous pouvez acheter de nos jours. Certaines fonctions d'affichage peuvent ne pas fonctionner ou fonctionner incorrectement sur des ordinateurs entrée de gamme ou avec des **cartes vidéos bas de gamme telles que les Intel (tous modèles)**, mais cela n'empêchera normalement pas de réaliser votre travail. Malheureusement, les **Apple MacBook 13"**, y compris le dernier **Retina 13"**, ont cette puce graphique HD  et doivent donc être évités.\\
-Cet avertissement concerne également les **Ordinateurs et tablette Surface et Surface Pro de Microsoft** puisqu¡ils ne sont équipés que d'une puce graphique Intel intégre.\\
+//Mis à jour le 14 septembre 2017//
 
-Rhino utilise librement le **système graphique OpenGL** dans Windows. La plupart des cartes graphiques présentent sur le marché utilisent DirectX et sont conçues pour le "jeu". La prise en charge de la norme OpenGL est assez instable sur la plupart des cartes. Les meilleures cartes pour Rhino sont celles conçues pour les "graphiques pour stations de travail" dont la compatibilité OpenGL est très importante. Toutefois, même les meilleures cartes peuvent poser des problèmes sur les pilotes ne sont pas bons. **Vérifiez que vos pilotes sont les derniers publiés !**\\
+**Vous rencontrez des problèmes d'affichage ?** Utilisez l'outils de [[rhino:5:video:troubleshooting| diagnostic vidéo]].
 
-<color red> **Attention :**</color> Tous les pilotes ne créent pas un point de restauration système de Windows avant leur installation. Au cas où les nouveaux pilotes causeraient des problèmes au niveau de votre configuration de Windows, il convient de créer un **point de restauration système** avant d'actualiser tout composant critique de Windows.
+McNeel **ne recommande pas** de matériel spécifique et ne fait pas de comparatif. 
+Toutefois, nos utilisateurs parlent souvent des cartes et des pilotes vidéos :
+  * [[http://discourse.mcneel.com/t/holomark-2-released/8040|Configurations système au banc d'essai]]
 
-  * Rhino V4 fonctionne avec OpenGL version 1.1
-  * Rhino V5 fonctionne avec OpenGL version 2.0 et Shader version 1.2
+Autres articles sur le matériel :
 
-Notes de conversations avec Jeff Lasor, développeur des fonctions d'affichage/OpenGL dans Rhino
+  * [[http://wiki.mcneel.com/rhino/hardwarebaseline|Configuration requise pour Rhino]]
+  * [[http://wiki.mcneel.com/rhino/videocards|Les bons et mauvais côtés de certaines cartes vidéos spécifiques]]
 
-===== Bans d'essais de performance =====
-Les développeurs de pilotes passent des mois à affiner leur code afin d'obtenir de meilleures notes sur les bancs d'essai. Un banc d'essai donné ne prouve rien, uniquement qu'il a plus ou moins bien fonctionner sur un GPU spécifique.
+-----
+===== Configuration OpenGL générale =====
 
-Les bancs d'essai ne montrent pas une utilisation ou une performance du GPU dans la réalité. 
-En d'autres termes, si un jeu fonctionne mieux sur une carte/GPU, ceci ne signifie pas que TOUS les jeux fonctionneront mieux sur cette carte. 
+Rhino utilise **OpenGL** pour afficher votre modèle dans les fenêtres. Les meilleures cartes OpenGL pour Rhino sont celles conçues pour les postes de travail dédiés au graphisme. Nous recommandons des cartes avec autant de mémoire vidéo que possible. Les fabricants de cartes OpenGL publient régulièrement de nouveaux pilotes. Ces nouveaux pilotes corrigent des erreurs connues mais en introduisent parfois d'autres. Nous vous recommandons cependant de toujours mettre à jour vos pilotes. 
 
-Les bancs d'essai sont souvent mentionnés ou disponibles simplement parce qu'ils ont donné de meilleurs résultats. 
-Et qu'en est-il de tous les autres bancs d'essai où la carte a donné de mauvais résultats ?
+  * Rhino 4 fonctionne avec OpenGL version 1.1
+  * Rhino 5 pour Windows fonctionne avec OpenGL version 2.0 et Shader version 1.2
+  * Rhino 6 utilise OpenGL 3.3 
 
-Les bancs d'essai sont des outils de marketing et sont utilisés pour positionner un produit spécifique pour qu'il semble plus performant que ses concurrents ; ce ne sont pas de bonnes mesures de l'utilisation réelle ni de la performance. 
+Si vous possédez deux cartes vidéos, veuillez lire ces informations pour [[http://wiki.mcneel.com/rhino/twodisplayadapters|utiliser Rhino avec deux cartes vidéo]].
 
-**Pour obtenir ce type d'information, participez au forum des utilisateurs pour voir les commentaires et l'expérience d'utilisateurs réels.** Vous pouvez même poser une question sur le [[http://discourse.mcneel.com/|Forum d'utilisateurs de Rhino]].
- 
-===== Cartes graphiques Intel et Rhino 5 =====
-**Ces cartes ne sont pas recommandés et vous devriez éviter de les utiliser avec Rhino.**
 
-Si vous possédez déjà une de ces cartes et si c'est la SEULE carte du système, (pas une hybride) nous vous encourageons à activer les modes d'accélération matérielle et à faire des tests. Rhino 5 pourrait avoir désactivé ce paramètre automatiquement pendant l'installation. 
+-----
+===== Mettre à jour les pilotes =====
+<color red> **Attention :**</color> Nous vous recommandons de créer un point de restauration système avant de mettre à jour vos pilotes.
+
+  * [[http://wiki.mcneel.com/rhino/nvidiainfo|NVIDIA Quadro]] (vérifiez que la version de votre pilote est 340.66 ou supérieure)
+  * [[http://www.nvidia.com/Download/index.aspx?lang=fr-fr|Autres cartes NVIDIA]]
+  * [[http://support.amd.com/us/Pages/AMDSupportHub.aspx|Cartes AMD et ATI]] 
+
+Ne vous fiez pas aux mises à jour automatiques de Windows. Téléchargez et installez les pilotes directement depuis le site du fabricant.
+
+-----
+===== Informations sur les différents fabricants =====
+==== Mac ====
+<color red> **Il n'est pas recommandé d'exécuter Rhino pour Windows sur Mac**</color>
+
+Les Macs sont excellents pour exécuter Rhino pour Mac. Mais ils sont plutôt mauvais pour exécuter Rhino pour Windows. Depuis plusieurs années maintenant, Apple utilise des adaptateurs d'affichage Intel HD et AMD Radeon. Étant donné que Apple écrit les pilotes OpenGL pour ces adaptateurs, ils fonctionnent assez bien. AMD développe ses adaptateurs Radeon pour les jeux DirectX sous Windows et ne prend plus en charge OpenGL pour Windows depuis fin 2013. Les Mac avec l'adaptateur Intel HD Iris fonctionnent mais ne sont pas rapides. 
+==== Cartes graphiques Intel ====
+Rhino 5 SR11 fonctionne sur les cartes Intel HD4000 et toutes les versions suivantes. Ces cartes plus récentes sont incluses par exemple dans les MacBooks 13" et les tablettes Surface Pro de Microsoft. Mais ce ne sont pas des cartes haute performance. 
+
+==== Cartes graphiques Intel avant HD3000 ====
+<color red> **Les cartes graphiques Intel avant la version HD3000 ne sont pas recommandées.**</color>
+
+Rhino fonctionne en utilisant une émulation logicielle sur ces cartes et peut ne pas s'exécuter correctement si vous activez l'accélération matérielle. 
+
+Pour exécuter Rhino avec l'accélération matérielle :
+
+   - Dans Rhino, dans le menu **Outils**, cliquez sur **Options**.
+   - Dans la boîte de dialogue Options, ouvrez l'onglet **OpenGL**.
 
 {{:rhino:rhino_opengl_options.png?400|}}
 
-//Dans Rhino, ouvrez Outils > Options > OpenGL.//
+Si après les tests, la performance de Rhino pour Windows est meilleure qu'avant, laissez cette option cochée.
+De nombreuses fonctions de Rhino 5 utilisent OpenGL, telles que les modes d'affichage rendu et ombré et les modes d'analyse.
+La performance ne sera pas excellente avec ces nouvelles fonctions mais elles devraient fonctionner, ce qui est toujours mieux que si elles ne fonctionnaient pas du tout.
 
-Si après les tests, la performance de Rhino est meilleure qu'avant, laissez cette option cochée. 
-De nombreuses fonctions de Rhino 5 utilisent OpenGL, telles que les modes d'affichage rendu et ombré et les modes d'analyse. 
-La performance ne sera pas excellente avec ces nouvelles fonctions mais elles devraient fonctionner, ce qui est toujours mieux que si elles ne fonctionnaient pas du tout. 
+==== ATI/AMD ====
 
-===== Cartes nVidia Quadro =====
+**<color red> Les cartes graphiques AMD Radeon ne sont actuellement __pas__ recommandées pour Rhino V5. </color>**\\
+**Note :** Rhino 6 fonctionnera avec les cartes AMD Radeon si vos pilotes sont à jour et prennent en charge OpenGL 3.3\\
 
-Les Quadro sont des cartes de haut niveau. nVidia a corrigé les pilotes de ces cartes et renforcé leurs performances. **Nous recommandons ces cartes Quadro**.\\
-Plus d'informations sont disponibles ici :
-http://wiki.mcneel.com/fr/rhino/nvidiainfo
+Les cartes AMD Radeon HD posent problème dans Rhino 5 pour Windows. Elles donnent de meilleurs résultats dans Rhino 6. Elles ont été conçues pour des graphiques DirectX uniquement. Les pilotes vidéo d'AMD pour les cartes Radeon postérieurs à décembre 2013 créent des défauts dans les modes d'affichage ombrés lorsque l'anticrénelage est activé. Nous espérons pouvoir contourner ces limites dans Rhino 6 pour Windows\\
+
+**<color red> Note : </color>** À partir de juin 2016, AMD a ajouté deux applications à leurs pilotes Radeon : **Raptr** et **PlaysTV**. Elles sont automatiquement installées avec les mises à jour des pilotes. Une dll incluse dans cette mise à jour fait parfois planter Rhino 5 après quelques minutes. La solution consiste à désinstaller ces deux applications en utilisant les outils du Panneau de configuration. Cette action supprimera le fichier dll qui cause le plantage. 
+
+**Note :** Depuis novembre 2015, AMD a supprimé les anciens pilotes de son site Internet.\\
+Si vous possédez une carte Radeon, utilisez les anciens pilotes si possible et désactivez l'anticrénelage.\\
+\\
+
+**Les cartes FirePro v7900 et v5900 _sont_ recommandées.**
+\\
+Les FirePros sont très rapides mais leur anticrénelage n'est pas aussi bon que NVIDIA.
+
+<color red>**Note :**</color>  À partir de juin 2016, AMD a ajouté deux applications à leurs pilotes FirePro : **Raptr** et **PlaysTV**. Elles sont automatiquement installées avec les mises à jour des pilotes. Une dll incluse dans cette mise à jour fait parfois planter Rhino 5 après quelques minutes. La solution consiste à désinstaller ces deux applications en utilisant les outils du Panneau de configuration. Cette action supprimera le fichier dll qui cause le plantage.
+
+==== FireGL 5800/7800/8800 ====
+Ces deux cartes sont bien. La 5800 est un peu moins puissante
+mais il s'agit toujours d'une bonne carte. La 7800 est une carte milieu de gamme dans les FirePro, et 
+la 8800 est plus haut de gamme. 
+
+==== Crossfire ====
+L'utilisation de Crossfire ne devrait qu'être positif même si nous ne sommes pas sûr que la différence se verra dans Rhino.  Crossfire ne se révèle que lorsque la carte est poussée à sa limite, comme pour les graphiques comprimés haute résolution et les jeux demandant des taux de rafraîchissement élevés.   Rhino ne fonctionne pas de cette façon... la plupart du temps (environ 95%). L'affichage de Rhino reste stable, sans rien faire. 
+
+-----
+
+==== Cartes NVIDIA Quadro ====
+
+Ces cartes sont des cartes de haut niveau optimisées pour OpenGL.\\
+Vérifiez que la version de votre pilote est au moins **340.66**.\\
+[[http://wiki.mcneel.com/rhino/nvidiainfo|Paramètres les plus importants pour la performance]].
 
 
+==== NVIDIA GeForce ====
 
-===== Nvidia GeForce =====
+La série de cartes vidéo GT et GTX de Nvidia Geforce fonctionne assez bien avec Rhino.
 
-**La série de cartes vidéo GT et GTX de Nvidia Geforce fonctionne bien avec Rhino**.
-
-Les GT 200 et 300 sont basées sur un chipset plus ancien mais qui est assez rapide.  Les nouvelles cartes GeForce basées sur le  FERMI de Nvidia (GeForce FX séries 400 et 500) fonctionnent mais ne présentent pas des gains de performance tels que ceux attendus des cartes les plus chères. D'ailleurs, dans certains cas elles sont plus lentes que les séries 200 et 300. 
-
-
-===== ATI =====
-Les dernières séries de cartes HD Radeaon AMD/ATI 4/5/6k se révèlent être de très bonne cartes pour la version 5. Évitez les versions antérieures. Elles ont été conçues pour DIrectX. Les pilotes livrés avec la carte ne sont pas toujours à jour, nous recommandons d'aller sur le site de ATI/AMD et de mettre à jour les pilotes. Les cartes FirePro v7900 et v5900 sont vraiment très bonnes.
-http://wiki.mcneel.com/fr/rhino/videocards
+Les GT 200 et 300 semblent assez rapides.  Les cartes GeForce basées sur le FERMI de NVIDIA ( (GeForce FX séries 400 et 500) fonctionnent mais ne présentent pas des gains de performance tels que ceux attendus des cartes les plus chères. D'ailleurs, dans certains cas elles sont plus lentes que les séries 200 et 300.
 
 
-//Note : Plusieurs utilisateurs experts du forum de discussion de Rhino ont eu de mauvaises expériences avec la FirePro v7900 surtout au niveau de l'anticrénelage, consultez le forum avant d'investir.//
+===== Bancs d'essais de performance =====
+Les développeurs de pilotes passent des mois à affiner leur code afin d'obtenir de meilleures notes sur les bancs d'essai. Un banc d'essai donné ne prouve rien,  uniquement qu'il a plus ou moins bien fonctionner sur un GPU spécifique.
 
+Les bancs d'essai ne montrent pas une utilisation ou une performance du GPU dans la réalité. 
+En d'autres termes, si un jeu fonctionne mieux sur une carte/GPU, ceci ne signifie pas que _tous_ les jeux fonctionneront mieux sur cette carte. 
 
-14 novembre 2012 - Un utilisateur nous a informé que la version 8.982 du pilote de la FirePro 8800 avait un problème avec les surfaces ombrées loin de l'origine, alors que l'ancienne version 8.911 fonctionnaient correctement. 
+Les bancs d'essai sont souvent mentionnés ou disponibles uniquement lorsqu'ils ont donné de meilleurs résultats. Et qu'en est-il de tous les autres bancs d'essai où la carte a donné de mauvais résultats ?
 
-===== FireGL 5800/7800/8800 =====
-Ces deux cartes fonctionnent bien. La 5800 est un peu moins puissante
-mais il s'agit toujours d'une bonne carte. 
- 
- 
+Les bancs d'essai sont des outils de marketing utilisés pour positionner une produit par rapport à d'autres produits concurrents. Les bancs d'essai ne sont pas une bonne mesure de l'utilisation ou des performances réelles. 
 
- 
-
-===== Nouveaux pilotes =====
-Si vous utilisez une nVidia Quadro 3800, vérifiez que les pilotes sont à jour. 
-
-Pour cela, visitez [[http://www.nvidia.com/Download/index.aspx?lang=fr
-|cette page.]]
-
-Remarque : Pour les **utilisateurs de Nvidia Quadro**, consultez cette page : http://wiki.mcneel.com/fr/rhino/nvidiainfo
-
-Pour télécharger les derniers pilotes AMD/ATI visitez http://support.amd.com/us/Pages/AMDSupportHub.aspx
-|cette page.]] 
-
-Ne vous fiez pas aux mises à jour automatiques des propriétés d'affichage de Windows. Téléchargez directement les pilotes sur le site du fabricant. Il s'agit normalement d'un fichier EXE que vous exécutez lorsque le téléchargement est terminé. 
-
-Téléchargez-le sur le bureau pour le retrouver plus facilement. Une fois installé, supprimez-le. 
-
-<color red> **Attention :**</color> Tous les pilotes ne créent pas un point de restauration système de Windows avant leur installation. Au cas où les nouveaux pilotes causeraient des problèmes au niveau de votre configuration de Windows, il convient de créer un **point de restauration système** avant d'actualiser tout composant critique de Windows.
-===== Crossfire =====
-Deux cartes couplées par Crossfire ne devrait qu'être positif même si nous ne sommes pas sûr que la différence se verra dans Rhino. Crossfire ne se révèle vraiment que lorsque la carte est poussée à sa limite, comme pour les graphiques comprimés haute résolution et les jeux demandant des taux de rafraîchissement élevés. Rhino ne fonctionne pas de cette façon... la plupart du temps (environ 95%) l'affichage de Rhino reste inactif. 
-
-===== Mémoire vidéo===== 
-Nous recommandons fortement les cartes avec beaucoup de mémoire vidéo. Si vous avez le choix entre une carte avec 1Go et une avec 2Go, prenez celle de 2Go. 
-===== Deux cartes vidéo===== 
-Plus d'informations sur les adaptateurs pour deux affichages. 
-http://wiki.mcneel.com/rhino/twodisplayadapters
-
-===== Demander l'avis des autres=====  
-Vous pouvez aussi demander aux utilisateurs de Rhino quelle carte ils utilisent avec Rhino 5. Pour ce faire, utilisez le forum de discussion dont le lien se trouve sur la page d'assistance :
-http://www.rhino3d.com/support.htm
-
-===== Autres informations=====  
-Cette page donne plus d'informations sur certaines cartes vidéo. 
-http://wiki.mcneel.com/fr/rhino/videocards
+**Pour obtenir ce type d'information, participez au forum des utilisateurs pour voir les commentaires et l'expérience d'utilisateurs réels.** Vous pouvez même poser une question sur le [[http://discourse.mcneel.com/|Forum d'utilisateurs de Rhino]].
