@@ -1,40 +1,55 @@
-====== Rhino 4.0 von Hand deinstallieren ======
-====Problem:====
-Während Programmstart, Installation oder Deinstallationn von Rhino erhalten Sie eine Fehlermeldung wie folgende: 
+====== Manuelles Deinstallieren von Rhino ======
+//Der folgende Vorgang bezieht sich auf Rhino 4 und neuer (einschließlich Rhino 5, 6, 7.//
+\\
 
-**Die Eigenschaft, die Sie verwenden möchten, befindet sich auf einer Netzwerk-Ressource, die nicht erhältlich ist.**
+=====Problem=====
+Während des Startens, Installieren oder Deinstallieren von Rhino erhalten Sie eine Fehlermeldung wie die folgende:
 
-**Klicken Sie auf OK, um es erneut zu versuchen, oder geben Sie im Kästchen einen alternativen Pfad zu einem Ordner ein, der das Installationspaket '<Dateiname>.MSI' enthält.**
+//Die Funktion, die Sie verwenden möchten, befindet sich auf einer Netzressource, die nicht zur Verfügung steht.//
+Klicken Sie auf OK um es erneut zu versuchen oder geben Sie in der untenstehenden Box einen anderen Pfad ein, zu einem Ordner mit dem Installationspaket '<Dateiname>.MSI'.
 
-====Gültig für:====
-Rhino 4.0, Rhino 5.0
-
-====Ursache:====
-Der Windows Installer Speicher kann keine Datei oder Verzeichnis-Code für die Deinstallation finden. Dies ist ein allgemein bekanntes Problem, das vom Windows Installer Service verursacht wird. Die beste Lösung wäre, das Werkzeug **Windows Install Clean Up** zu verwenden, um die vorherige Installation vollständig zu entfernen. Nachdem Sie die vorheige Installation entfernt haben, können Sie Rhino erneut installieren und eine gültige Installation erhalten. 
+=====Ursache=====
+Der Windows-Installer-Speicher kann eine zum Deinstallieren benötigte Datei oder den Registrierungscode nicht finden. Dies ist ein häufiges, durch das Windows Installer-Paket verursachtes Problem. Die beste Lösung besteht in der Verwendung von **Windows Install Clean Up** zur gründlichen Entfernung der vorherigen Installation. Sobald die vorherige Installation gesäubert ist, können Sie Rhino in korrekter Weise neu installieren.
 
 
-====Lösung:====
-Rhino und die Windows Installer Registrierung für das Produkt von Hand entfernen. 
+=====Auflösung - Schritte 1, 2 und 3=====
+Manuelles Deinstallieren von Rhino und der Windows-Installer-Registrierung für das Produkt.
+Sie benötigen die //Administratorrechte// Ihres Computers, um dies auszuführen.
 
-**Anmerkung:** Sie sollten das folgende Verfahren nur vornehmen, wenn die Deinstallation im Abschnitt der Programme und Eigenschaften in der Systemsteuerung nicht funktioniert. 
+====Ausführung der Programm-Deinstallation====
+  - Schließen Sie die Rhino-Anwendung.
+  - Gehen Sie zur Windows-Suche.
+  - Geben Sie **Apps & Features** ein (oder **Programme hinzufügen und entfernen**)
+  - Suchen Sie das Programm **Rhinoceros x.0** auf der Liste und klicken dann auf die Schaltfläche **Deinstallieren**.
 
-===Bereinigung des Windows Installer Speichers:===
-  - Download von [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]]
-  - Entzippen des Inhalts von WindowsInstallerCleanupUtility.zip in einen "Windows Installer Clean Up" Ordner auf Ihrem Desktop.
-  - Ausführen von **msicuu.exe**
-  - Runterscrollen zu **(Alle Benutzer) Rhinoceros 4.0**
-  - Klicken auf **Entfernen**.
-   
   
-===Löschen des Rhino-Installationsordners:===
-  - Durchsuchen von C:\Programmdateien\
-  - Löschen von **Rhinoceros 4.0** oder **Rhinoceros 4.0 Testversion**
+====Löschen des Rhino-Installationsordners==== 
+  - Navigieren Sie zu //C:\Programme\//.
+  - Löschen Sie **Rhinoceros 4.0** oder **Rhinoceros 4.0 Testversion**.
   
-===Löschen der Registry Keys:===
-  - Öffnen von **Registry Editor**.
-  - Durchsuchen von **HKEY_LOCAL_MACHINE**\Software\McNeel\Rhinoceros
-  - Löschen von **4.0** Key
-  - Durchsuchen von **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros
-  - Löschen von **4.0** Key
+====Löschen der Registrierungscodes:====
+  - Gehen Sie zur Windows-Suche und geben Sie **Registrierungseditor** ein.
+  - Öffnen Sie den **Registrierungseditor**. 
+  - Gehen Sie ins Verzeichnis //HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros//.
+  - Löschen Sie den Schlüssel **x.0**. Zum Beispiel Rhino 4.0, 5.0 oder welche Version von Rhino Sie auch immer entfernen möchten.
+  - Gehen Sie ins Verzeichnis //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros//.
+  - Löschen Sie den Schlüssel **x.0**. Zum Beispiel Rhino 4.0, 5.0 oder welche Version von Rhino Sie auch immer entfernen möchten.
+
+====Optional====
+Sie sollten das folgende Verfahren nur vornehmen, wenn die Deinstallation in **Apps & Features** nicht funktioniert.
+===Führen Sie das Microsoft-Tool Fix-it aus===
+  - Gehen Sie auf http://support.microsoft.com/mats/program_install_and_uninstall
+  - Klicken Sie auf **Jetzt ausführen**.
+
+===Bereinigung des Windows-Installer-Speichers===
+<color red>**Achtung:**</color> Das folgende Vorgehen kann Ihre Registrierungsdatenbank beschädigen und einen Fehler vom Typ 1402 hervorrufen, wenn Sie das nächste Mal ein Programm installieren möchten. <color red>**Befolgen Sie diese Schritte nur**</color>, wenn das Deinstallieren mit dem oben beschriebenen Vorgehen nicht erfolgreich war.
+  - Laden Sie das [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]] herunter.
+  - Entpacken Sie den Inhalt der heruntergeladenen Datei WindowsInstallerCleanupUtility.zip in einen Ordner (z.B.: "Windows Installer Clean Up") auf Ihrem Desktop.
+  - Führen Sie **msicuu.exe** aus.
+  - Gehen Sie zu (All Users) Rhinoceros 5.0 WIP (oder All Users Rhino 5.0 WIP x64) auf einem 64-Bit-System.
+  - Klicken Sie auf **Entfernen**.
+
+Wenn Sie diese Schritte befolgt haben und einen Fehler des Typs 1402 erhalten, können Ihnen [[http://wiki.mcneel.com/de/rhino/error1402|diese Anweisungen]] bei der Behebung des Fehlers helfen.
+
   
   
