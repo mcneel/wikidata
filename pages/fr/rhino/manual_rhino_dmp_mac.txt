@@ -1,0 +1,42 @@
+====== Créer manuellement un fichier de vidage (DMP) à partir d'une session de Rhino pour Mac ne répondant pas ======
+Revenir à la [[https://wiki.mcneel.com/fr/rhino/faq#display_problems|FAQ]]
+
+[[https://wiki.mcneel.com/fr/rhino/manual_rhino_dmp_windows|Lien]] vers les instructions pour créer un fichier DMP sur Windows.
+
+===== Problème : ===== 
+Il arrive parfois que Rhino ne réponde plus et soit complètement bloqué. Malgré tous vos efforts, il ne semble y avoir aucun 
+moyen de faire repartir Rhino. 
+
+Rhino a sûrement planté sans se fermer complètement.
+Il reste juste là à l'écran ou affiche un ballon. 
+
+Dans ces cas là, il est possible de créer manuellement un fichier de vidage de mémoire depuis Rhino dans l'état où il se trouve. 
+Les développeurs peuvent ensuite utiliser ce fichier pour essayer de déterminer où Rhino a planté et pourquoi
+il s'est figé. 
+
+===== Étapes pour créer un fichier DMP =====
+Les étapes suivantes expliquent comment créer le fichier de vidage (**DMP**) manuellement.
+
+1. Lorsque vous vous rendez compte que Rhino ne répond plus, lancez le **Moniteur d'activité** en cherchant ce terme dans l'outil de **Recherche** en haut à droite de l'écran Mac. 
+
+{{:rhino:activity_monitor.jpg?400|}}
+
+Ou, vous pouvez exécuter le **Launchpad** et ouvrir le groupe **Autre** où vous trouverez l'icône permettant d'exécuter le Moniteur d'activité. 
+
+{{:rhino:launch_pad_other.jpg?400|}}
+
+2. Dans le **Moniteur  d'activité**, trouvez le 
+processus **Rhinoceros** et sélectionnez-le. 
+
+3. Cliquez sur l'engrenage (Catalina) ou le cercle avec les trois points (BigSur ou suivant). Sélectionnez l'option Spindump. 
+Mac OS commencera à générer le fichier de vidage pour la session de Rhino qui ne répond plus. 
+
+{{:rhino:spindump_mac.png?600|}}
+
+4. Choisissez où enregistrer le fichier et indiquez un nom. 
+
+5. Retrouvez le fichier sur votre système dans le **Finder**. Cliquez avec le bouton de droite sur le fichier pour le compresser avant de l'envoyer. 
+
+{{:rhino:compress.jpg?200|}}
+
+6. Le fichier DMP sera trop volumineux pour le joindre dans un message. Veuillez utiliser notre système d'envoi de fichiers [[https://www.rhino3d.com/upload|ici]]. Indiquez comme adresse de destinataire **tech.eu@mcneel.com**. Donnez le plus d'informations possibles sur ce que vous faisiez dans Rhino lorsque le problème est survenu. 
