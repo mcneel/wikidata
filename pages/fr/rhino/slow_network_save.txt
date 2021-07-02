@@ -1,0 +1,26 @@
+====== Enregistrement réseau lent avec Rhino ======
+
+Certains de nos utilisateurs se plaignent que l'enregistrement de fichiers sur un disque réseau est beaucoup plus lent que l'enregistrement sur l'ordinateur où Rhino s'exécute. Nous n'avons pas pu reproduire ce problème en utilisant nos propres réseaux et différents services de stockage en ligne. 
+
+
+Ces informations peuvent aider votre service technique à configurer les paramètres de votre serveur. 
+
+  - Certains clients ont [[https://docs.microsoft.com/en-us/office/troubleshoot/office-suite-issues/saving-file-to-network-server-slow|remarqué que le cryptage entraînait un ralentissement des enregistrements]].
+  - Certains utilisateurs ont trouvé utile de [[https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/14|désactiver VMQ]].  
+  - Cette rubrique du forum [[https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/13|propose d'autres solutions à essayer]].
+  - Augmentez la taille du tampon de mémoire utilisé pour l'enregistrement :
+    - Lancez la commande **DéfinirTailleMémoireTamponFichier**
+    - Définissez la taille sur 32000. 
+    - Essayez à nouveau d'enregistrer.
+    - //Informations : Par défaut, Rhino enregistre en utilisant fwrite() pour envoyer des morceaux de 64 Ko vers le disque. Lorsqu'un fichier contient de grands objets (maillages, polysurfaces, ...) une opération de recherche sur les données supérieures à 64 Ko est lancée. Si l'augmentation de la taille accélère l'enregistrement, il est possible que votre serveur présente un surcharge par transaction d'écriture élevée. Si cette action n'aide en rien, redéfinissez la taille sur 64.//
+
+Si rien de tout cela n'aide :
+Veuillez utiliser [[https://discourse.mcneel.com|Discourse]] ou contacter [[https://www.rhino3d.com/support|l'assistance technique]] en indiquant ces informations :
+
+  - Les informations du menu principal de Rhino > Aide > Informations système.
+  - Logiciel antivirus installé sur l'ordinateur.
+  - Système d'exploitation du serveur réseau.
+  - Informations sur le système de fichiers du serveur réseau. 
+  - Logiciel antivirus installé sur le serveur réseau.
+  - Tous les paramètres réseau spéciaux définis (cryptage, compression, délais,...)
+  - Trouvez un fichier 3dm de Rhino qui s'enregistre rapidement en local et lentement sur un disque réseau. Déterminez la taille de ce fichier et créez un fichier de Rhino de la même taille contenant uniquement des lignes (utilisez la fonction de matrice pour créer des milliers de ligne à partir d'une ligne de départ). Regardez si le fichier contenant uniquement des lignes met également beaucoup de temps à s'enregistrer. (L'enregistrement du fichier contenant uniquement des lignes envoie des milliers de petits morceaux vers le serveur avec très peu d'opérations de recherche. Les résultats du test sur le fichier de lignes nous aidera à savoir si nous devons nous concentrer sur la vitesse de recherche sur le réseau ou non.)
