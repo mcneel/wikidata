@@ -1,61 +1,72 @@
 ======Umwandlung einer Rhino-Zoo-Lizenz in eine Einzelnutzerlizenz======
+
 > **Produkt:** //[[de:zoo:home|Zoo]]//
-> **Zusammenfassung:** //So wandeln Sie einen Netzwerkknoten von Rhino 5 für Windows in ein Einzelplatzsystem um.//
+> **Zusammenfassung:** //So wandeln Sie einen Netzwerkknoten von Rhino für Windows oder Rhino für Mac in ein Einzelplatzsystem um.//
 
 =====Frage=====
-Ich habe eine meiner Rhino-Lizenzen aus Versehen zur Verwendung mit dem Zoo installiert, obwohl ich sie eigentlich als Einzelplatzlizenz verwenden wollte. Wenn ich Rhino ausführe und in den **Optionen** auf **Lizenzen** gehe, ist die Möglichkeit zum **Umwandeln** deaktiviert. Ich habe mich auch als Administrator angemeldet, aber die Option ist immer noch deaktiviert. Wie kann ich diese Installation in Einzelplatzsystem umwandeln?
-
+Ich habe eine meiner Rhino-Lizenzen versehentlich zur Verwendung mit dem Zoo installiert, obwohl ich sie eigentlich als Einzelplatzlizenz verwenden wollte. Wenn ich Rhino ausführe und in den **Optionen** auf **Lizenzen** gehe, ist die Möglichkeit zum **Umwandeln** deaktiviert. Ich habe mich auch als Administrator angemeldet, aber die Option ist immer noch deaktiviert. Wie kann ich diese Installation in Einzelplatzsystem umwandeln?
 
 =====Antwort=====
 Um eine Rhino-Netzwerklizenz in eine Einzelplatzlizenz umzuwandeln, folgen Sie dieser Anleitung:
 
-====Windows Vista, Windows 7 oder Windows 8====
+==== Windows ====
 
 1. Melden Sie sich als Administrator oder Nutzer mit Administratorrechten an.
 
 2. Öffnen Sie den Windows Explorer.
 
-3. Wechseln Sie in den folgenden Ordner
-  C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses
+3. Navigieren Sie zum folgenden Ordner
+  C:\ProgramData\McNeel\Rhinoceros\<Version>\License Manager\Licenses
 
 > **Hinweis:** //Der Ordner ProgramData ist standardmäßig versteckt. Sie können entweder in den **Ordneroptionen** einstellen, dass versteckte Dateien und Ordner angezeigt werden sollen oder Sie geben einfach in die Adressleiste des Windows-Explorers **%ProgramData%** ein, um den Ordner zu finden.//
 
 4. Löschen Sie die folgende Datei (wenn vorhanden):
+  // Rhino 7
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
+  
+  // Rhino 6
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+  // Rhino 5
   60515f84-8f7f-41da-801d-1c87e32f88f5.lic
   
-5. Wechseln Sie in den folgenden Ordner
-  C:\Benutzer\[BENUTZERNAME]\AppData\Roaming\McNeel\Rhinoceros\5.0\License Manager\Licenses
+5. Navigieren Sie zum folgenden Ordner
+  C:\Users\<Benutzername>\AppData\Roaming\McNeel\Rhinoceros\<version>\License Manager\Licenses
 
 > **Hinweis:** //Der Ordner AppData ist standardmäßig versteckt. Sie können entweder in den **Ordneroptionen** einstellen, dass versteckte Dateien und Ordner angezeigt werden sollen oder Sie geben einfach in die Adressleiste des Windows-Explorers **%ProgramData%** ein, um den Ordner zu finden.//
 
 6. Löschen Sie die folgende Datei (wenn vorhanden):
+  // Rhino 7
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
+  
+  // Rhino 6
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+  // Rhino 5
   60515f84-8f7f-41da-801d-1c87e32f88f5.lic
 
 7. Klicken Sie mit der rechten Maustaste auf das Rhino-Startsymbol und wählen Sie **Als Administrator ausführen**.
 
 8. Geben Sie Ihren Rhino-Lizenzschlüssel ein und bestätigen Sie ihn.
 
-====Windows XP====
+====macOS====
 
-1. Melden Sie sich als Administrator oder Nutzer mit Administratorrechten an.
+Es gibt zwei Möglichkeiten, Rhino- in Mac-Lizenzen umzuwandeln.  
 
-2. Öffnen Sie den Windows Explorer.
+Die erste - und einfachste - Weise ist die, Rhino für Mac auszuführen und dann auf //Optionen...// > //Lizenzen// > //Lizenzschlüssel ändern// zuzugreifen.
 
-3. Wechseln Sie in den folgenden Ordner
-  C:\Dokumente und Einstellungen\Alle Benutzer\Anwendungsdaten\McNeel\Rhinoceros\5.0\License Manager\Licenses
+Falls Sie damit keinen Erfolg haben, müssen Sie vielleicht Ihre Lizenzdatei löschen und eine neue einfügen.  Vergewissern Sie sich, Ihren Lizenzschlüssel zu sichern, bevor Sie die folgenden Schritte ausführen:
 
-4. Löschen Sie die folgende Datei (wenn vorhanden):
-  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
+1. Schließen Sie Rhino für Mac und wechseln Sie in den Finder.
 
-5. Wechseln Sie in den folgenden Ordner
-  C:\Dokumente und Einstellungen\[BENUTZERNAME]\Anwendungsdaten\McNeel\Rhinoceros\5.0\License Manager\Licenses
+2. Navigate to //Finder// > //Gehe zu// > //Gehe zum Ordner...// und geben Sie folgenden Ordner ein:
+  /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
 
-6. Löschen Sie die folgende Datei (wenn vorhanden):
-  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
-  
-7. Starten Sie Rhino, indem Sie doppelt auf das Startsymbol klicken.
+3. Löschen Sie die im Ordner //Licenses// enthaltene Lizenzdatei.
 
-8. Geben Sie Ihren Rhino-Lizenzschlüssel ein und bestätigen Sie ihn.
+4. Starten Sie Rhino für Mac erneut.
+
+5. Geben Sie Ihren Rhino-Lizenzschlüssel ein und bestätigen Sie ihn.
 
 \\
 
