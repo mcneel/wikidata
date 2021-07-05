@@ -1,0 +1,26 @@
+====== Langsame Netzwerkspeicherung in Rhino ======
+
+Gelegentlich erhalten wir Mitteilungen, dass das Speichern einer Rhino-Datei auf ein Netzwerk-Laufwerk weitaus mehr Zeit in Anspruch nimmt als das Speichern auf den Computer, auf dem Rhino installiert ist. Wir waren bisher nicht in der Lage, dieses Problem unter Verwendung unserer eigenen Netzwerke sowie mehrerer Cloud-basierter Speicherplätze zu reproduzieren. 
+
+
+Die folgenden Informationen könnten ihrer IT-Abteilung bei der Feinabstimmung Ihrer Server-Einstellungen nützlich sein.
+
+  - Einige Anwender haben festgestellt, dass [[https://docs.microsoft.com/en-us/office/troubleshoot/office-suite-issues/saving-file-to-network-server-slow|langsame Netzwerkspeicherung durch Verschlüsselung verursacht werden kann]].
+  - Wieder andere Anwender hatten [[https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/14|durch Deaktivierung von VMQ Erfolg]].  
+  - In diesem Forumsbeitrag finden Sie eine [[https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/13|Liste mit Versuchsmöglichkeiten]].
+  - Vergrößern Sie den speicherinternen Buffer:
+    - Führen Sie den Befehl **SetArchiveMemoryBufferSize** aus
+    - Stellen Sie die Größe auf 32000 ein.
+    - Versuchen Sie den Speichervorgang erneut.
+    - //Hintergrund: Standardmäßig speichert Rhino Dateien unter Verwendung von fwrite(), um Einheiten von 64 KB auf das Laufwerk zu schreiben. Wenn eine Datei große Objekte enthält (große Polygonnetze, große Flächenverbände etc.), ist eine "Such"-Option für Daten von über 64 KB Größe verfügbar. Wenn durch Vergrößerung die Dateispeicherung beschleunigt wird, kann es sein dass die Transaktionen Ihres Servers pro Schreibvorgang überhöht sind. Sollte sie keine Verbesserung herbeiführen, setzen Sie die Größe auf 64 zurück.//
+
+Wenn keine der vorgeschlagenen Möglichkeiten hilft:
+gehen Sie bitte auf [[https://discourse.mcneel.com|Discourse]] oder nehmen Sie mit dem [[https://www.rhino3d.com/support|Technischen Support]] Kontakt auf und übermitteln Sie die folgenden Daten:
+
+  - Information vom Rhino-Hauptmenü > Hilfe > Systeminformationen.
+  - Die auf Ihrem Computer verwendete Antivirus-Software.
+  - Betriebssystem des Netzwerkservers.
+  - Informationen zum Dateisystem des Netzwerkservers.
+  - Antivirus-Software des Netzwerkservers.
+  - Jegliche von Ihnen verwendete besondere Netzwerkeinstellungen (Verschlüsselung, Komprimierung, Timeouts, ...)
+  - Suchen Sie nach Rhino-3dm-Dateien, die auf dem Computer schnell und auf dem Netzwerk-Laufwerk langsam gespeichert werden. Bestimmen Sie die Größe dieser Datei und erstellen Sie eine Rhino-Datei der gleichen Größe, die nur Linien enthält (verwenden Sie Anordnen, um Tausende Linien aus einer zu erstellen). Überprüfen Sie, ob sich die Speicherung der Datei mit den Linien ebenfalls verzögert. (Beim Speichern der Linien werden Tausende kleiner Einheiten mit sehr wenigen Suchoperationen an den Server gesandt. Das Ergebnis des Linientests ist uns dienlich, uns entweder auf die Geschwindigkeit der Netzwerksuche zu konzentrieren oder sie ganz zu verwerfen.)
