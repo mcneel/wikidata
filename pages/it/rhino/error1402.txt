@@ -1,0 +1,36 @@
+====== Errore di installazione 1402 (Impossibile aprire la chiave: UNKNOWN\Components)======
+======Rhino 5 per Windows======
+> **Sommario:** //Come correggere l'errore di installazione 1402 o 1406 (Impossibile aprire la chiave: UNKNOWN\Components).//
+> **Pagina correlata di aiuto all'installazione:** //[[installproblems|Risoluzione dei problemi di installazione di Rhino 5]]//
+
+=====Problema=====
+Il messaggio "Impossibile aprire la chiave: UNKNOWN\Components\(molte lettere e numeri). Errore 1402. Assicurarsi di disporre dei privilegi di accesso necessari per tale chiave oppure contattare il personale di supporto."
+
+=====Causa====
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-<numbers>\La chiave dei componenti presenta permessi non corretti.
+
+=====Risposta=====
+**//Soluzione 1://**
+Dal menu Avvio Windows, inserisci  **CMD** nella casella di ricerca. Fai clic con il tasto destro su  **cmd.exe **  e seleziona **Esegui come amministratore**. Copia la seguente riga e incollala nella finestra cmd, quindi premi **Invio**. Rhino riuscirà quindi ad installarsi.
+
+<code>
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
+</code>
+
+**//Soluzione 2://**
+>//**Avviso:** la procedura seguente richiede la modifica del registro di sistema di Windows. L'applicazione di una modifica non corretta al Registro di sistema può danneggiare il computer e renderlo inutilizzabile. Se hai difficoltà nel seguire le istruzioni, contatta il team di supporto di McNeel.//
+
+  - Scarica [[http://technet.microsoft.com/en-us/sysinternals/bb897553|psexec]] da Microsoft TechNet ed estraine il contenuto sul desktop.
+  - Apri una shell dei comandi di Windows.
+  - Passate alla directory del desktop.
+  - Nella shell dei comandi, inserisci **psexec -i -d -s c:\windows\regedit.exe**. Ciò fa in modo che Windows esegua l'editor di registro con i permessi dell'account di sistema -- un account più efficace che quello di amministratore.
+  - Andate a HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Installer\UserData\
+  - Fai clic destro sulla cartella **UserData**, quindi su **Autorizzazioni...**
+  - Nella finestra di dialogo **Autorizzazioni per UserData**, fai clic su **Impostazioni avanzate**.
+  - Assicurati che gli  **Amministratori** abbiano autorizzazioni di  **Controllo completo** in questa cartella e che gli **Utenti** abbiano autorizzazioni di **Lettura**. Esistono altre autorizzazioni utente, ma  **Amministratori** e **Utenti** sono quelle più importanti.
+  - Seleziona l'opzione **Sostituisci tutte le autorizzazioni ereditabili in tutti i discendenti che ereditano autorizzazioni da questo oggetto**.
+  - Fai clic due volte su **OK** per applicare le autorizzazioni.
+  - Installa Rhino di nuovo.
+
+
+{{tag>rhino5installationerror_en}}
