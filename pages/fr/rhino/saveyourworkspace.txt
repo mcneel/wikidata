@@ -1,0 +1,38 @@
+====== L'importance d'enregistrer votre fichier d'espace de travail personnalisé ======
+
+> Remarque : ces informations ne concernent pas Rhino pour Mac. 
+
+Sous Windows, les barres d'outils de Rhino sont enregistrées dans un fichier spécial appelé un fichier d'espace de travail. Le fichier d'espace de travail par défaut est appelé **default.rui** dans Rhino 5 et les version suivantes, ou **default.tb** dans Rhino 4 et les versions précédentes. 
+//(rui=__R__hino __U__ser __I__nterface ; tb=__T__ool__B__ar)//
+
+Toutes les modifications que vous réalisez sur les barres d'outils, telles que l'ajout ou la modification de macros ou de scripts, l'ajout de boutons, etc. ne sont normalement écrites dans le fichier d'espace de travail qu'à la fermeture de Rhino. (il est possible de forcer un enregistrement avant, voir ci-dessous). 
+
+Étant donné qu'il est possible d'avoir plusieurs sessions de Rhino ouvertes en même temps, si vous ne faites pas attention, il est facile de perdre certaines modifications de configuration. Il suffit d'avoir plusieurs sessions de Rhino ouvertes, de faire des modifications dans l'une d'elles et de la fermer en premier. Lorsque la deuxième session de Rhino, qui ne présente pas les modifications, est fermée elle remplace la première et toutes les modifications de l'autre session sont perdues. 
+
+Ainsi, si vous avez apporté des modifications importantes au fichier d'espace de travail par défaut et si vous voulez être sûr de conserver ces modifications, //**assurez-vous de l'enregistrer sous un nouveau nom !**//  
+
+> Remarques : si Rhino 4 est désinstallé, le fichier d'espace de travail par défaut est supprimé - ce qui supprimera _toutes_ vos personnalisations instantanément. Dans Rhino 5 et les versions suivantes, vous ne perdrez pas le fichier d'espace de travail par défaut lorsque Rhino est désinstallé ou actualisé. Cependant, les fichiers d'espace de travail peuvent être corrompus et inutilisables dans certains cas. La commande ** RéinitialiserBarreOutils** remplacera également le fichier par défaut et toutes les personnalisations réalisées seront perdues. 
+
+===== Comment enregistrer vos modifications=====
+
+Ouvrez //Outils > Configuration des barres d'outils// (ou //Options > Barres d'outils//), sélectionnez le fichier par défaut dans la fenêtre supérieure droite, puis cliquez sur **Fichier > Enregistrer sous** depuis le menu et donnez un //**nouveau nom**// à votre espace de travail modifié. Continuez ensuite à utiliser ce fichier pour votre travail. 
+
+Les fichiers .rui dans la version 5 et les versions suivantes sont enregistrés dans le dossier suivant :
+
+  C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\7.0 (ou 6.0, 5.0)\UI  
+  
+AppData est un dossier caché ; afin de l'ouvrir, dans la barre de recherche de Windwos, tapez %appdata% et appuyez sur Entrée, puis naviguez à partir d'ici. 
+
+Effectuez toujours vos modifications sur votre espace de travail personnalisé. Nous vous recommandons d'enregistrer ce fichier ainsi qu'une copie ailleurs (de préférence sur un autre ordinateur comme tous les documents importants). Pensez au temps qu'il vous faudra pour recréer le fichier si vous le perdez.
+
+La réinstallation de Rhino, les mises à jour et la commande RéinitialiserBarreOutils n'effaceront pas votre espace de travail personnalisé. 
+
+==== Important ====
+
+Vérifiez qu'une seule session de Rhino est ouverte lorsque vous modifiez les barres d'outils et l'espace de travail ! Lorsque les modifications sont réalisées, utilisez le menu **Fichier>Enregistrer** de la boîte de dialogue de configuration des barres d'outils pour enregistrer vos modifications. Vous pouvez également fermer Rhino et le réouvrir. Rhino enregistre automatiquement les modifications réalisées sur les barres d'outils lorsqu'il est fermé. Si plusieurs sessions de Rhino sont ouvertes, les barres d'outils de la dernière session fermée seront enregistrées et pourraient annuler les modifications réalisées dans d'autres sessions.
+
+====Paramètres non compris dans les fichiers d'espace de travail de Rhino====
+
+Le fichier d'espace de travail ne contient que des informations sur les barres d'outils, il n'enregistre pas les options de Rhino. Vous trouverez sur [[SettingsTransfer|cette page]] plus d'informations sur les options de Rhino et comment les enregistrer et les transférer. 
+
+Les informations précédentes s'appliquent à Rhino 7 et les versions précédentes. Certaines peuvent changer dans les versions futures. 
