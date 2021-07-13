@@ -1,0 +1,26 @@
+====== Salvataggio lento in Rhino ======
+
+A volte, ci viene segnalato che salvare un file di Rhino su un disco di rete è un procedimento più lento rispetto a quando Rhino viene usato sul computer. Non siamo riusciti a riprodurre questo problema usando le nostri reti e vari servizi di archiviazione cloud. 
+
+
+Queste informazioni potrebbero aiutare il dipartimento IT a configurare le impostazioni del server.
+
+  - Per alcuni utenti il [[https://docs.microsoft.com/en-us/office/troubleshoot/office-suite-issues/saving-file-to-network-server-slow|problema è dovuto alla codifica che causa il salvataggio lento in rete]].
+  - Alcuni utenti hanno risolto il problema [[https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/14|disattivando VMQ]].  
+  - Questo argomento del forum fornisce un [[https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/13|elenco di alcune possibili soluzioni]].
+  - Aumenta le dimensioni del buffer della memoria usato per il salvataggio:
+    - Esegui il comando **SetArchiveMemoryBufferSize**.
+    - Imposta le dimensioni su 32000.
+    - Riprova.
+    - //Background: di default, Rhino salva i file usando fwrite() per inviare 64 KB di porzioni di dati al disco. Quando un file contiene oggetti di grandi dimensioni (mesh o polisuperfici grandi),  esiste un'operazione "seek" per i dati superiori a 64 KB. Aumentando la velocità di salvataggio dei file, è possibile che il server abbia una quantità di memoria superiore per transazione scritta. Se questa soluzione non funziona, imposta nuovamente le dimensioni su 64.//
+
+Se il problema persiste:
+Usa il forum [[https://discourse.mcneel.com|Discourse]] o contatta il [[https://www.rhino3d.com/support|supporto tecnico]] e includi queste informazioni:
+
+  - Le informazioni del menu principale di Rhino > Aiuti > Informazioni sul sistema.
+  - Software di scansione virus sul computer locale.
+  - Server di rete OS.
+  - Informazioni su system file del server di rete.
+- Software di scansione virus sul server di rete.
+  - Qualsiasi particolare impostazione di rete usata (codifica, compressione, ritardi, ecc.).
+  - Trova un file 3dm di Rhino che viene salvato velocemente in locale e più lentamente su un disco di rete. Determina le dimensioni del file e crea un file di Rhino dalle stesse dimensioni contenente solo linee (usa serie per creare migliaia di line da una linea). Osserva se anche il file di linee viene salvato lentamente. Il salvataggio del file di linee invia migliaia di porzioni di dati al server con poche operazioni seek. Conoscere i risultati del test delle linee ci aiuta a concentrarci o determinare e escludere la velocità della rete.
