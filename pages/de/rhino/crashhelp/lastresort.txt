@@ -1,20 +1,31 @@
 ====== Diagnose von Startfehlern ======
 
->Wenn Rhino nicht startet oder beim Programmstart abstürzt, finden Sie auf dieser Seite einige Möglichkeiten, um das Problem zu untersuchen und zu beheben.
+>Wenn Rhino nicht startet oder beim Programmstart abstürzt, finden Sie auf dieser Seite einige Möglichkeiten, das Problem zu untersuchen und zu beheben.
 
+====Rhino 6====
 
-=== Rhino startet nicht beim Doppelklick auf eine Rhino-Datei bzw. Drag&Drop derselben ===
-  * Klicken Sie doppelt auf eine **Rhino-Verknüpfung** auf Ihrem Desktop oder klicken Sie auf einen Rhino-Eintrag im **Startmenü**.
+  - Öffnen Sie den Registrierungseditor (geben Sie im Windows-Startmenü **regedit** ein und drücken Sie die Eingabetaste).
+  - Im Editor, unter HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\Global Options\Debug Logging
+  - Erstellen Sie einen Wert REG_DWORD (32) namens **Enabled** (falls der Name noch nicht existiert)
+  - Stellen Sie **Enabled** auf **1** ein
+  - Erstellen Sie einen Wert REG_DWORD (32) namens **SaveToFile**  (falls der Name noch nicht existiert)
+  - Stellen Sie **SaveToFile** auf **1** ein
+  - Starten Sie **Rhino 6** mittels der **Verknüpfung**, nicht durch Klicken auf eine Datendatei.
+  - Senden Sie **RhinoDebugMessages.txt** in Ihrem Dokumentordner an **tech@mcneel.com**.
 
+--> Rhino 5^
+
+--> Rhino startet weder mit Doppelklick auf eine Rhino-Datei noch durch Ziehen und Ablegen derselben
+  * Doppelklicken Sie auf eine **Rhino-Verknüpfung** auf Ihrem Desktop oder klicken Sie auf ein Rhino-Element im **Startmenü**.
   * Wenn Rhino startet:
     * Öffnen Sie die Datei über das Menü **Datei** > **Öffnen** oder durch Klick auf die Werkzeugleistenschaltfläche **Öffnen**. Wenn sich die Datei nicht öffnen lässt, liegt vermutlich ein Problem mit der Datei vor. Untersuchen Sie die Datei mithilfe des Befehls **Prüfung3dmDatei**.
 
-
-=== Rhino startet nicht beim Klick auf eine Desktop- oder Startmenü-Verknüpfung ===
+<--
+--> Rhino startet nicht beim Klick auf eine Desktop- oder Startmenü-Verknüpfung
   * Starten Sie Rhino im abgesicherten Modus.
     * Im abgesicherten Modus wird Rhino ohne Grafikbeschleunigung gestartet und es werden keine Plug-ins geladen.
     * Klicken sie im **Windows-Startmenü** auf den Eintrag **Rhinoceros 5 im abgesicherten Modus** oder **Rhinoceros 5 (64-Bit) im abgesicherten Modus**.
-      * Akzeptieren Sie das Laden der Werkzeugleisten (//Toolbars.rhp//) und lehnen Sie das Laden des RDK ab.
+      * Klicken Sie auf **Ja** zum Laden der Werkzeugleisten und **Nein** zum Laden von RDK.
 
   * Wenn Rhino im abgesicherten Modus startet, liegt wahrscheinlich ein Problem mit einem Grafiktreiber oder einem Plug-in vor.
     * Im Rhino-Menü: //Werkzeuge - Optionen - Ansicht - OpenGL//, deaktivieren Sie die Option **Beschleunigte Hardware-Modi verwenden**. 
@@ -26,17 +37,21 @@
         * Intel:   http://downloadcenter.intel.com/Default.aspx
         * ATI/AMD: http://support.amd.com/us/gpudownload/Pages/index.aspx
         * Apple:   http://support.apple.com/downloads/#bootcamp
-        * Hinweis: Wenn Sie mit einem Laptop arbeiten, müssen Sie sehr wahrscheinlich die Treiberaktualisierung vom Laptop-Hersteller beziehen. 
+        * Weitere Sites für Ihre Video-Hardware.
+        * Hinweis: Wenn Sie mit einem Laptop arbeiten, müssen Sie sehr wahrscheinlich die Treiberaktualisierung vom Laptop-Hersteller beziehen.
       * Starten Sie Rhino erneut auf normalem Weg (nicht im abgesicherten Modus).
 
     * Wenn Rhino nach Deaktivierung der Hardware-Beschleunigung immer noch abstürzt, könnte ein Plug-in das Problem verursachen.
       * Starten Sie im Sicherheitsmodus neu und aktivieren Sie die Option **Beschleunigte Hardware-Modi verwenden**. 
       * Deaktivieren Sie im Rhino-Menü //Werkzeuge - Optionen - Plug-ins// alle Plug-ins, die nicht mit Rhino geliefert wurden und aktivieren Sie die Option **Vor dem Laden deaktivierter Plug-ins nachfragen** im unteren Bereich.
       * Schließen Sie Rhino und starten Sie im normalen Modus (nicht im Sicherheitsmodus). 
-        * Antworten Sie mit **Nein** auf die Frage nach dem Laden der deaktivierten Plug-ins.
+        * Klicken Sie bei der Frage, ob alle durch Sie deaktivierten Plug-ins geladen werden sollen, auf **Nein**.
 
       * Wenn Rhino mit einigen deaktivierten Plug-ins startet, liegt das Problem bei einem der deaktivierten Plug-ins. 
         * Starten Sie Rhino mehrmals neu und laden Sie bei jedem Start **eines der deaktivierten Plug-ins**, bis Sie herausfinden, welches Plug-in das Problem verursacht hat.
         * Wenn Sie herausgefunden haben, welches Plug-in das Problem verursacht, gehen Sie auf //Werkzeuge - Optionen - Plug-ins// und **aktivieren** Sie alle Plug-ins, die keine Probleme bereiten.
 
       * Wenn Rhino im abgesicherten Modus abstürzt oder Sie das Problem mithilfe der hier vorgestellten Methoden nicht beheben konnten, kontaktieren Sie uns unter  http://www.rhino3d.com/support.
+
+<--
+<--
