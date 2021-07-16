@@ -1,0 +1,57 @@
+====== Diagnostica di errori sull'avvio di Rhino ======
+
+>Se Rhino non si avvia o si blocca all'avvio, ecco una serie di informazioni utili per capire la causa del problema e come risolverlo.
+
+====Rhino 6====
+
+  - Apri l'editor del Registro di sistema (dal menu di avvio di Windows, inserisci **regedit**, quindi premi Invio).
+  - Nel registro, in HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\Global Options\Debug Logging
+  - Crea il valore REG_DWORD (32) chiamato **Enabled** (se non esiste già).
+  - Imposta **Enabled** su **1**.
+  - Crea il valore REG_DWORD (32) chiamato **SaveToFile**  (se non esiste già).
+  - Imposta **SaveToFile** su **1**.
+  - Avvia **Rhino 6** usando **tasti di scelta rapida**, non facendo clic sul file dati.
+Invia il file **RhinoDebugMessages.txt** (cartella Documenti) a **tech@mcneel.com**.
+
+--> Rhino 5^
+
+--> Rhino non si avvia facendo doppio clic o trascinando e rilasciando un file
+  * Fai doppio clic su un **collegamento** di Rhino sul desktop oppure fai clic su Rhino sul menu **Avvio**.
+  * Se Rhino si avvia:
+    * Apri un file dal menu **File** > **Apri** o dal pulsante della barra degli strumenti **Apri** . Se il file non si apre, probabilmente il problema è dovuto al file. Prova il comando **VerificaFile3dm**.
+
+<--
+--> Rhino non si avvia dal collegamento sul desktop o o dal menu Avvio
+  * Apri Rhino in modalità sicura.
+    * La modalità sicura avvia Rhino senza usare l'accelerazione grafica e senza caricare i plug-in.
+    * Sul **menu di avvio di Windows**, fai clic su **Rhinoceros 5.0 in modalità sicura** o **Rhinoceros 5.0 (a 6 -bit) in modalità sicura**.
+      * Rispondi **Sì** alla richiesta di caricare le **barre degli strumenti** e **No**  alla richiesta di caricare l'RDK.
+
+  * Se **Rhino si avvia in modalità sicura**, è probabile che il problema sia causato da un **driver video** o da un **plug-in.
+    * Strumenti - Opzioni - Vista - OpenGL**, **deseleziona** l'opzione **Usa modalità di accelerazione grafica hardware**. 
+    * Chiudi Rhino ed avvialo in modo normale (non usando la modalità sicura). 
+
+    * Se **Rhino si avvia con l'accelerazione hardware disattivata**, è probabile che il problema derivi dal **driver della scheda video. 
+      * Scarica e installa un driver corrente** per la scheda video. Ti consigliamo di aggiornare i driver dal sito del produttore dell'hardware, non da un sito di terze parti.
+        * NVIDIA:  http://www.nvidia.com/Download/index.aspx
+        * Intel:   http://downloadcenter.intel.com/Default.aspx
+        * ATI/AMD: http://support.amd.com/us/gpudownload/Pages/index.aspx
+        * Apple:   http://support.apple.com/downloads/#bootcamp
+        * Qualsiasi altro sito corrispondente al produttore della vostra scheda video.
+        * Nota: se usi un computer portatile, è probabile che dobbiate ottenere l'aggiornamento dei driver dal produttore del portatile.
+      * Riavvia Rhino in modo normale (non usando la modalità sicura).
+
+    * Se **Rhino continua a bloccarsi dopo aver disattivato l'accelerazione hardware**, è probabile che il problema sia causato da un **plug-in.
+      * Riavvia in modalità sicura** e **seleziona** l'opzione ** Usa modalità di accelerazione grafica hardware**. 
+      * Strumenti - Opzioni - Plug-in**, **deseleziona** l'opzione **Attivato** per tutti i plug-in non forniti con Rhino, quindi **seleziona** **Richiedi caricamento plug-in disattivati** nella parte inferiore della scheda.
+      * Chiudi Rhino e avvialo in modo normale (non usando la modalità sicura). 
+        * Rispondi **No** per caricare tutti i plug-in disattivati.
+
+      * Se **Rhino si avvia con alcuni plug-in disattivati**, il problema deriva da uno di questi plug-in. 
+        * Riavvia Rhino in modo normale** e rispondi **Sì** al caricamento di **un plug-in alla volta** e No al resto, fino a determinare qual è il plug-in che causa il problema.
+        * Una volta determinato di che plug-in si tratta, ritornate su **Strumenti - Opzioni - Plug-in** e **Seleziona l'opzione Attivato** di tutti i plug-in tranne quello in questione.
+
+      * Se **Rhino si blocca in modalità sicura** o il problema persiste nonostante questi metodi, contatta il nostro team di supporto per ricevere assistenza: http://www.rhino3d.com/support.
+
+<--
+<--
