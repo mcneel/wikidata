@@ -4,70 +4,67 @@
 > **요약:** //네트워크 노드로 설치된 Windows용 Rhino와 Mac용 Rhino를 독립실행형 노드로 변환하는 방법에 대한 안내입니다.//
 
 =====질문=====
-원래는 Rhino를 독립실행형 라이선스로 설치하려고 하였으나, 실수로 Zoo를 사용하도록 잘못 설치하였습니다. Rhino를 시작하고 **라이선스** 페이지의 **옵션** 대화상자를 보니 **변환** 단추가 비활성 상태입니다. 관리자로 로그인하여 다시 시도하였으나, 변환 단추를 여전히 사용할 수 없었습니다. 네트워크 노드로 설치된 Rhino를 독립실행형 노드로 어떻게 변경할 수 있습니까? 
+원래는 Rhino를 독립실행형 라이선스로 설치하려고 하였으나, 실수로 Zoo를 사용하도록 잘못 설치하였습니다. Rhino를 시작하고 **라이선스** 페이지의 **옵션** 대화상자를 보니 **변환** 단추가 비활성 상태입니다. 관리자로 로그인하여 다시 시도하였으나, 변환 단추를 여전히 사용할 수 없었습니다. 네트워크 노드로 설치된 Rhino를 독립실행형 노드로 어떻게 변경할 수 있습니까?
 
 =====답변=====
 네트워크 노드로 설치된 Rhino를 독립실행형 노드로 변환하려면 다음 순서대로 실행하세요:
 
-====Windows 10, 8, 7, 또는 Vista====
+==== Windows ====
 
 1. 컴퓨터에 관리자 또는 관리 권한이 있는 사용자로 로그인합니다.
 
 2. Windows 탐색기를 실행합니다.
 
 3. 다음 폴더를 찾습니다:
-  C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  C:\ProgramData\McNeel\Rhinoceros\<버전>\License Manager\Licenses
 
 > **안내:** //기본적으로 Microsoft에서는 ProgramData 폴더를 숨겨둡니다. **폴더 옵션**을 사용하여 숨겨진 파일과 폴더의 표시를 허용하거나, Windows 탐색기의 주소창에 **%ProgramData%**를 입력하여 해당 폴더로 바로 갈 수 있습니다.//
 
 4. 다음 파일이 있으면 삭제합니다:
+  // Rhino 7
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
+  
+  // Rhino 6
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+  // Rhino 5
   60515f84-8f7f-41da-801d-1c87e32f88f5.lic
   
 5. 다음 폴더를 찾습니다:
-  C:\Users\<사용자_이름>\AppData\Roaming\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  C:\Users\<사용자_이름>\AppData\Roaming\McNeel\Rhinoceros\<버전>\License Manager\Licenses
 
 > **안내:** //기본적으로, Microsoft에서는 AppData 폴더를 숨겨둡니다. **폴더 옵션**을 사용하여 숨겨진 파일과 폴더의 표시를 허용하거나, Windows 탐색기의 주소창에서 상기 주소에 **%AppData%**를 입력하여 해당 폴더를 찾을 수 있습니다.//
 
 6. 다음 파일이 있으면 삭제합니다:
+  // Rhino 7
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
+  
+  // Rhino 6
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+  // Rhino 5
   60515f84-8f7f-41da-801d-1c87e32f88f5.lic
 
 7. Rhino 바로 가기를 오른쪽 클릭하고 **관리자 권한으로 실행**을 선택합니다.
 
 8. Rhino 라이선스 키를 입력하고 유효성 검사를 실행합니다.
 
-====Windows XP====
+====macOS====
 
-1. 컴퓨터에 관리자 또는 관리 권한이 있는 사용자로 로그인합니다.
+Mac용 Rhino 라이선스를 변경하는 두 가지 방식이 있습니다.  
 
-2. Windows 탐색기를 실행합니다.
+첫 번째 가장 쉬운 방법은 Mac용 Rhino를 실행하고, //환경설정...// > //라이선스// > //라이선스 키 변경// 메뉴를 사용하는 것입니다. 
 
-3. 다음 폴더를 찾습니다:
-  C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
+첫 번째 방법으로 문제가 해결되지 않으면, 라이선스 파일을 삭제하고 새로운 파일을 입력해야 할 수도 있습니다. 다음 안내를 실행하기 전에 반드시 라이선스 키 정보를 기록해두시기 바랍니다:
 
-4. 다음 파일이 있으면 삭제합니다:
-  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
+1. Mac용 Rhino를 끝내고 Finder 어플리케이션으로 전환합니다. 
 
-5. 다음 폴더를 찾습니다:
-  C:\Documents and Settings\<사용자_이름>\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
-
-6. 다음 파일이 있으면 삭제합니다:
-  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
-  
-7. Rhino를 실행합니다.
-
-8. Rhino 라이선스 키를 입력하고 유효성 검사를 실행합니다.
-
-====OS X====
-
-1. Finder를 실행합니다.
-
-2. 다음 폴더를 찾습니다:
+2. //Finder// > //이동// > //폴더로 이동...//으로 가서 다음 폴더를 입력합니다:
   /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
 
-3. 다음 파일을 삭제합니다:
-  781b000c-8d0b-4ed3-8ead-213bdb848f39.lic
+3. //Licenses// 폴더에 있는 라이선스 파일을 삭제합니다. 
 
-4. Rhino를 실행합니다.
+4. Mac용 Rhino를 다시 시작합니다. 
 
 5. Rhino 라이선스 키를 입력하고 유효성 검사를 실행합니다.
 
