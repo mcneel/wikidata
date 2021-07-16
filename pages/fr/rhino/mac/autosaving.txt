@@ -1,40 +1,83 @@
-====== Enregistrement automatique et versions dans OS X 10.7 (Lion) ======
-Apple a ajouté une méthode radicalement différente de gestion des modèles dans OS X 10.7 et cette fonction a été intégrée dans Rhino pour Mac. Apple décrit l'enregistrement automatique et les versions [[http://support.apple.com/kb/HT4753?viewlocale=fr_FR|ici]] et [[http://www.apple.com/macosx/whats-new/features.html#versions|ici]], et une autre introduction se trouve [[http://www.tuaw.com/2011/07/20/os-x-lion-auto-save-and-versions-to-the-rescue/|ici]].
+====== Enregistrement automatique et versions dans macOS (enregistrement automatique) ======
+Apple a ajouté une méthode radicalement différente pour gérer vos modèles dans macOS et celle-ci a été intégrée dans Rhino pour Mac.  Apple décrit l'enregistrement automatique et les versions [[https://support.apple.com/guide/mac-help/view-and-restore-past-versions-of-documents-mh40710/mac|ici]]. Vous trouverez une autre introduction [[https://www.lifewire.com/use-auto-save-and-versions-in-os-x-2260850/|ici]].
 
-Cet article aborde d'autres informations, non mentionnées dans les articles précédents, qui sont importantes pour les utilisateurs de Rhino pour Mac. Enfin, vous devriez lire [[http://wiki.mcneel.com/rhino/mac/lionsaving|tout ce que vous avez appris sur l'enregistrement des fichiers est faux]].
+Cet article donne des informations non mentionnées dans ces articles et qui sont importantes pour les utilisateurs de Rhino pour Mac.
 
--->Qu'est-il arrivé à la question "Voulez-vous enregistrer ?" lorsque je quitte Rhino ?#
+===== L'enregistrement automatique de Mac et de Rhino ne sont pas équivalents ===== 
 
-Cette question n'est plus nécessaire puisque votre modèle est constamment enregistré sur le disque. Avant l'enregistrement automatique, vous aviez deux versions de votre modèle -- celle dans Rhino et celle sur le disque. C'était à vous de conserver manuellement ces deux versions synchronisées en enregistrant souvent votre modèle. Et voilà pourquoi les plantages pouvaient être catastrophiques. Si vous aviez oublié de conserver la synchronisation entre ces versions, vous pouviez perdre votre travail. Avec l'enregistrement automatique de Lion, il n'y a plus qu'une version de votre modèle, celle que vous voyez à l'écran est la même que celle sur le disque. 
+L'enregistrement automatique de Rhino enregistre une copie de sauvegarde de votre fichier ailleurs afin que vous puissiez la récupérer plus tard. Vous êtes responsable d'enregistrer votre fichier régulièrement, mais Rhino, tout comme d'autres programmes, crée un fichier de sauvegarde au cas où vous oublieriez d'enregistrer votre fichier. 
 
-<--
-  
--->Quand est-ce que Rhino pour Mac enregistre automatiquement le modèle ?#
+Dans macOS, Apple utilise le même terme pour une fonction un peu différente.  L'enregistrement automatique de macOS enregistre votre fichier automatiquement, remplaçant ainsi votre fichier. Il n'y a donc aucun fichier de sauvegarde enregistrement secrètement ailleurs. Votre fichier original est constamment remplacé. macOS conserve une copie de votre fichier original au cas où vous souhaiteriez annuler toutes vos modifications lorsque vous fermez votre modèle. 
 
-Un modèle est enregistré automatiquement lorsque vous **fermez** la fenêtre du modèle, lorsque vous **quittez** Rhino, lorsque vous **passez** à une autre application et //de temps en temps//. Apple dit que //de temps en temps// signifie que des enregistrements se produisent environ toutes les cinq minutes lorsque Rhino est inactif. Cet intervalle de temps n'est pas configurable.
+===== Quand est-ce que Rhino pour Mac enregistre un modèle ? =====
 
-<--
+Un modèle sera enregistré automatiquement lorsque vous changerez d'application et de manière régulière. Apple indique que la notion "de manière régulière" équivaut à un enregistrement toutes les cinq minutes lorsque Rhino est inactif. L'intervalle de temps ne peut pas être modifié. 
 
--->Si Rhino enregistre constamment mon modèle, je vais être constamment interrompu par les enregistrements automatiques ?#
+Rhino pour Mac n'enregistrera pas automatiquement votre modèle lorsque vous lancez une commande ou lorsque vous modifiez activement votre modèle. Chaque copie écrite sur le disque est une copie précise et cohérente de votre modèle au moment de son écriture. 
 
-Les enregistrements périodiques sont exécutés en arrière-plan. Vous ne saurez jamais quand un enregistrement se produit parce qu'il n'empêche jamais Rhino de fonctionner. Si vous commencez à modifier votre modèle pendant que Rhino réalise un enregistrement automatique, l'enregistrement est abandonné et sera relancé plus tard. 
+Vous pouvez faire cette expérience pour mieux comprendre ce fonctionnement. Vérifiez que vous voyez l'aperçu du modèle dans la fenêtre du Finder lorsque vous travaillez dans Rhino pour Mac. Modifiez votre modèle et attendez 30 secondes. Lorsque vous voyez que l'aperçu dans le Finder a changé, un enregistrement automatique s'est produit. 
 
-<--
+===== Récupérer le contenu original =====
 
--->Cette opération va-t-elle prendre de la place sur mon disque ?#
+Toute modification réalisée sur le modèle est enregistrée automatiquement mais vous pouvez décider de ne pas conserver ces changements. Lorsque vous fermez un modèle que vous avez modifié, Rhino vous demandera si vous souhaitez enregistrer vos modifications. Si vous cliquez sur le bouton Annuler les modifications, votre modèle original non modifié sera récupéré.
 
-L'enregistrement automatique enregistre uniquement ce qui a changé depuis la version précédente, l'utilisation de l'espace du disque est donc optimisée. Les anciennes versions sont automatiquement éliminées. 
+===== Si Rhino enregistre mon modèle en continu, ne vais-je pas être interrompu par ces enregistrements automatiques ? =====
 
-<--
+Les enregistrements automatiques réguliers se font en arrière-plan. Vous ne saurez jamais lorsqu'un enregistrement automatique se produit car cela n'empêche jamais Rhino de fonctionner. Si vous commencez à modifier votre modèle lorsque Rhino lance un enregistrement automatique, Rhino abandonne cet enregistrement et réessaiera plus tard. 
 
--->Rhino pour Mac peut-il parcourir les anciennes versions de mon modèle de Rhino ?#
+===== Cela va-t-il remplir mon disque ? =====
 
-Oui, le navigateur de versions fait partie de Rhino pour Mac dans 10.7. 
+L'enregistrement automatique enregistre souvent mais ne conserve que quelques versions de votre modèle. L'enregistrement automatique conserve une version de votre modèle toutes les heures sur une journée, puis une par jour sur une semaine et enfin une par semaine sur plusieurs semaines. Apple appelle cela des versions et vous pouvez les consulter avec le navigateur de versions (voir ci-dessous). 
 
-<--
+Si vous utilisez Time Machine pour réaliser des sauvegardes automatiques des fichiers se trouvant sur votre ordinateur, toutes les versions précédentes de vos fichiers 3DM sont comprises dans les sauvegardes de Time Machine et n'occupent pas d'espace supplémentaire sur votre disque local. Si vous ne réalisez pas de sauvegarde régulière, nous vous recommandons de commencer à le faire rapidement avec Time Machine. 
 
--->Que puis-je faire dans le navigateur de versions ?#
+===== Versions intermédiaires permanentes =====
 
-La fenêtre de gauche est votre modèle actuel et toutes les fenêtres à droite sont les versions précédentes de votre modèle. Ces fenêtres sont de vraies fenêtres de Rhino et peuvent être manipulées comme tout modèle de Rhino.  Vous pouvez faire tourner les vues, ouvrir le panneau des calques pour afficher et cacher des calques, vous pouvez même copier des objets d'un modèle précédent dans votre modèle actuel. Vous ne pouvez pas //modifier// des versions précédentes. [[http://tidbits.com/article/12483 |Attention au bogue de Versions dans Lion sur le réseau et les volumes Non-HFS+ (en anglais)]].
+Lorsque vous travaillez sur un modèle, votre travail présente des phases naturelles. Il est bon d'utiliser Fichier > Enregistrer (Commande - S) pour garder chaque phase importante de votre travail. N'oubliez pas que le système fera des enregistrements réguliers de votre modèle, environ toutes les heures, vous aurez donc plusieurs points de récupération si vous voulez retrouver un travail précédent. Chaque version séparée que vous enregistrez avec la fonction Fichier > Enregistrer est conservée par le système de versions. La création d'une nouvelle version ne remplace pas les versions précédentes mais l'ajoute à l'ensemble des versions. 
 
-<--
+Chaque fois que vous utilisez la fonction Fichier > Enregistrer, vous ajoutez une autre version de votre fichier. Si vous utilisez beaucoup Commande-S ou Fichier > Enregistrer créera un //grand nombre// de versions de votre fichier. Vous n'avez probablement pas besoin de toutes ces sauvegardes dans le futur. Vous devriez arrêter d'utiliser Commande-S tout le temps si vous voulez simplement enregistrer votre travail. Ce n'est plus nécessaire. Le système enregistre déjà votre modèle pour vous. 
+
+Afin de déterminer comment est utilisé l'espace de votre disque sur Mac, nous recommandons l'outil [[https://daisydiskapp.com/|DaisyDisk]].  Nous vous conseillons d'installer la version ne provenant pas de l'App Store de Mac et de [[https://daisydiskapp.com/manual/2/en/Topics/AdminScan.html|lancer l'analyse en tant qu'administrateur]] afin de voir [[https://daisydiskapp.com/manual/2/en/Topics/HiddenSpace.html|l'espace de disque caché]].
+
+===== Rhino pour Mac peut-il retrouver les versions précédentes de mes modèles de Rhino ? =====
+
+Oui, le navigateur de versions est intégré dans Rhino pour Mac. Ouvrez le menu //Fichier// > //Revenir à// > //Parcourir toutes les versions...//  S'il existe des versions enregistrées automatiquement de votre modèle, le navigateur de versions apparaîtra. 
+
+
+===== Que puis-je faire dans le navigateur de versions ? =====
+
+Dans le navigateur de versions, la fenêtre à gauche représente votre modèle actuel. Toutes les fenêtres à droite montrent les versions précédentes de votre modèle. Ces fenêtres sont des fenêtres de Rhino et peuvent être manipulées comme tout autre modèle de Rhino. Vous pouvez faire tourner les vues, ouvrir le panneau des calques pour montrer et cacher des éléments. Vous pouvez même copier des objets d'un modèle précédent pour le coller dans le modèle actuel. Vous ne pouvez //pas modifier// les versions précédentes. 
+
+===== Puis-je supprimer des anciennes versions du fichier ? =====
+
+Oui, vous pouvez supprimer des anciennes versions du fichier.  Pour ce faire, lancez Rhino pour Mac et ouvrir le fichier. Ouvrez le menu //Fichier// > //Revenir à// > //Parcourir toutes les versions...//  Lorsque l'explorateur de version apparaît, déplacez le pointeur de la souris vers le bord supérieur de votre écran afin d'afficher la barre de menu de Rhino.  Sous //Fichier// > //Revenir à// vous pouvez effacer une ancienne version ou - si vous maintenez enfoncée la touche //option/alt// - vous pouvez effacer toutes les versions précédentes. Cette action ne supprimera par le fichier 3dm ouvert, mais uniquement les versions précédentes de celui-ci. Si l'élément de menu "Supprimer cette version" ou "Supprimer toutes les versions" est en gris, le ou les fichiers de version en question ne se trouvent pas sur le disque local.  Ils font partie de votre sauvegarde Time Machine et ne peuvent pas être supprimés. 
+
+===== Enregistrement automatique et versions pour les fichiers sur réseau =====
+
+L'enregistrement automatique de Rhino fonctionne bien avec les serveurs de fichiers en réseau lents.  Lorsque Rhino lance un enregistrement automatique, une copie de votre modèle 3DM est rapidement enregistrée dans la mémoire puis réécrite sur le serveur en arrière-plan. Vous n'êtes pas obligé d'attendre que l'enregistrement automatique termine l'écriture sur le serveur. Rhino écrit le modèle 3DM dans un emplacement temporaire sur le serveur et, une fois ce processus terminé, il échange la nouvelle copie enregistrée automatiquement avec le fichier actuel. 
+
+Les performances de la fonction de versions de Rhino ne dépendent que de votre disque local. Toutefois, si votre modèle se trouve sur un serveur de fichier en réseau, vous avez toujours //presque toutes// les fonctions des versions. Votre modèle est fréquemment enregistré sur le serveur réseau et les versions précédentes enregistrées toutes les heures sont archivées aussi longtemps que le modèle reste ouvert. Nous pensons que, pour les serveurs de fichiers en réseau, ces versions précédentes sont conservées temporairement sur votre disque local. Vous pouvez utiliser Fichier > Revenir à > Parcourir toutes les versions, pour naviguer dans les versions précédentes de votre travail récent. 
+
+Lorsque vous fermez votre modèle, alors qu'il est enregistré sur un serveur de fichiers en réseau, les versions précédentes qui ont été enregistrées temporairement sur votre disque local sont supprimées. Rhino vous avertir en affichant cette boîte de dialogue :
+
+{{:rhino:mac:permanent_version_storage.png?500|/Users/macrhino/Desktop/Screenshots/permanent version storage.png}}
+
+Votre fichier sera enregistré normalement mais vous n'aurez pas accès aux versions précédentes du fichier une fois celui-ci fermé. 
+
+=== "Ce document n'a pas pu être enregistré automatiquement" ===
+
+Les utilisateurs de Rhino qui travaillent sur des serveurs de fichiers en réseau peuvent voir le message "Ce document n'a pas pu être enregistré automatiquement". Ce message indique que votre connexion avec le serveur de fichiers en réseau a été interrompue et que Rhino n'a pas pu écrire sur ce serveur. Lorsque la connexion avec le réseau est rétablie, Rhino pourra à nouveau enregistrer automatiquement votre modèle. 
+
+===== Est-il possible de désactiver la fonction de Versions dans Rhino pour Mac ? =====
+
+Oui, MAIS nous vous **RECOMMANDONS VIVEMENT** de **NE PAS LE FAIRE**. Rhino pour Mac est conçu pour travailler avec les versions et l'enregistrement automatique ; les performances et la stabilité pourraient être impactées si vous désactivez cette fonction. De plus, vous perdrez la possibilité d'ajouter des étiquettes, de renommer ou déplacer le fichier depuis le titre de la fenêtre, etc. Si, pour une raison précise, vous souhaitez vraiment désactiver cette fonction, exécutez  //Terminal.app// et lancez la commande suivante :
+    defaults write com.mcneel.rhinoceros ApplePersistence -bool no    
+Ceci désactivera l'enregistrement automatique et les versions et réactivera l'élément Enregistrer sous dans le menu Fichier (au lieu de Dupliquer). 
+
+Pour revenir au fonctionnement par défaut, exécutez à nouveau le Terminal et relancez la commande en remplaçant 'no' par 'yes' :
+    defaults write com.mcneel.rhinoceros ApplePersistence -bool oui    
+Pour vérifier quel est le paramètre actuel, utilisez :
+    defaults read com.mcneel.rhinoceros ApplePersistence    
+Si la réponse est 0 (ou une erreur paire), la fonction est désactivée. Si la réponse est 1, elle est activée. 
+
+**Remarque** : Les étapes précédentes ne fonctionnent pas sur macOS Mojave 10.14.  Nous ne connaissons pas actuellement d'autre solution pour ce système. 
