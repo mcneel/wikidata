@@ -1,61 +1,72 @@
-======Convertir un nodo de red en un nodo independiente======
-> **Producto:** //[[zoo:zoo5|Zoo 5]]//
-> **Resumen:** //Cómo convertir una instalación de Rhino 5 de un nodo de red en un nodo independiente.//
+====== Convertir una licencia de Rhino del Zoo en una licencia independiente ======
+
+> **Producto:** //[[zoo:home|Zoo]]//
+> **Resumen:** //Cómo convertir una instalación de Rhino para Windows o Rhino para Mac de un nodo de red en un nodo independiente.//
 
 =====Pregunta=====
-He instalado por error una de mis licencias de Rhino 5 como nodo de red, cuando en realidad quería instalarla como nodo independiente. Cuando inicio Rhino y voy a la página **Licencias** en el diálogo de **Opciones**, el botón **Convertir** está desactivado. He iniciado sesión como administrador y he vuelto a intentarlo, pero el botón sigue desactivado. ¿Cómo puedo cambiar esta instalación a un nodo independiente?
+Por error, he instalado una de mis licencias de Rhino para usar el Zoo, cuando en realidad quería instalarla como nodo independiente. Cuando inicio Rhino y voy a la página **Licencias** en el diálogo de **Opciones**, el botón **Convertir** está desactivado. He iniciado sesión como administrador y he vuelto a intentarlo, pero el botón sigue desactivado. ¿Cómo puedo cambiar esta instalación a un nodo independiente?
 
-
-> **Nota:** //Estas instrucciones también pueden usarse para cambiar de un nodo independiente a una licencia flotante invirtiendo los datos introducidos.//
 =====Respuesta=====
 Para convertir una instalación de Rhino 5 de un nodo de red en un nodo independiente, siga estos pasos:
 
-====Windows Vista, Windows 7 o Windows 8====
+==== Windows ====
 
 1. Inicie sesión en la estación de trabajo como administrador o como usuario con derechos de administrador.
 
 2. Ejecute el Explorador de Windows.
 
 3. Abra la carpeta siguiente:
-  C:\ProgramData\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  C:\ProgramData\McNeel\Rhinoceros\<versión>\License Manager\Licenses
 
 > **Nota:** //De manera predeterminada, Microsoft oculta la carpeta ProgramData. También puede usar las **Opciones de carpeta** para permitir la visualización de los archivos y carpetas ocultos, o puede escribir **%ProgramData%** en la barra de direcciones del Explorador de Windows para ir a la carpeta.//
 
 4. Elimine el archivo siguiente (si se encuentra):
+  // Rhino 7
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
+  
+  // Rhino 6
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+  // Rhino 5
   60515f84-8f7f-41da-801d-1c87e32f88f5.lic
   
 5. Abra la carpeta siguiente:
-  C:\Users\<user_name>\AppData\Roaming\McNeel\Rhinoceros\5.0\License Manager\Licenses
+  C:\Users\<nombre_de_usuario>\AppData\Roaming\McNeel\Rhinoceros\<versión>\License Manager\Licenses
 
 > **Nota:** //De manera predeterminada, Microsoft oculta la carpeta AppData. También puede usar las **Opciones de carpeta** para permitir la visualización de los archivos y carpetas ocultos, o puede escribir **%AppData%** en la barra de direcciones del Explorador de Windows para ir a la carpeta.//
 
-6. Elimine el siguiente archivo (si se encuentra):
-  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
-
-7. Haga clic con el botón derecho del ratón en el icono de Rhino 5 y seleccione **Ejecutar como administrador**.
-
-8. Introduzca y valide el código de CD de Rhino 5.
-====Windows XP====
-
-1. Inicie sesión en la estación de trabajo como administrador o como usuario con derechos de administrador.
-
-2. Ejecute el Explorador de Windows.
-
-3. Abra la carpeta siguiente:
-  C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
-
-4. Elimine el siguiente archivo (si se encuentra):
-  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
-
-5. Abra la carpeta siguiente:
-  C:\Documents and Settings\<nombre_de_usuario>\Application Data\McNeel\Rhinoceros\5.0\License Manager\Licenses
-
-6. Elimine el siguiente archivo (si se encuentra):
-  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
+6. Elimine el archivo siguiente (si se encuentra):
+  // Rhino 7
+  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
   
-7. Ejecute Rhino 5 haciendo doble clic en el acceso directo de Rhino 5.
+  // Rhino 6
+  55500d41-3a41-4474-99b3-684032a4f4df.lic
+  
+  // Rhino 5
+  60515f84-8f7f-41da-801d-1c87e32f88f5.lic
 
-8. Introduzca y valide el código de CD de Rhino 5.
+7. Haga clic con el botón derecho del ratón en el icono de Rhino y seleccione **Ejecutar como administrador**.
+
+8. Introduzca y valide el código de licencia de Rhino.
+
+====macOS====
+
+Hay dos formas de cambiar las licencias de Rhino para Mac.  
+
+La primera y más fácil es ejecutar Rhino para Mac y luego ir a //Preferencias...// > //Licencias// > //Cambiar el código de licencia//
+
+Si el método anterior no funciona, puede que tenga que eliminar su archivo de licencia e introducir uno nuevo.  Asegúrese de tener bien guardado su código de licencia antes de intentar los siguientes pasos:
+
+1. Salga de Rhino para Mac y cambie a la aplicación Finder.
+
+2. Vaya a //Finder// > //Ir// > //Ir a carpeta...// e introduzca la siguiente carpeta:
+  /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
+
+3. Elimine el archivo de licencia de la carpeta //Licences//.
+
+4. Vuelva a ejecutar Rhino para Mac.
+
+5. Introduzca y valide el código de licencia de Rhino.
 
 \\
 
