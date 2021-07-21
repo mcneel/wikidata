@@ -1,0 +1,29 @@
+====== Paramètres de sécurité de Windows et validation de licence ======
+> **Produit :** //[[fr:zoo:home|Zoo]]//
+> **Résumé :** //Informations sur les paramètres de sécurité de Windows et leur impact sur le système de validation de licence.//
+
+===== Symptômes : ====
+  * Le Zoo ne peut pas se connecter au serveur de validation de McNeel à l'adresse https://api.mcneel.com.
+  * Internet Explorer ne peut pas se connecter à https://api.mcneel.com depuis le serveur de validation, alors que les autres navigateurs ne posent pas problème. 
+
+===== Solution : =====
+Activez l’algorithme d'échange de clé PKCS en définissant la valeur **Enabled** de la clé de registre suivante sur **0xffffffff**.
+
+<code>
+Racine :  HKEY_LOCAL_MACHINE
+Clé:   SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS
+Nom :  Enabled
+Type :  REG_DWORD
+Valeur : 0xffffffff
+</code>
+
+===== Informations : =====
+Un paramètre de sécurité de Windows interfère avec le système de validation de licences dans le LAN ZOO sur Windows Server 2012 R2, 2016 et 2019.
+
+Si le PKCS est désactivé, le LAN Zoo ne peut pas se connecter au serveur de validation de McNeel. 
+
+En définissant la valeur **Enabled** sur **0xffffffff** (ou en la supprimant) la validation fonctionne à nouveau. La valeur par défaut pour Enabled est 0x0.
+
+\\
+
+{{tag>Zoo}}
