@@ -1,21 +1,23 @@
-====== Migrar licencias de Rhino de Zoo LAN a Cloud Zoo ======
-Haga que sus licencias de Rhino 6 y 7 para Windows y Mac estén disponibles para los usuarios en cualquier parte del mundo.
 
-//NO se necesita una conexión a Internet constante. Solo se necesita un acceso ocasional cada dos semanas. //
-==== Siga estas instrucciones: ====
+====== Mover licencias de Rhino de Zoo LAN a Cloud Zoo ======
+Haga que sus licencias de Rhino 6 para Windows y Mac estén disponibles para los usuarios desde cualquier parte del mundo.
 
-=== A - Recopile la información necesaria ===
+//No se requiere una conexión permanente a Internet. Solo se necesita acceso ocasional cada dos semanas. //
+
+==== Siga estos pasos: ====
+
+=== A - Recopile la información necesaria ====
 
   - Abra la consola Zoo Admin en el servidor de Zoo.
-  - Busque los números de serie: en la consola de Zoo Admin, los números de serie de Rhino 6 se verán así: "RH6-1NN-NNN-NNNNN-NNNNN".
-  - Encuentre sus códigos de licencia: busque los correos electrónicos que recibió cuando compró las licencias de Rhino 6. Contienen los números de serie del paso anterior. Los códigos de licencia se verán así: "RH60-NNNN-NNNN-NNNN-NNNN". **No continúe hasta que tenga todos los códigos de licencia.**
+  - Busque los números de serie: en la consola de Zoo Admin, los números de serie de Rhino 6 se verán así: ' 6-1NN-NNN-NNNNN-NNNNN''.
+  - Encuentre sus códigos de licencia: busque los correos electrónicos que recibió cuando compró las licencias de Rhino 6. Contienen los números de serie del paso anterior. Los códigos de licencia se verán así: "RH60-NNNN-NNNN-NNNN-NNNN''. ** No continúe hasta que tenga todos los códigos de licencia.**
   - //Opcional:// Si tiene previsto crear un [[https://www.rhino3d.com/6/new/licensing-and-administration#domain-linked-team|grupo vinculado por dominio]], asegúrese de que tiene acceso al servidor web de su dominio o contacte con un administrador de TI que lo tenga.
 
 === B - Cree una cuenta de Cloud Zoo ===
 
-  - Visite https://accounts.rhino3d.com para crear una cuenta que administre este grupo.
- 
-=== C - Cree un grupo en Cloud Zoo ===
+  - Si todavía no dispone de una cuenta, visite https://accounts.rhino3d.com para crear una cuenta que administre este grupo.
+
+=== C - Cree un grupo de Cloud Zoo ===
 
   - https://accounts.rhino3d.com/help#create_group
   - //Opcional:// Invite a otros usuarios a ser administradores de este grupo: https://accounts.rhino3d.com/help#invite_group_members
@@ -24,14 +26,14 @@ Haga que sus licencias de Rhino 6 y 7 para Windows y Mac estén disponibles para
 === D - Configure el Zoo y la red ===
 //Para eliminar su licencia del Zoo y agregarla a Cloud Zoo sin la ayuda de McNeel, debe asegurarse de que el Zoo está actualizado y su red está configurada correctamente. Si no lo hace, tendrá problemas en el paso siguiente: "Agregar sus licencias a Cloud Zoo".//
 
-  - Instale la última versión de Zoo desde https://www.rhino3d.com/download/zoo/6/latest
+  - Instale la última versión de Zoo desde https://www.rhino3d.com/download/zoo/7/latest
   - Desde su servidor de Zoo, abra un navegador web y visite https://api.mcneel.com
     - Si no puede ver esa página web, contacte con el administrador de red para abrir el acceso a https://api.mcneel.com
 
 
 === E - Elimine licencias del Zoo ===
 
-  - Abra la consola Admin Zoo.
+  - Abra la consola Admin Zoo
   - Seleccione una o más licencias de Rhino para eliminar.
   - Haga clic en el botón "Delete" de la barra de herramientas.
 
@@ -42,23 +44,23 @@ Tenga en cuenta que no puede eliminar las licencias que están en uso. Tiene dos
 
 === F - Agregue licencias a Cloud Zoo ===
 
-  * Visite https://www.rhino3d.com/licenses.
-  * Haga clic en su grupo.
-  * Haga clic en Agregar licencia.
-  * Introduzca su código de licencia y haga clic en Agregar licencia.
+  - Visite https://www.rhino3d.com/licenses.
+  - Haga clic en su grupo.
+  - Haga clic Agregar licencia
+  - Introduzca su código de licencia y haga clic en Agregar licencia.
 
 === G - Invite a usuarios al grupo ===
 
 == G.a. Si está utilizando grupos vinculados por dominio ==
 
-  * Envíe un correo electrónico a los usuarios invitándoles a crear una cuenta de Rhino en https://accounts.rhino3d.com.
-  * Pídales que utilicen la dirección de correo electrónico que pertenece a su dominio.
+  - Envíe un correo electrónico a los usuarios invitándoles a crear una cuenta de Rhino en https://accounts.rhino3d.com.
+  - Pídales que utilicen la dirección de correo electrónico que pertenece a su dominio.
 
-== G.b. Si NO está utilizando grupos vinculados por dominio ==
-  * Visite https://accounts.rhino3d.com/?controller=groups.
-  * Haga clic en su grupo.
-  * Haga clic en el botón Acción y luego en Invitar a miembros.
-  * Complete el formulario y haga clic en Enviar para enviar la invitación. 
+== G.b. O bien, si NO está utilizando grupos vinculados por dominio ==
+  - Visite https://accounts.rhino3d.com/?controller=groups.
+  - Haga clic en su grupo.
+  - Haga clic en el botón Acción y luego en Invitar a miembros.
+  - Complete el formulario y haga clic en Enviar para enviar la invitación. 
 
 === H - Configure Rhino para utilizar Cloud Zoo ===
 
@@ -69,6 +71,11 @@ Envíe las siguientes instrucciones a los usuarios después de que hayan creado 
   - Debajo de la licencia de Rhino, haga clic en Cambiar el código de licencia.
   - Haga clic Iniciar sesión.
   - Inicie sesión con la dirección de correo electrónico que forma parte del nuevo grupo.
+
+Para automatizar este proceso:
+  - Para Rhino 6, elimine el archivo %PROGRAMDATA%\mcneel\rhinoceros\6.0\license manager\licenses\55500D41-3A41-4474-99B3-684032A4F4DF.lic
+  - Para Rhino 7, elimine el archivo %PROGRAMDATA%\mcneel\rhinoceros\6.0\license manager\licenses\59FF75C9-9C71-4EF8-A290-6B590F3FC63A.lic (sí, está en la carpeta rhinoceros\6.0)
+  - A los usuarios se les pedirá una licencia, indíqueles que tienen que hacer clic en "Iniciar sesión".
 
 
 {{tag>CloudZoo}}
