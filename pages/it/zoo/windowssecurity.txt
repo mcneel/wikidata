@@ -1,0 +1,29 @@
+====== Impostazioni sulla sicurezza di Windows e convalida della licenza ======
+> **Prodotto:** //[[it:zoo:home|Zoo]]//
+> **Sommario:** //Impostazioni sulla sicurezza di Windows e convalida della licenza.//
+
+===== Descrizione del problema: ====
+  * Zoo non può connettersi al server di convalida di McNeel all'indirizzo https://api.mcneel.com.
+  * Internet Explorer non può connettersi all'indirizzo https://api.mcneel.com del server di convalida nonostante con altri browser sia possibile.
+
+===== Soluzione: =====
+Abilita l'algoritmo di scambio chiavi PKCS impostando il valore **Enabled** della seguente chiave di registro su **0xffffffff**.
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS
+Name:  Enabled
+Type:  REG_DWORD
+Value: 0xffffffff
+</code>
+
+===== Discussione: =====
+Un'impostazione di sicurezza per Windows interferisce con le licenze di convalida in LAN Zoo su Windows Server 2012 R2, 2016 e 2019.
+
+Se l'opzione PKCS non è abilitata, LAN Zoo non può connettersi al server di convalida di McNeel.
+
+Per ripristinare il funzionamento generale, basta impostare il valore **Enabled** su **0xffffffff** (o eliminarlo). Il valore predefinito di Enabled è 0x0.
+
+\\
+
+{{tag>Zoo}}
