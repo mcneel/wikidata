@@ -1,0 +1,26 @@
+====== Rhino es lento al guardar en red ======
+
+Ocasionalmente recibimos informes de que guardar un archivo de Rhino en un disco de red es mucho más lento que guardarlo en el ordenador en el que se está ejecutando Rhino. No hemos podido reproducir este problema utilizando nuestras redes y varios servicios de almacenamiento en la nube. 
+
+
+Esta información puede ayudar al departamento informático a ajustar la configuración de su servidor.
+
+  - Algunos clientes han [[https://docs.microsoft.com/es-es/office/troubleshoot/office-suite-issues/saving-file-to-network-server-slow|descubierto que el cifrado hace que guardar en el servidor sea lento]].
+  - A algunos de nuestros clientes les ha funcionado [[https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/14|desactivar VMQ]].  
+  - Este tema del foro muestra [[https://discourse.mcneel.com/t/rhino-6-slow-save-to-network-location/79177/13|una lista de otras cosas que se pueden probar]].
+  - Aumente el tamaño del búfer en memoria utilizado para guardar:
+    - Ejecute el comando  **DefinirTamañoDeBúferDeMemoriaDeArchivo **
+    - Aumente el tamaño a 32000.
+    - Intente volver a guardar.
+    - //Contexto: de manera predeterminada, Rhino guarda los archivos utilizando fwrite() para enviar trozos de 64KB al disco. Cuando un archivo contiene objetos grandes (mallas o polisuperficies grandes), hay una operación de "búsqueda" para datos de más de 64 KB. Si aumentar el tamaño acelera el almacenamiento de archivos, es posible que su servidor tenga una sobrecarga alta por transacción de escritura. Si eso no ayuda, vuelva a establecer el tamaño en 64.//
+
+Si ninguna de estas opciones le ayuda:
+utilice [[https://discourse.mcneel.com|Discourse]] o contacte con [[https://www.rhino3d.com/support|soporte técnico]] e incluya esta información:
+
+  - Información del menú principal de Rhino > Ayuda > Información del sistema.
+  - Software de detección de virus del ordenador local.
+  - SO del servidor de red.
+  - Información del sistema del archivo del servidor de red.
+  - Software de detección de virus del servidor de red.
+  - Cualquiera configuración de red especial que esté utilizando (cifrado, compresión, etc.)
+  - Busque un archivo de 3dm de Rhino que se guarde rápido de forma local y lento en un disco de red. Determine el tamaño de ese archivo y cree un archivo Rhino del mismo tamaño que contenga solo líneas (use una matriz para hacer miles de líneas a partir de una). Compruebe si el archivo de líneas también es lento al guardar. (Guardar el archivo de líneas envía miles de pequeños fragmentos al servidor con muy pocas operaciones de búsqueda. Los resultados de la prueba de líneas nos ayuda conocer la velocidad de búsqueda de la red).
