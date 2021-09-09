@@ -1,0 +1,29 @@
+====== Windows-Sicherheitseinstellungen und Lizenzbestätigung ======
+> **Produkt:** //[[de:zoo:home|Zoo]]//
+> **Zusammenfassung:** //Thema sind die Windows-Sicherheitseinstellungen und wie sie sich auf die Lizenzbestätigung auswirken.//
+
+===== Symptome: ====
+  * Der Zoo kann den Bestätigungsserver von McNeel auf https://api.mcneel.com nicht erreichen.
+  * Der Internet-Explorer kann https://api.mcneel.com vom Bestätigungsserver aus nicht erreichen, auf anderen Browsern ist dies jedoch möglich.
+
+===== Lösung: =====
+Aktivieren Sie den Algorithmus für PKCS-Schlüsselaustausch, indem Sie den Wert **Aktiviert** in folgender Registry auf **0xffffffff** setzen.
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Schlüssel:   SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS
+Name:  Aktiviert
+Typ:  REG_DWORD
+Wert: 0xffffffff
+</code>
+
+===== Diskussion: =====
+Eine empfohlene Windows-Sicherheitseinstellung beeinträchtigt die Bestätigungslizenzen im LAN-Zoo auf dem Windows-Server 2012 R2, 2016 und 2019.
+
+Wenn PKCS deaktiviert ist, kann der LAN-Zoo keine Verbindung zum Bestätigungsserver von McNeel aufnehmen.
+
+Die Änderung des Werts **Aktiviert** auf **0xffffffff** (oder seine Löschung) genügt, um die Funktion zu beheben. Der Standardwert für Aktiviert ist 0x0.
+
+\\
+
+{{tag>Zoo_de}}
