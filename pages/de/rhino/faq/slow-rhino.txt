@@ -1,0 +1,27 @@
+===== Problem: Rhinoceros startet nicht oder verlangsamt seine Funktion auf einer Workstation mit mehreren an einen USB-Hub angeschlossenen Monitoren =====
+Zurück zu den [[https://wiki.mcneel.com/de/rhino/faq#anzeigeprobleme|FAQ]]
+
+==== Hintergrund ====
+Man kommt leicht in Versuchung, die USB-Anzeigeverbindung für das Problem der verlangsamten Anzeige verantwortlich zu machen.
+Der USB-Hub hat aber lediglich den Anwender auf das Problem gebracht.
+
+==== Analyse ====
+Oft steht dieses Problem mit "NahimicOSD.dll" in Zusammenhang, einem durch einen Audiotreiber installierten Bildschirmanzeige-Service.
+
+Er ist recht fehleranfällig, und eine Google-Suche wird Ihnen bestätigen, dass Anwender aller möglichen Arten von Software Probleme damit haben. 
+
+In diesem Fall beseht das Problem darin, dass die DLL nicht besonders gut mit mehreren Anzeigen operiert (wenn überhaupt), und unserer Ansicht nach versucht sie alle Anzeigegeräte zu spezifizieren, tut dies jedoch in mangelhafter oder fehlerhafter Weise.
+So kommt es innerhalb ihres Codes zu einer Endlosschleife. Durch Einrichtung eines Systems mit dem USB-Hub und mehreren Monitoren wird dieses Problem lediglich zum Vorschein gebracht.
+
+==== Die Lösung auf Discourse ====
+[[https://discourse.mcneel.com/t/rhino-freezes-on-secondary-monitor-problem-with-the-nihimic-audio-driver-on-the-motherboard/82258/37?u=jeff|Die Lösung im Detail.]]
+
+Dieser Link führt Sie direkt zu dem Thread mit der Lösung.
+Der Nahimic-Service muss durch den Anwender deaktiviert werden. Da er nicht benötigt wird, ist er im Grunde wertlos. Daraus, dass es sich um eine Audio-DLL und einen Service handelt, folgt, dass jedem das Audiogerät (ganz oder teilweise) verwendenden Prozess die Nahimic DLL in den Prozessbereich injiziert wird. Es gibt nichts, was der Prozess dagegen tun kann. Sobald sie in den Prozessbereich eingedrungen ist, wird dieser Prozess im Prinzip gesperrt.
+
+==== Zusammenfassend ====
+Diese Information ist immer dann relevant, wenn von einer Rhino-Blockierung bei Verwendung mehrerer Monitore die Rede ist. Wahrscheinlich ist Nahimic DLL die Ursache.
+
+//Jeff Lasor,
+Leitender Grafikentwickler,
+Robert McNeel & Associates//
