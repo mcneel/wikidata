@@ -8,54 +8,38 @@ We recently purchased a Rhino for Mac Education Lab License. What are some strat
 We use [[http://www.jamfsoftware.com/products/casper-suite/|Casper]] and other management systems to build packages and push applications out to client systems. This usually includes bundling the license configuration information with the distribution application.
 
 =====Answer=====
-Here is some helpful information.
 
-1.) When you run Rhino for Mac for the first time, it creates the following folders:
+====To Deploy Rhino 7:====
 
-====Rhino 7====
+    - Install Rhino for Mac on a computer, and license it to connect to your LAN Zoo server.
+    -  Rhino creates the **/Users/Shared/McNeel/Rhinoceros/7.0/License Manager/Licenses/59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic**
+    - Deploy a copy of the license file to the same location on the target computers. Be sure to set the file and folder access permissions to match.
+    - Deploy Rhino to the target computers.
 
-  /Users/Shared/McNeel/Rhinoceros/7.0/License Manager
-  /Users/Shared/McNeel/Rhinoceros/7.0/License Manager/Licenses
-  
-====Rhino 6====
+====To Deploy Rhino 6:====
 
-  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager
-  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager/Licenses
-  
-====Rhino 5====
-
-  /Library/Application Support/McNeel/Rhinoceros/License Manager
-  /Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses
-
-2.) The **License Manager/Licenses** folder contains Rhino's license file:
-
-**NOTE**: A common mistake is to confuse ///Library// (the global library) and ///Users/[user_account]/Library// (the user's library).  Please make sure you are looking in the global library.
-
-Also, Rhino 6 and Rhino 7 create the Zoo license files under **License Manager** in explicit **6** & **7** subfolder, while Rhino 5 creates its files in the root of **License Manager** and **License** subfolder. In other words, Rhino 5 does not create a **5** subfolder.
-====Rhino 7====
-
-  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
-  
-====Rhino 6====
-
-  55500d41-3a41-4474-99b3-684032a4f4df.lic
-  
-====Rhino 5====
-
-  781b000c-8d0b-4ed3-8ead-213bdb848f39.lic
+    - Install Rhino for Mac on a computer, and license it to connect to your LAN Zoo server.
+    -  Rhino creates the **/Users/Shared/McNeel/Rhinoceros/6.0/License Manager/Licenses/55500d41-3a41-4474-99b3-684032a4f4df.lic**
+    - Deploy a copy of the license file to the same location on the target computers. Be sure to set the file and folder access permissions to match.
+    - Deploy Rhino to the target computers.
 
 
-For standalone licenses, this file is encrypted, unreadable, and unique per system.
+====To Deploy Rhino 5:====
 
-For network, or Zoo, licenses, this file is clear text, readable, and can be moved between one system and another.
+    - Install Rhino for Mac on a computer, and license it to connect to your LAN Zoo server.
+    - Rhino creates the **/Users/Shared/McNeel/Rhinoceros/License Manager/Licenses/781b000c-8d0b-4ed3-8ead-213bdb848f39.lic**
+    - Rhino creates **/Users/Shared/McNeel/Rhinoceros/License Manager/LicensesZooClient.settings**
+    - Deploy both files to the same location on the target computers. Be sure to set the file and folder access permissions to match.
+    - Deploy Rhino to the target computers.
 
-3.) For systems that have a network license, you will also find an additional file:
 
-  LicensesZooClient.settings 
 
-that is in the **License Manager** folder. This file is also clear text, readable, and can be moved between one system and another. It contains the **name of the Zoo server** as entered into Rhino.
+**NOTES:** 
 
-If your deployment system performs steps 1.), 2.), and 3.), besides pushing the Rhino application bundle into each system's **Applications** folder, you should be able to deploy Rhino for Mac on all your systems.
+    - A common mistake is to confuse ///Library// (the global library) and ///Users/[user_account]/Library// (the user's library).  Please make sure you are looking in the global library.
+    - Also, Rhino 6 and Rhino 7 create the Zoo license files under **License Manager** in explicit **6** & **7** subfolder, while Rhino 5 creates its files in the root of **License Manager** and **License** subfolder. In other words, Rhino 5 does not create a **5** subfolder.
+    - For standalone licenses, the license file file is encrypted, unreadable, and unique per system. It cannot be copied to different computers for deployment.
+    - For LAN Zoo and Cloud Zoo licenses, the license file is clear text, and can be moved between one system and another.
 
 =====More information=====
 
