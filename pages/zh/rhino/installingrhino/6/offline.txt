@@ -1,0 +1,55 @@
+=====Rhino离线安装与激活指南=====
+//本指南适合Rhino6、Rhino7或更新的版本//
+
+Rhino的安装程序需要最新的 Windows 运行环境，包括 .Net 框架与 Microsoft Visual C++ Runtime 等，由于大部分电脑都已经安装了这些最新的运行环境，所以我们并没有将这些内容内置于 Rhino 安装包中，在 Rhino 的安装过程中会根据需要进行下载。
+
+请确定你有一个完整的、有效的安装包文件。
+====下载Windows版的离线安装包 ====
+请至一台可以连接互联网的设备开始：
+  - 下载完整的离线的、最新的Windows更新与安装文件，这是很关键的一步，如果跳过这步你将无法安装Rhino。
+  - 这里提供一个第三方技术网站的[[https://windowsreport.com/offline-update-windows-10/离线版Windows更新安装包]]，你也可以通过搜索引擎查询。
+
+====下载离线Rhino安装包文件 ====
+从一台可以接入互联网的设备开始：
+  - 下载 [[https://www.rhino3d.com/download/rhino-for-windows/6/latest| 下载最新的 Rhino 安装包]].
+  - 在可以接入互联网的设备开始运行前面下载好的安装文件
+  - 点击 **图标齿轮** 然后点击开始安装按钮. {{ :rhino:installingrhino:6:install_gear_advancedoptions.png?direct&200 |}}
+  - 点击 **下载离线安装文件** 链接. {{ :rhino:installingrhino:6:install_download_packages.png?direct&200 |}}
+  - Rhino现在开始下载所需要的离线安装文件，期间会显示一个进度对话框. {{ :rhino:installingrhino:6:install_downloading.png?direct&200 |}}
+  - 下载完成后你会看到一个显示对话框 **Layout Completed Successfully** 且会提供进一步的说明. {{ :rhino:installingrhino:6:install_download_finished.png?direct&200 |}}
+  - 你现在会看到一个用于后续安装的文件夹，其中包含一个 **Bootstrapper.exe** 文件与 **redist** 的文件夹
+
+====安装====
+
+  - 拷贝 **Bootstrapper.exe** 文件至一台没有网络连接、准备离线安装Rhino的的电脑上。
+  - 拷贝 **redist** 文件夹至与上一步相同的目录.
+  - 在离线电脑上运行**Bootstrapper.exe** 文件.
+
+**For network-wide deployment**
+  * Follow the [[rhino:installingrhino:6|deployment instructions]].
+
+=====离线激活/验证Rhino=====
+使用Rhino之前你需要激活/验证Rhino 授权，没有网络连接的设备你可以参考下面的步骤来完成离线激活；
+
+  - 当运行Rhino时会提示你Rhino无法连接至授权验证服务器 {{ :zoo:validate01.png?direct&200 |}}
+  - 请点击 **"Get Validation Code Manually 手动获取离线验证码"**.
+  - 接下来会显示对话框. {{ :zoo:validate02.png?direct&200 |}} 
+  - 请记下对话框中显示的 **License Key**, **Device Name**, 与 **Device ID** 等信息。
+  - 请准备一台可以介入互联网的设备（手机、电脑或平板都可以）.
+  - 开启一个浏览器应用, 访问 https://www.rhino3d.com/validate.
+  - 根据提示输入你的 **email address**、Rhino **license key**、**Device Name**与 **Device ID** 等信息. {{ :zoo:validate2.jpg?direct&200 |}}
+  - 如果是升级版授权验证，还会提示你输入旧版Rhino的授权码。
+  - 你会看到激活码，请打印或保存为文本文件。 //激活码使用有效期为24小时//.
+  - 请转至离线设备，点击**Continue继续** 按钮.
+  - Enter your validation code in the Validation Wizard and click Next.
+
+Rhino将会被成功离线激活.
+
+**提醒:** 如果你使用 LAN Zoo 在内部网络署授权且离线激活授权，当你尝试向 LAN Zoo 添加授权时也会显示前面提及的所需资料，更多的相关操作请浏览 https://wiki.mcneel.com/zoo/rhinovalidateoffline#validating_offline
+====== 帮助文件======
+
+Rhino 6 开始使用在线帮助文件，你也可以下载离线文档：
+
+  - [[https://www.rhino3d.com/download/Rhino/6.0/Rhino6OfflineHelp|下载离线帮助文件包]]
+  - 运行安装包且安装过程中选择 **For All Users**。
+  - 了解更多关于[[https://wiki.mcneel.com/rhino/installrhi|安装 RHI 文件]].
