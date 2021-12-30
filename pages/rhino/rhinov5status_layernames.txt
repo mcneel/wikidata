@@ -1,17 +1,15 @@
-====== Rhino 5 - Layer Names and Trees ======
+====== Rhino - Layer Names and Trees ======
 {{:rhino:v5_samenamedlayers.png|Here are two sublayers named "Walls" and two sublayers named "Doors"}}
 
-Rhino 5 allows sublayers to have the same layer name, shown in the example above. In the example there are two sublayers named //Walls// and two sublayers named //Doors//. 
+Rhino allows layer names to be repeated if the repeated layer names are sublayers of different layers in the layer tree, as shown in the example above.  There are two sublayers named //Walls// and two sublayers named //Doors//. Each is a sublayer of a different layer, //Floor 1// and //Floor 2//.
 
 Some Rhino users requested this ability to have sublayers with the same layer name to help them organize layers to make it easier to find similar small features in a large model.  
 
 Other users have designed their work flows and parts libraries assuming that there are no duplicate layer names. If you are one of these users, the section below explains how you can configure Rhino so it will not create duplicate sublayers when importing models.
 
 
-
-
 ==== Controlling layer names when importing files ====
-For some users, having more than one layer with the same name disrupts their workflow. So Rhino 5 lets you control how layers are combined when Rhino imports an external model into an existing model.
+For some users, having more than one layer with the same name disrupts their workflow. So Rhino lets you control how layers are combined when Rhino imports an external model into an existing model.
 
 **Note** There are many ways to //import// an external model into the existing model including:
   * Use the Import command
@@ -35,7 +33,7 @@ You may download the files used in this example from {{:rhino:stoogesimportexamp
 
 ===== Layer names in linked block definitions =====
 {{ :rhino:insertlinkedblocklayerstylesettings.png|}}
-Rhino 5 has full support for linked block definitions.  A linked block definition references an external file.  Every time a model containing a linked block definition is loaded, Rhino also reads the referenced file to create the contents of the linked block definition. When you create a linked block definition (or edit its properties using the BlockManager command) you can specify one of these linked block definition layer styles:
+Rhino has full support for linked block definitions.  A linked block definition references an external file.  Every time a model containing a linked block definition is loaded, Rhino also reads the referenced file to create the contents of the linked block definition. When you create a linked block definition (or edit its properties using the BlockManager command) you can specify one of these linked block definition layer styles:
   * **Active** All layers for the linked block definition are in the active model and are saved in the active model.  All layer attributes, including rendering material, can be edited and are saved. For each layer in the reference model, if there is a layer in the active model with a matching short name, then that active layer is used. Otherwise an active layer is created.
   * **Reference** The layer tree from the reference model is added to the active model as reference layers under a //grandparent// layer that has the name of the reference file.  All the added layers are //reference layers//.  You cannot change the reference layer settings except for the visibility, locked, and color settings.
   * This image shows where you specify the linked block definition layer style when creating a linked block. 
@@ -45,14 +43,10 @@ Rhino 5 has full support for linked block definitions.  A linked block definitio
 ==== Example ====
 You may download the files used in this example from {{:rhino:producelinkedblockexample.zip|}}.
 
-This example demonstrates the two ways Rhino 5 manages layer names for the contents of a linked block definition.
+This example demonstrates the two ways Rhino manages layer names for the contents of a linked block definition.
 
 The model called //ProduceDepartment.3dm// has four linked blocks that reference files called //Apple.3dm//, //Banana.3dm//, //Squash.3dm//, and //Carrot.3dm//.
 
 {{:rhino:v5_linkedblockitemlayers.png|}}
 
 {{:rhino:v5_producedepartmentlayers.png|}}
-
-
-
-Back to [[rhinov5status|Rhino 5 Status]].
