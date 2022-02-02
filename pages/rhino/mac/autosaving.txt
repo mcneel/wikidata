@@ -70,14 +70,10 @@ Rhino users using network file servers might see the message "This document coul
 
 ===== Is it possible to disable the Versions feature in Rhino for Mac? =====
 
-Yes, BUT it is **HIGHLY RECOMMENDED** that you **DO NOT DO THIS**.  Rhino for Mac is designed to work with Versions and Autosaving; performance and stability may be impacted if you disable this.  Additionally, you will lose the ability to add tags, rename or move the file from the window title, etc.  If, for some reason, you need to disable it, you will need to launch //Terminal.app// and run the following command:
-    defaults write com.mcneel.rhinoceros ApplePersistence -bool no    
-This will disable autosaving and versions and bring back the Save As in the File menu (instead of Duplicate).
+No, you can not disable Auto Save on Rhino for Mac.
 
-To change back to default behavior, enter the Terminal command again but replace 'no' with 'yes':
-    defaults write com.mcneel.rhinoceros ApplePersistence -bool yes    
-To check to see what that current setting is, use:
-    defaults read com.mcneel.rhinoceros ApplePersistence    
-If it returns a 0 (or a pair not found error), it is disabled.  If it returns a 1, it is on.
+**Note:** It was possible prior to macOS Mojave 10.14.
+Apple is not allowing this to be disabled and has provided no viable workaround.
 
-**NOTE**: The above steps do not work on macOS Mojave 10.14.  We do not currently know of a viable workaround.
+//If you find a way, please email Mary Ann Fugier mary@mcneel.com.
+We can test you procedure and if it work, we will update this page for other users.//
