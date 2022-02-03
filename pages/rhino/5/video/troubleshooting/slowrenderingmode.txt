@@ -9,7 +9,9 @@ I wonder why Rhino for instance cannot draw more Power from my graphics card run
   How can I make Rhino 7 use my GPU to its full potential?
 
 ===== Answer: =====
-We believe that you are referring to the “power draw”
+
+==== Power Draw ====
+You may be referring to the “power draw” in the above question.
 If your GPU is only drawing 35W, when it’s designed to support up to 150W, then it means that it’s operating at roughly 20% capacity.
  
 You may be expecting that “If something takes 10 seconds, then if I get a card that’s 10x faster, then it should only take 1 second”.
@@ -24,7 +26,7 @@ Getting a model is the best way for us to know where the bottlenecks are. So tha
 Your 3 fps Rendered mode result does seem odd, given that his Shaded mode yields ~50 fps… Without knowing what is in your model, we would guess that it's probably something to do with his object management, blocks, and lighting or some combination of both The use of multiple lights can have an abysmal performance.  
 You will first need to first eliminate the typical CPU bottlenecks in the file geometry and setup, before you can expect good GPU performance.
  
-Measuring GPU Performance
+==== Measuring GPU Performance ====
 How are you gauging your GPU usage? If you are only using TestMaxSpeed, then that is problem #1.  
 Rhino’s display is a passive frame display, not an active one.  
 Rhino does not try to generate constant frame rates at all times (like a computer game does). It draws a single frame, ends and exits.  
@@ -32,13 +34,16 @@ Rhino does not try to generate constant frame rates at all times (like a compute
 Trying to determine overall GPU usage on a single frame would be like trying to determine how fast your car’s top speed is by measuring how fast it takes it to move one inch from at rest position, and then extrapolating that into miles per hour. Not a good approach to finding the best answer.
  
 A better way (but still flawed), is to use the Rhino TurnTable command …because it does try to maintain constant frames, and most GPU monitoring tools can then post better results.
-You mentioned the Hollomark utility.  There is a Hollomark for specifically  V6 and V7, which can be found on the Rhino support forum…but it’s not something we write or even support. 
-
-File Analysis
-Your file appears to be well organized in terms of “objects” and “layers”, and no kind of bad objects or block usages were found. 
-There were no immediate or obvious problems found with the content of your file when performing basic display operations. However, the display performance did (and does) seem to be sub-par for the given content (certainly not what was expected at first glance). 
+You mentioned the Hollomark utility.  There is a Hollomark for specifically  V6 and V7, which can be found on the Rhino support forum…but it’s not something we write or even support.
  
-The overall number of objects in the scene is not that high, so the object management overhead did not seem to be the place to focus our attention. The different “shaded” display modes all seemed to produce similar performance results, however, the Rendered display mode was/is significantly slower than the other modes, and although it is expected that Rendered modes will be slower, the differences seen with the given content were pretty excessive. 
+==== File Analysis ====
+
+If you file appears to be well organized in terms of “objects” and “layers”, and there are no kind of bad objects or excessive usage of blocks, and if ther ewere no immediate or obvious problems found with the content of your file when performing basic display operations, the display performance may still seem to be sub-par.
+ 
+Also keep the overall number of objects in the scene as low as possible and not excessive  so the object management overhead is not the bottle neck. 
+
+If different “shaded” display modes all seemed to produce similar performance results, **except the Rendered display mode** which can be significantly slower than the other modes.
+However, it is expected that Rendered modes will be slower, but if the differences seen with same content are excessive, here is why. 
  
 Rendered Mode
 The focus was then turned towards the Rendered mode results, to determine why and where things were slowing down.
