@@ -48,10 +48,15 @@ There is a Hollomark for specifically  V6 and V7, which can be found on the Rhin
 We do not write or support it, but it can be useful.
  
 ==== File Analysis ====
-
-If you file appears to be well organized in terms of “objects” and “layers”, and there are no kind of bad objects or excessive usage of blocks, and if there are no immediate or obvious problems found with the content of your file when performing basic display operations, the display performance may still seem to be sub-par.
- 
-Also keep the overall number of objects in the scene as low as possible and not excessive  so the object management overhead is not the bottle neck. 
+Here are some recommendations to improved performance of a file that is slow. These may improve the general overall performance of your file in may more ways, as well.
+  - Keep the overall number of objects in the scene as low as possible and not excessive  so the object management overhead is not the bottle neck. 
+  - Organize your file in and assign “objects” to “layers”.
+  - Check for bad objects and rebuild them.
+  - Avoid excessive usage of blocks
+  - Purge unused content in your file like materials and textured.
+  - Reset your Render mode settings to default //(Options -> View -> Display modes -> Rendered. Pick button at bottom to reset to Rhino defaults.)//
+  - Insert the contents of your file into a new file. //(This may leave some problem with the file behind.)//
+But still, the display performance can seem sub-par and painfully slow.
 
 If different “shaded” display modes all seemed to produce similar performance results, **except the Rendered display mode** which can be significantly slower than the other modes.
 However, it is expected that Rendered modes will be slower, but if the differences seen with same content are excessive, here is why. 
