@@ -19,13 +19,18 @@ You may be expecting that //“If something takes 10 seconds, then if I get a ca
 This is only true if 100% of the time Rhino spent on the GPU, which is not the case.
 But if only 1% of the time is spent on the GPU, then the result is basically going to be the same…10 seconds. 
  
-Why?
-This is because the problem (or bottleneck) is not with the GPU, so speeding up the GPU, or replacing it with a much faster one, isn’t going to do a thing.
+**//Why?//
+This is because the problem (or bottleneck) is not with the GPU, so speeding up the GPU, or replacing it with a much faster one, isn’t going to do a thing.**
  
-Start with the Model
-Getting a model is the best way for us to know where the bottlenecks are. So thank you for providing that file, we discuss your file below.
+==== Start with the Model ====
 
-Your 3 fps Rendered mode result does seem odd, given that his Shaded mode yields ~50 fps… Without knowing what is in your model, we would guess that it's probably something to do with his object management, blocks, and lighting or some combination of both The use of multiple lights can have an abysmal performance.  
+Getting us a model is the best way for us to know where the bottlenecks are. 
+You can submit a model for testing to tech support [[https://www.rhino3d.com/upload|here]]. (Fill out the comment field in detail so we know what issue you are having and what version of Rhino you are using. Incomplete information can result in a delayed response from technical support.)
+
+For example, if you are getting 3 fps Rendered mode result and a Shaded mode yields ~50 fps, that does see concerning.
+
+Without knowing what is in your model, we would guess that it's probably something to do with his object management, blocks, and lighting or some combination of both The use of multiple lights can have an abysmal performance.  
+
 You will first need to first eliminate the typical CPU bottlenecks in the file geometry and setup, before you can expect good GPU performance.
  
 ==== Measuring GPU Performance ====
