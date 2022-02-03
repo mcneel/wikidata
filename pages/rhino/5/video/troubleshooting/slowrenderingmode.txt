@@ -54,9 +54,10 @@ If different “shaded” display modes all seemed to produce similar performanc
 However, it is expected that Rendered modes will be slower, but if the differences seen with same content are excessive, here is why. 
  
 ==== Rendered Mode ====
-The focus was then turned towards the Rendered mode results, to determine why and where things were slowing down.
-Your file provided us with one of the more perfect examples of how to bring Rhino’s rendering pipeline to a standstill. 
-There are thousands of objects referencing several dozens of materials, many of which contain “transparency maps”. 
+Now you can focus on the Rendered mode results to determine why and where things were slowing down.
+Many well organized files with no bad geometry can bring Rhino’s rendering pipeline to a standstill. 
+
+Another reason is transparency maps. There can be thousands of objects referencing several dozens of materials, many of which contain “transparency maps”. 
  
 Why is this problematic? 
 //There is no guaranteed order for which objects get drawn in Rhino, which means for each and every object, Rhino will setup and initialize the GPU rendering stack (shaders, textures, content settings, etc…) prior to drawing it.// 
