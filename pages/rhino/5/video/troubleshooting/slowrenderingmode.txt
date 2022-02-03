@@ -9,7 +9,6 @@ I wonder why Rhino for instance cannot draw more Power from my graphics card run
   How can I make Rhino 7 use my GPU to its full potential?
 
 ===== Answer: =====
-
 ==== Power Draw ====
 You may be referring to the “power draw” in the above question.
 If your GPU is only drawing 35W, when it’s designed to support up to 150W, then it means that it’s operating at roughly 20% capacity.
@@ -27,17 +26,17 @@ Your 3 fps Rendered mode result does seem odd, given that his Shaded mode yields
 You will first need to first eliminate the typical CPU bottlenecks in the file geometry and setup, before you can expect good GPU performance.
  
 ==== Measuring GPU Performance ====
-How are you gauging your GPU usage? If you are only using TestMaxSpeed, then that is problem #1.  
-Rhino’s display is a passive frame display, not an active one.  
+How are you gauging your GPU usage? If you are only using **TestMaxSpeed**, then that is problem #1.  
+//Rhino’s display is a passive frame display, not an active one.//  
 Rhino does not try to generate constant frame rates at all times (like a computer game does). It draws a single frame, ends and exits.  
  
 Trying to determine overall GPU usage on a single frame would be like trying to determine how fast your car’s top speed is by measuring how fast it takes it to move one inch from at rest position, and then extrapolating that into miles per hour. Not a good approach to finding the best answer.
  
-A better way (but still flawed), is to use the Rhino TurnTable command …because it does try to maintain constant frames, and most GPU monitoring tools can then post better results.
-You mentioned the Hollomark utility.  There is a Hollomark for specifically  V6 and V7, which can be found on the Rhino support forum…but it’s not something we write or even support.
+A better way (but still flawed), is to use the Rhino's **TurnTable** command. Turntable does try to maintain constant frames, and most GPU monitoring tools can then post better results.
+There is a Hollomark for specifically  V6 and V7, which can be found on the Rhino support forum.
+We do not write or support it, but it can be useful.
  
 ==== File Analysis ====
-
 If you file appears to be well organized in terms of “objects” and “layers”, and there are no kind of bad objects or excessive usage of blocks, and if ther ewere no immediate or obvious problems found with the content of your file when performing basic display operations, the display performance may still seem to be sub-par.
  
 Also keep the overall number of objects in the scene as low as possible and not excessive  so the object management overhead is not the bottle neck. 
@@ -45,41 +44,43 @@ Also keep the overall number of objects in the scene as low as possible and not 
 If different “shaded” display modes all seemed to produce similar performance results, **except the Rendered display mode** which can be significantly slower than the other modes.
 However, it is expected that Rendered modes will be slower, but if the differences seen with same content are excessive, here is why. 
  
-Rendered Mode
+==== Rendered Mode ====
 The focus was then turned towards the Rendered mode results, to determine why and where things were slowing down.
 Your file provided us with one of the more perfect examples of how to bring Rhino’s rendering pipeline to a standstill. 
 There are thousands of objects referencing several dozens of materials, many of which contain “transparency maps”. 
  
-Why is this problematic?  
-There is no guaranteed order for which objects get drawn in Rhino, which means for each and every object, Rhino will setup and initialize the GPU rendering stack (shaders, textures, content settings, etc…) prior to drawing it. 
+Why is this problematic? 
+//There is no guaranteed order for which objects get drawn in Rhino, which means for each and every object, Rhino will setup and initialize the GPU rendering stack (shaders, textures, content settings, etc…) prior to drawing it.// 
 
 These “context switches” can become very timely, and end up overwhelming the CPU usage, which in turn, starves the GPU from getting used to its full potential. In other “shaded” modes, certain optimizations can be made to prioritize things because Rhino knows that a given set or group of objects will all be drawn using the same material. 
-However, because of “sub-object materials” that your model uses, Rhino cannot do the same kind of optimizations, and so they are skipped entirely. 
+Also with the use of “sub-object materials” in your model, Rhino cannot do the same kind of optimizations, and so they are skipped entirely. 
 
-To compound the problem, “transparency” requires up to 4 separate passes per object in order to get the best looking transparency possible. Now add to all of that, the multiple passes required for the “shadowing” phase (where transparency maps also need to be applied), the display starts to become mired in an endless process of initializations and context switches, resulting in very poor performance.
+//To compound the problem, “transparency” requires up to 4 separate passes per object in order to get the best looking transparency possible.// Now add to all of that, the multiple passes required for the “shadowing” phase (where transparency maps also need to be applied), the display starts to become mired in an endless process of initializations and context switches, resulting in very poor performance.
  
-No Fixes
+**No Quick Fixes**
 Unfortunately, there are no immediate fixes, suggestions or workarounds for this type of situation. 
-We understand that products like TwinMotion seem to run much faster in what appears to be a “similar” situation, and that Rhino should also be able to perform as well. 
+We understand that products like //TwinMotion// seem to run much faster in what appears to be a “similar” situation, and that Rhino should also be able to perform as well. 
  
 However, the path from a Rhino object to colorful pixels on the screen is a very complex and tedious process that does not take place in these other products. 
  
 TwinMotion and similar products are only interested in two things; 1) Polygons and 2)the color of said polygons. Once they have all of the information for all of the polygons, there are all kinds of optimizations that can be made.
  
-Testing and Analysis
-The developers used your file to test their analysis.
-First they converted all Rhino objects into their equivalent render meshes, and “joined” the render meshes into single, disjoint mesh based on the material each was using. 
+==== Testing and Analysis ====
+Here is the procedure Rhino developers use to test a file for display pipeline issues:
+
+**First, convert all Rhino objects into their equivalent render meshes, and “joined” the render meshes into single, disjoint mesh based on the material each was using.** 
+
 This does several things:
-	It reduces the overall number of objects that need to be processed, it allows Rhino to draw ALL objects that use the same material all in ONE single draw.
-	It frees up the CPU usage so that the GPU can be pumped as fast as possible, resulting in not only orders of magnitude increase in frame rates, but almost a 100% GPU utilization. 
-	Below are the GPU graphs of Rhino running “Turntable” using your original file “as is”
- 	
+  * It reduces the overall number of objects that need to be processed.
+  * It allows Rhino to draw ALL objects that use the same material all in ONE single draw.
+  * It frees up the CPU usage so that the GPU can be pumped as fast as possible, resulting in not only orders of magnitude increase in frame rates, but almost a 100% GPU utilization.
+ 
+This GPU graphs of Rhino running “Turntable” using a file “as is”.	
  	​
-	This graph is your the file with the optimizations above that were explain above.
- 	With these graphics, you can see the huge difference in GPU utilization…which is what you are seeing with TwinMotion.
- 	
+This graph show the same file with the optimizations explained above.
+With these graphics, you can see the huge difference in GPU utilization, which is what you are seeing with TwinMotion.
  	​
-In conclusion…
+==== In conclusion ====
 The reason the GPU utilization is low using the your file is because most of the time is being spent on the CPU,  which is why replacing the GPU with a faster one isn’t going to make any difference.
 Once the bottlenecks on the CPU have been eliminated, the GPU is free to run at full steam…this is what the second graph shows.
  
