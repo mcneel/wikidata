@@ -48,11 +48,11 @@ In the first step, all mesh faces are quadrangles. In all further steps, new tri
 ====NURBS meshing parameters====
 Many of these parameters are shared between the first and second steps. All steps except the fourth are run independently for each face.
 
-== Density ==
+=== Density ===
 Density is the parameter controlled by the slider in the simple mesh controls dialog. It uses a formula to control how close the polygon edges are to the original surface. The default value is 0.5, and acceptable values are between 0 and 1. Larger values result in a mesh with a higher polygon count.\\ {{:rhino:maxdist.png?600|}}\\ MaxDist = size \times 10^{-p}, \text{ with } p = {\begin{cases}1+6 \times density-4 \times density^2,& \text{if } density < 1/2\\2+2 \times density,& \text{otherwise}\end{cases}}
 
 
-==Maximum angle==
+===Maximum angle===
 In the initial grid step, this value controls the approximate maximum angle made by the surface normals at neighboring mesh vertices. Two vertices are neighbors if they are at the opposite ends of a single edge. In the mesh refinement step, quadrangles are subdivided until the angle between surface normals is smaller than this value.
 
 {{:rhino:maxangle.gif|}}
@@ -63,7 +63,7 @@ This setting will influence the meshing of objects of the same shape in the same
 
 This setting is scale independent.
 
-==Maximum aspect ratio==
+===Maximum aspect ratio===
 In the initial grid step, this value controls the approximate maximum aspect ratio of the quadrangles. In the mesh trimming step, this value controls when to subdivide quads that would otherwise become too skinny when trimmed.
 
 Smaller values result in slower meshing and a higher polygon count with more equilateral and nicely shaped polygons. Setting this value to 0 disables the criterion. The default value for this option is 0 and the suggested range, when not 0, is from √2 to 100.
@@ -88,7 +88,7 @@ The default value for this option is 0.0001 system units and the usable range de
 
 This setting is scale dependent.
 
-==Maximum edge length==
+===Maximum edge length===
 In the initial grid step, this value controls the approximate maximum edge length of the quadrangles. In the refinement step, quadrangles are further divided until all edges are shorter than this value.
 
 Smaller values result in slower meshing and a higher polygon count with more equally sized polygons. Setting this value to 0 disables the criterion. The default value is 0 and the usable range depends on the size of the model.
@@ -102,7 +102,7 @@ This setting is scale dependent.
 
 >**Application**\\ Use for making sure the polygons are approximately the same size.
 
-==Maximum distance, edge to surface==
+===Maximum distance, edge to surface===
 The distance is calculated from a mesh edge midpoint to the surface. In the initial grid step, the grid will approximately match this criterion. In the mesh refinement step, quadrangles are subdivided until the distance from a polygon edge midpoint to the surface is smaller than this value.
 
 {{:rhino:maximum_dist_edge_to_surface.gif|}}
@@ -115,21 +115,21 @@ This setting is scale dependent.
 
 >**Application**\\ Use as a general polygon mesh tolerance setting.
 
-==Minimum initial grid quads==
+===Minimum initial grid quads===
 The minimum number of quadrangles per surface in the initial mesh grid. Note that value applies to the shrunk untrimmed surface, so trimmed surfaces can use fewer quadrangles than this value.
 
 {{:rhino:minimum_initial_grid_quads.gif|}}
 
 //Minimum initial grid quads = 100, every surface starts meshing with 100 quads regardless of their sizes.//
 
-==Refine mesh (checkbox)==
+===Refine mesh (checkbox)===
 If this option is true, in the mesh refinement step, Rhino uses a recursive process to refine the mesh by subdividing quadrangles until they meet the criteria defined by the Maximum angle, Minimum edge length, Maximum edge length, and Maximum distance, edge to surface options.
 
 No refinement results in faster meshing, less accurate meshes, and lower polygon count. No refinement also means untrimmed individual surfaces and surface areas away from trim edges and joined edges are meshed with evenly sized quadrangles.
 
 Refinement is disabled for extrusions and ruled surfaces.
 
-==Jagged seams (checkbox)==
+===Jagged seams (checkbox)===
 If this option is true, all surfaces are meshed independently and Rhino does not stitch the edges of joined surface edges together.
 
 {{:rhino:jaggedseams.png|}}
@@ -143,7 +143,7 @@ If this option is false, watertight meshes are created.
 
 >**Application**\\ The Rhino mesher does not support watertight meshes made only of quadrangles unless you are meshing a single untrimmed surface. In this case, clear Refine mesh and use Jagged seams to generate quadrangle meshes.
 
-==Simple planes (checkbox)==
+===Simple planes (checkbox)===
 If this option is true, all planar surfaces are meshed by meshing the surface edges and then filling the area bounded by the edges with triangles. This causes a slower meshing and a minimum polygon count on planar surfaces, especially for complex trimmed surfaces.
 
 {{:rhino:simpleplane.png|}}
@@ -152,10 +152,10 @@ If this option is true, all planar surfaces are meshed by meshing the surface ed
 
 If this option is true, all other settings except for Jagged seams are ignored for planar surfaces, and the planar surface is meshed with as few polygons as possible.
 
-==Pack Textures==
+===Pack Textures===
 If this option is true, Rhino packs the mesh textures of the meshed polysurfaces.
 
-===SubD meshing parameters===
+====SubD meshing parameters====
 ==Level==
 This setting controls the minimum subdivision level of the meshes converted from SubD objects.
 
