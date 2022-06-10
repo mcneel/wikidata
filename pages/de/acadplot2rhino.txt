@@ -1,0 +1,30 @@
+====== AutoCAD CTB nach Rhino ======
+//Wie bekomme ich meine AutoCAD-CTB-Linienstärken und -Druckfarben in Rhino?// 
+Die AutoCAD-CTB-Datei ist herstellereigen und kompiliert. Daher kann unser Script sie nicht direkt lesen. Sie müssen eine CSV-Datei von Hand aktualisieren und unser Script zum Lesen dieser Datei verwenden. Unser Script wird alle Ebenen, die mit der Farbe in der CBT-Datei übereinstimmen, auf die Breite ändern, die sie in der CSV-Datei angeben. Es folgen die Details.
+
+**Eine weitere Option:** Sehen Sie in diesen [[https://mcneel.supportbee.com/tickets/33170460|Thread im Rhino Support Forum]] nach einem py-Script mit ähnlichen Eigenschaften.
+
+===== AutoCAD CTB =====
+Zum Drucken verwendet AutoCAD eine CTB (Farbtabelle) zum Einstellen der Farben, die Sie auf dem Display mit Strichstärken auf dem Plan sehen. Farbe kann nach Objekt eingestellt werden oder nach der Ebene, der das Objekt zugewiesen ist. 
+Es ist in dieser Tabelle, wo Sie den **AutoCAD-Farbindex** (ACI) der Druckbreite in mm zuweisen können. 
+
+{{ :ctb_graphic.png?500|}}
+Wenn die Objekt- oder Ebenenfarbe auf einen ACI von 1 oder Rot eingestellt ist, wird Sie mit der in der CTB-Datei eingestellten Strichstärke gezeichnet. 
+Sie können eine Bibliothek mehrerer CTB-Dateien haben, welche das Ziehen roter Linien verschieden konfigurieren. Zum Beispiel kann ACI 1 oder Rot mit einer Strichstärke von .5mm roter Farbe in einer CTB zeichnen, und einer Strichstärke von .25 und grauer Farbe in einer anderen. Die während des Zeichnens zugewiesene CTB bestimmt dies.
+
+===== Rhino-Druckeinstellungen =====
+{{ ::rhino_layers.png?400|}}
+Wenn Sie in Rhino arbeiten, möchten Sie diese Einstellungen vielleicht Ihrem Rhino-Modell zuweisen. In jedem Fall kann Rhino nicht die CTB-Datei öffnen. In Rhino werden Druckfarbe und -breite der Ebene oder dem Objekt zugewiesen. 
+Um also diese AutoCAD-Einstellungen zu verwenden, müssen Sie die Farbe und Druckbreite der Ebene zuweisen.
+
+{{ ::csv_in_excel.png?400|}}
+Einstellungen in der CSV-Datei werden als Eingabe für das Script verwendet. Das Script stellt die Druckbreite der Ebene ein, basierend auf der Farbe, die der Ebene zugewiesen ist. Das Script wandelt die ACI-Farbe in einen RGB-Wert um und bearbeitet die Ebenentabelle, indem es alle Ebenen mit RGB-Farbe auf die RGB-Farbe und -Druckbreite in Ihrer CSV-Tabelle einstellt. Näher kommen wir an das CTB-Verhalten in Rhino nicht heran.
+
+==== Vorgehensweise ==== 
+//Für dieses Script ist Rhinoceros 5, 6 oder 7 für Windows erforderlich.//
+  - Laden Sie die [[https://mcneel.s3.amazonaws.com/misc/samples/SetAcadPrintInfo.zip|SetACADPrintInfo.ZIP]]-Datei herunter. 
+  - Entpacken Sie sie in einen Ordner auf Ihrem Desktop.
+  - Bearbeiten Sie die CSV-Datei in Excel oder dem Texteditor.  Die Einstellungen in der AutoCAD-CTB-Datei müssen in eine CSV-Datei übertragen werden. Zu dem Zeitpunkt, als das Script geschrieben wurde, war die Umwandlung von CTB nach Txt nicht verfügbar.
+  - Legen Sie RVB per Drag and Drop auf Ihrer Rhinoceros-Anwendung für Windows ab.
+  - Geben Sie **SetAcadPrintInfo** ein.
+  - Sie müssen dieses Script jedesmal dann ausführen, wenn Sie eine neue Ebene hinzufügen. Führen Sie das Script von da an immer durch Eingabe von **SetAcadPrintInfo** aus. 
