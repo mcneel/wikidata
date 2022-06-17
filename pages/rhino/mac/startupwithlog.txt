@@ -4,19 +4,20 @@ Related: [[rhino:mac:consolemessages|Gathering Console Messages from Rhino for M
 
 It is sometimes necessary to start Rhino with event logging to diagnose start up or licensing problems.  Following are the steps for starting Rhino with logging: 
 
-1) Open a **Terminal** session from Launchpad or Spotlight.
-{{:rhino:mac:macloggingstep-1.png?600|}}
+1) Run the **Console** application from Launchpad or Spotlight.
+{{:rhino:mac:console.png?700|}}
 
-2) Start **Rhinoceros** using this command:
-   /Applications/Rhinoceros.app/Contents/MacOS/Rhinoceros -RhinoLog
-{{:rhino:mac:macloggingstep-2.png?600|}}
+2) In Console, make sure your computer is selected, set the filter to *Errors and Faults*, and then click **Start Streaming**
+{{:rhino:mac:streaming-log.png?700|}}
 
-3) Close the error dialog you get when starting Rhino and run the **Console** application from Launchpad or Spotlight.
+3) Open a **Terminal** session from Launchpad or Spotlight.
+{{:rhino:mac:terminal.png?700|}}
 
-{{:rhino:mac:macloggingstep-3.png?600|}}
+4) Start **Rhinoceros** using this command:
+   /Applications/Rhino\ 7.app/Contents/MacOS/Rhinoceros -RhinoLog
 
-4) Navigate to **~/Library/Logs/Rhinoceros** in the control on the left.
-{{:rhino:mac:macloggingstep-4.png?600|}}
+5) Rhino will now log many messages to Console. You want to run Rhino until you get to the point where bugs or errors are happening. Once you have run with the unintended behavior happening, in Console, you can **Pause** the logging and filter the results to **Rhinoceros**
+{{:rhino:mac:rhino-log.png?700|}}
 
-5) Click on the Rhinoceros.log item and choose **Reveal in Finder** and upload to this post or select **Mail** and send it to tech@mcneel.com.
-{{:rhino:mac:macloggingstep-5.png?600|}}
+6) Errors are yellow, Faults are red. If you are speaking with McNeel staff, they are likely looking for the red faults. You can copy/paste the entire contents of a particular fault by selecting it in the list and copying the **Message** that appears in the bottom of the Console window...
+{{:rhino:mac:rhino-fault.png?700|}}
