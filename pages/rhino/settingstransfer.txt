@@ -4,34 +4,38 @@
 
 =====Where are my settings stored?=====
 
-**In Rhino V5 and earlier** most of Rhino's settings were not stored in external files, but in the registry. **In Rhino V6**, much of this info has been moved out of the registry into one or more .xml "settings" files. However, in both cases, as there is not one single file that contains all options and personalizations, it's not a one-click operation to transfer your custom settings from one install to another.  Some shortcuts do exist:
+> Note, toolbars are separate from settings and will be covered further on
 
-The easiest way to transfer the bulk of your settings is to use the Rhino command **OptionsExport** (V5 and later), which creates a single file with __most__ of the customizations. Importing this file into another installation via the command **OptionsImport** (V5 and later) will transfer the settings to the new install.  You have a choice of which settings you would like to import. It is not necessary to import them all.  
+In Rhino V5 and earlier most of Rhino's settings were not stored in external files, but in the registry. As of Rhino V6, much of this info has been moved out of the registry into one or more .xml "settings" files; and with V7 and later, more changes have been made to the system. 
 
-> Note: In Rhino V4, the two commands above were named **ExportOptions** and **ImportOptions**.  They were renamed in V5 to avoid confusion with other file import/export settings. //Display modes// are not included in the ExportOptions in V4, you need to export them separately.  You do this from //Options > Appearance > Advanced Settings//.  
+In all cases, there is not one single file that contains all Rhino options and personalizations.  And, with each succeeding version, existing options can change and new ones can be added.  So, it's not a one-click operation to transfer your custom settings from one install to another; especially so if you are upgrading at the same time.  There are some shortcuts, depending on which version you have.
 
-**Display modes are included in OptionsExport and OptionsImport from V5 on**, but you can only import all of them at once (or none).  If you want to just transfer individual display modes, use the Export/Import buttons in Options>View>Display Modes instead.
+**For V6 and later - //within the same version//**:
+The easiest way is to simply copy the //settings-Scheme_Default.xml file// from one installation to the other, replacing the original.  The file is located at //C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\<version number>\settings//.  This may also work when upgrading versions, but it is somewhat risky, as some settings change between versions.
 
-**Separate from the other options, workspace files contain most of the info for toolbars/buttons** such as which buttons are in which toolbar, command macros for each button and button images. Workspace files have the extensions .tb for V4, .rui for V5 and later. You can copy this file between installations as well.  As of V5, the default location for these files is in a hidden folder:
+> Note - the location for these files mentioned above is a folder hidden by Windows by default. You can access this quickly by hitting the Windows Start button and typing **%appdata%** and Enter which gets you to "Roaming", then navigating to the appropriate folder. <username> represents your Windows account username, <version number> is 5.0, 6.0, 7.0 etc.
 
-**C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\<version number>\UI**
+**For V5:**
+To transfer the bulk of your settings, use the Rhino command **OptionsExport**, which creates a single file with __most__ of the customizations. Importing this file into another installation via the command **OptionsImport** (V5 and later) will transfer the settings to the new install.  You have a choice of which settings you would like to import. It is not necessary to import them all.  
 
-//(<username> represents your Windows account username, <version number> is 5.0, 6.0 etc.)//
+Display modes are included in OptionsExport and OptionsImport in V5, and also in the settings .xml files from V6 on.  In V5, you can only import all of them at once (or none) via OptionsExport/Import.  If you want to just transfer individual display modes, use the Export/Import buttons in Options>View>Display Modes instead.
 
-> Note: You can access this quickly by hitting the Windows Start button and typing **%appdata%** and Enter which gets you to "Roaming", then navigating to the appropriate folder.
+=====Toolbars=====
 
-> For V4 installations, the toolbars are here: C:\ProgramData\McNeel\Rhinoceros\4.0 (Win Vista and later) or here: C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\4.0 (XP)
+Separate from the other options, workspace files contain most of the info for toolbars/buttons such as which buttons are in which toolbar, command macros for each button and button images. Workspace files have the extensions .rui in V5 and later. You can copy this file between installations as well.  The default location for these files is also in a hidden folder:
+
+//C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\<version number>\UI//
 
 
-The workspace file does not contain the on-screen locations for the toolbars however, only the toolbars themselves and whether they are open or not. In V5, location info is still stored in the registry; in V6 it has been moved out to an .xml settings file which resides here:
+The workspace file does not contain the on-screen locations for the toolbars however, only the toolbars themselves and whether they are open or not. In V5, location info is still stored in the registry; in V6 and later it has been moved out to an .xml settings file called //window_positions// which resides in the same folder with the other settings:
 
-**C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\6.0\settings**
+//C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\<version number>\settings//
 
-The .xml file containing the options mentioned at the beginning is in this same folder. 
+To load an existing workspace file in a new installation, it is best to do it from inside Rhino. In the Options>Toolbars window, from the file menu, close the existing open workspace file, then open the new workspace file which has been copied over.  It may be necessary to re-arrange the toolbars the first time this is done, after that it should be remembered.  //It is not recommended to simply replace the .rui file with a different one via Windows explorer when Rhino is closed.//
+
+It is possible to import an .rui file from a previous version of Rhino via the above procedure; note however that many things change from one version to another, so this may not always be 100% successful.  Some command macros may have changed.
 
 Finally, there are some other things that might have been personalized/modified.  Among them could be your template files, installed plug-ins, etc.  Template files are just .3dm files so they can be copied over without a problem; plug-ins probably need to be re-installed; beware of compatibility issues if you are upgrading to a new version of Rhino.
-
-
 
 
 =====Umm, that sounds complicated, how do I make sure I get everything?=====
@@ -40,20 +44,22 @@ A general transfer procedure might look like this:
 
 **In the old install:**
 
-**OptionsExport** //(or ExportOptions for V4)// - creates an .ini file
+V5 only: **OptionsExport** - creates an .ini file
 
-  * Make a copy of your workspace (.tb/.rui) file if you customized it 
+V6 and later: Make a copy of your settings-Scheme_Default.xml file
+
+  * Make a copy of your workspace (.rui) file if you customized it 
   * Make copies of any custom template files you created 
-  * Make copies of any other external files used, including: non-standard plug-ins, e-maps, scripts, etc.
-  * V4 - Export any custom display modes (if you created any) - creates one .ini file per display mode
+  * Make copies of any other external files used, including: e-maps, scripts, etc.
 
 **In the new install:**
 
-**OptionsImport** //(or ImportOptions for V4)// and import the .ini file created above
+V5 only: **OptionsImport** and import the .ini file created above
 
-  * Copy your workspace, template, emaps, scripts, plug-ins files to appropriate locations.
-  * Go to //Tools>Toolbar Layout// and load your custom workspace.
-  * Drag n' drop your extra plug-ins into the Rhino window to install. (Some need an external installer. Use that if necessary.)
+V6 and later: //Replace// the existing settings-Scheme_Default.xml file with the one copied from the previous install
+
+  * Copy your workspace, template, emaps, scripts, files to appropriate locations.
+  * Go to //Options>Toolbars// and load your custom workspace file.
+  * Install any plug-ins that Rhino did not automatically transfer
   * Set Rhino up to open with your custom template.
-  * In the Files section of Options, set file paths to scripts, templates, etc. if they are non-standard.
-  * V4 - Go to //Options > Appearance > Advanced Settings// and import any custom display modes created, one by one.
+  * Set file paths to scripts, templates, etc. if they are non-standard.
