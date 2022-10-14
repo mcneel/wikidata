@@ -1,0 +1,159 @@
+====== Understanding Display Performance ======
+
+===== Question: =====
+//There is a lag when navigating in perspective view and layout views with the display mode set to rendered? 
+Also I upgraded my video card to the new RTX A4000 and it had no effect on performance over my old Quardo P2200 card. //
+ 
+
+//When I run the 'TurnTable' command and watch the performance tracking in the Task Manager everything is under 50% utilization (with the 2200 card the GPU was maxing out, with the A4000 it hits 44%). 
+However, Raytrace mode and hit 100% performance in Task Manager//
+
+===== Answer: =====
+
+==== Task Manager Performance Testing: Not the right tool ====
+
+Let's look at some of the issues with using Task Manager to measure performance.
+
+Cycles uses 100% GPU for everything it does, so of course it’s going to max out most of the time. (Turntable is not designed to work with Cycle’s Raytrace mode.) Raytrace is using the GPU 100% even though the display may still seem slow.
+
+Size of the file also has nothing to do with display performance, however all the geometry must be processed and meshed by the CPU before the GPU can take over. This can appear like the display performance is slow, when it is really a bottleneck at the CPU.
+
+==== The CPU Bottleneck ====
+A very simple example of CPU vs. GPU is one where you have say 100K objects that are all different, all having slightly different display characteristics like material.   
+
+Rhino has to iterate 100K times and draw 100K objects - one at a time-  for every frame.  
+Rhino uses the GPU to draw each object, but it’s using the CPU to manage and iterate over all 100K objects.
+
+**This creates a bottleneck at the CPU level.**
+In other words, the time it takes the GPU to draw 1 object is negligible compared to the time it takes the CPU to:
+1) process the object
+2) get it ready to draw
+3) then finally pass off the mesh to the GPU
+
+**Running a GPU monitor in Task Manager is the wrong approach here, since it will show almost no activity on the GPU because most of the processing time is spent on the CPU.** 
+
+This is what is happening when the Render display model reports 27% or similar number for GPU performance. It is not that the GPU is the issue, it is simply waiting for the CPU to catch up.
+
+==== Similar Geometry: Instancing in the Display ====
+If those 100K objects all looked the same, then Rhino could draw all of them in one fell swoop using a single call to the GPU.
+
+Running a GPU monitor here, will show massive GPU usage, since it’s working to draw 100K objects from start to finish.
+
+Obviously, it can be a bit more complicated, since not every object looks the same…but the concept is still the same. 
+
+**The GPU will almost never be the bottleneck for Rhino’s display, especially high-end models. Most of the time spent drawing things is done in Rhino’s object and attribute/material management.**
+
+Rhino has tried to improve this over the years by packing as much as possible on the GPU, but there’s still the problem with the CPU  just iterating over large datasets in general. 
+
+**The typical recommendation for those with these issues is to first improve your CPU (more cores and higher processing speed), add more system memory, then improve your graphics card.** 
+
+==== Mesh First - Then Render ====
+Meshing first will free up the CPU and get the objects to the GPU faster.
+All meshes get uploaded to the GPU, once and only once. 
+
+The process is to:
+  - SelAll command (assuming all the layer and geometry is visible that you want to render)
+  - Mesh the object with the Mesh command.
+  - SelMesh command and Invert command
+  - Hide (this hides all the polysurfaces that would need to be meshed by the CPU. It is essentially now done, so the Mesh step can be skipped completely by the CPU.)
+
+This is what the Task Manager Performance looks like when the above procedure is applied  and the Turntable command is run. Now the GPU is getting objects to display twice as fast, so the performance has increased 2x.
+
+
+==== Instancing for Display Performance ====
+A polysurface can have many faces, so let’s use a cube as an example.
+
+A cube has 6 faces.
+In Rhino V5/V6, we would draw a cube using 6 separate draw calls… one for each face.
+In Rhino V7/V8 Rhino has been improved to treat all 6 faces that are the exact same size and material, as a one single draw call.
+That’s a 600% decrease in call overhead.
+
+What part do the "pair of high res monitors" play in slowing down the navigation?
+Keep in mind, that’s only “call overhead”, not overall performance
+
+So if the call overhead took 30% of the overall draw time for a given model, and that model was made up mostly of polysurfaces, then call overhead would now only be taking up 5% of the overall draw time, yielding a 25% increase in performance.
+
+==== Render with One Mesh ====
+This exercise will demonstrate perfectly why the GPU will probably never be the bottleneck
+
+If you actually mesh everything, and then join all meshes into one giant, disjoint mesh, you can watch how fast things are. The limitation here is that there is only one material that can be set to the entire mesh. 
+
+Again, it’s because you’ve now reduced the object and draw call overhead down to a single object draw call
+
+Apply the above procedure first, steps 1-4.
+Of course keep all the polysurfaces hidden. Hide everything but the Meshes.
+5. Selmesh
+6. Join
+7. Turntable
+//
+You now have only 1 large mesh//
+Obviously it’s all going to render in the same materials and shade the same.
+You can now see the speed and performance from this mesh with one material.
+
+That 1 mesh gets uploaded to the GPU (once), and then from there on out, Rhino simply just tells the GPU “Hey, draw that mesh”
+
+You are probably not satisfied with just one mesh and one material, but it shows the speed difference.
+
+Drawing 100 objects vs. only 1 can show a huge performance difference
+It is not because the GPU is being used “more”…it’s because Rhino (CPU) has less to do.
+
+==== Buy A GPU for the Right Reasons ====
+Buying a new GPU will most likely not provide any improvement for models that bottleneck on the CPU.
+
+The model is still going to bottleneck on the CPU  and the GPU will just sit there waiting
+Let me make a draft reply and you can review. I think I have enough here.
+
+=== The Race Car Analogy ===
+I have a standard Toyota Civic sitting at the starting line.  I can’t “go” until all of my tires are changed, and my tank is filled with gas…
+
+It takes my pit crew 8 minutes to get everything ready. And then floor it, and it takes me 15 seconds to reach the finish line… So the overall time it took was 8:15 (8 minutes, 15 seconds).
+
+I go out and I buy a Ferrari … and get on the starting line…
+My crew still takes 8 minutes to get everything ready… I then floor it, and it takes, me less than 5 seconds to reach the finish line (300% faster)… The overall time it took was 8:05 (8 minutes, 5 seconds)…
+
+The crew is the CPU, and the car is the GPU. The Honda Civic is the Intel and Ferrari is the RXT Quadro
+
+If you really want Rhino to be faster, you will need to first invest in a faster CPU… Then augment that with a better GPU.
+
+Faster GPUs will perform better with Rhino, but not because the GPU monitor is being max’d out. Having a RTX is still a great option.
+
+==== In Summary ====
+//Get the CPU stuff done, then the GPU can run with it.//
+
+Being able to draw things faster with a better GPU is always going to speed things up.
+How much things speed up really depends on how much CPU time is being spent on processing the geometry before passing off to the GPU.
+
+===Other important factor on display performance:===
+
+Bad Objects https://wiki.mcneel.com/ko/rhino/badobjects
+Mesh Parameter  https://wiki.mcneel.com/rhino/meshfaq 
+
+==== What else slows down the performance ====
+=== Layouts ===
+Slows down the processing with overhead.
+May want to experiment with less overhead by linking the file with the model.
+Max.out at 10 layouts per model, for example.
+Printing is fragmented now, and PDF will need to be post processed in a PDF editor.
+Maybe the break up of sheets is not worth the savings… not in my opinion.
+
+=== Blocks ===
+Can slow down the display
+Only use blocks if instancing is required.
+
+
+=== Ambient Occlusion Light Setting in the Display Mode ===
+This setting in the display mode slows down the processing
+
+
+=== Render materials ===
+Worth the cost? Yes.
+
+==== Helpful Aliases ====
+Mesh the Geometry
+**ME**	!_selall -mesh enter _selnone
+
+Select the meshes, Invert, Hide the rest.
+**IH**	!_selmesh invert hide
+
+TestMaxSpeed
+**TMS**	!_testmaxspeed
