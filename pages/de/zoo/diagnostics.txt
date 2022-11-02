@@ -1,37 +1,43 @@
-======Zoo-Diagnosetool fÃ¼r Rhino fÃ¼r Windows======
-> **Produkt:** //[[zoo:home|Zoo]]//
-> **Zusammenfassung:** //Beschreibung des Zoo-Diagnosetools fÃ¼r Rhino 5 fÃ¼r Windows.//
+======Zoo - Diagnosetool für Windows======
+> **Produkt:** //[[de:zoo:home|Zoo]]//
+> **Zusammenfassung:** //Beschreibung des Hilfsprogramms Zoo Diagnostics für Windows//
 
-[[zoo:zoo5diagnostics|{{:zoo:zoodiagnostics.png|Zoo Diagnostics}}]]
+[[zoo:diagnostics|{{:zoo:zoodiagnostics.png|Zoo Diagnostics}}]]
 
-=====Ãœberblick=====
-Das Hilfsprogramm Zoo Diagnostics lÃ¤uft auf jedem Arbeitsplatz mit **Rhino 5 fÃ¼r Windows**. Es beinhaltet folgende Werkzeuge:
-  - Eine Reihe nutzlicher Netzwerkdiagnosetools zur Fehlersuche und -behebung bei Verbindungsproblemen zwischen Rhino-ArbeitsplÃ¤tzen und dem [[de:zoo:determinezoohost|Zoo-Server]].
-  - Ein Tool zur Anzeige und Bearbeitung des Namens des Zoo-Servers, der von den Rhino-ArbeitsplÃ¤tzen benutzt wird. Der Name des Zoo-Servers ist in der Windows-Registrierung gespeichert.
-
-[[zoo:zoo5diagnostics|{{:zoo:zoo_diagnostics.png|Zoo Diagnostics}}]]
-
-=====Diagnose=====
-Zoo Diagnostics bietet die folgenden nÃ¼tzlichen Netzwerktests:
-
-1. **[[http://support.microsoft.com/kb/814155|Ping]]** - Das Ping-Diagnosetool (PING) ist das wichtigste TCP/IP-Tool zur Fehlersuche und -behebung bei Problemen mit der KonnektivitÃ¤t, der Erreichbarkeit und der NamensauflÃ¶sung. Ping Ã¼berprÃ¼ft die KonnektivitÃ¤t mit einem anderen TCP/IP-Computer auf IP-Ebene, indem es diesem ICMP-Echoanforderungen sendet. AnschlieÃŸend zeigt es den Empfang der entsprechenden Anwort zusammen mit der Umlaufzeit an.
-
->**Hinweis:** StandardmÃ¤ÃŸig werden ICMP-Echoanforderungen, die fÃ¼r den Ping-Befehl benÃ¶tigt werden, von der Windows-Firewall geblockt. Um diese Art von Verbindung zuzulassen, gehen Sie auf Systemsteuerung -> Windows-Firewall -> Erweiterte Einstellungen -> Eingehende Regeln und aktivieren Sie im aktiven Sicherheitsprofil die Datei- und Druckerfreigabe (Netzwerk - Echoanforderung (ICMPv4 eingehend)).
-
-
-2. **[[http://support.microsoft.com/kb/200525|DNS Lookup]]** - Das Diagnosetool DNS Lookup zeigt Ihnen Informationen zu Ihrer DNS-Infrastruktur an.
-
-3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]** - Mit Trace Route (TRACERT) kÃ¶nnen Sie den Weg zu einem Ziel ermitteln. Dies wird erreicht, indem das Programm ICMP-Echopakete mit wechselnden IP Time-To-Live (TTL)-Werten an das Ziel sendet. Jeder Router auf dem Weg muss die TTL des Pakets mindestens um 1 herunterzÃ¤hlen, bevor das Paket weitervermittelt wird, sodass die TTL praktisch ein "Hop-ZÃ¤hler" ist. Wenn der TTL-Wert fÃ¼r ein Paket den Wert 0 erreicht, sendet der Router die ICMP-Meldung "ZeitÃ¼berschreitung" an den Quellcomputer zurÃ¼ck.
-
-4. **Zoo Port Check** - Der Zoo Port Check Ã¼berprÃ¼ft, ob ein Zoo-5-Service den TCP-Port 80 auf einem Server oder einem Arbeitsplatz abhÃ¶rt.
-
-//Wenn dieser Test fehlschlÃ¤gt, stellen Sie sicher, dass der Zoo-Server wirklich lÃ¤uft. DafÃ¼r nutzen Sie entweder das Tool ZooAdmin.exe oder Ã¼berprÃ¼fen es in der Systemsteuerung unter Dienste. Stellen Sie ebenfalls sicher, dass der __[[de:zoo:window7firewall|TCP-Port 80 in allen Firewalls]]__ des Zoo-Servers sowohl fÃ¼r eingehende als auch ausgehende Verbindungen geÃ¶ffnet ist.//
-
-5. **Zoo Connectivity** - Zoo Connectivity Ã¼berprÃ¼ft, ob der Zoo-5-Service korrekt ausgefÃ¼hrt wird (auf einem Server oder einem Arbeitsplatz). 
-
-//Wenn dieser Test fehlschlÃ¤gt und alle anderen Tests erfolgreich waren, stellen Sie sicher, dass der Zoo-Server wirklich lÃ¤uft. DafÃ¼r nutzen Sie entweder das Tool ZooAdmin.exe oder Ã¼berprÃ¼fen es in der Systemsteuerung unter Dienste. Stellen Sie ebenfalls sicher, dass der __[[de:zoo:window7firewall|TCP-Port 80 in allen Firewalls]]__ des Zoo-Servers sowohl fÃ¼r eingehende als auch ausgehende Verbindungen geÃ¶ffnet ist.//
+Das Hilfsprogramm Zoo Diagnostics läuft auf jedem Arbeitsplatz mit **Rhino für Windows**. Es beinhaltet folgende Werkzeuge:
+  - Eine Reihe nutzlicher Netzwerkdiagnosen zur Fehlersuche bei Verbindungsproblemen zwischen Rhino-Arbeitsplätzen und den [[de:zoo:determinezoohost|Zoo-Servern]].
+  - Zur Anzeige und Bearbeitung des Namens des LAN-Zoo-Servers, der von den Rhino-Arbeitsplätzen benutzt wird. Der Name des LAN-Zoo-Servers ist in der Windows-Registrierung gespeichert.
 
 =====Download=====
-* Sie benÃ¶tigen das [[http://www.microsoft.com/de-de/download/details.aspx?id=17851|Microsoft .NET Framework 4]].
+{{:zoo:zoodiagnostics.zip|Zoo Diagnostics herunterladen.}}
 
-{{:zoo:zoodiagnostics.zip|Download Zoo Diagnostics}}
+[[zoo:diagnostics|{{:zoo:zoo_diagnostics.png|Zoo Diagnostics}}]]
+
+=====Diagnose=====
+Zoo Diagnostics bietet die folgenden nützlichen Netzwerktests:
+
+1. **[[http://support.microsoft.com/kb/814155|Ping]]** - Das Ping-Diagnosetool (PING) ist das wichtigste TCP/IP-Tool zur Fehlersuche und -behebung bei Problemen mit der Konnektivität, der Erreichbarkeit und der Namensauflösung. Ping überprüft die Konnektivität mit einem anderen TCP/IP-Computer auf IP-Ebene, indem es diesem ICMP-Echoanforderungen sendet. Anschließend wird der Empfang der entsprechenden Antwort zusammen mit der Umlaufzeit angezeigt.
+
+>**Hinweis:** Die Standardeinstellungen des Windows-Firewalls blockieren die für den Ping-Befehl benötigten ICMP-Echoanforderungen. Um diese Art von Verbindung zuzulassen, gehen Sie auf Systemsteuerung -> System und Sicherheit -> Windows Defender Firewall -> Erweiterte Einstellungen -> Eingehende Regeln und aktivieren Sie im aktiven Sicherheitsprofil die Datei- und Druckerfreigabe (Echoanforderung - ICMPv4 eingehend).
+
+
+2. **[[http://support.microsoft.com/kb/200525|Nslookup]]:** Das Diagnosetool DNS Lookup (NSLOOKUP zeigt Ihnen Informationen zu Ihrer DNS-Infrastruktur an.
+
+3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]** - Mit Trace Route (TRACERT) können Sie den Weg zu einem Ziel ermitteln. Dies wird erreicht, indem das Programm ICMP-Echopakete mit wechselnden IP Time-To-Live (TTL)-Werten an das Ziel sendet. Jeder Router auf dem Weg muss die TTL des Pakets mindestens um 1 herunterzählen, bevor das Paket weitervermittelt wird, sodass die TTL praktisch ein "Hop-Zähler" ist. Wenn der TTL-Wert für ein Paket den Wert 0 erreicht, sendet der Router die ICMP-Meldung "Zeitüberschreitung" an den Quellcomputer zurück.
+
+4. **Zoo Port Check:** - Das Diagnose-Tool Zoo Port Check (ZOOPORT) überprüft, ob ein Zoo-Service den TCP-Port 80 auf einem Server oder einem Arbeitsplatz abhört.
+
+//Wenn dieser Test fehlschlägt, stellen Sie sicher, dass der Zoo-Server wirklich läuft. Dafür nutzen Sie entweder das Tool ZooAdmin.exe oder überprüfen es in der Systemsteuerung unter Dienste. Stellen Sie ebenfalls sicher, dass der __[[de:zoo:window7firewall|TCP-Port 80 in allen Firewalls]]__ des Zoo-Servers sowohl für eingehende als auch ausgehende Verbindungen geöffnet ist.
+
+//
+
+5. **Zoo Connectivity** - Das Diagnose-Hilfsprogramm Zoo Connectivity (ZOOECHO) überprüft, ob der Zoo-Service auf einem Server oder einem Arbeitsplatz korrekt ausgeführt wird. 
+
+//Wenn dieser Test fehlschlägt und alle anderen Tests erfolgreich waren, stellen Sie sicher, dass der Zoo-Server wirklich läuft. Dafür nutzen Sie entweder das Tool ZooAdmin.exe oder überprüfen es in der Systemsteuerung unter Dienste. Stellen Sie ebenfalls sicher, dass der __[[de:zoo:window7firewall|TCP-Port 80 in allen Firewalls]]__ des Zoo-Servers sowohl für eingehende als auch ausgehende Verbindungen geöffnet ist.//
+
+//Dieser Test kann fehlschlagen, wenn sich Kunde und Server auf verschiedenen Subnets befinden. Standardmäßig öffnet der Zoo-Installer die Windows-Firewall dem Zoo-Service an Port 80 nur für das lokale Subnet. Sie werden die Firewall-Regel ändern müssen, um allen sonstigen Subnets Zugriff zu genehmigen.//
+
+//Dieser Test kann ebenfalls fehlschlagen, wenn Ihr System so konfiguriert ist, um durch Verwendung eines [[https://de.wikipedia.org/wiki/Proxy_(Rechnernetz)|Proxy-Servers]] auf das Internet zuzugreifen. In diesem Fall erreicht der Test nie den Zoo-Server. Wenn Sie einen Proxy-Server verwenden, vergewissern Sie sich, dass der Zugriff auf lokale Adresse genehmigt ist. Siehe __[[de:zoo:zooproxyserver|Verwendung des Zoos mit einem Proxy Server]]__ um mehr zu erfahren.//
+
+=====Verwandte Themen =====
+[[zoo:diagnosticsmac|Zoo - Diagnostics Utility for Mac]]
