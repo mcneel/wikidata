@@ -1,0 +1,65 @@
+======Transferir la configuración personalizada======
+
+>Cómo transferir su configuración personalizada de una instalación a otra 
+
+=====¿Dónde se almacenan mis ajustes de configuración?=====
+
+> Nota: las barras de herramientas son independientes de la configuración y se tratarán más adelante
+
+En Rhino V5 y versiones anteriores, la mayoría de los ajustes de configuración de Rhino no se almacenaban en archivos externos, sino en el registro. A partir de Rhino V6, gran parte de esta información se ha trasladado fuera del registro a uno o más archivos de "configuración" .xml; y con la V7 y posteriores se han realizado más cambios en el sistema. 
+
+En todos los casos, no hay un único archivo que contenga todas las opciones y personalizaciones de Rhino.  Y, con cada versión sucesiva, las opciones existentes pueden cambiar y se pueden añadir otras nuevas.  Por lo tanto, no es una operación de un solo clic para transferir su configuración personalizada de una instalación a otra; sobre todo si está realizando una actualización al mismo tiempo. Hay algunos atajos, según la versión que tenga.
+
+**Para la V6 y posteriores - //dentro de la misma versión//**:
+La forma más fácil es simplemente copiar el archivo //settings-Scheme_Default.xml// de una instalación a la otra, reemplazando el original. El archivo se encuentra en //C:\Usuarios\<nombredeusuario>\AppData\Roaming\NMcNeel\Rhinoceros\<número de versión>\settings//. Esta opción también puede funcionar cuando se actualizan las versiones, pero es un poco arriesgado, ya que algunos ajustes cambian entre versiones.
+
+> Nota: la ubicación de estos archivos mencionados anteriormente es una carpeta oculta por Windows por defecto. Para acceder a la carpeta rápidamente, pulse el botón de Inicio de Windows, escriba **%appdata%** y pulse Intro. Esto le llevará a la carpeta "Roaming", y luego puede ir a la carpeta apropiada. <nombredeusuario> representa el nombre de usuario de su cuenta de Windows y <númerodeversión> es 5.0, 6.0, 7.0, etc.
+
+**Para la V5:**
+Para transferir toda la configuración, utilice el comando de Rhino **ExportarOpciones**, que crea un único archivo con la __mayoría__ de las personalizaciones. Al importar este archivo a otra instalación mediante el comando **ImportarOpciones** (V5 y posteriores), se transferirá la configuración a la nueva instalación.  Puede elegir qué opciones de configuración desea importar. No es necesario importarlas todas.  
+
+Los modos de visualización se incluyen en ExportarOpciones e ImportarOpciones en la V5 y también en los archivos .xml de configuración a partir de la V6.  En la V5, solo se pueden importar todas a la vez (o ninguna) a través de ExportarOpciones/ImportarOpciones.  Si solo desea transferir modos de visualización individuales, utilice los botones Exportar/Importar en Opciones>Ver>Modos de visualización.
+
+=====Barras de herramientas=====
+
+Aparte de las otras opciones, los archivos del espacio de trabajo contienen la mayor parte de la información de las barras de herramientas/botones como, por ejemplo, los botones que están en cada barra de herramientas, las macros de comandos para cada botón y las imágenes de los botones. Los archivos de espacios de trabajo tienen la extensión .rui en la V5 y posteriores. También puede copiar este archivo entre instalaciones.  La ubicación predeterminada de estos archivos también es una carpeta oculta:
+
+//C:\Usuarios\<nombredeusuario>\AppData\Roaming\McNeel\Rhinoceros\<númerodeversión>\UI//
+
+
+Sin embargo, el archivo del espacio de trabajo no contiene las ubicaciones en pantalla de las barras de herramientas, sino solo las barras de herramientas y si están abiertas o no. En la V5, la información de ubicación se guardaba en el registro; en la V6 y posteriores se ha trasladado a un archivo de configuración .xml denominado //window_positions// que se encuentra en la misma carpeta con las demás configuraciones:
+
+//C:\Usuarios\<nombredeusuario>\AppData\Roaming\McNeel\Rhinoceros\<númerodeversión>\settings//
+
+Para cargar un archivo de espacio de trabajo existente en una nueva instalación, es mejor hacerlo desde dentro de Rhino. En la ventana Opciones>Barras de herramientas, desde el menú Archivo, cierre el archivo de espacio de trabajo abierto existente y, a continuación, abra el nuevo archivo de espacio de trabajo que se ha copiado.  Puede que tenga que reorganizar las barras de herramientas la primera vez que lo haga, después ya se recordará.  //No es recomendable sustituir simplemente el archivo .rui por otro a través del explorador de Windows cuando se cierra Rhino.//
+
+Es posible importar un archivo .rui de una versión anterior de Rhino mediante el procedimiento anterior; sin embargo, tenga en cuenta que cambian muchas cosas de una versión a otra, por lo que puede que no siempre salga del todo bien.  Algunas macros de comandos pueden haber cambiado.
+
+Finalmente, hay otras cosas que se pueden haber personalizado/modificado.  Entre ellas, sus archivos de plantillas, los plug-ins instalados, etc.  Los archivos de plantillas son simplemente archivos .3dm, por lo que pueden copiarse sin problemas; los plug-ins probablemente tengan que reinstalarse; tenga cuidado con los problemas de compatibilidad si está actualizando a una nueva versión de Rhino.
+
+
+=====Suena complicado, ¿cómo me aseguro de no dejarme nada?=====
+
+Un procedimiento general de transferencia podría ser el siguiente:
+
+**En la antigua instalación:**
+
+Solo V5: **ExportarOpciones** crea un archivo .ini
+
+V6 y posteriores: haga una copia de su archivo settings-Scheme_Default.xml
+
+  * Haga una copia de su archivo de espacio de trabajo (.rui) si lo ha personalizado 
+  * Haga copias de los archivos de plantillas personalizadas que haya creado 
+  * Haga copias de cualquier otro archivo externo utilizado, incluidos e-maps, scripts, etc.
+
+**En la nueva instalación:**
+
+Solo V5: ejecute **ImportarOpciones** e importe el archivo .ini creado anteriormente
+
+V6 y posteriores: //Reemplace// el archivo settings-Scheme_Default.xml existente por el copiado de la instalación anterior
+
+  * Copie el espacio de trabajo, la plantilla, los e-maps, los scripts y los archivos en las ubicaciones apropiadas.
+  * Vaya a //Opciones>Barras de herramientas// y cargue su archivo de espacio de trabajo personalizado.
+  * Instale los plug-ins que Rhino no transfirió automáticamente.
+  * Configure Rhino para que se abra con su plantilla personalizada.
+  * Defina las rutas de los archivos a los scripts, plantillas, etc. si no son estándar.
