@@ -4,34 +4,38 @@
 
 =====Où sont enregistrés mes paramètres ?=====
 
-**Dans Rhino 5 et les versions précédentes** la plupart des paramètres de Rhino n'étaient pas enregistrés dans des fichiers externes, mais dans le registre. **Dans Rhino 6**, la plupart de ces informations ont été retirées du registre pour les placer dans un ou plusieurs fichiers de paramètres au format .xml. Cependant, dans les deux cas, il n'existe pas de fichier unique contenant toutes les options et personnalisations, le transfert de vos paramètres personnalisés ne se fera donc pas en un seul clic. Il existe toutefois des raccourcis :
+> Remaque : les barres d'outils ne sont pas enregistrées avec les paramètres et seront traitées à part. 
 
-La façon la plus simple de transférer la plupart de vos paramètres est d'utiliser la commande de Rhino **ExporterOptions** qui créer un fichier unique avec _la plupart_ des personnalisations. L'importation de ce fichier dans une autre installation avec la commande **ImporterOptions** transférera les paramètres vers la nouvelle installation. Vous avez la possibilité de choisir les paramètres que vous voulez importer. Il n'est pas obligatoire de tous les importer.  
+Dans Rhino 5 et les versions précédentes la plupart des paramètres de Rhino n'étaient pas enregistrés dans des fichiers externes, mais dans le registre. Dans **Rhino 6**, la plupart de ces informations ont été retirées du registre pour les placer dans un ou plusieurs fichiers de paramètres au format .xml ; et dans **Rhino 7 et les versions suivantes**, d'autres modifications ont été apportées au système. 
 
-> Remarque :   Les //modes d'affichage// ne sont pas inclus dans la commande ExporterOptions de la version 4, vous devez les exporter à part.  Pour ce faire, ouvrez les //Options > Apparence > Paramètres avancés//.  
+Dans tous les cas il n'existe pas de fichier unique contenant toutes les options et personnalisations de Rhino. Avec chaque version, les options peuvent changer et de nouvelles sont ajoutées. Le transfert de vos paramètres personnalisés ne se fera donc pas en un seul clic, en particulier si vous réalisez une mise à jour en même temps. Il existe toutefois des raccourcis, selon votre version. 
 
-**Pour les modes d'affichage, ils sont inclus sous forme d'ensemble dans ExporterOptions et ImporterOptions depuis la version 5**, cependant, vous ne pouvez pas sélectionner lesquels sont pris en compte. Si vous voulez juste transférer des modes d'affichage de manière individuelle, utilisez les boutons Exporter/Importer dans Options > Vue > Modes d'affichage. 
+**Rhino 6 et versions suivantes - //avec un transfert entre version équivalente//** :
+La façon la plus simple est de simplement copier le //fichier settings-Scheme_Default.xml// d'une installation à l'autre, en remplaçant le fichier original. Le fichier se trouve dans le dossier //C:\Users\<nom de l'utilisateur>\AppData\Roaming\McNeel\Rhinoceros\<version number>\settings//.  Il est préférable de ne pas utiliser cette option lors d'une mise à jour car certains paramètres peuvent avoir changé de nom ou d'options. 
 
-**Séparés des autres options, les fichiers d'espace de travail contiennent la plupart des informations sur les barres d'outils/boutons** telles que l'emplacement des boutons dans les barres d'outils, les macros de commandes de chaque bouton et les images. Les fichiers d'espace de travail ont une extension .tb pour la version 4 et .rui à partir de la version 5. Vous pouvez également copier ce fichier entre différentes installations. À partir de la version 5, l'emplacement par défaut de ces fichiers est un dossier caché :
+> Remarque : l'emplacement de ces fichiers est un dossier masqué par défaut dans Windows. Vous pouvez accéder rapidement à ce dossier en cliquant sur le bouton démarrer de Windows et en tapant **%appdata%** suivi de la touche Entrée afin d'atteindre le dossier Roaming, puis en navigant jusqu'au dossier indiqué. <nom de l'utilisateur> représente votre nom d'utilisateur dans Windows, <numéro de version> peut être 5,0, 6.0, 7.0 etc.
 
-**C:\Users\<nom de l'utilisateur>\AppData\Roaming\McNeel\Rhinoceros\<numéro de version>\UI**
+**Rhino 5 :**
+Pour transférer la plupart de vos paramètres, utilisez la commande de Rhino **ExporterOptions** qui crée un fichier unique avec _la plupart_ des personnalisations. L'importation de ce fichier dans une autre installation avec la commande **ImporterOptions** transférera les paramètres vers la nouvelle installation.  Vous avez la possibilité de choisir les paramètres que vous voulez importer. Il n'est pas obligatoire de tous les importer.  
 
-//(<nom de l'utilisateur> représente votre nom d'utilisateur dans Windows, <numéro de version> peut être 5.0, 6.0 etc.)//
+Les modes d'affichage sont inclus dans les commandes ExporterOptions et ImporterOptions dans la version 5 et également dans les fichiers de paramètres .xml dans la version 6 et les suivantes. Dans Rhino 5, la seule option disponible est d'importer tous les modes d'affichage d'un coup (ou aucun) si vous utilisez ExporterOptions/ImporterOptions. Si vous voulez juste transférer des modes d'affichage de manière individuelle, utilisez les boutons Exporter/Importer dans Options > Vue > Modes d'affichage.
 
-> Remarque : Vous pouvez accéder rapidement à ce dossier en cliquant sur le bouton démarrer de Windows et en tapant **%appdata%** suivi de la touche Entrée afin d'atteindre le dossier Roaming, puis en navigant jusqu'au dossier indiqué. 
+=====Barres d'outils=====
 
-> Pour la version 4, les barres d'outils se trouvent dans le dossier : C:\ProgramData\McNeel\Rhinoceros\4.0 (Win Vista et suivantes) ou : C:\Documents and Settings\All Users\Application Data\McNeel\Rhinoceros\4.0 (XP)
+Séparés des autres options, les fichiers d'espace de travail contiennent la plupart des informations sur les barres d'outils/boutons telles que l'emplacement des boutons dans les barres d'outils, les macros de commandes de chaque bouton et les images. Les fichiers d'espace de travail portent l'extension .rui dans Rhino 5 et les versions suivantes. Vous pouvez également copier ce fichier entre différentes installations.  L'emplacement par défaut de ces fichiers est également un dossier masqué :
 
-
-Le fichier d'espace de travail ne contient pas la position des barres d'outils sur l'écran mais uniquement leur contenu et si elles sont ouvertes ou non. Dans la version 5, les informations sur la position des barres d'outils sont enregistrées dans le registre ; dans la version 6 elles se trouvent dans un fichier de paramètres .xml placé dans le dossier :
-
-**C:\Users\<nom de l'utilisateur>\AppData\Roaming\McNeel\Rhinoceros\6.0\settings**
-
-Le fichier .xml contenant les options mentionnées au début se trouve dans le même dossier. 
-
-D'autres éléments peuvent être personnalisés ou modifiés, comme les fichiers modèles, les modules installés, etc. Les fichiers modèles sont de simples fichiers .3dm et peuvent donc être copiés d'un ordinateur à un autre sans problème ;  les modules devront probablement être réinstallés ; attention aux problèmes de compatibilité si vous faites une mise à jour de la version de Rhino. 
+//C:\Users\<nom de l'utilisateur>\AppData\Roaming\McNeel\Rhinoceros\<numéro de version>\UI//
 
 
+Le fichier d'espace de travail ne contient pas la position des barres d'outils sur l'écran mais uniquement leur contenu et si elles sont ouvertes ou non. Dans la version 5, les informations sur la position des barres d'outils sont enregistrées dans le registre ; dans la version 6 elles se trouvent dans un fichier de paramètres .xml appelé //window_positions// qui se trouve dans le même dossier que les autres paramètres : 
+
+//C:\Users\<nom de l'utilisateur>\AppData\Roaming\McNeel\Rhinoceros\<numéro de version>\settings//
+
+Pour charger un fichier d'espace de travail dans une nouvelle installation, nous vous recommandons de le faire depuis Rhino. Dans la fenêtre du menu Outils > Options > Barres d'outils, fermez les fichiers d'espace de travail ouverts et ouvrez le nouveau fichier que vous avez exporté d'une autre installation. Vous devrez peut-être réorganiser les barres d'outils la première fois, ensuite les positions devraient être enregistrées. //Il n'est pas recommandé de simplement remplacer le fichier .rui par un autre dans l'explorateur de Windows lorsque Rhino est fermé.//
+
+Il est possible d'importer un fichier .rui d'une version précédente de Rhino en utilisant la procédure précédente. Cependant, n'oubliez pas que de nombreuses options changent d'une version à une autre et l'importation peut ne pas être exacte à 100%. Certaines macros de commandes peuvent avoir changé. 
+
+D'autres éléments peuvent être personnalisés ou modifiés,  comme les fichiers modèles, les modules installés, etc.  Les fichiers modèles sont seulement des fichiers .3dm, il peuvent donc être copiés sans problème. Les modules devraient probablement être réinstallés, vérifiez la compatibilité si vous actualisez vers une nouvelle version de Rhino (de 6 vers 7 par exemple). 
 
 
 =====Comment être sûr de ne rien oublier ?=====
@@ -40,20 +44,22 @@ En règle générale, si vous devez transférer une installation, vous pouvez su
 
 **Sur l'ancienne installation :**
 
-Utilisez la commande **ExporterOptions** pour créer un fichier .ini
+**Rhino 5** uniquement : Utilisez la commande **ExporterOptions** pour créer un fichier .ini
 
-  * Copiez votre fichier d'espace de travail (.tb/.rui) si vous l'avez personnalisé 
+**Rhino 6 et Rhino 7** : Créez une copie du fichier settings-Scheme_Default.xml 
+
+  * Copiez votre fichier d'espace de travail (.rui) si vous l'avez personnalisé 
   * Copiez les fichiers modèles que vous avez créés 
-  * Copiez tous les fichiers externes utilisés, tels que : les modules, les environnements, les scripts, etc. 
-  * Version 4 - Exportez les modes d'affichage personnalisés  (si vous en avez créés) - en créant un fichier .ini par mode d'affichage
+  * Copiez tous les fichiers externes utilisés, tels que : placages d'environnement, scripts, etc.
 
 **Sur la nouvelle installation :**
 
-Utilisez la commande **ImporterOptions** et importez le fichier .ini créé dans l'ancienne installation
+**Rhino 5** uniquement : Utilisez la commande **ImporterOptions** et importez le fichier .ini créé auparavant. 
 
-  * Copiez vos fichiers d'espace de travail, de modèles, d'environnements, de scripts et de modules dans les emplacements correspondants. 
-  * Ouvrez le menu //Outils > Configuration des barres d'outils// et chargez votre espace de travail. 
-  * Déposez les fichiers des modules dans la fenêtre de Rhino pour les installer. (Certains ont besoin d'un fichier d'installation externe. Utilisez-le si nécessaire.)
+**Rhino 6 et Rhino 7** : //Remplacez// le fichier settings-Scheme_Default.xml existant par celui copié dans les étapes précédentes. 
+
+  * Copiez vos fichiers d'espace de travail, de modèles, d'environnements, de scripts dans les emplacements correspondants.
+  * Ouvrez le menu //Outils > Options > Barres d'outils// et chargez votre fichier d'espace de travail personnalisé. 
+  * Installez les modules que Rhino n'a pas transféré automatiquement. 
   * Configurez Rhino pour qu'il s'ouvre avec votre fichier modèle personnalisé.
-  * Dans la section Fichiers des Options, définissez les chemins d'accès aux scripts, aux fichiers modèles, etc. s'ils sont différents de ceux définis par défaut. 
-  * Dans la version 4 - Ouvrez le menu //Options > Apparence > Paramètres avancés// et importez les modes d'affichage personnalisés un par un. 
+  * Définissez les chemins d'accès des scripts, des fichiers modèles, etc. si vous les avez personnalisés. 
