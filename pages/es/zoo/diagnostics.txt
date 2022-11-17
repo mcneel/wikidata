@@ -1,0 +1,43 @@
+======Zoo - Utilidad de diagnóstico para Windows======
+> **Producto:** //[[es:zoo:home|Zoo]]//
+> **Resumen:** //Describe la utilidad de diagnóstico de Zoo para Windows//
+
+[[es:zoo:diagnostics|{{:zoo:zoodiagnostics.png|Diagnóstico de Zoo}}]]
+
+La utilidad de diagnóstico de Zoo se ejecuta en una estación de trabajo con **Rhino para Windows**. La utilidad ofrece estas herramientas útiles:
+  - Proporciona una serie de diagnósticos de red útiles para ayudarle a solucionar problemas de conectividad entre estaciones de trabajo de Rhino y [[es:zoo:determinezoohost|servidores de Zoo]].
+  - Permite ver y modificar el nombre del servidor de Zoo LAN utilizado por las estaciones de trabajo de Rhino. El nombre del servidor de Zoo LAN se guarda en el Registro de Windows.
+
+=====Descarga=====
+{{:zoo:zoodiagnostics.zip|Descargar Zoo Diagnostics.}}
+
+[[es:zoo:diagnostics|{{:zoo:zoodiagnostics.png|Diagnóstico de Zoo}}]]
+
+=====Diagnóstico=====
+La utilidad Zoo Diagnostics ofrece estas pruebas de red útiles:
+
+1. **[[http://support.microsoft.com/kb/814155|Ping]]:** La utilidad de diagnóstico de Ping (PING) es la principal herramienta TCP/IP utilizada para solucionar problemas de conectividad, accesibilidad y resolución de nombres. El Ping comprueba la conectividad a nivel de IP con otro equipo TCP/IP enviando mensajes de solicitud de eco con el Protocolo de mensajes de control de Internet (ICMP). La recepción de los correspondientes mensajes de respuesta de eco se muestra junto con los tiempos de ida y vuelta.
+
+>**Nota:** La configuración por defecto del firewall de Windows bloquea las peticiones de eco ICMP utilizadas para el comando ping. Para activar el eco ICMP en Windows, vaya a Panel de control -> Firewall de Windows -> Configuración avanzada -> Reglas de entrada y active Compartir impresoras y archivos (Solicitud de eco- ICMPv4-In) en el perfil de seguridad activo.
+
+
+2. **[[http://support.microsoft.com/kb/200525|Búsqueda de DNS]]:** La utilidad de diagnóstico de búsqueda de DNS (NSLOOKUP) muestra información que puede utilizar para diagnosticar la infraestructura del sistema de nombres de dominio (DNS).
+
+3.  **[[http://support.microsoft.com/kb/314868|Seguimiento de ruta]]:** La utilidad de diagnóstico de seguimiento de ruta (TRACERT) determina la ruta tomada hacia un destino enviando al destino paquetes de eco ICMP con valores diferentes de IP TTL. Se requiere que cada enrutador disminuya el TTL en un paquete en al menos 1 punto antes de reenviarlo, para que el TTL tenga un número de saltos. Cuando el TTL de un paquete llega a 0, el enrutador debe enviar un mensaje de tiempo excedido de ICMP al equipo de origen.
+
+4. **Comprobación del puerto de Zoo:** La utilidad de diagnóstico Zoo Port Check (ZOOPORT) verifica que haya un servicio de Zoo en el puerto TCP 80 de un servidor o estación de trabajo.
+
+//Si esta comprobación falla, asegúrese de que se esté ejecutando el servicio del servidor de Zoo. Puede hacerlo utilizando ZooAdmin.exe o la miniaplicación Servicios del Panel de control. Asegúrese también de que el [[es:zoo:window7firewall|puerto TCP 80 esté abierto en cualquier software de firewall]], tanto para el tráfico de entrada como de salida, que se esté ejecutando en el sistema de Zoo.
+
+//
+
+5. **Conectividad de Zoo:** La utilidad de diagnóstico Zoo Connectivity (ZOOECHO) verifica que haya un servicio de Zoo ejecutándose en un servidor o estación de trabajo. 
+
+//Si esta comprobación falla y otras se realizan correctamente, asegúrese de que se esté ejecutando el servicio del servidor de Zoo. Puede hacerlo utilizando ZooAdmin.exe o la miniaplicación Servicios del Panel de control. Asegúrese también de que el __[[es:zoo:window7firewall|puerto TCP 80 esté abierto en cualquier software de firewall]],__ tanto para el tráfico de entrada como de salida, que se esté ejecutando en el sistema de Zoo.//
+
+//Esta prueba puede fallar si el cliente y el servidor están en diferentes subredes. Por defecto, el instalador de Zoo abre el Firewall de Windows al servicio de Zoo en el puerto 80 solo para la subred local. Tendrá que cambiar la regla del firewall para permitir todas las demás subredes que necesiten acceso.//
+
+//Esta prueba también puede fallar si su sistema está configurado para acceder a Internet mediante un [[https://es.wikipedia.org/wiki/Servidor_proxy|servidor proxy]]. En este caso, la prueba nunca llega al servidor de Zoo. Si utiliza un servidor proxy, asegúrese de permitir el acceso a las direcciones locales. Consulte __[[es:zoo:zooproxyserver|Usar Zoo con un servidor proxy]]__ para obtener más información.//
+
+=====Temas relacionados =====
+[[es:zoo:diagnosticsmac|Zoo - Utilidad de diagnóstico para Mac]]
