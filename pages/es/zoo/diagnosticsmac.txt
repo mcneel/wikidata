@@ -1,0 +1,36 @@
+======Zoo - Utilidad de diagnóstico para Mac======
+> **Producto:** //[[es:zoo:home|Zoo]]//
+> **Resumen:** //Describe la utilidad de diagnóstico de Zoo para Mac//
+
+[[es:zoo:diagnosticsmac|{{:zoo:networkutility.png?128|Utilidad de red}}]]
+
+La utilidad de red se ejecuta en una estación de trabajo con **Rhino para Mac**. La utilidad proporciona una serie de diagnósticos de red útiles para ayudarle a solucionar problemas de conectividad entre estaciones de trabajo de Rhino para Mac y servidores de Zoo.
+
+Utilice **[[https://support.apple.com/es-es/guide/mac-help/mchlp1008/mac|Spotlight]]** en su Mac para encontrar y abrir la utilidad de red.
+
+  - Haga clic en el icono **Buscar** en la esquina superior derecha de la barra de menús, o pulse la tecla **Comando** + **Espacio**.
+  - Escriba **Utilidad de red** para realizar la búsqueda.
+  - Haga doble clic en **Utilidad de red** para ejecutarla.
+
+>**Nota:** Con el lanzamiento de macOS Big Sur, Apple optó por descontinuar esta aplicación. Sin embargo, todavía puede acceder a muchas de sus funciones más útiles utilizando **[[https://www.makeuseof.com/how-to-use-terminal-as-network-utility-replacement/|Terminal]]**.
+
+  
+=====Diagnóstico=====
+Utilidad de red ofrece estas pruebas de red útiles:
+
+1. **Ping:** La utilidad de diagnóstico de ping es la principal herramienta TCP/IP utilizada para solucionar problemas de conectividad, accesibilidad y resolución de nombres. El Ping comprueba la conectividad a nivel de IP con otro equipo TCP/IP enviando mensajes de solicitud de eco con el Protocolo de mensajes de control de Internet (ICMP). La recepción de los correspondientes mensajes de respuesta de eco se muestra junto con los tiempos de ida y vuelta.
+{{:zoo:nu_ping.png?640|Ping}}
+
+2. **Búsqueda de DNS:** La utilidad de diagnóstico de búsqueda de DNS muestra información que puede utilizar para diagnosticar la infraestructura del sistema de nombres de dominio (DNS).
+{{:zoo:nu_lookup.png?640|Lookup}}
+
+3.  **Seguimiento de ruta:** La utilidad de diagnóstico de seguimiento de ruta  determina la ruta tomada hacia un destino enviando al destino paquetes de eco ICMP con valores diferentes de IP TTL. Se requiere que cada enrutador disminuya el TTL en un paquete en al menos 1 punto antes de reenviarlo, para que el TTL tenga un número de saltos. Cuando el TTL de un paquete llega a 0, el enrutador debe enviar un mensaje de tiempo excedido de ICMP al equipo de origen.
+{{:zoo:nu_traceroute.png?640|Seguimiento de ruta}}
+
+4. **Escaneo de puertos:** La prueba de escaneo de puertos escanea los puertos TCP abiertos. En el caso de Zoo, querrá buscar el puerto TCP 80.
+{{:zoo:nu_portscan.png?640|Port Scan}}
+
+//Si esta comprobación falla, asegúrese de que se esté ejecutando el servicio del servidor de Zoo. Puede hacerlo utilizando ZooAdmin.exe o la miniaplicación Servicios del Panel de control. Asegúrese también de que el __[[es:zoo:window7firewall|puerto TCP 80 esté abierto en cualquier software de firewall]],__ tanto para el tráfico de entrada como de salida, que se esté ejecutando en el sistema de Zoo.//
+
+=====Temas relacionados =====
+[[es:zoo:diagnostics|Zoo - Utilidad de diagnóstico para Windows]]
