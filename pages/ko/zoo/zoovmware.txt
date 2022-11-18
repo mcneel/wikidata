@@ -1,24 +1,22 @@
-====== VMWare에서 Zoo 사용하기 ======
+====== Mac용 VMware Fusion에서 LAN Zoo 실행하기 ======
 > **제품:** //[[ko:zoo:home|Zoo]]//
-> **요약:** //OS X에서 VMWare를 사용하는 경우, Zoo 사용에 대한 안내입니다.//
+> **요약:** // macOS에서 VMWare를 사용하는 경우, LAN Zoo를 실행하는 방법을 안내합니다.//
 
 ===== 질문 =====
-[[:ko:zoo:zooosx|Wiki]] 페이지의 설명대로 Mac OS X 서버의 VMWare Fusion Pro와 Windows에 Zoo를 설치했습니다. 어떤 이유에선지, 실행이 되지 않습니다. Rhino에서 자동 검색과 IP 주소 지정 방식을 모두 사용해 봤습니다. Rhino에서 //An unknown exception has occurred. Please contact your system administrator for assistance (알 수 없는 예외가 발생했습니다. 시스템 관리자에게 문의하세요)//라는 오류 메시지만 표시됩니다. 
+macOS 서버의 VMWare Fusion Pro와 Windows에 LAN Zoo를 설치했습니다. 어떤 이유에선지 실행이 되지 않습니다. Rhino에서 자동 검색과 IP 주소 지정 방식을 모두 사용해 봤습니다. Rhino에서 //"An unknown exception has occurred. Please contact your system administrator for assistance (알 수 없는 예외가 발생했습니다. 시스템 관리자에게 문의하세요)"//라는 오류 메시지만 표시됩니다.
 
 ===== 답변 =====
-이와 같은 경우에는 Windows만 실행 중이 아니라는 점을 잊지 마세요. Windows는 OS X 시스템 안에서 가상 머신(virtual machine)으로 실행되고 있습니다. 따라서 제대로 Zoo를 실행하려면 별도의 네트워크 설정이 필요합니다. 
+이러한 상황에서는 Windows만 실행 중이 아니라는 점을 기억하세요. macOS 안에서 가상 컴퓨터로 Windows가 실행되고 있습니다. 따라서, 모든 것이 올바르게 실행되려면 별도의 네트워크 설정이 필요합니다.
 
-VMWare와 네트워킹에 익숙하지 않으시다면 다음 자료를 참조 바랍니다:
+VMware와 네트워크 작업이 익숙하지 않다면, 다음 정보를 검토해보시기 바랍니다: [[http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1022264|Understanding networking types in VMware Fusion]].
 
-[[http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1022264|Understanding networking types in VMware Fusion]]
+또한, 인터넷에서 "VMware Fusion에서 웹 서버 실행"을 검색하시면 도움이 되는 자료를 더 많이 찾으실 수 있습니다. Zoo는 웹 서버와 마찬가지로 TCP 80 포트를 사용한다는 점을 명심하세요.
 
-또한, 인터넷에서 "VMWare Fusion에서 웹 서버 실행"을 검색해보시면 도움이 되는 자료를 찾으실 수 있습니다. Zoo는 웹 서버와 마찬가지로 TCP Port 80를 사용한다는 점을 명심하세요.
+Mac 서버에서 어떤 작업을 하는 중인지, 얼마나 많은 다른 VMware 세션이 지원되지는지에 따라 설정은 매우 간단할 수 있습니다. 
 
-사용하시는 Mac 서버의 역할과, Mac 서버가 지원하는 VMWare 세션의 수에 따라서 간단한 설정으로 충분하거나, 약간을 설정이 필요할 수 있습니다. 
+예를 들어, Mac 서버가 웹 서비스를 전혀 호스트하지 않고, 한 대의 VMware 세션만을 실행하는 중이라면, 해당 세션의 네트워크 어댑터를 //브리지된(Bridged)// 모드로 설정하기만 하면 됩니다. 이것은 VMware에서 Zoo를 실행하게 만드는 가장 간단한 방법입니다. 
 
-예를 들어, Mac 서버가 웹 서비스 호스트하지 않고 한 대의 VMWare 세션만을 실행하는 경우, 해당 세션의 네트워크 어댑터를 "Bridged" 모드로 설정하시면 됩니다. 이것은 VMware에서 Zoo를 실행하는 가장 간단한 방법입니다. 
-
-NAT용으로 네트워크 어댑터를 설정해야 한다면 VMWare를 포트 전달(port forwarding)으로 설정하셔야 합니다.
+NAT용으로 네트워크 어댑터를 설정해야 한다면, VMware를 포트 전달(port forwarding)로 설정하셔야 합니다.
 
 [[http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2006955|Configuring a Web server on a virtual machine that uses NAT mode networking]]
 
