@@ -1,12 +1,12 @@
-====== Zoo가 웹 서버에서 시작하지 않습니다 ======
+====== LAN Zoo가 웹 서버에서 시작하지 않습니다 ======
 > **제품:** //[[ko:zoo:home|Zoo]]//
-> **요약:** //Zoo 는 TCP 80 포트로 액세스해야 합니다. 웹 서비스가 실행되는 시스템에서는 이것이 불가능합니다.//
+> **요약:** // LAN Zoo는 TCP 80 포트에 액세스해야 합니다. 웹 서비스가 실행되는 시스템에서는 이것이 불가능합니다.//
 
 ===== 문제 =====
-서버를 다시 시작하면 Zoo 5 서비스가 시작하지 않습니다. Windows 이벤트 로그 (제어판 > 관리 도구 -> 이벤트 뷰어)를 확인하니 Zoo 5 서비스에 오류가 로그되어 있었습니다:
+서버를 다시 시작하면 LAN Zoo 서비스가 시작하지 않습니다. Windows 이벤트 로그 (제어판 > 시스템 및 보안 -> 관리 도구 -> 이벤트 뷰어)를 확인하니 LAN Zoo 서비스에 오류가 로그되어 있었습니다:
 
 <code>
-로컬 컴퓨터의 Zoo 5 서비스가 시작한 후에 멈췄습니다.
+로컬 컴퓨터의 Zoo 서비스가 시작한 후에 멈췄습니다.
 일부 서비스 중에는 다른 서비스 또는 프로그램에서 사용되지 않는 경우에 자동으로 중지되는
 서비스가 있습니다.
 </code>
@@ -19,23 +19,20 @@ Run 'netstat -o -n -a' from a command line to find the conflicting
 process ID, then look in Task Manager to find the name of that process.
 </code>
 
-해석: 다른 프로세스에서 이미 주소를 사용 중입니다. 충돌하는 프로세스 ID를 찾기 위해 명령줄에 netstat -o -n -a를 실행하고 작업 관리자에서 해당 프로세스 이름을 찾습니다.
-
-{{:ko:zoo:netstat.png?450|}}
-
-  - 명령줄(command line)에 **NETSTAT -ano**를 실행하고 열어두고자 하는 포트의 PID 번호를 적어둡니다.
+  - 명령줄(command line)에 **NETSTAT -o -n -a**를 실행하고, 열어두려는 포트의 PID 번호를 적어둡니다.
   - 작업 관리자에서 어떤 프로세스가 해당 PID를 갖고 있는지 볼 수 있으며, 어느 프로그램이 해당 포트를 사용하고 있는지 확인할 수 있습니다.
 
-이 오류의 이유는 일부 다른 응용 프로그램이 이미 TCP 80 포트를 사용하고 있기 때문입니다. 한 번에 하나의 응용 프로그램만이 한 포트를 사용할 수 있으므로, Zoo가 80 포트와 연결되지 않게 됩니다.  이 문제를 일으키는 일반적인 응용 프로그램은 다음과 같습니다:
+이 오류의 이유는 다른 응용 프로그램이 이미 TCP 80 포트를 사용하고 있기 때문입니다. 한 번에 하나의 응용 프로그램만이 한 포트를 사용할 수 있으므로, Zoo가 80 포트와 연결되지 않게 됩니다. 이 문제를 일으키는 일반적인 응용 프로그램은 다음과 같습니다:
 
-  * [[http://www.iis.net/|Internet Information Services (IIS) for Windows® ​Services]]
+  * [[http://www.iis.net/|Internet Information Services (IIS) for Windows® Services]]
   * [[http://httpd.apache.org/|Apache HTTP 서버]]
   * [[http://www.java.com|Java]]
   * [[ko:zoo:zooskype|Skype]]
+
 ===== 해결책 =====
-  - 웹 서비스를 실행하지 않는 컴퓨터로 Zoo를 옮기십시오.  전원을 켜두는 워크스테이션인 프린트 서버나, 또 다른 가상 서버가 될 수 있습니다.
+  - 웹 서비스를 실행하지 않는 컴퓨터로 LAN Zoo를 옮기십시오. 전원을 켜두는 워크스테이션, 프린트 서버, 또 다른 가상 서버를 사용하실 수 있습니다. 
   - 웹 서비스가 다른 포트를 사용하도록 설정합니다. Apache와 IIS 모두 다른 포트에서 실행되도록 설정하실 수 있습니다.
 
 \\
 
-{{tag>Zoo_ko}}
+{{tag>Zoo_Ko}}
