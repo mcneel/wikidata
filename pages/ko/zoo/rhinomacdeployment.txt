@@ -1,50 +1,53 @@
-======Rhino for Mac Managed Distribution======
-> **Product:** //[[zoo:home|Zoo]]//
-> **Summary:** //Discusses how to deploy Rhino for Mac configured to use the Zoo//
+======Mac용 Rhino 관리된 배포======
+> **제품:** //[[ko:zoo:home|Zoo]]//
+> **요약:** //Mac용 Rhino가 Zoo를 사용하도록 설치 배포하는 방법에 대한 안내입니다//
 
-=====Question=====
-We recently purchased a Rhino for Mac Education Lab License. What are some strategies to help deploy it configured to use a Zoo license server on several computers at our university?
+=====질문=====
+Mac용 Rhino 교육 실습실용 라이선스를 최근 구매하였습니다. 학교 안의 여러 컴퓨터에서 Zoo 라이선스 서버를 사용하도록 Rhino를 설치하려면 어떻게 설정해야 합니까?
 
-We use [[http://www.jamfsoftware.com/products/casper-suite/|Casper]] and other management systems to build packages and push applications out to client systems. This usually includes bundling the license configuration information with the distribution application.
+저희 학교에서는 [[http://www.jamfsoftware.com/products/casper-suite/|Casper]]와 다른 관리 시스템을 사용하여 패키지를 빌드하고 응용 프로그램을 클라이언트 시스템에 푸시합니다. 대개의 경우, 라이선스 구성 정보와 배포 응용 프로그램을 번들링하는 작업이 포함됩니다.
 
-=====Answer=====
-
-====To Deploy Rhino 7:====
-
-    - Install Rhino for Mac on a computer, and license it to connect to your LAN Zoo server.
-    -  Rhino creates the **/Users/Shared/McNeel/Rhinoceros/7.0/License Manager/Licenses/59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic**
-    - Deploy a copy of the license file to the same location on the target computers.
-    - Change the file and folder access permissions to match (chmod 644).
-    - Deploy Rhino to the target computers.
-
-====To Deploy Rhino 6:====
-
-    - Install Rhino for Mac on a computer, and license it to connect to your LAN Zoo server.
-    -  Rhino creates the **/Library/Application Support/McNeel/Rhinoceros/6.0/License Manager/Licenses/55500d41-3a41-4474-99b3-684032a4f4df.lic**
-    - Deploy a copy of the license file to the same location on the target computers. 
-    - Set the file and folder access permissions to match (chmod 644).
-    - Deploy Rhino to the target computers.
+**LIC** 파일 외에도, Rhino는 **LicensesZooClient.Settings** 파일을 찾습니다. 이 파일에는 해당 Zoo 서버의 호스트 이름 또는 IP 주소가 포함되어 있습니다. 자세한 정보는 [[https://wiki.mcneel.com/ko/zoo/findzooservermac|Mac용 Rhino에서 Zoo 서버를 찾는 방법은?]] 페이지를 참조하세요.
 
 
-====To Deploy Rhino 5:====
+=====답변=====
 
-    - Install Rhino for Mac on a computer, and license it to connect to your LAN Zoo server.
-    - Rhino creates the **/Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses/781b000c-8d0b-4ed3-8ead-213bdb848f39.lic**
-    - Rhino creates **/Library/Application Support/McNeel/Rhinoceros/License Manager/LicensesZooClient.settings**
-    - Deploy both files to the same location on the target computers. 
-    - Change the file and folder access permissions to match (chmod 644).
-    - Deploy Rhino to the target computers.
+====Rhino 7 배포:====
+
+    - 컴퓨터에 Mac용 Rhino를 설치하고 LAN Zoo 서버에 연결하도록 라이선스를 설정합니다. 
+    -  Rhino는 **/Users/Shared/McNeel/Rhinoceros/7.0/License Manager/Licenses/59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic** 파일을 생성합니다. 
+    - 이 라이선스 파일의 복사본을 대상 컴퓨터의 동일한 위치에 배포합니다. 
+    - 파일과 폴더 액세스 권한을 일치(chmod 644)하도록 변경합니다. 
+    - 대상 컴퓨터에 Rhino를 배포합니다.
+
+====Rhino 6 배포:====
+
+    - 컴퓨터에 Mac용 Rhino를 설치하고 LAN Zoo 서버에 연결하도록 라이선스를 설정합니다.
+    -  Rhino는 **/Library/Application Support/McNeel/Rhinoceros/6.0/License Manager/Licenses/55500d41-3a41-4474-99b3-684032a4f4df.lic** 파일을 생성합니다. 
+    - 이 라이선스 파일의 복사본을 대상 컴퓨터의 동일한 위치에 배포합니다. 
+    - 파일과 폴더 액세스 권한을 일치(chmod 644)하도록 설정합니다.
+    - 대상 컴퓨터에 Rhino를 배포합니다.
+
+
+====Rhino 5 배포:====
+
+    - 컴퓨터에 Mac용 Rhino를 설치하고 LAN Zoo 서버에 연결하도록 라이선스를 설정합니다.
+    - Rhino는 **/Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses/781b000c-8d0b-4ed3-8ead-213bdb848f39.lic** 파일을 생성합니다. 
+    - Rhino **/Library/Application Support/McNeel/Rhinoceros/License Manager/LicensesZooClient.settings** 파일을 생성합니다. 
+    - 두 파일을 대상 컴퓨터의 동일한 위치에 배포합니다.  
+    - 파일과 폴더 액세스 권한을 일치(chmod 644)하도록 변경합니다.
+    - 대상 컴퓨터에 Rhino를 배포합니다.
 
 
 
-**NOTES:** 
+**안내:** 
 
-    - A common mistake is to confuse ///Library// (the global library) and ///Users/[user_account]/Library// (the user's library).  Please make sure you are looking in the global library.
-    - Also, Rhino 6 and Rhino 7 create the Zoo license files under **License Manager** in explicit **6** & **7** subfolder, while Rhino 5 creates its files in the root of **License Manager** and **License** subfolder. In other words, Rhino 5 does not create a **5** subfolder.
-    - For standalone licenses, the license file file is encrypted, unreadable, and unique per system. It cannot be copied to different computers for deployment.
-    - For LAN Zoo and Cloud Zoo licenses, the license file is clear text, and can be moved between one system and another.
+    - ///Library// (글로벌 라이브러리)와 ///Users/[사용자_계정]/Library// (사용자의 라이브러리)를 혼동하는 것은 흔한 실수입니다. 글로벌 라이브러리를 보고 있는지 반드시 확인하세요.
+    - 또한, Rhino 6과 Rhino 7은 명시된 **6**과 **7** 하위 폴더의 **License Manager** 아래에 Zoo 라이선스 파일을 생성하는 반면, Rhino 5는 **License Manager** 루트와 **License** 하위 폴더에 파일을 생성합니다. 즉, Rhino 5는 **5** 하위 폴더를 생성하지 않습니다. 
+    - 독립실행형(standalone) 라이선스에서는 라이선스 파일이 암호화되어 읽을 수 없으며, 시스템별로 고유합니다. 다른 컴퓨터에 독립실행형 라이선스 파일을 복사하여 배포할 수 없습니다. 
+    - LAN Zoo 와 Cloud Zoo 라이선스에서 라이선스 파일은 암호화되지 않은 텍스트(clear text)이며, 한 시스템에서 다른 시스템으로 이동할 수 있습니다.
 
-=====More information=====
+=====추가 정보=====
 
-[[http://wiki.mcneel.com/zoo/findzooservermac|How does Rhino for Mac find a Zoo server?]]
+[[http://wiki.mcneel.com/ko/zoo/findzooservermac|Mac용 Rhino에서 Zoo 서버를 찾는 방법]]
 
