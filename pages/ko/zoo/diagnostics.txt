@@ -6,7 +6,7 @@
 
 Zoo Diagnostics(진단) 유틸리티는 **Windows용 Rhino** 워크스테이션에서 실행됩니다. 유틸리티의 기능 안내:
   - Windows용 Rhino 워크스테이션과 [[ko:zoo:determinezoohost|Zoo 서버]] 사이의 연결 문제를 해결하는 몇 가지 유용한 네트워크 진단 방법을 제공합니다.
-  - Rhino 워크스테이션에서 사용하는 Zoo 서버의 이름을 보고 수정할 수 있습니다. Zoo 서버 이름은 Windows 레지스트리에 저장됩니다.
+  - Rhino 워크스테이션에서 사용하는 LAN Zoo 서버의 이름을 보고 수정할 수 있습니다. LAN Zoo 서버 이름은 Windows 레지스트리에 저장됩니다.
 
 =====다운로드=====
 {{:zoo:zoodiagnostics.zip|Zoo Diagnostics 다운로드.}}
@@ -16,26 +16,26 @@ Zoo Diagnostics(진단) 유틸리티는 **Windows용 Rhino** 워크스테이션�
 =====진단=====
 Zoo Diagnostics 유틸리티를 사용하여 다음과 같은 네트워크 테스트를 실행하실 수 있습니다:
 
-1. **[[http://support.microsoft.com/kb/814155|Ping]]:** Ping 진단 유틸리티는 연결, 액세스, 이름 관련 문제를 해결하는 기본적인 TCP/IP 도구입니다. Ping은 Internet Control Message Protocol (ICMP) 에코 요청 메시지를 보내, 다른 TCP/IP 컴퓨터와의 IP 레벨 연결을 확인합니다. 수신된 에코 응답 메시지가 왕복 시간과 함께 표시됩니다.
+1. **[[http://support.microsoft.com/kb/814155|Ping]]:** Ping (PING) 진단 유틸리티는 연결, 액세스, 이름 관련 문제를 해결하는 기본적인 TCP/IP 도구입니다. Ping은 Internet Control Message Protocol (ICMP) 에코 요청 메시지를 보내, 다른 TCP/IP 컴퓨터와의 IP 레벨 연결을 확인합니다. 수신된 에코 응답 메시지가 왕복 시간과 함께 표시됩니다.
 
 >**안내:** Ping 명령에 사용되는 ICMP 에코 응답은, Windows 방화벽 기본 설정에서 블록되어 있습니다. Windows에서 ICMP 에코를 사용하도록 설정하려면, 제어판 > Windows 방화벽 > 고급 설정 > 인바운드 규칙 에서 보안 프로필이 사용(active)으로 되어 있는 파일 및 프린터 공유 (에코 요청 - ICMPv4-In) 를 허용(enable)으로 설정합니다.
 
 
-2. **[[http://support.microsoft.com/kb/200525|Nslookup]]:** DNS Lookup 진단 유틸리티는 Domain Name System (DNS) 인프라를 진단하는 데 사용되는 정보를 표시합니다.
+2. **[[http://support.microsoft.com/kb/200525|Nslookup]]:** DNS Lookup (NSLOOKUP) 진단 유틸리티는 Domain Name System (DNS) 인프라를 진단하는 데 사용되는 정보를 표시합니다.
 
 3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]:** Trace Route (TRACERT) 진단 유틸리티는, Internet Control Message Protocol (ICMP) 에코 패킷을 송신하는 방법으로 대상까지의 IP Time-To-Live (TTL) 값을 변화시켜, 대상까지의 경로를 찾습니다. 경로에 따라 각각의 라우터는 전송하기 전에 패킷의 TTL을 적어도 1 감소시킬 필요가 있으므로, TTL은 사실상 홉 수(hop count)입니다. 패킷의 TTL이 0이 되면, 그 라우터는 ICMP의 시간 초과 메시지를 송신하는 곳의 컴퓨터로 반환해야 합니다.
 
-4. **Zoo Port Check:** Zoo Port Check 테스트는 Zoo 5 또는 6 서비스가 서버 또는 워크스테이션의 TCP Port 80을 수신하고 있는지를 확인합니다.
+5. **Zoo Port Check:** Zoo Port Check (ZOOPORT) 진단 유틸리티는 Zoo 서비스가 서버 또는 워크스테이션의 TCP 80 포트를 수신하고 있는지를 확인합니다.
 
 //테스트가 실패하면 Zoo 서버 서비스가 실행 중인지 확인하세요. ZooAdmin.exe 또는 제어판의 서비스 애플릿을 사용하여 Zoo 서버 서비스를 실행할 수 있습니다. 또한, Zoo 시스템에 실행 중인, 방화벽 소프트웨어에서 들어오고 나가는 트래픽 모두 __[[ko:zoo:window7firewall|TCP 80번 포트가 열려 있는지 확인]]__하세요.
 
 //
 
-5. **Zoo Connectivity:** Zoo Connectivity (연결) 테스트는 Zoo 5 또는 6 서비스가 서버 또는 워크스테이션에 실행 중인지 확인합니다. 
+5. **Zoo Connectivity:** Zoo Connectivity (ZOOECHO) 진단 유틸리티는 Zoo 서비스가 서버 또는 워크스테이션에 실행 중인지 확인합니다. 
 
 //테스트가 실패하고 다른 모든 테스트가 성공했다면, Zoo 서버 서비스가 실행 중인지 확인하세요. ZooAdmin.exe 또는 제어판의 서비스 애플릿을 사용하여 Zoo 서버 서비스를 실행할 수 있습니다. 또한, Zoo 시스템에 실행 중인, 방화벽 소프트웨어에서 들어오고 나가는 트래픽 모두 __[[ko:zoo:window7firewall|TCP 80번 포트가 열려 있는지 확인]]__하세요.//
 
-//만약 클라이언트와 서버가 서로 다른 서브넷에 있으면 이 테스트가 실패할 수 있습니다. 기본적으로, Zoo 설치 프로그램은 로컬 서브넷에서만 80 포트에서 Zoo 서비스에 대한 Windows 방화벽을 엽니다. 액세스가 필요한 다른 모든 서브넷을 허용하려면 방화벽 규칙을 변경해야 합니다.//
+//클라이언트와 서버가 다른 서브넷에 위치할 경우, 이 테스트가 실패할 수 있습니다. 기본적으로 Zoo 설치 프로그램은 로컬 서브넷에 대해서만 포트 80의 Zoo 서비스를 대상으로 Windows 방화벽을 엽니다. 액세스가 필요한 다른 모든 서브넷을 허용하려면 방화벽 규칙을 변경해야 합니다.//
 
 //사용하는 컴퓨터에서 [[https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9D%EC%8B%9C_%EC%84%9C%EB%B2%84|프록시 서버]]를 사용하여 인터넷에 액세스하도록 설정되어 있다면 이 테스트도 실패할 수 있습니다. 이 경우, 테스트가 절대로 Zoo 서버에 도달하지 않습니다. 프록시 서버를 사용한다면 반드시 로컬 주소로의 액세스를 허용하도록 설정하세요. 자세한 정보는 __[[ko:zoo:zooproxyserver|프록시 서버와 Zoo 사용]]__ 을 참조하세요.//
 
