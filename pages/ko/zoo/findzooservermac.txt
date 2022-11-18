@@ -1,0 +1,79 @@
+======Mac용 Rhino에서 Zoo 서버를 찾는 방법은?======
+
+> **제품:** //[[ko:zoo:home|Zoo]]//
+> **요약:** //Mac용 Rhino에서 Zoo 라이선스 관리자 서버를 찾는 방법에 대해 안내합니다.//
+
+Rhino가 Zoo 서버에서 라이선스를 필요로 할 때, 다음 위치를 이 순서대로 찾아 Zoo 서버의 이름을 확인합니다:
+  - Application Support 폴더의 Settings 파일. Zoo 서버의 호스트 이름 또는 IP 주소를 찾습니다.
+  - Domain Name System (DNS) 서버에 기본 Zoo 서버 이름을 쿼리합니다.
+  - LIC 파일을 찾습니다. [[https://wiki.mcneel.com/ko/zoo/rhinomacdeployment|Mac용 Rhino 관리된 배포]]를 참조하세요.
+
+=====추가 정보=====
+
+==== Settings 파일====
+
+네트워크 노드로 실행 중일 때, Rhino는 이 폴더의 **LicensesZooClient.Settings** 파일을 먼저 보고 Zoo 서버 이름을 확인합니다. 
+
+
+===Rhino 7===
+
+  /Library/Application Support/McNeel/Rhinoceros/7.0/License Manager
+
+
+===Rhino 6===
+
+  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager
+  
+===Rhino 5===
+
+  /Library/Application Support/McNeel/Rhinoceros/License Manager
+
+
+
+**안내**: ///Library// (글로벌 라이브러리)와 ///Users/[사용자_계정]/Library// (사용자의 라이브러리)를 혼동하는 것은 흔한 실수입니다. 글로벌 라이브러리를 보고 있는지 반드시 확인하세요.
+
+이 파일의 내용은 다음과 유사합니다:
+
+===Rhino 7===
+<code>
+<?xml version="1.0" encoding="utf-8"?>
+<!--Zoo client settings file writen by Rhino-->
+<ZooClient>
+  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="host name or IP address" />
+</ZooClient>
+</code>
+안내: //Software_McNeel_Rhinoceros_6.0_License_Manager// 위는 정확합니다.  
+
+===Rhino 6===
+<code>
+<?xml version="1.0" encoding="utf-8"?>
+<!--Zoo client settings file writen by Rhino-->
+<ZooClient>
+  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="host name or IP address" />
+</ZooClient>
+</code>
+
+===Rhino 5====
+
+<code>
+<?xml version="1.0" encoding="utf-8"?>
+<!--Zoo client settings file written by Rhino-->
+<ZooClient>
+  <Software_McNeel_Rhinoceros_5.0_License_Manager Server="host name or IP address"/>
+</ZooClient>
+</code>
+
+====DNS 사용하기===
+Settings 파일을 검색하여 Rhino가 Zoo 서버의 이름을 확인하지 못하면, Rhino는 다음 호스트 이름으로 기본 Zoo 서버를 DNS 서버에 쿼리합니다. 
+
+<code>
+__mcneel.__zoo5
+</code>
+
+예를 들어, 회사의 도메인이 //mcneel.com//이면, Zoo 서버에 위치를 알려주기 위해 DNS 앨리어스인 //<nowiki>__mcneel.__zoo5.mcneel.com</nowiki>// 을 추가할 수 있습니다.
+
+{{:zoo:dnsalias.png}}
+
+\\
+
+{{tag>Zoo_Ko}}
