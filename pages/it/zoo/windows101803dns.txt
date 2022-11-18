@@ -4,20 +4,20 @@
 > **Sommario:** //Aggiornamento di Windows 10 versione 1803 e le sue ripercussioni su Zoo//
 
 =====Problema=====
-There have been reports that after installing Microsoft's Spring Creators Update for Windows 10, version 1803, Rhino is no longer able to obtain licenses from a Zoo server. 
+È stato segnalato che dopo l'installazione de dell'aggiornamento Spring Creators di Microsoft per Windows 10, versione 1803, Rhino non ottiene più le licenze dal server Zoo. 
 
-Also, the **[[:zoo:diagnostics|Zoo Diagnostics Utility for Windows]]** now fails to complete one or more tests.\\
+Inolre, **[[:zoo:diagnostics|l'utility di diagnostica di Zoo per Windows]]** non riesce ora a completare uno o più test.\\
 
-=====More Information=====
+=====Ulteriori informazioni=====
 
-Although names resolved from Domain Name System (DNS) are case insensitive, we are seeing cases where diagnostic tools, such a **[[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ping|Ping]]**, are failing because of case sensitivity.
+Sebbene i nomi vengono risolti da DNS sono sensibili a maiuscole/minuscole, ci sono casi in cui gli strumenti di diagnosi, come **[[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ping|Ping]]**, non riescono a completare l'operazione perché distinguono fra maiuscole/minuscole.
 
-For example:
+Ad esempio:
 
 {{zoo:win10ping.jpg?640}}
 
 
-=====Possible Solution=====
+=====Possibile soluzione=====
 
 While we are still working to understand what has changed, in Windows 10 version 1803, one solution is to use a different case when specifying the Zoo server host name. In the example above, you'd specify the Zoo server host name in lower-case characters.
 
