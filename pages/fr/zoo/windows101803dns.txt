@@ -1,0 +1,28 @@
+======Windows 10 Version 1803 - Problème de résolution de nom======
+
+> **Produit :** //[[fr:zoo:home|Zoo]]//
+> **Résumé:** //Aborde la mise à jour vers Windows 10 version 1803 et son impact sur le Zoo//
+
+=====Problème =====
+Plusieurs utilisateurs ont indiqué qu'après avoir installé la mise à jour 1803 de Microsoft pour Windows 10, Rhino n'est plus en mesure d'obtenir des licences du serveur Zoo. 
+
+**[[:zoo:diagnostics|L'utilitaire de diagnostic du Zoo pour Windows]]** échoue également à certains tests.\\
+
+=====Plus d'informations=====
+
+Même si le système de nom de domaine (DNS) n'est pas sensible à la casse lors de la détermination des noms, nous rencontrons de plus en plus de cas où les outils de diagnostique, tels que le **[[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ping|Ping]]** échouent en raison d'un problème de majuscule/minuscule.
+
+Par exemple :
+
+{{zoo:win10ping.jpg?640}}
+
+
+=====Solution possible=====
+
+Nous recherchons ce qui a pu changer dans la version 1803 de Windows 10 mais en attendant, une solution consiste à modifier le nom d'hôte du serveur Zoo pour qu'il n'utilise pas de majuscule. Dans le cas ci-dessus, vous devriez indiquer le nom d'hôte du serveur Zoo en minuscules. 
+
+Il est également possible qu'il faille lancer des services supplémentaires sur Windows 10 1803.  Vous trouverez ici plus d'informations : [[zoo:windows101803#possible_solution|Problème avec la mise à jour vers Windows 10 Version 1803]]
+
+\\
+
+{{tag>Zoo}}
