@@ -1,38 +1,43 @@
-======Zoo - Utilitaire de diagnostic pour un client Rhino pour Windows======
+======Zoo - Utilitaire de diagnostic pour Windows======
 > **Produit :** //[[fr:zoo:home|Zoo]]//
-> **Résumé:** //Explique le fonctionnement de l'utilitaire de diagnostic du Zoo pour Rhino pour Windows//
+> **Résumé :** //Explique le fonctionnement de l'utilitaire de diagnostic du Zoo pour Windows//
 
-[[fr:zoo:zoo5diagnostics|{{:zoo:zoodiagnostics.png|Diagnostic du Zoo}}]]
+[[fr:zoo:diagnostics|{{:zoo:zoodiagnostics.png|Diagnostic du Zoo}}]]
 
-L'utilitaire de diagnostic du Zoo fonctionne sur un ordinateur équipé de Rhino pour Windows. L'utilitaire dispose des outils suivants :
-  - Diagnostic utile du réseau afin de vous aider à résoudre les problèmes de connectivité entre les ordinateurs où est installé Rhino et les [[fr:zoo:determinezoohost|serveurs Zoo]].
+L'utilitaire de diagnostic du Zoo fonctionne sur un ordinateur équipé de **Rhino pour Windows**. L'utilitaire dispose des outils suivants :
+  - Diagnostic utile du réseau afin de vous aider à résoudre les problèmes de connectivité entre les ordinateurs où est installé Rhino pour Windows et les [[fr:zoo:determinezoohost|serveurs Zoo]].
   - Vous permet de voir et changer le nom du serveur Zoo utilisé par les ordinateurs avec Rhino. Le nom du serveur Zoo est enregistré dans le registre de Windows.
 
-[[fr:zoo:zoo5diagnostics|{{:zoo:zoo_diagnostics.png|Diagnostic du Zoo}}]]
+=====Télécharger=====
+{{:zoo:zoodiagnostics.zip|Télécharger l'application Zoo Diagnostics.}}
+
+[[fr:zoo:diagnostics|{{:zoo:zoo_diagnostics.png|Diagnostic du Zoo}}]]
 
 =====Diagnostic=====
 L'utilitaire de diagnostic du Zoo permet de réaliser les tests suivants sur le réseau :
 
-1. **[[http://support.microsoft.com/kb/814155|Ping]]** - L'utilitaire de diagnostic de Ping est l'outil TCP/IP principal utilisé pour résoudre les problèmes de connectivité, de portée et de résolution de nom. Ping vérifie la connectivité au niveau IP avec un autre ordinateur TCP/IP en envoyant des messages de demande d'écho de protocole de message de contrôle sur Internet (ICMP). Les messages de réponse d'écho correspondants sont affichés, ainsi que les temps de d'envoi et retour.
+1. **[[http://support.microsoft.com/kb/814155|Ping]]** - L'utilitaire de diagnostic de Ping (PING) est l'outil TCP/IP principal utilisé pour résoudre les problèmes de connectivité, de portée et de résolution de nom. Ping vérifie la connectivité au niveau IP avec un autre ordinateur TCP/IP en envoyant des messages de demande d'écho de protocole de message de contrôle sur Internet (ICMP). Les messages de réponse d'écho correspondants sont affichés, ainsi que les temps de d'envoi et retour.
 
 >**Note :** Les paramètres par défaut du pare-feu de Windows bloquent les demandes d'écho d'ICMP utilisées pour la commande ping. Pour activer l'écho ICMP dans Windows, ouvrez le Panneau de configuration -> Pare-feu Windows -> Paramètres avancés -> Règles de trafic entrant et activez Partage de fichiers et d’imprimantes (Demande d’écho - Trafic entrant ICMPv4) dans le profil de sécurité actif.
 
 
-2. **[[http://support.microsoft.com/kb/200525/fr|NSLookup]]** - L'utilitaire de diagnostic de recherche DNS affiche des informations que vous pouvez utiliser pour diagnostiquer votre infrastructure de Système de nom de domaine (DNS) .
+2. **[[http://support.microsoft.com/kb/200525/fr|Nslookup]]** - L'utilitaire de diagnostic de recherche DNS (NSLOOKUP) affiche des informations que vous pouvez utiliser pour diagnostiquer votre infrastructure de Système de nom de domaine (DNS) .
 
-3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]:** L'utilitaire de diagnostic TRACERT détermine le chemin vers une destination en envoyant des paquets échos ICMP (Internet Control Message Protocol) vers la destination. Dans ces paquets, TRACERT utilise diverses valeurs de durée de vie (TTL - Time-To-Live) IP. Étant donné que chaque routeur se trouvant sur le chemin doit décrémenter d'au moins 1 unité la durée de vie sur un paquet avant de le transférer, la durée de vie représente effectivement le nombre de sauts. Lorsque la durée de vie sur un paquet atteint 0, le routeur envoie à l'ordinateur source un message ICMP indiquant l'expiration du délai.
+3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]** - L'utilitaire de diagnostic TRACERT détermine le chemin vers une destination en envoyant des paquets échos ICMP (Internet Control Message Protocol) vers la destination. Dans ces paquets, TRACERT utilise diverses valeurs de durée de vie (TTL - Time-To-Live) IP. Étant donné que chaque routeur se trouvant sur le chemin doit décrémenter d'au moins 1 unité la durée de vie sur un paquet avant de le transférer, la durée de vie représente effectivement le nombre de sauts. Lorsque la durée de vie sur un paquet atteint 0, le routeur envoie à l'ordinateur source un message ICMP indiquant l'expiration du délai.
 
-4. **Zoo Port Check :** Le test Zoo Port Check vérifie qu'un service de Zoo 5 ou 6 écoute le Port TCP 80 sur un serveur ou un ordinateur.
+4. **Zoo Port Check** - L'utilitaire de diagnostic Zoo Port Check (ZOOPORT) vérifie qu'un service de Zoo écoute le Port TCP 80 sur un serveur ou un ordinateur.
 
-//Si ce test échoue alors que tous les autres tests ont réussi, vérifiez que le service du serveur Zoo est exécuté. Pour ce faire, utilisez ZooAdmin.exe ou l'applicatif de Services dans le Panneau de configuration. Vérifiez également que le __[[fr:zoo:window7firewall|Port TCP 80 est ouvert sur tous les pare-feu]]__ exécutés sur le système où est installé le Zoo.//
+//Si ce test échoue alors que tous les autres tests ont réussi, vérifiez que le service du serveur Zoo est exécuté. Pour ce faire, utilisez ZooAdmin.exe ou l'applicatif de Services dans le Panneau de configuration. Vérifiez également que le __[[fr:zoo:window7firewall|Port TCP 80 est ouvert sur tous les pare-feu]]__ exécutés sur le système où est installé le Zoo.
 
-5. **Zoo Connectivity** - Le test Zoo Connectivity vérifie que le service Zoo 5 ou 6 est exécuté sur un serveur ou un poste de travail. 
+//
+
+5. **Zoo Connectivity** - L'utilitaire de diagnostic Zoo Connectivity (ZOOECHO) vérifie que le service Zoo 5 est exécuté sur un serveur ou un poste de travail. 
 
 //Si ce test échoue alors que tous les autres tests ont résussi, vérifiez que le service du serveur Zoo est exécuté. Pour ce faire, utilisez ZooAdmin.exe ou l'applicatif de Services dans le Panneau de configuration. Vérifiez également que le __[[fr:zoo:window7firewall|Port TCP 80 est ouvert sur tous les pare-feu]]__ exécutés sur le système où est installé le Zoo.//
 
+//Ce test peut échouer si le client et le serveur se trouvent sur deux sous-réseaux différents. Par défaut, le programme d'installation du Zoo ouvre, sur le sous-réseau local uniquement, le port 80 pour le service Zoo sur le pare-feu de Windows Vous devrez changer la règle du pare-feu pour autoriser tous les autres sous-réseaux ayant besoin d'un accès.//
+
 //Ce test peut également échouer si votre système est configuré pour accéder à Internet en utilisant un [[https://fr.wikipedia.org/wiki/Proxy|Proxy]]. Dans ce cas, le test n'atteint jamais le serveur Zoo. Si vous utilisez un Proxy, vérifiez que vous permettez l'accès aux adresses locales. Voir __[[fr:zoo:zooproxyserver|Utiliser le Zoo avec un Proxy]]__ pour plus d'informations.//
 
-=====Télécharger=====
-* [[http://www.microsoft.com/fr-fr/download/details.aspx?id=17851|Microsoft .NET Framework 4]] doit être installé.
-
-{{:zoo:zoodiagnostics.zip|Télécharger l'application Zoo Diagnostics.}}
+=====Voir aussi =====
+[[fr:zoo:diagnosticsmac|Zoo - Utilitaire de diagnostic pour Mac]]
