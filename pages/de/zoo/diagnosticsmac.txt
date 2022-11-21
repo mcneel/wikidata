@@ -1,0 +1,36 @@
+======Zoo - Diagnosetool für Mac======
+> **Produkt:** //[[de:zoo:home|Zoo]]//
+> **Zusammenfassung:** //Beschreibt das Netzwerkdienstprogramm für Mac//
+
+[[zoo:diagnosticsmac|{{:zoo:networkutility.png?128|Network Utility}}]]
+
+Das **[[https://support.apple.com/en-us/HT202790|Netzwerkdienstprogramm]]** wird auf einem **Rhino-für-Mac**-Arbeitsplatz ausgeführt. Es enthält eine Reihe nützlicher Netzwerkdiagnosen zur Fehlersuche bei Verbindungsproblemen zwischen Rhino-für-Mac-Arbeitsplätzen und Zoo-Servern.
+
+Verwenden Sie **[[https://support.apple.com/en-us/HT204014|Spotlight]]** auf Ihrem Mac, um das Netzwerkdienstprogramm zu finden und zu öffnen.
+
+  - Klicken Sie auf das **Suchen**-Symbol in der oberen rechten Ecke der Menüleiste oder drücken Sie die **Cmd**-Taste + **Leertaste**.
+  - Geben Sie **Netzwerkdienstprogramm** für die Suche ein.
+  - Doppelklicken Sie auf **Netzwerkdienstprogramm** um es auszuführen.
+
+>**Hinweis:** Mit der Veröffentlichung von macOS Big Sur hat Apple diese Anwendung eingestellt. Viele ihrer nützlichen Funktionen können Sie jedoch weiterhin über das **[[https://www.makeuseof.com/how-to-use-terminal-as-network-utility-replacement/|Terminal]]** aufrufen.
+
+  
+=====Diagnose=====
+Das Netzwerkdienstprogramm bietet die folgenden nützlichen Netzwerktests:
+
+1. **Ping:** Das Ping-Diagnosetool (PING) ist das wichtigste TCP/IP-Tool zur Fehlersuche und -behebung bei Problemen mit der Konnektivität, der Erreichbarkeit und der Namensauflösung. Ping überprüft die Konnektivität mit einem anderen TCP/IP-Computer auf IP-Ebene, indem es diesem ICMP-Echoanforderungen sendet. Anschließend wird der Empfang der entsprechenden Antwort zusammen mit der Umlaufzeit angezeigt.
+{{:zoo:nu_ping.png?640|Ping}}
+
+2. **Lookup:** Das Diagnosetool DNS Lookup zeigt Ihnen Informationen an, die Sie zur Diagnose Ihrer DNS-Infrastruktur verwenden können.
+{{:zoo:nu_lookup.png?640|Lookup}}
+
+3.  **Traceroute:** - Mit Trace Route können Sie den Weg zu einem Ziel ermitteln. Dies wird erreicht, indem das Programm ICMP-Echopakete mit wechselnden IP Time-To-Live (TTL)-Werten an das Ziel sendet. Jeder Router auf dem Weg muss die TTL des Pakets mindestens um 1 herunterzählen, bevor das Paket weitervermittelt wird, sodass die TTL praktisch ein "Hop-Zähler" ist. Wenn der TTL-Wert für ein Paket den Wert 0 erreicht, sendet der Router die ICMP-Meldung "Zeitüberschreitung" an den Quellcomputer zurück.
+{{:zoo:nu_traceroute.png?640|Traceroute}}
+
+4. **Port Scan:** Der Port-Scan-Test sucht nach offenen TCP-Ports. Im Falle des Zoo, sollten Sie nach TCP Port 80 suchen.
+{{:zoo:nu_portscan.png?640|Port Scan}}
+
+//Wenn dieser Test fehlschlägt, stellen Sie sicher, dass der Zoo-Server wirklich läuft. Dafür nutzen Sie entweder das Tool ZooAdmin.exe oder überprüfen es in der Systemsteuerung unter Dienste. Stellen Sie ebenfalls sicher, dass der __[[de:zoo:window7firewall|TCP-Port 80 in allen Firewalls]]__ des Zoo-Servers sowohl für eingehende als auch ausgehende Verbindungen geöffnet ist.//
+
+=====Verwandte Themen =====
+[[de:zoo:diagnostics|Zoo - Diagnosetool für Windows]]
