@@ -36,5 +36,9 @@ Zoo Diagnosticsユーティリティは以下の便利なネットワークテ�
 
 //このテストに失敗し、他のテスト全てに成功した場合は、Zooサーバーのサービスが実行されていることを確認してください。これはZooAdmin.exeまたはコントロールパネルのサービスを使って行うことができます。またZooシステムで実行中の__[[ja:zoo:window7firewall|全てのファイアウォールでTCPポート80が開かれていること]]__（受信/送信トラフィックとも）を確認してください。//
 
+//このテストはクライアントとサーバーが異なるサブネットにある場合、失敗します。デフォルトでは、Zooのインストーラはそのローカルのサブネットのみのポート80上のZooのサービスにWindowsのファイアウォールを開きます。アクセスが必要なその他すべてのサブネットを許可するためにファイアウォール規則の変更が必要です。//
+
+//This test can also fail if your system is configured to access the Internet by using a [[https://en.wikipedia.org/wiki/Proxy_server|Proxy Server]]. In this case, the test never reaches the Zoo server. If you are using a Proxy Server, make sure you allow access to local addresses. See __[[zoo:zooproxyserver|Using Zoo with a Proxy Server]]__ for details.//
+
 =====関連トピック=====
 [[zoo:diagnosticsmac|Zoo – Mac用のDiagnostics（診断）ユーティリティ]]
