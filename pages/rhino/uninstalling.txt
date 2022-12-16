@@ -12,33 +12,38 @@ Click OK to try again, or enter an alternate path to a folder containing the ins
 The Windows Installer cache cannot find a file or registry key required for uninstall. This is a common problem caused by the Windows Installer Service. The best solution is to use **Windows Install Clean Up** to thoroughly remove the previous installation. After you clean up the previous install, you will be able to reinstall Rhino and get a valid install.
 
 
-=====Resolution - Steps 1, 2 & 3=====
 Manually remove Rhino and the Windows Installer registration for the product.
 You will need to have //Administrator privileges// on your computer to complete this.
 
-====Run the Program Uninstall====
+====1. Run the Program Uninstall====
   - Close the Rhino application.
   - Go to Windows Search.
   - Type **App and Features** (or **Add and Remove** programs)
   - Find the **Rhinoceros x.0** program on the list, pick and select **Uninstall** button.
   
-====Delete the Rhino install folder==== 
+====2. Delete the Rhino install folder==== 
   - Browse to //C:\Program Files\//.
   - Delete folder **Rhinoceros x** or **Rhinoceros x Evaluation**.
 
-====Delete the Rhino folders==== 
+====3. Delete the Rhino folders==== 
   - Browse to %AppData%\Roaming\McNeel\Rhinoceros.
   - Delete folder **x.0** where x is the Rhino version.
   - Browse to %ProgramData%\McNeel\Rhinoceros
   - Delete folder **x.0** where x is the Rhino version.
   
-====Delete Registry Keys:====
+====4. Delete Registry Keys:====
   - Go to Windows Search and type **Registry Editor**.
   - Open the **Registry Editor**. 
   - Browse to //HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros//.
   - Delete the **x.0** Key. For example, Rhino 4.0, 5.0 or whatever version of Rhino you are removing.
   - Browse to //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros//.
   - Delete the **x.0** Key. For example, Rhino 4.0, 5.0 or whatever version of Rhino you are removing.
+
+====5. Reboot====
+  - Apply all Windows updates.
+  - If you plan to reinstall, download the latest Rhino installer [[https://www.rhino3d.com/download/here]].
+
+_________________
 
 =====Optional=====
 You should only do the following procedures if uninstall fails from the **Apps and Features**.
