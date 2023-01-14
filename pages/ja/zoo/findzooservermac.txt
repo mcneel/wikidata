@@ -1,18 +1,18 @@
-======How Does Rhino for Mac Find a Zoo Server?======
+======Mac版RhinoはZooをどのように検出しますか?======
 
-> **Product:** //[[zoo:home|Zoo]]//
-> **Summary:** //An overview of how Rhino for Mac finds a Zoo license manager server//
+> **製品:**//[[zoo:home|Zoo]]//
+> **要約:**//Mac版RhinoのZooライセンスマネージャーのサーバーの検出方法についての概要//
 
-When Rhino needs a license from a Zoo server, it determines the name of the Zoo server by looking in the following locations in this order:
-  - The Settings file in the Application Support folder. Looks for the host name or IP address of your Zoo server.
-  - Queries your Domain Name System (DNS) server for the default Zoo server name.
-  - Looks for the LIC file. See [[https://wiki.mcneel.com/zoo/rhinomacdeployment|Rhino for Mac Managed Distribution]].
+RhinoがZooのサーバーからのライセンスを必要とする場合、Rhinoは次の場所を以下の順序で検索してZooのサーバーの名前を決定します:
+  - アプリケーションサポートフォルダの設定ファイル。ZooのサーバーのIPアドレスまたはホスト名を検索します。
+  - デフォルトのZooサーバー名のDomain Name System (DNS) サーバーを照合します。
+  - LICファイルを探します。[[https://wiki.mcneel.com/zoo/rhinomacdeployment|Mac版Rhinoの配布管理]]を参照してください。
 
-=====More information=====
+=====詳細=====
 
-====Settings file====
+====設定ファイル====
 
-When running as a network node, Rhino determines the name of the Zoo server by first looking in the **LicensesZooClient.Settings** file in this folder:
+ネットワークノードとして実行している場合、Rhinoはまずこのフォルダの **LicensesZooClient.Settings** ファイルを参照して、Zooサーバーの名前を決定します。
 
 
 ===Rhino 7===
@@ -30,9 +30,9 @@ When running as a network node, Rhino determines the name of the Zoo server by f
 
 
 
-**NOTE**: A common mistake is to confuse ///Library// (the global library) and ///Users/[user_account]/Library// (the user's library).  Please make sure you are looking in the global library.
+**メモ**: よくある間違いに、 ///ライブラリ// (グローバルライブラリ)を ///ユーザー/[ユーザーアカウント]/ライブラリ// (ユーザーのライブラリ)と混乱することが挙げられます。  グローバルライブラリ内を探すようにしてください。
 
-The contents of this file looks similar to:
+このファイルの中身は次のようになっています:
 
 ===Rhino 7===
 <code>
@@ -42,7 +42,7 @@ The contents of this file looks similar to:
   <Software_McNeel_Rhinoceros_6.0_License_Manager Server="host name or IP address" />
 </ZooClient>
 </code>
-Note: //Software_McNeel_Rhinoceros_6.0_License_Manager// above is correct. 
+メモ: //Software_McNeel_Rhinoceros_6.0_License_Manager// を使用します。 
 
 ===Rhino 6===
 <code>
@@ -63,14 +63,14 @@ Note: //Software_McNeel_Rhinoceros_6.0_License_Manager// above is correct.
 </ZooClient>
 </code>
 
-====Using DNS===
-If Rhino cannot determine the name of the Zoo server by searching in the Settings file, it then queries your DNS server for the default Zoo server, which is the following host name:
+====DNSの使用===
+設定ファイルを検索してもRhinoがZooサーバーの名前を特定できない場合、RhinoはDNSサーバーにデフォルトのZooサーバーを照合します。これは次のホスト名です:
 
 <code>
 __mcneel.__zoo5
 </code>
 
-For example, if your company's domain is //mcneel.com//, then you can add a DNS alias of //<nowiki>__mcneel.__zoo5.mcneel.com</nowiki>// which points to your Zoo server.
+例えば、会社のドメインが //mcneel.com// である場合、Zooサーバーの場所を指す //<nowiki>__mcneel.__zoo5.mcneel.com</nowiki>//というDNSエイリアスを追加できます。
 
 {{:zoo:dnsalias.png}}
 
