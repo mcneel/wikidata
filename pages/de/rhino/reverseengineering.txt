@@ -1,4 +1,26 @@
 ======Reverse Engineering======
+=====Rhinoceros 8=====
+
+Reverse Engineering ist der Vorgang, ein [[https://docs.mcneel.com/rhino/8/help/de-de/index.htm#commands/mesh.htm%3FTocPath%3DCommands%7CAlphabetical%7CM%7C_____33|Polygonnetz]] oder eine [[https://docs.mcneel.com/rhino/8/help/de-de/index.htm#commands/pointcloud.htm?Highlight=point%20cloud|Punktwolke]], das bzw. die normalerweise durch Scannen eines physischen Objekts erhalten wurde, in eine Art auf Fertigungsstandards bearbeitbare 3D-Geometrie umzuwandeln. Ein Polygonnetz ist eine Aufeinanderfolge flacher Polygone, welche eine Form im 3D-Raum definieren. Aufgrund ihres Wesens ist es jedoch schwer, Polygonnetze genau zu handhaben. Diese Genauigkeit ist oft notwendig, das Modell in ein physisches Objekt zurückzumodellieren. Zum Beispiel einen Radius oder eine Krümmung können Sie auf einem Polygonnetz nicht genau definieren. Daher kann das Objekt durch Rückführung (Reverse Engineering) in eine mit mathematischer Präzision transformierbare Geometrie, wie z.B. [[https://www.rhino3d.com/features/nurbs/|NURBS]] im Nachhinein beliebig manipuliert, bearbeitet und an jegliche Prototyping-Maschine zurückgeschickt werden.
+
+Rhino ist **kein** Reverse-Engineering-Programm, da für das Reverse Engineering eine Vielzahl von Eigenschaften und Werkzeugen notwendig sind. Je nach Ihren Bedürfnissen ist es jedoch möglich, dass Rhino über genügend Werkzeuge verfügt, es zustande zu bringen.
+
+Rhino 8 bringt den Vorgang einen Schritt weiter als Rhino 7, dank der Hinzufügung des Befehls [[https://discourse.mcneel.com/t/rhino-8-feature-shrinkwrap/149658|Aufschrumpfen]]. 
+Dies sind einige der Ressourcen in Aufschrumpfen:
+  * https://discourse.mcneel.com/t/rhino-8-feature-shrinkwrap/149658
+  * https://vimeo.com/763781567
+  * https://vimeo.com/776411985
+
+Die Werkzeuge in Rhino 8, die beim Umwandeln eines Scans in ein bearbeitbares Teil behilflich sein können, sind:
+  * [[https://discourse.mcneel.com/t/rhino-8-feature-shrinkwrap/149658|Aufschrumpfen]] - zum Erhalt eines geschlossenen und sauberen Polygonnetzes
+  * [[https://docs.mcneel.com/rhino/8/help/de-de/index.htm#commands/quadremesh.htm|VierecksNeuvermaschung]] - zum Neuvermaschen und Steuern der Topologie
+  * [[https://docs.mcneel.com/rhino/8/help/de-de/index.htm#commands/tosubd.htm|InSubD]] - zum Bearbeiten, Manipulieren und Umwandeln seiner Form
+  * [[https://docs.mcneel.com/rhino/8/help/de-de/index.htm#commands/tonurbs.htm|InNURBS]] - zum Zurückverwandeln und weiteren (präzisen) Bearbeiten, etwa mit Booleschen Operationen, Abschrägungen oder Verrundungen.
+  * [[https://discourse.mcneel.com/t/rhino-wip-activated-new-mesh-booleans/149930|PolygonnetzAusBoolescherDifferenz verbessert]] - neugeschriebener Code für Polygonnetze aus Boolescher Differenz, der viele Fälle von Eckpunkten behandelt und ein saubereres polygonales Ergebnis erbringt.
+
+Eine stetig anwachsende Zahl von Tutorials finden Sie in der Kategorie [[https://www.rhino3d.com/en/learn/?query=kind:%20reverse_engineering&modal=null|Reverse Engineering]] unserer Schulungsseite.
+
+
 =====Rhinoceros 7=====
 Dies ist eine alte, aber immer noch gültige Erklärung eines [[https://www.hydraulicdesign.net/meshes.htm|Polygonnetzes.]]
 
@@ -16,11 +38,11 @@ https://www.youtube.com/c/Rhinoceros3d/videos
 
 [[de:rhino:rhinoceros|Rhino]] ist keine automatische Reverse-Engineering-Software.
 
-Im Allgemeinen verwenden Sie die Punktwolke oder das Polygonnetz als Referenz zur Remodellierung des Objekts mit [[de:rhino:nurbs|NURBS]]-Flächen.
+Im Allgemeinen verwenden Sie die Punktwolke oder das Polygonnetz als Referenz zur Remodellierung des Objekts mit [[rhino:nurbs|NURBS]]-Flächen.
 
 Sie können Querschnittskurven aus einer Punktwolke extrahieren (Befehl PunktwolkeSchnitt) oder ein Polygonnetz mit Schnitt oder Kontur formen.
 
-  *[[https://www.rhino3d.com/download/rhino/4.0/ScanCleanupRemodel|Tutorial]] über die in Rhino integrierten Funktionen 
+  *[[http://download.rhino3d.com/download.asp?id=ScanCleanupRemodel|Tutorial]] über die in Rhino integrierten Funktionen 
 
 Es stehen auch einige Plug-ins zur Verfügung, die beim Vorgang des Revers Engineering hilfreich sind.
 
@@ -36,16 +58,16 @@ Es stehen auch einige Plug-ins zur Verfügung, die beim Vorgang des Revers Engin
   *Und schließlich gibt es noch [[http://www.geomagic.com/en/products/studio/|Geomagic]].
 
 ----
-Der Befehl Füllfläche ist das einzige Werkzeug, das Sie direkt zur Erzeugung einer Fläche aus einer Menge von Punkten verwenden können. Sie können aber auch zuerst den Befehl PunktwolkeSchnitt in Rhino für das Reverse Engineering von Kurven, und dann diese Kurven zur Erstellung von [[de:rhino:nurbs|NURBS]]-Flächen verwenden.
+Der Befehl Füllfläche ist das einzige Werkzeug, das Sie direkt zur Erzeugung einer Fläche aus einer Menge von Punkten verwenden können. Sie können aber auch zuerst den Befehl PunktwolkeSchnitt in Rhino für das Reverse Engineering von Kurven, und dann diese Kurven zur Erstellung von [[rhino:nurbs|NURBs]] Flächen verwenden.
 
 ----
 Schauen Sie [[http://www.rhino3.de/design/modeling/reengineering/|hier]] und auf den folgenden Seiten nach Anwendungen, die automatisch NURBS-Flächen aus Punktwolken oder Polygonnetzen erzeugen. Zum Navigieren klicken Sie auf die kleinen Textwinkel ganz unten rechts auf jeder Seite.
 
 ----
-Je nach eingescanntem Objekt gehört Reverse Engineering zu den schwierigsten Aufgaben in Rhino. Meiner eigenen Erfahrung nach ist es weder leicht noch bietet es einen besonderen Anreiz, außer es handelt sich um eine Gelände-Map, die mit Patch zu bearbeiten sein sollte. Mein Rat lautet, diese Punktwolke nicht in [[de:rhino:nurbs|NURBS]]-Aufgaben zu verwenden, wenn es nicht unbedingt notwendig ist. (Es gibt CAM-Programme zur Aufnahme von Polygonnetzdateien, falls hier das Problem liegt.) Im Bedarfsfall sollten Sie jemanden mit Rhino-Erfahrung um Hilfe bitten--einen Trick gibt es nicht, nur fundierte Rhino-Kenntnisse sind von Nutzen-- oder sich eine spezielle Software für Reverse Engineering besorgen, um den Zeitwaufwand auf ein vernünftiges Maß zu beschränken.
+Je nach eingescanntem Objekt gehört Reverse Engineering zu den schwierigsten Aufgaben in Rhino. Meiner eigenen Erfahrung nach ist es weder leicht noch bietet es einen besonderen Anreiz, außer es handelt sich um eine Gelände-Map, die mit Patch zu bearbeiten sein sollte. Mein Rat lautet, diese Punktwolke nicht in [[rhino:nurbs|NURBs]]-Aufgaben zu verwenden, wenn es nicht unbedingt notwendig ist. (Es gibt CAM-Programme zur Aufnahme von Polygonnetzdateien, falls hier das Problem liegt.) Im Bedarfsfall sollten Sie jemanden mit Rhino-Erfahrung um Hilfe bitten--einen Trick gibt es nicht, nur fundierte Rhino-Kenntnisse sind von Nutzen-- oder sich eine spezielle Software für Reverse Engineering besorgen, um den Zeitwaufwand auf ein vernünftiges Maß zu beschränken.
 
 ----
-In dieser [[http://download.rhino3d.com:80/download.asp?id=ScanCleanupRemodel|PDF-Datei]] wird die Bereinigung eines gescannten Polygonnetzes und seine Vorbereitung für den STL-Druck beschrieben. Zusätzlich wird das Polygonnetz einem Reverse Engineering unterzogen und mit [[de:rhino:nurbs|NURBS]]-Flächen ersetzt, alles in Rhino 4.0.
+In dieser [[http://download.rhino3d.com:80/download.asp?id=ScanCleanupRemodel|PDF-Datei]] wird die Bereinigung eines gescannten Polygonnetzes und seine Vorbereitung für den STL-Druck beschrieben. Zusätzlich wird das Polygonnetz einem Reverse Engineering unterzogen und mit [[rhino:nurbs|NURBs]]-Flächen ersetzt, alles in Rhino 4.0.
 
 
 
