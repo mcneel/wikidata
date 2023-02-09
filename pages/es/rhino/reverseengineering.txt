@@ -1,39 +1,72 @@
-====== Ingeniería inversa ======
-Rhinoceros no es un software de ingeniería inversa automática.
+======Ingeniería inversa======
+=====Rhinoceros 8=====
 
-En general, se utiliza la nube de puntos o la malla poligonal como referencia para remodelar el objeto con superficies NURBS.
+La ingeniería inversa es el proceso de transformar una [[https://docs.mcneel.com/rhino/8/help/en-us/index.htm#commands/mesh.htm%3FTocPath%3DCommands%7CAlphabetical%7CM%7C_____33|malla]] o [[https://docs.mcneel.com/rhino/8/help/en-us/index.htm#commands/pointcloud.htm?Highlight=point%20cloud|nube de puntos]], normalmente procedente del escaneado de un objeto físico, en un tipo de geometría 3D que pueda editarse según los estándares de fabricación. Una malla es un conjunto de polígonos planos que definen una forma en el espacio 3D. Sin embargo, debido a su naturaleza, las mallas son difíciles de manipular de forma precisa. Esta precisión suele ser necesaria para volver a fabricar el modelo y convertirlo en un objeto físico. Por ejemplo, no se puede definir con precisión un radio o una curvatura en una malla. Por tanto, convirtiéndolo mediante ingeniería inversa en una geometría que se puede transformar con precisión matemática, como las [[https://www.rhino3d.com/features/nurbs/|NURBS]], el objeto se puede manipular y editar como se quiera, y enviarse de nuevo a cualquier tipo de máquina de prototipado.
+
+Rhino **no** es un programa de ingeniería inversa, ya que hay muchos aspectos y herramientas necesarios para hacer ingeniería inversa. Sin embargo, según los requisitos, Rhino puede tener suficientes herramientas para realizar lo que necesite.
+
+Rhino 8 mejora este proceso respecto a Rhino 7 añadiendo el comando [[https://discourse.mcneel.com/t/rhino-8-feature-shrinkwrap/149658|ShrinkWrap (EnvolverMalla)]]. 
+Algunos recursos útiles sobre ShrinkWrap (EnvolverMalla):
+  * https://discourse.mcneel.com/t/rhino-8-feature-shrinkwrap/149658
+  * https://vimeo.com/763781567
+  * https://vimeo.com/776411985
+
+El conjunto de herramientas de Rhino 8 que pueden ayudar a convertir un escaneado en una pieza editable son:
+  * [[https://discourse.mcneel.com/t/rhino-8-feature-shrinkwrap/149658|ShrinkWrap (EnvolverMalla)]]: para obtener una malla cerrada y limpia
+  * [[https://docs.mcneel.com/rhino/8/help/en-us/index.htm#commands/quadremesh.htm?Highlight=quadremesh|QuadRemesh (RemalladoCuad]]: para remallado y control de la topología
+  * [[https://docs.mcneel.com/rhino/8/help/en-us/index.htm#commands/tosubd.htm?Highlight=tosubd|ToSubD (ASubD)]]: para editar, manipular y transformar su forma
+  * [[https://docs.mcneel.com/rhino/8/help/en-us/index.htm#commands/tonurbs.htm?Highlight=tonurbs|ToNURBS (ANURBS)]]: para convertirlo de nuevo a NURBS y hacer más ediciones (de precisión) como booleanas, chaflanes o empalmes.
+  * [[https://discourse.mcneel.com/t/rhino-wip-activated-new-mesh-booleans/149930|Booleanas con mallas mejoradas]]: se ha reescrito el código de booleanas con mallas que trabajan con esquinas y producen un resultado poligonal más limpio
+
+Encontrará una amplia colección de tutoriales en la categoría [[https://www.rhino3d.com/learn/?query=kind:%20reverse_engineering&modal=null|Ingeniería inversa]] de la página de Formación.
+
+
+=====Rhinoceros 7=====
+Esta explicación es antigua, pero aún válida, sobre una [[https://www.hydraulicdesign.net/meshes.htm|malla.]]
+
+Rhino 7 mejora este proceso de ingeniería inversa de una malla.
+Aquí hay vídeos sobre el uso de Rhino 7 para aplicar ingeniería inversa a una malla.
+El proceso y los comandos se incluyen en el vídeo.
+  * https://www.youtube.com/watch?v=WpaSq2j-Mvk
+  * https://www.youtube.com/watch?v=EDd2wcTKWgE
+  * https://www.youtube.com/watch?v=fvV7Dyd7wH4
+
+Puede encontrar más información aquí:
+https://www.youtube.com/c/Rhinoceros3d/videos
+
+=====Rhinoceros 6=====
+
+[[rhino:rhinoceros|Rhino]] no es un software de ingeniería inversa automática.
+
+En general, se utiliza la nube de puntos o la malla poligonal como referencia para remodelar el objeto con superficies [[rhino:nurbs|NURBs]].
 
 Se pueden extraer curvas de sección de una nube de puntos (comando SecciónNubeDePuntos) o de una malla poligonal con Sección o Contorno.
 
-También hay algunos plug-ins disponibles para ingeniería inversa en http://www2.rhino3d.com/resources/default.asp?category=13
+  *[[http://download.rhino3d.com/download.asp?id=ScanCleanupRemodel|Tutorial]] sobre las funciones integradas en Rhino 
 
-Véase también http://www.flexicad.com/produkte/erweiterungen/rhinoreverse/uebersicht.htm.
+También existen algunos plug-ins que facilitan el proceso de ingeniería inversa.
 
-----
-El comando Parche es la única herramienta que se puede usar directamente para crear una superficie de un grupo de puntos. Pero también se puede usar el comando SecciónNubeDePuntos en Rhino para hacer la ingeniería inversa de las curvas en primer lugar y luego usar esas curvas para construir superficies NURBS.
+  *Trunhoo Network Technology tiene [[http://www.resurf3d.com/products.htm|RhinoResurf]], un plug-in de ingeniería inversa para Rhino 4 y 5. 
 
-----
-Mire aquí y las siguiente páginas: http://www.rhino3.de/design/modeling/reengineering/
+  *[[http://www.food4rhino.com/project/mesh2surface-0?etx|Mesh2Surface]] también es un buen plug-in para simplificar las tareas de ingeniería inversa en Rhinoceros.
 
-Para navegar, haga clic en los ángulos de texto de la parte inferior derecha de cada página.
+  *[[http://www.rhinoreverse.icapp.ch/english/index.html|Rhinoreverse]] también es un plug-in prometedor. 
 
-----
-Hay pocas posibilidades para hacer esto:
+  *Puede encontrar más herramientas para ingeniería inversa en [[https://www.food4rhino.com/en/browse?sort_by=ds_changed&f%5B0%5D=im_field_term_reference_category%3A712|nuestra página de productos y servicios relacionados.]]
 
-SMURF Plug-in for Rhino 3.0, http://www2.rhino3d.com/resources/display.asp?language=&listing=93  Smurf es un plug-in para Rhino que permite la conversión interactiva de mallas poligonales en parches de superficies NURBS.
 
-El plug-in SMURF requiere una malla poligonal. Si tiene una nube de puntos, es necesario convertir la nube de puntos en una malla en primer lugar.
-
-> **Convertidores:** ////
-  * [[rhino:points2polys|Points2Polys]] es un convertidor GRATUITO de nubes de puntos a mallas poligonales de Paraform que está diseñado para usar en datos de puntos RAW no estructurados (unos 500.000 puntos). http://www.paraform.com/ppdl/
-
-  Busque en el archivo del grupo de discusión de Rhino más información sobre esta herramienta.
-
-  * Busque en el archivo del grupo de discusión y en la página de recursos de Rhino otros traductores de nubes de puntos más recientes.
+  *Y también está [[https://oqton.com/|Geomagic]].
 
 ----
-Agregue sus comentarios...
+El comando Parche es la única herramienta que se puede usar directamente para crear una superficie de un grupo de puntos. Pero también se puede usar el comando SecciónNubeDePuntos en Rhino para hacer la ingeniería inversa de las curvas en primer lugar y luego usar esas curvas para construir superficies [[rhino:nurbs|NURBs]].
 
+----
+Consulte esta [[http://www.rhino3.de/design/modeling/reengineering/|página]] y las páginas siguientes de aplicaciones que crean automáticamente superficies NURBS a partir de nubes de puntos o mallas. Para navegar, haga clic en los ángulos de texto de la parte inferior derecha de cada página.
 
+----
+La ingeniería inversa es lo más difícil de hacer en Rhino, según cuál sea el elemento escaneado. No es un proceso fácil ni agradable, a no ser que sea un mapa de terreno, en cuyo caso debería ser factible conseguir buenos resultados con el comando Parche. Es aconsejable no realizar esta conversión de nube de puntos a [[rhino:nurbs|NURBs]] a menos que sea absolutamente necesario. (Hay programas CAM compatibles con archivos de malla, si ese es el problema.) Y si es necesario, entonces puede intentar obtener ayuda de alguien con experiencia en Rhino o bien conseguir el programa especializado de ingeniería inversa necesario para hacerlo en un plazo de tiempo razonable.
+
+----
+Este [[https://www.rhino3d.com/download/rhino/4.0/ScanCleanupRemodel|Archivo PDF]] describe el proceso de limpieza de una malla escaneada y su preparación para impresión STL. Además, se aplica "ingeniería inversa" a la malla y se sustituye por superficies [[rhino:nurbs|NURBS]], todo en Rhino 4.0.
 
 
