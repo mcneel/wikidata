@@ -1,15 +1,17 @@
-====== Rhino 5.0 ZooがWebサーバーで起動できない ======
-> **製品:** //[[ja:zoo:zoo5|Zoo 5.0]]//
-> **要約:** //Zoo 5.0はTCPポート80にアクセスする必要があります。これはWebサービスが実行されているシステムでは不可能です。//
+====== LAN Zoo がWebサーバーで起動できない ======
+> **製品:** //[[ja:zoo:home|Zoo]]//
+> **要約: ** //LAN Zoo はTCPポート80にアクセスする必要があります。これはWebサービスが実行されているシステムでは不可能です。//
 
 ===== 問題 =====
-サーバーを再起動してもZoo 5.0サービスが起動しません。Windowsイベントログ（コントロールパネル→ 管理ツール → イベントログ)をチェックすると、Zoo 5.0サービスがエラーを記録していました。
+サーバーを再起動しても LAN Zoo サービスが起動しません。Windowsイベントログ（コントロールパネル -> 管理ツール -> イベントログ）をチェックすると、LAN Zoo サービスがエラーを記録していました。
 
 <code>
-ローカルコンピューター上のZoo 5.0サービスは起動して停止しました。
-サービスの中には、他のサービスやプログラムで使用されていない場合は
-自動的に停止するものがあります。
+The Zoo service on the Local Computer started and then stopped.
+Some services stop automatically if they are not in use by another
+service or program. 
 </code>
+（ローカルコンピューター上のZooサービスは起動して停止しました。
+サービスの中には、他のサービスやプログラムで使用されていない場合は自動的に停止するものがあります。）
 
 再度Windowsイベントログで詳細を調べると、次のレポートが表示されました。
 
@@ -18,17 +20,22 @@ Address already in use by another process.
 Run 'netstat -o -n -a' from a command line to find the conflicting
 process ID, then look in Task Manager to find the name of that process.
 </code>
-
 （アドレスは既に他のプロセスによって使用されています。コマンドラインからnetstat -o -n -aを実行して競合しているプロセスIDを探し、タスクマネージャーでそのプロセスの名前を見つけてください。）
 
-  - コマンドラインでNETSTAT -anoを実行し、解放したいポートのPID番号を書き留めます。
+  - コマンドラインから **NETSTAT -o -n -a** を実行し、解放したいポートのPID番号を書き留めます。
   - タスクマネージャーからどのプロセスがそのPIDなのかが分かり、該当するポートを使用しているプログラムを確認することができます。
 
-このエラーは他のアプリケーションが既にポート80を使用していることが原因です。同時に1つのアプリケーションしかポートをリッスンできないため、Zooはポート80へのバインドに失敗します。よく起こるアプリケーションには[[http://www.iis.net/| Windows®サービスのInternet Information Services（IIS）]]、[[http://httpd.apache.org/|Apache HTTP Server]]、Skypeが含まれます。
-===== 解決策 =====
-  - Webサービスを実行していないコンピューターにZooを移します。これはプリントサーバー、電源を入れたままの他のワークステーション、追加の仮想サーバーでもかまいません。
+このエラーは他のアプリケーションが既にポート80を使用していることが原因です。同時に1つのアプリケーションしかポート80をリッスンできないため、Zooはポート80へのバインドに失敗します。この問題がよく起こるアプリケーションには以下が含まれます:
+
+  * [[http://www.iis.net/| Windows®サービス用のインターネット インフォメーション サービス（IIS）]]
+  * [[http://httpd.apache.org/|Apache HTTP Server]]
+  * [[http://www.java.com|Java]]
+  * [[ja:zoo:zooskype|Skype]]
+
+===== 解決方法 =====
+  - Webサービスを実行していないコンピューターに LAN Zoo を移します。これはプリントサーバー、電源を入れたままの他のワークステーション、あるいは追加の仮想サーバーでも構いません。
   - Webサービスが他のポートを使うよう設定します。Apache、IISとも他のポートで実行するよう設定することが可能です。
 
 \\
 
-{{tag>Zoo5}}
+{{tag>Zoo}}
