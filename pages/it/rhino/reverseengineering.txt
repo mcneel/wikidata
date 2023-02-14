@@ -1,37 +1,74 @@
-Rhinoceros non è un software specifico per Reverse Engineering.
+======Ingegneria inversa======
+=====Rhinoceros 8=====
 
-Normalmente sarà necessario usare la nuvola di punti o la mesh come riferimento per rimodellare l'oggetto con superfici Nurbs.
+L'ingegneria inversa è il processo di trasformazione di una [[https://docs.mcneel.com/rhino/8/help/it-it/index.htm#commands/mesh.htm%3FTocPath%3DCommands%7CAlphabetical%7CM%7C_____33|Mesh]] o [[https://docs.mcneel.com/rhino/8/help/it-it/index.htm#commands/pointcloud.htm?Highlight=point%20cloud|Nuvola di punti]], provenienti di solito dalla scansione di un oggetto fisico, in geometria 3D che può essere modificata in base agli standard di fabbricazione. Una mesh è una successione di poligoni piani che definiscono una forma nello spazio 3D. Tuttavia, per via della loro natura, le mesh sono difficili da manipolare in un determinato modo. Questa precisione è spesso richiesta per la fabbricazione di un oggetto fisico partendo da un modello. Ad esempio, è possibile definire con precisione il raggio o la curvatura di una mesh. Tramite operazioni di ingegneria inversa, è possibile ripristinare la geometria che può essere trasformata con precisione matematica, come [[https://www.rhino3d.com/features/nurbs/|NURBS]], l'oggetto può essere manipolato e modificato nuovamente da qualsiasi tipo di macchina di prototipazione.
 
-È possibile estrarre curve di sezione da una nuvola di punti con il comando //PointCloudSection, oppure da una mesh con i comandi //Section o _Contour.
+Rhino **non è** un programma di ingegneria inversa poiché occorrono molti aspetti e strumenti per svolgere operazioni di ingegneria inversa. Tuttavia, a seconda delle richieste, Rhino dispone di determinati strumenti per eseguire tali operazioni.
 
-Esistono anche alcuni plug-ins disponibili per Reverse Enginnering qui: http://www2.rhino3d.com/resources/default.asp?category=13
+Rhino 8 migliora il processo e Rhino 7 aggiungendo  il comando [[https://discourse.mcneel.com/t/rhino-8-feature-shrinkwrap/149658|AvvolgiMesh]]. 
+Ecco alcune risorse sul comando AvvolgiMesh:
+  * https://discourse.mcneel.com/t/rhino-8-feature-shrinkwrap/149658
+  * https://vimeo.com/763781567
+  * https://vimeo.com/776411985
 
-Vedere anche qui: http://www.flexicad.com/produkte/erweiterungen/rhinoreverse/uebersicht.htm.
+Di seguito, gli strumenti di Rhino 8 che consentono di convertire una scansione in oggetto modificabile:
+  * [[https://discourse.mcneel.com/t/rhino-8-feature-shrinkwrap/149658|AvvolgiMesh]] - per ottenere una mesh chiusa e nitida.
+  * [[https://docs.mcneel.com/rhino/8/help/en-us/index.htm#commands/quadremesh.htm?Highlight=quadremesh|RieseguiMeshQuad]] - per rieseguire la mesh e controllare la topologia.
+  * [[https://docs.mcneel.com/rhino/8/help/it-it/index.htm#commands/tosubd.htm?Highlight=tosubd|ASubD]] - per modificare, manipolare e trasformarne la forma.
+  * [[https://docs.mcneel.com/rhino/8/help/it-it/index.htm#commands/tonurbs.htm?Highlight=tonurbs|ANURBS]] - per riconvertire la forma ed applicare ulteriori modifiche (precisione) usando ad esempio booleane, smussamenti o raccordi fillet.
+  * [[https://discourse.mcneel.com/t/rhino-wip-activated-new-mesh-booleans/149930|BoolenaneMesh migliorate]] - codice di boolenane mesh riscritto che gestisce vari angoli e fornisce un risultato poligonale più nitido.
 
-Il comando _Patch è l'unico che può utilizzare direttamente come input i punti per generare una superficie (non è facile gestire il comando in modo da ottenere un risultato ottimale, specialmente quando i punti usati non sono perfettamente ordinati ed allineati, il che è abbastanza raro in una digitalizzazione). È spesso più conveniente costruire prima delle curve ottimizzate sui punti ed usare poi le stesse per generare le superfici Nurbs.
-
-Guardate qui ed alle pagine seguenti: http://www.rhino3.de/design/modeling/reengineering/
-
-Per navigare, click sui piccoli angoli di testo che si trovano all'estremità inferiore destra di ciascuna pagina.
-
-Per fare tutto questo esistono alcune possibilità:
-
-SMURF Plug-in per Rhino 3.0, http://www2.rhino3d.com/resources/display.asp?language=&listing=93 Smurf è un plug-in di Rhino che permette di convertire in modo interattivo mesh poligonali in pezze di superfici Nurbs
-
-Il Plug-in richiede come input una mesh. Di conseguenza  è necessario prima convertire la nuvola di punti in mesh.
-
-Per la conversione:
-
-  * Points2Polys è un convertitore gratuito della Paraform in grado di utilizzare input di punti non strutturato e di media dimensione (circa 500.000 punti). http://www.paraform.com/ppdl/
-  * _MeshFromPoints - comando di Rhino 3.0 incluso in Rhino 3.0 SR4  e in precedenza nel menu Bonus Tools. Cercate nell'archivio del NG di Rhino per maggiori informazioni su questo strumento.
-  * Cercate l'archivio del NG e la pagina Resources di Rhino per altri recenti convertitori di nuvole di punti.
-Supponendo che vogliate ottenere la superficie di alta qualità di un prodotto complesso, potrebbero bastare un paio d'anni di esperienza! Ma forse per qualcosa dove la qualità della superficie non è così importante o per oggetti semplici, Smurf e gli altri plug-in possono essere sufficienti. Senza vedere il modello e sapere di che si tratta, la maggior parte delle persone usa la nuvola di punti come riferimento per creare il modello con una tecnica adeguata di modellazione, combinata con la necessità di far combaciare al livello di tolleranza desiderato la superficie Nurbs con i punti della scansione, assai difficile.
-
-Il Reverse Engineering è una delle cose più difficili da fare in Rhino, in relazione alla complessità dell'oggetto da ricostruire. Ne ho fatto, trovandolo né facile né particolarmente divertente, con l'eccezione di mappe di terreno, nel qual caso è possibile ottenere qualcosa di accettabile con _Patch. Il [[rhino:mio|mio]] consiglio è di non intraprendere un processo di conversione da punti a superfici Nurbs se non è strettamente necessario (molti Cam usano Mesh, se dovete solo fabbricare l'oggetto). Se proprio dovete, chiedete l'assistenza di qualcuno con un'ottima esperienza di Rhino--non ci sono trucchi, dovete semplicemente conoscere Rhino molto molto bene-- oppure procuratevi un SW specializzato di Reverse Engineering in grado di attuare il processo in un lasso di tempo ragionevole.
-
-Aggiungete i vostri commenti...
+Troverai numerosi tutorial sulla pagina formativa dedicata all'[[https://www.rhino3d.com/learn/?query=kind:%20reverse_engineering&modal=null|Ingegneria inversa]].
 
 
+=====Rhinoceros 7=====
+Ecco una spiegazione ancora valida sulle [[https://www.hydraulicdesign.net/meshes.htm|Mesh.]]
+
+Rhino 7 migliora il processo di ingegneria inversa di una mesh.
+Ecco alcuni video sull'utilizzo di 7 per eseguire operazioni di ingegneria inversa su una mesh.
+Il processo e i comandi sono inclusi nel video.
+  * https://www.youtube.com/watch?v=WpaSq2j-Mvk
+  * https://www.youtube.com/watch?v=EDd2wcTKWgE
+  * https://www.youtube.com/watch?v=fvV7Dyd7wH4
+
+Ulteriore risorsa disponibile qui:
+https://www.youtube.com/c/Rhinoceros3d/videos
+
+=====Rhinoceros 6=====
+
+[[rhino:rhinoceros|Rhino]] non è un software di ingegneria inversa automatico.
+
+Di solito, viene utilizzata una nuvola di punti o una mesh poligonale come riferimento per rimodellare l'oggetto con le superfici [[rhino:nurbs|NURBS]].
+
+È possibile estrarre le curve di sezione da una nuvola di punti (comando SezioniNuvolaDiPunti) o da una mesh poligonale con Sezione o Contorno.
+
+  *[[http://download.rhino3d.com/download.asp?id=ScanCleanupRemodel|Tutorial]] sulle funzioni integrate in Rhino. 
+
+Esistono inoltre alcuni plug-in che consentono il processo di ingegneria inversa.
+
+  *Trunhoo Network Technology include [[http://www.resurf3d.com/products.htm|RhinoResurf]], un plug-in di ingegneria inversa per Rhino 4 e Rhino 5. 
+
+  *[[http://www.food4rhino.com/project/mesh2surface-0?etx|Mesh2Surface]] è uno straordinario plug-in per semplificare le operazioni di ingegneria inversa in Rhinoceros.
+
+  Anche *[[http://www.rhinoreverse.icapp.ch/english/index.html|Rhinoreverse]] è un plug-in molto promettente. 
+
+  *È possibile trovare strumenti aggiuntivi per l'ingegneria inversa sulla [[https://www.food4rhino.com/en/browse?sort_by=ds_changed&f%5B0%5D=im_field_term_reference_category%3A712|nostra pagina dedicata a prodotti e servizi.]]
+
+
+  *Mezioniamo anche [[http://www.geomagic.com/en/products/studio/|Geomagic]].
+
+----
+Il comando Patch è l'unico strumento che puoi usare direttamente per creare una superficie da un insieme di punti. Tuttavia, puoi anche usare il Comando SezioniNuvolaDiPunti Rhino per eseguire operazioni di ingegneria inversa su curve per poi costruire superfici [[rhino:nurbs|NURBS]].
+
+----
+Consulta [[http://www.rhino3.de/design/modeling/reengineering/|qui]] e le seguenti pagine sulle applicazioni che creano automaticamente superfici NURBS da nuvole di punti o mesh. Per navigare, fai clic sui piccoli angoli di testo in fondo a destra di ciascuna pagina.
+
+----
+L'ingegneria inversa è un processo difficile in Rhino e dipende dalla qualità della scansione iniziale. È un processo laborioso non semplici, a meno che non si disponga della mappa del terreno che consente di ottenere in qualche modo un output con il comando Patch. Sconsigliamo di utilizzare questa nuvola di punti per operazioni con [[rhino:nurbs|NURBS]] a meno che non sia strettamente necessario. Esistono programmi CAM che possono usare file mesh in alternativa. Ti consigliamo di chiede aiuto a utenti esperti in Rhino o specializzati in software di ingegneria inversa.
+
+----
+Questo  [[http://download.rhino3d.com:80/download.asp?id=ScanCleanupRemodel|file PDF]] descrive il processo di clean-up di una mesh scansionata, semplificando la stampa STL. Inoltre, alla mesh viene applicata ingegneria inversa e rimpiazzata da superfici [[rhino:nurbs|NURBS]] in Rhino 4.0.
 
 
 
+Aggiungi commenti...
