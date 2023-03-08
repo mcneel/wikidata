@@ -29,6 +29,7 @@ if (!defined('DOKU_INC')) die();
     </div>
 </div></div><!-- /footer -->
 
+<!-- Google GA3 tracking -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -38,6 +39,12 @@ if (!defined('DOKU_INC')) die();
   ga('create', 'UA-512742-6', 'auto');
   ga('send', 'pageview');
 
+</script>
+
+<!-- Google tag GA4 (gtag.js) --> 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EQ9K187465"></script> 
+<script> 
+    window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-EQ9K187465'); 
 </script>
 
 <?php
