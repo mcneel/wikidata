@@ -42,4 +42,5 @@ if (!defined('DOKU_INC')) die();
 </script>
 
 <?php
+include_once("tpl_analyticstacking.php");
 tpl_includeFile('footer.html');
