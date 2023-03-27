@@ -1,0 +1,29 @@
+====== Rhino V5 報告 "Bad image" (壞圖)並且無法啟動 ======
+2017年7月 - JB
+\\
+==== 問題 ====
+嘗試啟動 Rhino V5 時出現 "Rhino.exe - Bad image" (64-位元) 或 "Rhino4.exe - Bad image" (32位元)，錯誤狀態 0xc0000020。
+目前版本的**McAfee**防毒軟體正刪除Rhino系統檔案內容，將其清空。
+
+====症狀====
+
+一些用戶反映在最近更新後，Rhino V5 64位元版本無法啟動。我們最初猜測這是未知的Windows 更新所引起。 現有明確跡象表示，這是由**McAfee**防毒軟體目前版本所造成。\\
+
+Windows會彈出一個關於損壞檔案的訊息：
+{{ :rhino:5:v5_bad_image.png |Rhino.exe - Bad Image}}
+
+====修復====
+===1 - Rhino需要修復===
+在Windows開啟控制台：
+  - 執行程式和功能工具
+  - 在列表中找到 **Rhinoceros V5 (64-bit)** 
+  - 選取並選擇**修復**選項
+  - 在列表中找到 **Rhinoceros V5**
+  - 選取並選擇**修復**選項
+    - 如果Windows回報 "//您所嘗試使用的功能在網絡資源無法使用//", [[https://www.rhino3d.com/download/rhino/5/latest|下載安裝器]]，並執行。如果系統有詢問的話，請選擇**Repair** (修復)選項。
+
+===2 - 封鎖McAfee===
+如果你不從Rhino系統檔案中封鎖McAfee，那麼問題可能還會發生。
+你可以設定MaCfee排除**C:\Program Files\Rhinoceros 5 (64-bit)\System** 儲存這些檔案的資料夾。\\
+
+希望McAfee可以解決這個問題，到目前為止，我們無法就這些細節與他們取得聯繫。
