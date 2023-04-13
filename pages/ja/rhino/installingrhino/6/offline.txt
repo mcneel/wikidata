@@ -1,17 +1,22 @@
-======Rhino 6 オフラインインストール======
+=====Rhino オフラインインストールとバリデーション=====
+//Rhino 6、Rhino 7 およびそれ以降が対象です。//
 
 Rhinoインストーラーには、お使いのWindowsのインストールがRhinoの実行に必要なものを全て備えていることを確認する役割があります。これには .NET Framework および Microsoft Visual C++ Runtime 再頒布可能パッケージが含まれ、コンピューターの多くが既にそのパッケージを備えていることからインストーラーに組み込まれてはいません。必要に応じてインストール中にダウンロードされるようになっています。
 
 ですがオフラインでインストールするためには、ご自身でこれらのパッケージがあることを確認していただく必要があります。
-
-====オフラインインストール用のパッケージをダウンロードする ====
+====オフラインインストール用のWindowsパッケージをダウンロードする====
 インターネットに接続したコンピューターから:
-  - [[https://www.rhino3d.com/download/rhino-for-windows/6/latest|最新のRhinoインストーラー]]をダウンロード
+  - Microsoft Windows のアップデートをダウンロードし、オフラインでインストールします。これは不可欠なステップで、飛ばしてしまうとRhinoのインストール失敗につながるでしょう。
+  - [[https://windowsreport.com/offline-update-windows-10/|Installing Windows Updates Offline]] など、サードパーティの技術情報サイトが参考になるでしょう。検索すれば他にもいろいろ見つかります。
+
+====オフラインインストール用のRhinoパッケージをダウンロードする====
+インターネットに接続したコンピューターから:
+  - [[https://www.rhino3d.com/download/rhino-for-windows/7/最新のRhinoインストーラー]]をダウンロード
   - インターネットに接続したコンピューターでインストーラーを起動
-  - 今すぐインストール ボタンの横にある**ギア（歯車）のアイコン**をクリック {{ :ja:rhino:installingrhino:6:rinstallj_a.png?200 |}}
-  - **オフラインインストールのパッケージをダウンロード** のリンクをクリック {{ :ja:rhino:installingrhino:6:rinstallj_b.png?200 |}}
-  - Rhinoは必要なパッケージをダウンロードし、進行中のダイアログボックスを表示します。{{ :ja:rhino:installingrhino:6:rinstallj_c.png?200 |}}
-  - ダウンロードが完了すると **レイアウトを完了しました** とダイアログボックスに表示され、その後のインストラクションが含まれています。{{ :ja:rhino:installingrhino:6:rinstallj_d.png?200 |}}
+  - 今すぐインストール ボタンの横にある**ギア（歯車）のアイコン**をクリック {{ :rhino:installingrhino:6:install_gear_advancedoptions.png?direct&200 |}}
+  - **オフラインインストールのパッケージをダウンロード** のリンクをクリック {{ :rhino:installingrhino:6:install_download_packages.png?direct&200 |}}
+  - Rhinoは必要なパッケージをダウンロードし、進行中のダイアログボックスを表示します。 {{ :rhino:installingrhino:6:install_downloading.png?direct&200 |}}
+  - ダウンロードが完了すると **レイアウトを完了しました** とダイアログボックスに表示され、その後のインストラクションが含まれています。 {{ :rhino:installingrhino:6:install_download_finished.png?direct&200 |}}
   - そのまま実行できる **Bootstrapper.exe** ファイルと **redist** フォルダーがインストーラーファイルの隣に作成されたことをお確かめください。
 
 ====インストール====
@@ -21,30 +26,30 @@ Rhinoインストーラーには、お使いのWindowsのインストールがRh
   - オフラインのコンピューターで**Bootstrapper.exe**ファイルを実行します。
 
 **ネットワーク全体で展開するには**
-  * [[jp:rhino:installingrhino:6|展開の手順]]に従って実行します。
+  * [[jp:rhino:installingrhino:7|展開の手順]]に従って実行します。
 
-====オフラインインストールのバリデーション====
-Rhinoのライセンスはバリデーションされた後にお使いいただけるようになります。コンピューターがオフラインの場合、オフラインでバリデーションを行うことができます。
+=====オフラインインストールのバリデーション=====
+Rhinoのライセンスはバリデーションされた後にお使いいただけるようになります。Rhinoのライセンスはバリデーションされた後にお使いいただけるようになります。
 
-  - Rhino起動すると、Rhinoはバリデーションサーバーに接続できないことを通知します。{{ :zoo:validate01.png?direct&200 |}}
+  - Rhino起動すると、Rhinoはバリデーションサーバーに接続できないことを通知します。 {{ :zoo:validate01.png?direct&200 |}}
   - **"手動でバリデーションコードを取得"**するボタンをクリックします。
   - ダイアログボックスが表示されます。 {{ :zoo:validate02.png?direct&200 |}} 
   - **ライセンスキー**、**デバイス名**、**デバイスID**の情報を書き留めます。
   - インターネットに接続したシステムに移動します。
   - ウェブブラウザで https://www.rhino3d.com/validate にアクセスします。
-  - **メールアドレス**、Rhinoの**ライセンスキー**、**デバイス名**、**デバイスID**の情報をフォームに入力します。 {{ :ja:rhino:installingrhino:6:rinstallj_e.png?200 |}}
+  - **メールアドレス**、Rhinoの**ライセンスキー**、**デバイス名**、**デバイスID**の情報をフォームに入力します。 {{ :zoo:validate2.jpg?direct&200 |}}
   - アップグレードしている場合、以前のバージョンのRhinoライセンスキーも入力が必要となります。
-  - バリデーションコードが表示されますので、印刷またはテキストファイルに保存してください。 //このコードは生成から24時間以内に使用する必要があります//。
-  - オフラインのシステムに戻ります。
+  - バリデーションコードが表示されますので、印刷またはテキストファイルに保存してください。//このコードは生成から24時間以内に使用する必要があります//。
+  - オフラインのシステムに戻り、 **Continue** ボタンをピックします。
   - バリデーションウィザードにバリデーションコードを入力し、NEXT をクリックします。
 
 これでRhinoはオフラインでバリデーションすることができました。
-
-**メモ:** ネットワーク全体の展開でオフラインの LAN Zoo を使っている場合、必要なデータはZooにライセンスを追加しようとした時に表示されます。Zooでの手順についてはこちらをご覧ください: https://wiki.mcneel.com/zoo/rhinovalidateoffline#validating_offline
+0208759780
+**メモ:** ネットワーク全体の展開でオフラインの LAN Zoo を使っている場合、必要なデータはZooにライセンスを追加しようとした時に表示されます。Zoo特有の上記インストラクションは https://wiki.mcneel.com/zoo/rhinovalidateoffline#validating_offline をご覧ください。
 ====== ヘルプファイル ======
 
-Rhino 6 のヘルプシステムはオンラインになっています。オフラインで利用するためには:
+Rhino 6 および Rhino 7 のヘルプシステムはオンラインです。オフラインでご利用になるには:
 
-  - [[https://www.rhino3d.com/download/Rhino/6.0/Rhino6OfflineHelp|オフラインヘルプのインストーラーをダウンロードします]]。
+  - [[https://www.rhino3d.com/download/Rhino/6.0/Rhino6OfflineHelp|オフラインの Rhino 6 ヘルプ インストーラーをダウンロード]] / [[https://www.rhino3d.com/download/Rhino/7.0/rhino-7-offline-help|オフラインの Rhino 7 ヘルプ インストーラーをダウンロード]]します。
   - インストーラーを実行し、インストールプロセスの途中で必ず **すべてのユーザー** を選択してください。
   - [[https://wiki.mcneel.com/ja/rhino/installrhi|RHIファイルをすべてのユーザー向けにインストールする]]ことについての情報はこちらでご覧いただけます。
