@@ -1,0 +1,89 @@
+======Rhino for Windows はZooのサーバーをどのように検出しますか?======
+
+> **製品:** //[[ja:zoo:home|Zoo]]//
+> **要約:** //Rhino for Windows のZooライセンスマネージャーのサーバー検出方法についての概要//
+
+=====概要=====
+
+RhinoがZooのサーバーからライセンスを必要とする場合、**以下の順序で**場所を検索してZooのサーバー名を指定します:
+  - Windowsレジストリの現在のユーザーハイブ。ZooのサーバーのIPアドレスまたはホスト名を検索します。
+  - Windowsレジストリのローカルコンピューターハイブ。ZooのサーバーのIPアドレスまたはホスト名を検索します。
+  - デフォルトのZooサーバー名の ドメインネームシステム（DNS）サーバーを照会します。
+ 
+=====Rhino 7 / Rhino 6 for Windows=====
+
+===レジストリ参照 – 現在のユーザー===
+
+ZooサーバーのIPアドレスまたはホスト名の検索にWindowsレジストリの ''HKEY_CURRENT_USER'' を探す場合、Rhinoはこちらを検索します:
+
+<code>
+Hive:  HKEY_CURRENT_USER
+Key:   Software\McNeel\Rhinoceros\6.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <ホスト名またはIPアドレス>
+</code>
+
+===レジストリ参照 – ローカルコンピューター===
+
+ZooサーバーのIPアドレスまたはホスト名の検索にWindowsレジストリの ''HKEY_LOCAL_MACHINE'' を探す場合、Rhinoはこちらを検索します:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <ホスト名またはIPアドレス>
+</code>
+
+> **メモ:** //[[rhino:installingrhino|インストールを自動化した]]方法、管理者特権でRhinoを初期実行（"管理者として実行"）を使ってRhinoを展開すると、両方とも LAN Zoo のサーバー名は HKEY_LOCAL_MACHINE ハイブに書き込まれます。//
+
+=====Rhino 5 for Windows=====
+
+===レジストリ参照 – 現在のユーザー===
+
+ZooサーバーのIPアドレスまたはホスト名の検索にWindowsレジストリの ''HKEY_CURRENT_USER'' を探す場合、32ビット、64ビットともRhinoはこちらを検索します:
+
+<code>
+Hive:  HKEY_CURRENT_USER
+Key:   Software\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <ホスト名またはIPアドレス>
+</code>
+
+===レジストリ参照 – ローカルコンピューター===
+32ビット版のWindowsをお使いの場合、ZooサーバーのIPアドレスまたはホスト名の検索にWindowsレジストリの ''HKEY_LOCAL_MACHINE'' を探す場合、Rhinoはこちらを検索します:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   Software\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <ホスト名またはIPアドレス>
+</code>
+
+64ビット版のWindowsをお使いの場合、ZooサーバーのIPアドレスまたはホスト名の検索にWindowsレジストリの ''HKEY_LOCAL_MACHINE'' を探す場合、32ビット、64ビットともRhinoはこちらを検索します:
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <ホスト名またはIPアドレス>
+</code>
+
+=====DNSの使用=====
+Windowsレジストリの検索でRhinoがZooのサーバー名を特定できない場合、ホスト名が以下のデフォルトZooサーバーを、DNSサーバーに照会します:
+
+<code>
+__mcneel.__zoo5
+</code>
+
+例えば会社のドメインが //mcneel.com// の場合、Zooサーバーを示す //<nowiki>__mcneel.__zoo5.mcneel.com</nowiki>// のDNSエイリアスを追加することができます。
+
+{{:zoo:dnsalias.png}}
+
+\\
+
+{{tag>Zoo}}
