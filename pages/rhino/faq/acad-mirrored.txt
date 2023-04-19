@@ -5,11 +5,15 @@ When a Rhino file is exported to DWG/DXF and opened in AutoCAD, the text may app
 Let's look at the most common reason why this happens.
 
 ===== Rhino "Text reads forward" Setting=====
-In the Rhino Annotation Style there is a setting under the Font called [[https://docs.mcneel.com/rhino/7/help/en-us/index.htm#documentproperties/annotation.htm#(null)|Text reads forward when viewed from behind]]
-allows the text to stay always readable or forward even when it is viewed from behind or from the bottom.
+In the Rhino's **Annotation Style**, there is a setting under the **Font** page called [[https://docs.mcneel.com/rhino/7/help/en-us/index.htm#documentproperties/annotation.htm#(null)|Text reads forward when viewed from behind]].
 
-This setting works great if you stay in Rhino. However if you plan to export to //AutoCAD DWG/DXF// you will have problems. The reason is that AutoCAD does not have a corresponding setting in its Text or Dimension style.
+This allows the text to stay //always readable// or forward even when it is viewed from behind or from the bottom.
 
+This setting works great if you stay in Rhino. 
+However if you plan to export to //AutoCAD DWG/DXF// and open in AutoCAD, you will have problems. 
+
+The reason is that **AutoCAD does not have a corresponding setting in its //Text// or //Dimension style//**.
+So you must avoid this setting in Rhino, to guarantee visual parity between what you see in Rhino and what you will see down stream in AutoCAD.
 ===== The Solution =====
 If you plan to export to AutoCAD, you will need to turn off this setting [[https://docs.mcneel.com/rhino/7/help/en-us/index.htm#documentproperties/annotation.htm#(null)|"Text reads forward when viewed from behind"]] in your Annotation style.
 
