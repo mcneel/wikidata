@@ -1,0 +1,16 @@
+====== My Rhino Text is Mirrored in AutoCAD. Why? ======
+
+===== Background =====
+Many time Rhino users export to DWG/DXF. 
+Sometimes when the DWG/DXF is opened in AutoCAD, the text appear mittored.The 
+Let's look at the most common reason why this happens.
+
+===== Rhino "Text reads forward" Setting=====
+In the Rhino Annotation Style there is a setting under the Font called [[https://docs.mcneel.com/rhino/7/help/en-us/index.htm#documentproperties/annotation.htm#(null)|Text reads forward when viewed from behind]]
+allows the text to stay always readable or forward even when it is viewed from behind or from the bottom.
+
+This setting works great if you stay in Rhino. However if you plan to export to //AutoCAD DWG/DXF// you will have problems. The reason is that AutoCAD does not have a corresponding setting in its Text or Dimension style.
+
+===== The Solution =====
+If you plan to export to AutoCAD, you will need to turn this setting off.
+1. In Rhino, go your Annotation style(s) and turn off the setting:  //"Text reads forward when viewed from behind"//.
