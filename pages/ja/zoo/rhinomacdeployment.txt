@@ -1,0 +1,55 @@
+======Rhino for Mac 管理された配布======
+> **製品:** //[[ja:zoo:home|Zoo]]//
+> **要約:** //Zooを使用するよう設定された Rhino for Mac の展開方法の説明//
+
+=====質問=====
+Rhino for Mac のラボラトリーライセンスを購入しました。大学内の複数のコンピューターでZooライセンスサーバーを使用するよう設定した後の展開で、何か役立つ策はありますか?
+
+パッケージの構築とクライアントシステムへのアプリケーションのプッシュに[[http://www.jamfsoftware.com/products/casper-suite/|Casper]]等の管理システムを使っており、これは通常、ライセンス構成情報と配布アプリケーションとのバンドルを含みます。
+
+**LIC**ファイルに加え、Rhinoは **LicensesZooClient.Settings** ファイルを探し、これは通常、ライセンス構成情報と配布アプリケーションとのバンドルを含みます。
+
+**LIC**ファイルに加え、Rhinoは **LicensesZooClient.Settings** ファイルを探し、これにはZooサーバーのIPアドレスまたはホスト名が含まれています。詳細は[[https://wiki.mcneel.com/ja/zoo/findzooservermac|Rhino for Mac はZooのサーバーをどのように検出しますか?]] をご参照ください。
+
+
+=====回答=====
+
+====Rhino 7 を展開する:====
+
+    - 1台のコンピューターに Rhino for Mac をインストールし、ご利用の LAN Zoo サーバーに接続するようライセンス認証を行います。
+    -  Rhinoは **/ユーザー/Shared/McNeel/Rhinoceros/7.0/License Manager/Licenses/59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic** を作成します。
+    - ライセンスファイルのコピーを対象のコンピューターで同じ場所に展開します。
+    - ファイルとフォルダーのアクセス許可を、一致するよう変更します（chmod 644）。
+    - 対象のコンピューターでRhinoを展開します。
+
+====Rhino 6 を展開する:====
+
+    - 1台のコンピューターに Rhino for Mac をインストールし、ご利用の LAN Zoo サーバーに接続するようライセンス認証を行います。
+    -  Rhinoは **/ライブラリ/Application Support/McNeel/Rhinoceros/6.0/License Manager/Licenses/55500d41-3a41-4474-99b3-684032a4f4df.lic** を作成します。
+    - ライセンスファイルのコピーを対象のコンピューターで同じ場所に展開します。
+    - ファイルとフォルダーのアクセス許可を、一致するよう設定します（chmod 644）。
+    - 対象のコンピューターでRhinoを展開します。
+
+
+====Rhino 5 を展開する:====
+
+    - 1台のコンピューターに Rhino for Mac をインストールし、ご利用の LAN Zoo サーバーに接続するようライセンス認証を行います。
+    - Rhinoは **/ライブラリ/Application Support/McNeel/Rhinoceros/License Manager/Licenses/781b000c-8d0b-4ed3-8ead-213bdb848f39.lic** を作成します。
+    - Rhinoは **/ライブラリ/Application Support/McNeel/Rhinoceros/License Manager/LicensesZooClient.settings** を作成します。
+    - ファイルを両方とも、対象のコンピューターで同じ場所に展開します。
+    - ファイルとフォルダーのアクセス許可を、一致するよう変更します（chmod 644）。
+    - 対象のコンピューターでRhinoを展開します。
+
+
+
+**メモ:** 
+
+    - よくあるミスに、///ライブラリ//（グローバルライブラリ）と ///ユーザー/[user_account]/ライブラリ//（使用中のユーザーのライブラリ）の混同があります。間違いなくグローバルライブラリを見ていることを確認しながら作業を進めましょう。
+    - また Rhino 6と Rhino 7 は**6**および**7**の明示的サブフォルダーにある **License Manager** の下にZooのライセンスファイルを作成する一方、Rhino 5 は **License Manager** および **License** サブフォルダーにファイルを作成し、**5**のサブフォルダーは作成しません。
+    - スタンドアロンのライセンスファイルは暗号化されて読み取ることができず、システムごとに固有となっているため、他のコンピューターで展開するようコピーすることはできません。
+    - LAN Zoo および Cloud Zoo のライセンスファイルはクリアテキストで、システム間の移動が可能です。
+
+=====詳細=====
+
+[[https://wiki.mcneel.com/ja/zoo/findzooservermac|Rhino for Mac はZooのサーバーをどのように検出しますか?]]
+
