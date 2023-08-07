@@ -1,0 +1,38 @@
+======Zoo - Mac版本檢查工具======
+> **產品：** //[[zh-tw:zoo:home|Zoo]]//
+> **摘要:** //Zoo Mac版本檢查工具相關討論。//
+
+[[zoo:diagnosticsmac|{{:zoo:networkutility.png?128|網路公用程式}}]]
+
+**[[https://support.apple.com/en-us/HT202790|檢查工具]]**可在**Rhino for Mac**電腦上執行。 該程式提供幾個有用的網路診斷工具，來解決Rhino for Mac工作站與Zoo伺服器之間的連接問題。
+
+在Mac上使用 **[[https://support.apple.com/en-us/HT204014|Spotlight]]** 來搜尋並開啟網路公用程式。
+
+  - 點擊右上角選單上的 **搜尋**圖示，或按**Command** 鍵+**Space空白鍵** 。
+  - 鍵入 **Network Utility**進行搜尋。
+  - 雙點擊 **Network Utility**以執行。
+
+>**請注意：** 隨著macOS Big Sur的推出，蘋果決定停用此應用程式。但您仍能以 **[[https://www.makeuseof.com/how-to-use-terminal-as-network-utility-replacement/|Terminal]]**使用許多有用的功能。
+
+  
+=====診斷=====
+
+網路公用程式提供以下有用的網路測試：
+
+1. **Ping：** Ping診斷公用程式用於對連接、可達性、名稱分解進行故障排除的TCP/IP工具。Ping透過發送網際網路控制訊息協定(ICMP)回顯請求訊息，來驗證與另一部TCO/IP電腦的IP級別連接。 相應回顯訊息在往返時間內接收，並顯示。
+{{:zoo:nu_ping.png?640|Ping}}
+
+2. **查找：** DNS查找診斷公用程式顯示可用於診斷網域名系統(DNS)基礎結構的訊息。
+{{:zoo:nu_lookup.png?640|Lookup}}
+
+3.  **追蹤路由：** 追蹤路由診斷公用程式透過送出ICMP回送套件，確認不同IP存活時間(TTL)值，來判定到達目的地的路由。 沿路徑的每個路由都需要在轉發數據包之前，將其上的TTL至少減一，所以TTL實際上是個中繼段個數，當數據包的TTL達到0的時候，路由應該將ICMP超時的消息送回源電腦。
+{{:zoo:nu_traceroute.png?640|Traceroute}}
+
+4. **連接埠掃描：** 埠掃描可以測試掃描打開的TCP埠。 在Zoo的情況下，需要掃描TCP Port 80。
+{{:zoo:nu_portscan.png?640|埠掃描}}
+
+如果此測試失敗，請確保Zoo伺服器正在執行。您可透過使用ZooAdmin.exe或控制台中的服務小程式來執行此操作。另外，請確保在Zoo系統裡執行的防火牆軟體上[[zh-tw:zoo:window7firewall|，不管傳進或傳出的流量，TCP Port 80都是打開的]]。
+
+=====進階主題=====
+
+[[zh-tw:zoo:diagnostics|Zoo - Windows檢查工具]]
