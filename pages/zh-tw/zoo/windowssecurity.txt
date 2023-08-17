@@ -1,0 +1,29 @@
+====== Windows 安全設定與授權驗證 ======
+> **產品：** //[[zh-tw:zoo:home|Zoo]]//
+> **摘要：** //討論 Windows安全設置及其如何影響授權驗證//
+
+====症狀：====
+  * Zoo 無法連線到位於https://api.mcneel.com 的McNeel驗證伺服器。
+  * Internet Explorer 無法從驗證伺服器連線到https://api.mcneel.com，但用其他瀏覽器就可以。
+
+===== 解決方案： =====
+將以下註冊碼的**啟用**值設定為**0xffffffff**來啟動PKCS金鑰交換驗證演算法。
+
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS
+Name:  Enabled
+Type:  REG_DWORD
+Value: 0xffffffff
+</code>
+
+===== 討論：=====
+一組被推薦的安全設定會干擾在Windows 伺服器 2012 R2、2016和2019內的LAN Zoo授權驗證。
+
+如果禁用PKCS， LAN Zoo就無法連接到McNeel驗證伺服器。
+
+將 **啟用** 值設定為**0xffffffff** (或刪除之) 便足以讓一切恢復正常運作。啟用預設值為0x0。
+
+\\
+
+{{tag>Zoo_zh-tw}}
