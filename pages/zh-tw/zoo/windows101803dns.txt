@@ -1,0 +1,27 @@
+======Windows 10 版本1803名稱轉換問題======
+
+> **產品：** //[[zoo:home|Zoo]]//
+> **摘要:** //討論Windows 10 版本1803的更新，以及對Zoo造成的影響//
+
+=====問題=====
+有回報指稱安裝Windows 10 Microsoft Spring Creators 1803版本更新之後，Rhino不能再從Zoo伺服器獲取授權。 
+
+此外，**[[zh-tw:zoo:diagnostics|Windows版Zoo診斷公用程式]]** 現在無法完成單一或是多項測試。\\
+
+=====更多詳情=====
+
+儘管從領域名稱系統(DNS)解析的名稱不分大小寫，不過看到診斷工具，如 **[[https://docs.microsoft.com/zh-tw/windows-server/administration/windows-commands/ping|Ping]]**，就因為區分大小寫而發生錯誤。
+
+例如：
+
+{{zoo:win10ping.jpg?640}}
+
+
+=====可能的解決方案=====
+
+我們還在盡力了解發生了什麼狀況，但在Windows 10版本1803，有一種解決方案是用來指定Zoo伺服器主機名時使用不同大小寫。 在以上範例，您以小寫指定Zoo伺服器主機的名稱。
+
+也有可能需要在Windows 10版本1803中啟動其他的服務。這裡有一篇文章，是關於[[zoo:windows101803#possible_solution|Windows 10 版本1803 更新問題]]。
+
+\\
+{{tag>Zoo_zh-tw}}
