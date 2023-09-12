@@ -29,6 +29,7 @@ Here is the nvidia Control Panel option.
 Check is the NVIdia control panel and see if there are Stereo options shown above. Note: You will not be able to enable it from there since this is now a Windows settings. Notice in my screenshot of NVidia's control panel it says "Enabled" but it's grayed out...that's because I already enabled "3D display mode" in the Windows->Display settings.
 
 ==== The Plugin ==== 
+{{ :rhino:windows:show_panel.png?200|}}
 1. Download the plugin
 [[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/Stereo3DView.rhp|Stereo3DView]]
 
@@ -37,8 +38,29 @@ Check is the NVIdia control panel and see if there are Stereo options shown abov
 3. Drop on to the open Rhino application
 
 4. Show Panels" popup, check "Stereo 3D View"
-{{ :rhino:windows:show_panel.png?200|}}
+
 
 ==== QuadBuffering ====
 
 In Rhino, turn on QuadBuffering with the **TestQuadBuffering** command.
+
+==== Additional Notes ====
+  * You need very specific hardware and glasses. 
+  * You need a monitor with a fast refresh, 
+  * You need special glasses.  
+
+If you have an "Active" stereo configuration, then your glasses have to be able to sync with the monitors refresh (to flicker between left and right lenses), which means that the glasses either plugin somewhere in the back of the GPU, or there is some kind of USB receiver that plugs into the computer and the glasses communicate with it. 
+
+If you have a "Passive" configuration (the kind that 3D movies in theaters use), then you need also need special monitors, but the glasses are simply polarized lenses.  
+
+In either case, you also need to make sure that the GPU control panel is configured for the type of mode your hardware supports.  
+
+For "//Active" stereo// you should be able to use "**Generic active stereo**" setting.  
+For "//Passive" stereo//, you need to use "Clone mode" or "Planar stereo mirror display".
+Passive modes usually require some kind of dual displays with a plane of glass that sits at an angle between them.
+
+This is a passive mode setup by [[https://www.schneider-digital.com/en/|Schneider Digital]] called the [[https://www.schneider-digital.com/en/products/passive-3d-stereo-monitors/|“3D PluraView”]].
+
+=== Warning ===
+Because Rhino provided a type of "Stereo mode" setting in Rhino 5. you can not access this by simply "just turning it on". This is not the case and there will be a lot a experimentation required if you want to use this.Support is availble on the [[https://discourse.mcneel.com/c/rhino/147|Rhino Support Forum]].
+
