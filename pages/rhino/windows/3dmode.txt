@@ -1,18 +1,44 @@
-====== Quad Buffering 3D Mode ======
+====== AR/VR in Rhino 7 & 8 ======
 
-Rhino 8 now supports "Quad Buffering" which is what is needed for Passive/Active stereo viewing.
+===== Option 1: Rhino VR Plugin =====
+
+Download [[here|https://github.com/mcneel/RhinoVR]]
+It requires an OpenVR compatible VR headset.
+
+===== Option 2: Quad Buffering 3DMode =====
+
+Windows Rhino 7 & 8 now supports "Quad Buffering" which is what is needed for Passive/Active stereo viewing.
 
 The Quad Buffering support in V8 is for hardware like **PluraVision 3D** and passive stereo viewing from people like **Schneider Digital**.
 
-Quad Buffering does this need to be turned on in Rhino 8 and requires you enable "3D mode" in Windows display settings, as well as the GPU manufacturer's control panel.
+===== Configuration =====
+//Note: Close Rhino. You must get the computer all setup for stereo viewing prior to starting Rhino//
 
-Windows Setting
+==== Windows Setting ====
+
+Quad Buffering does this need to be turned on in Rhino 8 and requires you enable "3D mode" in Windows display settings, as well as the GPU manufacturer's control panel.
 
 {{:rhino:windows:3dmode01.png?200|}}
 
-Graphics Card Setting
+==== Graphics Card Setting ==== 
 GPU control panel should have some kind of Stereo option.
 
-Here is the nvidia option.
-
+Here is the nvidia Control Panel option.
 {{:rhino:windows:3dmode02.png?300|}}
+
+Check is the NVIdia control panel and see if there are Stereo options shown above. Note: You will not be able to enable it from there since this is now a Windows settings. Notice in my screenshot of NVidia's control panel it says "Enabled" but it's grayed out...that's because I already enabled "3D display mode" in the Windows->Display settings.
+
+==== The Plugin ==== 
+1. Download the plugin
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/Stereo3DView.rhp|Stereo3DView]]
+
+2. Open Rhino.
+
+3. Drop on to the open Rhino application
+
+4. Show Panels" popup, check "Stereo 3D View"
+{{ :rhino:windows:show_panel.png?200|}}
+
+==== QuadBuffering ====
+
+In Rhino, turn on QuadBuffering with the **TestQuadBuffering** command.
