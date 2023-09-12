@@ -20,7 +20,7 @@ A newly created scheme will always start with the default set of options (as if 
 4. On the Shortcut tab, edit the Target path. Add a switch for the new scheme: \\
 //(The example path below is for Windows Vista/7/8, Rhino 5 64 bit. Others are similar.)//
 
-**"C:\Program Files\Rhinoceros 5 (64-bit)\System\Rhino.exe" /<color darkslateblue>Scheme=MyNewScheme</color>**
+**"C:\Program Files\Rhino 7\System\Rhino.exe" /<color darkslateblue>Scheme=MyNewScheme</color>**
 
 //-- Make sure there is a single space before the **/Scheme=...**//
 
@@ -32,7 +32,9 @@ A newly created scheme will always start with the default set of options (as if 
 **Notes:** ////
 
   * **A template** is a 3DM file that can include any information stored in a Rhino 3DM file: document properties such as units, grid settings, tolerances, etc. as well as viewport layouts, layers, and even geometry. So you can create templates with preset units, layouts, title blocks, geometry, etc. -- anything that normally can be saved in a 3dm file.
-  * **A scheme** is a new location in the registry where an additional set of Rhino Options can be stored. These are the Rhino settings that you configure in the Options command.
+  * **A scheme** is a key in the Windows registry that tells Rhino that a set of options has been stored under that scheme name.  From Rhino V6 on, the options themselves are stored in the settings folder under the scheme name. The settings folder is located here:  **//C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\<version number>\settings//** where //<username>// is your user name and //<version number>// is 6.0, 7.0, 8.0 etc.
+
+
   * **A scheme can include a template specification**, i.e. any scheme can open with a specific template. After starting Rhino with your newly created scheme, use the **New** command and browse to the file you want to be your starting template for that scheme. In the lower left corner of the dialog, check **use this file when Rhino starts**. You can create a custom template by saving a drawing with the **SaveAsTemplate** command or using Save As Template from the file menu.
 
 ===== How to (more or less) duplicate a scheme without editing the registry=====
