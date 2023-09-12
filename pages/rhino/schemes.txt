@@ -37,23 +37,20 @@ A newly created scheme will always start with the default set of options (as if 
 
   * **A scheme can include a template specification**, i.e. any scheme can open with a specific template. After starting Rhino with your newly created scheme, use the **New** command and browse to the file you want to be your starting template for that scheme. In the lower left corner of the dialog, check **use this file when Rhino starts**. You can create a custom template by saving a drawing with the **SaveAsTemplate** command or using Save As Template from the file menu.
 
-===== How to (more or less) duplicate a scheme without editing the registry=====
-//This requires you have Rhino V4, or V3 with Bonus Tools installed.//
+===== How to duplicate a scheme without editing the registry=====
+//This topic has been updated to Rhino V6 and later !//
 
-While in the instance of Rhino whose scheme you want to duplicate:// (Make sure only this instance is running!)//
-  * Go to //Tools > Export Options// (V4) or //Bonus > Tools > Export Options// (V3).
-  * In V3, pick the **Select All** button.  In V4 all options are always exported.
-  * At the top, pick the "..." (Browse) button and browse to an easily found location, give the file a name, then pick **OK**.
-  * This file will be a .ini file with all your options.
-  * Close Rhino, then create a new shortcut on your desktop by copying the original Rhino shortcut.
-  * Right-click on the copy, choose properties, and change the Target to: **...Rhino4.exe" /<color darkslateblue>Scheme=MyNewScheme</color>** //(or ...Rhino3.exe...)//.
-  * It's a good idea to rename the shortcut so that you know which scheme will start.
-  * Start Rhino from this shortcut.  Inside Rhino go to //Tools > Import Options// (V4) or //Bonus > Tools > Import Options// (V3).
-  * Browse to your newly created .ini file, make sure all the options are selected (in V4 use the **Select All** button) and click **OK**. You will still have to open your custom toolbar layout/workspace if you have one as this is not covered by this procedure.
-  * To do this, go to Tools > Toolbar layout. Close the current workspace, navigate to your custom workspace, and Open.
-  * Custom display modes in V4 are neither covered by Schemes nor by Export Options, so you will have to export and reload those independently
-  * Change whatever else you want while in this instance of Rhino. These changes will be saved under the new scheme automatically.  The changes only affect the new scheme, not any others.
+As of V6, Rhino options and various other settings are stored in an .xml file the settings folder located in C:\Users\<username>\AppData\Roaming\McNeel\Rhinoceros\<version number>. The default scheme's file for example is called <file>settings-Scheme__Default.xml</file>  Creating a new scheme called "MyNewScheme" will create a new file in the same folder with the name <file>settings-Scheme__MyNewScheme.xml</file>
 
+This has made duplicating schemes (within the same version) relatively simple.  When you make a new scheme, the new file as outlined above will automatically be created.  //All you need to do is make a copy of the settings file from the scheme you want to duplicate and rename it with the name of the new scheme, **replacing** the old one//.  All the options from the duplicated scheme will then be applied.
+
+**Note that this can also be applied for duplicating Rhino options from one computer to another.**  Simply copy over the settings file from the first computer and replace the original on the second.
+
+**Important notes:**
+
+  * Replacing the settings file of of a Rhino version with that of a different version (i.e. V6 to V7) is not recommended.  There are often many changes to the settings file format between versions. It may work correctly - or it may not.
+
+  * The settings file includes which workspace file(s) should be loaded by a specific scheme, //but it does not modify the workspace files themselves// - that needs to be done separately via Rhino's workspace editing tools. 
 ===== How to duplicate a scheme by editing the registry=====
 
 **Note: //<color red>Be extremely careful when registry editing! If you use the above method, this is usually not necessary.</color>//**
