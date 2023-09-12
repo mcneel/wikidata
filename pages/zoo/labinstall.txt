@@ -44,4 +44,17 @@ This will allow any user on the computer to see the server key.
 
 {{:zoo:use_lan_zoo.png?200|}}
 
+10. Select **Use Zoo Server with following host name or IP.** Then type the hostname or IP into the text field. 
 
+{{:zoo:dnsoripzoo.png?200|}}
+
+Pick the **Continue** button.
+
+11. Now Rhino should open. 
+
+12. Close Rhino and logout as Admin. Login as a Student or low level user.
+
+13. Open Rhino. 
+
+//Why does it open?//
+When logged in as student, Rhino looks to the HKEY_CURRENT_USER hive, and finds that there is no key for the Zoo server. It continues to look in the HKEY_LOCAL_MACHINE hive, and finds the key that the Admin had previously written. Contacts the named Zoo server through TCP port 80 and us handed a Rhino license.
