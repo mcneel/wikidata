@@ -14,9 +14,6 @@ The main issue is that the Admin writes to the registry in the Admin user Hive a
 The solution is to write the registry key to the HKEY_LOCAL_MACHINE -> SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager area.
 This will allow any user on the computer to see the server key.
 
-**Reference:** [[How Does Rhino for Windows Find a Zoo Server?
-|How Does Rhino for Windows Find a Zoo Server?]]
-
 ===== How to Install Rhino in a EDU Lab =====
 
 1. [[https://wiki.mcneel.com/zoo/home|Download and install the Zoo]] and [[https://wiki.mcneel.com/zoo/rhinovalidate|add your Rhino EDU key]].
@@ -57,4 +54,7 @@ Pick the **Continue** button.
 13. Open Rhino. 
 
 //Why does it open?//
-When logged in as student, Rhino looks to the HKEY_CURRENT_USER hive, and finds that there is no key for the Zoo server. It continues to look in the HKEY_LOCAL_MACHINE hive, and finds the key that the Admin had previously written. Contacts the named Zoo server through TCP port 80 and us handed a Rhino license.
+When logged in as student, Rhino looks to the HKEY_CURRENT_USER hive, and finds that there is no key for the Zoo server. It continues to look in the HKEY_LOCAL_MACHINE hive, and finds the key that the Admin had previously written. Contacts the named Zoo server through TCP port 80 and us handed a Rhino license. It also verify the license with the local license file in C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
+
+**Reference:** [[How Does Rhino for Windows Find a Zoo Server?
+|How Does Rhino for Windows Find a Zoo Server?]]
