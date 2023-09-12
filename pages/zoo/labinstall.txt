@@ -8,7 +8,6 @@ IP is reset if you dynamic IPs. To you the IP you need to remove the IP from the
 
 2. Write the **license file** to the local computer.
 
-
 This only needs to be done once, correctly of course. Then any user that logs into the computer can open Rhino.
 The main issue is that the Admin writes to the registry in the Admin user Hive and the when logged in to the computer the user is not allowed to read this area.
 
@@ -17,3 +16,32 @@ This will allow any user on the computer to see the server key.
 
 **Reference:** [[How Does Rhino for Windows Find a Zoo Server?
 |How Does Rhino for Windows Find a Zoo Server?]]
+
+===== How to Install Rhino in a EDU Lab =====
+
+1. [[https://wiki.mcneel.com/zoo/home|Download and install the Zoo]] and [[https://wiki.mcneel.com/zoo/rhinovalidate|add your Rhino EDU key]].
+
+2. Login to student computer as Admin or any account at will allow an install.
+
+3. Download your [[https://www.rhino3d.com/download/|current Rhino installer]] and install.
+
+4. When the install is complete, there will be a program Rhino icon on the Desktop.
+{{ :zoo:rhino_7_menu.png?200|}}
+
+5. Right Mouse Button click the icon. This menu will pop up.
+
+6. Pick **Run as Administrator**
+
+//Why?// This is a critically important step. As admin, Rhino will run elevated and be able to write the key to the **HKEY_LOCAL_MACHINE** hive so any users can reference it. If you just open with the left mouse button, Rhino writes the key to **HKEY_CURRENT_USER** hive and no other user will be able to reference it.
+
+{{ :zoo:rhino_01.png?200|}}
+
+7. Dialog appear with message, Rhino needs a license to run. Check //I have read and agree//.
+
+8. Pick on **Options** that has now appeared in the lower left corner. 
+
+9. Select **Use Lan Zoo**.
+
+{{:zoo:use_lan_zoo.png?200|}}
+
+
