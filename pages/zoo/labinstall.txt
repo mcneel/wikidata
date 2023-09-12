@@ -1,0 +1,19 @@
+====== Install Rhino in a Windows School Lab ======
+The issue when installing Rhino on lab or classroom computers, is that often it works for the Admin. However then the a limited rights user logs in, Rhino can no longer opens and report that is can not find a license.
+
+There are two parts to configuring Rhino to use a Zoo server. 
+
+1. The **Registry Key**: Specify the Zoo DNS servername (prefered) or IP.
+IP is reset if you dynamic IPs. To you the IP you need to remove the IP from the dynamic range.)
+
+2. Write the **license file** to the local computer.
+
+
+This only needs to be done once, correctly of course. Then any user that logs into the computer can open Rhino.
+The main issue is that the Admin writes to the registry in the Admin user Hive and the when logged in to the computer the user is not allowed to read this area.
+
+The solution is to write the registry key to the HKEY_LOCAL_MACHINE -> SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager area.
+This will allow any user on the computer to see the server key.
+
+**Reference:** [[How Does Rhino for Windows Find a Zoo Server?
+|How Does Rhino for Windows Find a Zoo Server?]]
