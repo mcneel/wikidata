@@ -8,8 +8,11 @@ IP is reset if you dynamic IPs. To you the IP you need to remove the IP from the
 
 2. Write the **license file** to the local computer.
 
-This only needs to be done once, correctly of course. Then any user that logs into the computer can open Rhino.
-The main issue is that the Admin writes to the registry in the Admin user Hive and the when logged in to the computer the user is not allowed to read this area.
+This only needs to be done once, correctly of course. 
+If done correctly, any user that logs into the computer can open and run Rhino.
+
+The main problem here is that the Admin writes to the registry in the Admin user Hive. This occurs when Rhino is opened normally and the Zoo server name is entered.
+When normal users logged into the computer, they are not allowed to read this area.
 
 The solution is to write the registry key to the HKEY_LOCAL_MACHINE -> SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager area.
 This will allow any user on the computer to see the server key.
