@@ -3,19 +3,54 @@
 > **Product:** //[[zoo:home|Zoo]]//
 > **Summary:** //An overview of how Rhino for Windows finds a Zoo license manager server.//
 
-=====How does Rhino for Windows find a Zoo server?=====
+=====Overview=====
 
-When Rhino needs a license from a Zoo server, it determines the name of the Zoo server by looking in the following locations in this order:
+When Rhino needs a license from a Zoo server, it determines the name of the Zoo server by looking in the following locations **in this order**:
   - The Current User hive of the Windows Registry. Looks for the host name or IP address of your Zoo server.
   - The Local Machine hive of the Windows Registry. Looks for the host name or IP address of your Zoo server.
   - Queries your Domain Name System (DNS) server for the default Zoo server name.
  
+=====Rhino 8, 7 and 6 for Windows=====
 
-=====More information=====
+===Registry Lookup - Current user===
 
-====Registry Lookup - Current user====
+When searching in ''HKEY_CURRENT_USER'', of the Windows Registry, for the host name or IP address of your Zoo server, Rhino will look in this location:
 
-When searching in HKEY_CURRENT_USER, of the Windows Registry, for the host name or IP address of your Zoo server, both 32-bit and 64-bit Rhino will look in this location:
+<code>
+Hive:  HKEY_CURRENT_USER
+Key:   Software\McNeel\Rhinoceros\6.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <host name or IP address>
+</code>
+
+===Registry Lookup - Local machine===
+
+When searching in ''HKEY_LOCAL_MACHINE'', of the Windows Registry, for the host name or IP address of your Zoo server, Rhino will look in this location: **SOFTWARE\Wow6432Node**
+ 
+<code>
+Hive:  HKEY_LOCAL_MACHINE
+Key:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager
+Name:  Server
+Type:  REG_SZ
+Value: <host name or IP address>
+</code>
+
+> **Note:** //Both deploying Rhino using the [[rhino:installingrhino|Automated Installation]] method, and initially running Rhino with elevated privileges (i.e "Run as Administrator") will result in the LAN Zoo server name being written to the HKEY_LOCAL_MACHINE hive.//
+
+> A license key file will be created in %programdata%. This will have the key details so Rhino can open. Example: 55500d41-3a41-4474-99b3-684032a4f4df.lic in the C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
+
+> Right click on the Rhino program icon and pick "Run as Admin." Your registry entry for the Zoo will be created in the Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\6.0\License Manager
+
+> Open Rhino normally (unelevated) and the registry key is place in
+Computer\HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\License Manager
+
+
+=====Rhino 5 for Windows=====
+
+===Registry Lookup - Current user===
+
+When searching in ''HKEY_CURRENT_USER'', of the Windows Registry, for the host name or IP address of your Zoo server, both 32-bit and 64-bit Rhino will look in this location:
 
 <code>
 Hive:  HKEY_CURRENT_USER
@@ -25,8 +60,8 @@ Type:  REG_SZ
 Value: <host name or IP address>
 </code>
 
-====Registry Lookup - Local machine====
-If you are using a 32-bit version of Windows, then when searching in HKEY_LOCAL_MACHINE, of the Windows Registry, for the host name or IP address of your Zoo server, Rhino 32-bit will look in this location:
+===Registry Lookup - Local machine===
+If you are using a 32-bit version of Windows, then when searching in ''HKEY_LOCAL_MACHINE'', of the Windows Registry, for the host name or IP address of your Zoo server, Rhino 32-bit will look in this location:
 
 <code>
 Hive:  HKEY_LOCAL_MACHINE
@@ -36,7 +71,7 @@ Type:  REG_SZ
 Value: <host name or IP address>
 </code>
 
-If you are using a 64-bit version of Windows, then when searching in HKEY_LOCAL_MACHINE, of the Windows Registry, for the host name or IP address of your Zoo server, both 32-bit and 64-bit Rhino will look in this location:
+If you are using a 64-bit version of Windows, then when searching in ''HKEY_LOCAL_MACHINE'', of the Windows Registry, for the host name or IP address of your Zoo server, both 32-bit and 64-bit Rhino will look in this location:
 
 <code>
 Hive:  HKEY_LOCAL_MACHINE
@@ -46,7 +81,7 @@ Type:  REG_SZ
 Value: <host name or IP address>
 </code>
 
-====Using DNS====
+=====Using DNS=====
 If Rhino fails to determines the name of the Zoo server, by searching in the Windows Registry, then it will query your DNS server for the default Zoo server, which is the following host name:
 
 <code>
