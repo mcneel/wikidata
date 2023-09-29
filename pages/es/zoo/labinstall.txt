@@ -1,0 +1,71 @@
+====== Instalar Rhino para Windows en un aula ======
+El problema al instalar Rhino en equipos de aulas es que funciona para el administrador. Sin embargo, cuando un usuario con derechos limitados inicia sesión en el equipo, Rhino ya no se abre e informa de que no puede encontrar una licencia.
+
+La configuración de Rhino para utilizar un servidor Zoo consta de dos partes. 
+
+1. La **Clave de registro**: especifique el nombre del servidor Zoo DNS (preferido) o la IP.
+La IP se restablece si son IP dinámicas. La IP se necesita para eliminar la IP del rango dinámico.
+
+2. Guarde el **archivo de licencia** en el equipo local.
+
+Esto sólo hay que hacerlo una vez, y correctamente. 
+Si se hace correctamente, cualquier usuario que inicie sesión en el equipo podrá abrir y ejecutar Rhino.
+
+El principal problema aquí es que el Admin guarda en el registro en el Hive del usuario Admin. Esto ocurre cuando Rhino se abre normalmente y se introduce el nombre del servidor Zoo.
+Cuando los usuarios normales inician sesión en el equipo, no tienen permiso para leer esta área.
+
+La solución es escribir la clave de registro en el área HKEY_LOCAL_MACHINE -> SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager.
+Esto permitirá a cualquier usuario del equipo ver la clave del servidor.
+Esto se hace al abrir Rhino como administrador y escribir la clave del servidor Zoo.
+
+===== Cómo instalar Rhino en un Lab EDU =====
+
+1. [[https://wiki.mcneel.com/es/zoo/home|Descargue e instale el Zoo]] y [[https://wiki.mcneel.com/es/zoo/rhinovalidate|añada su código de licencia de Rhino EDU]].
+
+2. Inicie sesión en el equipo del estudiante como **Admin** o cualquier otra cuenta que permita la instalación.
+
+3. Descargue el [[https://www.rhino3d.com/download/|instalador actual de Rhino]] e instálelo.
+
+4. Una vez finalizada la instalación, aparecerá un icono de Rhino en el Escritorio.
+{{ :zoo:rhino_7_menu.png?200|}}
+
+5. Haga clic con el botón derecho del ratón en el icono. Aparecerá este menú.
+
+6. Seleccione **Ejecutar como Administrador**
+
+//¿Por qué?// Este paso es muy importante. Como administrador, Rhino se ejecutará en modo elevado y podrá escribir la clave en el directorio **HKEY_LOCAL_MACHINE** para que cualquier usuario pueda hacer referencia a ella. Si solo abre con el botón izquierdo del ratón, Rhino escribe la clave en **HKEY_CURRENT_USER** y ningún otro usuario podrá hacer referencia a ella.
+
+{{ :zoo:rhino_01.png?200|}}
+
+7. Aparece un cuadro de diálogo con el mensaje Rhino necesita una licencia para ejecutarse. Marque //Lo he leído y estoy de acuerdo//.
+
+8. Haga clic en **Opciones** que ha aparecido ahora en la esquina inferior izquierda. 
+
+9. Seleccione **Usar Lan Zoo**. 
+
+{{:zoo:use_lan_zoo.png?200|}}
+
+10. Seleccione **Use Zoo Server with following host name or IP.** A continuación, escriba el nombre de host o IP en el campo de texto. 
+
+{{:zoo:dnsoripzoo.png?200|}}
+
+Haga clic en el botón **Continuar**.
+
+11. Ahora Rhino debería abrirse. 
+
+12. Cierre Rhino y vuelva a iniciarlo como **Admin**. Inicie sesión como estudiante o usuario de bajo nivel.
+
+13. Abra Rhino. 
+
+//¿Por qué sucede esto?//
+Al iniciar sesión como estudiante, Rhino busca en la carpeta HKEY_CURRENT_USER y descubre que no hay ninguna clave para el servidor del Zoo. Continúa buscando en HKEY_LOCAL_MACHINE y encuentra la clave que el Admin había escrito previamente. Rhino se pone en contacto con el servidor Zoo nombrado a través del puerto TCP 80 y recibe una licencia de Rhino. También verifica la licencia con el archivo de licencia local en C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
+
+**Referencia:** 
+
+[[https://wiki.mcneel.com/zoo/findzooserverwin|¿Cómo encuentra Rhino un servidor del Zoo?]]
+
+\\
+
+{{tag>Zoo}}
+
+Última edición: Sept-29-2023
