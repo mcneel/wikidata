@@ -1,0 +1,71 @@
+====== Rhino für Windows in einer Studenten-Lab installieren ======
+Das Problem beim Installieren von Rhino auf Lab- oder Schulcomputern ist oft, dass es für den Administrator funktioniert. Wenn sich jedoch ein Anwender mit weniger Rechten in den Computer einlggt, kann Rhino nicht mehr starten und meldet, dass es keine Lizenz findet.
+
+Die Konfigurierung von Rhino zur Verwendung eines Zoo-Servers geschieht in zwei Schritten. 
+
+1. Der **Registrierungsschlüssel**: Geben Sie den Zoo-DNS-Servernamen (vorzugsweise) oder IP an.
+IP wird zurückgesetzt wenn Sie dynamische IPs verwenden. (Sie brauchen den IP, um den IP aus dem dynamischen Bereich zu entfernen.)
+
+2. Schreiben Sie die **Lizenzdatei** auf den lokalen Computer.
+
+Korrekt ausgeführt, ist dies nur einmal notwendig. 
+In diesem Fall kann danach jeder, der sich in den Computer einloggt, auch Rhino öffnen und ausführen.
+
+Das Hauptproblem besteht hier darin, dass der Administrator in der Admin-Benutzerstruktur in die Registrierung schreibt. Dies geschieht, wenn Rhino normal geöffnet und der Zoo-Servername eingegeben wird.
+Wenn sich normale Anwender in den Computer einloggen, sind sie nicht zum Lesen dieses Bereichs berechtigt.
+
+Die Lösung besteht darin, den Registrierungsschlüssel in den Managerbereich HKEY_LOCAL_MACHINE -> SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License zu schreiben.
+So wird jedem Anwender des Computers gestattet, den Serverschlüssel einzusehen.
+Dies ist möglich, wenn Sie Rhino als Admin öffnen und den Zoo-Serverschlüssel schreiben.
+
+===== Installation von Rhino in einer Studenten-Lab =====
+
+1. [[https://wiki.mcneel.com/de/zoo/home|Laden Sie den Zoo herunter und installieren Sie ihn]] und [[https://wiki.mcneel.com/zoo/rhinovalidate|fügen Sie Ihren Rhino-Studenten-Schlüssel hinzu]].
+
+2. Loggen Sie sich als **Administrator** im Studenten-Computer ein, oder mit jeglichem Konto das eine Installation ermöglicht.
+
+3. Laden Sie Ihren [[https://www.rhino3d.com/download/|aktuellen Rhino-Installer]] herunter und installieren Sie.
+
+4. Sobald die Installation abgeschlossen ist, erscheint auf dem Desktop ein Rhino-Symbol.
+{{ :zoo:rhino_7_menu.png?200|}}
+
+5. Klicken Sie mit der rechten Maustaste auf das Symbol. Darauf erscheint das Menü.
+
+6. Wählen Sie **Als Administrator ausführen**
+
+//Warum?// Dies ist eine höchst wichtiger Schritt. Bei Administratorausführung wird Rhino mit erweiterten Rechten ausgeführt, einschließlich der Möglichkeit, den Schlüssel in den Bereich **HKEY_LOCAL_MACHINE** zu schreiben, damit jeder Anwender ihn referenzieren kann. Wenn Sie es einfach mit der linken Maustaste öffnen, schreibt Rhino den Schlüssel in den Bereich **HKEY_CURRENT_USER**, womit kein anderer Anwender ihn referenzieren kann.
+
+{{ :zoo:rhino_01.png?200|}}
+
+7. Ein Dialog erscheint mit dem Hinweis, dass Rhino eine Betreiberlizenz benötigt. Wählen Sie //Ich gelesen und stimme zu//.
+
+8. Klicken Sie auf **Optionen**, die gerade in der linken unteren Ecke erschienen sind. 
+
+9. Wählen Sie **Lan Zoo verwenden**.
+
+{{:zoo:use_lan_zoo.png?200|}}
+
+10. Wählen Sie **Den Zoo-Server mit folgendem Hostnamen oder IP verwenden.** Dann geben Sie den Hostnamen bzw. die IP in das Textfeld ein. 
+
+{{:zoo:dnsoripzoo.png?200|}}
+
+Klicken Sie auf die Schaltfläche **Weiter**.
+
+11. Damit sollte Rhino geöffnet werden. 
+
+12. Schließen Sie Rhino und loggen Sie sich als **Administrator** aus. Loggen Sie sich als Student oder einfacher Anwender ein.
+
+13. Öffnen Sie Rhino. 
+
+//Warum lässt es sich öffnen?//
+Wenn Sie sich als Student eingeloggt haben, sucht Rhino im Bereich HKEY_CURRENT_USER und stellt fest, dass kein Schlüssel für den Zoo-Server vorhanden ist. Die Suche im Bereich HKEY_LOCAL_MACHINE wird fortgesetzt, bis der zuvor vom Asministrator geschriebene Schlüssel gefunden ist. Rhino kontaktiert dann den benannten Zoo-Server über den TCP-Port 80 und erhält eine Lizenz. Es bestätigt auch die Lizenz mit der lokalen Lizenzdatei in C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
+
+**Referenz:** 
+
+[[https://wiki.mcneel.com/de/zoo/findzooserverwin|Wie findet Rhino für Windows einen Zoo-Server?]]
+
+\\
+
+{{tag>Zoo_de}}
+
+Letzte Bearbeitung: 15. Sept. 2023
