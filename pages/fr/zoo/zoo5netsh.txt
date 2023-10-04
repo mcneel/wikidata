@@ -1,0 +1,45 @@
+======Ouvrir le Port TCP 80 sur le pare-feu de Windows à l'aide de Netsh======
+
+> **Produit :** //[[fr:zoo:home|Zoo]]//
+> **Résumé:** //Utilisation de Netsh pour ouvrir le port TCP 80 requis par Zoo//
+
+Zoo communique avec les clients Rhino par le Port TCP 80 (HTTP).
+
+Après avoir installé le Zoo, vous devrez vérifier que le port TCP 80 est ouvert dans les deux sens de communication, //entrant et sortant//, dans le logiciel de pare-feu du système où se trouve le serveur Zoo.
+
+Remarque, le port TCP 80 est ouvert par défaut pour les communications sortantes sur la plupart des pare-feu. Vous ne devriez donc pas avoir besoin d'ouvrir de ports sur le pare-feu des ordinateurs où est installé Rhino. 
+
+=====Plus d'informations=====
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|Netsh]]** est un utilitaire de script de ligne de commande Windows qui vous permet, localement ou à distance, d'afficher ou de modifier la configuration réseau d'un ordinateur en cours d'exécution.
+
+Netsh propose également une fonction de script permettant d'exécuter un groupe de commandes en mode batch sur un ordinateur donné.
+
+Netsh peut être utilisé, à la place de l'applet Pare-feu du Panneau de configuration, pour automatiser l'ouverture des ports TCP/IP requis.
+
+Il est possible d'ouvrir ces ports sur le pare-feu Windows à l'aide de Netsh. La syntaxe est différente selon que vous utilisez Windows XP, Windows Server 2008, Windows Vista ou une version plus récente.
+
+====Windows XP====
+**Important :** Si vous êtes membre du groupe Administrateurs, exécutez les commandes à partir d'une invite de commande. Pour lancer une invite de commande, recherchez l'icône ou l'entrée du menu Démarrer que vous utilisez pour lancer une session d'invite de commande.
+
+<code>
+rem Open TCP Port 80
+netsh firewall add portopening TCP 80 "Zoo TCP Port 80"
+</code>
+
+====Windows Server 2008, Windows Vista ou supérieur====
+
+**Important :** Si vous êtes membre du groupe Administrateurs et que le contrôle de compte d'utilisateur est activé sur votre ordinateur, exécutez les commandes à partir d'une invite de commande avec des autorisations élevées. Pour démarrer une invite de commande avec des autorisations élevées, recherchez l'icône ou l'entrée du menu Démarrer que vous utilisez pour démarrer une session d'invite de commande, cliquez dessus avec le bouton droit de la souris, puis cliquez sur **Exécuter en tant qu'administrateur**.
+
+<code>
+rem Open TCP Port 80 inbound and outbound
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=in action=allow protocol=TCP localport=80
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=out action=allow protocol=TCP localport=80
+</code>
+
+=====Référence=====
+[[http://support.microsoft.com/kb/947709|Comment utiliser le contexte "netsh advfirewall firewall".]]
+
+\\
+
+{{tag>Zoo}}
