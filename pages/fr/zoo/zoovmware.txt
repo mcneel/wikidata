@@ -1,0 +1,25 @@
+====== Exécuter LAN Zoo sur VMware Fusion pour Mac ======
+> **Produit :** //[[fr:zoo:home|Zoo]]//
+> **Résumé :** //Discute de l'utilisation du Zoo sur VMware sur macOS//
+
+===== Question=====
+Nous avons installé le LAN Zoo sur VMware Fusion Pro et Windows sur notre serveur macOS. Mais cela ne fonctionne pas. Dans Rhino, nous avons essayé la détection automatique et la spécification de l'adresse IP du serveur. Rhino indique, //"Une exception inattendue a eu lieu. Veuillez contacter votre administrateur informatique pour obtenir de l'aide."//
+
+===== Réponse=====
+N'oubliez pas que vous n'exécutez pas simplement Windows, mais que vous exécutez Windows en tant que machine virtuelle sous macOS. Une configuration supplémentaire du réseau sera donc nécessaire pour que tout cela fonctionne.
+
+Si vous n'êtes pas familier avec VMware et la mise en réseau, cette page vaut la peine d'être lue : [[http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1022264|Comprendre les types de réseaux sous VMware Fusion]].
+
+Vous trouverez également d'autres informations utiles en effectuant une recherche sur le web pour "Exécuter un serveur Web sur VMware Fusion". Gardez à l'esprit que le Zoo utilise le port TCP 80, tout comme un serveur web.
+
+La configuration peut être très simple ou très complexe. Cela dépend de ce que fait votre serveur Mac et du nombre de sessions VMware qu'il prend en charge.
+
+Par exemple, si votre serveur Mac n'héberge aucun service web et n'exécute qu'une seule session VMware, il vous suffit de configurer l'adaptateur réseau de la session pour le mode //Bridged//. C'est la façon la plus simple de faire fonctionner le Zoo sur VMware. 
+
+Si la carte réseau doit être configurée pour le NAT, vous devez configurer VMware pour la redirection de port.
+
+[[http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2006955|Configurer un serveur Web sur une machine virtuelle qui utilise un réseau en mode NAT]]
+
+\\
+
+{{tag>Zoo}}
