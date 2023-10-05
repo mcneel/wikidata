@@ -10,7 +10,7 @@ Lorsque Rhino doit extraire une licence sur un serveur de Zoo, il détermine le 
   - La racine de l'Ordinateur local du registre de Windows. Il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo.
   - Envoie une requête à votre serveur DNS (système de nom de domaine) pour demander le nom du serveur de Zoo par défaut.
   
-=====Rhino 6 ou 7 pour Windows=====
+=====Rhino 6, 7 ou 8 pour Windows=====
 
 ===Recherche dans le registre - Utilisateur actuel===
 
@@ -26,8 +26,8 @@ Valeur : <nom d'hôte ou adresse IP>
 
 ===Recherche dans le registre - Ordinateur local===
 
-Lorsque Rhino cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_LOCAL_MACHINE du registre de Windows, il regarde dans ces destinations :
-
+Lorsque Rhino cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_LOCAL_MACHINE du registre de Windows, il regarde dans ces destinations : **SOFTWARE\Wow6432Node**
+  
 <code>
 Racine :  HKEY_LOCAL_MACHINE
 Clé:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager
@@ -37,6 +37,14 @@ Valeur : <nom d'hôte ou adresse IP>
 </code>
 
 > **Note:** //Le déploiement de Rhino à l'aide de la méthode [[rhino:installingrhino|Installation automatisée]] ainsi que l'exécution initiale de Rhino avec des privilèges élevés (c.-à-d. "Exécuter en tant qu'administrateur") entraîneront l'écriture du nom du serveur LAN Zoo dans HKEY_LOCAL_MACHINE.//
+
+> Un fichier de clé de licence sera créé dans le dossier %programdata%. Il contient les détails de la clé permettant à Rhino de s'ouvrir. Exemple : 55500d41-3a41-4474-99b3-684032a4f4df.lic dans le gestionnaire de licences C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
+
+> Cliquez avec le bouton de droite sur l'icône de Rhino et sélectionnez "Exécuter en tant qu'administrateur." L'entrée du registre pour le zoo sera créée dans le gestionnaire de licences ComputerHKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\6.0\NLicense Manager
+
+> Ouvrez Rhino normalement (sans droits de niveau supérieur) et la clé de registre est placée dans
+Computer\HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\License Manager
+
 
 =====Rhino 5 pour Windows=====
 
