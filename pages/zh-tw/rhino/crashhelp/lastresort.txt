@@ -5,7 +5,7 @@
 
 ====Rhino 6 (及更新的版本)====
 
->The same process works for Rhino 7 -- just replace "6.0" with "7.0" in the registry key.
+>Rhino 7的作業方式一樣 -- 只是在登錄編輯程式路徑由"6.0"改成"7.0"。
 
   - 開啟登錄編輯程式 (從Windows的開始工具列，輸入 regedit, 然後按 Enter鍵)。
   - 到以下路徑  HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\Global Options\Debug Logging
@@ -18,43 +18,43 @@
 
 --> Rhino 5^
 
---> Rhino won't start when double-clicking or dragging and dropping a file
-  * Double-click a Rhino **shortcut** on your desktop, or click a Rhino item in your **Start** menu.
-  * If Rhino starts:
-    * Open the file from the **File** menu > **Open** or the **Open** toolbar button. If the file won't open, the problem is probably with the file. Try the **Audit3dmFile** command on the file.
+--> 當雙擊或拖曳一個檔案時Rhino無法開啟。
+  * 雙擊桌面**Rhino圖示捷徑**或是從**開始**功能表開啟Rhino。
+  * 若Rhino開啟:
+    * 從**檔案** >**開啟**或是**開啟**工具列的按鈕來開啟檔案。 如果檔案打不開，那麼很有可能是檔案本身的問題。那麼嘗試**Audit3dmFile**指令來打開檔案。
 
 <--
---> Rhino won't start from a desktop or Start menu shortcut
-  * Start in SafeMode.
-    * SafeMode starts Rhino without using accelerated graphics and without loading plug-ins.
-    * On the **Windows Start Menu**, click the item **Rhinoceros 5.0 in Safe Mode** or **Rhinoceros 5.0 (64-bit) in Safe Mode**.
-      * Answer **Yes** to loading Toolbars and **No** to loading RDK.
+--> 從桌面或是開始功能表捷徑啟動Rhino時當機
+  * 在安全模式下開啟Rhino。
+    * 安全模式之下開啟Rhino並不會用到圖形加速也不會載入外掛。
+    * 在 **Windows開始功能表**以及安全模式之下, 點開**安全模式下的Rhinoceros 5.0** 或 **Rhinoceros 5.0 (64-bit)**
+      * 按 **是**載入**工具列**，按**否**載入**RDK**外掛。
 
-  * If Rhino starts in SafeMode, there is likely a problem with a video driver or a plug-in.
-    * In the Rhino menu: //Tools - Options - View - OpenGL//, uncheck the box at the top labeled **Use accelerated hardware modes**. 
-    * Close Rhino and start normally (not using SafeMode). 
+  * 如果Rhino在安全模式開啟, 那麼顯示卡驅動程式或是外掛程式可能會出現問題。
+    * 在Rhino下拉式選單: //工具 - 選項 - 視圖 - OpenGL//, 不要勾選**使用硬體加速模式** 
+    * **重新開啟**一般模式的Rhino。
 
-    * If Rhino starts with accelerated hardware disabled, the problem is likely your video card driver. 
-      * Download and install a current driver for your video card. It's best to get your driver update from your hardware manufacturer and not from a third-party site.
+    * 如果Rhino使用不勾選使用硬體加速模式啟動成功，問題很可能是**顯示卡驅動程式**
+      * 下載並更新您目前的顯示卡驅動程式，最好直接到顯示卡廠商直接下載
         * NVIDIA:  http://www.nvidia.com/Download/index.aspx
         * Intel:   http://downloadcenter.intel.com/Default.aspx
         * ATI/AMD: http://support.amd.com/us/gpudownload/Pages/index.aspx
         * Apple:   http://support.apple.com/downloads/#bootcamp
-        * Other sites appropriate to your video hardware.
-        * Note: If you're on a laptop, you'll probably have to get your driver update from the laptop maker.
-      * Restart Rhino normally (not using SafeMode).
+        * 其他適合您顯示卡的網站。
+        * 注意: 若您使用筆記型電腦，您可能需要到筆記型電腦公司網站去取得最新版的顯示卡驅動程式。
+      * **重新開啟**一般模式的Rhino。
 
-    * If Rhino still crashes after disabling hardware acceleration, the problem may be a plug-in.
-      * Restart in SafeMode, and check the box **Use accelerated hardware modes**. 
-      * In the Rhino menu //Tools - Options - Plug-ins//, uncheck the **Enabled** box for all of the plug-ins that did not ship with Rhino, and check the box **Ask to load disabled plug-ins** at the bottom.
-      * Close Rhino and start normally (not using SafeMode). 
-        * Answer **No** to loading all of the plug-ins you disabled.
+    * 如果Rhino使用不勾選使用硬體加速模式仍然無法開啟，問題很可能是**外掛程式**的問題。
+      * 重新開啟Rhino安全模式，並且勾選**使用硬體加速模式**。
+      * 在Rhino下拉式選單:  //工具 - 選項 - 外掛程式//, 將所有非Rhino內建的外掛程式取消勾選 **啟用**並勾選下方的詢問是否載入停用的外掛程式。
+      * 關閉Rhino並**重新開啟**一般模式的Rhino。
+        * 點選 **No** 不載入您取消啟用的外掛程式。
 
-      * If Rhino starts with some plug-ins disabled, the problem is one of the disabled plug-ins. 
-        * Restart Rhino normally and answer **Yes** to loading **one plug-in at a time** and **No** to the rest until you determine which one causes the problem.
-        * When you have determined which plug-in causes a problem, go back to //Tools - Options - Plug-ins// and check the **Enabled** box for all of the plug-ins that don't cause a problem.
+      * 若Rhino可以在不啟用所有非Rhino內建的外掛程式下順利開啟，那代表您其中一個外掛程式造成問題。
+        * 重新開啟一般模式的Rhino並**一次回覆一個外掛程式是**去載入一個外掛並將其他的外掛程式選擇**否**不載入。直到找到造成無法開啟Rhino的外掛程式。
+        * 當您找造成當機原因的外掛程式，請到go back to //工具 - 選項 - 外掛程式// 並將其他沒問題的非Rhino內建的外掛程式勾選**啟用**。
 
-      * If Rhino crashes in SafeMode or you can't resolve the problem with these methods, contact us at http://www.rhino3d.com/support for help.
+      * 若您的Rhino 安全模式也無法開啟，或您使用以上的方式都無法解決問題，請聯絡我們http://www.rhino3d.com/support 提供協助。
 
 <--
 <--
