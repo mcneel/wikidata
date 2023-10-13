@@ -1,3 +1,60 @@
 ====== Rhino開啟時錯誤 ======
 
 >如果在開啟Rhino時無法開啟或當機，您可以執行以下操作以了解電腦上發生的情況並解決問題。
+
+
+====Rhino 6 (及更新的版本)====
+
+>The same process works for Rhino 7 -- just replace "6.0" with "7.0" in the registry key.
+
+  - 開啟登錄編輯程式 (從Windows的開始工具列，輸入 regedit, 然後按 Enter鍵)。
+  - 到以下路徑  HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\Global Options\Debug Logging
+  - 看看是否有一個叫做** Enabled** 的DWORD 32位元值(若沒有請新增一個)
+  - 將數值資料**Enabled **設定為** 1**
+  - 看看是否有一個叫做 **SaveToFile**的DWORD 32位元值(若沒有請新增一個)
+  - 將數值資料**SaveToFile**設定為** 1**
+  - 從桌面上的圖示捷徑開啟** Rhino 6**
+  - 將你文件資料夾中的**RhinoDebugMessages.txt** 檔案寄到 **tech@mcneel.com**。
+
+--> Rhino 5^
+
+--> Rhino won't start when double-clicking or dragging and dropping a file
+  * Double-click a Rhino **shortcut** on your desktop, or click a Rhino item in your **Start** menu.
+  * If Rhino starts:
+    * Open the file from the **File** menu > **Open** or the **Open** toolbar button. If the file won't open, the problem is probably with the file. Try the **Audit3dmFile** command on the file.
+
+<--
+--> Rhino won't start from a desktop or Start menu shortcut
+  * Start in SafeMode.
+    * SafeMode starts Rhino without using accelerated graphics and without loading plug-ins.
+    * On the **Windows Start Menu**, click the item **Rhinoceros 5.0 in Safe Mode** or **Rhinoceros 5.0 (64-bit) in Safe Mode**.
+      * Answer **Yes** to loading Toolbars and **No** to loading RDK.
+
+  * If Rhino starts in SafeMode, there is likely a problem with a video driver or a plug-in.
+    * In the Rhino menu: //Tools - Options - View - OpenGL//, uncheck the box at the top labeled **Use accelerated hardware modes**. 
+    * Close Rhino and start normally (not using SafeMode). 
+
+    * If Rhino starts with accelerated hardware disabled, the problem is likely your video card driver. 
+      * Download and install a current driver for your video card. It's best to get your driver update from your hardware manufacturer and not from a third-party site.
+        * NVIDIA:  http://www.nvidia.com/Download/index.aspx
+        * Intel:   http://downloadcenter.intel.com/Default.aspx
+        * ATI/AMD: http://support.amd.com/us/gpudownload/Pages/index.aspx
+        * Apple:   http://support.apple.com/downloads/#bootcamp
+        * Other sites appropriate to your video hardware.
+        * Note: If you're on a laptop, you'll probably have to get your driver update from the laptop maker.
+      * Restart Rhino normally (not using SafeMode).
+
+    * If Rhino still crashes after disabling hardware acceleration, the problem may be a plug-in.
+      * Restart in SafeMode, and check the box **Use accelerated hardware modes**. 
+      * In the Rhino menu //Tools - Options - Plug-ins//, uncheck the **Enabled** box for all of the plug-ins that did not ship with Rhino, and check the box **Ask to load disabled plug-ins** at the bottom.
+      * Close Rhino and start normally (not using SafeMode). 
+        * Answer **No** to loading all of the plug-ins you disabled.
+
+      * If Rhino starts with some plug-ins disabled, the problem is one of the disabled plug-ins. 
+        * Restart Rhino normally and answer **Yes** to loading **one plug-in at a time** and **No** to the rest until you determine which one causes the problem.
+        * When you have determined which plug-in causes a problem, go back to //Tools - Options - Plug-ins// and check the **Enabled** box for all of the plug-ins that don't cause a problem.
+
+      * If Rhino crashes in SafeMode or you can't resolve the problem with these methods, contact us at http://www.rhino3d.com/support for help.
+
+<--
+<--
