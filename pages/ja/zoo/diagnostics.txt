@@ -1,44 +1,53 @@
-======Zoo – Windows版Rhinoクライアント用Diagnostics（診断）ユーティリティ======
+======Zoo – Windows用 Diagnostics（診断）ユーティリティ======
 > **製品:** //[[ja:zoo:home|Zoo]]//
-> **要約:** //Windows 用 Zoo Diagnostics ユーティリティについての説明//
+> **要約:** //Windows版 Zoo Diagnostics ユーティリティについての説明//
 
-[[zoo:zoo5diagnostics|{{:zoo:zoodiagnostics.png|Zoo Diagnostics}}]]
+[[zoo:diagnostics|{{:zoo:zoodiagnostics.png|Zoo Diagnostics}}]]
 
-Zoo Diagnostics ユーティリティは **Windows版Rhino** のワークステーションで動作します。このユーティリティは以下の便利なツールを提供します。
-  - いくつかの便利なネットワーク診断を提供し、Rhinoのワークステーションと[[ja:zoo:determinezoohost|Zooサーバー]]との接続の問題のトラブルシューティングを行います。 
-  - Rhinoワークステーションに使用されているZooサーバーの名前を表示、変更できるようにします。Zooサーバーの名前はWindowsレジストリに保存されています。
+Zoo Diagnostics ユーティリティは **Rhino for Windows** のワークステーションで動作します。このユーティリティは以下の便利なツールを提供します。
+  - いくつかの便利なネットワーク診断を提供し、Rhino for Windows のワークステーションと[[ja:zoo:determinezoohost|Zooサーバー]]との接続の問題のトラブルシューティングを行います。
+  - Rhinoワークステーションに使用されている LAN Zoo サーバーの名前を表示、変更できるようにします。LAN Zoo サーバーの名前はWindowsレジストリに保存されています。
 
 =====ダウンロード=====
-{{:zoo:zoodiagnostics.zip|Zoo Diagnosticsのダウンロード}}
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/ZooDiagnostics8.zip|Zoo Diagnostics のダウンロード]]をピックします。
 
 [[zoo:diagnostics|{{:zoo:zoo_diagnostics.png|Zoo Diagnostics}}]]
-
 
 =====診断=====
 Zoo Diagnosticsユーティリティは以下の便利なネットワークテストを提供します。
 
-1. **[[http://support.microsoft.com/ja-jp/kb/814155|Ping]]:** Ping診断ユーティリティは接続、到達の可能性、名前解決のトラブルシューティングに使われるプライマリTCP/IPツールです。Pingはインターネット制御メッセージプロトコル（ICMP）エコー要求メッセージを送信することで、他のTCP/IPコンピューターとのIPレベルでの接続を確認します。対応するエコー応答メッセージの受信はラウンドトリップ時間と共に表示されます。
+1. **[[http://support.microsoft.com/kb/814155|Ping]]:** Ping (PING)診断ユーティリティは接続、到達の可能性、名前解決のトラブルシューティングに使われるプライマリTCP/IPツールです。Pingはインターネット制御メッセージプロトコル（ICMP）エコー要求メッセージを送信することで、他のTCP/IPコンピューターとのIPレベルでの接続を確認します。対応するエコー応答メッセージの受信はラウンドトリップ時間とともに表示されます。
 
->**メモ:** pingコマンドに使われるICMPエコー要求はWindowsファイアウォール規定の設定でブロックされます。WindowsでICMPエコーを有効にするにはコントロールパネル -> Windowsファイアウォール -> 詳細設定 -> 受信の規則のアクティブなセキュリティプロファイルで、ファイルとプリンターの共有（エコー要求 - ICMPv4受信）を有効にします。
-
-
-2. **[[https://technet.microsoft.com/ja-jp/library/cc725991|Nslookup]]:** DNSの参照（NSLOOKUP）診断ユーティリティは、ドメインネームシステム（DNS）インフラストラクチャの診断に利用できる情報を表示します。
-
-3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]:** Trace Route（TRACERT）診断ユーティリティは、IP TTL（TTL）の値を変化させてインターネット制御メッセージプロトコル（ICMP）エコーパケットを送信することで送信先へのルートを探し出します。パスに沿ったそれぞれのルーターは転送する前にパケットのTTLを少なくとも1減らす必要があるため、TTLは事実上ホップ数です。パケットのTTLが0になると、そのルーターはICMPの時間超過メッセージを送信元のコンピューターに返すはずです。
-
-4. **Zoo Port Check:** Zoo Port Check テストは Zoo 5 または Zoo 6 サービスがサーバーまたはワークステーションでTCPポート80をリッスンしているかどうかを確認します。
+>**メモ:** pingコマンドに使われるICMPエコー要求はWindowsファイアウォール規定の設定でブロックされます。The Windows firewall default settings block the ICMP echo requests used for ping command. WindowsでICMPエコーを有効にするにはコントロールパネル -> Windowsファイアウォール -> 詳細設定 -> 受信の規則のアクティブなセキュリティプロファイルで、ファイルとプリンターの共有（エコー要求 - ICMPv4受信）を有効にします。
 
 
-//このテストに失敗した場合は、Zooサーバーのサービスが実行されていることを確認してください。これはZooAdmin.exeまたはコントロールパネルのサービスを使って行うことができます。またZooシステムで実行中の__[[ja:zoo:window7firewall|全てのファイアウォールでTCPポート80が開かれていること]]__（受信/送信トラフィックとも）を確認してください。//
+2. **[[http://support.microsoft.com/kb/200525|Nslookup]]:** DNSの参照（NSLOOKUP）診断ユーティリティは、ドメインネームシステム（DNS）インフラストラクチャの診断に利用できる情報を表示します。
 
-5. **Zoo Connectivity:** The Zoo Connectivity テストは、サーバーまたはワークステーションでZoo 5サービスが実行されていることを確認します。 
+3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]: 
+Trace Route（TRACERT）診断ユーティリティは、IP TTL（TTL）の値を変化させてインターネット制御メッセージプロトコル（ICMP）エコーパケットを送信することで送信先へのルートを探し出します。パスに沿ったそれぞれのルーターは転送する前にパケットのTTLを少なくとも1減らす必要があるため、TTLは事実上ホップ数です。パケットのTTLが0になると、そのルーターはICMPの時間超過メッセージを送信元のコンピューターに返すはずです。
 
+4. **Zoo Port Check:** Zoo Port Check（ZOOPORT）診断ユーティリティはZooサービスがサーバーまたはワークステーションでTCPポート80をリッスンしているかどうかを確認します。
 
-//このテストに失敗し、他のテスト全てに成功した場合は、Zooサーバーのサービスが実行されていることを確認してください。これはZooAdmin.exeまたはコントロールパネルのサービスを使って行うことができます。またZooシステムで実行中の__[[ja:zoo:window7firewall|全てのファイアウォールでTCPポート80が開かれていること]]__（受信/送信トラフィックとも）を確認してください。//
+//このテストに失敗した場合はZooサーバーのサービスが実行されていることを確認してください。これはZooAdmin.exeまたはコントロールパネルのサービスを使って行うことができます。またZooシステムで実行中の__[[zoo:window7firewall|全てのファイアウォールでTCPポート80が開かれていること]]__（受信/送信トラフィックとも）を確認してください。
 
-//このテストはクライアントとサーバーが異なるサブネットにある場合、失敗します。デフォルトでは、Zooのインストーラはそのローカルのサブネットのみのポート80上のZooのサービスにWindowsのファイアウォールを開きます。アクセスが必要なその他すべてのサブネットを許可するためにファイアウォール規則の変更が必要です。//
+//
 
-//このテストはまた、システムが [[https://en.wikipedia.org/wiki/Proxy_server|プロキシサーバー]] を使用してインターネットにアクセスするように設定されている場合、失敗します。この場合、テストはいつまでもZooのサーバーに到達しません。プロキシサーバーを使用している場合は、ローカルアクセスへ許可するようにしてください。詳細は __[[zoo:zooproxyserver|プロキシサーバーを使ってZooを使用する]]__ をご覧ください。//
+5. **Zoo Connectivity:** Zoo Connectivity（ZOOECHO）診断ユーティリティは、サーバーまたはワークステーションでZooサービスが実行されていることを確認します。
+
+//このテストに失敗し、他のテスト全てに成功した場合は、Zooサーバーのサービスが実行されていることを確認してください。これはZooAdmin.exeまたはコントロールパネルのサービスを使って行うことができます。またZooシステムで実行中の__[[zoo:window7firewall|全てのファイアウォールでTCPポート80が開かれていること]]__（受信/送信トラフィックとも）を確認してください。//
+
+//このテストはクライアントとサーバーが異なるサブネットにある場合、失敗します。デフォルトでZooインストーラーは、ローカルサブネットのみのポート80上のZooサービスにWindowsファイアウォールを開きます。アクセスが必要な他のサブネット全てを許可する場合はファイアウォール規則の変更が必要です。//
+
+//このテストはシステムが[[https://en.wikipedia.org/wiki/Proxy_server|プロキシサーバー]]を使ってインターネットにアクセスするよう設定されている場合も失敗します。この場合、テストでZooサーバーに到達することはありませんので、プロキシサーバーをお使いでしたらローカルアドレスへのアクセスを許可するようにしてください。詳細は __[[zoo:zooproxyserver|プロキシサーバーを使ってZooを使用する]]__ をご覧ください。//
+
+6. **Zooサーバーの名前を設定:** 
+Zooサーバーの名前またはIPを入力します。(//画像は弊社のDNS名ですので、ご自身のZooサーバー名またはIPをお確かめの上、入力してください。//)
+ボタンをピックしてZooサーバー名またはIPをレジストリと照合します。
+Zooサーバー名はこちらに書き込まれます: 
+//Computer\HKEY_LOCAL_MACHINE\SOFTWARE\**WOW6432Node**\McNeel\Rhinoceros\x\License Manager// （**x**にはRhinoのバージョンが入ります）
+{{:zoo:setzooserver2.png?400|}}
 
 =====関連トピック=====
-[[zoo:diagnosticsmac|Zoo – Mac用のDiagnostics（診断）ユーティリティ]]
+  * [[zoo:diagnosticsmac|Zoo – Mac用の診断ユーティリティ]]
+  * [[https://wiki.mcneel.com/ja/zoo/findzooserverwin#rhino_8_7_and_6_for_windows|Rhino for Windows はZooサーバーをどう検出しますか?]]
+  * [[https://wiki.mcneel.com/ja/rhino/installingrhino/7|Rhino 7 for Windows のインストールを自動化する: スクリプト化したインストール]]
