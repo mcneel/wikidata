@@ -2,28 +2,29 @@
 
 >A basic tutorial on creating macros (scripting together Rhino commands)
 
-You can create macros in Rhino to automate many tasks, customize your commands, and improve your workflow.
+You can create **macros** in Rhino to automate many tasks, customize your commands, and improve your workflow.
 
-There may be some confusion about the use of the term “scripting” here.  Classically, it describes both the process of writing macros (what this section is about), as well as writing more sophisticated scripts in either [[developer:rhinoscript|RhinoScript]] or other programming languages.  
+There may be some confusion about the use of the term “scripting”.  It has been used to describe both the process of writing macros - what this section is about - as well as writing more sophisticated scripts in either [[developer:rhinoscript|RhinoScript]], [[https://developer.rhino3d.com/guides/rhinopython/|Python]], or other programming languages.  
 
-The two things are actually very different. Writing functions in RhinoScript or other programming languages is a lot more complex than creating macros, and requires some programming knowledge and skills.  We don't cover that here.
+//The two things are actually very different.// Writing functions in RhinoScript, Python or other programming languages is a lot more complex than creating macros, and requires some programming knowledge and skills.  //We don't cover that here.//
 
-I use the term “Macro” here exclusively to describe the putting together of strings of ordinary Rhino commands and their options to create an automated function.  This is scripting on its simplest of levels, and is easily accessible to any ordinary Rhino user, even if they have no knowledge of programming.  All You need is a reasonable understanding of Rhino commands and their structure, as well as a logical mind and a taste for a little experimentation and debugging.
+I use the term “Macro” here exclusively to describe the putting together of strings of ordinary Rhino commands and their options to create an automated function.  This is scripting on its simplest of levels, and is easily accessible to the average Rhino user, even if they have no knowledge of programming.  All you need is a reasonable understanding of Rhino commands and their structure, as well as a logical mind and a taste for a little experimentation and debugging.
 
 
 =====The tools you need=====
-Your brain.
-
-The Rhino Help file -  lists all Rhino commands and their sub-options. This is your most important reference.
-
-The Rhino **MacroEditor**, to easily run and debug your macros.
-
+  * Your brain :-P
+  * The **Rhino Help file** -  lists all Rhino commands and their sub-options. This is your most important reference.  Pressing F1 (Windows) or the :?: toolbar button (Mac) will get you to the online help.
+  * The Rhino **MacroEditor**, a built-in interface for creating and testing your macros.
+  * An understanding of how to add your macros to your workflow in the form of aliases or toolbar buttons (explained [[developer:macroscriptsetup|here]])
 =====You've already used a macro or two...=====
-First, if you are a user of Rhino, you are already a macro user even though you may not know it.  Many of the commands in Rhino are already “macroed” for you. When you click a toolbar button or call a command from the menu, it is often a preset macro.  To see, Shift+right-click on the button **Extrude Straight**:
+First, if you are a user of Rhino, you are already a macro user even though you may not know it.  Many of the commands in Rhino are already “macroed” for you. When you click a toolbar button or call a command from the menu, it is often a preset macro.  For example, the toolbar button **Extrude Closed Planar Curve** from the "Solid" toolbar has the following macro:
+//(shown: V6 for Windows)//
 
-{{:legacy:en:ExtrudeCrvButtonEditor.gif}}
+{{:rhino:extrudestraightv6solid.png?400|}}
 
-This is an example of the simplest macro, which sets a series of options within a single command so that you don’t have to specify each one every time you use it.  **ExtrudeCrv** has several buttons with preset options, **Tapered, AlongCurve, ToPoint, Cap=Yes** (solid) etc.  Check out the macros under all the **ExtrudeCrv** buttons to see how they are laid out.
+It just calls the **ExtrudeCrv** command and sets it to make a closed solid.  We will see what the "Pause" part does later.
+
+This is an example of the simplest kind of macro, which just sets a series of options within a single command so that you don’t have to specify them time you use it. **ExtrudeCrv** has several buttons with preset options, **Tapered, AlongCurve, ToPoint, Solid=Yes** (or No) etc.  Check out the macros under all the **ExtrudeCrv** buttons to see how they are laid out.
 
 In a sense, you’re doing the same thing as if you clicked or typed the options one at a time at the command line.  In fact, that’s all macros really are -- just a set of instructions to repeat a sequence of commands that you would otherwise input manually one at a time.
 
@@ -61,6 +62,20 @@ Since there is no further input necessary nor options possible, the macro comple
 
   ! _Box _Center _Pause r5,5 _Enter
 Now that the macro is running, [[rhino:macroscriptsetup|make a new toolbar button]] and paste the macro in. Give it a recognizable name, like “10x10x10 bottom centered box”.  Note, once the macro is executed, right-clicking repeats the whole sequence of this macro, so you can use it many times in a row without clicking the button every time.
+
+> //Note on the Pause command://   In earlier versions of Rhino, for some command macros it was necessary to use one Pause for each screen pick needed.  This made it difficult to make macros for commands that had an indeterminate number of screen picks.  Much of that has been fixed in the latest versions, however there are still some exceptions.  For these cases, there is now the Multipause command (V6 and later), which basically allows the user to make as many picks as needed without having to write multiple Pause commands in the macro.
+
+For example the macro below
+
+  ! _Polyline _Pause _SelLast
+
+will work fine to make the polyline, but it will not be selected at the end.  Why?  Because the single Pause is 'eaten' by the first pick in the polyline, and thus the SelLast command gets executed just after the first pick while we're still making the polyline - and therefore does nothing.  The single pause //does// allow you to finish the polyline with as many points as you want, but there is no longer a SelLast to be run at the end of it - because it ran already and failed.  
+
+However, the following macro
+
+  ! _Polyline _Multipause _SelLast
+  
+works including selecting the polyline at the end because the Multipause includes //all// the picks for the polyline, allowing the SelLast to be executed and work at the end.
 
 =====OK, let’s get a bit more complicated…=====
 
@@ -156,6 +171,12 @@ To script Crosshairs  ON or OFF put the following on a button:
 </code>
 Notice the reference to each individual command option name.  Specifying them inside the script is like clicking on them with the mouse.  Also note the three Enter entries.  Since each command option takes you down into a new set of sub-level command options, an Enter is required to take you back up.  Since this script went down three levels, it needs to specify three Enters to get all the way out of the command.
 
+**EnterEnd** is a good way to 'back out' of a command without the need to keep track of how many levels deep you've gone  - 
+
+<code>
+  -_Options _Appearance _Visibility _Crosshairs _EnterEnd
+</code>
+
 Or, if you just use an exclamation point **!** at the end (which in a script means “end now!”), it takes you all the way out regardless of how many sub-levels you're in. Note, if you want to continue your macro with something else, do not use !, use the Enters instead, otherwise your macro will always stop at the ! and terminate.
 
 The script simply toggles the crosshairs ON and OFF. But if you wanted a script that always turned them ON and another that always turned them OFF, here's what they would look like:
@@ -231,6 +252,8 @@ _Sellast _SelGroup TexTemp
 _Ungroup _Group _Setredrawon
 
 </code>
+
+//last edited: 28.08.19/msh//
 
 **Please feel free to add to or edit this tutorial!**
 This is a work in progress...
