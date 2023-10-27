@@ -2,15 +2,28 @@
 
 >Si Rhino no se inicia en su equipo o se bloquea al iniciarse, aquí encontrará información para detectar el problema y solucionarlo.
 
+====Rhino 6 (y versiones posteriores)====
 
-=== Rhino no se inicia al hacer doble clic o arrastrar y colocar un archivo ===
-  * Haga doble clic en el **acceso directo** del escritorio o en un elemento de Rhino en el menú de **Inicio**.
+>El mismo proceso funciona para Rhino 7 -- solo tiene que sustituir "6.0" por "7.0" en la clave del registro.
 
+  - Abra el Editor del registro (en el menú Inicio de Windows, escriba **regedit** y pulse Intro).
+  - En el registro, en HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\Global Options\Debug Logging
+  - Cree un valor REG_DWORD (32) llamado **Enabled** (si no existe ya)
+  - Defina el valor de **Enabled** en **1**
+  - Cree un valor REG_DWORD (32) llamado **SaveToFile** (si no existe ya)
+  - Defina el valor de **SaveToFile** en **1**
+  - Inicie **Rhino 6** utilizando el **acceso directo**, no haciendo clic en un archivo de datos.
+  - Envíe el archivo **RhinoDebugMessages.txt** de la carpeta Documentos a **tech.eu@mcneel.com**.
+
+--> Rhino 5^
+
+--> Rhino no se inicia al hacer doble clic o arrastrar y colocar un archivo
+  * Haga doble clic en el *acceso directo* del escritorio o en un elemento de Rhino en el menú de *Inicio*.
   * Si Rhino se inicia:
     * Abra el archivo desde el menú **Archivo** > **Abrir** o mediante el botón **Abrir** de la barra de herramientas. Si el archivo no se abre, el problema probablemente sea del archivo. Ejecute el comando **ExaminarArchivo3dm** en el archivo.
 
-
-=== Rhino no se inicia desde el escritorio o desde el acceso directo del menú Inicio ===
+<--
+--> Rhino no se inicia desde el escritorio o desde el acceso directo del menú Inicio
   * Inicie Rhino en modo seguro.
     * El modo seguro inicia Rhino sin utilizar gráficos acelerados y sin cargar plug-ins.
     * En el **menú Inicio de Windows**, haga clic en el elemento **Rhinoceros 5.0 en modo seguro** o **Rhinoceros 5.0 (64-bit) en modo seguro**.
@@ -41,4 +54,6 @@
         * Cuando se haya determinado el plug-in que causa el problema, vaya a //Herramientas - Opciones - Plug-ins// y marque la casilla **Activado** de todos los plug-ins que no causen un problema.
 
       * Si Rhino se bloquea en modo seguro o no puede resolver el problema con estos métodos, póngase en contacto con nosotros a través de http://www.rhino3d.com/support.
-----
+
+<--
+<--
