@@ -1,0 +1,118 @@
+====== Realidad virtual en Rhinoceros ======
+Rhino ofrecía la opción "Modo estéreo" en Rhino 5. 
+En Rhino 7 y 8, no se puede acceder a las vistas estereoscópicas y 3D "simplemente activándolas". 
+
+Ya no es tan fácil. Tendrá que conocer su hardware y experimentar para encontrar la mejor opción.
+Deberá descargar los plugins que añaden esta función a Rhino.
+
+Hay tres opciones en la página que se indica a continuación, ninguna está en el núcleo de Rhino.
+Como se necesitaba un hardware especial para utilizar esta función, se decidió no incluirla en el núcleo de Rhino, sino permitir que los usuarios la añadieran si la necesitaban.
+
+En el [[https://discourse.mcneel.com/c/rhino/147|Foro de soporte de Rhino]] encontrará ayuda del equipo de McNeel y de usuarios expertos de todo el mundo.
+
+===== Opción 1: Plugins de Rhino =====
+
+==== RhinoVR ====
+RhinoVR es un plug-in de Rhino 7 que utiliza gafas con monitores individuales de HTC Vive u Oculus Rift para renderizar vistas de Rhino en realidad virtual. Este plugin se creó como ejemplo para mostrar a los desarrolladores cómo se puede desarrollar un plugin de RV para Rhino 7.
+
+Requiere unas gafas de RV compatibles con OpenVR como Quest 2, Samsung Odyssey+ o Rift S. 
+Para que funcione con RhinoVR, se requieren unas gafas compatibles con Steam + SteamVR.
+
+[[https://github.com/mcneel/RhinoVR|Descargar RhinoVR]]
+
+==== EYECAD VR ====
+[[https://www.food4rhino.com/en/app/eyecad-vr-virtual-reality-architecture|Eyecad VR]] permite crear magníficas escenas de RV interactivas. Utilice Oculus Rift, HTC Vive, WMR o explore con su monitor y teclado o trackpad. También puede compartir sus proyectos con sus clientes mediante la nueva herramienta Eyecad 360, que permite crear visitas interactivas panorámicas de 360 grados a través de un enlace web.
+
+
+===== Opción 2: Plugin Stereo View y Anaglyph =====
+Con esta opción solo necesita las gafas "rojas y azules".
+No requiere ningún hardware especial, solo las gafas que se pueden conseguir en cualquier sitio y son muy baratas.
+
+Los plugins Anaglyph y 3D Stereo son muy parecidos y funcionan igual... ambos pueden instalarse, pero es difícil distinguirlos. Si no necesita los dos, es mejor solo instale el que necesite.
+
+Es probable que tenga que desactivar la opción QuadBuffering si utiliza Anaglyph Stereo. Esto se controla mediante el comando **TestQuadBuffering**. Está //desactivado// de manera predeterminada. Pero es posible que tenga que activarlo y desactivarlo de nuevo para verificar el ajuste.
+
+Anaglyph Stereo renderiza múltiples fotogramas. Ajuste la posición de la cámara y el punto de vista con la interfaz de Rhino.
+
+El plugin Anaglyph aparece en los paneles como "Stereo View", mientras que el plugin Active/Passive aparece como "Stereo 3D View".
+{{ :rhino:windows:show_panel_2.png?200|}}
+
+1. Descargue el plugin
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/StereoView.rhp|StereoView.rhp]].
+
+2. Abra Rhino.
+
+3. Suelte **StereoView.rhp** en la aplicación de Rhino abierta.
+
+4. En la ventana emergente **Mostrar paneles**, marque "Stereo View" para abrir el panel.
+
+{{:rhino:windows:anaglypg.png?200|}}
+
+//Obtenga más información en el [[https://discourse.mcneel.com/t/from-stereo-to-mono/53448/29|Foro de soporte de Rhino]].//
+
+===== Opción 3: Plugin Quad Buffering y Stereo3DView =====
+Windows Rhino 7 y 8 ahora admiten "Quad Buffering", que es lo que se necesita para la visualización estéreo pasiva/activa.
+
+La compatibilidad con Quad Buffering en V8 es para hardware como **PluraVision 3D** y visualización estéreo pasiva de **Schneider Digital**, por ejemplo.
+
+Normalmente, los portátiles no admiten ningún tipo de visualización estéreo. Pero es mejor comprobarlo.
+===== Configuración =====
+//Nota: Cierre Rhino. Debe configurar el equipo para la visualización estereoscópica antes de iniciar Rhino//
+
+==== Configuración de Windows ====
+
+La función Quad Buffering tiene que estar activada en Rhino 8 y requiere activar el "modo 3D" en la configuración de pantalla de Windows, así como en el panel de control del fabricante de la GPU.
+
+{{:rhino:windows:3dmode01.png?200|}}
+
+==== Configuración de la tarjeta gráfica ==== 
+El panel de control de la GPU debería tener algún tipo de opción Estéreo.
+
+Aquí se muestra la opción del Panel de control de Nvidia.
+
+{{:rhino:windows:3dmode02.png?300|}}
+
+Compruebe el Panel de control de Nvidia para ver si se encuentran las opciones Estéreo que se muestran en la imagen. 
+
+//Nota:// No se podrá activar desde ahí ya que ahora es una opción de Windows. 
+Si el panel de control de Nvidia dice "Activado" pero está en gris. 
+Se debe a que el "modo de visualización 3D" ya estaba activado en el cuadro de diálogo Windows->Configuración de pantalla.
+
+==== QuadBuffering ====
+
+En Rhino, active QuadBuffering con el comando **TestQuadBuffering**.
+
+
+==== El plugin ==== 
+{{ :rhino:windows:show_panel_1.png?200|}}
+1. Descargue el plugin
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/Stereo3DView.rhp|Stereo3DView]].
+
+2. Abra Rhino.
+
+3. Suelte el archivo en la aplicación Rhino abierta.
+
+4. En la ventana emergente "Mostrar paneles", marque "Stereo 3D View".
+
+{{:rhino:windows:active-passive.png?200|}}
+
+
+
+==== Notas adicionales ====
+  * Se necesita un hardware y unas gafas muy específicas. 
+  * Se necesita un monitor con una frecuencia de actualización rápida. 
+  * Se necesitan unas gafas especiales.  
+
+Si la opción Estéreo está configurada como "Active", entonces las gafas tienen que poder sincronizarse con la actualización de los monitores, lo que significa que las gafas o bien se conectan en algún lugar de la parte posterior de la GPU, o bien hay algún tipo de receptor USB que se conecta al equipo y las gafas se comunican con él. 
+
+Si está configurada como "Passive" (la que utilizan las películas 3D en los cines), también necesitará monitores especiales, pero las gafas son simplemente lentes polarizadas.  
+
+En cualquier caso, también debe asegurarse de que el panel de control de la GPU está configurado para el tipo de modo que admite su hardware.  
+
+Para "//Active" stereo// debería poder utilizar la configuración **Generic active stereo**.  
+Para "//Passive" stereo//, es necesario utilizar la opción **Clone mode** o **Planar stereo mirror display**.
+Los modos pasivos suelen requerir algún tipo de pantalla doble con un plano de cristal que se sitúa en ángulo entre ambas.
+
+{{ :rhino:windows:pluralvision.png?400|}}
+Se trata de un **modo pasivo** configurado por [[https://www.schneider-digital.com/en/|Schneider Digital]] denominado [[https://www.schneider-digital.com/en/products/passive-3d-stereo-monitors/|"3D PluraView”]].
+
