@@ -1,0 +1,27 @@
+===== Problema: Rhinoceros es lento en una estación de trabajo con varios monitores conectados a un concentrador USB =====
+Volver a las [[https://wiki.mcneel.com/es/rhino/faq#display_problems|FAQ]]
+
+==== Información general ====
+Es fácil que queramos culpar de la lentitud de la pantalla al enlace de la pantalla USB.
+Pero el concentrador USB simplemente es el vehículo que lleva al usuario al problema.
+
+==== Análisis ====
+A menudo, este problema está relacionado con "NahimicOSD.dll", que es un servicio de visualización en pantalla instalado por un controlador de audio.
+
+Tiene bastantes fallos y, si hace una búsqueda en Google, verá que todo tipo de usuarios que utilizan todo tipo de software diferente están experimentando problemas. 
+
+Este problema en particular es que la DLL no maneja muy bien las pantallas múltiples (si es que lo hace), y creemos que intenta desglosar todos los dispositivos de visualización, pero lo hace mal y de forma incorrecta.
+Esto resulta en un bucle infinito dentro de su código. Configurar un sistema con el concentrador USB y varios monitores revela el problema.
+
+==== La solución en Discourse ====
+[[https://discourse.mcneel.com/t/rhino-freezes-on-secondary-monitor-problem-with-the-nihimic-audio-driver-on-the-motherboard/82258/37?u=jeff|Detalles de la solución.]]
+
+Este enlace en concreto lleva a la parte de la conversación que tiene la solución.
+El usuario debe desactivar el servicio Nahimic. No es necesario y no aporta ningún valor. Dado que se trata de una DLL y un servicio de audio, significa que cualquier proceso que utilice el dispositivo de audio (o partes de él), tendrá la DLL Nahimic inyectada en su espacio de proceso. Y no hay nada que el proceso pueda hacer al respecto. Una vez dentro del espacio de proceso, básicamente bloquea ese proceso.
+
+==== En resumen ====
+Esta información es relevante con el problema "Mi Rhino se bloquea" y hay varios monitores implicados. Lo más probable es que sea la DLL Nahimic.
+
+//Jeff LaSor,
+Lead Graphics Developer,
+Robert McNeel & Associates//
