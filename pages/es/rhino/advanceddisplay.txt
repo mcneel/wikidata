@@ -1,0 +1,123 @@
+{{:rhino:simple_bright.zip|}}
+====== Modos de visualización avanzada de Rhino ======
+
+> **Resumen:** Rhino 5 tenía nuevos modos de visualización con líneas ocultas, modos de boceto y otras opciones. También puede descargarlos y utilizarlos con su versión de Rhino actual.
+
+=====Contenido=====
+
+  * [[#Información general]]
+  * [[#Ejemplos personalizados adicionales]]
+  * [[#Modos avanzados de impresión]]
+  * [[#Limitaciones]]
+
+=====Información general=====
+
+
+Una pequeña explicación....
+
+Rhino 5 tenía más opciones de visualización avanzadas que podían configurarse para crear modos de visualización más avanzados en tiempo real.  Estas opciones adicionales de visualización incluyen sombras, grosor de los bordes por tipo y control de iluminación. Para entender la visualización avanzada en Rhino, vaya a:
+
+  * [[https://vimeo.com/84982383|Vídeo de introducción a los modos de visualización en Rhino 5]]
+  * Vídeo de Rhino Visual Tips 5.0:[[http://v5.rhino3d.com/group/rhino-visual-tips-5/page/out-line-of-rhino-visual-tips-5-0| Chapter 9: Rhino Options: Display Modes]]
+
+Estos son algunos ejemplos de los nuevos modos de visualización predeterminados. Hay tres nuevos modos disponibles:
+
+====Técnico==== 
+{{http://wiki.mcneel.com/_media/rhino/technicalboat.jpg?w=600}}
+
+<color white>
+space
+space
+space
+</color>
+
+
+====Tinta==== 
+{{http://wiki.mcneel.com/_media/rhino/usbpen.jpg?w=600}}
+
+<color white>
+space
+space
+space
+</color>
+====Artístico==== 
+{{http://wiki.mcneel.com/_media/rhino/harken_artistic.jpg?w=600}}
+
+<color white>
+space
+space
+space
+</color>
+
+El modo de visualización Renderizado se ha actualizado.  Esto es posible agregando algunos materiales y activando un entorno. Aquí encontrará un tutorial en vídeo:  {{http://vimeo.com/59268869|Materials, Environments and more!}}
+
+====Renderizado====
+{{http://wiki.mcneel.com/_media/rhino/xlrcable.jpg?w=600}}
+
+
+
+
+=====Ejemplos personalizados adicionales=====
+
+Para aprovechar todo el potencial de estas nuevas opciones de visualización, puede crear sus propios modos de visualización y control:
+
+  * Lista desordenada 
+  * Siluetas en tiempo real
+  * Pliegues
+  * Bordes
+  * Intersecciones en tiempo real
+  * Visualización renderizada y sombreado
+  * Tipos de sombra
+  * 
+===== Instalación =====
+
+Los modos siguientes se pueden importar a Rhino mediante el comando de importación Opciones de visualización de Rhino. Vaya al menú //Herramientas > Opciones > Vista > Modos de visualización// y haga clic en **Importar**. Navegue a los archivos .ini descargados e importe. Consulte el tema de ayuda de Visualización avanzada debajo del encabezado de importación.
+
+====Patente====
+
+{{http://wiki.mcneel.com/_media/rhino/hull4b_patent.jpg?w=600}}
+
+Descargue el archivo [[http://wiki.mcneel.com/_media/rhino/patent_drawing.zip|Patent.ini]] para agregar este modo.
+
+Este modo es bastante sensible a la configuración de sombras. Algunas de las opciones para experimentar en este modo.  ¿Ángulo de línea de sombra?   Pruebe 0, 23, 45, 90 grados.  23 tiene algunas características interesantes. La línea de sombra no escalona a 23 grados. Ajustar la opción de ancho de línea en Patente > Objetos> Líneas es bastante importante.
+
+Al usar el modo Diseño, puede configurar el bloque de título y el texto guía.
+
+====Blueprint====
+{{http://wiki.mcneel.com/_media/rhino/harkin_2602_and_2616_blueprint.jpg?w=600}}
+
+Un blueprint es una combinación de un fondo bitmap, sombras de rayas blancas y líneas de silueta gruesas.  Para utilizar este modo, descargue el archivo [[http://wiki.mcneel.com/_media/rhino/blueprint.zip|Blueprint.ini]] y el [[http://www.psdgraphics.com/backgrounds/blank-blueprint-paper/|bitmap de fondo de blueprint]]. Configure el modo de visualización para usar esta imagen como fondo. Este modo también puede funcionar con el [[http://crisazi.deviantart.com/art/Blackboard-150161848|fondo de pizarra]].
+
+====Pizarra====
+{{http://wiki.mcneel.com/_media/rhino/lmgtblackboard.jpg?w=600}}
+
+Este modo es similar al modo blueprint. Utiliza una imagen de fondo y sombras blancas, pero usa anchos de gran tamaño para simular más un modo de boceto. Descargue el archivo [[http://wiki.mcneel.com/_media/rhino/blackboard.zip|Blackboard.ini]] para las opciones y el [[http://crisazi.deviantart.com/art/Blackboard-150161848|bitmap de pizarra]].
+
+====Brillo simple====
+{{http://wiki.mcneel.com/_media/rhino/fallingwater.jpg?w=600}}
+
+Un modo de sombreado simple de colores brillantes, popular tanto en arquitectura como en diseño mecánico. Para ejecutar este modo, importe el archivo [[http://wiki.mcneel.com/_media/rhino/simple_bright.zip|Simple Bright.ini]].
+
+====Blueprint semitransparente====
+{{ :rhino:lmp2005.jpg?600 |}}
+
+Este modo es similar al modo blueprint, aunque los objetos son parcialmente transparentes y las superficies están ligeramente sombreadas y modeladas. Para ejecutar este modo, importe el archivo [[http://files.na.mcneel.com/rhino/5.0/misc/Ghosted Blueprint.zip|Ghosted Blueprint.ini]]. También puede descargar un fondo bitmap: [[http://andrewl14.files.wordpress.com/2011/04/blueprint-1920x1200.png|Blueprint Grid]]
+
+=====Modos avanzados de impresión=====
+Los modos de visualización avanzados se basan actualmente en resoluciones de pantalla (bordes de 2 píxeles de ancho, por ejemplo). Al imprimir en estos modos, la resolución de impresión en la impresora puede ser muy diferente de la visualización. Es posible que una línea de 4 píxeles de grosor parezca gruesa en la pantalla, pero al imprimirla los bordes no parezcan gruesos.  Este cambio puede aplicarse a las sombras y a las tramas.  Para complicar aún más el asunto, la vista previa de impresión no previsualiza correctamente estos efectos.  Esto es algo que hay que mejorar. A continuación hay una alternativa para resolver el problema.
+
+Si desea imprimir uno de estos modos, cree una copia del modo en pantalla y cree una versión para imprimir del modo.  Por ejemplo, el modo Patente utiliza bordes de 4 para la visualización en pantalla. En la versión para impresora del modo de visualización, los bordes son de 8 píxeles.  A continuación se muestra una tabla que compara una versión en pantalla del modo con una versión imprimible del modo:
+
+|                        ^Modo Patente ^Modo Impresión de Patente  ^
+^Modo Sombreado |Líneas Paralelas |Líneas Paralelas      |
+^Líneas en modo Sombreado |1 px |4 px                |
+^Separación en modo Sombreado |3 líneas |2 líneas             |
+^Grosor de línea de borde |1 px |2 px                |
+^Grosor de silueta |2 px |8 px                |
+
+
+
+=====Limitaciones=====
+
+  - No puede asignar ninguno de estos modos de visualización a objetos individuales (por ejemplo, DefinirModoDeVisualizaciónDeObjeto). Sin embargo, en un modo de visualización Técnico, puede asignar todos los demás modos a objetos individuales... en otras palabras, el modo Técnico es un superconjunto de todos los demás modos (que admiten el canal estándar [[rhino:opengl|OpenGL). Por lo tanto, todavía puede mezclar y combinar los modos de visualización de objetos, solo tiene que empezar en el modo Técnico.
+  - Los cálculos iniciales de los datos técnicos de visualización pueden llevar mucho tiempo para objetos de malla densa... y no hay nada que podamos hacer al respecto... y si el objeto cambia de alguna manera, hay que rehacer los cálculos.
