@@ -1,0 +1,50 @@
+====== Resolución de problemas de visualización en Rhino ======
+
+==== Artefactos ====
+
+
+
+Lo primero que hay que intentar es **[[es:rhino:5:video:troubleshooting:intel|actualizar los controladores de vídeo]]**.
+
+\\
+
+====Problema: Parpadeo====
+{{:rhino:5:video:troubleshooting:farfromorigin.png?200| Visualización con artefactos}}  {{:rhino:5:video:troubleshooting:farfromorigin2.png?200| Visualización ordenada}}
+
+Si los objetos parpadean o se muestran inestables al mover la vista, o tiene mallas de renderizado muy imprecisas, puede ser que los objetos estén muy lejos del origen del plano universal.
+
+**Para determinar si los objetos están lejos del origen**
+  - Ejecute el comando  **CalcularPto**.
+  - **Restrinja el cursor** a un punto de un objeto. 
+Si la línea de comandos informa de que las coordenadas universales son muy grandes (por ejemplo, más de un millón), puede ayudar mover los objetos más cerca del origen del plano universal. 
+
+**Para mover los objetos cerca del origen**
+
+  - **Seleccione** todos los objetos a mover.
+  - Ejecute el comando **Mover**.
+  - Cuando le solicite **Punto desde el que mover**, designe una posición en alguno de los objetos. 
+  - Cuando le solicite **Punto hacia el que mover**, escriba **W0,0,0** (para el origen del plano universal). 
+  - Es posible que tenga que utilizar el comando **ActualizarSombreado** en los objetos para forzar la generación de nuevas mallas de renderizado más precisas.
+
+Si no puede mover los objetos y necesita otro enfoque, consulte: //[[rhino:farfromorigin|Objetos muy lejos del origen del plano universal]]//.
+
+\\
+
+==== Problema: Estructura alámbrica incorrecta en vistas sombreadas====
+
+{{:rhino:5:video:troubleshooting:testzbiasfactor1.png?200|La estructura alámbrica se muestra en las superficies sombreadas}}   {{:rhino:5:video:troubleshooting:testzbiasfactor12png.png?200|La estructura alámbrica se muestra correctamente}}
+ 
+
+La visualización de la estructura alámbrica de las superficies (isocurvas y bordes) está sesgada hacia la cámara, de modo que se visualizan delante de sus respectivas superficies en las vistas sombreadas. Si la estructura alámbrica de las superficies se muestra a través de las superficies sombreadas, intente ajustarlo utilizando el comando **testZBiasFactor**. Por lo general, si aplica una o dos veces la opción **Menos** de la línea de comandos, mejorará la visualización.
+
+\\
+
+==== Problema: Las barras de herramientas y el texto de Rhino 5 son demasiado pequeños en pantallas de alta resolución====
+
+[[rhino:5:video:highres:toolbars_and_text_too_small_in_64-bit_rhino_5_on_high_resolution_screen|Consulte esta página para obtener ayuda con elementos pequeños de la IU.]]
+
+>**Nota**: Esta página wiki forma parte del Asistente de instalación de Rhino. [[http://wiki.mcneel.com/es/rhino/5/video/troubleshooting |Empezar desde el inicio]].
+
+==== Hay pequeños iconos grises en la parte inferior derecha de la vista y el rendimiento es lento====
+
+Si tiene iconos pequeños en la parte inferior derecha de cada vista: [[ https://wiki.mcneel.com/es/rhino/5/video/troubleshooting/nvidia/slowperformance |desactive nVidia Shadowplay]]
