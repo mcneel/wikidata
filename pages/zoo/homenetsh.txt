@@ -1,0 +1,45 @@
+======Open TCP Port 80 in Windows Firewall Using Netsh======
+
+> **Product:** //[[zoo:home|Zoo]]//
+> **Summary:** //Using Netsh to open Zoo required TCP Port 80//
+
+Zoo communicates with Rhino clients via TCP Port 80 (HTTP).
+
+After installing the Zoo, you need to ensure that TCP Port 80 is open for //both incoming and outgoing// communications in the firewall software running on the Zoo server system.
+
+Note, by default TCP Port 80 is open for outgoing communications in most firewall software. You should not have to open any ports in the firewall software running on Rhino workstations. 
+
+=====More information=====
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|Netsh]]** is a Windows command-line scripting utility for you to, either locally or remotely, display or change the network configuration of a computer that is currently running.
+
+Netsh also provides a scripting feature to run a group of commands in batch mode against a specified computer.
+
+Netsh can be used, instead of the Firewall applet in the Control Panel, to automate the opening of required TCP/IP ports.
+
+It is possible to open these ports on the Window Firewall using Netsh. The syntax is different depending on whether or not you are using Windows XP or Windows Server 2008, Windows Vista, or greater.
+
+====Windows XP====
+**Important:** If you are a member of the Administrators group, run the commands from a command prompt. To start a command prompt, find the icon or Start menu entry that you use to start a command prompt session.
+
+<code>
+rem Open TCP Port 80
+netsh firewall add portopening TCP 80 "Zoo TCP Port 80"
+</code>
+
+====Windows Server 2008, Windows Vista, or greater====
+
+**Important:** If you are a member of the Administrators group, and User Account Control is enabled on your computer, run the commands from a command prompt with elevated permissions. To start a command prompt with elevated permissions, find the icon or Start menu entry that you use to start a command prompt session, right-click it, and then click **Run as administrator**.
+
+<code>
+rem Open TCP Port 80 inbound and outbound
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=in action=allow protocol=TCP localport=80
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=out action=allow protocol=TCP localport=80
+</code>
+
+=====Reference=====
+[[http://support.microsoft.com/kb/947709|How to use the "netsh advfirewall firewall" context.]]
+
+\\
+
+{{tag>Zoo}}
