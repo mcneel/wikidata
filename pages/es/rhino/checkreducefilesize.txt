@@ -1,0 +1,61 @@
+====== ¿Por qué mi archivo es tan grande? ======
+
+
+> A menudo hay alguna publicación en el foro de Rhino de algún usuario que comenta que su archivo ha aumentado significativamente de tamaño y no entiende por qué o no sabe cómo reducirlo.  Este artículo explica por qué sucede y ofrece algunas posibles soluciones. 
+
+=== ¿Qué causa el aumento de tamaño del archivo? ===
+
+Hay varias cosas que pueden aumentar considerablemente el tamaño del archivo:
+
+  * **Mostrar mallas**: Rhino utiliza mallas especiales para mostrar objetos de superficie en la pantalla. Una configuración de visualización de malla muy fina puede generar archivos de gran tamaño sin darse cuenta. La pantalla se ve normal, pero puede que no sepa cuántos polígonos tiene la malla.
+
+  * **Texturas/Imágenes bitmap**: las texturas bitmap de alta resolución almacenadas en el archivo, que se utilizan como materiales de renderizado o para objetos de imagen que haya creado, pueden aumentar considerablemente el tamaño del archivo.
+
+  * **Materiales**: puede que tenga muchos materiales que estén ocupando una cantidad significativa de espacio.  A veces, los materiales se duplican innecesariamente y se multiplica este efecto.
+
+  * **Plug-ins**: los plug-ins de Rhino pueden agregar todo tipo de funciones adicionales a Rhino, desde renderizado avanzado hasta herramientas de diseño específicas y CAM.  Los plug-ins pueden almacenar sus propios datos en el archivo de Rhino y, según el tipo de plug-in, puede ser un gran volumen.
+
+  * **Muchos datos**: finalmente, los archivos de Rhino pueden simplemente contener **cantidades masivas de geometría** en forma de curvas, superficies o mallas.  En este caso, los archivos serán de gran tamaño...
+
+----
+
+===¿Cómo puedo ver dónde está el problema?===
+
+Tras leer lo anterior, es posible que ya tenga en mente algunas "causas habituales".  Si es así, puede saltarse esta sección y pasar a la sección de "posibles soluciones".
+
+Sin embargo, si quiere ver todo lo que contiene su archivo con gran detalle, puede utilizar el comando **ExaminarArchivo3dm** dentro de Rhino. Puede ejecutarlo en el archivo Rhino que tenga abierto en ese momento o en algún otro archivo 3dm de su equipo.  Se abrirá una ventana de texto con mucha información.  La sección superior contiene información sobre su instalación de Rhino y los plug-ins cargados.  A continuación viene la parte interesante: las distintas "tablas" donde se almacena la información del archivo de Rhino que se está analizando.  
+
+  * La primera es la **"Tabla de bitmaps"**.  Le dirá cuántos bitmaps hay en el archivo y, lo que es más importante, el tamaño total. Si ve que hay números muy grandes (las cifras están en bytes), eso podría explicar parte del tamaño de su archivo.
+
+  * Luego se encuentra la **"Tabla de materiales"**, que también comprueba el tamaño.
+
+  * Más abajo está la **"Tabla de objetos"**, que ofrece un resumen de cuánto espacio de almacenamiento ocupa su geometría real.  En V5, solo verá el tamaño total de todos los objetos; en V6 y posteriores, también mostrará detalles de tamaño por objeto.  //Tenga en cuenta que el tamaño del objeto incluye las mallas de renderizado adjuntas, lo que puede ser útil si eso es lo que está provocando el problema del tamaño del archivo.//
+
+  * Por último, en la parte inferior se encuentra la **"Tabla de datos de usuario del modelo"**, que muestra todos los plug-ins cargados y los datos que almacenan.  Si alguno de ellos es muy grande, también podría ser la causa del problema.
+
+----
+
+===De acuerdo, veo posibles causas, ¿ahora qué hago?===
+
+  * **Mallas de visualización**: si sospecha que la configuración de las mallas de visualización está causando un tamaño de archivo muy grande, hay varias cosas que puede probar.  Pruebe a utilizar el comando **GuardarReducido**, que guardará el archivo sin las mallas de renderizado. Compruebe el tamaño del archivo recién guardado y, si ha disminuido drásticamente, ese era parte del problema.  Si desea conservar el original, también puede utilizar el comando **GuardarComo** con un nombre diferente y marcar la casilla "Guardar reducido" en el cuadro de diálogo.
+
+  * **Materiales**: si la tabla de materiales contiene entradas grandes, pruebe primero el comando **Depurar** con la opción **Materiales=Sí**.  Eso debería depurar cualquier material no utilizado y puede ayudar.  Si no es así, consulte la sección Datos de plug-ins más abajo...
+
+  * **Bitmaps (imágenes)**: si la tabla de bitmaps contiene entradas grandes, puede ser una de varias cosas.  Las imágenes, los bitmaps de fondo y las imágenes aplicadas como texturas se almacenan en la tabla de bitmaps.  Puede ver si tiene alguna textura sin usar que esté atascada en el archivo y eliminarla, y quitar cualquier elemento de imagen que ya no necesite.  Sin embargo, esto no siempre soluciona el problema, a veces las imágenes bitmap se quedan "atascadas" en el archivo incluso cuando se elimina el objeto que las contenía.  En ese caso, puede que tenga que depurar la tabla de bitmaps.  En Rhino V5, hay un comando de prueba para hacerlo: **TestPurgeBitmapTable**. Tiene que escribirlo todo, no se autocompleta. CUIDADO, porque este comando eliminará //TODOS// los bitmaps del documento, incluidos algunos que aún pueda necesitar, así que utilice este comando con mucho cuidado...
+
+  * **Datos de plug-ins**: los datos creados por los plug-ins de Rhino permanecen en el archivo //incluso si la instancia de Rhino que abre el archivo no tiene instalados los plug-ins correspondientes//. No se puede acceder a ellos, pero siguen ahí y no se eliminan al volver a guardar el archivo.  Sin embargo, puede que haya recibido un archivo de la persona responsable del renderizado, con todos los materiales personalizados dentro del archivo, o del modelador, con todas las trayectorias de herramientas CAM dentro del archivo; ya no necesita ese material y quiere reducir el tamaño del archivo si es posible. La forma de hacerlo es usar **-GuardarComo** (¡con el guión!); en la línea de comandos verá la entrada **GuardarDatosDePlugin**.  Seleccione **No** y guarde.  //**Advertencia:** se eliminarán todos los datos de todos los plug-ins, así que asegúrese de que realmente no lo necesitará de nuevo.// Haga una copia de seguridad por si acaso.\\ \\ Utilizar el procedimiento anterior para eliminar los datos de los plug-ins también puede resolver algunos de los problemas con los datos de alguna "fuente desconocida" que están "atascados" en el archivo y que no se han podido eliminar de ninguna otra manera.
+
+
+  * **Cantidades masivas de geometría en el archivo**: como se ha mencionado anteriormente, suponiendo que el archivo ya se haya creado, no hay mucho que se pueda hacer para reducir el tamaño del archivo en este caso. Rhino necesita ese espacio para describir correctamente todos los objetos.  Si necesita enviar el archivo a alguien, comprimirlo puede ayudar a reducir el tamaño del archivo de Rhino de forma significativa.  Si aún no ha creado el archivo, y el archivo contiene muchos objetos idénticos, el uso de **bloques** puede reducir el tamaño del archivo.  Consulte la Ayuda de Rhino para más información sobre el uso de bloques.\\ \\ **Si el tamaño de la memoria de la tabla de objetos es muy grande y cree que no debería ser así,** tendrá que buscar el objeto u objetos que están causando el problema con el tamaño del archivo.  Primero compruebe si hay algo oculto o en una capa desactivada que pueda estar causando el problema.  También podría haber una o más superficies enormes (con miles de puntos de control) que se hayan recortado a un tamaño pequeño. Puede pensar que no ocupan espacio, pero Rhino almacena la definición original (sin recortar) de la superficie, por lo que una superficie aparentemente pequeña puede ocupar mucha memoria.  El comando **ReducirSupRecortada** eliminará la parte innecesaria de estas superficies.
+
+----
+
+===¿Qué otras posibilidades hay?===
+
+Otras cosas que se pueden intentar si todo lo anterior no funciona...
+
+  * A veces, abrir un nuevo archivo en blanco, copiar y pegar la geometría del archivo antiguo en el nuevo puede ser una solución.  Pero, a veces, los objetos pueden contener todo el volumen cuando se copian, así que puede que esta opción no funcione.
+
+  * Si ninguna de estas opciones mencionadas funciona, puede probar a usar **GuardarComo** y marcar "Solo geometría". En principio solo se guardarán los objetos reales, pero cuidado porque también se destruye por completo cualquier organización de archivos. Los objetos acabarán todos en una sola capa, sin color, sin grupos, sin nada...  Realmente es el último recurso.
+
+----
