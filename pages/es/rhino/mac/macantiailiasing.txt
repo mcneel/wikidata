@@ -1,0 +1,24 @@
+====== Opciones de antialias en Rhino para Mac ======
+
+Rhino pone límites a la configuración más alta de antialias. Estos límites se determinaron a partir del volumen de fallos en los controladores OpenGL de Apple o de informes de errores de pantalla. Los límites actuales son los siguientes:
+
+==Hay un límite de un máximo de 4X de antialias si se cumple alguna de las siguientes condiciones:==
+
+  * Tiene un portátil retina
+  * Tiene más de una pantalla
+  * Su GPU tiene menos de 1024 MB
+
+==Hay un límite de un máximo de 2X de antialias si se cumple alguna de las siguientes condiciones:==
+
+  * Tiene un portátil retina y una pantalla externa
+  * Su GPU tiene menos de 1024 MB y más de una pantalla
+  * Su GPU tiene menos de 512 MB
+
+==El antialias se desactiva por completo si:==
+
+  * Tienes un portátil retina y dos pantallas externas
+  * Tienes un portátil retina configurado a una resolución superior a la normal
+  * Su GPU tiene menos de 512 MB y más de una pantalla
+  * Tiene una GPU Intel y no es HD 4000 o posterior
+
+Se trata de restricciones de rendimiento y estabilidad basadas en resultados anteriores y pueden cambiar en cualquier momento.
