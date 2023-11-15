@@ -1,0 +1,23 @@
+======Inicio de Rhino para Mac con registro de eventos mejorado====== 
+
+Relacionado:  [[es:rhino:mac:consolemessages|Obtener mensajes de consola desde Rhino para Mac]]
+
+A veces es necesario iniciar Rhino con el registro de eventos para diagnosticar problemas de inicio o de licencia.  A continuación se indican los pasos para iniciar Rhino con registro: 
+
+1) Ejecute la aplicación **Consola** desde Launchpad o Spotlight.
+{{:rhino:mac:console.png?700|}}
+
+2) En Consola, asegúrese de que su equipo está seleccionado, establezca el filtro en *Errores y fallos* y, a continuación, haga clic en **Iniciar transmisión**
+{{:rhino:mac:streaming-log.png?700|}}
+
+3) Abre una sesión de **Terminal** desde Launchpad o Spotlight.
+{{:rhino:mac:terminal.png?700|}}
+
+4) Inicie **Rhinoceros** utilizando este comando:
+   /Applications/Rhino\ 7.app/Contents/MacOS/Rhinoceros -RhinoLog
+
+5) Ahora Rhino registrará muchos mensajes en la consola. Ejecute Rhino hasta que llegue al punto en el que se produzcan fallos o errores. Una vez que se ha ejecutado con el comportamiento no deseado, en la consola, puede **Pausar** el registro y filtrar los resultados a **Rhinoceros**
+{{:rhino:mac:rhino-log.png?700|}}
+
+6) Los errores aparecen en amarillo, los fallos en rojo. Si habla con el personal de McNeel, es probable que busquen los fallos en rojo. Puede copiar/pegar todo el contenido de un fallo concreto seleccionándolo en la lista y copiando el **Mensaje** que aparece en la parte inferior de la ventana de la Consola...
+{{:rhino:mac:rhino-fault.png?700|}}
