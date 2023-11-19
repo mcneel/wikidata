@@ -32,15 +32,15 @@ If you can’t get Rhino to automatically produce a closed intersection curve, e
 
 ====Known Rhino limitations====
 
-**Coincident seams** – All objects have seams. Sometimes when the seams on two objects are at exactly the same place, Rhino has trouble with the intersection.  Solution: Either try to move the seam, or try moving one object just a tiny, tiny bit (if you can without making your model inaccurate).  Or try to do the operation manually.
+**Coincident seam and other edges** – All polysurface objects have joined edges and seams. Sometimes when the joints on two objects are at exactly the same place, Rhino has trouble with the intersection.  Solution: Either try to move the joint or seam edge, or go back to the manual Split/Trim and Join procedure in this case, in general Rhino will allow you to do this just fine and you will be done. There is sometimes a possibility to move one object just a tiny, tiny bit - this is a last-ditch attempt because it will make your model less accurate and that could have poor consequences later.
 
-**Coplanar faces** – If two faces of an object are on the same plane, Rhino may not be able to calculate the intersection. This is a fairly  common occurrence. Later versions of Rhino are much better at resolving these situations, but they may still occasionally fail. Solution: As above, you may move the object slightly if possible. If not, you may have to do this operation manually.
+**Coplanar faces** – If two faces of an object are on the same plane, Rhino may not be able to calculate the intersection. This is a fairly  common occurrence. Later versions of Rhino are much better at resolving these situations, but they may still occasionally fail. Solution: As above, try doing this operation manually, it will always succeed.
 
-**Nearly tangent surfaces** – Like the intersection of two equal diameter pipes at an angle.  The intersection often fails at the point where the surfaces are tangent.  Currently, there is no easy fix for this problem.
+**Nearly tangent surfaces** – Like the intersection of two equal diameter pipes at an angle.  The intersection often fails at the point where the surfaces are tangent.  Currently, there is no easy automatic fix for this problem, so you may end up having to use Intersect, then edit the resulting incomplete intersection curves to get something you can use to manually trim the surfaces before joining.
 
 **Invalid objects** – If one of the objects you're trying to work with is invalid, Boolean operations will often fail.  Check for invalid objects by using the command **SelBadObjects**.  If one highlights, you need to fix it first before proceeding.  It is also recommended that you turn on automatic object checking. If invalid objects are created in the course of your work (or imported), Rhino will tell you immediately.  To do this, simply type **CheckNewObjects**.  This is a toggle, running the command again turns it off.
 
-**Non-manifold polysurfaces** – Although Rhino doesn't currently flag these objects as bad, they can cause failure.  Rhino //shouldn't// create these types of structures, but under certain conditions it does.  The Properties/Details of an object will indicate if it is non-manifold, and you can use the edge analysis tool to highlight them.
+**Non-manifold polysurfaces** – Although Rhino doesn't currently flag these objects as bad, they can cause failure.  Rhino doesn't deliberately create these types of structures in general, but under certain conditions they can happen.  The Properties/Details of an object will indicate if it is non-manifold, and you can use the edge analysis tool to highlight them.  They will need to be manually repaired to fix the problem.
 
 =====Manual construction and editing is sometimes needed=====
 
