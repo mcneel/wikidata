@@ -1,0 +1,77 @@
+====== Accesos directos de teclado en Rhino para Mac ======
+
+Este artículo describe cómo usar y personalizar los accesos directos de teclado Rhino para Mac.
+
+=== Accesos directos estándar del menú de Rhino ===
+
+Rhino para Windows tiene muchos accesos directos y, en su mayor parte, Rhino para Mac ha adoptado los mismos. Muchas de ellos no son óptimos para el Mac, pero podemos considerar las asignaciones de teclado actuales como punto de partida. Rhino para Mac siempre tendrá un conjunto predeterminado de accesos directos que no se pueden cambiar. Estos accesos directos deberían ser útiles y naturales para los usuarios de Mac.  Haga sugerencias para mejorar los accesos directos predeterminados que crea que deberían estar disponibles para todo el mundo publicando sus sugerencias en [[http://mac.rhino3d.com/forums/t/3417.aspx|este hilo de soporte]].
+
+También puede definir su propio conjunto de accesos directos, de lo que hablaremos a continuación, por lo que no es necesario que mencione ningún acceso directo que sea de su uso específico de Rhino para Mac.  Siempre puede añadir estas asignaciones especiales a su propia copia de Rhino.  Limite sus sugerencias a los cambios que deberían estar disponibles de forma universal.
+
+He mencionado que algunos de los accesos directos no son óptimos.  Algunos de los accesos directos predeterminados utilizan teclas disponibles solo en el [[http://store.apple.com/es/product/MB110LL/B/apple-keyboard-with-numeric-keypad|teclado con teclas numéricas]].  Por ejemplo, la función Ver > Deshacer cambio de vista está asignada a la tecla Inicio, pero esa tecla no existe en los teclados de los ordenadores portátiles.  En lugar de eliminar por completo estos accesos directos, pensamos que lo mejor era dejarlos, poniéndolos a disposición de quienes puedan aprovecharlos.
+
+Otros accesos directos predeterminados utilizan las teclas de función (F1-F12, o F1-F19 en la versión con teclado numérico).  Apple ha añadido sus propias acciones del sistema a las teclas de función, lo que las hace incómodas de usar en una aplicación.  Debe mantener pulsada la tecla fn cuando pulse una de las teclas de función para que el programa vea una pulsación "normal" de una tecla de función.
+
+También puede cambiar el sentido de la tecla fn + función en Preferencias del sistema > Teclado > Teclado.  Hay una casilla de verificación llamada "Usar todas las teclas F1, F2, etc. como teclas de función estándar".  No está marcada de manera predeterminada, pero si lo está, el uso de las teclas de función es mucho más fácil en Rhino.  Tenga en cuenta que se trata de un ajuste para todo el sistema y que cambiará el comportamiento de las teclas de función en todo el Mac.
+
+Nota: En El Capitan, también tendrá que ir a Preferencias del sistema > Mission Control, y cambiar la asignación de ventanas de aplicación de la predeterminada F10 a otra.
+
+=== Accesos directos de menú vs. accesos directos de teclado ===
+
+En Rhino para Windows, puede añadir accesos directos.  Estos accesos directos pueden estar, aunque no es obligatorio, asociados a un elemento del menú de la aplicación.  En Windows, se introduce la cadena de comandos que se ejecutará cuando se escriba un acceso directo.
+
+Las directrices de Apple establecen que todos los comandos de las aplicaciones deben estar disponibles a través del menú de aplicaciones.  Para ello, Apple admite accesos directos de menú, el mismo concepto que los accesos directos de teclado en Windows, pero Apple exige que estos accesos directos estén siempre asociados a un elemento de menú.
+
+Rhino dispone de un amplio conjunto de comandos personalizables. No es práctico poner todos los comandos de Rhino y todas sus variaciones en el menú de la aplicación.  Algunos comandos menos utilizados en Rhino deben escribirse en el teclado para ejecutarlos.  Esto también significa que, en el Mac, cualquier comando que no esté en el menú de aplicaciones nunca puede tener un acceso directo de menú asociado.
+
+Consideramos que es demasiado restrictivo para Rhino con su gran conjunto de comandos, y hemos modificado las técnicas típicas de asignación de accesos directos de menú para permitir que los accesos directos de teclado se asignen a cualquier comando, no solo a los comandos del menú de la aplicación.
+
+=== Ver los accesos directos estándar ===
+
+En Rhino para Mac, los accesos directos se adjuntan a macros de comandos, en lugar de directamente a un elemento de menú.  Puede ver los accesos directos predeterminados seleccionando Rhinoceros > Comandos > Personalizar en el menú de la aplicación y, a continuación, seleccionando la ficha Accesos directos de teclado.
+
+{{:rhino:mac:default_keyboard_shortcuts.png?700|}}
+
+La lista accesos directos predeterminados aparece en la mitad superior de la ventana.  Al hacer clic en uno de los accesos directos, se selecciona el comando asignado en la mitad inferior y se muestran los detalles del comando en el panel inferior derecho.  Hay un nuevo campo en este panel para definir un acceso directo.
+
+Si la macro de comando está referenciada por un elemento de menú en el menú de la aplicación, entonces el acceso directo se muestra en el menú de la aplicación.
+
+{{:rhino:mac:default_menu_shortcut_example.png?300|}}
+
+Sin embargo, incluso si el acceso directo no está referenciado por un elemento del menú de la aplicación, el acceso directo seguirá funcionando en Rhino para Mac.
+
+=== Definir sus propios accesos directos ===
+
+No es posible modificar los comandos o accesos directos predeterminados.  Rhino para Mac tiene un conjunto de comandos predeterminados con un conjunto fijo de comandos.  Cuando ofrecemos soporte técnico, es posible que le pidamos que restableza los comandos de Rhino para Mac a los predeterminados para que no haya confusión sobre lo que hará un determinado elemento de menú o acceso directo.
+
+Para cambiar el conjunto de comandos predeterminado, debe crear una copia.  Haga clic en el botón de menú emergente de la esquina superior izquierda del Editor de comandos.  Actualmente indica "Predeterminado (solo lectura)".  Seleccione la opción "Duplicar" y elija un nombre para el nuevo conjunto de comandos.
+
+=== Eliminar los accesos directos ===
+
+Para eliminar los accesos directos existentes, seleccione la ficha Accesos directos en la parte superior y, a continuación, seleccione el acceso directo que quiera eliminar.  Haga clic en el botón "-" en la mitad superior de la ventana para eliminar el acceso directo.  Esto no elimina el comando en sí. Solo elimina el acceso directo asignado al comando.
+
+Observe que aparecen **todos** los accesos directos de Rhino, incluidos ⌘C para Copiar y ⌘Q para Salir de Rhinoceros.  Puede crearse bastante confusión eliminando o reasignando accesos directos estándar de Mac a comandos normales de Rhino.  No es recomendable, pero es posible hacerlo.
+
+=== Añadir accesos directos ===
+
+Para añadir un acceso directo, primero busque el comando que recibirá el acceso directo escribirndo una parte del nombre del comando en el campo de búsqueda de la esquina inferior izquierda.  Seleccione el botón de comando para mostrar sus detalles en el panel inferior derecho.  Haga clic en el campo de texto Acceso directo y escriba el acceso directo que quiera asignar.  Por ejemplo, si quiere asignar Comando-Mayúsculas-J a un comando, mantenga pulsada la tecla Comando y la tecla Mayúsculas mientras escribe la letra J para asignar el acceso directo.  Casi todos los accesos directos se desactivan al escribir en este campo, por lo que puede utilizar casi cualquier combinación de teclas para el acceso directo.  La tecla Supr sigue funcionando y puede utilizarla para eliminar un acceso directo asignado a un comando.
+
+Si desea asignar un acceso directo a una cadena de macros de comandos que no se encuentra en el conjunto de comandos, deberá crear primero una nueva macro de comandos.  Haga clic en el botón "+" de la esquina inferior izquierda para crear un nuevo comando Sin título.  Rellene los campos y escriba el acceso directo que desee en el campo Accesos directos.
+
+=== Notas sobre los accesos directos ===
+
+No hay comprobación de errores en los accesos directos que se asignan. Rhino permite asignar el mismo acceso directo a más de un comando. El comportamiento resultante es imprevisible. También puede asignar accesos directos reservados para macOS, pero estos accesos directos no funcionarán en Rhino.  El sistema operativo realizará primero el acceso directo.
+
+Los accesos directos no se limitan a combinaciones de teclas con las teclas Comando, Opción, Mayúsculas o Control.  Como en Adobe Illustrator, puede asignar una letra a un comando.  Por ejemplo, puede asignar **C** al comando Círculo.  Si se pulsa C cuando un comando no está activo, se ejecutará el comando Círculo. Si lo hace, no podrá escribir ningún comando de Rhino que empiece por la letra C.
+
+Si asigna solo letras a los comandos, puede escribir cualquier comando normal de Rhino invocando la ventana de búsqueda de comandos con ⌘K, o seleccionando Herramientas > Comandos > Buscar... en el menú de la aplicación y, a continuación, escribir el comando en el cuadro de diálogo de búsqueda de comandos.
+
+=== Accesos directos y alias ===
+
+Los accesos directos solo con letras no son igual que los alias de comandos.  Un acceso directo simple puede ser solo una letra y no requiere pulsar Intro para activarlo.  Un alias puede tener más de una letra y requiere pulsar Intro para activarlo.  El acceso directo "C" es totalmente distinto del alias "C" y ejecutará comandos diferentes.
+
+=== Múltiples conjuntos de comandos personalizados ===
+
+Puede crear más de un conjunto de comandos personalizados.  Si ya tiene un conjunto de comandos personalizado, pero quiere experimentar con accesos directos simples, duplique uno de los conjuntos de comandos existentes y haga pruebas.  
+
+Utilice Rhinoceros > Comandos > "Nombre del conjunto de comandos" en el menú de la aplicación para cambiar entre conjuntos de comandos.  Los accesos directos de teclado y de menú se actualizan instantáneamente cuando se cambia el conjunto de comandos.  No es necesario reiniciar Rhino para empezar a utilizar el nuevo conjunto de comandos.
