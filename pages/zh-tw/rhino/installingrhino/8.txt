@@ -1,0 +1,65 @@
+===== 自動安裝Rhino 8 for Windows：腳本安裝=====
+Rhino 8透過一個可執行安裝程式進行安裝，且可以完全自動化。
+
+setup.exe [Action] [Option] [Parameters]
+
+//註: 以上顯示的"setup.exe" 是目前Rhino 安裝程式的一個預留佔位，\\ e.g. [rhino_zh-tw_8.#...exe]//
+
+======離線安裝======
+如果在客戶端電腦無法訪問網際網路的環境中進行部署，請在部屬之前[[zh-tw:rhino:installingrhino:6:offline|按照這些步驟進行離線安裝]]。
+
+====指令列選項：====
+^動作 ^敘述  ^
+|**-package** | (預設) 安裝 |
+|**-uninstall** | 卸載 |
+|**-repair** | 修復 (如尚未安裝則開始安裝) |
+|**-layout** | 為離線安裝的啟動載入器(bootstrapper)建立本地映像 |
+
+^選項 ^描述  ^
+|**-quiet**| 無須任何使用者介面的執行操作。|
+| |如需重新啟動，系統將在不提示的情況下重新啟動 |
+|**-passive** | 使用進度條介面執行操作 | 
+|**-norestart** | 禁止任何重新啟動 |
+|**-promptrestart** | (預設) 提示是否需要重新啟動 |
+
+
+^參數 ^描述  ^
+|//所有參數都可以隨意選擇//|
+|**LICENSE_METHOD**| 其中一個: 單機 STANDALONE, ZOO ( Cloud Zoo留空白)|
+|**LICENSE_KEY** | ( 如果LICENSE_METHOD=STANDALONE**就需要**) 安裝授權 |
+|**LICENSE_VALIDATION_CODE**| Rhino授權驗證碼 |
+|**ZOO_SERVER** | 要查詢的Zoo伺服器 IP或FQDN |
+|**INSTALLDIR** | 將安裝Rhino的完整路徑 |
+|**CUSTOMER_NAME** | 在啟動畫面中顯示的客戶名稱 |
+|**COMPANY_NAME** | 在啟動畫面中顯示的公司名稱 |
+|**SEND_STATISTICS** | **1** = 向McNeel發送匿名安裝數據訊息(預設) |
+|                    | **0** = 不發送 |
+|**ENABLE_AUTOMATIC_UPDATES** (Rhino 6.15新增功能) | **1** = 允許安裝程式檢查並下載更新。|
+|                             | **0** = 不允許自動更新並發送使用訊息 |
+| 
+|**DISABLE_INTERNET_ACCESS** (Rhino 6.15新功能) | **1** = 禁用安裝程式，Rhin，McNeel更新連到網路的功能。這會停止Rhino所有連到網路的連線，包括自動更新檢測與下載，發送匿名使用統計數據，線上協助，啟動畫面新聞與提示，下載彩現紋理，訪問Cloud Zoo，以及嘗試使用網路的其他功能。 |
+|                            | **0** (default) = 允許所有網路連線 |
+\
+
+==== 語言選項 ====
+設定1來安裝語言，設定0則不安裝。
+除非將設定改為0，下載的安裝程式將安裝預設語言。如果您下載**French法語**安裝程式，並僅以 **INSTALL_EN=1**執行，那麼安裝後會是英語及法語。
+^語言參數 ^描述 ^
+|**INSTALL_EN**| 英文  |
+|**INSTALL_CN**| 簡體中文 |
+|**INSTALL_CS**| 捷克文 |
+|**INSTALL_DE**| 德文 |
+|**INSTALL_ES**| 西班牙文 |
+|**INSTALL_FR**| 法文 |
+|**INSTALL_IT**| 義大利文 |
+|**INSTALL_JA**| 日文 |
+|**INSTALL_KO**| 韓文 |
+|**INSTALL_PL**| 波蘭文 |
+|**INSTALL_PT**| 葡萄牙文 |
+|**INSTALL_RU**| 俄文 |
+|**INSTALL_TW**| 繁體中文|
+
+====範例====
+<code>
+rhino_zh-tw_8.#.#####.#####.exe -package -passive LICENSE_METHOD=ZOO ZOO_SERVER=10.0.0.1 INSTALL_FR=1 INSTALL_DE=1
+</code>
