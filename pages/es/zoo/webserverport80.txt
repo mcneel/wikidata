@@ -1,12 +1,12 @@
-====== El Zoo no se inicia en los servidores web ======
+====== Zoo LAN no se inicia en los servidores web ======
 > **Producto:** //[[home|Zoo]]//
-> **Resumen:** //Zoo requiere acceso al puerto 80. Esto no es posible en sistemas con servicios web en ejecución.//
+> **Resumen:** //Zoo LAN requiere acceso al puerto 80. Esto no es posible en sistemas con servicios web en ejecución.//
 
 ===== Problema =====
-Cuando reinicio el servidor, el servicio de Zoo no se inicia. Cuando compruebo el registro de eventos de Windows (Panel de control -> Herramientas administrativas -> Registro de eventos), veo que el servicio Zoo registra un error:
+Cuando reinicio el servidor, el servicio de Zoo LAN no se inicia. Cuando compruebo el registro de eventos de Windows (Panel de control -> Herramientas administrativas -> Registro de eventos), veo que el servicio de Zoo LAN registra un error:
 
 <code>
-El servicio del Zoo en el equipo local se ha iniciado y luego se ha detenido.
+El servicio de Zoo LAN en el equipo local se ha iniciado y luego se ha detenido.
 Algunos servicios se detienen automáticamente si no están siendo utilizados por otro
 servicio o programa.
 </code>
@@ -22,14 +22,14 @@ ID del proceso en conflicto y luego busque el nombre de proceso en el Administra
 - Ejecute **NETSTAT-ano** desde la línea de comandos y escriba el número PID del puerto que abierto que quiere liberar.
 - Desde el administrador de tareas se puede ver qué proceso tiene el PID y se puede saber qué programa está utilizando ese puerto.
 
-El motivo de este error es que alguna otra aplicación ya está utilizando el puerto 80. Una aplicación solo puede tener en cuenta un puerto en un momento determinado, por lo que el Zoo no puede enlazar con el puerto 80. Más aplicaciones que causan este problema:
+El motivo de este error es que alguna otra aplicación ya está utilizando el puerto 80. Una aplicación solo puede tener en cuenta un puerto en un momento determinado, por lo que Zoo LAN no puede enlazar con el puerto 80. Más aplicaciones que causan este problema:
 
   * [[http://www.iis.net/|Internet Information Services (IIS) for WindowsÂ® Services]]
   * [[http://httpd.apache.org/|Apache HTTP Server]]
   * [[http://www.java.com|Java]]
   * [[zoo:zooskype|Skype]]
 ===== Resolución =====
-  - Mueva el Zoo a una máquina que no esté ejecutando servicios web.  Puede ser un servidor de impresión, otra estación de trabajo que se haya dejado encendida o un servidor virtual adicional.
+  - Mueva Zoo LAN a una máquina que no esté ejecutando servicios web.  Puede ser un servidor de impresión, otra estación de trabajo que se haya dejado encendida o un servidor virtual adicional.
   - Configure los servicios web para utilizar un puerto diferente. Tanto Apache como IIS pueden configurarse para ejecutarse en un puerto diferente.
 
 \\
