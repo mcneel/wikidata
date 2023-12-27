@@ -1,83 +1,26 @@
-====== NVIDIA Quadro Video Issues ======
+====== NVIDIA GPU Video Issues ======
 > **Note:** NVIDIA actively fixes issues and updates their drivers.  Please follow the instructions below to get the latest update. This can have a significant impact on Rhino's stability.
 
-These instructions are for computers that have NVIDIA Quadro graphics hardware. 
+These instructions are for computers that have NVIDIA GPU graphics hardware. 
 
 **To complete these instructions you must know:**
-  - The card manufacturer.  This page is for NVIDIA Corporation cards.
-  - The video card model.  This page is for Quadro Models only.
-  - The operating system of the computer. [[http://windows.microsoft.com/en-us/windows/which-operating-system|Which Windows operating system am I running?]]
+  - The card manufacturer
+  - The video card model 
+  - The operating system of the computer
 
-If you are not sure of any of these, please go to our **[[rhino:5:video:troubleshooting:failure|Rhino Video Troubleshooting]]** section for additional instructions.
-
-> Before updating your video drivers we recommend creating a System Restore point on your computer in case the changes need to be rolled back.  [[http://windows.microsoft.com/en-us/windows/system-restore-faq#1TC=windows-7|Instructions for a System Restore.]]
+> Before updating your video drivers we recommend creating a Windows System Restore point on your computer in case the changes need to be rolled back.
  
-=====Determine NVIDIA Quadro driver version=====
-  - Start <color red>**Rhino**</color>.
-  - On the **Tools** menu, click **Options**.
+=====Determine NVIDIA driver version=====
+  - Start <color red>**Rhino**</color>
+  - On the **Tools** menu, click **Options**
   - Expand the **View** tab (located near the bottom of the list on the left), and then click **OpenGL**.
-  - Look for the **Driver Version:** line.  It will have a long number that looks like <color grey>x.xx.xxxx.xxxx</color> The last five digits of this number are the NVIDIA driver version. For instance, if the long Driver Version number is 8.17.0011.9713, then the NVIDIA driver version is 197.13.
+  - Look for the **Driver date:** line. If you are having display driver problems, and your drivers are several months old, an update might help
  
-If the NVIDIA graphics driver version is equal to or larger (newer), than 340.66. This was the first driver to work. Most subsequent drivers have been fine.
-
-If the NVIDIA graphics driver version is less than 340.66, or more than 6 months old, then update the driver by following the instructions below.
-
-
-=====Instructions to update the NVIDIA Quadro driver=====
+=====Instructions to update the NVIDIA driver=====
 
   - Go to the [[http://www.nvidia.com/Download/index.aspx?lang=en-us|NVIDIA driver download page]].
-  - Enter the system information:
-      - Product type: Quadro
-      - Product model: Is your adapter in a desktop or laptop?
-      - Product: Enter your specific Quadro Adapter reported in Rhino
-      - Operating system: Enter your operating system
-  - Click **Search**
-  - Download NVIDIA Quadro driver version <color grey>(The driver 340.66 **or newer** is highly recommended).</color>
-  - Start the driver installation
+  - Choose the options to find you specific model card and details
+  - Start the driver installer
   - At the point where you can choose installation type, select **Custom (Advanced)**
   - On the next install screen check the option that says **Perform a clean install**
-  - Continue with the install
-  - Reboot (even though the installer might not suggest it)
-  - Read the Additional Quadro Performance Improvements section below
 
-=====Additional Quadro performance improvements=====
-
---> NVIDIA Threaded Optimization setting#
-
-Many users are reporting random crashes with NVIDIA drivers.  There is a setting in the NVIDIA Control Panel that seems to help these problems.\\ 
-
->Note: **We recommend using the "Workstation App - Dynamic Streaming" setting**. The Advanced Streaming option may be a little faster but less stable.
-
-{{:rhino:5:quadrowsadsoption.png?550|}}
-<--
---> Power adjustments#
-Switching your NVIDIA card to High Performance can also help. Some users have reported this fixes a problem where portions of the **Gumball** feature do not display.
-  - Open your NVIDIA Control Panel and select **Manage 3D settings**
-  - Then, select the **Power Management mode** and change the option from **Adaptive** to **Prefer maximum performance**
-  - Save your changes and your are done! ﻿
-{{:rhino:nvidia_max_performance.png?nolink}}
-<--
---> Vertical Sync#
-I found that disabling vsync in the driver helped quite a bit for v6 - perhaps it helps with v5 too. 
-
-With VSync on:
-
-<code>
-Command: _TestMaxSpeed
-Time to regen viewport 100 times = 1.66 seconds. (60.39 FPS)
-</code>
-
-With Vsync off:
-
-<code>
-Command: _TestMaxSpeed
-Time to regen viewport 100 times = 0.08 seconds. (1265.82 FPS)
-</code>
-
-{{:rhino:vsync.png?600|}}
-<--
-
-=====Latest discussion on NVIDIA cards=====
-The most recent and ongoing discussion about Rhino and NVIDIA cards here: http://discourse.mcneel.com/t/quadro-drivers-updated-good-news/11197/4
-
-And the [[https://discourse.mcneel.com/t/how-can-i-improve-my-rhino-5-performance/62920/8|How can I Improve my Rhino performance thread]].
