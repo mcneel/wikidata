@@ -1,12 +1,12 @@
-====== Zoo startet nicht auf Webservern ======
+====== LAN Zoo startet nicht auf Webservern ======
 > **Produkt:** //[[de:zoo:home|Zoo]]//
-> **Zusammenfassung:** //Der Zoo benötigt Zugriff auf den TCP-Port 80. Dies ist auf Systemen mit Webdiensten nicht möglich.//
+> **Zusammenfassung:** //Der LAN Zoo benötigt Zugriff auf den TCP-Port 80. Dies ist auf Systemen mit Webdiensten nicht möglich.//
 
 ===== Problem =====
-Beim Neustart meines Servers wird der Zoo nicht gestartet. Im Windows-Ereignisprotokoll (Systemsteuerung -> Verwaltung > Ereignisprotokoll) finde ich den folgenden Fehler des Zoo-Dienstes:
+Beim Neustart meines Servers wird der LAN Zoo nicht gestartet. Im Windows-Ereignisprotokoll (Systemsteuerung -> Verwaltung > Ereignisprotokoll) finde ich den folgenden Fehler des LAN-Zoo-Dienstes:
 
 <code>
-Dienst Zoo wurde auf Lokaler Computer gestartet und dann angehalten.
+Der Zoo-Dienst wurde auf dem lokalen Computer gestartet und dann angehalten.
 Einige Dienste werden automatisch angehalten, wenn sie nicht von anderen 
 Diensten oder Programmen verwendet werden.
 </code>
@@ -30,7 +30,7 @@ Der Grund des Fehlers ist, dass bereits eine andere Anwendung den TCP-Port 80 be
   * [[http://www.java.com|Java]]
   * [[zoo:zooskype|Skype]]
 ===== Lösungen=====
-  - Installieren Sie den Zoo auf einem Gerät, das keine Webdienste verwendet.  Dies kann ein Druckerserver, ein stets eingeschalteter PC oder ein zusätzlicher virtueller Server sein.
+  - Installieren Sie den LAN Zoo auf einem Gerät, das keine Webdienste verwendet.  Dies kann ein Druckerserver, ein stets eingeschalteter PC oder ein zusätzlicher virtueller Server sein.
   - Konfigurieren Sie den Webdienst so, dass er einen anderen Port verwendet. Sowohl Apache als auch IIS können so konfiguriert werden, dass sie auf einem anderen Port laufen.
 
 \\
