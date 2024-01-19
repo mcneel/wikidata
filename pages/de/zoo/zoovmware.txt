@@ -1,20 +1,20 @@
-====== Zoo und VMware ======
+====== LAN Zoo und VMware ======
 > **Produkt:** //[[de:zoo:home|Zoo]]//
-> **Zusammenfassung:** //Ausführung des Zoos mithilfe von VMware unter OS X.//
+> **Zusammenfassung:** //Ausführung des LAN Zoos mithilfe von VMware unter OS X.//
 
 ===== Frage=====
-Wir haben den Zoo mithilfe von VMware Fusion Pro und Windows auf unserem Mac-OS-X-Server installiert. Aus irgendeinem Grund funktioniert es aber nicht. Wir haben es in Rhino mithilfe der automatischen Erkennung und unter Angabe der IP-Adresse des Servers versucht. Rhino gibt lediglich den folgenden Fehler aus: //Unbekannte Ausnahme aufgetreten. Für Unterstützung setzen Sie sich mit Ihrem Systemverwalter in Verbindung.//
+Wir haben den LAN Zoo mithilfe von VMware Fusion Pro und Windows auf unserem Mac-OS-X-Server installiert. Aus irgendeinem Grund funktioniert es aber nicht. Wir haben es in Rhino mithilfe der automatischen Erkennung und unter Angabe der IP-Adresse des Servers versucht. Rhino gibt lediglich den folgenden Fehler aus: //Unbekannte Ausnahme aufgetreten. Für Unterstützung setzen Sie sich mit Ihrem Systemverwalter in Verbindung.//
 
 ===== Antwort=====
 Beachten Sie, dass Sie nicht einfach nur Windows ausführen, sondern es auf einer virtuellen Maschine unter OS X betreiben. Daher sind einige zusätzliche Netzwerkkonfigurationen nötig, damit alles funktioniert.
 
 Wenn Sie wenig Erfahrung mit VMware und Netzwerkverbindungen haben, finden Sie hier eine gute Einführung: [[http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1022264|Understanding networking types in VMware Fusion]]
 
-Weitere Infos finden Sie auch, indem Sie das Internet nach "Web Server VMware Fusion" durchsuchen, da der Zoo genau wie ein Webserver den TCP-Port 80 verwendet.
+Weitere Infos finden Sie auch, indem Sie das Internet nach "Web Server VMware Fusion" durchsuchen, da der LAN Zoo genau wie ein Webserver den TCP-Port 80 verwendet.
 
 Je nachdem, wie Ihr Mac-Server aufgebaut ist und wie viele andere VMware-Sitzungen unterstützt werden, kann die Konfiguration sehr einfach oder ein wenig aufwändiger sein.
 
-Wenn auf Ihrem Mac-Server beispielsweise keine Webdienste und nur eine einzige VMware-Sitzung ausgeführt werden, müssen Sie lediglich den Netzwerkadapter der Sitzung auf den Modus //Bridged// einstellen. Dies ist die einfachste Methode zur Verwendung des Zoos mit VMware. 
+Wenn auf Ihrem Mac-Server beispielsweise keine Webdienste und nur eine einzige VMware-Sitzung ausgeführt werden, müssen Sie lediglich den Netzwerkadapter der Sitzung auf den Modus //Bridged// einstellen. Dies ist die einfachste Methode zur Verwendung des LAN Zoos mit VMware. 
 
 Bei Einstellung des Netzwerkadapters auf NAT muss VMware für die Port-Weiterleitung konfiguriert werden.
 
