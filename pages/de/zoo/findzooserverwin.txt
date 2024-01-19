@@ -1,20 +1,20 @@
-======Wie findet Rhino für Windows einen Zoo-Server?======
+======Wie findet Rhino für Windows einen LAN-Zoo-Server?======
 
-> **Produkt:** //[[de:zoo:home|Zoo]]//
+> **Produkt:** //[[de:zoo:home|LAN Zoo]]//
 > **Zusammenfassung:** //Überblick über die Verbindung von Rhino für Windows mit einem Zoo-Lizenzmanager-Server.//
 
 =====Überblick=====
 
-Wenn Rhino die Lizenz eines Zoo-Servers benötigt, bestimmt es den Namen des Servers, indem es **in dieser Reihenfolge** die folgenden Orte durchsucht:
-  - Die aktuelle Benutzerstruktur in der Windows-Registrierung. Es wird nach dem Hostnamen oder der IP-Adresse des Zoo-Servers gesucht.
-  - Die Lokaler-Computer-Struktur der Windows-Registrierung. Es wird nach dem Hostnamen oder der IP-Adresse des Zoo-Servers gesucht.
-  - Zuletzt befragt es Ihren Domänennamenserver (DNS) nach dem Standardnamen Ihres Zoo-Servers.
+Wenn Rhino die Lizenz eines LAN-Zoo-Servers benötigt, bestimmt es den Namen des Servers, indem es **in dieser Reihenfolge** die folgenden Orte durchsucht:
+  - Die aktuelle Benutzerstruktur in der Windows-Registrierung. Es wird nach dem Hostnamen oder der IP-Adresse des LAN-Zoo-Servers gesucht.
+  - Die Lokaler-Computer-Struktur der Windows-Registrierung. Es wird nach dem Hostnamen oder der IP-Adresse des LAN-Zoo-Servers gesucht.
+  - Zuletzt befragt es Ihren Domänennamenserver (DNS) nach dem Standardnamen Ihres LAN-Zoo-Servers.
  
 =====Rhino 8, 7 und 6 für Windows=====
 
 ===Suche im Registrierungsschlüssel des Aktuellen Benutzers===
 
-Rhino sucht beim Durchsuchen von ''HKEY_CURRENT_USER'' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres Zoo-Servers an folgendem Ort:
+Rhino sucht beim Durchsuchen von ''HKEY_CURRENT_USER'' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres LAN-Zoo-Servers an folgendem Ort:
 
 <code>
 Hive:  HKEY_CURRENT_USER
@@ -26,7 +26,7 @@ Wert: <Hostname oder IP-Adresse>
 
 ===Suche im Registrierungsschlüssel des Lokalen Computers===
 
-Rhino sucht beim Durchsuchen von ''HKEY_LOCAL_MACHINE'' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres Zoo-Servers an folgendem Ort: **SOFTWARE\Wow6432Node**
+Rhino sucht beim Durchsuchen von ''HKEY_LOCAL_MACHINE'' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres LAN-Zoo-Servers an folgendem Ort: **SOFTWARE\Wow6432Node**
  
 <code>
 Hive:  HKEY_LOCAL_MACHINE
@@ -50,7 +50,7 @@ Computer\HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\License Manager
 
 ===Suche im Registrierungsschlüssel des Aktuellen Benutzers===
 
-Sowohl die 32- als auch die 64-Bit-Version von Windows suchen beim Durchsuchen des Schlüssels ''HKEY_CURRENT_USER'' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres Zoo-Servers an folgendem Ort:
+Sowohl die 32- als auch die 64-Bit-Version von Windows suchen beim Durchsuchen des Schlüssels ''HKEY_CURRENT_USER'' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres LAN-Zoo-Servers an folgendem Ort:
 
 <code>
 Hive:  HKEY_CURRENT_USER
@@ -71,7 +71,7 @@ Typ:  REG_SZ
 Wert: <Hostname oder IP-Adresse>
 </code>
 
-Wenn Sie eine 64-Bit-Version von Windows verwenden, suchen sowohl die 32- als auch die 64-Bit-Version von Rhino beim Durchsuchen des Schlüssels ''HKEY_LOCAL_MACHINE'' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres Zoo-Servers an folgendem Ort:
+Wenn Sie eine 64-Bit-Version von Windows verwenden, suchen sowohl die 32- als auch die 64-Bit-Version von Rhino beim Durchsuchen des Schlüssels ''HKEY_LOCAL_MACHINE'' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres LAN-Zoo-Servers an folgendem Ort:
 
 <code>
 Hive:  HKEY_LOCAL_MACHINE
@@ -82,13 +82,13 @@ Wert: <Hostname oder IP-Adresse>
 </code>
 
 =====Verwendung eines DNS=====
-Wenn Rhino den Namen des Zoo-Servers bei seiner Suche in der Windows-Registrierung nicht feststellen kann, sendet es an Ihren DNS-Server eine Anfrage nach dem Standard-Zoo-Server, der den folgenden Hostnamen hat:
+Wenn Rhino den Namen des LAN-Zoo-Servers bei seiner Suche in der Windows-Registrierung nicht feststellen kann, sendet es an Ihren DNS-Server eine Anfrage nach dem Standard-Zoo-Server, der den folgenden Hostnamen hat:
 
 <code>
 __mcneel.__zoo5
 </code>
 
-Wenn also beispielsweise die Domäne Ihres Unternehmens //meinefirma.com// ist, können Sie einen DNS-Alisas namens //<nowiki>__mcneel.__zoo5.meinefirma.com</nowiki>// hinzufügen, der auf Ihren Zoo-Server verweist.
+Wenn also beispielsweise die Domäne Ihres Unternehmens //meinefirma.com// ist, können Sie einen DNS-Alisas namens //<nowiki>__mcneel.__zoo5.meinefirma.com</nowiki>// hinzufügen, der auf Ihren LAN-Zoo-Server verweist.
 
 {{:zoo:dnsalias.png}}
 
