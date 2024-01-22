@@ -1,0 +1,71 @@
+====== Installer Rhino pour Windows dans la salle informatique d'une école ======
+Le problème lors de l'installation de Rhino sur les ordinateurs des salles de classe, c'est qu'il fonctionne souvent pour l'administrateur. Cependant, lorsqu'un utilisateur aux droits limités se connecte à l'ordinateur, Rhino ne peut plus s'ouvrir et signale qu'il ne trouve pas de licence.
+
+La configuration de Rhino pour l'utilisation d'un serveur Zoo se fait en deux temps. 
+
+1. La **clé de registre** : Spécifiez le nom du serveur DNS (préféré) ou l'IP du Zoo.
+L'IP est réinitialisée si vous utilisez des IP dynamiques. Pour utiliser l'IP, vous devez retirer l'IP de la plage dynamique.)
+
+2. Enregistrez le **fichier de licence** sur le disque local.
+
+Cette opération ne doit être effectuée qu'une seule fois, correctement bien entendu. 
+Si cela est fait correctement, tout utilisateur qui se connecte à l'ordinateur peut ouvrir et exécuter Rhino.
+
+Le principal problème ici est que l'administrateur écrit dans le répertoire de stockage de l'utilisateur Admin. Cela se produit lorsque Rhino est ouvert normalement et que le nom du serveur Zoo est saisi.
+Lorsque d'autres utilisateurs se connectent à l'ordinateur, ils ne sont pas autorisés à lire cette zone.
+
+La solution consiste à écrire la clé de registre dans la zone HKEY_LOCAL_MACHINE -> SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager.
+Cela permettra à n'importe quel utilisateur de l'ordinateur de voir la clé du serveur.
+Pour cela, ouvrez Rhino en tant qu'administrateur et écrivez la clé du serveur Zoo.
+
+===== Comment installer Rhino dans une salle informatique =====
+
+1. [[https://wiki.mcneel.com/fr/zoo/home|Téléchargez et installez le Zoo]] puis [[https://wiki.mcneel.com/fr/zoo/rhinovalidate|ajoutez votre clé de licence LAB Rhino]].
+
+2. Connectez-vous à l'ordinateur de l'élève en tant que **Admin** ou tout autre compte permettant une installation.
+
+3. Téléchargez le [[https://www.rhino3d.com/download/|fichier d'installation de Rhino]] et installez-le.
+
+4. Lorsque l'installation est terminée, une icône du programme Rhino apparaît sur le bureau.
+{{ :zoo:rhino_7_menu.png?200|}}
+
+5. Avec le bouton de droite de la souris, cliquez sur l'icône. Ce menu s'affiche.
+
+6. Choisissez **Exécuter en tant qu'administrateur**
+
+//Pourquoi ?// Cette étape est importante. En tant qu'administrateur, Rhino fonctionnera en mode élevé et sera en mesure d'écrire la clé dans **HKEY_LOCAL_MACHINE** afin que tous les utilisateurs puissent y faire référence. Si vous ouvrez simplement avec le bouton gauche de la souris, Rhino écrit la clé dans **HKEY_CURRENT_USER** et aucun autre utilisateur ne pourra y faire référence.
+
+{{ :zoo:rhino_01.png?200|}}
+
+7. Une boîte de dialogue indique "Rhino a besoin d'une licence pour fonctionner". Cochez //J'ai lu et j'accepte//.
+
+8. Cliquez sur **Options** qui est maintenant apparu dans le coin inférieur gauche. 
+
+9. Sélectionnez **Utiliser Lan Zoo**.
+
+{{:zoo:use_lan_zoo.png?200|}}
+
+10. Sélectionnez **Utiliser le serveur Zoo avec le nom d'hôte ou l'IP suivant.** Puis tapez le nom d'hôte ou l'IP dans le champ de texte. 
+
+{{:zoo:dnsoripzoo.png?200|}}
+
+Cliquez sur le bouton **Continuer**.
+
+11. Rhino devrait maintenant s'ouvrir. 
+
+12. Fermez Rhino et déconnectez-vous du compte **Admin**. Connectez-vous en tant qu'étudiant ou tout utilisateur sans droit spéciaux. 
+
+13. Ouvrez Rhino. 
+
+//Pourquoi s'ouvre-t-il ?//
+Lorsque vous êtes connecté en tant qu'étudiant, Rhino consulte la ruche HKEY_CURRENT_USER et constate qu'il n'y a pas de clé pour le serveur Zoo. Il continue à chercher dans la ruche HKEY_LOCAL_MACHINE et trouve la clé que l'administrateur avait précédemment écrite. Rhino contacte alors le serveur Zoo nommé via le port TCP 80 et reçoit une licence Rhino. Il vérifie également la licence avec le fichier de licence local dans C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
+
+**Référence :** 
+
+[[https://wiki.mcneel.com/fr/zoo/findzooserverwin|Comment Rhino pour Windows trouve-t-il le serveur Zoo ?]]
+
+\\
+
+{{tag>Zoo}}
+
+Dernière actualisation : 15 septembre 2023
