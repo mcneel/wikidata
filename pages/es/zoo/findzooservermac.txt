@@ -1,40 +1,76 @@
-======Cómo encuentra Rhino para Mac un servidor del Zoo======
+====== ¿Cómo encuentra Rhino para Mac un servidor de Zoo LAN? ======
 
-> **Product:** //[[zoo:home|Zoo]]//
-> **Summary:** //An overview of how Rhino for Mac finds a Zoo license manager server//
+> **Producto:** //[[es:zoo:home|Zoo LAN]]//
+> **Resumen:** //Información sobre cómo Rhino para Mac encuentra el servidor de administración de licencias de Zoo//
 
-When Rhino needs a license from a Zoo server, it determines the name of the Zoo server by looking in the following locations in this order:
-  - The Settings file in the Application Support folder. Looks for the host name or IP address of your Zoo server.
-  - Queries your Domain Name System (DNS) server for the default Zoo server name.
+Cuando Rhino necesita una licencia de un servidor de Zoo LAN, determina el nombre del servidor de Zoo LAN buscando en las siguientes ubicaciones en este orden:
+  - El archivo Settings en la carpeta Application Support. Busca el nombre de host o la dirección IP del servidor de Zoo LAN.
+  - Consulta el servidor DNS del nombre del servidor predeterminado de Zoo LAN.
+  - Busca el archivo LIC. Consulte [[https://wiki.mcneel.com/es/zoo/rhinomacdeployment|Distribución gestionada de Rhino para Mac]].
 
-=====More information=====
+=====Más información=====
 
-====Settings file====
+====Archivo Settings====
 
-When running as a network node, Rhino determines the name of the Zoo server by first looking in the **LicenseZooClient.Settings** file in this folder:
+Cuando se ejecuta como nodo de red, Rhino determina el nombre del servidor Zoo LAN buscando primero en el archivo **LicensesZooClient.Settings** de esta carpeta:
 
-<code>
-/Library/Application Support/McNeel/Rhinoceros/License Manager
-</code>
 
-The contents of this file looks similar to:
+===Rhino 7===
 
+  /Library/Application Support/McNeel/Rhinoceros/7.0/License Manager
+
+
+===Rhino 6===
+
+  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager
+  
+===Rhino 5===
+
+  /Library/Application Support/McNeel/Rhinoceros/License Manager
+
+
+
+**NOTA**: un error común suele ser confundir ///Library// (la librería global) y ///Users/[cuenta_de_usuario]/Library// (la librería del usuario).  Asegúrese de mirar en la librería global.
+
+El contenido de este archivo es similar a:
+
+===Rhino 7===
 <code>
 <?xml version="1.0" encoding="utf-8"?>
-<!--Zoo client settings file written by Rhino-->
+<!--Archivo de configuración del cliente Zoo guardado por Rhino-->
 <ZooClient>
-  <Software_McNeel_Rhinoceros_5.0_License_Manager Server="host name or IP address"/>
+Â  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="nombre de host o dirección IP" />
+</ZooClient>
+</code>
+Nota: //Software_McNeel_Rhinoceros_6.0_License_Manager// es correcto. 
+
+===Rhino 6===
+<code>
+<?xml version="1.0" encoding="utf-8"?>
+<!--Archivo de configuración del cliente Zoo guardado por Rhino-->
+<ZooClient>
+Â  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="nombre de host o dirección IP" />
 </ZooClient>
 </code>
 
-====Using DNS====
-If Rhino cannot determine the name of the Zoo server by searching in the Settings file, it then queries your DNS server for the default Zoo server, which is the following host name:
+===Rhino 5====
+
+<code>
+<?xml version="1.0" encoding="utf-8"?>
+<!--Archivo de configuración del cliente Zoo guardado por Rhino-->
+<ZooClient>
+  <Software_McNeel_Rhinoceros_5.0_License_Manager Server="nombre de host o dirección IP"/>
+</ZooClient>
+</code>
+
+====Uso de DNS===
+Si Rhino no puede determinar el nombre del servidor de Zoo al buscar en el archivo Settings, entonces solicita al servidor DNS el servidor predeterminado del Zoo, que es nombre de host siguiente:
 
 <code>
 __mcneel.__zoo5
 </code>
 
-For example, if your company's domain is //mcneel.com//, then you can add a DNS alias of //<nowiki>__mcneel.__zoo5.mcneel.com</nowiki>// which points to your Zoo server.
+Por ejemplo, si el dominio de su empresa es //mcneel.com//, entonces puede agregar un alias DNS de //<nowiki>__mcneel.__zoo5.mcneel.com</nowiki>// que apunte a su servidor de Zoo.
 
 {{:zoo:dnsalias.png}}
 
