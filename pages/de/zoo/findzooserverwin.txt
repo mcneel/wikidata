@@ -1,11 +1,11 @@
 ======Wie findet Rhino für Windows einen LAN-Zoo-Server?======
 
-> **Produkt:** //[[de:zoo:home|LAN Zoo]]//
+> **Produkt :** //[[de:zoo:home|LAN-Zoo]]//
 > **Zusammenfassung:** //Überblick über die Verbindung von Rhino für Windows mit einem Zoo-Lizenzmanager-Server.//
 
 =====Überblick=====
 
-Wenn Rhino die Lizenz eines LAN-Zoo-Servers benötigt, bestimmt es den Namen des Servers, indem es **in dieser Reihenfolge** die folgenden Orte durchsucht:
+Wenn Rhino die Lizenz eines LAN-Zoo-Servers benötigt, bestimmt es den Namen dieses Servers, indem es **in dieser Reihenfolge** die folgenden Orte durchsucht:
   - Die aktuelle Benutzerstruktur in der Windows-Registrierung. Es wird nach dem Hostnamen oder der IP-Adresse des LAN-Zoo-Servers gesucht.
   - Die Lokaler-Computer-Struktur der Windows-Registrierung. Es wird nach dem Hostnamen oder der IP-Adresse des LAN-Zoo-Servers gesucht.
   - Zuletzt befragt es Ihren Domänennamenserver (DNS) nach dem Standardnamen Ihres LAN-Zoo-Servers.
@@ -40,7 +40,7 @@ Wert: <Hostname oder IP-Adresse>
 
 > Eine Lizenzschlüsseldatei wird in %programdata% erzeugt. Dies enthält die Schlüsseldetails, damit Rhino geöffnet werden kann. Beispiel: 55500d41-3a41-4474-99b3-684032a4f4df.lic in the C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
 
-> Klicken Sie mit der rechten Maustaste auf das Rhino-Symbol und wählen Sie "Als Administrator ausführen." Ihr Registrierungseintrag für den Zoo wird erstellt in Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\6.0\License Manager
+> Klicken Sie mit der rechten Maustaste auf das Rhino-Symbol und wählen Sie "Als Administrator ausführen." Ihr Registrierungseintrag für den LAN-Zoo wird erstellt in Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\6.0\License Manager
 
 > Wenn Sie Rhino normal öffnen, befindet sich der Registrierungsschlüssel in
 Computer\HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\License Manager
@@ -61,7 +61,7 @@ Wert: <Hostname oder IP-Adresse>
 </code>
 
 ===Suche im Registrierungsschlüssel des Lokalen Computers===
-Wenn Sie eine 32-Bit-Version von Windows verwenden, sucht die 32-Bit-Version von Rhino beim Durchsuchen des Schlüssels ''HKEY_LOCAL_MACHINE' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres Zoo-Servers an folgendem Ort:
+Wenn Sie eine 32-Bit-Version von Windows verwenden, sucht die 32-Bit-Version von Rhino beim Durchsuchen des Schlüssels ''HKEY_LOCAL_MACHINE' in der Windows-Registrierungsdatenbank nach dem Hostnamen oder der IP-Adresse Ihres LAN-Zoo-Servers an folgendem Ort:
 
 <code>
 Hive:  HKEY_LOCAL_MACHINE
