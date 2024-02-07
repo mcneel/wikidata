@@ -1,0 +1,119 @@
+====== VR in Rhinoceros ======
+Rhino provided a type of "Stereo mode" setting in Rhino 5. 
+In Rhino 7 & 8, you can not access Stereo Views and 3D View by simply "just turning it on". 
+
+It is no longer that easy. You will need to know your hardware and be ready to experiment to find the best option.
+You will need to download the plugins that add this feature to Rhino.
+
+There are a three options on the page below, none are in the Rhino core.
+Since special hardware was required to use, the decision was made not to include in the Rhino core, but allow users to add-on if they need the feature.
+
+Support from expert users and McNeel staff worldwide is available on the [[https://discourse.mcneel.com/c/rhino/147|Rhino Support Forum]].
+
+===== Option 1: Rhino Plugins =====
+
+==== RhinoVR ====
+RhinoVR is a Rhino 7 plug-in which uses the HTC Vive or Oculus Rift head-mounted displays to render Rhino viewports in virtual reality. This plug-in was created as a sample to show developers how a VR plug-in can be developed for Rhino 7.
+
+It requires an OpenVR compatible VR headset like Quest 2, Samsung Odyssey+, Rift S. 
+Headset support for Steam + SteamVR is required and then it will work with RhinoVR.
+
+Download [[https://github.com/mcneel/RhinoVR|here]]
+
+==== EYECAD VR ====
+[[https://www.food4rhino.com/en/app/eyecad-vr-virtual-reality-architecture|Eyecad VR Softwares]] allows you to create fantastic, Interactive VR scenes for you and your customers. Use Oculus Rift, HTC Vive, WMR or explore with your monitor and keyboards/pad. You can also share your projects with your customers through the new Eyecad 360 Tool that allows to create 360 panorama interactive tours via web-link.
+
+
+===== Option 2: Anaglyph Stereo View Plugin =====
+With this option you only need the “Red & Blue” glasses.
+It does not require any special hardware, just the glasses which are available anywhere and are very inexpensive.
+
+Both the Anaglyph and 3D Stereo plugins look and act the same…they both can be installed, but it’s hard to distinguish between the two. If you don’t need both, then you probably should not install both.
+
+QuadBuffering probably needs to be OFF if/when using Anaglyph stereo. This is controlled by the **TestQuadBuffering** command. It is //off// by default. But you may need to toggle it on and they off again to verify the setting.
+
+Anaglyph stereo renders multiple frames itself. Adjust camera position and viewpoint with the Rhino UI.
+
+Anaglyph plugin shows up in the panels as “Stereo View” while Active/Passive plugin shows up as “Stereo 3D View”.
+{{ :rhino:windows:show_panel_2.png?200|}}
+
+1. Download the plugin
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/StereoView.rhp|StereoView.rhp]]
+
+2. Open Rhino.
+
+3. Drop **StereoView.rhp** on to the open Rhino application.
+
+4. In the **Show Panels** popup, check "Stereo View" to open the panel.
+
+{{:rhino:windows:anaglypg.png?200|}}
+
+//See discussion on Rhino Support Forum [[https://discourse.mcneel.com/t/from-stereo-to-mono/53448/29|here]].//
+
+===== Option 3: Quad Buffering & Stereo3DView Plugin =====
+Windows Rhino 7 & 8 now supports "Quad Buffering" which is what is needed for Passive/Active stereo viewing.
+
+The Quad Buffering support in V8 is for hardware like **PluraVision 3D** and passive stereo viewing from people like **Schneider Digital**.
+
+Typically laptops do not support any kind of stereo viewing. But you will need to test.
+===== Configuration =====
+//Note: Close Rhino. You must get the computer all setup for stereo viewing prior to starting Rhino//
+
+==== Windows Setting ====
+
+Quad Buffering does this need to be turned on in Rhino 8 and requires you enable "3D mode" in Windows display settings, as well as the GPU manufacturer's control panel.
+
+{{:rhino:windows:3dmode01.png?200|}}
+
+==== Graphics Card Setting ==== 
+GPU control panel should have some kind of Stereo option.
+
+Here is the Nvidia Control Panel option.
+
+{{:rhino:windows:3dmode02.png?300|}}
+
+Check is the Nvidia control panel and see if there are Stereo options shown above. 
+
+//Note:// You will not be able to enable it from there since this is now a Windows settings. 
+If the Nvidia's control panel it says "Enabled" but it is grayed out. 
+This is because "3D display mode" was already enabled in the Windows->Display settings dialog.
+
+==== QuadBuffering ====
+
+In Rhino, turn on QuadBuffering with the **TestQuadBuffering** command.
+
+
+==== The Plugin ==== 
+{{ :rhino:windows:show_panel_1.png?200|}}
+1. Download the plugin
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/Stereo3DView.rhp|Stereo3DView]]
+
+2. Open Rhino.
+
+3. Drop on to the open Rhino application
+
+4. Show Panels" popup, check "Stereo 3D View".
+
+{{:rhino:windows:active-passive.png?200|}}
+
+
+
+==== Additional Notes ====
+  * You need very specific hardware and glasses. 
+  * You need a monitor with a fast refresh rate. 
+  * You need special glasses.  
+
+If you have an "Active" stereo configuration, then your glasses have to be able to sync with the monitors refresh (to flicker between left and right lenses), which means that the glasses either plugin somewhere in the back of the GPU, or there is some kind of USB receiver that plugs into the computer and the glasses communicate with it. 
+
+If you have a "Passive" configuration (the kind that 3D movies in theaters use), then you need also need special monitors, but the glasses are simply polarized lenses.  
+
+In either case, you also need to make sure that the GPU control panel is configured for the type of mode your hardware supports.  
+
+For "//Active" stereo// you should be able to use **Generic active stereo** setting.  
+For "//Passive" stereo//, you need to use **Clone mode** or **Planar stereo mirror display**.
+Passive modes usually require some kind of dual displays with a plane of glass that sits at an angle between them.
+
+{{ :rhino:windows:pluralvision.png?400|}}
+This is a **passive mode** setup by [[https://www.schneider-digital.com/en/|Schneider Digital]] called the [[https://www.schneider-digital.com/en/products/passive-3d-stereo-monitors/|“3D PluraView”]].
+
+
