@@ -97,13 +97,16 @@ For example, if your company's domain is //mcneel.com//, then you can add a DNS 
 ===== Additional DNS Details =====
 
   * If a LAN Zoo server name is found in the Windows Registry, then Rhino will only try to access a license from this location. 
-
   * If the name of the LAN Zoo, found in the registry, resolves to a DNS A record, and the system that resolved to this record is off, then Rhino will be unable to obtain a license.
-
   * On the other hand, if the name of the LAN Zoo, found in the registry, resolves to a DNS CNAME record, then the DNS server will resolve to whatever location is hosting a running LAN Zoo service.//This is standard DNS operation//.
+  * If a LAN Zoo server name is not found in the Windows Registry, then Rhino will look for a license by trying to resolve the automatic server name of 
 
-  * If a LAN Zoo server name is not found in the Windows Registry, then Rhino will look for a license by trying to resolve the automatic server name of __mcneel.__zoo5, as documented above.
+<code>
+__mcneel.__zoo5
+</code>
 
-  * IT professional will be needed to configure your DNS server.  
+as documented above.
+
+  * An IT professional will be helpful when configuring your DNS server.  
 
 {{tag>Zoo}}
