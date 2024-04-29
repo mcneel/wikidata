@@ -2,12 +2,46 @@
 Relates to [[https://discourse.mcneel.com/t/confusing-v8-print-dialog/181097|Forum Post]]
 
   * Why are there two drop-down options describing **Linetype** units?
+For a linetype is defined as 1 mm wide, do you want that to be 1 mm wide on the paper or 1 mm wide compared to other geometry in the model? If you have a better way to describe this, I’m all ears.
 
   * Can I can apply a multiplier to the line widths I set in the Layer panel?
+Yes “Scale by” scales all widths by a number. Again, if there is a better way to describe this let’s fix it.
 
   * Default line width I assume is to use a width that will override my Layer panel settings?
+The print width column in the layers panel can show widths with real numbers like 0.18 or the word “Default”. When a layer’s print width is set to “Default”, this print dialog setting defines what default actually means.
 
-  * What is **Apply Display Mode Scales**? 
+  * What is **Apply Display Mode Scales**?
+If you look at the Surfaces section in the default wireframe display mode, you should see that edges have a scale of 2 and isocurves have a scale of 1. This lets us show surfaces with thickness for different parts of the surface. This checkbox says “yes, use these scales when printing”
 
 Other reference links:
 https://discourse.mcneel.com/t/rhino-8-linetype-scaling-in-layout-space/176105/5
+
+Here is a good thread with additional details about Model Linetype Scaling
+
+Model linetype scaling was missing from the original Rhino 8 release.
+And how Rhino 8 sr6 adds it back in a more powerful way than Rhino 7.
+
+Linetype pattern and width units can be set new Linetype definitions now.
+There is a “Use Model Units” override.
+image
+
+This is legacy and possibly can be viewed as duplicate.
+But we also avoid taking any features away because established work flows are important to not mess up.
+image
+
+If the layer Print Width is set to **Default", then the Default line width in the Print dialog applies. My Default is set to .18 not Hairline. A quick way to increase the Print width or every thing is with the Print dialog Scale option. Mine is set to 1.1.
+image
+
+Rhino 8 now scales the Print width with the same scale as the Display mode. If you “uncheck” use Display mode scale, then printing will work with no display model scale like Rhino 7. Unchecked is the default.
+
+A couple of my Rhino 8 Print favs:
+  * Easier to select a mixed set (non-linear) of layout
+  * Mac and Windows are the same Print dialog, including Rhino PDF
+  * When checked RhinoPDF will open the PDF in your PDF reader
+  * Option to use Layout print sizes, to accommodate a mixed sheet size set.
+  * Option to print to individual PDFs
+  * 
+
+
+
+
