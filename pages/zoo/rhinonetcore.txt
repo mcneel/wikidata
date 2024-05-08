@@ -1,0 +1,37 @@
+======Rhino 8 uses .NET Core Runtime======
+> **Product:** //[[zoo:home|Zoo]]//
+> **Summary:** //Discusses LAN Zoo and Rhino 8//
+
+=====Question=====
+Our LAN Zoo hosts both Rhino 7 and Rhino 8 licenses. And, our Rhino workstations can successfully obtain licenses from the LAN Zoo. However, Rhino 8 is not working - it is failing the connectivity test in the "Set Zoo Server" form.
+
+=====Answer=====
+On the workstations that can run Rhino 7 but not Rhino 8, try running Rhino 8 with the following command line parameter:
+
+<code>
+C:\Program Files\Rhino 8\System\Rhino.exe /netfx
+</code>
+
+=====More Information=====
+Rhino 8 now uses the open source [[https://github.com/dotnet/runtime|.NET Core Runtime]] for running .NET code on both Windows and Mac. This brings some performance improvements and aligns the .NET runtimes used across platforms. 
+
+On Windows, you can still optionally run using the .NET Framework runtime, with Rhino 8, in the case of compatibility issues.
+
+Using .NET Core allows Rhino and plugins to take advantage of many performance improvements which will make just about all .NET code execute much faster. This can potentially provide huge productivity gains with computational libraries or large data sets.
+
+There may be reasons to continue to use .NET Framework on Windows, in particular if you need to use 3rd party plugins that aren’t compatible with .NET Core yet. The disadvantage to using .NET Framework is that Rhino may run a little slower in certain use cases.
+
+There are two ways to select the runtime that Rhino uses:
+
+1. Use the **SetDotNetRuntime** command, then restart Rhino.
+
+2. Pass either **/netcore** or **/netfx** as an argument when launching Rhino.exe. This overrides the **SetDotNetRuntime** setting.
+
+If your systems do not have .NET Core (7.x) installed, here is a link where you can download the latest.
+
+**[[https://dotnet.microsoft.com/en-us/download/dotnet/7.0|Download .NET Desktop Runtime 7.0]]**
+
+
+\\
+
+{{tag>Zoo}}
