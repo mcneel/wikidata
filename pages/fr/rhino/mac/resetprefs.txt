@@ -1,7 +1,32 @@
-====== Rhino pour Mac - Préférences ======
-Voici quelques procédures pour manipuler toutes vos préférences de Rhino pour Mac.
+====== Rhino pour Mac - Paramètres ======
 
-Rhino pour Mac 5.3.2 (et suivantes) et toutes les versions de Rhino 6 et 7 pour Mac, offrent trois commandes pratiques pour gérer vos préférences :
+Voici quelques procédures pour gérer tous vos paramètres et préférences de Rhino pour Mac.
+
+
+====== Rhino 8 pour Mac ======
+
+Dans Rhino 8 pour Mac, vous pouvez réinitialiser vos paramètres et préférences au moyen de la commande *Réinitialiser*.
+
+{{:rhino:mac:rhino-for-mac-reset.png?400|}}
+
+Il est possible de rétablir certains ou tous les paramètres de Rhino aux valeurs par défaut.
+
+Le bouton //Enregistrer les paramètres pour l'assistance...// vous permet d'enregistrer tous vos paramètres dans un dossier compressé (cela peut être utile pour les envoyer aux développeurs de McNeel afin qu'ils réalisent un diagnostic).
+
+Les paramètres de Rhino 8 pour Mac sont enregistrés dans le dossier suivant :
+
+///Utilisateurs/[votre nom d'utilisateur]/Bibliothèque/Application Support/McNeel/Rhinoceros/[version]/paramètres//
+
+À chaque fois que vous utilisez la commande *Réinitialiser* pour réinitialiser vos paramètres, Rhino enregistre une copie de sauvegarde dans le dossier
+
+///Utilisateurs/[votre nom d'utilisateur]/Bibliothèque/Application Support/McNeel/Rhinoceros/[version-sauvegarde-date]//
+
+afin que vous puissiez toujours les retrouver en cas d'erreur lors de la réinitialisation.
+====== Anciennes versions de Rhino ======
+
+:!: Bien qu'elles soient obsolètes, les informations suivantes sont fournies pour les anciennes versions de Rhino. :!: 
+
+Rhino pour Mac, versions 5 à 7, offrent trois commandes pour gérer vos préférences :
 
   - **ExporterPréférences** : permet d'exporter votre fichier .plis de préférences pour le sauvegarder ou le partager. 
   - **ImporterPréférences** : permet d'importer des préférences depuis un fichier .plist. 
@@ -9,22 +34,28 @@ Rhino pour Mac 5.3.2 (et suivantes) et toutes les versions de Rhino 6 et 7 pour 
 
 Les commandes ci-dessus sont fortement recommandées pour gérer les préférences. Cependant, si vous rencontrez des problèmes avec vos préférences, vous pouvez suivre ces instructions :
 
-==== Enregistrer une copie de vos préférences actuelles ====
+==== Enregistrer une copie de vos préférences actuelles de Rhino pour Mac - ANCIEN ====
   - **Fermez** entièrement Rhino.
   - Dans le **Finder**, maintenez la touche **Option** et sélectionnez **Bibliothèque** dans le menu **Aller**.
   - Ouvrez le dossier **Préférences**.
   - Trouvez le fichier **com.mcneel.rhinoceros.plist**.  Sélectionnez **Dupliquer** dans le menu contextuel du bouton de droite pour créer une copie.  La copie sera nommée **com.mcneel.rhinoceros - copie.plist**.  (**REMARQUE** : Dans Rhino 7 (et suivantes), le fichier de préférences inclut un numéro de version, tel que : com.mcneel.rhinoceros.7.plist)
 
-==== Réinitialiser les préférences de Rhino ====
-Suivez cette procédure pour supprimer toutes les préférences de Rhino et redéfinir les valeurs originales. 
+==== Réinitialiser les préférences de Rhino - ANCIEN ====
+Suivez cette procédure pour supprimer toutes les préférences de Rhino et redéfinir les valeurs originales.
 
   - **Fermez** Rhino.
   - Lancez l'application **Terminal** que vous trouverez dans le dossier **Applications** > **Utilitaires**. \\ Une fenêtre apparaît avec une invite de commande.
-  - Tapez **defaults delete com.mcneel.rhinoceros** et appuyez sur Entrée. (**REMARQUE** : Dans Rhino 7 (et suivantes), le fichier de préférences inclut un numéro de version, tel que : com.mcneel.rhinoceros.7.plist)
-  - Attendez que l'invite du Terminal revienne. Cela peut parfois prendre 15 à 20 secondes. 
+  - Tapez **defaults delete com.mcneel.rhinoceros** et appuyez sur Entrée. 
+**Remarque** : Dans Rhino 7 (et suivantes), le fichier de préférences inclut un numéro de version, tel que : 
+
+**defaults delete com.mcneel.rhinoceros.7.plist**
+
+**defaults delete com.mcneel.rhinoceros.8.plist**
+
+  - Attendez que l'invite du Terminal revienne. Cela peut parfois prendre 15 à 20 secondes.
   - Fermez l'application Terminal.
 
-==== Restaurer les préférences de Rhino enregistrées ====
+==== Restaurer les préférences de Rhino enregistrées - ANCIEN ====
 Suivez cette procédure pour remplacer toutes les Préférences de Rhino actuelles par une copie enregistrée précédemment.
 
   - **Fermez** Rhino.
