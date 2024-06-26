@@ -1,4 +1,4 @@
-======Gestion du déploiement de Rhino pour Mac======
+======Distribution gérée de Rhino pour Mac======
 > **Produit :** //[[fr:zoo:home|Zoo]]//
 > **Résumé :** //Comment déployer Rhino pour Mac en utilisant le Zoo//
 
@@ -7,61 +7,54 @@ Nous venons d'acheter une licence Lab éducation de Rhino pour Mac. Quelles stra
 
 Nous utilisons [[http://www.jamfsoftware.com/products/casper-suite/|Casper]] ainsi que d'autres systèmes de gestion pour compiler des paquetages et distribuer des applications sur des systèmes clients. Cette méthode implique normalement l'intégration des informations sur la configuration de la licence dans l'application de distribution.
 
+En plus du fichier **LIC**, Rhino recherche un fichier **LicensesZooClient.Settings**. Il contient le nom de l'hôte ou l'adresse IP de votre serveur Zoo. Consultez [[https://wiki.mcneel.com/zoo/findzooservermac|Comment Rhino pour Mac trouve-t-il le serveur Zoo ?]] pour en savoir plus à ce sujet.
+
+
 =====Réponse=====
-Voici quelques informations utiles :
 
-1.) Lorsque vous lancez Rhino pour Mac la première fois, les dossiers suivants sont créés :
+====Pour déployer Rhino 8 :====
 
-====Rhino 7====
+    - Installez Rhino pour Mac sur un ordinateur et saisissez une licence pour que cet ordinateur se connecte à votre serveur Zoo LAN.
+    -  Rhino crée le fichier **/Users/Shared/McNeel/Rhinoceros/8.0/License Manager/Licenses/59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic**
+    - Installez une copie du fichier de licence au même emplacement sur les ordinateurs cibles.
+    - Modifiez les autorisations d'accès aux fichiers et aux dossiers afin qu'elles concordent (chmod 644).
+    - Installez Rhino sur les ordinateurs cibles.
 
-  /Users/Shared/McNeel/Rhinoceros/7.0/License Manager
-  /Users/Shared/McNeel/Rhinoceros/7.0/License Manager/Licenses
-  
-====Rhino 6====
+====Pour déployer Rhino 7 :====
 
-  /Bibliothèque/Application Support/McNeel/Rhinoceros/6.0/License Manager
-  /Bibliothèque/Application Support/McNeel/Rhinoceros/6.0/License Manager/Licenses
-  
-====Rhino 5====
+    - Installez Rhino pour Mac sur un ordinateur et saisissez une licence pour que cet ordinateur se connecte à votre serveur Zoo LAN.
+    -  Rhino crée le fichier **/Users/Shared/McNeel/Rhinoceros/7.0/License Manager/Licenses/59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic**
+    - Installez une copie du fichier de licence au même emplacement sur les ordinateurs cibles.
+    - Modifiez les autorisations d'accès aux fichiers et aux dossiers afin qu'elles concordent (chmod 644).
+    - Installez Rhino sur les ordinateurs cibles.
 
-  /Bibliothèque/Application Support/McNeel/Rhinoceros/License Manager
-  /Bibliothèque/Application Support/McNeel/Rhinoceros/License Manager/Licenses
+====Pour déployer Rhino 6 :====
 
-2.) Le dossier **License Manager/Licenses** contient le fichier de licence de Rhino :
-
-**Remarque** : Attention à ne pas confondre ///Bibliothèque// (la bibliothèque générale) et ///Utilisateurs/Nom de l'utilisateur]/Bibliothèque// (la bibliothèque de l'utilisateur).  Vérifiez que vous êtes bien dans la bibliothèque générale. 
-
-De plus, Rhino 6 et Rhino 7 créent les fichiers de licence du Zoo dans des sous-dossiers spécifiques  **6** et **7** sous **License Manager**, alors que Rhino 5 crée ses fichiers directement dans le dossier **License Manager** et le sous-dossier **License**. En d'autres termes, Rhino 5 ne crée pas de sous-dossier **5**.
-====Rhino 7====
-
-  59ff75c9-9c71-4ef8-a290-6b590f3fc63a.lic
-  
-====Rhino 6====
-
-  55500d41-3a41-4474-99b3-684032a4f4df.lic
-  
-====Rhino 5====
-
-  781b000c-8d0b-4ed3-8ead-213bdb848f39.lic
+    - Installez Rhino pour Mac sur un ordinateur et saisissez une licence pour que cet ordinateur se connecte à votre serveur Zoo LAN.
+    -  Rhino crée le fichier **/Library/Application Support/McNeel/Rhinoceros/6.0/License Manager/Licenses/55500d41-3a41-4474-99b3-684032a4f4df.lic**
+    - Installez une copie du fichier de licence au même emplacement sur les ordinateurs cibles. 
+    - Modifiez les autorisations d'accès aux fichiers et aux dossiers afin qu'elles concordent (chmod 644).
+    - Installez Rhino sur les ordinateurs cibles.
 
 
-Pour les licences autonomes, ce fichier est crypté, non lisible et unique par système.
+====Pour déployer Rhino 5 :====
 
-Pour les licences réseau ou Zoo, ce fichier est en texte clair, lisible et peut être déplacé d'un système vers un autre.
+    - Installez Rhino pour Mac sur un ordinateur et saisissez une licence pour que cet ordinateur se connecte à votre serveur Zoo LAN.
+    - Rhino crée le fichier **/Library/Application Support/McNeel/Rhinoceros/License Manager/Licenses/781b000c-8d0b-4ed3-8ead-213bdb848f39.lic**
+    - Rhino crée le fichier **/Library/Application Support/McNeel/Rhinoceros/License Manager/LicensesZooClient.settings**
+    - Installez les deux fichiers au même emplacement sur les ordinateurs cibles. 
+    - Modifiez les autorisations d'accès aux fichiers et aux dossiers afin qu'elles concordent (chmod 644).
+    - Installez Rhino sur les ordinateurs cibles.
 
-3.) Pour les systèmes dotés d'une licence réseau, vous trouverez également un fichier 
 
-  LicensesZooClient.settings 
 
-dans le dossier **License Manager**. Ce fichier est également en texte clair, lisible et peut être déplacé d'un système vers un autre. Il contient le **nom du serveur Zoo** tel qu'il a été indiqué dans Rhino.
+**REMARQUES :** 
 
-Si votre système de déploiement réalise les étapes 1, 2 et 3 en plus de distribuer l'application Rhino dans le dossier **Application** de chaque système, vous devriez pouvoir déployer Rhino pour Mac sur tous vos systèmes.
+    - Attention à ne pas confondre ///Bibliothèque// (la bibliothèque générale) et ///Utilisateurs/[compte de l'utilisateur]/Bibliothèque// (la bibliothèque de l'utilisateur).  Vérifiez que vous êtes bien dans la bibliothèque générale.
+    - De plus, Rhino 6 et Rhino 7 créent les fichiers de licence du Zoo dans des sous-dossiers spécifiques  **6** et **7** sous **License Manager**, alors que Rhino 5 crée ses fichiers directement dans le dossier **License Manager** et le sous-dossier **License**. En d'autres termes, Rhino 5 ne crée pas de sous-dossier **5**.
+    - Pour les licences autonomes, ce fichier est crypté, non lisible et unique par système. Il ne peut pas être copié sur différents ordinateurs pour le déploiement.
+    - Pour les licences Zoo LAN ou Cloud Zoo, ce fichier est en texte clair et peut être déplacé d'un système vers un autre.
 
 =====Plus d'informations=====
 
 [[http://wiki.mcneel.com/zoo/findzooservermac|Comment Rhino pour Mac trouve-t-il le serveur Zoo ?]]
-
-
-\\
-
-{{tag>Zoo}}
