@@ -1,0 +1,23 @@
+======Lancer Rhino pour Mac avec l'enregistrement amélioré des événements====== 
+
+Voir aussi : [[rhino:mac:consolemessages|Collecter les messages de la console dans Rhino pour Mac]]
+
+Il est parfois nécessaire de démarrer Rhino avec l'enregistrement des événements afin de diagnostiquer des problèmes au niveau du démarrage ou des licences.  Voici comment faire : 
+
+1) Lancez l'application **Console** à partir de Launchpad ou de Spotlight.
+{{:rhino:mac:console.png?700|}}
+
+2) Dans Console, vérifiez que votre ordinateur est sélectionné, puis choisissez le filtre *Erreurs et pannes* et **Démarrer la lecture en continu**
+{{:rhino:mac:streaming-log.png?700|}}
+
+3) Ouvrez une session **Terminal** à partir de Launchpad ou de Spotlight.
+{{:rhino:mac:terminal.png?700|}}
+
+4) Démarrez **Rhino** avec la commande suivante :
+   /Applications/Rhino\ 7.app/Contents/MacOS/Rhinoceros -RhinoLog
+
+5) Rhino enregistrera alors de nombreux messages dans Console. Exécutez Rhino jusqu'à ce que des pannes ou des erreurs surviennent. Une fois le programme exécuté, dans Console, vous pouvez cliquer sur **Pause** pour interrompre l'enregistrement et filtrer les résultats avec le mot clé **Rhinoceros**.
+{{:rhino:mac:rhino-log.png?700|}}
+
+6) Les erreurs sont signalées en jaune et les pannes en rouge. Si vous êtes en ligne avec les spécialistes de McNeel, ils vous demanderont certainement de rechercher les pannes en rouge. Vous pouvez copier et coller tout le contenu d'une certaine panne en la sélectionnant dans la liste et en copiant le **Message** qui s'affiche dans le bas de la fenêtre de la Console.
+{{:rhino:mac:rhino-fault.png?700|}}
