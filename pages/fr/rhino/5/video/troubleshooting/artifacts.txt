@@ -1,0 +1,50 @@
+====== Résolution des problèmes d'affichage dans Rhino ======
+
+==== Artefacts / affichage imprécis ====
+
+
+
+Commencez par essayer de **[[rhino:5:video:troubleshooting:intel|mettre à jour vos pilotes vidéo]]**.
+
+\\
+
+====Problème : scintillement====
+{{:rhino:5:video:troubleshooting:farfromorigin.png?200| Affichage avec artefacts}}  {{:rhino:5:video:troubleshooting:farfromorigin2.png?200| Affichage précis}}
+
+Si des objets scintillent et sont instables lorsque vous déplacez la vue, ou encore que vous avez des maillages de rendu imprécis, le problème vient peut-être du fait que les objets sont très loin de l'origine du repère général.
+
+**Déterminer si les objets sont loin de l'origine du modèle**
+  - Lancez la commande **AnalyserPt**.
+  - Utilisez les **Accroches** pour sélectionner un point sur un objet. 
+Si la ligne de commande indique que les coordonnées dans le repère général sont très grandes (par exemple, plus d'un million), rapprocher les objets de l'origine du repère général peut permettre de résoudre le problème. 
+
+**Rapprocher les objets de l'origine**
+
+  - **Sélectionnez** tous les objets à déplacer.
+  - Lancez la commande **Déplacer**.
+  - À l'invite **Point de départ**, utilisez les accrochages pour sélectionner un point sur l'un des objets. 
+  - À l'invite **Point où déplacer l'objet**, tapez **W0,0,0** (pour l'origine du repère général). 
+  - Vous devrez peut-être utiliser la commande **ActualiserOmbrage** sur les objets pour forcer la génération de nouveaux maillages de rendu plus précis.
+
+Si vous ne pouvez pas déplacer les objets, nous vous invitons à consulter l'article suivant proposant une autre approche : //[[rhino:farfromorigin|Objets trop éloignés du repère général]]//.
+
+\\
+
+==== Problème : fils de fer incorrects dans les vues ombrées====
+
+{{:rhino:5:video:troubleshooting:testzbiasfactor1.png?200|Les fils de fer apparaissent à travers les surfaces ombrées}}   {{:rhino:5:video:troubleshooting:testzbiasfactor12png.png?200|Les fils de fer s'affichent correctement}}
+  
+
+L'affichage des fils de fer des surfaces (courbes isoparamétriques et bords) est biaisé vers la caméra, de sorte qu'ils apparaissent devant leurs surfaces respectives dans les vues ombrées. Si les fils de fer sont visibles à travers les surfaces ombrées, essayez d'ajuster le biais en utilisant la commande **testZBiasFactor**. En général une ou deux applications de l'option **Moins** dans la ligne de commande améliorera l'affichage.
+
+\\
+
+==== Problème : Dans Rhino 5, les barres d'outils et le texte sont trop petits sur les écrans haute résolution====
+
+[[rhino:5:video:highres:toolbars_and_text_too_small_in_64-bit_rhino_5_on_high_resolution_screen|Consultez cette page pour obtenir de l'aide sur les éléments de l'IU dont l'affichage est trop petit.]]
+
+>**Remarque**: Cette page wiki fait partie d'un assistant de résolution de problèmes. [[http://wiki.mcneel.com/fr/rhino/5/video/troubleshooting |Commencez du début]].
+
+==== Il y a de petites icônes grises en bas à droite de la fenêtre et les performances sont ralenties====
+
+Si de petites icônes apparaissent en bas à droite de chaque fenêtre : [[ https://wiki.mcneel.com/fr/rhino/5/video/troubleshooting/nvidia/slowperformance | Désactivez le Shadowplay de nVidia ]]
