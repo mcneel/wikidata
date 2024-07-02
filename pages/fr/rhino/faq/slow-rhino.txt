@@ -1,0 +1,27 @@
+===== Problème : Rhinoceros ne démarre pas ou est lent sur un poste avec plusieurs écrans branchés à un concentrateur USB =====
+Revenir à la page des [[https://wiki.mcneel.com/rhino/faq#display_problems|FAQ]]
+
+==== Informations ====
+Il est tentant de vouloir attribuer un problème de lenteur d'affichage au connecteur USB. 
+Mais le concentrateur USB ne fait en réalité que révéler le problème à l'utilisateur.
+
+==== Analyse ====
+Souvent ce problème est lié au fichier "NahimicOSD.dll", qui est un service d'affichage à l'écran (OSD) installé par un pilote audio.
+
+Il est souvent source de problèmes et si vous faites une recherche sur Google, vous constaterez que toutes sortes d'utilisateurs utilisant toutes sortes de logiciels rencontrent des difficultés. 
+
+Dans ce cas particulier, le problème tient au fait que la DLL ne prend pas bien (voire pas du tout) en charge l'affichage sur plusieurs écrans. Nous pensons qu'elle essaie de détailler tous les dispositifs d'affichage mais le fait mal et de façon incorrecte.
+Cela génère une boucle infinie dans son code. Installer un système avec un concentrateur USB et plusieurs écrans ne fait de révéler le problème.
+
+==== La solution sur Discourse ====
+[[https://discourse.mcneel.com/t/rhino-freezes-on-secondary-monitor-problem-with-the-nihimic-audio-driver-on-the-motherboard/82258/37?u=jeff|Détails de la solution.]]
+
+Ce lien vous renvoie vers la partie du fil de discussion où se trouve la solution.
+L'utilisateur doit désactiver le service Nahimic. Il n'est pas nécessaire et n'apporte aucune valeur ajoutée. Attendu qu'il s'agit d'une DLL et d'un service audio, la DLL Nahimic sera injectée dans l'espace de tout processus utilisant le dispositif audio (ou certaines parties). Et le processus ne peut rien y faire. Une fois dans l'espace du processus, le service verrouille ce processus.
+
+==== En bref ====
+Ces informations s'appliquent lorsque vous entendez "Rhino se bloque" et que plusieurs écrans sont raccordés à l'ordinateur. Il est fort probable qu'il s'agisse de la DLL Nahimic.
+
+//Jeff Lasor,
+Développeur graphique principal,
+Robert McNeel & Associates//
