@@ -1,23 +1,59 @@
-======Comment Rhino pour Mac trouve-t-il le serveur Zoo ?======
+======Comment Rhino pour Mac trouve-t-il le serveur Zoo LAN ?======
 
-> **Produit :** //[[fr:zoo:home|Zoo]]//
+> **Produit  :** //[[fr:zoo:home|Zoo LAN]]//
 > **Résumé :** //Une brève explication pour savoir comment Rhino pour Mac trouve un serveur de gestionnaire de licences Zoo//
 
-Lorsque Rhino doit extraire une licence sur un serveur de Zoo, il détermine le nom du serveur de Zoo en regardant dans les destinations suivantes, dans cet ordre :
-  - Le fichier Settings dans le dossier Application Support. Il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo.
-  - Envoie une requête à votre serveur DNS (système de nom de domaine) pour demander le nom du serveur de Zoo par défaut.
+Lorsque Rhino doit extraire une licence sur un serveur de Zoo LAN, il détermine le nom du serveur de Zoo LAN en regardant dans les destinations suivantes, dans cet ordre :
+  - Le fichier Settings dans le dossier Application Support. il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo LAN.
+  - il envoie une requête à votre serveur DNS (système de nom de domaine) pour demander le nom du serveur de Zoo LAN par défaut.
+- Il recherche le fichier LIC. Consultez [[https://wiki.mcneel.com/zoo/rhinomacdeployment|Gestion du déploiement de Rhino pour Mac]].
 
 =====Plus d'informations=====
 
 ====Fichier de paramètres====
 
-Lorsqu'il est exécuté en tant que noeud de réseau, Rhino détermine le nom du serveur de Zoo en regardant dans le fichier  **LicenseZooClient.Settings** dans ce dossier :
+Lorsqu'il est exécuté en tant que nœud de réseau, Rhino détermine le nom du serveur de Zoo LAN en regardant d'abord dans le fichier  **LicensesZooClient.Settings** dans ce dossier :
 
+
+===Rhino 7===
+
+  /Bibliothèque/Application Support/McNeel/Rhinoceros/7.0/License Manager
+
+
+===Rhino 6===
+
+  /Bibliothèque/Application Support/McNeel/Rhinoceros/6.0/License Manager
+  
+===Rhino 5===
+
+  /Library/Application Support/McNeel/Rhinoceros/License Manager
+
+
+
+**Remarque** : Attention à ne pas confondre ///Bibliothèque// (la bibliothèque générale) et ///Utilisateurs/[Nom de l'utilisateur]/Bibliothèque// (la bibliothèque de l'utilisateur).  Vérifiez que vous êtes bien dans la bibliothèque générale.
+
+Le contenu de ce fichier est similaire à :
+
+===Rhino 7===
 <code>
-/Library/Application Support/McNeel/Rhinoceros/License Manager
+<?xml version="1.0" encoding="utf-8"?>
+<!--Zoo client settings file written by Rhino-->
+<ZooClient>
+  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="host name or IP address" />
+</ZooClient>
+</code>
+Remarque : //Software_McNeel_Rhinoceros_6.0_License_Manager// est correct. 
+
+===Rhino 6===
+<code>
+<?xml version="1.0" encoding="utf-8"?>
+<!--Zoo client settings file written by Rhino-->
+<ZooClient>
+  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="host name or IP address" />
+</ZooClient>
 </code>
 
-Le contenu de ce fichier est similaire à : 
+===Rhino 5====
 
 <code>
 <?xml version="1.0" encoding="utf-8"?>
@@ -27,7 +63,7 @@ Le contenu de ce fichier est similaire à :
 </ZooClient>
 </code>
 
-====Utiliser le DNS====
+====Utiliser le DNS===
 Si Rhino ne peut pas déterminer le nom du serveur Zoo en cherchant dans le fichier Settings, il enverra une requête à votre serveur DNS concernant le serveur du Zoo par défaut, qui possède le nom d'hôte suivant :
 
 <code>
