@@ -1,36 +1,101 @@
 ======Zoo - Utilitaire de diagnostic pour Mac======
 > **Produit :** //[[fr:zoo:home|Zoo]]//
-> **Résumé :** //Présente l'utilitaire de réseau pour Mac//
+> **Résumé :** //cette page présente Terminal pour diagnostiquer les problèmes de réseau du Zoo LAN sur Mac//
 
-[[fr:zoo:diagnosticsmac|{{:zoo:networkutility.png?128|Utilitaire réseau}}]]
-
-L'**[[https://support.apple.com/en-us/HT202790|Utilitaire réseau]]** fonctionne sur un poste avec **Rhino pour Mac**. L'utilitaire offre plusieurs outils de diagnostic réseau pour résoudre les problèmes de connectivité entre les stations de Rhino pour Mac et les serveurs Zoo. 
-
-Utilisez **[[https://support.apple.com/en-us/HT204014|Spotlight]]** sur votre Mac pour trouver et ouvrir l'utilitaire réseau. 
-
-  - Cliquez sur l'icône **Rechercher** en haut à droite de la barre de menu ou appuyez sur la touche **Command** + la **Barre d'espace**.
-  - Tapez **Utilitaire réseau** pour lancer la recherche.
-  - Double cliquez **Utilitaire réseau** pour l'exécuter.
-
->**Remarque :** Avec la sortie de macOS Big Sur, Apple a choisi de supprimer cette application. Toutefois, vous pouvez vous pouvez toujours accéder à une grande partie des fonctions en utilisant le **[[https://www.makeuseof.com/how-to-use-terminal-as-network-utility-replacement/|Terminal]]**.
+**[[https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac|Terminal]]** fonctionne sur un poste équipé de **Rhino pour Mac**. Il offre plusieurs outils de diagnostic réseau utiles, accessibles à travers la ligne de commande, pour résoudre les problèmes de connectivité entre les postes équipés de Rhino pour Mac et les serveurs Zoo.
 
   
 =====Diagnostic=====
 L'utilitaire de diagnostic réseau permet de réaliser les tests suivants sur le réseau :
 
-1. **Ping:** L'utilitaire de diagnostic de Ping est l'outil TCP/IP principal utilisé pour résoudre les problèmes de connectivité, de portée et de résolution de nom. Ping vérifie la connectivité au niveau IP avec un autre ordinateur TCP/IP en envoyant des messages de demande d'écho de protocole de message de contrôle sur Internet (ICMP). Les messages de réponse d'écho correspondants sont affichés, ainsi que les temps de d'envoi et retour.
-{{:zoo:nu_ping.png?640|Ping}}
+1. **Ping :** l'utilitaire de diagnostic de ping est l'outil TCP/IP principal utilisé pour résoudre les problèmes de connectivité, de portée et de résolution de nom. Ping vérifie la connectivité au niveau IP avec un autre ordinateur TCP/IP en envoyant des messages de demande d'écho de protocole de message de contrôle sur Internet (ICMP). Les messages de réponse d'écho correspondants sont affichés, ainsi que les temps de d'envoi et retour.
 
-2. **Lookup:** L'outil de diagnostic DNS Lookup affiche des informations que vous pouvez utiliser pour diagnostiquer l'infrastructure DNS.
-{{:zoo:nu_lookup.png?640|Lookup}}
+''ping zoo.mcneel.com''
 
-3.  **Trace Route :** L'utilitaire de diagnostic Trace Route détermine le chemin vers une destination en envoyant des paquets échos ICMP (Internet Control Message Protocol) vers la destination. Dans ces paquets, TRACERT utilise diverses valeurs de durée de vie (TTL - Time-To-Live) IP. Étant donné que chaque routeur se trouvant sur le chemin doit décrémenter d'au moins 1 unité la durée de vie sur un paquet avant de le transférer, la durée de vie représente effectivement le nombre de sauts. Lorsque la durée de vie sur un paquet atteint 0, le routeur envoie à l'ordinateur source un message ICMP indiquant l'expiration du délai.
-{{:zoo:nu_traceroute.png?640|Traceroute}}
+Exemple de réussite d'un test ping :
 
-4. **Port Scan :** Le test Port Scan recherche les ports TCP ouverts. Dans le cas du Zoo, vous devez rechercher le Port TCP 80. 
-{{:zoo:nu_portscan.png?640|Port Scan}}
+<code>
+> ping zoo.mcneel.com
+PING zoo.mcneel.com (192.168.0.100): 56 data bytes
+64 bytes from 10.22.0.15: icmp_seq=0 ttl=127 time=9.981 ms
+64 bytes from 10.22.0.15: icmp_seq=1 ttl=127 time=8.630 ms
+64 bytes from 10.22.0.15: icmp_seq=2 ttl=127 time=9.774 ms
+</code>
 
-//Si ce test échoue alors que tous les autres tests ont réussi, vérifiez que le service du serveur Zoo est exécuté. Pour ce faire, utilisez ZooAdmin.exe ou l'applicatif de Services dans le Panneau de configuration. Vérifiez également que le __[[fr:zoo:window7firewall|Port TCP 80 est ouvert sur tous les pare-feu]]__ exécutés sur le système où est installé le Zoo.//
+Exemple d'échec d'un test ping :
+
+<code>
+> ping zoo.mcneel.com
+PING zoo.mcneel.com (192.168.0.100): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+Request timeout for icmp_seq 2
+Request timeout for icmp_seq 3
+</code>
+
+Appuyez sur **Ctrl+C** pour annuler la commande **ping**.
+
+2. **nslookup :** l'outil de diagnostic DNS Lookup affiche des informations que vous pouvez utiliser pour diagnostiquer l'infrastructure DNS.
+
+''nslookup zoo.mcneel.com''
+
+Exemple de réussite d'un test "nslookup" :
+
+<code>
+> nslookup zoo.mcneel.com
+Server:		192.168.0.1
+Address:	192.168.0.1#53
+
+Non-authoritative answer:
+Name:	zoo.mcneel.com
+Address: 192.168.0.100
+</code> 
+
+Exemple d'échec d'un test "nslookup" :
+<code>
+> nslookup zoo.mcneel.com
+** server can't find zoo.mcneel.com: NXDOMAIN
+</code> 
+
+
+3.  **Traceroute :** l'utilitaire de diagnostic Traceroute détermine le chemin vers une destination en envoyant des paquets échos ICMP (Internet Control Message Protocol) avec diverses valeurs de durée de vie (TTL - Time-To-Live) IP vers cette destination. Étant donné que chaque routeur se trouvant sur le chemin doit décrémenter d'au moins 1 unité la durée de vie sur un paquet avant de le transférer, la durée de vie représente en fait le nombre de sauts. Lorsque la durée de vie sur un paquet atteint 0, le routeur envoie à l'ordinateur source un message ICMP indiquant l'expiration du délai.
+
+''traceroute zoo.mcneel.com''
+
+Exemple de réussite d'un test "traceroute" :
+
+<code>
+> traceroute zoo.mcneel.com
+traceroute to zoo.mcneel.com (192.168.0.100), 64 hops max, 52 byte packets
+ 1  192.168.0.100 (192.168.0.100)  9.391 ms  6.558 ms  8.538 ms
+
+</code> 
+
+Exemple d'échec d'un test "traceroute" :
+<code>
+> traceroute zoo.mcneel.com
+traceroute to zoo.mcneel.com (192.168.0.100), 64 hops max, 52 byte packets
+1.  * * *
+</code> 
+
+
+4. **Port Scan (nc) :** le test Port Scan recherche les ports TCP ouverts. Dans le cas du Zoo, vous devez rechercher le Port TCP 80.
+
+''nc -z -v zoo.mcneel.com 80''
+
+Exemple de réussite d'un test "netcat" :
+
+<code>
+> nc -z -v zoo.mcneel.com 80
+Connection to zoo.mcneel.com port 80 [tcp/http] succeeded!
+</code>
+
+Exemple d'échec d'un test "netcat" :
+
+netcat ne renvoie aucun résultat. Pour annuler, appuyez sur **Ctrl+C**
+
+
+//Si ce test échoue alors que tous les autres tests ont réussi, vérifiez que le service du serveur Zoo fonctionne. Pour ce faire, utilisez ZooAdmin.exe ou l'applicatif de Services dans le Panneau de configuration. Vérifiez également que le __[[fr:zoo:window7firewall|Port TCP 80 est ouvert sur tous les pare-feu]],__ pour le trafic entrant et sortant, exécutés sur le système où est installé le Zoo.//
 
 =====Voir aussi =====
 [[fr:zoo:diagnostics|Zoo - Utilitaire de diagnostic pour Windows]]
