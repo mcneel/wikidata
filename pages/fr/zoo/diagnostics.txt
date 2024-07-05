@@ -9,7 +9,7 @@ L'utilitaire de diagnostic du Zoo fonctionne sur un ordinateur équipé de **Rhi
   - Vous permet de voir et changer le nom du serveur Zoo utilisé par les ordinateurs avec Rhino. Le nom du serveur Zoo est enregistré dans le registre de Windows.
 
 =====Télécharger=====
-{{:zoo:zoodiagnostics.zip|Télécharger l'application Zoo Diagnostics.}}
+Cliquez sur [[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/ZooDiagnostics8.zip|Télécharger Diagnostic du Zoo]]
 
 [[fr:zoo:diagnostics|{{:zoo:zoo_diagnostics.png|Diagnostic du Zoo}}]]
 
@@ -23,21 +23,31 @@ L'utilitaire de diagnostic du Zoo permet de réaliser les tests suivants sur le 
 
 2. **[[http://support.microsoft.com/kb/200525/fr|Nslookup]]** - L'utilitaire de diagnostic de recherche DNS (NSLOOKUP) affiche des informations que vous pouvez utiliser pour diagnostiquer votre infrastructure de Système de nom de domaine (DNS) .
 
-3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]** - L'utilitaire de diagnostic TRACERT détermine le chemin vers une destination en envoyant des paquets échos ICMP (Internet Control Message Protocol) vers la destination. Dans ces paquets, TRACERT utilise diverses valeurs de durée de vie (TTL - Time-To-Live) IP. Étant donné que chaque routeur se trouvant sur le chemin doit décrémenter d'au moins 1 unité la durée de vie sur un paquet avant de le transférer, la durée de vie représente effectivement le nombre de sauts. Lorsque la durée de vie sur un paquet atteint 0, le routeur envoie à l'ordinateur source un message ICMP indiquant l'expiration du délai.
+3.  **[[http://support.microsoft.com/kb/314868|Trace Route]]:** L'utilitaire de diagnostic TRACERT détermine le chemin vers une destination en envoyant des paquets échos ICMP (Internet Control Message Protocol) vers la destination. Dans ces paquets, TRACERT utilise diverses valeurs de durée de vie (TTL - Time-To-Live) IP. Étant donné que chaque routeur se trouvant sur le chemin doit décrémenter d'au moins 1 unité la durée de vie sur un paquet avant de le transférer, la durée de vie représente effectivement le nombre de sauts. Lorsque la durée de vie sur un paquet atteint 0, le routeur envoie à l'ordinateur source un message ICMP indiquant l'expiration du délai.
 
-4. **Zoo Port Check** - L'utilitaire de diagnostic Zoo Port Check (ZOOPORT) vérifie qu'un service de Zoo écoute le Port TCP 80 sur un serveur ou un ordinateur.
+4. **Zoo Port Check:** L'utilitaire de diagnostic Zoo Port Check (ZOOPORT) vérifie qu'un service de Zoo écoute le Port TCP 80 sur un serveur ou un ordinateur.
 
-//Si ce test échoue alors que tous les autres tests ont réussi, vérifiez que le service du serveur Zoo est exécuté. Pour ce faire, utilisez ZooAdmin.exe ou l'applicatif de Services dans le Panneau de configuration. Vérifiez également que le __[[fr:zoo:window7firewall|Port TCP 80 est ouvert sur tous les pare-feu]]__ exécutés sur le système où est installé le Zoo.
-
+//Si ce test échoue alors que tous les autres tests ont réussi, vérifiez que le service du serveur Zoo est exécuté. Pour ce faire, utilisez ZooAdmin.Wpf.exe ou l'applicatif de services dans le Panneau de configuration. Vérifiez également que le __[[fr:zoo:window7firewall|Port TCP 80 est ouvert sur tous les pare-feu]]__ exécutés sur le système où est installé le Zoo.
 //
+
+// Regardez également les résultats de Trace Route. Si vous voyez plusieurs sous-réseaux dans la liste, vous devrez certainement modifier les règles des pare-feu sur votre serveur Zoo LAN pour autoriser les connexions à partir de plusieurs sous-réseaux. Consultez la page [[https://wiki.mcneel.com/zoo/homenetsh|Ouvrir le Port TCP 80 sur le pare-feu de Windows à l'aide de Netsh]] pour plus de détails.//
 
 5. **Zoo Connectivity** - L'utilitaire de diagnostic Zoo Connectivity (ZOOECHO) vérifie que le service Zoo 5 est exécuté sur un serveur ou un poste de travail. 
 
-//Si ce test échoue alors que tous les autres tests ont résussi, vérifiez que le service du serveur Zoo est exécuté. Pour ce faire, utilisez ZooAdmin.exe ou l'applicatif de Services dans le Panneau de configuration. Vérifiez également que le __[[fr:zoo:window7firewall|Port TCP 80 est ouvert sur tous les pare-feu]]__ exécutés sur le système où est installé le Zoo.//
+//Si ce test échoue alors que tous les autres tests ont résussi, vérifiez que le service du serveur Zoo est exécuté. Pour ce faire, utilisez ZooAdmin.Wpf.exe ou l'applicatif de services dans le Panneau de configuration. Vérifiez également que le __[[fr:zoo:window7firewall|Port TCP 80 est ouvert sur tous les pare-feu]]__ exécutés sur le système où est installé le Zoo.//
 
-//Ce test peut échouer si le client et le serveur se trouvent sur deux sous-réseaux différents. Par défaut, le programme d'installation du Zoo ouvre, sur le sous-réseau local uniquement, le port 80 pour le service Zoo sur le pare-feu de Windows Vous devrez changer la règle du pare-feu pour autoriser tous les autres sous-réseaux ayant besoin d'un accès.//
+//Ce test peut échouer si le client et le serveur se trouvent sur deux sous-réseaux différents. Par défaut, le programme d'installation du Zoo ouvre, sur le sous-réseau local uniquement, le port 80 pour le service Zoo sur le pare-feu de Windows Vous devrez changer la propriété "Portée" de la règle du pare-feu pour autoriser tous les autres sous-réseaux ayant besoin d'un accès.//
 
 //Ce test peut également échouer si votre système est configuré pour accéder à Internet en utilisant un [[https://fr.wikipedia.org/wiki/Proxy|Proxy]]. Dans ce cas, le test n'atteint jamais le serveur Zoo. Si vous utilisez un Proxy, vérifiez que vous permettez l'accès aux adresses locales. Voir __[[fr:zoo:zooproxyserver|Utiliser le Zoo avec un Proxy]]__ pour plus d'informations.//
 
+6. **Définir le nom de votre serveur du Zoo**
+Tapez le nom ou l'adresse IP de votre serveur Zoo. (//Nous indiquons ici le nom de notre DNS. Vous devrez fournir le vôtre.//)
+Cliquez sur le bouton pour faire correspondre le nom ou l'adresse IP de votre serveur Zoo avec le registre.
+Le nom du serveur Zoo est écrit dans 
+//Computer\HKEY_LOCAL_MACHINE\SOFTWARE\**WOW6432Node**\McNeel\Rhinoceros\x\License Manager// (**x** désignant la version de Rhino). 
+{{:zoo:setzooserver2.png?400|}}
+
 =====Voir aussi =====
-[[fr:zoo:diagnosticsmac|Zoo - Utilitaire de diagnostic pour Mac]]
+  * [[zoo:diagnosticsmac|Zoo - Utilitaire de diagnostic pour Mac]]
+  * [[https://wiki.mcneel.com/fr/zoo/findzooserverwin#rhino_8_7_and_6_for_windows|Comment Rhino pour Windows trouve-t-il le serveur Zoo ?]]
+  * [[https://wiki.mcneel.com/fr/rhino/installingrhino/7|Automatisation de l'installation de Rhino 7 pour Windows : installation scriptée]]
