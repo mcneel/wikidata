@@ -24,7 +24,7 @@ if (!defined('DOKU_INC')) die();
                 '<span>'.$conf['title'].'</span>',
                 'accesskey="h" title="[H]"'
             );
-        ?></h1>
+        ?>!!!</h1>
         <?php if ($conf['tagline']): ?>
             <p class="claim"><?php echo $conf['tagline']; ?></p>
         <?php endif ?>
@@ -34,7 +34,11 @@ if (!defined('DOKU_INC')) die();
         <!-- SITE TOOLS -->
         <div id="dokuwiki__sitetools">
             <h3 class="a11y"><?php echo $lang['site_tools']; ?></h3>
-            <?php tpl_searchform(); ?>
+            <form id="cref" action="https://www.rhino3d.com/searchresults/">
+                <label for="search"><input id="searchtext" type="text" name="q" size="24" value="" placeholder="{{ i18n "search-navbar" }}" /></label>  
+                <input class="searchBox" type="submit" name="sa" size="2" aria-label="Search" value=" "/>
+            </form>
+<!---            <?php tpl_searchform(); ?>  -->
             <div class="mobileTools">
                 <?php tpl_actiondropdown($lang['tools']); ?>
             </div>
@@ -42,7 +46,7 @@ if (!defined('DOKU_INC')) die();
 
         <!--
 		<ul id="navmenu">
-			<li><a href="http://www.rhino3d.com">Home</a></li>
+			<li><a href="http://www.rhino3d.com">Home!</a></li>
 			<li><a href="http://gallery.mcneel.com/?language=<%=displayLang%>&g=1">Gallery</a></li>
 			<li><a href="http://www.rhino3d.com/download.htm">Download</a></li>
 			<li><a href="http://www.rhino3d.com/sales.htm">Sales</a></li>
