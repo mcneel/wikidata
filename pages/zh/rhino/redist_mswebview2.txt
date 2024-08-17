@@ -1,0 +1,31 @@
+====== Redist_MSWebView2_Standalone:-2147219198 ======
+
+
+===== Rhino 8 安装失败时的错误 =====
+
+如果你遇到 Rhino 8 安装失败失败，且最终错误代码显示位 Redist_MSWebView2_Standalone:-2147219198
+
+{{ :zh:rhino:rhino8_redist_msvebview2.jpg?400 |}}
+
+
+安装失败前在 “正在安装 Microsoft Edge Updated” 界面停留很久
+{{ :zh:rhino:rhino8_redist_msvebview2_1.jpg?400 |}}
+
+
+且在安装日志文件中出现如下错误：
+
+[1408:0D58][2024-08-12T10:24:57]e000: Error 0x80040902: Process returned error: 0x80040902
+[1408:0D58][2024-08-12T10:24:57]e000: Error 0x80040902: Failed to execute EXE package.
+[4AD8:4ADC][2024-08-12T10:24:57]e000: Error 0x80040902: Failed to configure per-machine EXE package.
+[4AD8:4ADC][2024-08-12T10:24:57]i319: Applied execute package: Redist_MSWebView2_Standalone, result: 0x80040902, restart: None
+[4AD8:4ADC][2024-08-12T10:24:57]e000: Error 0x80040902: Failed to execute EXE package.
+[1408:0D58][2024-08-12T10:24:57]i351: Removing cached package: Redist_MSWebView2_Standalone, from path: C:\ProgramData\Package Cache\BBCEF5847FAC589E7205DF908E819EA0DF803CBA\
+
+==== 安装失败原因 ====
+这是因为你当前的 Windows 无法正常安装 //MicrosoftEdgeWebView2RuntimeInstallerX64.exe//  造成，请打开Windows文件管理器，访问  //C:\Program Files (x86)\Microsoft// ，且显示这个文件夹下的所有文件（包含受包含的系统隐藏文件），找到 edgecore、edgewebview 与 temp 这三个受保护的系统文件且删除它们。然后重启 Windows、重新安装 Rhino 8 即可。
+{{ :zh:rhino:rhino8_redist_msvebview2_2.jpg?400 |}}
+
+=== 强制删除文件 ===
+
+由于这三个文件为 Windows 系统包含文件，通常无法直接删除，你需要使用一些强力删除工具来删除它们，推荐 [[https://www.diskgenius.com/manual/delete-files-permanently.php | DiskGenius]], [[https://www.diskgenius.com/manual/delete-files-permanently.php |详情请浏览这里 👈]]
+
