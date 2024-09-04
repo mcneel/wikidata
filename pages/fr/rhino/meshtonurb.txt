@@ -1,0 +1,69 @@
+====== La commande MaillageEnNURBS ======
+> **Résumé :** //Depuis des années, cette commande soulève une grande controverse et fait l'objet de nombreux appels d'assistance.  Cet article vise à expliquer les rouages de cette fonctionnalité très utile mais parfois mal comprise, et espérons-le à promouvoir une utilisation plus éclairée.//
+
+=====MaillageEnNURBS : qu'est-ce que c'est et qu'est-ce que ce n'est pas======
+  
+Pour bien comprendre ce que fait cette commande, il convient de se familiariser avec les bases de la géométrie constructive 3D ainsi qu’avec les caractéristiques des maillages et des NURBS.  Vous trouverez ci-dessous une brève description des caractéristiques des maillages et des NURBS.
+
+=====Maillages et NURBS=====
+Pour comprendre ce que fait la commande **MaillageEnNURBS**, il est important de connaître les différences fondamentales entre un modèle de //Maillage// et un modèle de surfaces //NURBS//.  Bien qu’ils puissent tous les deux représenter un objet 3D sous la forme d’un modèle informatique, ils le font de manière complètement différente. 
+
+Un maillage représente des surfaces 3D sous forme d’une série de facettes discrètes, comme des pixels qui représentent une image avec une série de points colorés.  Si les facettes, ou les pixels, sont suffisamment petits, l’image apparaît « lisse ».  Et pourtant, il suffit de zoomer pour voir la « pixellisation » ou granularité et se rendre compte que localement l’objet n’est pas lisse ou continu.
+
+Les surfaces NURBS sont des représentations mathématiques de courbes et de surfaces.  Elles peuvent représenter des surfaces de forme libre complexes qui sont intrinsèquement lisses et conservent leur forme lisse lorsqu’elles sont modifiées.  Il n’y a pas de pixellisation ou de granularité comme pour un maillage. Elles se comportent donc plus comme le visage d’une personne réelle que comme l’image pixellisée de ce visage.
+
+Il est important de noter qu’une NURBS peut facilement être transformée en maillage à tout moment, comme il est facile de prendre une photo numérique du visage d’une personne avec un appareil photo.  En quelque sorte, passer d’un maillage à une NURBS revient à reconstruire le visage d’une personne à partir d’une photo numérique pixellisée : la tâche est bien plus complexe et il n’existe pas de méthode automatique rapide pour y parvenir.
+ 
+
+===Terminologie sur les maillages employée dans cet article===
+Encore une fois, les maillages sont des représentations à facettes de surfaces 2D et 3D.  Dans Rhino, les facettes des maillages peuvent avoir 3 côtés (triangles) ou 4 côtés (quadrilatères).   Elles sont représentées sur votre écran sous forme de lignes reliées entre-elles en mode filaire ; en mode Ombré, une « surface » est attribuée à chaque facette à des fins de visualisation. Les points aux angles des facettes sont appelés des sommets.   Plusieurs facettes unies ensemble forment un maillage.
+
+**Information importante :**  On croit souvent à tort que les facettes des maillages sont toujours planes.  En réalité, il n’y a que dans le cas des maillages triangulaires que toutes les facettes sont planes.  Les facettes quadrangulaires **peuvent** être planes, mais ce n’est pas forcément le cas étant donné que 4 points qui ne sont pas coplanaires dans l’espace décriront une zone enveloppée.
+
+===Terminologie sur les NURBS employée dans cet article===
+De nombreuses informations sont disponibles sur les NURBS. C’est un sujet très complexe que nous ne décrirons pas en détail dans cet article. Les NURBS sont des courbes mathématiques.  Les //surfaces// des NURBS sont générées par une série de courbes NURBS dans deux directions (appelées « U » et « V ») interpolées pour créer une surface.  Nous ne verrons ici que le cas des surfaces NURBS les plus simples, à savoir celles que l’on appelle surfaces « bilinéaires » définies par des courbes NURBS de degré 1 (c’est-à-dire des lignes) dans les deux directions, comme celles qui sont produites par la commande MaillageEnNURBS.  Lorsque tous les bords d’une surface NURBS correspondent aux courbes d’origine ayant généré la surface (les bords « naturels ») on dit que la surface est non limitée.  Si la surface a été coupée avec une courbe autre que son bord naturel, on dit qu’elle est limitée.
+
+=====Assez de jargon technique, passons aux choses sérieuses...=====
+**//Que fait exactement la commande **MaillageEnNURBS** ?//**
+
+=====Ce qu’elle ne fait pas :===
+Comme nous l’avons déjà expliqué, MaillageEnNURBS n’est pas un processus de « rétroconception » automatique des maillages pour en faire des NURBS avec des surfaces lisses.  Désolé, mais il n’y a pas de miracle en un clic ici.  Il est difficile de recréer un objet NURBS lisse à partir du maillage d’un modèle 3D.  Il y a beaucoup d’informations disponibles sur la rétroconception et ses difficultés ; [[rhino:reverseengineering|cet article explique comment procéder avec les outils de Rhino]]. Il existe aussi différentes suites logicielles spécialisées en rétroconception pour automatiser partiellement ce processus. Le prix de ces logiciels est variable ; ils peuvent être de modérément couteux à très chers.  Il existe même des modules (payants) permettant d’ajouter cette capacité à Rhino.
+
+===Ce qu’elle fait :===
+MaillageEnNURBS transforme une structure maillée (à facettes) en une structure de NURBS (à facettes).  Pour cela, cette commande crée une surface NURBS pour CHAQUE face du maillage de l’objet d’origine et unit le résultat en une polysurface (en supposant que le maillage d’origine a plusieurs faces).
+
+===Fonctionnement de cette commande :===
+Les **quadrilatères du maillage** sont transformés en surfaces NURBS de degré 1 non limitées à 4 côtés.  Pour rappel, « non limité » signifie que les bords « naturels » de la surface sont les mêmes que les frontières extérieures et que rien n’a été « rogné ».  Ainsi, les bords de définition de la surface NURBS sont les mêmes que les lignes qui représentent les bords des faces du maillage.  Cela signifie deux choses :  Si la face quadrangulaire du maillage était définie par 4 points coplanaires, toutes les lignes de bord sont sur le même plan et la surface NURBS générée sera plane.  Si les sommets de la face quadrangulaire du maillage ne sont pas coplanaires, les lignes de bord de la surface NURBS ne seront pas coplanaires et la surface sera enveloppée.  On appelle aussi ce type de surface une « surface réglée ».
+
+Les **triangles du maillage** sont, par définition, plats.  MaillageEnNURB transformera les triangles des maillages soit en surfaces NURBS planes limitées, soit en surfaces NURBS planes non limitées avec une singularité (un bord réduit en un point) selon que vous avez défini l’option de la ligne de commande //LimiterFacesTriangulaires// sur //Oui// ou sur //Non//.  Cette option n’est disponible que si vous ne présélectionnez pas les maillages avant de lancer la commande. La surface NURBS limitée sera une surface de degré 1 x 1 comme pour les quadrilatères, mais avec une moitié rognée pour former un triangle.
+
+Compte tenu de ce qui précède, la polysurface générée avec MaillageEnNURBS aura **//exactement//** les mêmes bords que le modèle maillé d’origine et sera composée entièrement de surfaces NURBS de degré 1 x 1 (bilinéaires).  Les surfaces des triangles seront planes et limitées ou non, selon l’option choisie ; les surfaces des quadrilatères seront non limitées et pourront être planes ou non en fonction de la planéité de leurs 4 sommets.
+
+**Remarque importante :** MaillageEnNURBS ne sous-divise pas les zones des quadrilatères en triangles pour créer des surfaces planes.
+
+=====À prendre en compte :====
+
+===Utilisation de la mémoire et taille des fichiers===
+ 
+Les maillages peuvent contenir de quelques polygones à des centaines, des milliers ou des millions.  Le format de maillage est très compact pour enregistrer les données des facettes.  Les surfaces NURBS sont beaucoup moins compactes dans leur définition. La représentation NURBS d’un maillage générée par la commande MaillageEnNURBS peut facilement multiplier par 100 la quantité de données par rapport au maillage.  Si vous exécutez MaillageEnNURBS sur des maillages complexes composés de plusieurs milliers de triangles, d’une part votre ordinateur peut se retrouver à court de mémoire, et de l’autre les fichiers générés seront très volumineux.  Si vous possédez un ordinateur récent équipé d’un bon processeur, avec suffisamment de mémoire et un système d'exploitation de 64 bits, cela ne posera pas de problème.
+ 
+===Et après ?===
+
+Une fois que vous avez un objet NURBS généré par la commande MaillageEnNURBS composé de plusieurs milliers de petites surfaces NURBS (comme l’était le maillage), que pouvez-vous faire ?  Pas grand-chose : la plupart des opérations normales échoueront probablement...  Alors, demandez-vous pourquoi vous en avez besoin.
+
+===Considérations géométriques===
+Il est essentiel de comprendre le type de géométrie produite.  Comme nous l’avons expliqué, les facettes des maillages composés de quadrilatères ne sont pas forcément planes et les quadrilatères NURBS générés par MaillageEnNURBS pourront être enveloppés.  Ils ne seront peut-être pas développables sans être étirés.  Si vous utilisez **DéroulerSurf** sur la polysurface de NURBS, les résultats seront peut-être déformés ou incorrects.  Pour garantir la planéité ou le déroulement correct, vous pouvez soit transformer votre maillage en maillage composé de triangles avant de lancer MaillageEnNURBS, soit vérifier que toutes les faces du maillage sont bien planes. (Vous aurez besoin d’un script. Il n’existe actuellement aucun outil de Rhino pour cela.)
+
+=====Étant donné toutes ces limitations… dans quels cas cette commande est-elle utile ?=====
+
+===Transformer des maillages composés de peu de polygones===
+
+MaillageEnNURBS est utile pour transformer des maillages comptant peu de polygones et qui sont essentiellement plats, en surfaces NURBS pour les retravailler dans Rhino.  Par exemple, vous pouvez avoir importé un modèle d’architecture à partir d’un logiciel fonctionnant avec des maillages. Si le modèle se compose de faces maillées relativement grandes, MaillageEnNURBS fonctionnera bien pour transformer le modèle en surfaces NURBS. En utilisant d’autres outils tels que FusionnerToutesFaces, vous obtiendrez rapidement un modèle de NURBS de bonne qualité dans Rhino pour continuer à travailler.
+
+====Dérouler des objets====
+Attendu que l’on ne peut pas dérouler des maillages, vous pouvez utiliser MaillageEnNURBS, puis dérouler la polysurface obtenue.  Attention aux mises en gardes précédentes sur l’utilité, la taille des fichiers et la géométrie enveloppée.
+
+===Exporter vers des logiciels qui ne prennent pas en charge les maillages===
+Encore une fois, attention à la taille des fichiers, mais cela peut parfois vous sortir d’une impasse, même si vous aurez toujours un modèle à facettes.
+
+//WIP msh 13.04.2011//
