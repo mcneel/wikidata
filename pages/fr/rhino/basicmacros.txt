@@ -1,89 +1,89 @@
-======Creating Macros======
+======Créer des macros======
 
->A basic tutorial on creating macros (scripting together Rhino commands)
+> Tutoriel de base sur l'écriture de macros (scriptage conjoint de plusieurs commandes de Rhino).
 
-You can create **macros** in Rhino to automate many tasks, customize your commands, and improve your workflow.
+Dans Rhino, vous pouvez créer des **macros** pour automatiser de nombreuses tâches, personnaliser vos commandes et améliorer vos méthodes de travail.
 
-There may be some confusion about the use of the term “scripting”.  It has been used to describe both the process of writing macros - what this section is about - as well as writing more sophisticated scripts in either [[developer:rhinoscript|RhinoScript]], [[https://developer.rhino3d.com/guides/rhinopython/|Python]], or other programming languages.  
+Le terme scriptage peut parfois prêter à confusion.  On l’emploie pour décrire à la fois l’écriture de macros (le sujet de cet article) mais aussi de scripts plus sophistiqués dans [[developer:rhinoscript|RhinoScript]], [[https://developer.rhino3d.com/guides/rhinopython/|Python]] ou d’autres langages de programmation.  
 
-//The two things are actually very different.// Writing functions in RhinoScript, Python or other programming languages is a lot more complex than creating macros, and requires some programming knowledge and skills.  //We don't cover that here.//
+//Ce sont en fait deux choses complètement différentes.// Écrire des fonctions dans RhinoScript, Python ou d’autres langages de programmation est bien plus complexe que de créer des macros et requiert des connaissances et des compétences en programmation.  //Nous ne parlerons pas de ce sujet ici.//
 
-I use the term “Macro” here exclusively to describe the putting together of strings of ordinary Rhino commands and their options to create an automated function.  This is scripting on its simplest of levels, and is easily accessible to the average Rhino user, even if they have no knowledge of programming.  All you need is a reasonable understanding of Rhino commands and their structure, as well as a logical mind and a taste for a little experimentation and debugging.
+J'utilise le terme « macro » exclusivement pour décrire l'assemblage de chaînes de commandes normales de Rhino et de leurs options afin de créer une fonction automatisée.  Il s'agit ici du scriptage à son niveau le plus simple et il est facilement accessible à tout utilisateur moyen de Rhino même sans aucune connaissance en programmation.  Il suffit de comprendre les commandes de Rhino et leur structure, de raisonner logiquement et d’aimer faire des expériences et de la résolution d’erreurs.
 
 
-=====The tools you need=====
-  * Your brain :-P
-  * The **Rhino Help file** -  lists all Rhino commands and their sub-options. This is your most important reference.  Pressing F1 (Windows) or the :?: toolbar button (Mac) will get you to the online help.
-  * The Rhino **MacroEditor**, a built-in interface for creating and testing your macros.
-  * An understanding of how to add your macros to your workflow in the form of aliases or toolbar buttons (explained [[developer:macroscriptsetup|here]])
-=====You've already used a macro or two...=====
-First, if you are a user of Rhino, you are already a macro user even though you may not know it.  Many of the commands in Rhino are already “macroed” for you. When you click a toolbar button or call a command from the menu, it is often a preset macro.  For example, the toolbar button **Extrude Closed Planar Curve** from the "Solid" toolbar has the following macro:
+===== Les outils nécessaires=====
+  * Votre cerveau :-P
+  * Le **fichier d'aide de Rhino** qui liste toutes les commandes de Rhino et leurs options. C’est votre document de référence.  Appuyez sur F1 (Windows) ou cliquez sur le bouton :?: dans la barre d'outils (Mac) pour accéder à l’aide en ligne.
+  * L’**ÉditeurMacro** de Rhino qui est une interface intégrée conçue pour créer et tester vos macros.
+  * Comprendre comment intégrer vos macros dans votre flux de travail sous forme d’alias ou de boutons de barre d'outils (Vous trouverez toutes les informations [[developer:macroscriptsetup|ici]]).
+===== Vous avez déjà utilisé une ou deux macros...=====
+Tout d’abord, si vous êtes utilisateur de Rhino, vous ne le savez peut-être pas mais vous avez déjà utilisé des macros.  Dans Rhino, de nombreuses commandes sont déjà écrites sous forme de macros pour vous. Lorsque vous cliquez sur un bouton dans une barre d’outils ou sur une commande dans un menu, c’est souvent une macro prédéfinie.  Par exemple, la macro suivante est associée au bouton **Extruder une courbe plane fermée** dans la barre d’outils pour les solides :
 //(shown: V6 for Windows)//
 
 {{:rhino:extrudestraightv6solid.png?400|}}
 
-It just calls the **ExtrudeCrv** command and sets it to make a closed solid.  We will see what the "Pause" part does later.
+Ce bouton appelle simplement la commande **ExtruderCourbe** et la paramètre pour créer un solide fermé.  Nous verrons ce que « Pause » fait plus tard.
 
-This is an example of the simplest kind of macro, which just sets a series of options within a single command so that you don’t have to specify them time you use it. **ExtrudeCrv** has several buttons with preset options, **Tapered, AlongCurve, ToPoint, Solid=Yes** (or No) etc.  Check out the macros under all the **ExtrudeCrv** buttons to see how they are laid out.
+C’est un exemple du type de macros le plus simple qui définit une série d’options à l’intérieur d’une seule commande afin que vous n’ayez pas à les indiquer à chaque fois que vous l’utilisez. **ExtruderCourbe** a plusieurs boutons avec des options prédéfinies : **Dépouille, SuivreCourbe, VersPoint, Solide=Oui** (ou Non) etc.  Vérifiez les macros sous tous les boutons **ExtruderCourbe** pour voir comment elles sont organisées.
 
-In a sense, you’re doing the same thing as if you clicked or typed the options one at a time at the command line.  In fact, that’s all macros really are -- just a set of instructions to repeat a sequence of commands that you would otherwise input manually one at a time.
+En un sens, cela revient au même que si vous cliquiez sur les boutons ou tapiez les options une par une dans la ligne de commandes.  En fait, les macros sont précisément cela : un ensemble d’instructions pour répéter une séquence de commandes que vous devriez autrement saisir manuellement une par une.
 
-This scripting of options for a single command can also be combined with data entry (i.e. coordinates or other numerical data). It is also possible to string together several commands in a row, for an automated sequence of events to manipulate or create objects.
+Le scriptage d’options pour une commande peut aussi être combiné avec la saisie de données (par exemple des coordonnées ou d’autres données numériques). Il est aussi possible d’enchaîner plusieurs commandes à la suite pour avoir une séquence automatisée d’événements afin de manipuler ou créer des objets.
 
-> **Note:** //Why the _Underscores?  These tell Rhino that the command which follows is in English (no matter what the language you are running Rhino in), which will make your macro universal.  If you are running in English and don’t care, you can eliminate the underscores in your macros if you wish. It will not affect anything else.  Also, why the exclamation point (!)?  This cancels any previous command that might be running, for safety's sake.//
+>**Remarque :** //À quoi servent les tirets bas (_) ?  Le tiret bas prévient Rhino que la commande qui suit est en anglais (sans tenir compte de la langue dans laquelle vous utilisez le logiciel), ce qui fait que votre macro sera universelle.  Si vous utilisez Rhino en anglais, vous n’en avez pas besoin et vous pouvez éliminer tous les tirets bas de vos macros si vous le souhaitez. Cela n’aura aucune incidence.  Et à quoi sert le point d'exclamation (!) ?  Il annule toute commande précédente qui pourrait être en cours d’exécution ; c’est une mesure de sécurité.//
 
-======Getting started======
+======Pour commencer=====
 
-Say you have to place a series of 10x10x10 boxes with the center of the bottom face landing at the desired point, with that point to be specified by either by a mouse click at the desired location or by entering the coordinates by the keyboard.
+Imaginons que vous vouliez créer une série de boîtes de 10x10x10 en positionnant le centre de la base à l’endroit de votre choix, et que vous vouliez indiquer ce point d’insertion soit en cliquant avec la souris, soit en tapant les coordonnées au clavier.
 
-You could use the standard Box (**Corner to Corner + Height**) command, but by default this will place the insertion point at the first corner of the box.  To have the insertion point where we want, it is easier to use the Box, Center command.   This is in reality just the Box command with the center option, so you will have to activate it in your macro.
+Vous pourriez utiliser la commande Boîte standard (**Sommet à sommet + Hauteur**) mais par défaut le point d'insertion sera sur le premier sommet de la boîte.  Pour que le point d'insertion soit celui que nous voulons, il faut utiliser la commande Boîte, Centre.   C’est en fait tout simplement la commande Boîte avec l’option Centre et vous allez donc devoir l’activer dans votre macro.
 
-Open the **MacroEditor** and  type this in:
+Ouvrez l’**ÉditeurMacro** et tapez le texte suivant :
 
   ! _Box _Center 
-//(This is actually the macro under the Box, Center button if you check.)//\\ 
-All entries (command words and numerical inputs) need to be separated by a single space.
+//(C’est en fait la macro qui se trouve sous le bouton Boîte, Centre. Vous pouvez vérifier.)//\\ 
+Toutes les entrées (mots et chiffres des commandes) doivent être séparées par un seul espace.
 
-Now, we need to specify the center point.  To do this, you need to tell Rhino to stop processing the command temporarily and wait for an input in the form of a click or a keyboard entry.  Do this by inserting the command Pause.
+Nous devons à présent indiquer le point central.  Pour cela, vous allez dire à Rhino d’arrêter de traiter la commande temporairement et d’attendre une entrée sous la forme d’un clic ou d’une saisie au clavier.  Vous allez alors insérer la commande Pause.
 
   ! _Box _Center _Pause
   
-Once the data has been entered, you can specify the box size directly in the command.  Since the Center option in Box wants a corner of the box as a second input, you can specify its X,Y coordinates:
+Une fois les données saisies, vous pouvez indiquer la taille de la boîte directement dans la commande.  Étant donné que l’option Centre dans Boîte attend un sommet de la boîte en tant que deuxième entrée, vous pouvez indiquer ses coordonnées X et Y :
 
   ! _Box _Center _Pause r5,5
   
-(Why the "r”?  We want this coordinate to be relative to the last picked point, that is to say, the box bottom center.  Otherwise the corner will always land at X5, Y5.)
+(À quoi correspond le « r » ?  Les coordonnées du sommet de la boîte doivent être relatives au dernier point sélectionné, à savoir le centre de la base de la boîte.  Autrement, le sommet arriverait toujours sur X5, Y5.)
 
-At this point you can put in the height, which in this case is relative to the original starting point.
+Vous pouvez maintenant indiquer la hauteur, qui dans ce cas est relative au point de départ d’origine.
 
   ! _Box _Center _Pause r5,5 10
   
-Since there is no further input necessary nor options possible, the macro completes and our box is there.  Note that since we wanted a height equal to the width, another possibility  would just to have been to use Enter instead of 10 for the last entry.
+Comme il n’y a pas d’autre entrée nécessaire et qu’il n’y a plus d’autres options possibles, la macro se termine et votre boîte est créée.  Notez que comme nous voulions une hauteur égale à la largeur, nous aurions aussi pu utiliser « _Enter » (Entrée) au lieu de 10 pour la dernière entrée.
 
   ! _Box _Center _Pause r5,5 _Enter
-Now that the macro is running, [[rhino:macroscriptsetup|make a new toolbar button]] and paste the macro in. Give it a recognizable name, like “10x10x10 bottom centered box”.  Note, once the macro is executed, right-clicking repeats the whole sequence of this macro, so you can use it many times in a row without clicking the button every time.
+À présent que la macro fonctionne, [[rhino:macroscriptsetup|créez un nouveau bouton dans la barre d'outils]] et copiez la macro dedans. Donnez-lui un nom reconnaissable comme “Boîte centrée base 10x10x10”.  Souvenez-vous qu’une fois que la macro est exécutée, cliquer du bouton droit de la souris répète toute la séquence de cette macro. Vous pouvez donc l’utiliser plusieurs fois de suite sans cliquer sur le bouton à chaque fois.
 
-> //Note on the Pause command://   In earlier versions of Rhino, for some command macros it was necessary to use one Pause for each screen pick needed.  This made it difficult to make macros for commands that had an indeterminate number of screen picks.  Much of that has been fixed in the latest versions, however there are still some exceptions.  For these cases, there is now the Multipause command (V6 and later), which basically allows the user to make as many picks as needed without having to write multiple Pause commands in the macro.
+> //À propos de la commande Pause ://   dans les versions précédentes de Rhino, pour certaines macros il était nécessaire d’utiliser un « Pause » pour chaque sélection à l’écran.  Cela compliquait énormément la création de macros requérant de nombreuses sélections à l’écran.  De grandes améliorations ont été introduites dans les dernières versions, mais il reste certaines exceptions.  Dans ce type de cas, il existe désormais la commande « Multipause » (Rhino 6 et versions suivantes) qui permet essentiellement à l’utilisateur de faire autant de sélections que nécessaire sans avoir à écrire la commande Pause dans la macro.
 
-For example the macro below
+Par exemple, la macro suivante
 
   ! _Polyline _Pause _SelLast
 
-will work fine to make the polyline, but it will not be selected at the end.  Why?  Because the single Pause is 'eaten' by the first pick in the polyline, and thus the SelLast command gets executed just after the first pick while we're still making the polyline - and therefore does nothing.  The single pause //does// allow you to finish the polyline with as many points as you want, but there is no longer a SelLast to be run at the end of it - because it ran already and failed.  
+créera la polyligne, mais ne la sélectionnera pas à la fin.  Pourquoi ?  Parce que le Pause est « mangé » par la première sélection dans la polyligne et que la commande SélDerniers (_SelLast) est donc exécutée juste après la première sélection alors que nous sommes encore en train de créer la polyligne, et ne fait donc rien.  Pause //vous permet// bien de finir la polyligne avec autant de points que vous le voulez, mais il n’y a plus de SélDerniers à exécuter à la fin (parce que cette commande a déjà été exécutée et a échoué).  
 
-However, the following macro
+En revanche, la macro suivante
 
   ! _Polyline _Multipause _SelLast
   
-works including selecting the polyline at the end because the Multipause includes //all// the picks for the polyline, allowing the SelLast to be executed and work at the end.
+Fonctionne avec la sélection de la polyligne à la fin parce que Multipause inclut //toutes// les sélections pour la polyligne et permet donc à SélDerniers de s’exécuter et de fonctionner à la fin.
 
-=====OK, let’s get a bit more complicated…=====
+=====Et maintenant, compliquons un peu les choses…=====
 
-Some commands invoke dialog boxes with many options.  Normally, this stops your macro and waits for you to click the desired options, then continue.  Since you want to automate, you can bypass the dialog by putting a –hyphen (also known as a dash) before the command.  Then you can script in all your options and the macro will run to completion without needing your intervention.  Some commands have several levels of sub-options.  If you want to see what’s available, type the command at the command line with the hyphen and look at what’s proposed for options.  Click on the options and see if they have sub-options.
+Certaines commandes appellent des boîtes de dialogue contenant de nombreuses options.  Normalement, votre macro s’arrête et attend que vous cliquiez sur les options de votre choix dans la boîte de dialogue, puis reprend.  Comme vous voulez automatiser le processus, vous pouvez sauter la boîte de dialogue en mettant un tiret haut (-) avant la commande.  Vous écrirez alors toutes vos options dans le script et la macro fonctionnera jusqu’à la fin sans que vous n’ayez à intervenir.  Certaines commandes ont plusieurs niveaux d’options.  Si vous voulez voir les différentes options disponibles, tapez la commande dans la ligne de commandes précédée du tiret haut et regardez quelles sont les options proposées.  Cliquez sur les options et voyez si elles ont des sous-options.
 
-=====Loft two open curves=====
+=====Créer une surface par sections à partir de deux courbes ouvertes=====
 
-Let’s say you would like to repetitively **Loft** two //OPEN// curves together to form a surface.  If you use the standard **Loft** command, you always have to go through the dialog.  If you use the **//–Loft//** version, you can avoid this and things go much faster.  Look at the following:
+Imaginons que vous vouliez créer de manière répétitive une **Surface par sections** à partir de deux courbes //OUVERTES//.  Si vous utilisez la commande **Surface par sections** standard, vous devrez à chaque fois passer par la boîte de dialogue.  Si vous utilisez la version **//–Loft//** (SurfaceParSections précédée du tiret), vous évitez cette étape et allez beaucoup plus vite.  Regardez par exemple :
 
 <code>
 _-Loft
@@ -94,13 +94,13 @@ _Closed=_No
 _Enter
 </code>
 
-Note that when you invoke the command, immediately a pause lets you pick your curves.  If you remove the pause, the macro won’t work if you have not selected your curves before calling it.  If you have already preselected your curves the pause is intelligently ignored.  The command then sets all your specified options. Once that is done, it creates the surface and finishes. Try it with two open curves, either pre or post selecting them.  Try modifying one or more of the options, like substituting Closed=Yes or Simplify=Rebuild. (For this you also have to add a line with Rebuild=20 or some other value.)
+Remarquez que lorsque vous appelez la commande, vous avez immédiatement une Pause pour sélectionner vos courbes.  Si vous supprimez la Pause, la macro ne fonctionnera pas à moins que vous n’ayez sélectionné vos courbes au préalable.  Si vous avez déjà présélectionné vos courbes, vous avez raison d’ignorer la Pause.  La commande est ensuite paramétrée avec toutes les options que vous avez indiquées. Une fois cette étape réalisée, elle crée la surface et se termine. Essayez cette macro avec deux courbes ouvertes, en les sélectionnant avant ou après.  Essayez de modifier une ou plusieurs options, par exemple de remplacer Fermée=Oui ou Simplifier=Reconstruire. (Pour cela vous devrez aussi ajouter une ligne avec Reconstruire=20 ou une autre valeur.)
 
-=====Modifying it to use with closed curves=====
+=====Modifier cette macro pour l’utiliser avec des courbes fermées=====
 
-Now, try it with two closed curves.  You have a problem.  Why? For closed curves, Loft needs another input from you -– the seam location.  This is something that needs to be in the macro in the right sequence.  So, you can either choose from various automatic seam options (which are on a sub-option level) or you can adjust it on screen.  Either way, you need to modify the macro.
+Essayez à présent avec deux courbes fermées.  Vous avez un problème.  Pourquoi ? Pour les courbes fermées, SurfaceParSections a besoin que vous lui donniez une autre information : la position de la jointure.  Vous devez indiquer cette donnée dans la macro au bon endroit.  Vous pouvez donc soit choisir à partir de différentes options de jointures automatiques (qui sont dans un sous-niveau d’options) soit l’ajuster à l’écran.  Dans les deux cas, vous devrez modifier la macro.
 
-Adding a pause in the right place lets you check and adjust the seam on screen:
+Ajoutez une pause au bon endroit pour vérifier et ajuster la jointure à l’écran :
 
 <code>
 _-Loft
@@ -112,7 +112,7 @@ _Closed=_No
 _Enter
 </code>
 
-Adding an Enter instead of the Pause tells Rhino you don’t care. Just leave the seam the way it is by default.
+Si vous écrivez Entrée au lieu de Pause, vous indiquez à Rhino que vous ne souhaitez rien spécifier. Que la jointure peut être laissée telle qu’elle est par défaut.
 
 <code>
 _-Loft
@@ -124,7 +124,7 @@ _Closed=_No
 _Enter
 </code>
 
-Or, you can specify another Loft seam option by stepping down into the seam sub-option level:
+Ou, vous pouvez indiquer une autre option de jointure pour SurfaceParSections en descendant au niveau de la sous-option de jointure :
 
 <code>
 _-Loft
@@ -137,14 +137,14 @@ _Closed=_No
 _Enter
 </code>
 
-(The Enter after Natural is necessary to exit the “seam” option level and get back up to the Loft options level.)
+(Entrée après « Natural » est nécessaire pour sortir du niveau de l’option « jointure » et revenir au niveau des options de SurfaceParSections.)
 
-//Unfortunately, the same macro will not work correctly for both open and closed curves because of the extra seam option required.  This is one of the limitations of the macro system and the way some Rhino commands have been written.//
+//Malheureusement, la même macro ne fonctionnera pas correctement pour les courbes ouvertes et fermées à cause de l’option jointure supplémentaire.  C’est l’une des limites du système de macros et de la manière dont certaines commandes de Rhino ont été écrites.//
 
 
-======Using macros to set your interface options quickly======
+======Utiliser des macros pour définir rapidement les options de votre interface======
 
-Macros can also be used to set various GUI and Document Properties options automatically without having to go wading into the Options dialog.  I use the following to set the render mesh the way I want it. (Note the dash before -_DocumentProperties.)
+Les macros peuvent aussi être utilisées pour définir automatiquement diverses options GUI et des propriétés du document sans avoir à naviguer dans la boîte de dialogue d'options.  J’utilise la macro suivante pour définir le maillage de rendu comme je le veux. (Notez bien le tiret haut avant -_DocumentProperties.)
 
 <code>
 -_DocumentProperties
@@ -158,73 +158,73 @@ _Enter
 _Enter
 </code>
 
-Why are there two Enters at the end?
+Pourquoi y a-t-il deux fois « Entrée » à la fin ?
 
-You went down two levels in -_DocumentProperties, first to the Mesh level, then to the Custom sublevel inside Mesh.  You need one Enter to exit the sublevel and go back to the main level, and one more to exit the command.  Some scripts might even need three enters.  
+Vous êtes descendu deux niveaux dans -_DocumentProperties (PropriétésDocument), d’abord au niveau du Maillage, ensuite au sous-niveau Personnaliser (_Custom) dans Maillage.  Vous devez taper une fois sur Entrée pour quitter le sous-niveau et revenir au niveau principal, et une deuxième fois pour quitter la commande.  Dans certains scripts, vous aurez même besoin de trois « Entrée ».  
 
-The following is from Jeff LaSor, for turning on or off the crosshair cursor:
+La macro suivante a été créée par Jeff LaSor, pour activer ou désactiver le pointeur en croix :
 
-To script Crosshairs  ON or OFF put the following on a button:
+Pour ACTIVER ou DÉSACTIVER le pointeur en croix, écrivez la macro suivante pour un bouton :
 <code>
   -_Options _Appearance _Visibility
   _Crosshairs _Enter _Enter _Enter
 </code>
-Notice the reference to each individual command option name.  Specifying them inside the script is like clicking on them with the mouse.  Also note the three Enter entries.  Since each command option takes you down into a new set of sub-level command options, an Enter is required to take you back up.  Since this script went down three levels, it needs to specify three Enters to get all the way out of the command.
+Vous constatez qu’il indique à chaque fois le nom de l’option et de la sous-option de la commande.  Les écrire dans le script revient à cliquer dessus avec la souris.  Remarquez aussi les trois « Entrée ».  Comme chaque option de la commande vous fait descendre dans un sous-niveau d’options de commande, vous devez écrire « _Enter » (Entrée) pour revenir au niveau supérieur.  Comme ce script est descendu de trois niveaux, la macro contient trois fois « Entrée » pour sortir complètement de la commande.
 
-**EnterEnd** is a good way to 'back out' of a command without the need to keep track of how many levels deep you've gone  - 
+**EnterEnd** est un bon moyen pour ressortir d’une commande sans avoir à compter le nombre de sous-niveaux dans lesquels vous êtes descendu. 
 
 <code>
   -_Options _Appearance _Visibility _Crosshairs _EnterEnd
 </code>
 
-Or, if you just use an exclamation point **!** at the end (which in a script means “end now!”), it takes you all the way out regardless of how many sub-levels you're in. Note, if you want to continue your macro with something else, do not use !, use the Enters instead, otherwise your macro will always stop at the ! and terminate.
+Ou, si vous utilisez tout simplement un point d’exclamation **!** à la fin (ce qui dans un script signifie « terminer maintenant ! »), vous ressortirez complètement de la commande, quel que soit le sous-niveau dans lequel vous vous trouvez. Attention : si vous voulez continuer votre macro avec autre chose, n’utilisez pas le point d’exclamation, mais plutôt Entrée, faute de quoi votre macro se terminera toujours au « ! ».
 
-The script simply toggles the crosshairs ON and OFF. But if you wanted a script that always turned them ON and another that always turned them OFF, here's what they would look like:
+Le script ACTIVE ou DÉSACTIVE simplement le pointeur en croix. Mais si vous voulez un script qui l’ACTIVE toujours et un autre qui le DÉSACTIVE toujours, voici à quoi cela ressemblerait :
 
-Always ON version:
+Version toujours ACTIVÉ :
 <code>
   -_Options _Appearance _Visibility
   _Crosshairs=_Show !
 </code>
-Always OFF version:
+Version toujours DÉSACTIVÉ :
 <code>
   -_Options _Appearance _Visibility
   _Crosshairs=_Hide !
 </code>
-Note the use of the **!** here. Also, note you can assign directly the values options can take on to that option using the '=' operator.  The Crosshairs option has two possible values, "Show" and "Hide", and thus, that's what is used in the assignment.
+Remarquez bien que nous utilisons un **!** ici. Remarquez aussi que vous pouvez assigner directement les valeurs disponibles pour les options en utilisant l’opérateur « = ».  L’option Pointeur en croix a deux valeurs possibles (« Afficher » (Show) et « Cacher » (Hide) et c’est donc ce qui est utilisé dans cette macro.
 
-(Thanks, Jeff)
+(Merci, Jeff)
 
-======Other useful macro writing tools and commands======
+======Autres outils et commandes utiles pour l’écriture de macros======
 
-There are some handy tricks for doing more complex macros.  One is the discriminating use of various selection filters, particularly **SelLast**, which selects the last object created/transformed, **SelPrev**,  which selects the previous input object, and **SelNone**, which deselects everything.  There are also possibilities to name objects, group them (and name the group) and then recall them later by that object name or group name.
+Voici quelques astuces pratiques pour écrire des macros plus complexes.  La première consiste à utiliser avec discernement différents filtres de sélection, en particulier **SélDerniers** (qui sélectionne le dernier objet créé/transformé), **SélPréc** (qui sélectionne le dernier objet sélectionné) et **RienSélectionner** (qui désélectionne tout).  Vous pouvez aussi nommer des objets, les grouper (et nommer le groupe) pour ensuite les rappeler plus tard en utilisant le nom d’objet ou de groupe que vous avez défini.
 
 <code>
-Select
-SelLast
-SelPrev
-SelNone
-SetObjectName
-SetGroupName
-SelGroup
-SelName
-Group
-Ungroup
+_Select (Sélectionner)
+_SelLast (SélDerniers)
+_SelPrev (SélPréc)
+_SelNone (RienSélectionner)
+_SetObjectName (DéfinirNomObjet)
+_SetGroupName (NommerGroupe)
+_SelGroup (SélGroupe)
+_SelName (SélNom)
+_Group (Grouper)
+_Ungroup (Dégrouper)
 </code>
-To set a single object name (this in itself is a macro!):
-<code>
-  _Properties _Pause _Object _Name
-  [put your object name here] _Enter _Enter
-</code>
-To cancel a single object name (without deleting the object)
+Pour définir le nom d’un seul objet (ce qui est déjà une macro !) :
 <code>
   _Properties _Pause _Object _Name
-  “ “ _Enter _Enter (quote space quote for the name)
+  [Insérez le nom de votre objet ici] _Enter _Enter
+</code>
+Pour annuler le nom d’un seul objet (sans supprimer l’objet)
+<code>
+  _Properties _Pause _Object _Name
+  “ “ _Enter _Enter (guillemets espace guillemets pour le nom)
 </code>
 
-=====Examples using the above tools=====
+=====Exemples d’utilisation des outils précédents=====
 
-Look at the following macro:
+Regardez la macro suivante :
 
 <code>
 _Select _Pause _Setredrawoff
@@ -235,11 +235,11 @@ _Delete _Sellast
 _BoundingBox _World _Enter
 _Delete _Setredrawon
 </code>
-It creates an offset bounding box around an object. The offset is input by the user.  See if you can follow the logical sequence.  The Setredrawoff/on stop/restart the screen refresh, eliminates the display flickering as all is executed and speeds up the process.  Beware, if you terminate the command before Setredrawon, you will think Rhino is dead, as the screen no longer updates.  If this happens, don’t panic, typing the command **Setredrawon** will restore the display refresh.
+Elle crée une boîte de contour décalée autour d’un objet. Le décalage est indiqué par l’utilisateur.  Essayez de suivre la séquence logique.  Les commandes DésactiverRégénération (_Setredrawoff) et ActiverRégénération (_Setredrawon) arrêtent ou redémarrent la réactualisation de l’écran, éliminent le vacillement de l’écran puisque tout est exécuté et accélèrent le processus.  Attention, si vous terminez la commande avant ActiverRégénération (_Setredrawon), vous allez croire que Rhino est tombé en panne car l’écran ne s’actualisera plus.  Si cela se produit, ne vous inquiétez pas, tapez la commande **ActiverRégénération** (_Setredrawon) pour rétablir le rafraichissement de l’affichage.
 
-**//As a final example,//** the following macro creates a point centered on a 2D planar or text object and grouped with it. It assumes that you're in the same view the text was created in, and that the object is really 2D and planar. (Otherwise it will likely fail.)
+**//En tant que dernier exemple,//** la macro suivante crée un point centré sur un objet plat en 2D ou un objet de texte et le groupe avec l’objet. Elle considère que vous êtes dans la même vue que celle dans laquelle le texte a été créé et que l’objet est réellement en 2D ou plat (autrement il est probable qu’elle échoue).
 
-Note the use of a named group and various selection commands.  The **NoEcho** command temporarily stops the reporting of information to the command line, which, combined with Setredrawoff/on makes the macro run without flashing and without too much info reported to command history.  It will run without those as well, though.
+Remarquez l’utilisation d’un groupe nommé et de plusieurs commandes de sélection.  La commande **CopierInvitesDésactivé** (_NoEcho) arrête temporairement le signalement d’information dans la ligne de commande, ce qui, combiné à DésactiverRégénération (_Setredrawoff) ou ActiverRégénération (_Setredrawon) fait fonctionner la macro sans faire clignoter l’affichage et sans qu’il n’y ait trop d’informations dans l’historique des commandes.  Toutefois, elle pourrait fonctionner sans.
 
 <code>
 _Select _Pause _Noecho _Setredrawoff
@@ -253,7 +253,7 @@ _Ungroup _Group _Setredrawon
 
 </code>
 
-//last edited: 28.08.19/msh//
+//Dernière modification : 28.08.19/msh//
 
-**Please feel free to add to or edit this tutorial!**
-This is a work in progress...
+**N’hésitez pas à ajouter des éléments ou à modifier ce tutoriel !**
+C’est un article en cours de développement...
