@@ -1,97 +1,118 @@
-======Comment Rhino pour Windows trouve un serveur Zoo ?======
+======Comment Rhino pour Windows trouve-t-il un serveur Zoo LAN ?======
 
-> **Produit :** //[[fr:zoo:home|Zoo]]//
-> **Résumé:** //Une brève explication pour savoir comment Rhino pour Windows trouve un serveur de gestionnaire de licences Zoo.//
+>**Produit :** //[[zoo:home|Zoo LAN]]//
+Résumé : //cet article offre un aperçu de la manière dont Rhino pour Windows trouve un serveur de gestionnaire de licences Zoo.//
 
 =====Présentation=====
 
-Lorsque Rhino doit extraire une licence sur un serveur de Zoo, il détermine le nom du serveur de Zoo en regardant dans les destinations suivantes, **dans cet ordre**:
-  - La racine de l'utilisateur actuel du registre de Windows. Il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo.
-  - La racine de l'Ordinateur local du registre de Windows. Il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo.
-  - Envoie une requête à votre serveur DNS (système de nom de domaine) pour demander le nom du serveur de Zoo par défaut.
-  
+Lorsque Rhino doit extraire une licence sur un serveur de Zoo LAN, il détermine le nom du serveur de Zoo LAN en examinant les emplacements suivants, dans cet ordre :
+  - La racine de l'utilisateur actuel du registre de Windows. Il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo LAN.
+  - La racine de l'ordinateur local du registre de Windows. Il recherche le nom de l'hôte ou l'adresse IP de votre serveur Zoo LAN.
+  - Il envoie une requête à votre serveur DNS (système de nom de domaine) pour demander le nom du serveur de Zoo LAN par défaut.
+ 
 =====Rhino 6, 7 ou 8 pour Windows=====
 
 ===Recherche dans le registre - Utilisateur actuel===
 
-Lorsque Rhino cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_CURRENT_USER du registre de Windows, il regarde dans ces destinations :
+Lorsque Rhino cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo LAN dans la section ''HKEY_CURRENT_USER'' du registre de Windows, il examine cet emplacement :
 
 <code>
-Racine :  HKEY_CURRENT_USER
-Clé:   Software\McNeel\Rhinoceros\6.0\License Manager
-Nom :  Serveur
-Type :  REG_SZ
-Valeur : <nom d'hôte ou adresse IP>
+Racine :  HKEY_CURRENT_USER
+Clé :   Software\McNeel\Rhinoceros\6.0\License Manager
+Nom :  Serveur
+Type :  REG_SZ
+Valeur : <nom d'hôte ou adresse IP>
 </code>
 
 ===Recherche dans le registre - Ordinateur local===
 
-Lorsque Rhino cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_LOCAL_MACHINE du registre de Windows, il regarde dans ces destinations : **SOFTWARE\Wow6432Node**
-  
+Lorsque Rhino cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo LAN dans la section ''HKEY_LOCAL_MACHINE'' du registre de Windows, il examine cet emplacement : **SOFTWARE\Wow6432Node**
+ 
 <code>
-Racine :  HKEY_LOCAL_MACHINE
-Clé:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager
-Nom :  Serveur
-Type :  REG_SZ
-Valeur : <nom d'hôte ou adresse IP>
+Racine :  HKEY_LOCAL_MACHINE
+Clé :   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager
+Nom :  Serveur
+Type :  REG_SZ
+Valeur : <nom d'hôte ou adresse IP>
 </code>
 
-> **Note:** //Le déploiement de Rhino à l'aide de la méthode [[rhino:installingrhino|Installation automatisée]] ainsi que l'exécution initiale de Rhino avec des privilèges élevés (c.-à-d. "Exécuter en tant qu'administrateur") entraîneront l'écriture du nom du serveur LAN Zoo dans HKEY_LOCAL_MACHINE.//
+>**Remarque :** //Le déploiement de Rhino à l'aide de la méthode d’[[rhino:installingrhino|installation automatisée]] ainsi que l'exécution initiale de Rhino avec des privilèges élevés (c.-à-d. "Exécuter en tant qu'administrateur") entraîneront l'écriture du nom du serveur LAN Zoo dans HKEY_LOCAL_MACHINE.//
 
-> Un fichier de clé de licence sera créé dans le dossier %programdata%. Il contient les détails de la clé permettant à Rhino de s'ouvrir. Exemple : 55500d41-3a41-4474-99b3-684032a4f4df.lic dans le gestionnaire de licences C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
+> Un fichier de clé de licence sera créé dans le dossier %programdata%. Il contient les détails de la clé permettant à Rhino de s'ouvrir. Exemple : 55500d41-3a41-4474-99b3-684032a4f4df.lic dans C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
 
-> Cliquez avec le bouton de droite sur l'icône de Rhino et sélectionnez "Exécuter en tant qu'administrateur." L'entrée du registre pour le zoo sera créée dans le gestionnaire de licences ComputerHKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\6.0\NLicense Manager
+> Cliquez avec le bouton de droite sur l'icône de Rhino et sélectionnez "Exécuter en tant qu'administrateur." L'entrée du registre pour le Zoo LAN sera créée dans Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\6.0\License Manager
 
 > Ouvrez Rhino normalement (sans droits de niveau supérieur) et la clé de registre est placée dans
 Computer\HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\License Manager
 
+=====Rhino pour Mac====
+Rhino examine l’emplacement suivant à la recherche d’un chemin pour le Zoo LAN :
+`/Users/Shared/McNeel/Rhinoceros/8.0/License Manager/LicensesZooClient.settings`
+
+
+Rhino créera ce fichier avec les contenus correspondants lorsque vous choisirez d’obtenir une licence de Rhino à partir du Zoo LAN. Copiez le fichier dans le même dossier sur d’autres ordinateurs pour terminer le déploiement.
 
 =====Rhino 5 pour Windows=====
 
 ===Recherche dans le registre - Utilisateur actuel===
 
-Lorsque Rhino 32 bits et 64 bits cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_CURRENT_USER du registre de Windows, il regarde dans ces destinations :
+Lorsque Rhino 32 bits et 64 bits cherche le nom d'hôte ou l'adresse IP de votre serveur de Zoo LAN dans la section ''HKEY_CURRENT_USER'' du registre de Windows, il examine cet emplacement :
 
 <code>
-Racine :  HKEY_CURRENT_USER
-Clé:   Software\McNeel\Rhinoceros\5.0\License Manager
-Nom :  Serveur
-Type :  REG_SZ
-Valeur : <nom d'hôte ou adresse IP>
+Racine :  HKEY_CURRENT_USER
+Clé :   Software\McNeel\Rhinoceros\5.0\License Manager
+Nom :  Serveur
+Type :  REG_SZ
+Valeur : <nom d'hôte ou adresse IP>
 </code>
 
 ===Recherche dans le registre - Ordinateur local===
-Si vous utilisez une version 32 bits de Windows, lorsque vous cherchez le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_LOCAL_MACHINE du registre de Windows, Rhino 32 bits cherchera dans ces destinations :
+Si vous utilisez une version 32 bits de Windows, lorsque vous cherchez le nom d'hôte ou l'adresse IP de votre serveur de Zoo LAN dans la section ''HKEY_LOCAL_MACHINE'' du registre de Windows, Rhino 32 bits examinera cet emplacement :
 
 <code>
-Racine :  HKEY_LOCAL_MACHINE
-Clé:   Software\McNeel\Rhinoceros\5.0\License Manager
-Nom :  Serveur
-Type :  REG_SZ
-Valeur : <nom d'hôte ou adresse IP>
+Racine :  HKEY_LOCAL_MACHINE
+Clé :   Software\McNeel\Rhinoceros\5.0\License Manager
+Nom :  Serveur
+Type :  REG_SZ
+Valeur : <nom d'hôte ou adresse IP>
 </code>
 
-Si vous utilisez une version 64 bits de Windows, lorsque vous cherchez le nom d'hôte ou l'adresse IP de votre serveur de Zoo dans la section HKEY_LOCAL_MACHINE du registre de Windows, Rhino 32 et 64 bits chercheront dans ces destinations :
+Si vous utilisez une version 64 bits de Windows, lorsque vous cherchez le nom d'hôte ou l'adresse IP de votre serveur de Zoo LAN dans la section ''HKEY_LOCAL_MACHINE'' du registre de Windows, Rhino 32 et 64 bits examineront les emplacements suivants :
 
 <code>
-Racine :  HKEY_LOCAL_MACHINE
-Clé:   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
-Nom :  Serveur
-Type :  REG_SZ
-Valeur : <nom d'hôte ou adresse IP>
+Racine :  HKEY_LOCAL_MACHINE
+Clé :   SOFTWARE\Wow6432Node\McNeel\Rhinoceros\5.0\License Manager
+Nom :  Serveur
+Type :  REG_SZ
+Valeur : <nom d'hôte ou adresse IP>
 </code>
 
 =====Utiliser le DNS=====
-Si Rhino ne peut pas déterminer le nom du serveur Zoo en cherchant dans le registre de Windows, il enverra une requête à votre serveur DNS concernant le serveur du Zoo par défaut, qui possède le nom d'hôte suivant :
+Si Rhino ne parvient pas à déterminer le nom du serveur Zoo LAN en cherchant dans le registre de Windows, il enverra une requête à votre serveur DNS concernant le serveur du Zoo par défaut, qui possède le nom d'hôte suivant :
 
 <code>
 __mcneel.__zoo5
 </code>
 
-Par exemple, si le domaine de votre entreprise est //entrep.com//, vous pouvez ajouter un alias DNS de //<nowiki>__mcneel.__zoo5.entrep.com"</nowiki>// qui indique votre serveur de Zoo.
+Par exemple, si le domaine de votre entreprise est //entrep.com//, vous pouvez ajouter un alias DNS de //<nowiki>__mcneel.__zoo5.entrep.com"</nowiki>// qui renvoie vers votre serveur de Zoo LAN.
 
 {{:zoo:dnsalias.png}}
 
 \\
+
+===== Informations supplémentaires concernant le DNS =====
+
+  * Si Rhino trouve un nom de serveur Zoo LAN dans le registre de Windows, il essaiera d’accéder à une licence exclusivement à partir de cet emplacement. 
+  * Si le nom du Zoo LAN trouvé dans le registre renvoie vers un enregistrement DNS A et que le système qui l’a renvoyé vers ce registre est désactivé, Rhino ne parviendra pas à obtenir une licence.
+  * D’autre part, si le nom du Zoo LAN trouvé dans le registre renvoie vers un enregistrement DNS CNAME, le serveur DNS renverra vers tout emplacement qui héberge un service de Zoo LAN en exécution.//Cela relève du fonctionnement standard du DNS//.
+  * Si Rhino ne trouve pas de nom de serveur Zoo LAN dans le registre de Windows, il cherchera une licence en essayant de traduire le nom du serveur automatique de 
+
+<code>
+__mcneel.__zoo5
+</code>
+
+comme indiqué ci-dessus.
+
+  * Nous vous recommandons de faire appel à un expert informatique pour configurer votre serveur DNS.  
 
 {{tag>Zoo}}

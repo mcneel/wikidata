@@ -1,7 +1,32 @@
-====== Rhino per Mac - Preferenze ======
-Di seguito alcune procedure per la gestione delle preferenze di Rhino per Mac.
+====== Rhino per Mac - Impostazioni ======
 
-Rhino per Mac 5.3.2 e versioni successive e tutte le build di Rhino 6 per Mac offrono 3 comandi utili per la gestione delle preferenze:
+Di seguito alcune procedure per la gestione delle impostazioni/preferenze di Rhino per Mac.
+
+
+====== Rhino 8 per Mac ======
+
+In Rhino 8 per Mac, puoi ripristinare le Impostazioni/Preferenze usando il comando **Reimposta**.
+
+{{:rhino:mac:rhino-for-mac-reset.png?400|}}
+
+È possibile riportare ai valori di default alcune o tutte le impostazioni di Rhino 
+
+Il pulsante //Salvare le impostazioni per ricevere supporto...// consente di creare un file zip di tutte le impostazioni per finalità di archiviazione (utile per inviarlo agli sviluppatori di McNeel per la diagnosi).
+
+Rhino 8 per Mac archivia le impostazioni nella cartella seguente:
+
+///Users/[iltuonome]/Library/Application Support/McNeel/Rhinoceros/[versione]/settings//
+
+Ogni volta che esegui il comando  **Reimposta** per ripristinare le impostazioni, Rhino salva una copia di backup nella cartella:
+
+///Users/[iltuonome]/Library/Application Support/McNeel/Rhinoceros/[data-backup-versione]//
+
+in modo da poter essere recuperate in caso di errore del compado Reimposta.
+====== Versioni precedenti di Rhino ======
+
+:!: The following information is out-of-date, but is provided for legacy versions of Rhino. :!: 
+
+Rhino per Mac, dalla versione 5 alla 7, fornisce tre comandi per la gestione delle preferenze:
 
   - **ExportPreferences**: consente di esportare le preferenze del file .plist per scopi di backup o condivisione.
   - **ImportPreferences**: consente di importare selettivamente le preferenze da un file .plist.
@@ -9,30 +34,36 @@ Rhino per Mac 5.3.2 e versioni successive e tutte le build di Rhino 6 per Mac of
 
 Si consiglia di utilizzare i comandi descritti in alto per la gestione delle preferenze.  Tuttavia, in caso di problemi con le preferenze, è possibile utilizzare la seguente procedura manuale.
 
-==== Salvare una copia delle preferenze correnti di Rhino per Mac ====
+==== Salvare una copia delle preferenze correnti di Rhino per Mac - OBSOLETO  ====
   - **Esci** da Rhino.
   - Nel **Finder**, tenere premuto il tasto **Opzione** e selezionare **Libreria** sul menu **Vai**.
-  - Aprire la cartella **Preferenze**.
-  - Cercare il file **com.mcneel.rhinoceros.plist**.  Selezionare **Duplica** facendo clic con il tasto destro del mouse sul menu contestuale per effettuare una copia.  La copia verrà chiamata **com.mcneel.rhinoceros copy.plist**.  (**NOTA**: In Rhino 7 o versione successiva, il file delle preferenze include un numero di versione come: com.mcneel.rhinoceros.7.plist)
+  - Apri la cartella **Preferenze**.
+  - Cerca il file **com.mcneel.rhinoceros.plist**.  Seleziona **Duplica** facendo clic con il tasto destro del mouse sul menu contestuale per effettuare una copia.  La copia verrà chiamata **com.mcneel.rhinoceros copy.plist**.  **NOTA**: In Rhino 7 o versione successiva, il file delle preferenze include un numero di versione come: com.mcneel.rhinoceros.7.plist)
 
-==== Reimpostare le preferenze di Rhino ====
-Seguire questa procedura per rimuovere tutte le preferenze di Rhino modificate per riportarle ai valori originali.
+==== Reimpostare le preferenze di Rhino - OBSOLETO  ====
+Segui questa procedura per rimuovere tutte le preferenze di Rhino modificate per riportarle ai valori originali.
 
   - **Uscire** da Rhino.
-  - Aprire l'applicazione **Terminale** nella cartella **Applicazioni** > **Utility**. \\ Apparirà una finestra con un prompt dei comandi.
-  - Digitate **defaults delete com.mcneel.rhinoceros** e premete Invio. **NOTA**: In Rhino 7 o versione successiva, il file delle preferenze include un numero di versione come: com.mcneel.rhinoceros.7.plist.
+  - Apri l'applicazione **Terminal** nella cartella **Applicazioni** > **Utility**. \\ Apparirà una finestra con un prompt dei comandi.
+  - Digita **defaults delete com.mcneel.rhinoceros** e premi Invio. 
+**NOTA**: In Rhino 7 o versione successiva, il file delle preferenze include un numero di versione come: 
+
+**defaults delete com.mcneel.rhinoceros.7.plist**
+
+**defaults delete com.mcneel.rhinoceros.8.plist**
+
   - Attendere finché il prompt di Terminale non viene visualizzato nuovamente L'operazione potrebbe richiedere 15-20 secondi.
-  - Uscire dall'applicazione Terminale.
+  - Uscire dall'applicazione Terminal.
 
-==== Ripristinare le preferenze di Rhino salvate ====
-Seguire questa procedura per sostituire tutte le preferenze di Rhino attuali con una copia salvata precedentemente.
+==== Ripristinare le preferenze di Rhino salvate - OBSOLETO  ====
+Segui questa procedura per sostituire tutte le preferenze di Rhino attuali con una copia salvata precedentemente.
 
   - **Uscire** da Rhino.
-  - Nel Finder, tenere premuto il tasto **Opzione** e selezionare **Libreria** sul menu Vai.
-  - Aprire la cartella **Preferenze**.
-  - Cercare il file **com.mcneel.rhinoceros.plist**.  Trascinarlo nel Cestino.  **NOTA**: In Rhino 7 o versione successiva, il file delle preferenze include un numero di versione come: com.mcneel.rhinoceros.7.plist)
+  - Nel Finder, tieni premuto il tasto **Opzione** e seleziona **Libreria** sul menu Vai.
+  - Apri la cartella **Preferenze**.
+  - Cerca il file **com.mcneel.rhinoceros.plist**.  Trascinarlo nel Cestino.  **NOTA**: In Rhino 7 o versione successiva, il file delle preferenze include un numero di versione come: com.mcneel.rhinoceros.7.plist)
   - Rinominare il file con le preferenze salvate precedentemente inserendo **com.mcneel.rhinoceros.plist**.
     - Nota: se il file plist salvato viene spostato in un'altra cartella, occorre trascinarlo nuovamente nella cartella **preferenze**.
-  - Aprire  l'applicazione Terminale in Applicazioni > Utility. \\ Apparirà una finestra con un prompt dei comandi.
-  - Digitare **defaults read com.mcneel.rhinoceros** e premere Invio.  Varranno visualizzate numerose informazioni sulla finestra di Terminale.
-  - Uscire dall'applicazione Terminale.
+  - Apri l'applicazione Terminal in Applicazioni > Utility. \\ Apparirà una finestra con un prompt dei comandi.
+  - Digitare **defaults read com.mcneel.rhinoceros** e premere Invio.  Varranno visualizzate numerose informazioni sulla finestra di Terminal.
+  - Esci dall'applicazione Terminal.

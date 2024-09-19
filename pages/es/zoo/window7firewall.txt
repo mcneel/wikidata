@@ -1,14 +1,19 @@
-======Abrir el puerto TCP 80 en el firewall de Windows 7======
+======Abrir el puerto TCP 80 en el firewall de Windows======
 > **Producto:** //[[home|Zoo]]//
 > **Resumen.** //Muestra cómo abrir el puerto TCP 80 en el firewall de Windows 7.//
 
-Tenga en cuenta que el puerto 80 debe estar abierto para que la comunicación entre y salga del firewall. No es adecuado simplemente abrir el puerto 80 en la aplicación del Zoo. Los clientes de Rhino no podrán comunicarse con el Zoo a menos que realice el siguiente procedimiento en el firewall del servidor del Zoo.
+Zoo se comunica con los clientes de Rhino a través del puerto TCP 80 (HTTP).
 
-===== IMPORTANTE =====
-No es aceptable abrir el tráfico entrante y saliente del puerto solo para el //programa// o el //servicio//.
-Deben establecerse las reglas solo para el //**puerto**// como se indica en el paso 6 o //**no**// funcionará. 
+Después de instalar Zoo, debe asegurarse de que el puerto TCP 80 está abierto, tanto para las comunicaciones entrantes como salientes, en el software de firewall que se ejecuta en el sistema del servidor de Zoo.
+
+**Nota:** El puerto TCP 80 está abierto para las comunicaciones salientes de forma predeterminada en la mayoría de software de firewall. Por lo tanto, no debería tener que abrir ningún puerto en el software de firewall que se ejecuta en las estaciones de trabajo de Rhino.
+
+**Nota:** El instalador del Zoo abre el firewall de Windows en el servicio de Zoo en el puerto 80 solo para la subred local. Si sus estaciones de trabajo están en otras subredes, deberá cambiar la propiedad "Alcance" del servicio del firewall de Windows para permitir el acceso a todas las demás subredes que lo necesiten.
 
 ==== Pasos====
+Las siguientes instrucciones son para abrir el puerto TCP 80 en el firewall de Windows -- el software de firewall de Windows. Si utiliza un firewall alternativo, consulte la documentación pertinente.
+
+> <color red>**Importante: no es conveniente abrir el tráfico entrante y saliente del puerto solo para el programa o el servicio. Debe crear reglas para el __puerto__ como se indica a continuación en el paso 6, o __no__ funcionará**. </color>
 
 1. Abra el **Panel de control** desde el menú Inicio.
 

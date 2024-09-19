@@ -1,5 +1,5 @@
 ====== Desinstalar Rhino manualmente ======
-//El siguiente proceso se aplica a Rhino 4 y versiones posteriores (incluidos Rhino 5, 6 y 7).//
+//El siguiente proceso se aplica a Rhino 4 y versiones posteriores (Rhino 5, 6, 7 y 8)//
 \\
 
 =====Problema=====
@@ -12,22 +12,26 @@ Haga clic en Aceptar para volver a intentarlo o introduzca una ruta alternativa 
 La caché del instalador de Windows no puede encontrar un archivo o la clave de registro necesarios para la desinstalación. Se trata de un problema común causado por el servicio del instalador de Windows. La mejor solución es usar la herramienta **Windows Installer Clean Up** para eliminar por completo la instalación anterior. Después de “limpiar” la instalación anterior, podrá reinstalar Rhino y realizar una instalación válida.
 
 
-=====Resolución - Pasos 1, 2 y 3=====
 Elimine manualmente Rhino y el registro del instalador de Windows del producto.
 Necesitará tener //privilegios de administrador// en su equipo para completar este proceso.
 
-====Ejecute la desinstalación del programa====
+====1. Ejecute la desinstalación del programa====
   - Cierre la aplicación Rhino.
   - Vaya a la búsqueda de Windows.
   - Escriba **Aplicación y características** (o **Agregar y quitar** programas)
   - Busque el programa ** Rhinoceros x.0 ** en la lista y haga clic en el botón **Desinstalar**.
-
   
-====Eliminar la carpeta de instalación de Rhino==== 
+====2. Eliminar la carpeta de instalación de Rhino==== 
   - Vaya a //C:\Archivos de programa\//.
-  - Elimine **Rhinoceros 4.0** o **Evaluación de Rhinoceros 4.0**.
+  - Elimine la carpeta **Rhinoceros x** o **Evaluación de Rhinoceros x**.
+
+====3. Eliminar las carpetas de Rhino==== 
+  - Vaya a la carpeta %AppData%\Roaming\McNeel\Rhinoceros.
+  - Elimine la carpeta **x.0** donde x es la versión de Rhino.
+  - Vaya a la carpeta %ProgramData\McNeel\Rhinoceros
+  - Elimine la carpeta **x.0** donde x es la versión de Rhino.
   
-====Eliminar claves del registro:====
+====4. Eliminar claves del registro:====
   - Vaya a la búsqueda de Windows y escriba **Editor del registro**.
   - Abra el **Editor del registro**. 
   - Busque //HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros//.
@@ -35,7 +39,13 @@ Necesitará tener //privilegios de administrador// en su equipo para completar e
   - Vaya a //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros//.
   - Elimine la clave **x.0**. Por ejemplo, Rhino 4.0, 5.0 o cualquier versión de Rhino que esté eliminando.
 
-====Opcional====
+====5. Reiniciar====
+  - Instale todas las actualizaciones de Windows.
+  - Si tiene pensado reinstalar, descargue la última versión de Rhino [[https://www.rhino3d.com/download/|desde aquí]].
+
+_________________
+
+=====Opcional=====
 Solo debería realizar los siguientes procedimientos si se produce un error al desinstalar desde **Programas y características**.
 ===Ejecutar el parche de desinstalación de Microsoft===
   - Visite http://support.microsoft.com/mats/program_install_and_uninstall

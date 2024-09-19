@@ -1,0 +1,174 @@
+======Comprendre les performances d'affichage dans Rhino ======
+
+===== Question : =====
+//Pourquoi y a-t-il un décalage lorsque je navigue dans la vue en perspective et les vues de mise en page avec le mode d'affichage Rendu ? 
+J'ai installé une carte graphique plus performante, la nouvelle RTX A4000, mais je n'ai constaté aucune amélioration par rapport à mon ancienne carte (Quardo P2200). //
+  
+
+//Lorsque je lance la commande 'PlatineTournante' et que je regarde les performances dans le gestionnaire des tâches, tout est en dessous de 50 % d'utilisation (avec la carte 2200 le processeur graphique était au maximum, alors qu'avec la carte A4000, il atteint 44 %). 
+Cependant, en mode Lancer de rayons la performance s'élève à 100 % dans le gestionnaire des tâches.//
+{{:rhino:cpu_bottle_neck_01.jpg?500|}}
+===== Réponse : =====
+
+==== Le test de performance du gestionnaire des tâches n'est pas le bon outil ====
+
+Examinons quelques-uns des problèmes liés à l'utilisation du gestionnaire des tâches pour mesurer les performances.
+
+Le mode Lancer de rayons avec Cycles utilise 100 % du processeur graphique (GPU) pour tout ; il est donc normal qu'il fonctionne à plein régime la plupart du temps (La platine tournante n'est pas conçue pour fonctionner avec le mode Lancer de rayons de Cycles.). Le mode Lancer de rayons utilise le GPU à 100 %, bien que l'affichage puisse sembler lent.
+{{:rhino:cpu_bottle_neck_02.jpg?500|}}
+
+De même, la taille du fichier n'a rien à voir avec les performances d'affichage. Cependant, **toute** la géométrie doit être traitée et maillée par l'unité centrale (CPU) avant que le processeur graphique ne prenne le relais. 
+
+**//Ainsi, lorsque vous avez l'impression que l'affichage est lent, il s'agit probablement en réalité d'un goulot d'étranglement au niveau du CPU.//**
+
+==== Le goulot d'étranglement de l'unité centrale ====
+La différence entre le CPU et le GPU apparaît très clairement lorsque l'on prend un exemple avec 100 000 objets, tous différents et avec des caractéristiques d'affichage (comme le matériau) légèrement distinctes.   
+
+Rhino doit exécuter 100 000 itérations et dessiner 100 000 objets, un par un, pour chaque image.  
+Rhino utilise le GPU pour dessiner chaque objet, mais c'est au CPU que reviennent les tâches de gestion et d'itération des 100 000 objets.
+
+**Il se crée alors un goulot d'étranglement au niveau du CPU.**
+En d'autres termes, le temps nécessaire au GPU pour dessiner un objet est négligeable par rapport au temps que prend le CPU pour :
+  - traiter l'objet ;
+  - le préparer au dessin ;
+  - et enfin transmettre le maillage au GPU.
+
+**Analyser les performances du GPU dans le gestionnaire des tâches n'est pas la bonne approche, car vous ne verrez pratiquement aucune activité du processeur graphique étant donné que la plus grande partie du délai de traitement est attribuable au CPU.** 
+
+C'est ce qui se passe lorsque vous observez que les performances du GPU s'élèvent à 27 % (ou un chiffre similaire) en mode d'affichage Rendu. Ce n'est pas le processeur graphique qui est en cause ; il attend tout simplement que le CPU fasse son travail.
+
+[[https://www.wepc.com/tips/cpu-gpu-bottleneck|{{:rhino:cpu_bottle_neck.jpg?400|}}]]
+==== Géométrie similaire : instanciation dans l'affichage ====
+Imaginons à présent que ces 100 000 objets soient tous semblables. Rhino pourrait alors tous les dessiner en une seule fois en envoyant un seul appel au GPU.
+
+Un test de l'exécution du GPU montrerait alors une utilisation massive du processeur graphique, puisqu'il serait en train de dessiner les 100 000 objets de A à Z.
+
+Bien entendu, c'est souvent plus compliqué que cela car tous les objets ne se ressemblent pas... mais le concept est toujours le même. 
+
+//Le GPU ne sera presque jamais le goulot d'étranglement de l'affichage de Rhino, en particulier pour les modèles haut de gamme. L'essentiel du temps consacré au dessin des objets est dû à la gestion des objets et des attributs/matériaux de Rhino.//
+
+Rhino a essayé d'améliorer cet aspect au fil des ans en augmentant autant que possible la charge de travail sur le GPU, mais le problème du CPU et de l'itération de grands ensembles de données en général demeure. 
+
+//**On recommande habituellement aux utilisateurs qui rencontrent ces problèmes de commencer par changer le CPU (plus de cœurs et une vitesse de traitement plus élevée), ensuite d'ajouter de la mémoire système et finalement de changer la carte graphique.**//
+
+==== Maillage d'abord, rendu ensuite ====
+Commencer par le maillage permet de libérer le CPU et d'envoyer plus rapidement les objets au GPU.
+Tous les maillages sont envoyés au processeur graphique, une fois et une seule. 
+
+Le processus consiste à :
+  - Exécuter la commande ToutSélectionner (en supposant que tous les calques et toutes les géométries dont vous souhaitez obtenir le rendu sont visibles) ;
+  - Réaliser le maillage des objets avec la commande Maillage ;
+  - Exécuter les commandes SélMaillages et InverserSél ;
+  - Cacher (cette opération cache toutes les polysurfaces qui devraient être maillées par le CPU. Comme c'est déjà pratiquement fait, le CPU peut complètement ignorer cette étape.)
+
+Voici à quoi ressemble la performance dans le gestionnaire des tâches lorsque nous procédons comme expliqué ci-dessus et que la commande PlatineTournante est exécutée. Maintenant, le GPU reçoit les objets à afficher deux fois plus vite, ce qui multiplie les performances par deux.
+
+
+==== Instancier pour les performances d'affichage ====
+Une polysurface peut avoir de nombreuses faces. Prenons l'exemple d'un cube.
+
+Un cube a 6 faces.
+Dans Rhino V5/V6, nous dessinions un cube en utilisant 6 appels de dessin distincts... un pour chaque face.
+Rhino V7/V8 a été amélioré de sorte que le logiciel traite les 6 faces, qui sont exactement de la même taille et ont le même matériau, avec un seul appel de dessin.
+Cela représente une diminution de la surcharge d'appels de 600 %.
+
+Quel rôle jouent les "deux moniteurs haute résolution" dans le ralentissement de la navigation ?
+N'oubliez pas qu'il ne s'agit que de la "surcharge d'appels" et non de la performance générale.
+
+Ainsi, si la surcharge d'appels prenait 30 % du temps total consacré au dessin pour un modèle donné, et que ce modèle était composé principalement de polysurfaces, la surcharge d'appels ne prendrait plus que 5 % du temps de dessin total, ce qui se traduirait par une hausse de 25 % des performances.
+
+==== Calculer le rendu avec un maillage ====
+Cet exercice démontrera à la perfection pourquoi il est extrêmement peu probable que le GPU soit le goulot d'étranglement.
+
+Si vous effectuez le maillage de tous les objets, puis que vous joignez tous les maillages en un seul maillage géant et disjoint, vous pourrez constater la rapidité du processus. La seule restriction dans ce cas est qu'il n'est possible de définir qu'un seul matériau pour l'ensemble du maillage. 
+
+Encore une fois, c'est parce que vous avez maintenant diminué la surcharge correspondant à l'appel d'objet et de dessin à un seul appel de dessin d'objet.
+
+Commencez par suivre les étapes expliquées précédemment (1 à 4).
+Bien entendu, veillez à ce que toutes les polysurfaces restent cachées. Cachez tout sauf les maillages.
+Exécutez les commandes SélMaillages
+, Joindre 
+et PlatineTournante.
+//
+Vous n'avez plus qu'un seul grand maillage.//
+Évidemment, les matériaux utilisés pour le rendu seront les mêmes et les ombres seront identiques.
+Vous pouvez maintenant vérifier la vitesse et les performances pour ce maillage avec un seul matériau.
+
+Ce maillage est envoyé vers le GPU (une seule fois), et à partir de là, Rhino dit simplement au processeur graphique "Allez, dessine ce maillage !”.
+
+Ce rendu avec un seul maillage et un seul matériau ne vous satisfera certainement pas, mais cela vous permet de vous rendre compte de la différence de vitesse.
+
+Le fait de dessiner 1 seul objet plutôt que 100 peut nettement améliorer les performances.
+Ce n'est pas parce que le GPU est "plus" utilisé... c'est parce que Rhino (le CPU) a moins à travailler.
+
+==== Achetez un GPU pour de bonnes raisons ====
+L'achat d'un nouveau GPU n'apportera probablement aucune amélioration lorsque le goulot d'étranglement vient de l'unité centrale.
+
+Le modèle va toujours se bloquer au niveau du CPU et le processeur graphique continuera à attendre.
+
+=== L'analogie de la voiture de course ===
+{{:rhino:cpu_bottle_neck_03.jpg?400|}}
+
+J'ai une berline à quatre portes des années 90 qui se trouve sur la ligne de départ.  Je ne peux pas démarrer tant que tous mes pneus n'ont pas été changés et que mon réservoir n'a pas été rempli d'essence.
+
+Il faut 8 minutes à mon équipe pour tout préparer. Une fois au sol, j'atteins la ligne d'arrivée en 15 secondes... Le temps total est donc de 8:15 (8 minutes, 15 secondes).
+
+J'achète maintenant une voiture italienne ultramoderne... et je prends le départ.
+Mon équipe met toujours 8 minutes pour tout préparer. Une fois au sol, il ne me faut plus que 5 secondes pour atteindre la ligne d'arrivée (300 % plus rapide). Je mets donc en tout 8:5 (8 minutes, 5 secondes)…
+
+L'équipe est le CPU et la voiture, le GPU. La berline ancienne est l'Intel et la voiture moderne est la RXT Quadro.
+
+Si vous voulez vraiment que Rhino soit plus rapide, vous devrez d'abord investir dans un CPU plus rapide... et seulement ensuite améliorer les performances avec un meilleur GPU.
+
+Les GPU plus rapides fonctionneront mieux avec Rhino, mais pas parce que l'outil d'analyse des performances du GPU est au maximum. Avoir une RTX reste une excellente option.
+
+==== En bref ====
+//Vérifiez que le CPU fait bien son travail, ensuite le GPU suivra.//
+
+Il est certain qu'un GPU plus performant capable de dessiner plus rapidement les objets accélérera le processus.
+Mais le niveau d'accélération dépendra essentiellement du temps que le CPU consacrera au traitement de la géométrie avant de l'envoyer au GPU.
+
+===Autres facteurs importants concernant les performances d'affichage :===
+
+  * Mauvais objets https://wiki.mcneel.com/fr/rhino/badobjects
+  * Configuration du maillage  https://wiki.mcneel.com/fr/rhino/meshfaq 
+
+==== Quels sont les autres éléments qui ralentissent les performances ? ====
+=== Les mises en page ===
+Elles ralentissent le traitement en raison de la surcharge.
+Vous pouvez essayer de réduire la surcharge en liant le fichier au modèle.
+Établissez par exemple un maximum de 10 mises en page par modèle.
+L'impression sera alors fragmentée et les PDF devront être post-traités dans un éditeur de PDF.
+Vous vous dites peut-être que cette fragmentation n'en vaut pas la peine... Personnellement, je pense que si.
+
+=== Les blocs ===
+Ils peuvent ralentir l'affichage.
+N'utilisez des blocs que si l'instanciation est nécessaire.
+
+
+=== La lumière d'occlusion ambiante dans le mode d'affichage ===
+Ce paramètre dans le mode d'affichage ralentit le traitement. Essayez la "lumière par défaut" ou la "lumière de scène" dans votre mode d'affichage pour améliorer les performances.
+
+
+=== Les matériaux de rendu ===
+Valent-ils la peine ? À mon avis, oui.
+
+---
+
+=== Alias utiles ===
+== Maillage de la géométrie ==
+**ME**	!_ToutSélectionner -entrer le maillage _RienSélectionner
+
+==Sélectionner les maillages, inverser la sélection, cacher le reste==
+**IH**	!_SélMaillages InverserSél Cacher
+
+==TestVitesseMax==
+**TMS**	!_TestVitesseMax
+
+---
+
+Documents source :
+  * Conversations avec Jeff Lasor, développeur du canal d'affichage de Rhino.
+  * Compilé par Mary Ann Fugier
+  * Envoyez vos questions par e-mail à mary@mcneel.com
+  * 10/14/2022

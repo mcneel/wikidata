@@ -1,0 +1,22 @@
+===== STEP File Format =====
+
+The [[https://en.wikipedia.org/wiki/ISO_10303|STEP file]] (Standard for the Exchange of Product Data) format is a great format for exchanging NURBS engineering data. It is a popular engineering programs such as CATIA, Creo, SolidWorks, NX, Inventor, etc.  STEP will exchange the NURBS Solids and the Part and assembly project structure into Rhino.    
+
+Part and Assembly files structures are quite different from Rhino's layer based structure.  but in a project situation retaining that organization of parts and assemblies can be beneficial.  Rhino translates parts and assemblies into Blocks and block instances.
+
+==== Major STEP format version ====
+
+Rhino supports a series of STEP Application Protocols (APs). Each AP contains different levels of information.
+
+  *  **AP203 - ConfigControlDesign**. This is the default format. AP203 defines geometry, topology, and configuration management data of solid models for mechanical parts and assemblies. Primarily supported by aerospace and defense. Configuration controlled 3d design of mechanical parts and assemblies. 
+  *  **AP214 - AutomotiveDesign**. Popular for automotive industry mechanical design processes. Includes AP203 plus colors, layers, GD&T (geometric dimensioning and tolerance) and design intent.
+  *  **AP214 - AutomotiveDesignCC2**. Updated minor syntax change from AP214.  Not required often, but replaces the older AP214. 
+  *  **AP242 - Managed model-based 3D engineering**. Newest standard that merges STEP AP 203 and AP 214 to create a single standard for model-based 3D engineering. Technically replaced all other APs in 2014. New in Rhino 8.
+
+==== STEP File Utilities ====
+
+Use these Utilites to inspect STEP files. This can really help with troubleshooting file exchange problems.
+
+    *  [[https://www.nist.gov/services-resources/software/step-file-analyzer-and-viewer|STEP File Analyzer]] most detailed way to study STEP files.
+    *  [[https://pages.nist.gov/CAD-PMI-Testing/graphical-pmi-viewer.html|STEP File Viewer - Part with graphic PMI]] reads AP242 files.
+    *  [[https://stpviewer.com/|Free STP File Viewer]] Simple program to inspect parts assembly hierarchy.

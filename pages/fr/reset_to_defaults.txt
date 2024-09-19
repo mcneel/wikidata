@@ -1,0 +1,61 @@
+====== Réinitialiser les paramètres par défaut de Rhino ======
+Par [[mary@mcneel.com|Mary Ann Fugier]]
+
+{{ ::reset.jpg?250|}}
+===== Rhino 8 (ou version postérieure) pour Windows et pour Mac =====
+
+  - Ouvrez Rhino
+  - Tapez la commande **Réinitialiser**
+  - Dans la boîte de dialogue, sélectionnez les options de réinitialisation.
+
+Pour en savoir plus à propos de la commande Réinitialiser, cliquez [[https://docs.mcneel.com/rhino/8/help/fr-fr/toolbarsandmenus/windowlayout.htm#Reset|ici]].
+
+//Remarque :// Il s’agit d’une *nouvelle* commande de Rhino 8. 
+
+
+===== Rhino 6 et 7 pour Windows =====
+  * Ce processus comporte 4 étapes : supprimer les options personnalisées et le fichier xmls de position des fenêtres.
+  * Désactiver tous les modules.
+  * Fermer les menus des modules.
+  * Restaurer la barre d’outils par défaut.
+
+
+1. Pour commencer, vous allez réinitialiser les **options de Rhino** : fermez Rhino.
+ 
+Dans l’**explorateur de fichiers**, allez dans le dossier **C:\Utilisateurs\<UTILISATEUR>\AppData\Roaming\McNeel\Rhinoceros\6.0\settings** (<UTILISATEUR> étant le nom de l’utilisateur connecté). Astuce : dans la ligne de commande de l’explorateur de fichiers, tapez **%appdata%** et naviguez jusqu’au dossier **Roaming\McNeel\Rhinoceros\6.0\settings**.
+
+Déplacez ou supprimez les fichiers suivants : {{ ::settings_folder.png?nolink&300|}} 
+<code>
+settings-Scheme__Default.xml 
+window_positions-Scheme__Default.xml
+</code>
+
+Si vous déplacez ces fichiers vers un dossier que vous nommerez ANCIENS ou SAUVEGARDE vous pourrez les restaurer plus tard en les redéplaçant.
+Rhino recréera ces fichiers avec les paramètres par défaut s’il ne les trouve pas.
+ 
+2. Ouvrez Rhino.
+
+3. {{ ::undefined:plugins.png?nolink&300|}} 
+Pour **désactiver les modules** qui ne sont pas livrés avec Rhino, allez dans Options -> Modules et sélectionnez le filtre "Modules non livrés avec Rhino". Décochez-les. 
+
+
+
+
+
+
+4. Fermez et redémarrez Rhino.
+
+
+
+5. {{ ::toolbars.png?nolink&300|}} Fermez les **barres d'outils de Rhino** qui ne sont pas les barres d’outils par défaut. Ouvrez Options -> Barres d’outils.
+ 
+Sélectionnez les barres d’outils qui ont été ajoutées par un module ou qui sont personnalisées. 
+
+
+6. {{ ::toolbars_close.png?nolink&300|}} Dans le menu Fichier, cliquez sur **Fermer la barre d’outils**. Recommencez cette opération afin de ne laisser que la barre d’outils par défaut.
+
+
+7. Enfin, pour réinitialiser les **barres d’outils**, dans la ligne de commande de Rhino, tapez **RéinitialiserBarreOutils**. 
+ 
+8. Fermez et redémarrez Rhino.
+Vous devriez à présent voir Rhino tel qu’il était lorsque vous l’avez installé pour la première fois.

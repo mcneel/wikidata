@@ -1,0 +1,34 @@
+====== Redist_MSWebView2_Standalone:-2147219198 ======
+
+
+===== Rhino 8 installation failed =====
+
+If you encounter a Rhino 8 installation failure and the final error code shows as Redist_MSWebView2_Standalone:-2147219198, here's how you can resolve the issue...
+
+{{ :zh:rhino:rhino8_redist_msvebview2.jpg?400 |}}
+
+
+The installation hangs for a long time on the "Installing Microsoft Edge Updated" screen before failing.
+{{ :zh:rhino:rhino8_redist_msvebview2_1.jpg?400 |}}
+
+
+And the main error appearing in the installation log file is as follows:
+
+  * [1408:0D58][2024-08-12T10:24:57]e000: Error 0x80040902: Process returned error: 0x80040902
+  * [1408:0D58][2024-08-12T10:24:57]e000: Error 0x80040902: Failed to execute EXE package.
+  * [4AD8:4ADC][2024-08-12T10:24:57]e000: Error 0x80040902: Failed to configure per-machine EXE package.
+  * [4AD8:4ADC][2024-08-12T10:24:57]i319: Applied execute package: Redist_MSWebView2_Standalone, result: 0x80040902, restart: None
+  * [4AD8:4ADC][2024-08-12T10:24:57]e000: Error 0x80040902: Failed to execute EXE package.
+  * [1408:0D58][2024-08-12T10:24:57]i351: Removing cached package: Redist_MSWebView2_Standalone, from path: C:\ProgramData\Package Cache\BBCEF5847FAC589E7205DF908E819EA0DF803CBA\
+
+==== Cause of installation failure ====
+
+This issue is caused by your current Windows being unable to properly install //MicrosoftEdgeWebView2RuntimeInstallerX64.exe//. Please open Windows File Explorer, go to //C:\Program Files (x86)\Microsoft//, and ensure that all files (including protected system hidden files) are visible. Locate and delete the three protected system files: edgecore, edgewebview, and temp. Afterward, restart Windows and reinstall Rhino 8.
+
+
+{{ :zh:rhino:rhino8_redist_msvebview2_2.jpg?400 |}}
+
+==== Forced removal the files ====
+
+Since these three files are part of the Windows system and cannot usually be deleted directly, you will need to use some powerful deletion tools to remove them. I recommend using  [[https://www.diskgenius.com/manual/delete-files-permanently.php | DiskGenius]], [[https://www.diskgenius.com/manual/delete-files-permanently.php | For more details, please check here. 👈]]
+

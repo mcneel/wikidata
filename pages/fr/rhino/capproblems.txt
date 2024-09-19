@@ -1,0 +1,77 @@
+====== Problèmes pour boucher des objets ======
+
+>//Explication d’erreurs communes avec la fonction Boucher et suggestions pour y remédier.//
+
+**Une question qui revient fréquemment** sur le forum de Rhino est la suivante : //"Pourquoi mon extrusion solide n’est-elle pas fermée ?"// ou //"Pourquoi je ne parviens pas à boucher cet objet ?"// 
+
+Dans le cas de la commande **Extruder**, à l’heure actuelle Rhino n’affiche ni message d’erreur ni explication des raisons pour lesquelles la commande n’a pas fonctionné comme prévu. Elle échoue silencieusement et laisse l’utilisateur novice se demander ce qu’il a bien pu faire pour que la commande ne fonctionne pas.  
+
+Dans le cas de la commande **Boucher**, le message **Impossible de boucher cet objet** s’affiche, ce qui n’est pas très utile pour diagnostiquer le problème.  Nous espérons que les explications et conseils donnés sur cette page pourront vous aider...
+
+=====Les extrusions qui ne sont pas bouchées...=====
+
+==== Commencez par vérifier s’il y a des mauvais objets====
+
+Les conseils suivants partent du principe que vos objets sont valides.  Donc, avant de commencer, lancez **SélMauvaisObjets** et vérifiez que tous vos objets sont valides (ils ne devraient pas être sélectionnés).  Si votre modèle contient des objets invalides, réparez-les avant de poursuivre.  [[rhino:badobjects|Pour en savoir plus à propos des mauvais objets, cliquez ici.]]
+
+====C’est bon, mes objets sont valides. Mais alors, quel est le problème ?====
+
+Pour boucher une surface, Rhino doit avoir une courbe plane fermée.  Si l’extrusion d’une courbe //en théorie// plane et fermée ne se bouche pas, alors que vous avez choisi **Extruder** dans le menu des solides ou cliqué sur **boucher=oui** dans la ligne de commande, il y a quelque chose qui ne va pas...
+
+**//Soit ://**
+
+1) la courbe que vous utilisée n’est pas fermée ; soit\\ 
+2) elle n’est pas vraiment plane.
+
+====La courbe n’est pas fermée====
+
+Sans boucle fermée, Rhino ne peut pas dessiner une courbe de limite complète pour créer les surfaces de l’extrémité.  L’objet sera extrudé, mais comme Rhino ne trouve pas de courbe fermée complète pour limiter la surface de l’extrémité, celle-ci ne sera pas créée et votre extrusion restera ouverte.  Dans Rhino 4, aucun message d’erreur n’apparaît dans ce cas.
+
+<color darkslateblue>**//Comment savoir si votre courbe est ouverte ?  Plusieurs solutions ://**</color>
+
+  * Lancez la commande **SélCourbesOuvertes** et voyez si votre courbe est sélectionnée.
+  * Lancez la commande ** SélCourbesFermées** et voyez si votre courbe n’est pas sélectionnée.
+  * Sélectionnez la courbe et allez dans **Propriétés>Info** (ou utilisez la commande **Info**). Vous devriez voir si la courbe est fermée ou ouverte.
+
+Il existe différentes méthodes pour fermer une courbe ouverte en fonction de la nature du problème...
+
+<color darkslateblue>**//Pour commencer, trouvez l’ouverture ://**</color>
+
+Les commandes **DépartCourbe** ou **FinCourbe** placeront un point au début ou à la fin de la courbe, et c’est là que vous trouverez l’ouverture.
+
+Vous pouvez alors activer les points et essayer de positionner un point d’extrémité sur l’autre avec Accrochage Points ou modifier l’objet pour le fermer.
+
+====La courbe n’est pas plane====
+
+Si vous avez vérifié et que la courbe __est__ bien fermée (elle n’a pas été sélectionnée avec la commande **SélCourbesOuvertes**, ou a été sélectionnée avec **SélCourbesFermées**, ou vous avez vu dans les **Propriétés** que c’est une courbe fermée), mais que l’extrusion ne se bouche pas, il est quasiment certain que votre courbe n’est pas plane. Il suffit d’une différence microscopique pour faire échouer la commande.
+
+<color darkslateblue>**//Que faire dans ce cas ?//**</color>
+
+Vous pouvez utiliser la commande **Projeter sur le plan de construction** ou **DéfinirPt** et mettre la courbe à niveau.  Si après cela votre extrusion se bouche, c’est que le problème venait bien de là.
+
+==== Remarque importante====
+Il est possible que votre courbe soit à la fois **ouverte //et// non plane**...  :-)\\ Vous devrez donc peut-être résoudre les deux problèmes !\\ 
+\\ 
+
+----
+
+
+=====Des objets existants ne sont pas bouchés=====
+
+De façon similaire à une extrusion qui n’est pas bouchée, vous pouvez aussi avoir une polysurface ouverte existante qui devrait selon vous être bouchée mais qui ne l’est pas.
+
+Dans ce cas, l’**//ouverture//** à boucher doit être considérée comme la courbe que vous vouliez extruder dans le premier exemple. Ainsi, la boucle qui la définit est soit **//ouverte//** soit //**non planaire**.//
+
+Elle est peut-être ouverte si la polysurface n’est pas complètement jointe. Vous pouvez activer les bords libres pour voir s’il y a d’autres bords libres en plus des bords ouverts à boucher.
+
+Ou, l’ouverture qui était **//selon vous//** plane ne l’est en fait pas.
+
+Dans les deux cas, les réparations requises seront un peu plus complexes que pour une simple courbe.
+
+  * Dans le premier cas, vous devrez réparer les surfaces pour qu’elles se rejoignent sans aucun bord libre, à l’exception de l’ouverture que vous voulez boucher.
+
+  * Dans le deuxième, vous devez déterminer où la boucle n’est pas plane et réparer les surfaces problématiques afin qu’elles forment une boucle plane une fois jointes.
+
+//J’espère que cette petite explication aura permis de vous aider.//
+
+

@@ -1,0 +1,19 @@
+====== Comment faire pour que Dessin2D fonctionne mieux ? ======
+
+**Dessin2D** est l’un des points faibles de Rhino ; et pourtant c’est une fonction essentielle pour beaucoup d’utilisateurs.  Vous trouverez ci-dessous quelques conseils issus de diverses discussions entre //professionnels// sur le forum de Rhino.
+
+  * **Dessin2D** ne fonctionne pas avec les objets situés derrière la caméra. Assurez-vous donc qu’il n’y en a pas dans votre scène. Pour les vues où la caméra est dans le modèle, vous devrez peut-être dessiner un plan représentant la position de la caméra, découper le modèle à cet endroit et supprimer/cacher tout ce qui se trouve derrière la caméra. 
+  * **Cachez** tous les objets qui sont déjà complètement cachés derrière d’autres objets dans la scène.  Pour cela, vous pouvez tout simplement utiliser la commande **SélVisible** dans votre scène, puis **Inverser** la sélection.  Vous pourrez alors cacher tous les objets sélectionnés.
+  * **Cachez** (ou simplifiez) des objets contenant beaucoup de détails qui seront petits dans Dessin2D (par exemple le filetage des vis).  Il n’est pas intéressant de calculer toutes ces intersections et projections pour quelque chose qui ne sera au final que quelques pixels sur le dessin généré.
+  * **Joignez** toutes les **surfaces** en polysurfaces autant que possible. Partout où les bords des surfaces coïncident, Rhino doit calculer deux bords au lieu d’un. Vérifiez s’il y a des superpositions.
+  * **Cachez** toutes les **courbes** si possible. Elles sont plus longues à calculer.  C’est particulièrement vrai pour les courbes qui coïncident avec des bords de surfaces.  Elles sont de toute façon redondantes, alors cachez-les ou supprimez-les.
+  * Lancez une recherche de mauvais objets (**SélMauvaisObjets**) et réparez-les si nécessaire !
+  * Si possible, vérifiez que la géométrie incluse dans Dessin2D reste entièrement à l’intérieur des bordures de la vue (sans les toucher). Cela ne sera peut-être pas possible pour les intérieurs.
+  * Diminuer la **tolérance absolue** par un ordre de grandeur (par exemple de 0,001 à 0,01) aide énormément. Souvenez-vous simplement que la précision de votre Dessin2D final n’ira plus au-delà. N’oubliez pas non plus de remettre ensuite la tolérance d’origine.  Pour plus d’informations sur les tolérances dans Rhino, consultez la discussion suivante : [[rhino:faqtolerances|Comprendre les tolérances]].
+
+Et...  **Votre système fait également la différence**.
+
+  * Avec un système 64 bits équipé d’autant de mémoire RAM que possible et d’un processeur multi-cœur, vous pourrez avoir un Dessin2D fonctionnant en arrière-plan.  Quoi qu’il en soit, pour un grand Dessin2D, nous recommandons d’exporter la scène vers un nouveau fichier spécifique pour le Dessin2D et de réaliser toutes les opérations suggérées sur cette page dans le nouveau fichier.
+
+Complié par Mitch 8.02.09
+
