@@ -1,0 +1,18 @@
+====== Rhino 8 Mac with Enscape Reporting "License Not Found" ======
+Rhino 8 Mac with Enscape installed, sometimes reports "License not found" error and will not open.
+
+This happens may happen because Rhino was not initialized  be Enscape was install and Enscape created ~/Library/Application Support/McNeel with wrong permissions.
+
+The "fix" is to remove Enscape and all supporting files and then re-install and run Rhino **first** before re-installing Enscape.
+ 
+  - Restart your Mac.
+  - Make sure Rhino 8 is not running.
+  - Launch Terminal.
+  - rm -rf /Users/Shared/McNeel and press enter.
+  - Remove the folders that Enscape created.
+  - (a) If Rhino 7 is installed and working and you only want to fix Rhino 8, run rm -rf ~/Library/Application\ Support/McNeel/Rhinoceros/8.0
+  - (b)Otherwise, run rm -rf ~/Library/Application\ Support/McNeel
+  - Start Rhino 8
+  - With Rhino successfully starting, now you can reinstall Enscape
+
+If this does not work, contact [[https://www.rhino3d.com/support/|McNeel Technical Support]] tech@mcneelcom.
