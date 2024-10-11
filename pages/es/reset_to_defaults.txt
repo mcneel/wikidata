@@ -1,0 +1,61 @@
+====== Restaurar Rhino a sus valores predeterminados ======
+Por [[mary@mcneel.com|Mary Ann Fugier]]
+
+{{ ::reset.jpg?250|}}
+===== Para Rhino 8 (o posterior) para Windows y Mac =====
+
+  - Abra Rhino.
+  - Escriba el comando **Restablecer**.
+  - En el diálogo, seleccione las opciones de restablecimiento.
+
+Consulte más información sobre el comando Restablecer [[https://docs.mcneel.com/rhino/8/help/es-es/toolbarsandmenus/windowlayout.htm#Reset|aquí]].
+
+//Nota:// Este comando es **nuevo** en Rhino 8. 
+
+
+===== Para Rhino 6 y 7 para Windows =====
+  * Se hace en 4 pasos: borrar las opciones personalizadas y el archivo xmls de posición de ventana.
+  * Desactive los plugins.
+  * Cierre sus menús.
+  * Restaure la barra de herramientas a sus valores predeterminados.
+
+
+1. Restablezca las **Opciones de Rhino**: cierre Rhino.
+ 
+En **Explorador de archivos**, vaya a la carpeta **C:\Usuarios\<USUARIO>\AppData\Roaming\McNeel\Rhinoceros\6.0\settings** donde <USUARIO> es el usuario que ha iniciado sesión. Sugerencia: en la barra de entrada del Explorador de archivos, escriba **%appdata%** y vaya a la carpeta **Roaming\McNeel\Rhinoceros\6.0\settings**.
+
+Mueva o elimine estos archivos: {{ ::settings_folder.png?nolink&300|}} 
+<code>
+settings-Scheme__Default.xml 
+window_positions-Scheme__Default.xml
+</code>
+
+Moverlos a una carpeta ANTIGUO o GUARDADO le permitirá restaurar estos archivos más tarde recuperándolos.
+Rhino los recreará con la configuración predeterminada cuando no se encuentren.
+ 
+2. Abra Rhino.
+
+3. {{ ::undefined:plugins.png?nolink&300|}} 
+**Desactive los plugins** que no se suministran con Rhino: Opciones -> Plugins -> Filtrar en Plugins que "no se suministran con Rhino". Desmárquelos todos. 
+
+
+
+
+
+
+4. Cierre y vuelva a abrir Rhino.
+
+
+
+5. {{ ::toolbars.png?nolink&300|}} Cierre cualquier **barra de herramientas de Rhino** que no sea la Predeterminada de Rhino. Vaya a Opciones -> Barras de herramientas.
+ 
+Seleccione una barra de herramientas que haya añadido un plugin o que sea personalizada. 
+
+
+6. {{ ::toolbars_close.png?nolink&300|}} En el menú Archivo, seleccione **Cerrar barra de herramientas**. Repita este paso dejando solo la predeterminada.
+
+
+7. Restablezca las **Barras de herramientas**: en Rhino, escriba **RestablecerBarrasDeHerramientas**. 
+ 
+8. Cierre y vuelva a abrir Rhino.
+Rhino debería tener ahora el mismo aspecto que tenía cuando se instaló por primera vez.
