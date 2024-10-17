@@ -1,6 +1,6 @@
 
 ====== Mover licencias de Rhino de Zoo LAN a Cloud Zoo ======
-Haga que sus licencias de Rhino 6, Rhino 7 y Rhino 8 para Windows y Mac estén disponibles para los usuarios desde cualquier parte del mundo.
+Haga que sus licencias de Rhino 6, 7 y 8 (para Windows y Mac) estén disponibles para los usuarios desde cualquier parte del mundo con una conexión a Internet.
 
 //No se requiere una conexión permanente a Internet. Solo se necesita acceso ocasional cada dos semanas. //
 
@@ -8,45 +8,45 @@ Haga que sus licencias de Rhino 6, Rhino 7 y Rhino 8 para Windows y Mac estén d
 
 === A - Recopile la información necesaria ====
 
-  - Abra la consola LAN Zoo Admin en el servidor de Zoo LAN.
-  - Busque los números de serie: en la consola de LAN Zoo Admin, los números de serie de Rhino 6 se verán así: ' 6-1NN-NNN-NNNNN-NNNNN''.
-  - Encuentre sus códigos de licencia: busque los correos electrónicos que recibió cuando compró las licencias de Rhino 6. Contienen los números de serie del paso anterior. Los códigos de licencia se verán así: "RH60-NNNN-NNNN-NNNN-NNNN''. ** No continúe hasta que tenga todos los códigos de licencia.**
+  - Abra la consola Zoo LAN Admin en el servidor de Zoo LAN.
+  - Busque los números de serie: en la consola de Zoo LAN, los números de serie de Rhino 6 se verán así: ' 6-1NN-NNN-NNNNN-NNNNN''.
+  - Encuentre sus códigos de licencia: busque los correos electrónicos que recibió cuando compró las licencias de Rhino 6. Contienen los números de serie del paso anterior. Los códigos de licencia se verán así: "RH60-NNNN-NNNN-NNNN-NNNN''. **No continúe hasta que tenga todos los códigos de licencia.** Encuentre sus códigos de licencia V7 y V8 de la misma manera.
   - //Opcional:// Si tiene previsto crear un [[https://www.rhino3d.com/6/new/licensing-and-administration#domain-linked-team|grupo vinculado por dominio]], asegúrese de que tiene acceso al servidor web de su dominio o contacte con un administrador de TI que lo tenga.
 
-=== B - Cree una cuenta de Cloud Zoo ===
+=== B - Cree una cuenta de inicio de sesión ===
 
   - Si todavía no dispone de una cuenta, visite https://accounts.rhino3d.com para crear una cuenta que administre este grupo.
 
-=== C - Cree un grupo de Cloud Zoo ===
+=== C - Cree un grupo de licencias ===
 
   - https://accounts.rhino3d.com/help#create_group
   - //Opcional:// Invite a otros usuarios a ser administradores de este grupo: https://accounts.rhino3d.com/help#invite_group_members
   - //Opcional:// Vincule un dominio a su grupo en https://accounts.rhino3d.com/help#link_domain
 
-=== D - Configure Zoo LAN y la red ===
-//Para eliminar su licencia de Zoo LAN y agregarla a Cloud Zoo sin la ayuda de McNeel, debe asegurarse de que Zoo LAN está actualizado y su red está configurada correctamente. Si no lo hace, tendrá problemas en el paso siguiente: "Agregar sus licencias a Cloud Zoo".//
+=== D - Configure el Zoo LAN y la red ===
+//Para eliminar su licencia del Zoo y agregarla a Cloud Zoo sin la ayuda de McNeel, debe asegurarse de que el Zoo LAN está actualizado y su servidor anfitrión puede acceder a Internet.//
 
-  - Instale la última versión de Zoo LAN desde https://www.rhino3d.com/download/zoo/latest
-  - Desde su servidor de Zoo LAN, abra un navegador web y visite https://api.mcneel.com
-    - Si no puede ver esa página web, contacte con el administrador de red para abrir el acceso a https://api.mcneel.com
+  - Instale la última versión de Zoo LAN desde https://www.rhino3d.com/download/zoo/7/latest
+  - Desde su servidor anfitrión de Zoo LAN, abra un navegador web y visite https://api.mcneel.com
+    - Si no puede ver esa página web, contacte con el administrador de red para abrir el acceso a https://api.mcneel.com. Es necesario para devolvernos las validaciones de licencia y que puedan volver a utilizarse.
 
 
 === E - Elimine licencias de Zoo LAN ===
 
-  - Abra la consola LAN Zoo Admin.
-  - Seleccione una o más licencias de Rhino para eliminar.
+  - Abra la consola Zoo LAN Admin
+  - Seleccione la licencia de Rhino que desea eliminar
   - Haga clic en el botón "Delete" de la barra de herramientas.
 
 Tenga en cuenta que no puede eliminar las licencias que están en uso. Tiene dos opciones:
 
   * Póngase en contacto con todos los usuarios y avíseles que cierren Rhino.
-  * Desconecte Zoo LAN de la red y espere 15 minutos. Así se recuperarán todas las licencias, como si todos los Rhinos de su LAN se hubieran bloqueado.
+  * Desconecte el Zoo LAN de la red y espere 15 minutos. Así se recuperarán todas las licencias, como si todos los Rhinos de su LAN se hubieran bloqueado.
 
-=== F - Agregue licencias a Cloud Zoo ===
+=== F - Agregue licencias al nuevo Cloud Zoo ===
 
   - Visite https://www.rhino3d.com/licenses.
-  - Haga clic en su grupo.
-  - Haga clic Agregar licencia
+  - Haga clic en el nombre de su grupo.
+  - Haga clic en Agregar licencia.
   - Introduzca su código de licencia y haga clic en Agregar licencia.
 
 === G - Invite a usuarios al grupo ===
@@ -77,6 +77,6 @@ Para automatizar este proceso:
   - Para Rhino 7, elimine el archivo %PROGRAMDATA%\mcneel\rhinoceros\6.0\license manager\licenses\59FF75C9-9C71-4EF8-A290-6B590F3FC63A.lic (sí, está en la carpeta rhinoceros\6.0)
   - A los usuarios se les pedirá una licencia, indíqueles que tienen que hacer clic en "Iniciar sesión".
 
-
+Volver a la [[https://wiki.mcneel.com/es/rhino_accounts/home|página principal de Cloud Zoo]].
 {{tag>CloudZoo}}
 {{tag>Zoo}}
