@@ -1,7 +1,32 @@
-====== Rhino für Mac - Optionen ======
-Im Folgenden finden Sie einige Möglichkeiten zur Verwaltung Ihrer Optionensammlung von Rhino für Mac.
+====== Rhino für Mac - Einstellungen ======
 
-Rhino für Mac 5.3.2 und neuer, und alle Builds von Mac Rhino 6, enthalten drei zur Verwaltung Ihrer Einstellungen geeigneten Befehle:
+Im Folgenden finden Sie einige Möglichkeiten zur Verwaltung Ihrer Sammlung von Einstellungen/Optionen für Rhino für Mac.
+
+
+====== Rhino 8 für Mac ======
+
+In Rhino 8 für Mac können Sie Ihre Einstellungen/Optionen mit dem Befehl **Reset** zurücksetzen.
+
+{{:rhino:mac:rhino-for-mac-reset.png?400|}}
+
+Einige oder alle Rhino-Einstellungen können auf ihre Standardwerte zurückgesetzt werden.
+
+Mit der Schaltfläche //Einstellungen für Support speichern...// können Sie alle Ihre Einstellungen für die Archivierung als Zip-Datei komprimieren (und sie so etwa dem McNeel-Entwicklungsbüro zur Diagnose zukommen lassen).
+
+Rhino 8 für Mac speichert seine Einstellungen im folgenden Ordner:
+
+///Benutzer/[IhrName]/Library/Application Support/McNeel/Rhinoceros/[Version]/settings//
+
+Sooft sie **Zurücksetzen** zum Zurücksetzen Ihrer Einstellungen verwenden, speichert Rhino eine Sicherungskopie im Ordner
+
+///Benutzer/[IhrName]/Library/Application Support/McNeel/Rhinoceros/[Version-Sicherung-Datum]//
+
+So können Sie im Falle einer unbeabsichtigten Zurücksetzen jederzeit wieder aufgefunden werden.
+====== Ältere Versionen von Rhino ======
+
+:!: Die folgende Information ist veraltet, wird jedoch für die Legacy-Versionen von Rhino bereitgestellt. :!: 
+
+Rhino für die Mac in den Versionen 5 und 7 enthält diese Befehle zur Verwaltung Ihrer Einstellungen:
 
   - **EinstellungenExportieren**: zum Exportieren der .plist-Datei Ihrer Einstellungen, für ein Backup oder zum Teilen.
   - **EinstellungenImportieren**: zum Importieren ausgewählter Einstellungen aus einer .plist-Datei.
@@ -9,22 +34,28 @@ Rhino für Mac 5.3.2 und neuer, und alle Builds von Mac Rhino 6, enthalten drei 
 
 Die oben genannten Befehle werden zur Verwaltung der Einstellungen dringend empfohlen.  Sollten Sie jedoch mit Ihren Einstellungen Schwierigkeiten haben, stehen auch die folgenden manuellen Vorgehensweisen zur Verfügung...
 
-==== Speichern einer Kopie der aktuellen Optionen von Rhino für Mac ====
+==== Speichern einer Kopie der aktuellen Optionen von Rhino für Mac - ALT  ====
   - **Beenden** Sie Rhino vollständig.
   - Halten Sie im **Finder**-Menü die **Wahltaste** gedrückt und wählen Sie aus dem Menü **Gehe zu** den Eintrag **Library**.
   - Öffnen Sie den Ordner **Preferences**.
   - Suchen Sie die Datei **com.mcneel.rhinoceros.plist**.  Klicken Sie mit der rechten Maustaste darauf und wählen Sie im Kontextmenü **Duplizieren**.  Die Kopie erhält automatisch den Namen **com.mcneel.rhinoceros copy.plist**.  (**HINWEIS**: In Rhino 7 oder neuer enthält die Einstellungen-Datei eine Versionsnummer, zum Beispiel: com.mcneel.rhinoceros.7.plist)
 
-==== Rhino-Optionen zurücksetzen ====
+==== Rhino-Optionen zurücksetzen - ALT ====
 Mit der folgenden Methode können Sie alle benutzerdefinierten Rhino-Einstellungen rückgängig machen und die Ursprungswerte wiederherstellen.
 
   - **Schließen** Sie Rhino.
   - Öffnen Sie das **Terminal** im Ordner **Programme** > **Dienstprogramme**. \\ Daraufhin wird ein Fenster mit einer Eingabeaufforderung geöffnet.
-  - Geben sie dort **defaults delete com.mcneel.rhinoceros** ein und drücken Sie die Eingabetaste. (**HINWEIS**: In Rhino 7 oder neuer enthält die Einstellungen-Datei eine Versionsnummer, zum Beispiel: com.mcneel.rhinoceros.7.plist)
+  - Geben sie dort **defaults delete com.mcneel.rhinoceros** ein und drücken Sie die Eingabetaste. 
+**HINWEIS**: In Rhino 7 oder neuer enthält die Einstellungen-Datei eine Versionsnummer, zum Beispiel: 
+
+**defaults delete com.mcneel.rhinoceros.7.plist**
+
+**defaults delete com.mcneel.rhinoceros.8.plist**
+
   - Warten Sie bis die Eingabeaufforderung im Terminal wieder erscheint. Dies kann 15-20 Sekunden dauern.
   - Schließen Sie das Terminal.
 
-==== Rhino-Optionen wiederherstellen ====
+==== Gespeicherte Rhino-Optionen wiederherstellen - ALT ====
 Auf die folgende Weise können Sie alle aktuellen Rhino-Optionen mit einer vorher erstellten Kopie ersetzen.
 
   - **Schließen** Sie Rhino.
