@@ -1,0 +1,71 @@
+====== Installare Rhino for Windows in un laboratorio didattico ======
+Il problema di installare Rhino su computer di laboratori o aule è che spesso funziona solo per l’amministratore. Tuttavia, quando un utente con privilegi limitati di utente accede al computer, Rhino non si apre e indica che non è possibile trovare una licenza.
+
+La configurazione di Rhino per l’utilizzo del server LAN Zoo si divide in due parti. 
+
+1. La **Chiave di registro**: Specifica il nome del server LAN Zoo DNS (opzione preferita) o l’indirizzo IP.
+L’indirizzo IP viene reimpostato se si tratta di indirizzi IP dinamici. L’indirizzo IP è necessario per eliminare l’indirizzo IP dall’intervallo dinamico.
+
+2. Archivia il **file di licenza** sul computer locale.
+
+Occorre eseguire correttamente questa operazione solo una volta 
+Se eseguita correttamente, gli utenti che accedono al computer possono aprire ed eseguire Rhino.
+
+Il principale problema a qui è che l’amministratore (Admin) scrive nel registro nell’hive dell’utente Admin. Questo accade quando Rhino viene aperto normalmente e viene inserito il nome del server LAN Zoo.
+Quando gli utenti accedono al computer, non hanno i permessi per leggere queste informazioni.
+
+La soluzione è scrivere la chiave di registro nell’area HKEY_LOCAL_MACHINE -> SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License Manager.
+Ciò consente agli utenti sul computer di visualizzare la chiave del server.
+Questa operazione viene eseguita quando apriamo Rhino come amministratore e viene scritta la chiave del server LAN Zoo.
+
+===== Come installare Rhino in un laboratorio didattico  =====
+
+1. [[https://wiki.mcneel.com/zoo/home|Scarica e installa Zoo]] e[[https://wiki.mcneel.com/zoo/rhinovalidate|aggiungi la chiave LAB di Rhino]].
+
+2. Esegui l’accesso al computer degli studenti come **Admin** o con un altro account che consenta l’installazione
+
+3. Scarica il [[https://www.rhino3d.com/download/|programma di installazione attuale di Rhino]] e procedi con l’installazione.
+
+4. Al termine, troverai un’icona di Rhino sul desktop.
+{{ :zoo:rhino_7_menu. |}}
+
+5. Fai clic con il tasto destro del mouse sull’icona Apparirà il menu.
+
+6. Seleziona l’opzione ** Esegui come amministratore**.
+
+//Perché?// Questo passo è importante. Come Admin, Rhino verrà eseguito con privilegi elevati e potrà scrivere la chiave nell’hive **HKEY_LOCAL_MACHINE** a cui possono fare riferimento gli utenti. Se apri solo con il tasto sinistro del mouse, Rhino scrive la chiave nell’hive **HKEY_CURRENT_USER** e nessun utente potrà farvi riferimento.
+
+{{ :zoo:rhino_01.png?200|}}
+
+7. Appare un messaggio che indica che Rhino richiede una licenza. Selezionare //Ho letto e accetto//.
+
+8. Fare clic sul pulsante **Opzioni** che appare nell’angolo inferiore sinistro. 
+
+9. Seleziona **Usa Lan Zoo**.
+
+{{:zoo:use_lan_zoo.png?200|}}
+
+10. Seleziona **Usa il server Zoo con il seguente nome host o l’indirizzo IP.** Inserisci il nome host o l’indirizzo IP nel campo di testo. 
+
+{{:zoo:dnsoripzoo.png?200|}}
+
+Fai clic sul pulsante **Continua**.
+
+11. Rhino dovrebbe aprirsi. 
+
+12. Chiudi Rhino ed esegui il logout come **Admin**. Accedi come studente o come utenti con privilegi inferiori.
+
+13. Apri Rhino. 
+
+//Perché si apre?//
+Mediante l’accesso come srudente, Rhino guarda nell’hive HKEY_CURRENT_USER e rileva che non è presente nessuna chiave per il server LAN Zoo. Continua a guardare nell’hive HKEY_LOCAL_MACHINE e rileva la chiave scritta precedentemente da Admin. Rhino quindi contatta il server LAN Zoo con nome attraverso la porta TCP 80 e viene usata una licenza di Rhino. Verifica anche la licena con il file di licenza locale in C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
+
+**Riferimento:** 
+
+[[https://wiki.mcneel.com/it/zoo/findzooserverwin|Come Rhino per Windows trova un server LAN Zoo?]]
+
+\\
+
+{{tag>Zoo}}
+
+Lastedit: Sept-15-2023
