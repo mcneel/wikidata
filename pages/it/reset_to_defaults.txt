@@ -1,0 +1,61 @@
+====== Riportare Rhino alle impostazioni di default ======
+Di [[mary@mcneel.com|Mary Ann Fugier]]
+
+{{ ::reset.jpg?250|}}
+===== Rhino 8 (o versione successiva) per Windows e Mac =====
+
+  - Apri Rhino.
+  - Digita il comando **Reimposta**.
+  - Sulla finestra di dialogo, scegli le opzioni di ripristino.
+
+Consulta [[https://docs.mcneel.com/rhino/8/help/it-it/toolbarsandmenus/windowlayout.htm#Reset|qui]] le informazioni sul comando Reimposta.
+
+//Nota:// Si tratta di un comando **nuovo** in Rhino 8. 
+
+
+===== Rhino 6 e 7 per Windows =====
+  * Il processo include 4 passi: elimina le opzioni personalizzate e i file xml di posizione della finestra.
+  * Disattiva tutti i plug-in.
+  * Chiudi i menu di eventuali plug-in.
+  * Reimposta la barra strumenti di default.
+
+
+1. Reimposta le **Opzioni di Rhino**: Chiudi Rhino.
+ 
+In **Esplora file**, apri la cartella **C:\Users\<USER>\AppData\Roaming\McNeel\Rhinoceros\6.0\settings**, dove <USER> è l’utente che ha eseguito l’accesso. Suggerimento: nella barra di input di Esplora file, digita **%appdata%** e apri la cartella **Roaming\McNeel\Rhinoceros\6.0\settings**.
+
+Sposta o elimina questi file {{ ::settings_folder.png?nolink&300|}} 
+<code>
+settings-Scheme__Default.xml 
+window_positions-Scheme__Default.xml
+</code>
+
+Se li sposti in una cartella chiamata OLD o SAVE, potrai recuperarli in un qualunque momento.
+Rhino crea questi file con le impostazioni di default quando non li trova.
+ 
+2. Apri Rhino.
+
+3. {{ ::undefined:plugins.png?nolink&300|}} 
+**Disattiva i plug-in** non forniti con Rhino: Opzioni -> Plug-in -> e nell’elenco seleziona “Plug-in non forniti con Rhino". Deseleziona questi plug-in. 
+
+
+
+
+
+
+4. Chiudi e riavvia Rhino.
+
+
+
+5. {{ ::toolbars.png?nolink&300|}} Chiudi le **barre strumenti di Rhino** che non sono quelle di default di Rhino. Apri Opzioni -> Barre strumenti.
+ 
+Seleziona una barra strumenti aggiunta da un plug-in o personalizzata. 
+
+
+6. {{ ::toolbars_close.png?nolink&300|}} Dal menu File, scegli **Chiudi barra strumenti**. Ripeti l’operazione e mantieni solo le barre strumenti di default.
+
+
+7. Reimposta le **Barre strumenti**: In Rhino, digita **ToolBarReset**. 
+ 
+8. Chiudi e riavvia Rhino..
+Rhino torna allo stato della prima installazione.
