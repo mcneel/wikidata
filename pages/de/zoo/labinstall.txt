@@ -1,9 +1,9 @@
-====== Rhino für Windows in einer Studenten-Lab installieren ======
+====== Installation von Rhino für Windows in einer Studenten-Lab ======
 Das Problem beim Installieren von Rhino auf Lab- oder Schulcomputern ist oft, dass es für den Administrator funktioniert. Wenn sich jedoch ein Anwender mit weniger Rechten in den Computer einlggt, kann Rhino nicht mehr starten und meldet, dass es keine Lizenz findet.
 
-Die Konfigurierung von Rhino zur Verwendung eines Zoo-Servers geschieht in zwei Schritten. 
+Die Konfigurierung von Rhino zur Verwendung eines LAN Zoo-Servers geschieht in zwei Schritten. 
 
-1. Der **Registrierungsschlüssel**: Geben Sie den Zoo-DNS-Servernamen (vorzugsweise) oder IP an.
+1. Der **Registrierungsschlüssel**: Geben Sie den LAN-Zoo-DNS-Servernamen (vorzugsweise) oder die IP an.
 IP wird zurückgesetzt wenn Sie dynamische IPs verwenden. (Sie brauchen den IP, um den IP aus dem dynamischen Bereich zu entfernen.)
 
 2. Schreiben Sie die **Lizenzdatei** auf den lokalen Computer.
@@ -11,16 +11,16 @@ IP wird zurückgesetzt wenn Sie dynamische IPs verwenden. (Sie brauchen den IP, 
 Korrekt ausgeführt, ist dies nur einmal notwendig. 
 In diesem Fall kann danach jeder, der sich in den Computer einloggt, auch Rhino öffnen und ausführen.
 
-Das Hauptproblem besteht hier darin, dass der Administrator in der Admin-Benutzerstruktur in die Registrierung schreibt. Dies geschieht, wenn Rhino normal geöffnet und der Zoo-Servername eingegeben wird.
+Das Hauptproblem besteht hier darin, dass der Administrator in der Admin-Benutzerstruktur in die Registrierung schreibt. Dies geschieht, wenn Rhino normal geöffnet und der LAN Zoo-Servername eingegeben wird.
 Wenn sich normale Anwender in den Computer einloggen, sind sie nicht zum Lesen dieses Bereichs berechtigt.
 
 Die Lösung besteht darin, den Registrierungsschlüssel in den Managerbereich HKEY_LOCAL_MACHINE -> SOFTWARE\Wow6432Node\McNeel\Rhinoceros\6.0\License zu schreiben.
 So wird jedem Anwender des Computers gestattet, den Serverschlüssel einzusehen.
-Dies ist möglich, wenn Sie Rhino als Admin öffnen und den Zoo-Serverschlüssel schreiben.
+Dies ist möglich, wenn Sie Rhino als Admin öffnen und den LAN-Zoo-Serverschlüssel schreiben.
 
-===== Installation von Rhino in einer Studenten-Lab =====
+===== Installation von Rhino in einer Lab =====
 
-1. [[https://wiki.mcneel.com/de/zoo/home|Laden Sie den Zoo herunter und installieren Sie ihn]] und [[https://wiki.mcneel.com/zoo/rhinovalidate|fügen Sie Ihren Rhino-Studenten-Schlüssel hinzu]].
+1. [[https://wiki.mcneel.com/de/zoo/home|Laden Sie den Zoo herunter und installieren Sie ihn]] und [[https://wiki.mcneel.com/de/zoo/rhinovalidate|fügen Sie Ihren Rhino-LAB-Schlüssel hinzu]].
 
 2. Loggen Sie sich als **Administrator** im Studenten-Computer ein, oder mit jeglichem Konto das eine Installation ermöglicht.
 
@@ -58,11 +58,11 @@ Klicken Sie auf die Schaltfläche **Weiter**.
 13. Öffnen Sie Rhino. 
 
 //Warum lässt es sich öffnen?//
-Wenn Sie sich als Student eingeloggt haben, sucht Rhino im Bereich HKEY_CURRENT_USER und stellt fest, dass kein Schlüssel für den Zoo-Server vorhanden ist. Die Suche im Bereich HKEY_LOCAL_MACHINE wird fortgesetzt, bis der zuvor vom Asministrator geschriebene Schlüssel gefunden ist. Rhino kontaktiert dann den benannten Zoo-Server über den TCP-Port 80 und erhält eine Lizenz. Es bestätigt auch die Lizenz mit der lokalen Lizenzdatei in C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
+Wenn Sie sich als Student eingeloggt haben, sucht Rhino im Bereich HKEY_CURRENT_USER und stellt fest, dass kein Schlüssel für den LAN-Zoo-Server vorhanden ist. Die Suche im Bereich HKEY_LOCAL_MACHINE wird fortgesetzt, bis der zuvor vom Asministrator geschriebene Schlüssel gefunden ist. Rhino kontaktiert dann den benannten LAN Zoo-Server über den TCP-Port 80 und erhält eine Lizenz. Es bestätigt auch die Lizenz mit der lokalen Lizenzdatei in C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
 
 **Referenz:** 
 
-[[https://wiki.mcneel.com/de/zoo/findzooserverwin|Wie findet Rhino für Windows einen Zoo-Server?]]
+[[https://wiki.mcneel.com/de/zoo/findzooserverwin|Wie findet Rhino für Windows einen LAN-Zoo-Server?]]
 
 \\
 
