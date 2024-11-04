@@ -8,12 +8,12 @@
 
 In Rhino 5 und früher wurden die meisten Rhino Einstellungen nicht in externen Dateien gespeichert, sondern in der Registrierung. Was Rhino 6 betrifft, wurde ein Großteil dieser Information von der Registrierung in eine oder mehrere .xml-"Einstellungen"-Dateien verschoben; und in Version 7 und danach wurden weitere Systemänderungen vorgenommen. 
 
-In keinem Fall gibt es eine einzige Datei, die alle Rhino-Optionen und Personalisierungen enthielte.  Und mit jeder Folgeversion können vorhandene Optionen geändert und neue hinzugefügt werden.  Ihre benutzerdefinierten Einstellungen können also nicht einfach mit einem Klick von einer Installation auf die nächste übertragen werden, und erst recht nicht, wenn Sie gleichzeitig ein Upgrade ausführen.  Je nach Version gibt es einige Tastaturkürzel.
+In keinem Fall gibt es auch nur eine Datei, die alle Rhino-Optionen und Personalisierungen enthielte.  Und mit jeder Folgeversion können vorhandene Optionen geändert und neue hinzugefügt werden.  Ihre benutzerdefinierten Einstellungen können also nicht einfach mit einem Klick von einer Installation auf die nächste übertragen werden, und erst recht nicht, wenn Sie gleichzeitig ein Upgrade ausführen.  Je nach Version gibt es einige Tastaturkürzel.
 
 **Für Version 6 und neuer - //innerhalb der gleichen Version//**:
 Am einfachsten ist es, die //settings-Scheme_Default.xml-Datei// von einer Installation zur nächsten zu kopieren und dabei das Original zu ersetzen.  Die Datei befindet sich in //C:\Benutzer\<Benutzername>\AppData\Roaming\McNeel\Rhinoceros\<Versionsnummer>\settings//.  Dies kann auch beim Upgraden von Versionen funktionieren, ist jedoch etwas riskant, da einige Einstellungen von Version zu Version variieren.
 
-> Hinweis - beim Standort der oben genannten Dateien handelt es sich um einen in Windows standardmäßig ausgeblendeten Ordner. Sie haben darauf schnellen Zugriff, indem Sie auf die Windows-Start-Schaltfläche klicken, **%appdata%** eingeben und die Eingabetaste drücken; damit gelangen Sie zu "Roaming", von da aus navigieren Sie zum entsprechenden Ordner. <Benutzername> steht für den Benutzernamen Ihres Windows-Kontos, <Versionsnummer> ist 5.0, 6.0, 7.0 etc.
+> Hinweis - beim Standort der oben genannten Dateien handelt es sich um einen in Windows standardmäßig ausgeblendeten Ordner. Sie haben darauf schnellen Zugriff, indem Sie auf die Windows-Start-Schaltfläche klicken, **%appdata%** eingeben und die Eingabetaste drücken; damit gelangen Sie zu "Roaming", von da aus navigieren Sie zum entsprechenden Ordner. <Benutzername> steht für den Benutzernamen Ihres Windows-Kontos, <Versionsnummer> ist 5.0, 6.0, 7.0, 8.0 etc.
 
 **Für Version 5:**
 Um Ihre Einstellungen zu übertragen, verwenden Sie den Rhino Befehl **OptionenExportieren**, der eine einzelne Datei mit den __meisten__ Personalisierungen erzeugt. Beim Import dieser Datei in eine andere Installation durch den Befehl **OptionenImportieren** (Rhino 5 und neuer) werden die Einstellungen in die neue Installation übertragen.  Sie können dabei auswählen, welche der Einstellungen Sie importieren möchten. Es ist nicht notwendig, alle zu importieren.  
@@ -22,7 +22,9 @@ Anzeigemodi sind in OptionenExportieren und OptionenImportieren in Version 5 ent
 
 =====Werkzeugleisten=====
 
-Getrennt von den anderen Optionen, enthalten Arbeitsraumdateien am meisten Informationen für Werkzeugleisten/Schaltflächen, etwa welche Schaltflächen sich in welcher Werkzeugleiste befinden, Befehlsmakros für jede Schaltfläche und Schaltflächenbilder. Arbeitsraumdateien zeichnen sich in Version 5 und neuer durch die Erweiterung .rui aus. Sie können diese Datei ebenso zwischen Installationen hin und her kopieren.  Der standardmäßige Standort für diese Dateien befindet sich ebenfalls in einem ausgeblendeten Ordner:
+//**Anmerkung zu Version 8**: Struktur und Anordnung der Werkzeugleiste wurde für die Version 8 komplett neu geschrieben.  Version 8 verwendet keine .rui-Dateien mehr, das neue Format ist .rws (Rhino Workspace). Rhino 8 kann jedoch in den meisten Fällen erfolgreich .rui-Dateien aus Version 7 importieren. Mit Fertigstellung der Version 8 werde ich diese Sektion mit detaillierten Informationen zu den Vorgehensweisen für die Arbeitsraum-Struktur in Rhino 8 zum Übertragen von Einstellungen aktualisieren.//
+
+Getrennt von den anderen Optionen, enthalten Arbeitsraumdateien am meisten Informationen für Werkzeugleisten/Schaltflächen, etwa welche Schaltflächen sich in welcher Werkzeugleiste befinden, Befehlsmakros für jede Schaltfläche und Schaltflächenbilder. Arbeitsraumdateien zeichnen sich in den Versionen 5, 6 und 7 durch die Erweiterung .rui aus. Sie können diese Datei ebenso zwischen Installationen hin und her kopieren.  Der standardmäßige Standort für diese Dateien befindet sich ebenfalls in einem ausgeblendeten Ordner:
 
 //C:\Benutzer\<Benutzername>\AppData\Roaming\McNeel\Rhinoceros\<Versionsnummer>\UI//
 
@@ -46,11 +48,13 @@ Ein allgemeines Übertragungsverfahren könnte wie folgt aussehen:
 
 Nur in Version 5: **OptionenExportieren** - erzeugt eine .ini-Datei
 
-In Version 6 und neuer: Erstellt eine Kopie Ihrer settings-Scheme_Default.xml-Datei
+Version 6 und neuer: Erstellt eine Kopie Ihrer settings-Scheme_Default.xml-Datei
 
-  * Erstellen Sie eine Kopie Ihrer Arbeitsumgebungsdatei (.rui), wenn Sie sie personalisiert haben. 
+  * Rhino 6 und 7 - Erstellen Sie eine Kopie Ihrer Arbeitsumgebungsdatei (.rui), wenn Sie sie personalisiert haben.
+  * //Rhino 8: Vorgehensweise zur Übertragung des Arbeitsraums wird baldmöglichst bekanntgegeben//
   * Machen Sie Kopien von allen personalisierten Vorlagedateien, die Sie erzeugt haben 
   * Machen Sie Kopien von verwendeten externen Dateien, wie: Umgebungs-Maps, Skripts etc.
+
 
 **In der neuen Installation:**
 
@@ -59,7 +63,11 @@ Nur in Version 5: **OptionenImportieren** und importieren Sie die oben erzeugte 
 In Version 6 und neuer: //Ersetzen Sie// die vorhandene settings-Scheme_Default.xml-Datei durch die aus der vorherigen Installation kopierte
 
   * Kopieren Sie Arbeitsraum, Vorlage, Umgebungs-Maps, Skripts, Dateien an angemessenen Standorte.
-  * Gehen Sie auf //Optionen > Werkzeugleisten// und laden Sie Ihre benutzerdefinierte Arbeitsraumdatei.
+  * Rhino 6 und 7 - Gehen Sie auf //Optionen > Werkzeugleisten// und laden Sie Ihre benutzerdefinierte Arbeitsraumdatei.
+  * //Rhino 8: Vorgehensweise zur Übertragung des Arbeitsraums wird baldmöglichst bekanntgegeben//
   * Installieren Sie alle Plug-ins, die Rhino nicht automatisch übertragen hat
   * Stellen Sie ein, dass Rhino mit Ihrer benutzerdefinierten Vorlage geöffnet wird.
   * Stellen Sie Dateipfade auf Skripts, Vorlagen usw. ein, wenn sie nicht Standard sind.
+
+
+//Zuletzt bearbeitet am 13.09.23 MSH/Helvetosaur//
