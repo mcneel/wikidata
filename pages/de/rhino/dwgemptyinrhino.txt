@@ -8,18 +8,19 @@ Beim Öffnen einer dwg- oder DXF-Datei in Rhino werden keine Objekte in Rhino im
 =====Warum?=====
 Dafür gibt es im Allgemeinen drei Gründe:
 
-  * DWG/DXF wurde von einer neueren AutoCAD-Version oder einem Klon erzeugt, als Ihre Version von Rhino unterstützen kann.
+  * DWG/DXF wurde von einer neueren AutoCAD-Version oder einem Klon erzeugt, als Ihre Version von Rhino unterstützen kann
   * Proxy-Objekte in der dwg.
   * Die Zeichnungsgeometrie wurde im Layoutbereich erstellt.
 
 ====DWG/DXF-Versionen====
-  * Rhinoceros 6 öffnet AutoCAD-Dateiversion 2018 oder früher.
-  * Rhinoceros 5 öffnet AutoCAD-Dateiversionen 2013 und 2010 oder früher.
-  * Rhinoceros 4 öffnet AutoCAD-Dateiversion 2007 oder früher
+  * **Rhinoceros 6, 7 oder 8 WIP** öffnen **AutoCAD-Dateiversionen 2018** oder älter.
+  * **Rhinoceros 5** öffnet **AutoCAD-Dateiversionen 2013 und 2010** oder älter.
+  * **Rhinoceros 4** öffnet **AutoCAD-Dateiversion 2007** oder älter.
 
 Autodesk ändert das Dateiformat nicht mit jeder Versionsstufe. Gewöhnlich beträgt die Wartezeit 3 Versionsstufen, in letzter Zeit wurden jedoch bis zu 5 vor der Aktualisierung des Formats veröffentlicht.
-Dateiformat 
-  * 2018 (könnte 2019 und 2020 enthalten)
+
+===DWG/DXF-Dateiversion===
+  * 2018 (enthält AutoCAD-Versionen 2019, 2020, 2021, 2022, 2023 und 2024)
   * 2013 (enthält AutoCAD-Versionen 2014, 2015, 2016, 2017)
   * 2010 (enthält AutoCAD-Versionen 2011 und 2012)
   * 2007 (enthält AutoCAD-Versionen 2008 und 2009)
@@ -28,14 +29,16 @@ Dateiformat
   * R12 (enthält R13 und R14)
 
 
-{{:rhino:autocad_version.png?500|}}
+{{:rhino:autocad_version2024.png?600|}}
 
 
 ====Proxy-Objekte====
 
-Proxy-Objekte sind Platzhalter für durch ObjectARX®-Anwendungen wie AutoCAD® Mechanical, Autodesk® Architectural Desktop und Autodesk® Land Desktop erzeugte benutzerdefinierte Objekte.
+**Proxy-Objekte sind Platzhalter für benutzerdefinierte Objekte, die mit ObjectARX®-Anwendungen wie Inventor®, AutoCAD® Mechanical, Autodesk® Architectural Desktop und Autodesk® Land Desktop erstellt wurden.**
 
-Standardmäßig werden Objektbenachrichtigungen angezeigt, wenn beim Öffnen einer dwg im gewöhnlichen AutoCAD die zur Erzeugung des benutzerdefinierten Objekts verwendete Anwendung derzeit nicht ausgeführt wird. Wenn zum Beispiel eine in Autodesk Mechanical Desktop erstellte Zeichnung im gewöhnlichen AutoCAD® geöffnet wird, werden mit Autodesk Mechanical Desktop erzeugte Objekte als Proxy-Objekte angezeigt.
+Standardmäßig werden Objektbenachrichtigungen als einfache, leere Rechtecke angezeigt, wenn beim Öffnen einer DWG im gewöhnlichen AutoCAD die zur Erzeugung des benutzerdefinierten Objekts verwendete Anwendung derzeit nicht ausgeführt wird. Wenn zum Beispiel eine in Autodesk Mechanical Desktop erstellte Zeichnung im gewöhnlichen AutoCAD® geöffnet wird, werden mit Autodesk Mechanical Desktop AutoCAD Objekte als Proxy-Objekte angezeigt.
+
+Ebenso zeigt Rhino, wenn Sie eine DWG mit einem Proxy-Objekt öffnen, die Meldung //"Nicht unterstützter Elementtyp: AcDbProxyEntity, ACAD_PROXY_ENTITY"// in der Rhino-Befehlszeile. (Verwenden Sie F2 auf der Tastatur, um den gesamten Textbildschirm zu lesen.
 
 Hier können Sie Operationen wie das Verschieben und Kopieren von Proxy-Objekten durchführen. Besondere, speziell auf die jeweilige ObjectARX-Anwendung zugeschnittene Bearbeitungs-Operationen sind jedoch nicht verfügbar. Sie können zum Beispiel keine parametrischen Änderungen an Objekten aus Autodesk Mechanical Desktop in einer anderen Anwendung durchführen als in Autodesk Mechanical Desktop selbst.
 
@@ -51,7 +54,7 @@ Da AutoCAD seine 3D-Geometrie im Polygonnetzformat speichert, gibt es eine Optio
   - Speichern Sie es unter einem anderen Namen.
   - Importieren Sie diese Datei in Rhino.
 
-Proxy-Objekte müssen immer zerlegt werden.
+Proxy-Objekte müssen vor dem Exportieren immer zerlegt werden.
 
 
 ====Layoutbereich-Geometrie====
