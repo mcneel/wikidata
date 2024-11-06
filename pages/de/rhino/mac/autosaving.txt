@@ -68,16 +68,8 @@ Ihre Datei wird in der üblichen Weise gespeichert, sobald die Datei geschlossen
 
 Rhino-Anwender die Netzwerk-Dateiserver verwenden, sehen die Meldung "Dieses Dokument konnte nicht automatisch gespeichert werden" möglicherweise in einem Pop-up-Fenster.  Dies bedeutet, dass Ihre Verbindung zum Netzwerk-Dateiserver unterbrochen wurde und Rhino nicht darauf schreiben kann. Sobald Ihre Netzwerkverbindung wiederhergestellt ist, kann Rhino Ihr Modell wieder automatisch speichern.
 
-===== Kann die Versionen-Funktion in Rhino für Mac deaktiviert werden? =====
+===== Kann die Funktion für diese Version in Rhino für Mac deaktiviert werden? =====
 
-Ja, ABER hiervon ist **DRINGENDST ABZURATEN!**  Rhino für Mac ist auf das Arbeiten mit Versionen und Automatischen Speichern ausgelegt; Leistungsfähigkeit und Stabilität können im Falle der Deaktivierung beeinträchtigt werden.  Zudem verlieren Sie die die Möglichkeit zum Hinzufügen von Kategorien, Umbenennen oder Verschieben der Datei vom Fenstertitel, etc.  Wenn Sie sie aus irgendeinem Grund deaktivieren müssen, müssen Sie //Terminal.app// starten und den folgenden Befehl ausführen:
-    defaults write com.mcneel.rhinoceros ApplePersistence -bool no    
-Damit werden Automatische Speicherung und Versionen deaktiviert und Sichern unter… im Datei.Menü (statt Duplizieren) wieder aktiviert.
+In Rhino 5, 6 und 7 für Mac lautet die Antwort leider "Nein, automatisches Speichern kann nicht deaktiviert werden."
 
-Wenn Sie zum Standard-Verhalten zurückkehren möchten, führen Sie den Terminal-Befehl erneut aus, ersetzen dabei aber 'no' durch 'yes':
-    defaults write com.mcneel.rhinoceros ApplePersistence -bool yes    
-Um die derzeitige Einstellung zu überprüfen, verwenden Sie:
-    defaults read com.mcneel.rhinoceros ApplePersistence    
-Wenn Sie 0 (oder zwei Fehlermeldungen Nicht gefunden) erhalten, ist sie deaktiviert.  Erhalten Sie stattdessen 1, ist sie aktiviert.
-
-**HINWEIS**: Die oben beschriebene Vorgehensweise ist nicht auf macOS Mojave 10.14 möglich.  Eine Alternativlösung ist uns derzeit nicht bekannt.
+In Rhino 8 für Mac gibt es einen experimentellen Befehl namens **TestToggleMacAutosaveVersions**, mit dem Sie diese Funktion umschalten können. Rhino muss neu gestartet werden, damit dies in Kraft tritt.  **HINWEIS**: Bitte mit Vorsicht verwenden und Sicherheitskopien Ihrer Dateien erstellen!
