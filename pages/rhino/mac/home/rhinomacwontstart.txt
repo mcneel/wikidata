@@ -1,11 +1,47 @@
 ====== Rhino 8 Mac with Enscape Reporting "License Not Found" ======
-Rhino 8 Mac with Enscape installed, sometimes reports "License not found" error and will not open.
+**Issue:** After the install of Enscape for Mac, is a Rhino license in the RA and Rhino Mac reports "**No License found.**" 
 
 {{:rhino:mac:home:license_not_found.png?300|}}
 
-This happens because Rhino was not initialized  before Enscape was install and Enscape created ~/Library/Application Support/McNeel with wrong permissions.
+This happens because Rhino was not initialized before Enscape was install and Enscape created ~/Library/Application Support/McNeel with wrong permissions.
 
 The "fix" is to remove Enscape and all supporting files and then re-install and run Rhino **first** before re-installing Enscape.
+
+//Why?//
+We believe that this happens if you install Rhino Mac and do not license it. 
+Then Install Enscape. Now open Rhino with the Enscape plugin install. 
+It is all messed up and can not get to the RA for the key. 
+The lic files appears to be written on, but it may be bad or corrupt.
+
+===== Option 1 Manually and Complete Uninstall ===== 
+**Simplest Solution**
+
+Enscape is the problem. Here's the workaround.
+//You have to completely and manually remove Rhino and Enscape. //
+This means all the **Rhino** and **Enscape** application, folders and licence keys.
+
+1. In File Finder go to **Applications** and delete: Enscape, Rhino 7 and/or Rhino 8 
+
+2. Now, you will need to manually delete the folders where the plugin files live.
+
+3. In File Finder navigate to: ~/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/. Delete **Enscape** plugin folder. 
+    
+4. Now reset the Rhino licensing files by deleting the contents of these folders:
+    /Users//Library/Application Support/McNeel/Rhinoceros/8.0/License Manager/Licenses
+    /Users/Shared/McNeel/Rhinoceros/8.0/License Manager/Licenses
+    And this file if you have it:  
+    /Users//Library/Application Support/McNeel/Rhinoceros/8.0/ra_cache.txt
+
+5. And while you are in the library, double check to see if there are any Enscape folders and delete them.
+
+6. Reboot and reinstall Rhino. 
+
+ If on reinstall Mac says //"keep, replace ..."// you did not clean up all the folder good enough! 
+ It should install and open like it was never installed before. And then it will get a license from the RA. 
+
+
+===== Options 2: Use Apple Terminal Commands to Change Folder Permissions =====
+**Advanced Skills Required**
  
   - Quit Rhino 8.
   - Ordered List Item Restart your Mac.
@@ -21,5 +57,6 @@ The "fix" is to remove Enscape and all supporting files and then re-install and 
   - If all the above fails, you can browse directly to the folder in the finder and delete the folder manually by dragging it into the trash. (confirm with admin credentials) 
   - In some rare cases all the above fails, BUT after a restart the above process finally works. 
 
+We have heard from Enscape that their latest solves the issue.
 
 If the issue persists, please contact [[https://www.rhino3d.com/support/|McNeel Technical Support]] tech@mcneelcom.
