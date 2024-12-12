@@ -1,0 +1,19 @@
+====== Objetos demasiado lejos del origen del plano universal======
+
+Los objetos que se encuentran extremadamente lejos (millones de unidades) del origen del plano universal sufren problemas de visualización y precisión debido a que las ubicaciones de los vértices de la malla poligonal se representan con un único número de precisión. Esto afecta a la apariencia del sombreado y el renderizado y a la apariencia de los objetos de malla poligonal.
+
+Una solución a este problema es [[http://wiki.mcneel.com/es/rhino/5/video/troubleshooting/artifacts|acercar toda la geometría existente]] al origen y crear el modelo allí. Pero, puesto que puede ser necesario colocar el modelo para que se corresponda con los datos de la encuesta que utiliza el gran número de unidades, esto no siempre es posible. El siguiente procedimiento puede ayudar a solucionar el problema.
+
+
+  - Cree una copia del modelo original. Ahora tiene el **//original//** y la **//copia//**.
+  - En la **//copia//**, **mueva** los datos relevantes al origen y **elimine** el resto del modelo. 
+  - Cree la nueva geometría en la **//copia//** con todo alrededor del origen. No debería haber problemas de visualización o precisión. También puede escalar si lo necesita para trabajar en las unidades que convengan y orientar el modelo a la rejilla de Rhino para mayor comodidad.
+  - Utilice el comando **Insertar** para insertar la **//copia//** como **bloque vinculado e incrustado** en el **//original//** en la ubicación distante con la escala y orientación correctas.
+
+ 
+Este bloque vinculado puede actualizarse en el **//original//** cuando se modifica en la **//copia//**. El **//original//** siempre tiene los datos correctos en la ubicación correcta, pero como no es el modelo de trabajo, los posibles problemas de visualización, de malla y de precisión no son un gran problema. El archivo puede guardarse en un formato diferente según lo necesite el cliente. La referencia de bloque podría descomponerse antes de exportarla.
+
+El **//original//** ahora solo es un archivo contenedor que se utiliza para realizar el escalado/transposición del modelo. Todos los datos del original pueden vincularse a fuentes externas. Puede incluir los datos del modelo original si va a recibir actualizaciones durante el transcurso del proyecto. Puede actualizar estos datos externos y hacer que todo se actualice en el original sin tener que pasar cada vez por el proceso de escalado/traducción.
+
+Gracias a Mike La Fon por explicar este proceso en el foro de Rhino.
+
