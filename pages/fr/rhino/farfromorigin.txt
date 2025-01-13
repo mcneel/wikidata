@@ -1,18 +1,20 @@
-====== Loin de l'origine ======
+====== Objets trop éloignés de l’origine du repère général======
 
-Dans Rhino 3 ou 4, la géométrie construite ou importée dans Rhino, qui se trouve très loin de l'origine du repère général (des millions d'unités) présentent des problèmes d'affichage et de précision. En effet, les positions des sommets du maillage polygonal sont représentées par des nombre simple précision. Ce problème joue sur l'apparence de l'ombrage et du rendu et sur l'apparence des objets maillés.
+Les objets qui se trouvent très loin de l'origine du repère général (à des millions d'unités) présentent des problèmes d'affichage et de précision. En effet, les positions des sommets du maillage polygonal sont représentées en format simple précision. Ce problème joue sur l'apparence de l'ombrage et du rendu et sur l'apparence des objets maillés.
 
-Une des solutions est de déplacer toute la géométrie plus près de l'origine et réaliser le modèle à cet endroit. Cependant il se peut que le modèle doive être placé loin de l'origine pour être conforme à des données de levés qui utilisent le très grand nombre d'unités. Vous pouvez l'avoir des deux façons en utilisant cette procédure-
+Une des solutions consiste à [[http://wiki.mcneel.com/fr/rhino/5/video/troubleshooting/artifacts|rapprocher toute la géométrie]] de l'origine et à créer le modèle à cet endroit. Cependant le modèle doit parfois être placé loin de l'origine pour être conforme à des données de levés qui utilisent un très grand nombre d'unités, et il n’est alors pas possible de rapprocher le modèle. La procédure suivante peut aider à résoudre le problème.
 
 
-**1.** Créez une copie du modèle original. Vous avez maintenant le modèle A et le modèle B
+  - Créez une copie du modèle d’origine. Vous obtenez ainsi un **//original//** et une **//copie//**.
+  - Dans la **//copie//**, **déplacez** les données nécessaires sur l'origine et **supprimez** le reste du modèle. 
+  - Construisez votre nouvelle géométrie dans la **//copie//** en plaçant tous les éléments autour de l’origine. Il ne devrait pas y avoir de problème d’affichage ou de précision. Vous pouvez changer l'échelle si nécessaire pour travailler avec des unités plus adaptées et orienter votre modèle sur la grille de Rhino pour que ce soit plus pratique.
+  - Utilisez la commande **Insérer** pour insérer la **//copie//** en tant que **bloc lié et imbriqué** dans l’**//original//** à la position distante avec la bonne échelle et la bonne orientation.
 
-**2.** Dans la copie, modèle B, déplacez les données importantes, telles que les lignes de limite, etc. vers l'origine et effacez le reste du modèle. Construisez maintenant votre nouvelle géométrie dans ce modèle. En plaçant tous les éléments autour de l'origine il ne devrait pas y avoir de problème d'affichage ou de précision. Vous pouvez changer l'échelle si nécessaire pour travailler avec des unités plus adaptées et orienter votre modèle sur la grille de Rhino pour que ce soit plus pratique.
+ 
+Vous pourrez alors actualiser ce bloc lié dans l’**//original//** après l’avoir modifié dans la **//copie//**. L’**//original//** contient toujours les données correctes à la position correcte, mais comme il ne s’agit pas de votre modèle de travail, les éventuels problèmes d’affichage, de précision et sur les maillages ne sont pas importants. Vous pouvez enregistrer votre fichier sous différents formats, selon les besoins de votre client. L’occurrence de bloc peut être décomposée avant d’être exportée.
 
-**3.** Insérez (commande Insérer) le modèle B dans le modèle A à la position distante comme bloc lié et incrusté en utilisant l'échelle et l'orientation correctes. (Si l'échelle et l'orientation ont été modifiées dans l'étape précédente, il faut les restaurer lorsque les données sont remises dans le modèle A). Ce bloc lié peut être actualisé dans le fichier A lorsqu'il est modifié dans le fichier de travail, modèle B. Les données du modèle A sont toujours dans la bonne position mais comme il ne s'agit pas du modèle de travail, les problèmes potentiels d'affichage, de maillage et de précision ne sont plus importants ; le fichier peut être enregistré sous le format DWG ou DXF si nécessaire pour le renvoyer au client. L'occurrence de bloc du modèle B peut être décomposée avant d'exporter le fichier.
+L’**//original//** n'est plus qu'un fichier de contenu que vous utilisez pour réaliser la mise à l'échelle et la transposition du modèle. Toutes les données dans l’original peuvent être liées à des sources extérieures. Cela peut inclure les données du modèle d’origine si vous allez recevoir des mises à jour au cours du projet. Vous pouvez actualiser ces données extérieures et avoir tout à jour dans l’original sans avoir à passer par le processus de mise à l’échelle et transposition à chaque fois.
 
-Le modèle A n'est ici qu'un fichier de contenu, utilisé pour réaliser la mise à l'échelle et la transposition du modèle. Toutes les données du modèle A peuvent être liées à des sources externes (y compris les données du modèle original si vous prévoyez par exemple de recevoir des actualisations au cours du projet) afin de pouvoir actualiser ces données externes (modèle B dans notre exemple, mais il pourrait y avoir plusieurs fichiers liés) tout en conservant les données actualisées dans le modèle A sans avoir à changer l'échelle et la position à chaque fois.
-
-Merci à Mike La Fon pour avoir partagé ce procédé sur le forum de Rhino.
+Merci à Mike La Fon d’avoir partagé cette méthode sur le forum de Rhino.
 
 
