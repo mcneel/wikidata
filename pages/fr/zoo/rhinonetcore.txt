@@ -1,0 +1,43 @@
+====== Rhino 8 utilise l’environnement d’exécution .NET Core======
+>**Produit :** //[[zoo:home|Zoo]]//
+> **Résumé :** //cet article porte sur le Zoo LAN et Rhino 8//
+
+=====Question=====
+Notre Zoo LAN héberge nos licences de Rhino 7 et de Rhino 8, et nos ordinateurs équipés de Rhino parviennent à obtenir des licences à partir du Zoo LAN. Cependant, Rhino 8 ne fonctionne pas ; le test de connectivité à l’étape « Définir le serveur Zoo » échoue.
+
+=====Réponse=====
+À partir d’un ordinateur sur lequel fonctionne Rhino 7 mais pas Rhino 8, essayez de lancer Rhino 8 avec le paramètre de ligne de commande suivant :
+
+<code>
+C:\Program Files\Rhino 8\System\Rhino.exe /netfx
+</code>
+
+Si cela fonctionne, installez l’environnement d’exécution .NET Core 7.0 sur l’ordinateur équipé de Rhino (voir ci-dessous).
+=====Plus d'informations=====
+Rhino 8 utilise à présent l’environnement d’exécution en open source [[https://github.com/dotnet/runtime|.NET Core]] pour exécuter le code .NET sous Windows et Mac. Cela apporte des améliorations en termes de performance et s’aligne sur les environnements d’exécution .NET utilisés sur de nombreuses plateformes. 
+
+Sous Windows, vous avez toujours la possibilité d’utiliser l’environnement d’exécution .NET Framework avec Rhino 8 en cas de problèmes de compatibilité.
+
+Grâce à .NET Core, Rhino et les modules bénéficient de nombreuses améliorations de performance grâce auxquelles pratiquement tout le code .NET s’exécutera beaucoup plus rapidement. Cela permet potentiellement d’obtenir d’importants gains de productivité avec les bibliothèques informatiques ou les grands ensembles de données.
+
+Il se peut que vous souhaitiez continuer à utiliser .NET Framework sous Windows, notamment si vous devez utiliser des modules tiers qui ne sont pas encore compatibles avec .NET Core. L’inconvénient d’utiliser .NET Framework est que Rhino risque de fonctionner un peu plus lentement dans certains cas.
+
+Pour sélectionner l’environnement d’exécution à utiliser avec Rhino 8, deux méthodes s’offrent à vous :
+
+1. Lancez la commande **DéfinirEnvironnementExécutionDotNet**, puis redémarrez Rhino.
+
+2. Utilisez l’un des paramètres de ligne de commande suivants au moment de lancer **Rhino.exe**. Notez que cela remplace le paramètre **DéfinirEnvironnementExécutionDotNet**.
+
+^ Argument     ^  Description                            ^
+| **/netcore** | .NET Core 7.0 (par défaut)               |
+| **/netfx**   | .NET Framework 4.8 (mode compatibilité) |
+
+
+Si vos systèmes ne fonctionnent pas encore avec .NET Core 7.0, cliquez sur le lien suivant pour télécharger la dernière version.
+
+**[[https://dotnet.microsoft.com/fr-fr/download/dotnet/7.0|Télécharger .NET 7.0]]**
+
+
+\\
+
+{{tag>Zoo}}
