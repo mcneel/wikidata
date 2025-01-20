@@ -1,0 +1,73 @@
+====== 安裝Enscape的Rhino 8 Mac"無法找到授權" ======
+**問題：** 安裝Mac版Enscape後， Rhino帳號及Rhino Mac版回報"**無法找到授權。**" 
+
+{{:rhino:mac:home:license_not_found.png?300|}}
+
+會發生這種情況是因為Rhino在安裝Enscape之前沒有初始化Rhino，而且Enscape用了錯誤的權限建立~/Library/Application Support/McNeel 
+
+"修復方法" 是刪除Enscape以及所有支援檔案，重新安裝，並且在重新安裝Enscape前 **先執行**Rhino。 
+
+//為什麼呢?//
+我們覺得如果安裝Rhino Mac但未獲得授權，就會發生這種情況。 然後安裝Enscape。 現在開啟已經安裝Enscape外掛的Rhino。 一切一團亂，無法向Rhino 帳號請求授權。 lic檔案似乎被覆寫，也有可能是壞掉或是被損。
+
+===== 選項1：手動完全卸載 ===== 
+**最簡單的解決方案**
+
+Enscape就是問題所在，這裡有一個解決辦法。
+//您必須手動並完整刪除Rhino 和 Enscape。//
+這意味著所有 **Rhino** 與 **Enscape** 應用程式、資料夾以及授權。
+
+1. 在檔案搜尋中，前往 **Applications(應用程式)** 並刪除： Enscape, Rhino 7 和/或 Rhino 8。 
+
+2. 現在，你需要手動刪除外掛檔案所在的資料夾。
+
+3. 在檔案搜尋中找到： ~/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/. 刪除 **Enscape** 外掛資料夾。[[https://developer.rhino3d.com/guides/rhinocommon/uninstalling-plugins-mac/|請到此處]] //查看有關Mac 外掛程式的更多詳情。// 
+    
+4. 現在透過刪除這些資料夾裡的內容就可重設Rhino授權文件：
+    /Users//Library/Application Support/McNeel/Rhinoceros/8.0/License Manager/Licenses
+    /Users/Shared/McNeel/Rhinoceros/8.0/License Manager/Licenses
+    還有如果你有這個文件：  
+    /Users//Library/Application Support/McNeel/Rhinoceros/8.0/ra_cache.txt
+
+5. 當你在資料庫的時候，請仔細檢查是否有任何Enscape資料夾，並且將其刪除。
+
+6. 重新啟動也重新安裝Rhino。 
+
+ 如果重新安裝Mac時顯示 //"keep, replace ..."//那麼您還沒有清理好所有資料夾! 
+ 它應該像以前從未安裝過那樣進行安裝再打開，然後就會向Rhino 帳號申請授權了。 
+
+
+===== 選項2：手動修改資料夾權限 ===== 
+
+  - 徹底退出Rhino。
+  - 開啟 **搜尋器**，按一下 **前往(Go)** 選單，按下 **選項** 鍵 (⌥)並選擇 **資料庫**。
+  - 開啟 **應用程式支援)** 並找到McNeel資料夾。
+  - 按右鍵選擇 **獲取資訊**。
+  - 到 **共用與權限** 部分，點一下鎖頭就可以啟動編輯。
+  - 將所有條目的權限變更為 **讀&寫** 。
+  - 點擊視窗左下角+跟 - 旁邊的選項選單(圈圈裡有三個點)。
+  - 選擇 **應用至隨附項目…**
+  - 關閉此選單並重啟Rhino。
+
+
+===== 選項3: 使用Apple終端指令來改變資料夾權限 =====
+**需要高階技能**
+ 
+  - 退出Rhino。
+  - 重新啟動Mac。
+  - 確認Rhino 8未在執行。
+  - 啟動終端機。
+  - 刪除Enscape建立的資料夾。
+     - 如果Rhino 7已經安裝並正常執行，而您只是想要修復Rhino 8，那麼請貼到終端按下Enter就好：
+     - **rm -rf ~/Library/Application\ Support/McNeel/Rhinoceros/8.0**
+     - 或者貼上**rm -rf ~/Library/Application\ Support/McNeel** 再按Enter。
+  - 開啟 Rhino 8
+  - Rhino成功啟動後即可重新安裝Enscape。
+  - 如果執行上述步驟時"授權被拒絕"，請新增前置**sudo**，然後一個空白鍵，最後加上上面的指令字串。 這會叫出管理員憑證對話框，允許您輸入管理憑證。 輸入管理憑證擊指令字串後應該就能成功完成。 
+  - 如果上述所有方法都失敗，您可以直接用檔案搜尋查出資料夾，將其拖曳至垃圾桶就可以手動刪除該資料夾。(使用管理憑證)  
+  - 在極少數的情況下，上述所有操作都會失敗，但重新啟動後，以上過程最終是成功並可以運作的。 
+
+
+Enscape表示他們的最新解決方案已解決了這個問題。
+
+如果問題仍存在，請聯絡McNeel技術支援tech@mcneelcom。
