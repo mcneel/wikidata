@@ -1,0 +1,63 @@
+====== Préparer des fichiers pour le découpage au laser et au jet d'eau ======
+
+> **Résumé :** //trucs, astuces et techniques pour utiliser Rhino afin de préparer des fichiers pour le découpage au laser et au jet d'eau.//
+
+Il existe deux types de machines de découpe au laser : les systèmes de bureau ou les traceurs, et les machines industrielles à commande numérique ou fonctionnant à partir d’un code G. La méthode de préparation des fichiers sera différente selon que vous utilisiez un type de machine ou l’autre.
+
+=====Découpeuses de bureau / traceurs=====
+
+Les découpeuses au laser de type **bureau/traceur** sont généralement plus légères que les machines industrielles et sont destinées au découpage de matériaux non métalliques dans un environnement de bureau, un atelier de signalisation ou de modélisme.  Ces machines fonctionnent comme une imprimante d'ordinateur : un pilote d'imprimante est installé et vous pouvez simplement imprimer sur l'appareil comme vous le feriez avec une imprimante papier normale, via la boîte de dialogue **Imprimer**.
+
+Exemples :
+
+  * [[http://www.epiloglaser.com/|Epilog]] - [[rhino:epilogrhino|Utiliser Rhino avec une découpeuse laser Epilog]]
+  * [[http://www.ulsinc.com|Universal Laser Systems]]
+
+
+**[[http://wiki.mcneel.com/rhino/mitch_notes_2dcutting|Recommandations de Mitch Heynick concernant le découpage 2D.]]**.
+
+Dans la plupart des cas, si le découpage au laser est effectué en interne avec l'une de ces machines, il n'est pas nécessaire de procéder à des ajustements d'arcs ou à d'autres conversions géométriques. Vous pouvez utiliser n'importe quelle géométrie normale de Rhino.
+
+=====Machines de découpe au laser ou à jet d'eau de type CNC=====
+
+Les découpeuses industrielles au laser ou à jet d'eau sont normalement pilotées par un logiciel de FAO (fabrication assistée par ordinateur). La géométrie du logiciel de conception (Rhino) est transférée au logiciel de FAO, qui la traduit à son tour dans un langage (appelé code G) que la machine de découpe est capable de comprendre. Parmi les exemples de grandes découpeuses industrielles au laser et à jet d'eau, on peut citer :
+
+  * [[http://www.multicam.com|Machines de découpe au laser et à jet d'eau MultiCam]].
+  * [[http://www.omax.com|Machines de découpe à jet d’eau Omax]]
+
+Pour travailler avec des machines de découpe industrielles au laser ou à jet d'eau, il est impératif d’exporter un fichier de transfert contenant la géométrie 2D à découper, attendu que ces machines ne fonctionnent pas comme des imprimantes et pratiquement aucune d'entre elles n'accepte les fichiers Rhino natifs.  De plus, vous devrez aussi parfois convertir la géométrie de Rhino en lignes et en arcs avant de l’exporter. Cela dépend de l'âge et de la sophistication de votre machine ainsi que du logiciel utilisé. 
+
+Le format d'exportation le plus couramment utilisé dans l'industrie est le format **DXF d’AutoCAD**. On trouve également le format natif d'AutoCAD, DWG, et les formats AI et EPS d’Adobe Illustrator.  Les fichiers PDF contenant des informations vectorielles sont également de plus en plus utilisés. Tous les formats ci-dessus, à l'exception du format PDF, peuvent être exportés directement par Rhino. //Pour exporter des fichiers PDF à partir de Rhino, vous devez imprimer vers un programme d'impression PDF (Il en existe plusieurs.)//
+
+====Ajuster les arcs des courbes de forme libre====
+
+Un grand nombre de machines de découpe industrielles et de logiciels ne comprennent **que** les **// lignes//** et les **// arcs//**. Ainsi, pour bien découper des pièces, vous devez //convertir// toutes les courbes [[rhino:nurbs|NURBS]] de forme libre (**splines**) présentes dans votre fichier en une série d'arcs et de lignes. Par //conversion//, nous entendons une //approximation// de la spline par une polyligne ou une polycourbe ne contenant que des segments d'arc et de ligne.  Pour contrôler la tolérance d'approximation, utilisez les paramètres adaptés pendant le processus de conversion.  L'approximation des splines par une série d'arcs tangents (ou presque tangents) est généralement préférable aux polylignes, car ils permettent une coupe plus précise avec un fichier plus petit et moins de risques de ralentissement le long des courbes, en particulier avec les anciennes machines.  En cas de doute, consultez votre bureau d’assistance.
+
+Vous pouvez utiliser la commande **Convertir** dans Rhino pour ce processus, communément appelé "ajustement d’arcs". Définissez les options ainsi : **Résultat**=//Arcs//, **SimplifierOriginal**=//Non//, **ToléranceAngle**=//0/, et **Tolérance** à un nombre raisonnable en fonction de votre modèle. Exécutez la commande **Convertir** sur toutes les courbes du fichier que vous souhaitez envoyer vers la machine de découpe.
+
+//Remarque :// Avant de lancer Convertir, décomposez les éventuelles courbes NURBS qui sont jointes en un ensemble de courbes. Exécutez la commande Convertir sur cet ensemble de courbes. Si elles ne sont pas jointes, la conversion fonctionnera comme prévu et les arcs et lignes exportés correspondront aux courbes d'origine.
+
+====Réparer et imbriquer la géométrie====
+
+Les chevauchements, les écarts et les courbes dupliquées posent des problèmes lors de la découpe. La commande **opérationBooléenneCourbe** peut permettre de résoudre certains de ces problèmes, mais elle n'élimine pas complètement les sections qui se chevauchent et ne corrige pas les écarts.  Pour les petits écarts, la commande **FermerCourbe** dans Rhino peut être une solution rapide pour les courbes ouvertes qui doivent être fermées (Mais utilisez-la toutefois avec précaution.).
+
+Si vous avez besoin d'imbriquer de nombreux profils sur des feuilles standard, consultez [[http://www.mosaixsoftware.com|Mosaix]] et [[http://www.rhinonest.com/|RhinoNest]], qui fonctionnent tous deux dans Rhino. Depuis 2014, [[http://rhinocam.com/RhinoCAM-NEST.shtml|RhinoCAM]] dispose également d'un module d'imbrication.
+
+====Paramètres d'exportation====
+Dans Rhino, après avoir correctement préparé la géométrie, utilisez la commande **Exporter** ou **EnregistrerSous**. Sélectionnez le format de fichier DXF ou DWG d’AutoCAD, donnez un nom à votre fichier et cliquez sur **Enregistrer**. Lorsque la boîte de sélection des schémas apparaît, choisissez le schéma **R12 Naturel** et cliquez sur **OK**.
+
+Pour vérifier, ouvrez de nouveau votre fichier exporté dans Rhino ou tout autre logiciel capable de lire les fichiers DXF ou DWG. Le fichier ne doit contenir que des arcs et des lignes. C'est un bon moyen d'obtenir les résultats les plus cohérents.
+
+Si vous n'avez pas besoin de convertir en arcs et en lignes (si votre machine de découpe au laser ou à jet d'eau est capable de lire les splines NURBS), essayez le schéma **2004 Naturel**.
+
+Si les résultats ne sont pas conformes à vos attentes, [[scottd@mcneel.com|envoyez-nous un exemple]] ou expliquez le problème sur le [[http://discourse.mcneel.com/|forum de Rhino]].
+
+
+----
+=====Découpe au laser de tissus=====
+
+> **Commentaire :** /Les systèmes de découpe au laser fonctionnent bien pour découper des patrons dans des **matériaux textiles** destinés à être utilisés comme des nappes. Rendez-vous sur ce site pour avoir une meilleure idée de ce qui peut être fait : http://www.synrad.com/search_apps/materials/Plastics.htm. Il est assez simple de produire un échantillon, donc une fois que vous avez trouvé un partenaire local, prenez une série d'échantillons des matériaux. Remarque : en règle générale, cette opération est réalisée avec un laser de faible puissance, inférieur à 100 watts (30 watts est une valeur qui devrait être suffisante). Avec cette gamme de puissance, assurez-vous qu'il n'y a pas de fibres métalliques dans le matériau, car les éléments métalliques ne pourront pas être découpés. Autre point à noter : Avec le bon réglage, vous obtiendrez de meilleurs résultats sur un matériau de type polyester que sur du coton, car le laser coupera le polyester et scellera le bord en même temps. [Ken Miller - 10-11-2005]//
+
+> **Commentaire :** //Pour la découpe au laser directe, avec les nouveaux modes d'impression de la V4, Rhino fonctionne à merveille. Vous n’avez pas à convertir en lignes, polylignes et arcs. C’est également plus rapide.
+
+> **Commentaire :** //Je pense que 30 watts est trop élevé. Nous avons réalisé des prototypes en film PET de 0,004" à l'aide d'un laser CO2 de 35 W et les bords étaient un peu brûlés. Cela convient pour les prototypes initiaux, mais pas pour une présentation. Même à 10 ou 15 watts sur un faisceau de 0,003", l'opérateur doit probablement encore faire attention aux réglages de puissance du faisceau et à la vitesse de déplacement de la tête. [Jensen Didulo - 10-11-2005]//
