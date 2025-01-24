@@ -1,16 +1,16 @@
 ====== Slow Paste from Clipboard ======
-=== Rhino version: Any ===
+=== Rhino version: Any Rhino for Windows ===
 
 
-**Problem:** Pasting second Rhino instance, is slow. Sometime it may take 30-40 seconds for the geometry to be added to the second instance of Rhino. 
+**Problem:** Pasting from one Rhino instance to a second Rhino instance, may be slow. Sometimes it may take 30-40 seconds for the geometry to be added to the second instance of Rhino. What is happening here?
 
 **Background**
-  * CopyClipboard is really Export Selected and Paste is really using the Import command.
+  * **CopyClip** is really **ExportSelected** and **Paste** is really using the **Import** command.
   * The contents of the copy is written to a temporary file, since the clipboard typically is not sufficient.
-  * Rhino calls operating system functions to read and write with standard Windows API.
-  * Reading and Writing on a network drive can be slow from other applications.
+  * Rhino calls operating system functions to read and write with //standard Windows API//.
+  * Reading and Writing on a network drive can be slow from other applications, too.
   * Rhino's standard i/o calls are sent to the OS and abstracted.
-  * That means that Rhino is unaware if it is reading or writing to a drive is local, removable, cloud or network.
+  * That means that Rhino is unaware if it is reading or writing to a drive is //local, removable, cloud or network//.
 
 === Recommendations: ===
 
