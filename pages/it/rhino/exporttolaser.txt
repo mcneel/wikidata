@@ -1,0 +1,63 @@
+====== Preparazione dei file per il taglio laser e a getto d'acqua ======
+
+> **Sommario:** //Tipi e tecniche per utilizzare Rhino durante la preparazione di file per il taglio laser e a getto d'acqua//
+
+Esistono due stili principali di fresatrici laser: Macchine industriali con desktop/plotter e CNC/G-Code. I due diversi tipi richiedono metodi di preparazione diversi.
+
+=====Fresatrici laser Desktop/plotter =====
+
+I plotter laser del tipo **Desktop/plotter** sono generalmente più leggeri delle loro controparti industriali e sono destinati al taglio di materiali non metallici in un ambiente d'ufficio, di cartellonistica o di modellismo.  Funzionano come le stampanti per computer: si installa un driver di stampa e si può semplicemente stampare sulla macchina come si farebbe con una normale stampante cartacea, tramite la finestra di dialogo **Stampa**.
+
+Esempi:
+
+  * [[http://www.epiloglaser.com/|Epilog]] - [[rhino:epilogrhino|Using Rhino with an Epilog Laser cutter]]
+  * [[http://www.ulsinc.com|Universal Laser Systems]]
+
+
+**[[http://wiki.mcneel.com/rhino/mitch_notes_2dcutting|Recommendations on 2D cutting from Mitch Heynick.]]**
+
+Nella maggior parte dei casi, se il taglio laser viene eseguito internamente su uno di questi tipi di macchine, non è necessario il raccordo ad arco o altre conversioni geometriche. È possibile utilizzare qualsiasi normale geometria di Rhino.
+
+=====Fresatrici laser o a getto d'acqua di tipo CNC=====
+
+Le fresatrici industriali a laser o a getto d'acqua richiedono normalmente un software CAM (Computer Aided Manufacturing) per essere pilotate. La geometria dal software di progettazione (Rhino) viene trasferita al software CAM, che a sua volta la traduce in un linguaggio (G-Code) comprensibile alla macchina da taglio. Esempi di fresatrici laser/waterjet industriali di grandi dimensioni includono:
+
+  * [[http://www.multicam.com|MultiCam laser and waterjet cutters]]
+  * [[http://www.omax.com|Omax waterjet cutters]]
+
+Per lavorare con le fresatrici industriali a laser e a getto d'acqua è necessario esportare un file di trasferimento con la geometria 2D da tagliare, poiché queste macchine non funzionano come stampanti e praticamente nessuna accetta file nativi di Rhino.  Possono anche richiedere la conversione della geometria di Rhino in linee e archi prima dell'esportazione. Ciò dipende dall'età e dalla sofisticazione della macchina/software utilizzati. 
+
+Il formato di esportazione più comunemente usato nell'industria è un **AutoCAD DXF**. Altri includono DWG nativo di AutoCAD e Adobe Illustrator (AI, EPS).  Anche i file PDF contenenti informazioni vettoriali sono sempre più utilizzati. Tutti i formati sopra citati, tranne il PDF, possono essere esportati da Rhino. //Per esportare i file PDF da Rhino, è necessario stampare su un programma di stampa PDF. Molti disponibili.//
+
+====Arcfitting di curve a forma libera====
+
+Molte macchine da taglio industriali e software **solo** comprendono **//linee//** e **//archi//**. Quindi, per tagliare le parti con successo, è necessario //convertire// qualsiasi curva [[rhino:nurbs|NURBS]] di forma libera (**spline**) presente nel file in una serie di archi e linee. Per //conversione// si intende che la curva spline viene //approssimata// da una polilinea o policurva contenente solo segmenti di arco e di linea.  Controllare la tolleranza di approssimazione utilizzando le impostazioni corrette durante il processo di conversione.  L'approssimazione delle spline con una serie di archi tangenti (o quasi tangenti) è generalmente preferibile alle sole polilinee, perché consente un taglio più preciso con un file più piccolo e minori possibilità di rallentamenti lungo le curve, soprattutto con le macchine più vecchie.  In caso di dubbio, consultare il servizio di assistenza.
+
+Per questo processo si può usare il comando **_Convert** di Rhino, comunemente chiamato "Arc Fitting". Impostare le opzioni su: **Output**=//Arcs//, **SimplifyInput**=//No//, **AngleTolerance**=//0//, e **Tolerance** a un numero ragionevole per il vostro modello. Eseguire il comando **_Convert** su tutte le curve del file che si desidera inviare al plotter.
+
+//**Nota:**// Prima di eseguire _Convert, esplodere qualsiasi collezione di curve NURBS unite in un insieme di curve. Eseguire la conversione sull'insieme di curve. Se non sono unite, la conversione funzionerà come previsto e gli archi e le linee esportati corrisponderanno alle curve originali.
+
+====Riparazione della geometria e nesting====
+
+Sovrapposizioni, spazi vuoti e curve duplicate causano problemi di taglio. Il comando **_CurveBoolean** può funzionare per ripulire alcuni di questi elementi, ma non elimina completamente le sezioni sovrapposte e non risolve gli spazi vuoti.  Per piccoli spazi vuoti, il comando **_CloseCrv** di Rhino può essere una soluzione rapida per le curve aperte che devono essere chiuse. Usare con cautela.
+
+Per annidare molti profili su fogli standard, consulta [[http://www.mosaixsoftware.com|Mosaix]] e [[http://www.rhinonest.com/|RhinoNest]], entrambi funzionanti in Rhino. Dal 2014, [[http://rhinocam.com/RhinoCAM-NEST.shtml|RhinoCAM]] dispone anche di un modulo di nesting.
+
+====Impostazioni di esportazione====
+In Rhino, una volta preparata correttamente la geometria, utilizzare il comando **_Export** o **_SaveAs**. Selezionare il formato DXF o DWG di AutoCAD, assegnare un nome al file e fare clic su **Save**. Quando viene visualizzata la casella di selezione degli schemi, scegliere lo schema **R12 Natural** e fare clic su **OK**.
+
+Per verificare, riaprire il file esportato in Rhino o in qualsiasi altro software che legga DXF o DWG. Nel file devono essere presenti solo archi e linee. Questo è un buon modo per ottenere i risultati più consistenti.
+
+Se non è necessario convertire in archi e linee (se il fornitore di laser/getto d'acqua è in grado di leggere le spline NURBS), provare lo schema **2004 Natural**.
+
+Se i risultati non sono quelli desiderati, [[scottd@mcneel.com|inviate un campione]] o postate il problema nel [[http://discourse.mcneel.com/|forum di Rhino]].
+
+
+----
+=====Taglio laser del tessuto=====
+
+> **Commento:** //Il taglio al laser è un lavoro che serve a tagliare i modelli in un **materiale tessile** che verrà utilizzato come tovaglia. Per avere un'idea più precisa di ciò che si può fare, consultate questo sito: http://www.synrad.com/search_apps/materials/Plastics.htm . È abbastanza semplice fare un campione, quindi una volta trovato qualcuno del posto prendete una serie di materiali campione. Nota: In genere, si tratta di un laser a bassa potenza, inferiore a 100 watt (probabilmente ne basterebbero 30). Con questo tipo di potenza, assicuratevi che non ci siano materiali metallici nel materiale, perché non sarà in grado di tagliare l'elemento metallico. Nota: Con la giusta impostazione, sarà meglio utilizzare un materiale di tipo poliestere piuttosto che di cotone, poiché il laser taglierà il poliestere e sigillerà il bordo allo stesso tempo. [Ken Miller - 2005-11-10]//
+
+> **Commento:** //Con le nuove modalità di stampa V4 il taglio laser è diretto, Rhino funziona a meraviglia. Nessuna conversione in linee, polilinee e archi . Anche più scattante.//
+
+> **Commento:** //Penso che 30 watt siano troppi. Abbiamo realizzato dei prototipi in pellicola PET da 0,004" con un laser CO2 da 35W e i bordi erano un po' bruciati. Va bene per i prototipi iniziali, ma non per la presentazione. Anche con 10 o 15 watt su un raggio di 0,003", l'operatore deve fare attenzione alle impostazioni di potenza del raggio e alla velocità di spostamento della testa. [Jensen Didulo - 2005-11-10]//
