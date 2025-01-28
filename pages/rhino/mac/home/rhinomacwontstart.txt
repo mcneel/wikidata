@@ -1,7 +1,11 @@
 ====== Rhino 8 Mac with Enscape Reporting "License Not Found" ======
-**Issue:** After the install of Enscape for Mac, is a Rhino license in the RA and Rhino Mac reports "**No License found.**" 
+**Issue:** After the install of Enscape for Mac, is a Rhino license in the RA and Rhino Mac reports "**No License found** or Initializing..." and appears to be hung.
+
+Also you might see //"Troubleshooting: Data protection failed"//.
+See more [[https://discourse.mcneel.com/t/troubleshooting-data-protection-failed/136535|here.]]
 
 {{:rhino:mac:home:license_not_found.png?300|}}
+{{:rhino:mac:home:error_finding_mac_license.png?400|}}
 
 This happens because Rhino was not initialized before Enscape was install and Enscape created ~/Library/Application Support/McNeel with wrong permissions.
 
@@ -52,7 +56,11 @@ This means all the **Rhino** and **Enscape** application, folders and licence ke
   - Select the option **Apply to enclosed items…**
   - Close this menu and start Rhino again.
 
+or 
 
+Run these command in your Terminal APplication
+  sudo mkdir -p ~/.config/.mono/keypairs
+  sudo chmod -R 700 ~/.config/.mono/keypairs
 ===== Options 3: Use Apple Terminal Commands to Change Folder Permissions =====
 **Advanced Skills Required**
  

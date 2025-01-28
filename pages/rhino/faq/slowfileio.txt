@@ -1,0 +1,40 @@
+====== Slow Paste from Clipboard ======
+=== Rhino version: Any Rhino for Windows ===
+
+
+**Problem:** Pasting from one Rhino instance to a second Rhino instance, may be slow. Sometimes it may take 30-40 seconds for the geometry to be added to the second instance of Rhino. What is happening here?
+
+**Background**
+  * **CopyClip** is really **ExportSelected** and **Paste** is really using the **Import** command.
+  * The contents of the copy is written to a temporary file, since the clipboard typically is not sufficient.
+  * Rhino calls operating system functions to read and write with //standard Windows API//.
+  * Reading and Writing on a network drive can be slow from other applications, too.
+  * Rhino's standard i/o calls are sent to the OS and abstracted.
+  * That means that Rhino is unaware if it is reading or writing to a drive is //local, removable, cloud or network//.
+
+=== Requirements === 
+Rhino's file tools require:
+  * Windows mappable storage.
+  * This can be a UNC, local drive - physical, virtual or mapped.
+  * This does not include IP, FTP sites that are not mapped to a Windows UNC. volume or folder. So any file path like //\\10.10.10.220\general\Files\Image.png// does not meet the requirements and will cause issues when Rhino is looking for this file. You will likely see Rhino getting very slow when searching for this file during opening, exporting or copying/pasting from the clip board.
+
+=== Recommendations ===
+
+It may be best to contact the IT staff who were involved with this new server setup and tell them that file i/o across the network is slower: possibly security on the new server is tighter.
+Specifically any virus detectors or antimalware that can be slowing this process down. 
+Hopefully you will not have to use the workaround of deleting linked block or images.
+
+Here is one suggestion you can try to make one local file when exporting to one file and not write the file in "chunks".
+
+In Rhino go to Options -> Rhino Advanced and type WriteLocal. //Rhino.Options.FileSettings.WriteLocalTempFileWhenSaving// needs to be set to **True**. 
+
+{{:rhino:faq:writelocaltempfilewhensaving.png?600|}}
+
+We believe this is now True by default, but worth checking.
+image.png
+
+You can also search the the [[https://discourse.mcneel.com/|Rhino Support Forum]]. There are few similar topics that have been discussed with other customers in the past. You may discover a solution that worked for them also works for you.
+
+If you need additional help, email tech@mcneel.com
+
+(MAF 1-24-25)

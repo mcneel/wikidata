@@ -1,0 +1,20 @@
+====== Oggetti troppo lontani dall’origine assoluta======
+
+Gli oggetti estremamente lontani (milioni di unità) dall'origine del sistema assoluto presentano problemi di visualizzazione e di precisione, poiché le posizioni dei vertici della mesh poligonale sono rappresentate da un numero a precisione singola. Questo influisce sull'aspetto dell'ombreggiatura e del rendering e sull'aspetto degli oggetti mesh poligonali.
+
+Una soluzione a questo problema è quella di [[http://wiki.mcneel.com/rhino/5/video/troubleshooting/artifacts|avvicinare la geometria esistente]] all'origine e creare il modello lì. Tuttavia, poiché potrebbe essere necessario posizionare il modello in modo che corrisponda ai dati di analisi che utilizzano un numero molto elevato di unità, ciò non è sempre possibile. La procedura seguente può aiutare a risolvere il problema.
+
+
+  - Fare una copia del modello originale. Ora abbiamo **//originale//** e **//copia//**.
+  - Nella **//copia//**, **spostare** i dati rilevanti nell'origine e **eliminare** il resto del modello. 
+  - Costruire la nuova geometria nella **//copia//** con tutto ciò che è intorno all'origine. Non dovrebbero esserci problemi di visualizzazione o di precisione. Si può scalare secondo le necessità per lavorare in unità di misura convenienti e orientare il modello alla griglia di Rhino per comodità.
+  - Usare il comando **Inserisci** per inserire il **/copia//** come **blocco collegato e incorporato** nell’**/originale//** nella posizione più lontana, con la scala e l'orientamento corretti.
+
+ 
+Questo blocco collegato può essere aggiornato nell’**//originale//** quando viene modificato nella **//copia//**. L’**//originale//** ha sempre i dati corretti nella posizione corretta, ma poiché non è il modello funzionante, i potenziali problemi di visualizzazione, mesh e precisione non sono un grosso problema. Il file può essere salvato in un formato diverso a seconda delle esigenze del cliente. L'istanza del blocco potrebbe essere esplosa prima dell'esportazione.
+
+L’**//originale//** è ora solo un file contenitore usato per eseguire il ridimensionamento/trasposizione del modello. Tutti i dati dell'originale possono essere collegati a fonti esterne. Questo può includere i dati del modello originale se si riceveranno aggiornamenti nel corso del progetto. È possibile aggiornare questi dati esterni e far sì che tutto si aggiorni nell'originale senza dover passare ogni volta per il processo di scalatura/traduzione.
+
+Grazie a Mike La Fon per aver illustrato questo processo sul newsgroup di Rhino.
+
+
