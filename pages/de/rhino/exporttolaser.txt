@@ -1,52 +1,63 @@
 ====== Vorbereitung von Modellen zum Laser- und Wasserstrahlschneiden ======
 
-> **Zusammenfassung:** //Tipps und Techniken zur Verwendung von Rhino zum Laser- und Wasserstrahlschneiden.//
+> **Zusammenfassung:** //Tipps und Techniken für die Verwendung von Rhino zur Vorbereitung von Dateien für das Laser- und Wasserstrahlschneiden//
 
-Es gibt zwei Arten von Laserschneidern: Desktop-/Plottermaschinen und CNC-/G-Code-Industriemaschinen. Die unterschiedlichen Typen erfordern unterschiedliche Vorbereitungsmethoden.
+Es gibt zwei Hauptarten von Laserschneidern: Desktop/Plotter und CNC bzw. G-Code-gesteuerte Industriemaschinen. Die unterschiedlichen Typen erfordern unterschiedliche Vorbereitungsmethoden.
 
 =====Desktop-/Plotterlaserschneider=====
 
-**Desktop-/Plotterlaserschneider** sind normalerweise leichter als ihre industriellen Pendants und dienen dem Schnitt von nicht-metallischen Materialien in einem Büro oder einem kleinen Modellgeschäft.  Sie funktionieren ähnlich wie Computer-Drucker und nutzen einen Druckertreiber, sodass Sie Ihr Modell wie bei einem normalen Papierdrucker einfach über den Befehl **Drucken** an die Maschine weiterleiten können.
+Laserschneider vom Typ **Desktop/Plotter** sind in der Regel leichter als ihre industriellen Gegenstücke und für das Schneiden von Nicht-Metall-Materialien in einer Büro-, Schilder- oder Modellbauumgebung vorgesehen.  Sie funktionieren ähnlich wie Computerdrucker: Ein Druckertreiber wird installiert, und Sie können einfach über das Dialogfeld **Drucken** auf dem Gerät drucken, wie Sie es mit einem normalen Papierdrucker tun würden.
 
 Beispiele:
 
-  * [[http://www.epiloglaser.com/|Epilog]]
-  * [[http://www.ulsinc.com|Universal]]
+  * [[http://www.epiloglaser.com/|Epilog]] - [[rhino:epilogrhino|Verwendung von Rhino mit einem Epilog-Laserschneider]]
+  * [[http://www.ulsinc.com|Universal Laser Systems]]
 
 
-**[[http://wiki.mcneel.com/rhino/epilogrhino|White Paper zur Verwendung von Rhino mit einem Epilog-Laser]]**
+**[[http://wiki.mcneel.com/rhino/mitch_notes_2dcutting|Empfehlungen zum 2D-Schnitt von Mitch Heynick]]**.
 
-**[[http://wiki.mcneel.com/rhino/mitch_notes_2dcutting|Empfehlungen zum 2D-Schnitt von Mitch Heynick]]**
-
-Wenn Sie das Laserschneiden betriebsintern auf einer dieser Maschinen durchführen, werden Sie in den meisten Fällen keine Bogenanpassung oder andere geometrische Umwandlung benötigen. Sie können jede normale Rhino-Geometrie verwenden.
+In den meisten Fällen, wenn das Laserschneiden betriebsintern auf einer dieser Maschinen erfolgt, ist keine Bogenanpassung oder andere Geometrieumwandlung erforderlich. Sie können jede normale Rhino-Geometrie verwenden.
 
 =====CNC- oder Wasserstrahlschneider=====
 
-Industrielaser- oder Wasserstrahlschneider benötigen normalerweise eine CAM-Software (Computer Aided Manufacturing) zur Steuerung. Dabei wird die Geometrie der Design-Software (Rhino) zur CAM-Software übertragen, die sie in eine Sprache (G-Code) übersetzt, die eine Schneidemaschine versteht. Beispiele für große Industrielaser- bzw. Wasserstrahlschneider:
+Industrielle Laser- oder Wasserstrahlschneider benötigen normalerweise CAM-Software (CAM = Computer Aided Manufacturing), um sie zu steuern. Dabei wird die Geometrie der Design-Software (Rhino) zur CAM-Software übertragen, die sie in eine Sprache (G-Code) übersetzt, die eine Schneidemaschine versteht. Beispiele für große Industrielaser- bzw. Wasserstrahlschneider:
 
-  * [[http://www.multicam.com/intl/german.html|MultiCAM-Laser- und Wasserstrahlschneider]]
-  * [[http://www.omax.com|Omax-Wasserstrahlschneider]]
+  * [[http://www.multicam.com|MultiCam Laser- und Wasserstrahlschneider]]
+  * [[http://www.omax.com|Omax Wasserstrahlschneider]]
 
-Bei der Arbeit mit Industrielaser- und Wasserstrahlschneidern muss eine "Transferdatei" mit der zu schneidenen 2D-Geometrie erstellt werden, da diese Maschinen nicht wie Drucker arbeiten und buchstäblich keine davon native Rhino-Dateien unterstützt.  Je nach Alter und technischem Stand der Maschine muss die Rhino-Geometrie gegebenenfalls vor dem Exportieren in Linien und Bögen umgewandelt werden. 
+Für die Arbeit mit industriellen Laser- und Wasserstrahlschneidern ist es erforderlich, eine Transferdatei mit der zu schneidenden 2D-Geometrie zu exportieren, da diese Maschinen nicht wie Drucker funktionieren und praktisch keine nativen Rhino-Dateien akzeptieren.  Sie könnten es auch erforderlich machen, die Geometrie aus Rhino vor dem Export in Linien und Bögen umzuwandeln. Dies hängt vom Alter und der Ausgereiftheit der verwendeten Maschine/Software ab. 
 
-Das in der Industrie am meisten verwendete Format ist das **AutoCAD-DXF**-Format. Weitere Möglichkeiten sind das native AutoCAD-DWG-Format oder ein Adobe-Illustrator-Format (AI, EPS).  Daneben verbreiten sich auch PDF-Dateien mit Vektordaten immer mehr. Alle der genannten Formate außer PDF können von Rhino nativ exportiert werden. //Um in Rhino eine PDF-Datei zu erstellen, nutzen Sie einfach ein PDF-Druckprogramm (zahlreiche Programme vorhanden).//
+Das in der Industrie am häufigsten verwendete Exportformat ist **AutoCAD DXF**. Zu den anderen gehören AutoCAD (DWG) und Adobe Illustrator (AI, EPS).  Daneben sind auch PDF-Dateien mit Vektordaten immer verbreiteter. Alle oben genannten Formate außer PDF können nativ von Rhino exportiert werden. // Um PDF-Dateien aus Rhino zu exportieren, ist es notwendig, mit einem PDF-Druckerprogramm zu drucken. (Viele sind verfügbar.)//
 
 ====Bogenanpassung von Freiformkurven====
 
-Viele Industrieschnittmaschinen und die dazugehörige Software benötigen **//Linien//** oder **//Bogen//**. Zum sauberen Schnitt der Teile ist es daher notwendig, alle Freiform-[[http://wiki.mcneel.com/rhino:nurbs|NURBS]]-Kurven (**Splines**) in Bogen und Linien //umzuwandeln//. //Umwandeln// bedeutet hier dass Spline-Kurven durch Polylinien oder Polykurven //angenähert// werden, die nur Bogen- und Liniensegmente enthalten.  Die Toleranz der Annäherung kann durch die entsprechenden Einstellungen während des Umwandlungsprozesses gesteuert werden.  Die Annäherung an Splines über eine Serie von Tangenten (oder Beinahe-Tangenten) ist derjenigen über bloße Polylinien im Allgemeinen vorzuziehen, da so ein präziserer Schnitt mit einer kleineren Datei und einer geringeren Wahrscheinlichkeit von Verlangsamungen in den Kurven (besonders bei älteren Maschinen) möglich ist.  Fragen Sie im Zweifelsfall bei Ihrem Dienstleister nach.
+Viele Industrieschnittmaschinen und die dazugehörige Software benötigen **//Linien//** oder **//Bogen//**. Um Teile erfolgreich auszuschneiden, ist es also notwendig, alle Freiformkurven (**Splines**) in Ihrer Datei in eine Reihe von Bögen und Linien umzuwandeln. Mit //Umwandeln// ist gemeint, dass die Spline-Kurve durch eine Polylinie oder eine Polykurve, die nur Bogen- und Liniensegmente enthält, //angenähert// wird.  Steuern Sie die Annäherungstoleranz, indem Sie die richtigen Einstellungen während des Umwandlungsprozesses verwenden.  Die Annäherung von Splines durch eine Reihe von tangentialen (oder fast tangentialen) Bögen ist im Allgemeinen besser als nur Polylinien, da sie einen genaueren Schnitt mit einer kleineren Datei und eine geringere Möglichkeit der Verlangsamung entlang der Kurven ermöglichen, insbesondere bei älteren Maschinen.  Fragen Sie im Zweifelsfall bei Ihrem Dienstleister nach.
 
-Für diesen Prozess können Sie den Rhino-Befehl **Umwandeln** verwenden, der einige Bogenanpassungen vornimmt. Stellen Sie die Optionen folgendermaßen ein: **Ausgabe**=//Bogen//, **EingabeVereinfachen**=//Nein//, **WinkelToleranz**=//0// und **Toleranz** auf einen für Ihr Modell angemessenen Wert. Führen Sie den Befehl **Umwandeln** für alle Kurven des Modells aus, das Sie an einen Laserschneider schicken möchten.
+Für diesen Prozess können Sie den Rhino-Befehl **Umwandeln** verwenden, der einige Bogenanpassungen vornimmt. Stellen Sie folgende Optionen ein: **Ausgabe**=//Bogen//, **EingabeVereinfachen**=//Nein//, **WinkelToleranz**=//0// und **Toleranz** auf einen für Ihr Modell angemessenen Wert. Führen Sie den Befehl **Umwandeln** für alle Kurven des Modells aus, das Sie an einen Laserschneider schicken möchten.
+
+//**Anmerkung:**// Bevor Sie Umwandeln ausführen, zerlegen Sie jede Sammlung von NURBS-Kurven, die zu einem Kurvensatz verbunden sind. Führen Sie Umwandeln auf die Kurvenmenge aus. Wenn sie nicht verbunden sind, funktioniert die Umwandlung wie erwartet und die exportierten Bögen und Linien entsprechen den ursprünglichen Kurven.
 
 ====Geometrie-Reparatur und -Verschachtelung====
-Überlappungen, Lücken und doppelte Kurven verursachen Probleme beim Schneiden. Mit dem Befehl **BoolescheKurven** können Sie einige der Fehler beheben, wobei jedoch überlappende Bereiche nicht vollständig verschwinden und Lücken ebenfalls nicht geschlossen werden.  Für kleine Lücken kann der Befehl KurveSchließen eine schnelle Lösung sein, wenn es sich dabei um offene Kurven handelt, die geschlossen werden müssen (mit Vorsicht zu verwenden).
 
-Wenn Sie viele Profile auf Standard-Blättern verschachteln möchten, versuchen Sie es einmal mit [[http://www.cimsystem.it/prodotti/RHINO%20PLUGINS/MOSAIX/|Mosaix]] oder [[http://www.rhinonest.com/|RhinoNest]], die beide in Rhino laufen. Seit 2014 hat [[http://rhinocam.com/RhinoCAM-NEST.shtml|RhinoCAM]] ebenfalls ein Verschachtelungsmodul.
+Überlappungen, Lücken und doppelte Kurven verursachen Probleme beim Schneiden. Mit dem Befehl **BoolescheKurven** können Sie einige der Fehler beheben, wobei jedoch überlappende Bereiche nicht vollständig verschwinden und Lücken ebenfalls nicht geschlossen werden.  Bei kleinen Lücken kann der Befehl **KurveSchließen** in Rhino eine schnelle Lösung für offene Kurven sein, die geschlossen werden müssen. (Bitte mit Vorsicht verwenden.)
 
-====Einstellungen exportieren====
-Wenn die Geometrie korrekt vorbereitet ist, verwenden Sie die Befehle **Exportieren** oder **SpeichernUnter**. Wählen Sie als Dateiformat [[rhino:autocad|AutoCAD]] DXF oder DWG, benennen Sie die Datei und klicken Sie auf Speichern. Wählen Sie bei den Exportoptionen das Schema **R12 Ursprünglich** und bestätigen Sie mit OK.
+Wenn Sie viele Profile auf Standardplatten verschachteln müssen, schauen Sie sich [[http://www.mosaixsoftware.com|Mosaix]] und [[http://www.rhinonest.com/|RhinoNest]] an, die beide in Rhino laufen. Seit 2014 hat [[http://rhinocam.com/RhinoCAM-NEST.shtml|RhinoCAM]] ebenfalls ein Verschachtelungsmodul.
 
-Zur Überprüfung der Datei öffnen Sie sie mit Rhino oder einem anderen Programm, das DXF- oder DWG-Dateien lesen kann. Sie sollten nun nur Bogen und Linien in der Datei haben. Dies ist eine gute Methode, um ein möglichst konsistentes Ergebnis zu erzielen.
+====Export-Einstellungen====
+Wenn die Geometrie korrekt vorbereitet ist, verwenden Sie die Befehle **Exportieren** oder **SpeichernUnter**. Wählen Sie das AutoCAD DXF- oder DWG-Dateiformat, benennen Sie die Datei und klicken Sie auf **Speichern**. Wenn das Auswahlfeld für die Schemata angezeigt wird, wählen Sie das Schema **R12 Natural** und klicken Sie auf **OK**.
+
+Um dies zu überprüfen, öffnen Sie die exportierte Datei erneut in Rhino oder einer anderen Software, die DXF oder DWG liest. Sie sollten nun nur Bogen und Linien in der Datei haben. Dies ist eine gute Methode, um ein möglichst konsistentes Ergebnis zu erzielen.
 
 Wenn Sie keine Bogen und Linien benötigen (wenn Ihr Laserschneider also NURBS lesen kann), versuchen Sie es einmal mit dem Schema **2004 Ursprünglich**.
 
 Wenn Sie mit dem Ergebnis unzufrieden sind, [[scottd@mcneel.com|senden Sie uns Ihr Modell]] oder posten Sie Ihr Problem im [[http://discourse.mcneel.com/|Rhino-Forum]].
+
+
+----
+=====Laserschneiden von Stoffen=====
+
+> **Kommentar:** //Laserschneiden funktioniert gut zum Schneiden von Mustern in **Stoffmaterialien**, die als Tischdecke verwendet werden. Auf dieser Website können Sie sich eine bessere Vorstellung davon machen, was möglich ist: http://www.synrad.com/search_apps/materials/Plastics.htm. Es ist ganz einfach, eine Probe zu erstellen. Sobald Sie jemanden vor Ort gefunden haben, nehmen Sie eine Reihe von Probematerialien. Hinweis: In der Regel wird dies mit einem Laser mit geringer Leistung unter 100 Watt durchgeführt (30 Watt würden wahrscheinlich ausreichen). In diesem Leistungsbereich ist darauf zu achten, dass sich keine metallischen Materialien im Material befinden, da das Gerät nicht in der Lage ist, Metallelemente zu schneiden. Noch etwas anderes ist zu beachten: Mit der richtigen Einstellung ist es besser, ein Material aus Polyester als aus Baumwolle zu verwenden, da der Laser das Polyester schneidet und gleichzeitig die Kante versiegelt. [Ken Miller - 2005-11-10]//
+
+> **Kommentar:** //Mit den neuen V4-Druckmodi funktioniert Rhino wunderbar. Keine Umwandlung in Linie, Polylinie und Bögen . Es geht auch schneller.//
+
+> **Kommentar:** //Ich denke, 30 Watt sind zu viel. Wir hatten Prototypen aus 0,004-Zoll-PET-Folie, die mit einem 35-W-CO2-Laser hergestellt wurden, und die Kanten waren ein wenig angesengt. Das ist für erste Prototypen in Ordnung, aber nicht für die Präsentation. Selbst bei 10 oder 15 Watt auf einem 0,003-Zoll-Strahl muss der Bediener wahrscheinlich immer noch vorsichtig mit den Leistungseinstellungen des Strahls und der Verfahrgeschwindigkeit des Kopfes sein. [Jensen Didulo - 2005-11-10]//
