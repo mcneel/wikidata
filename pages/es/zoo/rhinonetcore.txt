@@ -1,0 +1,43 @@
+======Rhino 8 utiliza .NET Core Runtime======
+> **Producto:** //[[es:zoo:home|Zoo LAN]]//
+> **Resumen:** //Describe la utilidad de diagnóstico de Zoo LAN para Rhino 8//
+
+=====Pregunta=====
+Zoo LAN aloja licencias tanto de Rhino 7 como de Rhino 8. Además, nuestras estaciones de trabajo de Rhino pueden obtener licencias de Zoo LAN. Sin embargo, Rhino 8 no funciona: falla la prueba de conectividad en el formulario "Set Zoo Server".
+
+=====Respuesta=====
+En las estaciones de trabajo que pueden ejecutar Rhino 7 pero no Rhino 8, intente ejecutar Rhino 8 con el siguiente parámetro de línea de comandos:
+
+<code>
+C:\Archivos de programa\Rhino 8\System\Rhino.exe /netfx
+</code>
+
+Si esto funciona, instale los tiempos de ejecución de .NET Core 7.0 en la estación de trabajo de Rhino (véase más abajo).
+=====Más información=====
+Rhino 8 ahora utiliza [[https://github.com/dotnet/runtime|.NET Core Runtime]] de código abierto para ejecutar código .NET tanto en Windows como en Mac. Esto aporta algunas mejoras de rendimiento y alinea los tiempos de ejecución de .NET utilizados en todas las plataformas. 
+
+En Windows, todavía se puede ejecutar opcionalmente utilizando el tiempo de ejecución de .NET Framework, con Rhino 8, en caso de problemas de compatibilidad.
+
+El uso de .NET Core permite a Rhino y a los plugins aprovechar muchas mejoras de rendimiento que harán que casi todo el código .NET se ejecute mucho más rápido. Esto puede suponer un enorme aumento de la productividad con bibliotecas computacionales o grandes conjuntos de datos.
+
+Puede haber razones para seguir utilizando .NET Framework en Windows, en particular si necesita utilizar plugins de terceros que aún no son compatibles con .NET Core. La desventaja de utilizar .NET Framework es que Rhino puede funcionar un poco más lento en determinados casos.
+
+Hay dos formas de seleccionar el tiempo de ejecución que utiliza Rhino 8:
+
+1. Utilice el comando **DefinirTiempoDeEjecuciónDotNet** y reinicie Rhino.
+
+2. Introduzca uno de los siguientes parámetros de línea de comandos al iniciar **Rhino.exe**. Tenga en cuenta que esto reemplaza a la opción **DefinirTiempoDeEjecuciónDotNet**.
+
+^ Argumento     ^  Descripción                            ^
+| **/netcore** | .NET Core 7.0 (por defecto)                 |
+| **/netfx**   | .NET Framework 4.8 (modo de compatibilidad) |
+
+
+Si sus sistemas no tienen instalado .NET Core 7.0, aquí tiene un enlace donde puede descargar la última versión.
+
+**[[https://dotnet.microsoft.com/en-us/download/dotnet/7.0|Descargar .NET Desktop Runtime 7.0]]**
+
+
+\\
+
+{{tag>Zoo}}
