@@ -1,0 +1,43 @@
+======Rhino 8 utilizza .NET Core Runtime======
+> **Prodotto:** //[[zoo:home|Zoo]]//
+> **Sommario:** //LAN Zoo e Rhino 8//
+
+=====Domanda=====
+LAN Zoo ospita sia le licenze di Rhino 7 che quelle di Rhino 8. Inoltre, le workstation di Rhino possono ottenere licenze da LAN Zoo. Tuttavia, Rhino 8 non funziona e non supera il test di connettività nel modulo "Set Zoo Server".
+
+=====Risposta=====
+Sulle workstation che possono eseguire Rhino 7 ma non Rhino 8, prova ad eseguire Rhino 8 con il seguente parametro da linea di comando:
+
+<code>
+C:\Program Files\Rhino 8\System\Rhino.exe /netfx
+</code>
+
+Se funziona, installa i runtime .NET Core 7.0 sulla workstation di Rhino (vedi sotto).
+=====Ulteriori informazioni=====
+Rhino 8 utilizza ora [[https://github.com/dotnet/runtime|.NET Core Runtime]] open source per l'esecuzione di codice .NET sia su Windows che su Mac. Questo apporta alcuni miglioramenti alle prestazioni e allinea i runtime .NET sulle varie piattaforme. 
+
+Su Windows, è ancora possibile utilizzare facoltativamente il runtime NET Framework, con Rhino 8, in caso di problemi di compatibilità.
+
+L'uso di .NET Core permette a Rhino e ai plug-in di sfruttare molti miglioramenti delle prestazioni che renderanno molto più veloce l'esecuzione di tutto il codice .NET. Ciò può potenzialmente ottimizzare la produttività con le librerie digitali o con i grandi insiemi di dati.
+
+Potrebbero esistere ragioni valide per continuare a usare .NET Framework su Windows, in particolare se occorre utilizzare plug-in di terze parti che non sono ancora compatibili con .NET Core. Lo svantaggio dell'uso di .NET Framework è che Rhino potrebbe essere un po' più lento in alcuni casi.
+
+Esistono due modi di selezionare il runtime che Rhino 8 utilizza:
+
+1. Utilizzare il comando **SetDotNetRuntime**, quindi riavviare Rhino.
+
+2. Passare uno dei seguenti parametri da linea di comando quando si lancia **Rhino.exe**. Nota: questa impostazione sovrascrive quella di **SetDotNetRuntime**.
+
+^ Argument     ^  Description                            ^
+| **/netcore** | .NET Core 7.0 (default)                 |
+| **/netfx**   | .NET Framework 4.8 (compatibility mode) |
+
+
+Se non è installato .NET Core 7.0 nei sistemi, ecco un link per scaricare l'ultima versione.
+
+**[[https://dotnet.microsoft.com/en-us/download/dotnet/7.0|Download .NET Desktop Runtime 7.0]]**
+
+
+\\
+
+{{tag>Zoo}}
