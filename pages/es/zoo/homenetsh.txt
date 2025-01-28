@@ -1,0 +1,49 @@
+======Abrir el puerto TCP 80 en el firewall de Windows 7 con Netsh======
+
+> **Producto:** //[[es:zoo:home|Zoo LAN]]//
+> **Resumen:** //Usar Netsh para abrir Zoo LAN requiere el puerto TCP 80//
+
+Zoo LAN se comunica con los clientes de Rhino a través del puerto TCP 80 (HTTP).
+
+Después de instalar Zoo LAN, tiene que asegurarse de que el puerto TCP 80 está abierto para comunicaciones //tanto entrantes como salientes// en el software de cortafuegos que se ejecuta en el sistema servidor de Zoo LAN.
+
+**Por defecto, el puerto TCP 80 está abierto para las comunicaciones salientes en la mayoría de los cortafuegos. No debería tener que abrir ningún puerto en el software cortafuegos que se ejecuta en las estaciones de trabajo de Rhino.** 
+
+Nota: el instalador de Zoo LAN 8 configura por defecto el ámbito del Firewall de Windows sólo en la subred local.
+Debido al trabajo remoto y a las subredes enrutadas/Vpns, este detalle es importante.
+
+
+=====Más información=====
+
+**[[http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/netsh.mspx?mfr=true|Netsh]]** es una utilidad de scripting de línea de comandos de Windows para, de forma local o remota, mostra o cambiar la configuración de red de un equipo que se esté ejecutando en ese momento.
+
+Netsh también proporciona una función de scripting para ejecutar un grupo de comandos en modo por lotes en un equipo especificado.
+
+Netsh puede utilizarse, en lugar del Firewall del Panel de control, para automatizar la apertura de los puertos TCP/IP necesarios.
+
+Es posible abrir estos puertos en el Firewall de Windows utilizando Netsh. La sintaxis es diferente dependiendo de si está utilizando Windows XP o Windows Server 2008, Windows Vista o superior.
+
+====Windows XP====
+**Importante:** si es miembro del grupo Administradores, ejecute los comandos desde un símbolo del sistema. Para iniciar un símbolo del sistema, busque el icono o la entrada del menú Inicio que utiliza para iniciar una sesión de símbolo del sistema.
+
+<code>
+rem Open TCP Port 80
+netsh firewall add portopening TCP 80 "Zoo TCP Port 80"
+</code>
+
+====Windows Server 2008, Windows Vista o superior====
+
+**Importante:** si es miembro del grupo de Administradores y el Control de cuentas de usuario está activado en su equipo, ejecute los comandos desde un símbolo del sistema con permisos elevados. Para iniciar un símbolo del sistema con permisos elevados, busque el icono o la entrada del menú Inicio que utiliza para iniciar una sesión de símbolo del sistema, haga clic con el botón derecho y, a continuación, haga clic en **Ejecutar como administrador**.
+
+<code>
+rem Open TCP Port 80 inbound and outbound
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=in action=allow protocol=TCP localport=80
+netsh advfirewall firewall add rule name="Zoo TCP Port 80" dir=out action=allow protocol=TCP localport=80
+</code>
+
+=====Referencia=====
+[[http://support.microsoft.com/kb/947709|Cómo usar el contexto "netsh advfirewall firewall".]]
+
+\\
+
+{{tag>Zoo}}
