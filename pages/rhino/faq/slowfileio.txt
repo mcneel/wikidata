@@ -12,6 +12,12 @@
   * Rhino's standard i/o calls are sent to the OS and abstracted.
   * That means that Rhino is unaware if it is reading or writing to a drive is //local, removable, cloud or network//.
 
+=== Requirements === 
+Rhino's file tools require:
+  * Windows mappable storage.
+  * This can be a UNC, local drive - physical, virtual or mapped.
+  * This does not include IP, FTP sites that are not mapped to a Windows UNC. volume or folder. So any file path like //\\10.10.10.220\general\Files\Image.png// does not meet the requirements and will cause issues when Rhino is looking for this file. You will likely see Rhino getting very slow when searching for this file during opening, exporting or copying/pasting from the clip board.
+
 === Recommendations: ===
 
 It may be best to contact the IT staff who were involved with this new server setup and tell them that file i/o across the network is slower: possibly security on the new server is tighter.
