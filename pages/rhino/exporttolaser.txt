@@ -1,63 +1,63 @@
-====== Preparing Files for Laser and Waterjet Cutting ======
+====== Preparación de archivos para corte por láser y por chorro de agua ======
 
-> **Summary:** //Tips and techniques for using Rhino to prepare files for laser and waterjet cutting//
+> **Resumen:** //Consejos y técnicas para preparar archivos para corte láser y por chorro de agua//
 
-There are two main styles of laser cutters: Desktop/plotter and CNC/G-Code driven industrial machines. The two different types require different preparation methods.
+Existen dos estilos principales de cortadoras láser: máquinas de sobremesa/plotter y máquinas industriales accionadas por CNC/G-Code. Los dos tipos distintos requieren métodos de preparación diferentes.
 
-=====Desktop/plotter laser cutters=====
+=====Cortadoras láser de sobremesa/plotter=====
 
-**Desktop/plotter** type laser cutters are generally more lightweight than their industrial counterparts and are intended for cutting non-metal materials in an office, sign, or model shop environment.  They work a lot like computer printers -- A printer driver is installed and you can simply print to the machine like you would with a normal paper printer, via the **Print** dialog box.
+**Las cortadoras láser de sobremesa/plotter** suelen ser más ligeras que sus homólogas industriales y están pensadas para cortar materiales no metálicos en entornos de oficina, rotulación o modelismo.  Funcionan de forma muy parecida a las impresoras de ordenador: se instala un controlador de impresora y basta con imprimir en la máquina como si se tratara de una impresora de papel normal, a través del cuadro de diálogo **Imprimir**.
 
-Examples:
+Ejemplos:
 
-  * [[http://www.epiloglaser.com/|Epilog]] - [[rhino:epilogrhino|Using Rhino with an Epilog Laser cutter]]
+  * [[http://www.epiloglaser.com/|Epilog]] - [[rhino:epilogrhino|Usar Rhino con una cortadora láser Epilog]]
   * [[http://www.ulsinc.com|Universal Laser Systems]]
 
 
-**[[http://wiki.mcneel.com/rhino/mitch_notes_2dcutting|Recommendations on 2D cutting from Mitch Heynick.]]**
+**[[http://wiki.mcneel.com/rhino/mitch_notes_2dcutting|Recomendaciones sobre corte 2D de Mitch Heynick.]]**
 
-In most cases, if the laser cutting is done in-house on one of these types of machines, you don't need arc fitting or other geometry conversion. You can use any normal Rhino geometry.
+En la mayoría de los casos, si el corte por láser se realiza internamente en uno de estos tipos de máquinas, no es necesario el ajuste del arco ni ninguna otra conversión geométrica. Puede usar cualquier geometría normal de Rhino.
 
-=====CNC-type laser or waterjet cutters=====
+=====Cortadoras láser o por chorro de agua de tipo CNC=====
 
-Industrial laser or waterjet cutters normally need CAM (Computer Aided Manufacturing) software to drive them. Geometry from the design software (Rhino) is transferred to the CAM software, which in turn translates it into a language (G-Code) that the cutting machine can understand. Large industrial laser/waterjet cutter examples include:
+Las cortadoras industriales por láser o chorro de agua suelen necesitar un software CAM (fabricación asistida por ordenador) para funcionar. La geometría del software de diseño (Rhino) se transfiere al software CAM, que a su vez la traduce a un lenguaje (G-Code) que la máquina de corte puede entender. Entre los ejemplos de grandes cortadoras industriales láser/por chorro de agua se incluyen:
 
-  * [[http://www.multicam.com|MultiCam laser and waterjet cutters]]
-  * [[http://www.omax.com|Omax waterjet cutters]]
+  * [[http://www.multicam.com|Cortadoras láser y por chorro de agua MultiCam]]
+  * [[http://www.omax.com|Cortadoras por chorro de agua Omax]]
 
-Working with industrial laser and waterjet cutters require exporting a transfer file with the 2D geometry to be cut, as these machines do not work like printers and virtually none will accept native Rhino files.  They may also require the geometry from Rhino to be converted to lines and arcs before exporting. This depends on the age and sophistication of the machine/software used. 
+Para trabajar con cortadoras industriales por láser y chorro de agua es necesario exportar un archivo de transferencia con la geometría 2D que se va a cortar, ya que estas máquinas no funcionan como impresoras y prácticamente ninguna acepta archivos nativos de Rhino.  También pueden requerir que la geometría de Rhino se convierta en líneas y arcos antes de exportarla. Esto depende de la antigüedad y sofisticación de la máquina/software utilizado. 
 
-The most commonly used export format in industry is an **AutoCAD DXF**. Others include AutoCAD native DWG and Adobe Illustrator (AI, EPS).  PDF files containing vector info are also becoming quite commonly used. All the above formats except PDF can be natively exported by Rhino. //To export PDF files from Rhino, it is necessary to print to a PDF printer program. (Many are available.)//
+El formato de exportación más utilizado en la industria es **DXF de AutoCAD**. Otros son DWG nativo de AutoCAD y Adobe Illustrator (AI, EPS).  Los archivos PDF que contienen información vectorial también se utilizan cada vez más. Rhino puede exportar de forma nativa todos los formatos anteriores excepto PDF. //Para exportar archivos PDF desde Rhino, es necesario imprimir en un programa de impresión PDF. (Hay muchos disponibles.)//
 
-====Arcfitting freeform curves====
+====Ajuste de arcos en curvas de forma libre====
 
-A great many industrial cutting machines and software **only** understand **//lines//** and **//arcs//**. So, to cut parts sucessfully, it is necessary to //convert// any free-form [[rhino:nurbs|NURBS]] curves (**splines**) in your file into a series of arcs and lines. By //convert//, we mean that the spline curve is //approximated// by a polyline or polycurve containing only arc and line segments.  Control the approximation tolerance by using the correct settings during the conversion process.  Approximating splines by a series of tangent (or nearly tangent) arcs is generally preferable to just polylines, because they allow a more accurate cut with a smaller file and less possibility of slowdowns along the curves, especially with older machines.  Consult your service bureau if in doubt.
+Muchas máquinas de corte industrial y software **sólo** entienden **//líneas//** y **//arcos//**. Por lo tanto, para cortar bien las piezas, es necesario //convertir// cualquier forma libre [[rhino:nurbs|NURBS]] curvas (**splines**) del archivo en una serie de arcos y líneas. Por //convertir//, queremos decir que la curva spline queda //aproximada// por una polilínea o policurva que contiene sólo segmentos de arco y línea.  Se puede controlar la tolerancia de aproximación utilizando los ajustes correctos durante el proceso de conversión.  Aproximar splines mediante una serie de arcos tangentes (o casi tangentes) suele ser preferible a limitarse a polilíneas, porque permiten un corte más preciso con un archivo más pequeño y menos posibilidad de ralentizaciones a lo largo de las curvas, especialmente con máquinas antiguas.  En caso de duda, consulte a su oficina de soporte técnico.
 
-You can use the Rhino **Convert** command for this process, commonly called "Arc Fitting". Set options to: **Output**=//Arcs//, **SimplifyInput**=//No//, **AngleTolerance**=//0//, and **Tolerance** to a reasonable number for your model. Run the **Convert** command on all curves in the file you want to send to the cutter.
+Puede utilizar el comando **Convertir** de Rhino para este proceso, comúnmente llamado "Ajuste de arcos". Defina las opciones: **Salida**=//Arcos//, **SimplificarEntrada**=//No//, **ToleranciaDeÁngulo**=//0// y **Tolerancia** a un número razonable para su modelo. Ejecute el comando **Convertir** en todas las curvas del archivo que desea enviar a la cortadora.
 
-//**Note:**// Before running Convert, Explode any collection of NURBS curves that are joined into a set of curves. Run convert on the set of curves. If they are not joined, the convert will work as expected and the exported arcs and lines will match the original curves.
+//**Nota:**// Antes de ejecutar Convertir, descomponga cualquier conjunto de curvas NURBS que estén unidas con el comando Descomponer. Ejecute el comando Convertir en el conjunto de curvas. Si no se están unidas, la conversión funcionará como se espera y los arcos y líneas exportados coincidirán con las curvas originales.
 
-====Geometry repair and nesting====
+====Reparación de geometría y anidado====
 
-Overlaps, gaps, and duplicate curves cause problems in cutting. The **CurveBoolean** command may work to clean some of these up, but may not entirely eliminate overlapping sections, and it will not fix gaps.  For small gaps, the **CloseCrv** command in Rhino can be a quick fix for open curves that need to be closed. (Use this with caution.)
+Los solapamientos, los huecos y las curvas duplicadas causan problemas en el corte. El comando **BooleanaDeCurvas** puede funcionar para limpiarlo, pero puede que no elimine por completo las secciones superpuestas, y no arreglará los huecos.  Para huecos pequeños, el comando **CerrarCrv** en Rhino puede ser una solución rápida para curvas abiertas que tienen que ser cerradas. (Utilice esta opción con precaución.)
 
-If you need to nest many profiles together onto standard stock sheets, check out [[http://www.mosaixsoftware.com|Mosaix]] and [[http://www.rhinonest.com/|RhinoNest]], both which run inside Rhino. As of 2014, [[http://rhinocam.com/RhinoCAM-NEST.shtml|RhinoCAM]] also has a nesting module.
+Si necesita anidar muchos perfiles juntos en hojas de material estándar, consulte [[http://www.mosaixsoftware.com|Mosaix]] y [[http://www.rhinonest.com/|RhinoNest]], que funcionan dentro de Rhino. A partir de 2014, [[http://rhinocam.com/RhinoCAM-NEST.shtml|RhinoCAM]] también cuenta con un módulo de anidado.
 
-====Export settings====
-In Rhino, once the geometry has been correctly prepared, use the **Export** or **SaveAs** command. Select AutoCAD DXF or DWG file format, name the file, and click **Save**. When the schemes selection box comes up, choose the **R12 Natural** scheme and click **OK**.
+====Opciones de exportación====
+En Rhino, una vez preparada correctamente la geometría, utilice el comando **Exportar** o **Guardar como**. Seleccione el formato de archivo DXF o DWG de AutoCAD, asigne un nombre al archivo y haga clic en **Guardar**. Cuando aparezca el cuadro de selección de esquemas, elija el esquema **R12 Natural** y haga clic en **Aceptar**.
 
-To check, reopen your exported file in Rhino or any other software that reads DXF or DWG. There should be only arcs and lines in the file. This is one good way to get the most consistent results.
+Para comprobarlo, vuelva a abrir el archivo exportado en Rhino o en cualquier otro software que lea DXF o DWG. En el archivo sólo debe haber arcos y líneas. Esta es una buena manera de obtener los mejores resultados.
 
-If you do not need to convert to arcs and lines (if your laser/waterjet supplier can read NURBS splines), try the **2004 Natural** scheme.
+Si no necesita convertir a arcos y líneas (si su proveedor de láser/chorro de agua puede leer splines NURBS), pruebe el esquema **2004 Natural**.
 
-If the results are not what you want, [[scottd@mcneel.com|please send a sample]] or post the problem to the [[http://discourse.mcneel.com/|Rhino forum]].
+Si los resultados no son los deseados, [[scottd@mcneel.com|envíe una muestra]] o publique el problema en el [[http://discourse.mcneel.com/|Foro Rhino]].
 
 
 ----
-=====Laser cutting of fabric=====
+=====Corte de tejidos por láser=====
 
-> **Comment:** //Laser cutting works well for cutting patterns into a **fabric materials** that will be used as a tablecloth. Check out this site for a better idea of what can be done: http://www.synrad.com/search_apps/materials/Plastics.htm . It's simple enough to do a sample, so once you find someone local take a series of sample materials. Note: Typically this would be done with a low power laser under 100 watts (30 would probably do it). With this sort of power range be sure there are no metallic materials in the material because it won't be able to cut the metal element. One other thing to note: With the right setting you'll do better with a polyester type material rather than a cotton as the laser will cut the polyester and seal the edge at the same time. [Ken Miller - 2005-11-10]//
+> **Comentario:** //El corte por láser funciona bien para cortar patrones en un **material textil** que se utilizará como mantel. Consulte este sitio web para hacerse una mejor idea de lo que se puede hacer: http://www.synrad.com/search_apps/materials/Plastics.htm . Es bastante sencillo hacer una muestra, así que una vez que encuentre a alguien local, tome una serie de materiales de muestra. Nota: normalmente, esto se haría con un láser de baja potencia de menos de 100 vatios (con 30 probablemente bastaría). Con este tipo de rango de potencia asegúrese de que no hay materiales metálicos en el material porque no será capaz de cortar el elemento metálico. Otra cosa a tener en cuenta: con el ajuste correcto, irá mejor un material de tipo poliéster en lugar de algodón, ya que el láser cortará el poliéster y sellará el borde al mismo tiempo. [Ken Miller - 2005-11-10]//
 
-> **Comment:** //With the new V4 print modes laser cutting directly, Rhino works wonderfully. No converting to line, polyline, and arcs . Snappier too.//
+> **Comentario:** //Con los nuevos modos de impresión de V4, Rhino funciona de maravilla. No hace falta convertir a línea, polilínea y arcos. También es más rápido también.//
 
-> **Comment:** //I think 30 watts is too much. We had prototypes made of .004" PET film done on a 35W CO2 laser and the edges were a bit singed. This is okay for initial prototypes but not for presentation. Even at 10 or 15 watts on a .003" beam, the operator probably still has to be careful with the power settings of the beam and travel speed of the head. [Jensen Didulo - 2005-11-10]//
+> **Comentario:** //Creo que 30 vatios es demasiado. Teníamos prototipos hechos de película PET de 0,004" con un láser de CO2 de 35 W y los bordes quedaron un poco chamuscados. Está bien para prototipos iniciales, pero no para presentación. Incluso con 10 ó 15 vatios en un haz de 0,003", es probable que el operario tenga que tener cuidado con los ajustes de potencia del haz y la velocidad de desplazamiento del cabezal. [Jensen Didulo - 2005-11-10]//
