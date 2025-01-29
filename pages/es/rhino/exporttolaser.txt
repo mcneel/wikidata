@@ -1,0 +1,63 @@
+====== Preparación de archivos para corte por láser y por chorro de agua ======
+
+> **Resumen:** //Consejos y técnicas para preparar archivos para corte láser y por chorro de agua//
+
+Existen dos estilos principales de cortadoras láser: máquinas de sobremesa/plotter y máquinas industriales accionadas por CNC/G-Code. Los dos tipos distintos requieren métodos de preparación diferentes.
+
+=====Cortadoras láser de sobremesa/plotter=====
+
+**Las cortadoras láser de sobremesa/plotter** suelen ser más ligeras que sus homólogas industriales y están pensadas para cortar materiales no metálicos en entornos de oficina, rotulación o modelismo.  Funcionan de forma muy parecida a las impresoras de ordenador: se instala un controlador de impresora y basta con imprimir en la máquina como si se tratara de una impresora de papel normal, a través del cuadro de diálogo **Imprimir**.
+
+Ejemplos:
+
+  * [[http://www.epiloglaser.com/|Epilog]] - [[rhino:epilogrhino|Usar Rhino con una cortadora láser Epilog]]
+  * [[http://www.ulsinc.com|Universal Laser Systems]]
+
+
+**[[http://wiki.mcneel.com/rhino/mitch_notes_2dcutting|Recomendaciones sobre corte 2D de Mitch Heynick.]]**
+
+En la mayoría de los casos, si el corte por láser se realiza internamente en uno de estos tipos de máquinas, no es necesario el ajuste del arco ni ninguna otra conversión geométrica. Puede usar cualquier geometría normal de Rhino.
+
+=====Cortadoras láser o por chorro de agua de tipo CNC=====
+
+Las cortadoras industriales por láser o chorro de agua suelen necesitar un software CAM (fabricación asistida por ordenador) para funcionar. La geometría del software de diseño (Rhino) se transfiere al software CAM, que a su vez la traduce a un lenguaje (G-Code) que la máquina de corte puede entender. Entre los ejemplos de grandes cortadoras industriales láser/por chorro de agua se incluyen:
+
+  * [[http://www.multicam.com|Cortadoras láser y por chorro de agua MultiCam]]
+  * [[http://www.omax.com|Cortadoras por chorro de agua Omax]]
+
+Para trabajar con cortadoras industriales por láser y chorro de agua es necesario exportar un archivo de transferencia con la geometría 2D que se va a cortar, ya que estas máquinas no funcionan como impresoras y prácticamente ninguna acepta archivos nativos de Rhino.  También pueden requerir que la geometría de Rhino se convierta en líneas y arcos antes de exportarla. Esto depende de la antigüedad y sofisticación de la máquina/software utilizado. 
+
+El formato de exportación más utilizado en la industria es **DXF de AutoCAD**. Otros son DWG nativo de AutoCAD y Adobe Illustrator (AI, EPS).  Los archivos PDF que contienen información vectorial también se utilizan cada vez más. Rhino puede exportar de forma nativa todos los formatos anteriores excepto PDF. //Para exportar archivos PDF desde Rhino, es necesario imprimir en un programa de impresión PDF. (Hay muchos disponibles.)//
+
+====Ajuste de arcos en curvas de forma libre====
+
+Muchas máquinas de corte industrial y software **sólo** entienden **//líneas//** y **//arcos//**. Por lo tanto, para cortar bien las piezas, es necesario //convertir// cualquier forma libre [[rhino:nurbs|NURBS]] curvas (**splines**) del archivo en una serie de arcos y líneas. Por //convertir//, queremos decir que la curva spline queda //aproximada// por una polilínea o policurva que contiene sólo segmentos de arco y línea.  Se puede controlar la tolerancia de aproximación utilizando los ajustes correctos durante el proceso de conversión.  Aproximar splines mediante una serie de arcos tangentes (o casi tangentes) suele ser preferible a limitarse a polilíneas, porque permiten un corte más preciso con un archivo más pequeño y menos posibilidad de ralentizaciones a lo largo de las curvas, especialmente con máquinas antiguas.  En caso de duda, consulte a su oficina de soporte técnico.
+
+Puede utilizar el comando **Convertir** de Rhino para este proceso, comúnmente llamado "Ajuste de arcos". Defina las opciones: **Salida**=//Arcos//, **SimplificarEntrada**=//No//, **ToleranciaDeÁngulo**=//0// y **Tolerancia** a un número razonable para su modelo. Ejecute el comando **Convertir** en todas las curvas del archivo que desea enviar a la cortadora.
+
+//**Nota:**// Antes de ejecutar Convertir, descomponga cualquier conjunto de curvas NURBS que estén unidas con el comando Descomponer. Ejecute el comando Convertir en el conjunto de curvas. Si no se están unidas, la conversión funcionará como se espera y los arcos y líneas exportados coincidirán con las curvas originales.
+
+====Reparación de geometría y anidado====
+
+Los solapamientos, los huecos y las curvas duplicadas causan problemas en el corte. El comando **BooleanaDeCurvas** puede funcionar para limpiarlo, pero puede que no elimine por completo las secciones superpuestas, y no arreglará los huecos.  Para huecos pequeños, el comando **CerrarCrv** en Rhino puede ser una solución rápida para curvas abiertas que tienen que ser cerradas. (Utilice esta opción con precaución.)
+
+Si necesita anidar muchos perfiles juntos en hojas de material estándar, consulte [[http://www.mosaixsoftware.com|Mosaix]] y [[http://www.rhinonest.com/|RhinoNest]], que funcionan dentro de Rhino. A partir de 2014, [[http://rhinocam.com/RhinoCAM-NEST.shtml|RhinoCAM]] también cuenta con un módulo de anidado.
+
+====Opciones de exportación====
+En Rhino, una vez preparada correctamente la geometría, utilice el comando **Exportar** o **Guardar como**. Seleccione el formato de archivo DXF o DWG de AutoCAD, asigne un nombre al archivo y haga clic en **Guardar**. Cuando aparezca el cuadro de selección de esquemas, elija el esquema **R12 Natural** y haga clic en **Aceptar**.
+
+Para comprobarlo, vuelva a abrir el archivo exportado en Rhino o en cualquier otro software que lea DXF o DWG. En el archivo sólo debe haber arcos y líneas. Esta es una buena manera de obtener los mejores resultados.
+
+Si no necesita convertir a arcos y líneas (si su proveedor de láser/chorro de agua puede leer splines NURBS), pruebe el esquema **2004 Natural**.
+
+Si los resultados no son los deseados, [[scottd@mcneel.com|envíe una muestra]] o publique el problema en el [[http://discourse.mcneel.com/|Foro Rhino]].
+
+
+----
+=====Corte de tejidos por láser=====
+
+> **Comentario:** //El corte por láser funciona bien para cortar patrones en un **material textil** que se utilizará como mantel. Consulte este sitio web para hacerse una mejor idea de lo que se puede hacer: http://www.synrad.com/search_apps/materials/Plastics.htm . Es bastante sencillo hacer una muestra, así que una vez que encuentre a alguien local, tome una serie de materiales de muestra. Nota: normalmente, esto se haría con un láser de baja potencia de menos de 100 vatios (con 30 probablemente bastaría). Con este tipo de rango de potencia asegúrese de que no hay materiales metálicos en el material porque no será capaz de cortar el elemento metálico. Otra cosa a tener en cuenta: con el ajuste correcto, irá mejor un material de tipo poliéster en lugar de algodón, ya que el láser cortará el poliéster y sellará el borde al mismo tiempo. [Ken Miller - 2005-11-10]//
+
+> **Comentario:** //Con los nuevos modos de impresión de V4, Rhino funciona de maravilla. No hace falta convertir a línea, polilínea y arcos. También es más rápido también.//
+
+> **Comentario:** //Creo que 30 vatios es demasiado. Teníamos prototipos hechos de película PET de 0,004" con un láser de CO2 de 35 W y los bordes quedaron un poco chamuscados. Está bien para prototipos iniciales, pero no para presentación. Incluso con 10 ó 15 vatios en un haz de 0,003", es probable que el operario tenga que tener cuidado con los ajustes de potencia del haz y la velocidad de desplazamiento del cabezal. [Jensen Didulo - 2005-11-10]//
