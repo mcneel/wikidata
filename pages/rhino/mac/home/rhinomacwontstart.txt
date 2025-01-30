@@ -21,42 +21,54 @@ You might see //"Troubleshooting: Data protection failed"//. //[[https://discour
     - Drag **Enscape** to the trash
   - Delete Enscape Plugin:
     - In Finder, click **Go > Go to Folder**
-    - Paste ~/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/
+    - Paste **~/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/**
     - Drag the **Enscape** folder to the trash
   - Delete Rhino License Files:
     - In Finder, click **Go > Go to Folder**  
-    - Paste /Users/you/Library/Application Support/McNeel/Rhinoceros
+    - Paste **/Users/you/Library/Application Support/McNeel/Rhinoceros**
     - Drag **8.0** to the trash
     - In Finder, click **Go > Go to Folder**  
     - Paste /Users/Shared/McNeel/Rhinoceros/
     - Drag **8.0** to the trash
   - Delete Enscape Data Folders:
     - In Finder, click **Go > Go to Folder** 
-    - Paste /Users/you/Library/Application Support/
+    - Paste **/Users/you/Library/Application Support/**
     - Drag any Enscape-related folders to the trash
   - Restart your Mac
   - Reinstall Rhino. //If your Mac prompts "keep, replace ..." you did not clean up well enough. Go back to the top and try again.//
   - Start Rhino. It should install and open like it was never installed before. And then it will get a license from the RA. 
 ===== Option 2: Manually modify folder permissions ===== 
 
-  - Quit Rhino completely.
-  - Open the **Finder**, click the **Go** menu, hold the **Option** key (⌥) and select **Library**.
-  - Open **Application Support** and look for the McNeel folder.
-  - Right-click it and select **Get Info**.
-  - Go to the **Sharing & Permissions** section and click the padlock to enable editing.
-  - Change the permissions to **Read & Write** for all the entries.
-  - Click on the options menu at the bottom left of the window (the circle with the three dots) next to the + & - symbols.
-  - Select the option **Apply to enclosed items…**
-  - Close this menu and start Rhino again.
+  - **Quit Rhino**
+  - Open **Finder**
+  - Set permissions for ~/Library/Application Support/McNeel folder
+    - In Finder, click **Go > Go to Folder**.
+    - Paste **~/Library/Application Support**.
+    - Right-click the **McNeel** folder, then click **Get Info**.
+    - In the **Sharing & Permissions** section and click the padlock to enable editing.
+    - Change the permissions to **Read & Write** for all the entries.
+    - In the options menu (the circle with the three dots next to the + & - symbols), click **Apply to enclosed items…**
+    - Close the McNeel Info window.
+  - Set permissions for /Users/Shared/McNeel/Rhinoceros folder
+    - In Finder, click **Go > Go to Folder**.
+    - Paste **/Users/Shared/McNeel**
+    - Right-click the **Rhinoceros** folder, then click **Get Info**.
+    -  In the **Sharing & Permissions** section and click the padlock to enable editing.
+    -  Change the permissions to **Read & Write** for all the entries.
+    - In the options menu (the circle with the three dots next to the + & - symbols), click **Apply to enclosed items…**
+    - Close the Rhinoceros Info window.
+  - Start Rhino.
 
 or 
 
 Please check if you have read & write privileges on these license folders. To do this, right click a folder > choose Get Info > and check the permissions at the bottom of the window that pops up. Make all of them **Read + Write.**
-     /Users//Library/Application Support/McNeel/Rhinoceros
+     ~/Library/Application Support/McNeel/Rhinoceros
      /Users/Shared/McNeel/Rhinoceros
 
-  - For the User > Library folders, make sure you are in the one from the Go menu in the Finder app when the Option key is held.
+
   - Start Rhino 8 after making sure you can write to these folders. You should see a Welcome screen to enter your email. If that still doesn't work, try deleting all McNeel folders from both ‘/Application Support’ and ‘/Shared’ before starting Rhino 8
+
+
 ===== Options 3: Use Apple Terminal Commands to Change Folder Permissions =====
 **Advanced Skills Required**
  
