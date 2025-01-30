@@ -13,24 +13,30 @@ You might see //"Troubleshooting: Data protection failed"//. //[[https://discour
 ===== Solution 1: Manually and Complete Uninstall ===== 
 **Simplest Solution**
 
-Enscape is the problem. Here's the workaround.
-//You have to completely and manually remove Rhino and Enscape. //
-This means all the **Rhino** and **Enscape** application, folders and licence keys.
-
-  - In File Finder go to **Applications** and delete: Enscape, Rhino 7 and/or Rhino 8 
-  - Now, you will need to manually delete the folders where the plugin files live.
-  - In File Finder navigate to: ~/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/. Delete **Enscape** plugin folder.  //See more details on uninstalling Mac Plugins// [[https://developer.rhino3d.com/guides/rhinocommon/uninstalling-plugins-mac/|here]].
-  - Now reset the Rhino licensing files by deleting the contents of these folders:
-     - /Users/you/Library/Application Support/McNeel/Rhinoceros/8.0/License Manager/Licenses
-     - /Users/Shared/McNeel/Rhinoceros/8.0/License Manager/Licenses
-     - And this file if you have it:  
-     - /Users/you/Library/Application Support/McNeel/Rhinoceros/8.0/ra_cache.txt
-  - And while you are in the library, double check to see if there are any Enscape folders and delete them.
+  - Delete Applications:
+    - Open Finder
+    - Click **Applications** in the sidebar.
+    - Drag **Rhino 7** to the trash
+    - Drag **Rhino 8** to the trash
+    - Drag **Enscape** to the trash
+  - Delete Enscape Plugin:
+    - In Finder, click **Go > Go to Folder**
+    - Paste ~/Library/Application Support/McNeel/Rhinoceros/MacPlugIns/
+    - Drag the **Enscape** folder to the trash
+  - Delete Rhino License Files:
+    - In Finder, click **Go > Go to Folder**  
+    - Paste /Users/you/Library/Application Support/McNeel/Rhinoceros
+    - Drag **8.0** to the trash
+    - In Finder, click **Go > Go to Folder**  
+    - Paste /Users/Shared/McNeel/Rhinoceros/
+    - Drag **8.0** to the trash
+  - Delete Enscape Data Folders:
+    - In Finder, click **Go > Go to Folder** 
+    - Paste /Users/you/Library/Application Support/
+    - Drag any Enscape-related folders to the trash
   - Restart your Mac
   - Reinstall Rhino. //If your Mac prompts "keep, replace ..." you did not clean up well enough. Go back to the top and try again.//
   - Start Rhino. It should install and open like it was never installed before. And then it will get a license from the RA. 
-
-
 ===== Option 2: Manually modify folder permissions ===== 
 
   - Quit Rhino completely.
