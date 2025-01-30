@@ -10,6 +10,18 @@ You might see //"Troubleshooting: Data protection failed"//. //[[https://discour
 
 
 
+===== Solution 1: Use Apple Terminal Commands to Change Folder Permissions =====
+
+  - Close Rhino
+  - Open Terminal. //[[https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac|Details...]]//
+  - Paste the following into Terminal, then press Enter:
+
+<code language=bash>
+sudo chown -R $(logname) "/Users/Shared/McNeel/Rhinoceros"
+sudo chmod -R 755 "/Users/Shared/McNeel/Rhinoceros"
+</code>
+
+
 ===== Solution 1: Manually and Complete Uninstall ===== 
 **Simplest Solution**
 
@@ -94,14 +106,3 @@ Run these command in your Terminal Application
 We have heard from Enscape that their latest solves the issue.
 
 If the issue persists, please contact [[https://www.rhino3d.com/support/|McNeel Technical Support]] tech@mcneelcom.
-
-===== Solution 4: Use Apple Terminal Commands to Change Folder Permissions =====
-
-  - Close Rhino
-  - Open Terminal
-  - Paste the following into Terminal, then press Enter:
-
-<code language=bash>
-sudo chown -R $(logname) "/Users/Shared/McNeel/Rhinoceros"
-sudo chmod -R 755 "/Users/Shared/McNeel/Rhinoceros"
-</code>
