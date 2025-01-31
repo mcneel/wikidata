@@ -3,7 +3,7 @@
 \\
 
 =====Problema=====
-Quando apri un file dwg o DXF in Rhino, non viene importato nessun oggetto.
+Quando apri un file DWG o DXF in Rhino, non viene importato nessun oggetto.
 
 =====Perché?=====
 Esistono generalmente due motivi:
@@ -13,13 +13,14 @@ Esistono generalmente due motivi:
   * La geometria del disegno tecnico è stata creata nell'area della spazio layout.
 
 ====Versioni dei file DWG/DXF====
-  * Rhinoceros 6 aprirà le versioni del 2018 di AutoCAD o precedenti.
-  * Rhinoceros 5 aprirà i formati file della versione del 2013 e 2010 di AutoCAD o precedenti.
-  * Rhinoceros 4 aprirà le versioni del 2007 di AutoCAD o precedenti.
+  * **Rhinoceros 6, 7 o 8 ** apre **file di AutoCAD 2018** o versioni precedenti.
+  * **Rhinoceros 5** apre **file di AutoCAD 2013 e 2010** o versioni precedenti.
+  * **Rhinoceros 4** apre **file di AutoCAD 2007** o versioni precedenti.
 
 Autodesk non cambia il formato file ad ogni ciclo di release. Di solito, lo fanno ogni terza release, ma di recente hanno aggiornato il formato alla quinta release.
-Formato file 
-  * 2018 (può includere 2019 e 2020).
+
+====File DWG/DXF====
+  * 2018 (include le versioni 2019, 2020, 2021, 2022, 2023 e 2024 di AutoCAD).
   * 2013 (include le versioni 2014, 2015, 2016 e 2017 di AutoCAD).
   * 2010 (include le versioni 2011 e 2012 di AutoCAD).
   * 2007 (include le versioni 2008 e 2009 di AutoCAD).
@@ -28,14 +29,16 @@ Formato file
   * R12 (Include R13 e R14).
 
 
-{{:rhino:autocad_version.png?500|}}
+{{:rhino:autocad_version2024.png?600|}}
 
 
 ====Oggetti proxy====
 
-Gli oggetti proxy sono segnaposto per gli oggetti personalizzati creati da applicazioni ObjectARX®, quali AutoCAD® Mechanical, Autodesk® Architectural Desktop e Autodesk® Land Desktop.
+**Gli oggetti proxy sono segnaposto per gli oggetti personalizzati creati da applicazioni ObjectARX®, come Inventor®, AutoCAD® Mechanical, Autodesk® Architectural Desktop e Autodesk® Land Desktop.**
 
-Di default, i messaggi di oggetti proxy vengono visualizzati durante l'apertura di un file dwg su un piano AutoCAD se l'applicazione che ha creato gli oggetti personalizzati non è attualmente in esecuzione. Ad esempio, se un disegno tecnico creato in Autodesk Mechanical Desktop viene aperto in un piano AutoCAD®, gli oggetti creati come oggetti Autodesk Mechanical Desktop vengono visualizzati come oggetti proxy.
+Di default, i messaggi di oggetti proxy vengono visualizzati come rettangoli vuoti semplici durante l'apertura di un file DWG su un piano AutoCAD se l'applicazione che ha creato gli oggetti personalizzati non è attualmente in esecuzione. Ad esempio, se un disegno tecnico creato in Autodesk Mechanical Desktop viene aperto in un piano AutoCAD®, gli oggetti creati come oggetti Autodesk Mechanical Desktop vengono visualizzati come oggetti proxy.
+
+Inoltre, quando si apre un DWG con oggetto proxy, Rhino segnala //"Unsupported entity type: AcDbProxyEntity, ACAD_PROXY_ENTITY"// sulla linea di comando di Rhino. Usare F2 sulla tastiera per leggere l'intera schermata di testo.
 
 In questo senso, è possibile eseguire operazioni come spostare o copiare gli oggetti proxy. Tuttavia, non sono disponibili determinate operazioni di editing uniche per l'applicazione ObjectARX. Ad esempio, non è possibile eseguire modifiche parametriche su oggetti Autodesk Mechanical Desktop in applicazioni diverse da Autodesk Mechanical Desktop.
 
@@ -46,19 +49,19 @@ Poiché Rhino non è in grado di eseguire l'applicazione ARX con cui sono stati 
 
 Visto che AutoCAD salva la propria geometria 3D in formato mesh, esiste la possibilità di ottenere tali mesh in Rhino.
 
-  - Apri il file dwg nell'applicazione desktop con cui è stato creato (puoi provare semplicemente con AutoCAD).
+  - Aprire il file dwg nell'applicazione desktop che lo ha creato. È possibile provare un file semplice AutoCAD, se non è disponibile un altro formato.
   - **Esplodi** l'oggetto personalizzato (muro, tetto, porta, finestra, ecc.) in mesh.
   - Salva il file con un altro nome.
   - Importa il file in Rhino.
 
-L'oggetto proxy deve essere sempre esploso.
+L'oggetto proxy deve essere sempre esploso prima dell’esportazione.
 
 
 ====Geometria spazio layout====
 
-La geometria layout non verrà importata in Rhino 3 o Rhino 4, asolo in Rhino 5.
+La geometria layout non verrà importata in Rhino 3 o Rhino 4, ma solo in Rhino 5.
 
-Se apri un file dwg in Rhino e appare vuoto, gli oggetti potrebbero trovarsi nello spazio layout.
+Se aprendo un file dwg in Rhino, appare vuoto, gli oggetti potrebbero trovarsi nello spazio layout.
 
 ===Soluzione===
   - Apri il disegno tecnico in AutoCAD.
@@ -67,3 +70,4 @@ Se apri un file dwg in Rhino e appare vuoto, gli oggetti potrebbero trovarsi nel
 I layout vengono importati in Rhino 5. 
 
 **[[http://wiki.mcneel.com/rhino/faq|Torna alle Domande Frequenti]]**
+
