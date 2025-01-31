@@ -1,0 +1,50 @@
+====== Risoluzione dei problemi di visualizzazione in Rhino ======
+
+==== Manufatti/visualizzazione confusa ====
+
+
+
+La prima cosa da provare è **[[rhino:5:video:troubleshooting:intel|aggiornare i driver video]]**.
+
+\\
+
+====Problema:==== Sfarfallio====
+{{:rhino:5:video:troubleshooting:farfromorigin.png?200| Visualizzazione confusa}}  {{:rhino:5:video:troubleshooting:farfromorigin2.png?200| Visualizzazione corretta}}
+
+Se gli oggetti appaiono tremolanti e instabili quando si sposta la vista o se le mesh di rendering sono molto imprecise, è possibile che gli oggetti siano molto lontani dall'origine assoluta.
+
+**Per determinare se gli oggetti sono lontani dall'origine**
+  - Esegui il comando **EvaluatePt**.
+  - **Snap** a un punto su un oggetto. 
+Se la linea di comando segnala che le coordinate assolute sono molto grandi (ad esempio, più di un milione), può essere utile spostare gli oggetti più vicino all'origine assoluta. 
+
+**Per avvicinare gli oggetti all'origine**
+
+  - **Selezionare** tutti gli oggetti da spostare.
+  - Avviare il comando **Spostamento**.
+  - Al prompt **Punto da cui spostarsi**, fare uno snap su una posizione di uno degli oggetti. 
+  - Al prompt **Punto da spostare**, digitare **W0,0,0** (per l'origine assoluta). 
+  - Potrebbe essere necessario utilizzare il comando **RefreshShade** sugli oggetti per forzare la creazione di nuove mesh di rendering più accurate.
+
+Se non è possibile spostare gli oggetti, per un altro approccio alla soluzione del problema si veda: //[[rhino:farfromorigin|Oggetti troppo lontani dall’origine assoluta]]//.
+
+\\
+
+==== Problema: Wireframe non corretto nelle viste ombreggiate====
+
+{{:rhino:5:video:troubleshooting:testzbiasfactor1.png?200|Le wire si mostrano attraverso le superfici ombreggiate}}   {{:rhino:5:video:troubleshooting:testzbiasfactor12png.png?200|Visualizzazione corretta delle wire}}
+ 
+
+La visualizzazione delle wire di superficie (isocurve e bordi) è orientata verso la fotocamera, in modo che vengano visualizzate davanti alle rispettive superfici nelle viste ombreggiate. Se le wire di superficie vengono mostrate mediante superfici ombreggiate, provare a regolare il bias usando il comando **testZBiasFactor**. In genere, una o due applicazioni dell'opzione della linea di comando **Less** migliorano la visualizzazione.
+
+\\
+
+==== Problema: Le barre strumenti e il testo di Rhino 5 sono troppo piccoli sugli schermi ad alta risoluzione====
+
+[[rhino:5:video:highres:toolbars_and_text_too_small_in_64-bit_rhino_5_on_high_resolution_screen|Vedi questa pagina per un aiuto con gli elementi piccoli dell'interfaccia utente]].
+
+>**Nota**: Questa pagina wiki è parte dell'assistente di risoluzione dei problemi. [[http://wiki.mcneel.com/rhino/5/video/troubleshooting |Inizio]].
+
+==== Ci sono piccole icone grigie in basso a destra della finestra di visualizzazione e le prestazioni sono lente====
+
+Se disponi di icone piccole nell'angolo inferiore destro di ciascuna vista:  [[ https://wiki.mcneel.com/rhino/5/video/troubleshooting/nvidia/slowperformance | Disable nVidia Shadowplay ]]
