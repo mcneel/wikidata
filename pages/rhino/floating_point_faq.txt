@@ -1,0 +1,43 @@
+======Floating Point Issues in Rhino====== 
+
+===== Background =====
+
+When you model is located far from the world origin, or you are using a unit that is too small for the physical size object you are modeling, then floating point issues can appear.
+
+They are seen in commands that rely on accurate intersections calculations like booleans, trimming, hatching, Make2D, Clipping Drawings, Hatch and may more.
+
+The typical issue is that hatch messed up, the Make2D is not accurate, and clipping section may place the background mis aligned with the section geometry.
+
+**In general, modeling a very large distance from the origin can cause problems and should be avoided.**
+
+===== Double-precision Floating-point Number=====
+
+Rhino, like most CAD products, represents position in **double-precision floating-point numbers**. That means the x‑, y‑, or z-coordinate of any point can have a value ranging from as large as ±10308 to as small as ±10-308. 
+
+Because of the limitations of current computer technology, we expect calculations to be accurate to 15 digits of precision in a range from ±1020 to ±10-20. This limitation is found in all modern CAD products.
+
+If your integer fills up the 12 of the 15 digits, then the accuracy is “rounded off”
+This is the primary issue you are hoping to avoid.
+This is not just Rhino that uses floating point math, all CAD programs (AutoCAD, BriscCad, TurboCAD...) do.
+
+
+
+
+===== Best Practices =====
+Make2D and Clipping drawing rely on Rhino being able to calculate accurate intersections. If the intersections are “round off”, then the outcomes of these commands will look inaccurate. To get the accuracy desired, you need to:
+
+  * Pick a reasonable unit.
+  * And model close to the origin.
+
+The is the best approach to create metric architectural models in reasonable unit like Meters and **only dimension in mm**.
+
+  - Begin a new model with Meters Small template (this will give you .001 meters precision, you can increase it to .0001 but it you go beyond that, you will start to see round off errors.)
+  - Model with the MM modifier: When you are inputting curves and scalar values into command, type MM after the numeric value, like 2568mm or 25mm.
+  - Dimension in MM only
+  - There is an override on the Dimension to display the dimension in a unit/precision other than the Model unit.
+
+===== Resources=====
+For additional information on this topic see these links:
+  * [[https://www.rhino3d.com/features/accuracy/|Accuracy in Rhino]]
+  * Discourse Topic: [[https://discourse.mcneel.com/t/architectural-modeling-precision-floating-point-make2d-tolerances-etc/48412 |architectural-modeling-precision-floating-point-make2d-tolerances-etc]]
+
