@@ -36,6 +36,39 @@ The is the best approach to create metric architectural models in reasonable uni
   - Dimension in MM only
   - There is an override on the Dimension to display the dimension in a unit/precision other than the Model unit.
 
+===== More Information =====
+
+CAD users should understand that floating-point numbers are approximations of real numbers, not exact representations, and can lead to rounding errors, especially when performing complex calculations or comparing values.
+ 
+==== Floating-Point Representation: ====
+
+Computers represent numbers using a limited number of bits, which means they can't store all real numbers with perfect accuracy. This is particularly relevant for numbers with decimal parts, as many decimal values don't have a precise binary representation. 
+
+==== Rounding Errors: ====
+
+When performing calculations, floating-point operations often result in numbers that are slightly off from the true value due to rounding. These errors can accumulate over multiple calculations, leading to inaccuracies in the final results. 
+
+==== IEEE 754 Standard: ====
+
+Most modern computers use the IEEE 754 standard for floating-point arithmetic, which defines how numbers are represented and how operations are performed. 
+
+==== Implications for CAD: ====
+
+  * Geometric Accuracy: In CAD, precise geometric calculations are crucial. Rounding errors can lead to discrepancies in dimensions, angles, and other geometric properties, potentially impacting the accuracy of designs.
+  * Comparisons: Directly comparing floating-point numbers for equality can be problematic because of rounding errors. Instead, consider using a small tolerance or epsilon value when comparing floating-point numbers.
+  * Tolerance Settings: CAD software often uses tolerance settings to account for the inherent limitations of floating-point arithmetic. Understanding these settings and their impact on design accuracy is important.
+  * Data Exchange: When exchanging CAD data between different systems, floating-point representations can vary, potentially leading to discrepancies in dimensions or other parameters. 
+
+==== Example: ====
+
+The decimal number 0.1 cannot be represented exactly in binary with a finite number of digits, so it's stored as a close approximation, and the difference between the stored value and the actual value can cause problems. 
+
+==== Mitigation: ====
+
+  * Work around the world origin: For applications where precise calculations are critical, consider modeling your geometry around the world origin (0,0,0) whenever possible. 
+  * Be Aware of Rounding Errors: Be mindful of the potential for rounding errors and their impact on the accuracy of your designs. 
+  * Use Appropriate Tolerances: Set appropriate tolerance values in your CAD software to account for the limitations of floating-point arithmetic. 
+
 ===== Resources=====
 For additional information on this topic see these links:
   * [[https://www.rhino3d.com/features/accuracy/|Accuracy in Rhino]]
