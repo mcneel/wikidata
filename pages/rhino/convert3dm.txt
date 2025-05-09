@@ -1,0 +1,29 @@
+====== Guide to Using Convert3dm ======
+convert3dm Version 80 (2417003088)
+Copyright (c) 2021-2014 Robert McNeel & Associates
+ 
+Convert3dm is a simple command-line utility that reads a 3dm file and writes a new 3dm file using the specified file version.
+
+Convert3dm support Rhino file versions 1 through 8.
+
+===== Quick Start for Windows =====
+
+  - Download the version of [[https://www.food4rhino.com/en/app/convert3dm|Convert3dm]] appropriate for your operating system. 
+  - Pick the folder where your 3DM files to Convert are located
+
+  - Unzip the **convert3dm80win.zip**.
+  - In the Windows search bar, type CMD. The Windows Command Prompt Windows will open
+  - Type the command in the following syntax:
+
+**convert3dm input.3dm output.3dm [--version=0] [--log=logfile_path]**
+  *  version is one of 1, 2, 3, 4, 5, 50, 60, 70, 80.
+  *   Default version is 80.
+  *   logfile_path is the path to the text log representing the file that was read.
+
+convert3dm reads the  3dm file and writes a new 3dm file using the specified file version.
+If the optional --version argument is not specified, a version 80 file is written.
+If an error or warning occurs during conversion, this program ends with exit code 1.
+Successful conversion ends with exit code 0.
+
+
+
