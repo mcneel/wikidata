@@ -33,20 +33,24 @@ If an error or warning occurs during conversion, this program ends with exit cod
 Successful conversion ends with exit code 0.
 
 ===== Method 2: Convert3DM on the Windows Search Path =====
-If you want to be able to run Convert3DM from an folder on your computer where you may have your 3DM files stores, then this method of install the Convert3DM will allow you to do that. 
-This requires Admin rights and some Windows configuration knowledge. If you are not an Admin, you will need someone with Admin privileges to help.
+If you want to be able to run Convert3DM from any folder on your computer where you may have your 3DM files stores, then this method of install the Convert3DM will allow you to do that. 
 
-  - In file Explorer, navigate to the root of the C:\ drive and make a subfolder. We will call ours FIX. So the folder will be c:\FIX
+  * This requires Admin rights and some Windows configuration knowledge. 
+  * If you are not an Admin, you will need someone with Admin privileges to help.
+
+  - In file Explorer, navigate to the root of the C:\ drive and make a subfolder. We will call ours FIX. So the path to the folder will be **c:\FIX**
   - Download the version of [[https://www.food4rhino.com/en/app/convert3dm|Convert3dm]] appropriate for your operating system. 
   - Pick the folder **c:\FIX** folder to download into.
   - In the File Explorer, //navigate to the c:\FIX folder with your files and the convert3dm80win.zip//.
   - Unzip **convert3dm80win.zip** to **Convert3dm.exe**
   - Right on **Convert3dm.exe** and pick **Properties**.
   - Check the "unlock" field and pick OK. {{ :rhino:convert3dm-win1.png?300 |}}
-  - Open Windows Control Panel
-  - Type **CMD**. {{ :undefined:convert3dm-win2a.png?400 |}}
+  - In the Windows search bar, type **Edit Environment**. Pick on the Windows link on the right, **Edit the system environment variables.** {{ :rhino:edit_environment_1.png?400 |}}
+  - From the **Edit Environment Variables** dialog, double click on **Path** {{ :rhino:edit_the_path.png?400 |}}
+  - Pick the **New** button, and type C:\FIX or your path to the folder there the **Convert3dm.exe** is located. Pick the OKs required to exit the Environment dialogs. {{ :rhino:add_to_path.png?300 |}}
+  - In File Explorer, navigate to the folder where the 3DM files are located.
+  - Type **CMD** in the Windows Search box. {{ :undefined:convert3dm-win2a.png?400 |}}
   - The Command Prompt Windows will open. {{ :undefined:convert3dm-Win3.png?600 |}}
-  - Type the command in the following Syntax BELOW: 
-  - **Convert3DM "42 inch vanity.3dm" "42 inch vanity V6.3dm" --version=6** {{ :undefined:convert3dm-Win4.png?700 |}}
+  - Type the command in the following Syntax BELOW. Convert3DM "42 inch vanity.3dm" "42 inch vanity V6.3dm" --version=6 {{ :undefined:convert3dm-Win4.png?700 |}}\
   - Hint: type syntax of command into Notepad. Copy and paste into the CMD window.
-  - Convert3dm reads the 3dm file and writes a new 3dm file using the specified file version.{{ :rhino:convert3dm-win5.png?700 |}} {{ :rhino:convert3dm-win6.png?400 |}}
+  - Convert3dm reads the 3dm file and writes a new 3dm file using the specified file version.{{ :rhino:fixed_v6_files.png?400 |}}
