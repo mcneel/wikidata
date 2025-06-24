@@ -1,0 +1,119 @@
+
+====== 在Rhino使用VR ======
+Rhino在Rhino 5提供了「Stereo模式」的設定。 
+在Rhino 7跟8中，您無法簡單「開啟」立體視圖與3D視圖的存取。 
+
+這件事不再那麼簡單。 您需要了解您的硬體，準備好做些實驗，找到最佳的選擇。
+你會需要下載一個將新功能加入Rhino的外掛程式。
+
+以下有三個選項，沒有一個位在Rhino的核心。
+由於必須用到特殊硬體，所以決定選項並不包含在Rhino核心，不過允許用戶需要該功能時加入外掛。
+
+[[https://discourse.mcneel.com/c/rhino/147|Rhino支援論壇Support Forum]]提供全球專家用戶及McNeel員工的技術支援。
+
+===== 選項1: Rhino 外掛 =====
+
+==== RhinoVR ====
+Rhino VR是一個Rhino 7的外掛程式，用HTC Vive或Oculus Rift頭戴式顯示器，在虛擬實境中彩現Rhino視圖。 這個外掛程式本來只是個範例，用來像研發人員展示如何為Rhino 7開發VR外掛。
+
+這就需要相容於OpenVR的VR耳機，比如Quest 2、Samsung Odyssey+、Rift S... 
+支援Steam + SteamVR的耳機才能與Rhino VR搭配使用。
+
+ [[https://github.com/mcneel/RhinoVR|到此下載]]。
+
+==== EYECAD VR ====
+[[https://www.food4rhino.com/en/app/eyecad-vr-virtual-reality-architecture|Eyecad VR 軟體]] 讓您可以為您的客戶建立精彩互動式的VR場景。 用Oculus Rift、HTC Vive、WMR，或者用你的螢幕、鍵盤/平板進行探索。 
+還能夠透過新的Eyecad 360工具與客戶分享您的專案，透過網頁連結建立360度全景互動導覽。
+
+
+===== 選項2：浮雕立體視圖外掛程式 =====
+使用此選項，你需要「紅色+藍色」眼鏡。這不需要任何特殊硬體，只需要一副容易取得又便宜的眼鏡。
+
+Anaglyph跟3D立體外掛程式的外觀和行為相同，兩者皆能安裝，但很難區分。如果您不會兩個都用到，那麼就不要兩個都裝。
+
+使用Anaglyph立體的時候QuadBuffering可能需要關閉，這個可以用TestQuadBuffering指令控制，不過您可能需要打開再關閉一次，以驗證設定。
+
+Anaglyph浮雕立體本身彩現多個畫面，用Rhino UI(使用者介面)來調整相機位置與視角。Anaglyph浮雕外掛在面板中顯示為「Stereo View」，而主動/被動(Active/Passive)外掛程式則顯示為「立體3D視圖 (Stereo 3D View)」。
+{{ :rhino:windows:show_panel_2.png?200|}}
+
+1. 下載此外掛
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/StereoView.rhp|StereoView.rhp]]
+
+2. 開啟 Rhino.
+
+3. 將**StereoView.rhp**拖曳到開啟的Rhino應用程式中。
+
+4. 在「顯示面板」的彈出視窗中勾選「立體視圖」來開啟面板。
+
+{{:rhino:windows:anaglypg.png?200|}}
+
+// [[https://discourse.mcneel.com/t/from-stereo-to-mono/53448/29|到此參閱Rhino支援論壇的討論]].//
+
+===== 選項3：四重緩衝 (Quad Buffering )與立體3D視圖外掛程式 =====
+被動或主動觀看都需要的「Quad Buffering」，現在Windows Rhino 7 & 8 都支援囉。
+
+V8中的四重緩衝(Quad Buffering)支援適用於**PluraVision 3D**等硬體，還有**Schneiger Digital**等公司的被動立體觀看。
+
+通常，筆記型電腦並不支援任何類型的立體觀看，不過您會需要測試一下。
+=====配置=====
+//註：關閉Rhino。啟動Rhino之前，您必須將電腦設定為立體觀看。//
+
+====Windows 設定====
+
+四重緩衝(Quad Buffering)的確需要在Rhino 8 中先打開，並且需要您在Windows顯示設定及GPU製造商的控制面板中啟用「3D模式」。
+
+{{:rhino:windows:3dmode01.png?200|}}
+
+==== 顯示卡設定 ==== 
+GPU設定面板應該有某種立體選項。
+
+這裡有Nvidia控制面板選項。
+
+{{:rhino:windows:3dmode02.png?300|}}
+
+檢查Nvidia控制面板，看看有沒有如上之立體選項。 
+
+//註：// 你將無法從面板啟用，因為這個現在是Windows的設定。 
+如果Nvidia的控制面板顯示「已啟用(Enabled)」，不過是灰色的。 
+是因為這個「3D顯示模式」已經在Windows->顯示設定對話框裡啟動了。
+
+==== 四重緩衝(QuadBuffering) ====
+
+在Rhino中，用**TestQuadBuffering**指令開啟四重緩衝(QuadBuffering)。
+
+
+==== 外掛 ==== 
+{{ :rhino:windows:show_panel_1.png?200|}}
+1. 下載此外掛
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/Stereo3DView.rhp|立體3D視圖]]
+
+2. 開啟 Rhino.
+
+3. 拖曳到開啟的Rhino應用程式中。
+
+4. 顯示面版彈出視窗，勾選"立體3D視圖"。
+
+{{:rhino:windows:active-passive.png?200|}}
+
+
+
+==== 附加說明 ====
+  * 您需要非常特殊的硬體與眼鏡。 
+  * 需要一台有更新率快速的顯示器。 
+  * 特殊眼鏡。  
+
+如果你的立體配置是"主動"，那麼您的眼鏡必須能夠與顯示器更新率同步(在左右鏡片間閃爍)，意思就是眼鏡要插入GPU後面或某種USB接受器，以便連入電腦並與眼鏡溝通。 
+
+如果你有"被動"配置(戲院裡3D電影使用的那種)，那麼你還需要特殊顯示器，但眼鏡只是偏光鏡片。  
+
+無論任何狀況，你需要確保GPU控制面板是根據你的硬體支援模式類型所設定。  
+
+如果是"//主動" 立體//模式，應該能用  **通用主動立體** 設定。  
+ "//被動" 立體模式//，您需要用 **複製模式** 或 **平面立體鏡像顯示**。
+被動模式通常需要雙顯示器，中間有一面以某種角度擺放的玻璃面版。
+
+{{ :rhino:windows:pluralvision.png?400|}}
+這是由 [[https://www.schneider-digital.com/en/|Schneider Digital]]所設定的**被動模式**， 稱為 [[https://www.schneider-digital.com/en/products/passive-3d-stereo-monitors/|〝3D PluraView〞]]。
+
+
+
