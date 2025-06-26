@@ -15,53 +15,29 @@ When Rhino needs a license from a LAN Zoo server, it determines the name of the 
 When running as a network node, Rhino determines the name of the LAN Zoo server by first looking in the **LicensesZooClient.Settings** file in this folder:
 
 
+===Rhino 8===
+
+  /Users/Shared/McNeel//Rhinoceros/8.0/License Manager
+
 ===Rhino 7===
 
-  /Library/Application Support/McNeel/Rhinoceros/7.0/License Manager
-
+  /Users/Shared/McNeel//Rhinoceros/7.0/License Manager
 
 ===Rhino 6===
 
-  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager
+  /Users/Shared/McNeel//Rhinoceros/6.0/License Manager
   
-===Rhino 5===
-
-  /Library/Application Support/McNeel/Rhinoceros/License Manager
-
-
-
-**NOTE**: A common mistake is to confuse ///Library// (the global library) and ///Users/[user_account]/Library// (the user's library).  Please make sure you are looking in the global library.
 
 The contents of this file looks similar to:
-
-===Rhino 7===
-<code>
-<?xml version="1.0" encoding="utf-8"?>
-<!--Zoo client settings file writen by Rhino-->
-<ZooClient>
-  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="host name or IP address" />
-</ZooClient>
-</code>
-Note: //Software_McNeel_Rhinoceros_6.0_License_Manager// above is correct. 
-
-===Rhino 6===
-<code>
-<?xml version="1.0" encoding="utf-8"?>
-<!--Zoo client settings file writen by Rhino-->
-<ZooClient>
-  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="host name or IP address" />
-</ZooClient>
-</code>
-
-===Rhino 5====
 
 <code>
 <?xml version="1.0" encoding="utf-8"?>
 <!--Zoo client settings file written by Rhino-->
 <ZooClient>
-  <Software_McNeel_Rhinoceros_5.0_License_Manager Server="host name or IP address"/>
+  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="host name or IP address" />
 </ZooClient>
 </code>
+Note: //Software_McNeel_Rhinoceros_6.0_License_Manager// above is correct. 
 
 ====Using DNS===
 If Rhino cannot determine the name of the Zoo server by searching in the Settings file, it then queries your DNS server for the default Zoo server, which is the following host name:
