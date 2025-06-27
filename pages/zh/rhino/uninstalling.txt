@@ -1,0 +1,66 @@
+====== 手动卸载 Rhino  ======
+//以下流程适用于 Rhino 4 及更高版本（含 Rhino 5, 6, 7 & 8）//
+\\
+
+===== 问题现象 =====
+在启动、安装或卸载 Rhino 时出现错误提示：
+
+//您尝试使用的功能位于不可用的网络资源上。//
+单击"确定"重试，或在下方输入包含安装包"<文件名>.MSI"的备用路径。
+
+===== 原因分析 =====
+Windows 安装程序缓存无法找到卸载所需的文件或注册表项。这是 Windows Installer 服务的常见问题。最佳解决方案是使用 Windows Install Clean Up 彻底清除旧安装。清理完成后即可重新安装 Rhino。
+
+
+请按以下步骤手动移除 Rhino 及其 Windows Installer 注册信息：
+（需拥有计算机的 //管理员权限//）
+
+==== 1. 运行程序卸载 ====
+  - 关闭 Rhino 应用程序
+  - 打开 Windows 搜索
+  - 输入 应用和功能（或 添加或删除程序）
+  - 在列表中找到 Rhinoceros x.0，点击 卸载
+  
+==== 2. 删除安装目录 ====
+  - 浏览至 //C:\Program Files//
+  - 删除文件夹 Rhinoceros x 或 Rhinoceros x Evaluation
+
+==== 3. 删除 Rhino 数据文件夹 ====
+  - 浏览至 %AppData%\Roaming\McNeel\Rhinoceros
+  - 删除 x.0 文件夹（x 代表 Rhino 版本号）
+  - 浏览至 %ProgramData%\McNeel\Rhinoceros
+  - 删除 x.0 文件夹（x 代表 Rhino 版本号）
+  
+==== 4. 删除注册表项 ====
+  - 在 Windows 搜索中输入 注册表编辑器
+  - 打开 注册表编辑器
+  - 定位至 //HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros//
+  - 删除 x.0 项（例如 Rhino 4.0, 5.0 或需卸载的版本）
+  - 定位至 //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros//
+  - 删除 x.0 项（例如 Rhino 4.0, 5.0 或需卸载的版本）
+
+==== 5. 重启系统 ====
+  - 安装所有 Windows 更新
+  - 如需重装，请在此下载最新安装器：[[https://www.rhino3d.com/download|here]].
+
+_________________
+
+===== 备选方案 =====
+（仅当通过 **应用和功能** 卸载失败时执行）
+
+=== 运行微软卸载修复工具 ===
+  - 访问 http://support.microsoft.com/mats/program_install_and_uninstall
+  - 点击 **立即运行**.
+
+=== 清理 Windows 安装程序缓存 ===
+<color red>警告：</color> 此操作可能导致注册表损坏，后续安装时触发 1402 错误。<color red>仅当上述方案无效时执行</color>
+  - 下载 [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]].
+  - 解压至桌面"Windows Installer Clean Up"文件夹
+  - 运行 **msicuu.exe**.
+  - 找到列表中的 (All Users) Rhinoceros 5.0 WIP（64位系统显示为 All Users Rhino 5.0 WIP x64）
+  - 点击 **Remove**
+
+若操作后出现 1402 错误，可参考：[[https://wiki.mcneel.com/rhino/error1402|1402 错误解决方案]]].
+
+  
+  
