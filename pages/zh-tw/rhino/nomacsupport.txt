@@ -1,0 +1,224 @@
+====== Mac上的Rhino for Windows ======
+
+> **摘要：** 在 Intel 的 Mac 上執行各種 Rhino for Windows 版本的相關資訊。到 [[https://www.rhino3d.com/download/]]取得最新資訊並檢查作業系統需求。Rhino for Mac現在可以在Intel與 Apple Silicon Macs上執行。 
+
+=====(舊) 資訊來自在Intel Macs上用Rhino for Windows的用戶=====
+
+==新的 Parallels V5 運行得不太好==
+事實證明，Parallels Desktop 5 中新的//加速圖形支援// 對於某些OpenGL 的應用程式（如 Rhino）來說成效相當差。
+他們列出對 OpenGL 2.1 的支援，但許多用戶報告 Rhino 當掉。
+
+==解決Parallels V5的問題==
+我的 MacBook Pro（4GB RAM、雙核心、NVIDIA GeForce 8600M GT）上安裝了 Parallels Desktop 5 和 VMWare Fusion 3.1。
+我還有一個 Bootcamp 分割區，上面有 Windows XP Pro。
+為了讓 Parallels 與 Rhino 良好配合，請關閉 Rhino 中的硬體加速控制。
+它在 //工具 - 選項 - 外觀 - OpenGL 下(Tools- Options - Appearance - OpenGL)//。這是最佳選擇。
+至少 Rhino 可以使用且顯示驅動程式不再當掉。最終他們可能會解決這個問題，但我不會為他們通報自己應用程式的問題而付費。
+
+==VMWare Fusion 3.1 運作得比較好==
+VMWare Fusion (3.1) 的更新也增加了加速圖形支援。還包括 支援OpenGL 2.1 ，似乎可以與 Rhino 良好配合。
+它對 Rhino 顯示性能進行了適度的改進。例如，如果您處於陰影顯示（或 EMap 等假彩色分析模式）中，並且您旋轉視圖，則從顯示中被遺漏的物件會比以前更少。這是一個雖不大但顯而易見的進步。
+
+>**設定：** 如果你用的是滾輪滑滑鼠，請在VMWare Fusion 偏好設定中的鍵盤與滑鼠頁面，清除輔助按鈕(Secondary Button)以及按鈕捷徑(Button 3)的選項。 您才能夠像在Windows中一樣使用滑鼠右鍵。 另外在常規頁面(仍在Fusion偏好設定中)，將遊戲選項變更為 **永遠針對遊戲最佳化滑鼠**。這樣當滑鼠指標移動到您正在旋轉視圖視窗之外時，就不會發生瘋狂旋轉這種狀況。
+
+==最佳解決方案==
+
+儘管如此，它們的效能都無法與重啟到 Bootcamp 分割區並直接執行 Windows 的效能相比。這樣，您就可以使用所有記憶體、所有處理器核心，以及顯示卡提供的加速硬體。在我的 MacBook Pro 上，Rhino 的表現要好一個量級。 Bootcamp 是迄今為止最好的。VMWare Fusion 遠遠落後於 Fusion。 Parallels Desktop 則落後 Fusion 幾步，墊底。
+
+//-John Brock 2010年6月30日30 June 2010//
+----
+
+**在 Bootcamp 下使用 ATI X1600 顯示卡的 MacBook Pro**
+
+在這種情況下，前景恐怕不樂觀。
+X1600 可能是 Windows 上 OpenGL 支援最糟糕的顯示卡之一，而且硬體配置也不算太好，也許這就是為什麼蘋果幾乎立刻就放棄了 X1600，轉而在其 MacBook 上使用 NVIDIA 顯示卡的原因。但問題不在這。請繼續閱讀。
+
+對此我有親身經驗。問題不再於Rhino無法辨識ATI顯卡，而是Bootcamp驅動程式不支援也不提供ICD。
+換句話說，Bootcamp 提供的驅動程式中沒有可用的硬體加速。
+對於大多數在這些系統上執行Windows 的人來說，非常絕望，除非…
+
+您可以取得名稱為  //MobilityDotNet//的公用程式來安裝經過修改的桌面驅動程式。 工作原理大致如下：
+
+  - 將桌機版驅動程式下載到 MBP 上。 
+  - 啟動驅動程式安裝過程。
+  - 在驅動程式盪案解壓縮並複製到目標資料夾後，但在實際開始安裝**之前**(也就是安裝過程中暫停，ATI對話框詢問您要做什麼時)，執行MobilityDotNet公用程式。
+  - 之後的步驟是修改相應的文件，以便驅動程式能夠識別該特定的 MBP 為 //有效// 的受支援硬體。現在您可以繼續安裝 ATI 驅動程式了。 
+  - 需要重新啟動，之後 驅動程式就會隨著ICD安裝好了。
+
+過去兩年多來，我一直在為我的 MBP 做這件事。但是，每次新發布的桌機驅動程式似乎都修復了一些問題，但又造成其他一些錯誤。我發現唯一能穩定運行的是 8.7版驅動程式，不過，那只適用XP 和 Vista 。我最近在我的 MBP 上安裝了 Win7，9.3 驅動程式似乎可以正常工作……但又得重複上述步驟。
+
+因此，當您看到選取和取消選取 Rhino 的**使用硬體加速模式** 沒有任何作用的情況（即您總是看到 Microsoft Generic）時，通常意味著以下兩件事之一：
+
+  - 通常是沒有安裝ICD。
+  - 用戶在 Windows 顯示設定「故障排除」部分中調低了硬體加速設定。
+
+抱歉，但針對這種情況，沒有其他答案或解決方案……我知道 iRhino 運行得挺不錯的，不過這顯然是因為操作系統原生支持硬體，而整個 OS X 系統都根據於 OpenGL，並依賴於加速……所以它最好能正常運作……而且確實也有。
+
+唉，希望我有更好的方法。
+
+//-Jeff 5 2010年 5月//
+----
+
+**Parallels 團隊**
+
+我們在 [[http://www.parallels.com/en/products/desktop/|Parallels Desktop 3.0.]] 上成功安裝了 [[rhino:rhinoceros|Rhino]]，配備 Parallels 3D 加速功能的 Mac Mini 能夠流暢地運作 Rhino 的樣本。我們又以 Maxwell 彩現  //Human Head 2//樣本模型，沒有任何問題。因此，在 Rhino 穩定版發布之前，Parallels Desktop 是[[rhino:rhinoceros|在 Mac 上使用 Rhino ]]的理想選擇。請多多利用！
+
+
+**更新** 
+
+我收到了兩份用戶報告，一份是 Rhino V4 當掉故障的問題，另一份是 Penguin 在 Parallels V5 中開啟陰影後當掉的問題。在我看來，這兩份報告都像是與顯示驅動程式相關的問題。
+
+我在 MacBook Pro 上安裝了 Parallels V5。我之前用過 Parallels V4，安裝過程中沒有遇到任何問題。 V5 安裝程式提示我需要為加速圖形分配更多內存，所以我照做了。我加裝了 32 位元 Win7 系統，並執行了所有 Windows 關鍵更新。然後，我從光碟安裝 Rhino V4 SR6，跑起來沒有出現任何錯誤。接著下載並安裝 SR8 更新，過程也很順利。再來安裝的是 Penguin 2，執行了它的 SR2 更新，並設定了一個簡單的彩現，同時開啟了陰影。一切都很順利。 
+
+壞消息是我無法複製用戶當機的情況，不過好消息是這種方式好像可以正常運作。
+
+//-John Brock 20  2010年4月//
+
+----
+
+您好，我已經用 Bootcamp 和 Rhino 設定好了 Apple 的 Mac Mini。您可以在以下網頁上找到完整的教學（抱歉，目前只有德語版本）：
+
+還有一些相關圖片： http://www.flexiCAD.com/bild.php?id=6203
+
+//-flexiCAD.com的Michael Meyer //
+
+----
+**[[http://www.parallels.com/en/products/desktop|Parallels Desktop for Mac]]**
+
+大家好，我想告訴大家，Rhino 可以在 OS X 系統的 **Mac 版 Parallels Desktop Parallels Desktop for Mac**下運作。以下是該軟體的連結：http://www.parallels.com/en/products/desktop
+
+我的電腦是 Mac Mini，配備 2GHz **Intel Core Duo**處理器、2GB 記憶體和 100GB 7200 RPM 硬碟。我的虛擬 Windows 系統配置了單核心 2GHz 處理器（軟體限制，只能使用一個核心）、1GB 記憶體和 40GB 硬碟。 Rhino 運作非常流暢。由於顯示卡是完全模擬的，介面略有延遲，但整體來說運作順利。
+
+我的 MacBook Core Duo 2.0 上安裝了 Parallels 3.0，運作正常…但我看不到自己正在畫的東西…只能看到自己已經畫出來的…其他部分都正常…
+
+**註：** //以上報告來自Parallels 2.0 的使用者。現有一位用戶報告說，使用 Parallels 3.0 時 Rhino 4 經常故障，因此 Parallels 可能不再是在 OS X 上跑 Windows Rhino 4 的理想選擇。//
+
+//-David Twelves//
+
+----
+**[[http://www.vmware.com/download/fusion/|適用於 Mac Intel 的 VMware Fusion]]**
+
+V1.0 現在可以在 Win XP 上與 Rhino 4完美運作，而且比 Parallels 好用多了！
+
+如果您想在 OS X 系統中安裝 Rhino 虛擬機，可以參考這個：http://www.vmware.com/download/fusion/
+
+XAHO 使用 MacBook Pro - ATI X1600 - 2GB 記憶體 - OS X - Win XP Pro。
+
+我在 MacBook Pro 上執行 VMware Fusion 2.0.1，而Rhino V4 和內部版本的 V5都可以運作良好。它不支援硬體加速 OpenGL，但性能出奇地好。為了使普通的三鍵滑鼠正常運作（例如昇降模式），請在 **Fusion 偏好設定- 鍵盤與滑鼠**中關閉「輔助按鈕」和「按鈕 3」控制項。它們預設是開啟的。
+
+我還有一個安裝了 Win XP Pro 的 Bootcamp 分割區。當我需要最佳性能時，我會使用它。另一個很方便的工具是 Winclone。它可以備份 Bootcamp NTFS 分割區。它有一些工具可以更改 Mac 和 Bootcamp 分割區的大小。
+
+//-John Brock 2009年1月12日, <jb@mcneel.com>//
+
+----
+**[[http://www.codeweavers.com/products/cxmac/|CrossOver]]**
+
+一些Windows應用程式可以在[[http://www.codeweavers.com|CodWeavers]],的[[http://www.codeweavers.com/products/cxmac/|CrossOver]]中順利運作，不需要Windows系統。 CrossOver是根據[[http://en.wikipedia.org/wiki/Wine_(software|Wine]]，適用於Unix的Windows模擬器。
+
+[[http://www.codeweavers.com/compatibility/browse/name?app_id=344|Rhino 2.0.測試結果]]
+
+Rhino 3.0 已列出，但未經測試。
+
+Rhino 4.0 未在其 [[http://www.codeweavers.com/compatibility/search|相容性資料庫]]中列出。
+
+----
+
+今天入手了一台 Mac Pro，它配備了兩顆 2.66GHz 雙核心至強處理器和 2GB 記憶體。
+
+執行 Bootcamp 很輕鬆。遇到了一些小問題，希望能慢慢解決，但目前還沒有大問題讓人覺得這台電腦買錯了。
+（更新：除了讓內建藍牙能夠一直開啟工作之外，其他小問題都很容易解決。蘋果似乎已經意識到了這個問題，並且正在努力解決這個問題。目前，這台機器甚至比我那台為 Windows 設計的 WinXP 筆記型電腦還要好。 ）
+
+Rhino 運作良好（在 Mac 的 XP Pro 系統中執行）。不久前有人做過 Flamingo 彩現速度測試，並發布了一個測試檔。在我的 3GHz（Windows）筆記型電腦上，該檔案彩現耗時 43 秒。我看到一些貼文提到彩現速度驚人，最快只需 11 秒。
+
+這台 Mac Pro 只花了 7 秒鐘就彩現好了。以為只是僥倖......嘗試了一次又一次......每次都是 7 秒。
+
+我必須說我很滿意。
+
+//-Heath Satow, http://www.publicsculpture.com //
+
+----
+
+我嘗試在我的 MacBook Pro 筆記型電腦上看看Rhino 3.0可不可以在 Windows XP 虛擬機器內運作，嗯，跑得蠻順的。
+
+幾天前，我在加州出差時遇到了你們西雅圖辦公室的 John Brock，他向我展示了一些教程裡沒有提到的功能和功能。
+
+即使沒有多鍵滑鼠，我也可以輕鬆地建立和修改 3D 模型。
+後來我插上了一個真正的滑鼠，它也運作得很好。
+
+謝謝您，也謝謝 Brock 先生評估這款工具時提供的協助。
+
+//-Dennis Peterson//
+
+----
+//以下節錄未考慮Rhino，但的確包含了一些性能相關的有趣觀察，出自// 作者： Thomas J. Fitzgerald /  2006 年 8 月 10 日刊登於 //《紐約時報》// 的文章//"《權衡換用 Mac》"// 
+
+"在新款 Mac 上執行 Windows 的兩種方法已成為主流，並且都比舊 Mac 架構下的主流方案 Virtual PC 運行速度快得多。
+
+第一種是名為 **Parallels Desktop for Mac**（售價 80 美元；www.parallels.com）的新程式，允許您同時執行 Windows 和 Mac OS X Tiger。 」
+
+例如，您可以在一個可以最小化的視窗中執行 Internet Explorer 和 Microsoft Outlook 等 Windows 軟體，就像其他 Mac 程式一樣。
+您可以在平台之間複製數據，共享文件和資料夾，還可以選擇以全螢幕模式執行 Windows。
+
+Parallels 可以運行從 Windows 3.1 到目前 XP 版本的 Windows 系統。您需要自行提供 Windows 安裝軟體。Parallels 的一個缺點是它不支援 3D 加速圖形，這意味著一些高階 3D 遊戲和其他程式運行緩慢或不流暢。
+
+該公司表示，其他需要考慮的因素包括：與在基於 Intel 的電腦上原生運行 Windows 相比，Parallels 的速度會降低 5% 到 15%，以及並非所有周邊設備都相容。
+
+在新款 Mac 上運行 Windows 的另一個方法是透過  **Boot Camp** (www.apple.com/bootcamp) 。這款 Apple 提供的免費實用程式目前正處於 Beta 測試階段。（Apple 本周宣布，Boot Camp 將包含在其下一代作業系統 Leopard 中，該作業系統計劃於明年春季發布。）與在 Mac OS X 中運行 Windows 的 Parallels 不同，Boot Camp 會在電腦硬碟上創建一個分區，並將 Windows 安裝到其中。
+電腦啟動時，您可以選擇執行 Windows 或 Mac OS X。
+
+Boot Camp 的優點包括全速運行 Windows；它可以在 Mac 上原生運作，就像在Windows 的 PC上操作一樣，充分利用處理器和圖形功能，並提供與為 PC 設計的硬體外圍設備和設備的兼容性。
+
+不過Boot Camp 的一個缺點是，在使用其中一個作業系統之前，你必須關閉另一個。這表示你無法同時執行 Windows 和 Mac應用程式。還有個缺點，它只能執行兩個版本的 Windows：Windows XP 家用版（Service Pack 2，售價 200 美元）和 Windows XP 專業版（ Service Pack 2，售價 300 美元）。
+
+**安全性**是 Mac 的另一個讓 Windows 用戶感到好奇的方面。
+在 Windows 中，防毒和反間諜軟體程式已成為防禦各種威脅的關鍵。據諾頓防毒軟體製造商賽門鐵克稱，到目前為止，Mac OS X 作業系統尚未被病毒入侵，並且仍然沒有像 Windows 用戶那樣四處傳播的間諜軟體威脅。
+
+但是，當 Windows 在基於Intel 的 Mac 上執行（例如透過 Boot Camp 或 Parallels）時，很容易就受到與傳統 Windows PC 相同的病毒和間諜軟體威脅的攻擊。"
+
+//要讓數位鎖定功能正常運作，一個技巧是：如果您的 Mac 鍵盤上沒有數字鎖定按鈕，則必須使用**shift clear** Shift 清除組合鍵。//
+
+----
+
+新版Parallels提供連貫模式（OS X 和 Windows 系統同時顯示在螢幕上）。請看：
+
+http://www.edgargonzalez.com/2006/12/12/mac-windows-autocad-rhino3d/
+
+請參閱 Scott Onstott 對 AECbytes 中的新 Parallels 的[[http://www.aecbytes.com:80/tipsandtricks/2007/issue22-WinonMac.html|詳細評論]]。
+
+
+----
+您好，我在 MacBrook Pro 上透過 Bootcamp 在 Windows XP 家用版上運行 Rhino 3.0。
+我無法使用鍵盤刪除任何內容，只能選擇物件並透過編輯選單進行刪除。如果有人遇到過類似的鍵盤問題並能提供回饋，那將非常有幫助。謝謝。
+
+<KhamiltonG@gmail.com>
+
+Hi khamiltonG... 標記要刪除的對象，然後按 **d** 以及 **空白建**。 很好用!!
+
+另一個建議：在 Rhino 中建立一個執行 Delete 指令的工具列按鈕。內容可以（如上圖）只寫 D（因為它會自動補全 Delete）。說明文件(Help)中提供了自訂工具列的說明。
+
+MacBook Pro 上的 Delete 按鈕是隱藏的。上面寫著 **delete** 的按鈕其實是 **backspace**。若要在 MacBrook Pro 上按 Delete 鍵，必須同時按下 **fn**和 **delete** 鍵。這種方法同樣有效，而且只需要一隻手就能操作。
+
+
+----
+
+**在執行 Parallels 的 Mac 筆記型電腦上按滑鼠右鍵，並在 Parallels 中啟用 Shift Key Ortho 切換**
+
+Mac 筆記型電腦沒有滑鼠右鍵。 Rhino 卻很擅長使用滑鼠右鍵。如果您在 Mac 筆記型電腦上使用 Rhino，不妨為自己買一個無線兩鍵或三鍵滑鼠。
+
+如果您使用 Parallels，它有個「偏好設定」，可以幫助使用者模擬滑鼠右鍵。如果您按住 Control 鍵並點擊（唯一的）(單鍵) 滑鼠按鈕，Parallels 會將其轉換為滑鼠右鍵。但這會干擾擾 Rhino 按住 Control 鍵並點擊取消選取物件的功能。
+
+您可以在 Parallels 中關閉此轉換來還原 Control-click 功能。
+開啟 Parallels 的“偏好設定”，然後選擇“鍵盤”標籤。
+在**按滑鼠右鍵:** 的設定中，同時選擇**Ctrl** 和 **Command**，然後點選**OK**。
+這將使模擬右鍵單擊變得難以執行，並實際上停用了 Parallels 的模擬右鍵行為。現在，您可以在 Rhino 中毫無問題地按住 Control 再點擊，甚至按住 Shift +Control 鍵再單擊。
+如果您關閉了模擬右鍵單擊行為，最好使用具有真正滑鼠右鍵的滑鼠！
+
+//-MP//
+
+----
+
+**Rhino 4.0 無法在 Bootcamp 和 Windows XP 上啟動**
+
+這是使用者在 BootCamp 驅動程式版本過新的 iMac 上執行 Rhino 4 時出現的症狀。
+
+**注意：** 2007 年中期推出的 iMac//20"無法在安裝了 Bootcamp 顯示驅動程式（ATI 驅動程式 v. 8.390.0.0）的情況下執行 Rhino，並且上述連結中的驅動程式無法在最新的 iMac 上安裝。解決方法是停用 ATI 驅動程式。系統將恢復使用內建 VGA 驅動程式。顯示效能較差，但 Rhino 就可以運作了。//
