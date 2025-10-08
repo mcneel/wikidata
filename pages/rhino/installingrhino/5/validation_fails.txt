@@ -1,0 +1,31 @@
+====== Rhino 5 Validation Fails On Windows 11 ======
+===== Background: =====
+Rhino 5 Windows was developed for Windows 8 and Windows 10. These are the supported operating system and other [[https://www.rhino3d.com/5/system-requirements/|system requirements]] for Rhino 5.
+
+Rhino 5 Windows is was not developed for Windows 11 and therefore it is not supported, however it seems to work with earlier version of Windows 11 24H2.
+
+===== Windows 11 25H2: =====
+In the Fall of 2025 when the Windows 11 25H2 shipped on new computers, Rhino 5 Windows customers started having issues validating Rhino 5, specifically reaching the Rhino validation server.
+
+//The internet standards and regulatory bodies have deprecated or are not allowing the TLS versions 1.0 and 1.1 due to several security issues. Microsoft has stated that support for legacy TLS versions 1.0 and 1.1 may be removed completely in the future.//
+
+===== The Issue =====
+With the new Windows 11 25H2 security update, Rhino 5 can not reach the validation server, so it can not get a validation code.
+
+If the customer has the earlier version of Windows 11 24H2, install and validated Rhino 5, then upgraded to Windows 11 25H2, Rhino 5 runs since it already has a the been give the validation code and the license files were already created.
+
+**The issue is with those that get a new computer with new install of Windows 11 25H2, customers can not validate Rhino 5**
+
+===== Rhino Workaround: Offline Validation =====
+If the Rhino 5 validation fails on Windows 11, you will need to to use the offline validation.
+The details are [[https://wiki.mcneel.com/rhino/installingrhino/6/offline|here]].
+
+With the offline validation you will:
+1. Only get one offline validation for one computer
+2. Be required to call McNeel Sales department to manually ignore or remove the offline validation before installing on another computer
+
+===== Microsoft Recommendations =====
+Microsoft offers registry keys workarounds [[https://learn.microsoft.com/en-us/windows/win32/secauthn/tls-10-11-deprecation-in-windows|here]].
+We have been unsuccessful getting these to work on a couple customers' computers.
+Let us know by emailing tech@mcneel.com, if these suggestions work for you.
+
