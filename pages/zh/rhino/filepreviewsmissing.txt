@@ -1,0 +1,89 @@
+====== Windows文件管理中缺少的Rhino文件预览 ======
+> **摘要:** //如何确保Rhino缩图检视器在Windows中登录。 //
+
+如果在Windows文件管理的缩图预览中看不到Rhino的.3dm文件，请参考以下步骤：
+
+=====1. 修复您的Rhino安装=====
+
+  - 点击 **开始 -> 设定 -> 应用程序与功能**。
+-**Rhino 7**：
+    - 选择 **Rhino 7** 并点击 **修改(Modify)**。
+    - 在安装对话框中点击**修复(repair)**。
+-**Rhino 6**
+    - 选择 **Rhino 6** 并点击 **修改(Modify)**。
+    - 在安装对话框中点击**修复(repair)**。
+-**Rhino 5**
+    - 选择 **Rhinoceros 5 (64位元)** 并点击**修改(Modify)**.
+    - 在安装对话框中点击**修复(repair)**。
+
+若没看到Rhino.3dm文件的预览缩图，请继续执行步骤2。
+
+=====2. 确认未停用缩图=====
+  - 开启**文件管理**。
+  - 点击**预览**。
+  - 点击**选项** 然后选择 **变更文件夹及搜索选项**。
+  - 确认**永远显示图示，而非缩图** 并未勾选。
+{{:rhino:folder_options.png|文件夹选项}}
+
+
+如果缩图预览中看不到Rhino的.3dm文件，请至步骤3：
+
+=====3. 删除缩图快照==​​=== 
+如果您用的是较旧版本的Windows (如Windows 7 )，可能需要执行windows**磁盘清理**工具。 
+
+  - 执行**磁盘清理**。
+  - 点击**查看**。
+  - 按**OK**。
+
+{{:rhino:disk_cleanup.png|磁盘清理}}
+
+如果缩图预览中看不到Rhino的.3dm文件，请至步骤4：
+
+=====4. 登录Rhino缩图查看器=====
+
+要登录Rhino缩图查看器，需要以系统管理员身份运行命令提示行。
+
+===Windows 8 或 10===
+
+在Windows 8或 10以系统管理员的身分开启命令提示行：
+
+  - 按下**Windows+X**开启Power选单。
+  - 从选单中选择 **命令提示行 (系统管理员Admin)**
+
+{{:rhino:window_x.png|高级用户菜单}}
+
+当您用管理员权限启动命令提示字元时，可能会看到**使用者帐户控制**视窗要求继续获得权限。请点击**是**。
+
+===Windows 7===
+
+在Windows 7以系统管理员的身分开启命令提示行：
+
+  - 点击开始
+  - 在搜寻栏中输入 **CMD**。
+  - 搜寻结果中您会看到**CMD**。
+  - 在 **CMD**上按右键，从选单中选择 **以系统管理员身分执行**。
+
+{{:rhino:window_7.png|命令提示字元}}
+
+当您用管理员权限启动命令提示字元时，可能会看到**使用者帐户控制**视窗要求继续获得权限。请点击**是**。
+
+=====登录Rhino缩图查看器=====
+
+===Rhino 7===
+
+如果您已安装Rhino 7 for Windows，请在刚刚开启的命令提示行视窗中执行以下指令:
+
+regsvr32“C：\ Program Files \Rhino 7 \System \RhinoHandlers.dll”
+
+===Rhino 6===
+
+如果您已安装Rhino 6 for Windows，请在刚刚开启的命令提示行视窗中执行以下指令:
+
+regsvr32“C：\ Program Files \Rhino 6 \System \RhinoHandlers.dll”
+
+===Rhino 5===
+
+如果您已安装Rhino 6 for Windows，请在刚刚开启的命令提示行视窗中执行以下指令:
+
+regsvr32“C：\ Program Files \Rhinoceros 5（64位）\System \RhinoHandlers.dll”
+
