@@ -1,0 +1,37 @@
+====== Rhino 5 在Windows 11上驗證失敗 ======
+===== 背景： =====
+Rhino 5 for Windows 是在 Windows 8 和 Windows 10 上開發和測試的。這些是目前唯一支援的作業系統。請參閱 Rhino 5其他的[[https://www.rhino3d.com/5/system-requirements/|系統需求。]] 
+
+Rhino 5 for Windows 並非為 Windows 11 開發，因此**不受支援**。不過，據一些客戶//（但並非所有客戶）稱，Rhino 5 可能可以兼容 Windows 11 24H2 的早期版本。//
+
+===== Windows 11 25H2: =====
+2025 年秋季，當 Windows 11 25H2發行到新電腦時，Windows 版 Rhino 5 客戶回報 Rhino 5 驗證問題增多，尤其無法存取我們的 Rhino 驗證伺服器。 總之，Windows 11 上的 Rhino 5 被視為有安全性風險。
+
+//由於存在一些安全問題，網路標準和獨立機構已棄用或不再允許使用 TLS 1.0 和 1.1 版本。微軟已聲明，未來可能會完全取消對舊版 TLS 1.0 和 1.1 版本的支援。//
+
+
+===== 問題 =====
+由於 Windows 11 25H2 安全性更新，Rhino 5 無法存取我們的 Rhino 驗證伺服器，因此無法取得驗證碼。
+
+
+如果客戶擁有 Windows 11 24H2 的早期版本，並且已安裝並驗證了 Rhino 5，則在升級到 Windows 11 25H2 後，Rhino 5 仍可運行，因為它已獲得驗證碼，並且許可證文件已建立。
+
+**使用 Windows 11 25H2 或更高版本的電腦的 Rhino 5 用戶將 //無法驗證// Rhino 5。
+**
+
+===== Rhino 解決方案：離線驗證 =====
+如果 Rhino 5 在 Windows 11 上驗證失敗，歡迎您嘗試我們的離線驗證方法。
+但我們不再推薦或支援在 Windows 11 作業系統上為Rhino 5 進行此操作。
+**詳情 [[https://wiki.mcneel.com/rhino/installingrhino/6/offline|在此]]。**
+
+使用離線驗證後，您將：
+  *  每台電腦僅可取得一個離線驗證
+  *  在另一台電腦上安裝 Rhino 5 之前，需要致電 McNeel 銷售部門  //sales@mcneel.com// 手動忽略或刪除離線驗證。
+
+===== Microsoft 建議 =====
+Microsoft 提供一些登錄檔機碼的[[https://learn.microsoft.com/en-us/windows/win32/secauthn/tls-10-11-deprecation-in-windows|變通方案]]。
+我們已嘗試在幾台客戶的電腦上執行這些方法，但未能成功。
+
+如果這些建議方案對您有用，拜託寫信到 //tech@mcneel.com//告訴我們。
+
+//MAF最後編輯：2025年10月8日 Last edit:10/8/2025//
