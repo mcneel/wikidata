@@ -1,0 +1,20 @@
+====== Zu weit von Welt-Ursprung entfernte Objekte======
+
+Objekte, die extrem weit (Millionen von Einheiten) vom Welt-Ursprung entfernt sind, sind anfällig für Probleme mit der Anzeige und der Genauigkeit, wenn die Positionen der Polygonnetzscheitelpunkte mit Einfacher Genauigkeit angegeben werden. Dies wirkt sich auf die Schattenanzeige und deren Rendering aus, wie auch auf die Anzeige von Polygonnetzobjekten.
+
+Eine mögliche Lösung für dieses Problem besteht darin, [[http://wiki.mcneel.com/de/rhino/5/video/troubleshooting/artifacts|alle vorhandene Geometrie näher zum Ursprung zu verschieben]] und das Modell dort zu erstellen. Da das Modell jedoch möglicherweise in Entsprechung zu Vermessungsdaten platziert werden muss, die sehr zahlreiche Einheiten verwenden, ist dies nicht immer möglich. Folgende Vorgehensweise kann zur Lösung des Problems beitragen.
+
+
+  - Erstellen Sie eine Kopie des ursprünglichen Modells. Jetzt haben Sie das **//Original//** und die **//Kopie//**.
+  - **Verschieben** Sie in der **//Kopie//** die relevanten Daten zum Ursprung und **löschen** Sie den Rest des Modells. 
+  - Erstellen Sie Ihre neue Geometrie in der **//Kopie//** mit Allem um den Ursprung herum. Es sollten keine Probleme mit der Anzeige oder Genauigkeit auftreten. Sie können zur Arbeit in geeigneten Einheiten skalieren und zur Einfachheit ebenso das Modell an Rhinos Raster ausrichten.
+  - Verwenden Sie den Befehl **Einsetzen**, um die **//Kopie//** als **verknüpften und eingebetteten Block** mit korrekter Skalierung und Ausrichtung am entfernteren Standort in das **//Original//** einzusetzen.
+
+ 
+Dieser verknüpfte Block kann im **//Original//** aktualisiert werden, wenn er in der **//Kopie//** geändert wird. Das **//Original//** verfügt immer über die korrekten Daten am korrekten Standort, da es jedoch nicht das Arbeitsmodell ist, sind die möglicherweise auftretenden Probleme mit der Anzeige, dem Polygonnetz und der Genauigkeit nicht weiter von Belang. Die Datei kann in einem unterschiedlichen Dateiformat gespeichert werden, falls dies für einen Kunden erforderlich sein sollte. Die Blockinstanz könnte for dem Exportieren zerlegt werden.
+
+Das **//Original//** ist jetzt nichts als eine zum Skalieren/Vertauschen des Modells verwendete Containerdatei. Alle Daten im Original können mit außerhalb bestehenden Quellen verknüpft werden. Dies kann die Daten aus dem ursprünglichen Modell mit einschließen, wenn Sie während des Projektverlaufs Aktualisierungen erhalten. Sie können diese außerhalb vorhandenen Daten aktualisieren und alles im Original auf dem aktuellen Stand haben, ohne jedesmal den Skalierungs-/Übersetzungsprozess durchlaufen zu müssen.
+
+Wir danken Mike La Fon für die Darstellung dieses Prozesses in der Rhino Newsgroup.
+
+
