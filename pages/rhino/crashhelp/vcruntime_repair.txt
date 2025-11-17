@@ -1,0 +1,45 @@
+====== Rhino Won't Start with VCRUNTIME Error======
+We have seen this with Rhino 7 & 8.
+Related to Forum posts
+
+  * [[https://discourse.mcneel.com/t/rhino-cycles-won-t-load-issue/208464/9?u=theoutside|rhino-cycles-won-t-load-issue]]
+  * [[https://discourse.mcneel.com/t/starting-rhino-8-after-new-installation/174958|Rhino not starting after new install]]
+
+**Problem: Rhino won't start with an error that points to Windows VCRUNTIME dll** 
+
+//"C\Windows\SYSTEM32\VCRUNTIME140_1.dll is either not designed to run on Windows or it contains an error. Try installing the program again using the original installation media or contact your system administrator or the software vendor for support. Error status Oxc000012f"//
+
+or 
+
+//I’ve tried launching Rhino in Safe Mode and also attempted a repair installation, but it still doesn’t work
+If I inhibit RhinoCycles from loading and start Rhino 8 normally, it will start with no issues. If I turn back on RhinoCycles it will crash at start.// 
+
+**Possible Fix**
+
+This sounds like the redistributable issue that has popped up lately with updates (windows, programs) 
+Try a repain on Microsoft C++ Redistributable.
+Do the x86 C++ Redistributable first, then the x64 C++ Redistributable.
+
+This sounds like the redistributable issue that has popped up lately with updates (windows, programs) 
+
+Try a repairing on Microsoft C++ Redistributable.
+Do the x86 C++ Redistributable first, then the x64 C++ Redistributable.
+
+  -  Make sure that all Windows updates have been installed.
+  -  Open Settings: Right-click the Start button and select Settings. Alternatively, type "**Apps & features**" into the Windows search bar and click "Open".
+  -  Go to **Apps & features**: In the **Settings** window, select **Apps** from the left-hand menu, then click on **Apps & features**.
+  -  Sort by install date: Find the "//Sort by//" dropdown menu (it may initially say "Name") and click it.
+  -  Select //Install date//: Choose "//Install date//" from the dropdown to reorder the list, with the most recent installations appearing at the top.
+  -  Take a screen capture of your most recently installed apps. Send to support
+  -  Select //Microsoft C++ Redistributable//, right-click and click on Change. **(x86 first, then the x64)**
+  -  On Microsoft C++ Redistributable Setup, click on **Repair**.
+  -  Click on **Close** once setup is successful.
+
+{{:rhino:crashhelp:programs_and_features_02.png?400|}}
+{{:rhino:crashhelp:programs_and_features_01.png?400|}}
+
+**Happening again..?**
+Please send a screen grab of the Windows latest installed programs.
+Keep one when Rhino is workings and then take one then Rhino no longer opens.
+Send it to use ASAP.
+
