@@ -1,0 +1,57 @@
+====== VCRUNTIME 오류 때문에 Rhino가 시작하지 않습니다 ======
+Rhino 7, 8 버전에서 이러한 현상이 보고된 바 있습니다. 
+관련된 게시글
+
+  * [[https://discourse.mcneel.com/t/rhino-cycles-won-t-load-issue/208464/9?u=theoutside|rhino-cycles-won-t-load-issue]]
+  * [[https://discourse.mcneel.com/t/starting-rhino-8-after-new-installation/174958|Rhino not starting after new install]]
+
+**문제: Windows VCRUNTIME dll 관련 오류로 인해 Rhino가 시작하지 않습니다 ** 
+
+//"C\Windows\SYSTEM32\VCRUNTIME140_1.dll 은 Windows에서 실행되도록 설계되지 않았거나 오류를 포함하고 있습니다. 원본 설치 미디어를 사용하여 프로그램을 다시 설치하거나 시스템 관리자 또는 소프트웨어 공급업체에 문의하여 지원을 받으십시오. 오류 상태 Oxc000012f"//
+
+또는 
+
+//Rhino를 안전 모드로 실행해보고 복구 설치도 시도해봤지만, 여전히 실행되지 않습니다.
+RhinoCycles 로드를 차단하고 Rhino 8을 정상적으로 실행하면 문제 없이 시작됩니다. 하지만 RhinoCycles를 다시 켜면 시작할 때 크래시가 발생합니다.// 
+
+
+
+
+
+
+
+===== 가능한 문제 해결 방법 =====
+
+보고된 redistributable 문제와 비슷해 보입니다.
+**Microsoft C++ Redistributables** 를 복구해 보시기 바랍니다.
+//x86 C++ Redistributable 을 먼서 시도해 보신 후, x64 C++ Redistributable 의 복구를 시도해 보세요.//
+
+  - **다른 사용자들에게 도움이 되도록 저희를 도와주세요**
+    - 이 문제를 보고해 주시는 분들이 점차 증가하고 있는 것 같은데요. 저희가 바로 문제를 해결해버릴 수 있다면 좋겠습니다. 저희가 좀 더 문제를 파악할 수 있을 때까지 여러분께서는 도움을 요청하시거나 문제가 해결될 때까지 며칠 기다리셔야 할 수도 있습니다. 
+    - **프로그램 및 기능** 을 열려면 //Windows 시작// 단추를 클릭하고 **제어판** 을 입력하고 Enter 키를 누릅니다. 그 후 열리는 제어판에서 **프로그램 및 기능** 을 찾아 클릭합니다. 
+    - //설치 날짜// 를 클릭하여 최신순으로 정렬합니다. 
+    - 가장 최신에 설치된 앱 순서 화면을 캡처한 후, 이메일 제목을 "VC Runtime Fix Screenshot" 으로 적어 화면 캡처 이미지를 첨부하여 __//support@mcneel.com//__ 앞으로 이메일을 보내주세요. 
+  - **64-bit Microsoft C++ Redistributables 를 복구하려면**
+    - 프로그램 및 기능에서 //Microsoft C++ Redistributable (x64)// 를 오른쪽 클릭하고 변경을 클릭합니다. 
+    - //Microsoft C++ Redistributable Setup//에서 //복구//를 클릭합니다.
+    - 설치가 완료되면 //닫기//를 클릭합니다. 
+    - //Rhino를 시작합니다//. Rhino가 시작하면 이제 다 됐습니다. 만약 아니라면 아래 과정을 실행하세요. 
+  - **32-bit Microsoft C++ Redistributables 를 복구하려면**
+    - 프로그램 및 기능에서 //Microsoft C++ Redistributable (x86)// 를 오른쪽 클릭하고 변경을 클릭합니다.
+    - //Microsoft C++ Redistributable Setup//에서 //복구//를 클릭합니다.
+    - 설치가 완료되면 //닫기//를 클릭합니다.
+    - **컴퓨터를 종료하고 다시 시작합니다**.
+    - //Rhino를 시작합니다//. Rhino가 시작하면 이제 다 됐습니다. 만약 아니라면 아래 과정을 실행하세요. 
+  - **Windows 업데이트 설치**
+    - **Windows 업데이트**를 열려면 //Windows 시작// 단추를 클릭하고 **Windows 업데이트**를 입력한 후 Enter 키를 누릅니다. 
+    - 모든 Windows 업데이트가 모두 제대로 설치되었는지 확인하세요.
+
+
+{{:rhino:crashhelp:programs_and_features_02.png?400|}}
+{{:rhino:crashhelp:programs_and_features_01.png?400|}}
+
+**여전히 같은 문제가 발생하나요..?**
+Windows에서 최근 설치된 프로그램 목록을 스크린 캡처하여 저희에게 보내주세요.
+Rhino가 실행될 때 설치되어 있던 프로그램 목록은 그대로 두시고, Rhino가 더 이상 실행되지 않을 때 설치된 프로그램 목록을 한 번 캡처하세요.
+캡처한 이미지를 Rhino 기술 지원 tech@mcneel.com 앞으로 바로 보내주시기 바랍니다. 
+
