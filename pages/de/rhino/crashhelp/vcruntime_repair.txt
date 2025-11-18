@@ -1,0 +1,57 @@
+====== Fehler: Rhino startet nicht mit VCRUNTIME======
+Dies ist uns mit Rhino 7 und 8 passiert.
+In Bezug auf die Forumeinträge
+
+  * [[https://discourse.mcneel.com/t/rhino-cycles-won-t-load-issue/208464/9?u=theoutside|rhino-cycles-won-t-load-issue]]
+  * [[https://discourse.mcneel.com/t/starting-rhino-8-after-new-installation/174958|Rhino not starting after new install]]
+
+**Problem: Rhino startet nicht, mit einer Fehlermeldung bezüglich Windows VCRUNTIME dll** 
+
+//"C\Windows\SYSTEM32\VCRUNTIME140_1.dll ist entweder nicht für die Ausführung unter Windows vorgesehen oder enthält einen Fehler. Installieren Sie das Programm mit den Originalinstallationsmedien erneut, oder wenden Sie sich an den Systemadministrator oder Softwarelieferanten, um Unterstützung zu erhalten. Fehlerstatus Oxc000012f"//
+
+oder 
+
+//Ich habe versucht, Rhino im Abgesicherten Modus auszuführen und auch die Installatation zu reparieren, aber es funktioniert immer noch nicht.
+Wenn ich RhinoCycles am Laden hindere und Rhino 8 normal starte, treten keine Startprobleme auf. Wenn ich RhinoCycles erneut aktiviere, stürzt es beim Starten ab.// 
+
+
+
+
+
+
+
+===== Mögliche Fehlerbehebung =====
+
+Es sieht so aus, als wäre der Redistributable-Fehler gemeldet worden.
+Versuchen Sie eine Reparatur auf **Microsoft C++ Redistributables**.
+//Beginnen Sie mit x86 C++ Redistributable, dann x64 C++ Redistributable.//
+
+  - **Helfen Sie uns, helfen Sie anderen**
+    - Dieses Problem ist für uns von zunehmender Bedeutung, und wir würden es gerne beseitigen. Bis wir mehr herausgefunden haben, müssen uns Kunden wie Sie um Hilfe bitten und möglicherweise mehrere Tage lang auf eine Antwort warten.
+    - Um **Apps und Features** zu öffnen, klicken Sie auf die //Windows-Start-Schaltfläche//, geben sie **Apps und Features** ein und drücken Sie die Eingabetaste.
+    - Klicken Sie auf //Sortieren nach// > //Installationsdatum//
+    - Senden Sie einen Screenshot der zuletzt installierten Anwendungen an __//tech.eu@mcneel.com//__, mit dem Betreff "VC Runtime Fix Screenshot"
+  - **Um 64-bit Microsoft C++ Redistributables zu reparieren**
+    - In Apps & Features, klicken Sie mit der rechten Maustaste auf //Microsoft C++ Redistributable (x64)//, dann klicken Sie auf Ändern.
+    - In //Microsoft C++ Redistributable Setup//, klicken Sie auf //Reparieren//.
+    - //Schließen Sie// wenn das Setup erfolgreich war.
+    - //Starten Sie Rhino//. Wenn es startet, sind Sie fertig. Wenn nicht, fahren Sie fort. 
+  - **Um 32-bit Microsoft C++ Redistributables zu reparieren**
+    - In Apps & Features, klicken Sie mit der rechten Maustaste auf //Microsoft C++ Redistributable (x86)//, dann klicken Sie auf Ändern.
+    - In //Microsoft C++ Redistributable Setup//, klicken Sie auf //Reparieren//.
+    - //Schließen Sie// wenn das Setup erfolgreich war.
+    - **Fahren Sie den Computer herunter und starten Sie ihn neu**.
+    - // Starten Sie Rhino//. Wenn es startet, sind Sie fertig. Wenn nicht, fahren Sie fort. 
+  - **Installieren Sie die Windows-Aktualisierungen**
+    - Um die **Windows-Aktualisierung** zu öffnen, klicken Sie auf die //Windows-Start-Schaltfläche//, geben sie **Windows Update** ein und drücken Sie die Eingabetaste.
+    - Vergewissern Sie sich, dass alle Windows-Aktualisierungen erfolgreich installiert wurden.
+
+
+{{:rhino:crashhelp:programs_and_features_02.png?400|}}
+{{:rhino:crashhelp:programs_and_features_01.png?400|}}
+
+**Der Fehler wiederholt sich...?**
+Bitte schicken Sie uns einen Screenshot der zuletzt in Windows installierten Programme.
+Erstellen Sie einen Screenshot während Rhino funktioniert und speichern Sie ihn, und wenn sich Rhino wieder nicht öffnet, erstellen Sie einen weiteren. 
+Senden Sie beide zeitnah an tech.eu@mcneel.com.
+
