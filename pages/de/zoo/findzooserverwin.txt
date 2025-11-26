@@ -1,7 +1,7 @@
 ======Wie findet Rhino für Windows einen LAN-Zoo-Server?======
 
-> **Produkt :** //[[de:zoo:home|LAN-Zoo]]//
-> **Zusammenfassung:** //Überblick über die Verbindung von Rhino für Windows mit einem Zoo-Lizenzmanager-Server.//
+>** Produkt:** //[[de:zoo:home|LAN Zoo]]//
+> **Zusammenfassung:** //Überblick über die Verbindung von Rhino für Windows mit einem LAN-Zoo-Lizenzmanagerserver//
 
 =====Überblick=====
 
@@ -36,18 +36,22 @@ Typ:  REG_SZ
 Wert: <Hostname oder IP-Adresse>
 </code>
 
-> **Hinweis:** //Bei gleichzeitiger Ausführung von Rhino nach der Methode [[de:rhino:installingrhino|Automatische Installation]] und Erstausführung von Rhino mit höheren Rechten (z.B. "Als Administrator ausführen") führt dazu, dass der Servername des LAN Zoo in HKEY_LOCAL_MACHINE geschrieben wird.//
+> ** Hinweis:** //Bei gleichzeitiger Ausführung von Rhino nach der Methode [[de:rhino:installingrhino|Automatische Installation]] und Erstausführung von Rhino mit höheren Rechten (z.B. "Als Administrator ausführen") führt dazu, dass der Servername des LAN Zoo in HKEY_LOCAL_MACHINE geschrieben wird.//
 
 > Eine Lizenzschlüsseldatei wird in %programdata% erzeugt. Dies enthält die Schlüsseldetails, damit Rhino geöffnet werden kann. Beispiel: 55500d41-3a41-4474-99b3-684032a4f4df.lic in the C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses.
 
 > Klicken Sie mit der rechten Maustaste auf das Rhino-Symbol und wählen Sie "Als Administrator ausführen." Ihr Registrierungseintrag für den LAN-Zoo wird erstellt in Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\6.0\License Manager
 
 > Wenn Sie Rhino normal öffnen, befindet sich der Registrierungsschlüssel in
+<code>
 Computer\HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\License Manager
+</code>
 
 =====Rhino für Mac====
 Rhino sucht am folgenden Standort nach einem Pfad zu LAN Zoo:
-`/Users/Shared/McNeel/Rhinoceros/8.0/License Manager/LicensesZooClient.settings`
+<code>
+/Benutzer/Alle Benutzer/McNeel/Rhinoceros/8.0/License Manager/LicensesZooClient.settings
+</code>
 
 
 Rhino wird diese Datei mit den entsprechenden Inhalten erzeugen, wenn Sie Rhino unter Verwendung von LAN Zoo lizenzieren. Kopieren Sie die Datei an den gleichen Ort auf anderen Computern, um die Implementierung abzuschließen.
@@ -105,7 +109,7 @@ Wenn also beispielsweise die Domäne Ihres Unternehmens //meinefirma.com// ist, 
   * Wenn ein LAN-Zoo-Servername in der Windows-Registrierung gefunden wurde, dann wird Rhino nur von diesem Standort aus versuchen, auf eine Lizenz zuzugreifen. 
   * Wenn der in der Registrierung gefundene Name des LAN Zoo auf eine DNS-A-Aufnahme verweist, und das System das auf diese Aufnahme verwies ist deaktiviert, dann ist es Rhino nicht möglich, eine Lizenz zu erhalten.
   * Wenn der in der Registrierung gefundene Name des LAN Zoo jedoch auf eine DNS-CNAME-Aufnahme verweist, dann wird der DNS-Server auf jeglichen Standort verweisen, der einen ausgeführten LAN-Zoo-Dienst hostet.//Dies ist die standardmäßige DNS-Vorgehensweise//.
-  * Wenn ein LAN-Zoo-Servername nicht in der Windows-Registrierung gefunden wird, dann wird Rhino nach einer Lizenz suchen indem es versucht, auf den automatischen Servernamen von
+  * Wenn ein LAN-Zoo-Servername nicht in der Windows-Registrierung gefunden wird, dann wird Rhino nach einer Lizenz suchen indem es versucht, auf den automatischen Servernamen von 
 
 <code>
 __mcneel.__zoo5
