@@ -1,7 +1,7 @@
 ======Come Rhino per Windows trova un server LAN Zoo?======
 
 > **Prodotto:** //[[zoo:home|LAN Zoo]]//
-> **Summary:** //Panoramica sul metodo usato da Rhino per Windows per trovare il server del gestore licenze Zoo.//
+> **Sommario:** //Panoramica sul metodo usato da Rhino per Windows per trovare il server del gestore licenze LAN Zoo.//
 
 =====Informazioni generali=====
 
@@ -43,8 +43,18 @@ Valore: <nome host o indirizzo IP>
 > Fare clic con il tasto destro sull'icona di Rhino e selezionare "Esegui come amministratore". Verrà creata la voce di registro per LAN Zoo in Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\6.0\License Manager
 
 > Apri Rhino normalmente (senza privilegi di amministratore) e la chiave di registro si trova in
+<code>
 \ HKEY_CURRENT_USER SOFTWARE\McNeel\Rhinoceros\6.0\License Manager
+</code>
 
+===== Rhino per Mac
+Rhino cerca un percorso per LAN Zoo nella seguente posizione:
+<code>
+/Users/Shared/McNeel/Rhinoceros/8.0/License Manager/LicensesZooClient.settings
+</code>
+
+
+Rhino creerà questo file con i contenuti corretti quando la licenza di Rhino è usata con LAN Zoo. Copiare il file nella stessa cartella su altri computer per completare la distribuzione.
 
 ======Rhino 5 per Windows======
 
@@ -99,7 +109,7 @@ Se, ad esempio, il dominio dell'azienda è //mcneel.com//, è possibile aggiunge
   * Se viene trovato il nome di un server LAN Zoo nel Registro di Windows, Rhino proverà ad accedere solo a una licenza archiviata in questa posizione. 
   * Se il nome del server LAN Zoo, trovato nel registro, si risolve in un record DNS A e il sistema risolve che questo record non è attivo, Rhino non potrà ottenere una licenza.
   * Inoltre, se il nome del server LAN Zoo, trovato nel registro, si risolve nel record DNS CNAME, il server DNS si risolverà quindi in una posizione che ospita un servizio LAN Zoo in esecuzione.//Questa è un’operazione DNS standard//.
-  * Se non viene trovato il nome del server LAN Zoo nel Registro di Windows, Rhino ricercherà una licenza provando di risolvere il nome del server automatico  
+  * Se non viene trovato il nome del server LAN Zoo nel Registro di Windows, Rhino ricercherà una licenza provando di risolvere il nome del server automatico 
 
 <code>
 __mcneel.__zoo5
