@@ -1,50 +1,40 @@
 ======Wie findet Rhino für Mac einen LAN-Zoo-Server?======
 
-> **Produkt :** //[[de:zoo:home|LAN-Zoo]]//
-> **Zusammenfassung:** //Überblick über die Verbindung von Rhino für Mac mit einem Zoo-Lizenzmanager-Server//
+>** Produkt:** //[[de:zoo:home|LAN Zoo]]//
+> **Zusammenfassung:** //Überblick über die Verbindung von Rhino für Mac mit einem LAN-Zoo-Lizenzmanagerserver//
 
 Wenn Rhino die Lizenz eines LAN-Zoo-Servers benötigt, bestimmt es den Namen dieses Servers, indem es in dieser Reihenfolge die folgenden Orte durchsucht:
-  - Die Einstellungen im Ordner Application Support. Es wird nach dem Hostnamen oder der IP-Adresse des LAN-Zoo-Servers gesucht.
+  - Die xml-Datei der ZooClient-Einstellungen. Es wird nach dem Hostnamen oder der IP-Adresse des LAN-Zoo-Servers gesucht.
   - Zuletzt befragt es Ihren Domänennamenserver (DNS) nach dem Standardnamen Ihres LAN-Zoo-Servers.
-  - Es wird nach der LIC-Datei gesucht. Siehe [[https://wiki.mcneel.com/de/zoo/rhinomacdeployment|Verteilte Verwaltung von Lizenzen für Rhino für Mac]].
+
 
 =====Weitere Informationen=====
 
-====Einstellungsdatei====
+==== ZooClient-Einstellungsdatei====
 
-Wenn Rhino als Netzwerkknoten ausgeführt wird, wird der Name des LAN-Zoo-Servers zuerst dadurch bestimmt, dass die Datei **LicensesZooClient.Settings** im folgenden Ordner durchsucht wird:
+Wenn Rhino als Netzwerkknoten ausgeführt wird, wird der Name des LAN-Zoo-Servers zuerst dadurch bestimmt, dass die Datei **LicensesZooClient.Settings.xml** im folgenden Ordner durchsucht wird:
 
+=== Rhino 8 ===
 
-===Rhino 7===
-
-  /Library/Application Support/McNeel/Rhinoceros/7.0/License Manager
-
-
-===Rhino 6===
-
-  /Library/Application Support/McNeel/Rhinoceros/6.0/License Manager
-  
-===Rhino 5===
-
-  /Library/Application Support/McNeel/Rhinoceros/License Manager
-
-
-
-**HINWEIS**: Eine häufig auftretende Verwechselung ist die von ///Library// (die allgemeine Bibliothek) und ///Users/[user_account]/Library// (die Bibliothek des Anwenders).  Vergewissern Sie sich daher, die allgemeine Bibliothek zu konsultieren.
-
-Diese Datei sieht etwa folgendermaßen aus:
-
-===Rhino 7===
 <code>
-<?xml version="1.0" encoding="utf-8"?>
-<!--Zoo client settings file written by Rhino-->
-<ZooClient>
-  <Software_McNeel_Rhinoceros_6.0_License_Manager Server="host name or IP address" />
-</ZooClient>
+/Users/Shared/McNeel/Rhinoceros/8.0/License Manager
 </code>
-Hinweis: //Software_McNeel_Rhinoceros_6.0_License_Manager// weiter oben ist korrekt. 
+
+=== Rhino 7 ===
+
+<code>
+/Users/Shared/McNeel/Rhinoceros/7.0/License Manager
+</code>
 
 ===Rhino 6===
+
+<code>
+/Users/Shared/McNeel/Rhinoceros/6.0/License Manager
+</code>
+
+
+Die Dateiinhalte können mit einem Texteditor eingesehen und bearbeitet werden. Die Datei sieht in etwa so aus:
+
 <code>
 <?xml version="1.0" encoding="utf-8"?>
 <!--Zoo client settings file written by Rhino-->
@@ -53,18 +43,14 @@ Hinweis: //Software_McNeel_Rhinoceros_6.0_License_Manager// weiter oben ist korr
 </ZooClient>
 </code>
 
-===Rhino 5====
+Wo: **"Hostname oder IP-Adresse"** ist der Hostname oder die IP-Adresse Ihres LAN-Zoo-Servers.
 
-<code>
-<?xml version="1.0" encoding="utf-8"?>
-<!--Zoo client settings file written by Rhino-->
-<ZooClient>
-  <Software_McNeel_Rhinoceros_5.0_License_Manager Server="host name or IP address"/>
-</ZooClient>
-</code>
+> ** Hinweis:** //Damit Rhino diese Datei erstellen kann, muss der Betreiber von Rhino Rechte innehaben, diese Datei an diesem Ort zu erstellen.//
+
+> **Zudem:** //Das oben zu sehende xml-Tag **Software_McNeel_Rhinoceros_6.0_License_Manager** xml wird von **allen** Rhino-Versionen verwendet, //nicht nur Rhino 6//.//
 
 ====Verwendung eines DNS===
-Wenn Rhino den Namen des Zoo-Servers bei seiner Suche in der Settings-Datei nicht findet, sendet es an Ihren DNS-Server eine Anfrage nach dem Standard-Zoo-Server, der den folgenden Hostnamen hat:
+Wenn Rhino den Namen des Zoo-Servers bei seiner Suche in der ZooClient-Einstellungsdatei nicht findet, sendet es an Ihren DNS-Server eine Anfrage nach dem Standard-Zoo-Server, der den folgenden Hostnamen hat:
 
 <code>
 __mcneel.__zoo5
