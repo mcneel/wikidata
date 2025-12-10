@@ -1,0 +1,17 @@
+====== Data Transmitted Between Client and LAN Zoo Server ======
+
+> **Product:** //[[zoo:home|Zoo]]//
+> **Summary:** //Discusses what type of data is being transmitted between the client and Lan Zoo Server on port 80.//
+
+When a Zoo client requests a network license, these details will pass through Port 80 in the Client and on the Lan Zoo Server:
+
+  * Computer name
+  * User name
+  * ID of the product license they are requesting 
+
+The Lan Zoo that has a license available, replies with the license that is being loaned to that client.
+
+The Zoo needs the computer name and user name to know that if a second instance of Rhino is being opened on computer that already has a license of Rhino from the Lan Zoo, do not check out an additional license. 
+
+
+//Note:// You can use a packet sniffer app on port 80 to see this data.
