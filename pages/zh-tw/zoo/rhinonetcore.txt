@@ -1,0 +1,44 @@
+======Rhino 8 使用 .NET Core 執行環境======
+> **產品 ：** //[[zoo:home|Zoo]]//
+> **摘要 ：** //探討 LAN Zoo 與 Rhino 8 之間的關聯。//
+
+=====Question=====
+我們的 LAN Zoo 同時託管了 Rhino 7 與 Rhino 8 的授權，而且工作站（電腦）都能成功從 LAN Zoo 取得授權。然而，Rhino 8 卻無法正常運作——它在"設定 Zoo 伺服器"（Set Zoo Server）表單中的連線測試失敗。
+
+=====Answer=====
+在那些可以執行 Rhino 7 但 Rhino 8卻沒辦法的工作站上，請嘗試使用以下命令行參數來啟動 Rhino 8：
+
+<code>
+C:\Program Files\Rhino 8\System\Rhino.exe /netfx
+</code>
+
+如果這樣可以成功啟動並取得授權，請在該 Rhino 工作站上安裝 .NET Core 7.0 執行環境（Runtimes）（詳見下方說明）。
+=====更多資訊=====
+Rhino 8 現在在 Windows 和 Mac 平台上，皆統一使用開源的 [[https://github.com/dotnet/runtime|.NET Core Runtime]]  來執行 .NET 程式碼。這項改變提升了效能，並讓跨平台的執行環境達成一致。 
+
+在 Windows 平台上，若遇到相容性問題，您在執行 Rhino 8 時仍可選擇性地切換回舊有的 .NET Framework 執行環境。
+
+使用 .NET Core 能讓 Rhino 及其外掛程式（Plugins）充分發揮效能優勢，讓幾乎所有的 .NET 程式碼執行速度大幅提升。在處理運算庫（Computational libraries）或大型數據集時，這潛在地位用戶帶來了巨大的生產力提升。
+
+然而，在 Windows 上可能仍有理由繼續使用 .NET Framework，特別是當您需要使用尚未與 .NET Core 相容的第三方外掛程式時。使用 .NET Framework 的缺點是，在某些使用情境下，Rhino 的執行速度可能會稍微變慢。
+
+您可以透過兩種方式來選擇 Rhino 8 所使用的執行環境：
+
+1. 使用 **SetDotNetRuntime** 指令，然後重啟Rhino。
+
+2. 在啟動 **Rhino.exe**時加上以下指令行參數。.
+注意，這將覆蓋 **SetDotNetRuntime**的設定。
+
+^ 參數 (Argument)     ^  說明 (Description)                ^
+| **/netcore** | .NET Core 7.0 (預設模式)                 |
+| **/netfx**   | .NET Framework 4.8 (相容模式) |
+
+
+如果您的系統尚未安裝 .NET Core 7.0，可以透過以下連結下載最新版本：
+
+**[[https://dotnet.microsoft.com/zh-tw/download/dotnet/7.0|下載 .NET Desktop Runtime 7.0]]**
+
+
+\\
+
+{{tag>Zoo_zh-tw}}
