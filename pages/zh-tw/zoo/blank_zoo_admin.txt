@@ -1,0 +1,23 @@
+===== Zoo 管理介面顯示空白 =====
+====問題：====
+
+部分執行**Zoo 管理程式的** "無顯示器（headless）"電腦，其管理對話框可能會顯示為空白。已知無法正常顯示 **Zoo 管理介面的軟體**
+已知無法正常顯示 Zoo 管理介面的軟體包括：Kaseya 或 ScreenConnect。
+{{ :zoo:blank_zoo.png?400 |}}
+
+==== Background ====
+
+**Zoo 管理程式** 使用 WPF 作為其圖形使用者介面（GUI）函式庫。
+
+WPF (Windows Presentation Foundation) 應用程式可以在沒有實體螢幕的機器上執行，但其視覺化程度或功能可能與連接螢幕時有所不同。WPF 應用程式主要依賴視覺顯示，若缺少螢幕，程式將無法彩現其 UI 介面元素。
+
+如果 WPF 無法初始化顯示設定與相關細節，就會導致執行失敗。
+因此，在「無顯示器」電腦上設定 LAN Zoo 時，可能會出現空白的對話框。
+
+==== 解決方法： ====
+從其他工作站使用 MS RDP  ([[https://learn.microsoft.com/zh-tw/troubleshoot/windows-server/remote/understanding-remote-desktop-protocol|Remote Desktop Protocol]])(微軟遠端桌面連線) 遠端登入該台無顯示器的 Zoo 伺服器。 
+RDP 似乎能提供 WPF 所需的顯示支援，使其正常顯示對話框。
+
+\\
+
+{{tag>Zoo_zh-tw}}
