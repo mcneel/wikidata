@@ -1,0 +1,57 @@
+====== Rhino 無法啟動並出現 VCRUNTIME 錯誤======
+我們在 Rhino 7 和 8 都遇到過這個問題。
+相關論壇貼文
+
+  * [[https://discourse.mcneel.com/t/rhino-cycles-won-t-load-issue/208464/9?u=theoutside|rhino-cycles-won-t-load-issue (Rhino cycles無法載入的問題)]]
+  * [[https://discourse.mcneel.com/t/starting-rhino-8-after-new-installation/174958|全新安裝後Rhino無法啟動]]
+
+**問題：Rhino因Windows VCRUNTIME dll 錯誤而無法啟動。** 
+
+//"C\Windows\SYSTEM32\VCRUNTIME140_1.dll 可能並非設計在 Windows 上執行，或者內有錯誤。請嘗試使用原始安裝媒體重新安裝、聯絡系統管理員或軟體供應商尋求支援。錯誤狀態Oxc000012f"//
+
+或 
+
+//曾嘗試在安全模式下啟動 Rhino，也嘗試過修復安裝，但依然無效。
+如果我停止 RhinoCycles 載入，並正常啟動 Rhino 8，它也跟著能正常啟動。但如果我重啟 RhinoCycles，它就會在啟動時當機。// 
+
+
+
+
+
+
+
+===== 可能的解決方式 =====
+
+這聽起來像是之前已通報過的可轉散發套件問題。
+嘗試修復 **Microsoft C++ 可轉散發套件**.
+//先修復 x86 C++ 可轉散發套件，然後再修復 x64 C++ 可轉散發套件。//
+
+  - **幫助我們協助他人**
+    - 這個問題日益嚴重，我們很希望可以徹底解決它。但在掌握更多資訊之前，像您這樣的用戶需要向我們尋求協助，還可能需要等待數天才能解決此問題。
+    - 若要開啟 **應用程式 & 功能**，請按//Windows 的開始按鈕// 並鍵入 **應用程式與功能 (Apps & Features)**，按Enter。
+    - 按 //按照安裝日期// > //排序。//
+    - 請將最近安裝的應用程式截圖寄至 __//support@mcneel.com//__，主旨請寫 "VC Runtime Fix Screenshot"
+  - **修復 64位元 Microsoft C++ 可轉散發套件**
+    - 在應用程式與功能中，按右鍵點擊 //Microsoft C++ 可轉散發套件Redistributable (x64)//。然後按「變更」。
+    - 在//Microsoft C++ 可轉散發套件設定裡//，按一下 //修復//.
+    - 設定成功後//請關閉//。
+    - //啟動 Rhino//，如果啟動成功，就完成了。如果沒啟動，請繼續。 
+  - **修復 32位元 Microsoft C++ 可轉散發套件**
+    - 在應用程式與功能中，按右鍵點擊 //Microsoft C++ 可轉散發套件Redistributable (x64)//。然後按「變更」。
+    - 在//Microsoft C++ 可轉散發套件設定裡//，按一下 //修復//.
+    - 設定成功後//請關閉//。
+    - **關閉並重新啟動電腦**.
+    - //啟動 Rhino//，如果啟動成功，就完成了。如果沒啟動，請繼續。 
+  - **安裝Windows更新**
+    - 若要開啟 **應用程式 & 功能**，請按//Windows 的開始按鈕// 並鍵入 **應用程式與功能 (Apps & Features)**，按Enter。
+    - 請確保所有Windows更新都已成功安裝。
+
+
+{{:rhino:crashhelp:programs_and_features_02.png?400|}}
+{{:rhino:crashhelp:programs_and_features_01.png?400|}}
+
+**又當掉了？**
+請提供 Windows 最新安裝程式的螢幕截圖。
+在 Rhino 正常運作時截取一張螢幕截圖，然後在 Rhino 無法開啟時再截取一張。
+請盡快將截圖發送至 Rhino 技術支援 tech@mcneel.com。
+
