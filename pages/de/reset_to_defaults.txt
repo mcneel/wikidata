@@ -1,0 +1,61 @@
+====== Rhino auf Standardeinstellungen zurücksetzen ======
+Von [[mary@mcneel.com|Mary Ann Fugier]]
+
+{{ ::reset.jpg?250|}}
+===== Für Rhino 8 (oder neuer) für Windows und Mac =====
+
+  - Öffnen Sie Rhino
+  - Geben Sie den Befehl **Zurücksetzen** ein.
+  - Im Dialog wählen Sie die Zurücksetzungsoptionen aus.
+
+Details zum Befehl Zurücksetzen sehen Sie [[https://docs.mcneel.com/rhino/8/help/de-de/toolbarsandmenus/windowlayout.htm#Reset|hier]].
+
+//Anmerkung:// Dieser Befehl war **neu** in Rhino 8. 
+
+
+===== Für Rhino 6 und 7 für Windows =====
+  * Dies geschieht in 4 Schritten: löschen Sie die benutzerdefinierten Optionen und die xmls-Datei der Fenster-Positionen.
+  * Deaktivieren Sie sämtliche Plug-ins.
+  * Schließen Sie deren Menüs.
+  * Setzen Sie die Werkzeugleiste auf Standard zurück.
+
+
+1. **Rhino-Optionen** anzeigen: Schließen Sie Rhino.
+ 
+Im **Dateiexplorer** gehen Sie zum Ordner **C:\Users\<BENUTZER>\AppData\Roaming\McNeel\Rhinoceros\6.0\settings**, wobei mit <BENUTZER> derjenige gemeint ist, der eingeloggt ist. Hinweis: im Eingabefeld des Dateiexplorers geben Sie **%appdata%** ein und navigieren Sie zum Ordner **Roaming\McNeel\Rhinoceros\6.0\settings**.
+
+Verschieben oder löschen Sie diese Dateien {{ ::settings_folder.png?nolink&300|}} 
+<code>
+settings-Scheme__Default.xml 
+window_positions-Scheme__Default.xml
+</code>
+
+Die fraglichen Dateien in einen ALT oder SPEICHERN genannten Ordner zu verschieben wird Ihnen später ermöglichen, sie zu restaurieren, indem Sie sie einfach zurück verschieben.
+Rhino wird wird diese mit Standardeinstellungen neu erstellen, wenn sie nicht gefunden werden.
+ 
+2. Öffnen Sie Rhino.
+
+3. {{ ::undefined:plugins.png?nolink&300|}} 
+**Deaktivieren Sie Plug-ins**, die nicht mit Rhino ausgeliefert werden: Optionen -> Plug-ins -> Filter auf "Nicht in Rhino inbegriffene Plug-ins". Löschen Sie das Häkchen. 
+
+
+
+
+
+
+4. Schließen Sie Rhino und starten Sie es erneut.
+
+
+
+5. {{ ::toolbars.png?nolink&300|}} Schließen Sie sämtliche **Rhino-Werkzeugleisten** die nicht zum Rhino-Standard gehören. Gehen Sie zu Optionen -> Werkzeugleisten.
+ 
+Heben Sie eine Werkzeugleiste hervor, die durch ein Plug-in hinzugefügt wurde oder benutzerdefiniert ist. 
+
+
+6. {{ ::toolbars_close.png?nolink&300|}} Im Datei-Menü wählen Sie **Werkzeugleiste schließen**. Wiederholen Sie, bis nur Standard übrigbleibt.
+
+
+7. Setzen Sie die **Werkzeugleisten** zurück: In Rhino geben Sie **WerkzeugleisteZurücksetzen** ein. 
+ 
+8. Schließen Sie Rhino und starten Sie es erneut.
+Rhino sollte jetzt so wie nach der Erstinstallation aussehen
