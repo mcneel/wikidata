@@ -2,7 +2,9 @@
 
 >Se Rhino non si avvia o si blocca all'avvio, ecco una serie di informazioni utili per capire la causa del problema e come risolverlo.
 
-====Rhino 6====
+====Rhino 6 (e versioni successive)===
+
+>La stessa procedura funziona per Rhino 7 e 8 -- basta sostituire "6.0" con "7.0" o "8.0" nella chiave di registro.
 
   - Apri l'editor del Registro di sistema (dal menu di avvio di Windows, inserisci **regedit**, quindi premi Invio).
   - Nel registro, in HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\Global Options\Debug Logging
@@ -10,8 +12,8 @@
   - Imposta **Enabled** su **1**.
   - Crea il valore REG_DWORD (32) chiamato **SaveToFile**  (se non esiste già).
   - Imposta **SaveToFile** su **1**.
-  - Avvia **Rhino 6** usando **tasti di scelta rapida**, non facendo clic sul file dati.
-Invia il file **RhinoDebugMessages.txt** (cartella Documenti) a **tech@mcneel.com**.
+  - Avvia **Rhino** usando **tasti di scelta rapida**, non facendo clic sul file dati.
+  Invia il file **RhinoDebugMessages.txt** (cartella Documenti) a **tech@mcneel.com**.
 
 --> Rhino 5^
 
@@ -28,7 +30,7 @@ Invia il file **RhinoDebugMessages.txt** (cartella Documenti) a **tech@mcneel.co
       * Rispondi **Sì** alla richiesta di caricare le **barre degli strumenti** e **No**  alla richiesta di caricare l'RDK.
 
   * Se **Rhino si avvia in modalità sicura**, è probabile che il problema sia causato da un **driver video** o da un **plug-in.
-    * Strumenti - Opzioni - Vista - OpenGL**, **deseleziona** l'opzione **Usa modalità di accelerazione grafica hardware**. 
+    * Nel menu di Rhino: //Strumenti - Opzioni - Vista - OpenGL**, **deselezionare** la casella denominata **Usa modalità di accelerazione grafica hardware**. 
     * Chiudi Rhino ed avvialo in modo normale (non usando la modalità sicura). 
 
     * Se **Rhino si avvia con l'accelerazione hardware disattivata**, è probabile che il problema derivi dal **driver della scheda video. 
@@ -38,13 +40,13 @@ Invia il file **RhinoDebugMessages.txt** (cartella Documenti) a **tech@mcneel.co
         * ATI/AMD: http://support.amd.com/us/gpudownload/Pages/index.aspx
         * Apple:   http://support.apple.com/downloads/#bootcamp
         * Qualsiasi altro sito corrispondente al produttore della vostra scheda video.
-        * Nota: se usi un computer portatile, è probabile che dobbiate ottenere l'aggiornamento dei driver dal produttore del portatile.
+        * Nota: Se usate un computer portatile, è probabile che dobbiate ottenere l'aggiornamento dei driver dal produttore del portatile.
       * Riavvia Rhino in modo normale (non usando la modalità sicura).
 
     * Se **Rhino continua a bloccarsi dopo aver disattivato l'accelerazione hardware**, è probabile che il problema sia causato da un **plug-in.
       * Riavvia in modalità sicura** e **seleziona** l'opzione ** Usa modalità di accelerazione grafica hardware**. 
       * Strumenti - Opzioni - Plug-in**, **deseleziona** l'opzione **Attivato** per tutti i plug-in non forniti con Rhino, quindi **seleziona** **Richiedi caricamento plug-in disattivati** nella parte inferiore della scheda.
-      * Chiudi Rhino e avvialo in modo normale (non usando la modalità sicura). 
+      * Chiudi Rhino ed avvialo in modo normale (non usando la modalità sicura). 
         * Rispondi **No** per caricare tutti i plug-in disattivati.
 
       * Se **Rhino si avvia con alcuni plug-in disattivati**, il problema deriva da uno di questi plug-in. 
