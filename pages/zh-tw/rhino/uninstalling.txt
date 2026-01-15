@@ -1,37 +1,63 @@
-====== 手動移除 Rhino 4.0 ======
+====== 手動移除 Rhino  ======
+//以下流程適用於 Rhino 4 及更高版本（含 Rhino 5, 6, 7 & 8）//
+\\
 
-===問題：===
-移除 Rhino 時，發生找不到某個檔案而無法移除。
+===== 問題 =====
+在啟動、安裝或移除 Rhino 時出現錯誤提示：
 
-===適用於：===
-Rhino 4.0、Rhino 5.0
+//您嘗試使用的功能位於不可用的網路資源上。//
+按一下"確定"重試，或在下方輸入包含安裝包"<檔案名>.MSI"的備用路徑。
 
-===原因===
-Windows Installer 找不到它的記錄中移除作業需要的檔案。
+===== 原因 =====
+Windows 安裝程式緩存無法找到移除所需的檔案或註冊表項。這是 Windows Installer 服務的常見問題。最佳解決方案是使用 **Windows Install Clean Up** 徹底清除舊安裝。清理完成後即可重新安裝 Rhino。
 
-===解決方法：===
-手動移除 Rhino 與 Windows Installer 對 Rhino 的安裝記錄。
 
-**注意：**只有從 Windows 控制台的新增/移除對話框無法移除 Rhino 時才使用以下的方法。
+請按以下步驟手動移除 Rhino 及其 Windows Installer 註冊資訊：
+（需擁有電腦的 //管理員許可權//）
 
-==清除 Windows Installer 的安裝記錄：==
-  - 下載 [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup 工用程式]]
-  - 將下載的 **WindowsInstallerCleanupUtility.zip** 解壓縮到一個資料夾
-  - 雙擊 **msicuu.exe**
-  - 選取 **(All Users) Rhinoceros 4.0**
-  - 按 **Remove**
-   
+==== 1. 移除Rhino 程式 ====
+  - 關閉 Rhino 應用程式
+  - 打開 Windows 搜索
+  - 輸入 **應用程式**（或 **新增或移除程式**）
+  - 在列表中找到** Rhinoceros x.0**，點擊 **解除安裝**
   
-==刪除 Rhino 的安裝資料夾：==
-  - 瀏覽至 C:\Program Files\
-  - 刪除 **Rhinoceros 4.0** 或 **Rhinoceros 4.0 Evaluation**
+==== 2. 刪除安裝目錄 ====
+  - 請至路徑 //C:\Program Files//
+  - 刪除資料夾 **Rhinoceros x** 或 **Rhinoceros x Evaluation**
+
+==== 3. 刪除 Rhino 資料檔案夾 ====
+  - 請至路徑 %AppData%\Roaming\McNeel\Rhinoceros
+  - 刪除 **x.0** 資料夾（x 代表 Rhino 版本號）
+  - 請至路徑 %ProgramData%\McNeel\Rhinoceros
+  - 刪除 **x.0** 資料夾（x 代表 Rhino 版本號）
   
-==刪除登錄檔機碼：==
-  - 開啟**登錄檔編輯程式** (開始 > 執行，輸入 Regedit)
-  - 瀏覽至 **HKEY_LOCAL_MACHINE**\Software\McNeel\Rhinoceros
-  - 刪除 **4.0** 機碼
-  - 瀏覽至 **HKEY_CURRENT_USER**\Software\McNeel\Rhinoceros
-  - 刪除 **4.0** 機碼
-  
-===注意：===
-* 此方法適用於32位元的windows作業程式，使用64位元的用戶請洽原廠工程師 [[mailto:kelvin@mcneel.com|Kelvin]]。
+==== 4. 刪除註冊表項 ====
+  - 在 Windows 搜索中輸入 **登錄編輯程式**
+  - 打開 **登錄編輯程式**
+  - 定位至 //HKEY_LOCAL_MACHINE\Software\McNeel\Rhinoceros//
+  - 刪除 **x.0** 項（例如 Rhino 4.0, 5.0 或需卸載的版本）
+  - 定位至 //HKEY_CURRENT_USER\Software\McNeel\Rhinoceros//
+  - 刪除 **x.0** 項（例如 Rhino 4.0, 5.0 或需卸載的版本）
+
+==== 5. 重啟系統 ====
+  - 安裝所有 Windows 更新
+  - 如需重裝，[[https://www.rhino3d.com/download|請在此下載最新安裝器]]
+
+_________________
+
+===== 備選方案 =====
+（僅當通過 **應用和功能** 解除安裝時執行）
+
+=== 運行微軟安裝修復工具 ===
+  - 訪問 [[https://support.microsoft.com/zh-tw/topic/%E4%BF%AE%E5%BE%A9%E9%98%BB%E6%AD%A2%E5%AE%89%E8%A3%9D%E6%88%96%E7%A7%BB%E9%99%A4%E7%A8%8B%E5%BC%8F%E7%9A%84%E5%95%8F%E9%A1%8C-cca7d1b6-65a9-3d98-426b-e9f927e1eb4d|http://support.microsoft.com/mats/program_install_and_uninstall]]
+  - 點擊 **立即運行**.
+
+=== 清理 Windows 安裝程式緩存 ===
+<color red>警告：</color> 此操作可能導致註冊表損壞，後續安裝時觸發 1402 錯誤。<color red>僅當上述方案無效時執行</color>
+  - 下載 [[http://files.na.mcneel.com/misc/WindowsInstallerCleanupUtility.zip|Windows Installer Cleanup Utility]].
+  - 解壓至桌面"Windows Installer Clean Up"資料夾
+  - 運行 **msicuu.exe**.
+  - 找到列表中的 (All Users) Rhinoceros 5.0 WIP（64位元系統顯示為 All Users Rhino 5.0 WIP x64）
+  - 點擊 **Remove**
+
+若操作後出現 1402 錯誤，可參考：[[https://wiki.mcneel.com/zh-tw/rhino/error1402|1402 錯誤解決方案]].
