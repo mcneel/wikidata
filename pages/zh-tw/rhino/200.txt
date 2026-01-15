@@ -1,15 +1,46 @@
-====== 授權管理員初始化失敗錯誤代碼 -200 ======
+====== 授權管理器初始化失敗，錯誤代碼 -200 ======
 
-**問題:**\\
-Rhino 6 顯示此錯誤並且無法執行。 \\
+{{:rhino:error-200.png?400|}}\\ 
+===== Rhino 8 有此錯誤造成啟動 =====
+
+  - 完成所有Windows更新
+  - 重新安裝Microsoft.NET Runtime 8.0.22或更新版本 https://dotnet.microsoft.com/zh-tw/download/dotnet/8.0
+  - 啟動Rhino進行測試
+
+===== 因同樣錯誤Rhino 8 仍無法啟動 =====
+
+為了幫助我們診斷問題，請使用 Rhino 8.26 或更高版本按照以下步驟操作：
+
+  - 在**Windows Start > Run**上按右鍵。
+  - 貼上“C:\Program Files\Rhino 8\System\Rhino.exe /debuglog”，然後按一下"Ok"。
+  - 退出Rhino
+  - 前往您的「文件」資料夾，並將「RhinoDebugMessages.txt」和「RhinoDotNetTraceLog.txt」這兩個檔案傳送給我們。 
+  - 壓縮後，連同問題描述一起發送至 //tech@mcneel.com// 。或是用我們的 [[https://www.rhino3d.com/upload|上傳工具upload tool]]，提交壓縮檔案。
 
 
-**造成原因:**\\
-未知
+===== 如果以上方法皆無效 =====
 
-**解決方式 1:**
-在控制台--> 程式和功能中找尋Rhino 6 64-bit程式並執行"修復"來修正這個錯誤。
 
-**解決方式 2:**
-若您有安裝ShapeDiver V1.9.1 for Grasshopper，請執行 TestPackageManager 指令，然後更新ShapeDiver to v1.92-beta.1 或更新的版本。 \\
-(ShapeDiver在Rhino 7並不會造成這個錯誤。)
+若Rhino //仍舊無法開啟//而且還出現此錯誤，請用/netfx switch (指令行參數)修改Rhino捷徑。
+請確保在 /netfx 前面新增一個空格。
+
+{{:rhino:rhino_netfx_switch.png?400|}}
+-
+
+將上述參數新增至 Rhino 8 捷徑。
+/netfx 用來初始化 .NET Framework 4.8。
+然後用捷徑開啟 Rhino。
+
+如需更多協助，請發送電子郵件 **tech@mcneel.com**
+//請在郵件中包含您的 Rhino 系統資訊：在 Rhino 中輸入 **SystemInfo** 指令。
+將輸出結果複製並貼上到回覆。//
+
+===== Rhino 6 無法啟動並出現此錯誤 =====
+
+**解決方案 1：**
+在「控制台」>「程式和功能」中對 64 位元 Rhino 執行"修復程式"，來解決此錯誤。
+
+**解決方案 2：**
+如果您已安裝 Grasshopper 的 ShapeDiver v1.9.1，請執行 TestPackageManager 指令，並將 ShapeDiver 更新至 v1.92-beta.1 或更高版本。 \\
+（ShapeDiver 不會導致 Rhino 7 出現此錯誤。）
+
