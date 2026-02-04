@@ -1,0 +1,19 @@
+====== Formulas in Dimensions ======
+
+===== Question: =====
+I’m using the default “automatic” dimension value feature (eg “<>”) when I annotate 2D objects
+I want to create a detail view of a piece of a 2D object - while preserving the original dimensions.
+
+At present, I make a copy of the 2D object, scale it as desired, and then replace the “<>” dimension properties with a hand coded dimension value. This is tedious and prone to error.
+
+So my question is this…is there way to add a calculation to operated on the the automatic value (i.e. “<>”) of the dimension?
+
+===== Answer: =====
+If the formular begins with a % and ends in a %, then python function parser considers it a //parsable// function.
+There my be additional operator, but I will need to do additional research.
+
+Try these:
+%<<>*2>%
+%<<>/2>%
+%<<>-2>%
+%<<>+2>%
