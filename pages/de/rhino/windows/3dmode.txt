@@ -1,0 +1,119 @@
+====== VR in Rhinoceros ======
+Rhino hat eine Art „Stereo-Modus"-Einstellung in Rhino 5 eingeführt. 
+In Rhino 7 und 8 können Sie Stereo-Displays und 3D-Ansicht nicht „einfach anschalten". 
+
+So einfach geht es nicht mehr. Sie müssen vielmehr über Ihre Hardware Bescheid wissen und zum Experimentieren bereit sein, um die beste Option zu finden.
+Auch müssen Sie die Plug-ins herunterladen, die diese Funktion in Rhino hinzufügen.
+
+Es gibt drei Optionen auf der Seite unten, keine davon ist im Rhino-Kernspeicher enthalten
+Da der Gebrauch spezieller Hardware nötig war, wurde beschlossen, die Funktion nicht in den Rhino-Kernspeicher aufzunehmen, es aber den Anwendern zu ermöglichen, sie bei Bedarf als Add-on hinzuzufügen.
+
+Support von erfahrenen Anwendern und McNeel-Personal aus der ganzen Welt ist im [[https://discourse.mcneel.com/c/rhino/147|Rhino Support Forum]] erhältlich.
+
+===== Option 1: Rhino Plug-ins =====
+
+==== RhinoVR ====
+RhinoVR ist ein Plug-in für Rhino 7, welches kopfgestützte Anzeigegeräte von HTC Vive oder Oculus Rift verwendet, um Rhino-Ansichtsfenster in virtueller Realität zu rendern. Dieses Plug-in wurde als Muster erstellt, um Entwicklern zu zeigen, wie ein VR-Plug-in für Rhino 7 entwickelt werden kann.
+
+Benötigt wird ein OpenVR-kompatibles VR-Headset wie Quest 2, Samsung Odyssey+, Rift S. 
+Headset-Support für Steam + SteamVR wird benötigt, und dann funktioniert es mit RhinoVR.
+
+Hier geht es zum [[https://github.com/mcneel/RhinoVR|Download]]
+
+==== EYECAD VR ====
+[[https://www.food4rhino.com/en/app/eyecad-vr-virtual-reality-architecture|Eyecad VR Softwares]] ermöglicht die Erstellung phantastischer, interaktiver VR-Szenen für Sie und Ihre Kunden. Verwenden Sie Oculus Rift, HTC Vive, WMR oder gehen Sie mit Monitor und Tastatur/Pad auf Erkundung. Sie können Ihr Projekt auch durch das neue Eyecad-360-Tool mit Ihren Kunden teilen und so via Web-Link interaktive Panoramatouren in 360° kreieren.
+
+
+===== Option 2: Plug-in Anaglyph für stereoskopisches Sehen =====
+Mit dieser Option benötigen Sie nur eine “Rot-und-Blau”-Brille.
+Statt einer speziellen Hardware ist nur die Brille erforderlich, die überall für wenig Geld erhältlich ist.
+
+Beide Plug-ins, Anaglyph und 3D Stereo, sind vom Aussehen wie von der Funktion her gleich… sie können beide installiert werden, sind aber schwer voneinander zu unterscheiden. Wenn Sie nicht beide benötigen, sollten Sie wahrscheinlich auch nicht beide installieren.
+
+QuadBuffering muss wahrscheinlich AUS sein falls/während Anaglyph Stereo verwendet wird. Dies wird über den Befehl **TestQuadBuffering** gesteuert. Standardmäßig ist es //aus//. Möglicherweise müssen Sie es aber an- und dann wieder ausschalten, um die Einstellung zu überprüfen.
+
+Anaglyph Stereo rendert selbst Mehrfachrahmen. Passen Sie Kameraposition und -standpunkt mit der Rhino UI an.
+
+Das Plug-in Anaglyph wird in den Panels als “Stereo View” angezeigt, während das Aktive/Passive Plug-in als “Stereo 3D View” angezeigt wird.
+{{ :rhino:windows:show_panel_2.png?200|}}
+
+1. Laden Sie das Plug-in herunter:
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/StereoView.rhp|StereoView.rhp]]
+
+2. Öffnen Sie Rhino.
+
+3. Legen Sie **StereoView.rhp** auf der geöffneten Rhino-Anwendung ab.
+
+4. Im Pop-up **Panels** setzen Sie das Kontrollhäkchen bei „Stereo View", um das Panel zu öffnen.
+
+{{:rhino:windows:anaglypg.png?200|}}
+
+//Sehen Sie die Diskussion im Rhino Support Forum [[https://discourse.mcneel.com/t/from-stereo-to-mono/53448/29|hier]].//
+
+===== Option 3: Quad Buffering & Stereo3DView-Plug-in =====
+Windows Rhino 7 und 8 unterstützt jetzt „Quad Buffering", das für Passives/Aktives Stereo-Sehen benötigt wird.
+
+Die Quad-Buffering-Unterstützung in Version 8 ist für Hardware wie **PluraVision 3D** und passives Stereo-Sehen von Unternehmen wie **Schneider Digital**.
+
+Laptops unterstützen gewöhnlich keine Art von Stereo-Sehen. Sie müssen es jedoch ausprobieren.
+=====Konfiguration=====
+//Hinweis: Schließen Sie Rhino. Bevor Sie Rhino starten, müssen Sie den Computer auf Stereo-Sehen einstellen//
+
+==== Windows-Einstellung ====
+
+Quad Buffering nuss in Rhino 8 eingeschaltet sein und macht es erforderlich, den „3D-Modus" in den Einstellungen für die Windows-Anzeige zu aktivieren, wie auch in den Systemsteuerungen des GPU-Fabrikanten.
+
+{{:rhino:windows:3dmode01.png?200|}}
+
+==== Einstellung der Grafikkarte ==== 
+In der GPU-Systemsteuerung sollte irgendeine Stereo-Option vorhanden sein.
+
+Hier ist die Option der Nvidia-Systemsteuerung.
+
+{{:rhino:windows:3dmode02.png?300|}}
+
+Suchen Sie in der Nvidia-Systemsteuerung nach den oben angezeigten Stereo-Optionen, falls vorhanden. 
+
+//Anmerkung:// Sie müssen sie von hier aus aktivieren, da es sich nicht um eine Windows-Einstellung handelt. 
+Falls sie von der Nvidia-Systemsteuerung als „Aktiviert“ angezeigt wird, aber ausgegraut erscheint: 
+dies liegt daran, dass der „3D-Anzeigemodus" im Dialog Windows->Anzeigeeinstellungen bereits aktiviert war.
+
+==== QuadBuffering ====
+
+Schalten Sie QuadBuffering in Rhino mit dem Befehl **TestQuadBuffering** an.
+
+
+==== Das Plug-in ==== 
+{{ :rhino:windows:show_panel_1.png?200|}}
+1. Laden Sie das Plug-in herunter:
+[[https://s3.us-west-2.amazonaws.com/docs.mcneel.com/Share/Files/Stereo3DView.rhp|Stereo3DView]]
+
+2. Öffnen Sie Rhino.
+
+3. Legen Sie es auf der geöffneten Rhino-Anwendung ab.
+
+4. Zeigen Sie das Pop-up „Panels" an und setzen Sie das Kontrollkästchen für „Stereo 3D View".
+
+{{:rhino:windows:active-passive.png?200|}}
+
+
+
+==== Zusätzliche Hinweise ====
+  * Sie brauchen sehr spezielle Hardware und eine Brille. 
+  * Sie brauche einen Monitor mit einer schnellen Aktualisierungsrate. 
+  * Sie brauchen eine spezielle Brille.  
+
+Wenn Ihre Stereo-Konfigurierung „Aktiv" ist, dann muss Ihre Brille in der Lage sein, sich mit der Monitor-Aktualisierung zu synchronisieren (zwischen der linken und rechten Linse hin und her zu flimmern), d.h. entweder wird die Brille irgendwo hinten in der GPU eingestöpselt, oder es gibt eine Art in den Computer gestöpselten USB-Empfänger, mit dem die Brille kommuniziert. 
+
+Wenn Ihre Konfiguration „Passiv" ist (so wie für 3D-Filme im Kino verwendet), dann brauchen Sie ebenfalls spezielle Monitoren, die Brille hat jedoch lediglich polarisierte Linsen.  
+
+In jedem Fall müssen Sie auch sicherstellen, dass die GPU-Systemsteuerung für den von Ihrer Hardware unterstützten Modus konfiguriert ist.  
+
+Für „//Aktives" Stereo// sollte es möglich sein, die Einstellung **Generic active stereo** zu verwenden.  
+Für „//Passives" Stereo// müssen Sie **Clone mode** oder **Planar stereo mirror display** verwenden.
+Passive Modi machen normalerweise eine Art dualer Anzeigen mit einer Ebene aus Glas erforderlich, die sich in einem bestimmten Winkel dazwischen befindet.
+
+{{ :rhino:windows:pluralvision.png?400|}}
+Dies ist eine Einstellung für **passiven Modus** von [[https://www.schneider-digital.com/en/|Schneider Digital]], genannt [[https://www.schneider-digital.com/en/products/passive-3d-stereo-monitors/|“3D PluraView”]].
+
+
