@@ -64,3 +64,59 @@ rhino_en-us_7.#.#####.#####.exe -package -passive LICENSE_METHOD=ZOO ZOO_SERVER=
 </code>
 
 [[https://wiki.mcneel.com/rhino/installingrhino/no-msi|Why is there no MSI installer for Rhino 7?]]
+
+====Examples====
+Here is an example of a passive command line install. 
+//rhino_en-us_8.28.26041.11001.exe -package -passive -norestart LICENSE_METHOD=ZOO ZOO_SERVER=zoo.mcneel.com//
+Please fill in your own **ZOO_SERVER**
+
+The Rhino exe is in the Downloads folder.
+
+====Prepare for Install====
+  * If you have already **Rhino installed, uninstall it.** **<- very important**
+  * Clear out any old lic files that will not longer be used. 
+Lan Zoo C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses
+
+Cloud Zoo C:\Users\<user>\AppData\Roaming\McNeel\Rhinoceros\6.0\License Manager\Licenses
+<user> is the current user name
+
+  * For easy updates use your fully qualified DNS name for the server.
+
+===Test the Scripted Install===
+1. Passive so you do not get messages "like Rhino is already installed"
+You need to uninstall Rhino after every test run of the command line install. Consider not using **-passive**
+until you have this working.
+
+2. Open the **Windows Terminal application** as **ADMINISTRATOR**. The scripted install requires the ADMIN rights level.
+
+3. In the **Terminal** app, change directories into the Download or other folder where the EXE is located.
+For example **cd\users\jim\downloads** where Jim is the user.
+
+4. From the Downloads folder where the Rhino exe is located, run the scripted install:
+For us the version of Rhino 8 and the options we selected gave us this line to paste into Terminal:
+
+//rhino_en-us_X.XX.xxxxx.xxxx.exe -package -passive -norestart LICENSE_METHOD=ZOO ZOO_SERVER=zoo.mcneel.com//
+
+//Note: consider not using *-passive* is you are trouble shooting.//
+{{:rhino:installingrhino:admin_terminal_app.png?400|}}
+
+Rhino LAN Zoo Lic
+C:\ProgramData\McNeel\Rhinoceros\6.0\License Manager\Licenses
+
+**Note:**
+  * In a manual install, the lic is created the first time Rhino is run. 
+  * In the scripted install the .lic is created and then Rhino runs without opening the dialog to configure the licensing.
+
+====Helpful Locations====
+**Zoo Registry Keys:**
+Rhino 6,7,8
+HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\6.0\License Manager -> zoo.mcneel.com
+
+Rhino 5
+HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Rhinoceros\5.0\License Manager -> zoo.mcneel.com
+
+Low level user/manual install:
+HKEY_CURRENT_USER\Software\McNeel\Rhinoceros\6.0\License Manager -> Server=zoo.mcneel.com
+
+**Zoo Server Install Keys:** 
+Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\McNeel\Zoo\5.0
