@@ -1,36 +1,34 @@
+
 ====== Does Rhino support VDI? ======
-
 Rhino 8 and later supports a number of VDI (Virtual Desktop Infrastructure) systems:
-
   * Amazon AppStream
-  * Amazon Workspaces,
-  * Citrix XCenApp
+  * Amazon WorkSpaces
+  * Citrix XenApp
   * Citrix XenDesktop
   * Cloudalize
   * Itopia
   * Nutanix Frame
   * Vagon.io
 
-Rhino is officially not supported on AWS EC2, though you might be able to get it to run if you use Remote Desktop to access it. Getting good display performance over RDP is challenging, even with proper NVIDIA cards. We can't help get that working.
+Rhino is not officially supported on AWS EC2, though you may be able to get it running by using Remote Desktop to access it. Getting good display performance over RDP is challenging, even with proper NVIDIA cards, and this is not something we can help you configure.
 
-In summary, Rhino will run in the “supported” VDI environments, but we cannot help with setting it up for better graphics performance, however.
+In summary: Rhino will run in the "supported" VDI environments listed above, but we cannot help with tuning graphics performance in any of them.
 
 ==== Rhino.Compute ====
+This list of supported VDI environments dates back to the beginning of Rhino 7, around the same time [[https://developer.rhino3d.com/guides/compute/|Rhino.Compute]] was introduced.
 
-We have a list of supported VDI environments is that in the beginning of Rhino 7, with the creation of [[https://developer.rhino3d.com/guides/compute/|Rhino.Compute]].
-
-We required Rhino to use Core-Hour Billing for licensing when we detected that it was running on Windows Server. Many of these VDI environments are detected as Windows Server and of course users want to use regular seat-based licenses (i.e. license keys in standalone mode, LAN Zoo, or Cloud Zoo).
+At that time, we required Rhino to use Core-Hour Billing whenever it detected it was running on Windows Server. Since many VDI environments are themselves detected as Windows Server, this caused problems for users who wanted to use standard seat-based licensing instead (license keys in standalone mode, LAN Zoo, or Cloud Zoo).
 
 ==== Graphics Performance ====
-Our general advice is for users to try Rhino in these environments and see if it works for you. 
-If there are licensing problems, please email tech@mcneel.com. 
+Our general advice is to try Rhino in these environments and see whether it works for you.
 
-Unfortunately, we can not help with performance problems as we don’t have the general knowledge for configuring graphics in virtual environments.
-It gets very complicated and solutions are platforms specific and generally require specific configuration.
+  * If you run into licensing problems, email tech@mcneel.com.
+  * Unfortunately, we can't help troubleshoot performance problems — we don't have the specialized knowledge needed to configure graphics in virtual environments. This gets complicated quickly, and solutions tend to be platform-specific with their own particular configuration requirements.
 
 ==== Next Steps ====
-
-Don't forget to search the [[https://discourse.mcneel.com.|Rhino Support Forum]] for answers and post questions. The support forum is monitored by McNeel staff worldwide and other Rhino experts 24/7. 
-And your answer becomes part of a searchable archive for future inquiries.
+Search the [[https://discourse.mcneel.com|Rhino Support Forum]] for existing answers, and don't hesitate to post a question of your own. The forum is monitored around the clock by McNeel staff worldwide and other Rhino experts — and your question and its answer become part of a searchable archive for future users.
 
 See Also: [[https://www.rhino3d.com/system-requirements/|Rhino System Requirements]]
+
+
+
